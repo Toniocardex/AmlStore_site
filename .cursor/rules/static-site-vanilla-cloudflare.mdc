@@ -1,0 +1,91 @@
+---
+description: Stack statico vanilla, Cloudflare Pages, CWV, responsive, SEO, Schema.org JSON-LD e accessibilità; niente framework.
+alwaysApply: true
+---
+
+# Aml Store — sito statico vanilla
+
+## Stack obbligatorio
+
+- **Solo** HTML5, **CSS3** e **JavaScript ES6+** in forma **vanilla** (moduli nativi opzionali, nessun bundler obbligatorio se non richiesto).
+- **Vietati** framework UI (React, Vue, Svelte, Angular, ecc.), meta-framework, runtime da CDN tipo jQuery/Lodash/Bootstrap JS, e **qualsiasi libreria** lato browser per layout o interazione salvo esplicita richiesta del maintainer.
+- CSS: preferire **custom properties**, layout moderni (`flex`, `grid`), media queries; niente preprocessor obbligatorio (se presenti, non introdurli in nuovi file senza necessità).
+
+## Cloudflare Pages
+
+- Il sito deve poter essere pubblicato come **cartella statica** (nessuna dipendenza da server Node/PHP).
+- Usare **path assoluti dal dominio** (`/assets/...`) oppure path **relativi coerenti** rispetto alla struttura delle cartelle (`../components/...`), in modo che funzioni con l’URL Pages (incluso progetto su sottopath se usato).
+- Evitare API o build step **necessari** in runtime; se esistono script di build, il deploy deve servire solo file statici risultanti.
+- Opzionale ma utile: file `_redirects` / `_headers` nella root pubblicata solo se servono redirect o header (documentare in commit).
+
+## Core Web Vitals
+
+- **LCP**: immagini con `width`/`height` o `aspect-ratio`, formati moderni (`webp`/`avif` dove ha senso), `fetchpriority="high"` solo sull’hero se presente, evitare hero above-the-fold come immagini enormi non compresse.
+- **CLS**: riservare spazio a immagini/embed, evitare inserimenti di contenuti che spingono il layout dopo il primo paint senza placeholder.
+- **INP**: listener leggeri, evitare lavoro lungo sul main thread; `defer` o `type="module"` per script non bloccanti dove appropriato.
+- Font: `font-display: swap` o `optional`, limitare pesi e varianti; preferire **preconnect** a origini note (`fonts.googleapis.com` / `gstatic`) solo se usate.
+
+## Responsive
+
+- **`meta name="viewport"`** con `width=device-width` su ogni pagina.
+- Layout **mobile-first**; breakpoint chiari in CSS; touch target adeguati (circa 44px) per controlli interattivi.
+- Testare a larghezze tipiche (320px, 768px, 1024px+); niente overflow orizzontale involontario (`overflow-x` controllato dove serve).
+
+## Collegamento tra pagine
+
+- Ogni pagina deve essere **raggiungibile** da almeno un link interno (navigazione principale, footer, breadcrumb o link contestuali).
+- In sito multilingua: link tra versioni lingua (es. `hreflang` + link visibili o nel menu lingua) e **stesso pattern di URL** tra lingue.
+- Evitare pagine “orfane” non collegate dal resto del sito.
+
+## SEO (ottimizzazione)
+
+- **`title`**: univoco per pagina, descrittivo (brand in coda se serve), lunghezza ragionevole in SERP.
+- **`meta name="description"`**: unico per pagina, riassume il contenuto reale; niente keyword stuffing.
+- **`link rel="canonical"`** sulla versione preferita dell’URL; coerente con host e path pubblici (incluso eventuale base path su Pages).
+- **Multilingua**: `html lang="..."` corretto; `<link rel="alternate" hreflang="...">` verso tutte le lingue + `x-default` dove applicabile; URL stabili e simmetrici tra lingue.
+- **Struttura semantica**: `header`, `nav`, `main`, `footer`, titoli **`h1`–`h6` in ordine logico** (un solo `h1` principale per pagina salvo pattern documentato).
+- **Immagini**: `alt` descrittivo; vuoto solo se decorativa; file name e testo vicini coerenti col contenuto.
+- **Open Graph / Twitter Card** (opzionale ma consigliato su pagine chiave): `og:title`, `og:description`, `og:url`, `og:image`, `og:locale` / alternate locale.
+- **Indicizzazione**: `robots.txt` e `sitemap.xml` nella root pubblicata quando il sito ha più percorsi; `noindex` solo su pagine volutamente escluse (draft, duplicati).
+- **Performance e SEO**: velocità e CWV sono segnali di qualità; evitare contenuto nascosto per manipolazione ranking.
+
+## Schema.org — markup JSON-LD
+
+- Inserire **JSON-LD** (formato raccomandato da Google) in uno o più tag **`<script type="application/ld+json">`** in `<head>` o prima di `</body>`; **nessun framework**: JSON statico generato a mano o da template build, valido UTF-8.
+- Ogni oggetto deve includere **`"@context": "https://schema.org"`** e **`@type`** (o `@graph` con array di entità collegate tramite `@id`).
+- Usare **URL assoluti** `https://...` per `url`, `logo`, `image`, `sameAs`, `mainEntityOfPage`, ecc., coerenti con il dominio pubblico (e path base su Cloudflare Pages se presente).
+- I dati nel JSON devono **coincidere con il contenuto visibile** sulla pagina (prezzi, disponibilità, recensioni, organizzazione): niente proprietà inventate o fuorvianti.
+- **Tipi tipici** (solo se pertinenti al sito):
+  - **`Organization`** (+ `logo`, `contactPoint`, `sameAs` social ufficiali);
+  - **`WebSite`** con **`potentialAction` / `SearchAction`** solo se esiste davvero una pagina di ricerca con query parameter documentato;
+  - **`WebPage`** / **`CollectionPage`** con `name`, `description`, `isPartOf` → `WebSite`;
+  - **`BreadcrumbList`** allineato al percorso reale e ai link HTML;
+  - **`Product`** + **`Offer`** (o `AggregateOffer`) sulle schede prodotto, con `price`, `priceCurrency`, `availability` da Schema.org (`https://schema.org/InStock`, ecc.) quando il dato è certo;
+  - **`FAQPage`** solo se la pagina contiene domande/risposte effettive in markup.
+- **Multilingua**: una pagina = un JSON (o `@graph`) con `inLanguage` (BCP-47, es. `it`) e `url` della **stessa** versione linguistica; non mischiare lingue in un unico blocco senza coerenza con `hreflang`.
+- **Più entità**: usare `@graph` oppure `@id` + riferimenti incrociati (`"publisher": { "@id": "https://example.com/#org" }`) per evitare duplicazione incoerente.
+- **Validazione**: controllare con [Rich Results Test](https://search.google.com/test/rich-results) e il [Schema Markup Validator](https://validator.schema.org/) prima del deploy; correggere errori di tipo o proprietà obbligatorie mancanti.
+
+## Accessibilità (a11y)
+
+- **WCAG 2.x** come riferimento pratico: preferire livello **AA** dove fattibile (contrasto, focus, nomi accessibili).
+- **Tastiera**: tutti i controlli e link raggiungibili e attivabili senza mouse; ordine di tab logico; niente `tabindex` positivo salvo eccezioni motivate.
+- **Focus visibile**: non rimuovere il focus ring senza sostituto equivalente (`:focus-visible` + stili leggibili).
+- **Form**: ogni input con **`label`** associato (`for`/`id`) o `aria-label` / `aria-labelledby` quando il design non mostra etichetta visibile.
+- **Pulsanti e link**: usare `<button>` per azioni, `<a href>` per navigazione; testo del link chiaro fuori contesto (evitare solo “clicca qui”).
+- **Immagini e media**: `alt` come sopra; video/audio con sottotitoli o trascrizioni quando sono contenuto informativo.
+- **ARIA**: usarlo per colmare lacune (es. `aria-expanded`, `aria-controls` su menu), non duplicare ruoli già forniti dal tag HTML nativo.
+- **Contrasto**: testo e controlli rispettano rapporti minimi rispetto allo sfondo; non basare solo il colore per stato o errore (icona o testo aggiuntivo).
+- **Movimento**: rispettare **`prefers-reduced-motion: reduce`** per animazioni/transizioni non essenziali.
+- **Lingua e citazioni**: `lang` su `<html>` e, se serve, su span/quote con lingua diversa dal documento.
+- **Skip link** (opzionale ma utile): primo focus “Vai al contenuto” verso `#main` o `id` del `main`.
+
+## Web Components / JS condiviso
+
+- Se si usano **Custom Elements** o JS condiviso in `/components/*.js`, restare su **API standard** del browser, senza import da npm nel runtime della pagina statica.
+- In Shadow DOM: replicare **etichette, ruoli e stati** accessibili (`aria-*`, `role` solo se necessario), **contrasto** dei temi interni, e **focus** gestito su drawer/modal (chiudi con Esc, restituisci focus al trigger se pattern previsto).
+
+## Cosa non fare (promemoria)
+
+- Non aggiungere **npm** come requisito per visualizzare le pagine in locale, salvo tooling di sviluppo documentato.
+- Non introdurre **framework CSS** (Tailwind, Bootstrap) salvo decisione esplicita del progetto.

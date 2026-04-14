@@ -5,10 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aml Store - Ihr digitaler Partner</title>
     <meta name="description" content="Kaufen Sie originale Software-Lizenzen: Betriebssysteme, Office und Antivirus zum besten garantierten Preis.">
+    <meta name="robots" content="index, follow">
 
     <link rel="icon" href="/favicon/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
     <link rel="canonical" href="/de/">
+
+    <!-- Social SEO: https://amlstore.it bei anderem öffentlichen Domain ersetzen (z. B. Pages-URL). -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aml Store">
+    <meta property="og:title" content="Aml Store - Ihr digitaler Partner">
+    <meta property="og:description" content="Kaufen Sie originale Software-Lizenzen: Betriebssysteme, Office und Antivirus zum besten garantierten Preis.">
+    <meta property="og:url" content="https://amlstore.it/de/">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:locale:alternate" content="it_IT">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+    <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:image" content="https://amlstore.it/logo/logo-header-400.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aml Store - Ihr digitaler Partner">
+    <meta name="twitter:description" content="Kaufen Sie originale Software-Lizenzen: Betriebssysteme, Office und Antivirus zum besten garantierten Preis.">
+    <meta name="twitter:image" content="https://amlstore.it/logo/logo-header-400.webp">
 
     <link rel="alternate" hreflang="it"       href="/it/">
     <link rel="alternate" hreflang="en"       href="/en/">
@@ -17,8 +35,36 @@
     <link rel="alternate" hreflang="es"       href="/es/">
     <link rel="alternate" hreflang="x-default" href="/it/">
 
+    <link rel="stylesheet" href="/fonts/montserrat.css">
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://amlstore.it/#organization","name":"Aml Store","url":"https://amlstore.it/","logo":{"@type":"ImageObject","url":"https://amlstore.it/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://amlstore.it/#website","url":"https://amlstore.it/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://amlstore.it/#organization"}},{"@type":"WebPage","@id":"https://amlstore.it/de/#webpage","url":"https://amlstore.it/de/","name":"Aml Store - Ihr digitaler Partner","description":"Kaufen Sie originale Software-Lizenzen: Betriebssysteme, Office und Antivirus zum besten garantierten Preis.","isPartOf":{"@id":"https://amlstore.it/#website"},"inLanguage":"de"}]}
+    </script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap');
+        .skip-link {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        .skip-link:focus {
+            position: fixed;
+            left: 0.75rem;
+            top: 0.75rem;
+            z-index: 10001;
+            width: auto;
+            height: auto;
+            overflow: visible;
+            padding: 0.65rem 1rem;
+            background: #003182;
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
 
         body {
             margin: 0;
@@ -76,6 +122,15 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            .product-card {
+                transition: none;
+            }
+            .product-card:hover {
+                transform: none;
+            }
+        }
+
         .skeleton-img {
             background: #f0f2f5;
             height: 200px;
@@ -106,10 +161,11 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
 
     <ecommerce-header></ecommerce-header>
 
-    <main>
+    <main id="main">
         <h1>Aml Store — Software-Lizenzen</h1>
         <p class="subtitle">Ihr zuverlässiger Partner für den Kauf originaler Software-Lizenzen. Betriebssysteme, Office und Antivirus zum besten garantierten Preis.</p>
 

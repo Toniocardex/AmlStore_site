@@ -1,7 +1,168 @@
+const LANGS = [
+    { code: 'it', label: 'IT', flag: 'it' },
+    { code: 'en', label: 'EN', flag: 'gb' },
+    { code: 'fr', label: 'FR', flag: 'fr' },
+    { code: 'de', label: 'DE', flag: 'de' },
+    { code: 'es', label: 'ES', flag: 'es' },
+];
+
+const FOOTER_I18N = {
+    it: {
+        logoAlt: 'Aml Store',
+        brandDesc:
+            "Il tuo partner affidabile per l'acquisto di licenze software originali. Sistemi Operativi, Office e Antivirus al miglior prezzo garantito.",
+        headingProducts: 'Prodotti',
+        headingSupport: 'Supporto',
+        headingContact: 'Contattaci',
+        prodOs: 'Sistemi Operativi',
+        prodOffice: 'Office',
+        prodAntivirus: 'Antivirus',
+        prodBusiness: 'Software Aziendali',
+        prodDeals: 'Offerte Speciali',
+        supportMyAccount: 'Il mio account',
+        supportInstallGuide: "Guida all'installazione",
+        supportReturns: 'Resi e Rimborsi',
+        supportTerms: 'Termini e Condizioni',
+        supportPrivacy: 'Privacy Policy',
+        assistanceLabel: 'Assistenza',
+        emailSub: 'Rispondiamo h24',
+        copyright: 'Aml Store. Tutti i diritti riservati. P.IVA 12345678901.',
+    },
+    en: {
+        logoAlt: 'Aml Store',
+        brandDesc:
+            'Your trusted partner for genuine software licenses. Operating systems, Office and antivirus at the best guaranteed price.',
+        headingProducts: 'Products',
+        headingSupport: 'Support',
+        headingContact: 'Contact us',
+        prodOs: 'Operating systems',
+        prodOffice: 'Office',
+        prodAntivirus: 'Antivirus',
+        prodBusiness: 'Business software',
+        prodDeals: 'Special offers',
+        supportMyAccount: 'My account',
+        supportInstallGuide: 'Installation guide',
+        supportReturns: 'Returns & refunds',
+        supportTerms: 'Terms & conditions',
+        supportPrivacy: 'Privacy policy',
+        assistanceLabel: 'Support',
+        emailSub: 'We respond 24/7',
+        copyright: 'Aml Store. All rights reserved. VAT 12345678901.',
+    },
+    fr: {
+        logoAlt: 'Aml Store',
+        brandDesc:
+            "Votre partenaire de confiance pour des licences logicielles d'origine. Systèmes d'exploitation, Office et antivirus au meilleur prix garanti.",
+        headingProducts: 'Produits',
+        headingSupport: 'Assistance',
+        headingContact: 'Contact',
+        prodOs: "Systèmes d'exploitation",
+        prodOffice: 'Office',
+        prodAntivirus: 'Antivirus',
+        prodBusiness: 'Logiciels professionnels',
+        prodDeals: 'Offres spéciales',
+        supportMyAccount: 'Mon compte',
+        supportInstallGuide: "Guide d'installation",
+        supportReturns: 'Retours et remboursements',
+        supportTerms: 'Conditions générales',
+        supportPrivacy: 'Politique de confidentialité',
+        assistanceLabel: 'Assistance',
+        emailSub: 'Réponse 24h/24',
+        copyright: 'Aml Store. Tous droits réservés. TVA 12345678901.',
+    },
+    de: {
+        logoAlt: 'Aml Store',
+        brandDesc:
+            'Ihr zuverlässiger Partner für originale Softwarelizenzen. Betriebssysteme, Office und Antivirus zum besten garantierten Preis.',
+        headingProducts: 'Produkte',
+        headingSupport: 'Support',
+        headingContact: 'Kontakt',
+        prodOs: 'Betriebssysteme',
+        prodOffice: 'Office',
+        prodAntivirus: 'Antivirus',
+        prodBusiness: 'Business-Software',
+        prodDeals: 'Sonderangebote',
+        supportMyAccount: 'Mein Konto',
+        supportInstallGuide: 'Installationsanleitung',
+        supportReturns: 'Rückgabe & Erstattung',
+        supportTerms: 'Allgemeine Geschäftsbedingungen',
+        supportPrivacy: 'Datenschutz',
+        assistanceLabel: 'Support',
+        emailSub: 'Wir antworten rund um die Uhr',
+        copyright: 'Aml Store. Alle Rechte vorbehalten. USt-IdNr. 12345678901.',
+    },
+    es: {
+        logoAlt: 'Aml Store',
+        brandDesc:
+            'Tu socio de confianza para licencias de software originales. Sistemas operativos, Office y antivirus al mejor precio garantizado.',
+        headingProducts: 'Productos',
+        headingSupport: 'Soporte',
+        headingContact: 'Contacto',
+        prodOs: 'Sistemas operativos',
+        prodOffice: 'Office',
+        prodAntivirus: 'Antivirus',
+        prodBusiness: 'Software empresarial',
+        prodDeals: 'Ofertas especiales',
+        supportMyAccount: 'Mi cuenta',
+        supportInstallGuide: 'Guía de instalación',
+        supportReturns: 'Devoluciones y reembolsos',
+        supportTerms: 'Términos y condiciones',
+        supportPrivacy: 'Política de privacidad',
+        assistanceLabel: 'Asistencia',
+        emailSub: 'Respondemos 24/7',
+        copyright: 'Aml Store. Todos los derechos reservados. NIF 12345678901.',
+    },
+};
+
+function isKnownLangCode(segment) {
+    return LANGS.some((l) => l.code === segment);
+}
+
+/** Primo segmento del path che coincide con una lingua del sito (es. /repo/it/ → it). */
+function detectLangCodeFromPath() {
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    const found = segments.find((seg) => isKnownLangCode(seg));
+    return found || 'it';
+}
+
+/** Prefisso URL prima della cartella lingua (es. /repo per /repo/it/). */
+function pathPrefixBeforeLang(langCode) {
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    const idx = segments.indexOf(langCode);
+    if (idx <= 0) return '';
+    return '/' + segments.slice(0, idx).join('/');
+}
+
+function homeHrefForLang(langCode) {
+    const prefix = pathPrefixBeforeLang(langCode);
+    return prefix + '/' + langCode + '/';
+}
+
+/** Testo sicuro per innerHTML / attributi tra doppi apici (vanilla, no librerie). */
+function escapeHtml(text) {
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
 class EcommerceFooter extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+    }
+
+    connectedCallback() {
+        if (this.__footerUiInit) return;
+        this.__footerUiInit = true;
+
+        const langCode = detectLangCodeFromPath();
+        const activeLang = LANGS.find((l) => l.code === langCode) || LANGS[0];
+        const t = FOOTER_I18N[activeLang.code] || FOOTER_I18N.it;
+        const homeHref = homeHrefForLang(activeLang.code);
+        const esc = escapeHtml;
+
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -201,6 +362,25 @@ class EcommerceFooter extends HTMLElement {
                     font-weight: 700;
                 }
 
+                .contact-item a.contact-email {
+                    color: #e2e8f0;
+                    font-weight: 700;
+                    text-decoration: underline;
+                    text-underline-offset: 2px;
+                }
+                .contact-item a.contact-email:hover {
+                    color: #fff;
+                }
+
+                .contact-label-up {
+                    display: block;
+                    font-size: 10px;
+                    font-weight: 700;
+                    letter-spacing: 0.12em;
+                    opacity: 0.75;
+                    margin-bottom: 2px;
+                }
+
                 .contact-item .icon-wrap {
                     display: flex;
                     align-items: center;
@@ -305,48 +485,48 @@ class EcommerceFooter extends HTMLElement {
                         <div class="footer-grid">
                         <div class="footer-col">
                             <div class="footer-brand-card">
-                                <a href="#" class="footer-logo">
-                                    <img src="/logo/logo-header-400.webp" alt="Aml Store">
+                                <a href="${esc(homeHref)}" class="footer-logo">
+                                    <img src="/logo/logo-header-400.webp" alt="${esc(t.logoAlt)}">
                                 </a>
                                 <p class="footer-desc">
-                                    Il tuo partner affidabile per l'acquisto di licenze software originali. Sistemi Operativi, Office e Antivirus al miglior prezzo garantito.
+                                    ${esc(t.brandDesc)}
                                 </p>
                             </div>
                         </div>
                         <div class="footer-col">
-                            <h3>Prodotti</h3>
+                            <h3>${esc(t.headingProducts)}</h3>
                             <ul>
-                                <li><a href="#">Sistemi Operativi</a></li>
-                                <li><a href="#">Pacchetto Office</a></li>
-                                <li><a href="#">Antivirus & Sicurezza</a></li>
-                                <li><a href="#">Software Aziendali</a></li>
-                                <li><a href="#">Offerte Speciali</a></li>
+                                <li><a href="#">${esc(t.prodOs)}</a></li>
+                                <li><a href="#">${esc(t.prodOffice)}</a></li>
+                                <li><a href="#">${esc(t.prodAntivirus)}</a></li>
+                                <li><a href="#">${esc(t.prodBusiness)}</a></li>
+                                <li><a href="#">${esc(t.prodDeals)}</a></li>
                             </ul>
                         </div>
                         <div class="footer-col">
-                            <h3>Supporto</h3>
+                            <h3>${esc(t.headingSupport)}</h3>
                             <ul>
-                                <li><a href="#">Il mio account</a></li>
-                                <li><a href="#">Guida all'installazione</a></li>
-                                <li><a href="#">Resi e Rimborsi</a></li>
-                                <li><a href="#">Termini e Condizioni</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">${esc(t.supportMyAccount)}</a></li>
+                                <li><a href="#">${esc(t.supportInstallGuide)}</a></li>
+                                <li><a href="#">${esc(t.supportReturns)}</a></li>
+                                <li><a href="#">${esc(t.supportTerms)}</a></li>
+                                <li><a href="#">${esc(t.supportPrivacy)}</a></li>
                             </ul>
                         </div>
                         <div class="footer-col">
-                            <h3>Contattaci</h3>
+                            <h3>${esc(t.headingContact)}</h3>
                             <div class="contact-info">
                                 <div class="contact-item">
                                     <span class="icon-wrap" aria-hidden="true">
                                         <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                                     </span>
-                                    <span>Assistenza Clienti<br><strong>+39 02 1234 5678</strong></span>
+                                    <span><span class="contact-label-up">${esc(t.assistanceLabel)}</span><strong>+39 02 1234 5678</strong></span>
                                 </div>
                                 <div class="contact-item">
                                     <span class="icon-wrap" aria-hidden="true">
                                         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                                     </span>
-                                    <span><strong>supporto@amlstore.it</strong><br>Rispondiamo h24</span>
+                                    <span><a href="mailto:Info@amlstore.it" class="contact-email">Info@amlstore.it</a><br>${esc(t.emailSub)}</span>
                                 </div>
                             </div>
                         </div>
@@ -360,7 +540,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="footer-inner">
                         <div class="footer-bottom">
                         <div class="copyright">
-                            &copy; 2026 Aml Store. Tutti i diritti riservati. P.IVA 12345678901.
+                            &copy; 2026 ${esc(t.copyright)}
                         </div>
                         <div class="payment-methods">
                             <span class="payment-wrap" title="Visa">
