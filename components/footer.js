@@ -157,6 +157,9 @@ class EcommerceFooter extends HTMLElement {
         if (this.__footerUiInit) return;
         this.__footerUiInit = true;
 
+        this.setAttribute('translate', 'no');
+        this.classList.add('notranslate');
+
         const langCode = detectLangCodeFromPath();
         const activeLang = LANGS.find((l) => l.code === langCode) || LANGS[0];
         const t = FOOTER_I18N[activeLang.code] || FOOTER_I18N.it;

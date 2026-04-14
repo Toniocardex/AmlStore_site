@@ -89,6 +89,9 @@ class EcommerceHeader extends HTMLElement {
         if (this.__headerUiInit) return;
         this.__headerUiInit = true;
 
+        this.setAttribute('translate', 'no');
+        this.classList.add('notranslate');
+
         const segments = window.location.pathname.split('/').filter(Boolean);
         const langCode = segments.find((seg) => LANGS.some((l) => l.code === seg)) || 'it';
         const activeLang = LANGS.find((l) => l.code === langCode) || LANGS[0];
