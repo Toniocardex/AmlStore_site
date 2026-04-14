@@ -13,6 +13,9 @@ class EcommerceHeader extends HTMLElement {
     }
 
     connectedCallback() {
+        if (this.__headerUiInit) return;
+        this.__headerUiInit = true;
+
         const currentLang = window.location.pathname.split('/')[1] || 'it';
         const activeLang = LANGS.find(l => l.code === currentLang) || LANGS[0];
         const otherLangs = LANGS.filter(l => l.code !== activeLang.code);
@@ -23,12 +26,14 @@ class EcommerceHeader extends HTMLElement {
                     display: block;
                     position: relative;
                     z-index: 1000;
-                    --h-height: 80px;
+                    --h-height: 84px;
+                    --tap-min: 44px;
                     --color-gradient-start: #003182;
                     --color-gradient-end: #1a5fd1;
                     --text-dark: #1a1a1a;
                     --text-light: #ffffff;
-                    --text-grey: #666666;
+                    --text-grey: #5c5c5c;
+                    --nav-active: #003182;
                 }
 
                 * {
@@ -44,24 +49,25 @@ class EcommerceHeader extends HTMLElement {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-                    /* overflow visibile: il dropdown lingue sta sotto l'header; hidden lo ritagliava */
+                    box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 8px 32px rgba(0,35,90,0.08);
                     overflow: visible;
                 }
 
                 .bg-colored {
                     position: absolute;
                     top: 0; left: 0; right: 0; bottom: 0;
-                    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+                    background: linear-gradient(118deg, var(--color-gradient-start) 0%, #0d4bb8 45%, var(--color-gradient-end) 100%);
                     z-index: 1;
                 }
 
                 .bg-white {
                     position: absolute;
                     top: 0; left: 0; bottom: 0;
-                    width: 55%;
-                    background: #ffffff;
-                    clip-path: polygon(0 0, calc(100% - 75px) 0, 100% 100%, 0 100%);
+                    width: 56%;
+                    max-width: 720px;
+                    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+                    clip-path: polygon(0 0, calc(100% - 88px) 0, 100% 100%, 0 100%);
+                    box-shadow: inset -1px 0 0 rgba(0,49,130,0.06);
                     z-index: 2;
                 }
 
@@ -72,23 +78,29 @@ class EcommerceHeader extends HTMLElement {
                     height: 100%;
                     display: flex;
                     align-items: center;
-                    padding: 0 4%;
+                    padding: 0 clamp(1rem, 4vw, 3.5rem);
                 }
 
                 .left-section {
                     display: flex;
                     align-items: center;
-                    gap: 2rem;
+                    gap: clamp(1.25rem, 3vw, 2.75rem);
                     flex: 1;
+                    min-width: 0;
                 }
 
                 .logo {
                     display: flex;
                     align-items: center;
                     text-decoration: none;
+                    border-radius: 12px;
+                    outline-offset: 4px;
+                }
+                .logo:focus-visible {
+                    outline: 2px solid var(--nav-active);
                 }
                 .logo img {
-                    height: 64px;
+                    height: 56px;
                     width: auto;
                     display: block;
                     object-fit: contain;
@@ -96,42 +108,102 @@ class EcommerceHeader extends HTMLElement {
 
                 .nav-links {
                     display: flex;
-                    gap: 1.5rem;
+                    align-items: center;
+                    gap: 0.35rem;
                 }
                 .nav-links a {
                     text-decoration: none;
                     color: var(--text-grey);
                     font-weight: 600;
                     font-size: 14px;
-                    transition: color 0.2s;
-                }
-                .nav-links a.active {
-                    color: var(--text-dark);
-                    position: relative;
+                    letter-spacing: 0.01em;
+                    padding: 0.5rem 1.1rem;
+                    border-radius: 999px;
+                    background: linear-gradient(180deg, #ffffff 0%, #eef0f4 100%);
+                    box-shadow: 0 3px 12px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.92);
+                    transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
                 }
                 .nav-links a:hover {
                     color: var(--text-dark);
+                    background: linear-gradient(180deg, #ffffff 0%, #e4e7ed 100%);
+                    box-shadow: 0 5px 18px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.95);
+                    transform: translateY(-1px);
+                }
+                .nav-links a:active:not(.active) {
+                    transform: translateY(0);
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85);
+                }
+                .nav-links a.active {
+                    color: rgba(255,255,255,0.98);
+                    font-weight: 700;
+                    background: linear-gradient(118deg, var(--color-gradient-start) 0%, #0d4bb8 50%, var(--color-gradient-end) 100%);
+                    box-shadow: 0 4px 16px rgba(0,35,90,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+                    transform: none;
+                }
+                .nav-links a.active:hover {
+                    color: #fff;
+                    background: linear-gradient(118deg, #004099 0%, #1a5fd1 55%, #2b6fe0 100%);
+                    box-shadow: 0 6px 20px rgba(0,35,90,0.42), inset 0 1px 0 rgba(255,255,255,0.22);
+                    transform: translateY(-1px);
+                }
+                .nav-links a.active:active {
+                    transform: translateY(0);
+                    box-shadow: 0 3px 12px rgba(0,35,90,0.3), inset 0 1px 0 rgba(255,255,255,0.18);
                 }
 
                 .right-section {
                     display: flex;
                     align-items: center;
-                    gap: 1.5rem;
+                    gap: 0;
                     color: var(--text-light);
+                    flex-shrink: 0;
+                }
+
+                .rail-divider {
+                    align-self: center;
+                    width: 1px;
+                    height: 28px;
+                    background: rgba(255,255,255,0.22);
+                    margin: 0 clamp(0.75rem, 1.8vw, 1.35rem);
+                    flex-shrink: 0;
                 }
 
                 .phone-number {
                     display: flex;
                     align-items: center;
-                    gap: 8px;
-                    font-size: 13px;
-                    font-weight: 600;
-                    opacity: 0.9;
+                    gap: 10px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    letter-spacing: 0.04em;
+                    color: rgba(255,255,255,0.95);
+                    white-space: nowrap;
+                }
+                .phone-number .phone-icon-wrap {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 10px;
+                    background: rgba(255,255,255,0.14);
+                    border: 1px solid rgba(255,255,255,0.2);
                 }
                 .phone-number svg {
-                    width: 14px;
-                    height: 14px;
+                    width: 16px;
+                    height: 16px;
                     fill: currentColor;
+                }
+                .phone-number .phone-label {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
+                    line-height: 1.2;
+                }
+                .phone-number .phone-label small {
+                    font-size: 10px;
+                    font-weight: 700;
+                    letter-spacing: 0.12em;
+                    opacity: 0.75;
                 }
 
                 /* ── Language selector ── */
@@ -140,32 +212,56 @@ class EcommerceHeader extends HTMLElement {
                 }
 
                 .lang-selector {
-                    display: flex;
+                    display: inline-flex;
                     align-items: center;
-                    gap: 8px;
-                    font-size: 13px;
-                    font-weight: 600;
+                    justify-content: center;
+                    gap: 10px;
+                    min-height: var(--tap-min);
+                    padding: 0 14px 0 12px;
+                    font-size: 14px;
+                    font-weight: 700;
+                    letter-spacing: 0.02em;
                     cursor: pointer;
-                    opacity: 0.9;
-                    transition: opacity 0.2s;
                     user-select: none;
+                    color: rgba(255,255,255,0.98);
+                    background: rgba(255,255,255,0.12);
+                    border: 1px solid rgba(255,255,255,0.28);
+                    border-radius: 999px;
+                    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+                    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
                 }
                 .lang-selector:hover {
-                    opacity: 1;
+                    background: rgba(255,255,255,0.2);
+                    border-color: rgba(255,255,255,0.45);
+                    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+                }
+                .lang-selector:focus {
+                    outline: none;
+                }
+                .lang-selector:focus-visible {
+                    outline: 2px solid #fff;
+                    outline-offset: 3px;
+                }
+                .lang-wrapper.open .lang-selector {
+                    background: rgba(255,255,255,0.22);
+                    border-color: rgba(255,255,255,0.5);
                 }
                 .flag-icon {
-                    width: 20px;
-                    height: 20px;
+                    width: 22px;
+                    height: 22px;
                     border-radius: 50%;
-                    border: 1px solid rgba(255,255,255,0.2);
+                    border: 2px solid rgba(255,255,255,0.35);
                     background-size: cover;
                     background-position: center;
+                    flex-shrink: 0;
+                    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
                 }
                 .chevron-down {
-                    width: 10px;
-                    height: 10px;
+                    width: 12px;
+                    height: 12px;
                     fill: currentColor;
-                    transition: transform 0.2s;
+                    opacity: 0.9;
+                    transition: transform 0.2s ease;
                 }
                 .lang-wrapper.open .chevron-down {
                     transform: rotate(180deg);
@@ -174,37 +270,44 @@ class EcommerceHeader extends HTMLElement {
                 .lang-dropdown {
                     display: none;
                     position: absolute;
-                    top: calc(100% + 12px);
+                    top: calc(100% + 10px);
                     right: 0;
-                    background: white;
-                    border-radius: 10px;
-                    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                    background: #fff;
+                    border-radius: 14px;
+                    box-shadow: 0 12px 40px rgba(0,20,60,0.18);
+                    border: 1px solid rgba(0,49,130,0.08);
                     overflow: hidden;
-                    min-width: 120px;
+                    min-width: 156px;
+                    padding: 6px 0;
                     z-index: 100;
                 }
                 .lang-wrapper.open .lang-dropdown {
                     display: block;
+                    animation: langDrop 0.18s ease-out;
+                }
+                @keyframes langDrop {
+                    from { opacity: 0; transform: translateY(-6px); }
+                    to { opacity: 1; transform: translateY(0); }
                 }
 
                 .lang-option {
                     display: flex;
                     align-items: center;
-                    gap: 10px;
-                    padding: 10px 16px;
-                    font-size: 13px;
+                    gap: 12px;
+                    padding: 12px 16px;
+                    font-size: 14px;
                     font-weight: 600;
-                    color: #333;
+                    color: #1a1a1a;
                     text-decoration: none;
-                    transition: background 0.15s;
+                    transition: background 0.15s ease, color 0.15s ease;
                 }
                 .lang-option:hover {
                     background: #f0f4ff;
                     color: var(--color-gradient-start);
                 }
                 .lang-option .flag-icon {
-                    border-color: rgba(0,0,0,0.1);
-                    flex-shrink: 0;
+                    border-color: rgba(0,0,0,0.08);
+                    box-shadow: none;
                 }
 
                 /* ── Cart ── */
@@ -214,92 +317,166 @@ class EcommerceHeader extends HTMLElement {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    opacity: 0.9;
-                    transition: opacity 0.2s, transform 0.2s;
+                    width: var(--tap-min);
+                    height: var(--tap-min);
+                    border-radius: 14px;
+                    color: var(--text-light);
+                    transition: background 0.2s ease, transform 0.15s ease, color 0.2s ease;
                 }
                 .cart-wrapper:hover {
-                    opacity: 1;
-                    transform: scale(1.05);
+                    background: rgba(255,255,255,0.12);
+                    transform: translateY(-1px);
+                }
+                .cart-wrapper:focus-visible {
+                    outline: 2px solid #fff;
+                    outline-offset: 2px;
                 }
                 .cart-wrapper svg {
-                    width: 22px;
-                    height: 22px;
+                    width: 24px;
+                    height: 24px;
                     fill: currentColor;
                 }
                 .cart-badge {
                     position: absolute;
-                    top: -6px;
-                    right: -8px;
-                    background: #ff4757;
+                    top: 6px;
+                    right: 6px;
+                    background: linear-gradient(135deg, #ff5e62, #e0243a);
                     color: white;
                     font-size: 10px;
                     font-weight: 800;
-                    height: 16px;
-                    min-width: 16px;
-                    border-radius: 8px;
+                    height: 18px;
+                    min-width: 18px;
+                    border-radius: 9px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    padding: 0 4px;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                    padding: 0 5px;
+                    box-shadow: 0 2px 8px rgba(224,36,58,0.45);
+                    border: 2px solid rgba(0,49,130,0.35);
                 }
 
                 .btn-signin {
+                    margin-left: clamp(0.35rem, 1vw, 0.75rem);
                     background: var(--text-light);
                     color: var(--color-gradient-start);
                     border: none;
-                    padding: 10px 24px;
-                    border-radius: 20px;
+                    padding: 0 22px;
+                    min-height: var(--tap-min);
+                    border-radius: 999px;
                     font-weight: 700;
                     font-size: 14px;
+                    letter-spacing: 0.02em;
                     cursor: pointer;
-                    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                    transition: transform 0.2s, box-shadow 0.2s;
+                    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+                    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
                 }
                 .btn-signin:hover {
                     transform: translateY(-2px);
-                    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+                }
+                .btn-signin:focus-visible {
+                    outline: 2px solid #fff;
+                    outline-offset: 3px;
+                }
+                .btn-signin:active {
+                    transform: translateY(0);
                 }
 
                 .mobile-toggle {
                     display: none;
-                    background: none;
+                    width: var(--tap-min);
+                    height: var(--tap-min);
+                    background: rgba(0,49,130,0.06);
                     border: none;
+                    border-radius: 12px;
                     cursor: pointer;
                     color: var(--text-dark);
+                    flex-shrink: 0;
+                    transition: background 0.2s ease, color 0.2s ease;
+                }
+                .mobile-toggle:hover {
+                    background: rgba(0,49,130,0.1);
+                }
+                .mobile-toggle:focus-visible {
+                    outline: 2px solid var(--nav-active);
+                    outline-offset: 2px;
                 }
                 .mobile-toggle svg {
-                    width: 28px;
-                    height: 28px;
+                    width: 24px;
+                    height: 24px;
                     stroke: currentColor;
                     stroke-width: 2;
                     stroke-linecap: round;
                 }
 
                 @media (max-width: 1100px) {
-                    .bg-white { width: 50%; }
+                    .bg-white { width: 52%; }
                     .nav-links { display: none; }
-                    .mobile-toggle { display: block; }
+                    .mobile-toggle { display: flex; align-items: center; justify-content: center; }
                 }
 
                 @media (max-width: 768px) {
+                    :host { --h-height: 72px; }
                     .bg-colored { display: none; }
-                    .bg-white { width: 100%; clip-path: none; }
-                    .header-container { padding: 0 15px; }
+                    .bg-white { width: 100%; max-width: none; clip-path: none; box-shadow: none; }
+                    .content-wrapper { padding: 0 0.75rem 0 0.5rem; }
 
-                    .logo img { height: 46px; }
+                    .logo img { height: 44px; }
 
-                    .left-section { gap: 1rem; }
-                    .right-section { gap: 0.75rem; color: var(--color-gradient-start); }
+                    .left-section { gap: 0.65rem; }
+                    .right-section { color: var(--color-gradient-start); }
+
+                    .rail-divider { display: none; }
 
                     .phone-number { display: none; }
-                    .lang-selector .flag-icon { border-color: rgba(0,0,0,0.1); }
+
+                    .lang-selector {
+                        color: var(--color-gradient-start);
+                        background: rgba(0,49,130,0.06);
+                        border-color: rgba(0,49,130,0.12);
+                        box-shadow: none;
+                        padding: 0 12px 0 10px;
+                        min-height: 42px;
+                    }
+                    .lang-selector:hover {
+                        background: rgba(0,49,130,0.1);
+                        border-color: rgba(0,49,130,0.2);
+                    }
+                    .lang-wrapper.open .lang-selector {
+                        background: rgba(0,49,130,0.12);
+                    }
+                    .lang-selector:focus-visible {
+                        outline-color: var(--color-gradient-start);
+                    }
+                    .lang-selector .flag-icon {
+                        border-color: rgba(0,49,130,0.15);
+                        box-shadow: none;
+                    }
+
+                    .cart-wrapper {
+                        color: var(--color-gradient-start);
+                    }
+                    .cart-wrapper:hover {
+                        background: rgba(0,49,130,0.06);
+                    }
+                    .cart-wrapper:focus-visible {
+                        outline-color: var(--color-gradient-start);
+                    }
+                    .cart-badge {
+                        border-color: #fff;
+                    }
 
                     .btn-signin {
+                        margin-left: 0.35rem;
                         background: var(--color-gradient-start);
                         color: white;
-                        padding: 6px 12px;
+                        padding: 0 16px;
+                        min-height: 42px;
                         font-size: 13px;
+                        box-shadow: 0 4px 12px rgba(0,49,130,0.25);
+                    }
+                    .btn-signin:focus-visible {
+                        outline-color: var(--color-gradient-start);
                     }
                 }
 
@@ -363,7 +540,7 @@ class EcommerceHeader extends HTMLElement {
                 <div class="bg-white"></div>
                 <div class="content-wrapper">
                     <div class="left-section">
-                        <button class="mobile-toggle" aria-label="Menu">
+                        <button type="button" class="mobile-toggle" aria-label="Apri menu di navigazione">
                             <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
                         </button>
                         <a href="/${activeLang.code}/" class="logo">
@@ -378,16 +555,22 @@ class EcommerceHeader extends HTMLElement {
                     </div>
                     <div class="right-section">
                         <div class="phone-number">
-                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                            ASSISTENZA &nbsp; +39 02 1234 5678
+                            <span class="phone-icon-wrap" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            </span>
+                            <span class="phone-label">
+                                <small>Assistenza</small>
+                                <span>+39 02 1234 5678</span>
+                            </span>
                         </div>
 
-                        <!-- Language selector dropdown -->
+                        <span class="rail-divider" aria-hidden="true"></span>
+
                         <div class="lang-wrapper">
-                            <div class="lang-selector" role="button" aria-haspopup="true" aria-expanded="false">
+                            <div class="lang-selector" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="Seleziona lingua">
                                 <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${activeLang.flag}.png');"></div>
-                                ${activeLang.label}
-                                <svg class="chevron-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                <span>${activeLang.label}</span>
+                                <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                             </div>
                             <div class="lang-dropdown" role="menu">
                                 ${otherLangs.map(l => `
@@ -398,18 +581,20 @@ class EcommerceHeader extends HTMLElement {
                             </div>
                         </div>
 
-                        <div class="cart-wrapper">
-                            <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                        <span class="rail-divider" aria-hidden="true"></span>
+
+                        <div class="cart-wrapper" role="button" tabindex="0" aria-label="Carrello, 2 articoli">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                             <div class="cart-badge">2</div>
                         </div>
-                        <button class="btn-signin">Accedi</button>
+                        <button type="button" class="btn-signin">Accedi</button>
                     </div>
                 </div>
             </div>
 
             <div class="overlay"></div>
             <div class="mobile-drawer">
-                <button class="close-drawer"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+                <button type="button" class="close-drawer" aria-label="Chiudi menu"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                 <nav style="display:flex; flex-direction:column; gap:1.5rem; font-weight:700;">
                     <a href="/${activeLang.code}/" style="color:#333; text-decoration:none;">Home</a>
                     <a href="#" style="color:#333; text-decoration:none;">Sistemi Operativi</a>
@@ -444,19 +629,39 @@ class EcommerceHeader extends HTMLElement {
         if (close) close.addEventListener('click', closeMenu);
         if (overlay) overlay.addEventListener('click', closeMenu);
 
-        // Language dropdown toggle
-        if (langSelector) {
+        const toggleLangMenu = (e) => {
+            if (e) e.stopPropagation();
+            const isOpen = langWrapper.classList.toggle('open');
+            langSelector.setAttribute('aria-expanded', isOpen);
+        };
+
+        if (langSelector && langWrapper) {
             langSelector.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const isOpen = langWrapper.classList.toggle('open');
-                langSelector.setAttribute('aria-expanded', isOpen);
+                toggleLangMenu(e);
+            });
+            langSelector.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleLangMenu(e);
+                }
             });
         }
 
-        // Close lang dropdown when clicking outside
         document.addEventListener('click', () => {
+            if (!langWrapper || !langSelector) return;
             langWrapper.classList.remove('open');
-            if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+            langSelector.setAttribute('aria-expanded', 'false');
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape' || !langWrapper?.classList.contains('open')) return;
+            langWrapper.classList.remove('open');
+            if (langSelector) {
+                langSelector.setAttribute('aria-expanded', 'false');
+                langSelector.focus();
+            }
         });
     }
 }
