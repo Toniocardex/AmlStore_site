@@ -238,8 +238,10 @@ class EcommerceFooter extends HTMLElement {
                 }
 
                 /* --- GRIGLIA PRINCIPALE --- */
+                /* Solo padding verticale: lo stesso nodo ha .container con padding orizzontale clamp(...) */
                 .footer-main {
-                    padding: 5rem 0 4rem;
+                    padding-top: 5rem;
+                    padding-bottom: 4rem;
                     display: grid;
                     grid-template-columns: 2fr 1fr 1fr 1.5fr;
                     gap: 3rem 2rem;
@@ -455,7 +457,8 @@ class EcommerceFooter extends HTMLElement {
                     .footer-main {
                         grid-template-columns: 1fr;
                         gap: 2.5rem;
-                        padding: 4rem 0 3rem;
+                        padding-top: 4rem;
+                        padding-bottom: 3rem;
                     }
                     .bottom-content {
                         flex-direction: column;
