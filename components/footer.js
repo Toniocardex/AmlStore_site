@@ -1,4 +1,7 @@
-const LANGS = [
+(function () {
+    'use strict';
+
+    const LANGS = [
     { code: 'it', label: 'IT', flag: 'it' },
     { code: 'en', label: 'EN', flag: 'gb' },
     { code: 'fr', label: 'FR', flag: 'fr' },
@@ -147,6 +150,25 @@ function escapeHtml(text) {
         .replace(/"/g, '&quot;');
 }
 
+/** Prefisso path statici (es. /repo) ricavato dallo script components/footer.js (ok con defer e sottopath Pages). */
+function amlStaticRootFromFooterScript() {
+    const needle = '/components/footer.js';
+    const scripts = document.scripts;
+    for (let i = 0; i < scripts.length; i++) {
+        const raw = scripts[i].getAttribute('src');
+        if (!raw) continue;
+        let pathname;
+        try {
+            pathname = new URL(raw, window.location.href).pathname;
+        } catch (_) {
+            continue;
+        }
+        if (!pathname.endsWith(needle)) continue;
+        return pathname.slice(0, -needle.length);
+    }
+    return '';
+}
+
 class EcommerceFooter extends HTMLElement {
     constructor() {
         super();
@@ -155,7 +177,6 @@ class EcommerceFooter extends HTMLElement {
 
     connectedCallback() {
         if (this.__footerUiInit) return;
-        this.__footerUiInit = true;
 
         this.setAttribute('translate', 'no');
         this.classList.add('notranslate');
@@ -165,8 +186,11 @@ class EcommerceFooter extends HTMLElement {
         const t = FOOTER_I18N[activeLang.code] || FOOTER_I18N.it;
         const homeHref = homeHrefForLang(activeLang.code);
         const esc = escapeHtml;
+        const staticRoot = amlStaticRootFromFooterScript();
+        const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
 
-        this.shadowRoot.innerHTML = `
+        try {
+            this.shadowRoot.innerHTML = `
             <style>
                 :host {
                     display: block;
@@ -192,7 +216,7 @@ class EcommerceFooter extends HTMLElement {
                     background:
                         radial-gradient(ellipse 120% 80% at 50% -40%, rgba(26, 95, 209, 0.28), transparent 55%),
                         linear-gradient(168deg, var(--bg-deep) 0%, var(--bg-mid) 42%, #080c16 100%);
-                    overflow-x: clip;
+                    overflow-x: hidden;
                 }
 
                 .footer-wrapper::before {
@@ -489,7 +513,7 @@ class EcommerceFooter extends HTMLElement {
                         <div class="footer-col">
                             <div class="footer-brand-card">
                                 <a href="${esc(homeHref)}" class="footer-logo">
-                                    <img src="/logo/logo-header-400.webp" width="200" height="48" alt="${esc(t.logoAlt)}">
+                                    <img src="${esc(logoSrc)}" width="200" height="48" alt="${esc(t.logoAlt)}">
                                 </a>
                                 <p class="footer-desc">
                                     ${esc(t.brandDesc)}
@@ -561,9 +585,14 @@ class EcommerceFooter extends HTMLElement {
                 </div>
             </div>
         `;
+            this.__footerUiInit = true;
+        } catch (err) {
+            console.error('ecommerce-footer: render failed', err);
+        }
     }
 }
 
-if (!customElements.get('ecommerce-footer')) {
-    customElements.define('ecommerce-footer', EcommerceFooter);
-}
+    if (!customElements.get('ecommerce-footer')) {
+        customElements.define('ecommerce-footer', EcommerceFooter);
+    }
+})();

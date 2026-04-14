@@ -1,4 +1,7 @@
-const LANGS = [
+(function () {
+    'use strict';
+
+    const LANGS = [
     { code: 'it', label: 'IT', flag: 'it' },
     { code: 'en', label: 'EN', flag: 'gb' },
     { code: 'fr', label: 'FR', flag: 'fr' },
@@ -79,6 +82,25 @@ const HEADER_I18N = {
     },
 };
 
+/** Prefisso path statici (es. /repo) da components/header.js — compatibile con defer e base path Pages. */
+function amlStaticRootFromHeaderScript() {
+    const needle = '/components/header.js';
+    const scripts = document.scripts;
+    for (let i = 0; i < scripts.length; i++) {
+        const raw = scripts[i].getAttribute('src');
+        if (!raw) continue;
+        let pathname;
+        try {
+            pathname = new URL(raw, window.location.href).pathname;
+        } catch (_) {
+            continue;
+        }
+        if (!pathname.endsWith(needle)) continue;
+        return pathname.slice(0, -needle.length);
+    }
+    return '';
+}
+
 class EcommerceHeader extends HTMLElement {
     constructor() {
         super();
@@ -107,6 +129,9 @@ class EcommerceHeader extends HTMLElement {
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;');
+        const staticRoot = amlStaticRootFromHeaderScript();
+        const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
+        const flagSrc = (flag) => `${staticRoot}/images/flags/${flag}.svg`;
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -661,7 +686,7 @@ class EcommerceHeader extends HTMLElement {
                             <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
                         </button>
                         <a href="${esc(homeHref)}" class="logo">
-                            <img src="/logo/logo-header-400.webp" width="200" height="56" alt="${esc(t.logoAlt)}">
+                            <img src="${esc(logoSrc)}" width="200" height="56" alt="${esc(t.logoAlt)}">
                         </a>
                         <nav class="nav-links">
                             <a href="${esc(homeHref)}" class="active">${esc(t.navHome)}</a>
@@ -685,14 +710,14 @@ class EcommerceHeader extends HTMLElement {
 
                         <div class="lang-wrapper">
                             <div class="lang-selector" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.selectLanguage)}">
-                                <img class="flag-icon" src="/images/flags/${activeLang.flag}.svg" alt="" width="22" height="22" decoding="async">
+                                <img class="flag-icon" src="${esc(flagSrc(activeLang.flag))}" alt="" width="22" height="22" decoding="async">
                                 <span>${activeLang.label}</span>
                                 <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                             </div>
                             <div class="lang-dropdown" role="menu">
                                 ${otherLangs.map(l => `
                                 <a href="${esc(hrefForLang(l.code))}" class="lang-option" role="menuitem" hreflang="${l.code}">
-                                    <img class="flag-icon" src="/images/flags/${l.flag}.svg" alt="" width="22" height="22" decoding="async">
+                                    <img class="flag-icon" src="${esc(flagSrc(l.flag))}" alt="" width="22" height="22" decoding="async">
                                     ${l.label}
                                 </a>`).join('')}
                             </div>
@@ -721,7 +746,7 @@ class EcommerceHeader extends HTMLElement {
                 <div class="drawer-langs">
                     ${LANGS.map(l => `
                     <a href="${esc(hrefForLang(l.code))}" class="drawer-lang-link${l.code === activeLang.code ? ' active' : ''}" hreflang="${l.code}">
-                        <img class="flag-icon" src="/images/flags/${l.flag}.svg" alt="" width="22" height="22" decoding="async">
+                        <img class="flag-icon" src="${esc(flagSrc(l.flag))}" alt="" width="22" height="22" decoding="async">
                         ${l.label}
                     </a>`).join('')}
                 </div>
@@ -783,6 +808,7 @@ class EcommerceHeader extends HTMLElement {
     }
 }
 
-if (!customElements.get('ecommerce-header')) {
-    customElements.define('ecommerce-header', EcommerceHeader);
-}
+    if (!customElements.get('ecommerce-header')) {
+        customElements.define('ecommerce-header', EcommerceHeader);
+    }
+})();
