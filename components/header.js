@@ -6,6 +6,79 @@ const LANGS = [
     { code: 'es', label: 'ES', flag: 'es' },
 ];
 
+const HEADER_I18N = {
+    it: {
+        logoAlt: 'Aml Store',
+        navHome: 'Home',
+        navOs: 'Sistemi Operativi',
+        navOffice: 'Office',
+        navAntivirus: 'Antivirus',
+        assistanceSmall: 'Assistenza',
+        openNavMenu: 'Apri menu di navigazione',
+        closeNavMenu: 'Chiudi menu',
+        selectLanguage: 'Seleziona lingua',
+        cartAria: 'Carrello, 2 articoli',
+        signIn: 'Accedi',
+        drawerAssist: 'Assistenza: +39 02 1234 5678',
+    },
+    en: {
+        logoAlt: 'Aml Store',
+        navHome: 'Home',
+        navOs: 'Operating systems',
+        navOffice: 'Office',
+        navAntivirus: 'Antivirus',
+        assistanceSmall: 'Support',
+        openNavMenu: 'Open navigation menu',
+        closeNavMenu: 'Close menu',
+        selectLanguage: 'Select language',
+        cartAria: 'Shopping cart, 2 items',
+        signIn: 'Sign in',
+        drawerAssist: 'Support: +39 02 1234 5678',
+    },
+    fr: {
+        logoAlt: 'Aml Store',
+        navHome: 'Accueil',
+        navOs: "Systèmes d'exploitation",
+        navOffice: 'Office',
+        navAntivirus: 'Antivirus',
+        assistanceSmall: 'Assistance',
+        openNavMenu: 'Ouvrir le menu de navigation',
+        closeNavMenu: 'Fermer le menu',
+        selectLanguage: 'Choisir la langue',
+        cartAria: 'Panier, 2 articles',
+        signIn: 'Se connecter',
+        drawerAssist: 'Assistance : +39 02 1234 5678',
+    },
+    de: {
+        logoAlt: 'Aml Store',
+        navHome: 'Startseite',
+        navOs: 'Betriebssysteme',
+        navOffice: 'Office',
+        navAntivirus: 'Antivirus',
+        assistanceSmall: 'Support',
+        openNavMenu: 'Navigationsmenü öffnen',
+        closeNavMenu: 'Menü schließen',
+        selectLanguage: 'Sprache wählen',
+        cartAria: 'Warenkorb, 2 Artikel',
+        signIn: 'Anmelden',
+        drawerAssist: 'Support: +39 02 1234 5678',
+    },
+    es: {
+        logoAlt: 'Aml Store',
+        navHome: 'Inicio',
+        navOs: 'Sistemas operativos',
+        navOffice: 'Office',
+        navAntivirus: 'Antivirus',
+        assistanceSmall: 'Asistencia',
+        openNavMenu: 'Abrir menú de navegación',
+        closeNavMenu: 'Cerrar menú',
+        selectLanguage: 'Seleccionar idioma',
+        cartAria: 'Carrito, 2 artículos',
+        signIn: 'Iniciar sesión',
+        drawerAssist: 'Asistencia: +39 02 1234 5678',
+    },
+};
+
 class EcommerceHeader extends HTMLElement {
     constructor() {
         super();
@@ -16,9 +89,21 @@ class EcommerceHeader extends HTMLElement {
         if (this.__headerUiInit) return;
         this.__headerUiInit = true;
 
-        const currentLang = window.location.pathname.split('/')[1] || 'it';
-        const activeLang = LANGS.find(l => l.code === currentLang) || LANGS[0];
-        const otherLangs = LANGS.filter(l => l.code !== activeLang.code);
+        const segments = window.location.pathname.split('/').filter(Boolean);
+        const langCode = segments.find((seg) => LANGS.some((l) => l.code === seg)) || 'it';
+        const activeLang = LANGS.find((l) => l.code === langCode) || LANGS[0];
+        const otherLangs = LANGS.filter((l) => l.code !== activeLang.code);
+        const langSegIdx = segments.indexOf(activeLang.code);
+        const pathPrefix = langSegIdx > 0 ? '/' + segments.slice(0, langSegIdx).join('/') : '';
+        const hrefForLang = (code) => `${pathPrefix}/${code}/`;
+        const homeHref = hrefForLang(activeLang.code);
+        const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
+        const esc = (s) =>
+            String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
 
         this.shadowRoot.innerHTML = `
             <style>
@@ -567,17 +652,17 @@ class EcommerceHeader extends HTMLElement {
                 <div class="bg-white"></div>
                 <div class="content-wrapper">
                     <div class="left-section">
-                        <button type="button" class="mobile-toggle" aria-label="Apri menu di navigazione">
+                        <button type="button" class="mobile-toggle" aria-label="${esc(t.openNavMenu)}">
                             <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
                         </button>
-                        <a href="/${activeLang.code}/" class="logo">
-                            <img src="/logo/logo-header-400.webp" alt="Aml Store Logo">
+                        <a href="${esc(homeHref)}" class="logo">
+                            <img src="/logo/logo-header-400.webp" width="200" height="56" alt="${esc(t.logoAlt)}">
                         </a>
                         <nav class="nav-links">
-                            <a href="/${activeLang.code}/" class="active">Home</a>
-                            <a href="#">Sistemi Operativi</a>
-                            <a href="#">Office</a>
-                            <a href="#">Antivirus</a>
+                            <a href="${esc(homeHref)}" class="active">${esc(t.navHome)}</a>
+                            <a href="#">${esc(t.navOs)}</a>
+                            <a href="#">${esc(t.navOffice)}</a>
+                            <a href="#">${esc(t.navAntivirus)}</a>
                         </nav>
                     </div>
                     <div class="right-section">
@@ -586,7 +671,7 @@ class EcommerceHeader extends HTMLElement {
                                 <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                             </span>
                             <span class="phone-label">
-                                <small>Assistenza</small>
+                                <small>${esc(t.assistanceSmall)}</small>
                                 <span>+39 02 1234 5678</span>
                             </span>
                         </div>
@@ -594,14 +679,14 @@ class EcommerceHeader extends HTMLElement {
                         <span class="rail-divider" aria-hidden="true"></span>
 
                         <div class="lang-wrapper">
-                            <div class="lang-selector" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="Seleziona lingua">
+                            <div class="lang-selector" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.selectLanguage)}">
                                 <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${activeLang.flag}.png');"></div>
                                 <span>${activeLang.label}</span>
                                 <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                             </div>
                             <div class="lang-dropdown" role="menu">
                                 ${otherLangs.map(l => `
-                                <a href="/${l.code}/" class="lang-option" role="menuitem" hreflang="${l.code}">
+                                <a href="${esc(hrefForLang(l.code))}" class="lang-option" role="menuitem" hreflang="${l.code}">
                                     <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${l.flag}.png');"></div>
                                     ${l.label}
                                 </a>`).join('')}
@@ -610,33 +695,33 @@ class EcommerceHeader extends HTMLElement {
 
                         <span class="rail-divider" aria-hidden="true"></span>
 
-                        <div class="cart-wrapper" role="button" tabindex="0" aria-label="Carrello, 2 articoli">
+                        <div class="cart-wrapper" role="button" tabindex="0" aria-label="${esc(t.cartAria)}">
                             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                             <div class="cart-badge">2</div>
                         </div>
-                        <button type="button" class="btn-signin">Accedi</button>
+                        <button type="button" class="btn-signin">${esc(t.signIn)}</button>
                     </div>
                 </div>
             </div>
 
             <div class="overlay"></div>
             <div class="mobile-drawer">
-                <button type="button" class="close-drawer" aria-label="Chiudi menu"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+                <button type="button" class="close-drawer" aria-label="${esc(t.closeNavMenu)}"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                 <nav class="drawer-nav">
-                    <a href="/${activeLang.code}/">Home</a>
-                    <a href="#">Sistemi Operativi</a>
-                    <a href="#">Office</a>
-                    <a href="#">Antivirus</a>
+                    <a href="${esc(homeHref)}">${esc(t.navHome)}</a>
+                    <a href="#">${esc(t.navOs)}</a>
+                    <a href="#">${esc(t.navOffice)}</a>
+                    <a href="#">${esc(t.navAntivirus)}</a>
                 </nav>
                 <div class="drawer-langs">
                     ${LANGS.map(l => `
-                    <a href="/${l.code}/" class="drawer-lang-link${l.code === activeLang.code ? ' active' : ''}" hreflang="${l.code}">
+                    <a href="${esc(hrefForLang(l.code))}" class="drawer-lang-link${l.code === activeLang.code ? ' active' : ''}" hreflang="${l.code}">
                         <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${l.flag}.png'); background-size: cover; background-position: center; border-radius: 50%;"></div>
                         ${l.label}
                     </a>`).join('')}
                 </div>
                 <div style="margin-top:auto; font-size:14px; color:#666;">
-                    Assistenza: +39 02 1234 5678
+                    ${esc(t.drawerAssist)}
                 </div>
             </div>
         `;
