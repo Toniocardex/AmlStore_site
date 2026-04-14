@@ -34,6 +34,9 @@ class EcommerceHeader extends HTMLElement {
                     --text-light: #ffffff;
                     --text-grey: #5c5c5c;
                     --nav-active: #003182;
+                    --neon-line: rgba(180, 220, 255, 0.95);
+                    --neon-glow: rgba(26, 95, 209, 0.85);
+                    --neon-glow-soft: rgba(100, 170, 255, 0.45);
                 }
 
                 * {
@@ -161,11 +164,19 @@ class EcommerceHeader extends HTMLElement {
 
                 .rail-divider {
                     align-self: center;
-                    width: 1px;
-                    height: 28px;
-                    background: rgba(255,255,255,0.22);
-                    margin: 0 clamp(0.75rem, 1.8vw, 1.35rem);
+                    width: 2px;
+                    height: 30px;
                     flex-shrink: 0;
+                    margin: 0 clamp(0.75rem, 1.8vw, 1.35rem);
+                    border-radius: 99px;
+                    background: linear-gradient(180deg,
+                        rgba(255, 255, 255, 0.12) 0%,
+                        var(--neon-line) 50%,
+                        rgba(255, 255, 255, 0.12) 100%);
+                    box-shadow:
+                        0 0 8px rgba(200, 230, 255, 0.75),
+                        0 0 16px var(--neon-glow),
+                        0 0 26px rgba(0, 49, 130, 0.45);
                 }
 
                 .phone-number {
@@ -501,6 +512,22 @@ class EcommerceHeader extends HTMLElement {
                 .close-drawer { align-self: flex-end; background: none; border: none; cursor: pointer; }
                 .close-drawer svg { width: 24px; height: 24px; }
 
+                .drawer-nav {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0;
+                    font-weight: 700;
+                }
+                .drawer-nav a {
+                    color: #333;
+                    text-decoration: none;
+                    padding: 0.85rem 0;
+                    border-bottom: 1px solid #eee;
+                }
+                .drawer-nav a:last-child {
+                    border-bottom: none;
+                }
+
                 .drawer-langs {
                     display: flex;
                     gap: 8px;
@@ -595,11 +622,11 @@ class EcommerceHeader extends HTMLElement {
             <div class="overlay"></div>
             <div class="mobile-drawer">
                 <button type="button" class="close-drawer" aria-label="Chiudi menu"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
-                <nav style="display:flex; flex-direction:column; gap:1.5rem; font-weight:700;">
-                    <a href="/${activeLang.code}/" style="color:#333; text-decoration:none;">Home</a>
-                    <a href="#" style="color:#333; text-decoration:none;">Sistemi Operativi</a>
-                    <a href="#" style="color:#333; text-decoration:none;">Office</a>
-                    <a href="#" style="color:#333; text-decoration:none;">Antivirus</a>
+                <nav class="drawer-nav">
+                    <a href="/${activeLang.code}/">Home</a>
+                    <a href="#">Sistemi Operativi</a>
+                    <a href="#">Office</a>
+                    <a href="#">Antivirus</a>
                 </nav>
                 <div class="drawer-langs">
                     ${LANGS.map(l => `
