@@ -1,0 +1,23 @@
+# Cloudflare Pages — https://developers.cloudflare.com/pages/configuration/headers/
+# Dopo il deploy: verifica in Network (DevTools) che le risposte statiche riportino gli header attesi.
+
+# Font binari: cache lunga (rinominare i file se cambi contenuto e vuoi invalidare subito i client)
+/fonts/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+# Foglio @font-face: cache più breve così aggiornamenti a montserrat.css si propagano in giorni
+/fonts/montserrat.css
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/logo/*
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/favicon/*
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/components/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
