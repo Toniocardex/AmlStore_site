@@ -30,6 +30,8 @@ const FOOTER_I18N = {
         assistanceLabel: 'Assistenza',
         emailSub: 'Rispondiamo h24',
         copyright: 'Aml Store. Tutti i diritti riservati. P.IVA 12345678901.',
+        themeLabel: 'Aspetto',
+        themeAria: 'Tema della pagina: chiaro o scuro (barra in alto e piè di pagina invariati)',
     },
     en: {
         logoAlt: 'Aml Store',
@@ -51,6 +53,8 @@ const FOOTER_I18N = {
         assistanceLabel: 'Support',
         emailSub: 'We respond 24/7',
         copyright: 'Aml Store. All rights reserved. VAT 12345678901.',
+        themeLabel: 'Appearance',
+        themeAria: 'Page theme: light or dark (header and footer unchanged)',
     },
     fr: {
         logoAlt: 'Aml Store',
@@ -72,6 +76,8 @@ const FOOTER_I18N = {
         assistanceLabel: 'Assistance',
         emailSub: 'Réponse 24h/24',
         copyright: 'Aml Store. Tous droits réservés. TVA 12345678901.',
+        themeLabel: 'Apparence',
+        themeAria: "Thème de la page : clair ou sombre (en-tête et pied de page inchangés)",
     },
     de: {
         logoAlt: 'Aml Store',
@@ -93,6 +99,8 @@ const FOOTER_I18N = {
         assistanceLabel: 'Support',
         emailSub: 'Wir antworten rund um die Uhr',
         copyright: 'Aml Store. Alle Rechte vorbehalten. USt-IdNr. 12345678901.',
+        themeLabel: 'Erscheinungsbild',
+        themeAria: 'Seitenthema: hell oder dunkel (Kopf- und Fußzeile unverändert)',
     },
     es: {
         logoAlt: 'Aml Store',
@@ -114,6 +122,8 @@ const FOOTER_I18N = {
         assistanceLabel: 'Asistencia',
         emailSub: 'Respondemos 24/7',
         copyright: 'Aml Store. Todos los derechos reservados. NIF 12345678901.',
+        themeLabel: 'Apariencia',
+        themeAria: 'Tema de la página: claro u oscuro (cabecera y pie sin cambios)',
     },
 };
 
@@ -188,6 +198,8 @@ class EcommerceFooter extends HTMLElement {
         const esc = escapeHtml;
         const staticRoot = amlStaticRootFromFooterScript();
         const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
+        const pageTheme =
+            document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
 
         try {
             this.shadowRoot.innerHTML = `
@@ -412,16 +424,173 @@ class EcommerceFooter extends HTMLElement {
                 }
 
                 .bottom-content {
-                    display: flex; align-items: center; justify-content: space-between;
-                    /* Applichiamo lo stesso padding orizzontale per rispettare l'asse verticale */
-                    padding: 2rem clamp(2rem, 5vw, 4rem); 
-                    flex-wrap: wrap; gap: 1.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 2rem clamp(2rem, 5vw, 4rem);
+                    flex-wrap: wrap;
+                    gap: clamp(1rem, 2.5vw, 1.75rem);
                 }
-                .copyright { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
+                .copyright {
+                    color: var(--text-muted);
+                    font-size: 0.85rem;
+                    font-weight: 500;
+                    flex: 1 1 14rem;
+                    min-width: min(100%, 12rem);
+                    max-width: 100%;
+                    line-height: 1.45;
+                }
 
-                /* PAGAMENTI */
+                /* Toggle sempre a sinistra dei loghi pagamento, con respiro costante */
+                .bottom-right-cluster {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    flex-wrap: wrap;
+                    gap: clamp(1rem, 2.5vw, 2rem);
+                    column-gap: clamp(1.25rem, 3vw, 2.25rem);
+                    row-gap: 1rem;
+                    flex: 0 1 auto;
+                    min-width: 0;
+                }
+
+                .theme-toggle {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.55rem;
+                    flex-wrap: nowrap;
+                    flex-shrink: 0;
+                    margin-inline-end: auto;
+                }
+                .theme-toggle-label {
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.08em;
+                    color: var(--text-muted);
+                    white-space: nowrap;
+                }
+
+                /* Pill + thumb: inset simmetrico, corsa = larghezza − thumb − 2 inset */
+                .theme-glass-switch {
+                    --theme-track-w: 52px;
+                    --theme-track-h: 30px;
+                    --theme-thumb: 24px;
+                    --theme-inset: 3px;
+                    --theme-travel: calc(var(--theme-track-w) - var(--theme-thumb) - 2 * var(--theme-inset));
+                    --theme-ease: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    margin: 0;
+                    padding: 0.5rem 0.55rem;
+                    border: none;
+                    background: transparent;
+                    cursor: pointer;
+                    font-family: inherit;
+                    line-height: 0;
+                    border-radius: 999px;
+                    -webkit-tap-highlight-color: transparent;
+                    flex-shrink: 0;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 2.75rem;
+                    min-height: 2.75rem;
+                }
+                .theme-glass-switch:focus-visible {
+                    outline: 2px solid var(--accent);
+                    outline-offset: 3px;
+                    border-radius: 999px;
+                }
+                .theme-glass-track {
+                    position: relative;
+                    display: block;
+                    width: var(--theme-track-w);
+                    height: var(--theme-track-h);
+                    box-sizing: border-box;
+                    border-radius: calc(var(--theme-track-h) / 2);
+                    background: rgba(0, 0, 0, 0.5);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    box-shadow:
+                        inset 0 1px 0 rgba(255, 255, 255, 0.07),
+                        inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+                        inset 0 2px 6px rgba(0, 0, 0, 0.4);
+                    overflow: hidden;
+                }
+                .theme-glass-thumb {
+                    position: absolute;
+                    left: var(--theme-inset);
+                    top: 50%;
+                    width: var(--theme-thumb);
+                    height: var(--theme-thumb);
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                    background: linear-gradient(160deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.1) 48%, rgba(255, 255, 255, 0.06) 100%);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.48);
+                    box-shadow:
+                        0 2px 8px rgba(0, 0, 0, 0.45),
+                        0 1px 0 rgba(255, 255, 255, 0.55) inset;
+                    display: grid;
+                    place-items: center;
+                    transform: translateY(-50%) translateX(0);
+                    transition:
+                        transform 0.45s var(--theme-ease),
+                        box-shadow 0.35s ease,
+                        border-color 0.35s ease;
+                    z-index: 1;
+                }
+                .theme-glass-switch.theme-is-dark .theme-glass-thumb {
+                    transform: translateY(-50%) translateX(var(--theme-travel));
+                }
+                .theme-glass-ico {
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #fff;
+                    transition:
+                        opacity 0.38s var(--theme-ease),
+                        transform 0.38s var(--theme-ease);
+                }
+                .theme-glass-ico svg {
+                    width: 14px;
+                    height: 14px;
+                    display: block;
+                }
+                .theme-glass-switch.theme-is-dark .ico-moon {
+                    opacity: 1;
+                    transform: scale(1) rotate(0deg);
+                }
+                .theme-glass-switch.theme-is-dark .ico-sun {
+                    opacity: 0;
+                    transform: scale(0.5) rotate(45deg);
+                }
+                .theme-glass-switch.theme-is-light .ico-moon {
+                    opacity: 0;
+                    transform: scale(0.5) rotate(-40deg);
+                }
+                .theme-glass-switch.theme-is-light .ico-sun {
+                    opacity: 1;
+                    transform: scale(1) rotate(0deg);
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    .theme-glass-thumb {
+                        transition-duration: 0.12s;
+                    }
+                    .theme-glass-ico {
+                        transition-duration: 0.12s;
+                    }
+                }
+
+                /* PAGAMENTI (sempre dopo il toggle, senza restringersi a zero) */
                 .payments {
-                    display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+                    display: flex;
+                    align-items: center;
+                    gap: 1.25rem;
+                    flex-wrap: wrap;
+                    flex-shrink: 0;
                 }
                 .payment-logo {
                     display: block;
@@ -485,6 +654,16 @@ class EcommerceFooter extends HTMLElement {
                         padding: 2.5rem clamp(1.25rem, 5vw, 2rem);
                     }
                     .payments { justify-content: center; }
+                    .bottom-right-cluster {
+                        justify-content: center;
+                        width: 100%;
+                        margin-inline-end: 0;
+                    }
+                    .theme-toggle {
+                        margin-inline-end: 0;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                    }
                 }
             </style>
 
@@ -560,7 +739,23 @@ class EcommerceFooter extends HTMLElement {
                     <p class="copyright">
                         &copy; ${new Date().getFullYear()} ${esc(t.copyright)}
                     </p>
-                    <div class="payments">
+                    <div class="bottom-right-cluster">
+                        <div class="theme-toggle">
+                            <span class="theme-toggle-label">${esc(t.themeLabel)}</span>
+                            <button type="button" class="theme-glass-switch${pageTheme === 'dark' ? ' theme-is-dark' : ' theme-is-light'}" role="switch" aria-checked="${pageTheme === 'dark' ? 'true' : 'false'}" aria-label="${esc(t.themeAria)}">
+                                <span class="theme-glass-track">
+                                    <span class="theme-glass-thumb">
+                                        <span class="theme-glass-ico ico-moon" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+                                        </span>
+                                        <span class="theme-glass-ico ico-sun" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                                        </span>
+                                    </span>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="payments">
                         <div class="payment-logo" title="Visa">
                             <svg viewBox="0 0 38 24" fill="none" aria-hidden="true"><rect width="38" height="24" rx="4" fill="#1434CB"/><path d="M16.5 16h-3l1.5-10h3l-1.5 10zm11.2-9.8c-.5-.2-1.2-.3-2-.3-2.1 0-3.6 1.1-3.6 2.8 0 1.2 1.1 1.9 1.9 2.3.8.4 1.1.6 1.1 1 0 .5-.6.8-1.2.8-1.3 0-2-.3-2.7-.6l-.4-1.8c.6.3 1.5.5 2.3.5 2.2 0 3.7-1.1 3.7-2.8 0-1-.8-1.7-1.9-2.2-.7-.4-1.1-.6-1.1-1 0-.4.5-.7 1.1-.7 1 0 1.7.2 2.3.5l.5-1.5zm-15.4 9.8L10 9.8l-.8 4.2c-.1.6-.6 1-1.2 1H3v-.4c1.1-.2 2.3-.6 3.1-1.1l2.5-7.3h3.2l5 10h-4.5zM34 6h-2.5c-.6 0-1.1.3-1.4.9l-4 9.1h3.3l.6-1.8h4l.4 1.8h3l-3.4-10z" fill="#fff"/></svg>
                         </div>
@@ -570,13 +765,86 @@ class EcommerceFooter extends HTMLElement {
                         <div class="payment-logo" title="PayPal">
                             <svg viewBox="0 0 38 24" fill="none" aria-hidden="true"><rect width="38" height="24" rx="4" fill="#0079C1"/><path d="M12.5 15h3.8c.2 0 .4-.1.5-.3l2.8-11.4c0-.2-.1-.3-.3-.3H15.6c-.2 0-.4.1-.5.3l-2.4 9.4c0 .2.1.3.3.3zM25.7 15h-3c-.2 0-.4-.1-.5-.3l-.8-3.4c-.1-.3.2-.5.5-.5h2c1.7 0 2.5-.8 2.8-2.2.1-.5 0-1-.3-1.4-.4-.4-1.1-.6-2-.6h-3.3c-.2 0-.4.1-.5.3l-2 8.3c0 .2.1.3.3.3h3.2c1.3 0 2.2-.6 2.4-1.8.1-.5 0-.9-.3-1.2-.3-.3-.9-.4-1.7-.4h-.8c-.2 0-.4.1-.5.3l-.2.8c0 .2.1.3.3.3h1.2c.4 0 .7.1.8.3.1.2.1.4.1.7-.1.7-.6 1-1.4 1H25.7c.2 0 .3.1.3.3l-.3 1z" fill="#fff"/></svg>
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
         `;
+            const THEME_KEY = 'aml-theme';
+            const docEl = document.documentElement;
+            const storedThemeValue = () => {
+                try {
+                    return localStorage.getItem(THEME_KEY);
+                } catch (_) {
+                    return null;
+                }
+            };
+            const hasUserThemeOverride = () => {
+                const v = storedThemeValue();
+                return v === 'light' || v === 'dark';
+            };
+            const syncGlassToggle = () => {
+                const isDark = docEl.getAttribute('data-theme') !== 'light';
+                const glassBtn = this.shadowRoot.querySelector('.theme-glass-switch');
+                if (!glassBtn) return;
+                glassBtn.classList.toggle('theme-is-dark', isDark);
+                glassBtn.classList.toggle('theme-is-light', !isDark);
+                glassBtn.setAttribute('aria-checked', isDark ? 'true' : 'false');
+            };
+            const applySystemThemeFromOs = () => {
+                if (hasUserThemeOverride()) return;
+                const dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                docEl.setAttribute('data-theme', dark ? 'dark' : 'light');
+                syncGlassToggle();
+            };
+            const glassBtn = this.shadowRoot.querySelector('.theme-glass-switch');
+            if (glassBtn) {
+                glassBtn.addEventListener('click', () => {
+                    const next = docEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                    docEl.setAttribute('data-theme', next);
+                    try {
+                        localStorage.setItem(THEME_KEY, next);
+                    } catch (_) {}
+                    syncGlassToggle();
+                });
+            }
+            const onStorage = (e) => {
+                if (e.key !== THEME_KEY || !e.newValue) return;
+                if (e.newValue !== 'light' && e.newValue !== 'dark') return;
+                docEl.setAttribute('data-theme', e.newValue);
+                syncGlassToggle();
+            };
+            const mq =
+                typeof window.matchMedia === 'function'
+                    ? window.matchMedia('(prefers-color-scheme: dark)')
+                    : null;
+            const onOsTheme = () => applySystemThemeFromOs();
+            window.addEventListener('storage', onStorage);
+            if (mq && typeof mq.addEventListener === 'function') {
+                mq.addEventListener('change', onOsTheme);
+            } else if (mq && typeof mq.addListener === 'function') {
+                mq.addListener(onOsTheme);
+            }
+            this.__footerThemeCleanup = () => {
+                window.removeEventListener('storage', onStorage);
+                if (mq && typeof mq.removeEventListener === 'function') {
+                    mq.removeEventListener('change', onOsTheme);
+                } else if (mq && typeof mq.removeListener === 'function') {
+                    mq.removeListener(onOsTheme);
+                }
+            };
+            syncGlassToggle();
+
             this.__footerUiInit = true;
         } catch (err) {
             console.error('ecommerce-footer: render failed', err);
+        }
+    }
+
+    disconnectedCallback() {
+        if (typeof this.__footerThemeCleanup === 'function') {
+            this.__footerThemeCleanup();
+            this.__footerThemeCleanup = null;
         }
     }
 }
