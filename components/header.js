@@ -37,7 +37,7 @@ const HEADER_I18N = {
     },
     fr: {
         logoAlt: 'Aml Store',
-        navHome: 'Accueil',
+        navHome: 'Home',
         navOs: "Systèmes d'exploitation",
         navOffice: 'Office',
         navAntivirus: 'Antivirus',
@@ -51,7 +51,7 @@ const HEADER_I18N = {
     },
     de: {
         logoAlt: 'Aml Store',
-        navHome: 'Startseite',
+        navHome: 'Home',
         navOs: 'Betriebssysteme',
         navOffice: 'Office',
         navAntivirus: 'Antivirus',
@@ -65,7 +65,7 @@ const HEADER_I18N = {
     },
     es: {
         logoAlt: 'Aml Store',
-        navHome: 'Inicio',
+        navHome: 'Home',
         navOs: 'Sistemas operativos',
         navOffice: 'Office',
         navAntivirus: 'Antivirus',
@@ -350,10 +350,12 @@ class EcommerceHeader extends HTMLElement {
                     height: 22px;
                     border-radius: 50%;
                     border: 2px solid rgba(255,255,255,0.35);
-                    background-size: cover;
-                    background-position: center;
+                    object-fit: cover;
+                    object-position: center;
                     flex-shrink: 0;
                     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+                    box-sizing: border-box;
+                    display: block;
                 }
                 .chevron-down {
                     width: 12px;
@@ -683,14 +685,14 @@ class EcommerceHeader extends HTMLElement {
 
                         <div class="lang-wrapper">
                             <div class="lang-selector" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.selectLanguage)}">
-                                <div class="flag-icon" style="background-image: url('/images/flags/${activeLang.flag}.svg');"></div>
+                                <img class="flag-icon" src="/images/flags/${activeLang.flag}.svg" alt="" width="22" height="22" decoding="async">
                                 <span>${activeLang.label}</span>
                                 <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                             </div>
                             <div class="lang-dropdown" role="menu">
                                 ${otherLangs.map(l => `
                                 <a href="${esc(hrefForLang(l.code))}" class="lang-option" role="menuitem" hreflang="${l.code}">
-                                    <div class="flag-icon" style="background-image: url('/images/flags/${l.flag}.svg');"></div>
+                                    <img class="flag-icon" src="/images/flags/${l.flag}.svg" alt="" width="22" height="22" decoding="async">
                                     ${l.label}
                                 </a>`).join('')}
                             </div>
@@ -719,7 +721,7 @@ class EcommerceHeader extends HTMLElement {
                 <div class="drawer-langs">
                     ${LANGS.map(l => `
                     <a href="${esc(hrefForLang(l.code))}" class="drawer-lang-link${l.code === activeLang.code ? ' active' : ''}" hreflang="${l.code}">
-                        <div class="flag-icon" style="background-image: url('/images/flags/${l.flag}.svg'); background-size: cover; background-position: center; border-radius: 50%;"></div>
+                        <img class="flag-icon" src="/images/flags/${l.flag}.svg" alt="" width="22" height="22" decoding="async">
                         ${l.label}
                     </a>`).join('')}
                 </div>
