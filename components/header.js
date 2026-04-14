@@ -45,7 +45,8 @@ class EcommerceHeader extends HTMLElement {
                     align-items: center;
                     justify-content: space-between;
                     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-                    overflow: hidden;
+                    /* overflow visibile: il dropdown lingue sta sotto l'header; hidden lo ritagliava */
+                    overflow: visible;
                 }
 
                 .bg-colored {
