@@ -680,14 +680,14 @@ class EcommerceHeader extends HTMLElement {
 
                         <div class="lang-wrapper">
                             <div class="lang-selector" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.selectLanguage)}">
-                                <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${activeLang.flag}.png');"></div>
+                                <div class="flag-icon" style="background-image: url('/images/flags/${activeLang.flag}.svg');"></div>
                                 <span>${activeLang.label}</span>
                                 <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                             </div>
                             <div class="lang-dropdown" role="menu">
                                 ${otherLangs.map(l => `
                                 <a href="${esc(hrefForLang(l.code))}" class="lang-option" role="menuitem" hreflang="${l.code}">
-                                    <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${l.flag}.png');"></div>
+                                    <div class="flag-icon" style="background-image: url('/images/flags/${l.flag}.svg');"></div>
                                     ${l.label}
                                 </a>`).join('')}
                             </div>
@@ -716,7 +716,7 @@ class EcommerceHeader extends HTMLElement {
                 <div class="drawer-langs">
                     ${LANGS.map(l => `
                     <a href="${esc(hrefForLang(l.code))}" class="drawer-lang-link${l.code === activeLang.code ? ' active' : ''}" hreflang="${l.code}">
-                        <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${l.flag}.png'); background-size: cover; background-position: center; border-radius: 50%;"></div>
+                        <div class="flag-icon" style="background-image: url('/images/flags/${l.flag}.svg'); background-size: cover; background-position: center; border-radius: 50%;"></div>
                         ${l.label}
                     </a>`).join('')}
                 </div>

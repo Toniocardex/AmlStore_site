@@ -9,6 +9,9 @@
 /fonts/montserrat.css
   Cache-Control: public, max-age=604800, must-revalidate
 
+/images/flags/*.svg
+  Cache-Control: public, max-age=2592000, must-revalidate
+
 /logo/*
   Cache-Control: public, max-age=2592000, must-revalidate
 
