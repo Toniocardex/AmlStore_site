@@ -1,0 +1,12 @@
+# Cloudflare Pages — Redirect rules
+# Sintassi: <source> <destination> <status>
+
+# Root → italiano (301 permanente per SEO)
+/ /it/ 301
+
+# Redirect vecchi URL del sito precedente → nuova struttura
+# Aggiungere qui ogni vecchio percorso man mano che si conosce la struttura del sito precedente
+# Esempio:
+# /prodotti          /it/prodotti/     301
+# /contatti          /it/contatti/     301
+# /products          /en/products/     301

@@ -1,8 +1,22 @@
+const LANGS = [
+    { code: 'it', label: 'IT', flag: 'it' },
+    { code: 'en', label: 'EN', flag: 'gb' },
+    { code: 'fr', label: 'FR', flag: 'fr' },
+    { code: 'de', label: 'DE', flag: 'de' },
+    { code: 'es', label: 'ES', flag: 'es' },
+];
+
 class EcommerceHeader extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        // Il template è completamente incapsulato nella logica del componente
+    }
+
+    connectedCallback() {
+        const currentLang = window.location.pathname.split('/')[1] || 'it';
+        const activeLang = LANGS.find(l => l.code === currentLang) || LANGS[0];
+        const otherLangs = LANGS.filter(l => l.code !== activeLang.code);
+
         this.shadowRoot.innerHTML = `
             <style>
                 :host {
@@ -119,6 +133,11 @@ class EcommerceHeader extends HTMLElement {
                     fill: currentColor;
                 }
 
+                /* ── Language selector ── */
+                .lang-wrapper {
+                    position: relative;
+                }
+
                 .lang-selector {
                     display: flex;
                     align-items: center;
@@ -128,6 +147,7 @@ class EcommerceHeader extends HTMLElement {
                     cursor: pointer;
                     opacity: 0.9;
                     transition: opacity 0.2s;
+                    user-select: none;
                 }
                 .lang-selector:hover {
                     opacity: 1;
@@ -137,13 +157,56 @@ class EcommerceHeader extends HTMLElement {
                     height: 20px;
                     border-radius: 50%;
                     border: 1px solid rgba(255,255,255,0.2);
+                    background-size: cover;
+                    background-position: center;
                 }
                 .chevron-down {
                     width: 10px;
                     height: 10px;
                     fill: currentColor;
+                    transition: transform 0.2s;
+                }
+                .lang-wrapper.open .chevron-down {
+                    transform: rotate(180deg);
                 }
 
+                .lang-dropdown {
+                    display: none;
+                    position: absolute;
+                    top: calc(100% + 12px);
+                    right: 0;
+                    background: white;
+                    border-radius: 10px;
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                    overflow: hidden;
+                    min-width: 120px;
+                    z-index: 100;
+                }
+                .lang-wrapper.open .lang-dropdown {
+                    display: block;
+                }
+
+                .lang-option {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding: 10px 16px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: #333;
+                    text-decoration: none;
+                    transition: background 0.15s;
+                }
+                .lang-option:hover {
+                    background: #f0f4ff;
+                    color: var(--color-gradient-start);
+                }
+                .lang-option .flag-icon {
+                    border-color: rgba(0,0,0,0.1);
+                    flex-shrink: 0;
+                }
+
+                /* ── Cart ── */
                 .cart-wrapper {
                     position: relative;
                     cursor: pointer;
@@ -259,6 +322,39 @@ class EcommerceHeader extends HTMLElement {
                 .overlay.open { opacity: 1; pointer-events: auto; }
                 .close-drawer { align-self: flex-end; background: none; border: none; cursor: pointer; }
                 .close-drawer svg { width: 24px; height: 24px; }
+
+                .drawer-langs {
+                    display: flex;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                    padding-top: 0.5rem;
+                    border-top: 1px solid #eee;
+                }
+                .drawer-lang-link {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 6px 10px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #555;
+                    text-decoration: none;
+                    background: #f0f4ff;
+                    transition: background 0.15s, color 0.15s;
+                }
+                .drawer-lang-link.active {
+                    background: #003182;
+                    color: white;
+                }
+                .drawer-lang-link:hover:not(.active) {
+                    background: #dde6ff;
+                    color: #003182;
+                }
+                .drawer-lang-link .flag-icon {
+                    width: 16px; height: 16px;
+                    border: none;
+                }
             </style>
 
             <div class="header-container">
@@ -269,11 +365,11 @@ class EcommerceHeader extends HTMLElement {
                         <button class="mobile-toggle" aria-label="Menu">
                             <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>
                         </button>
-                        <a href="#" class="logo">
-                            <img src="logo/logo-header-400.webp" alt="Aml Store Logo">
+                        <a href="/${activeLang.code}/" class="logo">
+                            <img src="/logo/logo-header-400.webp" alt="Aml Store Logo">
                         </a>
                         <nav class="nav-links">
-                            <a href="#" class="active">Home</a>
+                            <a href="/${activeLang.code}/" class="active">Home</a>
                             <a href="#">Sistemi Operativi</a>
                             <a href="#">Office</a>
                             <a href="#">Antivirus</a>
@@ -284,11 +380,23 @@ class EcommerceHeader extends HTMLElement {
                             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                             ASSISTENZA &nbsp; +39 02 1234 5678
                         </div>
-                        <div class="lang-selector">
-                            <div class="flag-icon" style="background: url('https://flagcdn.com/w40/it.png') center/cover no-repeat;"></div>
-                            IT
-                            <svg class="chevron-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+
+                        <!-- Language selector dropdown -->
+                        <div class="lang-wrapper">
+                            <div class="lang-selector" role="button" aria-haspopup="true" aria-expanded="false">
+                                <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${activeLang.flag}.png');"></div>
+                                ${activeLang.label}
+                                <svg class="chevron-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                            </div>
+                            <div class="lang-dropdown" role="menu">
+                                ${otherLangs.map(l => `
+                                <a href="/${l.code}/" class="lang-option" role="menuitem" hreflang="${l.code}">
+                                    <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${l.flag}.png');"></div>
+                                    ${l.label}
+                                </a>`).join('')}
+                            </div>
                         </div>
+
                         <div class="cart-wrapper">
                             <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                             <div class="cart-badge">2</div>
@@ -302,37 +410,53 @@ class EcommerceHeader extends HTMLElement {
             <div class="mobile-drawer">
                 <button class="close-drawer"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
                 <nav style="display:flex; flex-direction:column; gap:1.5rem; font-weight:700;">
-                    <a href="#" style="color:#333; text-decoration:none;">Home</a>
+                    <a href="/${activeLang.code}/" style="color:#333; text-decoration:none;">Home</a>
                     <a href="#" style="color:#333; text-decoration:none;">Sistemi Operativi</a>
                     <a href="#" style="color:#333; text-decoration:none;">Office</a>
                     <a href="#" style="color:#333; text-decoration:none;">Antivirus</a>
                 </nav>
+                <div class="drawer-langs">
+                    ${LANGS.map(l => `
+                    <a href="/${l.code}/" class="drawer-lang-link${l.code === activeLang.code ? ' active' : ''}" hreflang="${l.code}">
+                        <div class="flag-icon" style="background-image: url('https://flagcdn.com/w40/${l.flag}.png'); background-size: cover; background-position: center; border-radius: 50%;"></div>
+                        ${l.label}
+                    </a>`).join('')}
+                </div>
                 <div style="margin-top:auto; font-size:14px; color:#666;">
                     Assistenza: +39 02 1234 5678
                 </div>
             </div>
         `;
-    }
 
-    connectedCallback() {
+        // ── Event listeners ──
         const toggle = this.shadowRoot.querySelector('.mobile-toggle');
         const close = this.shadowRoot.querySelector('.close-drawer');
         const overlay = this.shadowRoot.querySelector('.overlay');
         const drawer = this.shadowRoot.querySelector('.mobile-drawer');
+        const langWrapper = this.shadowRoot.querySelector('.lang-wrapper');
+        const langSelector = this.shadowRoot.querySelector('.lang-selector');
 
-        const openMenu = () => {
-            drawer.classList.add('open');
-            overlay.classList.add('open');
-        };
-
-        const closeMenu = () => {
-            drawer.classList.remove('open');
-            overlay.classList.remove('open');
-        };
+        const openMenu = () => { drawer.classList.add('open'); overlay.classList.add('open'); };
+        const closeMenu = () => { drawer.classList.remove('open'); overlay.classList.remove('open'); };
 
         if (toggle) toggle.addEventListener('click', openMenu);
         if (close) close.addEventListener('click', closeMenu);
         if (overlay) overlay.addEventListener('click', closeMenu);
+
+        // Language dropdown toggle
+        if (langSelector) {
+            langSelector.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = langWrapper.classList.toggle('open');
+                langSelector.setAttribute('aria-expanded', isOpen);
+            });
+        }
+
+        // Close lang dropdown when clicking outside
+        document.addEventListener('click', () => {
+            langWrapper.classList.remove('open');
+            if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+        });
     }
 }
 

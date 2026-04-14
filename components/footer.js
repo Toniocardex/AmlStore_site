@@ -73,7 +73,7 @@ class EcommerceFooter extends HTMLElement {
                 }
 
                 .footer-logo { display: inline-block; margin-bottom: 1.5rem; }
-                .footer-logo img { height: 48px; width: auto; display: block; filter: brightness(0) invert(1); }
+                .footer-logo img { height: 48px; width: auto; display: block; filter: brightness(0) invert(1) drop-shadow(0 0 1px rgba(255,255,255,0.2)); }
 
                 .footer-desc {
                     color: var(--text-muted);
@@ -119,7 +119,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="footer-grid">
                         <div class="footer-col">
                             <a href="#" class="footer-logo">
-                                <img src="logo/logo-header-400.webp" alt="Aml Store Logo Bianco">
+                                <img src="/logo/logo-header-400.webp" alt="Aml Store Logo Bianco">
                             </a>
                             <p class="footer-desc">
                                 Il tuo partner affidabile per l'acquisto di licenze software originali. Sistemi Operativi, Office e Antivirus al miglior prezzo garantito.
