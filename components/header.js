@@ -142,18 +142,16 @@
                         top: 0;
                         z-index: 1000;
                         font-family: 'Montserrat', sans-serif;
-                        /* Condivisione tavolozza colori col Footer */
+                        /* Stessa tonalità del footer (#050505 / #111111) con trasparenza glass */
                         --bg-base: rgba(5, 5, 5, 0.75);
                         --bg-surface: rgba(17, 17, 17, 0.85);
                         --border-color: rgba(255, 255, 255, 0.08);
                         --text-primary: #ffffff;
                         --text-secondary: #a1a1aa;
                         --text-muted: #71717a;
-                        --accent: #ffffff; 
-                        
-                        /* FIX: Spostiamo lo sfondo e il blur sul componente radice 
-                           così prende il 100% della larghezza e l'header-container può
-                           avere la max-width per allinearsi al footer */
+                        --accent: #3b82f6;
+                        --accent-hover: #60a5fa;
+
                         background-color: var(--bg-base);
                         backdrop-filter: blur(20px);
                         -webkit-backdrop-filter: blur(20px);
@@ -167,7 +165,7 @@
                         align-items: center;
                         justify-content: space-between;
                         gap: 2rem;
-                        height: 80px;
+                        height: 88px;
                         
                         /* FIX: Allineamento e Padding condiviso con il Footer */
                         max-width: 1280px;
@@ -190,15 +188,13 @@
                         flex-shrink: 0;
                     }
                     .logo:hover { opacity: 0.9; transform: scale(1.02); }
-                    .logo:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 4px; }
+                    .logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
                     .logo img {
-                        height: 40px;
+                        height: 56px;
                         width: auto;
+                        max-height: 100%;
                         display: block;
                         filter: brightness(0) invert(1);
-                        color: white;
-                        font-weight: 800;
-                        font-size: 1.2rem;
                     }
 
                     .nav-links {
@@ -508,7 +504,7 @@
                     @media (max-width: 640px) {
                         .header-container { 
                             padding: 0 clamp(1.25rem, 5vw, 2rem); 
-                            height: 64px; /* Header più sottile su mobile */
+                            height: 72px; /* Barra mobile: spazio per marchio più leggibile */
                             gap: 1rem;
                         }
                         .btn-signin { display: none; } /* Lo user troverà il login nel drawer */
@@ -516,7 +512,7 @@
                         .lang-selector span { display: none; } /* Solo icona lingua */
                         .lang-selector { padding: 0.4rem; }
                         .right-section { gap: 0.5rem; }
-                        .logo img { height: 32px; } /* Logo rimpicciolito */
+                        .header-container .left-section .logo img { height: 44px; }
                         .cart-wrapper { 
                             width: 36px; 
                             height: 36px; 
@@ -555,6 +551,10 @@
                         justify-content: space-between;
                         align-items: center;
                         margin-bottom: 2rem;
+                    }
+                    .mobile-drawer .drawer-header .logo img {
+                        height: 52px;
+                        width: auto;
                     }
                     .close-drawer {
                         background: rgba(255, 255, 255, 0.05);
@@ -662,7 +662,7 @@
                             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </button>
                         <a href="${esc(homeHref)}" class="logo">
-                            <img src="${esc(logoSrc)}" width="200" height="40" alt="${esc(t.logoAlt)}">
+                            <img src="${esc(logoSrc)}" width="280" height="56" alt="${esc(t.logoAlt)}">
                         </a>
                         <nav class="nav-links">
                             <a href="${esc(homeHref)}" class="active">${esc(t.navHome)}</a>
@@ -715,7 +715,7 @@
                 <div class="mobile-drawer">
                     <div class="drawer-header">
                         <a href="${esc(homeHref)}" class="logo">
-                            <img src="${esc(logoSrc)}" width="160" height="32" alt="${esc(t.logoAlt)}">
+                            <img src="${esc(logoSrc)}" width="260" height="52" alt="${esc(t.logoAlt)}">
                         </a>
                         <button type="button" class="close-drawer" aria-label="${esc(t.closeNavMenu)}">
                             <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
