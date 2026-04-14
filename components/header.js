@@ -137,10 +137,21 @@ class EcommerceHeader extends HTMLElement {
             <style>
                 :host {
                     display: block;
-                    position: relative;
-                    z-index: 1000;
+                    font-family: 'Montserrat', sans-serif;
+                    /* Allineato al footer — Premium Dark */
+                    --bg-base: #050505;
+                    --bg-surface: #111111;
+                    --border-color: rgba(255, 255, 255, 0.08);
+                    --text-primary: #ffffff;
+                    --text-secondary: #a1a1aa;
+                    --text-muted: #71717a;
+                    --accent: #3b82f6;
+                    --accent-hover: #60a5fa;
+                    --glow-color: rgba(59, 130, 246, 0.15);
+
                     --h-height: 84px;
                     --tap-min: 44px;
+                    /* Pannello chiaro (sinistra) / blu (destra) — separati dal clip-path */
                     --color-gradient-start: #003182;
                     --color-gradient-end: #1a5fd1;
                     --text-dark: #1a1a1a;
@@ -150,13 +161,28 @@ class EcommerceHeader extends HTMLElement {
                     --neon-line: rgba(180, 220, 255, 0.95);
                     --neon-glow: rgba(26, 95, 209, 0.85);
                     --neon-glow-soft: rgba(100, 170, 255, 0.45);
+
+                    position: relative;
+                    z-index: 1000;
+                    border-bottom: 1px solid rgba(0, 49, 130, 0.08);
+                    background: transparent;
+                    color: var(--text-dark);
+                    overflow: hidden;
                 }
 
-                * {
-                    box-sizing: border-box;
-                    margin: 0;
-                    padding: 0;
-                    font-family: 'Montserrat', sans-serif;
+                * { box-sizing: border-box; margin: 0; padding: 0; }
+
+                .header-bg-glow {
+                    position: absolute;
+                    top: 0;
+                    left: 42%;
+                    right: 0;
+                    transform: none;
+                    width: auto;
+                    height: 260px;
+                    background: radial-gradient(ellipse 90% 100% at 50% 0%, var(--glow-color) 0%, transparent 72%);
+                    pointer-events: none;
+                    z-index: 0;
                 }
 
                 .header-container {
@@ -165,8 +191,8 @@ class EcommerceHeader extends HTMLElement {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 8px 32px rgba(0,35,90,0.08);
-                    overflow: visible;
+                    box-shadow: none;
+                    overflow: hidden;
                 }
 
                 .bg-colored {
@@ -183,7 +209,7 @@ class EcommerceHeader extends HTMLElement {
                     max-width: 720px;
                     background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
                     clip-path: polygon(0 0, calc(100% - 88px) 0, 100% 100%, 0 100%);
-                    box-shadow: inset -1px 0 0 rgba(0,49,130,0.06);
+                    box-shadow: inset -1px 0 0 rgba(0, 49, 130, 0.06);
                     z-index: 2;
                 }
 
@@ -194,7 +220,7 @@ class EcommerceHeader extends HTMLElement {
                     height: 100%;
                     display: flex;
                     align-items: center;
-                    padding: 0 clamp(1rem, 4vw, 3.5rem);
+                    padding: 0 clamp(1.5rem, 5vw, 4rem);
                 }
 
                 .left-section {
@@ -203,6 +229,7 @@ class EcommerceHeader extends HTMLElement {
                     gap: clamp(1.25rem, 3vw, 2.75rem);
                     flex: 1;
                     min-width: 0;
+                    color: var(--text-dark);
                 }
 
                 .logo {
@@ -236,35 +263,38 @@ class EcommerceHeader extends HTMLElement {
                     padding: 0.5rem 1.1rem;
                     border-radius: 999px;
                     background: linear-gradient(180deg, #ffffff 0%, #eef0f4 100%);
-                    box-shadow: 0 3px 12px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.92);
-                    transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+                    border: 1px solid rgba(0, 49, 130, 0.08);
+                    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+                    transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
                 }
                 .nav-links a:hover {
                     color: var(--text-dark);
                     background: linear-gradient(180deg, #ffffff 0%, #e4e7ed 100%);
-                    box-shadow: 0 5px 18px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.95);
+                    border-color: rgba(0, 49, 130, 0.12);
+                    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.95);
                     transform: translateY(-1px);
                 }
                 .nav-links a:active:not(.active) {
                     transform: translateY(0);
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.85);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
                 }
                 .nav-links a.active {
-                    color: rgba(255,255,255,0.98);
+                    color: rgba(255, 255, 255, 0.98);
                     font-weight: 700;
                     background: linear-gradient(118deg, var(--color-gradient-start) 0%, #0d4bb8 50%, var(--color-gradient-end) 100%);
-                    box-shadow: 0 4px 16px rgba(0,35,90,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+                    border-color: rgba(255, 255, 255, 0.18);
+                    box-shadow: 0 4px 16px rgba(0, 35, 90, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
                     transform: none;
                 }
                 .nav-links a.active:hover {
                     color: #fff;
                     background: linear-gradient(118deg, #004099 0%, #1a5fd1 55%, #2b6fe0 100%);
-                    box-shadow: 0 6px 20px rgba(0,35,90,0.42), inset 0 1px 0 rgba(255,255,255,0.22);
+                    box-shadow: 0 6px 20px rgba(0, 35, 90, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.22);
                     transform: translateY(-1px);
                 }
                 .nav-links a.active:active {
                     transform: translateY(0);
-                    box-shadow: 0 3px 12px rgba(0,35,90,0.3), inset 0 1px 0 rgba(255,255,255,0.18);
+                    box-shadow: 0 3px 12px rgba(0, 35, 90, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.18);
                 }
 
                 .right-section {
@@ -299,7 +329,7 @@ class EcommerceHeader extends HTMLElement {
                     font-size: 12px;
                     font-weight: 700;
                     letter-spacing: 0.04em;
-                    color: rgba(255,255,255,0.95);
+                    color: rgba(255, 255, 255, 0.95);
                     white-space: nowrap;
                 }
                 .phone-number .phone-icon-wrap {
@@ -309,8 +339,13 @@ class EcommerceHeader extends HTMLElement {
                     width: 34px;
                     height: 34px;
                     border-radius: 10px;
-                    background: rgba(255,255,255,0.14);
-                    border: 1px solid rgba(255,255,255,0.2);
+                    background: rgba(255, 255, 255, 0.14);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    transition: background 0.2s ease, border-color 0.2s ease;
+                }
+                .phone-number:hover .phone-icon-wrap {
+                    background: rgba(255, 255, 255, 0.22);
+                    border-color: rgba(255, 255, 255, 0.3);
                 }
                 .phone-number svg {
                     width: 16px;
@@ -347,17 +382,17 @@ class EcommerceHeader extends HTMLElement {
                     letter-spacing: 0.02em;
                     cursor: pointer;
                     user-select: none;
-                    color: rgba(255,255,255,0.98);
-                    background: rgba(255,255,255,0.12);
-                    border: 1px solid rgba(255,255,255,0.28);
+                    color: rgba(255, 255, 255, 0.98);
+                    background: rgba(255, 255, 255, 0.12);
+                    border: 1px solid rgba(255, 255, 255, 0.28);
                     border-radius: 999px;
-                    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+                    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
                     transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
                 }
                 .lang-selector:hover {
-                    background: rgba(255,255,255,0.2);
-                    border-color: rgba(255,255,255,0.45);
-                    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+                    background: rgba(255, 255, 255, 0.2);
+                    border-color: rgba(255, 255, 255, 0.45);
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
                 }
                 .lang-selector:focus {
                     outline: none;
@@ -367,14 +402,14 @@ class EcommerceHeader extends HTMLElement {
                     outline-offset: 3px;
                 }
                 .lang-wrapper.open .lang-selector {
-                    background: rgba(255,255,255,0.22);
-                    border-color: rgba(255,255,255,0.5);
+                    background: rgba(255, 255, 255, 0.22);
+                    border-color: rgba(255, 255, 255, 0.5);
                 }
                 .flag-icon {
                     width: 22px;
                     height: 22px;
                     border-radius: 50%;
-                    border: 2px solid rgba(255,255,255,0.35);
+                    border: 2px solid rgba(255, 255, 255, 0.35);
                     object-fit: cover;
                     object-position: center;
                     flex-shrink: 0;
@@ -400,8 +435,8 @@ class EcommerceHeader extends HTMLElement {
                     right: 0;
                     background: #fff;
                     border-radius: 14px;
-                    box-shadow: 0 12px 40px rgba(0,20,60,0.18);
-                    border: 1px solid rgba(0,49,130,0.08);
+                    box-shadow: 0 12px 40px rgba(0, 20, 60, 0.18);
+                    border: 1px solid rgba(0, 49, 130, 0.08);
                     overflow: hidden;
                     min-width: 156px;
                     padding: 6px 0;
@@ -427,12 +462,13 @@ class EcommerceHeader extends HTMLElement {
                     text-decoration: none;
                     transition: background 0.15s ease, color 0.15s ease;
                 }
-                .lang-option:hover {
+                .lang-option:hover,
+                .lang-option:focus-visible {
                     background: #f0f4ff;
                     color: var(--color-gradient-start);
                 }
                 .lang-option .flag-icon {
-                    border-color: rgba(0,0,0,0.08);
+                    border-color: rgba(0, 0, 0, 0.08);
                     box-shadow: none;
                 }
 
@@ -450,7 +486,7 @@ class EcommerceHeader extends HTMLElement {
                     transition: background 0.2s ease, transform 0.15s ease, color 0.2s ease;
                 }
                 .cart-wrapper:hover {
-                    background: rgba(255,255,255,0.12);
+                    background: rgba(255, 255, 255, 0.12);
                     transform: translateY(-1px);
                 }
                 .cart-wrapper:focus-visible {
@@ -478,7 +514,7 @@ class EcommerceHeader extends HTMLElement {
                     justify-content: center;
                     padding: 0 5px;
                     box-shadow: 0 2px 8px rgba(224,36,58,0.45);
-                    border: 2px solid rgba(0,49,130,0.35);
+                    border: 2px solid rgba(0, 49, 130, 0.35);
                 }
 
                 .btn-signin {
@@ -493,12 +529,12 @@ class EcommerceHeader extends HTMLElement {
                     font-size: 14px;
                     letter-spacing: 0.02em;
                     cursor: pointer;
-                    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+                    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
                     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
                 }
                 .btn-signin:hover {
                     transform: translateY(-2px);
-                    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
                 }
                 .btn-signin:focus-visible {
                     outline: 2px solid #fff;
@@ -512,7 +548,7 @@ class EcommerceHeader extends HTMLElement {
                     display: none;
                     width: var(--tap-min);
                     height: var(--tap-min);
-                    background: rgba(0,49,130,0.06);
+                    background: rgba(0, 49, 130, 0.06);
                     border: none;
                     border-radius: 12px;
                     cursor: pointer;
@@ -521,7 +557,7 @@ class EcommerceHeader extends HTMLElement {
                     transition: background 0.2s ease, color 0.2s ease;
                 }
                 .mobile-toggle:hover {
-                    background: rgba(0,49,130,0.1);
+                    background: rgba(0, 49, 130, 0.1);
                 }
                 .mobile-toggle:focus-visible {
                     outline: 2px solid var(--nav-active);
@@ -544,7 +580,13 @@ class EcommerceHeader extends HTMLElement {
                 @media (max-width: 768px) {
                     :host { --h-height: 72px; }
                     .bg-colored { display: none; }
-                    .bg-white { width: 100%; max-width: none; clip-path: none; box-shadow: none; }
+                    .bg-white {
+                        width: 100%;
+                        max-width: none;
+                        clip-path: none;
+                        box-shadow: none;
+                        background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+                    }
                     .content-wrapper { padding: 0 0.75rem 0 0.5rem; }
 
                     .logo img { height: 44px; }
@@ -558,24 +600,24 @@ class EcommerceHeader extends HTMLElement {
 
                     .lang-selector {
                         color: var(--color-gradient-start);
-                        background: rgba(0,49,130,0.06);
-                        border-color: rgba(0,49,130,0.12);
+                        background: rgba(0, 49, 130, 0.06);
+                        border: 1px solid rgba(0, 49, 130, 0.12);
                         box-shadow: none;
                         padding: 0 12px 0 10px;
                         min-height: 42px;
                     }
                     .lang-selector:hover {
-                        background: rgba(0,49,130,0.1);
-                        border-color: rgba(0,49,130,0.2);
+                        background: rgba(0, 49, 130, 0.1);
+                        border-color: rgba(0, 49, 130, 0.2);
                     }
                     .lang-wrapper.open .lang-selector {
-                        background: rgba(0,49,130,0.12);
+                        background: rgba(0, 49, 130, 0.12);
                     }
                     .lang-selector:focus-visible {
                         outline-color: var(--color-gradient-start);
                     }
                     .lang-selector .flag-icon {
-                        border-color: rgba(0,49,130,0.15);
+                        border-color: rgba(0, 49, 130, 0.15);
                         box-shadow: none;
                     }
 
@@ -583,7 +625,7 @@ class EcommerceHeader extends HTMLElement {
                         color: var(--color-gradient-start);
                     }
                     .cart-wrapper:hover {
-                        background: rgba(0,49,130,0.06);
+                        background: rgba(0, 49, 130, 0.06);
                     }
                     .cart-wrapper:focus-visible {
                         outline-color: var(--color-gradient-start);
@@ -595,11 +637,11 @@ class EcommerceHeader extends HTMLElement {
                     .btn-signin {
                         margin-left: 0.35rem;
                         background: var(--color-gradient-start);
-                        color: white;
+                        color: #fff;
                         padding: 0 16px;
                         min-height: 42px;
                         font-size: 13px;
-                        box-shadow: 0 4px 12px rgba(0,49,130,0.25);
+                        box-shadow: 0 4px 12px rgba(0, 49, 130, 0.25);
                     }
                     .btn-signin:focus-visible {
                         outline-color: var(--color-gradient-start);
@@ -610,22 +652,37 @@ class EcommerceHeader extends HTMLElement {
                     position: fixed;
                     top: 0; left: -100%;
                     width: 80%; max-width: 320px; height: 100vh;
-                    background: white;
+                    background: var(--bg-surface);
                     z-index: 2000;
-                    box-shadow: 5px 0 20px rgba(0,0,0,0.1);
+                    box-shadow: 5px 0 24px rgba(0, 0, 0, 0.5);
+                    border-right: 1px solid var(--border-color);
                     transition: left 0.3s ease;
                     padding: 2rem;
                     display: flex; flex-direction: column; gap: 2rem;
+                    color: var(--text-primary);
                 }
                 .mobile-drawer.open { left: 0; }
                 .overlay {
                     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                    background: rgba(0,0,0,0.5); z-index: 1999;
+                    background: rgba(0, 0, 0, 0.6); z-index: 1999;
                     opacity: 0; pointer-events: none; transition: opacity 0.3s;
                 }
                 .overlay.open { opacity: 1; pointer-events: auto; }
-                .close-drawer { align-self: flex-end; background: none; border: none; cursor: pointer; }
-                .close-drawer svg { width: 24px; height: 24px; }
+                .close-drawer {
+                    align-self: flex-end;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid var(--border-color);
+                    border-radius: 10px;
+                    cursor: pointer;
+                    color: var(--text-primary);
+                    padding: 0.35rem;
+                }
+                .close-drawer svg {
+                    width: 24px;
+                    height: 24px;
+                    display: block;
+                    fill: currentColor;
+                }
 
                 .drawer-nav {
                     display: flex;
@@ -634,10 +691,15 @@ class EcommerceHeader extends HTMLElement {
                     font-weight: 700;
                 }
                 .drawer-nav a {
-                    color: #333;
+                    color: var(--text-secondary);
                     text-decoration: none;
                     padding: 0.85rem 0;
-                    border-bottom: 1px solid #eee;
+                    border-bottom: 1px solid var(--border-color);
+                    transition: color 0.2s ease;
+                }
+                .drawer-nav a:hover,
+                .drawer-nav a:focus-visible {
+                    color: var(--accent-hover);
                 }
                 .drawer-nav a:last-child {
                     border-bottom: none;
@@ -648,7 +710,7 @@ class EcommerceHeader extends HTMLElement {
                     gap: 8px;
                     flex-wrap: wrap;
                     padding-top: 0.5rem;
-                    border-top: 1px solid #eee;
+                    border-top: 1px solid var(--border-color);
                 }
                 .drawer-lang-link {
                     display: flex;
@@ -658,26 +720,38 @@ class EcommerceHeader extends HTMLElement {
                     border-radius: 20px;
                     font-size: 12px;
                     font-weight: 700;
-                    color: #555;
+                    color: var(--text-secondary);
                     text-decoration: none;
-                    background: #f0f4ff;
-                    transition: background 0.15s, color 0.15s;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid var(--border-color);
+                    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
                 }
                 .drawer-lang-link.active {
-                    background: #003182;
-                    color: white;
+                    background: rgba(59, 130, 246, 0.25);
+                    color: var(--text-primary);
+                    border-color: rgba(59, 130, 246, 0.45);
                 }
                 .drawer-lang-link:hover:not(.active) {
-                    background: #dde6ff;
-                    color: #003182;
+                    background: rgba(255, 255, 255, 0.08);
+                    color: var(--accent-hover);
+                    border-color: rgba(255, 255, 255, 0.12);
                 }
                 .drawer-lang-link .flag-icon {
                     width: 16px; height: 16px;
                     border: none;
                 }
+
+                .drawer-assist {
+                    margin-top: auto;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: var(--text-muted);
+                    line-height: 1.5;
+                }
             </style>
 
             <div class="header-container">
+                <div class="header-bg-glow" aria-hidden="true"></div>
                 <div class="bg-colored"></div>
                 <div class="bg-white"></div>
                 <div class="content-wrapper">
@@ -750,7 +824,7 @@ class EcommerceHeader extends HTMLElement {
                         ${l.label}
                     </a>`).join('')}
                 </div>
-                <div style="margin-top:auto; font-size:14px; color:#666;">
+                <div class="drawer-assist">
                     ${esc(t.drawerAssist)}
                 </div>
             </div>
