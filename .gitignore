@@ -1,27 +1,11 @@
-# Dipendenze
 node_modules/
-
-# Wrangler / Cloudflare (locale)
 .wrangler/
 .dev.vars
-.mf/
-
-# Segreti e env (mai in repo)
 .env
 .env.*
-!.env.example
-
-# OS
 .DS_Store
 Thumbs.db
-
-# Editor (opzionale: togli le righe se vuoi committare settings condivisi)
 .idea/
 .claude/
-
-# Log
 *.log
-npm-debug.log*
-
-# Output build se introdotto in seguito
 dist/
