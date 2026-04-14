@@ -1,0 +1,71 @@
+Build "Aml-Store.com" (The Vault Edition)
+Ruolo: Agisci come Senior Full-stack Developer esperto in Cloudflare Pages, Workers, D1 e R2.
+Progetto: Aml-Store.com - E-commerce internazionale per beni digitali.
+Filosofia: Pure HTML/CSS/JS (Vanilla). Nessuna libreria esterna (No React, No Tailwind, No jQuery). Performance 100/100 PageSpeed.
+
+CORE WEB VITALS (DIRETTIVA — fin dall’inizio, non in retrofit):
+Le metriche CWV sono obbligatorie come vincolo di progetto. Ogni feature (HTML, CSS, JS, Functions, asset) deve essere valutata e implementata in modo da proteggere LCP, INP e CLS.
+
+- LCP (Largest Contentful Paint): priorità al contenuto above-the-fold — immagini/logo con dimensioni esplicite (width/height), formati moderni (WebP), preload solo per ciò che è davvero critico; CSS critico leggero; evitare catene di richieste che ritardano il render; server/edge veloci (D1 query snelle, risposte API piccole).
+- INP (Interaction to Next Paint): JS vanilla snello — niente main thread lunghi; evitare listener pesanti su scroll/resize senza debounce; operazioni costose in async chunk piccoli se necessario; ridurre dipendenze da terze parti nel percorso interattivo.
+- CLS (Cumulative Layout Shift): riservare spazio a immagini, iframe, font (font-display: swap + preload mirato dove serve), annunci dinamici/liste che evitano reflow improvvisi; evitare inserimenti DOM sopra contenuto già visibile senza placeholder.
+
+Strumenti: usare Lighthouse/PageSpeed Insights e il report CWV in Chrome DevTools come verifica ricorrente, non solo a fine progetto.
+
+REGOLE DI SVILUPPO (STRICT):
+
+Performance: Tutto il CSS deve essere custom. JS deve essere Vanilla ES6+. Allineamento costante alle direttive CWV sopra.
+
+Sicurezza: Implementazione "Vault". Accesso admin protetto, URL firmati per i download.
+
+Multilingua: Struttura a sottocartelle fisiche (/it/, /en/, /de/, /fr/, /es/) — hreflang + switcher su ogni pagina pubblica.
+
+Backend: Cloudflare Pages Functions in /functions.
+
+STRUTTURA DIRECTORY:
+
+Plaintext
+/root
+├── /it, /en, /de, /fr, /es (struttura speculare)
+│   ├── index.html (HOME / root lingua)
+│   ├── account.html (storico ordini protetto)
+│   └── checkout.html (carrello e form fatturazione elettronica)
+├── /css (style.css unico e leggero)
+├── /js (cart.js, auth.js)
+├── /img (tutte le immagini in .webp)
+├── /functions (Backend API)
+│   ├── api/products.js (query D1)
+│   ├── api/create-checkout.js (Stripe Session dinamica)
+│   ├── api/webhook.js (Stripe -> Fattura24)
+│   ├── api/download.js (R2 Signed URLs + Log IP)
+│   └── api/admin/ (funzioni protette per gestione bonifici)
+└── wrangler.toml
+SPECIFICHE TECNICHE PER CURSOR:
+
+Database D1: Genera schema.sql. Tabelle: products (multilingua), orders (con cart_token UNIQUE, status, lang, billing_json), download_logs (IP/Timestamp), admin_audit_logs.
+
+Stripe Dinamico: Non usare Price ID fissi. Crea la sessione usando price_data ricalcolato dal server leggendo i prezzi su D1. Raccogli P.IVA/SDI/PEC tramite custom_fields.
+
+Download Protetti: I file digitali sono su Cloudflare R2. La funzione api/download.js deve verificare il pagamento su D1 e generare un URL firmato con scadenza 15 minuti.
+
+SEO: Inserisci i tag hreflang e i meta tag per Aml-Store.com in ogni versione linguistica.
+
+CMS Admin: Predisponi la cartella /admin con autenticazione tramite Cloudflare Access. Includi la logica per "Conferma Bonifico" che aggiorna D1 e triggera Fattura24.
+
+PRIMO TASK:
+Inizia generando il file wrangler.toml configurato per il dominio Aml-Store.com, lo schema schema.sql per il database D1 e la struttura base della cartella /it/ con un file index.html che carica i prodotti dinamicamente da D1 tramite Vanilla JS.
+
+Prossimi Passi per Te:
+In locale: Apri la cartella del progetto con Cursor e incolla il prompt nel Composer.
+
+Variabili d'ambiente: Una volta che Cursor ha scritto il codice, ricorda di andare nella dashboard di Cloudflare (Settings -> Functions) e inserire i tuoi "Secrets":
+
+STRIPE_SECRET_KEY
+
+STRIPE_WEBHOOK_SECRET
+
+FATTURA24_API_KEY
+
+CLERK_SECRET_KEY (se decidi di usare Clerk per l'area account).
+
+Deploy: Quando sei soddisfatto dei test in locale (usando npx wrangler pages dev), fai il git push e guarda il tuo punteggio PageSpeed volare verso il 100!

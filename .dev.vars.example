@@ -1,0 +1,6 @@
+# Copia come `.dev.vars` (non versionato) per `wrangler pages dev`.
+# Dashboard Cloudflare Pages: stesso nome come variabile d'ambiente.
+ADMIN_API_SECRET=local-dev-change-me
+
+# Opzionale: limite upload admin (byte). Default ~50MB.
+# ADMIN_UPLOAD_MAX_BYTES=52428800

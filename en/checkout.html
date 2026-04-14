@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <script src="/js/theme-init.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1e3a6e" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/webp" href="/img/favicon/icon-32.webp" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon.png" />
+  <title>Checkout — Aml-Store</title>
+  <meta name="description" content="Checkout and e-invoicing details — Aml-Store.com" />
+  <link rel="canonical" href="https://Aml-Store.com/en/checkout.html" />
+  <link rel="alternate" hreflang="it" href="https://Aml-Store.com/it/checkout.html" />
+  <link rel="alternate" hreflang="en" href="https://Aml-Store.com/en/checkout.html" />
+  <link rel="alternate" hreflang="de" href="https://Aml-Store.com/de/checkout.html" />
+  <link rel="alternate" hreflang="fr" href="https://Aml-Store.com/fr/checkout.html" />
+  <link rel="alternate" hreflang="es" href="https://Aml-Store.com/es/checkout.html" />
+  <link rel="alternate" hreflang="x-default" href="https://Aml-Store.com/it/checkout.html" />
+  <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script type="module" src="/js/checkout.js"></script>
+  <!-- TrustBox script -->
+  <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+  <!-- End TrustBox script -->
+</head>
+<body>
+  <a class="skip-link" href="#contenuto">Skip to content</a>
+  <header class="site-header" translate="no">
+    <div class="inner header-inner">
+      <div class="brand-block">
+        <a href="/en/" class="logo-link" aria-label="Aml-Store">
+          <img class="logo-img logo-img--for-light-bg" src="/img/logo/logo-header-200.webp" srcset="/img/logo/logo-header-200.webp 200w, /img/logo/logo-header-400.webp 400w" sizes="(max-width: 480px) 88vw, 300px" width="300" height="146" alt="Aml-Store.com" decoding="async" fetchpriority="high" />
+          <img class="logo-img logo-img--for-dark-bg" src="/img/logo/logo-header-200-light.webp" srcset="/img/logo/logo-header-200-light.webp 200w, /img/logo/logo-header-400-light.webp 400w" sizes="(max-width: 480px) 88vw, 300px" width="300" height="146" alt="" decoding="async" fetchpriority="low" aria-hidden="true" />
+        </a>
+      </div>
+      <div class="header-end">
+        <nav class="user-nav" aria-label="Cart and account">
+          <a class="user-nav-link user-nav-link--icon" href="/en/cart.html" aria-label="Cart">
+            <span class="nav-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <span id="cart-badge" class="cart-badge" hidden></span>
+            </span>
+          </a>
+          <a class="user-nav-link" href="/en/account.html">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Account</span>
+          </a>
+        </nav>
+        <details class="lang-dropdown" translate="no">
+          <summary class="lang-dropdown__summary" aria-label="Select language">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span class="lang-dropdown__code">EN</span>
+          </summary>
+          <div class="lang-dropdown__panel" role="navigation" aria-label="Language">
+            <a href="/it/checkout.html" hreflang="it" class="lang-dropdown__link">Italian</a>
+            <a href="/en/checkout.html" hreflang="en" class="lang-dropdown__link is-current" aria-current="page">English</a>
+            <a href="/de/checkout.html" hreflang="de" class="lang-dropdown__link">German</a>
+            <a href="/fr/checkout.html" hreflang="fr" class="lang-dropdown__link">French</a>
+            <a href="/es/checkout.html" hreflang="es" class="lang-dropdown__link">Spanish</a>
+          </div>
+        </details>
+        <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Switch to light theme">
+          <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="contenuto" class="main main--checkout">
+    <h1>Checkout</h1>
+    <p class="lead">
+      Order summary and checkout details. <strong>Physical</strong> items need a shipping address; <strong>digital</strong> items are delivered by email. SDI, PEC and VAT apply only for <strong>VAT / Company</strong>. Prices are confirmed by the server.
+    </p>
+    <div class="checkout-layout">
+      <section class="checkout-layout__summary" aria-labelledby="checkout-summary-title">
+        <h2 id="checkout-summary-title" class="checkout-summary-title">Order summary</h2>
+        <p id="checkout-status" class="status" aria-live="polite"></p>
+        <div id="checkout-lines" class="checkout-lines"></div>
+        <div class="checkout-summary-footer">
+          <a class="btn btn-ghost btn-back-cart" href="/en/cart.html">← Edit cart</a>
+        </div>
+      </section>
+      <aside class="checkout-layout__aside" aria-labelledby="checkout-pane-title">
+        <form id="checkout-form" class="checkout-form checkout-form--pane" hidden>
+          <h2 id="checkout-pane-title" class="checkout-pane-title">Billing &amp; payment</h2>
+          <p id="checkout-fulfillment-banner" class="checkout-fulfillment-banner hint" role="status" hidden></p>
+      <fieldset class="form-section">
+        <legend>Contact</legend>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" />
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend>Billing details</legend>
+        <div class="field field-inline">
+          <label><input type="radio" name="invoice_type" value="individual" checked /> Private customer</label>
+          <label><input type="radio" name="invoice_type" value="company" /> VAT / Company</label>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="first_name">First name</label>
+            <input type="text" id="first_name" name="first_name" autocomplete="given-name" required />
+          </div>
+          <div class="field">
+            <label for="last_name">Last name</label>
+            <input type="text" id="last_name" name="last_name" autocomplete="family-name" required />
+          </div>
+        </div>
+        <div id="block-fiscal-private" class="field">
+          <label for="fiscal_code">Tax / fiscal code (optional)</label>
+          <input type="text" id="fiscal_code" name="fiscal_code" autocomplete="off" />
+        </div>
+        <div id="block-company-extra" class="field" hidden>
+          <label for="company_name">Legal name</label>
+          <input type="text" id="company_name" name="company_name" autocomplete="organization" />
+        </div>
+      </fieldset>
+
+      <fieldset id="fieldset-address" class="form-section" hidden>
+        <legend id="address-fieldset-legend">Address</legend>
+        <div class="field">
+          <label for="street">Street and number</label>
+          <input type="text" id="street" name="street" autocomplete="street-address" />
+        </div>
+        <div class="grid-3">
+          <div class="field">
+            <label for="postal_code">Postal code</label>
+            <input type="text" id="postal_code" name="postal_code" autocomplete="postal-code" />
+          </div>
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" autocomplete="address-level2" />
+          </div>
+          <div class="field">
+            <label for="province">Region / province</label>
+            <input type="text" id="province" name="province" maxlength="8" autocomplete="address-level1" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="country">Country</label>
+          <select id="country" name="country" autocomplete="country-name">
+            <option value="IT" selected>Italy</option>
+            <option value="DE">Germany</option>
+            <option value="FR">France</option>
+            <option value="ES">Spain</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset id="fieldset-einvoice" class="form-section" hidden>
+        <legend>Italian e-invoicing (SDI / PEC)</legend>
+        <p class="hint">
+          SDI recipient code (7 characters). If not available, use <strong>0000000</strong> and provide a valid <strong>PEC</strong> email address.
+        </p>
+        <div class="field">
+          <label for="vat_id">VAT number</label>
+          <input type="text" id="vat_id" name="vat_id" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="sdi_code">SDI code</label>
+          <input type="text" id="sdi_code" name="sdi_code" maxlength="7" pattern="[A-Za-z0-9]{7}" autocomplete="off" title="7 alphanumeric characters" />
+        </div>
+        <div class="field">
+          <label for="pec">PEC (required if SDI is 0000000)</label>
+          <input type="email" id="pec" name="pec" autocomplete="email" />
+        </div>
+      </fieldset>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" id="checkout-submit">Place order (Stripe payment in Phase 4)</button>
+      </div>
+    </form>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="inner">
+      <p class="footer-legal">Aml Store © è un marchio di Licensoft di Cardelli Antonino. P.Iva 11461870963.</p>
+    </div>
+  </footer>
+  <script type="module" src="/js/nav.js"></script>
+</body>
+</html>

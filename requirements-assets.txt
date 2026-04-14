@@ -1,0 +1,2 @@
+# Solo per scripts/build-images.py (rigenera WebP/ICO da PNG sorgente)
+pillow>=10.0.0

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <script src="/js/theme-init.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1e3a6e" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/webp" href="/img/favicon/icon-32.webp" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/img/favicon/apple-touch-icon.png" />
+  <title>Warenkorb — Aml-Store</title>
+  <meta name="description" content="Ihr Aml-Store-Warenkorb: Positionen prüfen und zum Checkout. Preise werden vom Server bestätigt." />
+  <link rel="canonical" href="https://Aml-Store.com/de/cart.html" />
+  <link rel="alternate" hreflang="it" href="https://Aml-Store.com/it/cart.html" />
+  <link rel="alternate" hreflang="en" href="https://Aml-Store.com/en/cart.html" />
+  <link rel="alternate" hreflang="de" href="https://Aml-Store.com/de/cart.html" />
+  <link rel="alternate" hreflang="fr" href="https://Aml-Store.com/fr/cart.html" />
+  <link rel="alternate" hreflang="es" href="https://Aml-Store.com/es/cart.html" />
+  <link rel="alternate" hreflang="x-default" href="https://Aml-Store.com/it/cart.html" />
+  <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/inter-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/css/style.css" />
+  <script type="module" src="/js/cart-page.js"></script>
+  <!-- TrustBox script -->
+  <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+  <!-- End TrustBox script -->
+</head>
+<body>
+  <a class="skip-link" href="#contenuto">Zum Inhalt springen</a>
+  <header class="site-header" translate="no">
+    <div class="inner header-inner">
+      <div class="brand-block">
+        <a href="/de/" class="logo-link" aria-label="Aml-Store">
+          <img class="logo-img logo-img--for-light-bg" src="/img/logo/logo-header-200.webp" srcset="/img/logo/logo-header-200.webp 200w, /img/logo/logo-header-400.webp 400w" sizes="(max-width: 480px) 88vw, 300px" width="300" height="146" alt="Aml-Store.com" decoding="async" fetchpriority="high" />
+          <img class="logo-img logo-img--for-dark-bg" src="/img/logo/logo-header-200-light.webp" srcset="/img/logo/logo-header-200-light.webp 200w, /img/logo/logo-header-400-light.webp 400w" sizes="(max-width: 480px) 88vw, 300px" width="300" height="146" alt="" decoding="async" fetchpriority="low" aria-hidden="true" />
+        </a>
+      </div>
+      <div class="header-end">
+        <nav class="user-nav" aria-label="Warenkorb und Konto">
+          <a class="user-nav-link user-nav-link--icon" href="/de/cart.html" aria-label="Warenkorb" aria-current="page">
+            <span class="nav-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <span id="cart-badge" class="cart-badge" hidden></span>
+            </span>
+          </a>
+          <a class="user-nav-link" href="/de/account.html">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Konto</span>
+          </a>
+        </nav>
+        <details class="lang-dropdown" translate="no">
+          <summary class="lang-dropdown__summary" aria-label="Sprache wählen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span class="lang-dropdown__code">DE</span>
+          </summary>
+          <div class="lang-dropdown__panel" role="navigation" aria-label="Sprache">
+            <a href="/it/cart.html" hreflang="it" class="lang-dropdown__link">Italienisch</a>
+            <a href="/en/cart.html" hreflang="en" class="lang-dropdown__link">Englisch</a>
+            <a href="/de/cart.html" hreflang="de" class="lang-dropdown__link is-current" aria-current="page">Deutsch</a>
+            <a href="/fr/cart.html" hreflang="fr" class="lang-dropdown__link">Französisch</a>
+            <a href="/es/cart.html" hreflang="es" class="lang-dropdown__link">Spanisch</a>
+          </div>
+        </details>
+        <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Zum hellen Modus wechseln">
+          <svg class="theme-icon theme-icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="theme-icon theme-icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="contenuto" class="main main--cart">
+    <h1 class="cart-title">Ihr Warenkorb</h1>
+    <p class="lead cart-lead">
+      Digitale und physische Produkte (eine Menge pro Zeile). Preise werden vom Server bestätigt; Lieferadresse an der Kasse nur bei Versand oder Firmenrechnung.
+    </p>
+    <p id="cart-page-status" class="status cart-page-status" hidden aria-live="polite"></p>
+
+    <div class="cart-container">
+      <section class="cart-items-section" aria-labelledby="cart-items-heading">
+        <h2 id="cart-items-heading" class="visually-hidden">Artikel im Warenkorb</h2>
+
+        <div id="cart-empty-state" class="cart-empty-state" hidden>
+          <p class="cart-empty-text">Ihr Warenkorb ist leer.</p>
+          <a id="cart-empty-store-link" class="btn btn-primary" href="/de/">Zurück zum Katalog</a>
+        </div>
+
+        <div id="cart-list" class="cart-list"></div>
+
+        <template id="cart-item-template">
+          <article class="cart-item">
+            <img
+              class="cart-item-img"
+              src="/img/favicon/icon-32.webp"
+              alt=""
+              width="80"
+              height="80"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="cart-item-body">
+              <h3 class="cart-item-name"></h3>
+              <p class="cart-item-type"></p>
+            </div>
+            <div class="cart-item-actions">
+              <div class="cart-item-amount-wrap">
+                <span class="cart-item-amount-label"></span>
+                <span class="cart-item-price"></span>
+              </div>
+              <button type="button" class="btn-remove-cart"></button>
+            </div>
+          </article>
+        </template>
+      </section>
+
+      <aside id="cart-summary-section" class="cart-summary-section" hidden>
+        <div class="cart-summary sticky-summary">
+          <h2 class="cart-summary-title">Bestellübersicht</h2>
+          <div class="cart-summary-rows">
+            <div class="summary-row summary-row--total">
+              <span class="summary-label">Gesamt</span>
+              <span id="cart-total" class="summary-value">—</span>
+            </div>
+          </div>
+          <a id="btn-checkout" class="btn btn-primary btn-checkout-cta" href="/de/checkout.html">Weiter zur Kasse</a>
+          <div class="cart-trust-badges">
+            <div class="cart-trust-badge"><span class="cart-trust-badge__icon" aria-hidden="true">🔒</span> Sichere Zahlung</div>
+            <div class="cart-trust-badge"><span class="cart-trust-badge__icon" aria-hidden="true">⚡</span> Sofortige digitale Lieferung</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="inner">
+      <p class="footer-legal">Aml Store © è un marchio di Licensoft di Cardelli Antonino. P.Iva 11461870963.</p>
+    </div>
+  </footer>
+  <script type="module" src="/js/nav.js"></script>
+</body>
+</html>
