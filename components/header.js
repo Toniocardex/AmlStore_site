@@ -12,7 +12,9 @@
             openNavMenu: 'Apri menu di navigazione',
             closeNavMenu: 'Chiudi menu',
             selectLanguage: 'Seleziona lingua',
-            cartAria: 'Carrello, 2 articoli',
+            cartAriaEmpty: 'Carrello, nessun articolo',
+            cartAriaOne: 'Carrello, 1 articolo',
+            cartAriaMany: 'Carrello, {{n}} articoli',
             signIn: 'Accedi',
             drawerAssist: 'Assistenza: +39 02 1234 5678',
         },
@@ -26,7 +28,9 @@
             openNavMenu: 'Open navigation menu',
             closeNavMenu: 'Close menu',
             selectLanguage: 'Select language',
-            cartAria: 'Shopping cart, 2 items',
+            cartAriaEmpty: 'Shopping cart, empty',
+            cartAriaOne: 'Shopping cart, 1 item',
+            cartAriaMany: 'Shopping cart, {{n}} items',
             signIn: 'Sign in',
             drawerAssist: 'Support: +39 02 1234 5678',
         },
@@ -40,7 +44,9 @@
             openNavMenu: 'Ouvrir le menu de navigation',
             closeNavMenu: 'Fermer le menu',
             selectLanguage: 'Choisir la langue',
-            cartAria: 'Panier, 2 articles',
+            cartAriaEmpty: 'Panier vide',
+            cartAriaOne: 'Panier, 1 article',
+            cartAriaMany: 'Panier, {{n}} articles',
             signIn: 'Se connecter',
             drawerAssist: 'Assistance : +39 02 1234 5678',
         },
@@ -54,7 +60,9 @@
             openNavMenu: 'Navigationsmenü öffnen',
             closeNavMenu: 'Menü schließen',
             selectLanguage: 'Sprache wählen',
-            cartAria: 'Warenkorb, 2 Artikel',
+            cartAriaEmpty: 'Warenkorb leer',
+            cartAriaOne: 'Warenkorb, 1 Artikel',
+            cartAriaMany: 'Warenkorb, {{n}} Artikel',
             signIn: 'Anmelden',
             drawerAssist: 'Support: +39 02 1234 5678',
         },
@@ -68,7 +76,9 @@
             openNavMenu: 'Abrir menú de navegación',
             closeNavMenu: 'Cerrar menú',
             selectLanguage: 'Seleccionar idioma',
-            cartAria: 'Carrito, 2 artículos',
+            cartAriaEmpty: 'Carrito vacío',
+            cartAriaOne: 'Carrito, 1 artículo',
+            cartAriaMany: 'Carrito, {{n}} artículos',
             signIn: 'Iniciar sesión',
             drawerAssist: 'Asistencia: +39 02 1234 5678',
         },
@@ -105,8 +115,16 @@
                     window.location.hash
                 );
             const homeHref = S.homeHref(parsed.pathPrefix, activeLang.code);
+            const cartHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'cart.html');
             const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
             const esc = S.escapeHtmlAttr;
+
+            const cartAriaForCount = (n) => {
+                const c = Number(n) || 0;
+                if (c <= 0) return t.cartAriaEmpty;
+                if (c === 1) return t.cartAriaOne;
+                return String(t.cartAriaMany).replace('{{n}}', String(c));
+            };
 
             const staticRoot = S.staticRootFromScriptPath('/components/header.js');
             const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
@@ -374,10 +392,15 @@
                         cursor: pointer;
                         transition: color 0.3s ease, background 0.3s ease;
                         flex-shrink: 0;
+                        text-decoration: none;
                     }
                     .cart-wrapper:hover {
                         color: var(--text-primary);
                         background: rgba(255, 255, 255, 0.08);
+                    }
+                    .cart-wrapper:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
                     }
                     .cart-wrapper svg {
                         width: 22px;
@@ -398,14 +421,18 @@
                         color: white;
                         font-size: 0.65rem;
                         font-weight: 800;
-                        width: 18px;
+                        min-width: 18px;
                         height: 18px;
-                        display: flex;
+                        padding: 0 4px;
+                        display: none;
                         align-items: center;
                         justify-content: center;
                         border-radius: 50%;
                         border: 2px solid #050505; /* Bordo che "buca" l'icona sottostante */
                         box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                    }
+                    .cart-badge.is-visible {
+                        display: flex;
                     }
 
                     .btn-signin {
@@ -681,10 +708,10 @@
 
                         <div class="divider"></div>
 
-                        <div class="cart-wrapper" role="button" tabindex="0" aria-label="${esc(t.cartAria)}">
-                            <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                            <div class="cart-badge">2</div>
-                        </div>
+                        <a href="${esc(cartHref)}" class="cart-wrapper" aria-label="${esc(cartAriaForCount(0))}">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            <span class="cart-badge" aria-hidden="true">0</span>
+                        </a>
 
                         <button type="button" class="btn-signin">${esc(t.signIn)}</button>
                     </div>
@@ -779,6 +806,20 @@
                     langSelector.focus();
                 }
             });
+
+            const cartLink = this.shadowRoot.querySelector('a.cart-wrapper');
+            const cartBadge = this.shadowRoot.querySelector('.cart-badge');
+            const syncCartChrome = () => {
+                const count =
+                    global.AmlCart && typeof global.AmlCart.totalQty === 'function' ? global.AmlCart.totalQty() : 0;
+                if (cartBadge) {
+                    cartBadge.textContent = count > 99 ? '99+' : String(count);
+                    cartBadge.classList.toggle('is-visible', count > 0);
+                }
+                if (cartLink) cartLink.setAttribute('aria-label', cartAriaForCount(count));
+            };
+            syncCartChrome();
+            document.addEventListener('aml-cart-changed', syncCartChrome);
         }
     }
 

@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="../css/product.css">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"Product","name":"Microsoft 365 Famille — 12 mois","image":"https://aml-store.com/asset/media/Microsoft%20365_Family.webp","description":"Abonnement Microsoft 365 Famille pour jusqu'à 6 personnes.","brand":{"@type":"Brand","name":"Microsoft"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"99.00","availability":"https://schema.org/InStock","url":"https://aml-store.com/fr/microsoft-365-family.html"}}]}
+{"@context":"https://schema.org","@graph":[{"@type":"Product","name":"Microsoft 365 Famille — 12 mois","image":"https://aml-store.com/asset/media/Microsoft%20365_Family.webp","description":"Abonnement Microsoft 365 Famille pour jusqu'à 6 personnes.","brand":{"@type":"Brand","name":"Microsoft"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"99.00","availability":"https://schema.org/InStock","url":"https://aml-store.com/fr/microsoft-365-family.html"}},{"@type":"FAQPage","inLanguage":"fr","url":"https://aml-store.com/fr/microsoft-365-family.html","mainEntity":[{"@type":"Question","name":"Quelle est la différence entre Microsoft 365 Famille et Personnel ?","acceptedAnswer":{"@type":"Answer","text":"Famille sert à partager l'abonnement avec votre groupe familial Microsoft (jusqu'à 6 personnes), chacune avec son compte et son espace OneDrive, dans les limites publiées par Microsoft. Personnel couvre un seul utilisateur avec 1 To, selon les conditions Microsoft en vigueur."}},{"@type":"Question","name":"Comment inviter d'autres membres après l'achat ?","acceptedAnswer":{"@type":"Answer","text":"Après l'activation sur votre compte Microsoft, utilisez les fonctions de partage Famille dans la zone compte Microsoft / abonnements, comme documenté par Microsoft pour la durée de votre licence."}},{"@type":"Question","name":"S'agit-il d'un abonnement ou d'un achat unique ?","acceptedAnswer":{"@type":"Answer","text":"Il s'agit d'un abonnement avec renouvellement annuel (12 mois achetés ici). Durée, renouvellement et tarif de renouvellement dépendent de Microsoft et des informations affichées au moment du paiement."}},{"@type":"Question","name":"Puis-je utiliser les applications Office hors ligne ?","acceptedAnswer":{"@type":"Answer","text":"Oui : avec les applications de bureau installées, vous pouvez travailler hors ligne ; une connexion reste nécessaire pour les contrôles de licence, les mises à jour et les services cloud tels qu'OneDrive, comme décrit par Microsoft."}}]}]}
     </script>
 </head>
 <body>
@@ -40,8 +40,23 @@
 
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
-    <main id="main" class="product-page">
+    <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Achat rapide" hidden>
+        <div class="product-sticky-cta__inner">
+            <span class="product-sticky-cta__title">Microsoft 365 Famille</span>
+            <div class="product-sticky-cta__prices" aria-hidden="true">
+                <span class="product-sticky-cta__msrp">€ 129,00</span>
+                <span class="product-sticky-cta__sale">€ 99,00</span>
+            </div>
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing">
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Ajouter
+            </button>
+        </div>
+    </div>
+
+    <main id="main" class="product-page" data-cart-added-msg="Produit ajouté au panier.">
         <div class="page-glow-top" aria-hidden="true"></div>
+        <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 
         <nav class="breadcrumbs" aria-label="Fil d'Ariane">
             <a href="/fr/">Accueil</a>
@@ -76,6 +91,7 @@
                 />
             </div>
             <div
+                id="product-pricing"
                 class="pricing-card"
                 data-stripe-currency="eur"
                 data-stripe-unit-amount="9900"
@@ -100,7 +116,7 @@
                     <div class="tax-info">TVA incluse. Aucun frais de livraison.</div>
                 </div>
                 <div class="action-buttons">
-                    <button type="button" class="btn-primary">
+                    <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                         Ajouter au panier
                     </button>
@@ -121,6 +137,135 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <div id="product-sticky-sentinel" class="product-sticky-sentinel" aria-hidden="true"></div>
+
+        <section class="product-inline-benefits" aria-labelledby="inline-benefits-title">
+            <h2 id="inline-benefits-title" class="product-section-eyebrow">En bref</h2>
+            <ul class="product-checklist">
+                <li>Jusqu'à six personnes sur le même plan Famille, chacune avec un compte Microsoft, dans les limites du programme Microsoft.</li>
+                <li>Jusqu'à 6 To de stockage OneDrive partagé (souvent 1 To par personne lorsque cela s'applique), selon Microsoft.</li>
+                <li>Word, Excel, PowerPoint, Outlook et autres applications incluses sur les plateformes prises en charge, avec mises à jour Microsoft.</li>
+                <li>Outils de sécurité Microsoft (comme Defender) lorsque le plan et la plateforme le permettent.</li>
+            </ul>
+        </section>
+
+        <section class="product-apps-band" aria-labelledby="apps-band-title">
+            <div class="product-apps-band__inner">
+                <h2 id="apps-band-title" class="product-apps-band__title">Applications et services inclus (Microsoft 365 Famille)</h2>
+                <ul class="product-apps-list">
+                    <li class="product-app-item">
+                        <span class="product-app-icon" style="color:#185ABD" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+                        Word
+                    </li>
+                    <li class="product-app-item">
+                        <span class="product-app-icon" style="color:#107C41" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+                        Excel
+                    </li>
+                    <li class="product-app-item">
+                        <span class="product-app-icon" style="color:#C43E1C" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+                        PowerPoint
+                    </li>
+                    <li class="product-app-item">
+                        <span class="product-app-icon" style="color:#0078D4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 4h16v16H4z"/><path d="M22 7l-10 7L2 7"/></svg></span>
+                        Outlook
+                    </li>
+                    <li class="product-app-item">
+                        <span class="product-app-icon" style="color:#0364B8" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span>
+                        OneDrive
+                    </li>
+                    <li class="product-app-item">
+                        <span class="product-app-icon" style="color:#0078D4" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                        Defender
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="product-stories">
+            <article class="product-story">
+                <div class="product-story__visual" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/><path d="M8 12h8M12 8v8"/></svg>
+                </div>
+                <div class="product-story__copy">
+                    <p class="product-story__kicker">Stockage cloud</p>
+                    <h2 class="product-section-h2">OneDrive pour chaque membre</h2>
+                    <p>Chaque personne incluse reçoit un espace OneDrive personnel (jusqu'à 1 To chacun, avec un plafond global décrit par Microsoft pour le groupe). La sauvegarde et la synchronisation dépendent des paramètres du compte et de la connexion.</p>
+                </div>
+            </article>
+            <article class="product-story product-story--reverse">
+                <div class="product-story__visual" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="product-story__copy">
+                    <p class="product-story__kicker">Sécurité</p>
+                    <h2 class="product-section-h2">Protection sur les appareils pris en charge</h2>
+                    <p>Microsoft inclut des fonctions de sécurité (comme Microsoft Defender sur les plateformes et versions prises en charge) selon la documentation officielle. Les capacités dépendent de l'appareil, du système et des mises à jour Microsoft.</p>
+                </div>
+            </article>
+            <article class="product-story">
+                <div class="product-story__visual" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="product-story__copy">
+                    <p class="product-story__kicker">Partage</p>
+                    <h2 class="product-section-h2">Un abonnement, plusieurs personnes</h2>
+                    <p>Vous pouvez partager Microsoft 365 Famille avec votre groupe familial Microsoft dans les limites publiées par Microsoft (jusqu'à six personnes). Chaque membre utilise son propre compte pour les applications et la confidentialité.</p>
+                </div>
+            </article>
+        </div>
+
+        <section class="product-specs-band" aria-labelledby="specs-band-title">
+            <h2 id="specs-band-title" class="product-specs-band__title">Spécifications indicatives</h2>
+            <p class="product-faq-intro" style="text-align:center;margin:-1rem auto 2rem;max-width:40rem;color:rgba(255,255,255,0.65)">Valeurs issues de la documentation Microsoft ; vérifiez toujours les exigences à jour avant l'installation.</p>
+            <div class="product-specs-grid">
+                <div class="product-specs-item">
+                    <h3>Processeur</h3>
+                    <p>Windows : au moins 1,6 GHz et dual-core lorsque requis. Mac : processeurs Intel ou Apple Silicon compatibles avec les versions macOS prises en charge par Microsoft.</p>
+                </div>
+                <div class="product-specs-item">
+                    <h3>Système d'exploitation</h3>
+                    <p>Windows 11 ou Windows 10 ; trois dernières versions majeures de macOS ; iOS et Android selon les versions prises en charge par Microsoft pour les applications Office.</p>
+                </div>
+                <div class="product-specs-item">
+                    <h3>Mémoire (RAM)</h3>
+                    <p>Au moins 4 Go (PC ou Mac) comme base générale pour les applications de bureau ; davantage peut être nécessaire pour des charges lourdes ou de très gros fichiers.</p>
+                </div>
+                <div class="product-specs-item">
+                    <h3>Espace disque</h3>
+                    <p>Espace libre recommandé par Microsoft pour l'installation (de l'ordre de 4 Go sur PC, plus sur Mac selon la suite) : confirmez sur la page produit officielle Microsoft.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="product-faq" aria-labelledby="product-faq-title">
+            <h2 id="product-faq-title" class="product-section-h2">Questions fréquentes</h2>
+            <p class="product-faq-intro">Réponses courtes : suivez toujours la documentation Microsoft à jour et les conditions affichées au paiement.</p>
+            <details>
+                <summary>Quelle est la différence entre Microsoft 365 Famille et Personnel ?</summary>
+                <div class="product-faq-body">
+                    <p>Famille sert à partager l'abonnement avec votre groupe familial Microsoft (jusqu'à 6 personnes), chacune avec son compte et son espace OneDrive, dans les limites publiées par Microsoft. Personnel couvre un seul utilisateur avec 1 To, selon les conditions Microsoft en vigueur.</p>
+                </div>
+            </details>
+            <details>
+                <summary>Comment inviter d'autres membres après l'achat ?</summary>
+                <div class="product-faq-body">
+                    <p>Après l'activation sur votre compte Microsoft, utilisez les fonctions de partage Famille dans la zone compte Microsoft / abonnements, comme documenté par Microsoft pour la durée de votre licence.</p>
+                </div>
+            </details>
+            <details>
+                <summary>S'agit-il d'un abonnement ou d'un achat unique ?</summary>
+                <div class="product-faq-body">
+                    <p>Il s'agit d'un abonnement avec renouvellement annuel (12 mois achetés sur cette page). Durée, renouvellement et tarif de renouvellement dépendent de Microsoft et des informations affichées au moment du paiement.</p>
+                </div>
+            </details>
+            <details>
+                <summary>Puis-je utiliser les applications Office hors ligne ?</summary>
+                <div class="product-faq-body">
+                    <p>Oui : avec les applications de bureau installées, vous pouvez travailler hors ligne ; une connexion reste nécessaire pour les contrôles de licence, les mises à jour et les services cloud tels qu'OneDrive, comme décrit par Microsoft.</p>
+                </div>
+            </details>
         </section>
 
         <section class="details-section">
@@ -187,9 +332,11 @@
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
 
     <script src="../js/locale-path.js"></script>
+    <script src="../js/cart.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
     <script src="../js/product-tabs.js" defer></script>
+    <script src="../js/product-page.js" defer></script>
 </body>
 </html>

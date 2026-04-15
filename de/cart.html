@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warenkorb — Aml Store</title>
+    <meta name="description" content="Ihr Aml-Store-Warenkorb: Positionen, Summen und Checkout (Stripe oder Anfrage per E-Mail).">
+    <meta name="robots" content="index, follow">
+    <script src="../js/consent-init.js"></script>
+
+    <link rel="icon" href="../favicon/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+    <link rel="canonical" href="https://aml-store.com/de/cart.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aml Store">
+    <meta property="og:title" content="Warenkorb — Aml Store">
+    <meta property="og:description" content="Ihr Aml-Store-Warenkorb: Positionen, Summen und Checkout.">
+    <meta property="og:url" content="https://aml-store.com/de/cart.html">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:image" content="https://aml-store.com/logo/logo-header-400.webp">
+
+    <link rel="alternate" hreflang="it" href="https://aml-store.com/it/cart.html">
+    <link rel="alternate" hreflang="en" href="https://aml-store.com/en/cart.html">
+    <link rel="alternate" hreflang="fr" href="https://aml-store.com/fr/cart.html">
+    <link rel="alternate" hreflang="de" href="https://aml-store.com/de/cart.html">
+    <link rel="alternate" hreflang="es" href="https://aml-store.com/es/cart.html">
+    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/cart.html">
+
+    <link rel="stylesheet" href="../fonts/montserrat.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <script src="../js/theme-init.js"></script>
+    <!-- Optional: Stripe Payment Links pro SKU (HTTPS). -->
+    <!-- <script>window.AML_STRIPE_PAYMENT_LINK_BY_SKU = { "microsoft-365-family-12m": "https://buy.stripe.com/..." };</script> -->
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/de/cart.html#webpage","url":"https://aml-store.com/de/cart.html","name":"Warenkorb — Aml Store","description":"Ihr Aml-Store-Warenkorb: Positionen, Summen und Checkout.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"de"}]}
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
+    <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
+
+    <main id="main" class="cart-page">
+        <nav class="cart-breadcrumbs" aria-label="Brotkrumen">
+            <a href="/de/">Home</a>
+            <span class="sep" aria-hidden="true">/</span>
+            <span aria-current="page">Warenkorb</span>
+        </nav>
+
+        <h1>Warenkorb</h1>
+        <p class="cart-lead">Der Warenkorb wird in diesem Browser gespeichert (localStorage). Angezeigte Preise müssen mit der Produktseite und dem finalen Checkout übereinstimmen.</p>
+
+        <div
+            id="aml-cart-app"
+            data-label-remove="Entfernen"
+            data-qty-aria="Menge"
+        >
+            <div id="aml-cart-empty" class="cart-empty-panel">
+                <p>Ihr Warenkorb ist leer.</p>
+                <p><a class="cart-btn cart-btn-primary" href="/de/#catalogo">Zum Katalog</a></p>
+            </div>
+
+            <div id="aml-cart-filled" class="cart-filled" hidden>
+                <div class="cart-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Produkt</th>
+                                <th scope="col">Menge</th>
+                                <th scope="col">Zwischensumme</th>
+                                <th scope="col"><span class="visually-hidden">Aktionen</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="aml-cart-lines"></tbody>
+                    </table>
+                </div>
+                <p class="cart-total-row">Gesamt: <strong id="aml-cart-total">—</strong></p>
+                <p id="aml-cart-multi-note" class="cart-note" hidden>Mehrere Artikel: senden Sie eine Anfrage per E-Mail oder nutzen Sie Stripe, wenn ein Zahlungslink für einen einzelnen Artikel hinterlegt ist.</p>
+                <div class="cart-actions">
+                    <a id="aml-cart-stripe" class="cart-btn cart-btn-primary" href="#" target="_blank" rel="noopener noreferrer" hidden>Mit Karte zahlen (Stripe)</a>
+                    <a id="aml-cart-mail" class="cart-btn cart-btn-secondary" href="mailto:Info@amlstore.it">Bestellung per E-Mail anfragen</a>
+                    <button type="button" id="aml-cart-clear" class="cart-btn cart-btn-ghost">Warenkorb leeren</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aml-cookie-banner></aml-cookie-banner>
+    <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
+
+    <script src="../js/locale-path.js"></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../components/cookie-banner.js" defer></script>
+    <script src="../components/header.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+</body>
+</html>

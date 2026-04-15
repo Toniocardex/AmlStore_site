@@ -29,6 +29,13 @@
         return `${middle}/`;
     }
 
+    /** Path sotto la lingua, es. `cart.html` o `microsoft-365-family.html` (senza slash iniziale). */
+    function localePageUrl(pathPrefix, langCode, pathAfterLang) {
+        const middle = pathPrefix ? `${pathPrefix}/${langCode}` : `/${langCode}`;
+        const tail = String(pathAfterLang || '').replace(/^\/+/, '');
+        return tail ? `${middle}/${tail}` : `${middle}/`;
+    }
+
     function hrefSwitchLocale(pathPrefix, langCode, pathAfterLang, search, hash) {
         const qsAndHash = (search || '') + (hash || '');
         const middle = pathPrefix ? `${pathPrefix}/${langCode}` : `/${langCode}`;
@@ -66,6 +73,7 @@
         defaultLangCode: 'it',
         parseLocalePath,
         homeHref,
+        localePageUrl,
         hrefSwitchLocale,
         escapeHtmlAttr,
         staticRootFromScriptPath,
