@@ -1,6 +1,7 @@
 /**
  * Pagina prodotto — layout premium, token da page.css + tema chiaro.
  * Prezzi: usare .price-block (prezzo originale → nostro prezzo + % risparmio) per nuove schede.
+ * Responsive: preferire @container (main `pp`, dettagli `pp-details`) al posto delle breakpoint viewport, salvo prefers-reduced-motion.
  */
 .product-page .visually-hidden {
     position: absolute;
@@ -14,10 +15,18 @@
     border: 0;
 }
 
+/**
+ * Full-width: usa tutta la viewport con “gutter” fluido (mai attaccato ai bordi).
+ * max-width none; su schermi enormi il ritmo resta dai clamp e dalla misura in ch del corpo.
+ */
 main.product-page {
-    max-width: 1280px;
+    --pp-gutter: clamp(1.25rem, 4vw + 0.75rem, 5.5rem);
+    max-width: none;
     margin: 0 auto;
-    padding: 0 clamp(1.25rem, 5vw, 4rem) 4rem;
+    padding-top: 0;
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    padding-left: max(var(--pp-gutter), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--pp-gutter), env(safe-area-inset-right, 0px));
     width: 100%;
     box-sizing: border-box;
     position: relative;
@@ -25,6 +34,9 @@ main.product-page {
     isolation: isolate;
     overflow-x: hidden;
     flex: 1;
+    /* Container queries: il layout risponde alla larghezza reale del main, non solo alla viewport */
+    container-type: inline-size;
+    container-name: pp;
 }
 
 .product-page {
@@ -44,8 +56,8 @@ html[data-theme="light"] .product-page {
 .product-page .page-glow-top {
     position: absolute;
     top: 0;
-    left: 30%;
-    width: 600px;
+    left: 50%;
+    width: min(900px, 90vw);
     height: 600px;
     background: radial-gradient(
         circle,
@@ -89,7 +101,7 @@ html[data-theme="light"] .product-page {
 .product-page .product-header {
     position: relative;
     z-index: 1;
-    max-width: 900px;
+    max-width: 100%;
     margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
@@ -137,7 +149,7 @@ html[data-theme="light"] .product-page {
     line-height: 1.6;
     color: var(--page-text-secondary);
     font-weight: 500;
-    max-width: 800px;
+    max-width: min(65ch, 100%);
     margin: 0;
 }
 
@@ -145,10 +157,17 @@ html[data-theme="light"] .product-page {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: clamp(2rem, 4vw, 4rem);
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
     padding: 0 0 3rem;
     align-items: stretch;
+}
+
+@container pp (min-width: 720px) {
+    .product-page .product-hero {
+        grid-template-columns: minmax(0, 1.35fr) minmax(min(100%, 300px), 0.95fr);
+        gap: clamp(2rem, 4vw, 5rem);
+    }
 }
 
 .product-page .product-gallery {
@@ -156,7 +175,7 @@ html[data-theme="light"] .product-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3rem 2rem;
+    padding: clamp(1.75rem, 4vw, 3.25rem) clamp(1.25rem, 3vw, 2.5rem);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
     border: 1px solid var(--page-border);
     border-radius: 24px;
@@ -165,12 +184,12 @@ html[data-theme="light"] .product-page {
     background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
-    min-height: 420px;
+    min-height: clamp(260px, 36vw, 520px);
 }
 
 .product-page .product-cover-img {
     width: 100%;
-    max-width: 400px;
+    max-width: min(520px, 100%);
     height: auto;
     aspect-ratio: 1 / 1;
     object-fit: contain;
@@ -451,6 +470,8 @@ html[data-theme='light'] .product-page .price-block__save {
     padding-bottom: 3rem;
     position: relative;
     z-index: 1;
+    container-type: inline-size;
+    container-name: pp-details;
 }
 
 .product-page .tabs-header {
@@ -505,8 +526,21 @@ html[data-theme='light'] .product-page .price-block__save {
 
 .product-page .tab-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 2.5vw, 2.5rem);
+    align-items: start;
+}
+
+@container pp-details (min-width: 720px) {
+    .product-page .tab-content {
+        grid-template-columns: minmax(0, 2fr) minmax(min(100%, 280px), 1fr);
+        gap: clamp(2rem, 3vw, 4rem);
+    }
+}
+
+/* Leggibilità: il corpo lungo non diventa una riga infinita su ultra-wide */
+.product-page .tab-content .rich-text {
+    max-width: min(72ch, 100%);
 }
 
 .product-page .rich-text h2 {
@@ -592,48 +626,15 @@ html[data-theme='light'] .product-page .price-block__save {
     color: var(--page-text-secondary);
 }
 
-@media (max-width: 1024px) {
-    .product-page .product-hero {
-        gap: 2rem;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .product-page .tab-content {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
-}
-
-@media (max-width: 960px) {
-    .product-page .product-hero {
-        grid-template-columns: 1fr;
-        align-items: stretch;
-    }
-
-    .product-page .product-gallery {
-        min-height: 320px;
-    }
-
-    .product-page .software-mockup {
-        max-width: 260px;
-    }
-
-    .product-page .pricing-card {
-        width: 100%;
-    }
-}
-
-@media (max-width: 640px) {
-    main.product-page {
-        padding-bottom: 2.5rem;
-    }
-
+/* Compattezza quando il contenitore pagina è stretto (sidebar, mobile, finestra ridotta) */
+@container pp (max-width: 479px) {
     .product-page .product-header {
         margin-bottom: 2rem;
     }
 
     .product-page .product-gallery {
-        padding: 2rem 1.25rem;
+        padding: 1.5rem 1rem;
+        min-height: 240px;
     }
 
     .product-page .software-mockup {
