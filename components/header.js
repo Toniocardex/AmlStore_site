@@ -859,7 +859,7 @@
             let cartIconNudgeTimer = null;
             const syncCartChrome = () => {
                 const count =
-                    global.AmlCart && typeof global.AmlCart.totalQty === 'function' ? global.AmlCart.totalQty() : 0;
+                    window.AmlCart && typeof window.AmlCart.totalQty === 'function' ? window.AmlCart.totalQty() : 0;
                 const increased = prevCartQty !== null && count > prevCartQty;
 
                 if (cartBadge) {
