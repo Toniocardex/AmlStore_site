@@ -1,14 +1,6 @@
 (function () {
     'use strict';
 
-    const LANGS = [
-        { code: 'it', label: 'IT', flag: 'it' },
-        { code: 'en', label: 'EN', flag: 'gb' },
-        { code: 'fr', label: 'FR', flag: 'fr' },
-        { code: 'de', label: 'DE', flag: 'de' },
-        { code: 'es', label: 'ES', flag: 'es' },
-    ];
-
 const FOOTER_I18N = {
     it: {
         logoAlt: 'Aml Store',
@@ -29,7 +21,7 @@ const FOOTER_I18N = {
         supportPrivacy: 'Privacy Policy',
         assistanceLabel: 'Assistenza',
         emailSub: 'Rispondiamo h24',
-        copyright: 'Aml Store. Tutti i diritti riservati. P.IVA 12345678901.',
+        copyright: 'Aml Store. Tutti i diritti riservati. P.IVA 11461870963.',
         themeLabel: 'Aspetto',
         themeAria: 'Tema della pagina: chiaro o scuro (barra in alto e piè di pagina invariati)',
     },
@@ -52,7 +44,7 @@ const FOOTER_I18N = {
         supportPrivacy: 'Privacy policy',
         assistanceLabel: 'Support',
         emailSub: 'We respond 24/7',
-        copyright: 'Aml Store. All rights reserved. VAT 12345678901.',
+        copyright: 'Aml Store. All rights reserved. VAT 11461870963.',
         themeLabel: 'Appearance',
         themeAria: 'Page theme: light or dark (header and footer unchanged)',
     },
@@ -75,7 +67,7 @@ const FOOTER_I18N = {
         supportPrivacy: 'Politique de confidentialité',
         assistanceLabel: 'Assistance',
         emailSub: 'Réponse 24h/24',
-        copyright: 'Aml Store. Tous droits réservés. TVA 12345678901.',
+        copyright: 'Aml Store. Tous droits réservés. TVA 11461870963.',
         themeLabel: 'Apparence',
         themeAria: "Thème de la page : clair ou sombre (en-tête et pied de page inchangés)",
     },
@@ -98,7 +90,7 @@ const FOOTER_I18N = {
         supportPrivacy: 'Datenschutz',
         assistanceLabel: 'Support',
         emailSub: 'Wir antworten rund um die Uhr',
-        copyright: 'Aml Store. Alle Rechte vorbehalten. USt-IdNr. 12345678901.',
+        copyright: 'Aml Store. Alle Rechte vorbehalten. USt-IdNr. 11461870963.',
         themeLabel: 'Erscheinungsbild',
         themeAria: 'Seitenthema: hell oder dunkel (Kopf- und Fußzeile unverändert)',
     },
@@ -121,63 +113,11 @@ const FOOTER_I18N = {
         supportPrivacy: 'Política de privacidad',
         assistanceLabel: 'Asistencia',
         emailSub: 'Respondemos 24/7',
-        copyright: 'Aml Store. Todos los derechos reservados. NIF 12345678901.',
+        copyright: 'Aml Store. Todos los derechos reservados. NIF 11461870963.',
         themeLabel: 'Apariencia',
         themeAria: 'Tema de la página: claro u oscuro (cabecera y pie sin cambios)',
     },
 };
-
-function isKnownLangCode(segment) {
-    return LANGS.some((l) => l.code === segment);
-}
-
-/** Primo segmento del path che coincide con una lingua del sito (es. /repo/it/ → it). */
-function detectLangCodeFromPath() {
-    const segments = window.location.pathname.split('/').filter(Boolean);
-    const found = segments.find((seg) => isKnownLangCode(seg));
-    return found || 'it';
-}
-
-/** Prefisso URL prima della cartella lingua (es. /repo per /repo/it/). */
-function pathPrefixBeforeLang(langCode) {
-    const segments = window.location.pathname.split('/').filter(Boolean);
-    const idx = segments.indexOf(langCode);
-    if (idx <= 0) return '';
-    return '/' + segments.slice(0, idx).join('/');
-}
-
-function homeHrefForLang(langCode) {
-    const prefix = pathPrefixBeforeLang(langCode);
-    return prefix + '/' + langCode + '/';
-}
-
-/** Testo sicuro per innerHTML / attributi tra doppi apici (vanilla, no librerie). */
-function escapeHtml(text) {
-    return String(text)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-}
-
-/** Prefisso path statici (es. /repo) ricavato dallo script components/footer.js (ok con defer e sottopath Pages). */
-function amlStaticRootFromFooterScript() {
-    const needle = '/components/footer.js';
-    const scripts = document.scripts;
-    for (let i = 0; i < scripts.length; i++) {
-        const raw = scripts[i].getAttribute('src');
-        if (!raw) continue;
-        let pathname;
-        try {
-            pathname = new URL(raw, window.location.href).pathname;
-        } catch (_) {
-            continue;
-        }
-        if (!pathname.endsWith(needle)) continue;
-        return pathname.slice(0, -needle.length);
-    }
-    return '';
-}
 
 class EcommerceFooter extends HTMLElement {
     constructor() {
@@ -191,12 +131,17 @@ class EcommerceFooter extends HTMLElement {
         this.setAttribute('translate', 'no');
         this.classList.add('notranslate');
 
-        const langCode = detectLangCodeFromPath();
-        const activeLang = LANGS.find((l) => l.code === langCode) || LANGS[0];
+        const S = window.AmlSite;
+        if (!S) {
+            console.error('ecommerce-footer: includere ../js/locale-path.js prima di questo script.');
+            return;
+        }
+        const parsed = S.parseLocalePath(window.location.pathname);
+        const activeLang = parsed.activeLang;
         const t = FOOTER_I18N[activeLang.code] || FOOTER_I18N.it;
-        const homeHref = homeHrefForLang(activeLang.code);
-        const esc = escapeHtml;
-        const staticRoot = amlStaticRootFromFooterScript();
+        const homeHref = S.homeHref(parsed.pathPrefix, activeLang.code);
+        const esc = S.escapeHtmlAttr;
+        const staticRoot = S.staticRootFromScriptPath('/components/footer.js');
         const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
         const pageTheme =
             document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
