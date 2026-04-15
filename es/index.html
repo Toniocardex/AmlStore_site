@@ -38,9 +38,13 @@
 
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/home.css">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/es/#webpage","url":"https://aml-store.com/es/","name":"Aml Store - Tu Socio Digital","description":"Compra licencias de software originales: Sistemas Operativos, Office y Antivirus al mejor precio garantizado.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"es"}]}
+    </script>
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"es","url":"https://aml-store.com/es/","mainEntity":[{"@type":"Question","name":"¿Qué ocurre después de comprar una licencia digital?","acceptedAnswer":{"@type":"Answer","text":"Recibirá por correo electrónico las instrucciones y lo necesario para activar, según el proceso del fabricante (por ejemplo el portal de Microsoft para Office o Microsoft 365)."}},{"@type":"Question","name":"¿Cómo puedo contactar para soporte?","acceptedAnswer":{"@type":"Answer","text":"Escriba a Info@amlstore.it. La misma dirección aparece en el pie de página de cada página."}},{"@type":"Question","name":"¿Los precios mostrados incluyen IVA?","acceptedAnswer":{"@type":"Answer","text":"Para IVA y detalle de precios, consulte la ficha de producto y el checkout: allí encontrará la información aplicable a su compra."}},{"@type":"Question","name":"¿Cómo cambio mis preferencias de cookies?","acceptedAnswer":{"@type":"Answer","text":"Use Gestionar cookies en el pie de página o abra la política de cookies desde el banner o el pie de página."}}]}
     </script>
 </head>
 <body>
@@ -48,46 +52,159 @@
 
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
-    <main id="main">
-        <h1>Aml Store — Licencias de Software</h1>
-        <p class="subtitle">Tu socio de confianza para la compra de licencias de software originales. Sistemas Operativos, Office y Antivirus al mejor precio garantizado.</p>
+    <main id="main" class="home-page">
+        <section class="home-hero" aria-labelledby="home-hero-title">
+            <h1 id="home-hero-title">Aml Store — Licencias de software originales</h1>
+            <p class="subtitle home-hero-lead">Licencias digitales para Windows, Office y seguridad. Precios claros y entrega por correo tras la compra; la activación sigue las reglas de cada fabricante.</p>
+            <div class="home-hero-actions">
+                <a class="home-btn home-btn-primary" href="#catalogo">Ver catálogo</a>
+                <a class="home-btn home-btn-secondary" href="#come-funziona">Cómo funciona</a>
+            </div>
+        </section>
 
-        <div class="product-grid" id="catalogo">
-            <a
-                href="microsoft-365-family.html"
-                class="product-card product-card--link"
+        <section class="home-trust" aria-label="Señales de confianza">
+            <ul class="home-trust-list">
+                <li class="home-trust-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    Entrega digital por correo
+                </li>
+                <li class="home-trust-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    Pago con tarjeta en el checkout
+                </li>
+                <li class="home-trust-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    Activación en canales oficiales del fabricante
+                </li>
+                <li class="home-trust-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    Soporte por correo
+                </li>
+            </ul>
+        </section>
+
+        <section class="home-pillars" aria-labelledby="pillars-title">
+            <h2 id="pillars-title" class="home-section-title">Por qué elegir Aml Store</h2>
+            <p class="home-section-intro">Un catálogo para particulares y profesionales, con lo esencial antes de comprar.</p>
+            <div class="home-feature-grid">
+                <article class="home-feature-card">
+                    <h3>Sistemas operativos</h3>
+                    <p>Licencias para entornos Windows cuando estén disponibles; en la ficha verá requisitos y notas del fabricante.</p>
+                </article>
+                <article class="home-feature-card">
+                    <h3>Office y productividad</h3>
+                    <p>Suscripciones Microsoft 365 u Office según las ofertas publicadas, con duración y alcance descritos en la ficha.</p>
+                </article>
+                <article class="home-feature-card">
+                    <h3>Seguridad</h3>
+                    <p>Soluciones antivirus cuando figuren en el catálogo para reforzar la protección de sus equipos.</p>
+                </article>
+                <article class="home-feature-card">
+                    <h3>Soporte posventa</h3>
+                    <p>Escríbanos por correo para dudas sobre el pedido o la activación. Los tiempos de respuesta pueden variar según la carga de solicitudes.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="come-funziona" class="home-steps" aria-labelledby="steps-title">
+            <h2 id="steps-title" class="home-section-title">Cómo funciona</h2>
+            <ol class="home-steps-list">
+                <li class="home-step">
+                    <h3>Elija un producto</h3>
+                    <p>Explore el catálogo y abra la ficha para ver precio, duración e indicaciones de activación.</p>
+                </li>
+                <li class="home-step">
+                    <h3>Complete la compra</h3>
+                    <p>Use el checkout cuando esté disponible, introduzca los datos solicitados y confirme el pago.</p>
+                </li>
+                <li class="home-step">
+                    <h3>Reciba la entrega digital</h3>
+                    <p>Le enviamos por correo instrucciones y/o código para finalizar la activación en el canal oficial del fabricante.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section id="catalogo" class="home-catalog" aria-labelledby="catalog-title">
+            <h2 id="catalog-title" class="home-section-title">Catálogo</h2>
+            <div class="product-grid">
+            <div
+                class="product-card"
                 data-stripe-currency="eur"
                 data-stripe-unit-amount="9900"
                 data-stripe-compare-at-amount="12900"
                 data-stripe-product-sku="microsoft-365-family-12m"
                 data-discount-percent="23"
             >
-                <div class="product-card-media">
-                    <img src="../asset/media/Microsoft%20365_Family.webp" width="400" height="400" alt="Microsoft 365 Familia — vista previa del producto" decoding="async" fetchpriority="high" class="product-card-img">
+                <a href="microsoft-365-family.html" class="product-card-body product-card--link">
+                    <div class="product-card-media">
+                        <img src="../asset/media/Microsoft%20365_Family.webp" width="400" height="400" alt="Microsoft 365 Familia — vista previa del producto" decoding="async" fetchpriority="high" class="product-card-img">
+                    </div>
+                    <p class="product-card-name">Microsoft 365 Familia</p>
+                    <p class="product-card-blurb">Suscripción 12 meses · hasta 6 usuarios · licencia digital</p>
+                    <p class="product-card-price">€ 99,00</p>
+                </a>
+                <button type="button" class="btn-cta-primary product-card-add">Añadir al carrito</button>
+            </div>
+            <div class="product-card">
+                <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
+                <div class="skeleton-text"></div>
+                <div class="skeleton-text short"></div>
+                <div class="product-card-skel-grow" aria-hidden="true"></div>
+                <div class="skeleton-text price"></div>
+                <div class="product-card-skel-btn" aria-hidden="true"></div>
+            </div>
+            <div class="product-card">
+                <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
+                <div class="skeleton-text"></div>
+                <div class="skeleton-text short"></div>
+                <div class="product-card-skel-grow" aria-hidden="true"></div>
+                <div class="skeleton-text price"></div>
+                <div class="product-card-skel-btn" aria-hidden="true"></div>
+            </div>
+            <div class="product-card">
+                <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
+                <div class="skeleton-text"></div>
+                <div class="skeleton-text short"></div>
+                <div class="product-card-skel-grow" aria-hidden="true"></div>
+                <div class="skeleton-text price"></div>
+                <div class="product-card-skel-btn" aria-hidden="true"></div>
+            </div>
+            </div>
+        </section>
+
+        <section class="home-faq" aria-labelledby="faq-title">
+            <h2 id="faq-title" class="home-section-title">Preguntas frecuentes</h2>
+            <details>
+                <summary>¿Qué ocurre después de comprar una licencia digital?</summary>
+                <div class="home-faq-body">
+                    <p>Recibirá por correo electrónico las instrucciones y lo necesario para activar, según el proceso del fabricante (por ejemplo el portal de Microsoft para Office o Microsoft 365).</p>
                 </div>
-                <p class="product-card-name">Microsoft 365 Familia</p>
-                <p class="product-card-blurb">Suscripción 12 meses · hasta 6 usuarios · licencia digital</p>
-                <p class="product-card-price">€ 99,00</p>
-            </a>
-            <div class="product-card">
-                <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
-                <div class="skeleton-text"></div>
-                <div class="skeleton-text short"></div>
-                <div class="skeleton-text price"></div>
-            </div>
-            <div class="product-card">
-                <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
-                <div class="skeleton-text"></div>
-                <div class="skeleton-text short"></div>
-                <div class="skeleton-text price"></div>
-            </div>
-            <div class="product-card">
-                <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
-                <div class="skeleton-text"></div>
-                <div class="skeleton-text short"></div>
-                <div class="skeleton-text price"></div>
-            </div>
-        </div>
+            </details>
+            <details>
+                <summary>¿Cómo puedo contactar para soporte?</summary>
+                <div class="home-faq-body">
+                    <p>Escriba a <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>. La misma dirección aparece en el pie de página de cada página.</p>
+                </div>
+            </details>
+            <details>
+                <summary>¿Los precios mostrados incluyen IVA?</summary>
+                <div class="home-faq-body">
+                    <p>Para IVA y detalle de precios, consulte la ficha de producto y el checkout: allí encontrará la información aplicable a su compra.</p>
+                </div>
+            </details>
+            <details>
+                <summary>¿Cómo cambio mis preferencias de cookies?</summary>
+                <div class="home-faq-body">
+                    <p>Use <strong>Gestionar cookies</strong> en el pie de página o consulte la <a href="cookie-policy.html">política de cookies</a> desde el banner o el pie de página.</p>
+                </div>
+            </details>
+        </section>
+
+        <section class="home-cta" aria-labelledby="cta-title">
+            <h2 id="cta-title">¿Necesita ayuda?</h2>
+            <p>Escríbanos para consultas sobre pedidos, productos o activación.</p>
+            <a class="home-btn home-btn-primary" href="mailto:Info@amlstore.it">Info@amlstore.it</a>
+        </section>
     </main>
 
     <aml-cookie-banner></aml-cookie-banner>
