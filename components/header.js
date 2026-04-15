@@ -869,8 +869,8 @@
                         cartBadge.classList.remove('cart-badge-pop');
                         void cartBadge.offsetWidth;
                         cartBadge.classList.add('cart-badge-pop');
-                        global.clearTimeout(cartBadgePopTimer);
-                        cartBadgePopTimer = global.setTimeout(function () {
+                        clearTimeout(cartBadgePopTimer);
+                        cartBadgePopTimer = setTimeout(function () {
                             cartBadge.classList.remove('cart-badge-pop');
                         }, 600);
                     }
@@ -881,8 +881,8 @@
                         cartLink.classList.remove('cart-nudge');
                         void cartLink.offsetWidth;
                         cartLink.classList.add('cart-nudge');
-                        global.clearTimeout(cartIconNudgeTimer);
-                        cartIconNudgeTimer = global.setTimeout(function () {
+                        clearTimeout(cartIconNudgeTimer);
+                        cartIconNudgeTimer = setTimeout(function () {
                             cartLink.classList.remove('cart-nudge');
                         }, 650);
                     }

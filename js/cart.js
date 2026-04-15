@@ -8,6 +8,8 @@
 
     const STORAGE_KEY = 'aml-cart-v1';
     const EVT = 'aml-cart-changed';
+    var flashAddedTimer = null;
+    var liveRegionClearTimer = null;
 
     function readLines() {
         try {
@@ -105,9 +107,10 @@
         let live = document.getElementById('product-cart-live');
         if (!live) return;
         live.textContent = msg;
-        global.clearTimeout(global.__amlCartLiveClear);
-        global.__amlCartLiveClear = global.setTimeout(function () {
+        clearTimeout(liveRegionClearTimer);
+        liveRegionClearTimer = setTimeout(function () {
             live.textContent = '';
+            liveRegionClearTimer = null;
         }, 3200);
     }
 
@@ -118,14 +121,15 @@
             if (resolveLineRoot(b) === root) nodes.push(b);
         });
         if (!nodes.length) return;
-        global.clearTimeout(global.__amlCartFlashT);
+        clearTimeout(flashAddedTimer);
         nodes.forEach(function (b) {
             b.classList.add('is-added');
         });
-        global.__amlCartFlashT = global.setTimeout(function () {
+        flashAddedTimer = setTimeout(function () {
             nodes.forEach(function (b) {
                 b.classList.remove('is-added');
             });
+            flashAddedTimer = null;
         }, 2200);
     }
 
@@ -209,23 +213,23 @@
         return `mailto:Info@amlstore.it?subject=${sub}&body=${body}`;
     }
 
-    function bindAddButtons(root) {
-        const scope = root || document;
+    function bindAddButtons(scopeRoot) {
+        const scope = scopeRoot || document;
         scope.querySelectorAll('[data-cart-add]').forEach((btn) => {
             if (btn.dataset.amlCartBound) return;
             btn.dataset.amlCartBound = '1';
             btn.addEventListener('click', () => {
-                const root = resolveLineRoot(btn);
-                let line = null;
-                if (!root) return;
-                if (root.classList.contains('product-card')) line = lineFromProductCard(root);
-                else line = lineFromProductContext(root);
+                const lineRoot = resolveLineRoot(btn);
+                if (!lineRoot) return;
+                const line = lineRoot.classList.contains('product-card')
+                    ? lineFromProductCard(lineRoot)
+                    : lineFromProductContext(lineRoot);
                 if (!line) return;
                 const next = mergeAdd(readLines(), line);
                 writeLines(next);
                 dispatch(next);
                 announceCartAdded();
-                flashCartButtonsForSource(root);
+                flashCartButtonsForSource(lineRoot);
             });
         });
     }

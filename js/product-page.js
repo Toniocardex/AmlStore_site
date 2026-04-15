@@ -25,8 +25,12 @@
         }
     }
 
+    function headerElement() {
+        return document.querySelector('ecommerce-header');
+    }
+
     function headerInsetPx() {
-        var el = document.querySelector('ecommerce-header');
+        var el = headerElement();
         var h = 88;
         if (el) {
             var rect = el.getBoundingClientRect();
@@ -103,10 +107,9 @@
         window.addEventListener('resize', scheduleRebuild, { passive: true });
         window.addEventListener('orientationchange', scheduleRebuild, { passive: true });
 
-        var headerEl = document.querySelector('ecommerce-header');
+        var headerEl = headerElement();
         if (headerEl && 'ResizeObserver' in window) {
-            var ro = new ResizeObserver(scheduleRebuild);
-            ro.observe(headerEl);
+            new ResizeObserver(scheduleRebuild).observe(headerEl);
         }
     });
 })();
