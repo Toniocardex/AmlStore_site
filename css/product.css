@@ -431,24 +431,6 @@ html[data-theme='light'] .product-page .price-block__save {
     fill: currentColor;
 }
 
-.product-page .btn-secondary {
-    background: transparent;
-    color: var(--page-text);
-    border: 1px solid color-mix(in srgb, var(--page-text) 22%, transparent);
-    padding: 1.15rem 1.25rem;
-    border-radius: 14px;
-    font-family: inherit;
-    font-size: 1.05rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.product-page .btn-secondary:hover {
-    background: color-mix(in srgb, var(--page-text) 6%, transparent);
-    border-color: color-mix(in srgb, var(--page-text) 35%, transparent);
-}
-
 .product-page .trust-list {
     display: flex;
     flex-direction: column;
@@ -656,7 +638,6 @@ html[data-theme='light'] .product-page .price-block__save {
     }
 
     .product-page .btn-primary,
-    .product-page .btn-secondary,
     .product-sticky-cta .btn-primary {
         padding: 1rem;
         font-size: 1rem;
@@ -689,10 +670,6 @@ html[data-theme='light'] .product-page .price-block__row--original {
 html[data-theme='light'] .product-page .req-box {
     background: #f8f9fb;
     border-color: rgba(0, 0, 0, 0.08);
-}
-
-html[data-theme='light'] .product-page .btn-secondary:hover {
-    background: rgba(0, 0, 0, 0.04);
 }
 
 /* --- Barra acquisto sticky (sotto header; top da JS: --aml-header-offset) --- */
