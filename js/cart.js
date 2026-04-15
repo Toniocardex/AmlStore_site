@@ -41,7 +41,12 @@
         const items = lines.slice();
         const detail = { items, count: totalQty(items) };
         try {
-            document.dispatchEvent(new CustomEvent(EVT, { detail }));
+            document.dispatchEvent(
+                new CustomEvent(EVT, {
+                    detail,
+                    bubbles: true,
+                })
+            );
         } catch (_) {
             /* SSR / tests */
         }
@@ -107,18 +112,18 @@
     }
 
     function flashCartButtonsForSource(root) {
-        if (!root || !root.id) return;
-        const idAttr =
-            global.CSS && typeof global.CSS.escape === 'function'
-                ? global.CSS.escape(root.id)
-                : root.id.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-        const sel = '[data-cart-add][data-cart-source="' + idAttr + '"]';
+        if (!root) return;
+        var nodes = [];
+        document.querySelectorAll('[data-cart-add]').forEach(function (b) {
+            if (resolveLineRoot(b) === root) nodes.push(b);
+        });
+        if (!nodes.length) return;
         global.clearTimeout(global.__amlCartFlashT);
-        document.querySelectorAll(sel).forEach(function (b) {
+        nodes.forEach(function (b) {
             b.classList.add('is-added');
         });
         global.__amlCartFlashT = global.setTimeout(function () {
-            document.querySelectorAll(sel).forEach(function (b) {
+            nodes.forEach(function (b) {
                 b.classList.remove('is-added');
             });
         }, 2200);

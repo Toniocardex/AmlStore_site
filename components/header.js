@@ -435,6 +435,51 @@
                         display: flex;
                     }
 
+                    .cart-badge.is-visible.cart-badge-pop {
+                        animation: aml-cart-badge-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    }
+
+                    @keyframes aml-cart-badge-pop {
+                        0%,
+                        100% {
+                            transform: scale(1);
+                        }
+                        45% {
+                            transform: scale(1.14);
+                        }
+                    }
+
+                    .cart-wrapper.cart-nudge {
+                        color: var(--text-primary);
+                        background: rgba(255, 255, 255, 0.1);
+                    }
+
+                    .cart-wrapper.cart-nudge svg {
+                        animation: aml-cart-icon-nudge 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    }
+
+                    @keyframes aml-cart-icon-nudge {
+                        0%,
+                        100% {
+                            transform: scale(1) rotate(0deg);
+                        }
+                        35% {
+                            transform: scale(1.12) rotate(-10deg);
+                        }
+                        70% {
+                            transform: scale(1.05) rotate(4deg);
+                        }
+                    }
+
+                    @media (prefers-reduced-motion: reduce) {
+                        .cart-badge.is-visible.cart-badge-pop {
+                            animation: none;
+                        }
+                        .cart-wrapper.cart-nudge svg {
+                            animation: none;
+                        }
+                    }
+
                     .btn-signin {
                         background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 100%);
                         color: #000000; /* Testo in alto contrasto */
@@ -809,14 +854,40 @@
 
             const cartLink = this.shadowRoot.querySelector('a.cart-wrapper');
             const cartBadge = this.shadowRoot.querySelector('.cart-badge');
+            let prevCartQty = null;
+            let cartBadgePopTimer = null;
+            let cartIconNudgeTimer = null;
             const syncCartChrome = () => {
                 const count =
                     global.AmlCart && typeof global.AmlCart.totalQty === 'function' ? global.AmlCart.totalQty() : 0;
+                const increased = prevCartQty !== null && count > prevCartQty;
+
                 if (cartBadge) {
                     cartBadge.textContent = count > 99 ? '99+' : String(count);
                     cartBadge.classList.toggle('is-visible', count > 0);
+                    if (increased && count > 0) {
+                        cartBadge.classList.remove('cart-badge-pop');
+                        void cartBadge.offsetWidth;
+                        cartBadge.classList.add('cart-badge-pop');
+                        global.clearTimeout(cartBadgePopTimer);
+                        cartBadgePopTimer = global.setTimeout(function () {
+                            cartBadge.classList.remove('cart-badge-pop');
+                        }, 600);
+                    }
                 }
-                if (cartLink) cartLink.setAttribute('aria-label', cartAriaForCount(count));
+                if (cartLink) {
+                    cartLink.setAttribute('aria-label', cartAriaForCount(count));
+                    if (increased) {
+                        cartLink.classList.remove('cart-nudge');
+                        void cartLink.offsetWidth;
+                        cartLink.classList.add('cart-nudge');
+                        global.clearTimeout(cartIconNudgeTimer);
+                        cartIconNudgeTimer = global.setTimeout(function () {
+                            cartLink.classList.remove('cart-nudge');
+                        }, 650);
+                    }
+                }
+                prevCartQty = count;
             };
             syncCartChrome();
             document.addEventListener('aml-cart-changed', syncCartChrome);

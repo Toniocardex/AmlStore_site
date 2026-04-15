@@ -211,6 +211,18 @@ a.product-card--link:focus-visible {
     outline-offset: 3px;
 }
 
+/* Feedback dopo “Aggiungi al carrello” (stesso verde usato in scheda prodotto) */
+.btn-cta-primary.is-added {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+}
+
+.btn-cta-primary.is-added:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 24px rgba(16, 185, 129, 0.42);
+}
+
 .product-card-add {
     flex-shrink: 0;
     margin-top: 0;
@@ -227,7 +239,8 @@ a.product-card--link:focus-visible {
 
     .btn-cta-primary,
     .btn-cta-primary:hover,
-    .btn-cta-primary:active {
+    .btn-cta-primary:active,
+    .btn-cta-primary.is-added:hover {
         transition: none;
         transform: none;
     }
