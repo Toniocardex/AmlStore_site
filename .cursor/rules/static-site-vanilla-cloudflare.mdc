@@ -49,6 +49,13 @@ alwaysApply: true
 - **Indicizzazione**: `robots.txt` e `sitemap.xml` nella root pubblicata quando il sito ha più percorsi; `noindex` solo su pagine volutamente escluse (draft, duplicati).
 - **Performance e SEO**: velocità e CWV sono segnali di qualità; evitare contenuto nascosto per manipolazione ranking.
 
+## E-commerce Aml Store — contenuto e conversione
+
+- **Schede prodotto**: percorso **breve** verso CTA; evitare sezioni che **duplicano** messaggi già chiari in hero (trust list, consegna digitale, pagamenti) salvo un valore aggiunto nettamente diverso.
+- **Credibilità**: niente stelle, percentuali o conteggi recensioni **inventati**; niente tab o moduli presentati come attivi se sono solo **placeholder** (es. “recensioni quando sarà collegato…”).
+- **Coerenza dati**: prezzo a schermo, `data-stripe-*`, JSON-LD `Product`/`Offer` e testo legale (IVA, consegna) devono **coincidere**; per nuove schede riusare il pattern **prezzo originale → nostro prezzo → % risparmio** (`.price-block`) ove applicabile.
+- **Multilingua**: stessa sobrietà e stesso **tipo di sezioni** tra lingue (nessuna lingua “più marketing” delle altre senza dati).
+
 ## Schema.org — markup JSON-LD
 
 - Inserire **JSON-LD** (formato raccomandato da Google) in uno o più tag **`<script type="application/ld+json">`** in `<head>` o prima di `</body>`; **nessun framework**: JSON statico generato a mano o da template build, valido UTF-8.
