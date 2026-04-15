@@ -119,8 +119,17 @@
             const otherLangs = LANGS.filter((l) => l.code !== activeLang.code);
             const langSegIdx = segments.indexOf(activeLang.code);
             const pathPrefix = langSegIdx > 0 ? '/' + segments.slice(0, langSegIdx).join('/') : '';
-            const hrefForLang = (code) => `${pathPrefix}/${code}/`;
-            const homeHref = hrefForLang(activeLang.code);
+            /** Segmenti URL dopo la cartella lingua (es. microsoft-365-family.html), per restare sulla stessa pagina al cambio lingua. */
+            const pathAfterLang = langSegIdx >= 0 ? segments.slice(langSegIdx + 1).join('/') : '';
+            const qsAndHash = (window.location.search || '') + (window.location.hash || '');
+            /** Link verso un'altra lingua: stesso path relativo + query/hash. La home della lingua attiva usa `homeHref`. */
+            const hrefForLang = (code) => {
+                const middle = pathPrefix ? `${pathPrefix}/${code}` : `/${code}`;
+                const path = pathAfterLang ? `${middle}/${pathAfterLang}` : `${middle}/`;
+                return path + qsAndHash;
+            };
+            const homeMiddle = pathPrefix ? `${pathPrefix}/${activeLang.code}` : `/${activeLang.code}`;
+            const homeHref = `${homeMiddle}/`;
             const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
             const esc = (s) =>
                 String(s)
