@@ -26,6 +26,8 @@ const FOOTER_I18N = {
         copyright: 'Aml Store. Tutti i diritti riservati. P.IVA 11461870963.',
         themeLabel: 'Aspetto',
         themeAria: 'Tema della pagina: chiaro o scuro (barra in alto e piè di pagina invariati)',
+        paymentLogosAria:
+            'Metodi di pagamento disponibili al checkout (carta, PayPal, Apple Pay, Google Pay), elaborati tramite Stripe',
     },
     en: {
         logoAlt: 'Aml Store',
@@ -51,6 +53,8 @@ const FOOTER_I18N = {
         copyright: 'Aml Store. All rights reserved. VAT 11461870963.',
         themeLabel: 'Appearance',
         themeAria: 'Page theme: light or dark (header and footer unchanged)',
+        paymentLogosAria:
+            'Payment methods available at checkout (card, PayPal, Apple Pay, Google Pay), processed with Stripe',
     },
     fr: {
         logoAlt: 'Aml Store',
@@ -76,6 +80,8 @@ const FOOTER_I18N = {
         copyright: 'Aml Store. Tous droits réservés. TVA 11461870963.',
         themeLabel: 'Apparence',
         themeAria: "Thème de la page : clair ou sombre (en-tête et pied de page inchangés)",
+        paymentLogosAria:
+            'Moyens de paiement au checkout (carte, PayPal, Apple Pay, Google Pay), traités via Stripe',
     },
     de: {
         logoAlt: 'Aml Store',
@@ -101,6 +107,8 @@ const FOOTER_I18N = {
         copyright: 'Aml Store. Alle Rechte vorbehalten. USt-IdNr. 11461870963.',
         themeLabel: 'Erscheinungsbild',
         themeAria: 'Seitenthema: hell oder dunkel (Kopf- und Fußzeile unverändert)',
+        paymentLogosAria:
+            'Zahlungsarten im Checkout (Karte, PayPal, Apple Pay, Google Pay), Abwicklung über Stripe',
     },
     es: {
         logoAlt: 'Aml Store',
@@ -126,6 +134,8 @@ const FOOTER_I18N = {
         copyright: 'Aml Store. Todos los derechos reservados. NIF 11461870963.',
         themeLabel: 'Apariencia',
         themeAria: 'Tema de la página: claro u oscuro (cabecera y pie sin cambios)',
+        paymentLogosAria:
+            'Métodos de pago en el checkout (tarjeta, PayPal, Apple Pay, Google Pay), procesados con Stripe',
     },
 };
 
@@ -599,12 +609,13 @@ class EcommerceFooter extends HTMLElement {
                     filter: grayscale(0%) opacity(1);
                     transform: translateY(-3px) scale(1.05);
                 }
-                .payment-logo svg { 
-                    height: 26px; /* Ingrandite per compensare la rimozione della pillola esterna */
-                    width: auto; 
-                    display: block; 
-                    border-radius: 4px; /* Arrotondamento extra per sicurezza */
-                    box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Leggera ombra per dare tridimensionalità */
+                .payment-logo img {
+                    height: 22px;
+                    width: auto;
+                    max-width: 72px;
+                    object-fit: contain;
+                    display: block;
+                    border-radius: 4px;
                 }
 
                 /* --- STRATEGIA RESPONSIVE --- */
@@ -763,16 +774,13 @@ class EcommerceFooter extends HTMLElement {
                                 </span>
                             </button>
                         </div>
-                        <div class="payments">
-                        <div class="payment-logo" title="Visa">
-                            <svg viewBox="0 0 38 24" fill="none" aria-hidden="true"><rect width="38" height="24" rx="4" fill="#1434CB"/><path d="M16.5 16h-3l1.5-10h3l-1.5 10zm11.2-9.8c-.5-.2-1.2-.3-2-.3-2.1 0-3.6 1.1-3.6 2.8 0 1.2 1.1 1.9 1.9 2.3.8.4 1.1.6 1.1 1 0 .5-.6.8-1.2.8-1.3 0-2-.3-2.7-.6l-.4-1.8c.6.3 1.5.5 2.3.5 2.2 0 3.7-1.1 3.7-2.8 0-1-.8-1.7-1.9-2.2-.7-.4-1.1-.6-1.1-1 0-.4.5-.7 1.1-.7 1 0 1.7.2 2.3.5l.5-1.5zm-15.4 9.8L10 9.8l-.8 4.2c-.1.6-.6 1-1.2 1H3v-.4c1.1-.2 2.3-.6 3.1-1.1l2.5-7.3h3.2l5 10h-4.5zM34 6h-2.5c-.6 0-1.1.3-1.4.9l-4 9.1h3.3l.6-1.8h4l.4 1.8h3l-3.4-10z" fill="#fff"/></svg>
-                        </div>
-                        <div class="payment-logo" title="Mastercard">
-                            <svg viewBox="0 0 38 24" fill="none" aria-hidden="true"><rect width="38" height="24" rx="4" fill="#EB001B"/><circle cx="15" cy="12" r="7" fill="#F79E1B"/><circle cx="23" cy="12" r="7" fill="#FF5F00"/></svg>
-                        </div>
-                        <div class="payment-logo" title="PayPal">
-                            <svg viewBox="0 0 38 24" fill="none" aria-hidden="true"><rect width="38" height="24" rx="4" fill="#0079C1"/><path d="M12.5 15h3.8c.2 0 .4-.1.5-.3l2.8-11.4c0-.2-.1-.3-.3-.3H15.6c-.2 0-.4.1-.5.3l-2.4 9.4c0 .2.1.3.3.3zM25.7 15h-3c-.2 0-.4-.1-.5-.3l-.8-3.4c-.1-.3.2-.5.5-.5h2c1.7 0 2.5-.8 2.8-2.2.1-.5 0-1-.3-1.4-.4-.4-1.1-.6-2-.6h-3.3c-.2 0-.4.1-.5.3l-2 8.3c0 .2.1.3.3.3h3.2c1.3 0 2.2-.6 2.4-1.8.1-.5 0-.9-.3-1.2-.3-.3-.9-.4-1.7-.4h-.8c-.2 0-.4.1-.5.3l-.2.8c0 .2.1.3.3.3h1.2c.4 0 .7.1.8.3.1.2.1.4.1.7-.1.7-.6 1-1.4 1H25.7c.2 0 .3.1.3.3l-.3 1z" fill="#fff"/></svg>
-                        </div>
+                        <div class="payments" role="group" aria-label="${esc(t.paymentLogosAria)}">
+                            <span class="payment-logo" title="Visa"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Visa_logo.svg" width="56" height="22" alt="" loading="lazy" decoding="async"></span>
+                            <span class="payment-logo" title="Mastercard"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Mastercard_logo.svg" width="40" height="22" alt="" loading="lazy" decoding="async"></span>
+                            <span class="payment-logo" title="PayPal"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_PayPal-logo.svg" width="72" height="22" alt="" loading="lazy" decoding="async"></span>
+                            <span class="payment-logo" title="Apple Pay"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Apple_Pay_logo.svg" width="48" height="22" alt="" loading="lazy" decoding="async"></span>
+                            <span class="payment-logo" title="Google Pay"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Google_Pay_Logo.svg" width="52" height="22" alt="" loading="lazy" decoding="async"></span>
+                            <span class="payment-logo" title="Stripe"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Stripe_Logo.svg" width="56" height="22" alt="" loading="lazy" decoding="async"></span>
                         </div>
                     </div>
                 </div>
