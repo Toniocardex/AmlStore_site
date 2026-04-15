@@ -40,7 +40,7 @@
 
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
-    <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Quick purchase" hidden>
+    <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Quick purchase" hidden aria-hidden="true">
         <div class="product-sticky-cta__inner">
             <span class="product-sticky-cta__title">Microsoft 365 Family</span>
             <div class="product-sticky-cta__prices" aria-hidden="true">
@@ -116,7 +116,7 @@
                     <div class="tax-info">Tax included. No shipping fees.</div>
                 </div>
                 <div class="action-buttons">
-                    <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing">
+                    <button type="button" id="product-primary-cta" class="btn-primary" data-cart-add data-cart-source="product-pricing">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                         Add to cart
                     </button>
@@ -138,8 +138,6 @@
                 </div>
             </div>
         </section>
-
-        <div id="product-sticky-sentinel" class="product-sticky-sentinel" aria-hidden="true"></div>
 
         <section class="product-inline-benefits" aria-labelledby="inline-benefits-title">
             <h2 id="inline-benefits-title" class="product-section-eyebrow">At a glance</h2>

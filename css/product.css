@@ -685,46 +685,43 @@ html[data-theme='light'] .product-page .btn-secondary:hover {
     background: rgba(0, 0, 0, 0.04);
 }
 
-/* --- Barra acquisto sticky (sotto header sito) --- */
-.product-sticky-sentinel {
-    width: 100%;
-    height: 1px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    pointer-events: none;
-    visibility: hidden;
-}
-
+/* --- Barra acquisto sticky (sotto header; top da JS: --aml-header-offset) --- */
 .product-sticky-cta {
     position: fixed;
     left: 0;
     right: 0;
-    top: clamp(72px, 11vw, 88px);
+    top: var(--aml-header-offset, 88px);
     z-index: 900;
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
     transition:
-        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.3s ease;
-    background: color-mix(in srgb, var(--page-bg) 88%, transparent);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+        transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.28s ease,
+        box-shadow 0.28s ease;
+    background: color-mix(in srgb, var(--page-bg) 92%, transparent);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
     border-bottom: 1px solid var(--page-border);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    border-top: 1px solid transparent;
 }
 
 .product-sticky-cta.product-sticky-cta--visible {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
+    box-shadow:
+        0 1px 0 color-mix(in srgb, var(--page-accent) 22%, transparent),
+        0 12px 28px rgba(0, 0, 0, 0.22);
+    border-top-color: color-mix(in srgb, var(--page-accent) 18%, transparent);
 }
 
 .product-sticky-cta__inner {
     max-width: min(1200px, 100%);
     margin: 0 auto;
-    padding: 0.65rem max(var(--pp-gutter), env(safe-area-inset-right, 0px)) 0.65rem
+    min-height: 52px;
+    padding: 0.5rem max(var(--pp-gutter), env(safe-area-inset-right, 0px)) 0.5rem
         max(var(--pp-gutter), env(safe-area-inset-left, 0px));
     display: flex;
     align-items: center;
@@ -778,6 +775,8 @@ html[data-theme='light'] .product-page .btn-secondary:hover {
 @media (prefers-reduced-motion: reduce) {
     .product-sticky-cta {
         transition: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 }
 

@@ -1,28 +1,112 @@
 /**
- * Scheda prodotto: barra CTA sticky (IntersectionObserver), nessun dato inventato.
+ * Scheda prodotto: barra CTA sticky solo quando la CTA principale (#product-primary-cta)
+ * non è più visibile nell’area utile sotto l’header (altezza misurata, non fissa).
  */
 (function () {
     'use strict';
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const sticky = document.getElementById('product-sticky-cta');
-        const sentinel = document.getElementById('product-sticky-sentinel');
-        if (!sticky || !sentinel) return;
+    var HEADER_MIN = 56;
+    var HEADER_MAX = 120;
+    var RESIZE_DEBOUNCE_MS = 100;
+    var obs = null;
+    var resizeTimer = null;
 
-        function applySticky(on) {
-            sticky.toggleAttribute('hidden', !on);
-            sticky.classList.toggle('product-sticky-cta--visible', on);
+    function readSafeAreaTop() {
+        try {
+            var probe = document.createElement('div');
+            probe.style.cssText =
+                'position:fixed;top:0;left:0;padding-top:env(safe-area-inset-top,0px);visibility:hidden;pointer-events:none';
+            document.documentElement.appendChild(probe);
+            var pt = parseFloat(getComputedStyle(probe).paddingTop) || 0;
+            document.documentElement.removeChild(probe);
+            return pt;
+        } catch (_) {
+            return 0;
         }
+    }
 
+    function headerInsetPx() {
+        var el = document.querySelector('ecommerce-header');
+        var h = 88;
+        if (el) {
+            var rect = el.getBoundingClientRect();
+            h = Math.round(rect.height || el.offsetHeight || 88);
+        }
+        h = Math.min(HEADER_MAX, Math.max(HEADER_MIN, h));
+        return Math.round(h + readSafeAreaTop());
+    }
+
+    function syncHeaderCssVar() {
+        var px = headerInsetPx();
+        document.documentElement.style.setProperty('--aml-header-offset', px + 'px');
+    }
+
+    function applySticky(sticky, on) {
+        sticky.toggleAttribute('hidden', !on);
+        sticky.classList.toggle('product-sticky-cta--visible', on);
+        sticky.setAttribute('aria-hidden', on ? 'false' : 'true');
+    }
+
+    /** Doppio rAF: layout stabile (fonte/header) prima del primo IntersectionObserver. */
+    function afterLayoutStable(fn) {
+        requestAnimationFrame(function () {
+            requestAnimationFrame(fn);
+        });
+    }
+
+    function connectObserver(sticky, primaryCta) {
+        if (obs) {
+            obs.disconnect();
+            obs = null;
+        }
         if (!('IntersectionObserver' in window)) return;
 
-        var obs = new IntersectionObserver(
+        syncHeaderCssVar();
+        var inset = headerInsetPx();
+        var topMargin = '-' + inset + 'px';
+
+        obs = new IntersectionObserver(
             function (entries) {
                 var e = entries[0];
-                applySticky(!e.isIntersecting);
+                if (!e) return;
+                var primaryVisible = e.isIntersecting === true;
+                applySticky(sticky, !primaryVisible);
             },
-            { root: null, rootMargin: '-88px 0px 0px 0px', threshold: 0 }
+            {
+                root: null,
+                rootMargin: topMargin + ' 0px 0px 0px',
+                threshold: 0,
+            }
         );
-        obs.observe(sentinel);
+        obs.observe(primaryCta);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var sticky = document.getElementById('product-sticky-cta');
+        var primaryCta = document.getElementById('product-primary-cta');
+        if (!sticky || !primaryCta) return;
+
+        applySticky(sticky, false);
+        syncHeaderCssVar();
+        afterLayoutStable(function () {
+            connectObserver(sticky, primaryCta);
+        });
+
+        function scheduleRebuild() {
+            if (resizeTimer) clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                resizeTimer = null;
+                connectObserver(sticky, primaryCta);
+            }, RESIZE_DEBOUNCE_MS);
+        }
+
+        window.addEventListener('resize', scheduleRebuild, { passive: true });
+        window.addEventListener('orientationchange', scheduleRebuild, { passive: true });
+
+        var headerEl = document.querySelector('ecommerce-header');
+        if (headerEl && 'ResizeObserver' in window) {
+            var ro = new ResizeObserver(scheduleRebuild);
+            ro.observe(headerEl);
+        }
     });
 })();
