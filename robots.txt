@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amlstore.it/sitemap.xml
+Sitemap: https://aml-store.com/sitemap.xml
