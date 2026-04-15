@@ -1,5 +1,6 @@
 /**
  * Pagina prodotto — layout premium, token da page.css + tema chiaro.
+ * Prezzi: usare .price-block (prezzo originale → nostro prezzo + % risparmio) per nuove schede.
  */
 .product-page .visually-hidden {
     position: absolute;
@@ -315,38 +316,85 @@ html[data-theme="light"] .product-page {
 .product-page .price-section {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-}
-
-.product-page .price-wrapper {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
     gap: 1rem;
 }
 
-.product-page .price-current {
-    font-size: clamp(2.25rem, 4vw, 3.25rem);
-    font-weight: 800;
-    color: var(--page-text);
-    line-height: 1;
-    letter-spacing: -0.02em;
+/**
+ * Blocco prezzi riutilizzabile (pagine prodotto):
+ * riga 1 = prezzo di listino / originale · riga 2 = prezzo offerta + % risparmio.
+ */
+.product-page .price-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 1rem 1.15rem;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--page-text) 4%, transparent);
+    border: 1px solid var(--page-border);
 }
 
-.product-page .price-original {
-    font-size: 1.2rem;
+.product-page .price-block__row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.product-page .price-block__row--original {
+    padding-bottom: 0.85rem;
+    border-bottom: 1px dashed color-mix(in srgb, var(--page-text-muted) 35%, transparent);
+}
+
+.product-page .price-block__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--page-text-muted);
+}
+
+.product-page .price-block__msrp {
+    font-size: 1.35rem;
     font-weight: 600;
     color: var(--page-text-muted);
     text-decoration: line-through;
+    text-decoration-thickness: 1px;
 }
 
-.product-page .price-discount-badge {
-    background: rgba(16, 185, 129, 0.12);
+.product-page .price-block__row--offer .price-block__label {
+    color: var(--page-text-secondary);
+}
+
+.product-page .price-block__offer-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.65rem 0.85rem;
+}
+
+.product-page .price-block__sale {
+    font-size: clamp(2.35rem, 4.5vw, 3.35rem);
+    font-weight: 800;
+    color: var(--page-text);
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+
+.product-page .price-block__save {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    background: rgba(16, 185, 129, 0.16);
     color: var(--pp-success);
-    padding: 0.35rem 0.75rem;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.9rem;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    white-space: nowrap;
+}
+
+html[data-theme='light'] .product-page .price-block__save {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.28);
 }
 
 .product-page .tax-info {
@@ -711,6 +759,15 @@ html[data-theme='light'] .product-page .pricing-card {
     background: #ffffff;
     box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
     border-color: rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme='light'] .product-page .price-block {
+    background: #f6f7f9;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme='light'] .product-page .price-block__row--original {
+    border-bottom-color: rgba(0, 0, 0, 0.12);
 }
 
 html[data-theme='light'] .product-page .features-banner {
