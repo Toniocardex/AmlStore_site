@@ -1,14 +1,6 @@
 (function () {
     'use strict';
 
-    const LANGS = [
-        { code: 'it', label: 'IT', flag: 'it' },
-        { code: 'en', label: 'EN', flag: 'gb' },
-        { code: 'fr', label: 'FR', flag: 'fr' },
-        { code: 'de', label: 'DE', flag: 'de' },
-        { code: 'es', label: 'ES', flag: 'es' },
-    ];
-
     const HEADER_I18N = {
         it: {
             logoAlt: 'Aml Store',
@@ -82,24 +74,6 @@
         },
     };
 
-    function amlStaticRootFromHeaderScript() {
-        const needle = '/components/header.js';
-        const scripts = document.scripts;
-        for (let i = 0; i < scripts.length; i++) {
-            const raw = scripts[i].getAttribute('src');
-            if (!raw) continue;
-            let pathname;
-            try {
-                pathname = new URL(raw, window.location.href).pathname;
-            } catch (_) {
-                continue;
-            }
-            if (!pathname.endsWith(needle)) continue;
-            return pathname.slice(0, -needle.length);
-        }
-        return '';
-    }
-
     class EcommerceHeader extends HTMLElement {
         constructor() {
             super();
@@ -113,32 +87,28 @@
             this.setAttribute('translate', 'no');
             this.classList.add('notranslate');
 
-            const segments = window.location.pathname.split('/').filter(Boolean);
-            const langCode = segments.find((seg) => LANGS.some((l) => l.code === seg)) || 'it';
-            const activeLang = LANGS.find((l) => l.code === langCode) || LANGS[0];
+            const S = window.AmlSite;
+            if (!S) {
+                console.error('ecommerce-header: includere ../js/locale-path.js prima di questo script.');
+                return;
+            }
+            const parsed = S.parseLocalePath(window.location.pathname);
+            const LANGS = S.LANGS;
+            const activeLang = parsed.activeLang;
             const otherLangs = LANGS.filter((l) => l.code !== activeLang.code);
-            const langSegIdx = segments.indexOf(activeLang.code);
-            const pathPrefix = langSegIdx > 0 ? '/' + segments.slice(0, langSegIdx).join('/') : '';
-            /** Segmenti URL dopo la cartella lingua (es. microsoft-365-family.html), per restare sulla stessa pagina al cambio lingua. */
-            const pathAfterLang = langSegIdx >= 0 ? segments.slice(langSegIdx + 1).join('/') : '';
-            const qsAndHash = (window.location.search || '') + (window.location.hash || '');
-            /** Link verso un'altra lingua: stesso path relativo + query/hash. La home della lingua attiva usa `homeHref`. */
-            const hrefForLang = (code) => {
-                const middle = pathPrefix ? `${pathPrefix}/${code}` : `/${code}`;
-                const path = pathAfterLang ? `${middle}/${pathAfterLang}` : `${middle}/`;
-                return path + qsAndHash;
-            };
-            const homeMiddle = pathPrefix ? `${pathPrefix}/${activeLang.code}` : `/${activeLang.code}`;
-            const homeHref = `${homeMiddle}/`;
+            const hrefForLang = (code) =>
+                S.hrefSwitchLocale(
+                    parsed.pathPrefix,
+                    code,
+                    parsed.pathAfterLang,
+                    window.location.search,
+                    window.location.hash
+                );
+            const homeHref = S.homeHref(parsed.pathPrefix, activeLang.code);
             const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
-            const esc = (s) =>
-                String(s)
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;');
+            const esc = S.escapeHtmlAttr;
 
-            const staticRoot = amlStaticRootFromHeaderScript();
+            const staticRoot = S.staticRootFromScriptPath('/components/header.js');
             const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
             const flagSrc = (flag) => `${staticRoot}/images/flags/${flag}.svg`;
 

@@ -2,18 +2,18 @@
     'use strict';
 
     document.addEventListener('DOMContentLoaded', function () {
-        var page = document.querySelector('.product-page');
+        const page = document.querySelector('.product-page');
         if (!page) return;
-        var header = page.querySelector('.tabs-header');
+        const header = page.querySelector('.tabs-header');
         if (!header) return;
-        var tabs = header.querySelectorAll('.tab-btn');
-        var panels = page.querySelectorAll('.tab-panel');
+        const tabs = header.querySelectorAll('.tab-btn');
+        const panels = page.querySelectorAll('.tab-panel');
         if (!tabs.length || !panels.length) return;
 
         function go(index) {
-            var i = Math.max(0, Math.min(tabs.length - 1, index));
+            const i = Math.max(0, Math.min(tabs.length - 1, index));
             tabs.forEach(function (t, j) {
-                var on = j === i;
+                const on = j === i;
                 t.classList.toggle('active', on);
                 t.setAttribute('aria-selected', on ? 'true' : 'false');
             });
