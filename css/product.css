@@ -132,40 +132,6 @@ html[data-theme="light"] .product-page {
     margin: 0;
 }
 
-.product-page .product-rating {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--page-text-secondary);
-    flex-wrap: wrap;
-}
-
-.product-page .stars {
-    display: flex;
-    color: var(--pp-warning);
-    gap: 2px;
-}
-
-.product-page .stars svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-}
-
-.product-page .review-link {
-    color: var(--page-accent);
-    text-decoration: none;
-    margin-left: 0.25rem;
-    transition: color 0.2s;
-}
-
-.product-page .review-link:hover {
-    color: var(--pp-accent-hover);
-    text-decoration: underline;
-}
-
 .product-page .product-desc-short {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -480,67 +446,6 @@ html[data-theme='light'] .product-page .price-block__save {
     flex-shrink: 0;
 }
 
-.product-page .features-banner {
-    border-top: 1px solid var(--page-border);
-    border-bottom: 1px solid var(--page-border);
-    background: rgba(255, 255, 255, 0.02);
-    padding: 2.5rem 0;
-    margin-top: 1rem;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-}
-
-.product-page .features-banner .features-grid {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 5vw, 4rem);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-}
-
-.product-page .feature-box {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-}
-
-.product-page .feature-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.06);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--pp-accent-hover);
-}
-
-.product-page .feature-icon svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    stroke-width: 2;
-    fill: none;
-}
-
-.product-page .feature-box h4 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--page-text);
-    margin: 0;
-}
-
-.product-page .feature-box p {
-    font-size: 0.9rem;
-    color: var(--page-text-muted);
-    line-height: 1.5;
-    font-weight: 500;
-    margin: 0;
-}
-
 .product-page .details-section {
     padding-top: 3.5rem;
     padding-bottom: 3rem;
@@ -768,14 +673,6 @@ html[data-theme='light'] .product-page .price-block {
 
 html[data-theme='light'] .product-page .price-block__row--original {
     border-bottom-color: rgba(0, 0, 0, 0.12);
-}
-
-html[data-theme='light'] .product-page .features-banner {
-    background: rgba(0, 0, 0, 0.02);
-}
-
-html[data-theme='light'] .product-page .feature-icon {
-    background: rgba(0, 0, 0, 0.05);
 }
 
 html[data-theme='light'] .product-page .req-box {
