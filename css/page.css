@@ -264,3 +264,77 @@ html[data-theme="light"] .product-card-media {
     background: #f0f2f5;
     border-color: rgba(0, 0, 0, 0.06);
 }
+
+/* --- Pagine legali / testo lungo --- */
+.legal-doc {
+    max-width: 52rem;
+}
+
+.legal-doc h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin: 2.25rem 0 0.75rem;
+    color: var(--page-text);
+}
+
+.legal-doc h2:first-of-type {
+    margin-top: 1.5rem;
+}
+
+.legal-doc p,
+.legal-doc li {
+    color: var(--page-text-secondary);
+    line-height: 1.75;
+    font-size: 0.95rem;
+}
+
+.legal-doc p {
+    margin: 0 0 1rem;
+}
+
+.legal-doc ul {
+    margin: 0 0 1rem 1.1rem;
+    padding: 0;
+}
+
+.legal-doc li {
+    margin-bottom: 0.35rem;
+}
+
+.legal-doc a {
+    color: var(--page-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.legal-doc a:hover {
+    filter: brightness(1.08);
+}
+
+.legal-doc .legal-meta {
+    font-size: 0.85rem;
+    color: var(--page-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+html[data-theme="light"] .legal-doc a {
+    color: var(--page-accent);
+}
+
+.cookie-panel-trigger {
+    min-height: 44px;
+    padding: 0.6rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid var(--page-border);
+    background: var(--page-text);
+    color: var(--page-bg);
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.cookie-panel-trigger:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 3px;
+}

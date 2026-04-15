@@ -19,6 +19,8 @@ const FOOTER_I18N = {
         supportReturns: 'Resi e Rimborsi',
         supportTerms: 'Termini e Condizioni',
         supportPrivacy: 'Privacy Policy',
+        supportCookies: 'Cookie policy',
+        cookieManage: 'Gestisci preferenze cookie',
         assistanceLabel: 'Assistenza',
         emailSub: 'Rispondiamo h24',
         copyright: 'Aml Store. Tutti i diritti riservati. P.IVA 11461870963.',
@@ -42,6 +44,8 @@ const FOOTER_I18N = {
         supportReturns: 'Returns & refunds',
         supportTerms: 'Terms & conditions',
         supportPrivacy: 'Privacy policy',
+        supportCookies: 'Cookie policy',
+        cookieManage: 'Manage cookie preferences',
         assistanceLabel: 'Support',
         emailSub: 'We respond 24/7',
         copyright: 'Aml Store. All rights reserved. VAT 11461870963.',
@@ -65,6 +69,8 @@ const FOOTER_I18N = {
         supportReturns: 'Retours et remboursements',
         supportTerms: 'Conditions générales',
         supportPrivacy: 'Politique de confidentialité',
+        supportCookies: 'Politique cookies',
+        cookieManage: 'Gérer les préférences cookies',
         assistanceLabel: 'Assistance',
         emailSub: 'Réponse 24h/24',
         copyright: 'Aml Store. Tous droits réservés. TVA 11461870963.',
@@ -88,6 +94,8 @@ const FOOTER_I18N = {
         supportReturns: 'Rückgabe & Erstattung',
         supportTerms: 'Allgemeine Geschäftsbedingungen',
         supportPrivacy: 'Datenschutz',
+        supportCookies: 'Cookie-Richtlinie',
+        cookieManage: 'Cookie-Einstellungen',
         assistanceLabel: 'Support',
         emailSub: 'Wir antworten rund um die Uhr',
         copyright: 'Aml Store. Alle Rechte vorbehalten. USt-IdNr. 11461870963.',
@@ -111,6 +119,8 @@ const FOOTER_I18N = {
         supportReturns: 'Devoluciones y reembolsos',
         supportTerms: 'Términos y condiciones',
         supportPrivacy: 'Política de privacidad',
+        supportCookies: 'Política de cookies',
+        cookieManage: 'Gestionar cookies',
         assistanceLabel: 'Asistencia',
         emailSub: 'Respondemos 24/7',
         copyright: 'Aml Store. Todos los derechos reservados. NIF 11461870963.',
@@ -313,6 +323,48 @@ class EcommerceFooter extends HTMLElement {
                 .link-list a:hover::before, .link-list a:focus-visible::before {
                     opacity: 1;
                     transform: translateX(0);
+                }
+
+                .link-list button.link-as-a {
+                    appearance: none;
+                    background: none;
+                    border: none;
+                    margin: 0;
+                    font: inherit;
+                    color: var(--text-secondary);
+                    font-size: 0.95rem;
+                    font-weight: 500;
+                    display: inline-flex;
+                    align-items: center;
+                    padding: 0.35rem 0;
+                    width: max-content;
+                    position: relative;
+                    cursor: pointer;
+                    text-align: left;
+                    transition: color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                .link-list button.link-as-a::before {
+                    content: '→';
+                    position: absolute;
+                    left: -1.2rem;
+                    opacity: 0;
+                    color: var(--accent-hover);
+                    transform: translateX(-5px);
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                .link-list button.link-as-a:hover,
+                .link-list button.link-as-a:focus-visible {
+                    color: var(--text-primary);
+                    transform: translateX(1.2rem);
+                }
+                .link-list button.link-as-a:hover::before,
+                .link-list button.link-as-a:focus-visible::before {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                .link-list button.link-as-a:focus-visible {
+                    outline: 2px solid var(--accent);
+                    outline-offset: 2px;
                 }
 
                 /* ITEMS CONTATTO */
@@ -591,6 +643,15 @@ class EcommerceFooter extends HTMLElement {
                     .link-list a:last-child { border-bottom: none; }
                     .link-list a::before { display: none; }
                     .link-list a:hover, .link-list a:focus-visible { transform: none; color: var(--text-primary); }
+                    .link-list button.link-as-a {
+                        width: 100%;
+                        padding: 0.75rem 0;
+                        font-size: 1rem;
+                        border-bottom: 1px solid rgba(255,255,255,0.05);
+                    }
+                    .link-list button.link-as-a::before { display: none; }
+                    .link-list button.link-as-a:hover,
+                    .link-list button.link-as-a:focus-visible { transform: none; }
                     
                     .bottom-content {
                         flex-direction: column-reverse;
@@ -648,6 +709,8 @@ class EcommerceFooter extends HTMLElement {
                             <li><a href="#">${esc(t.supportReturns)}</a></li>
                             <li><a href="#">${esc(t.supportTerms)}</a></li>
                             <li><a href="#">${esc(t.supportPrivacy)}</a></li>
+                            <li><a href="cookie-policy.html">${esc(t.supportCookies)}</a></li>
+                            <li><button type="button" class="link-as-a" data-aml-cookie-settings>${esc(t.cookieManage)}</button></li>
                         </ul>
                     </div>
 
@@ -779,6 +842,11 @@ class EcommerceFooter extends HTMLElement {
                 }
             };
             syncGlassToggle();
+
+            this.shadowRoot.querySelector('[data-aml-cookie-settings]')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('aml-open-cookie-settings'));
+            });
 
             this.__footerUiInit = true;
         } catch (err) {
