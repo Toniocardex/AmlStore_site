@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/home.css">
+    <link rel="preload" as="image" href="../asset/media/home-hero.webp" type="image/webp">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/it/#webpage","url":"https://aml-store.com/it/","name":"Aml Store - Il Tuo Partner Digitale","description":"Acquista licenze software originali: Sistemi Operativi, Office e Antivirus al miglior prezzo garantito.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"it"},{"@type":"FAQPage","inLanguage":"it","url":"https://aml-store.com/it/","mainEntity":[{"@type":"Question","name":"Cosa ricevo esattamente dopo l'acquisto?","acceptedAnswer":{"@type":"Answer","text":"Ricevi una email di consegna digitale con quanto serve per usare la licenza (in genere codice e/o istruzioni operative, più i riferimenti utili alla prova d'acquisto, come da contenuto effettivo del messaggio inviato). La consegna è solo digitale: conserva la mail e controlla anche spam/posta indesiderata se non vedi nulla in arrivo."}},{"@type":"Question","name":"Quanto tempo passa tra il pagamento e l'email con la licenza?","acceptedAnswer":{"@type":"Answer","text":"Di norma l'email arriva subito dopo la conferma del pagamento; in rari casi possono servire alcuni minuti in più per le verifiche del pagamento. Se entro 30 minuti non hai ricevuto nulla, controlla anche spam/posta indesiderata e scrivi a Info@amlstore.it con prodotto acquistato e email usata per l'ordine, così possiamo verificare l'invio."}},{"@type":"Question","name":"Non ho mai acquistato una licenza digitale: come funziona dall'inizio alla fine?","acceptedAnswer":{"@type":"Answer","text":"Scegli il prodotto, completa l'ordine e il pagamento con i metodi disponibili al checkout (quando attivo, il pagamento con carta è gestito tramite Stripe). A pagamento confermato ricevi la consegna via email; per l'uso effettivo della licenza segui email e scheda prodotto sul nostro sito, dove trovi anche i riferimenti coerenti con quel titolo."}},{"@type":"Question","name":"Il prezzo è più basso che altrove: la licenza è regolare? Perché costa meno?","acceptedAnswer":{"@type":"Answer","text":"Vendiamo licenze digitali descritte nelle schede prodotto, con prezzi chiari e condizioni consultabili in Termini e Condizioni e Privacy prima dell'acquisto. Se vuoi un riscontro esterno, puoi leggere le recensioni pubbliche su Trustpilot (https://it.trustpilot.com/review/aml-store.com). Per dubbi operativi, scrivi a Info@amlstore.it."}},{"@type":"Question","name":"Dove inserisco il codice e come installo il software?","acceptedAnswer":{"@type":"Answer","text":"L'attivazione e l'installazione avvengono sui siti e portali ufficiali del produttore, secondo le regole di quel prodotto. Dopo l'acquisto usa le istruzioni ricevute via email e, per il dettaglio passo passo, la scheda prodotto sul nostro sito. Se qualcosa non funziona, scrivi a Info@amlstore.it con prodotto e email d'ordine."}},{"@type":"Question","name":"Come vi contatto per problemi con ordine, pagamento o attivazione?","acceptedAnswer":{"@type":"Answer","text":"Scrivi a Info@amlstore.it: è il canale principale indicato anche nel footer del sito. Nel messaggio indica prodotto, email usata per l'ordine e una breve descrizione del problema; per privacy, termini e resi usa i link nel footer (Privacy, Termini e Condizioni, Resi e Rimborsi)."}}]}]}
@@ -52,14 +53,21 @@
 
     <main id="main" class="home-page">
         <section class="home-hero" aria-labelledby="home-hero-title">
-            <h1 id="home-hero-title">Aml Store — Licenze software originali</h1>
-            <p class="subtitle home-hero-lead">Licenze digitali per Windows, Office e sicurezza. Prezzi chiari e consegna via email dopo l'acquisto: ricevi il <strong>product key</strong> da attivare sul <strong>tuo</strong> account ufficiale del produttore, secondo le regole del titolo.</p>
-            <p class="home-hero-note">
-                Modello basato su <strong>product key</strong> (codice di attivazione), non su vendita o trasferimento di <strong>account</strong> già esistenti o accessi condivisi. Pagamento con carta tramite <strong>Stripe</strong> al checkout; assistenza su <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>.
-            </p>
-            <div class="home-hero-actions">
-                <a class="home-btn home-btn-primary" href="#catalogo">Scopri i prodotti</a>
-                <a class="home-btn home-btn-secondary" href="#faq">Domande frequenti</a>
+            <div class="home-hero-layout">
+                <div class="home-hero-copy">
+                    <h1 id="home-hero-title">Aml Store — Licenze software originali</h1>
+                    <p class="subtitle home-hero-lead">Licenze digitali per Windows, Office e sicurezza. Prezzi chiari e consegna via email dopo l'acquisto: ricevi il <strong>product key</strong> da attivare sul <strong>tuo</strong> account ufficiale del produttore, secondo le regole del titolo.</p>
+                    <p class="home-hero-note">
+                        Modello basato su <strong>product key</strong> (codice di attivazione), non su vendita o trasferimento di <strong>account</strong> già esistenti o accessi condivisi. Pagamento con carta tramite <strong>Stripe</strong> al checkout; assistenza su <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>.
+                    </p>
+                    <div class="home-hero-actions">
+                        <a class="home-btn home-btn-primary" href="#catalogo">Scopri i prodotti</a>
+                        <a class="home-btn home-btn-secondary" href="#faq">Domande frequenti</a>
+                    </div>
+                </div>
+                <figure class="home-hero-visual">
+                    <img class="home-hero-img" src="../asset/media/home-hero.webp" width="960" height="540" alt="Illustrazione astratta: consegna digitale, product key e sicurezza — Aml Store." decoding="async" fetchpriority="high">
+                </figure>
             </div>
         </section>
 
@@ -112,7 +120,7 @@
             >
                 <a href="microsoft-365-family.html" class="product-card-body product-card--link">
                     <div class="product-card-media">
-                        <img src="../asset/media/Microsoft%20365_Family.webp" width="400" height="400" alt="Microsoft 365 Family — anteprima prodotto" decoding="async" fetchpriority="high" class="product-card-img">
+                        <img src="../asset/media/Microsoft%20365_Family.webp" width="400" height="400" alt="Microsoft 365 Family — anteprima prodotto" decoding="async" class="product-card-img">
                     </div>
                     <p class="product-card-name">Microsoft 365 Family</p>
                     <p class="product-card-blurb">Abbonamento 12 mesi · fino a 6 utenti · licenza digitale</p>

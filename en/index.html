@@ -40,6 +40,7 @@
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/home.css">
+    <link rel="preload" as="image" href="../asset/media/home-hero.webp" type="image/webp">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/en/#webpage","url":"https://aml-store.com/en/","name":"Aml Store - Your Digital Partner","description":"Buy original software licenses: Operating Systems, Office and Antivirus at the best guaranteed price.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"en"},{"@type":"FAQPage","inLanguage":"en","url":"https://aml-store.com/en/","mainEntity":[{"@type":"Question","name":"What exactly do I receive after purchase?","acceptedAnswer":{"@type":"Answer","text":"You receive a digital delivery email with what you need to use the licence (typically a product code and/or practical instructions, plus useful purchase references, as shown in the message we send). Delivery is digital only: keep the email and check spam/junk if nothing appears in your inbox."}},{"@type":"Question","name":"How long until I receive the email with the licence?","acceptedAnswer":{"@type":"Answer","text":"Usually the email arrives shortly after payment is confirmed; in rare cases payment checks may add a few more minutes. If you still haven't received anything within 30 minutes, check spam/junk and email Info@amlstore.it with the product purchased and the order email address so we can verify delivery."}},{"@type":"Question","name":"I've never bought a digital licence: how does it work from start to finish?","acceptedAnswer":{"@type":"Answer","text":"Choose your product, complete checkout and payment using the methods available at checkout (when enabled, card payments are processed with Stripe). Once payment is confirmed you receive digital delivery by email; to use the licence follow both the email and the product page on our site, where you'll find references that match that product."}},{"@type":"Question","name":"The price is lower than elsewhere: is the licence genuine? Why does it cost less?","acceptedAnswer":{"@type":"Answer","text":"We sell digital licences described on our product pages, with clear prices and terms you can read in Terms and Conditions and Privacy before purchase. If you want an external reference, you can read public reviews on Trustpilot (https://it.trustpilot.com/review/aml-store.com). For operational questions, email Info@amlstore.it."}},{"@type":"Question","name":"Where do I enter the code and how do I install the software?","acceptedAnswer":{"@type":"Answer","text":"Activation and installation take place on the vendor's official websites and portals, according to that product's rules. After purchase use the instructions in your email and, for step-by-step detail, the product page on our site. If something doesn't work, email Info@amlstore.it with the product and order email."}},{"@type":"Question","name":"How do I contact you about order, payment or activation issues?","acceptedAnswer":{"@type":"Answer","text":"Email Info@amlstore.it: it's the main channel shown in the site footer too. Include product, order email address and a short description; for privacy, terms and refunds use the footer links (Privacy, Terms and Conditions, Returns and refunds)."}}]}]}
@@ -52,14 +53,21 @@
 
     <main id="main" class="home-page">
         <section class="home-hero" aria-labelledby="home-hero-title">
-            <h1 id="home-hero-title">Aml Store — Original software licences</h1>
-            <p class="subtitle home-hero-lead">Digital licences for Windows, Office and security. Clear pricing and delivery by email after purchase: you receive a <strong>product key</strong> to activate on <strong>your</strong> official vendor account, following that product's rules.</p>
-            <p class="home-hero-note">
-                This model is based on a <strong>product key</strong> (activation code), not on selling or transferring <strong>existing accounts</strong> or shared credentials. Card payments with <strong>Stripe</strong> at checkout; support at <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>.
-            </p>
-            <div class="home-hero-actions">
-                <a class="home-btn home-btn-primary" href="#catalogo">See featured products</a>
-                <a class="home-btn home-btn-secondary" href="#faq">FAQ</a>
+            <div class="home-hero-layout">
+                <div class="home-hero-copy">
+                    <h1 id="home-hero-title">Aml Store — Original software licences</h1>
+                    <p class="subtitle home-hero-lead">Digital licences for Windows, Office and security. Clear pricing and delivery by email after purchase: you receive a <strong>product key</strong> to activate on <strong>your</strong> official vendor account, following that product's rules.</p>
+                    <p class="home-hero-note">
+                        This model is based on a <strong>product key</strong> (activation code), not on selling or transferring <strong>existing accounts</strong> or shared credentials. Card payments with <strong>Stripe</strong> at checkout; support at <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>.
+                    </p>
+                    <div class="home-hero-actions">
+                        <a class="home-btn home-btn-primary" href="#catalogo">See featured products</a>
+                        <a class="home-btn home-btn-secondary" href="#faq">FAQ</a>
+                    </div>
+                </div>
+                <figure class="home-hero-visual">
+                    <img class="home-hero-img" src="../asset/media/home-hero.webp" width="960" height="540" alt="Abstract illustration: digital delivery, product key and security — Aml Store." decoding="async" fetchpriority="high">
+                </figure>
             </div>
         </section>
 
@@ -112,7 +120,7 @@
             >
                 <a href="microsoft-365-family.html" class="product-card-body product-card--link">
                     <div class="product-card-media">
-                        <img src="../asset/media/Microsoft%20365_Family.webp" width="400" height="400" alt="Microsoft 365 Family — product preview" decoding="async" fetchpriority="high" class="product-card-img">
+                        <img src="../asset/media/Microsoft%20365_Family.webp" width="400" height="400" alt="Microsoft 365 Family — product preview" decoding="async" class="product-card-img">
                     </div>
                     <p class="product-card-name">Microsoft 365 Family</p>
                     <p class="product-card-blurb">12-month subscription · up to 6 users · digital licence</p>

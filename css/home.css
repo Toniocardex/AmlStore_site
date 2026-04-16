@@ -24,6 +24,39 @@
     padding-bottom: clamp(0.5rem, 2vw, 1rem);
 }
 
+.home-hero-layout {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .home-hero-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 44%);
+    }
+}
+
+.home-hero-copy {
+    min-width: 0;
+}
+
+.home-hero-visual {
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--page-border);
+    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.42);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.home-hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
 .home-page .home-hero h1 {
     max-width: 18ch;
     line-height: 1.1;
