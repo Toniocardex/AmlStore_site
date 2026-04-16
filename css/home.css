@@ -1,7 +1,20 @@
 /**
- * Home — flusso hero → come funziona → catalogo.
+ * Home — flusso hero → trust → come funziona → catalogo → FAQ → social proof → closing.
  * Dipende da page.css (token). Solo pagine index.
  */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
 
 .home-page > section + section {
     margin-top: clamp(3rem, 6vw, 5rem);
@@ -17,7 +30,175 @@
 }
 
 .home-hero-lead {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.home-hero-note {
+    margin: 0 0 1.35rem;
+    max-width: 52ch;
+    font-size: clamp(0.85rem, 2.4vw, 0.92rem);
+    line-height: 1.55;
+    font-weight: 500;
+    color: var(--page-text-secondary);
+}
+
+.home-hero-note a {
+    color: var(--page-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}
+
+.home-hero-note a:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.home-trust-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .home-trust-list {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+}
+
+.home-trust-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--page-border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    font-size: clamp(0.85rem, 2.4vw, 0.92rem);
+    line-height: 1.45;
+    color: var(--page-text);
+}
+
+.home-trust-icon {
+    flex-shrink: 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin-top: 0.1rem;
+    color: var(--page-accent);
+}
+
+.home-trust-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.home-trust-text a {
+    color: var(--page-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}
+
+.home-trust-text a:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.home-social-proof {
+    text-align: center;
+    max-width: 40rem;
+    margin-inline: auto;
+}
+
+.home-social-proof__text {
+    margin: 0;
+    font-size: clamp(0.9rem, 2.5vw, 0.98rem);
+    line-height: 1.55;
+    color: var(--page-text-secondary);
+    font-weight: 500;
+}
+
+.home-social-proof__text a {
+    color: var(--page-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}
+
+.home-social-proof__text a:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.home-closing {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.home-page .product-card > .product-card-price {
+    margin-top: 0;
+}
+
+.home-page .product-card-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.home-page .product-card-foot .btn-cta-primary {
+    width: 100%;
+}
+
+.home-product-detail {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--page-text);
+    border: 1px solid var(--page-border);
+    background: rgba(255, 255, 255, 0.04);
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.home-product-detail:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.home-product-detail:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 3px;
+}
+
+html[data-theme='light'] .home-trust-item {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme='light'] .home-product-detail {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme='light'] .home-product-detail:hover {
+    background: #f4f4f5;
+    border-color: rgba(0, 0, 0, 0.14);
 }
 
 .home-hero-actions {
@@ -156,4 +337,109 @@ html[data-theme='light'] .home-step {
     background: #ffffff;
     border-color: rgba(0, 0, 0, 0.08);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* FAQ homepage — mobile-first, touch ≥ 44px sui summary */
+.home-page .home-faq {
+    max-width: min(40rem, 100%);
+    margin-inline: auto;
+}
+
+.home-page .home-faq .home-section-title {
+    margin-bottom: 1rem;
+}
+
+.home-page .home-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.home-page .home-faq-item {
+    border: 1px solid var(--page-border);
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--page-text) 3.5%, var(--page-bg));
+    overflow: hidden;
+}
+
+.home-page .home-faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1rem 1.1rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 2.8vw, 0.98rem);
+    line-height: 1.35;
+    color: var(--page-text);
+}
+
+.home-page .home-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.home-page .home-faq-item summary::after {
+    content: '+';
+    margin-left: auto;
+    flex-shrink: 0;
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--page-accent);
+}
+
+.home-page .home-faq-item[open] summary::after {
+    content: '−';
+}
+
+.home-page .home-faq-item summary:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: -2px;
+}
+
+.home-page .home-faq-body {
+    padding: 0 1.1rem 1.1rem;
+    font-size: clamp(0.88rem, 2.6vw, 0.95rem);
+    line-height: 1.6;
+    font-weight: 500;
+    color: var(--page-text-secondary);
+}
+
+.home-page .home-faq-body p {
+    margin: 0;
+}
+
+.home-page .home-faq-body p + p {
+    margin-top: 0.75rem;
+}
+
+.home-page .home-faq-body a {
+    color: var(--page-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+    word-break: break-word;
+}
+
+.home-page .home-faq-body a:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+html[data-theme='light'] .home-page .home-faq-item {
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-page .home-faq-item summary {
+        transition: none;
+    }
+
+    .home-product-detail {
+        transition: none;
+    }
 }

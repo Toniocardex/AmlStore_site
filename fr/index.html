@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="../css/home.css">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/fr/#webpage","url":"https://aml-store.com/fr/","name":"Aml Store - Votre Partenaire Numérique","description":"Achetez des licences logicielles originales : Systèmes d'exploitation, Office et Antivirus au meilleur prix garanti.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"fr"}]}
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/fr/#webpage","url":"https://aml-store.com/fr/","name":"Aml Store - Votre Partenaire Numérique","description":"Achetez des licences logicielles originales : Systèmes d'exploitation, Office et Antivirus au meilleur prix garanti.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"fr"},{"@type":"FAQPage","inLanguage":"fr","url":"https://aml-store.com/fr/","mainEntity":[{"@type":"Question","name":"Que recevrai-je exactement après l'achat ?","acceptedAnswer":{"@type":"Answer","text":"Vous recevez un e-mail de livraison numérique avec ce dont vous avez besoin pour utiliser la licence (en général un code et/ou des instructions pratiques, plus les références utiles à la preuve d'achat, selon le contenu réel du message envoyé). La livraison est uniquement numérique : conservez l'e-mail et vérifiez aussi les courriers indésirables / spam si rien n'apparaît dans votre boîte de réception."}},{"@type":"Question","name":"Combien de temps entre le paiement et l'e-mail avec la licence ?","acceptedAnswer":{"@type":"Answer","text":"En règle générale, l'e-mail arrive juste après la confirmation du paiement ; dans de rares cas, il peut falloir quelques minutes de plus pour les vérifications de paiement. Si dans les 30 minutes vous n'avez toujours rien reçu, vérifiez le spam et écrivez à Info@amlstore.it avec le produit acheté et l'e-mail utilisé pour la commande, afin que nous puissions vérifier l'envoi."}},{"@type":"Question","name":"Je n'ai jamais acheté de licence numérique : comment cela fonctionne-t-il du début à la fin ?","acceptedAnswer":{"@type":"Answer","text":"Choisissez le produit, finalisez la commande et le paiement avec les moyens disponibles au checkout (lorsque c'est actif, le paiement par carte est traité via Stripe). Une fois le paiement confirmé, vous recevez la livraison par e-mail ; pour utiliser la licence, suivez l'e-mail et la fiche produit sur notre site, où vous trouverez les références correspondant à ce titre."}},{"@type":"Question","name":"Le prix est plus bas qu'ailleurs : la licence est-elle conforme ? Pourquoi coûte-t-elle moins cher ?","acceptedAnswer":{"@type":"Answer","text":"Nous vendons des licences numériques décrites sur les fiches produit, avec des prix clairs et des conditions consultables dans les Conditions générales et la Politique de confidentialité avant l'achat. Si vous souhaitez un retour externe, vous pouvez lire les avis publics sur Trustpilot (https://it.trustpilot.com/review/aml-store.com). Pour toute question opérationnelle, écrivez à Info@amlstore.it."}},{"@type":"Question","name":"Où saisir le code et comment installer le logiciel ?","acceptedAnswer":{"@type":"Answer","text":"L'activation et l'installation se font sur les sites et portails officiels de l'éditeur, selon les règles de ce produit. Après l'achat, utilisez les instructions reçues par e-mail et, pour le détail pas à pas, la fiche produit sur notre site. Si quelque chose ne fonctionne pas, écrivez à Info@amlstore.it avec le produit et l'e-mail de commande."}},{"@type":"Question","name":"Comment vous contacter pour un problème de commande, de paiement ou d'activation ?","acceptedAnswer":{"@type":"Answer","text":"Écrivez à Info@amlstore.it : c'est le canal principal indiqué aussi dans le pied de page du site. Dans le message, indiquez le produit, l'e-mail utilisé pour la commande et une brève description du problème ; pour la confidentialité, les conditions et les retours, utilisez les liens du pied de page (Politique de confidentialité, Conditions générales, Retours et remboursements)."}}]}]}
     </script>
 </head>
 <body>
@@ -53,10 +53,31 @@
         <section class="home-hero" aria-labelledby="home-hero-title">
             <h1 id="home-hero-title">Aml Store — Licences logicielles d'origine</h1>
             <p class="subtitle home-hero-lead">Licences numériques pour Windows, Office et la sécurité. Tarifs clairs et livraison par e-mail après achat ; l'activation suit les règles de chaque éditeur.</p>
+            <p class="home-hero-note">
+                Livraison numérique par e-mail ; paiement par carte via <strong>Stripe</strong> au checkout ; assistance sur <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> (également dans le pied de page).
+            </p>
             <div class="home-hero-actions">
-                <a class="home-btn home-btn-primary" href="#catalogo">Voir le catalogue</a>
-                <a class="home-btn home-btn-secondary" href="#come-funziona">Fonctionnement</a>
+                <a class="home-btn home-btn-primary" href="#catalogo">Voir les produits en vedette</a>
+                <a class="home-btn home-btn-secondary" href="#faq">Questions fréquentes</a>
             </div>
+        </section>
+
+        <section class="home-trust" aria-labelledby="home-trust-title">
+            <h2 id="home-trust-title" class="visually-hidden">Pourquoi acheter chez Aml Store</h2>
+            <ul class="home-trust-list">
+                <li class="home-trust-item">
+                    <span class="home-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <span class="home-trust-text">Livraison numérique par e-mail après commande</span>
+                </li>
+                <li class="home-trust-item">
+                    <span class="home-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <span class="home-trust-text">Paiement par carte (Stripe) au checkout</span>
+                </li>
+                <li class="home-trust-item">
+                    <span class="home-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <span class="home-trust-text">Assistance : <a href="mailto:Info@amlstore.it">Info@amlstore.it</a></span>
+                </li>
+            </ul>
         </section>
 
         <section id="come-funziona" class="home-steps" aria-labelledby="steps-title">
@@ -78,7 +99,7 @@
         </section>
 
         <section id="catalogo" class="home-catalog" aria-labelledby="catalog-title">
-            <h2 id="catalog-title" class="home-section-title">Catalogue</h2>
+            <h2 id="catalog-title" class="home-section-title">Produits en vedette</h2>
             <div class="product-grid">
             <div
                 class="product-card"
@@ -94,9 +115,12 @@
                     </div>
                     <p class="product-card-name">Microsoft 365 Famille</p>
                     <p class="product-card-blurb">Abonnement 12 mois · jusqu'à 6 utilisateurs · licence numérique</p>
-                    <p class="product-card-price">€ 99,00</p>
                 </a>
-                <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
+                <p class="product-card-price">€ 99,00</p>
+                <div class="product-card-foot">
+                    <a href="microsoft-365-family.html" class="home-product-detail">Voir le produit</a>
+                    <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
+                </div>
             </div>
             <div class="product-card">
                 <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
@@ -123,6 +147,67 @@
                 <div class="product-card-skel-btn" aria-hidden="true"></div>
             </div>
             </div>
+        </section>
+
+        <section id="faq" class="home-faq" aria-labelledby="home-faq-title">
+            <h2 id="home-faq-title" class="home-section-title">Questions fréquentes</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
+                    <summary>Que recevrai-je exactement après l'achat ?</summary>
+                    <div class="home-faq-body">
+                        <p>Vous recevez un <strong>e-mail de livraison numérique</strong> avec ce dont vous avez besoin pour utiliser la licence (en général un <strong>code</strong> et/ou des instructions pratiques, plus les références utiles à la preuve d'achat, selon le contenu réel du message envoyé).</p>
+                        <p>La livraison est <strong>uniquement numérique</strong> : conservez l'e-mail et vérifiez aussi les <strong>courriers indésirables / spam</strong> si rien n'apparaît dans votre boîte de réception.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Combien de temps entre le paiement et l'e-mail avec la licence ?</summary>
+                    <div class="home-faq-body">
+                        <p>En règle générale, l'e-mail arrive <strong>juste après la confirmation du paiement</strong> ; dans de rares cas, il peut falloir <strong>quelques minutes de plus</strong> pour les vérifications de paiement.</p>
+                        <p>Si <strong>dans les 30 minutes</strong> vous n'avez toujours rien reçu, vérifiez le spam et écrivez à <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> avec le <strong>produit acheté</strong> et l'<strong>e-mail utilisé pour la commande</strong>, afin que nous puissions vérifier l'envoi.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Je n'ai jamais acheté de licence numérique : comment cela fonctionne-t-il du début à la fin ?</summary>
+                    <div class="home-faq-body">
+                        <p>Choisissez le produit, <strong>finalisez la commande et le paiement</strong> avec les moyens disponibles au checkout (lorsque c'est actif, le paiement par carte est traité via <strong>Stripe</strong>).</p>
+                        <p>Une fois le paiement confirmé, vous recevez la <strong>livraison par e-mail</strong> ; pour utiliser la licence, suivez l'<strong>e-mail</strong> et la <strong>fiche produit</strong> sur notre site, où vous trouverez les références correspondant à ce titre.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Le prix est plus bas qu'ailleurs : la licence est-elle conforme ? Pourquoi coûte-t-elle moins cher ?</summary>
+                    <div class="home-faq-body">
+                        <p>Nous vendons des <strong>licences numériques</strong> décrites sur les <strong>fiches produit</strong>, avec des prix clairs et des conditions consultables dans les <strong>Conditions générales</strong> et la <strong>Politique de confidentialité</strong> avant l'achat.</p>
+                        <p>Si vous souhaitez un retour externe, vous pouvez lire les <strong>avis publics</strong> sur <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>. Pour toute question opérationnelle, écrivez à <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Où saisir le code et comment installer le logiciel ?</summary>
+                    <div class="home-faq-body">
+                        <p>L'activation et l'installation se font sur les <strong>sites et portails officiels de l'éditeur</strong>, selon les règles de ce produit.</p>
+                        <p>Après l'achat, utilisez les <strong>instructions reçues par e-mail</strong> et, pour le détail pas à pas, la <strong>fiche produit</strong> sur notre site. Si quelque chose ne fonctionne pas, écrivez à <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> avec le produit et l'e-mail de commande.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Comment vous contacter pour un problème de commande, de paiement ou d'activation ?</summary>
+                    <div class="home-faq-body">
+                        <p>Écrivez à <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> : c'est le canal principal indiqué aussi dans le <strong>pied de page</strong> du site.</p>
+                        <p>Dans le message, indiquez le <strong>produit</strong>, l'<strong>e-mail utilisé pour la commande</strong> et une brève description du problème ; pour la confidentialité, les conditions et les retours, utilisez les liens du pied de page (<strong>Politique de confidentialité</strong>, <strong>Conditions générales</strong>, <strong>Retours et remboursements</strong>).</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="home-social-proof" aria-labelledby="home-social-title">
+            <h2 id="home-social-title" class="visually-hidden">Avis clients</h2>
+            <p class="home-social-proof__text">
+                Retours clients sur
+                <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.
+            </p>
+        </section>
+
+        <section class="home-closing" aria-labelledby="home-closing-title">
+            <h2 id="home-closing-title" class="visually-hidden">Poursuivre</h2>
+            <a class="home-btn home-btn-primary" href="#catalogo">Retour aux produits en vedette</a>
         </section>
     </main>
 
