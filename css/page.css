@@ -53,21 +53,6 @@ html {
     border: 0;
 }
 
-/* Due TrustBox (light + dark nel markup); visibilità per tema sito */
-.trustpilot-host .trustpilot-widget--dark {
-    display: none !important;
-}
-html[data-theme='dark'] .trustpilot-host .trustpilot-widget--dark {
-    display: flex !important;
-}
-html[data-theme='dark'] .trustpilot-host .trustpilot-widget--light {
-    display: none !important;
-}
-
-html[data-theme='dark'] .trustpilot-widget iframe {
-    border-radius: 10px;
-}
-
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;

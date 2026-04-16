@@ -42,21 +42,6 @@
     font-size: 0.95rem;
 }
 
-/* Trustpilot: due embed (light/dark) in .trustpilot-host; visibilità in page.css */
-.cart-page .cart-trustpilot-wrap {
-    width: 100%;
-    min-height: 28px;
-    margin: 0 0 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.cart-page .cart-trustpilot-wrap .trustpilot-widget {
-    width: 100%;
-    max-width: min(28rem, 100%);
-}
-
 .cart-page .cart-empty-panel {
     border: 1px solid var(--page-border);
     border-radius: 12px;
