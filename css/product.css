@@ -3,17 +3,6 @@
  * Prezzi: usare .price-block (prezzo originale → nostro prezzo + % risparmio) per nuove schede.
  * Responsive: preferire @container (main `pp`, dettagli `pp-details`) al posto delle breakpoint viewport, salvo prefers-reduced-motion.
  */
-.product-page .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
 
 /**
  * Full-width: usa tutta la viewport con “gutter” fluido (mai attaccato ai bordi).
@@ -393,7 +382,7 @@ html[data-theme='light'] .product-page .price-block__save {
     gap: 1rem;
 }
 
-/* Trustpilot Micro Review Count (script in head pagina prodotto) */
+/* Trustpilot Micro Review Count (bootstrap in head; tema da js/trustpilot-theme.js) */
 .product-page .product-trustpilot-wrap {
     width: 100%;
     min-height: 28px;

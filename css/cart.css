@@ -35,18 +35,6 @@
     margin-bottom: 1.5rem;
 }
 
-.cart-page .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
 .cart-page .cart-lead {
     color: var(--page-text-secondary);
     line-height: 1.65;
@@ -54,7 +42,7 @@
     font-size: 0.95rem;
 }
 
-/* Trustpilot Micro Review Count (script in head pagina carrello) */
+/* Trustpilot Micro Review Count (bootstrap in head; tema da js/trustpilot-theme.js) */
 .cart-page .cart-trustpilot-wrap {
     width: 100%;
     min-height: 28px;
