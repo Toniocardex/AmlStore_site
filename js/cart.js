@@ -270,6 +270,8 @@
         const multiNote = document.getElementById('aml-cart-multi-note');
         const removeLabel = mount.getAttribute('data-label-remove') || 'Remove';
         const qtyAria = mount.getAttribute('data-qty-aria') || 'Quantity';
+        const qtyMinusAria = mount.getAttribute('data-label-qty-minus') || 'Decrease quantity for';
+        const qtyPlusAria = mount.getAttribute('data-label-qty-plus') || 'Increase quantity for';
 
         function render() {
             const lines = readLines();
@@ -309,22 +311,40 @@
 
                 const tdQty = document.createElement('td');
                 tdQty.className = 'aml-cart-col-qty';
-                const label = document.createElement('label');
-                label.className = 'aml-cart-qty-label';
-                const inv = document.createElement('span');
-                inv.className = 'visually-hidden';
-                inv.textContent = qtyAria;
+                const stepper = document.createElement('div');
+                stepper.className = 'aml-cart-qty-stepper';
+
+                const btnMinus = document.createElement('button');
+                btnMinus.type = 'button';
+                btnMinus.className = 'aml-cart-qty-btn aml-cart-qty-btn--minus';
+                btnMinus.setAttribute('data-sku-qty', l.sku);
+                btnMinus.setAttribute('aria-label', qtyMinusAria + ' ' + l.name);
+                btnMinus.disabled = q <= 1;
+                btnMinus.appendChild(document.createTextNode('\u2212'));
+
                 const inp = document.createElement('input');
                 inp.type = 'number';
                 inp.className = 'aml-cart-qty';
                 inp.min = '1';
                 inp.max = '99';
+                inp.setAttribute('inputmode', 'numeric');
+                inp.setAttribute('pattern', '[0-9]*');
                 inp.value = String(q);
                 inp.setAttribute('data-sku', l.sku);
-                inp.setAttribute('aria-label', qtyAria);
-                label.appendChild(inv);
-                label.appendChild(inp);
-                tdQty.appendChild(label);
+                inp.setAttribute('aria-label', qtyAria + ': ' + l.name);
+
+                const btnPlus = document.createElement('button');
+                btnPlus.type = 'button';
+                btnPlus.className = 'aml-cart-qty-btn aml-cart-qty-btn--plus';
+                btnPlus.setAttribute('data-sku-qty', l.sku);
+                btnPlus.setAttribute('aria-label', qtyPlusAria + ' ' + l.name);
+                btnPlus.disabled = q >= 99;
+                btnPlus.appendChild(document.createTextNode('+'));
+
+                stepper.appendChild(btnMinus);
+                stepper.appendChild(inp);
+                stepper.appendChild(btnPlus);
+                tdQty.appendChild(stepper);
 
                 const tdPrice = document.createElement('td');
                 tdPrice.className = 'aml-cart-col-price';
@@ -375,9 +395,28 @@
             tbody.addEventListener('click', (e) => {
                 const t = e.target;
                 if (!t || !t.closest) return;
-                const btn = t.closest('[data-sku-remove]');
-                if (!btn) return;
-                removeLine(btn.getAttribute('data-sku-remove'));
+                const rm = t.closest('[data-sku-remove]');
+                if (rm) {
+                    removeLine(rm.getAttribute('data-sku-remove'));
+                    return;
+                }
+                const dec = t.closest('.aml-cart-qty-btn--minus');
+                if (dec && !dec.disabled) {
+                    const sku = dec.getAttribute('data-sku-qty');
+                    const linesNow = readLines();
+                    const lineNow = linesNow.find((x) => x.sku === sku);
+                    const cur = Number(lineNow && lineNow.quantity) || 0;
+                    if (cur > 1) setQuantity(sku, cur - 1);
+                    return;
+                }
+                const inc = t.closest('.aml-cart-qty-btn--plus');
+                if (inc && !inc.disabled) {
+                    const sku = inc.getAttribute('data-sku-qty');
+                    const linesNow = readLines();
+                    const lineNow = linesNow.find((x) => x.sku === sku);
+                    const cur = Number(lineNow && lineNow.quantity) || 0;
+                    if (cur < 99) setQuantity(sku, cur + 1);
+                }
             });
         }
 

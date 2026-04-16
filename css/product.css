@@ -880,6 +880,88 @@ html[data-theme='light'] .product-sticky-cta__prices {
     background-position: center;
 }
 
+.product-process-steps {
+    position: relative;
+    z-index: 1;
+    padding: clamp(2rem, 4vw, 3rem) 0;
+    border-top: 1px solid var(--page-border);
+}
+
+.product-process-steps__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    max-width: min(1100px, 100%);
+    margin-inline: auto;
+}
+
+@container pp (min-width: 720px) {
+    .product-process-steps__list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+.product-process-steps__item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.2rem 1.25rem;
+    border: 1px solid var(--page-border);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--page-text) 3.5%, var(--page-bg));
+}
+
+.product-process-steps__num {
+    flex-shrink: 0;
+    width: 2.35rem;
+    height: 2.35rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.95rem;
+    line-height: 1;
+    background: color-mix(in srgb, var(--page-accent) 16%, transparent);
+    color: var(--page-accent);
+    border: 1px solid color-mix(in srgb, var(--page-accent) 32%, transparent);
+}
+
+.product-process-steps__heading {
+    margin: 0 0 0.45rem;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--page-text);
+}
+
+.product-process-steps__text {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    font-weight: 500;
+    color: var(--page-text-secondary);
+}
+
+.product-process-steps__text a {
+    color: var(--page-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}
+
+.product-process-steps__text a:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+html[data-theme='light'] .product-process-steps__item {
+    background: #ffffff;
+}
+
 .product-apps-band {
     position: relative;
     z-index: 1;
@@ -1032,6 +1114,16 @@ html[data-theme='light'] .product-sticky-cta__prices {
     font-weight: 800;
     letter-spacing: -0.02em;
     margin: 0 0 clamp(2rem, 4vw, 2.75rem);
+}
+
+.product-specs-band__intro {
+    text-align: center;
+    margin: -1rem auto 2rem;
+    max-width: 40rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.65);
 }
 
 .product-specs-grid {
