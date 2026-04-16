@@ -144,29 +144,8 @@ html[data-theme='light'] .home-hero--lifestyle .home-hero-eyebrow {
 }
 
 .home-hero-lead {
-    margin-bottom: 0.75rem !important;
-}
-
-.home-hero-note {
-    margin: 0 0 1.35rem;
-    max-width: 52ch;
-    font-size: clamp(0.85rem, 2.4vw, 0.92rem);
-    line-height: 1.55;
-    font-weight: 500;
-    color: var(--page-text-secondary);
-}
-
-.home-hero-note a {
-    color: var(--page-accent);
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 0.12em;
-}
-
-.home-hero-note a:focus-visible {
-    outline: 2px solid var(--page-accent);
-    outline-offset: 2px;
-    border-radius: 2px;
+    margin: 0 0 1.15rem !important;
+    max-width: min(62ch, 100%);
 }
 
 .home-trust-list {
