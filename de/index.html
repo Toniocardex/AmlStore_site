@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/home.css">
-    <link rel="preload" as="image" href="../asset/media/home-hero.webp" type="image/webp">
+    <link rel="preload" as="image" href="../asset/media/home-hero-lifestyle.webp" type="image/webp">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/de/#webpage","url":"https://aml-store.com/de/","name":"Aml Store - Ihr digitaler Partner","description":"Kaufen Sie originale Software-Lizenzen: Betriebssysteme, Office und Antivirus zum besten garantierten Preis.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"de"},{"@type":"FAQPage","inLanguage":"de","url":"https://aml-store.com/de/","mainEntity":[{"@type":"Question","name":"Was erhalte ich genau nach dem Kauf?","acceptedAnswer":{"@type":"Answer","text":"Sie erhalten eine E-Mail mit der digitalen Lieferung mit allem, was Sie zur Nutzung der Lizenz brauchen (in der Regel ein Produktschlüssel und/oder praktische Anweisungen sowie hilfreiche Nachweise zum Kauf, gemäß dem tatsächlichen Inhalt der Nachricht). Die Lieferung erfolgt nur digital: Bewahren Sie die E-Mail auf und prüfen Sie bei Bedarf auch Spam/Junk, falls nichts im Posteingang ankommt."}},{"@type":"Question","name":"Wie lange dauert es vom Zahlungseingang bis zur E-Mail mit der Lizenz?","acceptedAnswer":{"@type":"Answer","text":"In der Regel trifft die E-Mail kurz nach Zahlungsbestätigung ein; in seltenen Fällen können einige zusätzliche Minuten für Zahlungsprüfungen nötig sein. Wenn Sie innerhalb von 30 Minuten noch nichts erhalten haben, prüfen Sie Spam/Junk und schreiben Sie an Info@amlstore.it mit gekauftem Produkt und der für die Bestellung genutzten E-Mail-Adresse, damit wir den Versand prüfen können."}},{"@type":"Question","name":"Ich habe noch nie eine digitale Lizenz gekauft: wie läuft das von Anfang bis Ende?","acceptedAnswer":{"@type":"Answer","text":"Wählen Sie das Produkt, schließen Sie Bestellung und Zahlung mit den im Checkout verfügbaren Methoden ab (wenn aktiv, wird Kartenzahlung über Stripe abgewickelt). Nach bestätigter Zahlung erhalten Sie die Lieferung per E-Mail; zur Nutzung der Lizenz folgen Sie der E-Mail und der Produktseite auf unserer Website, wo Sie die passenden Hinweise zu diesem Titel finden."}},{"@type":"Question","name":"Der Preis ist niedriger als woanders: ist die Lizenz in Ordnung? Warum kostet sie weniger?","acceptedAnswer":{"@type":"Answer","text":"Wir verkaufen digitale Lizenzen, die auf den Produktseiten beschrieben sind, mit klaren Preisen und Konditionen in den Allgemeinen Geschäftsbedingungen und der Datenschutzerklärung vor dem Kauf. Wenn Sie einen externen Eindruck möchten, finden Sie öffentliche Bewertungen auf Trustpilot (https://it.trustpilot.com/review/aml-store.com). Für operative Fragen schreiben Sie an Info@amlstore.it."}},{"@type":"Question","name":"Wo gebe ich den Code ein und wie installiere ich die Software?","acceptedAnswer":{"@type":"Answer","text":"Aktivierung und Installation erfolgen über die offiziellen Websites und Portale des Anbieters, gemäß den Regeln dieses Produkts. Nach dem Kauf nutzen Sie die Anweisungen in der E-Mail und für Schritt-für-Schritt-Details die Produktseite auf unserer Website. Wenn etwas nicht funktioniert, schreiben Sie an Info@amlstore.it mit Produkt und Bestell-E-Mail."}},{"@type":"Question","name":"Wie erreiche ich Sie bei Fragen zu Bestellung, Zahlung oder Aktivierung?","acceptedAnswer":{"@type":"Answer","text":"Schreiben Sie an Info@amlstore.it: das ist der Hauptkanal, der auch im Footer der Website steht. Nennen Sie Produkt, Bestell-E-Mail-Adresse und eine kurze Problembeschreibung; zu Datenschutz, Bedingungen und Rückgabe nutzen Sie die Footer-Links (Datenschutz, Allgemeine Geschäftsbedingungen, Rückgabe und Erstattung)."}}]}]}
@@ -51,22 +51,24 @@
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
     <main id="main" class="home-page">
-        <section class="home-hero" aria-labelledby="home-hero-title">
-            <div class="home-hero-layout">
-                <div class="home-hero-copy">
-                    <h1 id="home-hero-title">Aml Store — Originale Software-Lizenzen</h1>
-                    <p class="subtitle home-hero-lead">Digitale Lizenzen für Windows, Office und Sicherheit. Klare Preise und Lieferung per E-Mail nach dem Kauf: Sie erhalten den <strong>Product Key</strong> zur Aktivierung in <strong>Ihrem</strong> offiziellen Konto beim Anbieter gemäß den Regeln des Produkts.</p>
-                    <p class="home-hero-note">
-                        Modell auf Basis eines <strong>Product Keys</strong> (Aktivierungscode), nicht auf Verkauf oder Übertragung bereits bestehender <strong>Konten</strong> oder gemeinsamer Zugänge. Kartenzahlung über <strong>Stripe</strong> im Checkout; Support unter <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>.
-                    </p>
-                    <div class="home-hero-actions">
-                        <a class="home-btn home-btn-primary" href="#catalogo">Hervorgehobene Produkte ansehen</a>
-                        <a class="home-btn home-btn-secondary" href="#faq">Häufige Fragen</a>
-                    </div>
+        <section class="home-hero home-hero--lifestyle" aria-labelledby="home-hero-title">
+            <figure class="home-hero-visual home-hero-visual--banner">
+                <img class="home-hero-img" src="../asset/media/home-hero-lifestyle.webp" width="1280" height="720" alt="Person am Laptop in einem modernen Arbeitsplatz — digitale Lizenzen Aml Store." decoding="async" fetchpriority="high">
+                <div class="home-hero-overlay" aria-hidden="true"></div>
+                <figcaption class="home-hero-banner-inset">
+                    <p class="home-hero-eyebrow">Aml Store</p>
+                    <h1 id="home-hero-title" class="home-hero-title-on-photo">Die Gelassenheit, originale Software zu wählen</h1>
+                </figcaption>
+            </figure>
+            <div class="home-hero-below">
+                <p class="subtitle home-hero-lead">Digitale Lizenzen für Windows, Office und Sicherheit. Klare Preise und Lieferung per E-Mail nach dem Kauf: Sie erhalten den <strong>Product Key</strong> zur Aktivierung in <strong>Ihrem</strong> offiziellen Konto beim Anbieter gemäß den Regeln des Produkts.</p>
+                <p class="home-hero-note">
+                    Modell auf Basis eines <strong>Product Keys</strong> (Aktivierungscode), nicht auf Verkauf oder Übertragung bereits bestehender <strong>Konten</strong> oder gemeinsamer Zugänge. Kartenzahlung über <strong>Stripe</strong> im Checkout; Support unter <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>.
+                </p>
+                <div class="home-hero-actions">
+                    <a class="home-btn home-btn-primary" href="#catalogo">Hervorgehobene Produkte ansehen</a>
+                    <a class="home-btn home-btn-secondary" href="#faq">Häufige Fragen</a>
                 </div>
-                <figure class="home-hero-visual">
-                    <img class="home-hero-img" src="../asset/media/home-hero.webp" width="960" height="540" alt="Abstrakte Illustration: digitale Lieferung, Product Key und Sicherheit — Aml Store." decoding="async" fetchpriority="high">
-                </figure>
             </div>
         </section>
 
