@@ -42,7 +42,7 @@
     font-size: 0.95rem;
 }
 
-/* Trustpilot Micro Review Count (bootstrap in head; tema da js/trustpilot-theme.js) */
+/* Trustpilot: due embed (light/dark) in .trustpilot-host; visibilità in page.css */
 .cart-page .cart-trustpilot-wrap {
     width: 100%;
     min-height: 28px;

@@ -31,9 +31,6 @@
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/cart.css">
     <script src="../js/theme-init.js"></script>
-    <!-- TrustBox script -->
-    <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
-    <!-- End TrustBox script -->
     <!-- Opzionale: Payment Link Stripe per SKU (HTTPS). -->
     <!-- <script>window.AML_STRIPE_PAYMENT_LINK_BY_SKU = { "microsoft-365-family-12m": "https://buy.stripe.com/..." };</script> -->
     <script type="application/ld+json">
@@ -55,12 +52,13 @@
         <h1>Carrello</h1>
         <p class="cart-lead">Il carrello è salvato in questo browser (localStorage). I prezzi mostrati devono coincidere con scheda prodotto e checkout finale.</p>
 
-        <div class="cart-trustpilot-wrap">
-            <!-- TrustBox widget - Micro Review Count -->
-            <div class="trustpilot-widget" data-locale="it-IT" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-token="c92325c4-322c-4b67-b5ff-129c9cf65c90" data-min-review-count="0" data-style-alignment="center">
+        <div class="cart-trustpilot-wrap trustpilot-host">
+            <div class="trustpilot-widget trustpilot-widget--light" data-locale="it-IT" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-token="c92325c4-322c-4b67-b5ff-129c9cf65c90" data-min-review-count="0" data-style-alignment="center">
                 <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
             </div>
-            <!-- End TrustBox widget -->
+            <div class="trustpilot-widget trustpilot-widget--dark" data-locale="it-IT" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-theme="dark" data-token="18617ae8-b57b-4ae2-91e2-f1fa72dd73cf" data-min-review-count="0" data-style-alignment="center">
+                <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+            </div>
         </div>
 
         <div
@@ -103,6 +101,7 @@
 
     <script src="../js/locale-path.js"></script>
     <script src="../js/trustpilot-theme.js" defer></script>
+    <script defer src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>

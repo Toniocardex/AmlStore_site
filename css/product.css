@@ -382,7 +382,7 @@ html[data-theme='light'] .product-page .price-block__save {
     gap: 1rem;
 }
 
-/* Trustpilot Micro Review Count (bootstrap in head; tema da js/trustpilot-theme.js) */
+/* Trustpilot: due embed (light/dark) in .trustpilot-host; visibilità in page.css; reload in js/trustpilot-theme.js */
 .product-page .product-trustpilot-wrap {
     width: 100%;
     min-height: 28px;

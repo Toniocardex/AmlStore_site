@@ -31,9 +31,6 @@
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/product.css">
     <script src="../js/theme-init.js"></script>
-    <!-- TrustBox script -->
-    <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
-    <!-- End TrustBox script -->
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Product","name":"Microsoft 365 Family — 12 mesi","image":"https://aml-store.com/asset/media/Microsoft%20365_Family.webp","description":"Abbonamento Microsoft 365 Family per fino a 6 persone.","brand":{"@type":"Brand","name":"Microsoft"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"99.00","availability":"https://schema.org/InStock","url":"https://aml-store.com/it/microsoft-365-family.html"}},{"@type":"FAQPage","inLanguage":"it","url":"https://aml-store.com/it/microsoft-365-family.html","mainEntity":[{"@type":"Question","name":"Qual è la differenza tra Microsoft 365 Family e Personal?","acceptedAnswer":{"@type":"Answer","text":"Family è pensato per condividere il piano con il tuo gruppo famiglia Microsoft (fino a 6 persone), ciascuna con account e spazio OneDrive distinti, nei limiti descritti da Microsoft. Personal copre un solo utente con 1 TB, sempre secondo le condizioni Microsoft aggiornate."}},{"@type":"Question","name":"Come si invitano altri membri dopo l'acquisto?","acceptedAnswer":{"@type":"Answer","text":"Dopo l'attivazione sul tuo account Microsoft, usa le funzioni di condivisione del piano Family nell'area account Microsoft / abbonamenti, così come documentato da Microsoft nel periodo di validità della licenza."}},{"@type":"Question","name":"È un abbonamento o un acquisto una tantum?","acceptedAnswer":{"@type":"Answer","text":"È un abbonamento con rinnovo annuale (12 mesi acquistati qui): per la durata, il rinnovo e le modalità di pagamento valgono i termini Microsoft e quelli mostrati in fase d'ordine."}},{"@type":"Question","name":"Si possono usare le app Office anche offline?","acceptedAnswer":{"@type":"Answer","text":"Sì: installando le app desktop sul PC o Mac puoi lavorare offline; la connessione serve comunque per controlli periodici della licenza, aggiornamenti e servizi cloud come OneDrive, come descritto da Microsoft."}}]}]}
     </script>
@@ -124,12 +121,13 @@
                         Aggiungi al carrello
                     </button>
                 </div>
-                <div class="product-trustpilot-wrap">
-                    <!-- TrustBox widget - Micro Review Count -->
-                    <div class="trustpilot-widget" data-locale="it-IT" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-token="c92325c4-322c-4b67-b5ff-129c9cf65c90" data-min-review-count="0" data-style-alignment="center">
+                <div class="product-trustpilot-wrap trustpilot-host">
+                    <div class="trustpilot-widget trustpilot-widget--light" data-locale="it-IT" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-token="c92325c4-322c-4b67-b5ff-129c9cf65c90" data-min-review-count="0" data-style-alignment="center">
                         <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                     </div>
-                    <!-- End TrustBox widget -->
+                    <div class="trustpilot-widget trustpilot-widget--dark" data-locale="it-IT" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-theme="dark" data-token="18617ae8-b57b-4ae2-91e2-f1fa72dd73cf" data-min-review-count="0" data-style-alignment="center">
+                        <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+                    </div>
                 </div>
                 <div class="trust-list">
                     <div class="trust-item">
@@ -340,6 +338,7 @@
 
     <script src="../js/locale-path.js"></script>
     <script src="../js/trustpilot-theme.js" defer></script>
+    <script defer src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>

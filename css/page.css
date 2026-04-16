@@ -53,7 +53,17 @@ html {
     border: 0;
 }
 
-/* TrustBox iframe (tema scuro: js/trustpilot-theme.js imposta data-token / data-theme) */
+/* Due TrustBox (light + dark nel markup); visibilità per tema sito */
+.trustpilot-host .trustpilot-widget--dark {
+    display: none !important;
+}
+html[data-theme='dark'] .trustpilot-host .trustpilot-widget--dark {
+    display: flex !important;
+}
+html[data-theme='dark'] .trustpilot-host .trustpilot-widget--light {
+    display: none !important;
+}
+
 html[data-theme='dark'] .trustpilot-widget iframe {
     border-radius: 10px;
 }

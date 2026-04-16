@@ -31,9 +31,6 @@
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/product.css">
     <script src="../js/theme-init.js"></script>
-    <!-- TrustBox script -->
-    <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
-    <!-- End TrustBox script -->
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Product","name":"Microsoft 365 Familia — 12 meses","image":"https://aml-store.com/asset/media/Microsoft%20365_Family.webp","description":"Suscripción Microsoft 365 Familia para hasta 6 personas.","brand":{"@type":"Brand","name":"Microsoft"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"99.00","availability":"https://schema.org/InStock","url":"https://aml-store.com/es/microsoft-365-family.html"}},{"@type":"FAQPage","inLanguage":"es","url":"https://aml-store.com/es/microsoft-365-family.html","mainEntity":[{"@type":"Question","name":"¿Cuál es la diferencia entre Microsoft 365 Familia y Personal?","acceptedAnswer":{"@type":"Answer","text":"Familia está pensado para compartir el plan con tu grupo familiar de Microsoft (hasta 6 personas), cada una con su cuenta y espacio de OneDrive, dentro de los límites publicados por Microsoft. Personal cubre a un solo usuario con 1 TB, según las condiciones actuales de Microsoft."}},{"@type":"Question","name":"¿Cómo invito a otros miembros después de la compra?","acceptedAnswer":{"@type":"Answer","text":"Tras la activación en tu cuenta Microsoft, usa las funciones de uso compartido Familia en el área de cuenta Microsoft / suscripciones, tal como documenta Microsoft para la vigencia de tu licencia."}},{"@type":"Question","name":"¿Es una suscripción o una compra única?","acceptedAnswer":{"@type":"Answer","text":"Es una suscripción con renovación anual (12 meses comprados aquí). La duración, la renovación y el precio de renovación dependen de Microsoft y de la información mostrada al pagar."}},{"@type":"Question","name":"¿Puedo usar las aplicaciones de Office sin conexión?","acceptedAnswer":{"@type":"Answer","text":"Sí: con las aplicaciones de escritorio instaladas puedes trabajar sin conexión; aun así necesitas conectividad periódica para comprobaciones de licencia, actualizaciones y servicios en la nube como OneDrive, según describe Microsoft."}}]}]}
     </script>
@@ -124,12 +121,13 @@
                         Añadir al carrito
                     </button>
                 </div>
-                <div class="product-trustpilot-wrap">
-                    <!-- TrustBox widget - Micro Review Count -->
-                    <div class="trustpilot-widget" data-locale="es-ES" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-token="c92325c4-322c-4b67-b5ff-129c9cf65c90" data-min-review-count="0" data-style-alignment="center">
+                <div class="product-trustpilot-wrap trustpilot-host">
+                    <div class="trustpilot-widget trustpilot-widget--light" data-locale="es-ES" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-token="c92325c4-322c-4b67-b5ff-129c9cf65c90" data-min-review-count="0" data-style-alignment="center">
                         <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                     </div>
-                    <!-- End TrustBox widget -->
+                    <div class="trustpilot-widget trustpilot-widget--dark" data-locale="es-ES" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-theme="dark" data-token="18617ae8-b57b-4ae2-91e2-f1fa72dd73cf" data-min-review-count="0" data-style-alignment="center">
+                        <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+                    </div>
                 </div>
                 <div class="trust-list">
                     <div class="trust-item">
@@ -340,6 +338,7 @@
 
     <script src="../js/locale-path.js"></script>
     <script src="../js/trustpilot-theme.js" defer></script>
+    <script defer src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>

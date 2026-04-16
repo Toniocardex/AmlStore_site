@@ -31,9 +31,6 @@
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/product.css">
     <script src="../js/theme-init.js"></script>
-    <!-- TrustBox script -->
-    <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
-    <!-- End TrustBox script -->
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Product","name":"Microsoft 365 Famille — 12 mois","image":"https://aml-store.com/asset/media/Microsoft%20365_Family.webp","description":"Abonnement Microsoft 365 Famille pour jusqu'à 6 personnes.","brand":{"@type":"Brand","name":"Microsoft"},"offers":{"@type":"Offer","priceCurrency":"EUR","price":"99.00","availability":"https://schema.org/InStock","url":"https://aml-store.com/fr/microsoft-365-family.html"}},{"@type":"FAQPage","inLanguage":"fr","url":"https://aml-store.com/fr/microsoft-365-family.html","mainEntity":[{"@type":"Question","name":"Quelle est la différence entre Microsoft 365 Famille et Personnel ?","acceptedAnswer":{"@type":"Answer","text":"Famille sert à partager l'abonnement avec votre groupe familial Microsoft (jusqu'à 6 personnes), chacune avec son compte et son espace OneDrive, dans les limites publiées par Microsoft. Personnel couvre un seul utilisateur avec 1 To, selon les conditions Microsoft en vigueur."}},{"@type":"Question","name":"Comment inviter d'autres membres après l'achat ?","acceptedAnswer":{"@type":"Answer","text":"Après l'activation sur votre compte Microsoft, utilisez les fonctions de partage Famille dans la zone compte Microsoft / abonnements, comme documenté par Microsoft pour la durée de votre licence."}},{"@type":"Question","name":"S'agit-il d'un abonnement ou d'un achat unique ?","acceptedAnswer":{"@type":"Answer","text":"Il s'agit d'un abonnement avec renouvellement annuel (12 mois achetés ici). Durée, renouvellement et tarif de renouvellement dépendent de Microsoft et des informations affichées au moment du paiement."}},{"@type":"Question","name":"Puis-je utiliser les applications Office hors ligne ?","acceptedAnswer":{"@type":"Answer","text":"Oui : avec les applications de bureau installées, vous pouvez travailler hors ligne ; une connexion reste nécessaire pour les contrôles de licence, les mises à jour et les services cloud tels qu'OneDrive, comme décrit par Microsoft."}}]}]}
     </script>
@@ -124,12 +121,13 @@
                         Ajouter au panier
                     </button>
                 </div>
-                <div class="product-trustpilot-wrap">
-                    <!-- TrustBox widget - Micro Review Count -->
-                    <div class="trustpilot-widget" data-locale="fr-FR" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-token="c92325c4-322c-4b67-b5ff-129c9cf65c90" data-min-review-count="0" data-style-alignment="center">
+                <div class="product-trustpilot-wrap trustpilot-host">
+                    <div class="trustpilot-widget trustpilot-widget--light" data-locale="fr-FR" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-token="c92325c4-322c-4b67-b5ff-129c9cf65c90" data-min-review-count="0" data-style-alignment="center">
                         <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                     </div>
-                    <!-- End TrustBox widget -->
+                    <div class="trustpilot-widget trustpilot-widget--dark" data-locale="fr-FR" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="61c44c912f493a1a7cd810fa" data-style-height="24px" data-style-width="100%" data-theme="dark" data-token="18617ae8-b57b-4ae2-91e2-f1fa72dd73cf" data-min-review-count="0" data-style-alignment="center">
+                        <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+                    </div>
                 </div>
                 <div class="trust-list">
                     <div class="trust-item">
@@ -340,6 +338,7 @@
 
     <script src="../js/locale-path.js"></script>
     <script src="../js/trustpilot-theme.js" defer></script>
+    <script defer src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
