@@ -484,12 +484,29 @@
                     }
 
                     @media (prefers-reduced-motion: reduce) {
-                        .cart-badge.is-visible.cart-badge-pop {
-                            animation: none;
-                        }
-                        .cart-wrapper.cart-nudge svg {
-                            animation: none;
-                        }
+                        /* Carrello */
+                        .cart-badge.is-visible.cart-badge-pop { animation: none; }
+                        .cart-wrapper.cart-nudge svg { animation: none; }
+                        /* Logo */
+                        .logo { transition: none; }
+                        /* Nav desktop */
+                        .nav-links a,
+                        .nav-links a::after { transition: none; }
+                        /* Supporto */
+                        .support-icon { transition: none; }
+                        /* Selettore lingua */
+                        .lang-selector { transition: none; }
+                        .chevron-down { transition: none; }
+                        .lang-wrapper.open .lang-dropdown { animation: none; }
+                        /* Pulsante Accedi */
+                        .btn-signin { transition: none; }
+                        /* Overlay e Drawer mobile */
+                        .overlay { transition: none; }
+                        .mobile-drawer { transition: none; }
+                        .close-drawer { transition: none; }
+                        .drawer-nav a { transition: none; }
+                        .drawer-lang-link { transition: none; }
+                        .drawer-btn-signin { transition: none; }
                     }
 
                     .btn-signin {
