@@ -333,6 +333,26 @@
                                     </label>
                                 </div>
 
+                                <!-- PayPal -->
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-paypal"
+                                        value="paypal"
+                                    >
+                                    <label class="payment-option-label" for="pay-paypal">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">PayPal</span>
+                                            <span class="payment-option-desc">Paga con il tuo conto PayPal o carta di credito tramite PayPal</span>
+                                            <span class="payment-icons" aria-label="PayPal">
+                                                <span class="payment-icon payment-icon--paypal">PayPal</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+
                                 <!-- Bonifico -->
                                 <div class="payment-option">
                                     <input
@@ -387,6 +407,12 @@
                             <!-- Sezione Stripe (visibile di default) -->
                             <div id="stripe-section">
                                 <!-- Contenuto contestuale vuoto — il bottone submit è sotto -->
+                            </div>
+
+                            <!-- Sezione PayPal (nascosta di default) -->
+                            <div id="paypal-section" class="paypal-section" hidden>
+                                <div id="paypal-loading" class="paypal-loading" hidden aria-live="polite">Caricamento PayPal…</div>
+                                <div id="paypal-buttons-container" class="paypal-buttons-container"></div>
                             </div>
 
                         </section>
@@ -551,24 +577,5 @@
     <script src="../components/footer.js" defer></script>
     <script src="../js/checkout.js" defer></script>
 
-    <script>
-    /* Sync bottoni submit con il metodo di pagamento selezionato.
-       Eseguito inline per evitare FOUC prima del defer. */
-    (function () {
-        document.addEventListener('DOMContentLoaded', function () {
-            var radios = document.querySelectorAll('input[name="payment-method"]');
-            var btnStripe = document.getElementById('btn-stripe-submit');
-            var btnTransfer = document.getElementById('btn-transfer-submit');
-            function sync() {
-                var sel = document.querySelector('input[name="payment-method"]:checked');
-                if (!sel) return;
-                if (btnStripe) btnStripe.style.display = sel.value === 'stripe' ? '' : 'none';
-                if (btnTransfer) btnTransfer.style.display = sel.value === 'transfer' ? '' : 'none';
-            }
-            radios.forEach(function (r) { r.addEventListener('change', sync); });
-            sync();
-        });
-    })();
-    </script>
 </body>
 </html>
