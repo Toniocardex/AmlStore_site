@@ -43,13 +43,24 @@
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
     <main id="main" class="cart-page">
-        <nav class="cart-breadcrumbs" aria-label="Migas de pan">
-            <a href="/es/">Home</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <span aria-current="page">Carrito</span>
-        </nav>
-
         <h1>Carrito</h1>
+
+        <ol class="checkout-stepper" aria-label="Progreso del pago">
+            <li class="checkout-stepper__step checkout-stepper__step--active">
+                <div class="checkout-stepper__dot" aria-current="step" aria-label="Paso 1: Carrito, paso actual">1</div>
+                <span class="checkout-stepper__label">Carrito</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Paso 2: Pago, aún no alcanzado">2</div>
+                <span class="checkout-stepper__label">Pago</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Paso 3: Confirmación, aún no alcanzado">3</div>
+                <span class="checkout-stepper__label">Confirmación</span>
+            </li>
+        </ol>
         <p class="cart-lead">El carrito se guarda en este navegador (localStorage). Los precios deben coincidir con la ficha de producto y el checkout final.</p>
 
         <div

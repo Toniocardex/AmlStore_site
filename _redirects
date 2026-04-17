@@ -13,8 +13,9 @@
 /es/prodotto.html /es/microsoft-365-family.html 301
 
 # ── Shortcut → lingua italiana di default ────────────────────────────────────
-/checkout /it/checkout.html 302
-/cart     /it/cart.html     302
+/checkout         /it/checkout.html          302
+/cart             /it/cart.html              302
+/checkout-success /it/checkout-success.html  302
 
 # ── Template per redirect futuri ─────────────────────────────────────────────
 # /it/vecchia-pagina /it/nuova-pagina 301

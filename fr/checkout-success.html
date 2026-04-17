@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande confirmée — Aml Store</title>
+    <meta name="description" content="Votre commande a bien été reçue. Merci pour votre achat sur Aml Store.">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="../js/consent-init.js"></script>
+
+    <link rel="icon" href="../favicon/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+
+    <link rel="alternate" hreflang="it" href="https://aml-store.com/it/checkout-success.html">
+    <link rel="alternate" hreflang="en" href="https://aml-store.com/en/checkout-success.html">
+    <link rel="alternate" hreflang="fr" href="https://aml-store.com/fr/checkout-success.html">
+    <link rel="alternate" hreflang="de" href="https://aml-store.com/de/checkout-success.html">
+    <link rel="alternate" hreflang="es" href="https://aml-store.com/es/checkout-success.html">
+    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/checkout-success.html">
+
+    <link rel="stylesheet" href="../fonts/montserrat.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/checkout.css">
+    <script src="../js/theme-init.js"></script>
+    <script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/fr/checkout-success.html#webpage","url":"https://aml-store.com/fr/checkout-success.html","name":"Commande confirmée — Aml Store","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"fr"}]}
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Aller au contenu principal</a>
+
+    <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
+
+    <main id="main" class="checkout-page">
+
+        <h1>Confirmation de commande</h1>
+
+        <ol class="checkout-stepper" aria-label="Progression du paiement">
+            <li class="checkout-stepper__step checkout-stepper__step--done">
+                <a href="/fr/cart.html" class="checkout-stepper__dot" aria-label="Étape 1 : Panier, terminée">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="checkout-stepper__label">Panier</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--done" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--done">
+                <div class="checkout-stepper__dot" aria-label="Étape 2 : Paiement, terminée">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <span class="checkout-stepper__label">Paiement</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--done" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--active">
+                <div class="checkout-stepper__dot" aria-current="step" aria-label="Étape 3 : Confirmation, étape en cours">3</div>
+                <span class="checkout-stepper__label">Confirmation</span>
+            </li>
+        </ol>
+
+        <div class="checkout-success">
+            <div class="checkout-success__icon" aria-hidden="true">
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="28" cy="28" r="28" fill="var(--accent)"/>
+                    <path d="M16 28l8 8 16-16" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h2 class="checkout-success__title">Merci pour votre commande !</h2>
+            <p class="checkout-success__msg">Votre commande a bien été reçue. Vous recevrez bientôt un e-mail de confirmation avec tous les détails.</p>
+            <a class="cart-btn cart-btn-primary checkout-success__cta" href="/fr/">Retour à la boutique</a>
+        </div>
+
+    </main>
+
+    <aml-cookie-banner></aml-cookie-banner>
+    <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
+
+    <script src="../js/locale-path.js"></script>
+    <script src="../components/cookie-banner.js" defer></script>
+    <script src="../components/header.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+</body>
+</html>

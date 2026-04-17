@@ -43,13 +43,24 @@
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
     <main id="main" class="cart-page">
-        <nav class="cart-breadcrumbs" aria-label="Percorso navigazione">
-            <a href="/it/">Home</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <span aria-current="page">Carrello</span>
-        </nav>
-
         <h1>Carrello</h1>
+
+        <ol class="checkout-stepper" aria-label="Progresso checkout">
+            <li class="checkout-stepper__step checkout-stepper__step--active">
+                <div class="checkout-stepper__dot" aria-current="step" aria-label="Passo 1: Carrello, passo corrente">1</div>
+                <span class="checkout-stepper__label">Carrello</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Passo 2: Checkout, non ancora raggiunto">2</div>
+                <span class="checkout-stepper__label">Checkout</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Passo 3: Conferma, non ancora raggiunto">3</div>
+                <span class="checkout-stepper__label">Conferma</span>
+            </li>
+        </ol>
         <p class="cart-lead">Il carrello è salvato in questo browser (localStorage). I prezzi mostrati devono coincidere con scheda prodotto e checkout finale.</p>
 
         <div

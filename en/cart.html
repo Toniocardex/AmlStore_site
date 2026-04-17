@@ -43,13 +43,24 @@
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
     <main id="main" class="cart-page">
-        <nav class="cart-breadcrumbs" aria-label="Breadcrumb">
-            <a href="/en/">Home</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <span aria-current="page">Cart</span>
-        </nav>
-
         <h1>Shopping cart</h1>
+
+        <ol class="checkout-stepper" aria-label="Checkout progress">
+            <li class="checkout-stepper__step checkout-stepper__step--active">
+                <div class="checkout-stepper__dot" aria-current="step" aria-label="Step 1: Cart, current step">1</div>
+                <span class="checkout-stepper__label">Cart</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Step 2: Checkout, not yet reached">2</div>
+                <span class="checkout-stepper__label">Checkout</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Step 3: Confirmation, not yet reached">3</div>
+                <span class="checkout-stepper__label">Confirmation</span>
+            </li>
+        </ol>
         <p class="cart-lead">Your cart is stored in this browser (localStorage). Displayed prices must match the product page and the final checkout.</p>
 
         <div

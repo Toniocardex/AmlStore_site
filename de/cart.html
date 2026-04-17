@@ -43,13 +43,24 @@
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
     <main id="main" class="cart-page">
-        <nav class="cart-breadcrumbs" aria-label="Brotkrumen">
-            <a href="/de/">Home</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <span aria-current="page">Warenkorb</span>
-        </nav>
-
         <h1>Warenkorb</h1>
+
+        <ol class="checkout-stepper" aria-label="Fortschritt beim Bezahlen">
+            <li class="checkout-stepper__step checkout-stepper__step--active">
+                <div class="checkout-stepper__dot" aria-current="step" aria-label="Schritt 1: Warenkorb, aktueller Schritt">1</div>
+                <span class="checkout-stepper__label">Warenkorb</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Schritt 2: Kasse, noch nicht erreicht">2</div>
+                <span class="checkout-stepper__label">Kasse</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Schritt 3: Bestätigung, noch nicht erreicht">3</div>
+                <span class="checkout-stepper__label">Bestätigung</span>
+            </li>
+        </ol>
         <p class="cart-lead">Der Warenkorb wird in diesem Browser gespeichert (localStorage). Angezeigte Preise müssen mit der Produktseite und dem finalen Checkout übereinstimmen.</p>
 
         <div

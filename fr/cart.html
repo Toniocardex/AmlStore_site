@@ -43,13 +43,24 @@
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
     <main id="main" class="cart-page">
-        <nav class="cart-breadcrumbs" aria-label="Fil d'Ariane">
-            <a href="/fr/">Home</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <span aria-current="page">Panier</span>
-        </nav>
-
         <h1>Panier</h1>
+
+        <ol class="checkout-stepper" aria-label="Progression du paiement">
+            <li class="checkout-stepper__step checkout-stepper__step--active">
+                <div class="checkout-stepper__dot" aria-current="step" aria-label="Étape 1 : Panier, étape en cours">1</div>
+                <span class="checkout-stepper__label">Panier</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Étape 2 : Paiement, pas encore atteinte">2</div>
+                <span class="checkout-stepper__label">Paiement</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Étape 3 : Confirmation, pas encore atteinte">3</div>
+                <span class="checkout-stepper__label">Confirmation</span>
+            </li>
+        </ol>
         <p class="cart-lead">Le panier est enregistré dans ce navigateur (localStorage). Les prix affichés doivent correspondre à la fiche produit et au tunnel de paiement final.</p>
 
         <div
