@@ -389,13 +389,6 @@
         }
 
         document.addEventListener(EVT, render);
-        const clearBtn = document.getElementById('aml-cart-clear');
-        if (clearBtn && !clearBtn.dataset.amlCartClearBound) {
-            clearBtn.dataset.amlCartClearBound = '1';
-            clearBtn.addEventListener('click', () => {
-                clearCart();
-            });
-        }
         render();
     }
 
