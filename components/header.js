@@ -756,9 +756,56 @@
                         outline-offset: 3px;
                     }
                     .drawer-assist {
-                        text-align: center;
-                        font-size: 0.85rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        text-decoration: none;
+                        padding: 0.875rem 1rem;
+                        border-radius: 10px;
+                        background: rgba(255, 255, 255, 0.03);
+                        border: 1px solid rgba(255, 255, 255, 0.07);
+                        transition: background 0.2s ease, border-color 0.2s ease;
+                    }
+                    .drawer-assist:hover {
+                        background: rgba(255, 255, 255, 0.06);
+                        border-color: rgba(255, 255, 255, 0.12);
+                    }
+                    .drawer-assist:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
+                    }
+                    .drawer-assist-icon {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 10px;
+                        background: rgba(255, 255, 255, 0.05);
+                        color: var(--text-secondary);
+                        flex-shrink: 0;
+                    }
+                    .drawer-assist-icon svg { width: 18px; height: 18px; fill: currentColor; }
+                    .drawer-assist-text {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.1rem;
+                        overflow: hidden;
+                    }
+                    .drawer-assist-label {
+                        font-size: 0.7rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.06em;
                         color: var(--text-muted);
+                    }
+                    .drawer-assist-number {
+                        font-size: 0.9rem;
+                        font-weight: 600;
+                        color: var(--text-primary);
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
                     }
                 </style>
 
@@ -846,7 +893,15 @@
                     
                     <div class="drawer-footer">
                         <button type="button" class="drawer-btn-signin">${esc(t.signIn)}</button>
-                        <div class="drawer-assist">${esc(t.drawerAssist)}</div>
+                        <a href="tel:+393925580413" class="drawer-assist">
+                            <div class="drawer-assist-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
+                            </div>
+                            <div class="drawer-assist-text">
+                                <span class="drawer-assist-label">${esc(t.assistanceSmall)}</span>
+                                <span class="drawer-assist-number">+39 392 558 0413</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             `;
