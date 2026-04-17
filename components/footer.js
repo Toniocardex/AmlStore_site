@@ -23,7 +23,9 @@ const FOOTER_I18N = {
         cookieManage: 'Gestisci preferenze cookie',
         assistanceLabel: 'Assistenza',
         emailSub: 'Rispondiamo h24',
-        copyright: 'Aml Store. Tutti i diritti riservati. P.IVA 11461870963.',
+        copyright: 'Aml Store. Tutti i diritti riservati.',
+        vatLabel: 'P.IVA 11461870963',
+        paymentSecure: 'Pagamenti sicuri',
         themeLabel: 'Aspetto',
         themeAria: 'Tema della pagina: chiaro o scuro (barra in alto e piè di pagina invariati)',
         paymentLogosAria:
@@ -50,7 +52,9 @@ const FOOTER_I18N = {
         cookieManage: 'Manage cookie preferences',
         assistanceLabel: 'Support',
         emailSub: 'We respond 24/7',
-        copyright: 'Aml Store. All rights reserved. VAT 11461870963.',
+        copyright: 'Aml Store. All rights reserved.',
+        vatLabel: 'VAT 11461870963',
+        paymentSecure: 'Secure payments',
         themeLabel: 'Appearance',
         themeAria: 'Page theme: light or dark (header and footer unchanged)',
         paymentLogosAria:
@@ -77,7 +81,9 @@ const FOOTER_I18N = {
         cookieManage: 'Gérer les préférences cookies',
         assistanceLabel: 'Assistance',
         emailSub: 'Réponse 24h/24',
-        copyright: 'Aml Store. Tous droits réservés. TVA 11461870963.',
+        copyright: 'Aml Store. Tous droits réservés.',
+        vatLabel: 'TVA 11461870963',
+        paymentSecure: 'Paiements sécurisés',
         themeLabel: 'Apparence',
         themeAria: "Thème de la page : clair ou sombre (en-tête et pied de page inchangés)",
         paymentLogosAria:
@@ -104,7 +110,9 @@ const FOOTER_I18N = {
         cookieManage: 'Cookie-Einstellungen',
         assistanceLabel: 'Support',
         emailSub: 'Wir antworten rund um die Uhr',
-        copyright: 'Aml Store. Alle Rechte vorbehalten. USt-IdNr. 11461870963.',
+        copyright: 'Aml Store. Alle Rechte vorbehalten.',
+        vatLabel: 'USt-IdNr. 11461870963',
+        paymentSecure: 'Sichere Zahlungen',
         themeLabel: 'Erscheinungsbild',
         themeAria: 'Seitenthema: hell oder dunkel (Kopf- und Fußzeile unverändert)',
         paymentLogosAria:
@@ -131,7 +139,9 @@ const FOOTER_I18N = {
         cookieManage: 'Gestionar cookies',
         assistanceLabel: 'Asistencia',
         emailSub: 'Respondemos 24/7',
-        copyright: 'Aml Store. Todos los derechos reservados. NIF 11461870963.',
+        copyright: 'Aml Store. Todos los derechos reservados.',
+        vatLabel: 'NIF 11461870963',
+        paymentSecure: 'Pagos seguros',
         themeLabel: 'Apariencia',
         themeAria: 'Tema de la página: claro u oscuro (cabecera y pie sin cambios)',
         paymentLogosAria:
@@ -583,13 +593,54 @@ class EcommerceFooter extends HTMLElement {
                     }
                 }
 
-                /* PAGAMENTI (sempre dopo il toggle, senza restringersi a zero) */
+                /* PAGAMENTI — pill glassmorphism */
                 .payments {
                     display: flex;
                     align-items: center;
-                    gap: 1.25rem;
+                    gap: 1rem;
                     flex-wrap: wrap;
                     flex-shrink: 0;
+                    background: rgba(255, 255, 255, 0.03);
+                    border: 1px solid rgba(255, 255, 255, 0.07);
+                    border-radius: 10px;
+                    padding: 0.45rem 0.875rem;
+                }
+
+                /* Etichetta sicurezza: lock + testo */
+                .payment-secure {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.3rem;
+                    color: var(--text-muted);
+                    font-size: 0.68rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.09em;
+                    white-space: nowrap;
+                    padding-inline-end: 0.75rem;
+                    border-inline-end: 1px solid rgba(255, 255, 255, 0.1);
+                    flex-shrink: 0;
+                }
+                .payment-secure svg {
+                    width: 11px;
+                    height: 11px;
+                    flex-shrink: 0;
+                    opacity: 0.7;
+                }
+
+                /* Divisore verticale tra toggle e payments */
+                .bottom-divider {
+                    width: 1px;
+                    height: 1.25rem;
+                    background: rgba(255, 255, 255, 0.1);
+                    flex-shrink: 0;
+                    align-self: center;
+                }
+
+                /* P.IVA muted rispetto al copyright principale */
+                .copyright-vat {
+                    color: var(--text-muted);
+                    font-size: 0.8rem;
                 }
                 .payment-logo {
                     display: block;
@@ -639,6 +690,7 @@ class EcommerceFooter extends HTMLElement {
 
                 /* BREAKPOINT 3 (Smartphone < 640px) */
                 @media (max-width: 640px) {
+                    .bottom-divider { display: none; }
                     .container { padding: 0 clamp(1.25rem, 5vw, 2rem); }
                     .footer-main { gap: 2.5rem; padding-top: 3rem; padding-bottom: 2rem; }
                     
@@ -754,6 +806,7 @@ class EcommerceFooter extends HTMLElement {
                 <div class="bottom-content">
                     <p class="copyright">
                         &copy; ${new Date().getFullYear()} ${esc(t.copyright)}
+                        <span class="copyright-vat">&nbsp;·&nbsp;${esc(t.vatLabel)}</span>
                     </p>
                     <div class="bottom-right-cluster">
                         <div class="theme-toggle">
@@ -771,7 +824,12 @@ class EcommerceFooter extends HTMLElement {
                                 </span>
                             </button>
                         </div>
+                        <div class="bottom-divider" aria-hidden="true"></div>
                         <div class="payments" role="group" aria-label="${esc(t.paymentLogosAria)}">
+                            <span class="payment-secure" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                ${esc(t.paymentSecure)}
+                            </span>
                             <span class="payment-logo" title="Visa"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Visa_logo.svg" width="56" height="22" alt="" loading="lazy" decoding="async"></span>
                             <span class="payment-logo" title="Mastercard"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Mastercard_logo.svg" width="40" height="22" alt="" loading="lazy" decoding="async"></span>
                             <span class="payment-logo" title="PayPal"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_PayPal-logo.svg" width="72" height="22" alt="" loading="lazy" decoding="async"></span>
