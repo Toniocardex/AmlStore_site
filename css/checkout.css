@@ -972,9 +972,9 @@ html[data-theme="light"] .checkout-error-msg {
 }
 
 /* Fix: l'attributo hidden deve prevalere su display:flex/block */
-.success-loading[hidden],
-.success-details[hidden],
-.success-error[hidden],
+#success-loading[hidden],
+#success-details[hidden],
+#success-error[hidden],
 #success-transfer-box[hidden] {
     display: none !important;
 }
