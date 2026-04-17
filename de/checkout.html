@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasse — Aml Store</title>
+    <meta name="description" content="Schließen Sie Ihren Kauf sicher bei Aml Store ab.">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="../js/consent-init.js"></script>
+
+    <link rel="icon" href="../favicon/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+    <link rel="canonical" href="https://aml-store.com/de/checkout.html">
+
+    <link rel="alternate" hreflang="it" href="https://aml-store.com/it/checkout.html">
+    <link rel="alternate" hreflang="en" href="https://aml-store.com/en/checkout.html">
+    <link rel="alternate" hreflang="fr" href="https://aml-store.com/fr/checkout.html">
+    <link rel="alternate" hreflang="de" href="https://aml-store.com/de/checkout.html">
+    <link rel="alternate" hreflang="es" href="https://aml-store.com/es/checkout.html">
+    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/checkout.html">
+
+    <link rel="stylesheet" href="../fonts/montserrat.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/checkout.css">
+    <script src="../js/theme-init.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
+
+    <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
+
+    <main id="main" class="checkout-page">
+
+        <nav class="checkout-breadcrumbs" aria-label="Breadcrumb">
+            <a href="/de/">Startseite</a>
+            <span class="sep" aria-hidden="true">/</span>
+            <a href="/de/cart.html">Warenkorb</a>
+            <span class="sep" aria-hidden="true">/</span>
+            <span aria-current="page">Kasse</span>
+        </nav>
+
+        <h1>Kasse</h1>
+
+        <div id="checkout-empty-section" class="checkout-empty" aria-live="polite">
+            <div class="checkout-empty-icon" aria-hidden="true">🛒</div>
+            <h2>Ihr Warenkorb ist leer</h2>
+            <p>Fügen Sie Produkte zu Ihrem Warenkorb hinzu, bevor Sie zur Kasse gehen.</p>
+            <a class="btn-back-shop" href="/de/#catalogo">Zurück zum Katalog</a>
+        </div>
+
+        <div id="checkout-content" hidden>
+
+            <div class="checkout-grid">
+
+                <div class="checkout-form-col">
+
+                    <form
+                        id="checkout-form"
+                        novalidate
+                        aria-label="Kassenformular"
+                        data-errors='{
+                            "required": "Dieses Feld ist erforderlich",
+                            "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+                            "phoneInvalid": "Ungültige Telefonnummer",
+                            "pivaInvalid": "Ungültige USt-IdNr. (11 Ziffern)",
+                            "sdiInvalid": "Ungültiger SDI-Code (7 alphanumerische Zeichen)",
+                            "sdiOrPecRequired": "Bitte SDI-Code oder PEC angeben (mindestens eines erforderlich)",
+                            "networkError": "Verbindungsfehler. Bitte versuchen Sie es in einem Moment erneut."
+                        }'
+                    >
+
+                        <section class="form-section" aria-labelledby="section-title-customer">
+                            <p id="section-title-customer" class="form-section-title">Kundentyp</p>
+
+                            <div role="tablist" class="customer-tabs" aria-label="Kundentyp">
+                                <button type="button" role="tab" id="tab-private" aria-selected="true" aria-controls="panel-private" tabindex="0" class="customer-tab-btn" data-customer-type="private">Privatperson</button>
+                                <button type="button" role="tab" id="tab-business" aria-selected="false" aria-controls="panel-business" tabindex="-1" class="customer-tab-btn" data-customer-type="business">Unternehmen</button>
+                            </div>
+
+                            <div role="tabpanel" id="panel-private" aria-labelledby="tab-private" tabindex="0">
+                                <div class="form-row--2">
+                                    <div class="form-field">
+                                        <label for="field-first-name">Vorname <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
+                                        <input type="text" id="field-first-name" name="firstName" required autocomplete="given-name" placeholder="Max">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-last-name">Nachname <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
+                                        <input type="text" id="field-last-name" name="lastName" required autocomplete="family-name" placeholder="Müller">
+                                    </div>
+                                </div>
+                                <div class="form-row--2" style="margin-top: 1rem;">
+                                    <div class="form-field">
+                                        <label for="field-email">E-Mail <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
+                                        <input type="email" id="field-email" name="email" required autocomplete="email" placeholder="max.mueller@email.de" inputmode="email">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-phone">Telefon <span style="font-weight:400;color:var(--page-text-muted)">(optional)</span></label>
+                                        <input type="tel" id="field-phone" name="phone" autocomplete="tel" placeholder="+49 170 0000000" inputmode="tel">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div role="tabpanel" id="panel-business" aria-labelledby="tab-business" tabindex="0" hidden>
+                                <div class="form-row--2">
+                                    <div class="form-field">
+                                        <label for="field-first-name-b">Vorname <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
+                                        <input type="text" id="field-first-name-b" name="firstName" required autocomplete="given-name" placeholder="Max">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-last-name-b">Nachname <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
+                                        <input type="text" id="field-last-name-b" name="lastName" required autocomplete="family-name" placeholder="Müller">
+                                    </div>
+                                </div>
+                                <div class="form-row--2" style="margin-top: 1rem;">
+                                    <div class="form-field">
+                                        <label for="field-email-b">E-Mail <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
+                                        <input type="email" id="field-email-b" name="email" required autocomplete="email" placeholder="max@unternehmen.de" inputmode="email">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-phone-b">Telefon <span style="font-weight:400;color:var(--page-text-muted)">(optional)</span></label>
+                                        <input type="tel" id="field-phone-b" name="phone" autocomplete="tel" placeholder="+49 30 0000000" inputmode="tel">
+                                    </div>
+                                </div>
+                                <div class="business-fields">
+                                    <div class="form-field">
+                                        <label for="field-ragione-sociale">Firmenname <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
+                                        <input type="text" id="field-ragione-sociale" name="ragioneSociale" autocomplete="organization" placeholder="Unternehmen GmbH">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-piva">Ital. USt-IdNr. (P.IVA) <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
+                                        <input type="text" id="field-piva" name="piva" placeholder="12345678901" maxlength="11" inputmode="numeric" pattern="\d{11}" autocomplete="off">
+                                    </div>
+                                    <div class="form-row--2">
+                                        <div class="form-field">
+                                            <label for="field-sdi">SDI-Code <span style="font-weight:400;color:var(--page-text-muted)">(opt. wenn PEC angegeben)</span></label>
+                                            <input type="text" id="field-sdi" name="sdi" placeholder="0000000" maxlength="7" autocomplete="off" aria-describedby="sdi-hint">
+                                            <p id="sdi-hint" style="font-size:0.74rem;color:var(--page-text-muted);margin:0.2rem 0 0;">7 alphanumerische Zeichen — SDI oder PEC erforderlich</p>
+                                        </div>
+                                        <div class="form-field">
+                                            <label for="field-pec">PEC <span style="font-weight:400;color:var(--page-text-muted)">(opt. wenn SDI angegeben)</span></label>
+                                            <input type="email" id="field-pec" name="pec" placeholder="rechnung@pec.unternehmen.de" inputmode="email" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="form-section" aria-labelledby="section-title-payment">
+                            <p id="section-title-payment" class="form-section-title">Zahlungsmethode</p>
+
+                            <div class="payment-options" role="radiogroup" aria-labelledby="section-title-payment">
+                                <div class="payment-option">
+                                    <input type="radio" name="payment-method" id="pay-stripe" value="stripe" checked>
+                                    <label class="payment-option-label" for="pay-stripe">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Karte / Digitale Zahlungen</span>
+                                            <span class="payment-option-desc">Sichere Zahlung über Stripe — SSL-verschlüsselt</span>
+                                            <span class="payment-icons" aria-label="Akzeptierte Zahlungsmethoden: Visa, Mastercard, American Express, Apple Pay, Google Pay">
+                                                <span class="payment-icon">VISA</span>
+                                                <span class="payment-icon">MC</span>
+                                                <span class="payment-icon">AMEX</span>
+                                                <span class="payment-icon">Apple Pay</span>
+                                                <span class="payment-icon">G Pay</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" name="payment-method" id="pay-transfer" value="transfer">
+                                    <label class="payment-option-label" for="pay-transfer">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Banküberweisung</span>
+                                            <span class="payment-option-desc">1–3 Werktage nach Zahlungseingang</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="transfer-section" class="transfer-section" hidden aria-live="polite">
+                                <div class="transfer-card">
+                                    <h3>Bankdaten für die Überweisung</h3>
+                                    <ul class="transfer-info-list">
+                                        <li><span class="transfer-info-label">IBAN</span>
+                                            <!-- TODO: echte IBAN einsetzen -->
+                                            <span class="transfer-info-value iban">IT00 X000 0000 0000 0000 0000 000</span></li>
+                                        <li><span class="transfer-info-label">Kontoinhaber</span><span class="transfer-info-value">Aml Store</span></li>
+                                        <li><span class="transfer-info-label">Betrag</span><span class="transfer-info-value" id="transfer-amount">—</span></li>
+                                        <li><span class="transfer-info-label">Verwendungszweck</span><span class="transfer-info-value" id="transfer-causale">Wird bei Bestätigung generiert</span></li>
+                                    </ul>
+                                    <p class="transfer-note">Ihre Bestellung wird innerhalb von 1–3 Werktagen nach Zahlungseingang bearbeitet. Sie erhalten eine Bestätigungs-E-Mail.</p>
+                                </div>
+                            </div>
+                            <div id="stripe-section"></div>
+                        </section>
+
+                        <div id="checkout-error-msg" class="checkout-error-msg" role="alert" aria-live="assertive" hidden data-network-error="Verbindungsfehler. Bitte versuchen Sie es erneut."></div>
+
+                        <button type="button" id="btn-stripe-submit" class="btn-checkout-primary" aria-label="Sicher bezahlen mit Stripe">
+                            <span class="btn-spinner" aria-hidden="true"></span>
+                            <span class="btn-text">🔒 Sicher bezahlen</span>
+                        </button>
+                        <button type="button" id="btn-transfer-submit" class="btn-checkout-primary" style="display:none;" aria-label="Bestellung bestätigen und Überweisungsdaten anzeigen">
+                            <span class="btn-spinner" aria-hidden="true"></span>
+                            <span class="btn-text">Bestellung bestätigen</span>
+                        </button>
+
+                        <p class="checkout-terms">
+                            Mit dem Fortfahren akzeptieren Sie unsere <a href="#" rel="noopener">[AGB]</a>
+                            und unsere <a href="/de/cookie-policy.html" rel="noopener">Datenschutzerklärung</a>.
+                        </p>
+                    </form>
+
+                    <div id="transfer-confirm-section" class="transfer-confirm-section" aria-live="polite" hidden>
+                        <p class="transfer-confirm-title">Bestellung bestätigt!</p>
+                        <p class="transfer-confirm-lead">Vielen Dank für Ihre Bestellung. Führen Sie die Überweisung mit den unten stehenden Daten durch, um die Bearbeitung zu starten.</p>
+                        <div class="transfer-card">
+                            <h3>Überweisungsübersicht</h3>
+                            <ul class="transfer-info-list">
+                                <li><span class="transfer-info-label">Bestell-ID</span><span class="transfer-info-value" id="confirm-order-id">—</span></li>
+                                <li><span class="transfer-info-label">IBAN</span>
+                                    <!-- TODO: echte IBAN einsetzen -->
+                                    <span class="transfer-info-value iban">IT00 X000 0000 0000 0000 0000 000</span></li>
+                                <li><span class="transfer-info-label">Kontoinhaber</span><span class="transfer-info-value">Aml Store</span></li>
+                                <li><span class="transfer-info-label">Betrag</span><span class="transfer-info-value" id="confirm-amount">—</span></li>
+                                <li><span class="transfer-info-label">Verwendungszweck</span><span class="transfer-info-value" id="confirm-causale">—</span></li>
+                            </ul>
+                            <p class="transfer-note">Bewahren Sie die Bestell-ID als Referenz auf. Sie erhalten eine Bestätigungs-E-Mail innerhalb von 1–3 Werktagen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-summary-col">
+                    <div class="checkout-summary">
+                        <button type="button" id="summary-toggle-btn" class="summary-toggle-btn" aria-expanded="true" aria-controls="checkout-summary-body">
+                            <span>Bestellübersicht</span>
+                            <span class="summary-toggle-icon" aria-hidden="true">▼</span>
+                        </button>
+                        <p class="checkout-summary-title" aria-hidden="true">Bestellübersicht</p>
+                        <div id="checkout-summary-body">
+                            <div id="checkout-items" class="checkout-items" aria-live="polite" data-qty-label="Menge"></div>
+                            <div class="checkout-totals">
+                                <div class="checkout-total-row"><span class="checkout-total-label">Zwischensumme</span><span id="checkout-subtotal">—</span></div>
+                                <div class="checkout-total-row"><span class="checkout-total-label">Versand</span><span>Digital — kostenlos</span></div>
+                                <div class="checkout-total-row checkout-grand-total"><span class="checkout-total-label">Gesamt</span><span id="checkout-grand-total">—</span></div>
+                            </div>
+                            <div class="checkout-trust" aria-label="Zahlungssicherheit">
+                                <span class="checkout-trust-icon" aria-hidden="true">🔒</span>
+                                <span>Sichere SSL-Zahlung · Stripe PCI-DSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <aml-cookie-banner></aml-cookie-banner>
+    <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
+
+    <script src="../js/locale-path.js"></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../components/cookie-banner.js" defer></script>
+    <script src="../components/header.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+    <script src="../js/checkout.js" defer></script>
+
+    <script>
+    (function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            var radios = document.querySelectorAll('input[name="payment-method"]');
+            var btnStripe = document.getElementById('btn-stripe-submit');
+            var btnTransfer = document.getElementById('btn-transfer-submit');
+            function sync() {
+                var sel = document.querySelector('input[name="payment-method"]:checked');
+                if (!sel) return;
+                if (btnStripe) btnStripe.style.display = sel.value === 'stripe' ? '' : 'none';
+                if (btnTransfer) btnTransfer.style.display = sel.value === 'transfer' ? '' : 'none';
+            }
+            radios.forEach(function (r) { r.addEventListener('change', sync); });
+            sync();
+        });
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Aml Store</title>
+    <meta name="description" content="Completa il tuo acquisto in modo sicuro su Aml Store.">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="../js/consent-init.js"></script>
+
+    <link rel="icon" href="../favicon/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+    <link rel="canonical" href="https://aml-store.com/it/checkout.html">
+
+    <link rel="alternate" hreflang="it" href="https://aml-store.com/it/checkout.html">
+    <link rel="alternate" hreflang="en" href="https://aml-store.com/en/checkout.html">
+    <link rel="alternate" hreflang="fr" href="https://aml-store.com/fr/checkout.html">
+    <link rel="alternate" hreflang="de" href="https://aml-store.com/de/checkout.html">
+    <link rel="alternate" hreflang="es" href="https://aml-store.com/es/checkout.html">
+    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/checkout.html">
+
+    <link rel="stylesheet" href="../fonts/montserrat.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/checkout.css">
+    <script src="../js/theme-init.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Vai al contenuto principale</a>
+
+    <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
+
+    <main id="main" class="checkout-page">
+
+        <nav class="checkout-breadcrumbs" aria-label="Percorso navigazione">
+            <a href="/it/">Home</a>
+            <span class="sep" aria-hidden="true">/</span>
+            <a href="/it/cart.html">Carrello</a>
+            <span class="sep" aria-hidden="true">/</span>
+            <span aria-current="page">Checkout</span>
+        </nav>
+
+        <h1>Checkout</h1>
+
+        <!-- Sezione carrello vuoto (visibile prima che JS verifichi il carrello) -->
+        <div id="checkout-empty-section" class="checkout-empty" aria-live="polite">
+            <div class="checkout-empty-icon" aria-hidden="true">🛒</div>
+            <h2>Il carrello è vuoto</h2>
+            <p>Aggiungi prodotti al carrello prima di procedere al checkout.</p>
+            <a class="btn-back-shop" href="/it/#catalogo">Torna al catalogo</a>
+        </div>
+
+        <!-- Contenuto checkout (nascosto finché JS non verifica il carrello) -->
+        <div id="checkout-content" hidden>
+
+            <div class="checkout-grid">
+
+                <!-- ── Colonna sinistra: form ── -->
+                <div class="checkout-form-col">
+
+                    <form
+                        id="checkout-form"
+                        novalidate
+                        aria-label="Modulo checkout"
+                        data-errors='{
+                            "required": "Campo obbligatorio",
+                            "emailInvalid": "Inserisci un indirizzo email valido",
+                            "phoneInvalid": "Numero di telefono non valido",
+                            "pivaInvalid": "Partita IVA non valida (11 cifre)",
+                            "sdiInvalid": "Codice SDI non valido (7 caratteri alfanumerici)",
+                            "sdiOrPecRequired": "Inserisci il Codice SDI o la PEC (almeno uno richiesto)",
+                            "networkError": "Errore di connessione. Riprova tra qualche istante."
+                        }'
+                    >
+
+                        <!-- ── 1. Tipo cliente ── -->
+                        <section class="form-section" aria-labelledby="section-title-customer">
+                            <p id="section-title-customer" class="form-section-title">Tipo cliente</p>
+
+                            <div
+                                role="tablist"
+                                class="customer-tabs"
+                                aria-label="Tipo di cliente"
+                            >
+                                <button
+                                    type="button"
+                                    role="tab"
+                                    id="tab-private"
+                                    aria-selected="true"
+                                    aria-controls="panel-private"
+                                    tabindex="0"
+                                    class="customer-tab-btn"
+                                    data-customer-type="private"
+                                >
+                                    Privato
+                                </button>
+                                <button
+                                    type="button"
+                                    role="tab"
+                                    id="tab-business"
+                                    aria-selected="false"
+                                    aria-controls="panel-business"
+                                    tabindex="-1"
+                                    class="customer-tab-btn"
+                                    data-customer-type="business"
+                                >
+                                    Azienda
+                                </button>
+                            </div>
+
+                            <!-- Panel privato -->
+                            <div
+                                role="tabpanel"
+                                id="panel-private"
+                                aria-labelledby="tab-private"
+                                tabindex="0"
+                            >
+                                <div class="form-row--2">
+                                    <div class="form-field">
+                                        <label for="field-first-name">Nome <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
+                                        <input
+                                            type="text"
+                                            id="field-first-name"
+                                            name="firstName"
+                                            required
+                                            autocomplete="given-name"
+                                            placeholder="Mario"
+                                        >
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-last-name">Cognome <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
+                                        <input
+                                            type="text"
+                                            id="field-last-name"
+                                            name="lastName"
+                                            required
+                                            autocomplete="family-name"
+                                            placeholder="Rossi"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="form-row--2" style="margin-top: 1rem;">
+                                    <div class="form-field">
+                                        <label for="field-email">Email <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
+                                        <input
+                                            type="email"
+                                            id="field-email"
+                                            name="email"
+                                            required
+                                            autocomplete="email"
+                                            placeholder="mario.rossi@email.it"
+                                            inputmode="email"
+                                        >
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-phone">Telefono <span style="font-weight:400;color:var(--page-text-muted)">(opzionale)</span></label>
+                                        <input
+                                            type="tel"
+                                            id="field-phone"
+                                            name="phone"
+                                            autocomplete="tel"
+                                            placeholder="+39 333 0000000"
+                                            inputmode="tel"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Panel azienda -->
+                            <div
+                                role="tabpanel"
+                                id="panel-business"
+                                aria-labelledby="tab-business"
+                                tabindex="0"
+                                hidden
+                            >
+                                <!-- Stessi campi del privato, condivisi nel DOM -->
+                                <p class="visually-hidden">Compila i campi anagrafici e i dati aziendali qui sotto.</p>
+
+                                <div class="form-row--2">
+                                    <div class="form-field">
+                                        <label for="field-first-name-b">Nome <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
+                                        <input
+                                            type="text"
+                                            id="field-first-name-b"
+                                            name="firstName"
+                                            required
+                                            autocomplete="given-name"
+                                            placeholder="Mario"
+                                        >
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-last-name-b">Cognome <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
+                                        <input
+                                            type="text"
+                                            id="field-last-name-b"
+                                            name="lastName"
+                                            required
+                                            autocomplete="family-name"
+                                            placeholder="Rossi"
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="form-row--2" style="margin-top: 1rem;">
+                                    <div class="form-field">
+                                        <label for="field-email-b">Email <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
+                                        <input
+                                            type="email"
+                                            id="field-email-b"
+                                            name="email"
+                                            required
+                                            autocomplete="email"
+                                            placeholder="mario.rossi@azienda.it"
+                                            inputmode="email"
+                                        >
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="field-phone-b">Telefono <span style="font-weight:400;color:var(--page-text-muted)">(opzionale)</span></label>
+                                        <input
+                                            type="tel"
+                                            id="field-phone-b"
+                                            name="phone"
+                                            autocomplete="tel"
+                                            placeholder="+39 02 0000000"
+                                            inputmode="tel"
+                                        >
+                                    </div>
+                                </div>
+
+                                <!-- Campi aziendali aggiuntivi -->
+                                <div class="business-fields">
+                                    <div class="form-field">
+                                        <label for="field-ragione-sociale">Ragione sociale <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
+                                        <input
+                                            type="text"
+                                            id="field-ragione-sociale"
+                                            name="ragioneSociale"
+                                            autocomplete="organization"
+                                            placeholder="Azienda S.r.l."
+                                        >
+                                    </div>
+
+                                    <div class="form-field">
+                                        <label for="field-piva">Partita IVA <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
+                                        <input
+                                            type="text"
+                                            id="field-piva"
+                                            name="piva"
+                                            placeholder="12345678901"
+                                            maxlength="11"
+                                            inputmode="numeric"
+                                            pattern="\d{11}"
+                                            autocomplete="off"
+                                        >
+                                    </div>
+
+                                    <div class="form-row--2">
+                                        <div class="form-field">
+                                            <label for="field-sdi">
+                                                Codice SDI
+                                                <span style="font-weight:400;color:var(--page-text-muted)">(opzionale se inserita PEC)</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="field-sdi"
+                                                name="sdi"
+                                                placeholder="0000000"
+                                                maxlength="7"
+                                                autocomplete="off"
+                                                aria-describedby="sdi-hint"
+                                            >
+                                            <p id="sdi-hint" class="field-hint" style="font-size:0.74rem;color:var(--page-text-muted);margin:0.2rem 0 0;">7 caratteri alfanumerici — inserire SDI o PEC</p>
+                                        </div>
+                                        <div class="form-field">
+                                            <label for="field-pec">
+                                                PEC
+                                                <span style="font-weight:400;color:var(--page-text-muted)">(opzionale se inserito SDI)</span>
+                                            </label>
+                                            <input
+                                                type="email"
+                                                id="field-pec"
+                                                name="pec"
+                                                placeholder="fattura@pec.azienda.it"
+                                                inputmode="email"
+                                                autocomplete="off"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- ── 2. Metodo di pagamento ── -->
+                        <section class="form-section" aria-labelledby="section-title-payment">
+                            <p id="section-title-payment" class="form-section-title">Metodo di pagamento</p>
+
+                            <div class="payment-options" role="radiogroup" aria-labelledby="section-title-payment">
+
+                                <!-- Stripe -->
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-stripe"
+                                        value="stripe"
+                                        checked
+                                    >
+                                    <label class="payment-option-label" for="pay-stripe">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Carta / Metodi digitali</span>
+                                            <span class="payment-option-desc">Pagamento sicuro tramite Stripe — cifrato SSL</span>
+                                            <span class="payment-icons" aria-label="Metodi accettati: Visa, Mastercard, American Express, Apple Pay, Google Pay">
+                                                <span class="payment-icon">VISA</span>
+                                                <span class="payment-icon">MC</span>
+                                                <span class="payment-icon">AMEX</span>
+                                                <span class="payment-icon">Apple Pay</span>
+                                                <span class="payment-icon">G Pay</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <!-- Bonifico -->
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-transfer"
+                                        value="transfer"
+                                    >
+                                    <label class="payment-option-label" for="pay-transfer">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Bonifico bancario</span>
+                                            <span class="payment-option-desc">1–3 giorni lavorativi dalla ricezione del bonifico</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Istruzioni bonifico (visibili solo se bonifico selezionato) -->
+                            <div id="transfer-section" class="transfer-section" hidden aria-live="polite">
+                                <div class="transfer-card">
+                                    <h3>Dati per il bonifico</h3>
+                                    <ul class="transfer-info-list">
+                                        <li>
+                                            <span class="transfer-info-label">IBAN</span>
+                                            <!-- TODO: sostituire con IBAN reale -->
+                                            <span class="transfer-info-value iban">IT00 X000 0000 0000 0000 0000 000</span>
+                                        </li>
+                                        <li>
+                                            <span class="transfer-info-label">Intestatario</span>
+                                            <span class="transfer-info-value">Aml Store</span>
+                                        </li>
+                                        <li>
+                                            <span class="transfer-info-label">Importo</span>
+                                            <span class="transfer-info-value" id="transfer-amount">—</span>
+                                        </li>
+                                        <li>
+                                            <span class="transfer-info-label">Causale</span>
+                                            <span class="transfer-info-value" id="transfer-causale">Verrà generata al momento della conferma</span>
+                                        </li>
+                                    </ul>
+                                    <p class="transfer-note">
+                                        L'ordine verrà elaborato entro 1–3 giorni lavorativi dalla ricezione del pagamento.
+                                        Riceverai una conferma via email all'indirizzo indicato.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Sezione Stripe (visibile di default) -->
+                            <div id="stripe-section">
+                                <!-- Contenuto contestuale vuoto — il bottone submit è sotto -->
+                            </div>
+
+                        </section>
+
+                        <!-- ── Messaggio di errore globale ── -->
+                        <div
+                            id="checkout-error-msg"
+                            class="checkout-error-msg"
+                            role="alert"
+                            aria-live="assertive"
+                            hidden
+                            data-network-error="Errore di connessione. Riprova tra qualche istante."
+                        ></div>
+
+                        <!-- ── Bottoni submit ── -->
+                        <!-- Bottone Stripe (visibile quando "stripe" selezionato) -->
+                        <button
+                            type="button"
+                            id="btn-stripe-submit"
+                            class="btn-checkout-primary"
+                            aria-label="Procedi al pagamento sicuro con Stripe"
+                        >
+                            <span class="btn-spinner" aria-hidden="true"></span>
+                            <span class="btn-text">🔒 Procedi al pagamento sicuro</span>
+                        </button>
+
+                        <!-- Bottone Bonifico (nascosto di default, mostrato via JS) -->
+                        <button
+                            type="button"
+                            id="btn-transfer-submit"
+                            class="btn-checkout-primary"
+                            style="display:none;"
+                            aria-label="Conferma ordine e visualizza istruzioni bonifico"
+                        >
+                            <span class="btn-spinner" aria-hidden="true"></span>
+                            <span class="btn-text">Conferma ordine</span>
+                        </button>
+
+                        <p class="checkout-terms">
+                            Procedendo accetti i
+                            <a href="#" rel="noopener">[Termini e Condizioni]</a>
+                            e la
+                            <a href="/it/cookie-policy.html" rel="noopener">Privacy Policy</a>.
+                        </p>
+
+                    </form>
+
+                    <!-- ── Sezione conferma bonifico ── -->
+                    <div
+                        id="transfer-confirm-section"
+                        class="transfer-confirm-section"
+                        aria-live="polite"
+                        hidden
+                    >
+                        <p class="transfer-confirm-title">Ordine confermato!</p>
+                        <p class="transfer-confirm-lead">
+                            Grazie per il tuo ordine. Completa il bonifico con i dati indicati per attivare la lavorazione.
+                        </p>
+                        <div class="transfer-card">
+                            <h3>Riepilogo dati bonifico</h3>
+                            <ul class="transfer-info-list">
+                                <li>
+                                    <span class="transfer-info-label">ID Ordine</span>
+                                    <span class="transfer-info-value" id="confirm-order-id">—</span>
+                                </li>
+                                <li>
+                                    <span class="transfer-info-label">IBAN</span>
+                                    <!-- TODO: sostituire con IBAN reale -->
+                                    <span class="transfer-info-value iban">IT00 X000 0000 0000 0000 0000 000</span>
+                                </li>
+                                <li>
+                                    <span class="transfer-info-label">Intestatario</span>
+                                    <span class="transfer-info-value">Aml Store</span>
+                                </li>
+                                <li>
+                                    <span class="transfer-info-label">Importo</span>
+                                    <span class="transfer-info-value" id="confirm-amount">—</span>
+                                </li>
+                                <li>
+                                    <span class="transfer-info-label">Causale</span>
+                                    <span class="transfer-info-value" id="confirm-causale">—</span>
+                                </li>
+                            </ul>
+                            <p class="transfer-note">
+                                Conserva l'ID ordine come riferimento. Riceverai una email di conferma all'indirizzo indicato
+                                entro 1–3 giorni lavorativi dalla ricezione del pagamento.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /form col -->
+
+                <!-- ── Colonna destra: riepilogo ordine ── -->
+                <div class="checkout-summary-col">
+                    <div class="checkout-summary">
+
+                        <!-- Toggle per mobile -->
+                        <button
+                            type="button"
+                            id="summary-toggle-btn"
+                            class="summary-toggle-btn"
+                            aria-expanded="true"
+                            aria-controls="checkout-summary-body"
+                        >
+                            <span>Riepilogo ordine</span>
+                            <span class="summary-toggle-icon" aria-hidden="true">▼</span>
+                        </button>
+
+                        <p class="checkout-summary-title" aria-hidden="true">Riepilogo ordine</p>
+
+                        <div id="checkout-summary-body">
+                            <!-- Prodotti (popolati da JS) -->
+                            <div
+                                id="checkout-items"
+                                class="checkout-items"
+                                aria-live="polite"
+                                data-qty-label="Qtà"
+                            ></div>
+
+                            <!-- Totali -->
+                            <div class="checkout-totals">
+                                <div class="checkout-total-row">
+                                    <span class="checkout-total-label">Subtotale</span>
+                                    <span id="checkout-subtotal">—</span>
+                                </div>
+                                <div class="checkout-total-row">
+                                    <span class="checkout-total-label">Spedizione</span>
+                                    <span>Digitale — gratuita</span>
+                                </div>
+                                <div class="checkout-total-row checkout-grand-total">
+                                    <span class="checkout-total-label">Totale</span>
+                                    <span id="checkout-grand-total">—</span>
+                                </div>
+                            </div>
+
+                            <!-- Badge sicurezza -->
+                            <div class="checkout-trust" aria-label="Sicurezza pagamenti">
+                                <span class="checkout-trust-icon" aria-hidden="true">🔒</span>
+                                <span>Pagamento sicuro SSL · Stripe PCI-DSS</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /summary col -->
+
+            </div>
+            <!-- /checkout-grid -->
+
+        </div>
+        <!-- /checkout-content -->
+
+    </main>
+
+    <aml-cookie-banner></aml-cookie-banner>
+    <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
+
+    <script src="../js/locale-path.js"></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../components/cookie-banner.js" defer></script>
+    <script src="../components/header.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+    <script src="../js/checkout.js" defer></script>
+
+    <script>
+    /* Sync bottoni submit con il metodo di pagamento selezionato.
+       Eseguito inline per evitare FOUC prima del defer. */
+    (function () {
+        document.addEventListener('DOMContentLoaded', function () {
+            var radios = document.querySelectorAll('input[name="payment-method"]');
+            var btnStripe = document.getElementById('btn-stripe-submit');
+            var btnTransfer = document.getElementById('btn-transfer-submit');
+            function sync() {
+                var sel = document.querySelector('input[name="payment-method"]:checked');
+                if (!sel) return;
+                if (btnStripe) btnStripe.style.display = sel.value === 'stripe' ? '' : 'none';
+                if (btnTransfer) btnTransfer.style.display = sel.value === 'transfer' ? '' : 'none';
+            }
+            radios.forEach(function (r) { r.addEventListener('change', sync); });
+            sync();
+        });
+    })();
+    </script>
+</body>
+</html>

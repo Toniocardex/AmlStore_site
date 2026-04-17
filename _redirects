@@ -12,6 +12,9 @@
 /de/prodotto.html /de/microsoft-365-family.html 301
 /es/prodotto.html /es/microsoft-365-family.html 301
 
+# ── Checkout → lingua italiana di default ─────────────────────────────────────
+/checkout /it/checkout.html 302
+
 # ── Template per redirect futuri ─────────────────────────────────────────────
 # /it/vecchia-pagina /it/nuova-pagina 301
 # /en/old-page       /en/new-page     301
