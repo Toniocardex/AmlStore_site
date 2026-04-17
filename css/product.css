@@ -489,6 +489,12 @@ html[data-theme='light'] .product-page .price-block__save {
     color: var(--pp-accent-hover);
 }
 
+.product-page .tab-btn:focus-visible {
+    outline: 2px solid var(--pp-accent-hover);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
 .product-page .tab-btn.active::after {
     content: '';
     position: absolute;
