@@ -346,7 +346,6 @@
                     }
 
                     .lang-dropdown {
-                        display: none;
                         position: absolute;
                         top: calc(100% + 0.75rem);
                         right: 0;
@@ -358,12 +357,21 @@
                         padding: 0.5rem;
                         min-width: 140px;
                         box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+                        /* Stato chiuso: invisibile ma nel flusso — permette transizione in uscita */
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-6px) scale(0.98);
+                        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
                     }
-                    .lang-wrapper.open .lang-dropdown { display: block; animation: dropIn 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
-
-                    @keyframes dropIn {
-                        from { opacity: 0; transform: translateY(-8px) scale(0.98); }
-                        to { opacity: 1; transform: translateY(0) scale(1); }
+                    .lang-wrapper.open .lang-dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        transform: translateY(0) scale(1);
+                        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    visibility 0.25s;
                     }
 
                     .lang-option {
@@ -497,7 +505,8 @@
                         /* Selettore lingua */
                         .lang-selector { transition: none; }
                         .chevron-down { transition: none; }
-                        .lang-wrapper.open .lang-dropdown { animation: none; }
+                        .lang-dropdown,
+                        .lang-wrapper.open .lang-dropdown { transition: none; }
                         /* Pulsante Accedi */
                         .btn-signin { transition: none; }
                         /* Overlay e Drawer mobile */
