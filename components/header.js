@@ -623,26 +623,37 @@
                         background: rgba(0,0,0,0.6);
                         backdrop-filter: blur(6px);
                         z-index: 1999;
-                        opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+                        opacity: 0; pointer-events: none;
+                        /* Chiusura: ease-in (veloce all'uscita) */
+                        transition: opacity 0.25s cubic-bezier(0.4, 0, 1, 1);
                     }
-                    .overlay.open { opacity: 1; pointer-events: auto; }
+                    .overlay.open {
+                        opacity: 1; pointer-events: auto;
+                        /* Apertura: ease-out (parte veloce, rallenta) */
+                        transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1);
+                    }
 
                     .mobile-drawer {
                         position: fixed; top: 0; left: -100%;
-                        width: 100%; max-width: 320px; /* Meglio 320px per mobile */
+                        width: 100%; max-width: 320px;
                         height: 100vh;
                         background: var(--bg-surface);
                         backdrop-filter: blur(20px);
                         -webkit-backdrop-filter: blur(20px);
                         border-right: 1px solid var(--border-color);
                         z-index: 2000;
-                        transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                        /* Chiusura: ease-in più rapida */
+                        transition: left 0.3s cubic-bezier(0.4, 0, 1, 1);
                         padding: 1.5rem 1.25rem;
                         display: flex; flex-direction: column;
                         overflow-y: auto;
                         box-shadow: 10px 0 30px rgba(0,0,0,0.5);
                     }
-                    .mobile-drawer.open { left: 0; }
+                    .mobile-drawer.open {
+                        left: 0;
+                        /* Apertura: ease-out con overshoot leggero */
+                        transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    }
 
                     .drawer-header {
                         display: flex;
