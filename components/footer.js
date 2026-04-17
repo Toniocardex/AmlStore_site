@@ -735,7 +735,7 @@ class EcommerceFooter extends HTMLElement {
                                 </div>
                                 <div class="contact-text">
                                     <span class="contact-label">${esc(t.assistanceLabel)}</span>
-                                    <span class="contact-value">+39 02 1234 5678</span>
+                                    <span class="contact-value">+39 392 558 0413</span>
                                 </div>
                             </a>
                             <a href="mailto:Info@amlstore.it" class="contact-item">

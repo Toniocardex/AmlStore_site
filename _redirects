@@ -1,6 +1,17 @@
-# Vecchio URL scheda prodotto → nuovo slug (301)
+# Cloudflare Pages — Redirect rules
+# Sintassi: <source> <destination> <status>
+# Ordine: la prima regola che fa match vince.
+
+# ── Root → Italiano (301 permanente per SEO) ──────────────────────────────────
+/ /it/ 301
+
+# ── Vecchi slug → nuovi slug (301) ───────────────────────────────────────────
 /it/prodotto.html /it/microsoft-365-family.html 301
 /en/prodotto.html /en/microsoft-365-family.html 301
 /fr/prodotto.html /fr/microsoft-365-family.html 301
 /de/prodotto.html /de/microsoft-365-family.html 301
 /es/prodotto.html /es/microsoft-365-family.html 301
+
+# ── Template per redirect futuri ─────────────────────────────────────────────
+# /it/vecchia-pagina /it/nuova-pagina 301
+# /en/old-page       /en/new-page     301

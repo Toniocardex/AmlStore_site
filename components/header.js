@@ -16,7 +16,7 @@
             cartAriaOne: 'Carrello, 1 articolo',
             cartAriaMany: 'Carrello, {{n}} articoli',
             signIn: 'Accedi',
-            drawerAssist: 'Assistenza: +39 02 1234 5678',
+            drawerAssist: 'Assistenza: +39 392 558 0413',
         },
         en: {
             logoAlt: 'Aml Store',
@@ -32,7 +32,7 @@
             cartAriaOne: 'Shopping cart, 1 item',
             cartAriaMany: 'Shopping cart, {{n}} items',
             signIn: 'Sign in',
-            drawerAssist: 'Support: +39 02 1234 5678',
+            drawerAssist: 'Support: +39 392 558 0413',
         },
         fr: {
             logoAlt: 'Aml Store',
@@ -48,7 +48,7 @@
             cartAriaOne: 'Panier, 1 article',
             cartAriaMany: 'Panier, {{n}} articles',
             signIn: 'Se connecter',
-            drawerAssist: 'Assistance : +39 02 1234 5678',
+            drawerAssist: 'Assistance : +39 392 558 0413',
         },
         de: {
             logoAlt: 'Aml Store',
@@ -64,7 +64,7 @@
             cartAriaOne: 'Warenkorb, 1 Artikel',
             cartAriaMany: 'Warenkorb, {{n}} Artikel',
             signIn: 'Anmelden',
-            drawerAssist: 'Support: +39 02 1234 5678',
+            drawerAssist: 'Support: +39 392 558 0413',
         },
         es: {
             logoAlt: 'Aml Store',
@@ -80,7 +80,7 @@
             cartAriaOne: 'Carrito, 1 artículo',
             cartAriaMany: 'Carrito, {{n}} artículos',
             signIn: 'Iniciar sesión',
-            drawerAssist: 'Asistencia: +39 02 1234 5678',
+            drawerAssist: 'Asistencia: +39 392 558 0413',
         },
     };
 
@@ -724,13 +724,13 @@
                     </div>
                     
                     <div class="right-section">
-                        <div class="support-info" title="${esc(t.assistanceSmall)}: +39 02 1234 5678">
+                        <div class="support-info" title="${esc(t.assistanceSmall)}: +39 392 558 0413">
                             <div class="support-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
                             </div>
                             <div class="support-text">
                                 <small>${esc(t.assistanceSmall)}</small>
-                                <span>+39 02 1234 5678</span>
+                                <span>+39 392 558 0413</span>
                             </div>
                         </div>
 
