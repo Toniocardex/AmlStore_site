@@ -22,6 +22,11 @@ html {
     }
 }
 
+/* Offset per header sticky (~88px) + margine di respiro */
+[id] {
+    scroll-margin-top: 104px;
+}
+
 .skip-link {
     position: absolute;
     left: -10000px;
