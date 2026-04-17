@@ -1,6 +1,5 @@
 /**
  * Carrello minimale (localStorage) + evento aml-cart-changed.
- * Checkout: opzionale mappa globale AML_STRIPE_PAYMENT_LINK_BY_SKU { sku: "https://buy.stripe.com/..." }.
  * Pulsanti fuori dalla card: data-cart-source="id" punta a #id di .product-card o .pricing-card.
  */
 (function (global) {
@@ -11,20 +10,40 @@
     var flashAddedTimer = null;
     var liveRegionClearTimer = null;
 
+    /* ─── Storage ──────────────────────────────────────────────────────────────── */
+
     function readLines() {
         try {
             const raw = global.localStorage.getItem(STORAGE_KEY);
             if (!raw) return [];
             const parsed = JSON.parse(raw);
-            return Array.isArray(parsed) ? parsed : [];
+            if (!Array.isArray(parsed)) {
+                // Dato corrotto: ripulisce storage e riparte da zero
+                try { global.localStorage.removeItem(STORAGE_KEY); } catch (_) {}
+                return [];
+            }
+            return parsed;
         } catch (_) {
+            // JSON.parse fallito: storage corrotto, ripulisce
+            try { global.localStorage.removeItem(STORAGE_KEY); } catch (__) {}
             return [];
         }
     }
 
     function writeLines(lines) {
-        global.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+        try {
+            global.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+            return true;
+        } catch (e) {
+            // QuotaExceededError o accesso negato (es. Safari private)
+            if (typeof console !== 'undefined') {
+                console.warn('[AmlCart] localStorage write failed:', e && e.name);
+            }
+            return false;
+        }
     }
+
+    /* ─── Calcoli ──────────────────────────────────────────────────────────────── */
 
     function totalQty(lines) {
         return lines.reduce((acc, l) => acc + (Number(l.quantity) > 0 ? Number(l.quantity) : 0), 0);
@@ -39,20 +58,17 @@
         }, 0);
     }
 
+    /* ─── Evento ───────────────────────────────────────────────────────────────── */
+
     function dispatch(lines) {
         const items = lines.slice();
         const detail = { items, count: totalQty(items) };
         try {
-            document.dispatchEvent(
-                new CustomEvent(EVT, {
-                    detail,
-                    bubbles: true,
-                })
-            );
-        } catch (_) {
-            /* SSR / tests */
-        }
+            document.dispatchEvent(new CustomEvent(EVT, { detail, bubbles: true }));
+        } catch (_) { /* SSR / tests */ }
     }
+
+    /* ─── Helpers lettura dati da DOM ──────────────────────────────────────────── */
 
     function normalizeSku(el) {
         if (!el) return '';
@@ -63,8 +79,7 @@
     function normalizeCurrency(el) {
         if (!el) return 'eur';
         const c = String(el.dataset.stripeCurrency || el.getAttribute('data-stripe-currency') || 'eur')
-            .trim()
-            .toLowerCase();
+            .trim().toLowerCase();
         return c || 'eur';
     }
 
@@ -72,6 +87,21 @@
         const raw = el.dataset.stripeUnitAmount || el.getAttribute('data-stripe-unit-amount');
         const n = Number(raw);
         return Number.isFinite(n) ? Math.round(n) : 0;
+    }
+
+    /**
+     * Normalizza un src immagine in path assoluto (inizia con /).
+     * Evita che path relativi come "../asset/..." siano broken fuori dalla pagina sorgente.
+     */
+    function normalizeImageSrc(src) {
+        if (!src) return '';
+        try {
+            const url = new URL(src, global.location.href);
+            // Mantieni solo path + search (no host) per portabilità multi-dominio
+            return url.pathname + (url.search || '');
+        } catch (_) {
+            return src;
+        }
     }
 
     function productTitleFromPage() {
@@ -86,7 +116,7 @@
         const currency = normalizeCurrency(root);
         const unitAmount = parseMinorAmount(root);
         const imgEl = document.querySelector('.product-cover-img');
-        const image = imgEl && imgEl.getAttribute('src') ? imgEl.getAttribute('src') : '';
+        const image = normalizeImageSrc(imgEl && imgEl.getAttribute('src'));
         const productPath = global.location.pathname || '';
         return { sku, name, currency, unitAmount, quantity: 1, image, productPath };
     }
@@ -104,7 +134,7 @@
         const main = document.querySelector('main.product-page');
         const msg = main && main.getAttribute('data-cart-added-msg');
         if (!msg) return;
-        let live = document.getElementById('product-cart-live');
+        const live = document.getElementById('product-cart-live');
         if (!live) return;
         live.textContent = msg;
         clearTimeout(liveRegionClearTimer);
@@ -122,13 +152,9 @@
         });
         if (!nodes.length) return;
         clearTimeout(flashAddedTimer);
-        nodes.forEach(function (b) {
-            b.classList.add('is-added');
-        });
+        nodes.forEach(function (b) { b.classList.add('is-added'); });
         flashAddedTimer = setTimeout(function () {
-            nodes.forEach(function (b) {
-                b.classList.remove('is-added');
-            });
+            nodes.forEach(function (b) { b.classList.remove('is-added'); });
             flashAddedTimer = null;
         }, 2200);
     }
@@ -141,7 +167,7 @@
         const currency = normalizeCurrency(root);
         const unitAmount = parseMinorAmount(root);
         const imgEl = root.querySelector('.product-card-img');
-        const image = imgEl && imgEl.getAttribute('src') ? imgEl.getAttribute('src') : '';
+        const image = normalizeImageSrc(imgEl && imgEl.getAttribute('src'));
         const link = root.querySelector('a.product-card-body');
         let productPath = '';
         if (link && link.getAttribute('href')) {
@@ -153,6 +179,8 @@
         }
         return { sku, name, currency, unitAmount, quantity: 1, image, productPath };
     }
+
+    /* ─── Mutazioni carrello ───────────────────────────────────────────────────── */
 
     function mergeAdd(lines, line) {
         const next = lines.map((x) => ({ ...x }));
@@ -178,16 +206,26 @@
         return next;
     }
 
-    function paymentMap() {
-        const m = global.AML_STRIPE_PAYMENT_LINK_BY_SKU;
-        return m && typeof m === 'object' ? m : {};
+    function setQuantity(sku, quantity) {
+        const q = Math.round(Number(quantity));
+        // Guard: NaN o valore non numerico → ignora
+        if (!Number.isFinite(q)) return;
+        const clamped = Math.max(0, Math.min(99, q));
+        const next = readLines().map((x) => ({ ...x }));
+        const idx = next.findIndex((x) => x.sku === sku);
+        if (idx < 0) return;
+        if (clamped <= 0) next.splice(idx, 1);
+        else next[idx].quantity = clamped;
+        if (writeLines(next)) dispatch(next);
     }
 
-    function stripeUrlForCart(lines) {
-        if (lines.length !== 1) return '';
-        const u = paymentMap()[lines[0].sku];
-        if (typeof u !== 'string' || !u.startsWith('https://')) return '';
-        return u;
+    function removeLine(sku) {
+        const next = readLines().filter((x) => x.sku !== sku);
+        if (writeLines(next)) dispatch(next);
+    }
+
+    function clearCart() {
+        if (writeLines([])) dispatch([]);
     }
 
     function formatMoney(minor, currency) {
@@ -199,48 +237,29 @@
         }
     }
 
-    function bindAddButtons(scopeRoot) {
-        const scope = scopeRoot || document;
-        scope.querySelectorAll('[data-cart-add]').forEach((btn) => {
-            if (btn.dataset.amlCartBound) return;
-            btn.dataset.amlCartBound = '1';
-            btn.addEventListener('click', () => {
-                const lineRoot = resolveLineRoot(btn);
-                if (!lineRoot) return;
-                const line = lineRoot.classList.contains('product-card')
-                    ? lineFromProductCard(lineRoot)
-                    : lineFromProductContext(lineRoot);
-                if (!line) return;
-                const next = mergeAdd(readLines(), line);
-                writeLines(next);
+    /* ─── Delegazione click su [data-cart-add] ─────────────────────────────────── */
+    // Unico listener sul document: gestisce bottoni presenti ora e futuri (contenuto dinamico).
+
+    function initAddDelegation() {
+        document.addEventListener('click', function (e) {
+            const btn = e.target && e.target.closest ? e.target.closest('[data-cart-add]') : null;
+            if (!btn) return;
+            const lineRoot = resolveLineRoot(btn);
+            if (!lineRoot) return;
+            const line = lineRoot.classList.contains('product-card')
+                ? lineFromProductCard(lineRoot)
+                : lineFromProductContext(lineRoot);
+            if (!line) return;
+            const next = mergeAdd(readLines(), line);
+            if (writeLines(next)) {
                 dispatch(next);
                 announceCartAdded();
                 flashCartButtonsForSource(lineRoot);
-            });
+            }
         });
     }
 
-    function setQuantity(sku, quantity) {
-        const q = Math.max(0, Math.min(99, Math.round(Number(quantity))));
-        const next = readLines().map((x) => ({ ...x }));
-        const idx = next.findIndex((x) => x.sku === sku);
-        if (idx < 0) return;
-        if (q <= 0) next.splice(idx, 1);
-        else next[idx].quantity = q;
-        writeLines(next);
-        dispatch(next);
-    }
-
-    function removeLine(sku) {
-        const next = readLines().filter((x) => x.sku !== sku);
-        writeLines(next);
-        dispatch(next);
-    }
-
-    function clearCart() {
-        writeLines([]);
-        dispatch([]);
-    }
+    /* ─── Pagina carrello ──────────────────────────────────────────────────────── */
 
     function initCartPage() {
         const mount = document.getElementById('aml-cart-app');
@@ -354,13 +373,41 @@
 
         if (tbody && !tbody.dataset.amlCartDelegated) {
             tbody.dataset.amlCartDelegated = '1';
-            tbody.addEventListener('change', (e) => {
+
+            // `change` per mouse/Enter; `input` + debounce per mobile (alcuni browser
+            // non emettono `change` finché il campo non perde il focus).
+            var qtyInputTimer = null;
+            tbody.addEventListener('input', function (e) {
                 const t = e.target;
                 if (!t || !t.classList || !t.classList.contains('aml-cart-qty')) return;
-                const sku = t.getAttribute('data-sku');
-                setQuantity(sku, t.value);
+                clearTimeout(qtyInputTimer);
+                qtyInputTimer = setTimeout(function () {
+                    qtyInputTimer = null;
+                    setQuantity(t.getAttribute('data-sku'), t.value);
+                }, 600);
             });
-            tbody.addEventListener('click', (e) => {
+
+            tbody.addEventListener('change', function (e) {
+                const t = e.target;
+                if (!t || !t.classList || !t.classList.contains('aml-cart-qty')) return;
+                // Cancella il debounce pendente e aggiorna subito
+                clearTimeout(qtyInputTimer);
+                qtyInputTimer = null;
+                setQuantity(t.getAttribute('data-sku'), t.value);
+            });
+
+            // Enter sul campo qty: conferma immediata
+            tbody.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+                const t = e.target;
+                if (!t || !t.classList || !t.classList.contains('aml-cart-qty')) return;
+                clearTimeout(qtyInputTimer);
+                qtyInputTimer = null;
+                setQuantity(t.getAttribute('data-sku'), t.value);
+                t.blur();
+            });
+
+            tbody.addEventListener('click', function (e) {
                 const t = e.target;
                 if (!t || !t.closest) return;
                 const rm = t.closest('[data-sku-remove]');
@@ -392,29 +439,32 @@
         render();
     }
 
-    const api = {
+    /* ─── API pubblica ─────────────────────────────────────────────────────────── */
+
+    global.AmlCart = {
         getItems: readLines,
         setQuantity,
         removeLine,
         clear: clearCart,
         totalQty: () => totalQty(readLines()),
         totalMinor: () => totalMinor(readLines()),
-        stripeUrlForCurrentCart: () => stripeUrlForCart(readLines()),
-        bindAddButtons,
         formatMoney,
+        // Mantenuto per compatibilità; la delegazione è ora automatica su document.
+        bindAddButtons: function () {},
     };
 
-    global.AmlCart = api;
+    /* ─── Init ─────────────────────────────────────────────────────────────────── */
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            bindAddButtons(document);
+        document.addEventListener('DOMContentLoaded', function () {
+            initAddDelegation();
             initCartPage();
             dispatch(readLines());
         });
     } else {
-        bindAddButtons(document);
+        initAddDelegation();
         initCartPage();
         dispatch(readLines());
     }
+
 })(typeof window !== 'undefined' ? window : globalThis);
