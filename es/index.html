@@ -52,22 +52,35 @@
 
     <main id="main" class="home-page">
         <section class="home-hero home-hero--lifestyle" aria-labelledby="home-hero-title">
-            <figure class="home-hero-visual home-hero-visual--banner">
+            <figure class="home-hero-visual">
                 <img class="home-hero-img" src="../asset/media/home-hero-lifestyle.webp" width="1280" height="720" alt="Persona trabajando con un portátil en un espacio de trabajo moderno — licencias digitales Aml Store." decoding="async" fetchpriority="high">
                 <div class="home-hero-overlay" aria-hidden="true"></div>
-                <figcaption class="home-hero-banner-inset">
-                    <p class="home-hero-eyebrow">Aml Store</p>
-                    <h1 id="home-hero-title" class="home-hero-title-on-photo">La serenidad de elegir software original</h1>
+                <figcaption class="home-hero-content">
+                    <p class="home-hero-eyebrow">
+                        <span class="home-hero-eyebrow-rule" aria-hidden="true"></span>
+                        Software Original
+                        <span class="home-hero-eyebrow-rule" aria-hidden="true"></span>
+                    </p>
+                    <h1 id="home-hero-title" class="home-hero-title">La serenidad de<br>elegir bien</h1>
+                    <p class="home-hero-subtitle">Licencias digitales auténticas para Windows, Office y Antivirus — entregadas por correo electrónico, activadas en los portales oficiales del fabricante.</p>
+                    <div class="home-hero-actions">
+                        <a class="home-btn home-btn-primary" href="#catalogo">Ver productos destacados</a>
+                        <a class="home-btn home-btn-ghost" href="#faq">Cómo funciona →</a>
+                    </div>
                 </figcaption>
             </figure>
-            <div class="home-hero-below">
-                <div class="home-hero-promise" role="region" aria-labelledby="home-hero-promise-h">
-                    <p id="home-hero-promise-h" class="home-hero-promise-eyebrow">Valor y confianza</p>
-                    <p class="home-hero-promise-text">Con Aml Store puedes ahorrar en los mejores software profesionales sin renunciar a la seguridad de una <strong>licencia auténtica</strong> y a la garantía de <strong>«satisfacción o reembolso»</strong>.</p>
+            <div class="home-hero-trust-bar" aria-hidden="true">
+                <div class="home-hero-trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>Licencias originales</span>
                 </div>
-                <div class="home-hero-actions">
-                    <a class="home-btn home-btn-primary" href="#catalogo">Ver productos destacados</a>
-                    <a class="home-btn home-btn-secondary" href="#faq">Preguntas frecuentes</a>
+                <div class="home-hero-trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>Entrega inmediata</span>
+                </div>
+                <div class="home-hero-trust-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>Satisfecho o reembolsado</span>
                 </div>
             </div>
         </section>
