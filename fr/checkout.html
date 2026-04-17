@@ -31,15 +31,26 @@
 
     <main id="main" class="checkout-page">
 
-        <nav class="checkout-breadcrumbs" aria-label="Fil d'Ariane">
-            <a href="/fr/">Accueil</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <a href="/fr/cart.html">Panier</a>
-            <span class="sep" aria-hidden="true">/</span>
-            <span aria-current="page">Paiement</span>
-        </nav>
-
         <h1>Paiement</h1>
+
+        <ol class="checkout-stepper" aria-label="Progression du paiement">
+            <li class="checkout-stepper__step checkout-stepper__step--done">
+                <a href="/fr/cart.html" class="checkout-stepper__dot" aria-label="Étape 1 : Panier, terminée">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="checkout-stepper__label">Panier</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--done" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--active">
+                <div class="checkout-stepper__dot" aria-current="step" aria-label="Étape 2 : Paiement, étape en cours">2</div>
+                <span class="checkout-stepper__label">Paiement</span>
+            </li>
+            <li class="checkout-stepper__line checkout-stepper__line--next" aria-hidden="true"></li>
+            <li class="checkout-stepper__step checkout-stepper__step--next">
+                <div class="checkout-stepper__dot" aria-label="Étape 3 : Confirmation, pas encore atteinte">3</div>
+                <span class="checkout-stepper__label">Confirmation</span>
+            </li>
+        </ol>
 
         <div id="checkout-empty-section" class="checkout-empty" aria-live="polite">
             <div class="checkout-empty-icon" aria-hidden="true">🛒</div>
