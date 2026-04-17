@@ -8,32 +8,44 @@
 }
 
 .home-hero {
-    padding-bottom: clamp(0.5rem, 2vw, 1rem);
+    padding-bottom: 0;
 }
 
-/* Hero lifestyle: foto full-bleed nel blocco + titolo in overlay (testo reale HTML, non “bruciato” nell’immagine) */
-.home-hero--lifestyle .home-hero-visual--banner {
+/* ── Hero lifestyle — full-bleed, edge-to-edge redesign ────── */
+
+/* Rompe fuori dal padding/max-width di <main> per coprire tutta la larghezza */
+.home-hero--lifestyle {
+    position: relative;
+    margin-inline: calc(50% - 50vw);
+    width: 100vw;
+    margin-top: -4rem;
+    min-height: 92svh;
+}
+
+/* <figure> come tela full-bleed */
+.home-hero--lifestyle .home-hero-visual {
     position: relative;
     margin: 0;
+    padding: 0;
     width: 100%;
-    max-height: min(52vh, 520px);
-    aspect-ratio: 16 / 9;
-    border-radius: 16px;
+    min-height: 92svh;
+    display: flex;
+    align-items: center;
     overflow: hidden;
-    border: 1px solid var(--page-border);
-    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.42);
-    background: #0a0a0a;
+    background: #050505;
 }
 
-.home-hero--lifestyle .home-hero-visual--banner .home-hero-img {
+/* Immagine di sfondo a copertura totale */
+.home-hero--lifestyle .home-hero-img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 70% center;
+    object-position: 65% center;
 }
 
+/* Overlay direzionale: denso sul lato testo, si dissolve verso destra */
 .home-hero-overlay {
     position: absolute;
     inset: 0;
@@ -41,137 +53,155 @@
     pointer-events: none;
     background: linear-gradient(
         105deg,
-        rgba(5, 5, 5, 0.92) 0%,
-        rgba(5, 5, 5, 0.72) 38%,
-        rgba(5, 5, 5, 0.2) 68%,
-        transparent 100%
+        rgba(5, 5, 5, 0.94) 0%,
+        rgba(5, 5, 5, 0.78) 38%,
+        rgba(5, 5, 5, 0.30) 65%,
+        rgba(5, 5, 5, 0.08) 100%
     );
 }
 
-.home-hero-banner-inset {
-    position: absolute;
-    inset: 0;
+/* Contenuto testo: allineato a sinistra, centrato verticalmente */
+.home-hero-content {
+    position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: min(100%, 22rem);
-    max-width: 92%;
-    margin: 0;
-    padding: clamp(1.1rem, 3.5vw, 2rem);
+    padding: clamp(6rem, 10vw, 9rem) clamp(1.5rem, 8vw, 6rem) clamp(5rem, 8vw, 7rem);
+    max-width: min(640px, 90vw);
     box-sizing: border-box;
-}
-
-.home-hero-title-on-photo {
     margin: 0;
-    font-size: clamp(1.45rem, 4.2vw, 2.35rem);
-    font-weight: 800;
-    line-height: 1.12;
-    letter-spacing: -0.03em;
-    color: #fafafa;
-    text-shadow: 0 2px 28px rgba(0, 0, 0, 0.55);
-    max-width: 22ch;
 }
 
+/* Eyebrow: etichetta allcaps con regoli decorativi affiancati */
 .home-hero-eyebrow {
-    margin: 0 0 0.45rem;
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(250, 250, 250, 0.88);
-}
-
-.home-hero-below {
-    margin-top: clamp(1.35rem, 3vw, 2rem);
     display: flex;
-    flex-direction: column;
-    gap: clamp(1.5rem, 3.8vw, 2.35rem);
-}
-
-.home-hero-promise {
-    margin: 0;
-    padding: clamp(1.15rem, 3vw, 1.55rem);
-    border-radius: 14px;
-    border: 1px solid var(--page-border);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 55%, rgba(255, 255, 255, 0.03) 100%);
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
-}
-
-.home-hero-promise-eyebrow {
-    margin: 0 0 0.55rem;
-    font-size: 0.68rem;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 1.1rem;
+    font-size: 0.7rem;
     font-weight: 800;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(228, 228, 231, 0.72);
+    color: rgba(250, 250, 250, 0.65);
 }
 
-.home-hero-promise-text {
-    margin: 0;
-    max-width: min(58ch, 100%);
-    font-size: clamp(1.02rem, 2.35vw, 1.2rem);
-    line-height: 1.5;
-    font-weight: 600;
-    letter-spacing: -0.025em;
-    color: var(--page-text);
+.home-hero-eyebrow-rule {
+    display: block;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 1px;
+    background: rgba(250, 250, 250, 0.35);
 }
 
-.home-hero-promise-text strong {
+/* H1: dimensione molto più grande, peso 800 */
+.home-hero-title {
+    margin: 0 0 1.35rem;
+    font-size: clamp(2.4rem, 5.8vw, 4rem);
     font-weight: 800;
+    line-height: 1.07;
+    letter-spacing: -0.038em;
+    color: #fafafa;
+    text-shadow: 0 2px 44px rgba(0, 0, 0, 0.5);
+    max-width: 15ch;
 }
 
-@media (min-width: 640px) {
-    .home-hero--lifestyle .home-hero-visual--banner .home-hero-img {
-        object-position: center center;
+/* Sottotitolo sotto l’H1 */
+.home-hero-subtitle {
+    margin: 0 0 2rem;
+    font-size: clamp(0.92rem, 2vw, 1.08rem);
+    line-height: 1.65;
+    font-weight: 500;
+    color: rgba(250, 250, 250, 0.78);
+    max-width: 44ch;
+}
+
+/* Bottone ghost per il CTA secondario dentro la hero scura */
+.home-btn-ghost {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.90);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.home-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.32);
+}
+
+/* Trust bar glassmorphism ancorata al fondo della sezione */
+.home-hero-trust-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0.85rem clamp(1.5rem, 6vw, 4rem);
+    background: rgba(5, 5, 5, 0.62);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.home-hero-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.75rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: rgba(250, 250, 250, 0.80);
+    white-space: nowrap;
+}
+
+.home-hero-trust-item + .home-hero-trust-item {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.home-hero-trust-item svg {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    color: var(--page-accent);
+}
+
+/* Mobile: trust item si impila verticalmente */
+@media (max-width: 480px) {
+    .home-hero-trust-item {
+        padding: 0.4rem 1rem;
+        font-size: 0.72rem;
     }
 
-    .home-hero-banner-inset {
-        width: min(100%, 26rem);
+    .home-hero-trust-item + .home-hero-trust-item {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .home-hero-title-on-photo {
-        max-width: 26ch;
+    .home-hero-trust-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-inline: 1.5rem;
     }
 }
 
 /*
- * Tema chiaro: il blocco hero resta “dark on photo” (come il dark mode), così il testo
- * non finisce su overlay bianco lavato. Solo il corpo pagina è chiaro.
+ * Tema chiaro: la sezione hero rimane sempre scura (immagine di sfondo),
+ * solo il corpo pagina diventa chiaro.
  */
-html[data-theme='light'] .home-hero--lifestyle .home-hero-visual--banner {
-    border: none;
-    box-shadow:
-        0 4px 6px rgba(0, 0, 0, 0.04),
-        0 18px 44px rgba(0, 0, 0, 0.1);
-}
-
-html[data-theme='light'] .home-hero--lifestyle .home-hero-overlay {
+html[data-theme=’light’] .home-hero-overlay {
     background: linear-gradient(
         105deg,
-        rgba(12, 12, 14, 0.93) 0%,
-        rgba(12, 12, 14, 0.76) 40%,
-        rgba(12, 12, 14, 0.28) 68%,
-        transparent 100%
+        rgba(5, 5, 5, 0.94) 0%,
+        rgba(5, 5, 5, 0.78) 40%,
+        rgba(5, 5, 5, 0.30) 65%,
+        rgba(5, 5, 5, 0.08) 100%
     );
-}
-
-html[data-theme='light'] .home-hero-promise {
-    background: linear-gradient(145deg, #ffffff 0%, #f4f4f5 100%);
-    border-color: rgba(0, 0, 0, 0.08);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-}
-
-html[data-theme='light'] .home-hero-promise-eyebrow {
-    color: rgba(63, 63, 70, 0.85);
-}
-
-html[data-theme='light'] .home-hero-promise-text {
-    color: #0a0a0a;
-}
-
-html[data-theme='light'] .home-hero-actions {
-    border-top-color: rgba(0, 0, 0, 0.08);
 }
 
 .home-trust-list {
@@ -317,8 +347,6 @@ html[data-theme='light'] .home-product-detail:hover {
     flex-wrap: wrap;
     gap: 0.75rem 1rem;
     box-sizing: border-box;
-    padding-top: clamp(1.2rem, 3vw, 1.75rem);
-    border-top: 1px solid var(--page-border);
 }
 
 .home-btn {
