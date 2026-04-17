@@ -971,6 +971,14 @@ html[data-theme="light"] .checkout-error-msg {
     font-size: 0.95rem;
 }
 
+/* Fix: l'attributo hidden deve prevalere su display:flex/block */
+.success-loading[hidden],
+.success-details[hidden],
+.success-error[hidden],
+#success-transfer-box[hidden] {
+    display: none !important;
+}
+
 .success-loading::before {
     content: '';
     display: block;
@@ -1002,21 +1010,24 @@ html[data-theme="light"] .checkout-error-msg {
 /* Tabella riepilogo ordine */
 .success-order-meta {
     background: var(--page-bg, #f5f6f8);
-    border-radius: 6px;
-    padding: 1rem 1.25rem;
-    margin: 0 0 1.25rem;
+    border-radius: 10px;
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0 2rem;
     font-size: 0.9rem;
     color: var(--page-text-secondary, #555);
+    line-height: 1.7;
 }
 
-.success-order-meta p { margin: 0.25rem 0; }
+.success-order-meta p { margin: 0.4rem 0; }
 
 .success-order-id {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: var(--page-accent, #3b82f6);
     font-family: monospace, monospace;
     word-break: break-all;
+    margin: 0.25rem 0 1rem !important;
+    letter-spacing: 0.5px;
 }
 
 /* Badge stato */
