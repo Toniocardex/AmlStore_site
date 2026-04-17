@@ -845,20 +845,21 @@
                 });
             }
 
-            document.addEventListener('click', () => {
+            this.__docClickHandler = () => {
                 if (!langWrapper || !langSelector) return;
                 langWrapper.classList.remove('open');
                 langSelector.setAttribute('aria-expanded', 'false');
-            });
-
-            document.addEventListener('keydown', (e) => {
+            };
+            this.__docKeydownHandler = (e) => {
                 if (e.key !== 'Escape' || !langWrapper?.classList.contains('open')) return;
                 langWrapper.classList.remove('open');
                 if (langSelector) {
                     langSelector.setAttribute('aria-expanded', 'false');
                     langSelector.focus();
                 }
-            });
+            };
+            document.addEventListener('click', this.__docClickHandler);
+            document.addEventListener('keydown', this.__docKeydownHandler);
 
             const cartLink = this.shadowRoot.querySelector('a.cart-wrapper');
             const cartBadge = this.shadowRoot.querySelector('.cart-badge');
@@ -898,7 +899,23 @@
                 prevCartQty = count;
             };
             syncCartChrome();
+            this.__syncCartChrome = syncCartChrome;
             document.addEventListener('aml-cart-changed', syncCartChrome);
+        }
+
+        disconnectedCallback() {
+            if (typeof this.__docClickHandler === 'function') {
+                document.removeEventListener('click', this.__docClickHandler);
+                this.__docClickHandler = null;
+            }
+            if (typeof this.__docKeydownHandler === 'function') {
+                document.removeEventListener('keydown', this.__docKeydownHandler);
+                this.__docKeydownHandler = null;
+            }
+            if (typeof this.__syncCartChrome === 'function') {
+                document.removeEventListener('aml-cart-changed', this.__syncCartChrome);
+                this.__syncCartChrome = null;
+            }
         }
     }
 
