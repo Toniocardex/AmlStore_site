@@ -12,7 +12,7 @@ compatibility_flags    = ["nodejs_compat"]
 [[d1_databases]]
 binding       = "DB"
 database_name = "aml-orders"
-database_id   = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id   = "72e06b2b-7366-4298-8fd9-ccbb4540ad79"
 
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
