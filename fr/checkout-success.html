@@ -59,12 +59,50 @@
         <div class="checkout-success">
             <div class="checkout-success__icon" aria-hidden="true">
                 <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="28" cy="28" r="28" fill="var(--accent)"/>
+                    <circle cx="28" cy="28" r="28" fill="var(--page-accent)"/>
                     <path d="M16 28l8 8 16-16" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
             <h2 class="checkout-success__title">Merci pour votre commande !</h2>
-            <p class="checkout-success__msg">Votre commande a bien été reçue. Vous recevrez bientôt un e-mail de confirmation avec tous les détails.</p>
+
+            <div id="success-loading" class="success-loading" aria-live="polite">
+                <span id="success-loading-msg">Chargement de la commande…</span>
+            </div>
+
+            <div id="success-details" hidden>
+                <div class="success-order-meta">
+                    <p><span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.4px;color:var(--page-text-muted)">N° commande</span></p>
+                    <p class="success-order-id" id="success-order-id">—</p>
+                    <p>Date : <strong id="success-date">—</strong></p>
+                    <p>Paiement : <strong id="success-method">—</strong><span id="success-status-badge" class="success-badge"></span></p>
+                </div>
+
+                <table class="success-items-table">
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th style="text-align:center">Qté</th>
+                            <th style="text-align:right">Sous-total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="success-items-body"></tbody>
+                </table>
+                <p class="success-total-row">Total : <span id="success-total">—</span></p>
+
+                <div id="success-transfer-box" class="success-transfer-box" hidden>
+                    <strong>Instructions pour le virement</strong>
+                    <p>IBAN : <span style="font-family:monospace">IT91 S062 3033 5400 0001 5095 392</span></p>
+                    <p>Titulaire : <span style="font-family:monospace">AML STORE di Cardelli Antonino</span></p>
+                    <p>Banque : Crédit Agricole</p>
+                    <p>Référence (obligatoire) : <span class="success-causale" id="success-causale">—</span></p>
+                </div>
+            </div>
+
+            <div id="success-error" hidden>
+                <p class="success-error__title" id="success-error-title">Lien expiré</p>
+                <p class="success-error__msg"   id="success-error-msg">Consultez votre e-mail pour les détails de votre commande.</p>
+            </div>
+
             <a class="cart-btn cart-btn-primary checkout-success__cta" href="/fr/">Retour à la boutique</a>
         </div>
 
@@ -74,6 +112,8 @@
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
 
     <script src="../js/locale-path.js"></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../js/checkout-success.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>

@@ -958,3 +958,152 @@ html[data-theme="light"] .checkout-error-msg {
 .checkout-success__cta {
     margin-top: 0.5rem;
 }
+
+/* ─── Success page — stato loading / error / dettagli ordine ────────────────── */
+
+.success-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 3rem 1rem;
+    color: var(--page-text-muted, #888);
+    font-size: 0.95rem;
+}
+
+.success-loading::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--page-accent, #3b82f6);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spinner-rotate 0.8s linear infinite;
+}
+
+.success-error {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+}
+
+.success-error__title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--page-text, #1a1a2e);
+}
+
+.success-error__msg {
+    color: var(--page-text-muted, #888);
+    margin: 0 0 1.5rem;
+}
+
+/* Tabella riepilogo ordine */
+.success-order-meta {
+    background: var(--page-bg, #f5f6f8);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 0 0 1.25rem;
+    font-size: 0.9rem;
+    color: var(--page-text-secondary, #555);
+}
+
+.success-order-meta p { margin: 0.25rem 0; }
+
+.success-order-id {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--page-accent, #3b82f6);
+    font-family: monospace, monospace;
+    word-break: break-all;
+}
+
+/* Badge stato */
+.success-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin-left: 0.4rem;
+}
+
+.success-badge--paid    { background: #d1fae5; color: #065f46; }
+.success-badge--pending { background: #fef3c7; color: #92400e; }
+
+/* Tabella items */
+.success-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.success-items-table th {
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--page-text-muted, #888);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid var(--border-color, rgba(255,255,255,0.08));
+}
+
+.success-td {
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color, rgba(255,255,255,0.08));
+}
+
+.success-td--center { text-align: center; }
+.success-td--right  { text-align: right; white-space: nowrap; }
+
+.success-total-row {
+    text-align: right;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.5rem 0.5rem 0;
+    margin: 0 0 1rem;
+}
+
+/* Box bonifico */
+.success-transfer-box {
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #78350f;
+}
+
+.success-transfer-box strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 0.5rem;
+}
+
+.success-causale {
+    font-family: monospace, monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #92400e;
+    word-break: break-all;
+}
+
+/* Light mode overrides */
+@media (prefers-color-scheme: light) {
+    .success-items-table th,
+    .success-td {
+        border-bottom-color: #e5e7eb;
+    }
+}
+
+[data-theme="light"] .success-items-table th,
+[data-theme="light"] .success-td {
+    border-bottom-color: #e5e7eb;
+}
