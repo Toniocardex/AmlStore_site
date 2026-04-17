@@ -117,6 +117,10 @@
             const homeHref = S.homeHref(parsed.pathPrefix, activeLang.code);
             const cartHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'cart.html');
             const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
+
+            /* Rileva se siamo sulla home page della lingua attiva */
+            const afterLang = (parsed.pathAfterLang || '').replace(/^\//, '');
+            const isHome = afterLang === '' || afterLang === 'index.html';
             const esc = S.escapeHtmlAttr;
 
             const cartAriaForCount = (n) => {
@@ -720,7 +724,7 @@
                             <img src="${esc(logoSrc)}" width="280" height="56" alt="${esc(t.logoAlt)}">
                         </a>
                         <nav class="nav-links">
-                            <a href="${esc(homeHref)}" class="active">${esc(t.navHome)}</a>
+                            <a href="${esc(homeHref)}"${isHome ? ' class="active"' : ''}>${esc(t.navHome)}</a>
                             <a href="#">${esc(t.navOs)}</a>
                             <a href="#">${esc(t.navOffice)}</a>
                             <a href="#">${esc(t.navAntivirus)}</a>
@@ -778,7 +782,7 @@
                     </div>
                     
                     <nav class="drawer-nav">
-                        <a href="${esc(homeHref)}" class="active">${esc(t.navHome)}</a>
+                        <a href="${esc(homeHref)}"${isHome ? ' class="active"' : ''}>${esc(t.navHome)}</a>
                         <a href="#">${esc(t.navOs)}</a>
                         <a href="#">${esc(t.navOffice)}</a>
                         <a href="#">${esc(t.navAntivirus)}</a>
