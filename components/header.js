@@ -899,6 +899,8 @@
             document.addEventListener('click', this.__docClickHandler);
             document.addEventListener('keydown', this.__docKeydownHandler);
 
+            // TODO: collegare btn-signin e drawer-btn-signin al sistema di autenticazione
+            //       (es. Stripe Identity, custom auth) — al momento visivi/placeholder.
             const cartLink = this.shadowRoot.querySelector('a.cart-wrapper');
             const cartBadge = this.shadowRoot.querySelector('.cart-badge');
             let prevCartQty = null;
