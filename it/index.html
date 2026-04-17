@@ -47,6 +47,7 @@
     </script>
 </head>
 <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Vai al contenuto principale</a>
 
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
@@ -230,8 +231,12 @@
         </section>
 
         <section class="home-closing" aria-labelledby="home-closing-title">
-            <h2 id="home-closing-title" class="visually-hidden">Continua</h2>
-            <a class="home-btn home-btn-primary" href="#catalogo">Torna ai prodotti in evidenza</a>
+            <div class="home-closing-inner">
+                <p class="home-closing-eyebrow">Aml Store</p>
+                <h2 id="home-closing-title" class="home-closing-title">Software originale.<br>Prezzi onesti.</h2>
+                <p class="home-closing-sub">Licenze digitali autentiche, consegnate via email. Senza abbonamenti nascosti.</p>
+                <a class="home-btn home-btn-primary" href="#catalogo">Esplora il catalogo</a>
+            </div>
         </section>
     </main>
 
@@ -240,6 +245,7 @@
 
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
+    <script src="../js/home.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
