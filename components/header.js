@@ -249,8 +249,12 @@
                         display: flex;
                         align-items: center;
                         gap: 0.75rem;
-                        cursor: default;
-                        text-decoration: none; /* In caso lo si trasformi in link in futuro */
+                        text-decoration: none;
+                        border-radius: 8px;
+                    }
+                    .support-info:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
                     }
                     .support-icon {
                         display: flex;
@@ -724,7 +728,7 @@
                     </div>
                     
                     <div class="right-section">
-                        <div class="support-info" title="${esc(t.assistanceSmall)}: +39 392 558 0413">
+                        <a href="tel:+393925580413" class="support-info" title="${esc(t.assistanceSmall)}: +39 392 558 0413">
                             <div class="support-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
                             </div>
@@ -732,7 +736,7 @@
                                 <small>${esc(t.assistanceSmall)}</small>
                                 <span>+39 392 558 0413</span>
                             </div>
-                        </div>
+                        </a>
 
                         <div class="divider"></div>
 
