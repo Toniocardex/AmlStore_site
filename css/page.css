@@ -22,9 +22,10 @@ html {
     }
 }
 
-/* Offset per header sticky (~88px) + margine di respiro */
+/* Ancora centrata visivamente: 40vh porta il target a metà schermo
+   tenendo conto dell'header sticky (~88px) */
 [id] {
-    scroll-margin-top: 104px;
+    scroll-margin-top: 40vh;
 }
 
 .skip-link {
