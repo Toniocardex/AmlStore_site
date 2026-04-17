@@ -321,6 +321,10 @@
                         background: rgba(255, 255, 255, 0.05);
                         border-color: rgba(255, 255, 255, 0.1);
                     }
+                    .lang-selector:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
+                    }
                     /* Sostituto visivo per l'anteprima se non c'è l'immagine della flag */
                     .lang-selector img {
                         width: 20px;
@@ -509,6 +513,10 @@
                     .btn-signin:active {
                         transform: translateY(0) scale(0.98);
                     }
+                    .btn-signin:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
+                    }
 
                     .mobile-toggle {
                         display: none;
@@ -518,11 +526,16 @@
                         cursor: pointer;
                         padding: 0.5rem;
                         margin-left: -0.5rem; /* Compensa il padding per l'allineamento */
+                        border-radius: 6px;
                         transition: opacity 0.2s;
                         touch-action: manipulation; /* Ottimizzazione touch */
                     }
                     .mobile-toggle:hover {
                         opacity: 0.7;
+                    }
+                    .mobile-toggle:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
                     }
                     .mobile-toggle svg {
                         width: 28px;
@@ -625,9 +638,13 @@
                         cursor: pointer;
                         transition: background 0.3s ease, transform 0.3s ease;
                     }
-                    .close-drawer:hover { 
-                        background: rgba(255, 255, 255, 0.15); 
+                    .close-drawer:hover {
+                        background: rgba(255, 255, 255, 0.15);
                         transform: rotate(90deg);
+                    }
+                    .close-drawer:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
                     }
                     .close-drawer svg { width: 20px; height: 20px; fill: currentColor; }
 
@@ -704,9 +721,13 @@
                         margin-bottom: 1.5rem;
                         transition: opacity 0.2s ease, transform 0.2s ease;
                     }
-                    .drawer-btn-signin:hover { 
+                    .drawer-btn-signin:hover {
                         opacity: 0.9;
                         transform: scale(1.01);
+                    }
+                    .drawer-btn-signin:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
                     }
                     .drawer-assist {
                         text-align: center;
