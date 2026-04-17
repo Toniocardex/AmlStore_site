@@ -31,7 +31,12 @@ export async function createOrder(db, {
     currency,
     paymentMethod,
 }) {
-    const id = crypto.randomUUID();
+    // Genera ID breve leggibile: AML- + 8 caratteri uppercase alfanumerici
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no I,O,0,1 (ambigui)
+    const arr = new Uint8Array(8);
+    crypto.getRandomValues(arr);
+    const shortId = 'AML-' + Array.from(arr).map(b => chars[b % chars.length]).join('');
+    const id = shortId;
     const ts = now();
 
     await db.prepare(`
