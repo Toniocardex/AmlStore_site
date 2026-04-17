@@ -265,9 +265,7 @@
         const filledEl = document.getElementById('aml-cart-filled');
         const tbody = document.getElementById('aml-cart-lines');
         const totalEl = document.getElementById('aml-cart-total');
-        const stripeBtn = document.getElementById('aml-cart-stripe');
         const mailBtn = document.getElementById('aml-cart-mail');
-        const multiNote = document.getElementById('aml-cart-multi-note');
         const removeLabel = mount.getAttribute('data-label-remove') || 'Remove';
         const qtyAria = mount.getAttribute('data-qty-aria') || 'Quantity';
         const qtyMinusAria = mount.getAttribute('data-label-qty-minus') || 'Decrease quantity for';
@@ -367,20 +365,6 @@
             });
 
             if (totalEl) totalEl.textContent = formatMoney(minor, currency);
-
-            const stripeUrl = stripeUrlForCart(lines);
-            if (stripeBtn) {
-                if (stripeUrl && lines.length === 1) {
-                    stripeBtn.hidden = false;
-                    stripeBtn.setAttribute('href', stripeUrl);
-                    stripeBtn.setAttribute('rel', 'noopener noreferrer');
-                } else {
-                    stripeBtn.hidden = true;
-                    stripeBtn.removeAttribute('href');
-                    stripeBtn.removeAttribute('rel');
-                }
-            }
-            if (multiNote) multiNote.hidden = lines.length < 2;
             if (mailBtn) mailBtn.setAttribute('href', mailtoOrder(lines));
         }
 
