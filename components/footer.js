@@ -301,7 +301,9 @@ class EcommerceFooter extends HTMLElement {
                     gap: 0.5rem;
                 }
 
-                .link-list a {
+                /* Stili condivisi <a> e <button> */
+                .link-list a,
+                .link-list button.link-as-a {
                     color: var(--text-secondary);
                     text-decoration: none;
                     font-size: 0.95rem;
@@ -314,45 +316,8 @@ class EcommerceFooter extends HTMLElement {
                     transition: color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 }
 
-                /* Effetto Hover: Il testo diventa bianco e appare una freccina */
-                .link-list a::before {
-                    content: '→';
-                    position: absolute;
-                    left: -1.2rem;
-                    opacity: 0;
-                    color: var(--accent-hover);
-                    transform: translateX(-5px);
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                }
-
-                .link-list a:hover, .link-list a:focus-visible {
-                    color: var(--text-primary);
-                    transform: translateX(1.2rem);
-                }
-                
-                .link-list a:hover::before, .link-list a:focus-visible::before {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-
-                .link-list button.link-as-a {
-                    appearance: none;
-                    background: none;
-                    border: none;
-                    margin: 0;
-                    font: inherit;
-                    color: var(--text-secondary);
-                    font-size: 0.95rem;
-                    font-weight: 500;
-                    display: inline-flex;
-                    align-items: center;
-                    padding: 0.35rem 0;
-                    width: max-content;
-                    position: relative;
-                    cursor: pointer;
-                    text-align: left;
-                    transition: color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                }
+                /* Effetto hover: freccina animata */
+                .link-list a::before,
                 .link-list button.link-as-a::before {
                     content: '→';
                     position: absolute;
@@ -362,19 +327,46 @@ class EcommerceFooter extends HTMLElement {
                     transform: translateX(-5px);
                     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 }
+
+                .link-list a:hover,
+                .link-list a:focus-visible,
                 .link-list button.link-as-a:hover,
                 .link-list button.link-as-a:focus-visible {
                     color: var(--text-primary);
                     transform: translateX(1.2rem);
                 }
+
+                .link-list a:hover::before,
+                .link-list a:focus-visible::before,
                 .link-list button.link-as-a:hover::before,
                 .link-list button.link-as-a:focus-visible::before {
                     opacity: 1;
                     transform: translateX(0);
                 }
+
+                /* Reset specifico <button> */
+                .link-list button.link-as-a {
+                    appearance: none;
+                    background: none;
+                    border: none;
+                    margin: 0;
+                    font: inherit;
+                    cursor: pointer;
+                    text-align: left;
+                }
+
                 .link-list button.link-as-a:focus-visible {
                     outline: 2px solid var(--accent);
                     outline-offset: 2px;
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .link-list a,
+                    .link-list button.link-as-a,
+                    .link-list a::before,
+                    .link-list button.link-as-a::before {
+                        transition: none;
+                    }
                 }
 
                 /* ITEMS CONTATTO */
@@ -601,13 +593,18 @@ class EcommerceFooter extends HTMLElement {
                 }
                 .payment-logo {
                     display: block;
-                    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    transition: filter 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                                transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                     filter: grayscale(100%) opacity(0.4);
-                    cursor: default;
+                    cursor: pointer;
                 }
                 .payment-logo:hover {
                     filter: grayscale(0%) opacity(1);
                     transform: translateY(-3px) scale(1.05);
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    .payment-logo { transition: none; }
+                    .payment-logo:hover { transform: none; }
                 }
                 .payment-logo img {
                     height: 22px;
@@ -645,24 +642,23 @@ class EcommerceFooter extends HTMLElement {
                     .container { padding: 0 clamp(1.25rem, 5vw, 2rem); }
                     .footer-main { gap: 2.5rem; padding-top: 3rem; padding-bottom: 2rem; }
                     
-                    .link-list a {
-                        padding: 0.75rem 0; /* Padding Touch Enorme */
-                        width: 100%;
-                        font-size: 1rem;
-                        border-bottom: 1px solid rgba(255,255,255,0.05);
-                    }
-                    .link-list a:last-child { border-bottom: none; }
-                    .link-list a::before { display: none; }
-                    .link-list a:hover, .link-list a:focus-visible { transform: none; color: var(--text-primary); }
+                    /* Touch: padding generoso + separatore per ogni voce */
+                    .link-list a,
                     .link-list button.link-as-a {
-                        width: 100%;
                         padding: 0.75rem 0;
+                        width: 100%;
                         font-size: 1rem;
                         border-bottom: 1px solid rgba(255,255,255,0.05);
                     }
+                    /* Rimuove separatore sull'ultima voce di ogni lista */
+                    .link-list li:last-child a,
+                    .link-list li:last-child button.link-as-a { border-bottom: none; }
+                    /* Nasconde la freccina e annulla lo spostamento laterale */
+                    .link-list a::before,
                     .link-list button.link-as-a::before { display: none; }
+                    .link-list a:hover, .link-list a:focus-visible,
                     .link-list button.link-as-a:hover,
-                    .link-list button.link-as-a:focus-visible { transform: none; }
+                    .link-list button.link-as-a:focus-visible { transform: none; color: var(--text-primary); }
                     
                     .bottom-content {
                         flex-direction: column-reverse;
