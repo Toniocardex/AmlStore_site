@@ -199,20 +199,6 @@
         }
     }
 
-    function mailtoOrder(lines) {
-        const linesText = lines
-            .map((l) => {
-                const q = Number(l.quantity) || 0;
-                return `${q}x ${l.name} (${l.sku}) — ${formatMoney(Math.round(Number(l.unitAmount) || 0) * q, l.currency)}`;
-            })
-            .join('\n');
-        const sub = encodeURIComponent('Aml Store — cart order request');
-        const body = encodeURIComponent(
-            `Hello,\n\nI would like to place the following order:\n\n${linesText}\n\nIndicative total: ${formatMoney(totalMinor(lines), lines[0] && lines[0].currency)}\n`
-        );
-        return `mailto:Info@amlstore.it?subject=${sub}&body=${body}`;
-    }
-
     function bindAddButtons(scopeRoot) {
         const scope = scopeRoot || document;
         scope.querySelectorAll('[data-cart-add]').forEach((btn) => {
@@ -265,7 +251,6 @@
         const filledEl = document.getElementById('aml-cart-filled');
         const tbody = document.getElementById('aml-cart-lines');
         const totalEl = document.getElementById('aml-cart-total');
-        const mailBtn = document.getElementById('aml-cart-mail');
         const removeLabel = mount.getAttribute('data-label-remove') || 'Remove';
         const qtyAria = mount.getAttribute('data-qty-aria') || 'Quantity';
         const qtyMinusAria = mount.getAttribute('data-label-qty-minus') || 'Decrease quantity for';
@@ -365,7 +350,6 @@
             });
 
             if (totalEl) totalEl.textContent = formatMoney(minor, currency);
-            if (mailBtn) mailBtn.setAttribute('href', mailtoOrder(lines));
         }
 
         if (tbody && !tbody.dataset.amlCartDelegated) {
@@ -423,7 +407,6 @@
         totalQty: () => totalQty(readLines()),
         totalMinor: () => totalMinor(readLines()),
         stripeUrlForCurrentCart: () => stripeUrlForCart(readLines()),
-        mailtoOrderUrl: () => mailtoOrder(readLines()),
         bindAddButtons,
         formatMoney,
     };
