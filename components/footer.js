@@ -434,7 +434,7 @@ class EcommerceFooter extends HTMLElement {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    padding: 2rem clamp(2rem, 5vw, 4rem);
+                    padding: 2rem 0;
                     flex-wrap: wrap;
                     gap: clamp(1rem, 2.5vw, 1.75rem);
                 }
@@ -668,7 +668,7 @@ class EcommerceFooter extends HTMLElement {
                         flex-direction: column-reverse;
                         justify-content: center;
                         text-align: center;
-                        padding: 2.5rem clamp(1.25rem, 5vw, 2rem);
+                        padding: 2.5rem 0;
                     }
                     .payments { justify-content: center; }
                     .bottom-right-cluster {
@@ -720,7 +720,7 @@ class EcommerceFooter extends HTMLElement {
                             <li><a href="#">${esc(t.supportReturns)}</a></li>
                             <li><a href="#">${esc(t.supportTerms)}</a></li>
                             <li><a href="#">${esc(t.supportPrivacy)}</a></li>
-                            <li><a href="cookie-policy.html">${esc(t.supportCookies)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/cookie-policy.html">${esc(t.supportCookies)}</a></li>
                             <li><button type="button" class="link-as-a" data-aml-cookie-settings>${esc(t.cookieManage)}</button></li>
                         </ul>
                     </div>
@@ -729,7 +729,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="contact-card">
                         <h3 class="col-title">${esc(t.headingContact)}</h3>
                         <div class="contact-items-wrapper">
-                            <a href="tel:+390212345678" class="contact-item">
+                            <a href="tel:+393925580413" class="contact-item">
                                 <div class="contact-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
                                 </div>
@@ -754,6 +754,7 @@ class EcommerceFooter extends HTMLElement {
 
             <!-- Footer Bottom -->
             <div class="footer-bottom">
+                <div class="container">
                 <div class="bottom-content">
                     <p class="copyright">
                         &copy; ${new Date().getFullYear()} ${esc(t.copyright)}
@@ -783,6 +784,7 @@ class EcommerceFooter extends HTMLElement {
                             <span class="payment-logo" title="Stripe"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Stripe_Logo.svg" width="56" height="22" alt="" loading="lazy" decoding="async"></span>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         `;
