@@ -1003,6 +1003,12 @@ html[data-theme='light'] .product-process-steps__item {
     object-fit: contain;
 }
 
+/* Defender SVG has less internal padding — scale down to match visual weight */
+.product-app-icon img[src*="Defender"] {
+    width: 48px;
+    height: 48px;
+}
+
 .product-stories {
     position: relative;
     z-index: 1;
