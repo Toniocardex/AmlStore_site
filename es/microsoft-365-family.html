@@ -6,7 +6,44 @@
     <title>Microsoft 365 Familia — Aml Store</title>
     <meta name="description" content="Suscripción Microsoft 365 Familia 12 meses: Office premium, 6 TB en OneDrive, hasta 6 usuarios. Licencia digital original.">
     <meta name="robots" content="index, follow">
-    <script src="../js/consent-init.js"></script>
+    <script>/**
+ * Google Consent Mode v2 — default e ripristino da preferenze salvate.
+ * Caricare come primo script in <head>, prima di Google Tag Manager / gtag.js.
+ * Dopo questo file è sicuro inserire GTM (snippet consigliato da Google).
+ */
+(function (w) {
+    'use strict';
+
+    var STORAGE_KEY = 'aml-consent-v2';
+
+    w.dataLayer = w.dataLayer || [];
+    if (typeof w.gtag !== 'function') {
+        w.gtag = function gtag() {
+            w.dataLayer.push(arguments);
+        };
+    }
+
+    w.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'denied',
+        personalization_storage: 'denied',
+        security_storage: 'granted',
+        wait_for_update: 500,
+    });
+
+    try {
+        var raw = w.localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        var parsed = JSON.parse(raw);
+        if (!parsed || !parsed.consent || typeof parsed.consent !== 'object') return;
+        w.gtag('consent', 'update', parsed.consent);
+    } catch (_) {
+        /* ignore */
+    }
+})(typeof window !== 'undefined' ? window : globalThis);</script>
 
     <link rel="icon" href="../favicon/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
@@ -29,11 +66,31 @@
     <link rel="alternate" hreflang="es" href="https://aml-store.com/es/microsoft-365-family.html">
     <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/microsoft-365-family.html">
 
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-700.woff2">
+    <link rel="preload" as="image" href="../asset/media/microsoft-365-family.webp" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/product.css">
-    <link rel="preload" as="image" href="../asset/media/microsoft-365-family.webp" fetchpriority="high" type="image/webp">
-    <script src="../js/theme-init.js"></script>
+    <script>(function () {
+    'use strict';
+    var KEY = 'aml-theme';
+    function systemTheme() {
+        try {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+        } catch (_) {}
+        return 'light';
+    }
+    try {
+        var v = localStorage.getItem(KEY);
+        if (v === 'light' || v === 'dark') {
+            document.documentElement.setAttribute('data-theme', v);
+            return;
+        }
+    } catch (_) {}
+    document.documentElement.setAttribute('data-theme', systemTheme());
+})();</script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -411,7 +468,7 @@
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
 
-    <script src="../js/locale-path.js"></script>
+    <script src="../js/locale-path.js" defer></script>
     <script src="../js/cart.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
