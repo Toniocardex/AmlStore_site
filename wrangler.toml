@@ -23,8 +23,8 @@ PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"
 # Admin panel — Cloudflare Access JWT verification
 # CF_ACCESS_AUD: Zero Trust → Access → Applications → [Admin App] → Overview → "Application Audience"
 # CF_ACCESS_TEAM_DOMAIN: Zero Trust → Settings → Custom Pages → team domain (es. "xyz.cloudflareaccess.com")
-CF_ACCESS_AUD         = ""
-CF_ACCESS_TEAM_DOMAIN = ""
+CF_ACCESS_AUD         = "8c5ead49-2ccc-4f35-8009-9bcc57f6f2f3"
+CF_ACCESS_TEAM_DOMAIN = "amlstore.cloudflareaccess.com"
 
 # ── Segreti (MAI committare — impostare con `wrangler secret put <NAME>`) ────
 # TOKEN_SECRET           — stringa random ≥32 caratteri per HMAC token thank-you
