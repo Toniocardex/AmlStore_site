@@ -62,7 +62,15 @@ async function fetchJwks(teamDomain) {
  * @returns {Promise<{valid: boolean, email?: string, reason?: string}>}
  */
 export async function verifyAccessJwt(request, env) {
-    const token = request.headers.get('Cf-Access-Jwt-Assertion');
+    // Cloudflare Access injects Cf-Access-Jwt-Assertion for protected paths.
+    // For same-origin API calls from the browser, fall back to the CF_Authorization
+    // cookie that CF Access sets after authentication.
+    let token = request.headers.get('Cf-Access-Jwt-Assertion');
+    if (!token) {
+        const cookieHeader = request.headers.get('Cookie') || '';
+        const match = cookieHeader.match(/(?:^|;\s*)CF_Authorization=([^;]+)/);
+        token = match ? match[1] : null;
+    }
     if (!token) return { valid: false, reason: 'missing_jwt' };
 
     const parsed = parseJwt(token);
