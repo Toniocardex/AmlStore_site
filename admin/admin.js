@@ -213,7 +213,7 @@
                 + '<td class="adm-td--center adm-td--nowrap"><strong>' + esc(fmtMoney(o.totalMinor, o.currency)) + '</strong></td>'
                 + '<td class="adm-td--nowrap adm-td--muted">' + esc(fmtDate(o.createdAt)) + '</td>'
                 + '<td class="adm-td--center adm-td--actions">'
-                    + '<button class="adm-btn adm-btn--ghost adm-btn--sm btn-detail" data-id="' + esc(o.orderId) + '" title="Dettaglio">Dettaglio</button>'
+                    + '<button class="adm-btn adm-btn--ghost adm-btn--sm btn-detail" data-id="' + esc(o.orderId) + '" title="Dettagli">Dettagli</button>'
                 + '</td>'
             + '</tr>';
         }).join('');
