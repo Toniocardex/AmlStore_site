@@ -67,8 +67,23 @@
 
     /* ─── API calls ────────────────────────────────────────────────────────── */
 
+    function getCFToken() {
+        var match = document.cookie.match(/(?:^|;\s*)CF_Authorization=([^;]+)/);
+        return match ? match[1] : null;
+    }
+
+    function authHeaders(extra) {
+        var h = Object.assign({}, extra || {});
+        var token = getCFToken();
+        if (token) h['Cf-Access-Jwt-Assertion'] = token;
+        return h;
+    }
+
     function apiGet(path) {
-        return fetch(path, { credentials: 'same-origin' }).then(function (res) {
+        return fetch(path, {
+            credentials: 'same-origin',
+            headers: authHeaders(),
+        }).then(function (res) {
             if (res.status === 401) { toast('Sessione scaduta — ricarica la pagina', 'error'); throw new Error('401'); }
             if (!res.ok) throw new Error('HTTP ' + res.status);
             return res.json();
@@ -79,7 +94,7 @@
         return fetch(path, {
             method:      'POST',
             credentials: 'same-origin',
-            headers:     { 'Content-Type': 'application/json' },
+            headers:     authHeaders({ 'Content-Type': 'application/json' }),
             body:        JSON.stringify(body || {}),
         }).then(function (res) {
             if (res.status === 401) { toast('Sessione scaduta — ricarica la pagina', 'error'); throw new Error('401'); }
