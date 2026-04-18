@@ -372,6 +372,9 @@ select.adm-input {
 .adm-badge--paypal   { background: rgba(59,130,246,.15); color: #60a5fa; }
 .adm-badge--transfer { background: rgba(249,115,22,.15); color: #fb923c; }
 
+/* ─── Hidden attribute override (previene che display:flex sovrascriva [hidden]) */
+[hidden] { display: none !important; }
+
 /* ─── Loading / Empty ────────────────────────────────────────────────────── */
 
 .adm-loading {
