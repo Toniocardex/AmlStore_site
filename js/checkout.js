@@ -37,7 +37,9 @@
         var KEY = 'aml-transfer-ikey';
         var k = sessionStorage.getItem(KEY);
         if (!k) {
-            k = 'ik-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+            var arr = new Uint32Array(2);
+            crypto.getRandomValues(arr);
+            k = 'ik-' + Date.now() + '-' + arr[0].toString(36) + arr[1].toString(36);
             sessionStorage.setItem(KEY, k);
         }
         return k;

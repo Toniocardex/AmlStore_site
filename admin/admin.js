@@ -26,7 +26,7 @@
     /* ─── Utility DOM ──────────────────────────────────────────────────────── */
 
     function $  (id) { return document.getElementById(id); }
-    function esc(s)  { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function esc(s)  { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
     function show(id) { var el = $(id); if (el) el.hidden = false; }
     function hide(id) { var el = $(id); if (el) el.hidden = true; }
@@ -200,12 +200,13 @@
 
             var archived = o.archivedAt ? ' adm-row--archived' : '';
 
+            var cust = o.customer || {};
             return '<tr class="adm-order-row' + archived + '" data-id="' + esc(o.orderId) + '">'
                 + '<td class="adm-td--nowrap"><span class="adm-order-id">' + esc(o.orderId) + '</span></td>'
                 + '<td>'
-                    + '<div class="adm-customer-name">' + esc((o.customer.firstName || '') + ' ' + (o.customer.lastName || '')) + '</div>'
-                    + '<div class="adm-customer-email">' + esc(o.customer.email || '') + '</div>'
-                    + (o.customer.company ? '<div class="adm-customer-company">' + esc(o.customer.company) + '</div>' : '')
+                    + '<div class="adm-customer-name">' + esc((cust.firstName || '') + ' ' + (cust.lastName || '')) + '</div>'
+                    + '<div class="adm-customer-email">' + esc(cust.email || '') + '</div>'
+                    + (cust.company ? '<div class="adm-customer-company">' + esc(cust.company) + '</div>' : '')
                 + '</td>'
                 + '<td><div class="adm-items-list">' + (items || '<span class="adm-td--muted">—</span>') + '</div></td>'
                 + '<td>' + methodBadge(o.paymentMethod) + '</td>'
@@ -325,17 +326,18 @@
         + '</div></div>';
 
         // Cliente
+        var c = o.customer || {};
         html += '<div class="adm-detail-section">'
             + '<p class="adm-detail-section__title">Cliente</p>'
             + '<div class="adm-detail-grid">'
-            + field('Nome',      esc((o.customer.firstName || '') + ' ' + (o.customer.lastName || '')))
-            + field('Email',     '<a href="mailto:' + esc(o.customer.email) + '">' + esc(o.customer.email) + '</a>')
-            + field('Tipo',      esc(o.customer.type === 'business' ? 'Azienda' : 'Privato'))
-            + (o.customer.company ? field('Ragione Soc.', esc(o.customer.company)) : '')
-            + (o.customer.phone   ? field('Telefono',     esc(o.customer.phone))   : '')
-            + (o.customer.piva    ? field('P.IVA',        esc(o.customer.piva))    : '')
-            + (o.customer.pec     ? field('PEC',          esc(o.customer.pec))     : '')
-            + (o.customer.sdi     ? field('SDI',          esc(o.customer.sdi))     : '')
+            + field('Nome',      esc((c.firstName || '') + ' ' + (c.lastName || '')))
+            + field('Email',     '<a href="mailto:' + esc(c.email || '') + '">' + esc(c.email || '—') + '</a>')
+            + field('Tipo',      esc(c.type === 'business' ? 'Azienda' : 'Privato'))
+            + (c.company ? field('Ragione Soc.', esc(c.company)) : '')
+            + (c.phone   ? field('Telefono',     esc(c.phone))   : '')
+            + (c.piva    ? field('P.IVA',        esc(c.piva))    : '')
+            + (c.pec     ? field('PEC',          esc(c.pec))     : '')
+            + (c.sdi     ? field('SDI',          esc(c.sdi))     : '')
         + '</div></div>';
 
         // Articoli

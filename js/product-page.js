@@ -10,6 +10,7 @@
     var RESIZE_DEBOUNCE_MS = 100;
     var obs = null;
     var resizeTimer = null;
+    var lastInset = -1;
 
     function readSafeAreaTop() {
         try {
@@ -59,14 +60,17 @@
     }
 
     function connectObserver(sticky, primaryCta) {
-        if (obs) {
-            obs.disconnect();
-            obs = null;
-        }
         if (!('IntersectionObserver' in window)) return;
 
         syncHeaderCssVar();
         var inset = headerInsetPx();
+
+        // Skip rebuild if header height hasn't changed — avoids unnecessary disconnect/reconnect
+        if (obs && inset === lastInset) return;
+        lastInset = inset;
+
+        if (obs) { obs.disconnect(); obs = null; }
+
         var topMargin = '-' + inset + 'px';
 
         obs = new IntersectionObserver(
