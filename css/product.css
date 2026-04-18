@@ -497,88 +497,11 @@ html[data-theme='light'] .product-page .price-block__save {
     flex-shrink: 0;
 }
 
-.product-page .details-section {
+.product-page .install-section {
     padding-top: 3.5rem;
     padding-bottom: 3rem;
     position: relative;
     z-index: 1;
-    container-type: inline-size;
-    container-name: pp-details;
-}
-
-.product-page .tabs-header {
-    display: flex;
-    gap: 1.5rem;
-    border-bottom: 1px solid var(--page-border);
-    margin-bottom: 2rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.product-page .tabs-header::-webkit-scrollbar {
-    display: none;
-}
-
-.product-page .tab-btn {
-    background: none;
-    border: none;
-    padding: 0.85rem 0;
-    font-family: inherit;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--page-text-muted);
-    cursor: pointer;
-    position: relative;
-    white-space: nowrap;
-    transition: color 0.2s ease;
-}
-
-.product-page .tab-btn:hover {
-    color: var(--page-text);
-}
-
-.product-page .tab-btn.active {
-    color: var(--pp-accent-hover);
-}
-
-.product-page .tab-btn:focus-visible {
-    outline: 2px solid var(--pp-accent-hover);
-    outline-offset: 2px;
-    border-radius: 4px;
-}
-
-.product-page .tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--pp-accent-hover);
-    border-radius: 2px 2px 0 0;
-}
-
-.product-page .tab-panel[hidden] {
-    display: none;
-}
-
-.product-page .tab-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(1.75rem, 2.5vw, 2.5rem);
-    align-items: start;
-}
-
-@container pp-details (min-width: 720px) {
-    .product-page .tab-content {
-        grid-template-columns: minmax(0, 2fr) minmax(min(100%, 280px), 1fr);
-        gap: clamp(2rem, 3vw, 4rem);
-    }
-}
-
-/* Leggibilità: il corpo lungo non diventa una riga infinita su ultra-wide */
-.product-page .tab-content .rich-text {
-    max-width: min(72ch, 100%);
 }
 
 .product-page .rich-text h2 {

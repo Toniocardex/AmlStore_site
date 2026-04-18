@@ -120,7 +120,7 @@
 
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
 
-    <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Acquisto rapido" hidden aria-hidden="true">
+    <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Acquisto rapido" aria-hidden="true">
         <div class="product-sticky-cta__inner">
             <span class="product-sticky-cta__title">Microsoft 365 Family</span>
             <div class="product-sticky-cta__prices" aria-hidden="true">
@@ -232,33 +232,7 @@
         </section>
 
 
-        <section class="details-section">
-            <div class="tabs-header" role="tablist" aria-label="Sezioni prodotto">
-                <button type="button" class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-desc" id="tab-desc">Descrizione</button>
-                <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-install" id="tab-install">Installazione</button>
-            </div>
-
-            <div class="tab-panel" id="panel-desc" role="tabpanel" aria-labelledby="tab-desc">
-                <div class="tab-content">
-                    <aside class="req-box">
-                        <h3>Requisiti di sistema</h3>
-                        <div class="req-item">
-                            <span class="req-label">Sistema operativo</span>
-                            <span class="req-val">Windows 10/11, macOS, iOS, Android.</span>
-                        </div>
-                        <div class="req-item">
-                            <span class="req-label">Account</span>
-                            <span class="req-val">Account Microsoft e connessione Internet.</span>
-                        </div>
-                        <div class="req-item">
-                            <span class="req-label">Spazio disco</span>
-                            <span class="req-val">Almeno 4 GB liberi (variabile per piattaforma).</span>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-
-            <div class="tab-panel" id="panel-install" role="tabpanel" aria-labelledby="tab-install" hidden>
+        <section class="install-section">
                 <div class="rich-text">
                     <h2>Attivazione e installazione</h2>
                     <p>Per riscattare e attivare Microsoft 365 Family usa il portale ufficiale Microsoft:</p>
@@ -428,7 +402,6 @@
                     <p>Sì: con le app desktop installate puoi lavorare offline; servono comunque connessione e accesso periodici per la verifica della licenza, aggiornamenti e servizi cloud come OneDrive, come descritto da Microsoft.</p>
                 </div>
             </details>
-        </section>
     </main>
 
     <aml-cookie-banner></aml-cookie-banner>
@@ -439,7 +412,6 @@
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
-    <script src="../js/product-tabs.js" defer></script>
     <script src="../js/faq-anim.js" defer></script>
     <script src="../js/product-page.js" defer></script>
 </body>
