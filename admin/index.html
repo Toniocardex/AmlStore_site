@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — Aml Store</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/favicon/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<!-- ── Header ────────────────────────────────────────────────────────────── -->
+<header class="adm-header">
+    <div class="adm-header__brand">
+        <svg class="adm-header__logo-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <path d="M4 24L14 4l10 20H4z" stroke="currentColor" stroke-width="2.2"
+                  stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span>Aml Store <strong>Admin</strong></span>
+    </div>
+    <div class="adm-header__right">
+        <span class="adm-user-email" id="adm-user-email"></span>
+        <a href="https://amlstore.cloudflareaccess.com/cdn-cgi/access/logout"
+           class="adm-btn adm-btn--ghost adm-btn--sm">Esci</a>
+    </div>
+</header>
+
+<!-- ── Layout principale ─────────────────────────────────────────────────── -->
+<div class="adm-layout">
+
+    <!-- Sidebar filtri -->
+    <aside class="adm-sidebar">
+        <section class="adm-filter-section">
+            <h2 class="adm-filter-section__title">Filtri</h2>
+
+            <label class="adm-label" for="filter-search">Cerca</label>
+            <input id="filter-search" type="search" class="adm-input"
+                   placeholder="ID, email, nome…" autocomplete="off">
+
+            <label class="adm-label" for="filter-status">Stato</label>
+            <select id="filter-status" class="adm-input">
+                <option value="">Tutti</option>
+                <option value="pending_payment">In attesa</option>
+                <option value="paid">Pagato</option>
+                <option value="cancelled">Annullato</option>
+                <option value="refunded">Rimborsato</option>
+            </select>
+
+            <label class="adm-label" for="filter-method">Metodo</label>
+            <select id="filter-method" class="adm-input">
+                <option value="">Tutti</option>
+                <option value="stripe">Carta (Stripe)</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank_transfer">Bonifico</option>
+            </select>
+
+            <label class="adm-checkbox-label">
+                <input type="checkbox" id="filter-archived" class="adm-checkbox">
+                Includi archiviati
+            </label>
+
+            <button id="btn-search" class="adm-btn adm-btn--primary adm-btn--full">
+                Cerca
+            </button>
+        </section>
+
+        <section class="adm-filter-section adm-filter-section--stats" id="adm-stats">
+            <!-- Populated by JS -->
+        </section>
+    </aside>
+
+    <!-- Contenuto principale -->
+    <main class="adm-main" id="adm-main">
+
+        <!-- Toolbar -->
+        <div class="adm-toolbar">
+            <h1 class="adm-page-title">Ordini</h1>
+            <div class="adm-toolbar__right">
+                <span class="adm-count" id="adm-count"></span>
+                <div class="adm-pagination" id="adm-pagination"></div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div class="adm-loading" id="adm-loading" aria-live="polite">
+            <div class="adm-spinner"></div>
+            <span>Caricamento ordini…</span>
+        </div>
+
+        <!-- Errore -->
+        <div class="adm-empty" id="adm-error" hidden>
+            <p class="adm-empty__icon">⚠️</p>
+            <p id="adm-error-msg">Errore nel caricamento degli ordini.</p>
+            <button class="adm-btn adm-btn--primary" onclick="window.adminApp.reload()">
+                Riprova
+            </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="adm-empty" id="adm-empty" hidden>
+            <p class="adm-empty__icon">📭</p>
+            <p>Nessun ordine trovato.</p>
+        </div>
+
+        <!-- Tabella ordini -->
+        <div class="adm-table-wrap" id="adm-table-wrap" hidden>
+            <table class="adm-table" id="adm-table">
+                <thead>
+                    <tr>
+                        <th>Ordine</th>
+                        <th>Cliente</th>
+                        <th>Articoli</th>
+                        <th>Metodo</th>
+                        <th>Stato</th>
+                        <th class="adm-th--right">Totale</th>
+                        <th>Data</th>
+                        <th class="adm-th--center">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="adm-tbody"></tbody>
+            </table>
+        </div>
+
+    </main>
+</div>
+
+<!-- ── Modal dettaglio ordine ─────────────────────────────────────────────── -->
+<div class="adm-modal-backdrop" id="adm-modal-backdrop" hidden aria-hidden="true">
+    <div class="adm-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="adm-modal__header">
+            <h2 class="adm-modal__title" id="modal-title">Dettaglio ordine</h2>
+            <button class="adm-modal__close" id="modal-close" aria-label="Chiudi">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2"
+                          stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="adm-modal__body" id="modal-body">
+            <div class="adm-loading adm-loading--inline">
+                <div class="adm-spinner"></div>
+                <span>Caricamento…</span>
+            </div>
+        </div>
+
+        <div class="adm-modal__footer" id="modal-footer"></div>
+    </div>
+</div>
+
+<!-- ── Dialog conferma ────────────────────────────────────────────────────── -->
+<div class="adm-modal-backdrop" id="adm-confirm-backdrop" hidden aria-hidden="true">
+    <div class="adm-modal adm-modal--sm" role="dialog" aria-modal="true"
+         aria-labelledby="confirm-title">
+        <div class="adm-modal__header">
+            <h2 class="adm-modal__title" id="confirm-title">Conferma azione</h2>
+        </div>
+        <div class="adm-modal__body">
+            <p id="confirm-msg"></p>
+            <label class="adm-label" id="confirm-notes-label" for="confirm-notes"
+                   style="margin-top:1rem">Note (opzionale)</label>
+            <textarea id="confirm-notes" class="adm-input adm-textarea"
+                      placeholder="Es: Bonifico ricevuto il 18/04/2026…" rows="3"></textarea>
+        </div>
+        <div class="adm-modal__footer">
+            <button class="adm-btn adm-btn--ghost" id="confirm-cancel">Annulla</button>
+            <button class="adm-btn adm-btn--danger" id="confirm-ok">Conferma</button>
+        </div>
+    </div>
+</div>
+
+<!-- ── Toast ──────────────────────────────────────────────────────────────── -->
+<div class="adm-toast-container" id="adm-toast-container" aria-live="polite"></div>
+
+<script src="/admin/admin.js" defer></script>
+</body>
+</html>

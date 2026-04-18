@@ -40,7 +40,14 @@ CREATE TABLE IF NOT EXISTS orders (
 
     -- Traccia operativa
     confirmation_email_sent_at   TEXT,                    -- idempotenza: null = non ancora inviata
-    confirmation_email_event_src TEXT                     -- webhook_stripe|webhook_paypal|worker_capture|bank_transfer_created
+    confirmation_email_event_src TEXT,                    -- webhook_stripe|webhook_paypal|worker_capture|bank_transfer_created
+
+    -- Admin panel
+    archived_at                  TEXT,                    -- soft-archive (NULL = attivo)
+    marked_paid_at               TEXT,                    -- timestamp conferma manuale bonifico
+    marked_paid_by               TEXT,                    -- email admin da JWT
+    admin_notes                  TEXT,                    -- note opzionali admin
+    paid_notification_sent_at    TEXT                     -- idempotenza 2a email bonifico (pagamento confermato)
 );
 
 -- Indici per lookup rapidi
@@ -49,3 +56,4 @@ CREATE INDEX IF NOT EXISTS idx_orders_paypal_order    ON orders(paypal_order_id)
 CREATE INDEX IF NOT EXISTS idx_orders_status          ON orders(status);
 CREATE INDEX IF NOT EXISTS idx_orders_customer_email  ON orders(customer_email);
 CREATE INDEX IF NOT EXISTS idx_orders_created_at      ON orders(created_at);
+CREATE INDEX IF NOT EXISTS idx_orders_archived        ON orders(archived_at);

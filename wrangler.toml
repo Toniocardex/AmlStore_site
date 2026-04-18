@@ -16,9 +16,15 @@ database_id   = "72e06b2b-7366-4298-8fd9-ccbb4540ad79"
 
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
-SITE_ORIGIN   = "https://aml-store.com"
+SITE_ORIGIN     = "https://aml-store.com"
 PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"
 # Prima del go-live cambiare PAYPAL_BASE_URL in: https://api-m.paypal.com
+
+# Admin panel — Cloudflare Access JWT verification
+# CF_ACCESS_AUD: Zero Trust → Access → Applications → [Admin App] → Overview → "Application Audience"
+# CF_ACCESS_TEAM_DOMAIN: Zero Trust → Settings → Custom Pages → team domain (es. "xyz.cloudflareaccess.com")
+CF_ACCESS_AUD         = ""
+CF_ACCESS_TEAM_DOMAIN = ""
 
 # ── Segreti (MAI committare — impostare con `wrangler secret put <NAME>`) ────
 # TOKEN_SECRET           — stringa random ≥32 caratteri per HMAC token thank-you

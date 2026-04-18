@@ -2,14 +2,21 @@
  * functions/api/[[catchall]].js
  * Cloudflare Pages Function — gestisce tutte le route /api/*
  *
- * Routes:
+ * Routes pubbliche:
  *   POST /api/stripe-create-session
- *   GET  /api/stripe-return               ← redirect post-pagamento Stripe
+ *   GET  /api/stripe-return
  *   POST /api/webhooks/stripe
  *   POST /api/paypal-create-order
  *   POST /api/paypal-capture-order
  *   POST /api/bank-transfer-order
  *   GET  /api/order-status
+ *
+ * Routes admin (protette da Cloudflare Access + verifica JWT):
+ *   GET  /api/admin/orders
+ *   GET  /api/admin/orders/:id
+ *   POST /api/admin/orders/:id/mark-paid
+ *   POST /api/admin/orders/:id/archive
+ *   POST /api/admin/orders/:id/unarchive
  */
 
 import { generateToken, verifyToken }                    from './_lib/token.js';
@@ -21,6 +28,9 @@ import { createCheckoutSession, verifyStripeWebhook }    from './_lib/stripe.js'
 import { getAccessToken, createPaypalOrder,
          capturePaypalOrder }                            from './_lib/paypal.js';
 import { sendConfirmationOnce }                          from './_lib/email.js';
+import { verifyAccessJwt, listOrders, getOrderDetail,
+         markBankTransferPaid, archiveOrder,
+         unarchiveOrder }                                from './_lib/admin.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -63,7 +73,12 @@ export async function onRequest(context) {
     }
 
     try {
-        // ── Routes ──────────────────────────────────────────────────────────────
+        // ── Admin routes (protette da Cloudflare Access + JWT) ───────────────────
+        if (path.startsWith('/api/admin/')) {
+            return await handleAdminRoute(path, request, env);
+        }
+
+        // ── Routes pubbliche ─────────────────────────────────────────────────────
         if (path === '/api/stripe-create-session' && request.method === 'POST') {
             return await handleStripeCreateSession(request, env);
         }
@@ -382,6 +397,100 @@ async function handleBankTransferOrder(request, env) {
         t:       token.t,
         causale: orderId,  // mostrato anche in pagina
     }, 200, request);
+}
+
+/* ─── Admin routes ───────────────────────────────────────────────────────────── */
+
+/**
+ * Middleware + dispatcher per tutte le route /api/admin/*
+ * Ogni richiesta viene prima autenticata via JWT Cloudflare Access.
+ * Le API admin sono same-origin (no CORS aggiuntivo): la UI è su /admin/
+ * protetto dallo stesso Cloudflare Access Policy.
+ */
+async function handleAdminRoute(path, request, env) {
+    // ── Autenticazione JWT ────────────────────────────────────────────────────
+    const jwt = await verifyAccessJwt(request, env);
+    if (!jwt.valid) {
+        console.warn('[admin] JWT non valido:', jwt.reason);
+        return new Response(JSON.stringify({ error: 'Unauthorized', reason: jwt.reason }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+    const actorEmail = jwt.email;
+
+    // Sotto-path dopo /api/admin
+    const sub = path.slice('/api/admin'.length); // es. '/orders' o '/orders/AML-xxx/mark-paid'
+
+    // ── GET /api/admin/orders ─────────────────────────────────────────────────
+    if (sub === '/orders' && request.method === 'GET') {
+        const qs              = new URL(request.url).searchParams;
+        const result = await listOrders(env.DB, {
+            page:            Number(qs.get('page'))   || 1,
+            status:          qs.get('status')          || '',
+            paymentMethod:   qs.get('paymentMethod')   || '',
+            search:          qs.get('search')          || '',
+            includeArchived: qs.get('archived') === '1',
+        });
+        return new Response(JSON.stringify(result), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── GET /api/admin/orders/:id ─────────────────────────────────────────────
+    const detailMatch = sub.match(/^\/orders\/([^/]+)$/);
+    if (detailMatch && request.method === 'GET') {
+        const orderId = detailMatch[1];
+        const order   = await getOrderDetail(env.DB, orderId);
+        if (!order) {
+            return new Response(JSON.stringify({ error: 'Order not found' }), {
+                status: 404, headers: { 'Content-Type': 'application/json' },
+            });
+        }
+        return new Response(JSON.stringify(order), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── POST /api/admin/orders/:id/mark-paid ─────────────────────────────────
+    const markPaidMatch = sub.match(/^\/orders\/([^/]+)\/mark-paid$/);
+    if (markPaidMatch && request.method === 'POST') {
+        const orderId = markPaidMatch[1];
+        const body    = await request.json().catch(() => ({}));
+        const notes   = body.notes || null;
+
+        const result = await markBankTransferPaid(
+            env.DB, orderId, actorEmail, notes,
+            env.RESEND_API_KEY || '', env.TRUSTPILOT_BCC || ''
+        );
+
+        const status = result.ok ? 200 : (result.reason === 'order_not_found' ? 404 : 409);
+        return new Response(JSON.stringify(result), {
+            status, headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── POST /api/admin/orders/:id/archive ────────────────────────────────────
+    const archiveMatch = sub.match(/^\/orders\/([^/]+)\/archive$/);
+    if (archiveMatch && request.method === 'POST') {
+        await archiveOrder(env.DB, archiveMatch[1]);
+        return new Response(JSON.stringify({ ok: true }), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── POST /api/admin/orders/:id/unarchive ──────────────────────────────────
+    const unarchiveMatch = sub.match(/^\/orders\/([^/]+)\/unarchive$/);
+    if (unarchiveMatch && request.method === 'POST') {
+        await unarchiveOrder(env.DB, unarchiveMatch[1]);
+        return new Response(JSON.stringify({ ok: true }), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    return new Response(JSON.stringify({ error: 'Not found' }), {
+        status: 404, headers: { 'Content-Type': 'application/json' },
+    });
 }
 
 /* ─── GET /api/order-status ─────────────────────────────────────────────────── */
