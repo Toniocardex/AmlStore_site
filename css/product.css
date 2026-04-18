@@ -991,18 +991,16 @@ html[data-theme='light'] .product-process-steps__item {
 }
 
 .product-app-icon {
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     display: grid;
     place-items: center;
-    border-radius: 14px;
-    background: color-mix(in srgb, var(--page-text) 6%, transparent);
-    border: 1px solid var(--page-border);
 }
 
-.product-app-icon svg {
-    width: 26px;
-    height: 26px;
+.product-app-icon img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
 }
 
 .product-stories {
