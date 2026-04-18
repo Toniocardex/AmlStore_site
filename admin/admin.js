@@ -210,7 +210,7 @@
                 + '<td><div class="adm-items-list">' + (items || '<span class="adm-td--muted">—</span>') + '</div></td>'
                 + '<td>' + methodBadge(o.paymentMethod) + '</td>'
                 + '<td>' + statusBadge(o.status) + (o.archivedAt ? ' <span class="adm-badge adm-badge--archived">Archiviato</span>' : '') + '</td>'
-                + '<td class="adm-td--right adm-td--nowrap"><strong>' + esc(fmtMoney(o.totalMinor, o.currency)) + '</strong></td>'
+                + '<td class="adm-td--center adm-td--nowrap"><strong>' + esc(fmtMoney(o.totalMinor, o.currency)) + '</strong></td>'
                 + '<td class="adm-td--nowrap adm-td--muted">' + esc(fmtDate(o.createdAt)) + '</td>'
                 + '<td class="adm-td--center adm-td--actions">'
                     + '<button class="adm-btn adm-btn--ghost adm-btn--sm btn-detail" data-id="' + esc(o.orderId) + '" title="Dettaglio">Dettaglio</button>'

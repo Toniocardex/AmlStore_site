@@ -130,12 +130,12 @@ a:hover { text-decoration: underline; }
 /* ─── Filter section ─────────────────────────────────────────────────────── */
 
 .adm-filter-section__title {
-    font-size: .7rem;
+    font-size: .65rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .6px;
+    letter-spacing: .7px;
     color: var(--adm-muted);
-    margin-bottom: .75rem;
+    margin-bottom: .6rem;
 }
 
 .adm-filter-section {
@@ -251,9 +251,10 @@ select.adm-input {
 }
 
 .adm-page-title {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--adm-text);
+    letter-spacing: -.01em;
 }
 
 .adm-toolbar__right {
@@ -263,8 +264,12 @@ select.adm-input {
 }
 
 .adm-count {
-    font-size: .8rem;
+    font-size: .78rem;
     color: var(--adm-muted);
+    background: var(--adm-card);
+    border: 1px solid var(--adm-border);
+    border-radius: 20px;
+    padding: .15rem .65rem;
 }
 
 /* ─── Pagination ─────────────────────────────────────────────────────────── */
@@ -297,6 +302,7 @@ select.adm-input {
     border-radius: var(--adm-radius-lg);
     border: 1px solid var(--adm-border);
     background: var(--adm-card);
+    box-shadow: 0 2px 12px rgba(0,0,0,.25);
 }
 
 .adm-table {
@@ -313,78 +319,84 @@ select.adm-input {
 }
 
 .adm-table th {
-    padding: .75rem 1rem;
+    padding: .7rem 1rem;
     text-align: left;
-    font-size: .7rem;
+    font-size: .68rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .4px;
+    letter-spacing: .5px;
     color: var(--adm-muted);
     white-space: nowrap;
-    border-bottom: 1px solid var(--adm-border);
+    border-bottom: 2px solid var(--adm-border);
+    user-select: none;
 }
 .adm-th--right  { text-align: right; }
 .adm-th--center { text-align: center; }
 
 .adm-table tbody tr {
-    border-bottom: 1px solid var(--adm-border);
-    transition: background .1s;
+    border-bottom: 1px solid rgba(42,46,69,.6);
+    transition: background .12s;
     cursor: pointer;
 }
+/* Zebra stripes leggere */
+.adm-table tbody tr:nth-child(even) { background: rgba(255,255,255,.018); }
 .adm-table tbody tr:last-child { border-bottom: none; }
-.adm-table tbody tr:hover { background: rgba(59,130,246,.07); }
-.adm-table tbody tr.adm-row--archived { opacity: .5; }
+.adm-table tbody tr:hover { background: rgba(59,130,246,.09) !important; }
+.adm-table tbody tr.adm-row--archived { opacity: .45; }
 
 .adm-table td {
-    padding: .8rem 1rem;
+    padding: .75rem 1rem;
     vertical-align: middle;
 }
 
-.adm-td--right  { text-align: right; white-space: nowrap; }
-.adm-td--center { text-align: center; }
-.adm-td--nowrap { white-space: nowrap; }
-.adm-td--mono   { font-family: monospace; font-size: .8rem; }
-.adm-td--muted  { color: var(--adm-muted2); }
+.adm-td--right   { text-align: right;  white-space: nowrap; }
+.adm-td--center  { text-align: center; white-space: nowrap; }
+.adm-td--nowrap  { white-space: nowrap; }
+.adm-td--mono    { font-family: monospace; font-size: .8rem; }
+.adm-td--muted   { color: var(--adm-muted2); }
 .adm-td--actions { white-space: nowrap; }
 
 .adm-order-id {
-    font-family: monospace;
-    font-size: .82rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: .8rem;
     font-weight: 700;
     color: var(--adm-accent);
+    letter-spacing: .03em;
 }
+.adm-order-id:hover { text-decoration: underline; }
 
-.adm-customer-name { font-weight: 600; }
-.adm-customer-email { font-size: .78rem; color: var(--adm-muted2); }
-.adm-customer-company { font-size: .75rem; color: var(--adm-muted); font-style: italic; }
+.adm-customer-name    { font-weight: 600; color: var(--adm-text); }
+.adm-customer-email   { font-size: .76rem; color: var(--adm-muted2); margin-top: .1rem; }
+.adm-customer-company { font-size: .73rem; color: var(--adm-muted); font-style: italic; margin-top: .1rem; }
 
-.adm-items-list { font-size: .8rem; color: var(--adm-muted2); }
-.adm-items-list span { display: block; }
+.adm-items-list { font-size: .79rem; color: var(--adm-muted2); }
+.adm-items-list span { display: block; line-height: 1.6; }
 
 /* ─── Badges ─────────────────────────────────────────────────────────────── */
 
 .adm-badge {
     display: inline-flex;
     align-items: center;
-    padding: .2rem .6rem;
+    padding: .22rem .65rem;
     border-radius: 20px;
-    font-size: .72rem;
+    font-size: .7rem;
     font-weight: 700;
     white-space: nowrap;
-    letter-spacing: .2px;
+    letter-spacing: .25px;
+    border: 1px solid transparent;
 }
 
 /* Status */
-.adm-badge--pending  { background: rgba(245,158,11,.15); color: #f59e0b; }
-.adm-badge--paid     { background: rgba(16,185,129,.15);  color: #10b981; }
-.adm-badge--cancelled{ background: rgba(239,68,68,.15);   color: #ef4444; }
-.adm-badge--refunded { background: rgba(100,116,139,.15); color: #94a3b8; }
-.adm-badge--archived { background: rgba(100,116,139,.1);  color: #64748b; font-style: italic; }
+.adm-badge--pending  { background: rgba(245,158,11,.12); color: #fbbf24; border-color: rgba(245,158,11,.25); }
+.adm-badge--paid     { background: rgba(16,185,129,.12);  color: #34d399; border-color: rgba(16,185,129,.25); }
+.adm-badge--cancelled{ background: rgba(239,68,68,.12);   color: #f87171; border-color: rgba(239,68,68,.25); }
+.adm-badge--refunded { background: rgba(100,116,139,.12); color: #94a3b8; border-color: rgba(100,116,139,.25); }
+.adm-badge--archived { background: rgba(100,116,139,.08); color: #64748b; border-color: rgba(100,116,139,.15); font-style: italic; }
 
 /* Metodo pagamento */
-.adm-badge--stripe   { background: rgba(139,92,246,.15); color: #a78bfa; }
-.adm-badge--paypal   { background: rgba(59,130,246,.15); color: #60a5fa; }
-.adm-badge--transfer { background: rgba(249,115,22,.15); color: #fb923c; }
+.adm-badge--stripe   { background: rgba(139,92,246,.12); color: #c4b5fd; border-color: rgba(139,92,246,.25); }
+.adm-badge--paypal   { background: rgba(59,130,246,.12); color: #93c5fd; border-color: rgba(59,130,246,.25); }
+.adm-badge--transfer { background: rgba(249,115,22,.12); color: #fdba74; border-color: rgba(249,115,22,.25); }
 
 /* ─── Hidden attribute override (previene che display:flex sovrascriva [hidden]) */
 [hidden] { display: none !important; }
