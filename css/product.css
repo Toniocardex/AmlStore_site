@@ -118,6 +118,12 @@ html[data-theme="light"] .product-page {
     border: 1px solid rgba(245, 158, 11, 0.25);
 }
 
+.product-page .badge.popular {
+    background: rgba(99, 102, 241, 0.12);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.28);
+}
+
 .product-page .badge.digital {
     background: color-mix(in srgb, var(--page-accent) 14%, transparent);
     color: var(--pp-accent-hover);
@@ -375,6 +381,21 @@ html[data-theme='light'] .product-page .price-block__save {
     font-size: 0.85rem;
     color: var(--page-text-muted);
     font-weight: 500;
+}
+
+.product-page .price-compare {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: #34d399;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.product-page .price-compare svg {
+    flex-shrink: 0;
+    opacity: 0.9;
 }
 
 .product-page .action-buttons {
