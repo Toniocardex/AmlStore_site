@@ -206,6 +206,14 @@
                         Aggiungi al carrello
                     </button>
                 </div>
+                <div class="payment-methods" aria-label="Metodi di pagamento accettati">
+                    <span class="payment-methods__logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg" width="56" height="18" alt="Visa" loading="lazy" decoding="async"></span>
+                    <span class="payment-methods__logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg" width="40" height="18" alt="Mastercard" loading="lazy" decoding="async"></span>
+                    <span class="payment-methods__logo" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg" width="72" height="18" alt="PayPal" loading="lazy" decoding="async"></span>
+                    <span class="payment-methods__logo" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg" width="48" height="18" alt="Apple Pay" loading="lazy" decoding="async"></span>
+                    <span class="payment-methods__logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg" width="52" height="18" alt="Google Pay" loading="lazy" decoding="async"></span>
+                    <span class="payment-methods__logo" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg" width="56" height="18" alt="Stripe" loading="lazy" decoding="async"></span>
+                </div>
                 <div class="trust-list">
                     <div class="trust-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -223,14 +231,75 @@
             </div>
         </section>
 
+
+        <section class="details-section">
+            <div class="tabs-header" role="tablist" aria-label="Sezioni prodotto">
+                <button type="button" class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-desc" id="tab-desc">Descrizione</button>
+                <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-install" id="tab-install">Installazione</button>
+            </div>
+
+            <div class="tab-panel" id="panel-desc" role="tabpanel" aria-labelledby="tab-desc">
+                <div class="tab-content">
+                    <div class="rich-text">
+                        <h2>Il meglio di Microsoft per la famiglia</h2>
+                        <p>
+                            Un solo abbonamento per fino a 6 persone: Word, Excel, PowerPoint, Outlook e OneDrive su PC, Mac, web e mobile, con aggiornamenti continui.
+                        </p>
+                        <ul>
+                            <li>Fino a 6 utenti con lo stesso piano.</li>
+                            <li>6 TB OneDrive (1 TB per persona).</li>
+                            <li>App desktop e mobile sempre aggiornate.</li>
+                            <li>Outlook senza pubblicità e strumenti di sicurezza Microsoft.</li>
+                        </ul>
+                        <h2>Dopo l'acquisto</h2>
+                        <p>
+                            Ricevi una <strong>product key digitale</strong> via email con istruzioni per scaricare e attivare dal sito Microsoft, oltre alla ricevuta d'acquisto.
+                        </p>
+                    </div>
+                    <aside class="req-box">
+                        <h3>Requisiti di sistema</h3>
+                        <div class="req-item">
+                            <span class="req-label">Sistema operativo</span>
+                            <span class="req-val">Windows 10/11, macOS, iOS, Android.</span>
+                        </div>
+                        <div class="req-item">
+                            <span class="req-label">Account</span>
+                            <span class="req-val">Account Microsoft e connessione Internet.</span>
+                        </div>
+                        <div class="req-item">
+                            <span class="req-label">Spazio disco</span>
+                            <span class="req-val">Almeno 4 GB liberi (variabile per piattaforma).</span>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="panel-install" role="tabpanel" aria-labelledby="tab-install" hidden>
+                <div class="rich-text">
+                    <h2>Attivazione e installazione</h2>
+                    <p>Per riscattare e attivare Microsoft 365 Family usa il portale ufficiale Microsoft:</p>
+                    <p><a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a></p>
+                    <h3>Guida rapida all’attivazione</h3>
+                    <ol>
+                        <li>Apri il link e accedi con il tuo <strong>account Microsoft</strong> (o creane uno).</li>
+                        <li>Inserisci il <strong>codice prodotto</strong> che trovi nell’email di consegna inviata da Aml Store.</li>
+                        <li>Completa la procedura guidata per associare la licenza all’account e scaricare le app.</li>
+                        <li>Installa le app su PC o Mac da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a> o dagli store su dispositivi mobile, nei limiti previsti dalla licenza Family.</li>
+                        <li>Conserva l’email d’ordine; per assistenza contatta il supporto Aml Store dal footer.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+
         <section class="product-inline-benefits" aria-labelledby="inline-benefits-title">
             <h2 id="inline-benefits-title" class="product-section-eyebrow">In sintesi</h2>
-            <ul class="product-checklist">
-                <li>Da 1 a 6 persone nello stesso piano Family, ciascuna con il proprio account Microsoft, nei limiti del programma Microsoft.</li>
-                <li>Fino a 6 TB di archiviazione OneDrive complessivi (1 TB per persona quando applicabile), secondo Microsoft.</li>
-                <li>Word, Excel, PowerPoint, Outlook e altre app incluse sulle piattaforme supportate, con aggiornamenti gestiti da Microsoft.</li>
-                <li>Strumenti di sicurezza Microsoft (es. Defender) dove previsti dal piano e dalla piattaforma.</li>
-            </ul>
+            
+                <li>Da 1 a 6 persone nello stesso piano Family, ciascuna con account Microsoft separato.</li>
+                <li>Fino a 6 TB OneDrive complessivi (1 TB per persona).</li>
+                <li>Word, Excel, PowerPoint, Outlook e app incluse, sempre aggiornate.</li>
+                <li>Defender e sicurezza Microsoft inclusi sulle piattaforme supportate.</li>
+            
         </section>
 
         <section class="product-process-steps" aria-labelledby="product-process-title">
@@ -375,65 +444,6 @@
                     <p>Sì: con le app desktop installate puoi lavorare offline; servono comunque connessione e accesso periodici per la verifica della licenza, aggiornamenti e servizi cloud come OneDrive, come descritto da Microsoft.</p>
                 </div>
             </details>
-        </section>
-
-        <section class="details-section">
-            <div class="tabs-header" role="tablist" aria-label="Sezioni prodotto">
-                <button type="button" class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-desc" id="tab-desc">Descrizione</button>
-                <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-install" id="tab-install">Installazione</button>
-            </div>
-
-            <div class="tab-panel" id="panel-desc" role="tabpanel" aria-labelledby="tab-desc">
-                <div class="tab-content">
-                    <div class="rich-text">
-                        <h2>Il meglio di Microsoft per la famiglia</h2>
-                        <p>
-                            Un solo abbonamento per fino a 6 persone: Word, Excel, PowerPoint, Outlook e OneDrive su PC, Mac, web e mobile, con aggiornamenti continui.
-                        </p>
-                        <ul>
-                            <li>Fino a 6 utenti con lo stesso piano.</li>
-                            <li>6 TB OneDrive (1 TB per persona).</li>
-                            <li>App desktop e mobile sempre aggiornate.</li>
-                            <li>Outlook senza pubblicità e strumenti di sicurezza Microsoft.</li>
-                        </ul>
-                        <h2>Dopo l'acquisto</h2>
-                        <p>
-                            Ricevi una <strong>product key digitale</strong> via email con istruzioni per scaricare e attivare dal sito Microsoft, oltre alla ricevuta d'acquisto.
-                        </p>
-                    </div>
-                    <aside class="req-box">
-                        <h3>Requisiti di sistema</h3>
-                        <div class="req-item">
-                            <span class="req-label">Sistema operativo</span>
-                            <span class="req-val">Windows 10/11, macOS, iOS, Android.</span>
-                        </div>
-                        <div class="req-item">
-                            <span class="req-label">Account</span>
-                            <span class="req-val">Account Microsoft e connessione Internet.</span>
-                        </div>
-                        <div class="req-item">
-                            <span class="req-label">Spazio disco</span>
-                            <span class="req-val">Almeno 4 GB liberi (variabile per piattaforma).</span>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-
-            <div class="tab-panel" id="panel-install" role="tabpanel" aria-labelledby="tab-install" hidden>
-                <div class="rich-text">
-                    <h2>Attivazione e installazione</h2>
-                    <p>Per riscattare e attivare Microsoft 365 Family usa il portale ufficiale Microsoft:</p>
-                    <p><a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a></p>
-                    <h3>Guida rapida all’attivazione</h3>
-                    <ol>
-                        <li>Apri il link e accedi con il tuo <strong>account Microsoft</strong> (o creane uno).</li>
-                        <li>Inserisci il <strong>codice prodotto</strong> che trovi nell’email di consegna inviata da Aml Store.</li>
-                        <li>Completa la procedura guidata per associare la licenza all’account e scaricare le app.</li>
-                        <li>Installa le app su PC o Mac da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a> o dagli store su dispositivi mobile, nei limiti previsti dalla licenza Family.</li>
-                        <li>Conserva l’email d’ordine; per assistenza contatta il supporto Aml Store dal footer.</li>
-                    </ol>
-                </div>
-            </div>
         </section>
     </main>
 

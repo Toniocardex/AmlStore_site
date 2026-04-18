@@ -170,7 +170,7 @@ html[data-theme="light"] .product-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: clamp(1.75rem, 4vw, 3.25rem) clamp(1.25rem, 3vw, 2.5rem);
+    padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.75rem);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
     border: 1px solid var(--page-border);
     border-radius: 24px;
@@ -179,7 +179,7 @@ html[data-theme="light"] .product-page {
     background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
-    min-height: clamp(260px, 36vw, 520px);
+    min-height: clamp(220px, 26vw, 400px);
 }
 
 .product-page .product-cover-img {
@@ -401,6 +401,37 @@ html[data-theme='light'] .product-page .price-block__save {
 .product-page .action-buttons {
     display: grid;
     gap: 1rem;
+}
+
+.product-page .payment-methods {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--page-border);
+    border-bottom: 1px solid var(--page-border);
+    margin: 0.25rem 0;
+}
+
+.product-page .payment-methods__logo {
+    display: flex;
+    align-items: center;
+    opacity: 0.75;
+    filter: grayscale(30%);
+    transition: opacity 0.15s, filter 0.15s;
+}
+
+.product-page .payment-methods__logo:hover {
+    opacity: 1;
+    filter: none;
+}
+
+.product-page .payment-methods__logo img {
+    height: 18px;
+    width: auto;
+    display: block;
 }
 
 .product-page .btn-primary,
