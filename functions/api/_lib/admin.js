@@ -286,3 +286,18 @@ export async function unarchiveOrder(db, orderId) {
         'UPDATE orders SET archived_at = NULL, updated_at = ? WHERE id = ?'
     ).bind(now(), orderId).run();
 }
+
+/**
+ * Elimina definitivamente un ordine dal DB.
+ * Operazione irreversibile — usare solo per ordini di test o casi estremi.
+ * @returns {{ ok: boolean, reason?: string }}
+ */
+export async function deleteOrder(db, orderId) {
+    const existing = await db
+        .prepare('SELECT id FROM orders WHERE id = ?')
+        .bind(orderId).first();
+    if (!existing) return { ok: false, reason: 'order_not_found' };
+
+    await db.prepare('DELETE FROM orders WHERE id = ?').bind(orderId).run();
+    return { ok: true };
+}

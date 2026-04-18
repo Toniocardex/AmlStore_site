@@ -30,7 +30,7 @@ import { getAccessToken, createPaypalOrder,
 import { sendConfirmationOnce }                          from './_lib/email.js';
 import { verifyAccessJwt, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
-         unarchiveOrder }                                from './_lib/admin.js';
+         unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -485,6 +485,17 @@ async function handleAdminRoute(path, request, env) {
         await unarchiveOrder(env.DB, unarchiveMatch[1]);
         return new Response(JSON.stringify({ ok: true }), {
             headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── DELETE /api/admin/orders/:id ──────────────────────────────────────────
+    const deleteMatch = sub.match(/^\/orders\/([^/]+)$/);
+    if (deleteMatch && request.method === 'DELETE') {
+        const orderId = deleteMatch[1];
+        const result  = await deleteOrder(env.DB, orderId);
+        const status  = result.ok ? 200 : (result.reason === 'order_not_found' ? 404 : 500);
+        return new Response(JSON.stringify(result), {
+            status, headers: { 'Content-Type': 'application/json' },
         });
     }
 

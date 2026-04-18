@@ -409,6 +409,7 @@
             footerHtml += '<button class="adm-btn adm-btn--ghost" id="btn-unarchive">Ripristina</button>';
         }
 
+        footerHtml += '<button class="adm-btn adm-btn--danger adm-btn--sm" id="btn-delete" title="Eliminazione definitiva — irreversibile">🗑 Elimina</button>';
         footerHtml += '<button class="adm-btn adm-btn--ghost" id="btn-close-detail">Chiudi</button>';
         $('modal-footer').innerHTML = footerHtml;
 
@@ -443,6 +444,11 @@
         var btnUnarchive = document.getElementById('btn-unarchive');
         if (btnUnarchive) {
             btnUnarchive.addEventListener('click', function () { doUnarchive(o.orderId); });
+        }
+
+        var btnDelete = document.getElementById('btn-delete');
+        if (btnDelete) {
+            btnDelete.addEventListener('click', function () { openDeleteConfirm(o.orderId); });
         }
     }
 
@@ -535,6 +541,54 @@
             .catch(function (e) { toast('Errore ripristino: ' + e.message, 'error'); });
     }
 
+    /* ─── Dialog eliminazione definitiva ──────────────────────────────────── */
+
+    var _deleteOrderId = null;
+
+    function openDeleteConfirm(orderId) {
+        _deleteOrderId = orderId;
+        $('delete-msg').innerHTML =
+            'Stai per <strong>eliminare definitivamente</strong> l\'ordine ' +
+            '<code style="color:#ef4444">' + esc(orderId) + '</code>.<br><br>' +
+            'Questa operazione è <strong>irreversibile</strong>: tutti i dati ' +
+            '(cliente, articoli, riferimenti PSP) saranno cancellati dal database.';
+        $('delete-confirm-input').value = '';
+        $('delete-ok').disabled = true;
+        show('adm-delete-backdrop');
+        $('adm-delete-backdrop').removeAttribute('aria-hidden');
+        setTimeout(function () { $('delete-confirm-input').focus(); }, 50);
+    }
+
+    function closeDeleteConfirm() {
+        hide('adm-delete-backdrop');
+        $('adm-delete-backdrop').setAttribute('aria-hidden', 'true');
+        _deleteOrderId = null;
+    }
+
+    function doDelete(orderId) {
+        var btn = $('delete-ok');
+        if (btn) { btn.disabled = true; btn.textContent = 'Eliminazione…'; }
+
+        fetch('/api/admin/orders/' + encodeURIComponent(orderId), {
+            method:      'DELETE',
+            credentials: 'same-origin',
+            headers:     authHeaders(),
+        }).then(function (res) {
+            return res.json().then(function (data) {
+                if (!res.ok) throw new Error(data.error || 'HTTP ' + res.status);
+                return data;
+            });
+        }).then(function () {
+            closeDeleteConfirm();
+            closeDetail();
+            toast('Ordine ' + orderId + ' eliminato definitivamente', 'error');
+            loadOrders();
+        }).catch(function (e) {
+            if (btn) { btn.disabled = false; btn.textContent = 'Elimina definitivamente'; }
+            toast('Errore eliminazione: ' + e.message, 'error');
+        });
+    }
+
     /* ─── Event listeners globali ──────────────────────────────────────────── */
 
     function initEvents() {
@@ -613,11 +667,34 @@
             if (e.target === confirmBack) closeConfirm();
         });
 
+        // Dialog eliminazione
+        var deleteInput  = $('delete-confirm-input');
+        var deleteOk     = $('delete-ok');
+        var deleteCancel = $('delete-cancel');
+        var deleteBack   = $('adm-delete-backdrop');
+
+        if (deleteInput) {
+            deleteInput.addEventListener('input', function () {
+                deleteOk.disabled = (deleteInput.value.trim() !== _deleteOrderId);
+            });
+            deleteInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' && !deleteOk.disabled) doDelete(_deleteOrderId);
+            });
+        }
+        if (deleteOk)     deleteOk.addEventListener('click', function () {
+            if (_deleteOrderId) doDelete(_deleteOrderId);
+        });
+        if (deleteCancel) deleteCancel.addEventListener('click', closeDeleteConfirm);
+        if (deleteBack)   deleteBack.addEventListener('click', function (e) {
+            if (e.target === deleteBack) closeDeleteConfirm();
+        });
+
         // ESC per chiudere modal
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
-                if (!$('adm-confirm-backdrop').hidden) { closeConfirm(); return; }
-                if (!$('adm-modal-backdrop').hidden)   { closeDetail();  return; }
+                if (!$('adm-delete-backdrop').hidden)  { closeDeleteConfirm(); return; }
+                if (!$('adm-confirm-backdrop').hidden) { closeConfirm();       return; }
+                if (!$('adm-modal-backdrop').hidden)   { closeDetail();        return; }
             }
         });
     }

@@ -450,6 +450,35 @@ select.adm-input {
     animation: adm-fade-in .15s ease;
 }
 
+/* Dialog eliminazione */
+.adm-modal--danger {
+    border-color: #ef4444;
+}
+.adm-modal__header--danger {
+    background: rgba(239, 68, 68, .08);
+    border-bottom-color: rgba(239, 68, 68, .3);
+}
+.adm-modal__header--danger .adm-modal__title {
+    color: #ef4444;
+}
+.adm-delete-confirm-box {
+    margin-top: 1.25rem;
+    padding: 1rem;
+    background: rgba(239, 68, 68, .06);
+    border: 1px solid rgba(239, 68, 68, .25);
+    border-radius: var(--adm-radius);
+}
+.adm-input--danger {
+    border-color: rgba(239, 68, 68, .5);
+    margin-top: .4rem;
+    font-family: monospace;
+    letter-spacing: .05em;
+}
+.adm-input--danger:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, .15);
+}
+
 @keyframes adm-slide-in {
     from { transform: translateX(100%); opacity: 0; }
     to   { transform: translateX(0);    opacity: 1; }
