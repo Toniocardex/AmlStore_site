@@ -54,15 +54,29 @@ a:hover { text-decoration: underline; }
 .adm-header__brand {
     display: flex;
     align-items: center;
-    gap: .6rem;
-    font-size: .9rem;
-    color: var(--adm-muted2);
+    gap: .75rem;
+    text-decoration: none;
 }
-.adm-header__brand strong { color: var(--adm-text); }
 
-.adm-header__logo-icon {
-    width: 22px; height: 22px;
+.adm-header__logo {
+    height: 32px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+    /* Versione light usata: nessun filtro necessario su sfondo scuro */
+}
+
+.adm-header__admin-badge {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
     color: var(--adm-accent);
+    background: rgba(59,130,246,.12);
+    border: 1px solid rgba(59,130,246,.25);
+    border-radius: 4px;
+    padding: .15rem .45rem;
+    line-height: 1.4;
     flex-shrink: 0;
 }
 
