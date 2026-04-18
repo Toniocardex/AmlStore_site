@@ -32,19 +32,16 @@
 
                 if (details.open) {
                     /* Chiusura: height → 0 */
-                    var startH = body.scrollHeight;
-                    body.style.height = startH + 'px';
+                    body.style.height = body.scrollHeight + 'px';
                     body.style.overflow = 'hidden';
                     requestAnimationFrame(function () {
-                        requestAnimationFrame(function () {
-                            body.style.transition = 'height 0.28s cubic-bezier(0.4, 0, 0.2, 1)';
-                            body.style.height = '0px';
-                            body.addEventListener('transitionend', function onEnd() {
-                                body.removeEventListener('transitionend', onEnd);
-                                details.removeAttribute('open');
-                                body.style.cssText = '';
-                            }, { once: true });
-                        });
+                        body.style.transition = 'height 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
+                        body.style.height = '0px';
+                        body.addEventListener('transitionend', function onEnd() {
+                            body.removeEventListener('transitionend', onEnd);
+                            details.removeAttribute('open');
+                            body.style.cssText = '';
+                        }, { once: true });
                     });
                 } else {
                     /* Apertura: height 0 → scrollHeight */
@@ -53,14 +50,12 @@
                     body.style.height = '0px';
                     body.style.overflow = 'hidden';
                     requestAnimationFrame(function () {
-                        requestAnimationFrame(function () {
-                            body.style.transition = 'height 0.28s cubic-bezier(0.4, 0, 0.2, 1)';
-                            body.style.height = targetH + 'px';
-                            body.addEventListener('transitionend', function onEnd() {
-                                body.removeEventListener('transitionend', onEnd);
-                                body.style.cssText = '';
-                            }, { once: true });
-                        });
+                        body.style.transition = 'height 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
+                        body.style.height = targetH + 'px';
+                        body.addEventListener('transitionend', function onEnd() {
+                            body.removeEventListener('transitionend', onEnd);
+                            body.style.cssText = '';
+                        }, { once: true });
                     });
                 }
             });
