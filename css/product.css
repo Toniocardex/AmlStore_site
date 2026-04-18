@@ -1198,13 +1198,25 @@ html[data-theme='light'] .product-process-steps__item {
 }
 
 .product-faq .product-faq-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-faq details[open] .product-faq-body {
+    grid-template-rows: 1fr;
+}
+
+.product-faq .product-faq-body__inner {
+    overflow: hidden;
+    min-height: 0;
     padding: 0 1.15rem 1.15rem;
     font-size: 0.9rem;
     line-height: 1.65;
     color: var(--page-text-secondary);
 }
 
-.product-faq .product-faq-body a {
+.product-faq .product-faq-body__inner a {
     color: var(--page-accent);
     font-weight: 600;
 }

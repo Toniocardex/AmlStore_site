@@ -1,78 +1,49 @@
 /**
- * faq-anim.js — Animazione height smooth su <details> con classe body specificata.
+ * faq-anim.js — FAQ smooth via grid-template-rows (no layout reflow).
  *
- * Uso: initFaqAnim('.my-faq-body')
- * Funziona su qualsiasi <details> che contenga un div con quella classe.
- * Rispetta prefers-reduced-motion: se attivo, salta l'animazione.
- * Compatibile con home.js (usa selettori diversi, non interferisce).
+ * L'apertura è gestita interamente da CSS (details[open] → grid-template-rows: 1fr).
+ * Il JS intercetta solo la chiusura per prevenire che il browser rimuova [open]
+ * prima che la transizione CSS finisca.
+ * Rispetta prefers-reduced-motion.
  */
 (function () {
     'use strict';
 
-    function initFaqAnim(bodySelector) {
-        if (!bodySelector) return;
-        var reducedMotion =
-            typeof window.matchMedia === 'function' &&
-            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reducedMotion =
+        typeof window.matchMedia === 'function' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        var bodies = document.querySelectorAll(bodySelector);
-        bodies.forEach(function (body) {
-            var details = body.closest('details');
-            if (!details) return;
+    function init() {
+        document.querySelectorAll('.product-faq details').forEach(function (details) {
             var summary = details.querySelector('summary');
             if (!summary) return;
 
             summary.addEventListener('click', function (e) {
+                if (!details.open) return; // apertura: lascia fare al browser, CSS anima
+
                 e.preventDefault();
 
                 if (reducedMotion) {
-                    details.toggleAttribute('open');
+                    details.removeAttribute('open');
                     return;
                 }
 
-                if (details.open) {
-                    /* Chiusura: height → 0 */
-                    body.style.height = body.scrollHeight + 'px';
-                    body.style.overflow = 'hidden';
-                    requestAnimationFrame(function () {
-                        body.style.transition = 'height 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
-                        body.style.height = '0px';
-                        body.addEventListener('transitionend', function onEnd() {
-                            body.removeEventListener('transitionend', onEnd);
-                            details.removeAttribute('open');
-                            body.style.cssText = '';
-                        }, { once: true });
-                    });
-                } else {
-                    /* Apertura: height 0 → scrollHeight */
-                    details.setAttribute('open', '');
-                    var targetH = body.scrollHeight;
-                    body.style.height = '0px';
-                    body.style.overflow = 'hidden';
-                    requestAnimationFrame(function () {
-                        body.style.transition = 'height 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
-                        body.style.height = targetH + 'px';
-                        body.addEventListener('transitionend', function onEnd() {
-                            body.removeEventListener('transitionend', onEnd);
-                            body.style.cssText = '';
-                        }, { once: true });
-                    });
-                }
+                var body = details.querySelector('.product-faq-body');
+                if (!body) { details.removeAttribute('open'); return; }
+
+                body.style.gridTemplateRows = '0fr';
+                body.addEventListener('transitionend', function onEnd() {
+                    body.removeEventListener('transitionend', onEnd);
+                    details.removeAttribute('open');
+                    body.style.gridTemplateRows = '';
+                }, { once: true });
             });
         });
     }
 
-    /* Espone la funzione per uso da altri script */
-    window.AmlFaqAnim = { init: initFaqAnim };
-
-    /* Auto-init per la pagina prodotto */
-    function autoInit() {
-        initFaqAnim('.product-faq-body');
-    }
-
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', autoInit);
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        autoInit();
+        init();
     }
 })();
