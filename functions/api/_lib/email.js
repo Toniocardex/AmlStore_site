@@ -1,42 +1,30 @@
 /**
  * email.js — invio email transazionale via Resend + idempotenza.
  *
- * sendConfirmationOnce:
- *   1. Controlla confirmation_email_sent_at in D1 → se già valorizzato, skip.
- *   2. Costruisce payload Resend con HTML + plain text + BCC Trustpilot.
- *   3. Chiama Resend API.
- *   4. Solo se 2xx: aggiorna confirmation_email_sent_at in D1.
- *   5. Se Resend fallisce: non aggiorna il flag → retry sicuro.
+ * sendConfirmationOnce   — email ordine (pending o paid). Stripe/PayPal/BT iniziale.
+ * sendPaidNotificationOnce — email "pagamento ricevuto" per bonifico marcato pagato da admin.
+ *
+ * Entrambe sono idempotenti: controllano il flag DB prima di chiamare Resend
+ * e aggiornano il flag solo dopo un 2xx. Retry sicuro.
  */
 
-import { emailSubject, emailHtml, emailText } from './templates.js';
-import { markConfirmationEmailSent }           from './order.js';
+import { emailSubject, emailHtml, emailText }          from './templates.js';
+import { markConfirmationEmailSent, markPaidNotificationSent } from './order.js';
+import { safeParseJSON }                                from './utils.js';
 
 const RESEND_API = 'https://api.resend.com/emails';
 const FROM       = 'Aml Store <ordini@aml-store.com>';
+const REPLY_TO   = 'Info@amlstore.it';
 
-/**
- * Invia l'email di conferma ordine al massimo una volta.
- * Thread-safe a livello di singola Worker invocation grazie al flag DB.
- *
- * @param {D1Database} db
- * @param {object}     order        — riga grezza da D1 (non toPublicOrder)
- * @param {string}     resendApiKey — env var RESEND_API_KEY
- * @param {string}     trustpilotBcc — env var TRUSTPILOT_BCC (può essere '')
- * @param {string}     eventSrc     — es. 'webhook_stripe', 'worker_capture', ...
- * @returns {Promise<{ sent: boolean, skipped?: boolean, error?: string }>}
- */
-export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBcc, eventSrc) {
-    // ── Idempotenza: già inviata? ──────────────────────────────────────────────
-    if (order.confirmation_email_sent_at) {
-        return { sent: false, skipped: true };
-    }
+/* ─── Helpers interni ────────────────────────────────────────────────────────── */
 
-    const isPaid  = order.status === 'paid';
-    const locale  = order.locale  || 'it';
+function buildRecipient(order) {
+    return `${order.customer_first_name} ${order.customer_last_name} <${order.customer_email}>`;
+}
 
-    // Costruiamo un "order arricchito" per i template
-    const orderForTemplate = {
+function buildOrderForTemplate(order, overrides = {}) {
+    const locale = order.locale || 'it';
+    return {
         orderId:       order.id,
         status:        order.status,
         paymentMethod: order.payment_method,
@@ -45,68 +33,125 @@ export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBc
         firstName:     order.customer_first_name,
         lastName:      order.customer_last_name,
         email:         order.customer_email,
-        locale:        locale,
+        locale,
         currency:      order.currency,
         totalMinor:    order.total_minor,
         lineItems:     safeParseJSON(order.line_items, []),
-        causale:       order.payment_method === 'bank_transfer' ? order.id : undefined,
-        // Campi PSP per plain text / template
-        stripe_session_id:      order.stripe_session_id,
-        stripe_payment_intent:  order.stripe_payment_intent,
-        paypal_order_id:        order.paypal_order_id,
-        paypal_capture_id:      order.paypal_capture_id,
+        stripe_session_id:     order.stripe_session_id,
+        stripe_payment_intent: order.stripe_payment_intent,
+        paypal_order_id:       order.paypal_order_id,
+        paypal_capture_id:     order.paypal_capture_id,
+        ...overrides,
     };
+}
 
-    // ── Payload Resend ─────────────────────────────────────────────────────────
-    const payload = {
-        from:    FROM,
-        to:      [`${order.customer_first_name} ${order.customer_last_name} <${order.customer_email}>`],
-        subject: emailSubject(locale, order.id, isPaid),
-        html:    emailHtml(orderForTemplate, isPaid),
-        text:    emailText(orderForTemplate, isPaid),
-        // Reply-To admin
-        reply_to: 'Info@amlstore.it',
-    };
-
-    // BCC Trustpilot solo se lo slot è configurato e l'ordine è pagato
-    // (non ha senso invitare a recensire un ordine non ancora pagato)
-    if (trustpilotBcc && isPaid) {
-        payload.bcc = [trustpilotBcc];
-    }
-
-    // ── Chiama Resend ──────────────────────────────────────────────────────────
-    let resendRes;
+async function callResend(apiKey, payload) {
+    let res;
     try {
-        resendRes = await fetch(RESEND_API, {
+        res = await fetch(RESEND_API, {
             method:  'POST',
-            headers: {
-                'Authorization': `Bearer ${resendApiKey}`,
-                'Content-Type':  'application/json',
-            },
-            body: JSON.stringify(payload),
+            headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+            body:    JSON.stringify(payload),
         });
-    } catch (networkErr) {
-        console.error('[email] Resend network error:', networkErr);
-        return { sent: false, error: 'network_error' };
+    } catch (e) {
+        console.error('[email] Resend network error:', e);
+        return { ok: false, error: 'network_error' };
+    }
+    if (!res.ok) {
+        const body = await res.text().catch(() => '');
+        console.error(`[email] Resend HTTP ${res.status}:`, body);
+        return { ok: false, error: `resend_http_${res.status}` };
+    }
+    return { ok: true };
+}
+
+/* ─── Export pubblici ────────────────────────────────────────────────────────── */
+
+/**
+ * Invia l'email di conferma ordine al massimo una volta.
+ * Usata per: Stripe paid (via webhook), PayPal paid (via capture), BT creato (pending).
+ *
+ * BCC Trustpilot incluso solo se isPaid=true.
+ *
+ * @param {D1Database} db
+ * @param {object}  order         — riga grezza D1
+ * @param {string}  resendApiKey
+ * @param {string}  trustpilotBcc — '' se non configurato
+ * @param {string}  eventSrc      — es. 'webhook_stripe', 'bank_transfer_created', ...
+ */
+export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBcc, eventSrc) {
+    if (order.confirmation_email_sent_at) return { sent: false, skipped: true };
+    if (!resendApiKey) {
+        console.warn('[email] RESEND_API_KEY non configurato');
+        return { sent: false, error: 'no_resend_key' };
     }
 
-    if (!resendRes.ok) {
-        const body = await resendRes.text().catch(() => '');
-        console.error(`[email] Resend HTTP ${resendRes.status}:`, body);
-        return { sent: false, error: `resend_http_${resendRes.status}` };
-    }
+    const isPaid  = order.status === 'paid';
+    const locale  = order.locale || 'it';
+    const tpl     = buildOrderForTemplate(order, {
+        causale: order.payment_method === 'bank_transfer' ? order.id : undefined,
+    });
 
-    // ── Solo dopo 2xx: aggiorna flag idempotenza ───────────────────────────────
+    const payload = {
+        from:     FROM,
+        to:       [buildRecipient(order)],
+        subject:  emailSubject(locale, order.id, isPaid),
+        html:     emailHtml(tpl, isPaid),
+        text:     emailText(tpl, isPaid),
+        reply_to: REPLY_TO,
+    };
+    if (trustpilotBcc && isPaid) payload.bcc = [trustpilotBcc];
+
+    const { ok, error } = await callResend(resendApiKey, payload);
+    if (!ok) return { sent: false, error };
+
     try {
         await markConfirmationEmailSent(db, order.id, eventSrc);
-    } catch (dbErr) {
-        // Email inviata ma flag non aggiornato → log per debug, non bloccare
-        console.error('[email] Impossibile aggiornare confirmation_email_sent_at:', dbErr);
+    } catch (e) {
+        console.error('[email] Impossibile aggiornare confirmation_email_sent_at:', e);
     }
 
     return { sent: true };
 }
 
-function safeParseJSON(raw, fallback) {
-    try { return JSON.parse(raw || 'null') ?? fallback; } catch (_) { return fallback; }
+/**
+ * Invia la email "pagamento ricevuto" per ordini bonifico marcati pagati dall'admin.
+ * Usa il flag paid_notification_sent_at (separato da confirmation_email_sent_at).
+ * BCC Trustpilot SEMPRE incluso (ordine effettivamente pagato).
+ *
+ * @param {D1Database} db
+ * @param {object}  order         — riga grezza D1 (già aggiornata a status='paid')
+ * @param {string}  resendApiKey
+ * @param {string}  trustpilotBcc
+ */
+export async function sendPaidNotificationOnce(db, order, resendApiKey, trustpilotBcc) {
+    if (order.paid_notification_sent_at) return { sent: false, skipped: true };
+    if (!resendApiKey) {
+        console.warn('[email] RESEND_API_KEY non configurato, email non inviata');
+        return { sent: false, error: 'no_resend_key' };
+    }
+
+    const locale = order.locale || 'it';
+    const tpl    = buildOrderForTemplate(order, { status: 'paid', causale: undefined });
+
+    const payload = {
+        from:     FROM,
+        to:       [buildRecipient(order)],
+        subject:  emailSubject(locale, order.id, true),
+        html:     emailHtml(tpl, true),
+        text:     emailText(tpl, true),
+        reply_to: REPLY_TO,
+    };
+    if (trustpilotBcc) payload.bcc = [trustpilotBcc];
+
+    const { ok, error } = await callResend(resendApiKey, payload);
+    if (!ok) return { sent: false, error };
+
+    try {
+        await markPaidNotificationSent(db, order.id);
+    } catch (e) {
+        console.error('[email] Impossibile aggiornare paid_notification_sent_at:', e);
+    }
+
+    return { sent: true };
 }

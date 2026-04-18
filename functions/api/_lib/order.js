@@ -2,9 +2,7 @@
  * order.js — helper D1 per la gestione ordini Aml Store.
  */
 
-function now() {
-    return new Date().toISOString();
-}
+import { now, safeParseJSON } from './utils.js';
 
 /**
  * Crea un nuovo ordine con status 'pending_payment'.
@@ -26,7 +24,7 @@ export async function createOrder(db, {
     customerSdi,
     customerPec,
     locale,
-    lineItems,       // array of objects
+    lineItems,
     totalMinor,
     currency,
     paymentMethod,
@@ -35,8 +33,7 @@ export async function createOrder(db, {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no I,O,0,1 (ambigui)
     const arr = new Uint8Array(8);
     crypto.getRandomValues(arr);
-    const shortId = 'AML-' + Array.from(arr).map(b => chars[b % chars.length]).join('');
-    const id = shortId;
+    const id = 'AML-' + Array.from(arr).map(b => chars[b % chars.length]).join('');
     const ts = now();
 
     await db.prepare(`
@@ -96,21 +93,15 @@ export async function getOrderByPaypalOrderId(db, paypalOrderId) {
 
 /**
  * Aggiorna lo stripe_session_id su un ordine appena creato.
- * @param {D1Database} db
- * @param {string} orderId
- * @param {string} stripeSessionId
  */
 export async function setStripeSession(db, orderId, stripeSessionId) {
-    await db.prepare(`
-        UPDATE orders SET stripe_session_id = ?, updated_at = ? WHERE id = ?
-    `).bind(stripeSessionId, now(), orderId).run();
+    await db.prepare(
+        'UPDATE orders SET stripe_session_id = ?, updated_at = ? WHERE id = ?'
+    ).bind(stripeSessionId, now(), orderId).run();
 }
 
 /**
  * Promuove un ordine a 'paid' con i riferimenti PSP Stripe.
- * @param {D1Database} db
- * @param {string} orderId
- * @param {object} params
  */
 export async function markPaidStripe(db, orderId, { stripeSessionId, stripePaymentIntent }) {
     const ts = now();
@@ -124,9 +115,6 @@ export async function markPaidStripe(db, orderId, { stripeSessionId, stripePayme
 
 /**
  * Promuove un ordine a 'paid' con i riferimenti PSP PayPal.
- * @param {D1Database} db
- * @param {string} orderId
- * @param {object} params
  */
 export async function markPaidPaypal(db, orderId, { paypalOrderId, paypalCaptureId }) {
     const ts = now();
@@ -140,20 +128,15 @@ export async function markPaidPaypal(db, orderId, { paypalOrderId, paypalCapture
 
 /**
  * Aggiorna il paypal_order_id su un ordine pending.
- * @param {D1Database} db
- * @param {string} orderId
- * @param {string} paypalOrderId
  */
 export async function setPaypalOrderId(db, orderId, paypalOrderId) {
-    await db.prepare(`
-        UPDATE orders SET paypal_order_id = ?, updated_at = ? WHERE id = ?
-    `).bind(paypalOrderId, now(), orderId).run();
+    await db.prepare(
+        'UPDATE orders SET paypal_order_id = ?, updated_at = ? WHERE id = ?'
+    ).bind(paypalOrderId, now(), orderId).run();
 }
 
 /**
- * Marca la email di conferma come inviata (idempotenza).
- * @param {D1Database} db
- * @param {string} orderId
+ * Marca la email di conferma ordine come inviata (idempotenza).
  * @param {string} eventSrc — es. 'webhook_stripe', 'worker_capture', ecc.
  */
 export async function markConfirmationEmailSent(db, orderId, eventSrc) {
@@ -166,10 +149,17 @@ export async function markConfirmationEmailSent(db, orderId, eventSrc) {
 }
 
 /**
+ * Marca la email di "pagamento ricevuto" (bonifico) come inviata (idempotenza).
+ */
+export async function markPaidNotificationSent(db, orderId) {
+    const ts = now();
+    await db.prepare(
+        'UPDATE orders SET paid_notification_sent_at = ?, updated_at = ? WHERE id = ?'
+    ).bind(ts, ts, orderId).run();
+}
+
+/**
  * Restituisce solo i campi pubblici di un ordine (per la thank-you page).
- * Non espone dati fiscali, PSP interni, ecc.
- * @param {object} order — riga grezza da D1
- * @returns {object}
  */
 export function toPublicOrder(order) {
     if (!order) return null;
@@ -183,14 +173,9 @@ export function toPublicOrder(order) {
         lastName:      order.customer_last_name,
         email:         order.customer_email,
         locale:        order.locale,
-        lineItems:     safeParseLineItems(order.line_items),
+        lineItems:     safeParseJSON(order.line_items, []),
         totalMinor:    order.total_minor,
         currency:      order.currency,
-        // Causale solo per bonifico
         causale:       order.payment_method === 'bank_transfer' ? order.id : undefined,
     };
-}
-
-function safeParseLineItems(raw) {
-    try { return JSON.parse(raw || '[]'); } catch (_) { return []; }
 }
