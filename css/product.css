@@ -167,9 +167,9 @@ html[data-theme="light"] .product-page {
 
 .product-page .product-gallery {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr 108px;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
     padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.75rem);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
@@ -186,38 +186,34 @@ html[data-theme="light"] .product-page {
 .product-page .product-feature-tiles {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    align-self: stretch;
-    justify-content: center;
+    gap: 0.45rem;
+    width: 100%;
 }
 
 .product-page .product-feature-tile {
-    flex: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 0.5rem;
+    gap: 0.6rem;
+    padding: 0.5rem 0.75rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--page-border);
-    border-radius: 12px;
-    text-align: center;
-    min-height: 0;
+    border-radius: 10px;
 }
 
 .product-page .product-feature-tile img {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
     object-fit: contain;
 }
 
 .product-page .product-feature-tile span {
-    font-size: 0.68rem;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 600;
     color: var(--page-text-secondary);
-    line-height: 1.3;
-    letter-spacing: 0.01em;
+    line-height: 1.25;
+    white-space: nowrap;
 }
 
 .product-page .product-cover-img {
