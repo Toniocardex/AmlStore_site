@@ -9,8 +9,8 @@
  * max-width none; su schermi enormi il ritmo resta dai clamp e dalla misura in ch del corpo.
  */
 main.product-page {
-    --pp-gutter: clamp(1.25rem, 4vw + 0.75rem, 5.5rem);
-    max-width: none;
+    --pp-gutter: clamp(1rem, 4vw, 5rem);
+    max-width: 1280px;
     margin: 0 auto;
     padding-top: 0;
     padding-bottom: clamp(2.5rem, 5vw, 4rem);
@@ -31,11 +31,17 @@ main.product-page {
 .product-page {
     --pp-success: #10b981;
     --pp-warning: #f59e0b;
-    --pp-accent-hover: #60a5fa;
+    --pp-accent-hover: #005da6;
+    --pp-brand: #0067b8;
+    --pp-brand-hover: #005da6;
+    --pp-pricing-bg: rgba(255, 255, 255, 0.04);
+    --pp-pricing-border: var(--page-border);
 }
 
 html[data-theme="light"] .product-page {
-    --pp-accent-hover: #2563eb;
+    --pp-accent-hover: #005da6;
+    --pp-pricing-bg: #f9fafb;
+    --pp-pricing-border: #f3f4f6;
 }
 
 .product-page * {
@@ -108,9 +114,9 @@ html[data-theme="light"] .product-page {
 }
 
 .product-page .badge.digital {
-    background: color-mix(in srgb, var(--page-accent) 14%, transparent);
-    color: var(--pp-accent-hover);
-    border: 1px solid color-mix(in srgb, var(--page-accent) 28%, transparent);
+    background: rgba(0, 103, 184, 0.1);
+    color: var(--pp-brand);
+    border: 1px solid rgba(0, 103, 184, 0.22);
 }
 
 .product-page .product-title {
@@ -172,13 +178,13 @@ html[data-theme="light"] .product-page {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.4rem 0.75rem;
-    background: color-mix(in srgb, var(--page-accent) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--page-accent) 25%, transparent);
-    border-radius: 99px;
+    padding: 0.35rem 0.85rem;
+    background: rgba(0, 103, 184, 0.08);
+    border: 1px solid rgba(0, 103, 184, 0.2);
+    border-radius: 9999px;
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--page-text-secondary);
+    color: var(--pp-brand);
 }
 
 .product-page .product-feature-pill img {
@@ -195,6 +201,7 @@ html[data-theme="light"] .product-page {
     object-fit: contain;
     display: block;
     border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 @keyframes product-float {
@@ -288,7 +295,11 @@ html[data-theme="light"] .product-page {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding-top: 0.5rem;
+    padding: 1.5rem;
+    background: var(--pp-pricing-bg);
+    border: 1px solid var(--pp-pricing-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .product-page .price-section {
@@ -429,32 +440,32 @@ html[data-theme='light'] .product-page .price-block__save {
 
 .product-page .btn-primary,
 .product-sticky-cta .btn-primary {
-    background: linear-gradient(135deg, var(--page-accent) 0%, #2563eb 100%);
+    background: var(--pp-brand);
     color: #ffffff;
     border: none;
-    padding: 1.15rem 1.25rem;
-    border-radius: 14px;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
     font-family: inherit;
-    font-size: 1.05rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-    box-shadow: 0 8px 20px color-mix(in srgb, var(--page-accent) 35%, transparent);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .product-page .btn-primary:hover,
 .product-sticky-cta .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px color-mix(in srgb, var(--page-accent) 45%, transparent);
+    background: var(--pp-brand-hover);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .product-page .btn-primary:focus-visible,
 .product-sticky-cta .btn-primary:focus-visible {
-    outline: 2px solid var(--page-accent);
+    outline: 2px solid var(--pp-brand);
     outline-offset: 3px;
 }
 
@@ -486,7 +497,7 @@ html[data-theme='light'] .product-page .price-block__save {
 .product-page .trust-item svg {
     width: 20px;
     height: 20px;
-    color: var(--pp-success);
+    color: var(--pp-brand);
     flex-shrink: 0;
 }
 
@@ -639,7 +650,7 @@ html[data-theme='light'] .product-page .price-block__save {
 .product-page .product-feature-grid__icon {
     width: 32px;
     height: 32px;
-    color: var(--page-accent);
+    color: var(--pp-brand);
     flex-shrink: 0;
 }
 
