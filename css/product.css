@@ -167,9 +167,9 @@ html[data-theme="light"] .product-page {
 
 .product-page .product-gallery {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr 160px;
-    align-items: start;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     gap: 1rem;
     padding: clamp(1.25rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.75rem);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
@@ -188,6 +188,7 @@ html[data-theme="light"] .product-page {
     flex-direction: column;
     gap: 0.5rem;
     padding-top: 0.25rem;
+    flex: 0 0 auto;
 }
 
 .product-page .product-feature-tile {
@@ -216,8 +217,8 @@ html[data-theme="light"] .product-page {
 }
 
 .product-page .product-cover-img {
-    width: 100%;
-    max-width: min(520px, 100%);
+    flex: 0 0 auto;
+    width: clamp(180px, 42%, 380px);
     height: auto;
     aspect-ratio: 1 / 1;
     object-fit: contain;
