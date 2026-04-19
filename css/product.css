@@ -28,7 +28,8 @@ main.product-page {
     container-name: pp;
 }
 
-.product-page {
+.product-page,
+.product-sticky-cta {
     --pp-success: #10b981;
     --pp-warning: #f59e0b;
     --pp-accent-hover: #005da6;
