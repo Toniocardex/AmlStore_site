@@ -43,20 +43,7 @@ html[data-theme="light"] .product-page {
 }
 
 .product-page .page-glow-top {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: min(900px, 90vw);
-    height: 600px;
-    background: radial-gradient(
-        circle,
-        color-mix(in srgb, var(--page-accent) 22%, transparent) 0%,
-        transparent 60%
-    );
-    transform: translate(-50%, -30%);
-    pointer-events: none;
-    z-index: 0;
-    filter: blur(40px);
+    display: none;
 }
 
 .product-page .breadcrumbs {
@@ -207,8 +194,7 @@ html[data-theme="light"] .product-page {
     aspect-ratio: 1 / 1;
     object-fit: contain;
     display: block;
-    border-radius: 20px;
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
 }
 
 @keyframes product-float {
@@ -299,15 +285,10 @@ html[data-theme="light"] .product-page {
 }
 
 .product-page .pricing-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--page-border);
-    border-radius: 24px;
-    padding: clamp(1.75rem, 3vw, 2.75rem);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 1.75rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    gap: 1.5rem;
+    padding-top: 0.5rem;
 }
 
 .product-page .price-section {
@@ -323,11 +304,7 @@ html[data-theme="light"] .product-page {
 .product-page .price-block {
     display: flex;
     flex-direction: column;
-    gap: 1.1rem;
-    padding: 1rem 1.15rem;
-    border-radius: 16px;
-    background: color-mix(in srgb, var(--page-text) 4%, transparent);
-    border: 1px solid var(--page-border);
+    gap: 0.75rem;
 }
 
 .product-page .price-block__row {
@@ -337,8 +314,7 @@ html[data-theme="light"] .product-page {
 }
 
 .product-page .price-block__row--original {
-    padding-bottom: 0.85rem;
-    border-bottom: 1px dashed color-mix(in srgb, var(--page-text-muted) 35%, transparent);
+    padding-bottom: 0;
 }
 
 .product-page .price-block__label {
@@ -684,19 +660,8 @@ html[data-theme='light'] .product-page .price-block__save {
 
 
 
-html[data-theme='light'] .product-page .pricing-card {
-    background: #ffffff;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 0, 0, 0.08);
-}
-
-html[data-theme='light'] .product-page .price-block {
-    background: #f6f7f9;
-    border-color: rgba(0, 0, 0, 0.08);
-}
-
 html[data-theme='light'] .product-page .price-block__row--original {
-    border-bottom-color: rgba(0, 0, 0, 0.12);
+    border-bottom: none;
 }
 
 html[data-theme='light'] .product-page .req-box {
