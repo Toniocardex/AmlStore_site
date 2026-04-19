@@ -47,9 +47,9 @@
     }
 
     function applySticky(sticky, on) {
-        sticky.toggleAttribute('hidden', !on);
         sticky.classList.toggle('product-sticky-cta--visible', on);
         sticky.setAttribute('aria-hidden', on ? 'false' : 'true');
+        sticky.inert = !on;
     }
 
     /** Doppio rAF: layout stabile (fonte/header) prima del primo IntersectionObserver. */

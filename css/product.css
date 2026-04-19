@@ -445,7 +445,7 @@ html[data-theme='light'] .product-page .price-block__save {
     color: #ffffff;
     border: none;
     padding: 1rem 1.5rem;
-    border-radius: 4px;
+    border-radius: 10px;
     font-family: inherit;
     font-size: 1rem;
     font-weight: 600;
@@ -691,32 +691,35 @@ html[data-theme='light'] .product-page .req-box {
     /* Stessi gutter della scheda prodotto (la barra è fuori da main.product-page). */
     --pp-gutter: clamp(1.25rem, 4vw + 0.75rem, 5.5rem);
     --pp-success: #10b981;
-    transform: translateY(-100%);
+    transform: translateY(-110%) scale(0.98);
     opacity: 0;
     pointer-events: none;
+    will-change: transform, opacity;
     transition:
-        transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.28s ease,
-        box-shadow 0.28s ease;
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease,
+        border-top-color 0.35s ease;
     background: linear-gradient(
         180deg,
         color-mix(in srgb, var(--page-text) 6%, var(--page-bg)) 0%,
         color-mix(in srgb, var(--page-text) 2.5%, var(--page-bg)) 100%
     );
-    backdrop-filter: blur(20px) saturate(1.12);
-    -webkit-backdrop-filter: blur(20px) saturate(1.12);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
     border-bottom: 1px solid var(--page-border);
     box-shadow: none;
     border-top: 1px solid color-mix(in srgb, var(--page-border) 70%, transparent);
 }
 
 .product-sticky-cta.product-sticky-cta--visible {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
     pointer-events: auto;
     box-shadow:
         0 1px 0 color-mix(in srgb, var(--page-accent) 18%, transparent),
-        0 16px 36px rgba(0, 0, 0, 0.28);
+        0 20px 48px rgba(0, 0, 0, 0.22),
+        0 4px 12px rgba(0, 0, 0, 0.1);
     border-top-color: color-mix(in srgb, var(--page-accent) 22%, transparent);
 }
 
@@ -757,7 +760,7 @@ html[data-theme='light'] .product-page .req-box {
     gap: 0.6rem;
     flex-shrink: 0;
     padding: 0.4rem 0.85rem;
-    border-radius: 12px;
+    border-radius: 10px;
     background: color-mix(in srgb, var(--page-text) 4%, var(--page-bg));
     border: 1px solid var(--page-border);
 }

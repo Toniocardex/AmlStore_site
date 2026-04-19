@@ -523,7 +523,7 @@
                         color: #000000; /* Testo in alto contrasto */
                         border: none;
                         padding: 0.6rem 1.4rem;
-                        border-radius: 999px;
+                        border-radius: 10px;
                         font-family: inherit;
                         font-size: 0.9rem;
                         font-weight: 700;
