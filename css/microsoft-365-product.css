@@ -221,7 +221,6 @@
 [data-theme="light"] .v2-pricing-card .v2-price-msrp { color: #999; }
 [data-theme="light"] .v2-pricing-card .v2-price-sale { color: #0a0a0f; }
 [data-theme="light"] .v2-pricing-card .v2-price-tax { color: #888; }
-.v2-price-block {}
 .v2-price-label {
     font-size: 0.78rem;
     font-weight: 600;
