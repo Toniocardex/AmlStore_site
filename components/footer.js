@@ -15,7 +15,6 @@ const FOOTER_I18N = {
         prodBusiness: 'Software Aziendali',
         prodDeals: 'Offerte Speciali',
         supportMyAccount: 'Il mio account',
-        supportInstallGuide: "Guida all'installazione",
         supportReturns: 'Resi e Rimborsi',
         supportTerms: 'Termini e Condizioni',
         supportPrivacy: 'Privacy Policy',
@@ -44,7 +43,6 @@ const FOOTER_I18N = {
         prodBusiness: 'Business software',
         prodDeals: 'Special offers',
         supportMyAccount: 'My account',
-        supportInstallGuide: 'Installation guide',
         supportReturns: 'Returns & refunds',
         supportTerms: 'Terms & conditions',
         supportPrivacy: 'Privacy policy',
@@ -73,7 +71,6 @@ const FOOTER_I18N = {
         prodBusiness: 'Logiciels professionnels',
         prodDeals: 'Offres spéciales',
         supportMyAccount: 'Mon compte',
-        supportInstallGuide: "Guide d'installation",
         supportReturns: 'Retours et remboursements',
         supportTerms: 'Conditions générales',
         supportPrivacy: 'Politique de confidentialité',
@@ -102,7 +99,6 @@ const FOOTER_I18N = {
         prodBusiness: 'Business-Software',
         prodDeals: 'Sonderangebote',
         supportMyAccount: 'Mein Konto',
-        supportInstallGuide: 'Installationsanleitung',
         supportReturns: 'Rückgabe & Erstattung',
         supportTerms: 'Allgemeine Geschäftsbedingungen',
         supportPrivacy: 'Datenschutz',
@@ -131,7 +127,6 @@ const FOOTER_I18N = {
         prodBusiness: 'Software empresarial',
         prodDeals: 'Ofertas especiales',
         supportMyAccount: 'Mi cuenta',
-        supportInstallGuide: 'Guía de instalación',
         supportReturns: 'Devoluciones y reembolsos',
         supportTerms: 'Términos y condiciones',
         supportPrivacy: 'Política de privacidad',
@@ -764,7 +759,6 @@ class EcommerceFooter extends HTMLElement {
                         <h3 class="col-title">${esc(t.headingSupport)}</h3>
                         <ul class="link-list">
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/account.html">${esc(t.supportMyAccount)}</a></li>
-                            <li><a href="${esc(staticRoot)}/${activeLang.code}/installation-guide.html">${esc(t.supportInstallGuide)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/returns-and-refunds.html">${esc(t.supportReturns)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/terms-and-conditions.html">${esc(t.supportTerms)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/privacy-policy.html">${esc(t.supportPrivacy)}</a></li>
