@@ -6,7 +6,12 @@
             logoAlt: 'Aml Store',
             navHome: 'Home',
             navOs: 'Sistemi Operativi',
-            navOffice: 'Office',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Apri sottomenu Microsoft 365',
+            navM365Overview: 'Panoramica suite',
+            navM365Personal: 'Microsoft 365 Personal',
+            navM365Family: 'Microsoft 365 Family',
+            navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
             assistanceSmall: 'Assistenza',
             openNavMenu: 'Apri menu di navigazione',
@@ -22,7 +27,12 @@
             logoAlt: 'Aml Store',
             navHome: 'Home',
             navOs: 'Operating systems',
-            navOffice: 'Office',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Open Microsoft 365 submenu',
+            navM365Overview: 'Suite overview',
+            navM365Personal: 'Microsoft 365 Personal',
+            navM365Family: 'Microsoft 365 Family',
+            navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
             assistanceSmall: 'Support',
             openNavMenu: 'Open navigation menu',
@@ -38,7 +48,12 @@
             logoAlt: 'Aml Store',
             navHome: 'Home',
             navOs: "Systèmes d'exploitation",
-            navOffice: 'Office',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Ouvrir le sous-menu Microsoft 365',
+            navM365Overview: 'Vue d’ensemble de la suite',
+            navM365Personal: 'Microsoft 365 Personnel',
+            navM365Family: 'Microsoft 365 Famille',
+            navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
             assistanceSmall: 'Assistance',
             openNavMenu: 'Ouvrir le menu de navigation',
@@ -54,7 +69,12 @@
             logoAlt: 'Aml Store',
             navHome: 'Home',
             navOs: 'Betriebssysteme',
-            navOffice: 'Office',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Microsoft-365-Untermenü öffnen',
+            navM365Overview: 'Suite-Überblick',
+            navM365Personal: 'Microsoft 365 Personal',
+            navM365Family: 'Microsoft 365 Family',
+            navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
             assistanceSmall: 'Support',
             openNavMenu: 'Navigationsmenü öffnen',
@@ -70,7 +90,12 @@
             logoAlt: 'Aml Store',
             navHome: 'Home',
             navOs: 'Sistemas operativos',
-            navOffice: 'Office',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Abrir submenú Microsoft 365',
+            navM365Overview: 'Panorama de la suite',
+            navM365Personal: 'Microsoft 365 Personal',
+            navM365Family: 'Microsoft 365 Familia',
+            navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
             assistanceSmall: 'Asistencia',
             openNavMenu: 'Abrir menú de navegación',
@@ -121,6 +146,13 @@
             /* Rileva se siamo sulla home page della lingua attiva */
             const afterLang = (parsed.pathAfterLang || '').replace(/^\//, '');
             const isHome = afterLang === '' || afterLang === 'index.html';
+            const hrefM365Solutions = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-solutions.html');
+            const hrefM365Family = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-family.html');
+            const afterLangLower = String(parsed.pathAfterLang || '').toLowerCase();
+            const isM365Solutions = afterLangLower.includes('microsoft-365-solutions');
+            const isM365Family = afterLangLower.includes('microsoft-365-family');
+            const isM365NavActive = isM365Solutions || isM365Family;
+            const mailM365Business = 'mailto:Info@amlstore.it?subject=' + encodeURIComponent('Microsoft 365 Business Standard');
             const esc = S.escapeHtmlAttr;
 
             const cartAriaForCount = (n) => {
@@ -241,6 +273,151 @@
                     .nav-links a.active {
                         color: var(--text-primary);
                         font-weight: 600;
+                    }
+
+                    /* Microsoft 365 — voce principale (link overview) + sottomenù */
+                    .nav-m365-wrap {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .nav-m365-inner {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.15rem;
+                    }
+                    .nav-m365-root {
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.9rem;
+                        font-weight: 500;
+                        transition: color 0.3s ease, text-shadow 0.3s ease;
+                        position: relative;
+                        padding-bottom: 4px;
+                        white-space: nowrap;
+                    }
+                    .nav-m365-root::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 50%;
+                        width: 0;
+                        height: 2px;
+                        background-color: var(--text-primary);
+                        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        border-radius: 2px;
+                    }
+                    .nav-m365-root:hover {
+                        color: var(--text-primary);
+                        text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+                    }
+                    .nav-m365-root:hover::after,
+                    .nav-m365-root.active::after {
+                        width: 100%;
+                        left: 0;
+                    }
+                    .nav-m365-root.active {
+                        color: var(--text-primary);
+                        font-weight: 600;
+                    }
+                    .nav-m365-caret {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        padding: 0;
+                        margin: 0 0 2px 0;
+                        border: none;
+                        border-radius: 6px;
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        transition: color 0.2s ease, background 0.2s ease;
+                    }
+                    .nav-m365-caret:hover,
+                    .nav-m365-wrap.open .nav-m365-caret {
+                        color: var(--text-primary);
+                        background: rgba(255, 255, 255, 0.06);
+                    }
+                    .nav-m365-caret:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                    }
+                    .nav-m365-caret svg {
+                        width: 12px;
+                        height: 12px;
+                        fill: currentColor;
+                        transition: transform 0.25s ease;
+                    }
+                    .nav-m365-wrap.open .nav-m365-caret svg {
+                        transform: rotate(180deg);
+                    }
+                    /* Ponte invisibile sopra il pannello: senza, il mouse attraversa il gap
+                       tra trigger e dropdown e :hover sul wrap cade → il menu si chiude. */
+                    .nav-m365-dropdown::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 100%;
+                        left: 0;
+                        right: 0;
+                        height: calc(0.5rem + 12px);
+                    }
+                    .nav-m365-dropdown {
+                        position: absolute;
+                        top: calc(100% + 0.5rem);
+                        left: 0;
+                        min-width: 16.5rem;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: 12px;
+                        padding: 0.4rem;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-6px) scale(0.98);
+                        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+                        z-index: 50;
+                    }
+                    .nav-m365-wrap:hover .nav-m365-dropdown,
+                    .nav-m365-wrap:focus-within .nav-m365-dropdown,
+                    .nav-m365-wrap.open .nav-m365-dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        transform: translateY(0) scale(1);
+                        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    visibility 0.25s;
+                    }
+                    .nav-m365-dropdown a {
+                        display: block;
+                        padding: 0.55rem 0.75rem;
+                        border-radius: 8px;
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                        white-space: nowrap;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .nav-m365-dropdown a:hover {
+                        background: rgba(255, 255, 255, 0.08);
+                        color: var(--text-primary);
+                    }
+                    .nav-m365-dropdown a.nav-m365-dropdown__overview {
+                        font-weight: 700;
+                        color: var(--text-primary);
+                        border-bottom: 1px solid var(--border-color);
+                        border-radius: 8px 8px 0 0;
+                        margin-bottom: 0.15rem;
+                        padding-bottom: 0.65rem;
+                    }
+                    .nav-m365-dropdown a.nav-m365-dropdown__overview:hover {
+                        background: rgba(59, 130, 246, 0.12);
                     }
 
                     .right-section {
@@ -507,6 +684,11 @@
                         .chevron-down { transition: none; }
                         .lang-dropdown,
                         .lang-wrapper.open .lang-dropdown { transition: none; }
+                        .nav-m365-dropdown,
+                        .nav-m365-wrap:hover .nav-m365-dropdown,
+                        .nav-m365-wrap:focus-within .nav-m365-dropdown,
+                        .nav-m365-wrap.open .nav-m365-dropdown { transition: none; }
+                        .nav-m365-caret svg { transition: none; }
                         /* Pulsante Accedi */
                         .btn-signin { transition: none; }
                         /* Overlay e Drawer mobile */
@@ -688,6 +870,16 @@
                     .drawer-nav {
                         display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2.5rem;
                     }
+                    .drawer-m365-block { margin-bottom: 0.25rem; }
+                    .drawer-m365-heading {
+                        font-size: 0.72rem;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.08em;
+                        color: var(--text-muted);
+                        padding: 0.5rem 1rem 0.35rem;
+                    }
+                    .drawer-m365-block a { font-size: 1rem; font-weight: 600; }
                     .drawer-nav a {
                         color: var(--text-primary);
                         text-decoration: none;
@@ -831,7 +1023,20 @@
                         <nav class="nav-links">
                             <a href="${esc(homeHref)}"${isHome ? ' class="active"' : ''}>${esc(t.navHome)}</a>
                             <a href="#">${esc(t.navOs)}</a>
-                            <a href="#">${esc(t.navOffice)}</a>
+                            <div class="nav-m365-wrap">
+                                <div class="nav-m365-inner">
+                                    <a href="${esc(hrefM365Solutions)}" class="nav-m365-root${isM365NavActive ? ' active' : ''}">${esc(t.navM365)}</a>
+                                    <button type="button" class="nav-m365-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navM365OpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-m365-dropdown" role="menu">
+                                    <a href="${esc(hrefM365Solutions)}" class="nav-m365-dropdown__overview" role="menuitem">${esc(t.navM365Overview)}</a>
+                                    <a href="${esc(hrefM365Solutions)}" role="menuitem">${esc(t.navM365Personal)}</a>
+                                    <a href="${esc(hrefM365Family)}" role="menuitem">${esc(t.navM365Family)}</a>
+                                    <a href="${esc(mailM365Business)}" role="menuitem">${esc(t.navM365Business)}</a>
+                                </div>
+                            </div>
                             <a href="#">${esc(t.navAntivirus)}</a>
                         </nav>
                     </div>
@@ -889,7 +1094,13 @@
                     <nav class="drawer-nav">
                         <a href="${esc(homeHref)}"${isHome ? ' class="active"' : ''}>${esc(t.navHome)}</a>
                         <a href="#">${esc(t.navOs)}</a>
-                        <a href="#">${esc(t.navOffice)}</a>
+                        <div class="drawer-m365-block">
+                            <div class="drawer-m365-heading">${esc(t.navM365)}</div>
+                            <a href="${esc(hrefM365Solutions)}"${isM365Solutions ? ' class="active"' : ''}>${esc(t.navM365Overview)}</a>
+                            <a href="${esc(hrefM365Solutions)}">${esc(t.navM365Personal)}</a>
+                            <a href="${esc(hrefM365Family)}"${isM365Family ? ' class="active"' : ''}>${esc(t.navM365Family)}</a>
+                            <a href="${esc(mailM365Business)}">${esc(t.navM365Business)}</a>
+                        </div>
                         <a href="#">${esc(t.navAntivirus)}</a>
                     </nav>
                     
@@ -939,6 +1150,10 @@
 
             const toggleLangMenu = (e) => {
                 if (e) e.stopPropagation();
+                const m365WClose = this.shadowRoot.querySelector('.nav-m365-wrap');
+                const m365CClose = this.shadowRoot.querySelector('.nav-m365-caret');
+                if (m365WClose) m365WClose.classList.remove('open');
+                if (m365CClose) m365CClose.setAttribute('aria-expanded', 'false');
                 if (!langWrapper || !langSelector) return;
                 const isOpen = langWrapper.classList.toggle('open');
                 langSelector.setAttribute('aria-expanded', isOpen);
@@ -958,17 +1173,60 @@
                 });
             }
 
-            this.__docClickHandler = () => {
-                if (!langWrapper || !langSelector) return;
-                langWrapper.classList.remove('open');
-                langSelector.setAttribute('aria-expanded', 'false');
+            const m365Wrap = this.shadowRoot.querySelector('.nav-m365-wrap');
+            const m365Caret = this.shadowRoot.querySelector('.nav-m365-caret');
+            const closeM365Menu = () => {
+                if (!m365Wrap || !m365Caret) return;
+                m365Wrap.classList.remove('open');
+                m365Caret.setAttribute('aria-expanded', 'false');
+            };
+            if (m365Caret && m365Wrap) {
+                m365Caret.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (langWrapper) {
+                        langWrapper.classList.remove('open');
+                        if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                    }
+                    const isOpen = m365Wrap.classList.toggle('open');
+                    m365Caret.setAttribute('aria-expanded', isOpen);
+                });
+                this.shadowRoot.querySelectorAll('.nav-m365-dropdown a').forEach((a) => {
+                    a.addEventListener('click', closeM365Menu);
+                });
+            }
+
+            this.__docClickHandler = (e) => {
+                const path = typeof e.composedPath === 'function' ? e.composedPath() : [];
+                if (langWrapper && langSelector && !path.includes(langWrapper)) {
+                    langWrapper.classList.remove('open');
+                    langSelector.setAttribute('aria-expanded', 'false');
+                }
+                const m365W = this.shadowRoot.querySelector('.nav-m365-wrap');
+                const m365C = this.shadowRoot.querySelector('.nav-m365-caret');
+                if (m365W && !path.includes(m365W)) {
+                    m365W.classList.remove('open');
+                    if (m365C) m365C.setAttribute('aria-expanded', 'false');
+                }
             };
             this.__docKeydownHandler = (e) => {
-                if (e.key !== 'Escape' || !langWrapper?.classList.contains('open')) return;
-                langWrapper.classList.remove('open');
-                if (langSelector) {
-                    langSelector.setAttribute('aria-expanded', 'false');
-                    langSelector.focus();
+                if (e.key !== 'Escape') return;
+                if (langWrapper?.classList.contains('open')) {
+                    langWrapper.classList.remove('open');
+                    if (langSelector) {
+                        langSelector.setAttribute('aria-expanded', 'false');
+                        langSelector.focus();
+                    }
+                    return;
+                }
+                const m365W = this.shadowRoot.querySelector('.nav-m365-wrap');
+                const m365C = this.shadowRoot.querySelector('.nav-m365-caret');
+                if (m365W?.classList.contains('open')) {
+                    m365W.classList.remove('open');
+                    if (m365C) {
+                        m365C.setAttribute('aria-expanded', 'false');
+                        m365C.focus();
+                    }
                 }
             };
             document.addEventListener('click', this.__docClickHandler);

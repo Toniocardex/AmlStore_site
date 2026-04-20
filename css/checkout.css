@@ -343,6 +343,33 @@
     white-space: nowrap;
 }
 
+/* Chip con logo SVG (checkout) */
+.payment-icon--img {
+    padding: 0.15rem 0.45rem;
+    font-size: 0;
+    letter-spacing: 0;
+    white-space: normal;
+}
+
+.payment-icon--img img {
+    display: block;
+    height: 14px;
+    width: auto;
+    max-width: 44px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.payment-icon--img.payment-icon--paypal-wide img {
+    max-width: 56px;
+    height: 15px;
+}
+
+.payment-icon--img.payment-icon--transfer img {
+    max-width: 42px;
+    height: 15px;
+}
+
 /* ─── Card bonifico (istruzioni) ───────────────────────────────────────────── */
 
 .transfer-section {
@@ -412,7 +439,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-/* ─── PayPal ────────────────────────────────────────────────────────────────── */
+/* ─── PayPal (testo placeholder — non usato se c’è .payment-icon--img) ─────── */
 
 .payment-icon--paypal {
     background: #003087;
@@ -843,6 +870,10 @@ html[data-theme="light"] .payment-icon {
     background: rgba(0, 0, 0, 0.06);
     border-color: rgba(0, 0, 0, 0.08);
     color: #333;
+}
+
+html[data-theme="light"] .payment-icon--img {
+    background: rgba(255, 255, 255, 0.95);
 }
 
 html[data-theme="light"] .checkout-summary {
