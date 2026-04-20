@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="360" viewBox="0 0 560 360" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="dfg" x1="280" y1="60" x2="280" y2="300">
+      <stop stop-color="#34d399"/>
+      <stop offset="1" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="dff" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <rect width="560" height="360" rx="18" fill="#0f1018"/>
+  <circle cx="280" cy="170" r="130" fill="rgba(16,185,129,0.12)" filter="url(#dff)"/>
+  <rect x="96" y="88" width="368" height="200" rx="16" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.09)" stroke-width="1"/>
+  <rect x="116" y="108" width="140" height="10" rx="3" fill="rgba(255,255,255,0.11)"/>
+  <rect x="116" y="128" width="260" height="8" rx="2" fill="rgba(255,255,255,0.06)"/>
+  <rect x="116" y="144" width="220" height="8" rx="2" fill="rgba(255,255,255,0.06)"/>
+  <path d="M280 134l52 26v58c0 36-52 64-52 64s-52-28-52-64v-58l52-26z" fill="rgba(16,185,129,0.25)" stroke="url(#dfg)" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M262 210l14 14 28-32" stroke="#6ee7b7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="116" y="238" width="328" height="10" rx="2" fill="rgba(255,255,255,0.06)"/>
+  <rect x="116" y="256" width="280" height="10" rx="2" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="416" cy="128" r="6" fill="#34d399"/>
+  <rect x="108" y="120" width="4" height="4" rx="1" fill="#6ee7b7" opacity="0.8"/>
+  <rect x="448" y="248" width="4" height="4" rx="1" fill="#34d399" opacity="0.7"/>
+</svg>
