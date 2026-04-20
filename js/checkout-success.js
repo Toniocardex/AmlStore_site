@@ -165,6 +165,17 @@
             .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
+    /** Allinea i nomi ordine allo stesso formato del carrello (es. SKU → titolo leggibile). */
+    function orderLineLabel(item) {
+        var sku = (item.sku || '').trim();
+        var name = item.name != null ? String(item.name).trim() : '';
+        var cart = global.AmlCart;
+        if (cart && typeof cart.lineDisplayName === 'function') {
+            return cart.lineDisplayName({ sku: sku || name, name: name || sku });
+        }
+        return name || sku;
+    }
+
     /* ─── DOM helpers ──────────────────────────────────────────────────────── */
 
     var $ = function (id) { return document.getElementById(id); };
@@ -204,7 +215,7 @@
             var unit     = item.unit_amount_minor || item.unitAmount || 0;
             var subMinor = Math.round(unit) * qty;
             return '<tr>'
-                + '<td class="success-td">' + esc(item.name || item.sku || '') + '</td>'
+                + '<td class="success-td">' + esc(orderLineLabel(item)) + '</td>'
                 + '<td class="success-td success-td--center">' + qty + '</td>'
                 + '<td class="success-td success-td--right">' + formatMoney(subMinor, order.currency) + '</td>'
                 + '</tr>';

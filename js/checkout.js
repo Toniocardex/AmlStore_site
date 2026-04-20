@@ -47,6 +47,13 @@
 
     /* ─── Utility ──────────────────────────────────────────────────────────── */
 
+    /** Righe carrello con nomi leggibili (stesso formato di cart.js). */
+    function checkoutCartLines(cart) {
+        if (!cart) return [];
+        if (typeof cart.getItemsForCheckout === 'function') return cart.getItemsForCheckout();
+        return cart.getItems ? cart.getItems() : [];
+    }
+
     function getLang() {
         var htmlLang = document.documentElement.lang || '';
         var match    = htmlLang.match(/^[a-z]{2}/i);
@@ -315,7 +322,7 @@
         var cart = global.AmlCart;
         if (!cart) return;
 
-        var lines    = cart.getItems  ? cart.getItems()  : [];
+        var lines    = checkoutCartLines(cart);
         var totalQty = cart.totalQty  ? cart.totalQty()  : 0;
 
         if (!lines.length || totalQty === 0) {
@@ -339,7 +346,7 @@
             var qtyEl = document.createElement('div'); qtyEl.className = 'checkout-item-qty';
             var price = document.createElement('div'); price.className = 'checkout-item-price';
 
-            name.textContent  = line.name || line.sku;
+            name.textContent  = (cart.lineDisplayName && cart.lineDisplayName(line)) || line.name || line.sku;
             qtyEl.textContent = (container.getAttribute('data-qty-label') || 'Qtà') + ': ' + qty;
             price.textContent = formatMoney(lineMinor, currency);
 
@@ -386,7 +393,7 @@
 
         var btn      = document.getElementById('btn-stripe-submit');
         var cart     = global.AmlCart;
-        var items    = cart && cart.getItems ? cart.getItems() : [];
+        var items    = checkoutCartLines(cart);
         var lang     = getLang();
         var customer = collectFormData();
 
@@ -432,7 +439,7 @@
 
         var btn      = document.getElementById('btn-transfer-submit');
         var cart     = global.AmlCart;
-        var items    = cart && cart.getItems  ? cart.getItems()  : [];
+        var items    = checkoutCartLines(cart);
         var lang     = getLang();
         var customer = collectFormData();
 
@@ -550,7 +557,7 @@
                         }
 
                         var cart  = global.AmlCart;
-                        var items = cart && cart.getItems  ? cart.getItems()  : [];
+                        var items = checkoutCartLines(cart);
                         var lang  = getLang();
 
                         var payload = {

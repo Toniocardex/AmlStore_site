@@ -147,11 +147,13 @@
             const afterLang = (parsed.pathAfterLang || '').replace(/^\//, '');
             const isHome = afterLang === '' || afterLang === 'index.html';
             const hrefM365Solutions = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-solutions.html');
+            const hrefM365Personal = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-personal.html');
             const hrefM365Family = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-family.html');
             const afterLangLower = String(parsed.pathAfterLang || '').toLowerCase();
             const isM365Solutions = afterLangLower.includes('microsoft-365-solutions');
+            const isM365Personal = afterLangLower.includes('microsoft-365-personal');
             const isM365Family = afterLangLower.includes('microsoft-365-family');
-            const isM365NavActive = isM365Solutions || isM365Family;
+            const isM365NavActive = isM365Solutions || isM365Personal || isM365Family;
             const mailM365Business = 'mailto:Info@amlstore.it?subject=' + encodeURIComponent('Microsoft 365 Business Standard');
             const esc = S.escapeHtmlAttr;
 
@@ -1032,7 +1034,7 @@
                                 </div>
                                 <div class="nav-m365-dropdown" role="menu">
                                     <a href="${esc(hrefM365Solutions)}" class="nav-m365-dropdown__overview" role="menuitem">${esc(t.navM365Overview)}</a>
-                                    <a href="${esc(hrefM365Solutions)}" role="menuitem">${esc(t.navM365Personal)}</a>
+                                    <a href="${esc(hrefM365Personal)}" role="menuitem">${esc(t.navM365Personal)}</a>
                                     <a href="${esc(hrefM365Family)}" role="menuitem">${esc(t.navM365Family)}</a>
                                     <a href="${esc(mailM365Business)}" role="menuitem">${esc(t.navM365Business)}</a>
                                 </div>
@@ -1097,7 +1099,7 @@
                         <div class="drawer-m365-block">
                             <div class="drawer-m365-heading">${esc(t.navM365)}</div>
                             <a href="${esc(hrefM365Solutions)}"${isM365Solutions ? ' class="active"' : ''}>${esc(t.navM365Overview)}</a>
-                            <a href="${esc(hrefM365Solutions)}">${esc(t.navM365Personal)}</a>
+                            <a href="${esc(hrefM365Personal)}"${isM365Personal ? ' class="active"' : ''}>${esc(t.navM365Personal)}</a>
                             <a href="${esc(hrefM365Family)}"${isM365Family ? ' class="active"' : ''}>${esc(t.navM365Family)}</a>
                             <a href="${esc(mailM365Business)}">${esc(t.navM365Business)}</a>
                         </div>

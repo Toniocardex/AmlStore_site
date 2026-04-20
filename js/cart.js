@@ -76,6 +76,33 @@
         return String(ds.stripeProductSku || el.getAttribute('data-stripe-product-sku') || '').trim();
     }
 
+    /**
+     * Converte uno SKU tipo slug (microsoft-365-personal-12m) in titolo per vetrina:
+     * rimuove suffisso durata -12m/-24m, trattini → spazi, ogni segmento con iniziale maiuscola.
+     * I segmenti solo numerici (365, 11) restano invariati.
+     */
+    function displayNameFromSku(sku) {
+        let s = String(sku || '').trim();
+        if (!s) return '';
+        s = s.replace(/-\d+m$/i, '');
+        return s
+            .split('-')
+            .filter(Boolean)
+            .map((part) => {
+                if (/^\d+$/.test(part)) return part;
+                return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+            })
+            .join(' ');
+    }
+
+    /** Nome riga carrello: usa il titolo salvato se è diverso dallo SKU, altrimenti deriva dallo SKU. */
+    function lineDisplayName(line) {
+        const sku = String((line && line.sku) || '').trim();
+        const raw = line && line.name != null ? String(line.name).trim() : '';
+        if (raw && raw !== sku) return raw;
+        return displayNameFromSku(sku) || sku;
+    }
+
     function normalizeCurrency(el) {
         if (!el) return 'eur';
         const c = String(el.dataset.stripeCurrency || el.getAttribute('data-stripe-currency') || 'eur')
@@ -106,13 +133,16 @@
 
     function productTitleFromPage() {
         const h = document.querySelector('h1.product-title');
-        return h ? h.textContent.replace(/\s+/g, ' ').trim() : '';
+        if (h) return h.textContent.replace(/\s+/g, ' ').trim();
+        const v2 = document.querySelector('.v2-hero__title');
+        return v2 ? v2.textContent.replace(/\s+/g, ' ').trim() : '';
     }
 
     function lineFromProductContext(root) {
         const sku = normalizeSku(root);
         if (!sku) return null;
-        const name = productTitleFromPage() || sku;
+        const title = productTitleFromPage();
+        const name = title || displayNameFromSku(sku);
         const currency = normalizeCurrency(root);
         const unitAmount = parseMinorAmount(root);
         const imgEl = document.querySelector('.product-cover-img');
@@ -180,7 +210,7 @@
         const sku = normalizeSku(root);
         if (!sku) return null;
         const nameEl = root.querySelector('.product-card-name');
-        const name = (nameEl && nameEl.textContent.trim()) || sku;
+        const name = (nameEl && nameEl.textContent.trim()) || displayNameFromSku(sku);
         const currency = normalizeCurrency(root);
         const unitAmount = parseMinorAmount(root);
         const imgEl = root.querySelector('.product-card-img');
@@ -204,7 +234,10 @@
         const idx = next.findIndex((x) => x.sku === line.sku);
         if (idx >= 0) {
             next[idx].quantity = Number(next[idx].quantity) + Number(line.quantity || 1);
-            next[idx].name = line.name || next[idx].name;
+            next[idx].name = lineDisplayName({
+                sku: next[idx].sku,
+                name: line.name || next[idx].name,
+            });
             next[idx].currency = line.currency || next[idx].currency;
             next[idx].unitAmount = line.unitAmount;
             if (line.image) next[idx].image = line.image;
@@ -213,7 +246,7 @@
         }
         next.push({
             sku: line.sku,
-            name: line.name,
+            name: lineDisplayName(line),
             currency: line.currency,
             unitAmount: line.unitAmount,
             quantity: Number(line.quantity) > 0 ? Number(line.quantity) : 1,
@@ -316,16 +349,17 @@
                 const q = Number(l.quantity) || 0;
                 const lineMinor = Math.round(Number(l.unitAmount) || 0) * q;
                 const path = l.productPath || '';
+                const label = lineDisplayName(l);
 
                 const tdName = document.createElement('td');
                 tdName.className = 'aml-cart-col-name';
                 if (path) {
                     const a = document.createElement('a');
                     a.href = path;
-                    a.textContent = l.name;
+                    a.textContent = label;
                     tdName.appendChild(a);
                 } else {
-                    tdName.textContent = l.name;
+                    tdName.textContent = label;
                 }
 
                 const tdQty = document.createElement('td');
@@ -337,7 +371,7 @@
                 btnMinus.type = 'button';
                 btnMinus.className = 'aml-cart-qty-btn aml-cart-qty-btn--minus';
                 btnMinus.setAttribute('data-sku-qty', l.sku);
-                btnMinus.setAttribute('aria-label', qtyMinusAria + ' ' + l.name);
+                btnMinus.setAttribute('aria-label', qtyMinusAria + ' ' + label);
                 btnMinus.disabled = q <= 1;
                 btnMinus.appendChild(document.createTextNode('\u2212'));
 
@@ -350,13 +384,13 @@
                 inp.setAttribute('pattern', '[0-9]*');
                 inp.value = String(q);
                 inp.setAttribute('data-sku', l.sku);
-                inp.setAttribute('aria-label', qtyAria + ': ' + l.name);
+                inp.setAttribute('aria-label', qtyAria + ': ' + label);
 
                 const btnPlus = document.createElement('button');
                 btnPlus.type = 'button';
                 btnPlus.className = 'aml-cart-qty-btn aml-cart-qty-btn--plus';
                 btnPlus.setAttribute('data-sku-qty', l.sku);
-                btnPlus.setAttribute('aria-label', qtyPlusAria + ' ' + l.name);
+                btnPlus.setAttribute('aria-label', qtyPlusAria + ' ' + label);
                 btnPlus.disabled = q >= 99;
                 btnPlus.appendChild(document.createTextNode('+'));
 
@@ -466,6 +500,12 @@
         totalQty: () => totalQty(readLines()),
         totalMinor: () => totalMinor(readLines()),
         formatMoney,
+        displayNameFromSku,
+        lineDisplayName,
+        /** Righe con nome mostrabile (utile a checkout / worker). */
+        getItemsForCheckout: function () {
+            return readLines().map((l) => ({ ...l, name: lineDisplayName(l) }));
+        },
         // Mantenuto per compatibilità; la delegazione è ora automatica su document.
         bindAddButtons: function () {},
     };
