@@ -468,6 +468,23 @@
         .v2-faq details[open] summary::after { content: '−'; }
         .v2-faq details p { margin: 16px 0 0; font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
         [data-theme="light"] .v2-faq details p { color: #555; }
+        @media (max-width: 640px) {
+            .v2-faq details { padding: 14px 0; }
+            .v2-faq summary {
+                min-height: 44px;
+                align-items: flex-start;
+                padding: 4px 0;
+                gap: 12px;
+                line-height: 1.35;
+                touch-action: manipulation;
+            }
+            .v2-faq summary::after { margin-top: 0.08em; line-height: 1; }
+            .v2-faq details p { margin-top: 12px; font-size: 0.88rem; line-height: 1.65; }
+        }
+        @media (max-width: 480px) {
+            .v2-faq details { padding: 12px 0; }
+            .v2-faq summary { font-size: 0.94rem; gap: 10px; }
+        }
         .v2-specs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
         .v2-specs-item { padding: 24px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
         [data-theme="light"] .v2-specs-item { background: #f5f7fa; border-color: rgba(0,0,0,0.07); }

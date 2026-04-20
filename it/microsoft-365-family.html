@@ -709,6 +709,31 @@
         }
         [data-theme="light"] .v2-faq details p { color: #555; }
 
+        @media (max-width: 640px) {
+            .v2-faq details { padding: 14px 0; }
+            .v2-faq summary {
+                min-height: 44px;
+                align-items: flex-start;
+                padding: 4px 0;
+                gap: 12px;
+                line-height: 1.35;
+                touch-action: manipulation;
+            }
+            .v2-faq summary::after {
+                margin-top: 0.08em;
+                line-height: 1;
+            }
+            .v2-faq details p {
+                margin-top: 12px;
+                font-size: 0.88rem;
+                line-height: 1.65;
+            }
+        }
+        @media (max-width: 480px) {
+            .v2-faq details { padding: 12px 0; }
+            .v2-faq summary { font-size: 0.94rem; gap: 10px; }
+        }
+
         /* ── SPECS TABLE ── */
         .v2-specs-grid {
             display: grid;
