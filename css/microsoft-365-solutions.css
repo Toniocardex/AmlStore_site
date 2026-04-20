@@ -1,0 +1,571 @@
+/**
+ * Microsoft 365 — pagina soluzioni (tema premium AI/Copilot, sfondo chiaro + hero scuro).
+ * Font Inter collegato dalla pagina HTML.
+ */
+
+body.m365sol {
+    font-family: 'Inter', 'Montserrat', sans-serif;
+    background: #f9fafb !important;
+    background-image: none !important;
+    color: #1f2937;
+}
+
+body.m365sol main.m365sol-main {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    flex: 1;
+}
+
+body.m365sol ::selection {
+    background: rgba(196, 181, 253, 0.45);
+}
+
+/* ── Hero ── */
+.m365sol-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 1rem 14rem;
+    background: radial-gradient(circle at top right, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+}
+
+.m365sol-glow-wrap {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.m365sol-glow-1 {
+    position: absolute;
+    top: 2.5rem;
+    left: 25%;
+    width: min(500px, 90vw);
+    height: min(500px, 90vw);
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, transparent 70%);
+    filter: blur(80px);
+    opacity: 0.6;
+}
+
+.m365sol-glow-2 {
+    position: absolute;
+    bottom: 5rem;
+    right: 25%;
+    width: min(600px, 95vw);
+    height: min(600px, 95vw);
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
+    filter: blur(100px);
+    opacity: 0.5;
+}
+
+.m365sol-hero__inner {
+    position: relative;
+    z-index: 10;
+    max-width: 64rem;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: clamp(1rem, 4vw, 3rem);
+}
+
+.m365sol-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(12px);
+}
+
+.m365sol-badge-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: #22d3ee;
+    animation: m365sol-pulse 2s ease-in-out infinite;
+}
+
+@keyframes m365sol-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .m365sol-badge-dot,
+    .m365sol-mockup-float {
+        animation: none;
+    }
+}
+
+.m365sol-hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 2rem;
+}
+
+.m365sol-gradient-text {
+    display: block;
+    background: linear-gradient(90deg, #60a5fa, #67e8f9, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.m365sol-hero-lede {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    color: #9ca3af;
+    max-width: 42rem;
+    margin: 0 auto 3rem;
+    line-height: 1.65;
+}
+
+.m365sol-hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.m365sol-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.m365sol-btn--primary {
+    background: #2563eb;
+    color: #fff;
+    box-shadow: 0 10px 20px -10px rgba(37, 99, 235, 0.5);
+}
+
+.m365sol-btn--primary:hover {
+    background: #3b82f6;
+    transform: translateY(-3px);
+}
+
+.m365sol-btn--ghost {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+}
+
+.m365sol-btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.m365sol-hero-fade {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 72rem;
+    height: 16rem;
+    background: linear-gradient(to top, #f9fafb, transparent);
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* ── Path cards (overlap) ── */
+.m365sol-path {
+    position: relative;
+    z-index: 30;
+    max-width: 80rem;
+    margin: -10rem auto 6rem;
+    padding: 0 1rem;
+}
+
+.m365sol-path-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .m365sol-path-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.m365sol-path-card {
+    display: block;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #f3f4f6;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.m365sol-path-card:hover {
+    transform: translateY(-8px);
+}
+
+.m365sol-path-card--light {
+    background: #fff;
+}
+
+.m365sol-path-card--dark {
+    background: #111827;
+    color: #fff;
+    border-color: #1f2937;
+}
+
+.m365sol-path-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.m365sol-path-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.m365sol-path-card--light .m365sol-path-icon {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.m365sol-path-card--light.m365sol-path-card--purple .m365sol-path-icon {
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
+.m365sol-path-card--dark .m365sol-path-icon {
+    background: #1f2937;
+    border: 1px solid #374151;
+    color: #fff;
+}
+
+.m365sol-path-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+}
+
+.m365sol-path-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.m365sol-path-card--light p {
+    color: #6b7280;
+}
+
+.m365sol-path-card--dark p {
+    color: #9ca3af;
+}
+
+.m365sol-path-link {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.m365sol-path-card--light .m365sol-path-link {
+    color: #2563eb;
+}
+
+.m365sol-path-card--purple .m365sol-path-link {
+    color: #7c3aed;
+}
+
+.m365sol-path-card--dark .m365sol-path-link {
+    color: #fff;
+}
+
+.m365sol-path-link svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* ── Apps ── */
+.m365sol-apps {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 5rem 1rem;
+}
+
+.m365sol-apps-head {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.m365sol-apps-head h2 {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.5rem;
+    line-height: 1.2;
+}
+
+.m365sol-apps-head p {
+    font-size: 1.25rem;
+    color: #6b7280;
+    max-width: 42rem;
+    margin: 0 auto;
+}
+
+.m365sol-apps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 3rem;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .m365sol-apps-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.m365sol-app-tile {
+    cursor: default;
+}
+
+.m365sol-app-icon {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin: 0 auto 1rem;
+    transition: transform 0.2s;
+}
+
+.m365sol-app-tile:hover .m365sol-app-icon {
+    transform: scale(1.08);
+}
+
+.m365sol-app-tile h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.m365sol-app-tile p {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0.25rem 0 0;
+}
+
+.m365sol-app-icon--w { background: #dbeafe; color: #2563eb; }
+.m365sol-app-icon--x { background: #dcfce7; color: #16a34a; }
+.m365sol-app-icon--p { background: #ffedd5; color: #ea580c; }
+.m365sol-app-icon--t { background: #e0e7ff; color: #4f46e5; }
+
+/* ── Copilot band ── */
+.m365sol-copilot {
+    background: #111827;
+    color: #fff;
+    padding: 6rem 1rem;
+    margin: 3rem 0;
+}
+
+.m365sol-copilot-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .m365sol-copilot-inner {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .m365sol-copilot-text {
+        flex: 1;
+    }
+
+    .m365sol-copilot-visual {
+        flex: 1;
+    }
+}
+
+.m365sol-copilot-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #67e8f9;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.m365sol-copilot-text h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 1.5rem;
+}
+
+.m365sol-copilot-text p {
+    font-size: 1.125rem;
+    color: #9ca3af;
+    line-height: 1.65;
+    margin: 0 0 2rem;
+}
+
+.m365sol-btn--light {
+    background: #fff;
+    color: #111827;
+}
+
+.m365sol-btn--light:hover {
+    background: #f3f4f6;
+}
+
+.m365sol-mockup-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.m365sol-mockup {
+    position: relative;
+    z-index: 10;
+    background: #1f2937;
+    border-radius: 1rem;
+    border: 1px solid #374151;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+}
+
+.m365sol-mockup-float {
+    animation: m365sol-float 6s ease-in-out infinite;
+}
+
+@keyframes m365sol-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.m365sol-mockup-dots {
+    display: flex;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #374151;
+}
+
+.m365sol-mockup-dots span {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 9999px;
+}
+
+.m365sol-mockup-dots span:nth-child(1) { background: #ef4444; }
+.m365sol-mockup-dots span:nth-child(2) { background: #eab308; }
+.m365sol-mockup-dots span:nth-child(3) { background: #22c55e; }
+
+.m365sol-mockup-line {
+    height: 1rem;
+    background: #4b5563;
+    border-radius: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.m365sol-mockup-line--w75 { width: 75%; }
+.m365sol-mockup-line--w50 { width: 50%; }
+.m365sol-mockup-line--w83 { width: 83%; }
+
+.m365sol-mockup-ai {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(30, 58, 138, 0.3);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 0.75rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.m365sol-mockup-ai-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: #22d3ee;
+    margin-top: 0.35rem;
+    flex-shrink: 0;
+}
+
+.m365sol-mockup-ai p {
+    font-size: 0.875rem;
+    color: #bfdbfe;
+    margin: 0;
+}
+
+.m365sol-mockup-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(6, 182, 212, 0.2);
+    filter: blur(120px);
+    border-radius: 9999px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ── Footer note ── */
+.m365sol-disclaimer {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 0 1rem 4rem;
+    font-size: 0.8rem;
+    color: #6b7280;
+    line-height: 1.5;
+    text-align: center;
+}

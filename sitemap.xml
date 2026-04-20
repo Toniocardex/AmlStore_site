@@ -15,6 +15,11 @@
   <url><loc>https://aml-store.com/fr/microsoft-365-family.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/de/microsoft-365-family.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/microsoft-365-family.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/microsoft-365-solutions.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aml-store.com/en/microsoft-365-solutions.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aml-store.com/fr/microsoft-365-solutions.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aml-store.com/de/microsoft-365-solutions.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://aml-store.com/es/microsoft-365-solutions.html</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
   <url><loc>https://aml-store.com/it/cookie-policy.html</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
   <url><loc>https://aml-store.com/en/cookie-policy.html</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
   <url><loc>https://aml-store.com/fr/cookie-policy.html</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
