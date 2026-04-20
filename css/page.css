@@ -449,6 +449,10 @@ html[data-theme="light"] .btn-cta-primary:hover {
     margin-bottom: 1.5rem;
 }
 
+.legal-doc a.account-phone {
+    white-space: nowrap;
+}
+
 html[data-theme="light"] .legal-doc a {
     color: var(--page-accent);
 }
