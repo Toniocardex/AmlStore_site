@@ -387,14 +387,25 @@ body.m365sol ::selection {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 1.75rem;
     margin: 0 auto 1rem;
     transition: transform 0.2s;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.m365sol-app-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .m365sol-app-tile:hover .m365sol-app-icon {
-    transform: scale(1.08);
+    transform: scale(1.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .m365sol-app-tile h3 {
@@ -409,11 +420,6 @@ body.m365sol ::selection {
     color: #6b7280;
     margin: 0.25rem 0 0;
 }
-
-.m365sol-app-icon--w { background: #dbeafe; color: #2563eb; }
-.m365sol-app-icon--x { background: #dcfce7; color: #16a34a; }
-.m365sol-app-icon--p { background: #ffedd5; color: #ea580c; }
-.m365sol-app-icon--t { background: #e0e7ff; color: #4f46e5; }
 
 /* ── Copilot band ── */
 .m365sol-copilot {
