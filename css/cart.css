@@ -318,8 +318,34 @@ html[data-theme='light'] .cart-page .cart-table-wrap {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
+/* Tema chiaro: CTA primario blu (come stepper / accent) — il gradiente chiaro su bianco poco visibile */
 html[data-theme='light'] .cart-page .cart-btn-primary {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    background: var(--page-accent);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 49, 130, 0.22);
+}
+
+html[data-theme='light'] .cart-page .cart-btn-primary:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 6px 18px rgba(0, 49, 130, 0.28);
+}
+
+/* Focus su CTA piena: anello bianco + contorno accent — contrasto sul blu pieno */
+html[data-theme='light'] .cart-page .cart-btn-primary:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow:
+        0 0 0 4px var(--page-accent),
+        0 4px 14px rgba(0, 49, 130, 0.22);
+}
+
+html[data-theme='light'] .cart-page thead th {
+    background: #f0f1f3;
+    color: var(--page-text-secondary);
+}
+
+html[data-theme='light'] .cart-page .aml-cart-remove:hover {
+    background: rgba(0, 0, 0, 0.06);
 }
 
 html[data-theme='light'] .cart-page .aml-cart-qty-stepper {
