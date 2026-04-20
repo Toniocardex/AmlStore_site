@@ -763,11 +763,11 @@ class EcommerceFooter extends HTMLElement {
                     <div class="nav-col">
                         <h3 class="col-title">${esc(t.headingSupport)}</h3>
                         <ul class="link-list">
-                            <li><a href="#">${esc(t.supportMyAccount)}</a></li>
-                            <li><a href="#">${esc(t.supportInstallGuide)}</a></li>
-                            <li><a href="#">${esc(t.supportReturns)}</a></li>
-                            <li><a href="#">${esc(t.supportTerms)}</a></li>
-                            <li><a href="#">${esc(t.supportPrivacy)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/account.html">${esc(t.supportMyAccount)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/installation-guide.html">${esc(t.supportInstallGuide)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/returns-and-refunds.html">${esc(t.supportReturns)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/terms-and-conditions.html">${esc(t.supportTerms)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/privacy-policy.html">${esc(t.supportPrivacy)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/cookie-policy.html">${esc(t.supportCookies)}</a></li>
                             <li><button type="button" class="link-as-a" data-aml-cookie-settings>${esc(t.cookieManage)}</button></li>
                         </ul>
