@@ -1,0 +1,25 @@
+{
+  "name": "aml-store_site",
+  "version": "1.0.0",
+  "description": "Dominio pubblico: **https://aml-store.com**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:m365-illu": "node scripts/build-m365-illustrations.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toniocardex/AmlStore_site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Toniocardex/AmlStore_site/issues"
+  },
+  "homepage": "https://github.com/Toniocardex/AmlStore_site#readme",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

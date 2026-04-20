@@ -693,6 +693,15 @@ html[data-theme="light"] .m365sol-btn--light:hover {
     border-radius: 50%;
 }
 
+.m365sol-feature-illu-picture {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
 .m365sol-feature-illu {
     position: relative;
     z-index: 1;
