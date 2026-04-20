@@ -121,13 +121,30 @@
         return { sku, name, currency, unitAmount, quantity: 1, image, productPath };
     }
 
+    /** Blocco prezzi / card catalogo da cui leggere SKU e importo */
+    function isCartLineRoot(el) {
+        if (!el || !el.classList) return false;
+        const cl = el.classList;
+        if (cl.contains('product-card')) return true;
+        if (cl.contains('pricing-card')) return true;
+        if (cl.contains('v2-pricing-card')) return true;
+        return Boolean(normalizeSku(el));
+    }
+
     function resolveLineRoot(btn) {
         const id = (btn.getAttribute('data-cart-source') || '').trim();
         if (id) {
             const el = document.getElementById(id);
-            if (el && (el.classList.contains('pricing-card') || el.classList.contains('product-card'))) return el;
+            if (el && isCartLineRoot(el)) return el;
         }
-        return btn.closest('.product-card') || btn.closest('.pricing-card');
+        const fromDom =
+            btn.closest('.product-card') ||
+            btn.closest('.pricing-card') ||
+            btn.closest('.v2-pricing-card') ||
+            btn.closest('[data-stripe-product-sku]');
+        if (fromDom) return fromDom;
+        const fallback = document.getElementById('product-pricing');
+        return fallback && isCartLineRoot(fallback) ? fallback : null;
     }
 
     function announceCartAdded() {
