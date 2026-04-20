@@ -4,8 +4,7 @@
   "description": "Dominio pubblico: **https://aml-store.com**",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build:m365-illu": "node scripts/build-m365-illustrations.cjs"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -18,8 +17,5 @@
   "bugs": {
     "url": "https://github.com/Toniocardex/AmlStore_site/issues"
   },
-  "homepage": "https://github.com/Toniocardex/AmlStore_site#readme",
-  "devDependencies": {
-    "sharp": "^0.34.5"
-  }
+  "homepage": "https://github.com/Toniocardex/AmlStore_site#readme"
 }
