@@ -22,17 +22,13 @@ body.m365sol ::selection {
     background: rgba(196, 181, 253, 0.45);
 }
 
-/* ── Hero ── */
+/* ── Hero (stessa scala verticale della .v2-hero prodotto: no min-vh, padding interno come v2-hero__inner) ── */
 .m365sol-hero {
     position: relative;
     overflow: hidden;
-    min-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 8rem 1rem 14rem;
+    padding: 0;
     background: radial-gradient(circle at top right, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+    contain: layout paint;
 }
 
 .m365sol-glow-wrap {
@@ -68,10 +64,17 @@ body.m365sol ::selection {
 .m365sol-hero__inner {
     position: relative;
     z-index: 10;
-    max-width: 64rem;
+    max-width: 1200px;
     margin: 0 auto;
     text-align: center;
-    padding-top: clamp(1rem, 4vw, 3rem);
+    padding: 80px 24px 160px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .m365sol-hero__inner {
+        padding: 64px 20px 120px;
+    }
 }
 
 .m365sol-badge {
@@ -87,7 +90,7 @@ body.m365sol ::selection {
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     backdrop-filter: blur(12px);
 }
 
@@ -112,12 +115,12 @@ body.m365sol ::selection {
 }
 
 .m365sol-hero h1 {
-    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
     font-weight: 800;
     color: #fff;
     letter-spacing: -0.03em;
     line-height: 1.1;
-    margin: 0 0 2rem;
+    margin: 0 0 1.5rem;
 }
 
 .m365sol-gradient-text {
@@ -129,12 +132,12 @@ body.m365sol ::selection {
 }
 
 .m365sol-hero-lede {
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    font-weight: 300;
-    color: #9ca3af;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.72);
     max-width: 42rem;
-    margin: 0 auto 3rem;
-    line-height: 1.65;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
 }
 
 .m365sol-hero-cta {
@@ -187,20 +190,33 @@ body.m365sol ::selection {
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 72rem;
-    height: 16rem;
+    max-width: 1200px;
+    height: 7rem;
     background: linear-gradient(to top, #f9fafb, transparent);
     z-index: 20;
     pointer-events: none;
 }
 
-/* ── Path cards (overlap) ── */
+@media (max-width: 900px) {
+    .m365sol-hero-fade {
+        height: 5rem;
+    }
+}
+
+/* ── Path cards (overlap come .v2-pricing-wrap sulla scheda prodotto) ── */
 .m365sol-path {
     position: relative;
     z-index: 30;
     max-width: 80rem;
-    margin: -10rem auto 6rem;
-    padding: 0 1rem;
+    margin: -80px auto 4rem;
+    padding: 0 24px;
+}
+
+@media (max-width: 900px) {
+    .m365sol-path {
+        margin: -60px auto 3rem;
+        padding: 0 20px;
+    }
 }
 
 .m365sol-path-grid {
