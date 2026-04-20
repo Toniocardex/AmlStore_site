@@ -345,8 +345,6 @@
         [data-theme="light"] .v2-pricing-card .v2-price-msrp { color: #999; }
         [data-theme="light"] .v2-pricing-card .v2-price-sale { color: #0a0a0f; }
         [data-theme="light"] .v2-pricing-card .v2-price-tax { color: #888; }
-        [data-theme="light"] .v2-pricing-card .v2-payment-sep { color: #bbb; }
-
         .v2-price-block {}
         .v2-price-label {
             font-size: 0.78rem;
@@ -428,16 +426,29 @@
         .v2-btn-primary:active { transform: translateY(0); }
         .v2-btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
 
-        /* Payment logos row */
+        /* Payment logos (solo icone, sotto CTA) */
         .v2-payment-row {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: flex-start;
+            gap: clamp(12px, 2.5vw, 22px);
             flex-wrap: wrap;
         }
-        .v2-payment-sep { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
-        .v2-payment-logo { opacity: 0.75; display: flex; align-items: center; }
+        .v2-payment-logo {
+            opacity: 0.82;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
         .v2-payment-logo:hover { opacity: 1; }
+        .v2-payment-logo img {
+            height: 22px;
+            width: auto;
+            max-width: min(88px, 24vw);
+            object-fit: contain;
+            display: block;
+        }
 
         /* ── SECTION WRAPPER ── */
         .v2-section {
@@ -865,12 +876,11 @@
                         Aggiungi al carrello
                     </button>
                     <div class="v2-payment-row" role="group" aria-label="Metodi di pagamento accettati">
-                        <span class="v2-payment-sep">Pagamenti:</span>
-                        <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg" width="46" height="16" alt="Visa" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg" width="34" height="16" alt="Mastercard" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg" width="60" height="16" alt="PayPal" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg" width="40" height="16" alt="Apple Pay" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg" width="44" height="16" alt="Google Pay" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg" alt="Visa" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg" alt="Mastercard" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg" alt="PayPal" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg" alt="Apple Pay" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg" alt="Google Pay" loading="lazy" decoding="async"></span>
                     </div>
                 </div>
             </div>
