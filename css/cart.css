@@ -265,7 +265,8 @@
     justify-content: center;
     min-height: 44px;
     padding: 0.65rem 1.35rem;
-    border-radius: 999px;
+    /* Stessa forma dei CTA prodotto (.btn-primary in product.css) */
+    border-radius: 10px;
     font-weight: 700;
     font-size: 0.9rem;
     font-family: inherit;
