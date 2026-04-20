@@ -406,11 +406,11 @@ html[data-theme='light'] .home-product-detail:hover {
     justify-content: center;
     min-height: 44px;
     padding: 0.65rem 1.35rem;
-    border-radius: 999px;
+    border-radius: 14px;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .home-btn:focus-visible {
@@ -419,14 +419,21 @@ html[data-theme='light'] .home-product-detail:hover {
 }
 
 .home-btn-primary {
-    background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 100%);
-    color: #0a0a0a;
-    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.12);
+    background: linear-gradient(135deg, #0078d7 0%, #106ebe 100%);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 8px 24px rgba(0, 120, 215, 0.4);
 }
 
 .home-btn-primary:hover {
     transform: translateY(-2px);
-    filter: brightness(1.03);
+    box-shadow: 0 12px 32px rgba(0, 120, 215, 0.5);
+    filter: brightness(1.08);
+}
+
+.home-btn-primary:active {
+    transform: translateY(0);
+    filter: brightness(1);
 }
 
 .home-btn-secondary {
@@ -535,12 +542,17 @@ html[data-theme='light'] .home-section-title {
     .home-btn-primary:hover,
     .home-btn-secondary:hover {
         transform: none;
+        filter: none;
     }
 }
 
 /* Tema chiaro */
 html[data-theme='light'] .home-btn-primary {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 103, 184, 0.3);
+}
+
+html[data-theme='light'] .home-btn-primary:hover {
+    box-shadow: 0 12px 32px rgba(0, 120, 215, 0.42);
 }
 
 html[data-theme='light'] .home-btn-secondary {
