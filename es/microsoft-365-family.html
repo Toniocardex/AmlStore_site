@@ -160,7 +160,6 @@
         [data-theme="light"] .v2-pricing-card .v2-price-msrp { color: #999; }
         [data-theme="light"] .v2-pricing-card .v2-price-sale { color: #0a0a0f; }
         [data-theme="light"] .v2-pricing-card .v2-price-tax { color: #888; }
-        [data-theme="light"] .v2-pricing-card .v2-trust-item { color: #444; }
         [data-theme="light"] .v2-pricing-card .v2-payment-sep { color: #bbb; }
         .v2-price-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 8px; }
         .v2-price-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; }
@@ -175,9 +174,6 @@
         .v2-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,120,215,0.5); filter: brightness(1.08); }
         .v2-btn-primary:active { transform: translateY(0); }
         .v2-btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
-        .v2-trust-row { display: flex; flex-wrap: wrap; gap: 12px; }
-        .v2-trust-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.62); }
-        .v2-trust-item svg { width: 14px; height: 14px; color: #00bcd4; flex-shrink: 0; }
         .v2-payment-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .v2-payment-sep { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
         .v2-payment-logo { opacity: 0.75; display: flex; align-items: center; }
@@ -353,33 +349,19 @@
                         <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" width="13" height="13"><path d="M13 5H3l1-3h8l1 3zM3 5l2 8h6l2-8" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 9h4M8 7v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
                         Ahorras <strong>30 €</strong> frente al Microsoft Store (129,00 €)
                     </div>
-                    <div class="v2-payment-row" style="margin-top:16px;">
-                        <span class="v2-payment-sep">Pagos:</span>
-                        <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg" width="46" height="16" alt="Visa" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg" width="34" height="16" alt="Mastercard" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg" width="60" height="16" alt="PayPal" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg" width="40" height="16" alt="Apple Pay" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg" width="44" height="16" alt="Google Pay" loading="lazy" decoding="async"></span>
-                    </div>
                 </div>
                 <div class="v2-pricing-actions">
                     <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                         Añadir al carrito
                     </button>
-                    <div class="v2-trust-row">
-                        <span class="v2-trust-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Licencia original
-                        </span>
-                        <span class="v2-trust-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Email en pocos minutos
-                        </span>
-                        <span class="v2-trust-item">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Garantía de reembolso
-                        </span>
+                    <div class="v2-payment-row" role="group" aria-label="Métodos de pago aceptados">
+                        <span class="v2-payment-sep">Pagos:</span>
+                        <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg" width="46" height="16" alt="Visa" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg" width="34" height="16" alt="Mastercard" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg" width="60" height="16" alt="PayPal" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg" width="40" height="16" alt="Apple Pay" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg" width="44" height="16" alt="Google Pay" loading="lazy" decoding="async"></span>
                     </div>
                 </div>
             </div>
