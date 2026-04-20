@@ -1,7 +1,7 @@
 /**
  * home.js — logica esclusiva delle pagine index (tutte le lingue).
  * - FAQ: animazione smooth open/close su <details> con transizione height
- * - Scroll progress: barra fissa in cima che avanza con lo scroll
+ * (La barra scroll in cima è in js/scroll-progress.js + .scroll-progress in page.css.)
  */
 (function () {
   'use strict';
@@ -50,35 +50,12 @@
     });
   }
 
-  /* ── Scroll progress bar ─────────────────────────────────── */
-  function initScrollProgress() {
-    var bar = document.querySelector('.scroll-progress');
-    if (!bar) return;
-
-    var pending = false;
-    function update() {
-      var scrolled = window.scrollY;
-      var total    = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.transform = 'scaleX(' + (total > 0 ? scrolled / total : 0) + ')';
-      pending = false;
-    }
-
-    window.addEventListener('scroll', function () {
-      if (!pending) {
-        pending = true;
-        requestAnimationFrame(update);
-      }
-    }, { passive: true });
-  }
-
   /* ── Init ────────────────────────────────────────────────── */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       initFaqAnimation();
-      initScrollProgress();
     });
   } else {
     initFaqAnimation();
-    initScrollProgress();
   }
 }());

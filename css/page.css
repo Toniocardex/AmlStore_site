@@ -22,6 +22,21 @@ html {
     }
 }
 
+/* ── Scroll progress bar (fissa in cima; markup: .scroll-progress) ───────── */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--page-accent) 0%, #93c5fd 100%);
+    transform-origin: left center;
+    transform: scaleX(0);
+    z-index: 9999;
+    pointer-events: none;
+    will-change: transform;
+}
+
 /* Ancora centrata visivamente: 40vh porta il target a metà schermo
    tenendo conto dell'header sticky (~88px) */
 [id] {
