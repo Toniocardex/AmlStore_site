@@ -30,6 +30,9 @@
     var _ppSdkLoading = false;
     var _ppSdkQueue   = [];
 
+    /* ─── Stato Sottomissione ──────────────────────────────────────────────── */
+    var _isSubmitting = false;
+
     /* ─── Idempotency key per bonifico ────────────────────────────────────── */
     // Generato una sola volta al caricamento, persiste in sessionStorage.
     // Previene doppi ordini su refresh del form.
@@ -389,6 +392,7 @@
 
     function handleStripeSubmit(e) {
         e.preventDefault();
+        if (_isSubmitting) return;
         if (!validateForm()) return;
 
         var btn      = document.getElementById('btn-stripe-submit');
@@ -404,6 +408,7 @@
             lang:           lang,
         };
 
+        _isSubmitting = true;
         if (btn) { btn.setAttribute('aria-busy', 'true'); btn.disabled = true; }
         hideGlobalError();
 
@@ -428,6 +433,7 @@
             var errorEl = document.getElementById('checkout-error-msg');
             showGlobalError(errorEl && errorEl.getAttribute('data-network-error') || 'Errore di connessione. Riprova.');
             if (btn) { btn.removeAttribute('aria-busy'); btn.disabled = false; }
+            _isSubmitting = false;
         });
     }
 
@@ -435,6 +441,7 @@
 
     function handleTransferSubmit(e) {
         e.preventDefault();
+        if (_isSubmitting) return;
         if (!validateForm()) return;
 
         var btn      = document.getElementById('btn-transfer-submit');
@@ -450,6 +457,7 @@
             lang:           lang,
         };
 
+        _isSubmitting = true;
         if (btn) { btn.setAttribute('aria-busy', 'true'); btn.disabled = true; }
         hideGlobalError();
 
@@ -480,6 +488,7 @@
             var errorEl = document.getElementById('checkout-error-msg');
             showGlobalError(errorEl && errorEl.getAttribute('data-network-error') || 'Errore di connessione. Riprova.');
             if (btn) { btn.removeAttribute('aria-busy'); btn.disabled = false; }
+            _isSubmitting = false;
         });
     }
 
@@ -551,6 +560,7 @@
                     },
 
                     createOrder: function () {
+                        if (_isSubmitting) return;
                         if (!validateForm()) {
                             // Errore intenzionale — onError lo ignora
                             throw new Error('aml-validation');
@@ -567,6 +577,7 @@
                             lang:           lang,
                         };
 
+                        _isSubmitting = true;
                         return fetch(PAYPAL_WORKER_CREATE, {
                             method:  'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -606,6 +617,7 @@
                     },
 
                     onError: function (ppErr) {
+                        _isSubmitting = false;
                         if (ppErr && ppErr.message === 'aml-validation') return;
                         console.error('[PayPal] SDK error:', ppErr);
                         var netErr = errorEl && errorEl.getAttribute('data-network-error');
@@ -613,6 +625,7 @@
                     },
 
                     onCancel: function () {
+                        _isSubmitting = false;
                         console.log('[PayPal] Pagamento annullato.');
                     },
 
