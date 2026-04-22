@@ -21,6 +21,21 @@
 /components/*
   Cache-Control: public, max-age=86400, must-revalidate
 
+/css/*
+  Cache-Control: public, max-age=604800, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/asset/icon/*
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/asset/media/*
+  Cache-Control: public, max-age=2592000, must-revalidate
+
+/asset/payments_logo/*
+  Cache-Control: public, max-age=2592000, must-revalidate
+
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

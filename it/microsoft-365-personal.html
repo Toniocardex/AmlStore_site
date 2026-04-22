@@ -99,21 +99,12 @@
 }
     </script>
 
-    <script>/**
- * Google Consent Mode v2
- */
-(function (w) {
-    'use strict';
-    var STORAGE_KEY = 'aml-consent-v2';
-    w.dataLayer = w.dataLayer || [];
-    if (typeof w.gtag !== 'function') { w.gtag = function gtag() { w.dataLayer.push(arguments); }; }
-    w.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', functionality_storage: 'denied', personalization_storage: 'denied', security_storage: 'granted', wait_for_update: 500 });
-    try { var raw = w.localStorage.getItem(STORAGE_KEY); if (!raw) return; var parsed = JSON.parse(raw); if (!parsed || !parsed.consent || typeof parsed.consent !== 'object') return; w.gtag('consent', 'update', parsed.consent); } catch (_) {}
-})(typeof window !== 'undefined' ? window : globalThis);</script>
+    <script src="../js/consent-init.js"></script>
 
     <link rel="icon" href="../favicon/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-700.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-800.woff2">
     <link rel="preload" as="image" href="../asset/media/microsoft-365-personal.webp" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">

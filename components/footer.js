@@ -746,7 +746,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="nav-col">
                         <h3 class="col-title">${esc(t.headingProducts)}</h3>
                         <ul class="link-list">
-                            <li><a href="#">${esc(t.prodOs)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/sistemi-operativi.html">${esc(t.prodOs)}</a></li>
                             <li><a href="#">${esc(t.prodOffice)}</a></li>
                             <li><a href="#">${esc(t.prodAntivirus)}</a></li>
                             <li><a href="#">${esc(t.prodBusiness)}</a></li>

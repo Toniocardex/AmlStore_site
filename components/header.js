@@ -5,7 +5,10 @@
         it: {
             logoAlt: 'Aml Store',
             navHome: 'Home',
-            navOs: 'Sistemi Operativi',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Apri sottomenu Windows',
+            navWindowsOverview: 'Sistemi Operativi',
+            navWindows11Home: 'Windows 11 Home',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Apri sottomenu Microsoft 365',
             navM365Overview: 'Panoramica suite',
@@ -26,7 +29,10 @@
         en: {
             logoAlt: 'Aml Store',
             navHome: 'Home',
-            navOs: 'Operating systems',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Open Windows submenu',
+            navWindowsOverview: 'Operating Systems',
+            navWindows11Home: 'Windows 11 Home',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Open Microsoft 365 submenu',
             navM365Overview: 'Suite overview',
@@ -47,7 +53,10 @@
         fr: {
             logoAlt: 'Aml Store',
             navHome: 'Home',
-            navOs: "Systèmes d'exploitation",
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Ouvrir le sous-menu Windows',
+            navWindowsOverview: "Systèmes d'exploitation",
+            navWindows11Home: 'Windows 11 Home',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Ouvrir le sous-menu Microsoft 365',
             navM365Overview: 'Vue d’ensemble de la suite',
@@ -68,7 +77,10 @@
         de: {
             logoAlt: 'Aml Store',
             navHome: 'Home',
-            navOs: 'Betriebssysteme',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Windows-Untermenü öffnen',
+            navWindowsOverview: 'Betriebssysteme',
+            navWindows11Home: 'Windows 11 Home',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Microsoft-365-Untermenü öffnen',
             navM365Overview: 'Suite-Überblick',
@@ -89,7 +101,10 @@
         es: {
             logoAlt: 'Aml Store',
             navHome: 'Home',
-            navOs: 'Sistemas operativos',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Abrir submenú Windows',
+            navWindowsOverview: 'Sistemas operativos',
+            navWindows11Home: 'Windows 11 Home',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Abrir submenú Microsoft 365',
             navM365Overview: 'Panorama de la suite',
@@ -155,6 +170,11 @@
             const isM365Family = afterLangLower.includes('microsoft-365-family');
             const isM365NavActive = isM365Solutions || isM365Personal || isM365Family;
             const mailM365Business = 'mailto:Info@amlstore.it?subject=' + encodeURIComponent('Microsoft 365 Business Standard');
+            const hrefWinOverview = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'sistemi-operativi.html');
+            const hrefWin11Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-home.html');
+            const isWinOverview = afterLangLower.includes('sistemi-operativi');
+            const isWin11Home = afterLangLower.includes('windows-11-home');
+            const isWinNavActive = isWinOverview || isWin11Home;
             const esc = S.escapeHtmlAttr;
 
             const cartAriaForCount = (n) => {
@@ -275,6 +295,145 @@
                     .nav-links a.active {
                         color: var(--text-primary);
                         font-weight: 600;
+                    }
+
+                    /* Windows — voce principale + sottomenù (identica struttura di M365) */
+                    .nav-win-wrap {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .nav-win-inner {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.15rem;
+                    }
+                    .nav-win-root {
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.9rem;
+                        font-weight: 500;
+                        transition: color 0.3s ease, text-shadow 0.3s ease;
+                        position: relative;
+                        padding-bottom: 4px;
+                        white-space: nowrap;
+                    }
+                    .nav-win-root::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 50%;
+                        width: 0;
+                        height: 2px;
+                        background-color: var(--text-primary);
+                        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        border-radius: 2px;
+                    }
+                    .nav-win-root:hover { color: var(--text-primary); text-shadow: 0 0 12px rgba(255,255,255,0.2); }
+                    .nav-win-root:hover::after,
+                    .nav-win-root.active::after { width: 100%; left: 0; }
+                    .nav-win-root.active { color: var(--text-primary); font-weight: 600; }
+                    .nav-win-caret {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        padding: 0;
+                        margin: 0 0 2px 0;
+                        border: none;
+                        border-radius: 6px;
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        transition: color 0.2s ease, background 0.2s ease;
+                    }
+                    .nav-win-caret:hover,
+                    .nav-win-wrap.open .nav-win-caret { color: var(--text-primary); background: rgba(255,255,255,0.06); }
+                    .nav-win-caret:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+                    .nav-win-caret svg {
+                        width: 12px; height: 12px; fill: currentColor;
+                        transition: transform 0.25s ease;
+                    }
+                    .nav-win-wrap.open .nav-win-caret svg { transform: rotate(180deg); }
+                    .nav-win-dropdown::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 100%;
+                        left: 0;
+                        right: 0;
+                        height: calc(0.5rem + 12px);
+                    }
+                    .nav-win-dropdown {
+                        position: absolute;
+                        top: calc(100% + 0.5rem);
+                        left: 0;
+                        min-width: 16.5rem;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: 12px;
+                        padding: 0.4rem;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-6px) scale(0.98);
+                        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+                        z-index: 50;
+                    }
+                    .nav-win-wrap:hover .nav-win-dropdown,
+                    .nav-win-wrap:focus-within .nav-win-dropdown,
+                    .nav-win-wrap.open .nav-win-dropdown {
+                        opacity: 1; visibility: visible; pointer-events: auto;
+                        transform: translateY(0) scale(1);
+                        transition: opacity 0.25s cubic-bezier(0.16,1,0.3,1),
+                                    transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                                    visibility 0.25s;
+                    }
+                    .nav-win-dropdown a {
+                        display: block;
+                        padding: 0.55rem 0.75rem;
+                        border-radius: 8px;
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                        white-space: nowrap;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .nav-win-dropdown a:hover { background: rgba(255,255,255,0.08); color: var(--text-primary); }
+                    .nav-win-dropdown a.nav-win-dropdown__overview {
+                        font-weight: 700;
+                        color: var(--text-primary);
+                        border-bottom: 1px solid var(--border-color);
+                        border-radius: 8px 8px 0 0;
+                        margin-bottom: 0.15rem;
+                        padding-bottom: 0.65rem;
+                    }
+                    .nav-win-dropdown a.nav-win-dropdown__overview:hover { background: rgba(59,130,246,0.12); }
+
+                    /* Drawer mobile — sezione Windows */
+                    .drawer-win-block { margin-bottom: 0.25rem; }
+                    .drawer-win-heading {
+                        font-size: 0.72rem;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.08em;
+                        color: var(--text-muted);
+                        padding: 0.5rem 1rem 0.35rem;
+                    }
+                    .drawer-win-block a { font-size: 1rem; font-weight: 600; }
+
+                    /* reduced-motion: Windows */
+                    @media (prefers-reduced-motion: reduce) {
+                        .nav-win-root, .nav-win-root::after { transition: none; }
+                        .nav-win-caret svg { transition: none; }
+                        .nav-win-dropdown,
+                        .nav-win-wrap:hover .nav-win-dropdown,
+                        .nav-win-wrap:focus-within .nav-win-dropdown,
+                        .nav-win-wrap.open .nav-win-dropdown { transition: none; }
                     }
 
                     /* Microsoft 365 — voce principale (link overview) + sottomenù */
@@ -1024,7 +1183,18 @@
                         </a>
                         <nav class="nav-links">
                             <a href="${esc(homeHref)}"${isHome ? ' class="active"' : ''}>${esc(t.navHome)}</a>
-                            <a href="#">${esc(t.navOs)}</a>
+                            <div class="nav-win-wrap">
+                                <div class="nav-win-inner">
+                                    <a href="${esc(hrefWinOverview)}" class="nav-win-root${isWinNavActive ? ' active' : ''}">${esc(t.navWindows)}</a>
+                                    <button type="button" class="nav-win-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navWindowsOpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-win-dropdown" role="menu">
+                                    <a href="${esc(hrefWinOverview)}" class="nav-win-dropdown__overview" role="menuitem">${esc(t.navWindowsOverview)}</a>
+                                    <a href="${esc(hrefWin11Home)}" role="menuitem"${isWin11Home ? ' aria-current="page"' : ''}>${esc(t.navWindows11Home)}</a>
+                                </div>
+                            </div>
                             <div class="nav-m365-wrap">
                                 <div class="nav-m365-inner">
                                     <a href="${esc(hrefM365Solutions)}" class="nav-m365-root${isM365NavActive ? ' active' : ''}">${esc(t.navM365)}</a>
@@ -1095,7 +1265,11 @@
                     
                     <nav class="drawer-nav">
                         <a href="${esc(homeHref)}"${isHome ? ' class="active"' : ''}>${esc(t.navHome)}</a>
-                        <a href="#">${esc(t.navOs)}</a>
+                        <div class="drawer-win-block">
+                            <div class="drawer-win-heading">${esc(t.navWindows)}</div>
+                            <a href="${esc(hrefWinOverview)}"${isWinOverview ? ' class="active"' : ''}>${esc(t.navWindowsOverview)}</a>
+                            <a href="${esc(hrefWin11Home)}"${isWin11Home ? ' class="active"' : ''}>${esc(t.navWindows11Home)}</a>
+                        </div>
                         <div class="drawer-m365-block">
                             <div class="drawer-m365-heading">${esc(t.navM365)}</div>
                             <a href="${esc(hrefM365Solutions)}"${isM365Solutions ? ' class="active"' : ''}>${esc(t.navM365Overview)}</a>
@@ -1156,6 +1330,10 @@
                 const m365CClose = this.shadowRoot.querySelector('.nav-m365-caret');
                 if (m365WClose) m365WClose.classList.remove('open');
                 if (m365CClose) m365CClose.setAttribute('aria-expanded', 'false');
+                const winWClose = this.shadowRoot.querySelector('.nav-win-wrap');
+                const winCClose = this.shadowRoot.querySelector('.nav-win-caret');
+                if (winWClose) winWClose.classList.remove('open');
+                if (winCClose) winCClose.setAttribute('aria-expanded', 'false');
                 if (!langWrapper || !langSelector) return;
                 const isOpen = langWrapper.classList.toggle('open');
                 langSelector.setAttribute('aria-expanded', isOpen);
@@ -1175,6 +1353,35 @@
                 });
             }
 
+            /* ── Windows dropdown ── */
+            const winWrap = this.shadowRoot.querySelector('.nav-win-wrap');
+            const winCaret = this.shadowRoot.querySelector('.nav-win-caret');
+            const closeWinMenu = () => {
+                if (!winWrap || !winCaret) return;
+                winWrap.classList.remove('open');
+                winCaret.setAttribute('aria-expanded', 'false');
+            };
+            if (winCaret && winWrap) {
+                winCaret.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (langWrapper) {
+                        langWrapper.classList.remove('open');
+                        if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                    }
+                    const m365WClose = this.shadowRoot.querySelector('.nav-m365-wrap');
+                    const m365CClose = this.shadowRoot.querySelector('.nav-m365-caret');
+                    if (m365WClose) m365WClose.classList.remove('open');
+                    if (m365CClose) m365CClose.setAttribute('aria-expanded', 'false');
+                    const isOpen = winWrap.classList.toggle('open');
+                    winCaret.setAttribute('aria-expanded', isOpen);
+                });
+                this.shadowRoot.querySelectorAll('.nav-win-dropdown a').forEach((a) => {
+                    a.addEventListener('click', closeWinMenu);
+                });
+            }
+
+            /* ── Microsoft 365 dropdown ── */
             const m365Wrap = this.shadowRoot.querySelector('.nav-m365-wrap');
             const m365Caret = this.shadowRoot.querySelector('.nav-m365-caret');
             const closeM365Menu = () => {
@@ -1190,6 +1397,7 @@
                         langWrapper.classList.remove('open');
                         if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
                     }
+                    closeWinMenu();
                     const isOpen = m365Wrap.classList.toggle('open');
                     m365Caret.setAttribute('aria-expanded', isOpen);
                 });
@@ -1210,6 +1418,12 @@
                     m365W.classList.remove('open');
                     if (m365C) m365C.setAttribute('aria-expanded', 'false');
                 }
+                const winW = this.shadowRoot.querySelector('.nav-win-wrap');
+                const winC = this.shadowRoot.querySelector('.nav-win-caret');
+                if (winW && !path.includes(winW)) {
+                    winW.classList.remove('open');
+                    if (winC) winC.setAttribute('aria-expanded', 'false');
+                }
             };
             this.__docKeydownHandler = (e) => {
                 if (e.key !== 'Escape') return;
@@ -1221,14 +1435,18 @@
                     }
                     return;
                 }
+                const winW = this.shadowRoot.querySelector('.nav-win-wrap');
+                const winC = this.shadowRoot.querySelector('.nav-win-caret');
+                if (winW?.classList.contains('open')) {
+                    winW.classList.remove('open');
+                    if (winC) { winC.setAttribute('aria-expanded', 'false'); winC.focus(); }
+                    return;
+                }
                 const m365W = this.shadowRoot.querySelector('.nav-m365-wrap');
                 const m365C = this.shadowRoot.querySelector('.nav-m365-caret');
                 if (m365W?.classList.contains('open')) {
                     m365W.classList.remove('open');
-                    if (m365C) {
-                        m365C.setAttribute('aria-expanded', 'false');
-                        m365C.focus();
-                    }
+                    if (m365C) { m365C.setAttribute('aria-expanded', 'false'); m365C.focus(); }
                 }
             };
             document.addEventListener('click', this.__docClickHandler);
