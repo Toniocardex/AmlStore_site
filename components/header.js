@@ -414,17 +414,24 @@
                     }
                     .nav-win-dropdown a.nav-win-dropdown__overview:hover { background: rgba(59,130,246,0.12); }
 
-                    /* Drawer mobile — sezione Windows */
-                    .drawer-win-block { margin-bottom: 0.25rem; }
-                    .drawer-win-heading {
-                        font-size: 0.72rem;
+                    /* Drawer mobile — gruppi Windows / M365 (sottomenu) */
+                    .drawer-win-block,
+                    .drawer-m365-block {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.125rem;
+                        margin-bottom: 0.35rem;
+                    }
+                    .drawer-win-heading,
+                    .drawer-m365-heading {
+                        font-size: 0.65rem;
                         font-weight: 700;
                         text-transform: uppercase;
-                        letter-spacing: 0.08em;
+                        letter-spacing: 0.07em;
                         color: var(--text-muted);
-                        padding: 0.5rem 1rem 0.35rem;
+                        padding: 0.4rem 0.75rem 0.2rem;
+                        line-height: 1.2;
                     }
-                    .drawer-win-block a { font-size: 1rem; font-weight: 600; }
 
                     /* reduced-motion: Windows */
                     @media (prefers-reduced-motion: reduce) {
@@ -987,7 +994,7 @@
                         z-index: 2000;
                         /* Chiusura: ease-in più rapida */
                         transition: left 0.3s cubic-bezier(0.4, 0, 1, 1);
-                        padding: 1.5rem 1.25rem;
+                        padding: 1rem 0.9rem 1.25rem;
                         display: flex; flex-direction: column;
                         overflow-y: auto;
                         box-shadow: 10px 0 30px rgba(0,0,0,0.5);
@@ -1002,10 +1009,11 @@
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        margin-bottom: 2rem;
+                        margin-bottom: 1.25rem;
+                        flex-shrink: 0;
                     }
                     .mobile-drawer .drawer-header .logo img {
-                        height: 52px;
+                        height: 40px;
                         width: auto;
                     }
                     .close-drawer {
@@ -1018,9 +1026,10 @@
                         cursor: pointer;
                         transition: background 0.3s ease, transform 0.3s ease;
                     }
-                    .close-drawer:hover {
-                        background: rgba(255, 255, 255, 0.15);
-                        transform: rotate(90deg);
+                    @media (hover: hover) and (pointer: fine) {
+                        .close-drawer:hover {
+                            background: rgba(255, 255, 255, 0.1);
+                        }
                     }
                     .close-drawer:focus-visible {
                         outline: 2px solid var(--accent);
@@ -1029,51 +1038,90 @@
                     .close-drawer svg { width: 20px; height: 20px; fill: currentColor; }
 
                     .drawer-nav {
-                        display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2.5rem;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.2rem;
+                        margin-bottom: 1.25rem;
+                        flex-shrink: 0;
                     }
-                    .drawer-m365-block { margin-bottom: 0.25rem; }
-                    .drawer-m365-heading {
-                        font-size: 0.72rem;
-                        font-weight: 700;
-                        text-transform: uppercase;
-                        letter-spacing: 0.08em;
-                        color: var(--text-muted);
-                        padding: 0.5rem 1rem 0.35rem;
+                    .drawer-nav > a,
+                    .drawer-win-block a,
+                    .drawer-m365-block a {
+                        -webkit-tap-highlight-color: transparent;
+                        position: relative;
+                        display: block;
+                        width: fit-content;
+                        max-width: 100%;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                        line-height: 1.35;
+                        padding: 0.35rem 0.5rem;
+                        box-sizing: border-box;
+                        background: transparent;
+                        text-decoration-line: underline;
+                        text-decoration-color: transparent;
+                        text-decoration-thickness: 1px;
+                        text-underline-offset: 0.2em;
+                        transition: color 0.15s ease, text-decoration-color 0.15s ease;
                     }
-                    .drawer-m365-block a { font-size: 1rem; font-weight: 600; }
-                    .drawer-nav a {
+                    .drawer-nav > a {
+                        font-size: 0.9375rem;
                         color: var(--text-primary);
-                        text-decoration: none;
-                        font-size: 1.2rem;
-                        font-weight: 600;
-                        padding: 1rem; /* Area touch massimizzata */
-                        border-radius: 10px;
-                        transition: background 0.3s ease, padding-left 0.3s ease;
                     }
-                    .drawer-nav a:hover, .drawer-nav a.active {
-                        background: rgba(255, 255, 255, 0.08);
-                        padding-left: 1.5rem; /* Effetto indentazione al passaggio del mouse */
+                    .drawer-win-block a,
+                    .drawer-m365-block a {
+                        font-size: 0.875rem;
+                    }
+                    .drawer-nav > a.active,
+                    .drawer-win-block a.active,
+                    .drawer-m365-block a.active {
+                        color: var(--text-primary);
+                        text-decoration-color: rgba(255, 255, 255, 0.55);
+                    }
+                    @media (hover: hover) and (pointer: fine) {
+                        .drawer-nav > a:hover,
+                        .drawer-win-block a:hover,
+                        .drawer-m365-block a:hover {
+                            color: var(--text-primary);
+                            text-decoration-color: rgba(255, 255, 255, 0.4);
+                        }
+                    }
+                    @media (hover: none), (pointer: coarse) {
+                        .drawer-nav > a:hover,
+                        .drawer-win-block a:hover,
+                        .drawer-m365-block a:hover {
+                            color: inherit;
+                            text-decoration-color: transparent;
+                        }
+                        .drawer-nav > a:active,
+                        .drawer-win-block a:active,
+                        .drawer-m365-block a:active {
+                            color: var(--text-primary);
+                            text-decoration-color: rgba(255, 255, 255, 0.45);
+                        }
                     }
 
                     .drawer-section-title {
-                        font-size: 0.75rem;
+                        font-size: 0.65rem;
                         color: var(--text-muted);
                         text-transform: uppercase;
-                        letter-spacing: 0.1em;
+                        letter-spacing: 0.08em;
                         font-weight: 600;
-                        margin-bottom: 1rem;
-                        padding-left: 0.5rem;
+                        margin-bottom: 0.5rem;
+                        padding-left: 0.75rem;
                     }
 
                     .drawer-langs {
-                        display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 0.35rem;
                         margin-bottom: auto;
                     }
                     .drawer-lang-link {
-                        display: flex; align-items: center; gap: 0.75rem;
-                        padding: 0.75rem 1rem;
-                        border-radius: 10px;
-                        font-size: 0.9rem; font-weight: 500;
+                        display: flex; align-items: center; gap: 0.5rem;
+                        padding: 0.5rem 0.65rem;
+                        border-radius: 8px;
+                        font-size: 0.8125rem; font-weight: 500;
                         color: var(--text-secondary);
                         text-decoration: none;
                         border: 1px solid transparent;
@@ -1084,9 +1132,11 @@
                         border-color: rgba(255, 255, 255, 0.2);
                         color: var(--text-primary);
                     }
-                    .drawer-lang-link:hover:not(.active) {
-                        background: rgba(255, 255, 255, 0.05);
-                        color: var(--text-primary);
+                    @media (hover: hover) and (pointer: fine) {
+                        .drawer-lang-link:hover:not(.active) {
+                            background: rgba(255, 255, 255, 0.05);
+                            color: var(--text-primary);
+                        }
                     }
                     .drawer-lang-link img {
                         width: 20px; height: 20px; border-radius: 50%; object-fit: cover;
@@ -1094,26 +1144,28 @@
                     }
 
                     .drawer-footer {
-                        margin-top: 2.5rem;
-                        padding-top: 1.5rem;
+                        margin-top: 1.25rem;
+                        padding-top: 1rem;
                         border-top: 1px solid var(--border-color);
+                        flex-shrink: 0;
                     }
                     .drawer-btn-signin {
                         width: 100%;
                         background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 100%);
                         color: #000;
                         border: none;
-                        padding: 1rem;
-                        border-radius: 10px;
+                        padding: 0.75rem 1rem;
+                        border-radius: 8px;
                         font-weight: 700;
-                        font-size: 1rem;
+                        font-size: 0.875rem;
                         cursor: pointer;
                         margin-bottom: 1.5rem;
                         transition: opacity 0.2s ease, transform 0.2s ease;
                     }
-                    .drawer-btn-signin:hover {
-                        opacity: 0.9;
-                        transform: scale(1.01);
+                    @media (hover: hover) and (pointer: fine) {
+                        .drawer-btn-signin:hover {
+                            opacity: 0.92;
+                        }
                     }
                     .drawer-btn-signin:focus-visible {
                         outline: 2px solid var(--accent);
@@ -1122,17 +1174,19 @@
                     .drawer-assist {
                         display: flex;
                         align-items: center;
-                        gap: 0.75rem;
+                        gap: 0.6rem;
                         text-decoration: none;
-                        padding: 0.875rem 1rem;
-                        border-radius: 10px;
+                        padding: 0.65rem 0.75rem;
+                        border-radius: 8px;
                         background: rgba(255, 255, 255, 0.03);
                         border: 1px solid rgba(255, 255, 255, 0.07);
                         transition: background 0.2s ease, border-color 0.2s ease;
                     }
-                    .drawer-assist:hover {
-                        background: rgba(255, 255, 255, 0.06);
-                        border-color: rgba(255, 255, 255, 0.12);
+                    @media (hover: hover) and (pointer: fine) {
+                        .drawer-assist:hover {
+                            background: rgba(255, 255, 255, 0.05);
+                            border-color: rgba(255, 255, 255, 0.1);
+                        }
                     }
                     .drawer-assist:focus-visible {
                         outline: 2px solid var(--accent);

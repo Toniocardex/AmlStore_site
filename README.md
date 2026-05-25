@@ -16,7 +16,16 @@ Flusso: **GitHub** (questo repo) → integrazione **Cloudflare Pages** → **dep
 | Build output dir    | *(vuoto)*     |
 | Root directory      | *(repo root)* |
 
-Non c'è `package.json`: il deploy pubblica solo file statici dalla root del repository.
+Il deploy pubblica file statici dalla root; le **Pages Functions** in `functions/api/` gestiscono checkout e ordini (D1).
+
+### Catalogo prezzi
+
+Il sito **non usa WooCommerce**: è solo HTML/CSS/JS statico + **Pages Functions** (`functions/api/`) per checkout (Stripe, PayPal, bonifico) e ordini su **D1**.
+
+- Listino autoritativo lato server: [`functions/api/_lib/catalog.js`](functions/api/_lib/catalog.js) — il Worker **non** si fida dei prezzi inviati dal browser.
+- Rigenerare il catalogo: `python scripts/build-catalog.py` passando il CSV export (es. dal **vecchio** e-shop `www.aml-store.com`, solo come sorgente SKU/prezzi).
+- Riferimento per chi crea schede prodotto: [`catalog.json`](catalog.json) in root (`data-stripe-product-sku` = colonna `code` del CSV).
+- Redirect in [`_redirects`](_redirects): slug del sito precedente → nuove pagine `.html` statiche.
 
 ## Struttura cartelle
 

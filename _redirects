@@ -5,7 +5,7 @@
 # ── Root → Italiano (301 permanente per SEO) ──────────────────────────────────
 / /it/ 301
 
-# ── Vecchi slug → nuovi slug (301) ───────────────────────────────────────────
+# ── Vecchio e-shop (slug lunghi) → pagine statiche .html (301) ───────────────
 /it/prodotto.html /it/microsoft-365-family.html 301
 /en/prodotto.html /en/microsoft-365-family.html 301
 /fr/prodotto.html /fr/microsoft-365-family.html 301
@@ -20,3 +20,13 @@
 # ── Template per redirect futuri ─────────────────────────────────────────────
 # /it/vecchia-pagina /it/nuova-pagina 301
 # /en/old-page       /en/new-page     301
+/it/sistema-operativo/microsoft-windows-11-professional-licenza-esd-originale /it/windows-11-pro.html 301
+/it/sistema-operativo/microsoft-windows-10-home /it/windows-10-home.html 301
+/it/sistema-operativo/microsoft-windows-10-professional /it/windows-10-pro.html 301
+/it/sistema-operativo/microsoft-windows-11-home-microsoft-365-personal-5-dispositivi-1-anno /it/bundle-windows-11-home-m365-personal.html 301
+/it/office-suite/microsoft-office-365-personal-mcafee-total-protection-5-dispositivi-1-anno /it/bundle-m365-personal-mcafee.html 301
+/it/office-suite/microsoft-office-365-personal-kaspersky-premium-5-dispositivi-1-anno /it/bundle-m365-personal-kaspersky.html 301
+/it/office-suite/microsoft-365-family-6-utenti-copilot-cloud /it/microsoft-365-family.html 301
+/it/office-suite/microsoft-office-365-personal-1-year-5-devices-qq2-00012 /it/microsoft-365-personal.html 301
+/en/office-suite/microsoft-365-family-6-utenti-copilot-cloud /en/microsoft-365-family.html 301
+/en/office-suite/microsoft-office-365-personal-1-year-5-devices-qq2-00012 /en/microsoft-365-personal.html 301

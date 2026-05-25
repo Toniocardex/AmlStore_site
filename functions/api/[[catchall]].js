@@ -31,6 +31,7 @@ import { sendConfirmationOnce }                          from './_lib/email.js';
 import { verifyAccessJwt, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
          unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
+import { resolveAndValidateItems }                     from './_lib/catalog.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -134,7 +135,12 @@ function totalMinorFromItems(items) {
  */
 function orderParamsFromBody(body, paymentMethod) {
     const c = body.customer || {};
-    const items = normalizeItems(body.items);
+    let items;
+    try {
+        items = resolveAndValidateItems(body.items);
+    } catch (catalogErr) {
+        throw Object.assign(new Error(catalogErr.message || 'Invalid catalog'), { status: 400 });
+    }
     return {
         idempotencyKey:    body.idempotencyKey || crypto.randomUUID(),
         customerEmail:     (c.email || '').trim().toLowerCase(),
@@ -156,11 +162,22 @@ function orderParamsFromBody(body, paymentMethod) {
 
 /* ─── POST /api/stripe-create-session ───────────────────────────────────────── */
 
+function orderParamsFromBodySafe(body, paymentMethod, request) {
+    try {
+        return orderParamsFromBody(body, paymentMethod);
+    } catch (e) {
+        if (e.status === 400) return { error: err(e.message, 400, request) };
+        throw e;
+    }
+}
+
 async function handleStripeCreateSession(request, env) {
     const body = await request.json().catch(() => null);
     if (!body) return err('Invalid JSON', 400, request);
 
-    const params = orderParamsFromBody(body, 'stripe');
+    const paramsOrErr = orderParamsFromBodySafe(body, 'stripe', request);
+    if (paramsOrErr.error) return paramsOrErr.error;
+    const params = paramsOrErr;
     if (!params.customerEmail) return err('Email cliente mancante', 400, request);
 
     // Crea ordine in D1
@@ -277,7 +294,9 @@ async function handlePaypalCreateOrder(request, env) {
     const body = await request.json().catch(() => null);
     if (!body) return err('Invalid JSON', 400, request);
 
-    const params = orderParamsFromBody(body, 'paypal');
+    const paramsOrErr = orderParamsFromBodySafe(body, 'paypal', request);
+    if (paramsOrErr.error) return paramsOrErr.error;
+    const params = paramsOrErr;
     if (!params.customerEmail) return err('Email cliente mancante', 400, request);
 
     // Crea ordine in D1
@@ -360,7 +379,9 @@ async function handleBankTransferOrder(request, env) {
     const body = await request.json().catch(() => null);
     if (!body) return err('Invalid JSON', 400, request);
 
-    const params = orderParamsFromBody(body, 'bank_transfer');
+    const paramsOrErr = orderParamsFromBodySafe(body, 'bank_transfer', request);
+    if (paramsOrErr.error) return paramsOrErr.error;
+    const params = paramsOrErr;
     if (!params.customerEmail) return err('Email cliente mancante', 400, request);
 
     // Crea ordine in D1

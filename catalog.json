@@ -1,0 +1,578 @@
+[
+  {
+    "sku": "QQ2-00012",
+    "name": "Microsoft 365 Personal | 12 Mesi | Copilot AI + 1TB Cloud",
+    "unitAmountMinor": 7900,
+    "compareAtMinor": 9900,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "suite office > microsoft 365"
+  },
+  {
+    "sku": "EP2-06798",
+    "name": "Microsoft Office 2024 Home | PC/Mac",
+    "unitAmountMinor": 13900,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office > microsoft office 2024"
+  },
+  {
+    "sku": "SC871349",
+    "name": "Microsoft Office 2024 Standard",
+    "unitAmountMinor": 29999,
+    "compareAtMinor": 33989,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office > microsoft office 2024"
+  },
+  {
+    "sku": "EP2-07219",
+    "name": "Microsoft Word 2024  (Standalone) | Licenza ESD Originale",
+    "unitAmountMinor": 7900,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office > microsoft office 2024"
+  },
+  {
+    "sku": "MPN: 065-09748",
+    "name": "Microsoft Excel 2024 (Standalone) | Licenza ESD Originale",
+    "unitAmountMinor": 7900,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "065-09804",
+    "name": "Microsoft PowerPoint 2024 (Standalone) | Licenza ESD Originale",
+    "unitAmountMinor": 7900,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office > microsoft office 2024"
+  },
+  {
+    "sku": "KW9-00642",
+    "name": "Microsoft Windows 11 Home OEM | Copilot AI incluso",
+    "unitAmountMinor": 5900,
+    "compareAtMinor": 9900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows"
+  },
+  {
+    "sku": "FQC-10528",
+    "name": "Microsoft Windows 11 Professional - Licenza ESD Originale",
+    "unitAmountMinor": 7900,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows"
+  },
+  {
+    "sku": "6GQ-00092",
+    "name": "Microsoft 365 Family | 12 Mesi | 6 Utenti | Include Copilot AI e 6TB Cloud",
+    "unitAmountMinor": 10495,
+    "compareAtMinor": 12900,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "suite office > microsoft 365"
+  },
+  {
+    "sku": "FQC-08930",
+    "name": "Microsoft Windows 10 Professional 32/64-bit",
+    "unitAmountMinor": 5799,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows"
+  },
+  {
+    "sku": "KW9-00136",
+    "name": "Microsoft Windows 10 Home 32/64-bit",
+    "unitAmountMinor": 3799,
+    "compareAtMinor": 9900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows"
+  },
+  {
+    "sku": "79G-05412",
+    "name": "Microsoft Office 2021 Home & Student | Windows o Mac",
+    "unitAmountMinor": 13400,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "T5D-03485",
+    "name": "Microsoft Office 2021 Home & Business | PC/MAC",
+    "unitAmountMinor": 19989,
+    "compareAtMinor": 29900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "DG7GMGF0PN44",
+    "name": "Microsoft Project Standard 2024 | Windows",
+    "unitAmountMinor": 34900,
+    "compareAtMinor": 34900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office > microsoft project 2024"
+  },
+  {
+    "sku": "EAVH-N1-A1",
+    "name": "Eset Nod32 Antivirus | 1 Anno | 1 Dispositivo",
+    "unitAmountMinor": 2199,
+    "compareAtMinor": 3999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "GMGF0D7FX-0002-P",
+    "name": "Microsoft Office 2021 Professional Plus | Licenza ESD Originale (Windows)",
+    "unitAmountMinor": 23400,
+    "compareAtMinor": 47900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "T5D-03489",
+    "name": "Microsoft Office 2021 Home & Business | Mac",
+    "unitAmountMinor": 15990,
+    "compareAtMinor": 29900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "EAVH-N1-A2",
+    "name": "Eset Nod32 Antivirus | 1 Anno | 2 Dispositivo/i",
+    "unitAmountMinor": 3199,
+    "compareAtMinor": 4499,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "EAVH-N1-A3",
+    "name": "Eset Nod32 Antivirus | 1 Anno | 3 Dispositivo/i",
+    "unitAmountMinor": 3499,
+    "compareAtMinor": 4998,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "EAVH-N1-A5",
+    "name": "Eset Nod32 Antivirus | 1 Anno | 5 Dispositivo/i",
+    "unitAmountMinor": 4298,
+    "compareAtMinor": 5999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "EAVH-N1-A10",
+    "name": "Eset Nod32 Antivirus | 1 Anno | 10 Dispositivo/i",
+    "unitAmountMinor": 6999,
+    "compareAtMinor": 8499,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "KLQ-00388",
+    "name": "Microsoft 365 Business Standard | 1 Utente | 15 Dispositivi",
+    "unitAmountMinor": 13998,
+    "compareAtMinor": 17100,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office > microsoft 365"
+  },
+  {
+    "sku": "21395096E7",
+    "name": "Norton 360 Standard 10GB Cloud | 1 Anno | 1 Dispositivo",
+    "unitAmountMinor": 1499,
+    "compareAtMinor": 2999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "269-17068",
+    "name": "Microsoft Office 2019 Professional Plus",
+    "unitAmountMinor": 17499,
+    "compareAtMinor": 20899,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "7470A",
+    "name": "Bitdefender Antivirus Plus | 1 Anno | 1 Dispositivo",
+    "unitAmountMinor": 1999,
+    "compareAtMinor": 2299,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "TL11012001-EN",
+    "name": "Bitdefender Antivirus Plus | 1 Anno | 3 Dispositivi",
+    "unitAmountMinor": 2899,
+    "compareAtMinor": 3499,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "TL11012001-EN-5D",
+    "name": "Bitdefender Antivirus Plus | 1 Anno | 5 Dispositivi",
+    "unitAmountMinor": 3899,
+    "compareAtMinor": 5671,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "TL11011010-DE",
+    "name": "Bitdefender Antivirus Plus | 1 Anno | 10 Dispositivi",
+    "unitAmountMinor": 5499,
+    "compareAtMinor": 7999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "FQC-10538",
+    "name": "Microsoft Windows 11 Professional DVD Ita OEM | FQC-10538",
+    "unitAmountMinor": 8199,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows"
+  },
+  {
+    "sku": "EP2-07110",
+    "name": "Microsoft Visio Professional 2024 - Licenza ESD Originale (Windows)",
+    "unitAmountMinor": 44700,
+    "compareAtMinor": 88900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "EP2-07167",
+    "name": "Microsoft Visio Standard 2024",
+    "unitAmountMinor": 28495,
+    "compareAtMinor": 47900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "P73-08328",
+    "name": "Microsoft Windows Server 2022 Standard 64-bit 16 Core | OEM DVD ENG | P73-08328",
+    "unitAmountMinor": 35999,
+    "compareAtMinor": 38900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows server"
+  },
+  {
+    "sku": "79G-05018",
+    "name": "Microsoft Office 2019 Home and Student | PC/Mac",
+    "unitAmountMinor": 10259,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "NORT_360DEL_3D_1A",
+    "name": "Norton 360 Deluxe 25GB Cloud | 3 Dispositivi",
+    "unitAmountMinor": 1999,
+    "compareAtMinor": 3999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "P1433901",
+    "name": "Norton 360 Standard 10GB Cloud | 1 Dispositivo | 1 Anno - NO ABBONAMENTO",
+    "unitAmountMinor": 1899,
+    "compareAtMinor": 2999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "EP2-25187",
+    "name": "Microsoft Windows Server 2025 Standard 64-bit 16 Core",
+    "unitAmountMinor": 39495,
+    "compareAtMinor": 74900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows server"
+  },
+  {
+    "sku": "P73-08538",
+    "name": "Microsoft Windows Server 2025 Standard 64-bit 16 Core| OEM DVD ENG | P73-08538",
+    "unitAmountMinor": 38999,
+    "compareAtMinor": 78895,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows server"
+  },
+  {
+    "sku": "P73-07788",
+    "name": "Microsoft Windows Server 2019 Standard 64-bit 16 Core | OEM DVD ENG | P73-07788",
+    "unitAmountMinor": 13900,
+    "compareAtMinor": 27900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows server"
+  },
+  {
+    "sku": "EP2-07001",
+    "name": "Microsoft Project Professional 2024 | Licenza ESD Perpetua",
+    "unitAmountMinor": 68999,
+    "compareAtMinor": 165900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "KASP_STD_1D_1A",
+    "name": "Kaspersky Standard | Antivirus 2025",
+    "unitAmountMinor": 1899,
+    "compareAtMinor": 3499,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "KASP_PLUS_1D_1A",
+    "name": "Kaspersky Plus | Internet Security 2025",
+    "unitAmountMinor": 3199,
+    "compareAtMinor": 5499,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "KL1047TDAFS",
+    "name": "Kaspersky Premium | 1 Dispositivo | 1 Anno",
+    "unitAmountMinor": 2999,
+    "compareAtMinor": 7999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "NORT_360DEL_3D_1A-NOABB",
+    "name": "Norton 360 Deluxe 25GB Cloud | 3 Dispositivi | 1 Anno - NO ABBONAMENTO",
+    "unitAmountMinor": 1899,
+    "compareAtMinor": 3999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "AD_STD_2D-1A",
+    "name": "Adobe Acrobat Standard | 2 Dispositivi | 1 Anno - PC/Mac",
+    "unitAmountMinor": 17999,
+    "compareAtMinor": 19020,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "tool ufficio"
+  },
+  {
+    "sku": "SC916509",
+    "name": "Adobe Acrobat Professional | 2 Dispositivi | 1 Anno - PC/Mac",
+    "unitAmountMinor": 23999,
+    "compareAtMinor": 29119,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "tool ufficio"
+  },
+  {
+    "sku": "W11_PRO_STICKER",
+    "name": "Microsoft Windows 11 Professional COA Sticker - Licenza OEM Originale",
+    "unitAmountMinor": 3199,
+    "compareAtMinor": 7900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows"
+  },
+  {
+    "sku": "P6L-00076",
+    "name": "Microsoft SQL Server 2022 Enterprise 24 Core Unlimited CALs incl. DVD",
+    "unitAmountMinor": 388000,
+    "compareAtMinor": 665000,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows server"
+  },
+  {
+    "sku": "P73-07788_ESD",
+    "name": "Microsoft Windows Server 2019 Standard 64-bit 16 Core",
+    "unitAmountMinor": 14799,
+    "compareAtMinor": 67999,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows server"
+  },
+  {
+    "sku": "B0CXZR44LP",
+    "name": "CorelDRAW Graphics Suite 2024 | Acquisto unico | Windows o Mac",
+    "unitAmountMinor": 56900,
+    "compareAtMinor": 77900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "multimedia > photoediting"
+  },
+  {
+    "sku": "1108921",
+    "name": "McAfee Total Protection 2026 | 1 Dispositivo | 1 Anno",
+    "unitAmountMinor": 995,
+    "compareAtMinor": 2995,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "1108923",
+    "name": "McAfee Total Protection 2026 | 5 Dispositivi | 1 Anno",
+    "unitAmountMinor": 1499,
+    "compareAtMinor": 3995,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "MTP00MNRXRAAD",
+    "name": "McAfee Total Protection | 10 Dispositivi | 1 Anno",
+    "unitAmountMinor": 1790,
+    "compareAtMinor": 7999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "KL1047GDCFS1",
+    "name": "Kaspersky Premium | 3 Dispositivi | 1 Anno",
+    "unitAmountMinor": 3499,
+    "compareAtMinor": 6899,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "KL1047GDEFS",
+    "name": "Kaspersky Premium | 5 Dispositivi | 1 Anno",
+    "unitAmountMinor": 4499,
+    "compareAtMinor": 7899,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "KL1047GDKFS",
+    "name": "Kaspersky Premium | 10 Dispositivi | 1 Anno",
+    "unitAmountMinor": 5499,
+    "compareAtMinor": 8999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "SC835510",
+    "name": "Microsoft SQL Server 2022 Standard 16 Core Unlimited CALs incl. DVD",
+    "unitAmountMinor": 189900,
+    "compareAtMinor": 375500,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "sistema operativo > windows server"
+  },
+  {
+    "sku": "SC_M365_KPremium_5Device",
+    "name": "Microsoft Office 365 Personal | Kaspersky Premium 5 Dispositivi - 1 Anno",
+    "unitAmountMinor": 11899,
+    "compareAtMinor": 17898,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "suite office > microsoft 365"
+  },
+  {
+    "sku": "SC_M365P_MTOTPROT_5Device",
+    "name": "Microsoft Office 365 Personal | McAfee Total Protection 5 Dispositivi - 1 Anno",
+    "unitAmountMinor": 8999,
+    "compareAtMinor": 13895,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "suite office > microsoft 365"
+  },
+  {
+    "sku": "SC_W11HOME_M365PERS",
+    "name": "Microsoft Windows 11 Home | Microsoft 365 Personal 5 Dispositivi 1 Anno",
+    "unitAmountMinor": 14900,
+    "compareAtMinor": 17800,
+    "currency": "EUR",
+    "type": "bundle",
+    "category": "sistema operativo > windows > microsoft windows 11"
+  },
+  {
+    "sku": "ACRTRIAD1D1Y",
+    "name": "Acronis True Image Advanced | 1 Dispositivo 1 Anno + 50 GB Cloud Storage",
+    "unitAmountMinor": 3499,
+    "compareAtMinor": 5799,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "backup"
+  },
+  {
+    "sku": "EP2-06606",
+    "name": "Microsoft Office 2024 Home and Business | Windows/Mac | Licenza ESD",
+    "unitAmountMinor": 17900,
+    "compareAtMinor": 29900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office"
+  },
+  {
+    "sku": "SC484126",
+    "name": "Microsoft Copilot  | Guida Premium 2026",
+    "unitAmountMinor": 1490,
+    "compareAtMinor": 2990,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "formazione"
+  },
+  {
+    "sku": "5W1-04285",
+    "name": "Microsoft Outlook 2024 (Standalone) | Licenza ESD Originale",
+    "unitAmountMinor": 7900,
+    "compareAtMinor": 14900,
+    "currency": "EUR",
+    "type": "perpetual",
+    "category": "suite office > microsoft office 2024"
+  },
+  {
+    "sku": "EAVH-N2-A1",
+    "name": "Eset Nod32 Antivirus | 2 Anni | 1 Dispositivo",
+    "unitAmountMinor": 4990,
+    "compareAtMinor": 7998,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  }
+]

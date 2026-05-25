@@ -60,4 +60,34 @@
   <url><loc>https://aml-store.com/fr/account.html</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
   <url><loc>https://aml-store.com/de/account.html</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
   <url><loc>https://aml-store.com/es/account.html</loc><changefreq>yearly</changefreq><priority>0.35</priority></url>
+  <url><loc>https://aml-store.com/it/windows-11-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/windows-10-home.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/windows-10-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/bundle-windows-11-home-m365-personal.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/bundle-m365-personal-mcafee.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/bundle-m365-personal-kaspersky.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/en/windows-11-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/en/windows-10-home.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/en/windows-10-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/en/bundle-windows-11-home-m365-personal.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/en/bundle-m365-personal-mcafee.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/en/bundle-m365-personal-kaspersky.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/fr/windows-11-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/fr/windows-10-home.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/fr/windows-10-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/fr/bundle-windows-11-home-m365-personal.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/fr/bundle-m365-personal-mcafee.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/fr/bundle-m365-personal-kaspersky.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/de/windows-11-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/de/windows-10-home.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/de/windows-10-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/de/bundle-windows-11-home-m365-personal.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/de/bundle-m365-personal-mcafee.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/de/bundle-m365-personal-kaspersky.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/es/windows-11-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/es/windows-10-home.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/es/windows-10-pro.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/es/bundle-windows-11-home-m365-personal.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/es/bundle-m365-personal-mcafee.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/es/bundle-m365-personal-kaspersky.html</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
 </urlset>
