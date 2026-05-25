@@ -9,6 +9,30 @@
             navWindowsOpenSubmenu: 'Apri sottomenu Windows',
             navWindowsOverview: 'Sistemi Operativi',
             navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Apri sottomenu Office',
+            navOfficeOverview: 'Suite Office',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024Standard: 'Office 2024 Standard',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navServerOverview: 'Windows Server e SQL',
+            navPacchetti: 'Pacchetti',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Apri sottomenu Antivirus',
+            navAvOverview: 'Catalogo antivirus',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Strumenti e altro',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Apri sottomenu Microsoft 365',
             navM365Overview: 'Panoramica suite',
@@ -33,6 +57,30 @@
             navWindowsOpenSubmenu: 'Open Windows submenu',
             navWindowsOverview: 'Operating Systems',
             navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Open Office submenu',
+            navOfficeOverview: 'Office suite',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024Standard: 'Office 2024 Standard',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navServerOverview: 'Windows Server & SQL',
+            navPacchetti: 'Bundles',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Open Antivirus submenu',
+            navAvOverview: 'Antivirus catalog',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Tools & more',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Open Microsoft 365 submenu',
             navM365Overview: 'Suite overview',
@@ -57,6 +105,30 @@
             navWindowsOpenSubmenu: 'Ouvrir le sous-menu Windows',
             navWindowsOverview: "Systèmes d'exploitation",
             navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Ouvrir le sous-menu Office',
+            navOfficeOverview: 'Suite Office',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024Standard: 'Office 2024 Standard',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navServerOverview: 'Windows Server et SQL',
+            navPacchetti: 'Packs',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Ouvrir le sous-menu Antivirus',
+            navAvOverview: 'Catalogue antivirus',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Outils et plus',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Ouvrir le sous-menu Microsoft 365',
             navM365Overview: 'Vue d’ensemble de la suite',
@@ -81,6 +153,30 @@
             navWindowsOpenSubmenu: 'Windows-Untermenü öffnen',
             navWindowsOverview: 'Betriebssysteme',
             navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Office-Untermenü öffnen',
+            navOfficeOverview: 'Office-Suite',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024Standard: 'Office 2024 Standard',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navServerOverview: 'Windows Server & SQL',
+            navPacchetti: 'Pakete',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Antivirus-Untermenü öffnen',
+            navAvOverview: 'Antivirus-Katalog',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Tools & mehr',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Microsoft-365-Untermenü öffnen',
             navM365Overview: 'Suite-Überblick',
@@ -105,6 +201,30 @@
             navWindowsOpenSubmenu: 'Abrir submenú Windows',
             navWindowsOverview: 'Sistemas operativos',
             navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Abrir submenú Office',
+            navOfficeOverview: 'Suite Office',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024Standard: 'Office 2024 Standard',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navServerOverview: 'Windows Server y SQL',
+            navPacchetti: 'Packs',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Abrir submenú Antivirus',
+            navAvOverview: 'Catálogo antivirus',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Herramientas y más',
             navM365: 'Microsoft 365',
             navM365OpenSubmenu: 'Abrir submenú Microsoft 365',
             navM365Overview: 'Panorama de la suite',
@@ -168,13 +288,67 @@
             const isM365Solutions = afterLangLower.includes('microsoft-365-solutions');
             const isM365Personal = afterLangLower.includes('microsoft-365-personal');
             const isM365Family = afterLangLower.includes('microsoft-365-family');
-            const isM365NavActive = isM365Solutions || isM365Personal || isM365Family;
-            const mailM365Business = 'mailto:Info@amlstore.it?subject=' + encodeURIComponent('Microsoft 365 Business Standard');
+            const hrefM365Business = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-business-standard.html');
+            const isM365Business = afterLangLower.includes('microsoft-365-business-standard');
             const hrefWinOverview = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'sistemi-operativi.html');
             const hrefWin11Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-home.html');
+            const hrefWin11Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro.html');
+            const hrefWin10Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-home.html');
+            const hrefWin10Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-pro.html');
             const isWinOverview = afterLangLower.includes('sistemi-operativi');
             const isWin11Home = afterLangLower.includes('windows-11-home');
-            const isWinNavActive = isWinOverview || isWin11Home;
+            const isWin11Pro = afterLangLower.includes('windows-11-pro');
+            const isWin10Home = afterLangLower.includes('windows-10-home');
+            const isWin10Pro = afterLangLower.includes('windows-10-pro');
+            const hrefSuiteOffice = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'suite-office.html');
+            const hrefOffice2024Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-home.html');
+            const hrefOffice2024Standard = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-standard.html');
+            const hrefOffice2021HS = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-student.html');
+            const hrefOffice2021PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-professional-plus.html');
+            const hrefOffice2019PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2019-professional-plus.html');
+            const isOfficeOverview = afterLangLower.includes('suite-office');
+            const isOffice2024Home = afterLangLower.includes('office-2024-home');
+            const isOffice2024Standard = afterLangLower.includes('office-2024-standard');
+            const isOffice2021HS = afterLangLower.includes('office-2021-home-student');
+            const isOffice2021PP = afterLangLower.includes('office-2021-professional-plus');
+            const isOffice2019PP = afterLangLower.includes('office-2019-professional-plus');
+            const isOfficeNavActive = isOfficeOverview || isOffice2024Home || isOffice2024Standard
+                || isOffice2021HS || isOffice2021PP || isOffice2019PP
+                || /\/(office-|word-2024|excel-2024|powerpoint-2024|outlook-2024|project-|visio-)/.test(afterLangLower);
+            const hrefWinServer = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-server.html');
+            const hrefPacchetti = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'pacchetti.html');
+            const hrefAntivirus = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'antivirus.html');
+            const hrefStrumenti = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'strumenti.html');
+            const hrefBundleWinM365 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-windows-11-home-m365-personal.html');
+            const hrefBundleM365Mcafee = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-m365-personal-mcafee.html');
+            const hrefBundleM365Kaspersky = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-m365-personal-kaspersky.html');
+            const hrefAvMcafee = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'mcafee-total-protection-1-device.html');
+            const hrefAvNorton = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'norton-360-standard.html');
+            const hrefAvEset = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'eset-nod32-1-device.html');
+            const hrefAvBitdefender = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bitdefender-plus-1-device.html');
+            const hrefAvKaspersky = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'kaspersky-standard.html');
+            const isServerOverview = afterLangLower.includes('windows-server') || afterLangLower.includes('sql-server');
+            const isPacchettiOverview = afterLangLower.includes('pacchetti');
+            const isBundleWinM365 = afterLangLower.includes('bundle-windows-11-home-m365-personal');
+            const isBundleM365Mcafee = afterLangLower.includes('bundle-m365-personal-mcafee');
+            const isBundleM365Kaspersky = afterLangLower.includes('bundle-m365-personal-kaspersky');
+            const isWinNavActive = isWinOverview || isWin11Home || isWin11Pro || isWin10Home || isWin10Pro || isServerOverview;
+            const isM365NavActive = isM365Solutions || isM365Personal || isM365Family || isM365Business
+                || isPacchettiOverview || isBundleWinM365 || isBundleM365Mcafee || isBundleM365Kaspersky;
+            const isAvOverview = afterLangLower.includes('antivirus.html');
+            const isAvMcafee = afterLangLower.includes('mcafee-total-protection');
+            const isAvNorton = afterLangLower.includes('norton-360');
+            const isAvEset = afterLangLower.includes('eset-nod32');
+            const isAvBitdefender = afterLangLower.includes('bitdefender-plus');
+            const isAvKaspersky = afterLangLower.includes('kaspersky-standard')
+                || afterLangLower.includes('kaspersky-plus')
+                || afterLangLower.includes('kaspersky-premium');
+            const isAvNavActive = isAvOverview || isAvMcafee || isAvNorton || isAvEset || isAvBitdefender || isAvKaspersky;
+            const isStrumentiOverview = afterLangLower.includes('strumenti.html')
+                || afterLangLower.includes('adobe-acrobat')
+                || afterLangLower.includes('coreldraw-2024')
+                || afterLangLower.includes('acronis-true-image')
+                || afterLangLower.includes('copilot-guide-2026');
             const esc = S.escapeHtmlAttr;
 
             const cartAriaForCount = (n) => {
@@ -416,14 +590,20 @@
 
                     /* Drawer mobile — gruppi Windows / M365 (sottomenu) */
                     .drawer-win-block,
-                    .drawer-m365-block {
+                    .drawer-office-block,
+                    .drawer-m365-block,
+                    .drawer-bundle-block,
+                    .drawer-av-block {
                         display: flex;
                         flex-direction: column;
                         gap: 0.125rem;
                         margin-bottom: 0.35rem;
                     }
                     .drawer-win-heading,
-                    .drawer-m365-heading {
+                    .drawer-office-heading,
+                    .drawer-m365-heading,
+                    .drawer-bundle-heading,
+                    .drawer-av-heading {
                         font-size: 0.65rem;
                         font-weight: 700;
                         text-transform: uppercase;
@@ -585,6 +765,165 @@
                         padding-bottom: 0.65rem;
                     }
                     .nav-m365-dropdown a.nav-m365-dropdown__overview:hover {
+                        background: rgba(59, 130, 246, 0.12);
+                    }
+
+                    /* Office — voce principale + sottomenù */
+                    .nav-office-wrap,
+                    .nav-av-wrap {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .nav-office-inner,
+                    .nav-av-inner {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.15rem;
+                    }
+                    .nav-office-root,
+                    .nav-av-root {
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.9rem;
+                        font-weight: 500;
+                        transition: color 0.3s ease, text-shadow 0.3s ease;
+                        position: relative;
+                        padding-bottom: 4px;
+                        white-space: nowrap;
+                    }
+                    .nav-office-root::after,
+                    .nav-av-root::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 50%;
+                        width: 0;
+                        height: 2px;
+                        background-color: var(--text-primary);
+                        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        border-radius: 2px;
+                    }
+                    .nav-office-root:hover,
+                    .nav-av-root:hover { color: var(--text-primary); text-shadow: 0 0 12px rgba(255, 255, 255, 0.2); }
+                    .nav-office-root:hover::after,
+                    .nav-av-root:hover::after,
+                    .nav-office-root.active::after,
+                    .nav-av-root.active::after { width: 100%; left: 0; }
+                    .nav-office-root.active,
+                    .nav-av-root.active { color: var(--text-primary); font-weight: 600; }
+                    .nav-office-caret,
+                    .nav-av-caret {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        padding: 0;
+                        margin: 0 0 2px 0;
+                        border: none;
+                        border-radius: 6px;
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        transition: color 0.2s ease, background 0.2s ease;
+                    }
+                    .nav-office-caret:hover,
+                    .nav-av-caret:hover,
+                    .nav-office-wrap.open .nav-office-caret,
+                    .nav-av-wrap.open .nav-av-caret {
+                        color: var(--text-primary);
+                        background: rgba(255, 255, 255, 0.06);
+                    }
+                    .nav-office-caret:focus-visible,
+                    .nav-av-caret:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                    }
+                    .nav-office-caret svg,
+                    .nav-av-caret svg {
+                        width: 12px;
+                        height: 12px;
+                        fill: currentColor;
+                        transition: transform 0.25s ease;
+                    }
+                    .nav-office-wrap.open .nav-office-caret svg,
+                    .nav-av-wrap.open .nav-av-caret svg {
+                        transform: rotate(180deg);
+                    }
+                    .nav-office-dropdown::before,
+                    .nav-av-dropdown::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 100%;
+                        left: 0;
+                        right: 0;
+                        height: calc(0.5rem + 12px);
+                    }
+                    .nav-office-dropdown,
+                    .nav-av-dropdown {
+                        position: absolute;
+                        top: calc(100% + 0.5rem);
+                        left: 0;
+                        min-width: 16.5rem;
+                        max-height: min(70vh, 22rem);
+                        overflow-y: auto;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: 12px;
+                        padding: 0.4rem;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-6px) scale(0.98);
+                        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+                        z-index: 50;
+                    }
+                    .nav-office-wrap:hover .nav-office-dropdown,
+                    .nav-av-wrap:hover .nav-av-dropdown,
+                    .nav-office-wrap:focus-within .nav-office-dropdown,
+                    .nav-av-wrap:focus-within .nav-av-dropdown,
+                    .nav-office-wrap.open .nav-office-dropdown,
+                    .nav-av-wrap.open .nav-av-dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        transform: translateY(0) scale(1);
+                        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    visibility 0.25s;
+                    }
+                    .nav-office-dropdown a,
+                    .nav-av-dropdown a {
+                        display: block;
+                        padding: 0.55rem 0.75rem;
+                        border-radius: 8px;
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                        white-space: nowrap;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .nav-office-dropdown a:hover,
+                    .nav-av-dropdown a:hover {
+                        background: rgba(255, 255, 255, 0.08);
+                        color: var(--text-primary);
+                    }
+                    .nav-office-dropdown a.nav-office-dropdown__overview,
+                    .nav-av-dropdown a.nav-av-dropdown__overview {
+                        font-weight: 700;
+                        color: var(--text-primary);
+                        border-bottom: 1px solid var(--border-color);
+                        border-radius: 8px 8px 0 0;
+                        margin-bottom: 0.15rem;
+                        padding-bottom: 0.65rem;
+                    }
+                    .nav-office-dropdown a.nav-office-dropdown__overview:hover,
+                    .nav-av-dropdown a.nav-av-dropdown__overview:hover {
                         background: rgba(59, 130, 246, 0.12);
                     }
 
@@ -857,6 +1196,16 @@
                         .nav-m365-wrap:focus-within .nav-m365-dropdown,
                         .nav-m365-wrap.open .nav-m365-dropdown { transition: none; }
                         .nav-m365-caret svg { transition: none; }
+                        .nav-office-dropdown,
+                        .nav-av-dropdown,
+                        .nav-office-wrap:hover .nav-office-dropdown,
+                        .nav-av-wrap:hover .nav-av-dropdown,
+                        .nav-office-wrap:focus-within .nav-office-dropdown,
+                        .nav-av-wrap:focus-within .nav-av-dropdown,
+                        .nav-office-wrap.open .nav-office-dropdown,
+                        .nav-av-wrap.open .nav-av-dropdown { transition: none; }
+                        .nav-office-caret svg,
+                        .nav-av-caret svg { transition: none; }
                         /* Pulsante Accedi */
                         .btn-signin { transition: none; }
                         /* Overlay e Drawer mobile */
@@ -1046,7 +1395,10 @@
                     }
                     .drawer-nav > a,
                     .drawer-win-block a,
-                    .drawer-m365-block a {
+                    .drawer-office-block a,
+                    .drawer-m365-block a,
+                    .drawer-bundle-block a,
+                    .drawer-av-block a {
                         -webkit-tap-highlight-color: transparent;
                         position: relative;
                         display: block;
@@ -1069,19 +1421,28 @@
                         color: var(--text-primary);
                     }
                     .drawer-win-block a,
-                    .drawer-m365-block a {
+                    .drawer-office-block a,
+                    .drawer-m365-block a,
+                    .drawer-bundle-block a,
+                    .drawer-av-block a {
                         font-size: 0.875rem;
                     }
                     .drawer-nav > a.active,
                     .drawer-win-block a.active,
-                    .drawer-m365-block a.active {
+                    .drawer-office-block a.active,
+                    .drawer-m365-block a.active,
+                    .drawer-bundle-block a.active,
+                    .drawer-av-block a.active {
                         color: var(--text-primary);
                         text-decoration-color: rgba(255, 255, 255, 0.55);
                     }
                     @media (hover: hover) and (pointer: fine) {
                         .drawer-nav > a:hover,
                         .drawer-win-block a:hover,
-                        .drawer-m365-block a:hover {
+                        .drawer-office-block a:hover,
+                        .drawer-m365-block a:hover,
+                        .drawer-bundle-block a:hover,
+                        .drawer-av-block a:hover {
                             color: var(--text-primary);
                             text-decoration-color: rgba(255, 255, 255, 0.4);
                         }
@@ -1089,13 +1450,19 @@
                     @media (hover: none), (pointer: coarse) {
                         .drawer-nav > a:hover,
                         .drawer-win-block a:hover,
-                        .drawer-m365-block a:hover {
+                        .drawer-office-block a:hover,
+                        .drawer-m365-block a:hover,
+                        .drawer-bundle-block a:hover,
+                        .drawer-av-block a:hover {
                             color: inherit;
                             text-decoration-color: transparent;
                         }
                         .drawer-nav > a:active,
                         .drawer-win-block a:active,
-                        .drawer-m365-block a:active {
+                        .drawer-office-block a:active,
+                        .drawer-m365-block a:active,
+                        .drawer-bundle-block a:active,
+                        .drawer-av-block a:active {
                             color: var(--text-primary);
                             text-decoration-color: rgba(255, 255, 255, 0.45);
                         }
@@ -1245,8 +1612,28 @@
                                     </button>
                                 </div>
                                 <div class="nav-win-dropdown" role="menu">
-                                    <a href="${esc(hrefWinOverview)}" class="nav-win-dropdown__overview" role="menuitem">${esc(t.navWindowsOverview)}</a>
+                                    <a href="${esc(hrefWinOverview)}" class="nav-win-dropdown__overview" role="menuitem"${isWinOverview ? ' aria-current="page"' : ''}>${esc(t.navWindowsOverview)}</a>
                                     <a href="${esc(hrefWin11Home)}" role="menuitem"${isWin11Home ? ' aria-current="page"' : ''}>${esc(t.navWindows11Home)}</a>
+                                    <a href="${esc(hrefWin11Pro)}" role="menuitem"${isWin11Pro ? ' aria-current="page"' : ''}>${esc(t.navWindows11Pro)}</a>
+                                    <a href="${esc(hrefWin10Home)}" role="menuitem"${isWin10Home ? ' aria-current="page"' : ''}>${esc(t.navWindows10Home)}</a>
+                                    <a href="${esc(hrefWin10Pro)}" role="menuitem"${isWin10Pro ? ' aria-current="page"' : ''}>${esc(t.navWindows10Pro)}</a>
+                                    <a href="${esc(hrefWinServer)}" class="nav-win-dropdown__overview" role="menuitem"${isServerOverview ? ' aria-current="page"' : ''}>${esc(t.navServerOverview)}</a>
+                                </div>
+                            </div>
+                            <div class="nav-office-wrap">
+                                <div class="nav-office-inner">
+                                    <a href="${esc(hrefSuiteOffice)}" class="nav-office-root${isOfficeNavActive ? ' active' : ''}">${esc(t.navOffice)}</a>
+                                    <button type="button" class="nav-office-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navOfficeOpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-office-dropdown" role="menu">
+                                    <a href="${esc(hrefSuiteOffice)}" class="nav-office-dropdown__overview" role="menuitem"${isOfficeOverview ? ' aria-current="page"' : ''}>${esc(t.navOfficeOverview)}</a>
+                                    <a href="${esc(hrefOffice2024Home)}" role="menuitem"${isOffice2024Home ? ' aria-current="page"' : ''}>${esc(t.navOffice2024Home)}</a>
+                                    <a href="${esc(hrefOffice2024Standard)}" role="menuitem"${isOffice2024Standard ? ' aria-current="page"' : ''}>${esc(t.navOffice2024Standard)}</a>
+                                    <a href="${esc(hrefOffice2021HS)}" role="menuitem"${isOffice2021HS ? ' aria-current="page"' : ''}>${esc(t.navOffice2021HS)}</a>
+                                    <a href="${esc(hrefOffice2021PP)}" role="menuitem"${isOffice2021PP ? ' aria-current="page"' : ''}>${esc(t.navOffice2021PP)}</a>
+                                    <a href="${esc(hrefOffice2019PP)}" role="menuitem"${isOffice2019PP ? ' aria-current="page"' : ''}>${esc(t.navOffice2019PP)}</a>
                                 </div>
                             </div>
                             <div class="nav-m365-wrap">
@@ -1260,10 +1647,30 @@
                                     <a href="${esc(hrefM365Solutions)}" class="nav-m365-dropdown__overview" role="menuitem">${esc(t.navM365Overview)}</a>
                                     <a href="${esc(hrefM365Personal)}" role="menuitem">${esc(t.navM365Personal)}</a>
                                     <a href="${esc(hrefM365Family)}" role="menuitem">${esc(t.navM365Family)}</a>
-                                    <a href="${esc(mailM365Business)}" role="menuitem">${esc(t.navM365Business)}</a>
+                                    <a href="${esc(hrefM365Business)}" role="menuitem"${isM365Business ? ' aria-current="page"' : ''}>${esc(t.navM365Business)}</a>
+                                    <a href="${esc(hrefPacchetti)}" role="menuitem"${isPacchettiOverview ? ' aria-current="page"' : ''}>${esc(t.navPacchetti)}</a>
+                                    <a href="${esc(hrefBundleWinM365)}" role="menuitem"${isBundleWinM365 ? ' aria-current="page"' : ''}>${esc(t.navBundleWinM365)}</a>
+                                    <a href="${esc(hrefBundleM365Mcafee)}" role="menuitem"${isBundleM365Mcafee ? ' aria-current="page"' : ''}>${esc(t.navBundleM365Mcafee)}</a>
+                                    <a href="${esc(hrefBundleM365Kaspersky)}" role="menuitem"${isBundleM365Kaspersky ? ' aria-current="page"' : ''}>${esc(t.navBundleM365Kaspersky)}</a>
                                 </div>
                             </div>
-                            <a href="#">${esc(t.navAntivirus)}</a>
+                            <div class="nav-av-wrap">
+                                <div class="nav-av-inner">
+                                    <a href="${esc(hrefAntivirus)}" class="nav-av-root${isAvNavActive ? ' active' : ''}">${esc(t.navAntivirus)}</a>
+                                    <button type="button" class="nav-av-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navAvOpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-av-dropdown" role="menu">
+                                    <a href="${esc(hrefAntivirus)}" class="nav-av-dropdown__overview" role="menuitem"${isAvOverview ? ' aria-current="page"' : ''}>${esc(t.navAvOverview)}</a>
+                                    <a href="${esc(hrefAvMcafee)}" role="menuitem"${isAvMcafee ? ' aria-current="page"' : ''}>${esc(t.navAvMcafee)}</a>
+                                    <a href="${esc(hrefAvNorton)}" role="menuitem"${isAvNorton ? ' aria-current="page"' : ''}>${esc(t.navAvNorton)}</a>
+                                    <a href="${esc(hrefAvEset)}" role="menuitem"${isAvEset ? ' aria-current="page"' : ''}>${esc(t.navAvEset)}</a>
+                                    <a href="${esc(hrefAvBitdefender)}" role="menuitem"${isAvBitdefender ? ' aria-current="page"' : ''}>${esc(t.navAvBitdefender)}</a>
+                                    <a href="${esc(hrefAvKaspersky)}" role="menuitem"${isAvKaspersky ? ' aria-current="page"' : ''}>${esc(t.navAvKaspersky)}</a>
+                                    <a href="${esc(hrefStrumenti)}" role="menuitem"${isStrumentiOverview ? ' aria-current="page"' : ''}>${esc(t.navStrumenti)}</a>
+                                </div>
+                            </div>
                         </nav>
                     </div>
                     
@@ -1323,15 +1730,44 @@
                             <div class="drawer-win-heading">${esc(t.navWindows)}</div>
                             <a href="${esc(hrefWinOverview)}"${isWinOverview ? ' class="active"' : ''}>${esc(t.navWindowsOverview)}</a>
                             <a href="${esc(hrefWin11Home)}"${isWin11Home ? ' class="active"' : ''}>${esc(t.navWindows11Home)}</a>
+                            <a href="${esc(hrefWin11Pro)}"${isWin11Pro ? ' class="active"' : ''}>${esc(t.navWindows11Pro)}</a>
+                            <a href="${esc(hrefWin10Home)}"${isWin10Home ? ' class="active"' : ''}>${esc(t.navWindows10Home)}</a>
+                            <a href="${esc(hrefWin10Pro)}"${isWin10Pro ? ' class="active"' : ''}>${esc(t.navWindows10Pro)}</a>
+                            <a href="${esc(hrefWinServer)}"${isServerOverview ? ' class="active"' : ''}>${esc(t.navServerOverview)}</a>
+                        </div>
+                        <div class="drawer-office-block">
+                            <div class="drawer-office-heading">${esc(t.navOffice)}</div>
+                            <a href="${esc(hrefSuiteOffice)}"${isOfficeOverview ? ' class="active"' : ''}>${esc(t.navOfficeOverview)}</a>
+                            <a href="${esc(hrefOffice2024Home)}"${isOffice2024Home ? ' class="active"' : ''}>${esc(t.navOffice2024Home)}</a>
+                            <a href="${esc(hrefOffice2024Standard)}"${isOffice2024Standard ? ' class="active"' : ''}>${esc(t.navOffice2024Standard)}</a>
+                            <a href="${esc(hrefOffice2021HS)}"${isOffice2021HS ? ' class="active"' : ''}>${esc(t.navOffice2021HS)}</a>
+                            <a href="${esc(hrefOffice2021PP)}"${isOffice2021PP ? ' class="active"' : ''}>${esc(t.navOffice2021PP)}</a>
+                            <a href="${esc(hrefOffice2019PP)}"${isOffice2019PP ? ' class="active"' : ''}>${esc(t.navOffice2019PP)}</a>
                         </div>
                         <div class="drawer-m365-block">
                             <div class="drawer-m365-heading">${esc(t.navM365)}</div>
                             <a href="${esc(hrefM365Solutions)}"${isM365Solutions ? ' class="active"' : ''}>${esc(t.navM365Overview)}</a>
                             <a href="${esc(hrefM365Personal)}"${isM365Personal ? ' class="active"' : ''}>${esc(t.navM365Personal)}</a>
                             <a href="${esc(hrefM365Family)}"${isM365Family ? ' class="active"' : ''}>${esc(t.navM365Family)}</a>
-                            <a href="${esc(mailM365Business)}">${esc(t.navM365Business)}</a>
+                            <a href="${esc(hrefM365Business)}"${isM365Business ? ' class="active"' : ''}>${esc(t.navM365Business)}</a>
                         </div>
-                        <a href="#">${esc(t.navAntivirus)}</a>
+                        <div class="drawer-bundle-block">
+                            <div class="drawer-bundle-heading">${esc(t.navPacchetti)}</div>
+                            <a href="${esc(hrefPacchetti)}"${isPacchettiOverview ? ' class="active"' : ''}>${esc(t.navPacchetti)}</a>
+                            <a href="${esc(hrefBundleWinM365)}"${isBundleWinM365 ? ' class="active"' : ''}>${esc(t.navBundleWinM365)}</a>
+                            <a href="${esc(hrefBundleM365Mcafee)}"${isBundleM365Mcafee ? ' class="active"' : ''}>${esc(t.navBundleM365Mcafee)}</a>
+                            <a href="${esc(hrefBundleM365Kaspersky)}"${isBundleM365Kaspersky ? ' class="active"' : ''}>${esc(t.navBundleM365Kaspersky)}</a>
+                        </div>
+                        <div class="drawer-av-block">
+                            <div class="drawer-av-heading">${esc(t.navAntivirus)}</div>
+                            <a href="${esc(hrefAntivirus)}"${isAvOverview ? ' class="active"' : ''}>${esc(t.navAvOverview)}</a>
+                            <a href="${esc(hrefAvMcafee)}"${isAvMcafee ? ' class="active"' : ''}>${esc(t.navAvMcafee)}</a>
+                            <a href="${esc(hrefAvNorton)}"${isAvNorton ? ' class="active"' : ''}>${esc(t.navAvNorton)}</a>
+                            <a href="${esc(hrefAvEset)}"${isAvEset ? ' class="active"' : ''}>${esc(t.navAvEset)}</a>
+                            <a href="${esc(hrefAvBitdefender)}"${isAvBitdefender ? ' class="active"' : ''}>${esc(t.navAvBitdefender)}</a>
+                            <a href="${esc(hrefAvKaspersky)}"${isAvKaspersky ? ' class="active"' : ''}>${esc(t.navAvKaspersky)}</a>
+                            <a href="${esc(hrefStrumenti)}"${isStrumentiOverview ? ' class="active"' : ''}>${esc(t.navStrumenti)}</a>
+                        </div>
                     </nav>
                     
                     <div class="drawer-section-title">${esc(t.selectLanguage)}</div>
@@ -1378,16 +1814,23 @@
             if (close) close.addEventListener('click', closeMenu);
             if (overlay) overlay.addEventListener('click', closeMenu);
 
+            const closeNavSubmenus = () => {
+                [
+                    ['.nav-win-wrap', '.nav-win-caret'],
+                    ['.nav-office-wrap', '.nav-office-caret'],
+                    ['.nav-m365-wrap', '.nav-m365-caret'],
+                    ['.nav-av-wrap', '.nav-av-caret'],
+                ].forEach(([wrapSel, caretSel]) => {
+                    const wrap = this.shadowRoot.querySelector(wrapSel);
+                    const caret = this.shadowRoot.querySelector(caretSel);
+                    if (wrap) wrap.classList.remove('open');
+                    if (caret) caret.setAttribute('aria-expanded', 'false');
+                });
+            };
+
             const toggleLangMenu = (e) => {
                 if (e) e.stopPropagation();
-                const m365WClose = this.shadowRoot.querySelector('.nav-m365-wrap');
-                const m365CClose = this.shadowRoot.querySelector('.nav-m365-caret');
-                if (m365WClose) m365WClose.classList.remove('open');
-                if (m365CClose) m365CClose.setAttribute('aria-expanded', 'false');
-                const winWClose = this.shadowRoot.querySelector('.nav-win-wrap');
-                const winCClose = this.shadowRoot.querySelector('.nav-win-caret');
-                if (winWClose) winWClose.classList.remove('open');
-                if (winCClose) winCClose.setAttribute('aria-expanded', 'false');
+                closeNavSubmenus();
                 if (!langWrapper || !langSelector) return;
                 const isOpen = langWrapper.classList.toggle('open');
                 langSelector.setAttribute('aria-expanded', isOpen);
@@ -1423,15 +1866,62 @@
                         langWrapper.classList.remove('open');
                         if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
                     }
-                    const m365WClose = this.shadowRoot.querySelector('.nav-m365-wrap');
-                    const m365CClose = this.shadowRoot.querySelector('.nav-m365-caret');
-                    if (m365WClose) m365WClose.classList.remove('open');
-                    if (m365CClose) m365CClose.setAttribute('aria-expanded', 'false');
+                    closeNavSubmenus();
                     const isOpen = winWrap.classList.toggle('open');
                     winCaret.setAttribute('aria-expanded', isOpen);
                 });
                 this.shadowRoot.querySelectorAll('.nav-win-dropdown a').forEach((a) => {
                     a.addEventListener('click', closeWinMenu);
+                });
+            }
+
+            /* ── Office dropdown ── */
+            const officeWrap = this.shadowRoot.querySelector('.nav-office-wrap');
+            const officeCaret = this.shadowRoot.querySelector('.nav-office-caret');
+            const closeOfficeMenu = () => {
+                if (!officeWrap || !officeCaret) return;
+                officeWrap.classList.remove('open');
+                officeCaret.setAttribute('aria-expanded', 'false');
+            };
+            if (officeCaret && officeWrap) {
+                officeCaret.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (langWrapper) {
+                        langWrapper.classList.remove('open');
+                        if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                    }
+                    closeNavSubmenus();
+                    const isOpen = officeWrap.classList.toggle('open');
+                    officeCaret.setAttribute('aria-expanded', isOpen);
+                });
+                this.shadowRoot.querySelectorAll('.nav-office-dropdown a').forEach((a) => {
+                    a.addEventListener('click', closeOfficeMenu);
+                });
+            }
+
+            /* ── Antivirus dropdown ── */
+            const avWrap = this.shadowRoot.querySelector('.nav-av-wrap');
+            const avCaret = this.shadowRoot.querySelector('.nav-av-caret');
+            const closeAvMenu = () => {
+                if (!avWrap || !avCaret) return;
+                avWrap.classList.remove('open');
+                avCaret.setAttribute('aria-expanded', 'false');
+            };
+            if (avCaret && avWrap) {
+                avCaret.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (langWrapper) {
+                        langWrapper.classList.remove('open');
+                        if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                    }
+                    closeNavSubmenus();
+                    const isOpen = avWrap.classList.toggle('open');
+                    avCaret.setAttribute('aria-expanded', isOpen);
+                });
+                this.shadowRoot.querySelectorAll('.nav-av-dropdown a').forEach((a) => {
+                    a.addEventListener('click', closeAvMenu);
                 });
             }
 
@@ -1451,7 +1941,7 @@
                         langWrapper.classList.remove('open');
                         if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
                     }
-                    closeWinMenu();
+                    closeNavSubmenus();
                     const isOpen = m365Wrap.classList.toggle('open');
                     m365Caret.setAttribute('aria-expanded', isOpen);
                 });
@@ -1466,18 +1956,19 @@
                     langWrapper.classList.remove('open');
                     langSelector.setAttribute('aria-expanded', 'false');
                 }
-                const m365W = this.shadowRoot.querySelector('.nav-m365-wrap');
-                const m365C = this.shadowRoot.querySelector('.nav-m365-caret');
-                if (m365W && !path.includes(m365W)) {
-                    m365W.classList.remove('open');
-                    if (m365C) m365C.setAttribute('aria-expanded', 'false');
-                }
-                const winW = this.shadowRoot.querySelector('.nav-win-wrap');
-                const winC = this.shadowRoot.querySelector('.nav-win-caret');
-                if (winW && !path.includes(winW)) {
-                    winW.classList.remove('open');
-                    if (winC) winC.setAttribute('aria-expanded', 'false');
-                }
+                [
+                    ['.nav-win-wrap', '.nav-win-caret'],
+                    ['.nav-office-wrap', '.nav-office-caret'],
+                    ['.nav-m365-wrap', '.nav-m365-caret'],
+                    ['.nav-av-wrap', '.nav-av-caret'],
+                ].forEach(([wrapSel, caretSel]) => {
+                    const wrap = this.shadowRoot.querySelector(wrapSel);
+                    const caret = this.shadowRoot.querySelector(caretSel);
+                    if (wrap && !path.includes(wrap)) {
+                        wrap.classList.remove('open');
+                        if (caret) caret.setAttribute('aria-expanded', 'false');
+                    }
+                });
             };
             this.__docKeydownHandler = (e) => {
                 if (e.key !== 'Escape') return;
@@ -1489,18 +1980,20 @@
                     }
                     return;
                 }
-                const winW = this.shadowRoot.querySelector('.nav-win-wrap');
-                const winC = this.shadowRoot.querySelector('.nav-win-caret');
-                if (winW?.classList.contains('open')) {
-                    winW.classList.remove('open');
-                    if (winC) { winC.setAttribute('aria-expanded', 'false'); winC.focus(); }
-                    return;
-                }
-                const m365W = this.shadowRoot.querySelector('.nav-m365-wrap');
-                const m365C = this.shadowRoot.querySelector('.nav-m365-caret');
-                if (m365W?.classList.contains('open')) {
-                    m365W.classList.remove('open');
-                    if (m365C) { m365C.setAttribute('aria-expanded', 'false'); m365C.focus(); }
+                const submenus = [
+                    ['.nav-win-wrap', '.nav-win-caret'],
+                    ['.nav-office-wrap', '.nav-office-caret'],
+                    ['.nav-m365-wrap', '.nav-m365-caret'],
+                    ['.nav-av-wrap', '.nav-av-caret'],
+                ];
+                for (const [wrapSel, caretSel] of submenus) {
+                    const wrap = this.shadowRoot.querySelector(wrapSel);
+                    const caret = this.shadowRoot.querySelector(caretSel);
+                    if (wrap?.classList.contains('open')) {
+                        wrap.classList.remove('open');
+                        if (caret) { caret.setAttribute('aria-expanded', 'false'); caret.focus(); }
+                        return;
+                    }
                 }
             };
             document.addEventListener('click', this.__docClickHandler);
