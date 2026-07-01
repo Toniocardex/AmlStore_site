@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS orders (
     -- Traccia operativa
     confirmation_email_sent_at   TEXT,                    -- idempotenza: null = non ancora inviata
     confirmation_email_event_src TEXT,                    -- webhook_stripe|webhook_paypal|worker_capture|bank_transfer_created
+    internal_notification_sent_at TEXT,                   -- idempotenza notifica interna ordine
+    internal_notification_event_src TEXT,                 -- webhook_stripe|worker_capture|bank_transfer_created
 
     -- Admin panel
     archived_at                  TEXT,                    -- soft-archive (NULL = attivo)

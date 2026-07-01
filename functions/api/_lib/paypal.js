@@ -105,7 +105,7 @@ export async function createPaypalOrder(baseUrl, accessToken, {
  * @param {string} baseUrl
  * @param {string} accessToken
  * @param {string} paypalOrderId — ID ordine PayPal (dal frontend)
- * @returns {Promise<{ captureId: string, status: string }>}
+ * @returns {Promise<{ captureId: string, status: string, amountValue: string, currencyCode: string }>}
  */
 export async function capturePaypalOrder(baseUrl, accessToken, paypalOrderId) {
     const res = await fetch(`${baseUrl}/v2/checkout/orders/${paypalOrderId}/capture`, {
@@ -123,6 +123,12 @@ export async function capturePaypalOrder(baseUrl, accessToken, paypalOrderId) {
     }
 
     // Estrai capture ID dalla prima purchase_unit
-    const captureId = data?.purchase_units?.[0]?.payments?.captures?.[0]?.id || null;
-    return { captureId, status: data.status };
+    const capture = data?.purchase_units?.[0]?.payments?.captures?.[0] || {};
+    const captureId = capture.id || null;
+    return {
+        captureId,
+        status: data.status,
+        amountValue: capture.amount?.value || '',
+        currencyCode: capture.amount?.currency_code || '',
+    };
 }

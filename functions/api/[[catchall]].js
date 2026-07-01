@@ -27,7 +27,8 @@ import { createOrder, getOrderById, getOrderByStripeSession,
 import { createCheckoutSession, verifyStripeWebhook }    from './_lib/stripe.js';
 import { getAccessToken, createPaypalOrder,
          capturePaypalOrder }                            from './_lib/paypal.js';
-import { sendConfirmationOnce }                          from './_lib/email.js';
+import { sendConfirmationOnce,
+         sendInternalOrderNotificationOnce }             from './_lib/email.js';
 import { verifyAccessJwt, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
          unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
@@ -36,10 +37,18 @@ import { resolveAndValidateItems }                     from './_lib/catalog.js';
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
 const ALLOWED_ORIGINS = ['https://aml-store.com', 'http://localhost:8788'];
+const ALLOWED_LOCALES = new Set(['it', 'en', 'fr', 'de', 'es']);
+const MAX_JSON_BODY_BYTES = 32 * 1024;
 
-function corsHeaders(request) {
+function allowedOrigins(env = {}) {
+    const origins = new Set(ALLOWED_ORIGINS);
+    if (env.SITE_ORIGIN) origins.add(env.SITE_ORIGIN);
+    return origins;
+}
+
+function corsHeaders(request, env = {}) {
     const origin = request.headers.get('Origin') || '';
-    const allow  = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+    const allow  = allowedOrigins(env).has(origin) ? origin : (env.SITE_ORIGIN || ALLOWED_ORIGINS[0]);
     return {
         'Access-Control-Allow-Origin':  allow,
         'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
@@ -47,18 +56,18 @@ function corsHeaders(request) {
     };
 }
 
-function json(data, status = 200, request = null) {
+function json(data, status = 200, request = null, env = null) {
     return new Response(JSON.stringify(data), {
         status,
         headers: {
             'Content-Type': 'application/json',
-            ...(request ? corsHeaders(request) : {}),
+            ...(request ? corsHeaders(request, env || {}) : {}),
         },
     });
 }
 
-function err(msg, status = 400, request = null) {
-    return json({ error: msg }, status, request);
+function err(msg, status = 400, request = null, env = null) {
+    return json({ error: msg }, status, request, env);
 }
 
 /* ─── Entry point Pages Function ────────────────────────────────────────────── */
@@ -70,7 +79,7 @@ export async function onRequest(context) {
 
     // CORS preflight
     if (request.method === 'OPTIONS') {
-        return new Response(null, { status: 204, headers: corsHeaders(request) });
+        return new Response(null, { status: 204, headers: corsHeaders(request, env) });
     }
 
     try {
@@ -130,11 +139,119 @@ function totalMinorFromItems(items) {
     return items.reduce((s, i) => s + i.unit_amount_minor * i.qty, 0);
 }
 
+function isAllowedCheckoutOrigin(request, env) {
+    const origin = request.headers.get('Origin') || '';
+    return Boolean(origin && allowedOrigins(env).has(origin));
+}
+
+function isJsonContentType(request) {
+    const type = request.headers.get('Content-Type') || '';
+    return type.toLowerCase().split(';', 1)[0].trim() === 'application/json';
+}
+
+function requestBodyTooLarge(request) {
+    const len = Number(request.headers.get('Content-Length') || 0);
+    return Number.isFinite(len) && len > MAX_JSON_BODY_BYTES;
+}
+
+function validateCheckoutRequest(request, env) {
+    if (!isAllowedCheckoutOrigin(request, env)) {
+        return err('Origin non consentita', 403, request, env);
+    }
+    if (!isJsonContentType(request)) {
+        return err('Content-Type non valido', 415, request, env);
+    }
+    if (requestBodyTooLarge(request)) {
+        return err('Payload troppo grande', 413, request, env);
+    }
+    return null;
+}
+
+function validateEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || ''));
+}
+
+function validatePIVA(v) {
+    v = String(v || '').trim();
+    if (!/^\d{11}$/.test(v)) return false;
+    let s = 0;
+    for (let i = 0; i <= 9; i += 2) s += parseInt(v[i], 10);
+    for (let j = 1; j <= 9; j += 2) {
+        const d = parseInt(v[j], 10) * 2;
+        s += d > 9 ? d - 9 : d;
+    }
+    return (10 - (s % 10)) % 10 === parseInt(v[10], 10);
+}
+
+function cleanString(v, maxLen = 120) {
+    return String(v || '').trim().slice(0, maxLen);
+}
+
+function normalizeIdempotencyKey(v) {
+    const key = cleanString(v, 96);
+    if (!key) return crypto.randomUUID();
+    if (!/^[A-Za-z0-9._:-]{8,96}$/.test(key)) {
+        throw Object.assign(new Error('Idempotency key non valida'), { status: 400 });
+    }
+    return key;
+}
+
+function validateCustomer(rawCustomer, rawLang) {
+    const c = rawCustomer || {};
+    const lang = cleanString(rawLang || 'it', 2).toLowerCase();
+    if (!ALLOWED_LOCALES.has(lang)) throw Object.assign(new Error('Lingua non valida'), { status: 400 });
+
+    const type = cleanString(c.type || 'private', 16).toLowerCase();
+    if (!['private', 'business'].includes(type)) {
+        throw Object.assign(new Error('Tipo cliente non valido'), { status: 400 });
+    }
+
+    const customer = {
+        type,
+        firstName: cleanString(c.firstName, 80),
+        lastName: cleanString(c.lastName, 80),
+        email: cleanString(c.email, 254).toLowerCase(),
+        phone: cleanString(c.phone, 40) || null,
+        ragioneSociale: cleanString(c.ragioneSociale, 160),
+        piva: cleanString(c.piva, 20).replace(/\s+/g, ''),
+        sdi: cleanString(c.sdi, 20).toUpperCase(),
+        pec: cleanString(c.pec, 254).toLowerCase(),
+    };
+
+    if (!customer.firstName) throw Object.assign(new Error('Nome cliente mancante'), { status: 400 });
+    if (!customer.lastName) throw Object.assign(new Error('Cognome cliente mancante'), { status: 400 });
+    if (!validateEmail(customer.email)) throw Object.assign(new Error('Email cliente non valida'), { status: 400 });
+    if (customer.phone && customer.phone.length < 7) {
+        throw Object.assign(new Error('Telefono cliente non valido'), { status: 400 });
+    }
+
+    if (type === 'business') {
+        if (!customer.ragioneSociale) throw Object.assign(new Error('Ragione sociale mancante'), { status: 400 });
+        if (!validatePIVA(customer.piva)) throw Object.assign(new Error('Partita IVA non valida'), { status: 400 });
+        if (!customer.sdi && !customer.pec) {
+            throw Object.assign(new Error('Inserire Codice SDI o PEC'), { status: 400 });
+        }
+        if (customer.sdi && !/^[A-Z0-9]{7}$/.test(customer.sdi)) {
+            throw Object.assign(new Error('Codice SDI non valido'), { status: 400 });
+        }
+        if (customer.pec && !validateEmail(customer.pec)) {
+            throw Object.assign(new Error('PEC non valida'), { status: 400 });
+        }
+    } else {
+        customer.ragioneSociale = '';
+        customer.piva = '';
+        customer.sdi = '';
+        customer.pec = '';
+    }
+
+    return { customer, lang };
+}
+
 /**
  * Costruisce i parametri ordine dal body JSON del checkout.
  */
 function orderParamsFromBody(body, paymentMethod) {
-    const c = body.customer || {};
+    const { customer: c, lang } = validateCustomer(body.customer, body.lang);
     let items;
     try {
         items = resolveAndValidateItems(body.items);
@@ -142,17 +259,17 @@ function orderParamsFromBody(body, paymentMethod) {
         throw Object.assign(new Error(catalogErr.message || 'Invalid catalog'), { status: 400 });
     }
     return {
-        idempotencyKey:    body.idempotencyKey || crypto.randomUUID(),
-        customerEmail:     (c.email || '').trim().toLowerCase(),
-        customerFirstName: (c.firstName || '').trim(),
-        customerLastName:  (c.lastName  || '').trim(),
-        customerCompany:   (c.ragioneSociale || '').trim() || null,
-        customerType:      c.type     || 'private',
-        customerPhone:     c.phone    || null,
-        customerPiva:      c.piva     || null,
-        customerSdi:       c.sdi      || null,
-        customerPec:       c.pec      || null,
-        locale:            body.lang  || 'it',
+        idempotencyKey:    normalizeIdempotencyKey(body.idempotencyKey),
+        customerEmail:     c.email,
+        customerFirstName: c.firstName,
+        customerLastName:  c.lastName,
+        customerCompany:   c.ragioneSociale || null,
+        customerType:      c.type,
+        customerPhone:     c.phone || null,
+        customerPiva:      c.piva || null,
+        customerSdi:       c.sdi || null,
+        customerPec:       c.pec || null,
+        locale:            lang,
         lineItems:         items,
         totalMinor:        totalMinorFromItems(items),
         currency:          (items[0]?.currency) || 'EUR',
@@ -162,23 +279,25 @@ function orderParamsFromBody(body, paymentMethod) {
 
 /* ─── POST /api/stripe-create-session ───────────────────────────────────────── */
 
-function orderParamsFromBodySafe(body, paymentMethod, request) {
+function orderParamsFromBodySafe(body, paymentMethod, request, env) {
     try {
         return orderParamsFromBody(body, paymentMethod);
     } catch (e) {
-        if (e.status === 400) return { error: err(e.message, 400, request) };
+        if (e.status === 400) return { error: err(e.message, 400, request, env) };
         throw e;
     }
 }
 
 async function handleStripeCreateSession(request, env) {
-    const body = await request.json().catch(() => null);
-    if (!body) return err('Invalid JSON', 400, request);
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
 
-    const paramsOrErr = orderParamsFromBodySafe(body, 'stripe', request);
+    const body = await request.json().catch(() => null);
+    if (!body) return err('Invalid JSON', 400, request, env);
+
+    const paramsOrErr = orderParamsFromBodySafe(body, 'stripe', request, env);
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
-    if (!params.customerEmail) return err('Email cliente mancante', 400, request);
 
     // Crea ordine in D1
     let orderId;
@@ -192,7 +311,7 @@ async function handleStripeCreateSession(request, env) {
                 .bind(params.idempotencyKey).first();
             if (existing?.stripe_session_id) {
                 // Recupera URL sessione Stripe esistente (non ancora completata)
-                return json({ orderId: existing.id }, 200, request);
+                return json({ orderId: existing.id }, 200, request, env);
             }
             orderId = existing?.id;
         } else {
@@ -218,7 +337,7 @@ async function handleStripeCreateSession(request, env) {
     // Salva stripe_session_id sull'ordine
     await setStripeSession(env.DB, orderId, session.id);
 
-    return json({ url: session.url, orderId }, 200, request);
+    return json({ url: session.url, orderId }, 200, request, env);
 }
 
 /* ─── GET /api/stripe-return ────────────────────────────────────────────────── */
@@ -282,6 +401,11 @@ async function handleStripeWebhook(request, env) {
                 env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
                 'webhook_stripe'
             );
+            await sendInternalOrderNotificationOnce(
+                env.DB, updatedOrder,
+                env.RESEND_API_KEY,
+                'webhook_stripe'
+            );
         }
     }
 
@@ -291,13 +415,15 @@ async function handleStripeWebhook(request, env) {
 /* ─── POST /api/paypal-create-order ─────────────────────────────────────────── */
 
 async function handlePaypalCreateOrder(request, env) {
-    const body = await request.json().catch(() => null);
-    if (!body) return err('Invalid JSON', 400, request);
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
 
-    const paramsOrErr = orderParamsFromBodySafe(body, 'paypal', request);
+    const body = await request.json().catch(() => null);
+    if (!body) return err('Invalid JSON', 400, request, env);
+
+    const paramsOrErr = orderParamsFromBodySafe(body, 'paypal', request, env);
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
-    if (!params.customerEmail) return err('Email cliente mancante', 400, request);
 
     // Crea ordine in D1
     let orderId;
@@ -330,30 +456,49 @@ async function handlePaypalCreateOrder(request, env) {
 
     await setPaypalOrderId(env.DB, orderId, paypalOrderId);
 
-    return json({ orderID: paypalOrderId, amlOrderId: orderId }, 200, request);
+    return json({ orderID: paypalOrderId, amlOrderId: orderId }, 200, request, env);
 }
 
 /* ─── POST /api/paypal-capture-order ────────────────────────────────────────── */
 
 async function handlePaypalCaptureOrder(request, env) {
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
+
     const body = await request.json().catch(() => null);
-    if (!body?.orderID) return err('orderID mancante', 400, request);
+    if (!body?.orderID) return err('orderID mancante', 400, request, env);
 
     const paypalOrderId = body.orderID;
 
     const order = await getOrderByPaypalOrderId(env.DB, paypalOrderId);
-    if (!order) return err('Ordine non trovato', 404, request);
+    if (!order) return err('Ordine non trovato', 404, request, env);
 
     // Cattura pagamento su PayPal
     const accessToken = await getAccessToken(
         env.PAYPAL_BASE_URL, env.PAYPAL_CLIENT_ID, env.PAYPAL_CLIENT_SECRET
     );
-    const { captureId, status } = await capturePaypalOrder(
+    const { captureId, status, amountValue, currencyCode } = await capturePaypalOrder(
         env.PAYPAL_BASE_URL, accessToken, paypalOrderId
     );
 
     if (status !== 'COMPLETED') {
-        return err(`PayPal capture status: ${status}`, 402, request);
+        return err(`PayPal capture status: ${status}`, 402, request, env);
+    }
+
+    const capturedMinor = Math.round(Number(amountValue) * 100);
+    if (
+        !Number.isFinite(capturedMinor) ||
+        capturedMinor !== Number(order.total_minor) ||
+        String(currencyCode || '').toUpperCase() !== String(order.currency || 'EUR').toUpperCase()
+    ) {
+        console.error('[paypal-capture] Importo o valuta non coerenti:', {
+            paypalOrderId,
+            capturedMinor,
+            currencyCode,
+            expectedMinor: order.total_minor,
+            expectedCurrency: order.currency,
+        });
+        return err('Importo PayPal non coerente con ordine', 409, request, env);
     }
 
     // Aggiorna ordine D1
@@ -366,23 +511,30 @@ async function handlePaypalCaptureOrder(request, env) {
         env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
         'worker_capture'
     );
+    await sendInternalOrderNotificationOnce(
+        env.DB, updatedOrder,
+        env.RESEND_API_KEY,
+        'worker_capture'
+    );
 
     // Genera token thank-you
     const token = await generateToken(env.TOKEN_SECRET, order.id);
 
-    return json({ oid: token.oid, exp: token.exp, t: token.t }, 200, request);
+    return json({ oid: token.oid, exp: token.exp, t: token.t }, 200, request, env);
 }
 
 /* ─── POST /api/bank-transfer-order ─────────────────────────────────────────── */
 
 async function handleBankTransferOrder(request, env) {
-    const body = await request.json().catch(() => null);
-    if (!body) return err('Invalid JSON', 400, request);
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
 
-    const paramsOrErr = orderParamsFromBodySafe(body, 'bank_transfer', request);
+    const body = await request.json().catch(() => null);
+    if (!body) return err('Invalid JSON', 400, request, env);
+
+    const paramsOrErr = orderParamsFromBodySafe(body, 'bank_transfer', request, env);
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
-    if (!params.customerEmail) return err('Email cliente mancante', 400, request);
 
     // Crea ordine in D1
     let orderId;
@@ -408,6 +560,11 @@ async function handleBankTransferOrder(request, env) {
         env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
         'bank_transfer_created'
     );
+    await sendInternalOrderNotificationOnce(
+        env.DB, newOrder,
+        env.RESEND_API_KEY,
+        'bank_transfer_created'
+    );
 
     // Genera token thank-you
     const token = await generateToken(env.TOKEN_SECRET, orderId);
@@ -417,7 +574,7 @@ async function handleBankTransferOrder(request, env) {
         exp:     token.exp,
         t:       token.t,
         causale: orderId,  // mostrato anche in pagina
-    }, 200, request);
+    }, 200, request, env);
 }
 
 /* ─── Admin routes ───────────────────────────────────────────────────────────── */

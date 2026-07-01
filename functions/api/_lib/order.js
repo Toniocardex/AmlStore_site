@@ -159,6 +159,21 @@ export async function markPaidNotificationSent(db, orderId) {
 }
 
 /**
+ * Marca la notifica operativa interna come inviata (idempotenza).
+ * @param {string} eventSrc - es. 'webhook_stripe', 'worker_capture', ecc.
+ */
+export async function markInternalNotificationSent(db, orderId, eventSrc) {
+    const ts = now();
+    await db.prepare(`
+        UPDATE orders
+        SET internal_notification_sent_at = ?,
+            internal_notification_event_src = ?,
+            updated_at = ?
+        WHERE id = ?
+    `).bind(ts, eventSrc, ts, orderId).run();
+}
+
+/**
  * Restituisce solo i campi pubblici di un ordine (per la thank-you page).
  */
 export function toPublicOrder(order) {

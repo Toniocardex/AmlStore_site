@@ -9,12 +9,14 @@
  */
 
 import { emailSubject, emailHtml, emailText }          from './templates.js';
-import { markConfirmationEmailSent, markPaidNotificationSent } from './order.js';
+import { markConfirmationEmailSent, markPaidNotificationSent,
+         markInternalNotificationSent }                from './order.js';
 import { safeParseJSON }                                from './utils.js';
 
 const RESEND_API = 'https://api.resend.com/emails';
 const FROM       = 'Aml Store <ordini@aml-store.com>';
 const REPLY_TO   = 'Info@amlstore.it';
+const INTERNAL_RECIPIENTS = ['Info@amlstore.it', 'Antonino.cardelli@outlook.it'];
 
 /* ─── Helpers interni ────────────────────────────────────────────────────────── */
 
@@ -28,6 +30,7 @@ function buildOrderForTemplate(order, overrides = {}) {
         orderId:       order.id,
         status:        order.status,
         paymentMethod: order.payment_method,
+        payment_method: order.payment_method,
         createdAt:     order.created_at,
         paidAt:        order.paid_at,
         firstName:     order.customer_first_name,
@@ -43,6 +46,155 @@ function buildOrderForTemplate(order, overrides = {}) {
         paypal_capture_id:     order.paypal_capture_id,
         ...overrides,
     };
+}
+
+function esc(str) {
+    return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function formatMoney(minor, currency) {
+    try {
+        return new Intl.NumberFormat('it-IT', {
+            style: 'currency',
+            currency: (currency || 'EUR').toUpperCase(),
+        }).format(Number(minor || 0) / 100);
+    } catch (_) {
+        return 'EUR ' + (Number(minor || 0) / 100).toFixed(2);
+    }
+}
+
+function methodLabel(method) {
+    return {
+        stripe: 'Carta / Stripe',
+        paypal: 'PayPal',
+        bank_transfer: 'Bonifico bancario',
+    }[method] || method || 'N/D';
+}
+
+function internalSubject(order) {
+    const paid = order.status === 'paid';
+    const prefix = paid ? 'Nuovo ordine pagato' : 'Nuovo ordine bonifico';
+    const action = paid ? 'inviare licenza' : 'attendere pagamento';
+    return `[Aml Store] ${prefix} ${order.id} - ${action}`;
+}
+
+function internalOrderHtml(order) {
+    const items = safeParseJSON(order.line_items, []);
+    const isPaid = order.status === 'paid';
+    const actionText = isPaid
+        ? 'PAGAMENTO CONFERMATO: inviare manualmente la licenza al cliente.'
+        : 'BONIFICO IN ATTESA: non inviare la licenza finche il pagamento non risulta ricevuto.';
+
+    const rows = items.map((item) => {
+        const qty = Number(item.qty || item.quantity || 1);
+        const unit = Number(item.unit_amount_minor || item.unitAmount || 0);
+        const subMinor = Math.round(unit) * qty;
+        return `
+            <tr>
+                <td style="padding:10px;border-bottom:1px solid #e5e7eb">${esc(item.name || item.sku || 'Prodotto')}</td>
+                <td style="padding:10px;border-bottom:1px solid #e5e7eb;font-family:monospace">${esc(item.sku || 'N/D')}</td>
+                <td style="padding:10px;border-bottom:1px solid #e5e7eb;text-align:center">${qty}</td>
+                <td style="padding:10px;border-bottom:1px solid #e5e7eb;text-align:right">${formatMoney(subMinor, order.currency)}</td>
+                <td style="padding:10px;border-bottom:1px solid #e5e7eb;color:#b45309;font-weight:700">DA INVIARE MANUALMENTE</td>
+            </tr>`;
+    }).join('');
+
+    return `<!DOCTYPE html>
+<html lang="it">
+<head><meta charset="UTF-8"><title>${esc(internalSubject(order))}</title></head>
+<body style="margin:0;background:#f5f6f8;font-family:Arial,sans-serif;color:#1f2937">
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:24px;background:#f5f6f8">
+    <tr><td align="center">
+      <table width="760" cellpadding="0" cellspacing="0" style="width:100%;max-width:760px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
+        <tr><td style="background:#111827;color:#fff;padding:18px 24px">
+          <h1 style="font-size:20px;margin:0">Nuovo ordine Aml Store</h1>
+          <p style="margin:6px 0 0;color:#d1d5db">${esc(actionText)}</p>
+        </td></tr>
+        <tr><td style="padding:22px 24px">
+          <h2 style="font-size:16px;margin:0 0 10px">Riepilogo ordine</h2>
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:18px">
+            ${infoRow('Numero ordine', order.id)}
+            ${infoRow('Stato', order.status)}
+            ${infoRow('Metodo pagamento', methodLabel(order.payment_method))}
+            ${infoRow('Totale', formatMoney(order.total_minor, order.currency))}
+            ${infoRow('Cliente', `${order.customer_first_name || ''} ${order.customer_last_name || ''}`.trim())}
+            ${infoRow('Email cliente', order.customer_email)}
+            ${infoRow('Telefono', order.customer_phone || 'N/D')}
+          </table>
+
+          <h2 style="font-size:16px;margin:18px 0 10px">Articoli acquistati</h2>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e5e7eb;border-collapse:collapse">
+            <thead>
+              <tr style="background:#f9fafb">
+                <th style="padding:10px;text-align:left">Prodotto</th>
+                <th style="padding:10px;text-align:left">ID articolo / SKU</th>
+                <th style="padding:10px;text-align:center">Qta</th>
+                <th style="padding:10px;text-align:right">Subtotale</th>
+                <th style="padding:10px;text-align:left">Licenza</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+
+          <p style="margin:18px 0 0;padding:12px;background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;color:#92400e">
+            ${esc(actionText)}
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+function internalOrderText(order) {
+    const items = safeParseJSON(order.line_items, []);
+    const isPaid = order.status === 'paid';
+    const actionText = isPaid
+        ? 'PAGAMENTO CONFERMATO: inviare manualmente la licenza al cliente.'
+        : 'BONIFICO IN ATTESA: non inviare la licenza finche il pagamento non risulta ricevuto.';
+
+    const lines = [
+        'Nuovo ordine Aml Store',
+        actionText,
+        '',
+        `Numero ordine: ${order.id}`,
+        `Stato: ${order.status}`,
+        `Metodo pagamento: ${methodLabel(order.payment_method)}`,
+        `Totale: ${formatMoney(order.total_minor, order.currency)}`,
+        `Cliente: ${order.customer_first_name || ''} ${order.customer_last_name || ''}`.trim(),
+        `Email cliente: ${order.customer_email}`,
+        `Telefono: ${order.customer_phone || 'N/D'}`,
+        '',
+        'Articoli acquistati:',
+    ];
+
+    items.forEach((item) => {
+        const qty = Number(item.qty || item.quantity || 1);
+        const unit = Number(item.unit_amount_minor || item.unitAmount || 0);
+        const subMinor = Math.round(unit) * qty;
+        lines.push(
+            `- ${item.name || item.sku || 'Prodotto'}`,
+            `  ID articolo / SKU: ${item.sku || 'N/D'}`,
+            `  Quantita: ${qty}`,
+            `  Subtotale: ${formatMoney(subMinor, order.currency)}`,
+            `  Licenza: DA INVIARE MANUALMENTE`,
+        );
+    });
+
+    lines.push('', actionText);
+    return lines.join('\n');
+}
+
+function infoRow(label, value) {
+    return `<tr>
+        <td style="padding:4px 0;color:#6b7280;width:170px">${esc(label)}</td>
+        <td style="padding:4px 0;font-weight:700">${esc(value || 'N/D')}</td>
+    </tr>`;
 }
 
 async function callResend(apiKey, payload) {
@@ -109,6 +261,38 @@ export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBc
         await markConfirmationEmailSent(db, order.id, eventSrc);
     } catch (e) {
         console.error('[email] Impossibile aggiornare confirmation_email_sent_at:', e);
+    }
+
+    return { sent: true };
+}
+
+/**
+ * Invia una notifica operativa interna per evasione manuale licenza.
+ * Destinatari fissi: Info@amlstore.it e Antonino.cardelli@outlook.it.
+ */
+export async function sendInternalOrderNotificationOnce(db, order, resendApiKey, eventSrc) {
+    if (order.internal_notification_sent_at) return { sent: false, skipped: true };
+    if (!resendApiKey) {
+        console.warn('[email] RESEND_API_KEY non configurato, notifica interna non inviata');
+        return { sent: false, error: 'no_resend_key' };
+    }
+
+    const payload = {
+        from:     FROM,
+        to:       INTERNAL_RECIPIENTS,
+        subject:  internalSubject(order),
+        html:     internalOrderHtml(order),
+        text:     internalOrderText(order),
+        reply_to: REPLY_TO,
+    };
+
+    const { ok, error } = await callResend(resendApiKey, payload);
+    if (!ok) return { sent: false, error };
+
+    try {
+        await markInternalNotificationSent(db, order.id, eventSrc);
+    } catch (e) {
+        console.error('[email] Impossibile aggiornare internal_notification_sent_at:', e);
     }
 
     return { sent: true };

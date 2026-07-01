@@ -21,7 +21,8 @@
  */
 
 import { now, safeParseJSON }          from './utils.js';
-import { sendPaidNotificationOnce }    from './email.js';
+import { sendInternalOrderNotificationOnce,
+         sendPaidNotificationOnce }    from './email.js';
 
 /* ─── JWT Cloudflare Access ──────────────────────────────────────────────────── */
 
@@ -82,13 +83,17 @@ export async function verifyAccessJwt(request, env) {
         return { valid: false, reason: 'expired' };
     }
 
-    // 2. Audience (opzionale — la firma RS256 è la garanzia primaria)
+    // 2. Audience: il token deve essere emesso per questa Access Application.
     const expectedAud = env.CF_ACCESS_AUD;
     if (expectedAud) {
         const aud = Array.isArray(payload.aud) ? payload.aud : [payload.aud];
         if (!aud.includes(expectedAud)) {
             console.warn('[admin] AUD mismatch — JWT aud:', aud, '| expected:', expectedAud);
+            return { valid: false, reason: 'aud_mismatch' };
         }
+    } else {
+        console.error('[admin] CF_ACCESS_AUD non configurato');
+        return { valid: false, reason: 'misconfigured' };
     }
 
     // 3. Firma RS256 via JWKS
@@ -172,6 +177,7 @@ export async function listOrders(db, {
                    stripe_session_id, stripe_payment_intent,
                    paypal_order_id, paypal_capture_id,
                    confirmation_email_sent_at, paid_notification_sent_at,
+                   internal_notification_sent_at, internal_notification_event_src,
                    archived_at, marked_paid_at, marked_paid_by, admin_notes,
                    line_items
             FROM orders ${where}
@@ -229,6 +235,8 @@ function formatAdminOrder(row) {
         paypalCaptureId:         row.paypal_capture_id         || null,
         confirmationEmailSentAt: row.confirmation_email_sent_at || null,
         paidNotificationSentAt:  row.paid_notification_sent_at  || null,
+        internalNotificationSentAt: row.internal_notification_sent_at || null,
+        internalNotificationEventSrc: row.internal_notification_event_src || null,
     };
 }
 
@@ -269,7 +277,10 @@ export async function markBankTransferPaid(db, orderId, actorEmail, notes, resen
     if (!order) return { ok: true };
 
     const emailResult = await sendPaidNotificationOnce(db, order, resendApiKey, trustpilotBcc);
-    return { ok: true, emailResult };
+    const internalNotificationResult = await sendInternalOrderNotificationOnce(
+        db, order, resendApiKey, 'bank_transfer_marked_paid'
+    );
+    return { ok: true, emailResult, internalNotificationResult };
 }
 
 /** Soft-archive un ordine. */
