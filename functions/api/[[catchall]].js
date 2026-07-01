@@ -121,20 +121,6 @@ export async function onRequest(context) {
 
 /* ─── Helpers condivisi ──────────────────────────────────────────────────────── */
 
-/**
- * Normalizza i line_items dal frontend al formato interno.
- * Il frontend invia gli item del cart.js (unitAmount in centesimi, quantity).
- */
-function normalizeItems(rawItems) {
-    return (rawItems || []).map(item => ({
-        sku:               item.sku || '',
-        name:              item.name || item.sku || 'Prodotto',
-        qty:               Number(item.quantity) || 1,
-        unit_amount_minor: Math.round(Number(item.unitAmount || item.unit_amount_minor) || 0),
-        currency:          (item.currency || 'EUR').toUpperCase(),
-    }));
-}
-
 function totalMinorFromItems(items) {
     return items.reduce((s, i) => s + i.unit_amount_minor * i.qty, 0);
 }
