@@ -39,6 +39,7 @@ import { resolveAndValidateItems }                     from './_lib/catalog.js';
 const ALLOWED_ORIGINS = ['https://aml-store.com', 'http://localhost:8788'];
 const ALLOWED_LOCALES = new Set(['it', 'en', 'fr', 'de', 'es']);
 const MAX_JSON_BODY_BYTES = 32 * 1024;
+const MAX_ADMIN_JSON_BODY_BYTES = 4 * 1024;
 
 function allowedOrigins(env = {}) {
     const origins = new Set(ALLOWED_ORIGINS);
@@ -151,6 +152,37 @@ function validateCheckoutRequest(request, env) {
         return err('Payload troppo grande', 413, request, env);
     }
     return null;
+}
+
+function adminJson(data, status = 200) {
+    return new Response(JSON.stringify(data), {
+        status,
+        headers: { 'Content-Type': 'application/json' },
+    });
+}
+
+function validateAdminMutationRequest(request, env, { requireJson = true } = {}) {
+    const origin = request.headers.get('Origin') || '';
+    if (!origin || !allowedOrigins(env).has(origin)) {
+        return adminJson({ error: 'Forbidden', reason: 'origin_not_allowed' }, 403);
+    }
+    const len = Number(request.headers.get('Content-Length') || 0);
+    if (Number.isFinite(len) && len > MAX_ADMIN_JSON_BODY_BYTES) {
+        return adminJson({ error: 'Payload too large', reason: 'payload_too_large' }, 413);
+    }
+    if (requireJson && !isJsonContentType(request)) {
+        return adminJson({ error: 'Unsupported Media Type', reason: 'invalid_content_type' }, 415);
+    }
+    return null;
+}
+
+function adminDeleteEnabled(env) {
+    return String(env.ADMIN_ALLOW_DELETE_ORDERS || '') === '1';
+}
+
+function normalizeAdminNotes(v) {
+    const notes = cleanString(v, 1000);
+    return notes || null;
 }
 
 function validateEmail(v) {
@@ -596,6 +628,7 @@ async function handleAdminRoute(path, request, env) {
             search:          qs.get('search')          || '',
             includeArchived: qs.get('archived') === '1',
         });
+        result.capabilities = { deleteOrders: adminDeleteEnabled(env) };
         return new Response(JSON.stringify(result), {
             headers: { 'Content-Type': 'application/json' },
         });
@@ -619,9 +652,12 @@ async function handleAdminRoute(path, request, env) {
     // ── POST /api/admin/orders/:id/mark-paid ─────────────────────────────────
     const markPaidMatch = sub.match(/^\/orders\/([^/]+)\/mark-paid$/);
     if (markPaidMatch && request.method === 'POST') {
+        const invalidRequest = validateAdminMutationRequest(request, env);
+        if (invalidRequest) return invalidRequest;
+
         const orderId = markPaidMatch[1];
         const body    = await request.json().catch(() => ({}));
-        const notes   = body.notes || null;
+        const notes   = normalizeAdminNotes(body.notes);
 
         const result = await markBankTransferPaid(
             env.DB, orderId, actorEmail, notes,
@@ -637,6 +673,9 @@ async function handleAdminRoute(path, request, env) {
     // ── POST /api/admin/orders/:id/archive ────────────────────────────────────
     const archiveMatch = sub.match(/^\/orders\/([^/]+)\/archive$/);
     if (archiveMatch && request.method === 'POST') {
+        const invalidRequest = validateAdminMutationRequest(request, env);
+        if (invalidRequest) return invalidRequest;
+
         await archiveOrder(env.DB, archiveMatch[1]);
         return new Response(JSON.stringify({ ok: true }), {
             headers: { 'Content-Type': 'application/json' },
@@ -646,6 +685,9 @@ async function handleAdminRoute(path, request, env) {
     // ── POST /api/admin/orders/:id/unarchive ──────────────────────────────────
     const unarchiveMatch = sub.match(/^\/orders\/([^/]+)\/unarchive$/);
     if (unarchiveMatch && request.method === 'POST') {
+        const invalidRequest = validateAdminMutationRequest(request, env);
+        if (invalidRequest) return invalidRequest;
+
         await unarchiveOrder(env.DB, unarchiveMatch[1]);
         return new Response(JSON.stringify({ ok: true }), {
             headers: { 'Content-Type': 'application/json' },
@@ -655,9 +697,15 @@ async function handleAdminRoute(path, request, env) {
     // ── DELETE /api/admin/orders/:id ──────────────────────────────────────────
     const deleteMatch = sub.match(/^\/orders\/([^/]+)$/);
     if (deleteMatch && request.method === 'DELETE') {
+        const invalidRequest = validateAdminMutationRequest(request, env, { requireJson: false });
+        if (invalidRequest) return invalidRequest;
+        if (!adminDeleteEnabled(env)) {
+            return adminJson({ ok: false, error: 'Delete disabled', reason: 'delete_disabled' }, 403);
+        }
+
         const orderId = deleteMatch[1];
         const result  = await deleteOrder(env.DB, orderId);
-        const status  = result.ok ? 200 : (result.reason === 'order_not_found' ? 404 : 500);
+        const status  = result.ok ? 200 : (result.reason === 'order_not_found' ? 404 : 409);
         return new Response(JSON.stringify(result), {
             status, headers: { 'Content-Type': 'application/json' },
         });

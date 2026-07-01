@@ -46,6 +46,13 @@ function parseJwt(token) {
     } catch (_) { return null; }
 }
 
+function parseEmailList(value) {
+    return String(value || '')
+        .split(',')
+        .map(v => v.trim().toLowerCase())
+        .filter(Boolean);
+}
+
 async function fetchJwks(teamDomain) {
     const res = await fetch(
         `https://${teamDomain}/cdn-cgi/access/certs`,
@@ -132,7 +139,14 @@ export async function verifyAccessJwt(request, env) {
         return { valid: false, reason: 'verify_error' };
     }
 
-    return { valid: true, email: payload.email || payload.sub || 'unknown' };
+    const actorEmail = String(payload.email || payload.sub || 'unknown').toLowerCase();
+    const allowedAdmins = parseEmailList(env.ADMIN_ALLOWED_EMAILS);
+    if (allowedAdmins.length && !allowedAdmins.includes(actorEmail)) {
+        console.warn('[admin] Email non autorizzata:', actorEmail);
+        return { valid: false, reason: 'admin_email_not_allowed' };
+    }
+
+    return { valid: true, email: actorEmail };
 }
 
 /* ─── Query D1 lista ordini ──────────────────────────────────────────────────── */
@@ -305,9 +319,10 @@ export async function unarchiveOrder(db, orderId) {
  */
 export async function deleteOrder(db, orderId) {
     const existing = await db
-        .prepare('SELECT id FROM orders WHERE id = ?')
+        .prepare('SELECT id, archived_at FROM orders WHERE id = ?')
         .bind(orderId).first();
     if (!existing) return { ok: false, reason: 'order_not_found' };
+    if (!existing.archived_at) return { ok: false, reason: 'not_archived' };
 
     await db.prepare('DELETE FROM orders WHERE id = ?').bind(orderId).run();
     return { ok: true };

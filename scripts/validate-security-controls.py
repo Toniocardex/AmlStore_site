@@ -47,6 +47,11 @@ require("idempotency key validation missing", "normalizeIdempotencyKey" in CATCH
 
 require("admin aud mismatch must reject", "return { valid: false, reason: 'aud_mismatch' }" in ADMIN)
 require("admin missing audience must reject", "CF_ACCESS_AUD non configurato" in ADMIN)
+require("admin email allowlist missing", "ADMIN_ALLOWED_EMAILS" in ADMIN and "admin_email_not_allowed" in ADMIN)
+require("admin mutation origin guard missing", "validateAdminMutationRequest(request, env)" in CATCHALL)
+require("admin mutation body-size guard missing", "MAX_ADMIN_JSON_BODY_BYTES" in CATCHALL)
+require("admin delete flag missing", "ADMIN_ALLOW_DELETE_ORDERS" in CATCHALL)
+require("admin delete requires archived order", "not_archived" in ADMIN and "archived_at" in ADMIN)
 
 require("PayPal capture amount not returned", "amountValue:" in PAYPAL)
 require("PayPal capture currency not returned", "currencyCode:" in PAYPAL)

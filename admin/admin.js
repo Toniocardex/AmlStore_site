@@ -21,6 +21,7 @@
         pageSize:        50,
         loading:         false,
         openOrderId:     null,
+        capabilities:    { deleteOrders: false },
     };
 
     /* ─── Utility DOM ──────────────────────────────────────────────────────── */
@@ -67,16 +68,8 @@
 
     /* ─── API calls ────────────────────────────────────────────────────────── */
 
-    function getCFToken() {
-        var match = document.cookie.match(/(?:^|;\s*)CF_Authorization=([^;]+)/);
-        return match ? match[1] : null;
-    }
-
     function authHeaders(extra) {
-        var h = Object.assign({}, extra || {});
-        var token = getCFToken();
-        if (token) h['Cf-Access-Jwt-Assertion'] = token;
-        return h;
+        return Object.assign({}, extra || {});
     }
 
     function apiGet(path) {
@@ -131,6 +124,7 @@
         apiGet(url).then(function (data) {
             state.total    = data.total   || 0;
             state.pageSize = data.pageSize || 50;
+            state.capabilities = data.capabilities || { deleteOrders: false };
             state.loading  = false;
 
             renderStats(data);
@@ -325,6 +319,15 @@
             + field('Email conf.', o.confirmationEmailSentAt ? esc(fmtDate(o.confirmationEmailSentAt)) : dash())
         + '</div></div>';
 
+        html += '<div class="adm-detail-section">'
+            + '<p class="adm-detail-section__title">Notifiche</p>'
+            + '<div class="adm-detail-grid">'
+            + field('Email cliente', o.confirmationEmailSentAt ? esc(fmtDate(o.confirmationEmailSentAt)) : dash())
+            + field('Email interna', o.internalNotificationSentAt ? esc(fmtDate(o.internalNotificationSentAt)) : dash())
+            + (o.internalNotificationEventSrc ? field('Evento interno', esc(o.internalNotificationEventSrc)) : '')
+            + (isBT ? field('Email pagato', o.paidNotificationSentAt ? esc(fmtDate(o.paidNotificationSentAt)) : dash()) : '')
+        + '</div></div>';
+
         // Cliente
         var c = o.customer || {};
         html += '<div class="adm-detail-section">'
@@ -391,6 +394,7 @@
                 + '<p class="adm-detail-section__title">Archivio</p>'
                 + '<div class="adm-detail-grid">'
                 + field('Archiviato il', esc(fmtDate(o.archivedAt)))
+                + field('Eliminazione test', state.capabilities.deleteOrders ? 'Disponibile' : 'Disattivata da configurazione')
             + '</div></div>';
         }
 
@@ -411,7 +415,9 @@
             footerHtml += '<button class="adm-btn adm-btn--ghost" id="btn-unarchive">Ripristina</button>';
         }
 
-        footerHtml += '<button class="adm-btn adm-btn--danger adm-btn--sm" id="btn-delete" title="Eliminazione definitiva — irreversibile">🗑 Elimina</button>';
+        if (isArchived && state.capabilities.deleteOrders) {
+            footerHtml += '<button class="adm-btn adm-btn--danger adm-btn--sm" id="btn-delete" title="Solo per ordini di test gia archiviati">Elimina test</button>';
+        }
         footerHtml += '<button class="adm-btn adm-btn--ghost" id="btn-close-detail">Chiudi</button>';
         $('modal-footer').innerHTML = footerHtml;
 
@@ -552,6 +558,7 @@
         $('delete-msg').innerHTML =
             'Stai per <strong>eliminare definitivamente</strong> l\'ordine ' +
             '<code style="color:#ef4444">' + esc(orderId) + '</code>.<br><br>' +
+            'Usa questa azione solo per ordini di test gia archiviati. ' +
             'Questa operazione è <strong>irreversibile</strong>: tutti i dati ' +
             '(cliente, articoli, riferimenti PSP) saranno cancellati dal database.';
         $('delete-confirm-input').value = '';
@@ -577,7 +584,10 @@
             headers:     authHeaders(),
         }).then(function (res) {
             return res.json().then(function (data) {
-                if (!res.ok) throw new Error(data.error || 'HTTP ' + res.status);
+                if (!res.ok) throw Object.assign(new Error(data.error || 'HTTP ' + res.status), {
+                    data: data,
+                    status: res.status,
+                });
                 return data;
             });
         }).then(function () {
@@ -587,7 +597,13 @@
             loadOrders();
         }).catch(function (e) {
             if (btn) { btn.disabled = false; btn.textContent = 'Elimina definitivamente'; }
-            toast('Errore eliminazione: ' + e.message, 'error');
+            var reason = e.data && e.data.reason;
+            var msg = {
+                delete_disabled: 'Eliminazione disattivata: abilita ADMIN_ALLOW_DELETE_ORDERS solo per pulire test.',
+                not_archived:    'Prima archivia l\'ordine, poi potrai eliminarlo come test.',
+                order_not_found: 'Ordine non trovato.',
+            }[reason] || e.message;
+            toast('Errore eliminazione: ' + msg, 'error');
         });
     }
 
