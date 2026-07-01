@@ -857,10 +857,9 @@ class EcommerceFooter extends HTMLElement {
                 glassBtn.classList.toggle('theme-is-light', !isDark);
                 glassBtn.setAttribute('aria-checked', isDark ? 'true' : 'false');
             };
-            const applySystemThemeFromOs = () => {
+            const applyDefaultTheme = () => {
                 if (hasUserThemeOverride()) return;
-                const dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                docEl.setAttribute('data-theme', dark ? 'dark' : 'light');
+                docEl.setAttribute('data-theme', 'light');
                 syncGlassToggle();
             };
             const glassBtn = this.shadowRoot.querySelector('.theme-glass-switch');
@@ -880,24 +879,10 @@ class EcommerceFooter extends HTMLElement {
                 docEl.setAttribute('data-theme', e.newValue);
                 syncGlassToggle();
             };
-            const mq =
-                typeof window.matchMedia === 'function'
-                    ? window.matchMedia('(prefers-color-scheme: dark)')
-                    : null;
-            const onOsTheme = () => applySystemThemeFromOs();
             window.addEventListener('storage', onStorage);
-            if (mq && typeof mq.addEventListener === 'function') {
-                mq.addEventListener('change', onOsTheme);
-            } else if (mq && typeof mq.addListener === 'function') {
-                mq.addListener(onOsTheme);
-            }
+            applyDefaultTheme();
             this.__footerThemeCleanup = () => {
                 window.removeEventListener('storage', onStorage);
-                if (mq && typeof mq.removeEventListener === 'function') {
-                    mq.removeEventListener('change', onOsTheme);
-                } else if (mq && typeof mq.removeListener === 'function') {
-                    mq.removeListener(onOsTheme);
-                }
             };
             syncGlassToggle();
 
