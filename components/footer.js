@@ -758,7 +758,6 @@ class EcommerceFooter extends HTMLElement {
                     <div class="nav-col">
                         <h3 class="col-title">${esc(t.headingSupport)}</h3>
                         <ul class="link-list">
-                            <li><a href="${esc(staticRoot)}/${activeLang.code}/account">${esc(t.supportMyAccount)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/returns-and-refunds">${esc(t.supportReturns)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/terms-and-conditions">${esc(t.supportTerms)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/privacy-policy">${esc(t.supportPrivacy)}</a></li>

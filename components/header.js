@@ -1709,7 +1709,6 @@
                             <span class="cart-badge" aria-hidden="true">0</span>
                         </a>
 
-                        <button type="button" class="btn-signin">${esc(t.signIn)}</button>
                     </div>
                 </div>
 
@@ -1780,7 +1779,6 @@
                     </div>
                     
                     <div class="drawer-footer">
-                        <button type="button" class="drawer-btn-signin">${esc(t.signIn)}</button>
                         <a href="tel:+393925580413" class="drawer-assist">
                             <div class="drawer-assist-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
