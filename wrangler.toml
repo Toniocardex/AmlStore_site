@@ -17,8 +17,9 @@ database_id   = "72e06b2b-7366-4298-8fd9-ccbb4540ad79"
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
 SITE_ORIGIN     = "https://aml-store.com"
-PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"
-# Prima del go-live cambiare PAYPAL_BASE_URL in: https://api-m.paypal.com
+PAYPAL_BASE_URL = "https://api-m.paypal.com"
+# Produzione = PayPal LIVE. Per lo sviluppo locale, .dev.vars sovrascrive con
+# la sandbox (PAYPAL_BASE_URL + PAYPAL_CLIENT_ID/SECRET sandbox).
 
 # Admin panel — Cloudflare Access JWT verification
 # CF_ACCESS_AUD: Zero Trust → Access → Applications → [Admin App] → Overview → "Application Audience"
@@ -34,5 +35,7 @@ ADMIN_ALLOW_DELETE_ORDERS = "0"
 # TRUSTPILOT_BCC         — indirizzo ...+token@invite.trustpilot.com
 # STRIPE_SECRET_KEY      — sk_live_... (o sk_test_... in sviluppo)
 # STRIPE_WEBHOOK_SECRET  — whsec_... da Stripe Dashboard > Webhooks
-# PAYPAL_CLIENT_ID       — Client ID PayPal server-side (live o sandbox)
-# PAYPAL_CLIENT_SECRET   — Client Secret PayPal server-side
+# PAYPAL_CLIENT_ID       — Client ID PayPal LIVE (esposto al frontend via
+#                          /api/paypal-config: è un dato pubblico)
+# PAYPAL_CLIENT_SECRET   — Client Secret PayPal LIVE (solo server-side)
+# Vedi GO-LIVE.md per la checklist completa di messa online.

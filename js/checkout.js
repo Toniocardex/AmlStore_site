@@ -11,9 +11,7 @@
     const PAYPAL_WORKER_CREATE   = '/api/paypal-create-order';
     const PAYPAL_WORKER_CAPTURE  = '/api/paypal-capture-order';
     const TRANSFER_WORKER_URL    = '/api/bank-transfer-order';
-
-    /** PayPal Client ID — sandbox. Sostituire con ID live prima del deploy. */
-    const PAYPAL_CLIENT_ID = 'AaY8zQfK-vpfHUqIc9TKbVppU7-UbPkBGPy0Pop5xXr3tQXrfDCZiT9_39YhqgPzPGq2gOPcEC1-ZOHa';
+    const PAYPAL_CONFIG_URL      = '/api/paypal-config';
 
     const PAYPAL_LOCALE_MAP = {
         it: 'it_IT', en: 'en_US', fr: 'fr_FR', de: 'de_DE', es: 'es_ES',
@@ -535,7 +533,34 @@
 
     /* ─── PayPal SDK loader ────────────────────────────────────────────────── */
 
+    var _ppClientIdPromise = null;
+
+    /** Client ID PayPal dal backend (sandbox o live a seconda dell'ambiente). */
+    function fetchPaypalClientId() {
+        if (_ppClientIdPromise) return _ppClientIdPromise;
+        _ppClientIdPromise = fetch(PAYPAL_CONFIG_URL)
+            .then(function (res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function (data) {
+                if (!data || !data.clientId) throw new Error('PayPal non configurato');
+                return data.clientId;
+            })
+            .catch(function (cfgErr) {
+                _ppClientIdPromise = null; // consente un retry al prossimo tentativo
+                throw cfgErr;
+            });
+        return _ppClientIdPromise;
+    }
+
     function loadPaypalSDK() {
+        return fetchPaypalClientId().then(function (clientId) {
+            return loadPaypalSDKWithClientId(clientId);
+        });
+    }
+
+    function loadPaypalSDKWithClientId(clientId) {
         return new Promise(function (resolve, reject) {
             if (_ppSdkLoaded && global.paypal) { resolve(); return; }
             if (_ppSdkLoading) { _ppSdkQueue.push({ resolve: resolve, reject: reject }); return; }
@@ -544,7 +569,7 @@
             var lang   = getLang();
             var locale = PAYPAL_LOCALE_MAP[lang] || 'it_IT';
             var src    = 'https://www.paypal.com/sdk/js'
-                       + '?client-id='  + encodeURIComponent(PAYPAL_CLIENT_ID)
+                       + '?client-id='  + encodeURIComponent(clientId)
                        + '&currency=EUR&intent=capture'
                        + '&locale='     + locale
                        + '&components=buttons';

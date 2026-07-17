@@ -115,6 +115,9 @@ export async function onRequest(context) {
         if (path === '/api/order-status' && request.method === 'GET') {
             return await handleOrderStatus(request, env);
         }
+        if (path === '/api/paypal-config' && request.method === 'GET') {
+            return handlePaypalConfig(request, env);
+        }
 
         return err('Not found', 404, request);
 
@@ -297,6 +300,15 @@ function orderParamsFromBody(body, paymentMethod) {
         currency:          (items[0]?.currency) || 'EUR',
         paymentMethod,
     };
+}
+
+/* ─── GET /api/paypal-config ────────────────────────────────────────────────── */
+// Espone il Client ID PayPal (dato pubblico: finisce comunque nell'URL dell'SDK).
+// Sandbox o live dipendono solo dalla config dell'ambiente: niente ID hardcodato
+// nel frontend. Se non configurato il frontend disabilita PayPal con messaggio.
+
+function handlePaypalConfig(request, env) {
+    return json({ clientId: env.PAYPAL_CLIENT_ID || '' }, 200, request, env);
 }
 
 /* ─── POST /api/stripe-create-session ───────────────────────────────────────── */

@@ -1,0 +1,18 @@
+# Copia questo file in `.dev.vars` per lo sviluppo locale (wrangler pages dev).
+# `.dev.vars` è in .gitignore: NON committare valori reali.
+
+# Obbligatoria per i token della thank-you page (qualsiasi stringa lunga va bene in dev)
+TOKEN_SECRET=stringa-random-di-almeno-32-caratteri
+
+# PayPal SANDBOX per i test locali (in produzione si usano i secret live)
+PAYPAL_BASE_URL=https://api-m.sandbox.paypal.com
+PAYPAL_CLIENT_ID=<client-id-sandbox>
+PAYPAL_CLIENT_SECRET=<client-secret-sandbox>
+
+# Facoltative in dev: se assenti le email non partono (comportamento gestito)
+# RESEND_API_KEY=re_xxx
+# STRIPE_SECRET_KEY=sk_test_xxx
+# STRIPE_WEBHOOK_SECRET=whsec_xxx
+
+# Pannello admin senza Cloudflare Access in locale
+# ADMIN_DEV_BYPASS=1
