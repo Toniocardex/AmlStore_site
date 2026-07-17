@@ -275,37 +275,37 @@
                     window.location.hash
                 );
             const homeHref = S.homeHref(parsed.pathPrefix, activeLang.code);
-            const cartHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'cart.html');
+            const cartHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'cart');
             const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
 
             /* Rileva se siamo sulla home page della lingua attiva */
             const afterLang = (parsed.pathAfterLang || '').replace(/^\//, '');
-            const isHome = afterLang === '' || afterLang === 'index.html';
-            const hrefM365Solutions = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-solutions.html');
-            const hrefM365Personal = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-personal.html');
-            const hrefM365Family = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-family.html');
+            const isHome = afterLang === '' || afterLang === 'index';
+            const hrefM365Solutions = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-solutions');
+            const hrefM365Personal = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-personal');
+            const hrefM365Family = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-family');
             const afterLangLower = String(parsed.pathAfterLang || '').toLowerCase();
             const isM365Solutions = afterLangLower.includes('microsoft-365-solutions');
             const isM365Personal = afterLangLower.includes('microsoft-365-personal');
             const isM365Family = afterLangLower.includes('microsoft-365-family');
-            const hrefM365Business = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-business-standard.html');
+            const hrefM365Business = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-business-standard');
             const isM365Business = afterLangLower.includes('microsoft-365-business-standard');
-            const hrefWinOverview = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'sistemi-operativi.html');
-            const hrefWin11Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-home.html');
-            const hrefWin11Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro.html');
-            const hrefWin10Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-home.html');
-            const hrefWin10Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-pro.html');
+            const hrefWinOverview = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'sistemi-operativi');
+            const hrefWin11Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-home');
+            const hrefWin11Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro');
+            const hrefWin10Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-home');
+            const hrefWin10Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-pro');
             const isWinOverview = afterLangLower.includes('sistemi-operativi');
             const isWin11Home = afterLangLower.includes('windows-11-home');
             const isWin11Pro = afterLangLower.includes('windows-11-pro');
             const isWin10Home = afterLangLower.includes('windows-10-home');
             const isWin10Pro = afterLangLower.includes('windows-10-pro');
-            const hrefSuiteOffice = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'suite-office.html');
-            const hrefOffice2024Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-home.html');
-            const hrefOffice2024Standard = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-standard.html');
-            const hrefOffice2021HS = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-student.html');
-            const hrefOffice2021PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-professional-plus.html');
-            const hrefOffice2019PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2019-professional-plus.html');
+            const hrefSuiteOffice = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'suite-office');
+            const hrefOffice2024Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-home');
+            const hrefOffice2024Standard = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-standard');
+            const hrefOffice2021HS = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-student');
+            const hrefOffice2021PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-professional-plus');
+            const hrefOffice2019PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2019-professional-plus');
             const isOfficeOverview = afterLangLower.includes('suite-office');
             const isOffice2024Home = afterLangLower.includes('office-2024-home');
             const isOffice2024Standard = afterLangLower.includes('office-2024-standard');
@@ -315,18 +315,18 @@
             const isOfficeNavActive = isOfficeOverview || isOffice2024Home || isOffice2024Standard
                 || isOffice2021HS || isOffice2021PP || isOffice2019PP
                 || /\/(office-|word-2024|excel-2024|powerpoint-2024|outlook-2024|project-|visio-)/.test(afterLangLower);
-            const hrefWinServer = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-server.html');
-            const hrefPacchetti = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'pacchetti.html');
-            const hrefAntivirus = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'antivirus.html');
-            const hrefStrumenti = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'strumenti.html');
-            const hrefBundleWinM365 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-windows-11-home-m365-personal.html');
-            const hrefBundleM365Mcafee = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-m365-personal-mcafee.html');
-            const hrefBundleM365Kaspersky = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-m365-personal-kaspersky.html');
-            const hrefAvMcafee = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'mcafee-total-protection-1-device.html');
-            const hrefAvNorton = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'norton-360-standard.html');
-            const hrefAvEset = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'eset-nod32-1-device.html');
-            const hrefAvBitdefender = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bitdefender-plus-1-device.html');
-            const hrefAvKaspersky = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'kaspersky-standard.html');
+            const hrefWinServer = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-server');
+            const hrefPacchetti = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'pacchetti');
+            const hrefAntivirus = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'antivirus');
+            const hrefStrumenti = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'strumenti');
+            const hrefBundleWinM365 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-windows-11-home-m365-personal');
+            const hrefBundleM365Mcafee = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-m365-personal-mcafee');
+            const hrefBundleM365Kaspersky = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-m365-personal-kaspersky');
+            const hrefAvMcafee = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'mcafee-total-protection-1-device');
+            const hrefAvNorton = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'norton-360-standard');
+            const hrefAvEset = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'eset-nod32-1-device');
+            const hrefAvBitdefender = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bitdefender-plus-1-device');
+            const hrefAvKaspersky = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'kaspersky-standard');
             const isServerOverview = afterLangLower.includes('windows-server') || afterLangLower.includes('sql-server');
             const isPacchettiOverview = afterLangLower.includes('pacchetti');
             const isBundleWinM365 = afterLangLower.includes('bundle-windows-11-home-m365-personal');
@@ -335,7 +335,7 @@
             const isWinNavActive = isWinOverview || isWin11Home || isWin11Pro || isWin10Home || isWin10Pro || isServerOverview;
             const isM365NavActive = isM365Solutions || isM365Personal || isM365Family || isM365Business
                 || isPacchettiOverview || isBundleWinM365 || isBundleM365Mcafee || isBundleM365Kaspersky;
-            const isAvOverview = afterLangLower.includes('antivirus.html');
+            const isAvOverview = afterLangLower.includes('antivirus');
             const isAvMcafee = afterLangLower.includes('mcafee-total-protection');
             const isAvNorton = afterLangLower.includes('norton-360');
             const isAvEset = afterLangLower.includes('eset-nod32');
@@ -344,7 +344,7 @@
                 || afterLangLower.includes('kaspersky-plus')
                 || afterLangLower.includes('kaspersky-premium');
             const isAvNavActive = isAvOverview || isAvMcafee || isAvNorton || isAvEset || isAvBitdefender || isAvKaspersky;
-            const isStrumentiOverview = afterLangLower.includes('strumenti.html')
+            const isStrumentiOverview = afterLangLower.includes('strumenti')
                 || afterLangLower.includes('adobe-acrobat')
                 || afterLangLower.includes('coreldraw-2024')
                 || afterLangLower.includes('acronis-true-image')

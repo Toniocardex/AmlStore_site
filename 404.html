@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina non trovata — Aml Store</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="/favicon/favicon.png" type="image/png">
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #f7f8fa; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
+            --accent: #0f62fe; --border: #e5e7eb;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root { --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --muted: #94a3b8; --border: #334155; }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            background: var(--bg); color: var(--text);
+            font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 24px;
+        }
+        .card {
+            max-width: 560px; width: 100%; background: var(--card);
+            border: 1px solid var(--border); border-radius: 16px;
+            padding: 40px 32px; text-align: center;
+        }
+        .code { font-size: 64px; font-weight: 800; letter-spacing: 2px; color: var(--accent); }
+        h1 { font-size: 22px; margin: 8px 0 12px; }
+        p { color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+        .btn {
+            display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
+            font-weight: 700; padding: 12px 28px; border-radius: 999px; margin-bottom: 26px;
+        }
+        .btn:hover { filter: brightness(1.1); }
+        .langs { border-top: 1px solid var(--border); padding-top: 18px; font-size: 14px; color: var(--muted); }
+        .langs a { color: var(--accent); text-decoration: none; margin: 0 8px; font-weight: 600; }
+        .langs a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <div class="code">404</div>
+        <h1 id="nf-title">Pagina non trovata</h1>
+        <p id="nf-msg">La pagina che cerchi non esiste o è stata spostata. Il catalogo completo ti aspetta in home.</p>
+        <a class="btn" id="nf-home" href="/it/">Vai al negozio</a>
+        <div class="langs">
+            <a href="/it/">Italiano</a>·<a href="/en/">English</a>·<a href="/fr/">Français</a>·<a href="/de/">Deutsch</a>·<a href="/es/">Español</a>
+        </div>
+    </main>
+    <script>
+    (function () {
+        var i18n = {
+            en: { title: 'Page not found', msg: 'The page you are looking for does not exist or has been moved. Browse the full catalog from the home page.', btn: 'Back to store', home: '/en/' },
+            fr: { title: 'Page introuvable', msg: "La page que vous cherchez n'existe pas ou a été déplacée. Retrouvez tout le catalogue depuis l'accueil.", btn: 'Retour à la boutique', home: '/fr/' },
+            de: { title: 'Seite nicht gefunden', msg: 'Die gesuchte Seite existiert nicht oder wurde verschoben. Den gesamten Katalog finden Sie auf der Startseite.', btn: 'Zum Shop', home: '/de/' },
+            es: { title: 'Página no encontrada', msg: 'La página que buscas no existe o se ha movido. Encuentra todo el catálogo en la página de inicio.', btn: 'Volver a la tienda', home: '/es/' },
+        };
+        var m = location.pathname.match(/^\/(en|fr|de|es)(\/|$)/);
+        if (!m) return;
+        var t = i18n[m[1]];
+        document.documentElement.lang = m[1];
+        document.getElementById('nf-title').textContent = t.title;
+        document.getElementById('nf-msg').textContent = t.msg;
+        var btn = document.getElementById('nf-home');
+        btn.textContent = t.btn;
+        btn.href = t.home;
+    })();
+    </script>
+</body>
+</html>

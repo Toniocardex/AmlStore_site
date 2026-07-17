@@ -12,7 +12,7 @@ export const CATALOG = {
   "EP2-06798": { name: "Microsoft Office 2024 Home | PC/Mac", unitAmountMinor: 13900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
   "SC871349": { name: "Microsoft Office 2024 Standard", unitAmountMinor: 29999, compareAtMinor: 33989, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
   "EP2-07219": { name: "Microsoft Word 2024  (Standalone) | Licenza ESD Originale", unitAmountMinor: 7900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
-  "MPN: 065-09748": { name: "Microsoft Excel 2024 (Standalone) | Licenza ESD Originale", unitAmountMinor: 7900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office" },
+  "065-09748": { name: "Microsoft Excel 2024 (Standalone) | Licenza ESD Originale", unitAmountMinor: 7900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office" },
   "065-09804": { name: "Microsoft PowerPoint 2024 (Standalone) | Licenza ESD Originale", unitAmountMinor: 7900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
   "KW9-00642": { name: "Microsoft Windows 11 Home OEM | Copilot AI incluso", unitAmountMinor: 5900, compareAtMinor: 9900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows" },
   "FQC-10528": { name: "Microsoft Windows 11 Professional - Licenza ESD Originale", unitAmountMinor: 7900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows" },

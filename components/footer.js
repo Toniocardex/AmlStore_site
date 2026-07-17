@@ -746,7 +746,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="nav-col">
                         <h3 class="col-title">${esc(t.headingProducts)}</h3>
                         <ul class="link-list">
-                            <li><a href="${esc(staticRoot)}/${activeLang.code}/sistemi-operativi.html">${esc(t.prodOs)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/sistemi-operativi">${esc(t.prodOs)}</a></li>
                             <li><a href="#">${esc(t.prodOffice)}</a></li>
                             <li><a href="#">${esc(t.prodAntivirus)}</a></li>
                             <li><a href="#">${esc(t.prodBusiness)}</a></li>
@@ -758,11 +758,11 @@ class EcommerceFooter extends HTMLElement {
                     <div class="nav-col">
                         <h3 class="col-title">${esc(t.headingSupport)}</h3>
                         <ul class="link-list">
-                            <li><a href="${esc(staticRoot)}/${activeLang.code}/account.html">${esc(t.supportMyAccount)}</a></li>
-                            <li><a href="${esc(staticRoot)}/${activeLang.code}/returns-and-refunds.html">${esc(t.supportReturns)}</a></li>
-                            <li><a href="${esc(staticRoot)}/${activeLang.code}/terms-and-conditions.html">${esc(t.supportTerms)}</a></li>
-                            <li><a href="${esc(staticRoot)}/${activeLang.code}/privacy-policy.html">${esc(t.supportPrivacy)}</a></li>
-                            <li><a href="${esc(staticRoot)}/${activeLang.code}/cookie-policy.html">${esc(t.supportCookies)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/account">${esc(t.supportMyAccount)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/returns-and-refunds">${esc(t.supportReturns)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/terms-and-conditions">${esc(t.supportTerms)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/privacy-policy">${esc(t.supportPrivacy)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/cookie-policy">${esc(t.supportCookies)}</a></li>
                             <li><button type="button" class="link-as-a" data-aml-cookie-settings>${esc(t.cookieManage)}</button></li>
                         </ul>
                     </div>

@@ -34,7 +34,7 @@
             catAnalytics: 'Misurazione e statistiche (analytics_storage)',
             catAds: 'Marketing e pubblicità (ad_storage, ad_user_data, ad_personalization)',
             catFunc: 'Funzionalità e personalizzazione locale (functionality_storage, personalization_storage)',
-            policyHref: 'cookie-policy.html',
+            policyHref: 'cookie-policy',
         },
         en: {
             title: 'Cookies and privacy preferences',
@@ -48,7 +48,7 @@
             catAnalytics: 'Measurement and statistics (analytics_storage)',
             catAds: 'Marketing and advertising (ad_storage, ad_user_data, ad_personalization)',
             catFunc: 'Functionality and personalization (functionality_storage, personalization_storage)',
-            policyHref: 'cookie-policy.html',
+            policyHref: 'cookie-policy',
         },
         fr: {
             title: 'Cookies et préférences de confidentialité',
@@ -62,7 +62,7 @@
             catAnalytics: 'Mesure et statistiques (analytics_storage)',
             catAds: 'Marketing et publicité (ad_storage, ad_user_data, ad_personalization)',
             catFunc: 'Fonctionnalités et personnalisation (functionality_storage, personalization_storage)',
-            policyHref: 'cookie-policy.html',
+            policyHref: 'cookie-policy',
         },
         de: {
             title: 'Cookies und Datenschutzeinstellungen',
@@ -76,7 +76,7 @@
             catAnalytics: 'Messung und Statistik (analytics_storage)',
             catAds: 'Marketing und Werbung (ad_storage, ad_user_data, ad_personalization)',
             catFunc: 'Funktionalität und Personalisierung (functionality_storage, personalization_storage)',
-            policyHref: 'cookie-policy.html',
+            policyHref: 'cookie-policy',
         },
         es: {
             title: 'Cookies y preferencias de privacidad',
@@ -90,7 +90,7 @@
             catAnalytics: 'Medición y estadísticas (analytics_storage)',
             catAds: 'Marketing y publicidad (ad_storage, ad_user_data, ad_personalization)',
             catFunc: 'Funcionalidad y personalización (functionality_storage, personalization_storage)',
-            policyHref: 'cookie-policy.html',
+            policyHref: 'cookie-policy',
         },
     };
 
