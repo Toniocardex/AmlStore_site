@@ -620,7 +620,7 @@
                     style: {
                         layout: 'vertical',
                         color:  'gold',
-                        shape:  'pill',
+                        shape:  'rect',
                         label:  'paypal',
                         height: 48,
                     },

@@ -688,7 +688,7 @@
     background: linear-gradient(135deg, var(--page-accent) 0%, color-mix(in srgb, var(--page-accent) 70%, #7c3aed) 100%);
     color: #ffffff;
     border: none;
-    border-radius: 999px;
+    border-radius: 10px;
     font-family: inherit;
     font-size: 0.95rem;
     font-weight: 700;
@@ -798,7 +798,7 @@
     justify-content: center;
     min-height: 44px;
     padding: 0.65rem 1.5rem;
-    border-radius: 999px;
+    border-radius: 10px;
     background: var(--page-accent);
     color: #fff;
     font-family: inherit;

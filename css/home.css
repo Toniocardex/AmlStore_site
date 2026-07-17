@@ -357,7 +357,7 @@ html[data-theme='light'] .home-closing {
     min-height: 44px;
     padding: 0.5rem 1rem;
     box-sizing: border-box;
-    border-radius: 999px;
+    border-radius: 10px;
     font-weight: 700;
     font-size: 0.9rem;
     text-decoration: none;
@@ -406,7 +406,7 @@ html[data-theme='light'] .home-product-detail:hover {
     justify-content: center;
     min-height: 44px;
     padding: 0.65rem 1.35rem;
-    border-radius: 14px;
+    border-radius: 10px;
     font-weight: 700;
     font-size: 0.95rem;
     text-decoration: none;

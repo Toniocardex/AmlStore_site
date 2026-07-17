@@ -229,7 +229,7 @@ a.product-card--link:focus-visible {
     background: linear-gradient(135deg, #0078d7 0%, #106ebe 100%);
     color: #ffffff;
     border: none;
-    border-radius: 14px;
+    border-radius: 10px;
     font-family: inherit;
     font-size: 0.95rem;
     font-weight: 700;
