@@ -547,7 +547,7 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 12px;
+                        border-radius: 8px;
                         padding: 0.4rem;
                         box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
                         opacity: 0;
@@ -569,7 +569,7 @@
                     .nav-win-dropdown a {
                         display: block;
                         padding: 0.55rem 0.75rem;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         color: var(--text-secondary);
                         text-decoration: none;
                         font-size: 0.85rem;
@@ -582,7 +582,7 @@
                         font-weight: 700;
                         color: var(--text-primary);
                         border-bottom: 1px solid var(--border-color);
-                        border-radius: 8px 8px 0 0;
+                        border-radius: 6px 6px 0 0;
                         margin-bottom: 0.15rem;
                         padding-bottom: 0.65rem;
                     }
@@ -720,7 +720,7 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 12px;
+                        border-radius: 8px;
                         padding: 0.4rem;
                         box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
                         opacity: 0;
@@ -744,7 +744,7 @@
                     .nav-m365-dropdown a {
                         display: block;
                         padding: 0.55rem 0.75rem;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         color: var(--text-secondary);
                         text-decoration: none;
                         font-size: 0.85rem;
@@ -760,7 +760,7 @@
                         font-weight: 700;
                         color: var(--text-primary);
                         border-bottom: 1px solid var(--border-color);
-                        border-radius: 8px 8px 0 0;
+                        border-radius: 6px 6px 0 0;
                         margin-bottom: 0.15rem;
                         padding-bottom: 0.65rem;
                     }
@@ -872,7 +872,7 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 12px;
+                        border-radius: 8px;
                         padding: 0.4rem;
                         box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
                         opacity: 0;
@@ -900,7 +900,7 @@
                     .nav-av-dropdown a {
                         display: block;
                         padding: 0.55rem 0.75rem;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         color: var(--text-secondary);
                         text-decoration: none;
                         font-size: 0.85rem;
@@ -918,7 +918,7 @@
                         font-weight: 700;
                         color: var(--text-primary);
                         border-bottom: 1px solid var(--border-color);
-                        border-radius: 8px 8px 0 0;
+                        border-radius: 6px 6px 0 0;
                         margin-bottom: 0.15rem;
                         padding-bottom: 0.65rem;
                     }
@@ -938,7 +938,7 @@
                         align-items: center;
                         gap: 0.75rem;
                         text-decoration: none;
-                        border-radius: 8px;
+                        border-radius: 6px;
                     }
                     .support-info:focus-visible {
                         outline: 2px solid var(--accent);
@@ -997,7 +997,7 @@
                         cursor: pointer;
                         font-family: inherit;
                         padding: 0.5rem;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         transition: color 0.3s ease, background 0.3s ease, border 0.3s ease;
                     }
                     .lang-selector:hover, .lang-wrapper.open .lang-selector {
@@ -1037,7 +1037,7 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 12px;
+                        border-radius: 8px;
                         padding: 0.5rem;
                         min-width: 140px;
                         box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
@@ -1067,7 +1067,7 @@
                         text-decoration: none;
                         font-size: 0.85rem;
                         font-weight: 500;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
                     }
                     .lang-option:hover {
@@ -1222,7 +1222,7 @@
                         color: #000000; /* Testo in alto contrasto */
                         border: none;
                         padding: 0.6rem 1.4rem;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         font-family: inherit;
                         font-size: 0.9rem;
                         font-weight: 700;
@@ -1487,7 +1487,7 @@
                     .drawer-lang-link {
                         display: flex; align-items: center; gap: 0.5rem;
                         padding: 0.5rem 0.65rem;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         font-size: 0.8125rem; font-weight: 500;
                         color: var(--text-secondary);
                         text-decoration: none;
@@ -1522,7 +1522,7 @@
                         color: #000;
                         border: none;
                         padding: 0.75rem 1rem;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         font-weight: 700;
                         font-size: 0.875rem;
                         cursor: pointer;
@@ -1544,7 +1544,7 @@
                         gap: 0.6rem;
                         text-decoration: none;
                         padding: 0.65rem 0.75rem;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         background: rgba(255, 255, 255, 0.03);
                         border: 1px solid rgba(255, 255, 255, 0.07);
                         transition: background 0.2s ease, border-color 0.2s ease;
@@ -1565,7 +1565,7 @@
                         justify-content: center;
                         width: 36px;
                         height: 36px;
-                        border-radius: 8px;
+                        border-radius: 6px;
                         background: rgba(255, 255, 255, 0.05);
                         color: var(--text-secondary);
                         flex-shrink: 0;

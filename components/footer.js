@@ -274,7 +274,7 @@ class EcommerceFooter extends HTMLElement {
                     flex: 1 1 280px; /* Colonna contatti un po' più larga */
                     background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
                     border: 1px solid rgba(255,255,255,0.08);
-                    border-radius: 12px;
+                    border-radius: 8px;
                     padding: 1.75rem;
                     box-shadow: 0 4px 24px -1px rgba(0,0,0,0.1);
                     display: flex;
@@ -388,7 +388,7 @@ class EcommerceFooter extends HTMLElement {
                 
                 .contact-icon {
                     display: flex; align-items: center; justify-content: center;
-                    width: 42px; height: 42px; border-radius: 12px;
+                    width: 42px; height: 42px; border-radius: 8px;
                     background: rgba(255, 255, 255, 0.05);
                     color: var(--text-primary);
                     flex-shrink: 0;
@@ -597,7 +597,7 @@ class EcommerceFooter extends HTMLElement {
                     flex-shrink: 0;
                     background: rgba(255, 255, 255, 0.03);
                     border: 1px solid rgba(255, 255, 255, 0.07);
-                    border-radius: 8px;
+                    border-radius: 6px;
                     padding: 0.45rem 0.875rem;
                 }
 
@@ -678,7 +678,7 @@ class EcommerceFooter extends HTMLElement {
                 @media (max-width: 768px) {
                     .nav-group { flex-direction: column; gap: 2.5rem; }
                     .contact-card {
-                        border-radius: 12px;
+                        border-radius: 8px;
                         padding: 1.5rem;
                     }
                 }

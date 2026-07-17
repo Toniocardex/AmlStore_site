@@ -201,7 +201,7 @@ html[data-theme="light"] .product-page {
     aspect-ratio: 1 / 1;
     object-fit: contain;
     display: block;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
@@ -232,7 +232,7 @@ html[data-theme="light"] .product-page {
     max-width: 300px;
     aspect-ratio: 3 / 4;
     background: linear-gradient(135deg, #eb3c00 0%, #ff7300 100%);
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 20px 40px rgba(235, 60, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.3),
         inset 0 0 40px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -299,7 +299,7 @@ html[data-theme="light"] .product-page {
     padding: 1.5rem;
     background: var(--pp-pricing-bg);
     border: 1px solid var(--pp-pricing-border);
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
@@ -445,7 +445,7 @@ html[data-theme='light'] .product-page .price-block__save {
     color: #ffffff;
     border: none;
     padding: 1rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 6px;
     font-family: inherit;
     font-size: 1rem;
     font-weight: 600;
@@ -554,7 +554,7 @@ html[data-theme='light'] .product-page .price-block__save {
 .product-page .req-box {
     background: color-mix(in srgb, var(--page-text) 6%, var(--page-bg));
     border: 1px solid var(--page-border);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 1.75rem;
     height: max-content;
 }
@@ -609,7 +609,7 @@ html[data-theme='light'] .product-page .price-block__save {
 
     .product-page .pricing-card {
         padding: 1.5rem;
-        border-radius: 12px;
+        border-radius: 8px;
     }
 
     .product-page .btn-primary,
@@ -760,7 +760,7 @@ html[data-theme='light'] .product-page .req-box {
     gap: 0.6rem;
     flex-shrink: 0;
     padding: 0.4rem 0.85rem;
-    border-radius: 8px;
+    border-radius: 6px;
     background: color-mix(in srgb, var(--page-text) 4%, var(--page-bg));
     border: 1px solid var(--page-border);
 }
@@ -933,7 +933,7 @@ html[data-theme='light'] .product-sticky-cta__prices {
     align-items: flex-start;
     padding: 1.2rem 1.25rem;
     border: 1px solid var(--page-border);
-    border-radius: 12px;
+    border-radius: 8px;
     background: color-mix(in srgb, var(--page-text) 3.5%, var(--page-bg));
 }
 
@@ -1084,7 +1084,7 @@ html[data-theme='light'] .product-process-steps__item {
 
 .product-story__visual {
     min-height: clamp(200px, 28vw, 320px);
-    border-radius: 12px;
+    border-radius: 8px;
     border: 1px solid var(--page-border);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%);
     display: grid;
@@ -1215,7 +1215,7 @@ html[data-theme='light'] .product-process-steps__item {
 
 .product-faq details {
     border: 1px solid var(--page-border);
-    border-radius: 12px;
+    border-radius: 8px;
     margin-bottom: 0.65rem;
     background: color-mix(in srgb, var(--page-text) 3%, transparent);
     overflow: hidden;
