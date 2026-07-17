@@ -192,15 +192,14 @@
 }
 
 .v2-pricing-card {
-    background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(24px) saturate(1.8);
-    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    /* Opaca: la card attraversa il confine hero scura → sfondo pagina, e con
+       la trasparenza lo stacco delle due sezioni si vedeva attraverso. */
+    background: #15151f;
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 24px;
     box-shadow:
         0 32px 80px rgba(0,0,0,0.35),
-        0 0 0 1px rgba(255,255,255,0.04) inset,
-        0 1px 0 rgba(255,255,255,0.12) inset;
+        0 1px 0 rgba(255,255,255,0.1) inset;
     padding: 36px 40px;
     display: grid;
     grid-template-columns: 1fr auto;
@@ -213,7 +212,7 @@
 
 /* Force dark text on light theme for the card */
 [data-theme="light"] .v2-pricing-card {
-    background: rgba(255,255,255,0.85);
+    background: #ffffff;
     border-color: rgba(0,0,0,0.08);
     box-shadow: 0 32px 80px rgba(0,0,0,0.12), 0 1px 0 rgba(255,255,255,0.9) inset;
 }
