@@ -984,6 +984,22 @@
                         background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.15), transparent);
                     }
 
+                    /* Ponte hover sotto i wrap: copre il gap trigger→pannello per tutti
+                       i menu. Serve sul wrap (non sul dropdown) perché nei pannelli con
+                       overflow-y:auto (Office/Antivirus) il ::before del dropdown viene
+                       ritagliato e l'hover cadeva attraversando il gap. */
+                    .nav-win-wrap:hover::after, .nav-win-wrap.open::after,
+                    .nav-office-wrap:hover::after, .nav-office-wrap.open::after,
+                    .nav-m365-wrap:hover::after, .nav-m365-wrap.open::after,
+                    .nav-av-wrap:hover::after, .nav-av-wrap.open::after {
+                        content: '';
+                        position: absolute;
+                        top: 100%;
+                        left: -0.75rem;
+                        right: -0.75rem;
+                        height: 0.75rem;
+                    }
+
                     .lang-wrapper { position: relative; }
                     .lang-selector {
                         display: flex;
@@ -1945,6 +1961,39 @@
                 });
                 this.shadowRoot.querySelectorAll('.nav-m365-dropdown a').forEach((a) => {
                     a.addEventListener('click', closeM365Menu);
+                });
+            }
+
+            /* ── Hover-intent: apertura al passaggio e tolleranza di uscita per
+                  tutti i menu desktop (stessa esperienza del menu Microsoft 365).
+                  Solo su dispositivi con hover reale: sul touch resta il caret. ── */
+            if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+                const hoverMenus = [
+                    [winWrap, winCaret],
+                    [officeWrap, officeCaret],
+                    [m365Wrap, m365Caret],
+                    [avWrap, avCaret],
+                ].filter(([w, c]) => w && c);
+                let hoverCloseTimer = null;
+                hoverMenus.forEach(([wrap, caret]) => {
+                    wrap.addEventListener('mouseenter', () => {
+                        clearTimeout(hoverCloseTimer);
+                        hoverMenus.forEach(([w2, c2]) => {
+                            if (w2 !== wrap && w2.classList.contains('open')) {
+                                w2.classList.remove('open');
+                                c2.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                        wrap.classList.add('open');
+                        caret.setAttribute('aria-expanded', 'true');
+                    });
+                    wrap.addEventListener('mouseleave', () => {
+                        clearTimeout(hoverCloseTimer);
+                        hoverCloseTimer = setTimeout(() => {
+                            wrap.classList.remove('open');
+                            caret.setAttribute('aria-expanded', 'false');
+                        }, 300);
+                    });
                 });
             }
 
