@@ -11,6 +11,17 @@
 /cart             /it/cart              302
 /checkout-success /it/checkout-success  302
 
+# ── File di repo non pubblici (build output = root del repo) ────────────────
+/schema.sql /it/ 302
+/schema-admin-migration.sql /it/ 302
+/schema-internal-notification-migration.sql /it/ 302
+/catalog.json /it/ 302
+/package.json /it/ 302
+/package-lock.json /it/ 302
+/README.md /it/ 302
+/wrangler.toml /it/ 302
+/GO-LIVE.md /it/ 302
+
 # ── Legacy prodotto.html ─────────────────────────────────────────────────────
 /it/prodotto.html /it/microsoft-365-family 301
 /en/prodotto.html /en/microsoft-365-family 301
@@ -488,7 +499,8 @@
 /en/terms /en/terms-and-conditions 301
 /en/terms/ /en/terms-and-conditions 301
 
-# ── Fallback splat: vecchi path non mappati → pagina di sezione ─────────────
+# ── Splat (SEMPRE in fondo: dopo il primo * ogni regola conta come dinamica) ─
+/scripts/* /it/ 302
 /it/sistema-operativo/* /it/sistemi-operativi 301
 /it/operating-system/* /it/sistemi-operativi 301
 /it/office-suite/* /it/suite-office 301
