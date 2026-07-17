@@ -1222,7 +1222,7 @@
                         color: #000000; /* Testo in alto contrasto */
                         border: none;
                         padding: 0.6rem 1.4rem;
-                        border-radius: 10px;
+                        border-radius: 8px;
                         font-family: inherit;
                         font-size: 0.9rem;
                         font-weight: 700;
@@ -1565,7 +1565,7 @@
                         justify-content: center;
                         width: 36px;
                         height: 36px;
-                        border-radius: 10px;
+                        border-radius: 8px;
                         background: rgba(255, 255, 255, 0.05);
                         color: var(--text-secondary);
                         flex-shrink: 0;

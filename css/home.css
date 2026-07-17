@@ -284,7 +284,7 @@ html[data-theme=’light’] .home-hero-overlay {
     overflow: hidden;
     text-align: center;
     padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 3rem);
-    border-radius: 16px;
+    border-radius: 12px;
     border: 1px solid var(--page-border);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
@@ -357,7 +357,7 @@ html[data-theme='light'] .home-closing {
     min-height: 44px;
     padding: 0.5rem 1rem;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: 700;
     font-size: 0.9rem;
     text-decoration: none;
@@ -406,7 +406,7 @@ html[data-theme='light'] .home-product-detail:hover {
     justify-content: center;
     min-height: 44px;
     padding: 0.65rem 1.35rem;
-    border-radius: 10px;
+    border-radius: 8px;
     font-weight: 700;
     font-size: 0.95rem;
     text-decoration: none;

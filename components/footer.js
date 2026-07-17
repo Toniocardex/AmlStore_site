@@ -274,7 +274,7 @@ class EcommerceFooter extends HTMLElement {
                     flex: 1 1 280px; /* Colonna contatti un po' più larga */
                     background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
                     border: 1px solid rgba(255,255,255,0.08);
-                    border-radius: 16px;
+                    border-radius: 12px;
                     padding: 1.75rem;
                     box-shadow: 0 4px 24px -1px rgba(0,0,0,0.1);
                     display: flex;
@@ -490,7 +490,7 @@ class EcommerceFooter extends HTMLElement {
                     cursor: pointer;
                     font-family: inherit;
                     line-height: 0;
-                    border-radius: 999px;
+                    border-radius: 6px;
                     -webkit-tap-highlight-color: transparent;
                     flex-shrink: 0;
                     display: inline-flex;
@@ -502,7 +502,7 @@ class EcommerceFooter extends HTMLElement {
                 .theme-glass-switch:focus-visible {
                     outline: 2px solid var(--accent);
                     outline-offset: 3px;
-                    border-radius: 999px;
+                    border-radius: 6px;
                 }
                 .theme-glass-track {
                     position: relative;
@@ -597,7 +597,7 @@ class EcommerceFooter extends HTMLElement {
                     flex-shrink: 0;
                     background: rgba(255, 255, 255, 0.03);
                     border: 1px solid rgba(255, 255, 255, 0.07);
-                    border-radius: 10px;
+                    border-radius: 8px;
                     padding: 0.45rem 0.875rem;
                 }
 

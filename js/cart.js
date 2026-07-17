@@ -203,7 +203,7 @@
             + '.aml-cart-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);'
             + 'display:flex;align-items:center;gap:12px;max-width:min(92vw,420px);padding:13px 16px;'
             + 'background:rgba(17,24,39,0.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);'
-            + 'color:#f9fafb;border:1px solid rgba(255,255,255,0.12);border-radius:14px;'
+            + 'color:#f9fafb;border:1px solid rgba(255,255,255,0.12);border-radius:10px;'
             + 'box-shadow:0 12px 32px rgba(0,0,0,0.35);z-index:1200;opacity:0;pointer-events:none;'
             + 'font-family:inherit;font-size:0.92rem;line-height:1.35;'
             + 'transition:opacity 0.25s ease,transform 0.25s ease;}'

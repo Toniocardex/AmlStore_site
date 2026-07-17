@@ -266,7 +266,7 @@ html[data-theme="light"] .m365sol-hero-fade {
     flex-direction: column;
     align-items: stretch;
     min-height: 0;
-    border-radius: 20px;
+    border-radius: 12px;
     padding: 1.75rem;
     text-decoration: none;
     color: inherit;
@@ -320,7 +320,7 @@ html[data-theme="light"] .m365sol-path-card--ink {
 .m365sol-path-icon {
     width: 48px;
     height: 48px;
-    border-radius: 14px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -478,7 +478,7 @@ html[data-theme="light"] .m365sol-apps-head p {
 .m365sol-app-tile {
     cursor: default;
     padding: 24px;
-    border-radius: 16px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.07);
     transition: transform 0.2s, box-shadow 0.2s;
@@ -497,7 +497,7 @@ html[data-theme="light"] .m365sol-app-tile {
 .m365sol-app-icon {
     width: 5rem;
     height: 5rem;
-    border-radius: 1.25rem;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -668,7 +668,7 @@ html[data-theme="light"] .m365sol-copilot-text p {
     max-width: 100%;
     height: auto;
     aspect-ratio: 560 / 360;
-    border-radius: 1rem;
+    border-radius: 12px;
     box-shadow: 0 24px 56px rgba(0, 0, 0, 0.42);
     border: 1px solid rgba(255, 255, 255, 0.1);
     object-fit: contain;
@@ -699,7 +699,7 @@ html[data-theme="light"] .m365sol-feature-illu {
     position: relative;
     z-index: 10;
     background: rgba(255, 255, 255, 0.04);
-    border-radius: 1rem;
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     padding: 1.5rem;
@@ -735,7 +735,7 @@ html[data-theme="light"] .m365sol-mockup-dots {
 .m365sol-mockup-dots span {
     width: 0.75rem;
     height: 0.75rem;
-    border-radius: 9999px;
+    border-radius: 6px;
 }
 
 .m365sol-mockup-dots span:nth-child(1) { background: #ef4444; }
@@ -771,7 +771,7 @@ html[data-theme="light"] .m365sol-mockup-line {
 .m365sol-mockup-ai-dot {
     width: 0.5rem;
     height: 0.5rem;
-    border-radius: 9999px;
+    border-radius: 6px;
     background: #00bcd4;
     margin-top: 0.35rem;
     flex-shrink: 0;
@@ -838,7 +838,7 @@ html[data-theme="light"] .m365sol-mockup-ai--outlook {
     height: 100%;
     background: rgba(0, 120, 215, 0.18);
     filter: blur(100px);
-    border-radius: 9999px;
+    border-radius: 6px;
     z-index: 0;
     pointer-events: none;
 }

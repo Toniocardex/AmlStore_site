@@ -229,7 +229,7 @@ a.product-card--link:focus-visible {
     background: linear-gradient(135deg, #0078d7 0%, #106ebe 100%);
     color: #ffffff;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     font-family: inherit;
     font-size: 0.95rem;
     font-weight: 700;
@@ -460,7 +460,7 @@ html[data-theme="light"] .legal-doc a {
 .cookie-panel-trigger {
     min-height: 44px;
     padding: 0.6rem 1.25rem;
-    border-radius: 999px;
+    border-radius: 6px;
     border: 1px solid var(--page-border);
     background: var(--page-text);
     color: var(--page-bg);
