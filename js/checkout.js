@@ -20,8 +20,8 @@
     };
 
     const CART_PATHS = {
-        it: '/it/cart.html', en: '/en/cart.html', fr: '/fr/cart.html',
-        de: '/de/cart.html', es: '/es/cart.html',
+        it: '/it/cart', en: '/en/cart', fr: '/fr/cart',
+        de: '/de/cart', es: '/es/cart',
     };
 
     /* ─── Stato PayPal SDK ─────────────────────────────────────────────────── */
@@ -33,20 +33,59 @@
     /* ─── Stato Sottomissione ──────────────────────────────────────────────── */
     var _isSubmitting = false;
 
-    /* ─── Idempotency key per bonifico ────────────────────────────────────── */
-    // Generato una sola volta al caricamento, persiste in sessionStorage.
-    // Previene doppi ordini su refresh del form.
-    var _transferIdempotencyKey = (function () {
-        var KEY = 'aml-transfer-ikey';
-        var k = sessionStorage.getItem(KEY);
-        if (!k) {
+    /* ─── Idempotency key ──────────────────────────────────────────────────── */
+    // Chiave stabile per (sessione, metodo, carrello, email): un retry dello stesso
+    // ordine riusa la stessa chiave (niente doppioni in D1), mentre un carrello o
+    // una email diversi producono una chiave nuova. Il sale di sessione viene
+    // ruotato a ordine completato (qui e in checkout-success.js).
+    var SALT_STORAGE_KEY = 'aml-ikey-salt';
+
+    function getSessionSalt() {
+        var s = null;
+        try { s = sessionStorage.getItem(SALT_STORAGE_KEY); } catch (_) {}
+        if (!s) {
             var arr = new Uint32Array(2);
             crypto.getRandomValues(arr);
-            k = 'ik-' + Date.now() + '-' + arr[0].toString(36) + arr[1].toString(36);
-            sessionStorage.setItem(KEY, k);
+            s = arr[0].toString(36) + arr[1].toString(36);
+            try { sessionStorage.setItem(SALT_STORAGE_KEY, s); } catch (_) {}
         }
-        return k;
-    })();
+        return s;
+    }
+
+    function rotateSessionSalt() {
+        try {
+            sessionStorage.removeItem(SALT_STORAGE_KEY);
+            sessionStorage.removeItem('aml-transfer-ikey'); // legacy
+        } catch (_) {}
+    }
+
+    function randomIdempotencyKey(prefix) {
+        var arr = new Uint32Array(2);
+        crypto.getRandomValues(arr);
+        return prefix + '-' + Date.now() + '-' + arr[0].toString(36) + arr[1].toString(36);
+    }
+
+    /** @returns {Promise<string>} chiave deterministica; fallback random se manca crypto.subtle */
+    function buildIdempotencyKey(prefix, items, email) {
+        var basis;
+        try {
+            basis = JSON.stringify([getSessionSalt(), prefix, String(email || '').toLowerCase()]
+                .concat(items.map(function (i) { return [i.sku, Number(i.quantity) || 1]; })));
+        } catch (_) {
+            return Promise.resolve(randomIdempotencyKey(prefix));
+        }
+        if (!(global.crypto && crypto.subtle && global.TextEncoder)) {
+            return Promise.resolve(randomIdempotencyKey(prefix));
+        }
+        return crypto.subtle.digest('SHA-256', new TextEncoder().encode(basis))
+            .then(function (buf) {
+                var hex = Array.prototype.map.call(new Uint8Array(buf), function (b) {
+                    return ('0' + b.toString(16)).slice(-2);
+                }).join('');
+                return prefix + '-' + hex.slice(0, 40);
+            })
+            .catch(function () { return randomIdempotencyKey(prefix); });
+    }
 
     /* ─── Utility ──────────────────────────────────────────────────────────── */
 
@@ -401,21 +440,22 @@
         var lang     = getLang();
         var customer = collectFormData();
 
-        var payload = {
-            idempotencyKey: 'sk-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
-            customer:       customer,
-            items:          items,
-            lang:           lang,
-        };
-
         _isSubmitting = true;
         if (btn) { btn.setAttribute('aria-busy', 'true'); btn.disabled = true; }
         hideGlobalError();
 
-        fetch(STRIPE_WORKER_URL, {
-            method:  'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify(payload),
+        buildIdempotencyKey('sk', items, customer.email)
+        .then(function (idempotencyKey) {
+            return fetch(STRIPE_WORKER_URL, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    idempotencyKey: idempotencyKey,
+                    customer:       customer,
+                    items:          items,
+                    lang:           lang,
+                }),
+            });
         })
         .then(function (res) {
             if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -450,21 +490,22 @@
         var lang     = getLang();
         var customer = collectFormData();
 
-        var payload = {
-            idempotencyKey: _transferIdempotencyKey,
-            customer:       customer,
-            items:          items,
-            lang:           lang,
-        };
-
         _isSubmitting = true;
         if (btn) { btn.setAttribute('aria-busy', 'true'); btn.disabled = true; }
         hideGlobalError();
 
-        fetch(TRANSFER_WORKER_URL, {
-            method:  'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify(payload),
+        buildIdempotencyKey('bt', items, customer.email)
+        .then(function (idempotencyKey) {
+            return fetch(TRANSFER_WORKER_URL, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({
+                    idempotencyKey: idempotencyKey,
+                    customer:       customer,
+                    items:          items,
+                    lang:           lang,
+                }),
+            });
         })
         .then(function (res) {
             if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -472,10 +513,10 @@
         })
         .then(function (data) {
             if (data && data.oid) {
-                // Pulisci la chiave idempotenza (ordine creato → prossima visita è nuovo ordine)
-                sessionStorage.removeItem('aml-transfer-ikey');
+                // Ordine creato → ruota il sale: il prossimo checkout è un nuovo ordine
+                rotateSessionSalt();
                 // Redirect alla thank-you page con token
-                global.location.href = '/' + lang + '/checkout-success.html'
+                global.location.href = '/' + lang + '/checkout-success'
                     + '?oid=' + encodeURIComponent(data.oid)
                     + '&exp=' + encodeURIComponent(data.exp)
                     + '&t='   + encodeURIComponent(data.t);
@@ -560,28 +601,33 @@
                     },
 
                     createOrder: function () {
-                        if (_isSubmitting) return;
+                        if (_isSubmitting) {
+                            // Doppio click — onError lo ignora (stesso marker della validazione)
+                            throw new Error('aml-validation');
+                        }
                         if (!validateForm()) {
                             // Errore intenzionale — onError lo ignora
                             throw new Error('aml-validation');
                         }
 
-                        var cart  = global.AmlCart;
-                        var items = checkoutCartLines(cart);
-                        var lang  = getLang();
-
-                        var payload = {
-                            idempotencyKey: 'pp-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8),
-                            customer:       collectFormData(),
-                            items:          items,
-                            lang:           lang,
-                        };
+                        var cart     = global.AmlCart;
+                        var items    = checkoutCartLines(cart);
+                        var lang     = getLang();
+                        var customer = collectFormData();
 
                         _isSubmitting = true;
-                        return fetch(PAYPAL_WORKER_CREATE, {
-                            method:  'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body:    JSON.stringify(payload),
+                        return buildIdempotencyKey('pp', items, customer.email)
+                        .then(function (idempotencyKey) {
+                            return fetch(PAYPAL_WORKER_CREATE, {
+                                method:  'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body:    JSON.stringify({
+                                    idempotencyKey: idempotencyKey,
+                                    customer:       customer,
+                                    items:          items,
+                                    lang:           lang,
+                                }),
+                            });
                         })
                         .then(function (res) {
                             if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -604,13 +650,15 @@
                             return res.json();
                         })
                         .then(function (result) {
+                            rotateSessionSalt();
                             var lang = getLang();
-                            global.location.href = '/' + lang + '/checkout-success.html'
+                            global.location.href = '/' + lang + '/checkout-success'
                                 + '?oid=' + encodeURIComponent(result.oid)
                                 + '&exp=' + encodeURIComponent(result.exp)
                                 + '&t='   + encodeURIComponent(result.t);
                         })
                         .catch(function (captureErr) {
+                            _isSubmitting = false;
                             console.error('[PayPal] Capture error:', captureErr);
                             showGlobalError('Errore nella conferma del pagamento PayPal. Contatta il supporto.');
                         });

@@ -325,6 +325,12 @@
                 global.AmlCart.clear();
             }
 
+            // Ruota il sale delle idempotency key: il prossimo checkout è un nuovo ordine
+            try {
+                sessionStorage.removeItem('aml-ikey-salt');
+                sessionStorage.removeItem('aml-transfer-ikey'); // legacy
+            } catch (_) {}
+
         }).catch(function (errObj) {
             showError(errObj && errObj.reason ? errObj.reason : 'error');
         });

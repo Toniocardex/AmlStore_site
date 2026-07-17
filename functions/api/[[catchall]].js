@@ -29,14 +29,18 @@ import { getAccessToken, createPaypalOrder,
          capturePaypalOrder }                            from './_lib/paypal.js';
 import { sendConfirmationOnce,
          sendInternalOrderNotificationOnce }             from './_lib/email.js';
-import { verifyAccessJwt, listOrders, getOrderDetail,
+import { resolveAdminAuth, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
          unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
 import { resolveAndValidateItems }                     from './_lib/catalog.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
-const ALLOWED_ORIGINS = ['https://aml-store.com', 'http://localhost:8788'];
+const ALLOWED_ORIGINS = [
+    'https://aml-store.com',
+    'http://localhost:8788',
+    'http://127.0.0.1:8788',
+];
 const ALLOWED_LOCALES = new Set(['it', 'en', 'fr', 'de', 'es']);
 const MAX_JSON_BODY_BYTES = 32 * 1024;
 const MAX_ADMIN_JSON_BODY_BYTES = 4 * 1024;
@@ -322,16 +326,19 @@ async function handleStripeCreateSession(request, env) {
     try {
         orderId = await createOrder(env.DB, params);
     } catch (dbErr) {
-        // UNIQUE constraint: idempotency_key già presente → cerca ordine esistente
+        // UNIQUE constraint: idempotency_key già presente → riusa l'ordine esistente.
+        // Si prosegue comunque con createCheckoutSession: l'Idempotency-Key Stripe
+        // (= orderId) fa restituire la stessa sessione, quindi il client riceve
+        // sempre una url valida anche su retry.
         if (String(dbErr).includes('UNIQUE')) {
             const existing = await env.DB
-                .prepare('SELECT id, stripe_session_id FROM orders WHERE idempotency_key = ?')
+                .prepare('SELECT id, status FROM orders WHERE idempotency_key = ?')
                 .bind(params.idempotencyKey).first();
-            if (existing?.stripe_session_id) {
-                // Recupera URL sessione Stripe esistente (non ancora completata)
-                return json({ orderId: existing.id }, 200, request, env);
+            if (!existing?.id) throw dbErr;
+            if (existing.status === 'paid') {
+                return err('Ordine già pagato', 409, request, env);
             }
-            orderId = existing?.id;
+            orderId = existing.id;
         } else {
             throw dbErr;
         }
@@ -340,7 +347,7 @@ async function handleStripeCreateSession(request, env) {
     const origin     = env.SITE_ORIGIN || 'https://aml-store.com';
     const lang       = params.locale || 'it';
     const successUrl = `${origin}/api/stripe-return?sid={CHECKOUT_SESSION_ID}&lang=${lang}`;
-    const cancelUrl  = `${origin}/${lang}/checkout.html?cancelled=1`;
+    const cancelUrl  = `${origin}/${lang}/checkout?cancelled=1`;
 
     // Crea Stripe Checkout Session
     const session = await createCheckoutSession(env.STRIPE_SECRET_KEY, {
@@ -365,21 +372,22 @@ async function handleStripeCreateSession(request, env) {
 async function handleStripeReturn(request, env) {
     const url  = new URL(request.url);
     const sid  = url.searchParams.get('sid');
-    const lang = url.searchParams.get('lang') || 'it';
+    const rawLang = (url.searchParams.get('lang') || 'it').toLowerCase();
+    const lang = ALLOWED_LOCALES.has(rawLang) ? rawLang : 'it';
 
     const origin = env.SITE_ORIGIN || 'https://aml-store.com';
 
     if (!sid) {
-        return Response.redirect(`${origin}/${lang}/checkout.html?error=missing_sid`, 302);
+        return Response.redirect(`${origin}/${lang}/checkout?error=missing_sid`, 302);
     }
 
     const order = await getOrderByStripeSession(env.DB, sid);
     if (!order) {
-        return Response.redirect(`${origin}/${lang}/checkout.html?error=order_not_found`, 302);
+        return Response.redirect(`${origin}/${lang}/checkout?error=order_not_found`, 302);
     }
 
     const token = await generateToken(env.TOKEN_SECRET, order.id);
-    const dest  = `${origin}/${lang}/checkout-success.html?oid=${token.oid}&exp=${token.exp}&t=${encodeURIComponent(token.t)}`;
+    const dest  = `${origin}/${lang}/checkout-success?oid=${token.oid}&exp=${token.exp}&t=${encodeURIComponent(token.t)}`;
 
     return Response.redirect(dest, 302);
 }
@@ -605,7 +613,7 @@ async function handleBankTransferOrder(request, env) {
  */
 async function handleAdminRoute(path, request, env) {
     // ── Autenticazione JWT ────────────────────────────────────────────────────
-    const jwt = await verifyAccessJwt(request, env);
+    const jwt = await resolveAdminAuth(request, env);
     if (!jwt.valid) {
         console.warn('[admin] JWT non valido:', jwt.reason);
         return new Response(JSON.stringify({ error: 'Unauthorized', reason: jwt.reason }), {
