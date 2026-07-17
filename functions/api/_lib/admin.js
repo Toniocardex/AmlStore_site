@@ -149,6 +149,24 @@ export async function verifyAccessJwt(request, env) {
     return { valid: true, email: actorEmail };
 }
 
+const LOCAL_DEV_HOSTS = new Set(['localhost', '127.0.0.1']);
+
+/**
+ * Autenticazione admin: JWT Cloudflare Access in produzione;
+ * bypass opzionale solo in wrangler pages dev (ADMIN_DEV_BYPASS=1 in .dev.vars).
+ */
+export async function resolveAdminAuth(request, env) {
+    if (String(env.ADMIN_DEV_BYPASS || '') === '1') {
+        const host = new URL(request.url).hostname;
+        if (LOCAL_DEV_HOSTS.has(host)) {
+            console.warn('[admin] DEV BYPASS attivo — solo localhost, mai in produzione');
+            const allowed = parseEmailList(env.ADMIN_ALLOWED_EMAILS);
+            return { valid: true, email: allowed[0] || 'dev@localhost' };
+        }
+    }
+    return verifyAccessJwt(request, env);
+}
+
 /* ─── Query D1 lista ordini ──────────────────────────────────────────────────── */
 
 const PAGE_SIZE = 50;

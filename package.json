@@ -4,6 +4,8 @@
   "description": "Dominio pubblico: **https://aml-store.com**",
   "main": "index.js",
   "scripts": {
+    "dev": "wrangler pages dev . --port 8788 --d1=DB --persist-to .wrangler/state",
+    "dev:db": "python scripts/dev-d1-init.py",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Toniocardex/AmlStore_site/issues"
   },
-  "homepage": "https://github.com/Toniocardex/AmlStore_site#readme"
+  "homepage": "https://github.com/Toniocardex/AmlStore_site#readme",
+  "devDependencies": {
+    "wrangler": "^4.106.0"
+  }
 }
