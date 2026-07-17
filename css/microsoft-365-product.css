@@ -301,6 +301,15 @@
 .v2-btn-primary:active { transform: translateY(0); }
 .v2-btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
 
+/* Feedback dopo "Aggiungi al carrello" (stesso verde di .btn-cta-primary.is-added) */
+.v2-btn-primary.is-added {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+}
+.v2-btn-primary.is-added:hover {
+    box-shadow: 0 12px 32px rgba(16, 185, 129, 0.5);
+}
+
 /* Payment logos (solo icone, sotto CTA) */
 .v2-payment-row {
     display: flex;

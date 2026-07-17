@@ -177,6 +177,126 @@
         return fallback && isCartLineRoot(fallback) ? fallback : null;
     }
 
+    /* ─── Toast "aggiunto al carrello" ─────────────────────────────────────────── */
+    // Feedback visivo immediato su ogni pagina con bottoni [data-cart-add]:
+    // il solo badge nell'header non è abbastanza visibile.
+
+    var TOAST_I18N = {
+        it: { added: 'Aggiunto al carrello', view: 'Vai al carrello' },
+        en: { added: 'Added to cart', view: 'View cart' },
+        fr: { added: 'Ajouté au panier', view: 'Voir le panier' },
+        de: { added: 'Zum Warenkorb hinzugefügt', view: 'Warenkorb ansehen' },
+        es: { added: 'Añadido al carrito', view: 'Ver carrito' },
+    };
+    var toastHideTimer = null;
+
+    function toastLang() {
+        var m = (document.documentElement.lang || '').match(/^[a-z]{2}/i)
+             || (global.location.pathname || '').match(/^\/([a-z]{2})\//);
+        var code = m ? String(m[1] || m[0]).toLowerCase() : 'it';
+        return TOAST_I18N[code] ? code : 'it';
+    }
+
+    function ensureToastStyles() {
+        if (document.getElementById('aml-cart-toast-style')) return;
+        var css = ''
+            + '.aml-cart-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);'
+            + 'display:flex;align-items:center;gap:12px;max-width:min(92vw,420px);padding:13px 16px;'
+            + 'background:rgba(17,24,39,0.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);'
+            + 'color:#f9fafb;border:1px solid rgba(255,255,255,0.12);border-radius:14px;'
+            + 'box-shadow:0 12px 32px rgba(0,0,0,0.35);z-index:1200;opacity:0;pointer-events:none;'
+            + 'font-family:inherit;font-size:0.92rem;line-height:1.35;'
+            + 'transition:opacity 0.25s ease,transform 0.25s ease;}'
+            + '.aml-cart-toast.is-visible{opacity:1;transform:translate(-50%,0);pointer-events:auto;}'
+            + '@media (min-width:640px){.aml-cart-toast{left:auto;right:24px;transform:translate(0,16px);}'
+            + '.aml-cart-toast.is-visible{transform:translate(0,0);}}'
+            + '.aml-cart-toast__check{flex-shrink:0;display:flex;align-items:center;justify-content:center;'
+            + 'width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);}'
+            + '.aml-cart-toast__check svg{width:16px;height:16px;stroke:#fff;stroke-width:3;fill:none;'
+            + 'stroke-linecap:round;stroke-linejoin:round;}'
+            + '.aml-cart-toast__body{min-width:0;}'
+            + '.aml-cart-toast__title{font-weight:700;}'
+            + '.aml-cart-toast__name{color:#d1d5db;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'
+            + 'max-width:260px;}'
+            + '.aml-cart-toast__link{flex-shrink:0;margin-left:4px;color:#7cc0ff;font-weight:700;'
+            + 'text-decoration:none;white-space:nowrap;}'
+            + '.aml-cart-toast__link:hover{text-decoration:underline;}'
+            + '.aml-cart-toast__link:focus-visible{outline:2px solid #7cc0ff;outline-offset:3px;border-radius:4px;}'
+            + '@media (prefers-reduced-motion:reduce){.aml-cart-toast{transition:opacity 0.2s ease;'
+            + 'transform:translate(-50%,0);}'
+            + '@media (min-width:640px){.aml-cart-toast{transform:none;}}}';
+        var style = document.createElement('style');
+        style.id = 'aml-cart-toast-style';
+        style.textContent = css;
+        document.head.appendChild(style);
+    }
+
+    function ensureToastEl() {
+        var el = document.getElementById('aml-cart-toast');
+        if (el) return el;
+        ensureToastStyles();
+        var lang = toastLang();
+        var t = TOAST_I18N[lang];
+
+        el = document.createElement('div');
+        el.id = 'aml-cart-toast';
+        el.className = 'aml-cart-toast';
+        el.setAttribute('role', 'status');
+        el.setAttribute('aria-live', 'polite');
+
+        var check = document.createElement('span');
+        check.className = 'aml-cart-toast__check';
+        check.setAttribute('aria-hidden', 'true');
+        check.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+
+        var body = document.createElement('div');
+        body.className = 'aml-cart-toast__body';
+        var title = document.createElement('div');
+        title.className = 'aml-cart-toast__title';
+        title.textContent = t.added;
+        var name = document.createElement('div');
+        name.className = 'aml-cart-toast__name';
+        body.appendChild(title);
+        body.appendChild(name);
+
+        var link = document.createElement('a');
+        link.className = 'aml-cart-toast__link';
+        link.href = '/' + lang + '/cart';
+        link.textContent = t.view + ' →';
+
+        el.appendChild(check);
+        el.appendChild(body);
+        el.appendChild(link);
+
+        // Click fuori dal link = chiudi subito
+        el.addEventListener('click', function (e) {
+            if (e.target && e.target.closest && e.target.closest('a')) return;
+            hideCartToast();
+        });
+
+        document.body.appendChild(el);
+        return el;
+    }
+
+    function hideCartToast() {
+        var el = document.getElementById('aml-cart-toast');
+        if (el) el.classList.remove('is-visible');
+        clearTimeout(toastHideTimer);
+        toastHideTimer = null;
+    }
+
+    function showCartToast(line) {
+        var el = ensureToastEl();
+        var nameEl = el.querySelector('.aml-cart-toast__name');
+        if (nameEl) nameEl.textContent = lineDisplayName(line);
+        // Riapparizione pulita anche se già visibile (riavvia transizione e timer)
+        el.classList.remove('is-visible');
+        void el.offsetWidth; // reflow per riavviare la transizione
+        el.classList.add('is-visible');
+        clearTimeout(toastHideTimer);
+        toastHideTimer = setTimeout(hideCartToast, 4000);
+    }
+
     function announceCartAdded() {
         const main = document.querySelector('main.product-page');
         const msg = main && main.getAttribute('data-cart-added-msg');
@@ -303,7 +423,10 @@
             const next = mergeAdd(readLines(), line);
             if (writeLines(next)) {
                 dispatch(next);
-                announceCartAdded();
+                // Il toast ha role="status": annuncia già ai lettori di schermo.
+                // announceCartAdded() resta per le pagine senza body (fallback).
+                if (document.body) showCartToast(line);
+                else announceCartAdded();
                 flashCartButtonsForSource(lineRoot);
             }
         });
