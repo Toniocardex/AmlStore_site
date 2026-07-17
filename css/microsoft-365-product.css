@@ -196,7 +196,7 @@
        la trasparenza lo stacco delle due sezioni si vedeva attraverso. */
     background: #15151f;
     border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 24px;
+    border-radius: 16px;
     box-shadow:
         0 32px 80px rgba(0,0,0,0.35),
         0 1px 0 rgba(255,255,255,0.1) inset;
@@ -285,7 +285,7 @@
     justify-content: center;
     gap: 10px;
     padding: 16px 28px;
-    border-radius: 14px;
+    border-radius: 10px;
     background: linear-gradient(135deg, #0078d7 0%, #106ebe 100%);
     color: #fff;
     font-size: 1rem;
@@ -974,3 +974,47 @@ body { background: var(--bg, #fff); }
     .bento-title { font-size: 0.95rem; }
     .bento-text { font-size: 0.82rem; }
 }
+
+/* ── TRUST ROW nella pricing card ── */
+.v2-trust {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+[data-theme="light"] .v2-trust { border-top-color: rgba(0,0,0,0.08); }
+.v2-trust__pay {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.v2-trust__chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 10px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 6px;
+}
+.v2-trust__chip img { height: 14px; width: auto; display: block; }
+.v2-trust__points {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+}
+[data-theme="light"] .v2-trust__points { color: #666; }
+.v2-trust__points li { display: inline-flex; align-items: center; gap: 6px; }
+.v2-trust__points li::before { content: '✓'; color: #10b981; font-weight: 700; }
+.v2-trust__points a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.v2-trust__points a:hover { color: inherit; filter: brightness(1.3); }
