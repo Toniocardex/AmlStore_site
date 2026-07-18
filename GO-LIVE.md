@@ -1,5 +1,9 @@
 # Checklist go-live — aml-store.com
 
+> **Prima di ogni deploy**: eseguire `python scripts/bump-asset-version.py`
+> (aggiorna gli hash `?v=` di css/js nelle pagine: senza, i browser dei
+> clienti tengono i file vecchi fino a 7 giorni per via della cache).
+
 Stato al 2026-07-17. Il codice è pronto (redirect migrazione, URL senza `.html`,
 fix checkout, PayPal parametrizzato). Restano i passi qui sotto, che richiedono
 accessi ai pannelli (Cloudflare, PayPal, Stripe, Resend, registrar).
