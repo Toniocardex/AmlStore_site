@@ -882,6 +882,12 @@
                         transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
                         z-index: 50;
                     }
+                    /* Ultima voce del nav: il pannello si apre verso sinistra, così non
+                       si estende sotto l'area assistenza/lingua/carrello a destra. */
+                    .nav-av-dropdown {
+                        left: auto;
+                        right: 0;
+                    }
                     .nav-office-wrap:hover .nav-office-dropdown,
                     .nav-av-wrap:hover .nav-av-dropdown,
                     .nav-office-wrap:focus-within .nav-office-dropdown,
