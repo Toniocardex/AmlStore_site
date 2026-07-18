@@ -10,6 +10,8 @@
             navWindowsOverview: 'Sistemi Operativi',
             navWindows11Home: 'Windows 11 Home',
             navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
             navWindows10Home: 'Windows 10 Home',
             navWindows10Pro: 'Windows 10 Pro',
             navOffice: 'Office',
@@ -58,6 +60,8 @@
             navWindowsOverview: 'Operating Systems',
             navWindows11Home: 'Windows 11 Home',
             navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
             navWindows10Home: 'Windows 10 Home',
             navWindows10Pro: 'Windows 10 Pro',
             navOffice: 'Office',
@@ -106,6 +110,8 @@
             navWindowsOverview: "Systèmes d'exploitation",
             navWindows11Home: 'Windows 11 Home',
             navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
             navWindows10Home: 'Windows 10 Home',
             navWindows10Pro: 'Windows 10 Pro',
             navOffice: 'Office',
@@ -154,6 +160,8 @@
             navWindowsOverview: 'Betriebssysteme',
             navWindows11Home: 'Windows 11 Home',
             navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
             navWindows10Home: 'Windows 10 Home',
             navWindows10Pro: 'Windows 10 Pro',
             navOffice: 'Office',
@@ -202,6 +210,8 @@
             navWindowsOverview: 'Sistemas operativos',
             navWindows11Home: 'Windows 11 Home',
             navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
             navWindows10Home: 'Windows 10 Home',
             navWindows10Pro: 'Windows 10 Pro',
             navOffice: 'Office',
@@ -293,11 +303,15 @@
             const hrefWinOverview = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'sistemi-operativi');
             const hrefWin11Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-home');
             const hrefWin11Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro');
+            const hrefWin11ProDvd = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro-oem-dvd');
+            const hrefWin11ProCoa = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro-coa');
             const hrefWin10Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-home');
             const hrefWin10Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-pro');
             const isWinOverview = afterLangLower.includes('sistemi-operativi');
             const isWin11Home = afterLangLower.includes('windows-11-home');
-            const isWin11Pro = afterLangLower.includes('windows-11-pro');
+            const isWin11Pro = afterLangLower.includes('windows-11-pro') && !afterLangLower.includes('windows-11-pro-oem-dvd') && !afterLangLower.includes('windows-11-pro-coa');
+            const isWin11ProDvd = afterLangLower.includes('windows-11-pro-oem-dvd');
+            const isWin11ProCoa = afterLangLower.includes('windows-11-pro-coa');
             const isWin10Home = afterLangLower.includes('windows-10-home');
             const isWin10Pro = afterLangLower.includes('windows-10-pro');
             const hrefSuiteOffice = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'suite-office');
@@ -332,7 +346,7 @@
             const isBundleWinM365 = afterLangLower.includes('bundle-windows-11-home-m365-personal');
             const isBundleM365Mcafee = afterLangLower.includes('bundle-m365-personal-mcafee');
             const isBundleM365Kaspersky = afterLangLower.includes('bundle-m365-personal-kaspersky');
-            const isWinNavActive = isWinOverview || isWin11Home || isWin11Pro || isWin10Home || isWin10Pro || isServerOverview;
+            const isWinNavActive = isWinOverview || isWin11Home || isWin11Pro || isWin11ProDvd || isWin11ProCoa || isWin10Home || isWin10Pro || isServerOverview;
             const isM365NavActive = isM365Solutions || isM365Personal || isM365Family || isM365Business
                 || isPacchettiOverview || isBundleWinM365 || isBundleM365Mcafee || isBundleM365Kaspersky;
             const isAvOverview = afterLangLower.includes('antivirus');
@@ -1637,6 +1651,8 @@
                                     <a href="${esc(hrefWinOverview)}" class="nav-win-dropdown__overview" role="menuitem"${isWinOverview ? ' aria-current="page"' : ''}>${esc(t.navWindowsOverview)}</a>
                                     <a href="${esc(hrefWin11Home)}" role="menuitem"${isWin11Home ? ' aria-current="page"' : ''}>${esc(t.navWindows11Home)}</a>
                                     <a href="${esc(hrefWin11Pro)}" role="menuitem"${isWin11Pro ? ' aria-current="page"' : ''}>${esc(t.navWindows11Pro)}</a>
+                                    <a href="${esc(hrefWin11ProDvd)}" role="menuitem"${isWin11ProDvd ? ' aria-current="page"' : ''}>${esc(t.navWindows11ProDvd)}</a>
+                                    <a href="${esc(hrefWin11ProCoa)}" role="menuitem"${isWin11ProCoa ? ' aria-current="page"' : ''}>${esc(t.navWindows11ProCoa)}</a>
                                     <a href="${esc(hrefWin10Home)}" role="menuitem"${isWin10Home ? ' aria-current="page"' : ''}>${esc(t.navWindows10Home)}</a>
                                     <a href="${esc(hrefWin10Pro)}" role="menuitem"${isWin10Pro ? ' aria-current="page"' : ''}>${esc(t.navWindows10Pro)}</a>
                                     <a href="${esc(hrefWinServer)}" class="nav-win-dropdown__overview" role="menuitem"${isServerOverview ? ' aria-current="page"' : ''}>${esc(t.navServerOverview)}</a>
@@ -1752,6 +1768,8 @@
                             <a href="${esc(hrefWinOverview)}"${isWinOverview ? ' class="active"' : ''}>${esc(t.navWindowsOverview)}</a>
                             <a href="${esc(hrefWin11Home)}"${isWin11Home ? ' class="active"' : ''}>${esc(t.navWindows11Home)}</a>
                             <a href="${esc(hrefWin11Pro)}"${isWin11Pro ? ' class="active"' : ''}>${esc(t.navWindows11Pro)}</a>
+                            <a href="${esc(hrefWin11ProDvd)}"${isWin11ProDvd ? ' class="active"' : ''}>${esc(t.navWindows11ProDvd)}</a>
+                            <a href="${esc(hrefWin11ProCoa)}"${isWin11ProCoa ? ' class="active"' : ''}>${esc(t.navWindows11ProCoa)}</a>
                             <a href="${esc(hrefWin10Home)}"${isWin10Home ? ' class="active"' : ''}>${esc(t.navWindows10Home)}</a>
                             <a href="${esc(hrefWin10Pro)}"${isWin10Pro ? ' class="active"' : ''}>${esc(t.navWindows10Pro)}</a>
                             <a href="${esc(hrefWinServer)}"${isServerOverview ? ' class="active"' : ''}>${esc(t.navServerOverview)}</a>
