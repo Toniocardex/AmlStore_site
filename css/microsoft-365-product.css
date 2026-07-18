@@ -115,10 +115,7 @@
     color: #fff;
 }
 .v2-hero__title span {
-    background: linear-gradient(135deg, #0078d7 0%, #00bcd4 50%, #7c3aed 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #3b82f6; /* hero sempre scura: serve l'accent luminoso */
 }
 
 .v2-hero__desc {
@@ -251,7 +248,7 @@
     align-items: center;
     padding: 4px 10px;
     border-radius: 6px;
-    background: linear-gradient(135deg, #0078d7, #00bcd4);
+    background: var(--page-accent, #003182);
     font-size: 0.72rem;
     font-weight: 700;
     color: #fff;
@@ -286,17 +283,17 @@
     gap: 10px;
     padding: 16px 28px;
     border-radius: 6px;
-    background: linear-gradient(135deg, #0078d7 0%, #106ebe 100%);
+    background: var(--page-accent, #003182);
     color: #fff;
     font-size: 1rem;
     font-weight: 700;
     border: none;
     cursor: pointer;
-    box-shadow: 0 8px 24px rgba(0,120,215,0.4);
+    box-shadow: 0 8px 24px rgba(0, 49, 130, 0.4);
     transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
     white-space: nowrap;
 }
-.v2-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,120,215,0.5); filter: brightness(1.08); }
+.v2-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0, 49, 130, 0.5); filter: brightness(1.08); }
 .v2-btn-primary:active { transform: translateY(0); }
 .v2-btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
 
@@ -351,7 +348,7 @@
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #0078d7;
+    color: var(--page-accent, #003182);
     margin-bottom: 12px;
 }
 .v2-section-title {
@@ -465,7 +462,7 @@
     letter-spacing: -0.05em;
     line-height: 1;
     margin-bottom: 8px;
-    background: linear-gradient(135deg, #0078d7, #00bcd4);
+    background: var(--page-accent, #003182);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -676,7 +673,7 @@
     width: 36px;
     height: 36px;
     border-radius: 8px;
-    background: linear-gradient(135deg, #0078d7, #106ebe);
+    background: var(--page-accent, #003182);
     color: #fff;
     font-size: 0.9rem;
     font-weight: 800;
@@ -693,7 +690,7 @@
     color: rgba(255,255,255,0.58);
 }
 [data-theme="light"] .v2-step__body { color: #555; }
-.v2-step__body a { color: #0078d7; }
+.v2-step__body a { color: var(--page-accent, #003182); }
 
 /* ── FAQ ── */
 .v2-faq { max-width: 800px; }
@@ -776,7 +773,7 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #0078d7;
+    color: var(--page-accent, #003182);
     margin: 0 0 8px;
 }
 .v2-specs-item p { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.6); margin: 0; }

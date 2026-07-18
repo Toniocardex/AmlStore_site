@@ -1,5 +1,5 @@
 /**
- * Microsoft 365 — pagina soluzioni (tema v2 come scheda prodotto: hero #0a0a0f, glass, CTA #0078d7).
+ * Microsoft 365 — pagina soluzioni (tema v2 come scheda prodotto: hero #0a0a0f, glass, CTA var(--page-accent, #003182)).
  */
 
 /* ── Pagina: stesso fondo della scheda prodotto v2 ── */
@@ -170,7 +170,7 @@ body.m365sol main.product-page.m365sol-main {
 
 .m365sol-gradient-text {
     display: block;
-    background: linear-gradient(135deg, #0078d7 0%, #00bcd4 50%, #7c3aed 100%);
+    background: linear-gradient(135deg, var(--page-accent, #003182) 0%, #00bcd4 50%, #7c3aed 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -406,7 +406,7 @@ html[data-theme="light"] .m365sol-path-card p {
 }
 
 html[data-theme="light"] .m365sol-path-link {
-    color: #0078d7;
+    color: var(--page-accent, #003182);
 }
 
 html[data-theme="light"] .m365sol-path-card--purple .m365sol-path-link {
@@ -610,7 +610,7 @@ html[data-theme="light"] .m365sol-copilot {
 html[data-theme="light"] .m365sol-copilot-tag {
     background: rgba(0, 120, 215, 0.1);
     border-color: rgba(0, 120, 215, 0.2);
-    color: #0078d7;
+    color: var(--page-accent, #003182);
 }
 
 .m365sol-copilot-text h2 {

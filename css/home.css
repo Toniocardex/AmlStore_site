@@ -419,15 +419,15 @@ html[data-theme='light'] .home-product-detail:hover {
 }
 
 .home-btn-primary {
-    background: linear-gradient(135deg, #0078d7 0%, #106ebe 100%);
+    background: var(--page-accent, #003182);
     color: #ffffff;
     border: none;
-    box-shadow: 0 8px 24px rgba(0, 120, 215, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 49, 130, 0.4);
 }
 
 .home-btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(0, 120, 215, 0.5);
+    box-shadow: 0 12px 32px rgba(0, 49, 130, 0.5);
     filter: brightness(1.08);
 }
 

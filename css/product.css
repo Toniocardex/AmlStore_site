@@ -33,7 +33,7 @@ main.product-page {
     --pp-success: #10b981;
     --pp-warning: #f59e0b;
     --pp-accent-hover: #005da6;
-    --pp-brand: #0067b8;
+    --pp-brand: var(--page-accent, #003182);
     --pp-brand-hover: #005da6;
     --pp-pricing-bg: rgba(255, 255, 255, 0.04);
     --pp-pricing-border: var(--page-border);

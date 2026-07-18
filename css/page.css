@@ -226,7 +226,7 @@ a.product-card--link:focus-visible {
     min-height: 44px;
     padding: 0.85rem 1.35rem;
     box-sizing: border-box;
-    background: linear-gradient(135deg, #0078d7 0%, #106ebe 100%);
+    background: var(--page-accent, #003182);
     color: #ffffff;
     border: none;
     border-radius: 6px;
@@ -251,7 +251,7 @@ a.product-card--link:focus-visible {
 }
 
 .btn-cta-primary:focus-visible {
-    outline: 2px solid #0078d7;
+    outline: 2px solid var(--page-accent, #003182);
     outline-offset: 3px;
 }
 
