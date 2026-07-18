@@ -42,6 +42,7 @@ const i18n = {
         footer_help:      'Hai domande? Contattaci:',
         footer_copy:      '© {year} AML STORE di Cardelli Antonino — P.IVA inclusa in fattura',
         cta:              'Vai al negozio',
+        shipping_title:   'Indirizzo di spedizione',
     },
     en: {
         subject_paid:     'Order #{orderId} confirmed — Aml Store',
@@ -70,6 +71,7 @@ const i18n = {
         footer_help:      'Questions? Contact us:',
         footer_copy:      '© {year} AML STORE di Cardelli Antonino',
         cta:              'Go to store',
+        shipping_title:   'Shipping address',
     },
     fr: {
         subject_paid:     'Commande #{orderId} confirmée — Aml Store',
@@ -98,6 +100,7 @@ const i18n = {
         footer_help:      'Des questions ? Contactez-nous :',
         footer_copy:      '© {year} AML STORE di Cardelli Antonino',
         cta:              'Aller à la boutique',
+        shipping_title:   'Adresse de livraison',
     },
     de: {
         subject_paid:     'Bestellung #{orderId} bestätigt — Aml Store',
@@ -126,6 +129,7 @@ const i18n = {
         footer_help:      'Fragen? Kontaktieren Sie uns:',
         footer_copy:      '© {year} AML STORE di Cardelli Antonino',
         cta:              'Zum Shop',
+        shipping_title:   'Lieferadresse',
     },
     es: {
         subject_paid:     'Pedido #{orderId} confirmado — Aml Store',
@@ -154,6 +158,7 @@ const i18n = {
         footer_help:      '¿Preguntas? Contáctenos:',
         footer_copy:      '© {year} AML STORE di Cardelli Antonino',
         cta:              'Ir a la tienda',
+        shipping_title:   'Dirección de envío',
     },
 };
 
@@ -259,6 +264,19 @@ export function emailHtml(order, isPaid) {
       </td></tr>
     </table>` : '';
 
+    // Indirizzo di spedizione (solo articoli fisici: DVD/COA)
+    const shippingSection = (order.requiresShipping && order.shipping) ? `
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${BG};border-radius:6px">
+      <tr><td style="padding:16px 20px">
+        <p style="margin:0 0 6px;font-size:13px;font-weight:700;color:${TEXT}">${t.shipping_title}</p>
+        <p style="margin:0;font-size:14px;color:${TEXT};line-height:1.5">
+          ${escHtml(order.shipping.addressLine1)}<br>
+          ${escHtml(order.shipping.postalCode)} ${escHtml(order.shipping.city)}${order.shipping.province ? ' (' + escHtml(order.shipping.province) + ')' : ''}<br>
+          ${escHtml(order.shipping.country)}
+        </p>
+      </td></tr>
+    </table>` : '';
+
     // Riferimento PSP (solo se pagato)
     let pspRef = '';
     if (isPaid) {
@@ -332,6 +350,7 @@ export function emailHtml(order, isPaid) {
       </tr>
     </table>
 
+    ${shippingSection}
     ${transferSection}
 
   </td></tr>
@@ -395,6 +414,16 @@ export function emailText(order, isPaid) {
     });
 
     lines.push(``, `${t.total}: ${fmt(order.totalMinor, order.currency)}`);
+
+    if (order.requiresShipping && order.shipping) {
+        lines.push(
+            ``,
+            `--- ${t.shipping_title} ---`,
+            order.shipping.addressLine1,
+            `${order.shipping.postalCode} ${order.shipping.city}${order.shipping.province ? ' (' + order.shipping.province + ')' : ''}`,
+            order.shipping.country,
+        );
+    }
 
     if (!isPaid && order.payment_method === 'bank_transfer') {
         lines.push(

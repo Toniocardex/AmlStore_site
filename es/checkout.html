@@ -156,6 +156,35 @@
                             </div>
                         </section>
 
+                        <section id="shipping-section" class="form-section" aria-labelledby="section-title-shipping" hidden>
+                            <p id="section-title-shipping" class="form-section-title">📦 Dirección de envío</p>
+                            <p class="field-hint" style="margin:-0.5rem 0 1rem;">Tu carrito contiene un artículo físico (DVD o adhesivo COA) que se te enviará por correo postal.</p>
+                            <div class="form-field">
+                                <label for="field-address">Dirección (calle y número) <abbr title="obligatorio" aria-label="obligatorio">*</abbr></label>
+                                <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="Calle Mayor 12">
+                            </div>
+                            <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-field">
+                                    <label for="field-city">Ciudad <abbr title="obligatorio" aria-label="obligatorio">*</abbr></label>
+                                    <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="Madrid">
+                                </div>
+                                <div class="form-field">
+                                    <label for="field-postal-code">Código postal <abbr title="obligatorio" aria-label="obligatorio">*</abbr></label>
+                                    <input type="text" id="field-postal-code" name="postalCode" autocomplete="postal-code" placeholder="28013">
+                                </div>
+                            </div>
+                            <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-field">
+                                    <label for="field-province">Provincia <span style="font-weight:400;color:var(--page-text-muted)">(opcional)</span></label>
+                                    <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
+                                </div>
+                                <div class="form-field">
+                                    <label for="field-country">País <abbr title="obligatorio" aria-label="obligatorio">*</abbr></label>
+                                    <input type="text" id="field-country" name="country" autocomplete="country-name" placeholder="España" value="España">
+                                </div>
+                            </div>
+                        </section>
+
                         <section class="form-section" aria-labelledby="section-title-payment">
                             <p id="section-title-payment" class="form-section-title">Método de pago</p>
 
@@ -276,7 +305,7 @@
                             <div id="checkout-items" class="checkout-items" aria-live="polite" data-qty-label="Cant."></div>
                             <div class="checkout-totals">
                                 <div class="checkout-total-row"><span class="checkout-total-label">Subtotal</span><span id="checkout-subtotal">—</span></div>
-                                <div class="checkout-total-row"><span class="checkout-total-label">Envío</span><span>Digital — gratuito</span></div>
+                                <div class="checkout-total-row"><span class="checkout-total-label">Envío</span><span id="checkout-shipping-note" data-label-digital="Digital — gratuito" data-label-physical="Gratuito">Digital — gratuito</span></div>
                                 <div class="checkout-total-row checkout-grand-total"><span class="checkout-total-label">Total</span><span id="checkout-grand-total">—</span></div>
                             </div>
                             <div class="checkout-trust" aria-label="Seguridad de pago">
@@ -296,11 +325,11 @@
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
 
     <script src="../js/locale-path.js?v=0c77df5095"></script>
-    <script src="../js/cart.js?v=023e22a433" defer></script>
+    <script src="../js/cart.js?v=32dc4d5333" defer></script>
     <script src="../components/cookie-banner.js?v=5b248be783" defer></script>
     <script src="../components/header.js?v=16d9f1d3fc" defer></script>
     <script src="../components/footer.js?v=0e085c2b8d" defer></script>
-    <script src="../js/checkout.js?v=32091d331c" defer></script>
+    <script src="../js/checkout.js?v=0525ebcea0" defer></script>
 
 </body>
 </html>

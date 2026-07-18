@@ -36,16 +36,16 @@ export const CATALOG = {
   "TL11012001-EN": { name: "Bitdefender Antivirus Plus | 1 Anno | 3 Dispositivi", unitAmountMinor: 2899, compareAtMinor: 3499, currency: 'EUR', type: "subscription", category: "antivirus" },
   "TL11012001-EN-5D": { name: "Bitdefender Antivirus Plus | 1 Anno | 5 Dispositivi", unitAmountMinor: 3899, compareAtMinor: 5671, currency: 'EUR', type: "subscription", category: "antivirus" },
   "TL11011010-DE": { name: "Bitdefender Antivirus Plus | 1 Anno | 10 Dispositivi", unitAmountMinor: 5499, compareAtMinor: 7999, currency: 'EUR', type: "subscription", category: "antivirus" },
-  "FQC-10538": { name: "Microsoft Windows 11 Professional DVD Ita OEM | FQC-10538", unitAmountMinor: 8199, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows" },
+  "FQC-10538": { name: "Microsoft Windows 11 Professional DVD Ita OEM | FQC-10538", unitAmountMinor: 8199, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows", physical: true },
   "EP2-07110": { name: "Microsoft Visio Professional 2024 - Licenza ESD Originale (Windows)", unitAmountMinor: 44700, compareAtMinor: 88900, currency: 'EUR', type: "perpetual", category: "suite office" },
   "EP2-07167": { name: "Microsoft Visio Standard 2024", unitAmountMinor: 28495, compareAtMinor: 47900, currency: 'EUR', type: "perpetual", category: "suite office" },
-  "P73-08328": { name: "Microsoft Windows Server 2022 Standard 64-bit 16 Core | OEM DVD ENG | P73-08328", unitAmountMinor: 35999, compareAtMinor: 38900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server" },
+  "P73-08328": { name: "Microsoft Windows Server 2022 Standard 64-bit 16 Core | OEM DVD ENG | P73-08328", unitAmountMinor: 35999, compareAtMinor: 38900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server", physical: true },
   "79G-05018": { name: "Microsoft Office 2019 Home and Student | PC/Mac", unitAmountMinor: 10259, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office" },
   "NORT_360DEL_3D_1A": { name: "Norton 360 Deluxe 25GB Cloud | 3 Dispositivi", unitAmountMinor: 1999, compareAtMinor: 3999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "P1433901": { name: "Norton 360 Standard 10GB Cloud | 1 Dispositivo | 1 Anno - NO ABBONAMENTO", unitAmountMinor: 1899, compareAtMinor: 2999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "EP2-25187": { name: "Microsoft Windows Server 2025 Standard 64-bit 16 Core", unitAmountMinor: 39495, compareAtMinor: 74900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server" },
-  "P73-08538": { name: "Microsoft Windows Server 2025 Standard 64-bit 16 Core| OEM DVD ENG | P73-08538", unitAmountMinor: 38999, compareAtMinor: 78895, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server" },
-  "P73-07788": { name: "Microsoft Windows Server 2019 Standard 64-bit 16 Core | OEM DVD ENG | P73-07788", unitAmountMinor: 13900, compareAtMinor: 27900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server" },
+  "P73-08538": { name: "Microsoft Windows Server 2025 Standard 64-bit 16 Core| OEM DVD ENG | P73-08538", unitAmountMinor: 38999, compareAtMinor: 78895, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server", physical: true },
+  "P73-07788": { name: "Microsoft Windows Server 2019 Standard 64-bit 16 Core | OEM DVD ENG | P73-07788", unitAmountMinor: 13900, compareAtMinor: 27900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server", physical: true },
   "EP2-07001": { name: "Microsoft Project Professional 2024 | Licenza ESD Perpetua", unitAmountMinor: 68999, compareAtMinor: 165900, currency: 'EUR', type: "perpetual", category: "suite office" },
   "KASP_STD_1D_1A": { name: "Kaspersky Standard | Antivirus 2025", unitAmountMinor: 1899, compareAtMinor: 3499, currency: 'EUR', type: "subscription", category: "antivirus" },
   "KASP_PLUS_1D_1A": { name: "Kaspersky Plus | Internet Security 2025", unitAmountMinor: 3199, compareAtMinor: 5499, currency: 'EUR', type: "subscription", category: "antivirus" },
@@ -53,8 +53,8 @@ export const CATALOG = {
   "NORT_360DEL_3D_1A-NOABB": { name: "Norton 360 Deluxe 25GB Cloud | 3 Dispositivi | 1 Anno - NO ABBONAMENTO", unitAmountMinor: 1899, compareAtMinor: 3999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "AD_STD_2D-1A": { name: "Adobe Acrobat Standard | 2 Dispositivi | 1 Anno - PC/Mac", unitAmountMinor: 17999, compareAtMinor: 19020, currency: 'EUR', type: "subscription", category: "tool ufficio" },
   "SC916509": { name: "Adobe Acrobat Professional | 2 Dispositivi | 1 Anno - PC/Mac", unitAmountMinor: 23999, compareAtMinor: 29119, currency: 'EUR', type: "subscription", category: "tool ufficio" },
-  "W11_PRO_STICKER": { name: "Microsoft Windows 11 Professional COA Sticker - Licenza OEM Originale", unitAmountMinor: 3199, compareAtMinor: 7900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows" },
-  "P6L-00076": { name: "Microsoft SQL Server 2022 Enterprise 24 Core Unlimited CALs incl. DVD", unitAmountMinor: 388000, compareAtMinor: 665000, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server" },
+  "W11_PRO_STICKER": { name: "Microsoft Windows 11 Professional COA Sticker - Licenza OEM Originale", unitAmountMinor: 3199, compareAtMinor: 7900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows", physical: true },
+  "P6L-00076": { name: "Microsoft SQL Server 2022 Enterprise 24 Core Unlimited CALs incl. DVD", unitAmountMinor: 388000, compareAtMinor: 665000, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server", physical: true },
   "P73-07788_ESD": { name: "Microsoft Windows Server 2019 Standard 64-bit 16 Core", unitAmountMinor: 14799, compareAtMinor: 67999, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server" },
   "B0CXZR44LP": { name: "CorelDRAW Graphics Suite 2024 | Acquisto unico | Windows o Mac", unitAmountMinor: 56900, compareAtMinor: 77900, currency: 'EUR', type: "perpetual", category: "multimedia > photoediting" },
   "1108921": { name: "McAfee Total Protection 2026 | 1 Dispositivo | 1 Anno", unitAmountMinor: 995, compareAtMinor: 2995, currency: 'EUR', type: "subscription", category: "antivirus" },
@@ -63,7 +63,7 @@ export const CATALOG = {
   "KL1047GDCFS1": { name: "Kaspersky Premium | 3 Dispositivi | 1 Anno", unitAmountMinor: 3499, compareAtMinor: 6899, currency: 'EUR', type: "subscription", category: "antivirus" },
   "KL1047GDEFS": { name: "Kaspersky Premium | 5 Dispositivi | 1 Anno", unitAmountMinor: 4499, compareAtMinor: 7899, currency: 'EUR', type: "subscription", category: "antivirus" },
   "KL1047GDKFS": { name: "Kaspersky Premium | 10 Dispositivi | 1 Anno", unitAmountMinor: 5499, compareAtMinor: 8999, currency: 'EUR', type: "subscription", category: "antivirus" },
-  "SC835510": { name: "Microsoft SQL Server 2022 Standard 16 Core Unlimited CALs incl. DVD", unitAmountMinor: 189900, compareAtMinor: 375500, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server" },
+  "SC835510": { name: "Microsoft SQL Server 2022 Standard 16 Core Unlimited CALs incl. DVD", unitAmountMinor: 189900, compareAtMinor: 375500, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server", physical: true },
   "SC_M365_KPremium_5Device": { name: "Microsoft Office 365 Personal | Kaspersky Premium 5 Dispositivi - 1 Anno", unitAmountMinor: 11899, compareAtMinor: 17898, currency: 'EUR', type: "subscription", category: "suite office > microsoft 365" },
   "SC_M365P_MTOTPROT_5Device": { name: "Microsoft Office 365 Personal | McAfee Total Protection 5 Dispositivi - 1 Anno", unitAmountMinor: 8999, compareAtMinor: 13895, currency: 'EUR', type: "subscription", category: "suite office > microsoft 365" },
   "SC_W11HOME_M365PERS": { name: "Microsoft Windows 11 Home | Microsoft 365 Personal 5 Dispositivi 1 Anno", unitAmountMinor: 14900, compareAtMinor: 17800, currency: 'EUR', type: "bundle", category: "sistema operativo > windows > microsoft windows 11" },
@@ -99,8 +99,14 @@ export function resolveAndValidateItems(rawItems) {
             qty,
             unit_amount_minor: entry.unitAmountMinor,
             currency: entry.currency,
+            physical: Boolean(entry.physical),
         });
     }
     if (items.length === 0) throw new Error("Carrello vuoto");
     return items;
+}
+
+/** Vero se almeno una riga richiede spedizione fisica (DVD/COA). */
+export function itemsRequireShipping(items) {
+    return (items || []).some((i) => i.physical);
 }

@@ -196,7 +196,7 @@
 
             var cust = o.customer || {};
             return '<tr class="adm-order-row' + archived + '" data-id="' + esc(o.orderId) + '">'
-                + '<td class="adm-td--nowrap"><span class="adm-order-id">' + esc(o.orderId) + '</span></td>'
+                + '<td class="adm-td--nowrap"><span class="adm-order-id">' + esc(o.orderId) + '</span>' + (o.requiresShipping ? ' <span title="Contiene articoli fisici da spedire">📦</span>' : '') + '</td>'
                 + '<td>'
                     + '<div class="adm-customer-name">' + esc((cust.firstName || '') + ' ' + (cust.lastName || '')) + '</div>'
                     + '<div class="adm-customer-email">' + esc(cust.email || '') + '</div>'
@@ -343,12 +343,25 @@
             + (c.sdi     ? field('SDI',          esc(c.sdi))     : '')
         + '</div></div>';
 
+        // Spedizione (solo ordini con articoli fisici: DVD/COA)
+        if (o.requiresShipping && o.shipping) {
+            var s = o.shipping;
+            html += '<div class="adm-detail-section">'
+                + '<p class="adm-detail-section__title">📦 Spedizione</p>'
+                + '<div class="adm-detail-grid">'
+                + field('Indirizzo', esc(s.addressLine1 || '—'))
+                + field('Città',     esc(s.city || '—') + ' ' + esc(s.postalCode || ''))
+                + (s.province ? field('Provincia', esc(s.province)) : '')
+                + field('Paese',     esc(s.country || '—'))
+            + '</div></div>';
+        }
+
         // Articoli
         var itemRows = (o.lineItems || []).map(function (i) {
             var qty  = i.qty || i.quantity || 1;
             var unit = i.unit_amount_minor || i.unitAmount || 0;
             return '<tr>'
-                + '<td>' + esc(i.name || i.sku || '?') + (i.sku ? '<br><small style="color:var(--adm-muted)">' + esc(i.sku) + '</small>' : '') + '</td>'
+                + '<td>' + esc(i.name || i.sku || '?') + (i.physical ? ' 📦' : '') + (i.sku ? '<br><small style="color:var(--adm-muted)">' + esc(i.sku) + '</small>' : '') + '</td>'
                 + '<td class="adm-td--right">' + qty + '</td>'
                 + '<td class="adm-td--right">' + esc(fmtMoney(unit * qty, o.currency)) + '</td>'
             + '</tr>';

@@ -164,6 +164,35 @@
                             </div>
                         </section>
 
+                        <section id="shipping-section" class="form-section" aria-labelledby="section-title-shipping" hidden>
+                            <p id="section-title-shipping" class="form-section-title">📦 Adresse de livraison</p>
+                            <p class="field-hint" style="margin:-0.5rem 0 1rem;">Votre panier contient un article physique (DVD ou autocollant COA) qui vous sera envoyé par courrier.</p>
+                            <div class="form-field">
+                                <label for="field-address">Adresse (rue et numéro) <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
+                                <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="12 rue de la Paix">
+                            </div>
+                            <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-field">
+                                    <label for="field-city">Ville <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
+                                    <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="Paris">
+                                </div>
+                                <div class="form-field">
+                                    <label for="field-postal-code">Code postal <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
+                                    <input type="text" id="field-postal-code" name="postalCode" autocomplete="postal-code" placeholder="75002">
+                                </div>
+                            </div>
+                            <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-field">
+                                    <label for="field-province">Région <span style="font-weight:400;color:var(--page-text-muted)">(facultatif)</span></label>
+                                    <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
+                                </div>
+                                <div class="form-field">
+                                    <label for="field-country">Pays <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
+                                    <input type="text" id="field-country" name="country" autocomplete="country-name" placeholder="France" value="France">
+                                </div>
+                            </div>
+                        </section>
+
                         <section class="form-section" aria-labelledby="section-title-payment">
                             <p id="section-title-payment" class="form-section-title">Mode de paiement</p>
 
@@ -284,7 +313,7 @@
                             <div id="checkout-items" class="checkout-items" aria-live="polite" data-qty-label="Qté"></div>
                             <div class="checkout-totals">
                                 <div class="checkout-total-row"><span class="checkout-total-label">Sous-total</span><span id="checkout-subtotal">—</span></div>
-                                <div class="checkout-total-row"><span class="checkout-total-label">Livraison</span><span>Numérique — gratuite</span></div>
+                                <div class="checkout-total-row"><span class="checkout-total-label">Livraison</span><span id="checkout-shipping-note" data-label-digital="Numérique — gratuite" data-label-physical="Gratuite">Numérique — gratuite</span></div>
                                 <div class="checkout-total-row checkout-grand-total"><span class="checkout-total-label">Total</span><span id="checkout-grand-total">—</span></div>
                             </div>
                             <div class="checkout-trust" aria-label="Sécurité des paiements">
@@ -304,11 +333,11 @@
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
 
     <script src="../js/locale-path.js?v=0c77df5095"></script>
-    <script src="../js/cart.js?v=023e22a433" defer></script>
+    <script src="../js/cart.js?v=32dc4d5333" defer></script>
     <script src="../components/cookie-banner.js?v=5b248be783" defer></script>
     <script src="../components/header.js?v=16d9f1d3fc" defer></script>
     <script src="../components/footer.js?v=0e085c2b8d" defer></script>
-    <script src="../js/checkout.js?v=32091d331c" defer></script>
+    <script src="../js/checkout.js?v=0525ebcea0" defer></script>
 
 </body>
 </html>

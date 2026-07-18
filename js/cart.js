@@ -76,6 +76,13 @@
         return String(ds.stripeProductSku || el.getAttribute('data-stripe-product-sku') || '').trim();
     }
 
+    /** Segnale UI: richiede indirizzo di spedizione (server rivalida via catalogo). */
+    function isPhysical(el) {
+        if (!el) return false;
+        const ds = el.dataset || {};
+        return (ds.physical || el.getAttribute('data-physical') || '') === 'true';
+    }
+
     /**
      * Converte uno SKU tipo slug (microsoft-365-personal-12m) in titolo per vetrina:
      * rimuove suffisso durata -12m/-24m, trattini → spazi, ogni segmento con iniziale maiuscola.
@@ -148,7 +155,7 @@
         const imgEl = document.querySelector('.product-cover-img');
         const image = normalizeImageSrc(imgEl && imgEl.getAttribute('src'));
         const productPath = global.location.pathname || '';
-        return { sku, name, currency, unitAmount, quantity: 1, image, productPath };
+        return { sku, name, currency, unitAmount, quantity: 1, image, productPath, physical: isPhysical(root) };
     }
 
     /** Blocco prezzi / card catalogo da cui leggere SKU e importo */
@@ -344,7 +351,7 @@
                 productPath = link.getAttribute('href');
             }
         }
-        return { sku, name, currency, unitAmount, quantity: 1, image, productPath };
+        return { sku, name, currency, unitAmount, quantity: 1, image, productPath, physical: isPhysical(root) };
     }
 
     /* ─── Mutazioni carrello ───────────────────────────────────────────────────── */
@@ -362,6 +369,7 @@
             next[idx].unitAmount = line.unitAmount;
             if (line.image) next[idx].image = line.image;
             if (line.productPath) next[idx].productPath = line.productPath;
+            next[idx].physical = Boolean(line.physical);
             return next;
         }
         next.push({
@@ -372,6 +380,7 @@
             quantity: Number(line.quantity) > 0 ? Number(line.quantity) : 1,
             image: line.image || '',
             productPath: line.productPath || '',
+            physical: Boolean(line.physical),
         });
         return next;
     }

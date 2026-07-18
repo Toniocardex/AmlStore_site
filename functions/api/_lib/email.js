@@ -44,6 +44,14 @@ function buildOrderForTemplate(order, overrides = {}) {
         stripe_payment_intent: order.stripe_payment_intent,
         paypal_order_id:       order.paypal_order_id,
         paypal_capture_id:     order.paypal_capture_id,
+        requiresShipping: Boolean(order.requires_shipping),
+        shipping: order.requires_shipping ? {
+            addressLine1: order.shipping_address_line1,
+            city:         order.shipping_city,
+            postalCode:   order.shipping_postal_code,
+            province:     order.shipping_province,
+            country:      order.shipping_country,
+        } : undefined,
         ...overrides,
     };
 }
@@ -93,15 +101,26 @@ function internalOrderHtml(order) {
         const qty = Number(item.qty || item.quantity || 1);
         const unit = Number(item.unit_amount_minor || item.unitAmount || 0);
         const subMinor = Math.round(unit) * qty;
+        const actionLabel = item.physical
+            ? '<span style="color:#1d4ed8">SPEDIRE FISICAMENTE</span>'
+            : '<span style="color:#b45309">DA INVIARE MANUALMENTE</span>';
         return `
             <tr>
                 <td style="padding:10px;border-bottom:1px solid #e5e7eb">${esc(item.name || item.sku || 'Prodotto')}</td>
                 <td style="padding:10px;border-bottom:1px solid #e5e7eb;font-family:monospace">${esc(item.sku || 'N/D')}</td>
                 <td style="padding:10px;border-bottom:1px solid #e5e7eb;text-align:center">${qty}</td>
                 <td style="padding:10px;border-bottom:1px solid #e5e7eb;text-align:right">${formatMoney(subMinor, order.currency)}</td>
-                <td style="padding:10px;border-bottom:1px solid #e5e7eb;color:#b45309;font-weight:700">DA INVIARE MANUALMENTE</td>
+                <td style="padding:10px;border-bottom:1px solid #e5e7eb;font-weight:700">${actionLabel}</td>
             </tr>`;
     }).join('');
+
+    const shippingBlock = order.requires_shipping ? `
+          <h2 style="font-size:16px;margin:18px 0 10px">Indirizzo di spedizione</h2>
+          <p style="margin:0 0 18px;padding:12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;color:#1e3a8a">
+            ${esc(order.shipping_address_line1)}<br>
+            ${esc(order.shipping_postal_code)} ${esc(order.shipping_city)}${order.shipping_province ? ' (' + esc(order.shipping_province) + ')' : ''}<br>
+            ${esc(order.shipping_country)}
+          </p>` : '';
 
     return `<!DOCTYPE html>
 <html lang="it">
@@ -139,7 +158,7 @@ function internalOrderHtml(order) {
             </thead>
             <tbody>${rows}</tbody>
           </table>
-
+          ${shippingBlock}
           <p style="margin:18px 0 0;padding:12px;background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;color:#92400e">
             ${esc(actionText)}
           </p>
@@ -182,9 +201,19 @@ function internalOrderText(order) {
             `  ID articolo / SKU: ${item.sku || 'N/D'}`,
             `  Quantita: ${qty}`,
             `  Subtotale: ${formatMoney(subMinor, order.currency)}`,
-            `  Licenza: DA INVIARE MANUALMENTE`,
+            `  Licenza: ${item.physical ? 'SPEDIRE FISICAMENTE' : 'DA INVIARE MANUALMENTE'}`,
         );
     });
+
+    if (order.requires_shipping) {
+        lines.push(
+            '',
+            'Indirizzo di spedizione:',
+            order.shipping_address_line1,
+            `${order.shipping_postal_code} ${order.shipping_city}${order.shipping_province ? ' (' + order.shipping_province + ')' : ''}`,
+            order.shipping_country,
+        );
+    }
 
     lines.push('', actionText);
     return lines.join('\n');

@@ -32,7 +32,7 @@ import { sendConfirmationOnce,
 import { resolveAdminAuth, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
          unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
-import { resolveAndValidateItems }                     from './_lib/catalog.js';
+import { resolveAndValidateItems, itemsRequireShipping } from './_lib/catalog.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -273,6 +273,26 @@ function validateCustomer(rawCustomer, rawLang) {
 }
 
 /**
+ * Valida l'indirizzo di spedizione (richiesto solo se il carrello contiene
+ * almeno un articolo fisico: DVD/COA — vedi catalog.js `physical`).
+ */
+function validateShipping(raw) {
+    const s = raw || {};
+    const shipping = {
+        addressLine1: cleanString(s.addressLine1, 160),
+        city:         cleanString(s.city, 80),
+        postalCode:   cleanString(s.postalCode, 20),
+        province:     cleanString(s.province, 80),
+        country:      cleanString(s.country, 80),
+    };
+    if (!shipping.addressLine1) throw Object.assign(new Error('Indirizzo di spedizione mancante'), { status: 400 });
+    if (!shipping.city) throw Object.assign(new Error('Città di spedizione mancante'), { status: 400 });
+    if (!shipping.postalCode) throw Object.assign(new Error('CAP di spedizione mancante'), { status: 400 });
+    if (!shipping.country) throw Object.assign(new Error('Paese di spedizione mancante'), { status: 400 });
+    return shipping;
+}
+
+/**
  * Costruisce i parametri ordine dal body JSON del checkout.
  */
 function orderParamsFromBody(body, paymentMethod) {
@@ -283,6 +303,8 @@ function orderParamsFromBody(body, paymentMethod) {
     } catch (catalogErr) {
         throw Object.assign(new Error(catalogErr.message || 'Invalid catalog'), { status: 400 });
     }
+    const requiresShipping = itemsRequireShipping(items);
+    const shipping = requiresShipping ? validateShipping(body.shipping) : null;
     return {
         idempotencyKey:    normalizeIdempotencyKey(body.idempotencyKey),
         customerEmail:     c.email,
@@ -299,6 +321,8 @@ function orderParamsFromBody(body, paymentMethod) {
         totalMinor:        totalMinorFromItems(items),
         currency:          (items[0]?.currency) || 'EUR',
         paymentMethod,
+        requiresShipping,
+        shipping,
     };
 }
 

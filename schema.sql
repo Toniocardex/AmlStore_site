@@ -24,6 +24,14 @@ CREATE TABLE IF NOT EXISTS orders (
     customer_pec                 TEXT,
     locale                       TEXT NOT NULL DEFAULT 'it',       -- it|en|fr|de|es
 
+    -- Spedizione (solo ordini con almeno un articolo fisico: DVD/COA)
+    requires_shipping            INTEGER NOT NULL DEFAULT 0,       -- 0|1
+    shipping_address_line1       TEXT,
+    shipping_city                TEXT,
+    shipping_postal_code         TEXT,
+    shipping_province            TEXT,
+    shipping_country             TEXT,
+
     -- Righe ordine (JSON congelato al momento dell'acquisto)
     line_items                   TEXT NOT NULL,            -- JSON: [{sku,name,qty,unit_amount,currency}]
     total_minor                  INTEGER NOT NULL,         -- centesimi (es. 1999 = €19.99)
@@ -59,3 +67,4 @@ CREATE INDEX IF NOT EXISTS idx_orders_status          ON orders(status);
 CREATE INDEX IF NOT EXISTS idx_orders_customer_email  ON orders(customer_email);
 CREATE INDEX IF NOT EXISTS idx_orders_created_at      ON orders(created_at);
 CREATE INDEX IF NOT EXISTS idx_orders_archived        ON orders(archived_at);
+CREATE INDEX IF NOT EXISTS idx_orders_requires_shipping ON orders(requires_shipping);

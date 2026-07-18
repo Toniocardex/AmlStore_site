@@ -298,6 +298,39 @@
                             </div>
                         </section>
 
+                        <!-- ── 1b. Shipping address (only if the cart contains physical items) ── -->
+                        <section id="shipping-section" class="form-section" aria-labelledby="section-title-shipping" hidden>
+                            <p id="section-title-shipping" class="form-section-title">📦 Shipping address</p>
+                            <p class="field-hint" style="margin:-0.5rem 0 1rem;">Your cart contains a physical item (DVD or COA sticker) that will be shipped to you by post.</p>
+
+                            <div class="form-field">
+                                <label for="field-address">Address (street and number) <abbr title="required" aria-label="required">*</abbr></label>
+                                <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="221B Baker Street">
+                            </div>
+
+                            <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-field">
+                                    <label for="field-city">City <abbr title="required" aria-label="required">*</abbr></label>
+                                    <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="London">
+                                </div>
+                                <div class="form-field">
+                                    <label for="field-postal-code">Postal code <abbr title="required" aria-label="required">*</abbr></label>
+                                    <input type="text" id="field-postal-code" name="postalCode" autocomplete="postal-code" placeholder="NW1 6XE">
+                                </div>
+                            </div>
+
+                            <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-field">
+                                    <label for="field-province">State / Province <span style="font-weight:400;color:var(--page-text-muted)">(optional)</span></label>
+                                    <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
+                                </div>
+                                <div class="form-field">
+                                    <label for="field-country">Country <abbr title="required" aria-label="required">*</abbr></label>
+                                    <input type="text" id="field-country" name="country" autocomplete="country-name" placeholder="United Kingdom">
+                                </div>
+                            </div>
+                        </section>
+
                         <!-- ── 2. Payment method ── -->
                         <section class="form-section" aria-labelledby="section-title-payment">
                             <p id="section-title-payment" class="form-section-title">Payment method</p>
@@ -518,7 +551,7 @@
                                 </div>
                                 <div class="checkout-total-row">
                                     <span class="checkout-total-label">Shipping</span>
-                                    <span>Digital — free</span>
+                                    <span id="checkout-shipping-note" data-label-digital="Digital — free" data-label-physical="Free">Digital — free</span>
                                 </div>
                                 <div class="checkout-total-row checkout-grand-total">
                                     <span class="checkout-total-label">Total</span>
@@ -545,11 +578,11 @@
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
 
     <script src="../js/locale-path.js?v=0c77df5095"></script>
-    <script src="../js/cart.js?v=023e22a433" defer></script>
+    <script src="../js/cart.js?v=32dc4d5333" defer></script>
     <script src="../components/cookie-banner.js?v=5b248be783" defer></script>
     <script src="../components/header.js?v=16d9f1d3fc" defer></script>
     <script src="../components/footer.js?v=0e085c2b8d" defer></script>
-    <script src="../js/checkout.js?v=32091d331c" defer></script>
+    <script src="../js/checkout.js?v=0525ebcea0" defer></script>
 
 </body>
 </html>

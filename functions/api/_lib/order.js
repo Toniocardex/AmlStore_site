@@ -28,6 +28,8 @@ export async function createOrder(db, {
     totalMinor,
     currency,
     paymentMethod,
+    requiresShipping,
+    shipping,
 }) {
     // Genera ID breve leggibile: AML- + 8 caratteri uppercase alfanumerici
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no I,O,0,1 (ambigui)
@@ -35,6 +37,7 @@ export async function createOrder(db, {
     crypto.getRandomValues(arr);
     const id = 'AML-' + Array.from(arr).map(b => chars[b % chars.length]).join('');
     const ts = now();
+    const ship = shipping || {};
 
     await db.prepare(`
         INSERT INTO orders (
@@ -42,12 +45,16 @@ export async function createOrder(db, {
             customer_email, customer_first_name, customer_last_name,
             customer_company, customer_type, customer_phone,
             customer_piva, customer_sdi, customer_pec, locale,
+            requires_shipping, shipping_address_line1, shipping_city,
+            shipping_postal_code, shipping_province, shipping_country,
             line_items, total_minor, currency, payment_method
         ) VALUES (
             ?, ?, 'pending_payment', ?, ?,
             ?, ?, ?,
             ?, ?, ?,
             ?, ?, ?, ?,
+            ?, ?, ?,
+            ?, ?, ?,
             ?, ?, ?, ?
         )
     `).bind(
@@ -55,6 +62,8 @@ export async function createOrder(db, {
         customerEmail, customerFirstName, customerLastName,
         customerCompany || null, customerType || 'private', customerPhone || null,
         customerPiva || null, customerSdi || null, customerPec || null, locale || 'it',
+        requiresShipping ? 1 : 0, ship.addressLine1 || null, ship.city || null,
+        ship.postalCode || null, ship.province || null, ship.country || null,
         JSON.stringify(lineItems), totalMinor, currency || 'EUR', paymentMethod
     ).run();
 
@@ -192,5 +201,13 @@ export function toPublicOrder(order) {
         totalMinor:    order.total_minor,
         currency:      order.currency,
         causale:       order.payment_method === 'bank_transfer' ? order.id : undefined,
+        requiresShipping: Boolean(order.requires_shipping),
+        shipping: order.requires_shipping ? {
+            addressLine1: order.shipping_address_line1,
+            city:         order.shipping_city,
+            postalCode:   order.shipping_postal_code,
+            province:     order.shipping_province,
+            country:      order.shipping_country,
+        } : undefined,
     };
 }

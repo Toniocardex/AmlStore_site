@@ -323,8 +323,10 @@
             }
         }
 
+        var shippingValid = validateShippingForm();
+
         if (firstInvalid) setTimeout(function () { firstInvalid.focus(); }, 0);
-        return valid;
+        return valid && shippingValid;
     }
 
     /* ─── Metodi di pagamento — visibilità ────────────────────────────────── */
@@ -356,6 +358,79 @@
         updateVisibility();
     }
 
+    /* ─── Spedizione ───────────────────────────────────────────────────────── */
+    // Mostra/richiede l'indirizzo solo se il carrello contiene un articolo fisico
+    // (DVD/COA — flag impostato in cart.js da data-physical sulla pagina prodotto).
+    // Il server rivalida comunque in modo indipendente via catalog.js.
+
+    var SHIPPING_FIELD_IDS = ['field-address', 'field-city', 'field-postal-code', 'field-country'];
+
+    function cartHasPhysical(items) {
+        return (items || []).some(function (l) { return Boolean(l.physical); });
+    }
+
+    function updateShippingVisibility(items) {
+        var section = document.getElementById('shipping-section');
+        var note    = document.getElementById('checkout-shipping-note');
+        var needsShipping = cartHasPhysical(items);
+
+        if (section) {
+            section.hidden = !needsShipping;
+            SHIPPING_FIELD_IDS.forEach(function (id) {
+                var input = document.getElementById(id);
+                if (!input) return;
+                if (needsShipping) input.setAttribute('required', '');
+                else input.removeAttribute('required');
+            });
+        }
+        if (note) {
+            note.textContent = needsShipping
+                ? (note.getAttribute('data-label-physical') || note.textContent)
+                : (note.getAttribute('data-label-digital')  || note.textContent);
+        }
+        return needsShipping;
+    }
+
+    function collectShippingData() {
+        return {
+            addressLine1: (document.getElementById('field-address')      || {}).value || '',
+            city:         (document.getElementById('field-city')         || {}).value || '',
+            postalCode:   (document.getElementById('field-postal-code')  || {}).value || '',
+            province:     (document.getElementById('field-province')     || {}).value || '',
+            country:      (document.getElementById('field-country')      || {}).value || '',
+        };
+    }
+
+    function validateShippingForm() {
+        var section = document.getElementById('shipping-section');
+        if (!section || section.hidden) return true;
+
+        var msgs  = getErrorMessages();
+        var valid = true;
+        var firstInvalid = null;
+
+        function fail(fieldEl) {
+            var wrapper = fieldEl.closest('.form-field');
+            if (wrapper) showFieldError(wrapper, msgs.required || 'Campo obbligatorio');
+            if (!firstInvalid) firstInvalid = fieldEl;
+            valid = false;
+        }
+
+        SHIPPING_FIELD_IDS.forEach(function (id) {
+            var input = document.getElementById(id);
+            if (input && !input.value.trim()) fail(input);
+        });
+
+        if (firstInvalid) setTimeout(function () { firstInvalid.focus(); }, 0);
+        return valid;
+    }
+
+    function shippingPayloadIfNeeded() {
+        var section = document.getElementById('shipping-section');
+        if (!section || section.hidden) return undefined;
+        return collectShippingData();
+    }
+
     /* ─── Riepilogo carrello ───────────────────────────────────────────────── */
 
     function renderCartSummary() {
@@ -375,6 +450,8 @@
         container.textContent = '';
 
         var currency = (lines[0] && lines[0].currency) || 'eur';
+
+        updateShippingVisibility(lines);
 
         lines.forEach(function (line) {
             var qty       = Number(line.quantity) || 0;
@@ -452,6 +529,7 @@
                     customer:       customer,
                     items:          items,
                     lang:           lang,
+                    shipping:       shippingPayloadIfNeeded(),
                 }),
             });
         })
@@ -502,6 +580,7 @@
                     customer:       customer,
                     items:          items,
                     lang:           lang,
+                    shipping:       shippingPayloadIfNeeded(),
                 }),
             });
         })
@@ -651,6 +730,7 @@
                                     customer:       customer,
                                     items:          items,
                                     lang:           lang,
+                                    shipping:       shippingPayloadIfNeeded(),
                                 }),
                             });
                         })
