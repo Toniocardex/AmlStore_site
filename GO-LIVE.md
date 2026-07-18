@@ -8,18 +8,13 @@ Stato al 2026-07-17. Il codice è pronto (redirect migrazione, URL senza `.html`
 fix checkout, PayPal parametrizzato). Restano i passi qui sotto, che richiedono
 accessi ai pannelli (Cloudflare, PayPal, Stripe, Resend, registrar).
 
-## 0. Database D1 — migrazione spedizione (nuovo, 2026-07-18)
+## 0. Database D1 — migrazione spedizione ✅ eseguita 2026-07-18
 
-Aggiunta gestione ordini con articoli fisici (Windows 11 Pro OEM DVD, Windows 11
-Pro COA, Windows Server 2019/2022/2025 DVD, SQL Server 2022 Standard/Enterprise):
-il database D1 esistente in produzione **non ha ancora** le colonne di
-spedizione. Da eseguire una tantum prima del primo deploy con questo codice:
-
-```
-wrangler d1 execute aml-orders --remote --file=migrations/0001_add_shipping_columns.sql
-```
-
-Non serve per un database D1 creato da zero (`schema.sql` le include già).
+Colonne di spedizione (`requires_shipping`, `shipping_address_line1`,
+`shipping_city`, `shipping_postal_code`, `shipping_province`,
+`shipping_country`) applicate al D1 di produzione `aml-orders` via
+`migrations/0001_add_shipping_columns.sql` — verificate presenti con
+`PRAGMA table_info(orders)`. Nessuna azione ulteriore richiesta.
 
 ## 1. Secrets Cloudflare Pages (obbligatori)
 
