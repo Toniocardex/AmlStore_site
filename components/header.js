@@ -1,6 +1,40 @@
 (function () {
     'use strict';
 
+    /* Cache indice ricerca per lingua, condivisa tra eventuali piu' istanze dell'header. */
+    const SEARCH_INDEX_CACHE = {};
+
+    /* Range combining diacritical marks (U+0300-U+036F) costruito da codepoint
+       per evitare di incorporare caratteri Unicode non stampabili nel sorgente. */
+    const DIACRITICS_RE = new RegExp(
+        '[' + String.fromCharCode(0x0300) + '-' + String.fromCharCode(0x036f) + ']', 'g'
+    );
+
+    function stripDiacritics(str) {
+        return String(str || '').normalize('NFD').replace(DIACRITICS_RE, '');
+    }
+
+    function normalizeSearchText(str) {
+        return stripDiacritics(str).toLowerCase().trim();
+    }
+
+    function rankSearchResults(entries, query) {
+        const q = normalizeSearchText(query);
+        if (!q) return [];
+        const scored = [];
+        entries.forEach((entry, idx) => {
+            const name = normalizeSearchText(entry.name);
+            const category = normalizeSearchText(entry.category);
+            let tier = -1;
+            if (name.indexOf(q) === 0) tier = 3;
+            else if (name.indexOf(q) !== -1) tier = 2;
+            else if (category.indexOf(q) !== -1) tier = 1;
+            if (tier >= 0) scored.push({ entry, tier, idx });
+        });
+        scored.sort((a, b) => (b.tier - a.tier) || (a.idx - b.idx));
+        return scored.slice(0, 8).map((s) => s.entry);
+    }
+
     const HEADER_I18N = {
         it: {
             logoAlt: 'Aml Store',
@@ -51,6 +85,11 @@
             cartAriaMany: 'Carrello, {{n}} articoli',
             signIn: 'Accedi',
             drawerAssist: 'Assistenza: +39 392 558 0413',
+            searchToggleLabel: 'Cerca prodotti',
+            searchPlaceholder: 'Cerca un prodotto…',
+            searchHint: 'Inizia a digitare per cercare',
+            searchNoResults: 'Nessun risultato per "{{q}}"',
+            searchCloseLabel: 'Chiudi ricerca',
         },
         en: {
             logoAlt: 'Aml Store',
@@ -101,6 +140,11 @@
             cartAriaMany: 'Shopping cart, {{n}} items',
             signIn: 'Sign in',
             drawerAssist: 'Support: +39 392 558 0413',
+            searchToggleLabel: 'Search products',
+            searchPlaceholder: 'Search for a product…',
+            searchHint: 'Start typing to search',
+            searchNoResults: 'No results for "{{q}}"',
+            searchCloseLabel: 'Close search',
         },
         fr: {
             logoAlt: 'Aml Store',
@@ -151,6 +195,11 @@
             cartAriaMany: 'Panier, {{n}} articles',
             signIn: 'Se connecter',
             drawerAssist: 'Assistance : +39 392 558 0413',
+            searchToggleLabel: 'Rechercher des produits',
+            searchPlaceholder: 'Rechercher un produit…',
+            searchHint: 'Commencez à taper pour rechercher',
+            searchNoResults: 'Aucun résultat pour « {{q}} »',
+            searchCloseLabel: 'Fermer la recherche',
         },
         de: {
             logoAlt: 'Aml Store',
@@ -201,6 +250,11 @@
             cartAriaMany: 'Warenkorb, {{n}} Artikel',
             signIn: 'Anmelden',
             drawerAssist: 'Support: +39 392 558 0413',
+            searchToggleLabel: 'Produkte durchsuchen',
+            searchPlaceholder: 'Produkt suchen…',
+            searchHint: 'Tippen Sie, um zu suchen',
+            searchNoResults: 'Keine Ergebnisse für „{{q}}"',
+            searchCloseLabel: 'Suche schließen',
         },
         es: {
             logoAlt: 'Aml Store',
@@ -251,6 +305,11 @@
             cartAriaMany: 'Carrito, {{n}} artículos',
             signIn: 'Iniciar sesión',
             drawerAssist: 'Asistencia: +39 392 558 0413',
+            searchToggleLabel: 'Buscar productos',
+            searchPlaceholder: 'Buscar un producto…',
+            searchHint: 'Empieza a escribir para buscar',
+            searchNoResults: 'Sin resultados para "{{q}}"',
+            searchCloseLabel: 'Cerrar búsqueda',
         },
     };
 
@@ -1352,6 +1411,169 @@
                         }
                     }
 
+                    /* RICERCA PRODOTTI */
+                    .search-toggle {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 8px;
+                        border: none;
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        flex-shrink: 0;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .search-toggle:hover { background: rgba(255,255,255,0.08); color: var(--text-primary); }
+                    .search-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+                    .search-backdrop {
+                        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                        background: rgba(0,0,0,0.6);
+                        backdrop-filter: blur(6px);
+                        z-index: 1999;
+                        opacity: 0; pointer-events: none;
+                        transition: opacity 0.25s cubic-bezier(0.4, 0, 1, 1);
+                    }
+                    .search-backdrop.open {
+                        opacity: 1; pointer-events: auto;
+                        transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1);
+                    }
+
+                    .search-panel {
+                        position: fixed;
+                        top: 90px;
+                        left: 50%;
+                        transform: translate(-50%, -12px);
+                        width: min(92vw, 640px);
+                        max-height: calc(100vh - 140px);
+                        display: flex;
+                        flex-direction: column;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: 12px;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+                        z-index: 2001;
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transition: opacity 0.25s cubic-bezier(0.16,1,0.3,1),
+                                    transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                                    visibility 0.25s;
+                        overflow: hidden;
+                    }
+                    .search-panel.open {
+                        opacity: 1; visibility: visible; pointer-events: auto;
+                        transform: translate(-50%, 0);
+                    }
+                    .search-panel-row {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.6rem;
+                        padding: 0.75rem 1rem;
+                        border-bottom: 1px solid var(--border-color);
+                        flex-shrink: 0;
+                    }
+                    .search-input-icon { color: var(--text-muted); flex-shrink: 0; }
+                    .search-input {
+                        flex: 1 1 auto;
+                        min-width: 0;
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                        color: var(--text-primary);
+                        font-family: inherit;
+                        font-size: 0.95rem;
+                    }
+                    .search-input::placeholder { color: var(--text-muted); }
+                    .search-input::-webkit-search-cancel-button { display: none; }
+                    .search-close {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 28px;
+                        height: 28px;
+                        border-radius: 6px;
+                        border: none;
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        flex-shrink: 0;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .search-close:hover { background: rgba(255,255,255,0.08); color: var(--text-primary); }
+                    .search-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+                    .search-results {
+                        overflow-y: auto;
+                        padding: 0.4rem;
+                    }
+                    .search-hint,
+                    .search-empty {
+                        padding: 1.5rem 1rem;
+                        text-align: center;
+                        color: var(--text-muted);
+                        font-size: 0.85rem;
+                    }
+                    .search-result {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        padding: 0.5rem 0.6rem;
+                        border-radius: 8px;
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .search-result:hover,
+                    .search-result:focus-visible {
+                        background: rgba(255,255,255,0.08);
+                        color: var(--text-primary);
+                        outline: none;
+                    }
+                    .search-result-thumb {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 6px;
+                        object-fit: contain;
+                        background: rgba(255,255,255,0.05);
+                        flex-shrink: 0;
+                    }
+                    .search-result-info { min-width: 0; flex: 1 1 auto; }
+                    .search-result-name {
+                        font-size: 0.88rem;
+                        font-weight: 600;
+                        color: var(--text-primary);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .search-result-category {
+                        font-size: 0.75rem;
+                        color: var(--text-muted);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .search-result-price {
+                        font-size: 0.85rem;
+                        font-weight: 700;
+                        color: var(--text-primary);
+                        flex-shrink: 0;
+                        white-space: nowrap;
+                    }
+                    @media (max-width: 640px) {
+                        .search-panel { top: 76px; width: min(94vw, 640px); max-height: calc(100vh - 100px); }
+                    }
+                    @media (prefers-reduced-motion: reduce) {
+                        .search-backdrop { transition: none; }
+                        .search-panel { transition: none; }
+                    }
+
                     /* DRAWER MOBILE */
                     .overlay {
                         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -1713,6 +1935,10 @@
                     </div>
                     
                     <div class="right-section">
+                        <button type="button" class="search-toggle" aria-label="${esc(t.searchToggleLabel)}" aria-haspopup="true" aria-expanded="false">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+                        </button>
+
                         <a href="tel:+393925580413" class="support-info" title="${esc(t.assistanceSmall)}: +39 392 558 0413">
                             <div class="support-icon" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
@@ -1748,6 +1974,18 @@
                         </a>
 
                     </div>
+                </div>
+
+                <div class="search-backdrop"></div>
+                <div class="search-panel" role="dialog" aria-modal="true" aria-label="${esc(t.searchToggleLabel)}">
+                    <div class="search-panel-row">
+                        <svg class="search-input-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+                        <input type="search" class="search-input" placeholder="${esc(t.searchPlaceholder)}" aria-label="${esc(t.searchPlaceholder)}" autocomplete="off">
+                        <button type="button" class="search-close" aria-label="${esc(t.searchCloseLabel)}">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                        </button>
+                    </div>
+                    <div class="search-results" role="region" aria-live="polite" aria-atomic="true"></div>
                 </div>
 
                 <div class="overlay"></div>
@@ -1865,6 +2103,158 @@
                     if (caret) caret.setAttribute('aria-expanded', 'false');
                 });
             };
+
+            /* ── Ricerca prodotti ── */
+            const searchToggle = this.shadowRoot.querySelector('.search-toggle');
+            const searchBackdrop = this.shadowRoot.querySelector('.search-backdrop');
+            const searchPanel = this.shadowRoot.querySelector('.search-panel');
+            const searchInput = this.shadowRoot.querySelector('.search-input');
+            const searchClose = this.shadowRoot.querySelector('.search-close');
+            const searchResultsEl = this.shadowRoot.querySelector('.search-results');
+            const searchLang = activeLang.code;
+            const searchPathPrefix = parsed.pathPrefix;
+            let searchDebounceTimer = null;
+
+            const isSearchOpen = () => Boolean(searchPanel && searchPanel.classList.contains('open'));
+
+            const renderSearchResults = (entries, query) => {
+                if (!searchResultsEl) return;
+                searchResultsEl.textContent = '';
+                if (!query) {
+                    const hint = document.createElement('p');
+                    hint.className = 'search-hint';
+                    hint.textContent = t.searchHint;
+                    searchResultsEl.appendChild(hint);
+                    return;
+                }
+                if (!entries.length) {
+                    const empty = document.createElement('p');
+                    empty.className = 'search-empty';
+                    empty.textContent = t.searchNoResults.replace('{{q}}', query);
+                    searchResultsEl.appendChild(empty);
+                    return;
+                }
+                entries.forEach((entry) => {
+                    const a = document.createElement('a');
+                    a.className = 'search-result';
+                    a.href = S.localePageUrl(searchPathPrefix, searchLang, entry.slug);
+
+                    const thumb = document.createElement('img');
+                    thumb.className = 'search-result-thumb';
+                    thumb.src = `${staticRoot}${entry.image}`;
+                    thumb.alt = '';
+                    thumb.loading = 'lazy';
+                    thumb.decoding = 'async';
+                    a.appendChild(thumb);
+
+                    const info = document.createElement('div');
+                    info.className = 'search-result-info';
+                    const name = document.createElement('div');
+                    name.className = 'search-result-name';
+                    name.textContent = entry.name;
+                    const category = document.createElement('div');
+                    category.className = 'search-result-category';
+                    category.textContent = entry.category;
+                    info.appendChild(name);
+                    info.appendChild(category);
+                    a.appendChild(info);
+
+                    const price = document.createElement('span');
+                    price.className = 'search-result-price';
+                    price.textContent = (window.AmlCart && window.AmlCart.formatMoney)
+                        ? window.AmlCart.formatMoney(entry.priceMinor, entry.currency)
+                        : '';
+                    a.appendChild(price);
+
+                    searchResultsEl.appendChild(a);
+                });
+            };
+
+            const runSearch = (query) => {
+                const cached = SEARCH_INDEX_CACHE[searchLang];
+                if (!cached) return;
+                renderSearchResults(rankSearchResults(cached, query), query.trim());
+            };
+
+            const ensureSearchIndexLoaded = () => {
+                if (SEARCH_INDEX_CACHE[searchLang]) return Promise.resolve(SEARCH_INDEX_CACHE[searchLang]);
+                return fetch(`${staticRoot}/asset/search-index/${searchLang}.json`)
+                    .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+                    .then((data) => {
+                        SEARCH_INDEX_CACHE[searchLang] = Array.isArray(data) ? data : [];
+                        return SEARCH_INDEX_CACHE[searchLang];
+                    })
+                    .catch(() => { SEARCH_INDEX_CACHE[searchLang] = []; return []; });
+            };
+
+            const openSearch = () => {
+                if (!searchPanel || !searchBackdrop) return;
+                closeNavSubmenus();
+                if (langWrapper) {
+                    langWrapper.classList.remove('open');
+                    if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                }
+                closeMenu();
+                searchPanel.classList.add('open');
+                searchBackdrop.classList.add('open');
+                if (searchToggle) searchToggle.setAttribute('aria-expanded', 'true');
+                renderSearchResults([], '');
+                ensureSearchIndexLoaded().then(() => {
+                    if (searchInput && searchInput.value.trim()) runSearch(searchInput.value);
+                });
+                if (searchInput) setTimeout(() => searchInput.focus(), 0);
+            };
+
+            const closeSearch = ({ returnFocus = true } = {}) => {
+                if (!searchPanel || !searchBackdrop) return;
+                searchPanel.classList.remove('open');
+                searchBackdrop.classList.remove('open');
+                if (searchToggle) {
+                    searchToggle.setAttribute('aria-expanded', 'false');
+                    if (returnFocus) searchToggle.focus();
+                }
+            };
+
+            if (searchToggle) {
+                searchToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (isSearchOpen()) closeSearch();
+                    else openSearch();
+                });
+            }
+            if (searchClose) searchClose.addEventListener('click', () => closeSearch());
+            if (searchBackdrop) searchBackdrop.addEventListener('click', () => closeSearch({ returnFocus: false }));
+            if (searchInput) {
+                searchInput.addEventListener('input', () => {
+                    clearTimeout(searchDebounceTimer);
+                    const value = searchInput.value;
+                    searchDebounceTimer = setTimeout(() => runSearch(value), 150);
+                });
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const first = searchResultsEl && searchResultsEl.querySelector('.search-result');
+                        if (first) first.focus();
+                    }
+                });
+            }
+            if (searchResultsEl) {
+                searchResultsEl.addEventListener('keydown', (e) => {
+                    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+                    const items = Array.from(searchResultsEl.querySelectorAll('.search-result'));
+                    const active = this.shadowRoot.activeElement;
+                    const idx = items.indexOf(active);
+                    if (idx === -1) return;
+                    e.preventDefault();
+                    if (e.key === 'ArrowDown') {
+                        (items[idx + 1] || items[idx]).focus();
+                    } else if (idx === 0) {
+                        if (searchInput) searchInput.focus();
+                    } else {
+                        items[idx - 1].focus();
+                    }
+                });
+            }
 
             const toggleLangMenu = (e) => {
                 if (e) e.stopPropagation();
@@ -2023,6 +2413,10 @@
 
             this.__docClickHandler = (e) => {
                 const path = typeof e.composedPath === 'function' ? e.composedPath() : [];
+                if (searchPanel && searchToggle && isSearchOpen()
+                    && !path.includes(searchPanel) && !path.includes(searchToggle)) {
+                    closeSearch({ returnFocus: false });
+                }
                 if (langWrapper && langSelector && !path.includes(langWrapper)) {
                     langWrapper.classList.remove('open');
                     langSelector.setAttribute('aria-expanded', 'false');
@@ -2043,6 +2437,10 @@
             };
             this.__docKeydownHandler = (e) => {
                 if (e.key !== 'Escape') return;
+                if (isSearchOpen()) {
+                    closeSearch();
+                    return;
+                }
                 if (langWrapper?.classList.contains('open')) {
                     langWrapper.classList.remove('open');
                     if (langSelector) {

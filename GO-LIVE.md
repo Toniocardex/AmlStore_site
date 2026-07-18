@@ -3,6 +3,11 @@
 > **Prima di ogni deploy**: eseguire `python scripts/bump-asset-version.py`
 > (aggiorna gli hash `?v=` di css/js nelle pagine: senza, i browser dei
 > clienti tengono i file vecchi fino a 7 giorni per via della cache).
+>
+> **Dopo ogni modifica alle pagine prodotto** (nuovo prodotto, prezzo, nome):
+> rieseguire anche `python scripts/build-search-index.py` (rigenera
+> `asset/search-index/{lang}.json` usati dalla ricerca nell'header — altrimenti
+> la ricerca resta con dati vecchi fino a 24h per via della cache in `_headers`).
 
 Stato al 2026-07-17. Il codice è pronto (redirect migrazione, URL senza `.html`,
 fix checkout, PayPal parametrizzato). Restano i passi qui sotto, che richiedono
