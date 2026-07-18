@@ -568,7 +568,7 @@ html[data-theme='light'] .home-step {
 
 /* FAQ homepage — mobile-first, touch ≥ 44px sui summary */
 .home-page .home-faq {
-    max-width: min(40rem, 100%);
+    max-width: min(46rem, 100%);
     margin-inline: auto;
 }
 
@@ -586,6 +586,7 @@ html[data-theme='light'] .home-step {
     border: 1px solid var(--page-border);
     border-radius: 8px;
     background: color-mix(in srgb, var(--page-text) 3.5%, var(--page-bg));
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
 }
 
@@ -607,23 +608,58 @@ html[data-theme='light'] .home-step {
     display: none;
 }
 
+.home-page .home-faq-item summary::before {
+    content: '?';
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--page-accent) 14%, transparent);
+    color: var(--page-accent);
+    font-size: 0.85rem;
+    font-weight: 800;
+    display: grid;
+    place-items: center;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
 .home-page .home-faq-item summary::after {
-    content: '+';
+    content: '';
     margin-left: auto;
     flex-shrink: 0;
-    font-weight: 800;
-    font-size: 1.1rem;
-    line-height: 1;
-    color: var(--page-accent);
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid var(--page-accent);
+    border-bottom: 2px solid var(--page-accent);
+    transform: rotate(45deg);
+    transition: transform 0.25s ease;
 }
 
 .home-page .home-faq-item[open] summary::after {
-    content: '−';
+    transform: rotate(-135deg);
+}
+
+.home-page .home-faq-item[open] summary::before {
+    background: var(--page-accent);
+    color: #fff;
 }
 
 .home-page .home-faq-item summary:focus-visible {
     outline: 2px solid var(--page-accent);
     outline-offset: -2px;
+}
+
+.home-page .home-faq-item:hover {
+    border-color: color-mix(in srgb, var(--page-accent) 45%, var(--page-border));
+}
+
+.home-page .home-faq-list .home-faq-item[open] {
+    border-color: var(--page-accent);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--page-accent) 14%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-page .home-faq-item summary::after { transition: none; }
 }
 
 .home-page .home-faq-body {
@@ -675,7 +711,7 @@ html[data-theme='light'] .home-page .home-faq-item {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    padding: 1.15rem 3rem 1.15rem 1.25rem;
+    padding: 1.25rem 3rem 1.25rem 1.25rem;
     border: 1px solid var(--page-border);
     border-radius: 8px;
     background: var(--page-surface, rgba(127, 127, 127, 0.04));
@@ -690,6 +726,27 @@ html[data-theme='light'] .home-page .home-faq-item {
 .home-category-tile:focus-visible {
     outline: 2px solid var(--page-accent);
     outline-offset: 3px;
+}
+.home-category-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--page-accent) 12%, transparent);
+    color: var(--page-accent);
+    margin-bottom: 2px;
+    flex-shrink: 0;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.home-category-icon svg {
+    width: 20px;
+    height: 20px;
+}
+.home-category-tile:hover .home-category-icon {
+    background: var(--page-accent);
+    color: #fff;
 }
 .home-category-name {
     font-weight: 700;

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows 10 Home — Aml Store</title>
-    <meta name="description" content="Windows 10 Home 32/64 bits: el sistema operativo Microsoft más probado para PC domésticos, con actualizaciones de seguridad. Clave de producto original por email.">
+    <meta name="description" content="En Microsoft Windows 10 Home, el clásico menú Inicio regresa en una versión moderna y personalizable, permitiéndote acceder rápidamente a tus aplicaciones favoritas, archivos recientes y configuración. El nuevo diseño de Windows 10 es más claro y fácil de usar.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aml-store.com/es/windows-10-home">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
     <meta property="og:title" content="Windows 10 Home — Aml Store">
-    <meta property="og:description" content="Windows 10 Home 32/64 bits: el sistema operativo Microsoft más probado para PC domésticos, con actualizaciones de seguridad. Clave de producto original por email.">
+    <meta property="og:description" content="En Microsoft Windows 10 Home, el clásico menú Inicio regresa en una versión moderna y personalizable, permitiéndote acceder rápidamente a tus aplicaciones favoritas, archivos recientes y configuración. El nuevo diseño de Windows 10 es más claro y fácil de usar.">
     <meta property="og:url" content="https://aml-store.com/es/windows-10-home">
     <meta property="og:locale" content="es_ES">
     <meta property="og:image" content="https://aml-store.com/asset/media/products/windows-10-home.webp">
@@ -27,6 +27,12 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://aml-store.com/#organization",
+      "name": "Aml Store",
+      "url": "https://aml-store.com/"
+    },
+    {
       "@type": "Product",
       "@id": "https://aml-store.com/es/windows-10-home#product",
       "name": "Windows 10 Home",
@@ -34,7 +40,7 @@
       "inLanguage": "es",
       "url": "https://aml-store.com/es/windows-10-home",
       "image": "https://aml-store.com/asset/media/products/windows-10-home.webp",
-      "description": "Windows 10 Home 32/64 bits: el sistema operativo Microsoft más probado para PC domésticos, con actualizaciones de seguridad. Clave de producto original por email.",
+      "description": "En Microsoft Windows 10 Home, el clásico menú Inicio regresa en una versión moderna y personalizable, permitiéndote acceder rápidamente a tus aplicaciones favoritas, archivos recientes y configuración. El nuevo diseño de Windows 10 es más claro y fácil de usar.",
       "brand": {
         "@type": "Brand",
         "name": "Microsoft"
@@ -45,18 +51,93 @@
         "priceCurrency": "EUR",
         "price": "37.99",
         "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition"
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@id": "https://aml-store.com/#organization"
+        }
       }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aml-store.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sistemas operativos",
+          "item": "https://aml-store.com/es/sistemi-operativi"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Windows 10 Home"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "inLanguage": "es",
+      "url": "https://aml-store.com/es/windows-10-home",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿La licencia es de por vida o caduca?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es una licencia perpetua: pagas una sola vez y sigue siendo válida de por vida en el dispositivo activado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se activa la licencia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Introduce la clave de producto recibida por email durante la instalación, o en la configuración \"Activación\" si Windows ya está instalado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo actualizar desde una versión anterior de Windows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, si tu PC cumple los requisitos mínimos puedes usar la clave de producto para activar la actualización desde la configuración de Windows."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la diferencia con Windows 10 Pro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La versión Pro añade funciones profesionales como BitLocker y Escritorio remoto, pensadas para uso empresarial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo pedir factura?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, la factura electrónica está disponible para empresas indicando un NIF/CIF en el checkout."
+          }
+        }
+      ]
     }
   ]
 }
     </script>
     <script src="../js/consent-init.js?v=90e947b9a7"></script>
     <link rel="icon" href="../favicon/favicon.png?v=3bfa4181d2" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-700.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-800.woff2">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
     <link rel="stylesheet" href="../css/page.css?v=7ba50fd6ef">
-    <link rel="stylesheet" href="../css/product.css?v=69c68e6071">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=606f5818cc">
+    <link rel="stylesheet" href="../css/product.css?v=eb249443f7">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=592868d4d4">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
@@ -72,7 +153,10 @@
             <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">Añadir al carrito</button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="Prodotto">
+    <section class="v2-hero" aria-label="Producto y compra">
+        <div class="v2-hero__ambient" aria-hidden="true"></div>
+        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
+        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
         <div class="v2-breadcrumb">
             <nav aria-label="Breadcrumb">
                 <a href="/es/">Home</a><span class="sep">/</span>
@@ -84,10 +168,30 @@
             <div class="v2-hero__left">
                 <p class="v2-hero__eyebrow">Sistema operativo</p>
                 <h1 class="v2-hero__title">Windows 10 Home</h1>
-                <p class="v2-hero__desc">Windows 10 Home 32/64 bits: el sistema operativo Microsoft más probado para PC domésticos, con actualizaciones de seguridad. Clave de producto original por email.</p>
+                <p class="v2-hero__desc">En Microsoft Windows 10 Home, el clásico menú Inicio regresa en una versión moderna y personalizable, permitiéndote acceder rápidamente a tus aplicaciones favoritas, archivos recientes y configuración. El nuevo diseño de Windows 10 es más claro y fácil de usar.</p>
+                <div class="v2-pills" aria-label="Características principales">
+                    <span class="v2-pill">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        Licencia de por vida
+                    </span>
+                    <span class="v2-pill">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg>
+                        Menú Inicio renovado
+                    </span>
+                    <span class="v2-pill">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Windows Defender
+                    </span>
+                    <span class="v2-pill">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+                        Entrega rápida
+                    </span>
+                </div>
             </div>
             <div class="v2-hero__right">
-                <img class="v2-hero__cover" src="../asset/media/products/windows-10-home.webp?v=ebbcf6e0a3" width="800" height="800" alt="" fetchpriority="high" decoding="async">
+                <div class="v2-hero__cover-wrap">
+                    <img class="v2-hero__cover" src="../asset/media/products/windows-10-home.webp?v=410de95a43" width="400" height="400" alt="Windows 10 Home" fetchpriority="high" decoding="async">
+                </div>
             </div>
         </div>
     </section>
@@ -98,44 +202,170 @@
             data-stripe-compare-at-amount="9900"
             data-stripe-product-sku="KW9-00136"
             data-discount-percent="62">
-            <div class="v2-price-label">Nuestro precio</div>
-            <div class="v2-price-row">
+            <div class="v2-price-info">
+                <div class="v2-price-label">Nuestro precio</div>
+                <div class="v2-price-row">
                 <span class="v2-price-msrp">€ 99,00</span>
                 <span class="v2-price-sale">€ 37,99</span>
                 <span class="v2-price-badge">−62%</span>
+                </div>
+                <div class="v2-price-tax">Impuestos incluidos. Sin gastos de envío.</div>
             </div>
-            <div class="v2-price-tax">Impuestos incluidos. Sin gastos de envío.</div>
-            <button type="button" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Añadir al carrito</button>
-            <div class="v2-trust">
+            <div class="v2-cta-col">
+                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Añadir al carrito</button>
                 <div class="v2-trust__pay" role="img" aria-label="Métodos de pago aceptados"><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Amex_logo.svg?v=27a9919e6a" alt="American Express" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" alt="PayPal" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" alt="Apple Pay" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" height="14" loading="lazy"></span></div>
-                <ul class="v2-trust__points">
+            </div>
+            <ul class="v2-trust__points">
                     <li>Pago seguro y cifrado</li>
                     <li>Entrega por email en minutos</li>
                     <li><a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener">Reseñas en Trustpilot</a></li>
                 </ul>
-            </div>
         </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="Añadir al carrito">
-        <section class="product-details" aria-labelledby="details-title">
-            <h2 id="details-title">Detalles del producto</h2>
-            <p class="product-details__note">Tras la compra recibes la clave de producto con las instrucciones para descargar Windows desde los canales oficiales de Microsoft, para una instalación limpia o una actualización. La activación se realiza en línea.</p>
-            <dl class="product-details__specs">
-                <div class="product-details__row"><dt>Licencia</dt><dd>Perpetua — pago único</dd></div>
-                <div class="product-details__row"><dt>Duración</dt><dd>Ilimitada, sin caducidad</dd></div>
-                <div class="product-details__row"><dt>Dispositivos</dt><dd>1 dispositivo</dd></div>
-                <div class="product-details__row"><dt>Plataforma</dt><dd>Windows</dd></div>
-                <div class="product-details__row"><dt>Entrega</dt><dd>Email con clave e instrucciones, normalmente a los pocos minutos del pago</dd></div>
-                <div class="product-details__row"><dt>Facturación</dt><dd>Factura disponible; empresas: código SDI o PEC en el checkout</dd></div>
-            </dl>
+        <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+        <!-- ── BENTO FEATURES ── -->
+        <section class="v2-section" aria-labelledby="v2-features-title">
+            <p class="v2-eyebrow">Por qué elegirlo</p>
+            <h2 id="v2-features-title" class="v2-section-title">Windows 10 Home</h2>
+            <div class="v2-bento" role="list">
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Licencia perpetua de por vida</h3>
+                        <p class="v2-bento__body">Pago único sin renovaciones. La licencia permanece activa para siempre en el dispositivo activado.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Menú Inicio moderno</h3>
+                        <p class="v2-bento__body">Accede rápidamente a tus apps favoritas, archivos recientes y configuración con un diseño más claro.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Windows Defender integrado</h3>
+                        <p class="v2-bento__body">Protección antivirus y firewall incluidas por defecto, sin software adicional.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Actualizaciones automáticas</h3>
+                        <p class="v2-bento__body">Recibe las actualizaciones de seguridad de Microsoft durante toda la vigencia del soporte oficial.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="M10.5 12.5 20 3M16.5 6l3 3M13.5 9l2 2"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Clave digital original</h3>
+                        <p class="v2-bento__body">Clave de producto oficial de Microsoft, activable online en pocos minutos.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Entrega rápida</h3>
+                        <p class="v2-bento__body">Código e instrucciones por email, normalmente en pocos minutos tras el pago.</p>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="product-process-steps" aria-labelledby="steps-title">
-            <h2 id="steps-title">Entrega y activación</h2>
-            <ol class="product-process-steps__list">
-                <li><strong>Pedido</strong> — Checkout seguro</li>
-                <li><strong>Email</strong> — Código e instrucciones en minutos</li>
-                <li><strong>Activación</strong> — Activación oficial Microsoft</li>
-            </ol>
+
+        <hr class="v2-divider">
+
+        <!-- ── HOW IT WORKS ── -->
+        <section class="v2-section" aria-labelledby="v2-steps-title">
+            <p class="v2-eyebrow">Cómo funciona</p>
+            <h2 id="v2-steps-title" class="v2-section-title">Entrega y activación</h2>
+            <div class="v2-steps">
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">1</div>
+                    <h3 class="v2-step__title">Pedido y pago</h3>
+                    <p class="v2-step__body">Añade el producto al carrito y completa el pago seguro con los métodos disponibles. Recibirás la confirmación del pedido según las condiciones mostradas en el checkout.</p>
+                </div>
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">2</div>
+                    <h3 class="v2-step__title">Entrega digital</h3>
+                    <p class="v2-step__body">Te enviamos el <strong>código de activación</strong> y las instrucciones por email, normalmente en pocos minutos tras la aprobación del pago.</p>
+                </div>
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">3</div>
+                    <h3 class="v2-step__title">Activación</h3>
+                    <p class="v2-step__body">Descarga Windows 10 directamente desde los canales oficiales de Microsoft o usa el código para activar un PC existente.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="v2-divider">
+
+        <!-- ── FAQ ── -->
+        <section class="v2-section" aria-labelledby="v2-faq-title">
+            <p class="v2-eyebrow">FAQ</p>
+            <h2 id="v2-faq-title" class="v2-section-title">Preguntas frecuentes</h2>
+            <div class="v2-faq">
+                <details>
+                    <summary>¿La licencia es de por vida o caduca?</summary>
+                    <p>Es una licencia perpetua: pagas una sola vez y sigue siendo válida de por vida en el dispositivo activado.</p>
+                </details>
+                <details>
+                    <summary>¿Cómo se activa la licencia?</summary>
+                    <p>Introduce la clave de producto recibida por email durante la instalación, o en la configuración &quot;Activación&quot; si Windows ya está instalado.</p>
+                </details>
+                <details>
+                    <summary>¿Puedo actualizar desde una versión anterior de Windows?</summary>
+                    <p>Sí, si tu PC cumple los requisitos mínimos puedes usar la clave de producto para activar la actualización desde la configuración de Windows.</p>
+                </details>
+                <details>
+                    <summary>¿Cuál es la diferencia con Windows 10 Pro?</summary>
+                    <p>La versión Pro añade funciones profesionales como BitLocker y Escritorio remoto, pensadas para uso empresarial.</p>
+                </details>
+                <details>
+                    <summary>¿Puedo pedir factura?</summary>
+                    <p>Sí, la factura electrónica está disponible para empresas indicando un NIF/CIF en el checkout.</p>
+                </details>
+            </div>
+        </section>
+
+        <hr class="v2-divider">
+
+        <!-- ── SPECS ── -->
+        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
+            <p class="v2-eyebrow">Detalles del producto</p>
+            <h2 id="v2-specs-title" class="v2-section-title">Especificaciones</h2>
+            <div class="v2-specs-grid">
+                <div class="v2-specs-item">
+                    <h3>Licencia</h3>
+                    <p>Perpetua — pago único</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>Duración</h3>
+                    <p>Ilimitada, sin caducidad</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>Dispositivos</h3>
+                    <p>1 dispositivo</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>Plataforma</h3>
+                    <p>Windows</p>
+                </div>
+            </div>
         </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
@@ -145,6 +375,6 @@
     <script src="../js/product-page.js?v=faeebcc328" defer></script>
     <script src="../components/cookie-banner.js?v=5b248be783" defer></script>
     <script src="../components/header.js?v=16d9f1d3fc" defer></script>
-    <script src="../components/footer.js?v=5583b2ffce" defer></script>
+    <script src="../components/footer.js?v=0e085c2b8d" defer></script>
 </body>
 </html>

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Office 2019 Professional Plus — Aml Store</title>
-    <meta name="description" content="Office 2019 Professional Plus: Word, Excel, PowerPoint, Outlook, Publisher and Access with a perpetual Windows licence. The full suite at a smart price.">
+    <meta name="description" content="Word, Excel, PowerPoint, Outlook, Access and Publisher. All the professional applications for managing documents, data, presentations and business databases.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aml-store.com/en/office-2019-professional-plus">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
     <meta property="og:title" content="Office 2019 Professional Plus — Aml Store">
-    <meta property="og:description" content="Office 2019 Professional Plus: Word, Excel, PowerPoint, Outlook, Publisher and Access with a perpetual Windows licence. The full suite at a smart price.">
+    <meta property="og:description" content="Word, Excel, PowerPoint, Outlook, Access and Publisher. All the professional applications for managing documents, data, presentations and business databases.">
     <meta property="og:url" content="https://aml-store.com/en/office-2019-professional-plus">
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://aml-store.com/asset/media/products/office-2019-professional-plus.webp">
@@ -27,6 +27,12 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://aml-store.com/#organization",
+      "name": "Aml Store",
+      "url": "https://aml-store.com/"
+    },
+    {
       "@type": "Product",
       "@id": "https://aml-store.com/en/office-2019-professional-plus#product",
       "name": "Office 2019 Professional Plus",
@@ -34,7 +40,7 @@
       "inLanguage": "en",
       "url": "https://aml-store.com/en/office-2019-professional-plus",
       "image": "https://aml-store.com/asset/media/products/office-2019-professional-plus.webp",
-      "description": "Office 2019 Professional Plus: Word, Excel, PowerPoint, Outlook, Publisher and Access with a perpetual Windows licence. The full suite at a smart price.",
+      "description": "Word, Excel, PowerPoint, Outlook, Access and Publisher. All the professional applications for managing documents, data, presentations and business databases.",
       "brand": {
         "@type": "Brand",
         "name": "Microsoft"
@@ -45,18 +51,93 @@
         "priceCurrency": "EUR",
         "price": "174.99",
         "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition"
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@id": "https://aml-store.com/#organization"
+        }
       }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aml-store.com/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Office suite",
+          "item": "https://aml-store.com/en/suite-office"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Office 2019 Professional Plus"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "inLanguage": "en",
+      "url": "https://aml-store.com/en/office-2019-professional-plus",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it a subscription or a one-time purchase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It's a one-time purchase: the licence is perpetual, with a single payment and no renewals."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I activate the licence?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Redeem the code at setup.office.com with your Microsoft account, then install the apps from office.com."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use the apps offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes: once the desktop apps are installed you can work offline; you just need periodic connectivity for licence checks and updates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use it for my job or business?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, this edition authorises commercial use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get an invoice?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, an electronic invoice is available for businesses by entering a VAT/SDI code at checkout."
+          }
+        }
+      ]
     }
   ]
 }
     </script>
     <script src="../js/consent-init.js?v=90e947b9a7"></script>
     <link rel="icon" href="../favicon/favicon.png?v=3bfa4181d2" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-700.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-800.woff2">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
     <link rel="stylesheet" href="../css/page.css?v=7ba50fd6ef">
-    <link rel="stylesheet" href="../css/product.css?v=69c68e6071">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=606f5818cc">
+    <link rel="stylesheet" href="../css/product.css?v=eb249443f7">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=592868d4d4">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
@@ -72,7 +153,10 @@
             <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">Add to cart</button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="Prodotto">
+    <section class="v2-hero" aria-label="Product and purchase">
+        <div class="v2-hero__ambient" aria-hidden="true"></div>
+        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
+        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
         <div class="v2-breadcrumb">
             <nav aria-label="Breadcrumb">
                 <a href="/en/">Home</a><span class="sep">/</span>
@@ -84,10 +168,30 @@
             <div class="v2-hero__left">
                 <p class="v2-hero__eyebrow">Perpetual licence</p>
                 <h1 class="v2-hero__title">Office 2019 Professional Plus</h1>
-                <p class="v2-hero__desc">Office 2019 Professional Plus: Word, Excel, PowerPoint, Outlook, Publisher and Access with a perpetual Windows licence. The full suite at a smart price.</p>
+                <p class="v2-hero__desc">Word, Excel, PowerPoint, Outlook, Access and Publisher. All the professional applications for managing documents, data, presentations and business databases.</p>
+                <div class="v2-pills" aria-label="Main features">
+                    <span class="v2-pill">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        Lifetime licence
+                    </span>
+                    <span class="v2-pill">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+                        Word, Excel, PowerPoint, Outlook, Access, Publisher
+                    </span>
+                    <span class="v2-pill">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg>
+                        Windows or Mac
+                    </span>
+                    <span class="v2-pill">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 6 10-6"></path></svg>
+                        Fast delivery
+                    </span>
+                </div>
             </div>
             <div class="v2-hero__right">
-                <img class="v2-hero__cover" src="../asset/media/products/office-2019-professional-plus.webp?v=ac34a5427c" width="800" height="800" alt="" fetchpriority="high" decoding="async">
+                <div class="v2-hero__cover-wrap">
+                    <img class="v2-hero__cover" src="../asset/media/products/office-2019-professional-plus.webp?v=743207dbb4" width="400" height="400" alt="Office 2019 Professional Plus" fetchpriority="high" decoding="async">
+                </div>
             </div>
         </div>
     </section>
@@ -98,44 +202,170 @@
             data-stripe-compare-at-amount="20899"
             data-stripe-product-sku="269-17068"
             data-discount-percent="16">
-            <div class="v2-price-label">Our price</div>
-            <div class="v2-price-row">
+            <div class="v2-price-info">
+                <div class="v2-price-label">Our price</div>
+                <div class="v2-price-row">
                 <span class="v2-price-msrp">€ 208,99</span>
                 <span class="v2-price-sale">€ 174,99</span>
                 <span class="v2-price-badge">−16%</span>
+                </div>
+                <div class="v2-price-tax">Tax included. No shipping fees.</div>
             </div>
-            <div class="v2-price-tax">Tax included. No shipping fees.</div>
-            <button type="button" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Add to cart</button>
-            <div class="v2-trust">
+            <div class="v2-cta-col">
+                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Add to cart</button>
                 <div class="v2-trust__pay" role="img" aria-label="Accepted payment methods"><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Amex_logo.svg?v=27a9919e6a" alt="American Express" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" alt="PayPal" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" alt="Apple Pay" height="14" loading="lazy"></span><span class="v2-trust__chip"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" height="14" loading="lazy"></span></div>
-                <ul class="v2-trust__points">
+            </div>
+            <ul class="v2-trust__points">
                     <li>Secure encrypted payment</li>
                     <li>Email delivery within minutes</li>
                     <li><a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener">Reviews on Trustpilot</a></li>
                 </ul>
-            </div>
         </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="Add to cart">
-        <section class="product-details" aria-labelledby="details-title">
-            <h2 id="details-title">Product details</h2>
-            <p class="product-details__note">The key activates on your Microsoft account via setup.office.com: from there you download the software and the licence stays linked to your account, ready for future reinstallation on the same device.</p>
-            <dl class="product-details__specs">
-                <div class="product-details__row"><dt>Licence</dt><dd>Perpetual — one-time payment</dd></div>
-                <div class="product-details__row"><dt>Duration</dt><dd>Unlimited, never expires</dd></div>
-                <div class="product-details__row"><dt>Devices</dt><dd>1 device</dd></div>
-                <div class="product-details__row"><dt>Platform</dt><dd>Windows</dd></div>
-                <div class="product-details__row"><dt>Delivery</dt><dd>Email with key and instructions, usually within minutes of payment</dd></div>
-                <div class="product-details__row"><dt>Invoicing</dt><dd>Invoice available; businesses can add SDI code or PEC at checkout</dd></div>
-            </dl>
+        <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+        <!-- ── BENTO FEATURES ── -->
+        <section class="v2-section" aria-labelledby="v2-features-title">
+            <p class="v2-eyebrow">Why choose it</p>
+            <h2 id="v2-features-title" class="v2-section-title">Office 2019 Professional Plus</h2>
+            <div class="v2-bento" role="list">
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6l-9-4z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Perpetual lifetime licence</h3>
+                        <p class="v2-bento__body">One-time payment, no renewals. The licence stays active forever on the activated device.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"></circle><path d="M10.5 12.5 20 3M16.5 6l3 3M13.5 9l2 2"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Original Microsoft ESD key</h3>
+                        <p class="v2-bento__body">Official digital product key to activate at setup.office.com, linked to your Microsoft account.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Apps included: Word, Excel, PowerPoint, Outlook, Access, Publisher</h3>
+                        <p class="v2-bento__body">All the full desktop applications, with no limitations compared to subscription versions.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Commercial use authorised</h3>
+                        <p class="v2-bento__body">Licence intended for professional and business activity.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14a9 3 0 0 0 18 0V5"></path><path d="M3 12a9 3 0 0 0 18 0"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Databases and professional publishing</h3>
+                        <p class="v2-bento__body">Includes Access for database management and Publisher for business communication materials.</p>
+                    </div>
+                </div>
+                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
+                    <div class="v2-bento__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+                    <div class="v2-bento__content">
+                        <h3 class="v2-bento__title">Security updates included</h3>
+                        <p class="v2-bento__body">Get all security updates for the duration of Microsoft support.</p>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="product-process-steps" aria-labelledby="steps-title">
-            <h2 id="steps-title">Delivery and activation</h2>
-            <ol class="product-process-steps__list">
-                <li><strong>Order</strong> — Secure checkout</li>
-                <li><strong>Email</strong> — Code and instructions within minutes</li>
-                <li><strong>Activation</strong> — Official setup.office.com portal</li>
-            </ol>
+
+        <hr class="v2-divider">
+
+        <!-- ── HOW IT WORKS ── -->
+        <section class="v2-section" aria-labelledby="v2-steps-title">
+            <p class="v2-eyebrow">How it works</p>
+            <h2 id="v2-steps-title" class="v2-section-title">Delivery and activation</h2>
+            <div class="v2-steps">
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">1</div>
+                    <h3 class="v2-step__title">Order and payment</h3>
+                    <p class="v2-step__body">Add the product to your cart and complete secure payment with the available methods. You'll receive order confirmation as shown at checkout.</p>
+                </div>
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">2</div>
+                    <h3 class="v2-step__title">Digital delivery</h3>
+                    <p class="v2-step__body">We'll send the <strong>activation code</strong> and instructions by email, usually within minutes of payment approval.</p>
+                </div>
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">3</div>
+                    <h3 class="v2-step__title">Activation</h3>
+                    <p class="v2-step__body">Redeem the code at setup.office.com, link the licence to your Microsoft account and install the apps from office.com.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="v2-divider">
+
+        <!-- ── FAQ ── -->
+        <section class="v2-section" aria-labelledby="v2-faq-title">
+            <p class="v2-eyebrow">FAQ</p>
+            <h2 id="v2-faq-title" class="v2-section-title">Frequently asked questions</h2>
+            <div class="v2-faq">
+                <details>
+                    <summary>Is it a subscription or a one-time purchase?</summary>
+                    <p>It&#x27;s a one-time purchase: the licence is perpetual, with a single payment and no renewals.</p>
+                </details>
+                <details>
+                    <summary>How do I activate the licence?</summary>
+                    <p>Redeem the code at setup.office.com with your Microsoft account, then install the apps from office.com.</p>
+                </details>
+                <details>
+                    <summary>Can I use the apps offline?</summary>
+                    <p>Yes: once the desktop apps are installed you can work offline; you just need periodic connectivity for licence checks and updates.</p>
+                </details>
+                <details>
+                    <summary>Can I use it for my job or business?</summary>
+                    <p>Yes, this edition authorises commercial use.</p>
+                </details>
+                <details>
+                    <summary>Can I get an invoice?</summary>
+                    <p>Yes, an electronic invoice is available for businesses by entering a VAT/SDI code at checkout.</p>
+                </details>
+            </div>
+        </section>
+
+        <hr class="v2-divider">
+
+        <!-- ── SPECS ── -->
+        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
+            <p class="v2-eyebrow">Product details</p>
+            <h2 id="v2-specs-title" class="v2-section-title">Specifications</h2>
+            <div class="v2-specs-grid">
+                <div class="v2-specs-item">
+                    <h3>Licence</h3>
+                    <p>Perpetual — one-time payment</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>Duration</h3>
+                    <p>Unlimited, never expires</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>Devices</h3>
+                    <p>1 device</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>Platform</h3>
+                    <p>Windows</p>
+                </div>
+            </div>
         </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
@@ -145,6 +375,6 @@
     <script src="../js/product-page.js?v=faeebcc328" defer></script>
     <script src="../components/cookie-banner.js?v=5b248be783" defer></script>
     <script src="../components/header.js?v=16d9f1d3fc" defer></script>
-    <script src="../components/footer.js?v=5583b2ffce" defer></script>
+    <script src="../components/footer.js?v=0e085c2b8d" defer></script>
 </body>
 </html>

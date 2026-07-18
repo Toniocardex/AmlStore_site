@@ -747,10 +747,10 @@ class EcommerceFooter extends HTMLElement {
                         <h3 class="col-title">${esc(t.headingProducts)}</h3>
                         <ul class="link-list">
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/sistemi-operativi">${esc(t.prodOs)}</a></li>
-                            <li><a href="#">${esc(t.prodOffice)}</a></li>
-                            <li><a href="#">${esc(t.prodAntivirus)}</a></li>
-                            <li><a href="#">${esc(t.prodBusiness)}</a></li>
-                            <li><a href="#">${esc(t.prodDeals)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/suite-office">${esc(t.prodOffice)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/antivirus">${esc(t.prodAntivirus)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/windows-server">${esc(t.prodBusiness)}</a></li>
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/pacchetti">${esc(t.prodDeals)}</a></li>
                         </ul>
                     </div>
 

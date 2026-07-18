@@ -972,21 +972,22 @@ body { background: var(--bg, #fff); }
     .bento-text { font-size: 0.82rem; }
 }
 
-/* ── TRUST ROW nella pricing card ── */
-.v2-trust {
-    grid-column: 1 / -1;
+/* ── PREZZO + CTA + LOGHI PAGAMENTO nella pricing card ── */
+.v2-price-info { min-width: 0; }
+.v2-cta-col {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px 24px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
 }
-[data-theme="light"] .v2-trust { border-top-color: rgba(0,0,0,0.08); }
+@media (max-width: 768px) {
+    .v2-cta-col { align-items: stretch; }
+    .v2-cta-col .v2-trust__pay { justify-content: center; }
+}
 .v2-trust__pay {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
     gap: 8px;
 }
 .v2-trust__chip {
@@ -1000,16 +1001,21 @@ body { background: var(--bg, #fff); }
     border-radius: 6px;
 }
 .v2-trust__chip img { height: 14px; width: auto; display: block; }
+
+/* ── TRUST POINTS: riga a piena larghezza sotto prezzo/CTA ── */
 .v2-trust__points {
+    grid-column: 1 / -1;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     gap: 6px 18px;
     margin: 0;
-    padding: 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
     font-size: 0.8rem;
     color: rgba(255,255,255,0.6);
 }
+[data-theme="light"] .v2-trust__points { border-top-color: rgba(0,0,0,0.08); }
 [data-theme="light"] .v2-trust__points { color: #666; }
 .v2-trust__points li { display: inline-flex; align-items: center; gap: 6px; }
 .v2-trust__points li::before { content: '✓'; color: #10b981; font-weight: 700; }
