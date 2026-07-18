@@ -38,7 +38,7 @@
 
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
     <link rel="stylesheet" href="../css/page.css?v=7ba50fd6ef">
-    <link rel="stylesheet" href="../css/home.css?v=c04d07a1fc">
+    <link rel="stylesheet" href="../css/home.css?v=b33500de84">
     <link rel="preload" as="image" href="../asset/media/home-hero-lifestyle.webp?v=d31107865c" type="image/webp">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script type="application/ld+json">
@@ -122,6 +122,42 @@
             </ol>
         </section>
 
+        <section class="home-categories" aria-labelledby="home-categories-title">
+            <h2 id="home-categories-title" class="home-section-title">Parcourir les catégories</h2>
+            <div class="home-categories-grid">
+                <a href="sistemi-operativi" class="home-category-tile">
+                    <span class="home-category-name">Systèmes d'exploitation</span>
+                    <span class="home-category-desc">Windows 10 et 11, Famille et Pro</span>
+                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="suite-office" class="home-category-tile">
+                    <span class="home-category-name">Suites Office</span>
+                    <span class="home-category-desc">D'Office 2019 à Office 2024</span>
+                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="microsoft-365-solutions" class="home-category-tile">
+                    <span class="home-category-name">Microsoft 365</span>
+                    <span class="home-category-desc">Personnel, Famille et Business</span>
+                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="antivirus" class="home-category-tile">
+                    <span class="home-category-name">Antivirus et sécurité</span>
+                    <span class="home-category-desc">Norton, Kaspersky, Bitdefender, ESET, McAfee</span>
+                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="windows-server" class="home-category-tile">
+                    <span class="home-category-name">Serveurs et bases de données</span>
+                    <span class="home-category-desc">Windows Server et SQL Server</span>
+                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="strumenti" class="home-category-tile">
+                    <span class="home-category-name">Outils et plus</span>
+                    <span class="home-category-desc">Acrobat, CorelDRAW, Acronis, Project et Visio</span>
+                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+        </section>
+
         <section id="catalogo" class="home-catalog" aria-labelledby="catalog-title">
             <h2 id="catalog-title" class="home-section-title">Produits en vedette</h2>
             <div class="product-grid">
@@ -167,13 +203,110 @@
                     <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
                 </div>
             </div>
-            <div class="product-card">
-                <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
-                <div class="skeleton-text"></div>
-                <div class="skeleton-text short"></div>
-                <div class="product-card-skel-grow" aria-hidden="true"></div>
-                <div class="skeleton-text price"></div>
-                <div class="product-card-skel-btn" aria-hidden="true"></div>
+            <div
+                class="product-card"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="7900"
+                data-stripe-compare-at-amount="14900"
+                data-stripe-product-sku="FQC-10528"
+                data-discount-percent="47"
+            >
+                <a href="windows-11-pro" class="product-card-body product-card--link">
+                    <div class="product-card-media">
+                        <img src="../asset/media/products/windows-11-pro.webp?v=4ffffba74e" width="800" height="800" alt="Windows 11 Pro" decoding="async" loading="lazy" class="product-card-img">
+                    </div>
+                    <p class="product-card-name">Windows 11 Pro</p>
+                    <p class="product-card-blurb">Licence perpétuelle · BitLocker et Bureau à distance · ESD</p>
+                </a>
+                <p class="product-card-price">€ 79,00</p>
+                <div class="product-card-foot">
+                    <a href="windows-11-pro" class="home-product-detail">Voir le produit</a>
+                    <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
+                </div>
+            </div>
+            <div
+                class="product-card"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="13900"
+                data-stripe-compare-at-amount="14900"
+                data-stripe-product-sku="EP2-06798"
+                data-discount-percent="7"
+            >
+                <a href="office-2024-home" class="product-card-body product-card--link">
+                    <div class="product-card-media">
+                        <img src="../asset/media/products/office-2024-home.webp?v=4164391812" width="800" height="800" alt="Office 2024 Famille" decoding="async" loading="lazy" class="product-card-img">
+                    </div>
+                    <p class="product-card-name">Office 2024 Famille</p>
+                    <p class="product-card-blurb">Licence perpétuelle · Word, Excel, PowerPoint · PC/Mac</p>
+                </a>
+                <p class="product-card-price">€ 139,00</p>
+                <div class="product-card-foot">
+                    <a href="office-2024-home" class="home-product-detail">Voir le produit</a>
+                    <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
+                </div>
+            </div>
+            <div
+                class="product-card"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="13400"
+                data-stripe-compare-at-amount="14900"
+                data-stripe-product-sku="79G-05412"
+                data-discount-percent="10"
+            >
+                <a href="office-2021-home-student" class="product-card-body product-card--link">
+                    <div class="product-card-media">
+                        <img src="../asset/media/products/office-2021-home-student.webp?v=7960a65db1" width="800" height="800" alt="Office 2021 Famille et Étudiant" decoding="async" loading="lazy" class="product-card-img">
+                    </div>
+                    <p class="product-card-name">Office 2021 Famille et Étudiant</p>
+                    <p class="product-card-blurb">Licence perpétuelle · maison et études · Windows ou Mac</p>
+                </a>
+                <p class="product-card-price">€ 134,00</p>
+                <div class="product-card-foot">
+                    <a href="office-2021-home-student" class="home-product-detail">Voir le produit</a>
+                    <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
+                </div>
+            </div>
+            <div
+                class="product-card"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="1999"
+                data-stripe-compare-at-amount="3999"
+                data-stripe-product-sku="NORT_360DEL_3D_1A"
+                data-discount-percent="50"
+            >
+                <a href="norton-360-deluxe" class="product-card-body product-card--link">
+                    <div class="product-card-media">
+                        <img src="../asset/media/products/norton-360-deluxe.webp?v=833e9fa511" width="800" height="800" alt="Norton 360 Deluxe" decoding="async" loading="lazy" class="product-card-img">
+                    </div>
+                    <p class="product-card-name">Norton 360 Deluxe</p>
+                    <p class="product-card-blurb">1 an · 3 appareils · VPN et 25 Go de cloud</p>
+                </a>
+                <p class="product-card-price">€ 19,99</p>
+                <div class="product-card-foot">
+                    <a href="norton-360-deluxe" class="home-product-detail">Voir le produit</a>
+                    <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
+                </div>
+            </div>
+            <div
+                class="product-card"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="2999"
+                data-stripe-compare-at-amount="7999"
+                data-stripe-product-sku="KL1047TDAFS"
+                data-discount-percent="62"
+            >
+                <a href="kaspersky-premium-1-device" class="product-card-body product-card--link">
+                    <div class="product-card-media">
+                        <img src="../asset/media/products/kaspersky-premium-1-device.webp?v=d8bb5552cc" width="800" height="800" alt="Kaspersky Premium — 1 appareil" decoding="async" loading="lazy" class="product-card-img">
+                    </div>
+                    <p class="product-card-name">Kaspersky Premium — 1 appareil</p>
+                    <p class="product-card-blurb">1 an · VPN illimité et gestionnaire de mots de passe</p>
+                </a>
+                <p class="product-card-price">€ 29,99</p>
+                <div class="product-card-foot">
+                    <a href="kaspersky-premium-1-device" class="home-product-detail">Voir le produit</a>
+                    <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
+                </div>
             </div>
             <div class="product-card">
                 <div class="skeleton-img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
