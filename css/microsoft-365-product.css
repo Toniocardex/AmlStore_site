@@ -1018,3 +1018,56 @@ body { background: var(--bg, #fff); }
 .v2-trust__points li::before { content: '✓'; color: #10b981; font-weight: 700; }
 .v2-trust__points a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .v2-trust__points a:hover { color: inherit; filter: brightness(1.3); }
+
+/* ── DETTAGLI PRODOTTO (specifiche + nota operativa) ── */
+.product-details {
+    position: relative;
+    z-index: 1;
+    padding: clamp(2rem, 4vw, 3rem) 0 clamp(1.5rem, 3vw, 2.25rem);
+}
+.product-details h2 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.9rem;
+}
+.product-details__note {
+    max-width: 62ch;
+    line-height: 1.7;
+    color: var(--page-text-muted, #667085);
+    margin: 0 0 1.5rem;
+}
+.product-details__specs {
+    margin: 0;
+    border: 1px solid var(--page-border, rgba(0,0,0,0.1));
+    border-radius: 8px;
+    overflow: hidden;
+}
+.product-details__row {
+    display: grid;
+    grid-template-columns: minmax(120px, 200px) 1fr;
+    gap: 1rem;
+    padding: 0.7rem 1rem;
+}
+.product-details__row + .product-details__row {
+    border-top: 1px solid var(--page-border, rgba(0,0,0,0.08));
+}
+.product-details__row dt {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--page-text-muted, #667085);
+    align-self: center;
+}
+.product-details__row dd {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+.product-details__row:nth-child(odd) {
+    background: rgba(127, 127, 127, 0.05);
+}
+@media (max-width: 560px) {
+    .product-details__row { grid-template-columns: 1fr; gap: 0.15rem; }
+}

@@ -15,9 +15,13 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LANG_DIRS = ["it", "en", "fr", "de", "es"]
 os.chdir(ROOT)
 
-# href/src verso asset locali css/js (relativi ../ o assoluti /), con o senza ?v= esistente
+# href/src verso asset locali (relativi ../ o assoluti /), con o senza ?v= esistente.
+# Copre css/js e immagini in-page (asset/media anche in sottocartelle, logo, favicon).
 REF = re.compile(
-    r'((?:href|src)=")((?:\.\./|/)(?:css|js|components|fonts)/[A-Za-z0-9._-]+\.(?:css|js))(?:\?v=[A-Za-z0-9]+)?(")'
+    r'((?:href|src)=")'
+    r'((?:\.\./|/)(?:css|js|components|fonts|logo|favicon|images/[A-Za-z0-9._-]+|asset/[A-Za-z0-9._/-]+?)'
+    r'/[A-Za-z0-9._-]+\.(?:css|js|webp|jpe?g|png|svg|ico))'
+    r'(?:\?v=[A-Za-z0-9]+)?(")'
 )
 
 def short_hash(path):
