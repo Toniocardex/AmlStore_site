@@ -498,6 +498,10 @@
 /en/terms/ /en/terms-and-conditions 301
 
 # ── Splat (SEMPRE in fondo: dopo il primo * ogni regola conta come dinamica) ─
+# www → apex: DEVE precedere le altre regole splat, altrimenti una richiesta
+# su www che matcha anche una regola di path sotto (es. /it/sistema-operativo/*)
+# verrebbe riscritta restando su www invece di consolidare sull'apex.
+https://www.aml-store.com/* https://aml-store.com/:splat 301
 /scripts/* /it/ 302
 /it/sistema-operativo/* /it/sistemi-operativi 301
 /it/operating-system/* /it/sistemi-operativi 301

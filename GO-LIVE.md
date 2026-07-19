@@ -57,11 +57,18 @@ La casella di supporto/reply-to `Info@amlstore.it` è su un **dominio diverso**
 
 ## 3. Taglio DNS / dominio
 
-1. Collegare il progetto Pages al dominio `aml-store.com` (custom domain).
-2. Mantenere il redirect `www.aml-store.com` → `aml-store.com` (Bulk Redirect o
-   regola esistente): tutti i canonical/sitemap usano l'apex.
-3. Il vecchio shop resta raggiungibile finché non si punta il DNS: fare lo
-   switch solo dopo il punto 1 e 2.
+1. Collegare il progetto Pages **sia** al dominio apex `aml-store.com` **sia**
+   a `www.aml-store.com` (entrambi come custom domain dello stesso progetto
+   Pages) — il redirect www→apex aggiunto in `_redirects` (`https://www.aml-store.com/*
+   https://aml-store.com/:splat 301`, 2026-07-19) viene valutato solo se le
+   richieste a www arrivano effettivamente a questo progetto Pages. Se invece
+   si preferisce gestire www a livello DNS/zona (Bulk Redirect Cloudflare),
+   la regola in `_redirects` resta comunque innocua come rete di sicurezza.
+2. Il vecchio shop resta raggiungibile finché non si punta il DNS: fare lo
+   switch solo dopo il punto 1.
+3. Verificare dopo il taglio: `curl -I https://www.aml-store.com/it/` deve
+   rispondere `301` verso `https://aml-store.com/it/` (non è testabile in
+   locale: il redirect è basato sull'host, non riproducibile su localhost).
 
 ## 4. Verifiche post-deploy (5 minuti)
 
@@ -70,7 +77,7 @@ curl -I https://aml-store.com/                 # 301 → /it/
 curl -I https://aml-store.com/it/windows-11-pro  # 200
 curl -I https://aml-store.com/it/sistema-operativo/windows-11-pro-licenza-esd-originale  # 301 un solo hop
 curl -I https://aml-store.com/schema.sql       # 302 → /it/ (non deve servire il file)
-curl -I https://www.aml-store.com/it/          # 301 → apex
+curl -I https://www.aml-store.com/it/          # 301 → apex (regola aggiunta 2026-07-19 in _redirects)
 curl    https://aml-store.com/api/paypal-config  # {"clientId":"<live>"}
 ```
 
