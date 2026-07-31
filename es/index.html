@@ -37,8 +37,9 @@
     <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/">
 
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=7ba50fd6ef">
-    <link rel="stylesheet" href="../css/home.css?v=2b0367b3b8">
+    <link rel="stylesheet" href="../fonts/source-serif.css?v=650b28185c">
+    <link rel="stylesheet" href="../css/page.css?v=a25709f90e">
+    <link rel="stylesheet" href="../css/home.css?v=f726566ae5">
     <link rel="preload" as="image" href="../asset/media/home-hero-lifestyle.webp?v=d31107865c" type="image/webp">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script type="application/ld+json">
@@ -105,44 +106,68 @@
 
         <section class="home-categories" aria-labelledby="home-categories-title">
             <h2 id="home-categories-title" class="home-section-title">Explora las categorías</h2>
-            <div class="home-categories-grid">
-                <a href="sistemi-operativi" class="home-category-tile">
-                    <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg></span>
-                    <span class="home-category-name">Sistemas operativos</span>
-                    <span class="home-category-desc">Windows 10 y 11, Home y Pro</span>
-                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                </a>
-                <a href="suite-office" class="home-category-tile">
-                    <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg></span>
-                    <span class="home-category-name">Suites Office</span>
-                    <span class="home-category-desc">De Office 2019 a Office 2024</span>
-                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                </a>
-                <a href="microsoft-365-solutions" class="home-category-tile">
-                    <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.4-1.5A5 5 0 0 0 6.5 19h11z"></path></svg></span>
-                    <span class="home-category-name">Microsoft 365</span>
-                    <span class="home-category-desc">Personal, Family y Business</span>
-                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                </a>
-                <a href="antivirus" class="home-category-tile">
-                    <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
-                    <span class="home-category-name">Antivirus y seguridad</span>
-                    <span class="home-category-desc">Norton, Kaspersky, Bitdefender, ESET, McAfee</span>
-                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                </a>
-                <a href="windows-server" class="home-category-tile">
-                    <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14a9 3 0 0 0 18 0V5"></path><path d="M3 12a9 3 0 0 0 18 0"></path></svg></span>
-                    <span class="home-category-name">Servidores y bases de datos</span>
-                    <span class="home-category-desc">Windows Server y SQL Server</span>
-                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                </a>
-                <a href="strumenti" class="home-category-tile">
-                    <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
-                    <span class="home-category-name">Herramientas y más</span>
-                    <span class="home-category-desc">Acrobat, CorelDRAW, Acronis, Project y Visio</span>
-                    <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                </a>
-            </div>
+            <ul class="home-categories-grid">
+                <li>
+                    <a href="sistemi-operativi" class="home-category-tile">
+                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 18v3"></path></svg></span>
+                        <span class="home-category-copy">
+                            <span class="home-category-name">Sistemas operativos</span>
+                            <span class="home-category-desc">Windows 10 y 11, Home y Pro</span>
+                        </span>
+                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="suite-office" class="home-category-tile">
+                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg></span>
+                        <span class="home-category-copy">
+                            <span class="home-category-name">Suites Office</span>
+                            <span class="home-category-desc">De Office 2019 a Office 2024</span>
+                        </span>
+                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="microsoft-365-solutions" class="home-category-tile">
+                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.4-1.5A5 5 0 0 0 6.5 19h11z"></path></svg></span>
+                        <span class="home-category-copy">
+                            <span class="home-category-name">Microsoft 365</span>
+                            <span class="home-category-desc">Personal, Family y Business</span>
+                        </span>
+                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="antivirus" class="home-category-tile">
+                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
+                        <span class="home-category-copy">
+                            <span class="home-category-name">Antivirus y seguridad</span>
+                            <span class="home-category-desc">Norton, Kaspersky, Bitdefender, ESET, McAfee</span>
+                        </span>
+                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="windows-server" class="home-category-tile">
+                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14a9 3 0 0 0 18 0V5"></path><path d="M3 12a9 3 0 0 0 18 0"></path></svg></span>
+                        <span class="home-category-copy">
+                            <span class="home-category-name">Servidores y bases de datos</span>
+                            <span class="home-category-desc">Windows Server y SQL Server</span>
+                        </span>
+                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="strumenti" class="home-category-tile">
+                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
+                        <span class="home-category-copy">
+                            <span class="home-category-name">Herramientas y más</span>
+                            <span class="home-category-desc">Acrobat, CorelDRAW, Acronis, Project y Visio</span>
+                        </span>
+                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
         </section>
 
         <section id="catalogo" class="home-catalog" aria-labelledby="catalog-title">

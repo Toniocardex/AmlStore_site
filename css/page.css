@@ -9,6 +9,8 @@
     --page-text-muted: #71717a;
     --page-accent: #3b82f6;
     --page-glow: rgba(59, 130, 246, 0.08);
+    --font-sans: 'Montserrat', sans-serif;
+    --font-display: 'Source Serif 4', 'Source Serif4', Georgia, serif;
 }
 
 html {
@@ -84,7 +86,7 @@ html {
 
 body {
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-sans);
     background-color: var(--page-bg);
     background-image: radial-gradient(ellipse 120% 80% at 50% -20%, var(--page-glow), transparent 55%);
     color: var(--page-text);
