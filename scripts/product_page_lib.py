@@ -358,6 +358,47 @@ def _render_features(features):
     return "\n".join(parts)
 
 
+def _render_lifestyle_band(lifestyle, lang):
+    """Full-bleed lifestyle band (Win11 gallery CWV pattern). Optional per SKU."""
+    if not lifestyle:
+        return ""
+    img = lifestyle["image"]
+    img_640 = lifestyle.get("image_640") or img
+    w = int(lifestyle.get("width") or 1024)
+    h = int(lifestyle.get("height") or 640)
+    alt = lifestyle["alt"][lang]
+    kicker = lifestyle["kicker"][lang]
+    title = lifestyle["title"][lang]
+    body = lifestyle["body"][lang]
+    src = f"../asset/media/products/{img}"
+    src_640 = f"../asset/media/products/{img_640}"
+    # srcset: smaller first for mobile; sizes match full-bleed band
+    srcset = f"{src_640} 640w, {src} {w}w"
+    return f"""        <hr class="v2-divider">
+        <section class="v2-section v2-section--gallery" aria-label="{title}">
+            <figure class="bento-figure">
+                <img
+                    class="bento-img"
+                    src="{src}"
+                    srcset="{srcset}"
+                    sizes="100vw"
+                    width="{w}"
+                    height="{h}"
+                    alt="{alt}"
+                    loading="lazy"
+                    decoding="async"
+                >
+                <figcaption class="bento-caption">
+                    <span class="bento-kicker">{kicker}</span>
+                    <h3 class="bento-title">{title}</h3>
+                    <p class="bento-text">{body}</p>
+                </figcaption>
+            </figure>
+        </section>
+        <hr class="v2-divider">
+"""
+
+
 def _render_apps(app_keys, labels_map=None):
     names = {
         "word": "Word",
@@ -500,8 +541,10 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         ],
     }
 
+    lifestyle_block = _render_lifestyle_band(content.get("lifestyle"), lang)
+
     if content.get("apps"):
-        apps_block = f"""        <section class="v2-apps-section" aria-labelledby="v2-apps-title">
+        apps_block = f"""{lifestyle_block}        <section class="v2-apps-section" aria-labelledby="v2-apps-title">
             <p class="v2-eyebrow">{ui['apps_eyebrow']}</p>
             <h2 id="v2-apps-title" class="v2-section-title" style="margin-bottom:32px;">{content['apps_title'][lang]}</h2>
             <div class="v2-apps-grid">
@@ -511,7 +554,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         <hr class="v2-divider">
 """
     else:
-        apps_block = "        <hr class=\"v2-divider\">\n"
+        apps_block = f"{lifestyle_block}        <hr class=\"v2-divider\">\n"
 
     return f"""<!DOCTYPE html>
 <html lang="{lang}">

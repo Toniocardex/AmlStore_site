@@ -403,6 +403,41 @@ PRODUCTS = {
             "de": "Apps im Paket",
             "es": "Apps incluidas en el pack",
         },
+        # Full-bleed lifestyle band (after bento, before apps). Reuses Win11 gallery CWV pattern.
+        "lifestyle": {
+            "image": "office-2024-home-business-lifestyle.webp",
+            "image_640": "office-2024-home-business-lifestyle-640.webp",
+            "width": 1024,
+            "height": 640,
+            "alt": {
+                "it": "Scrivania con laptop per lavoro e uso domestico con Office.",
+                "en": "Home-office desk with a laptop for work and everyday Office use.",
+                "fr": "Bureau à domicile avec ordinateur portable pour le travail et Office au quotidien.",
+                "de": "Home-Office-Schreibtisch mit Laptop für Arbeit und Office im Alltag.",
+                "es": "Escritorio de casa con portátil para trabajo y uso diario de Office.",
+            },
+            "kicker": {
+                "it": "Casa e lavoro",
+                "en": "Home and work",
+                "fr": "Maison et travail",
+                "de": "Zuhause und Arbeit",
+                "es": "Hogar y trabajo",
+            },
+            "title": {
+                "it": "Outlook incluso, senza abbonamento",
+                "en": "Outlook included, no subscription",
+                "fr": "Outlook inclus, sans abonnement",
+                "de": "Outlook inklusive — ohne Abo",
+                "es": "Outlook incluido, sin suscripción",
+            },
+            "body": {
+                "it": "Word, Excel, PowerPoint, Outlook e OneNote su 1 PC o Mac: produttività quotidiana con licenza perpetua ESD.",
+                "en": "Word, Excel, PowerPoint, Outlook and OneNote on 1 PC or Mac—everyday productivity with a perpetual ESD licence.",
+                "fr": "Word, Excel, PowerPoint, Outlook et OneNote sur 1 PC ou Mac : productivité quotidienne en licence ESD perpétuelle.",
+                "de": "Word, Excel, PowerPoint, Outlook und OneNote auf 1 PC oder Mac — Alltag produktiv mit ESD-Dauerlizenz.",
+                "es": "Word, Excel, PowerPoint, Outlook y OneNote en 1 PC o Mac: productividad diaria con licencia ESD perpetua.",
+            },
+        },
         "faq": {
             "it": [
                 ("Qual è la differenza tra Office 2024 e Microsoft 365?", "Office 2024 Home & Business è un acquisto unico con licenza permanente per 1 PC o Mac, senza rinnovi. Non include OneDrive 1 TB, Copilot AI o Defender tipici di Microsoft 365, che è un abbonamento con app aggiornate, cloud e AI."),
