@@ -1,0 +1,350 @@
+#!/usr/bin/env python3
+"""Refresh homepage featured products, payments strip, and Trustpilot placeholder ×5 langs."""
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from product_page_lib import BASE_LABELS, LANGS, product_card  # noqa: E402
+
+# TrustBox — Micro Review Count (widget ufficiale Trustpilot)
+TRUSTPILOT_BUSINESS_UNIT_ID = "61c44c912f493a1a7cd810fa"
+TRUSTPILOT_TEMPLATE_ID = "5419b6a8b0d04a076446a9ad"
+TRUSTPILOT_TOKEN = "27270fde-f5a0-4937-9101-76b7ebae8a1a"
+
+HOME_COPY = {
+    "it": {
+        "catalog_lede": "Le licenze più richieste, con prezzi chiari e consegna digitale immediata.",
+        "catalog_more": "Vedi tutte le suite Office",
+        "catalog_more_href": "suite-office.html",
+        "payments_title": "Pagamenti sicuri",
+        "social_hidden": "Recensioni dei clienti",
+        "social_fallback": (
+            'Esperienze reali condivise dai clienti su '
+            '<a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.'
+        ),
+        "trustpilot_locale": "it-IT",
+        "trustpilot_url": "https://it.trustpilot.com/review/aml-store.com",
+    },
+    "en": {
+        "catalog_lede": "Our most popular licences with clear pricing and instant digital delivery.",
+        "catalog_more": "Browse all Office suites",
+        "catalog_more_href": "suite-office.html",
+        "payments_title": "Secure payments",
+        "social_hidden": "Customer reviews",
+        "social_fallback": (
+            'Real experiences shared by customers on '
+            '<a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.'
+        ),
+        "trustpilot_locale": "en-US",
+        "trustpilot_url": "https://www.trustpilot.com/review/aml-store.com",
+    },
+    "fr": {
+        "catalog_lede": "Les licences les plus demandées, prix clairs et livraison numérique immédiate.",
+        "catalog_more": "Voir toutes les suites Office",
+        "catalog_more_href": "suite-office.html",
+        "payments_title": "Paiements sécurisés",
+        "social_hidden": "Avis clients",
+        "social_fallback": (
+            'Expériences réelles partagées sur '
+            '<a href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.'
+        ),
+        "trustpilot_locale": "fr-FR",
+        "trustpilot_url": "https://fr.trustpilot.com/review/aml-store.com",
+    },
+    "de": {
+        "catalog_lede": "Beliebteste Lizenzen mit klaren Preisen und sofortiger digitaler Lieferung.",
+        "catalog_more": "Alle Office-Suiten ansehen",
+        "catalog_more_href": "suite-office.html",
+        "payments_title": "Sichere Zahlungen",
+        "social_hidden": "Kundenbewertungen",
+        "social_fallback": (
+            'Echte Erfahrungen von Kunden auf '
+            '<a href="https://de.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.'
+        ),
+        "trustpilot_locale": "de-DE",
+        "trustpilot_url": "https://de.trustpilot.com/review/aml-store.com",
+    },
+    "es": {
+        "catalog_lede": "Licencias más solicitadas, precios claros y entrega digital inmediata.",
+        "catalog_more": "Ver todas las suites Office",
+        "catalog_more_href": "suite-office.html",
+        "payments_title": "Pagos seguros",
+        "social_hidden": "Opiniones de clientes",
+        "social_fallback": (
+            'Experiencias reales compartidas en '
+            '<a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.'
+        ),
+        "trustpilot_locale": "es-ES",
+        "trustpilot_url": "https://es.trustpilot.com/review/aml-store.com",
+    },
+}
+
+FEATURED = [
+    {
+        "sku": "6GQ-00092",
+        "slug": "microsoft-365-family",
+        "template": "m365",
+        "image": "microsoft-365-family.webp",
+        "image_src": "../asset/media/products/microsoft-365-family.webp?v=7503c711d3",
+        "card_name": "Microsoft 365 Family",
+        "blurb": {
+            "it": "Abbonamento 12 mesi · fino a 6 utenti · licenza digitale",
+            "en": "12-month subscription · up to 6 users · digital licence",
+            "fr": "Abonnement 12 mois · jusqu'à 6 utilisateurs · licence numérique",
+            "de": "12-Monats-Abo · bis zu 6 Nutzer · digitale Lizenz",
+            "es": "Suscripción 12 meses · hasta 6 usuarios · licencia digital",
+        },
+    },
+    {
+        "sku": "QQ2-00012",
+        "slug": "microsoft-365-personal",
+        "template": "m365",
+        "image": "microsoft-365-personal.webp",
+        "image_src": "../asset/media/products/microsoft-365-personal.webp?v=2cfdb89700",
+        "card_name": "Microsoft 365 Personal",
+        "blurb": {
+            "it": "Abbonamento 12 mesi · 1 utente · licenza digitale",
+            "en": "12-month subscription · 1 user · digital licence",
+            "fr": "Abonnement 12 mois · 1 utilisateur · licence numérique",
+            "de": "12-Monats-Abo · 1 Nutzer · digitale Lizenz",
+            "es": "Suscripción 12 meses · 1 usuario · licencia digital",
+        },
+    },
+    {
+        "sku": "SC_W11HOME_M365PERS",
+        "slug": "bundle-windows-11-home-m365-personal",
+        "template": "bundle",
+        "image": "microsoft-windows-11-home.webp",
+        "image_src": "../asset/media/products/bundle-windows-11-home-m365-personal.webp?v=a94f67147b",
+        "card_name": {
+            "it": "Windows 11 Home + M365 Personal",
+            "en": "Windows 11 Home + M365 Personal",
+            "fr": "Windows 11 Home + M365 Personal",
+            "de": "Windows 11 Home + M365 Personal",
+            "es": "Windows 11 Home + M365 Personal",
+        },
+        "blurb": {
+            "it": "Pacchetto · Windows a vita + Office 12 mesi · 5 dispositivi",
+            "en": "Bundle · lifetime Windows + 12-month Office · 5 devices",
+            "fr": "Pack · Windows à vie + Office 12 mois · 5 appareils",
+            "de": "Paket · Windows dauerhaft + Office 12 Monate · 5 Geräte",
+            "es": "Pack · Windows de por vida + Office 12 meses · 5 dispositivos",
+        },
+    },
+    {
+        "sku": "FQC-10528",
+        "slug": "windows-11-pro",
+        "template": "windows",
+        "image": "microsoft-windows-11-home.webp",
+        "image_src": "../asset/media/products/windows-11-pro.webp?v=9f7915ebb5",
+        "card_name": "Windows 11 Pro",
+        "blurb": {
+            "it": "Licenza perpetua · BitLocker e Desktop remoto · ESD",
+            "en": "Perpetual licence · BitLocker and Remote Desktop · ESD",
+            "fr": "Licence perpétuelle · BitLocker et Bureau à distance · ESD",
+            "de": "Dauerlizenz · BitLocker und Remote Desktop · ESD",
+            "es": "Licencia perpetua · BitLocker y Escritorio remoto · ESD",
+        },
+        "lazy": True,
+    },
+    {
+        "sku": "EP2-06798",
+        "slug": "office-2024-home",
+        "template": "office",
+        "image": "microsoft-365-personal.webp",
+        "image_src": "../asset/media/products/office-2024-home.webp?v=a93041b6f5",
+        "card_name": "Office 2024 Home",
+        "blurb": {
+            "it": "Licenza perpetua · Word, Excel, PowerPoint · PC/Mac",
+            "en": "Perpetual licence · Word, Excel, PowerPoint · PC/Mac",
+            "fr": "Licence perpétuelle · Word, Excel, PowerPoint · PC/Mac",
+            "de": "Dauerlizenz · Word, Excel, PowerPoint · PC/Mac",
+            "es": "Licencia perpetua · Word, Excel, PowerPoint · PC/Mac",
+        },
+        "lazy": True,
+    },
+    {
+        "sku": "79G-05412",
+        "slug": "office-2021-home-student",
+        "template": "office",
+        "image": "microsoft-365-personal.webp",
+        "image_src": "../asset/media/products/office-2021-home-student.webp?v=0ccb66f48c",
+        "card_name": "Office 2021 Home & Student",
+        "blurb": {
+            "it": "Licenza perpetua · per studio e casa · Windows o Mac",
+            "en": "Perpetual licence · for home and study · Windows or Mac",
+            "fr": "Licence perpétuelle · maison et études · Windows ou Mac",
+            "de": "Dauerlizenz · für Zuhause und Studium · Windows oder Mac",
+            "es": "Licencia perpetua · hogar y estudio · Windows o Mac",
+        },
+        "lazy": True,
+    },
+    {
+        "sku": "NORT_360DEL_3D_1A",
+        "slug": "norton-360-deluxe",
+        "template": "antivirus",
+        "image": "microsoft-365-personal.webp",
+        "image_src": "../asset/media/products/norton-360-deluxe.webp?v=6cb83b581a",
+        "card_name": "Norton 360 Deluxe",
+        "blurb": {
+            "it": "1 anno · 3 dispositivi · VPN e 25 GB di cloud",
+            "en": "1 year · 3 devices · VPN and 25 GB cloud",
+            "fr": "1 an · 3 appareils · VPN et 25 Go cloud",
+            "de": "1 Jahr · 3 Geräte · VPN und 25 GB Cloud",
+            "es": "1 año · 3 dispositivos · VPN y 25 GB en la nube",
+        },
+        "lazy": True,
+    },
+    {
+        "sku": "KL1047TDAFS",
+        "slug": "kaspersky-premium-1-device",
+        "template": "antivirus",
+        "image": "microsoft-365-personal.webp",
+        "image_src": "../asset/media/products/kaspersky-premium-1-device.webp?v=cd395b5601",
+        "card_name": {
+            "it": "Kaspersky Premium — 1 dispositivo",
+            "en": "Kaspersky Premium — 1 device",
+            "fr": "Kaspersky Premium — 1 appareil",
+            "de": "Kaspersky Premium — 1 Gerät",
+            "es": "Kaspersky Premium — 1 dispositivo",
+        },
+        "blurb": {
+            "it": "1 anno · VPN illimitata e password manager",
+            "en": "1 year · unlimited VPN and password manager",
+            "fr": "1 an · VPN illimitée et gestionnaire de mots de passe",
+            "de": "1 Jahr · unbegrenztes VPN und Passwort-Manager",
+            "es": "1 año · VPN ilimitada y gestor de contraseñas",
+        },
+        "lazy": True,
+    },
+]
+
+PAYMENT_LOGOS = [
+    ("img-aml-store_Visa_logo.svg", "Visa"),
+    ("img-aml-store_Mastercard_logo.svg", "Mastercard"),
+    ("img-aml-store_Stripe_Logo.svg", "Stripe"),
+    ("img-aml-store_Apple_Pay_logo.svg", "Apple Pay"),
+    ("img-aml-store_Google_Pay_Logo.svg", "Google Pay"),
+    ("img-aml-store_bank-transfer.svg", "Bank transfer"),
+]
+
+HOME_TRUST_RE = re.compile(
+    r"\n\s*<section class=\"home-trust\"[^>]*>.*?</section>\s*",
+    re.DOTALL,
+)
+
+CATALOG_GRID_RE = re.compile(
+    r"(<section id=\"catalogo\"[^>]*>\s*<h2[^>]*>.*?</h2>)\s*<div class=\"product-grid\">.*?</div>\s*(</section>)",
+    re.DOTALL,
+)
+
+PAYMENTS_STRIP_RE = re.compile(
+    r"\n\s*<section class=\"home-payments-strip\"[^>]*>.*?</section>\s*",
+    re.DOTALL,
+)
+
+SOCIAL_PROOF_RE = re.compile(
+    r"\n\s*<section class=\"home-social-proof\"[^>]*>.*?</section>\s*",
+    re.DOTALL,
+)
+
+
+def featured_prod(lang, base):
+    prod = dict(base)
+    prod["href_suffix"] = ""
+    name = prod.get("card_name")
+    if isinstance(name, dict):
+        prod["card_name"] = name[lang]
+    prod["blurb"] = prod["blurb"][lang]
+    return prod
+
+
+def payments_strip(lang):
+    copy = HOME_COPY[lang]
+    logos = "\n".join(
+        f'                <img src="../asset/payments_logo/{fname}" width="56" height="36" alt="{alt}" loading="lazy" decoding="async">'
+        for fname, alt in PAYMENT_LOGOS
+    )
+    return f"""
+        <section class="home-payments-strip" aria-labelledby="home-payments-title">
+            <h2 id="home-payments-title" class="home-payments-strip__title">{copy['payments_title']}</h2>
+            <div class="home-payments-strip__logos">
+{logos}
+            </div>
+        </section>
+"""
+
+
+def social_proof_section(lang):
+    copy = HOME_COPY[lang]
+    return f"""
+        <section class="home-social-proof" aria-labelledby="home-social-title">
+            <h2 id="home-social-title" class="visually-hidden">{copy['social_hidden']}</h2>
+            <p class="home-social-proof__fallback">{copy['social_fallback']}</p>
+            <div
+                id="trustpilot-widget"
+                class="trustpilot-widget"
+                data-locale="{copy['trustpilot_locale']}"
+                data-template-id="{TRUSTPILOT_TEMPLATE_ID}"
+                data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT_ID}"
+                data-style-height="40px"
+                data-style-width="100%"
+                data-token="{TRUSTPILOT_TOKEN}"
+                data-min-review-count="0"
+                data-style-alignment="center"
+            >
+                <a href="{copy['trustpilot_url']}" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+            </div>
+        </section>
+"""
+
+
+def patch_index(lang):
+    path = ROOT / lang / "index.html"
+    text = path.read_text(encoding="utf-8")
+    copy = HOME_COPY[lang]
+    labels = BASE_LABELS[lang]
+
+    text = HOME_TRUST_RE.sub("\n", text)
+    text = PAYMENTS_STRIP_RE.sub("\n", text)
+
+    cards = "".join(
+        product_card(lang, featured_prod(lang, p), labels) for p in FEATURED
+    )
+
+    m = CATALOG_GRID_RE.search(text)
+    if not m:
+        raise RuntimeError(f"catalog section not found in {path}")
+    intro_and_grid = f"""{m.group(1)}
+            <div class="home-catalog-intro">
+                <p class="home-catalog-lede">{copy['catalog_lede']}</p>
+                <a class="home-catalog-more" href="{copy['catalog_more_href']}">{copy['catalog_more']} →</a>
+            </div>
+            <div class="product-grid">
+{cards}            </div>
+        </section>
+{payments_strip(lang)}"""
+    text = CATALOG_GRID_RE.sub(intro_and_grid, text, count=1)
+
+    if SOCIAL_PROOF_RE.search(text):
+        text = SOCIAL_PROOF_RE.sub(social_proof_section(lang), text, count=1)
+    else:
+        text = text.replace(
+            '<section class="home-closing"',
+            social_proof_section(lang).strip() + '\n\n        <section class="home-closing"',
+            1,
+        )
+
+    path.write_text(text, encoding="utf-8")
+    print("updated", path.relative_to(ROOT))
+
+
+def main():
+    for lang in LANGS:
+        patch_index(lang)
+
+
+if __name__ == "__main__":
+    main()

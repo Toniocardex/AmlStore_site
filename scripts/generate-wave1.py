@@ -3,9 +3,12 @@
 import json
 import math
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from product_page_lib import product_card  # noqa: E402
 CATALOG = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
 LANGS = ("it", "en", "fr", "de", "es")
 LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
@@ -146,35 +149,6 @@ def hreflang_block(lang, slug):
         f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}.html">'
     )
     return "\n".join(lines)
-
-
-def product_card(lang, slug, sku, short_name, blurb, labels):
-    e = entry(sku)
-    sale = e["unitAmountMinor"]
-    compare = e["compareAtMinor"]
-    disc = pct(sale, compare)
-    return f"""                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="{sale}"
-                    data-stripe-compare-at-amount="{compare}"
-                    data-stripe-product-sku="{sku}"
-                    data-discount-percent="{disc}"
-                >
-                    <a href="{slug}.html" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/microsoft-windows-11-home.webp" width="400" height="400" alt="{short_name}" decoding="async" class="product-card-img" onerror="this.src='../asset/media/home-hero-lifestyle.webp'">
-                        </div>
-                        <p class="product-card-name">{short_name}</p>
-                        <p class="product-card-blurb">{blurb}</p>
-                    </a>
-                    <p class="product-card-price">€ {eur_fmt(sale)}</p>
-                    <div class="product-card-foot">
-                        <a href="{slug}.html" class="home-product-detail">{labels['detail']}</a>
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>{labels['add']}</button>
-                    </div>
-                </div>
-"""
 
 
 def build_page(lang, prod):
@@ -344,7 +318,15 @@ def patch_sistemi_operativi():
             elif p["slug"] == "windows-10-pro":
                 short = "Windows 10 Pro"
             blurb = "ESD · " + ("Attivazione immediata" if lang == "it" else "Instant activation")
-            cards.append(product_card(lang, p["slug"], p["sku"], short, blurb, labels))
+            prod = {
+                "sku": p["sku"],
+                "slug": p["slug"],
+                "template": p["template"],
+                "card_name": short,
+                "image": p["image"],
+                "blurb": blurb,
+            }
+            cards.append(product_card(lang, prod, labels))
         skeleton = re.search(
             r"\n                <div class=\"product-card\">\n                    <div class=\"skeleton-img\">.*?</div>\n                </div>\n                <div class=\"product-card\">.*?</div>\n            </div>",
             text,

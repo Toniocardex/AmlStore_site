@@ -52,6 +52,7 @@
             navOfficeOpenSubmenu: 'Apri sottomenu Office',
             navOfficeOverview: 'Suite Office',
             navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
             navOffice2024Standard: 'Office 2024 Standard',
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
@@ -107,6 +108,7 @@
             navOfficeOpenSubmenu: 'Open Office submenu',
             navOfficeOverview: 'Office suite',
             navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
             navOffice2024Standard: 'Office 2024 Standard',
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
@@ -162,6 +164,7 @@
             navOfficeOpenSubmenu: 'Ouvrir le sous-menu Office',
             navOfficeOverview: 'Suite Office',
             navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
             navOffice2024Standard: 'Office 2024 Standard',
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
@@ -217,6 +220,7 @@
             navOfficeOpenSubmenu: 'Office-Untermenü öffnen',
             navOfficeOverview: 'Office-Suite',
             navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
             navOffice2024Standard: 'Office 2024 Standard',
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
@@ -272,6 +276,7 @@
             navOfficeOpenSubmenu: 'Abrir submenú Office',
             navOfficeOverview: 'Suite Office',
             navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
             navOffice2024Standard: 'Office 2024 Standard',
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
@@ -375,17 +380,19 @@
             const isWin10Pro = afterLangLower.includes('windows-10-pro');
             const hrefSuiteOffice = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'suite-office');
             const hrefOffice2024Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-home');
+            const hrefOffice2024HB = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-home-business');
             const hrefOffice2024Standard = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-standard');
             const hrefOffice2021HS = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-student');
             const hrefOffice2021PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-professional-plus');
             const hrefOffice2019PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2019-professional-plus');
             const isOfficeOverview = afterLangLower.includes('suite-office');
-            const isOffice2024Home = afterLangLower.includes('office-2024-home');
+            const isOffice2024HB = afterLangLower.includes('office-2024-home-business');
+            const isOffice2024Home = afterLangLower.includes('office-2024-home') && !isOffice2024HB;
             const isOffice2024Standard = afterLangLower.includes('office-2024-standard');
             const isOffice2021HS = afterLangLower.includes('office-2021-home-student');
             const isOffice2021PP = afterLangLower.includes('office-2021-professional-plus');
             const isOffice2019PP = afterLangLower.includes('office-2019-professional-plus');
-            const isOfficeNavActive = isOfficeOverview || isOffice2024Home || isOffice2024Standard
+            const isOfficeNavActive = isOfficeOverview || isOffice2024Home || isOffice2024HB || isOffice2024Standard
                 || isOffice2021HS || isOffice2021PP || isOffice2019PP
                 || /\/(office-|word-2024|excel-2024|powerpoint-2024|outlook-2024|project-|visio-)/.test(afterLangLower);
             const hrefWinServer = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-server');
@@ -1890,6 +1897,7 @@
                                 <div class="nav-office-dropdown" role="menu">
                                     <a href="${esc(hrefSuiteOffice)}" class="nav-office-dropdown__overview" role="menuitem"${isOfficeOverview ? ' aria-current="page"' : ''}>${esc(t.navOfficeOverview)}</a>
                                     <a href="${esc(hrefOffice2024Home)}" role="menuitem"${isOffice2024Home ? ' aria-current="page"' : ''}>${esc(t.navOffice2024Home)}</a>
+                                    <a href="${esc(hrefOffice2024HB)}" role="menuitem"${isOffice2024HB ? ' aria-current="page"' : ''}>${esc(t.navOffice2024HB)}</a>
                                     <a href="${esc(hrefOffice2024Standard)}" role="menuitem"${isOffice2024Standard ? ' aria-current="page"' : ''}>${esc(t.navOffice2024Standard)}</a>
                                     <a href="${esc(hrefOffice2021HS)}" role="menuitem"${isOffice2021HS ? ' aria-current="page"' : ''}>${esc(t.navOffice2021HS)}</a>
                                     <a href="${esc(hrefOffice2021PP)}" role="menuitem"${isOffice2021PP ? ' aria-current="page"' : ''}>${esc(t.navOffice2021PP)}</a>
@@ -2016,6 +2024,7 @@
                             <div class="drawer-office-heading">${esc(t.navOffice)}</div>
                             <a href="${esc(hrefSuiteOffice)}"${isOfficeOverview ? ' class="active"' : ''}>${esc(t.navOfficeOverview)}</a>
                             <a href="${esc(hrefOffice2024Home)}"${isOffice2024Home ? ' class="active"' : ''}>${esc(t.navOffice2024Home)}</a>
+                            <a href="${esc(hrefOffice2024HB)}"${isOffice2024HB ? ' class="active"' : ''}>${esc(t.navOffice2024HB)}</a>
                             <a href="${esc(hrefOffice2024Standard)}"${isOffice2024Standard ? ' class="active"' : ''}>${esc(t.navOffice2024Standard)}</a>
                             <a href="${esc(hrefOffice2021HS)}"${isOffice2021HS ? ' class="active"' : ''}>${esc(t.navOffice2021HS)}</a>
                             <a href="${esc(hrefOffice2021PP)}"${isOffice2021PP ? ' class="active"' : ''}>${esc(t.navOffice2021PP)}</a>

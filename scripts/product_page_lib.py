@@ -236,6 +236,18 @@ def hreflang_block(slug):
     return "\n".join(lines)
 
 
+def product_card_price_block(sale, compare, disc):
+    if disc > 0:
+        return f"""                    <div class="product-card-price-block">
+                        <div class="product-card-price-block__row">
+                            <span class="product-card-price-block__msrp">€ {eur_fmt(compare)}</span>
+                            <span class="product-card-price-block__sale">€ {eur_fmt(sale)}</span>
+                        </div>
+                        <span class="product-card-price-block__save">−{disc}%</span>
+                    </div>"""
+    return f"""                    <p class="product-card-price">€ {eur_fmt(sale)}</p>"""
+
+
 def product_card(lang, prod, labels):
     e = entry(prod["sku"])
     sale = e["unitAmountMinor"]
@@ -243,9 +255,25 @@ def product_card(lang, prod, labels):
     disc = pct(sale, compare)
     meta = TEMPLATE_META[prod["template"]]
     name = prod["card_name"]
-    blurb = prod.get("blurb") or meta["blurb"][lang]
+    blurb_raw = prod.get("blurb")
+    if isinstance(blurb_raw, dict):
+        blurb = blurb_raw.get(lang) or meta["blurb"][lang]
+    elif blurb_raw:
+        blurb = blurb_raw
+    else:
+        blurb = meta["blurb"][lang]
     slug = prod["slug"]
     image = prod["image"]
+    href_suffix = prod.get("href_suffix", ".html")
+    href = f"{slug}{href_suffix}"
+    image_src = prod.get("image_src") or _product_image_src(slug, image)
+    lazy_attr = ' loading="lazy"' if prod.get("lazy") else ""
+    badge = ""
+    if disc > 0:
+        badge = (
+            f'                            <span class="product-card-badge" aria-hidden="true">−{disc}%</span>\n'
+        )
+    price_html = product_card_price_block(sale, compare, disc)
     return f"""                <div
                     class="product-card"
                     data-stripe-currency="eur"
@@ -254,23 +282,417 @@ def product_card(lang, prod, labels):
                     data-stripe-product-sku="{prod['sku']}"
                     data-discount-percent="{disc}"
                 >
-                    <a href="{slug}.html" class="product-card-body product-card--link">
+                    <a href="{href}" class="product-card-body product-card--link">
                         <div class="product-card-media">
-                            <img src="../asset/media/{image}" width="400" height="400" alt="{name}" decoding="async" class="product-card-img" onerror="this.src='../asset/media/home-hero-lifestyle.webp'">
+{badge}                            <img src="{image_src}" width="400" height="400" alt="{name}" decoding="async"{lazy_attr} class="product-card-img" onerror="this.src='../asset/media/home-hero-lifestyle.webp'">
                         </div>
                         <p class="product-card-name">{name}</p>
                         <p class="product-card-blurb">{blurb}</p>
                     </a>
-                    <p class="product-card-price">€ {eur_fmt(sale)}</p>
+{price_html}
                     <div class="product-card-foot">
-                        <a href="{slug}.html" class="home-product-detail">{labels['detail']}</a>
                         <button type="button" class="btn-cta-primary product-card-add" data-cart-add>{labels['add']}</button>
                     </div>
                 </div>
 """
 
 
-def build_product_page(lang, prod):
+PAYMENT_LOGOS = [
+    ("img-aml-store_Visa_logo.svg", "Visa"),
+    ("img-aml-store_Mastercard_logo.svg", "Mastercard"),
+    ("img-aml-store_Stripe_Logo.svg", "Stripe"),
+    ("img-aml-store_Apple_Pay_logo.svg", "Apple Pay"),
+    ("img-aml-store_Google_Pay_Logo.svg", "Google Pay"),
+]
+
+CART_ICON = (
+    '<svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20">'
+    '<path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>'
+    "</svg>"
+)
+
+
+def _product_image_src(slug, fallback_image):
+    product_path = ROOT / "asset" / "media" / "products" / f"{slug}.webp"
+    if product_path.exists():
+        return f"../asset/media/products/{slug}.webp"
+    return f"../asset/media/{fallback_image}"
+
+
+def _icon_src(key):
+    from product_content_office import ICON
+
+    return f"../asset/icon/{ICON[key]}"
+
+
+def _render_pills(pills):
+    parts = []
+    for icon_key, label in pills:
+        icon_html = ""
+        if icon_key:
+            icon_html = (
+                f'<img src="{_icon_src(icon_key)}" width="18" height="18" alt="" '
+                f'loading="lazy" decoding="async">'
+            )
+        parts.append(
+            f"""                        <span class="v2-pill">
+                            {icon_html}
+                            {label}
+                        </span>"""
+        )
+    return "\n".join(parts)
+
+
+def _render_features(features):
+    parts = []
+    for span, tone, label, title, body in features:
+        tone_cls = f" v2-bento__cell--{tone}" if tone else ""
+        label_html = f'<p class="v2-bento__label">{label}</p>' if label else ""
+        parts.append(
+            f"""                <div class="v2-bento__cell v2-bento__cell--{span}{tone_cls}" role="listitem">
+                    {label_html}
+                    <h3 class="v2-bento__title">{title}</h3>
+                    <p class="v2-bento__body">{body}</p>
+                </div>"""
+        )
+    return "\n".join(parts)
+
+
+def _render_apps(app_keys, labels_map=None):
+    names = {
+        "word": "Word",
+        "excel": "Excel",
+        "powerpoint": "PowerPoint",
+        "outlook": "Outlook",
+        "onenote": "OneNote",
+    }
+    parts = []
+    for key in app_keys:
+        parts.append(
+            f"""                <div class="v2-app-item">
+                    <img src="{_icon_src(key)}" width="48" height="48" alt="" loading="lazy" decoding="async">
+                    {names.get(key, key.title())}
+                </div>"""
+        )
+    return "\n".join(parts)
+
+
+def _render_faq(faq_items):
+    parts = []
+    for q, a in faq_items:
+        parts.append(
+            f"""                <details>
+                    <summary>{q}</summary>
+                    <p>{a}</p>
+                </details>"""
+        )
+    return "\n".join(parts)
+
+
+def _render_payment_row(ui):
+    logos = "\n".join(
+        f'                        <span class="v2-payment-logo" title="{alt}">'
+        f'<img src="../asset/payments_logo/{fname}" alt="{alt}" loading="lazy" decoding="async"></span>'
+        for fname, alt in PAYMENT_LOGOS
+    )
+    return f"""                    <div class="v2-payment-row" role="group" aria-label="{ui['payments_aria']}">
+{logos}
+                    </div>"""
+
+
+def build_rich_product_page(lang, prod, content, ui_map=None):
+    if ui_map is None:
+        from product_content_office import UI as ui_map
+
+    e = entry(prod["sku"])
+    slug = prod["slug"]
+    sku = prod["sku"]
+    sale = e["unitAmountMinor"]
+    compare = e["compareAtMinor"]
+    disc = pct(sale, compare)
+    save = compare - sale
+    labels = BASE_LABELS[lang]
+    ui = ui_map[lang]
+    meta = TEMPLATE_META[prod["template"]]
+    short = (content.get("name") or {}).get(lang) or prod["card_name"]
+    brand = prod.get("brand") or meta["brand"] or "Microsoft"
+    cat_slug = meta["listing"]
+    cat_name = meta["cat_label"][lang]
+    desc = content["desc"][lang]
+    eyebrow = content["eyebrow"][lang]
+    title_html = content["title_html"][lang]
+    price_dec = f"{sale / 100:.2f}"
+    img_src = _product_image_src(slug, prod["image"])
+    og_image_abs = (
+        f"https://aml-store.com/asset/media/products/{slug}.webp"
+        if (ROOT / "asset" / "media" / "products" / f"{slug}.webp").exists()
+        else f"https://aml-store.com/asset/media/{prod['image']}"
+    )
+    page_url = f"https://aml-store.com/{lang}/{slug}.html"
+    badge_html = (
+        f'<span class="v2-price-badge" aria-label="−{disc}%">−{disc}%</span>'
+        if disc > 0
+        else ""
+    )
+    msrp_html = (
+        f'<span class="v2-price-msrp" aria-label="{eur_fmt(compare)}">€ {eur_fmt(compare)}</span>'
+        if disc > 0
+        else ""
+    )
+    save_html = ""
+    if save > 0:
+        save_html = f"""                    <div class="v2-price-compare">
+                        {ui['save_prefix']} <strong>€ {eur_fmt(save)}</strong> {ui['save_vs']} (€ {eur_fmt(compare)})
+                    </div>"""
+
+    faq_entities = [
+        {
+            "@type": "Question",
+            "name": q,
+            "acceptedAnswer": {"@type": "Answer", "text": a},
+        }
+        for q, a in content["faq"][lang]
+    ]
+
+    ld = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://aml-store.com/#organization",
+                "name": "Aml Store",
+                "url": "https://aml-store.com/",
+            },
+            {
+                "@type": "Product",
+                "@id": f"{page_url}#product",
+                "name": short,
+                "sku": sku,
+                "inLanguage": lang,
+                "url": page_url,
+                "image": og_image_abs,
+                "description": desc,
+                "brand": {"@type": "Brand", "name": brand},
+                "offers": {
+                    "@type": "Offer",
+                    "url": page_url,
+                    "priceCurrency": "EUR",
+                    "price": price_dec,
+                    "availability": "https://schema.org/InStock",
+                    "itemCondition": "https://schema.org/NewCondition",
+                    "seller": {"@id": "https://aml-store.com/#organization"},
+                },
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": f"https://aml-store.com/{lang}/"},
+                    {"@type": "ListItem", "position": 2, "name": cat_name, "item": f"https://aml-store.com/{lang}/{cat_slug}.html"},
+                    {"@type": "ListItem", "position": 3, "name": short},
+                ],
+            },
+            {
+                "@type": "FAQPage",
+                "inLanguage": lang,
+                "url": page_url,
+                "mainEntity": faq_entities,
+            },
+        ],
+    }
+
+    if content.get("apps"):
+        apps_block = f"""        <section class="v2-apps-section" aria-labelledby="v2-apps-title">
+            <p class="v2-eyebrow">{ui['apps_eyebrow']}</p>
+            <h2 id="v2-apps-title" class="v2-section-title" style="margin-bottom:32px;">{content['apps_title'][lang]}</h2>
+            <div class="v2-apps-grid">
+{_render_apps(content['apps'])}
+            </div>
+        </section>
+        <hr class="v2-divider">
+"""
+    else:
+        apps_block = "        <hr class=\"v2-divider\">\n"
+
+    return f"""<!DOCTYPE html>
+<html lang="{lang}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{short} — Aml Store</title>
+    <meta name="description" content="{desc}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{page_url}">
+    <meta property="og:type" content="product">
+    <meta property="og:site_name" content="Aml Store">
+    <meta property="og:title" content="{short} — Aml Store">
+    <meta property="og:description" content="{desc}">
+    <meta property="og:url" content="{page_url}">
+    <meta property="og:locale" content="{LOCALE[lang]}">
+    <meta property="og:image" content="{og_image_abs}">
+    <meta property="product:price:amount" content="{price_dec}">
+    <meta property="product:price:currency" content="EUR">
+{hreflang_block(slug)}
+    <script type="application/ld+json">
+{json.dumps(ld, ensure_ascii=False, indent=2)}
+    </script>
+    <script src="../js/consent-init.js"></script>
+    <link rel="icon" href="../favicon/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+    <link rel="preload" as="image" href="{img_src}" fetchpriority="high" type="image/webp">
+    <link rel="stylesheet" href="../fonts/montserrat.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/product.css">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css">
+    <script src="../js/theme-init.js"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">{labels['skip']}</a>
+    <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
+    <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="{labels['sticky']}" aria-hidden="true">
+        <div class="product-sticky-cta__inner">
+            <span class="product-sticky-cta__title">{short}</span>
+            <div class="product-sticky-cta__prices" aria-hidden="true">
+                <span class="product-sticky-cta__msrp">€ {eur_fmt(compare)}</span>
+                <span class="product-sticky-cta__sale">€ {eur_fmt(sale)}</span>
+            </div>
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">
+                {CART_ICON}
+                {ui['sticky_add']}
+            </button>
+        </div>
+    </div>
+    <section class="v2-hero" aria-label="{ui['hero_aria']}">
+        <div class="v2-hero__ambient" aria-hidden="true"></div>
+        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
+        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
+        <div class="v2-breadcrumb">
+            <nav aria-label="{ui['breadcrumb_nav']}">
+                <a href="/{lang}/">Home</a>
+                <span class="sep" aria-hidden="true">/</span>
+                <a href="/{lang}/{cat_slug}.html">{cat_name}</a>
+                <span class="sep" aria-hidden="true">/</span>
+                <span aria-current="page">{short}</span>
+            </nav>
+        </div>
+        <div class="v2-hero__inner">
+            <div class="v2-hero__left">
+                <p class="v2-hero__eyebrow">{eyebrow}</p>
+                <h1 class="v2-hero__title">{title_html}</h1>
+                <p class="v2-hero__desc">{desc}</p>
+                <div class="v2-pills" aria-label="{ui['features_eyebrow']}">
+{_render_pills(content['pills'][lang])}
+                </div>
+            </div>
+            <div class="v2-hero__right">
+                <div class="v2-hero__cover-wrap">
+                    <img class="v2-hero__cover" src="{img_src}" width="400" height="400" alt="{short}" fetchpriority="high" decoding="async">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="v2-pricing-wrap">
+        <div id="product-pricing" class="v2-pricing-card"
+            data-stripe-currency="eur"
+            data-stripe-unit-amount="{sale}"
+            data-stripe-compare-at-amount="{compare}"
+            data-stripe-product-sku="{sku}"
+            data-discount-percent="{disc}">
+            <div>
+                <div class="v2-price-label">{labels['price_label']}</div>
+                <div class="v2-price-row" role="group" aria-label="{ui['prices_aria']}">
+                    {msrp_html}
+                    <span class="v2-price-sale">€ {eur_fmt(sale)}</span>
+                    {badge_html}
+                </div>
+                <div class="v2-price-tax">{labels['tax']}</div>
+{save_html}
+            </div>
+            <div class="v2-pricing-actions">
+                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
+                    {CART_ICON}
+                    {labels['add']}
+                </button>
+{_render_payment_row(ui)}
+            </div>
+        </div>
+    </div>
+    <main id="main" class="product-page" data-cart-added-msg="{ui['cart_added']}">
+        <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+        <section class="v2-section" aria-labelledby="v2-features-title">
+            <p class="v2-eyebrow">{ui['features_eyebrow']}</p>
+            <h2 id="v2-features-title" class="v2-section-title">{content['features_title'][lang]}</h2>
+            <div class="v2-bento" role="list">
+{_render_features(content['features'][lang])}
+            </div>
+        </section>
+{apps_block}        <section class="v2-section" aria-labelledby="v2-steps-title">
+            <p class="v2-eyebrow">{ui['how_eyebrow']}</p>
+            <h2 id="v2-steps-title" class="v2-section-title">{ui['how_title']}</h2>
+            <div class="v2-steps">
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">1</div>
+                    <h3 class="v2-step__title">{ui['step1_title']}</h3>
+                    <p class="v2-step__body">{ui['step1_body']}</p>
+                </div>
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">2</div>
+                    <h3 class="v2-step__title">{ui['step2_title']}</h3>
+                    <p class="v2-step__body">{ui['step2_body']}</p>
+                </div>
+                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">3</div>
+                    <h3 class="v2-step__title">{ui['step3_title']}</h3>
+                    <p class="v2-step__body">{ui['step3_body']}</p>
+                </div>
+            </div>
+        </section>
+        <hr class="v2-divider">
+        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
+            <p class="v2-eyebrow">{ui['specs_eyebrow']}</p>
+            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">{ui['specs_title']}</h2>
+            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">{ui['specs_note']}</p>
+            <div class="v2-specs-grid">
+                <div class="v2-specs-item">
+                    <h3>{ui['spec_cpu']}</h3>
+                    <p>{ui['spec_cpu_body']}</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>{ui['spec_os']}</h3>
+                    <p>{ui['spec_os_body']}</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>{ui['spec_ram']}</h3>
+                    <p>{ui['spec_ram_body']}</p>
+                </div>
+                <div class="v2-specs-item">
+                    <h3>{ui['spec_disk']}</h3>
+                    <p>{ui['spec_disk_body']}</p>
+                </div>
+            </div>
+        </section>
+        <hr class="v2-divider">
+        <section class="v2-section" aria-labelledby="v2-faq-title">
+            <p class="v2-eyebrow">{ui['faq_eyebrow']}</p>
+            <h2 id="v2-faq-title" class="v2-section-title">{ui['faq_title']}</h2>
+            <div class="v2-faq">
+{_render_faq(content['faq'][lang])}
+            </div>
+        </section>
+    </main>
+    <aml-cookie-banner></aml-cookie-banner>
+    <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
+    <script src="../js/locale-path.js"></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../js/product-page.js" defer></script>
+    <script src="../components/cookie-banner.js" defer></script>
+    <script src="../components/header.js" defer></script>
+    <script src="../components/footer.js" defer></script>
+</body>
+</html>
+"""
+
+
+def build_compact_product_page(lang, prod):
     e = entry(prod["sku"])
     slug = prod["slug"]
     sku = prod["sku"]
@@ -385,12 +807,12 @@ def build_product_page(lang, prod):
             data-discount-percent="{disc}">
             <div class="v2-price-label">{labels['price_label']}</div>
             <div class="v2-price-row">
-                <span class="v2-price-msrp">€ {eur_fmt(compare)}</span>
+                {f'<span class="v2-price-msrp">€ {eur_fmt(compare)}</span>' if disc > 0 else ''}
                 <span class="v2-price-sale">€ {eur_fmt(sale)}</span>
-                <span class="v2-price-badge">−{disc}%</span>
+                {f'<span class="v2-price-badge">−{disc}%</span>' if disc > 0 else ''}
             </div>
             <div class="v2-price-tax">{labels['tax']}</div>
-            <button type="button" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">{labels['add']}</button>
+            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">{labels['add']}</button>
         </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="{labels['add']}">
@@ -414,6 +836,66 @@ def build_product_page(lang, prod):
 </body>
 </html>
 """
+
+
+def resolve_rich_content(slug):
+    """Return (content, ui_map) or (None, None)."""
+    try:
+        from product_content_office import UI as OFFICE_UI
+        from product_content_office import get_office_content
+    except ImportError:
+        get_office_content = lambda _s: None  # noqa: E731
+        OFFICE_UI = None
+
+    loaders = []
+    if get_office_content:
+        loaders.append(get_office_content)
+    try:
+        from product_content_office_2021 import get_office_2021_content
+
+        loaders.append(get_office_2021_content)
+    except ImportError:
+        pass
+    try:
+        from product_content_office_apps import get_office_apps_content
+
+        loaders.append(get_office_apps_content)
+    except ImportError:
+        pass
+
+    for loader in loaders:
+        content = loader(slug)
+        if content:
+            return content, OFFICE_UI
+
+    try:
+        from product_content_windows import UI as WINDOWS_UI
+        from product_content_windows import get_windows_content
+
+        content = get_windows_content(slug)
+        if content:
+            return content, WINDOWS_UI
+    except ImportError:
+        pass
+
+    try:
+        from product_content_antivirus import UI as ANTIVIRUS_UI
+        from product_content_antivirus import get_antivirus_content
+
+        content = get_antivirus_content(slug)
+        if content:
+            return content, ANTIVIRUS_UI
+    except ImportError:
+        pass
+
+    return None, None
+
+
+def build_product_page(lang, prod):
+    content, ui_map = resolve_rich_content(prod["slug"])
+    if content:
+        return build_rich_product_page(lang, prod, content, ui_map=ui_map)
+    return build_compact_product_page(lang, prod)
 
 
 def build_catalog_page(lang, catalog_slug, products):
@@ -454,9 +936,9 @@ def build_catalog_page(lang, catalog_slug, products):
     <main id="main" class="home-page">
         <section class="home-catalog" aria-labelledby="catalog-title" style="padding-top: 120px;">
             <h1 id="catalog-title" class="home-section-title">{title}</h1>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 48px; font-size: 1.1rem; max-width: 640px; margin-left: auto; margin-right: auto;">
-                {lede}
-            </p>
+            <div class="home-catalog-lede-block">
+                <p class="home-catalog-lede">{lede}</p>
+            </div>
             <div class="product-grid">
 {cards}
             </div>

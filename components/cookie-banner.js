@@ -127,6 +127,11 @@
         if (typeof window.gtag === 'function') {
             window.gtag('consent', 'update', consent);
         }
+        try {
+            window.dispatchEvent(new CustomEvent('aml-consent-updated', { detail: consent }));
+        } catch (_) {
+            /* ignore */
+        }
     }
 
     function readStored() {

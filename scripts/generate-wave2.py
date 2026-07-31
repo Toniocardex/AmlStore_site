@@ -2,9 +2,12 @@
 """Generate wave-2 product pages (Office perpetual + M365 Business), suite-office catalog, sitemap, redirects."""
 import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from product_page_lib import product_card  # noqa: E402
 CATALOG = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
 LANGS = ("it", "en", "fr", "de", "es")
 LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
@@ -227,39 +230,6 @@ def card_blurb(lang, prod):
     return CARD_BLURBS["default_office"][lang]
 
 
-def product_card(lang, prod, labels):
-    e = entry(prod["sku"])
-    sale = e["unitAmountMinor"]
-    compare = e["compareAtMinor"]
-    disc = pct(sale, compare)
-    name = prod["card_name"]
-    blurb = card_blurb(lang, prod)
-    slug = prod["slug"]
-    image = prod["image"]
-    return f"""                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="{sale}"
-                    data-stripe-compare-at-amount="{compare}"
-                    data-stripe-product-sku="{prod['sku']}"
-                    data-discount-percent="{disc}"
-                >
-                    <a href="{slug}.html" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/{image}" width="400" height="400" alt="{name}" decoding="async" class="product-card-img" onerror="this.src='../asset/media/home-hero-lifestyle.webp'">
-                        </div>
-                        <p class="product-card-name">{name}</p>
-                        <p class="product-card-blurb">{blurb}</p>
-                    </a>
-                    <p class="product-card-price">€ {eur_fmt(sale)}</p>
-                    <div class="product-card-foot">
-                        <a href="{slug}.html" class="home-product-detail">{labels['detail']}</a>
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>{labels['add']}</button>
-                    </div>
-                </div>
-"""
-
-
 def build_page(lang, prod):
     e = entry(prod["sku"])
     slug = prod["slug"]
@@ -405,7 +375,9 @@ def build_page(lang, prod):
 
 def build_suite_office(lang):
     labels = LABELS[lang]
-    cards = "".join(product_card(lang, p, labels) for p in WAVE2)
+    cards = "".join(
+        product_card(lang, {**p, "blurb": card_blurb(lang, p)}, labels) for p in WAVE2
+    )
     meta_desc = labels["suite_lede"]
     return f"""<!DOCTYPE html>
 <html lang="{lang}">

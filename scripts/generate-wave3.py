@@ -51,7 +51,7 @@ PRODUCT_DEFS = [
     ("269-17068", "office-2019-professional-plus", "office", "Office 2019 Professional Plus", IMG_OFFICE),
     # ── Wave 3 — Office / produttività ──
     ("EP2-07219", "word-2024", "office", "Word 2024", IMG_OFFICE),
-    ("MPN: 065-09748", "excel-2024", "office", "Excel 2024", IMG_OFFICE),
+    ("065-09748", "excel-2024", "office", "Excel 2024", IMG_OFFICE),
     ("065-09804", "powerpoint-2024", "office", "PowerPoint 2024", IMG_OFFICE),
     ("5W1-04285", "outlook-2024", "office", "Outlook 2024", IMG_OFFICE),
     ("EP2-06606", "office-2024-home-business", "office", "Office 2024 Home & Business", IMG_OFFICE),

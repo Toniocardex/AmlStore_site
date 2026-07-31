@@ -177,6 +177,7 @@ a.product-card--link:focus-visible {
 }
 
 .product-card-media {
+    position: relative;
     background: rgba(255, 255, 255, 0.06);
     height: 200px;
     border-radius: 6px;
@@ -184,6 +185,22 @@ a.product-card--link:focus-visible {
     place-items: center;
     border: 1px solid rgba(255, 255, 255, 0.05);
     overflow: hidden;
+}
+
+.product-card-badge {
+    position: absolute;
+    top: 0.65rem;
+    left: 0.65rem;
+    z-index: 1;
+    padding: 0.28rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    pointer-events: none;
 }
 
 .product-card-img {
@@ -215,6 +232,60 @@ a.product-card--link:focus-visible {
     color: var(--page-text);
     margin: 0;
     margin-top: auto;
+}
+
+/* Blocco prezzi compatto per card catalogo / homepage */
+.product-card-price-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: auto;
+}
+
+.product-card-price-block__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.45rem 0.65rem;
+}
+
+.product-card-price-block__msrp {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--page-text-muted);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+}
+
+.product-card-price-block__sale {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--page-text);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.product-card-price-block__save {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.22rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    background: rgba(16, 185, 129, 0.16);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    white-space: nowrap;
+}
+
+.product-card-foot {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.25rem;
+}
+
+.product-card-foot .btn-cta-primary {
+    width: 100%;
 }
 
 /* CTA catalogo — stesso linguaggio del pulsante principale scheda prodotto (.v2-btn-primary / .btn-primary) */
@@ -367,6 +438,12 @@ html[data-theme="light"] .product-card {
 html[data-theme="light"] .product-card:hover {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     border-color: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme="light"] .product-card-price-block__save {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+    border-color: rgba(16, 185, 129, 0.28);
 }
 
 html[data-theme="light"] .skeleton-img {
