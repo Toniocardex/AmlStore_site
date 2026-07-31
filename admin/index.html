@@ -16,6 +16,10 @@
         <img src="/logo/logo-header-400-light.webp" alt="Aml Store" class="adm-header__logo">
         <span class="adm-header__admin-badge">Admin</span>
     </div>
+    <nav class="adm-header__nav" aria-label="Sezioni admin">
+        <button type="button" class="adm-nav-btn is-active" data-adm-view="orders" id="nav-orders">Ordini</button>
+        <button type="button" class="adm-nav-btn" data-adm-view="stock" id="nav-stock">Magazzino</button>
+    </nav>
     <div class="adm-header__right">
         <span class="adm-user-email" id="adm-user-email"></span>
         <a href="https://amlstore.cloudflareaccess.com/cdn-cgi/access/logout"
@@ -24,7 +28,7 @@
 </header>
 
 <!-- ── Layout principale ─────────────────────────────────────────────────── -->
-<div class="adm-layout">
+<div class="adm-layout" id="adm-view-orders">
 
     <!-- Sidebar filtri -->
     <aside class="adm-sidebar">
@@ -119,6 +123,42 @@
             </table>
         </div>
 
+    </main>
+</div>
+
+<!-- ── Vista Magazzino ───────────────────────────────────────────────────── -->
+<div class="adm-layout adm-layout--stock" id="adm-view-stock" hidden>
+    <main class="adm-main adm-main--full">
+        <div class="adm-toolbar">
+            <h1 class="adm-page-title">Magazzino</h1>
+            <div class="adm-toolbar__right">
+                <span class="adm-count" id="adm-stock-count"></span>
+                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btn-stock-reload">Ricarica</button>
+            </div>
+        </div>
+        <p class="adm-stock-hint">Solo prodotti fisici (DVD/COA). Quantità reale di magazzino — 0 = non vendibile in vetrina.</p>
+        <div class="adm-loading" id="adm-stock-loading" aria-live="polite" hidden>
+            <div class="adm-spinner"></div>
+            <span>Caricamento magazzino…</span>
+        </div>
+        <div class="adm-empty" id="adm-stock-error" hidden>
+            <p class="adm-empty__icon">⚠️</p>
+            <p id="adm-stock-error-msg">Errore caricamento magazzino.</p>
+        </div>
+        <div class="adm-table-wrap" id="adm-stock-table-wrap" hidden>
+            <table class="adm-table" id="adm-stock-table">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Prodotto</th>
+                        <th class="adm-th--center">Qty</th>
+                        <th>Aggiornato</th>
+                        <th class="adm-th--center">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="adm-stock-tbody"></tbody>
+            </table>
+        </div>
     </main>
 </div>
 

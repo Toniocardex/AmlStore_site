@@ -10,6 +10,7 @@
  *   POST /api/paypal-capture-order
  *   POST /api/bank-transfer-order
  *   GET  /api/order-status
+ *   GET  /api/stock
  *
  * Routes admin (protette da Cloudflare Access + verifica JWT):
  *   GET  /api/admin/orders
@@ -17,6 +18,8 @@
  *   POST /api/admin/orders/:id/mark-paid
  *   POST /api/admin/orders/:id/archive
  *   POST /api/admin/orders/:id/unarchive
+ *   GET  /api/admin/stock
+ *   POST /api/admin/stock
  */
 
 import { generateToken, verifyToken }                    from './_lib/token.js';
@@ -33,6 +36,9 @@ import { resolveAdminAuth, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
          unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
 import { resolveAndValidateItems, itemsRequireShipping } from './_lib/catalog.js';
+import { assertCartStock, deductStockForPaidOrder, getStockQty,
+         listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
+import { safeParseJSON }                                 from './_lib/utils.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -114,6 +120,9 @@ export async function onRequest(context) {
         }
         if (path === '/api/order-status' && request.method === 'GET') {
             return await handleOrderStatus(request, env);
+        }
+        if (path === '/api/stock' && request.method === 'GET') {
+            return await handlePublicStock(request, env);
         }
         if (path === '/api/paypal-config' && request.method === 'GET') {
             return handlePaypalConfig(request, env);
@@ -337,13 +346,45 @@ function handlePaypalConfig(request, env) {
 
 /* ─── POST /api/stripe-create-session ───────────────────────────────────────── */
 
-function orderParamsFromBodySafe(body, paymentMethod, request, env) {
+async function orderParamsFromBodySafe(body, paymentMethod, request, env) {
     try {
-        return orderParamsFromBody(body, paymentMethod);
+        const params = orderParamsFromBody(body, paymentMethod);
+        try {
+            await assertCartStock(env.DB, params.lineItems);
+        } catch (stockErr) {
+            const status = stockErr.status || 409;
+            return {
+                error: err(stockErr.message || 'Stock insufficiente', status, request, env),
+            };
+        }
+        return params;
     } catch (e) {
         if (e.status === 400) return { error: err(e.message, 400, request, env) };
         throw e;
     }
+}
+
+async function deductStockForOrderRow(db, order) {
+    if (!order?.id) return;
+    const items = safeParseJSON(order.line_items, []);
+    try {
+        await deductStockForPaidOrder(db, order.id, items);
+    } catch (e) {
+        console.warn('[stock] deduct after paid failed:', order.id, e?.message || e);
+    }
+}
+
+async function handlePublicStock(request, env) {
+    const sku = new URL(request.url).searchParams.get('sku') || '';
+    const key = String(sku).trim();
+    if (!key || !isPhysicalSku(key)) {
+        return json({ error: 'Not found' }, 404, request, env);
+    }
+    const qty = await getStockQty(env.DB, key);
+    const res = json({ sku: key, qty, physical: true }, 200, request, env);
+    const headers = new Headers(res.headers);
+    headers.set('Cache-Control', 'public, max-age=30');
+    return new Response(res.body, { status: 200, headers });
 }
 
 async function handleStripeCreateSession(request, env) {
@@ -353,7 +394,7 @@ async function handleStripeCreateSession(request, env) {
     const body = await request.json().catch(() => null);
     if (!body) return err('Invalid JSON', 400, request, env);
 
-    const paramsOrErr = orderParamsFromBodySafe(body, 'stripe', request, env);
+    const paramsOrErr = await orderParamsFromBodySafe(body, 'stripe', request, env);
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
 
@@ -458,6 +499,7 @@ async function handleStripeWebhook(request, env) {
             await markPaidStripe(env.DB, order.id, { stripeSessionId, stripePaymentIntent });
             // Rileggi ordine aggiornato per il template email
             const updatedOrder = await getOrderById(env.DB, order.id);
+            await deductStockForOrderRow(env.DB, updatedOrder || order);
             await sendConfirmationOnce(
                 env.DB, updatedOrder,
                 env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
@@ -483,7 +525,7 @@ async function handlePaypalCreateOrder(request, env) {
     const body = await request.json().catch(() => null);
     if (!body) return err('Invalid JSON', 400, request, env);
 
-    const paramsOrErr = orderParamsFromBodySafe(body, 'paypal', request, env);
+    const paramsOrErr = await orderParamsFromBodySafe(body, 'paypal', request, env);
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
 
@@ -568,6 +610,7 @@ async function handlePaypalCaptureOrder(request, env) {
 
     // Invia email
     const updatedOrder = await getOrderById(env.DB, order.id);
+    await deductStockForOrderRow(env.DB, updatedOrder || order);
     await sendConfirmationOnce(
         env.DB, updatedOrder,
         env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
@@ -594,7 +637,7 @@ async function handleBankTransferOrder(request, env) {
     const body = await request.json().catch(() => null);
     if (!body) return err('Invalid JSON', 400, request, env);
 
-    const paramsOrErr = orderParamsFromBodySafe(body, 'bank_transfer', request, env);
+    const paramsOrErr = await orderParamsFromBodySafe(body, 'bank_transfer', request, env);
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
 
@@ -708,10 +751,42 @@ async function handleAdminRoute(path, request, env) {
             env.RESEND_API_KEY || '', env.TRUSTPILOT_BCC || ''
         );
 
+        if (result.ok) {
+            const paidOrder = await getOrderById(env.DB, orderId);
+            await deductStockForOrderRow(env.DB, paidOrder);
+        }
+
         const status = result.ok ? 200 : (result.reason === 'order_not_found' ? 404 : 409);
         return new Response(JSON.stringify(result), {
             status, headers: { 'Content-Type': 'application/json' },
         });
+    }
+
+    // ── GET /api/admin/stock ──────────────────────────────────────────────────
+    if (sub === '/stock' && request.method === 'GET') {
+        const items = await listAdminStock(env.DB);
+        return new Response(JSON.stringify({ items }), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── POST /api/admin/stock ─────────────────────────────────────────────────
+    if (sub === '/stock' && request.method === 'POST') {
+        const invalidRequest = validateAdminMutationRequest(request, env);
+        if (invalidRequest) return invalidRequest;
+
+        const body = await request.json().catch(() => ({}));
+        try {
+            const saved = await setStockQty(env.DB, body.sku, body.qty, actorEmail);
+            return new Response(JSON.stringify({ ok: true, item: saved }), {
+                headers: { 'Content-Type': 'application/json' },
+            });
+        } catch (e) {
+            const status = e.reason === 'not_physical' ? 400
+                : e.reason === 'invalid_qty' ? 400
+                : 400;
+            return adminJson({ ok: false, error: e.message, reason: e.reason || 'error' }, status);
+        }
     }
 
     // ── POST /api/admin/orders/:id/archive ────────────────────────────────────

@@ -201,7 +201,8 @@
             data-stripe-unit-amount="3199"
             data-stripe-compare-at-amount="7900"
             data-stripe-product-sku="W11_PRO_STICKER"
-            data-discount-percent="60">
+            data-discount-percent="60"
+            data-physical="true">
             <div>
                 <div class="v2-price-label">Our price</div>
                 <div class="v2-price-row" role="group" aria-label="Prices">
@@ -210,6 +211,14 @@
                     <span class="v2-price-badge" aria-label="−60%">−60%</span>
                 </div>
                 <div class="v2-price-tax">Tax included. No shipping fees.</div>
+                <p class="v2-stock" data-stock-status="loading" aria-live="polite"
+                    data-stock-available="Available: {n}"
+                    data-stock-low="Only {n} left"
+                    data-stock-out="Out of stock"
+                    data-stock-error="Availability to be confirmed">
+                    <span class="v2-stock__dot" aria-hidden="true"></span>
+                    <span class="v2-stock__text"></span>
+                </p>
                     <div class="v2-price-compare">
                         You save <strong>€ 47,01</strong> versus the list price (€ 79,00)
                     </div>
@@ -346,6 +355,7 @@
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
+    <script src="../js/product-stock.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>

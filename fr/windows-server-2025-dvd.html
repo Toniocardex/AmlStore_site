@@ -97,7 +97,8 @@
             data-stripe-unit-amount="38999"
             data-stripe-compare-at-amount="78895"
             data-stripe-product-sku="P73-08538"
-            data-discount-percent="51">
+            data-discount-percent="51"
+            data-physical="true">
             <div class="v2-price-label">Notre prix</div>
             <div class="v2-price-row">
                 <span class="v2-price-msrp">€ 788,95</span>
@@ -105,7 +106,15 @@
                 <span class="v2-price-badge">−51%</span>
             </div>
             <div class="v2-price-tax">Taxes incluses. Pas de frais de port.</div>
-            <button type="button" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Ajouter au panier</button>
+                <p class="v2-stock" data-stock-status="loading" aria-live="polite"
+                    data-stock-available="Disponibles : {n}"
+                    data-stock-low="Plus que {n}"
+                    data-stock-out="Indisponible"
+                    data-stock-error="Disponibilité à vérifier">
+                    <span class="v2-stock__dot" aria-hidden="true"></span>
+                    <span class="v2-stock__text"></span>
+                </p>
+            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Ajouter au panier</button>
         </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="Ajouter au panier">
@@ -123,6 +132,7 @@
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
+    <script src="../js/product-stock.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>

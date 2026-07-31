@@ -22,6 +22,8 @@
         loading:         false,
         openOrderId:     null,
         capabilities:    { deleteOrders: false },
+        view:            'orders',
+        stockLoading:    false,
     };
 
     /* ─── Utility DOM ──────────────────────────────────────────────────────── */
@@ -730,6 +732,93 @@
         });
     }
 
+    /* ─── Magazzino ────────────────────────────────────────────────────────── */
+
+    function setView(view) {
+        state.view = view === 'stock' ? 'stock' : 'orders';
+        var ordersEl = $('adm-view-orders');
+        var stockEl  = $('adm-view-stock');
+        var navOrders = $('nav-orders');
+        var navStock  = $('nav-stock');
+        if (ordersEl) ordersEl.hidden = state.view !== 'orders';
+        if (stockEl)  stockEl.hidden  = state.view !== 'stock';
+        if (navOrders) navOrders.classList.toggle('is-active', state.view === 'orders');
+        if (navStock)  navStock.classList.toggle('is-active', state.view === 'stock');
+        if (state.view === 'stock') loadStock();
+        else loadOrders();
+    }
+
+    function loadStock() {
+        if (state.stockLoading) return;
+        state.stockLoading = true;
+        show('adm-stock-loading');
+        hide('adm-stock-error');
+        hide('adm-stock-table-wrap');
+
+        apiGet('/api/admin/stock').then(function (data) {
+            state.stockLoading = false;
+            hide('adm-stock-loading');
+            renderStockTable(data.items || []);
+        }).catch(function (e) {
+            state.stockLoading = false;
+            hide('adm-stock-loading');
+            if (e.message !== '401') {
+                show('adm-stock-error');
+                text('adm-stock-error-msg', 'Errore caricamento magazzino: ' + e.message);
+            }
+        });
+    }
+
+    function renderStockTable(items) {
+        text('adm-stock-count', items.length + ' SKU fisici');
+        if (!items.length) {
+            show('adm-stock-error');
+            text('adm-stock-error-msg', 'Nessun SKU fisico in catalogo.');
+            return;
+        }
+        show('adm-stock-table-wrap');
+        var tbody = $('adm-stock-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = items.map(function (it) {
+            var qty = Number(it.qty) || 0;
+            var updated = it.updatedAt
+                ? fmtDate(it.updatedAt) + (it.updatedBy ? ' · ' + esc(it.updatedBy) : '')
+                : '—';
+            return '<tr data-sku="' + esc(it.sku) + '">'
+                + '<td class="adm-td--nowrap"><code class="adm-sku">' + esc(it.sku) + '</code></td>'
+                + '<td>' + esc(it.name) + '</td>'
+                + '<td class="adm-th--center">'
+                + '<input type="number" class="adm-input adm-input--qty" min="0" max="999999" step="1" '
+                + 'value="' + qty + '" data-stock-qty="' + esc(it.sku) + '" aria-label="Quantità ' + esc(it.sku) + '">'
+                + '</td>'
+                + '<td class="adm-muted">' + updated + '</td>'
+                + '<td class="adm-th--center">'
+                + '<button type="button" class="adm-btn adm-btn--primary adm-btn--sm" data-stock-save="' + esc(it.sku) + '">Salva</button>'
+                + '</td>'
+                + '</tr>';
+        }).join('');
+    }
+
+    function saveStock(sku) {
+        var input = document.querySelector('[data-stock-qty="' + CSS.escape(sku) + '"]');
+        if (!input) {
+            var row = document.querySelector('tr[data-sku="' + CSS.escape(sku) + '"]');
+            input = row ? row.querySelector('[data-stock-qty]') : null;
+        }
+        if (!input) return;
+        var qty = Math.round(Number(input.value));
+        if (!Number.isFinite(qty) || qty < 0) {
+            toast('Quantità non valida', 'error');
+            return;
+        }
+        apiPost('/api/admin/stock', { sku: sku, qty: qty }).then(function () {
+            toast('Stock aggiornato: ' + sku + ' → ' + qty, 'success');
+            loadStock();
+        }).catch(function (e) {
+            toast((e.data && e.data.error) || e.message || 'Errore salvataggio', 'error');
+        });
+    }
+
     /* ─── Init ─────────────────────────────────────────────────────────────── */
 
     function init() {
@@ -748,11 +837,39 @@
             .catch(function () {});
 
         initEvents();
+
+        document.querySelectorAll('[data-adm-view]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                setView(btn.getAttribute('data-adm-view'));
+            });
+        });
+        var stockReload = $('btn-stock-reload');
+        if (stockReload) stockReload.addEventListener('click', loadStock);
+        var stockTbody = $('adm-stock-tbody');
+        if (stockTbody) {
+            stockTbody.addEventListener('click', function (e) {
+                var btn = e.target && e.target.closest ? e.target.closest('[data-stock-save]') : null;
+                if (btn) saveStock(btn.getAttribute('data-stock-save'));
+            });
+            stockTbody.addEventListener('keydown', function (e) {
+                if (e.key !== 'Enter') return;
+                var inp = e.target;
+                if (!inp || !inp.getAttribute || !inp.getAttribute('data-stock-qty')) return;
+                e.preventDefault();
+                saveStock(inp.getAttribute('data-stock-qty'));
+            });
+        }
+
         loadOrders();
     }
 
     // Espone reload per il pulsante "Riprova"
-    window.adminApp = { reload: loadOrders };
+    window.adminApp = {
+        reload: function () {
+            if (state.view === 'stock') loadStock();
+            else loadOrders();
+        },
+    };
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);

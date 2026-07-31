@@ -97,7 +97,8 @@
             data-stripe-unit-amount="189900"
             data-stripe-compare-at-amount="375500"
             data-stripe-product-sku="SC835510"
-            data-discount-percent="49">
+            data-discount-percent="49"
+            data-physical="true">
             <div class="v2-price-label">Unser Preis</div>
             <div class="v2-price-row">
                 <span class="v2-price-msrp">€ 3755,00</span>
@@ -105,7 +106,15 @@
                 <span class="v2-price-badge">−49%</span>
             </div>
             <div class="v2-price-tax">Steuern inklusive. Keine Versandkosten.</div>
-            <button type="button" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">In den Warenkorb</button>
+                <p class="v2-stock" data-stock-status="loading" aria-live="polite"
+                    data-stock-available="Verfügbar: {n}"
+                    data-stock-low="Nur noch {n}"
+                    data-stock-out="Nicht verfügbar"
+                    data-stock-error="Verfügbarkeit prüfen">
+                    <span class="v2-stock__dot" aria-hidden="true"></span>
+                    <span class="v2-stock__text"></span>
+                </p>
+            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">In den Warenkorb</button>
         </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="In den Warenkorb">
@@ -123,6 +132,7 @@
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
+    <script src="../js/product-stock.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>

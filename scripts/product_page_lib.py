@@ -8,6 +8,80 @@ CATALOG = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
 LANGS = ("it", "en", "fr", "de", "es")
 LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
 
+# Allineato a functions/api/_lib/catalog.js (physical: true)
+PHYSICAL_SKUS = frozenset({
+    "FQC-10538",
+    "P73-08328",
+    "P73-08538",
+    "P73-07788",
+    "W11_PRO_STICKER",
+    "P6L-00076",
+    "SC835510",
+})
+
+STOCK_I18N = {
+    "it": {
+        "available": "Disponibili: {n}",
+        "low": "Solo {n} rimasti",
+        "out": "Non disponibile",
+        "error": "Disponibilità da verificare",
+    },
+    "en": {
+        "available": "Available: {n}",
+        "low": "Only {n} left",
+        "out": "Out of stock",
+        "error": "Availability to be confirmed",
+    },
+    "fr": {
+        "available": "Disponibles : {n}",
+        "low": "Plus que {n}",
+        "out": "Indisponible",
+        "error": "Disponibilité à vérifier",
+    },
+    "de": {
+        "available": "Verfügbar: {n}",
+        "low": "Nur noch {n}",
+        "out": "Nicht verfügbar",
+        "error": "Verfügbarkeit prüfen",
+    },
+    "es": {
+        "available": "Disponibles: {n}",
+        "low": "Solo quedan {n}",
+        "out": "No disponible",
+        "error": "Disponibilidad por confirmar",
+    },
+}
+
+
+def is_physical_sku(sku):
+    return str(sku or "").strip() in PHYSICAL_SKUS
+
+
+def _stock_block_html(lang, sku):
+    """Placeholder stock row + data-i18n for product-stock.js (physical only)."""
+    if not is_physical_sku(sku):
+        return ""
+    t = STOCK_I18N[lang]
+    return f"""                <p class="v2-stock" data-stock-status="loading" aria-live="polite"
+                    data-stock-available="{t['available']}"
+                    data-stock-low="{t['low']}"
+                    data-stock-out="{t['out']}"
+                    data-stock-error="{t['error']}">
+                    <span class="v2-stock__dot" aria-hidden="true"></span>
+                    <span class="v2-stock__text"></span>
+                </p>
+"""
+
+
+def _physical_attr(sku):
+    return '\n            data-physical="true"' if is_physical_sku(sku) else ""
+
+
+def _stock_script_tag(sku):
+    if not is_physical_sku(sku):
+        return ""
+    return '    <script src="../js/product-stock.js" defer></script>\n'
+
 BASE_LABELS = {
     "it": {
         "skip": "Vai al contenuto principale",
@@ -639,7 +713,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
             data-stripe-unit-amount="{sale}"
             data-stripe-compare-at-amount="{compare}"
             data-stripe-product-sku="{sku}"
-            data-discount-percent="{disc}">
+            data-discount-percent="{disc}"{_physical_attr(sku)}>
             <div>
                 <div class="v2-price-label">{labels['price_label']}</div>
                 <div class="v2-price-row" role="group" aria-label="{ui['prices_aria']}">
@@ -648,7 +722,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                     {badge_html}
                 </div>
                 <div class="v2-price-tax">{labels['tax']}</div>
-{save_html}
+{_stock_block_html(lang, sku)}{save_html}
             </div>
             <div class="v2-pricing-actions">
                 <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
@@ -727,7 +801,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
-    <script src="../components/cookie-banner.js" defer></script>
+{_stock_script_tag(sku)}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
 </body>
@@ -847,7 +921,7 @@ def build_compact_product_page(lang, prod):
             data-stripe-unit-amount="{sale}"
             data-stripe-compare-at-amount="{compare}"
             data-stripe-product-sku="{sku}"
-            data-discount-percent="{disc}">
+            data-discount-percent="{disc}"{_physical_attr(sku)}>
             <div class="v2-price-label">{labels['price_label']}</div>
             <div class="v2-price-row">
                 {f'<span class="v2-price-msrp">€ {eur_fmt(compare)}</span>' if disc > 0 else ''}
@@ -855,7 +929,7 @@ def build_compact_product_page(lang, prod):
                 {f'<span class="v2-price-badge">−{disc}%</span>' if disc > 0 else ''}
             </div>
             <div class="v2-price-tax">{labels['tax']}</div>
-            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">{labels['add']}</button>
+{_stock_block_html(lang, sku)}            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">{labels['add']}</button>
         </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="{labels['add']}">
@@ -873,7 +947,7 @@ def build_compact_product_page(lang, prod):
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
-    <script src="../components/cookie-banner.js" defer></script>
+{_stock_script_tag(sku)}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
 </body>

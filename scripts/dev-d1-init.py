@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Apply schema.sql to all local Miniflare D1 sqlite files used by pages dev."""
+"""Apply schema.sql (+ stock migration) to all local Miniflare D1 sqlite files used by pages dev."""
 import sqlite3
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = (ROOT / "schema.sql").read_text(encoding="utf-8")
+STOCK = (ROOT / "schema-stock-migration.sql").read_text(encoding="utf-8")
 D1_DIR = ROOT / ".wrangler" / "state" / "v3" / "d1" / "miniflare-D1DatabaseObject"
 
 if not D1_DIR.exists():
@@ -17,6 +18,7 @@ for db_path in sorted(D1_DIR.glob("*.sqlite")):
         continue
     con = sqlite3.connect(db_path)
     con.executescript(SCHEMA)
+    con.executescript(STOCK)
     con.commit()
     tables = [r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
     con.close()

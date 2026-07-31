@@ -97,7 +97,8 @@
             data-stripe-unit-amount="388000"
             data-stripe-compare-at-amount="665000"
             data-stripe-product-sku="P6L-00076"
-            data-discount-percent="42">
+            data-discount-percent="42"
+            data-physical="true">
             <div class="v2-price-label">Il nostro prezzo</div>
             <div class="v2-price-row">
                 <span class="v2-price-msrp">€ 6650,00</span>
@@ -105,7 +106,15 @@
                 <span class="v2-price-badge">−42%</span>
             </div>
             <div class="v2-price-tax">Tasse incluse. Nessun costo di spedizione.</div>
-            <button type="button" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Aggiungi al carrello</button>
+                <p class="v2-stock" data-stock-status="loading" aria-live="polite"
+                    data-stock-available="Disponibili: {n}"
+                    data-stock-low="Solo {n} rimasti"
+                    data-stock-out="Non disponibile"
+                    data-stock-error="Disponibilità da verificare">
+                    <span class="v2-stock__dot" aria-hidden="true"></span>
+                    <span class="v2-stock__text"></span>
+                </p>
+            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Aggiungi al carrello</button>
         </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="Aggiungi al carrello">
@@ -123,6 +132,7 @@
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
+    <script src="../js/product-stock.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
