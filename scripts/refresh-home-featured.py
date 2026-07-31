@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh homepage featured products, payments strip, and Trustpilot placeholder ×5 langs."""
+"""Refresh homepage best sellers, payments strip, and Trustpilot placeholder ×5 langs."""
 import re
 import sys
 from pathlib import Path
@@ -15,9 +15,9 @@ TRUSTPILOT_TOKEN = "27270fde-f5a0-4937-9101-76b7ebae8a1a"
 
 HOME_COPY = {
     "it": {
+        "catalog_title": "I più venduti",
         "catalog_lede": "Le licenze più richieste, con prezzi chiari e consegna digitale immediata.",
-        "catalog_more": "Vedi tutte le suite Office",
-        "catalog_more_href": "suite-office.html",
+        "hero_catalog_cta": "Vedi i più venduti",
         "payments_title": "Pagamenti sicuri",
         "social_hidden": "Recensioni dei clienti",
         "social_fallback": (
@@ -28,9 +28,9 @@ HOME_COPY = {
         "trustpilot_url": "https://it.trustpilot.com/review/aml-store.com",
     },
     "en": {
+        "catalog_title": "Best sellers",
         "catalog_lede": "Our most popular licences with clear pricing and instant digital delivery.",
-        "catalog_more": "Browse all Office suites",
-        "catalog_more_href": "suite-office.html",
+        "hero_catalog_cta": "See best sellers",
         "payments_title": "Secure payments",
         "social_hidden": "Customer reviews",
         "social_fallback": (
@@ -41,9 +41,9 @@ HOME_COPY = {
         "trustpilot_url": "https://www.trustpilot.com/review/aml-store.com",
     },
     "fr": {
+        "catalog_title": "Les plus vendus",
         "catalog_lede": "Les licences les plus demandées, prix clairs et livraison numérique immédiate.",
-        "catalog_more": "Voir toutes les suites Office",
-        "catalog_more_href": "suite-office.html",
+        "hero_catalog_cta": "Voir les plus vendus",
         "payments_title": "Paiements sécurisés",
         "social_hidden": "Avis clients",
         "social_fallback": (
@@ -54,9 +54,9 @@ HOME_COPY = {
         "trustpilot_url": "https://fr.trustpilot.com/review/aml-store.com",
     },
     "de": {
+        "catalog_title": "Bestseller",
         "catalog_lede": "Beliebteste Lizenzen mit klaren Preisen und sofortiger digitaler Lieferung.",
-        "catalog_more": "Alle Office-Suiten ansehen",
-        "catalog_more_href": "suite-office.html",
+        "hero_catalog_cta": "Bestseller ansehen",
         "payments_title": "Sichere Zahlungen",
         "social_hidden": "Kundenbewertungen",
         "social_fallback": (
@@ -67,9 +67,9 @@ HOME_COPY = {
         "trustpilot_url": "https://de.trustpilot.com/review/aml-store.com",
     },
     "es": {
+        "catalog_title": "Los más vendidos",
         "catalog_lede": "Licencias más solicitadas, precios claros y entrega digital inmediata.",
-        "catalog_more": "Ver todas las suites Office",
-        "catalog_more_href": "suite-office.html",
+        "hero_catalog_cta": "Ver los más vendidos",
         "payments_title": "Pagos seguros",
         "social_hidden": "Opiniones de clientes",
         "social_fallback": (
@@ -181,44 +181,6 @@ FEATURED = [
         },
         "lazy": True,
     },
-    {
-        "sku": "NORT_360DEL_3D_1A",
-        "slug": "norton-360-deluxe",
-        "template": "antivirus",
-        "image": "microsoft-365-personal.webp",
-        "image_src": "../asset/media/products/norton-360-deluxe.webp?v=6cb83b581a",
-        "card_name": "Norton 360 Deluxe",
-        "blurb": {
-            "it": "1 anno · 3 dispositivi · VPN e 25 GB di cloud",
-            "en": "1 year · 3 devices · VPN and 25 GB cloud",
-            "fr": "1 an · 3 appareils · VPN et 25 Go cloud",
-            "de": "1 Jahr · 3 Geräte · VPN und 25 GB Cloud",
-            "es": "1 año · 3 dispositivos · VPN y 25 GB en la nube",
-        },
-        "lazy": True,
-    },
-    {
-        "sku": "KL1047TDAFS",
-        "slug": "kaspersky-premium-1-device",
-        "template": "antivirus",
-        "image": "microsoft-365-personal.webp",
-        "image_src": "../asset/media/products/kaspersky-premium-1-device.webp?v=cd395b5601",
-        "card_name": {
-            "it": "Kaspersky Premium — 1 dispositivo",
-            "en": "Kaspersky Premium — 1 device",
-            "fr": "Kaspersky Premium — 1 appareil",
-            "de": "Kaspersky Premium — 1 Gerät",
-            "es": "Kaspersky Premium — 1 dispositivo",
-        },
-        "blurb": {
-            "it": "1 anno · VPN illimitata e password manager",
-            "en": "1 year · unlimited VPN and password manager",
-            "fr": "1 an · VPN illimitée et gestionnaire de mots de passe",
-            "de": "1 Jahr · unbegrenztes VPN und Passwort-Manager",
-            "es": "1 año · VPN ilimitada y gestor de contraseñas",
-        },
-        "lazy": True,
-    },
 ]
 
 PAYMENT_LOGOS = [
@@ -235,9 +197,13 @@ HOME_TRUST_RE = re.compile(
     re.DOTALL,
 )
 
-CATALOG_GRID_RE = re.compile(
-    r"(<section id=\"catalogo\"[^>]*>\s*<h2[^>]*>.*?</h2>)\s*<div class=\"product-grid\">.*?</div>\s*(</section>)",
+CATALOG_SECTION_RE = re.compile(
+    r"<section id=\"catalogo\"[^>]*>.*?</section>",
     re.DOTALL,
+)
+
+HERO_CATALOG_CTA_RE = re.compile(
+    r'(<a class="home-btn home-btn-primary" href="#catalogo">)[^<]+(</a>)',
 )
 
 PAYMENTS_STRIP_RE = re.compile(
@@ -314,19 +280,32 @@ def patch_index(lang):
         product_card(lang, featured_prod(lang, p), labels) for p in FEATURED
     )
 
-    m = CATALOG_GRID_RE.search(text)
-    if not m:
+    if not CATALOG_SECTION_RE.search(text):
         raise RuntimeError(f"catalog section not found in {path}")
-    intro_and_grid = f"""{m.group(1)}
+    catalog_section = f"""<section id="catalogo" class="home-catalog" aria-labelledby="catalog-title">
+            <h2 id="catalog-title" class="home-section-title">{copy['catalog_title']}</h2>
             <div class="home-catalog-intro">
                 <p class="home-catalog-lede">{copy['catalog_lede']}</p>
-                <a class="home-catalog-more" href="{copy['catalog_more_href']}">{copy['catalog_more']} →</a>
             </div>
             <div class="product-grid">
 {cards}            </div>
-        </section>
-{payments_strip(lang)}"""
-    text = CATALOG_GRID_RE.sub(intro_and_grid, text, count=1)
+        </section>"""
+    text = CATALOG_SECTION_RE.sub(catalog_section, text, count=1)
+
+    # Payments strip sits after catalog; re-insert after section replace.
+    text = text.replace(
+        catalog_section,
+        catalog_section + "\n" + payments_strip(lang),
+        1,
+    )
+
+    if not HERO_CATALOG_CTA_RE.search(text):
+        raise RuntimeError(f"hero catalog CTA not found in {path}")
+    text = HERO_CATALOG_CTA_RE.sub(
+        rf"\g<1>{copy['hero_catalog_cta']}\g<2>",
+        text,
+        count=1,
+    )
 
     if SOCIAL_PROOF_RE.search(text):
         text = SOCIAL_PROOF_RE.sub(social_proof_section(lang), text, count=1)

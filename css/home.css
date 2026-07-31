@@ -613,6 +613,69 @@ html[data-theme='light'] .home-section-title {
     margin-bottom: 1.5rem;
 }
 
+.home-page .home-catalog .home-section-title {
+    text-align: center;
+}
+
+/* Più venduti — righe piene: 2 col mobile, 6 col desktop (stessa densità di prima).
+   Scoped alla home: le listing categoria restano su .product-grid globale. */
+.home-page .home-catalog .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.75rem, 2.5vw, 1.25rem);
+}
+
+@media (min-width: 1024px) {
+    .home-page .home-catalog .product-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+.home-page .home-catalog .product-card {
+    min-width: 0;
+    min-height: 0;
+    padding: clamp(0.85rem, 2vw, 1.35rem);
+    gap: 0.75rem;
+}
+
+.home-page .home-catalog .product-card-media {
+    height: clamp(140px, 38vw, 200px);
+}
+
+.home-page .home-catalog .product-card-name {
+    font-size: clamp(0.88rem, 2.4vw, 1.05rem);
+}
+
+.home-page .home-catalog .product-card-blurb {
+    font-size: clamp(0.75rem, 2.1vw, 0.85rem);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.home-page .home-catalog .product-card-foot .btn-cta-primary {
+    min-height: 44px;
+    padding: 0.7rem 0.45rem;
+    font-size: clamp(0.72rem, 2.2vw, 0.82rem);
+    white-space: normal;
+    line-height: 1.2;
+    text-align: center;
+}
+
+@media (min-width: 1024px) {
+    .home-page .home-catalog .product-card-media {
+        height: 200px;
+    }
+
+    .home-page .home-catalog .product-card-foot .btn-cta-primary {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.78rem;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .home-btn-primary:hover,
     .home-btn-secondary:hover {
@@ -641,36 +704,47 @@ html[data-theme='light'] .home-step {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
-/* FAQ homepage — mobile-first, touch ≥ 44px sui summary */
+/* FAQ homepage — mobile-first, tocco ≥ 44px.
+   Non mettere max-width sulla section: in light mode le sezioni pari
+   usano full-bleed (width:100vw + margin breakout) e un max-width
+   sulla stessa box le sposta a sinistra. Il vincolo va sulla lista. */
 .home-page .home-faq {
-    max-width: min(46rem, 100%);
-    margin-inline: auto;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
 }
 
 .home-page .home-faq .home-section-title {
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .home-page .home-faq-list {
     display: flex;
     flex-direction: column;
     gap: 0.65rem;
+    width: 100%;
+    max-width: min(40rem, 100%);
+    margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+    .home-page .home-faq-list {
+        max-width: min(48rem, 100%);
+    }
 }
 
 @media (min-width: 1024px) {
     .home-page .home-faq-list {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.75rem;
-        max-width: none;
-    }
-
-    .home-page .home-faq {
-        max-width: min(72rem, 100%);
+        max-width: min(64rem, 100%);
     }
 }
 
 .home-page .home-faq-item {
+    min-width: 0;
     border: 1px solid var(--page-border);
     border-radius: 8px;
     background: color-mix(in srgb, var(--page-text) 3.5%, var(--page-bg));
@@ -690,6 +764,7 @@ html[data-theme='light'] .home-step {
     font-size: clamp(0.9rem, 2.8vw, 0.98rem);
     line-height: 1.35;
     color: var(--page-text);
+    overflow-wrap: break-word;
 }
 
 .home-page .home-faq-item summary::-webkit-details-marker {
