@@ -21,32 +21,32 @@ PHYSICAL_SKUS = frozenset({
 
 STOCK_I18N = {
     "it": {
-        "available": "Disponibili: {n}",
-        "low": "Solo {n} rimasti",
+        "available": "Disponibilità: {n}",
+        "low": "Ultime {n} unità",
         "out": "Non disponibile",
         "error": "Disponibilità da verificare",
     },
     "en": {
-        "available": "Available: {n}",
-        "low": "Only {n} left",
+        "available": "Availability: {n}",
+        "low": "Last {n} units",
         "out": "Out of stock",
         "error": "Availability to be confirmed",
     },
     "fr": {
-        "available": "Disponibles : {n}",
-        "low": "Plus que {n}",
+        "available": "Disponibilité : {n}",
+        "low": "Dernières {n} unités",
         "out": "Indisponible",
         "error": "Disponibilité à vérifier",
     },
     "de": {
-        "available": "Verfügbar: {n}",
-        "low": "Nur noch {n}",
+        "available": "Verfügbarkeit: {n}",
+        "low": "Letzte {n} Einheiten",
         "out": "Nicht verfügbar",
         "error": "Verfügbarkeit prüfen",
     },
     "es": {
-        "available": "Disponibles: {n}",
-        "low": "Solo quedan {n}",
+        "available": "Disponibilidad: {n}",
+        "low": "Últimas {n} unidades",
         "out": "No disponible",
         "error": "Disponibilidad por confirmar",
     },
@@ -81,6 +81,159 @@ def _stock_script_tag(sku):
     if not is_physical_sku(sku):
         return ""
     return '    <script src="../js/product-stock.js" defer></script>\n'
+
+
+TRUSTPILOT_LOCALE = {
+    "it": ("it-IT", "https://it.trustpilot.com/review/aml-store.com"),
+    "en": ("en-US", "https://www.trustpilot.com/review/aml-store.com"),
+    "fr": ("fr-FR", "https://fr.trustpilot.com/review/aml-store.com"),
+    "de": ("de-DE", "https://de.trustpilot.com/review/aml-store.com"),
+    "es": ("es-ES", "https://es.trustpilot.com/review/aml-store.com"),
+}
+
+TRUSTPILOT_I18N = {
+    "it": {
+        "title": "Recensioni dei clienti",
+        "fallback": "Esperienze reali dei clienti su Trustpilot.",
+    },
+    "en": {
+        "title": "Customer reviews",
+        "fallback": "Real customer experiences on Trustpilot.",
+    },
+    "fr": {
+        "title": "Avis clients",
+        "fallback": "Expériences réelles des clients sur Trustpilot.",
+    },
+    "de": {
+        "title": "Kundenbewertungen",
+        "fallback": "Echte Kundenerfahrungen auf Trustpilot.",
+    },
+    "es": {
+        "title": "Opiniones de clientes",
+        "fallback": "Experiencias reales de clientes en Trustpilot.",
+    },
+}
+
+TRUSTPILOT_BUSINESS_UNIT = "61c44c912f493a1a7cd810fa"
+TRUSTPILOT_TEMPLATE_ID = "5419b6a8b0d04a076446a9ad"
+TRUSTPILOT_TOKEN = "27270fde-f5a0-4937-9101-76b7ebae8a1a"
+
+
+def _trustpilot_block(lang):
+    """Micro TrustBox + fallback link (loader: js/trustpilot-widget.js)."""
+    tp_locale, tp_url = TRUSTPILOT_LOCALE[lang]
+    t = TRUSTPILOT_I18N[lang]
+    return f"""        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
+            <h2 id="product-trustpilot-title" class="visually-hidden">{t['title']}</h2>
+            <p class="product-trustpilot__fallback trustpilot-fallback">{t['fallback']} <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+            <div
+                id="trustpilot-widget"
+                class="trustpilot-widget"
+                data-locale="{tp_locale}"
+                data-template-id="{TRUSTPILOT_TEMPLATE_ID}"
+                data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT}"
+                data-style-height="40px"
+                data-style-width="100%"
+                data-token="{TRUSTPILOT_TOKEN}"
+                data-min-review-count="0"
+                data-style-alignment="center"
+            >
+                <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+            </div>
+        </section>
+"""
+
+
+def _trustpilot_script_tag():
+    return '    <script src="../js/trustpilot-widget.js" defer></script>\n'
+
+
+# Override copy per SKU fisici (tax/passi) — non tocca licenze digitali
+PHYSICAL_LABELS = {
+    "it": {
+        "tax": "Tasse incluse. Articolo fisico con spedizione gratuita (non consegna solo digitale). Spedizione express in 24 ore.",
+        "steps_title": "Ordine, spedizione e attivazione",
+        "step_email": "Spedizione del supporto",
+        "step_email_desc": "Spedizione gratuita express in 24 ore; conferma ordine via email",
+        "desc_suffix": "Articolo fisico con spedizione gratuita express in 24 ore. Conferma d'ordine via email.",
+    },
+    "en": {
+        "tax": "Tax included. Physical product with free shipping (not digital-only delivery). Dispatch within 48 hours.",
+        "steps_title": "Order, shipping and activation",
+        "step_email": "Media shipping",
+        "step_email_desc": "Free shipping within 48 hours; order confirmation by email",
+        "desc_suffix": "Physical product with free shipping within 48 hours. Order confirmation by email.",
+    },
+    "fr": {
+        "tax": "Taxes incluses. Article physique avec livraison gratuite (pas une livraison uniquement numérique). Expédition sous 48 heures.",
+        "steps_title": "Commande, expédition et activation",
+        "step_email": "Expédition du support",
+        "step_email_desc": "Livraison gratuite sous 48 heures ; confirmation de commande par e-mail",
+        "desc_suffix": "Article physique avec livraison gratuite sous 48 heures. Confirmation de commande par e-mail.",
+    },
+    "de": {
+        "tax": "Steuern inklusive. Physischer Artikel mit kostenlosem Versand (keine rein digitale Lieferung). Versand innerhalb von 48 Stunden.",
+        "steps_title": "Bestellung, Versand und Aktivierung",
+        "step_email": "Versand des Mediums",
+        "step_email_desc": "Kostenloser Versand innerhalb von 48 Stunden; Bestellbestätigung per E-Mail",
+        "desc_suffix": "Physischer Artikel mit kostenlosem Versand innerhalb von 48 Stunden. Bestellbestätigung per E-Mail.",
+    },
+    "es": {
+        "tax": "Impuestos incluidos. Artículo físico con envío gratuito (no es entrega solo digital). Envío en 48 horas.",
+        "steps_title": "Pedido, envío y activación",
+        "step_email": "Envío del soporte",
+        "step_email_desc": "Envío gratuito en 48 horas; confirmación del pedido por email",
+        "desc_suffix": "Artículo físico con envío gratuito en 48 horas. Confirmación del pedido por email.",
+    },
+}
+
+PHYSICAL_UI = {
+    "it": {
+        "step2_title": "Spedizione del supporto",
+        "step2_body": "Spediamo il <strong>supporto fisico</strong> (DVD/COA) con <strong>spedizione gratuita express in 24 ore</strong> dopo il pagamento — non è una consegna solo digitale. Ricevi anche la <strong>conferma d'ordine</strong> via email (con tracking quando disponibile).",
+        "step3_title": "Attivazione",
+        "step3_body": "Attiva Windows con la licenza/codice associati all'ordine: Impostazioni → Sistema → Attivazione (o la procedura indicata). Usa i canali ufficiali Microsoft.",
+    },
+    "en": {
+        "step2_title": "Media shipping",
+        "step2_body": "We ship the <strong>physical media</strong> (DVD/COA) with <strong>free shipping within 48 hours</strong> after payment — not digital-only delivery. You also receive an <strong>order confirmation</strong> by email (with tracking when available).",
+        "step3_title": "Activation",
+        "step3_body": "Activate Windows with the licence/key for your order: Settings → System → Activation (or the stated procedure). Use official Microsoft channels.",
+    },
+    "fr": {
+        "step2_title": "Expédition du support",
+        "step2_body": "Nous expédions le <strong>support physique</strong> (DVD/COA) en <strong>livraison gratuite sous 48 heures</strong> après paiement — ce n'est pas une livraison uniquement numérique. Vous recevez aussi une <strong>confirmation de commande</strong> par e-mail (avec suivi si disponible).",
+        "step3_title": "Activation",
+        "step3_body": "Activez Windows avec la licence/clé liée à la commande : Paramètres → Système → Activation (ou la procédure indiquée). Utilisez les canaux Microsoft officiels.",
+    },
+    "de": {
+        "step2_title": "Versand des Mediums",
+        "step2_body": "Wir versenden das <strong>physische Medium</strong> (DVD/COA) mit <strong>kostenlosem Versand innerhalb von 48 Stunden</strong> nach Zahlung — keine rein digitale Lieferung. Sie erhalten außerdem eine <strong>Bestellbestätigung</strong> per E-Mail (mit Tracking, falls verfügbar).",
+        "step3_title": "Aktivierung",
+        "step3_body": "Aktivieren Sie Windows mit der Lizenz/dem Key der Bestellung: Einstellungen → System → Aktivierung (oder die angegebene Prozedur). Offizielle Microsoft-Kanäle nutzen.",
+    },
+    "es": {
+        "step2_title": "Envío del soporte",
+        "step2_body": "Enviamos el <strong>soporte físico</strong> (DVD/COA) con <strong>envío gratuito en 48 horas</strong> tras el pago — no es una entrega solo digital. También recibes la <strong>confirmación del pedido</strong> por email (con tracking cuando esté disponible).",
+        "step3_title": "Activación",
+        "step3_body": "Activa Windows con la licencia/clave del pedido: Configuración → Sistema → Activación (o el procedimiento indicado). Usa canales oficiales Microsoft.",
+    },
+}
+
+
+def _labels_for(lang, sku):
+    labels = dict(BASE_LABELS[lang])
+    if is_physical_sku(sku):
+        labels.update(PHYSICAL_LABELS[lang])
+    return labels
+
+
+def _ui_for(lang, sku, ui_map):
+    ui = dict(ui_map[lang])
+    if is_physical_sku(sku):
+        ui.update(PHYSICAL_UI[lang])
+    return ui
+
 
 BASE_LABELS = {
     "it": {
@@ -526,8 +679,8 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     compare = e["compareAtMinor"]
     disc = pct(sale, compare)
     save = compare - sale
-    labels = BASE_LABELS[lang]
-    ui = ui_map[lang]
+    labels = _labels_for(lang, sku)
+    ui = _ui_for(lang, sku, ui_map)
     meta = TEMPLATE_META[prod["template"]]
     short = (content.get("name") or {}).get(lang) or prod["card_name"]
     brand = prod.get("brand") or meta["brand"] or "Microsoft"
@@ -763,7 +916,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 </div>
             </div>
         </section>
-        <hr class="v2-divider">
+{_trustpilot_block(lang)}        <hr class="v2-divider">
         <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
             <p class="v2-eyebrow">{ui['specs_eyebrow']}</p>
             <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">{ui['specs_title']}</h2>
@@ -801,7 +954,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
-{_stock_script_tag(sku)}    <script src="../components/cookie-banner.js" defer></script>
+{_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
 </body>
@@ -816,7 +969,7 @@ def build_compact_product_page(lang, prod):
     sale = e["unitAmountMinor"]
     compare = e["compareAtMinor"]
     disc = pct(sale, compare)
-    labels = BASE_LABELS[lang]
+    labels = _labels_for(lang, sku)
     meta = TEMPLATE_META[prod["template"]]
     short = prod["card_name"]
     brand = prod.get("brand") or meta["brand"] or "Microsoft"
@@ -941,13 +1094,13 @@ def build_compact_product_page(lang, prod):
                 <li><strong>{labels['step_act']}</strong> — {act_step}</li>
             </ol>
         </section>
-    </main>
+{_trustpilot_block(lang)}    </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
-{_stock_script_tag(sku)}    <script src="../components/cookie-banner.js" defer></script>
+{_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
 </body>

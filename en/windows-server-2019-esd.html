@@ -105,7 +105,7 @@
                 <span class="v2-price-badge">−78%</span>
             </div>
             <div class="v2-price-tax">Tax included. No shipping fees.</div>
-            <button type="button" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Add to cart</button>
+            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Add to cart</button>
         </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="Add to cart">
@@ -117,12 +117,31 @@
                 <li><strong>Activation</strong> — Official Microsoft activation</li>
             </ol>
         </section>
+        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
+            <h2 id="product-trustpilot-title" class="visually-hidden">Customer reviews</h2>
+            <p class="product-trustpilot__fallback trustpilot-fallback">Real customer experiences on Trustpilot. <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+            <div
+                id="trustpilot-widget"
+                class="trustpilot-widget"
+                data-locale="en-US"
+                data-template-id="5419b6a8b0d04a076446a9ad"
+                data-businessunit-id="61c44c912f493a1a7cd810fa"
+                data-style-height="40px"
+                data-style-width="100%"
+                data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
+                data-min-review-count="0"
+                data-style-alignment="center"
+            >
+                <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+            </div>
+        </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
+    <script src="../js/trustpilot-widget.js" defer></script>
     <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>

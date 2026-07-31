@@ -6,7 +6,7 @@
 import { CATALOG, getCatalogEntry } from './catalog.js';
 import { now } from './utils.js';
 
-const LOW_STOCK_MAX = 10;
+const LOW_STOCK_MAX = 3;
 
 /** @returns {Array<{ sku: string, name: string }>} */
 export function listPhysicalSkus() {

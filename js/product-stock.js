@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    var LOW_MAX = 10;
+    var LOW_MAX = 3;
 
     function pricingRoot() {
         return document.querySelector('[data-physical="true"][data-stripe-product-sku], #product-pricing[data-physical="true"]');
