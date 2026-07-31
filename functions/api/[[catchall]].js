@@ -497,9 +497,12 @@ async function handleStripeWebhook(request, env) {
 
         if (order.status !== 'paid') {
             await markPaidStripe(env.DB, order.id, { stripeSessionId, stripePaymentIntent });
-            // Rileggi ordine aggiornato per il template email
-            const updatedOrder = await getOrderById(env.DB, order.id);
-            await deductStockForOrderRow(env.DB, updatedOrder || order);
+        }
+        // Stock: sempre (idempotente via stock_deductions) anche su retry webhook
+        // se mark-paid era riuscito e il deduct era fallito al primo passaggio.
+        const updatedOrder = await getOrderById(env.DB, order.id);
+        await deductStockForOrderRow(env.DB, updatedOrder || order);
+        if (order.status !== 'paid') {
             await sendConfirmationOnce(
                 env.DB, updatedOrder,
                 env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
@@ -751,7 +754,9 @@ async function handleAdminRoute(path, request, env) {
             env.RESEND_API_KEY || '', env.TRUSTPILOT_BCC || ''
         );
 
-        if (result.ok) {
+        // Deduct anche su already_paid (idempotente): recupera stock se il primo
+        // mark-paid era andato a buon fine senza scalare il magazzino.
+        if (result.ok || result.reason === 'already_paid') {
             const paidOrder = await getOrderById(env.DB, orderId);
             await deductStockForOrderRow(env.DB, paidOrder);
         }

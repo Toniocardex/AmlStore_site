@@ -157,12 +157,13 @@ export async function deductStockForPaidOrder(db, orderId, lineItems) {
     try {
         const stmts = [];
         for (const [sku, want] of needed) {
+            const actor = `order:${oid}`;
             stmts.push(
                 db.prepare(`
                     UPDATE product_stock
-                    SET qty = qty - ?, updated_at = ?
+                    SET qty = qty - ?, updated_at = ?, updated_by = ?
                     WHERE sku = ? AND qty >= ?
-                `).bind(want, ts, sku, want)
+                `).bind(want, ts, actor, sku, want)
             );
         }
         stmts.push(
