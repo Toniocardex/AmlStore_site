@@ -469,8 +469,8 @@ def product_card_price_block(sale, compare, disc):
                         <div class="product-card-price-block__row">
                             <span class="product-card-price-block__msrp">€ {eur_fmt(compare)}</span>
                             <span class="product-card-price-block__sale">€ {eur_fmt(sale)}</span>
+                            <span class="product-card-price-block__save">−{disc}%</span>
                         </div>
-                        <span class="product-card-price-block__save">−{disc}%</span>
                     </div>"""
     return f"""                    <p class="product-card-price">€ {eur_fmt(sale)}</p>"""
 
@@ -495,11 +495,6 @@ def product_card(lang, prod, labels):
     href = f"{slug}{href_suffix}"
     image_src = prod.get("image_src") or _product_image_src(slug, image)
     lazy_attr = ' loading="lazy"' if prod.get("lazy") else ""
-    badge = ""
-    if disc > 0:
-        badge = (
-            f'                            <span class="product-card-badge" aria-hidden="true">−{disc}%</span>\n'
-        )
     price_html = product_card_price_block(sale, compare, disc)
     return f"""                <div
                     class="product-card"
@@ -511,7 +506,7 @@ def product_card(lang, prod, labels):
                 >
                     <a href="{href}" class="product-card-body product-card--link">
                         <div class="product-card-media">
-{badge}                            <img src="{image_src}" width="400" height="400" alt="{name}" decoding="async"{lazy_attr} class="product-card-img" onerror="this.src='../asset/media/home-hero-lifestyle.webp'">
+                            <img src="{image_src}" width="400" height="400" alt="{name}" decoding="async"{lazy_attr} class="product-card-img" onerror="this.src='../asset/media/home-hero-lifestyle.webp'">
                         </div>
                         <p class="product-card-name">{name}</p>
                         <p class="product-card-blurb">{blurb}</p>

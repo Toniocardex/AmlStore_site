@@ -234,18 +234,21 @@ a.product-card--link:focus-visible {
     margin-top: auto;
 }
 
-/* Blocco prezzi compatto per card catalogo / homepage */
+/* Blocco prezzi compatto per card catalogo / homepage.
+   −% in riga col prezzo; padding-bottom conserva lo spazio verso il CTA
+   che prima dava la seconda riga dello sconto. */
 .product-card-price-block {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0;
     margin-top: auto;
+    padding-bottom: 1.65rem;
 }
 
 .product-card-price-block__row {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: center;
     gap: 0.45rem 0.65rem;
 }
 
@@ -276,6 +279,7 @@ a.product-card--link:focus-visible {
     color: #34d399;
     border: 1px solid rgba(16, 185, 129, 0.35);
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .product-card-foot {
