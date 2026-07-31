@@ -770,7 +770,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="contact-card">
                         <h3 class="col-title">${esc(t.headingContact)}</h3>
                         <div class="contact-items-wrapper">
-                            <a href="tel:+393925580413" class="contact-item">
+                            <a href="https://wa.me/393925580413" class="contact-item" target="_blank" rel="noopener noreferrer">
                                 <div class="contact-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
                                 </div>
