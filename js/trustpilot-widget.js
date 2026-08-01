@@ -35,16 +35,39 @@
         if (widget) widget.classList.toggle('trustpilot-widget--active', active);
     }
 
-    function hideTrustpilotFallback() {
+    function setTrustpilotFallbackVisible(visible) {
         document.querySelectorAll('.trustpilot-fallback, .home-social-proof__fallback').forEach(function (el) {
-            el.hidden = true;
+            el.hidden = !visible;
         });
+    }
+
+    function getLoadTarget(widget) {
+        return (
+            widget.closest('.home-social-proof, .product-trustpilot') ||
+            widget.parentElement ||
+            widget
+        );
     }
 
     function disconnectNearViewportObserver() {
         if (_nearViewportObserver) {
             _nearViewportObserver.disconnect();
             _nearViewportObserver = null;
+        }
+    }
+
+    function renderTrustpilotWidget(widget) {
+        if (!window.Trustpilot || typeof window.Trustpilot.loadFromElement !== 'function') return false;
+
+        try {
+            setWidgetActive(true);
+            window.Trustpilot.loadFromElement(widget, true);
+            setTrustpilotFallbackVisible(false);
+            return true;
+        } catch (_) {
+            setWidgetActive(false);
+            setTrustpilotFallbackVisible(true);
+            return false;
         }
     }
 
@@ -56,23 +79,14 @@
         if (!businessUnitId) return;
 
         if (_loadStarted && document.getElementById(TRUSTPILOT_SCRIPT_ID)) {
-            setWidgetActive(true);
-            if (window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
-                window.Trustpilot.loadFromElement(widget, true);
-                hideTrustpilotFallback();
-            }
+            renderTrustpilotWidget(widget);
             return;
         }
         _loadStarted = true;
         disconnectNearViewportObserver();
 
-        setWidgetActive(true);
-
         function bootstrapWidget() {
-            if (window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
-                window.Trustpilot.loadFromElement(widget, true);
-                hideTrustpilotFallback();
-            }
+            renderTrustpilotWidget(widget);
         }
 
         if (document.getElementById(TRUSTPILOT_SCRIPT_ID)) {
@@ -85,6 +99,12 @@
         script.src = TRUSTPILOT_SCRIPT_SRC;
         script.async = true;
         script.onload = bootstrapWidget;
+        script.onerror = function () {
+            _loadStarted = false;
+            setWidgetActive(false);
+            setTrustpilotFallbackVisible(true);
+            script.remove();
+        };
         document.head.appendChild(script);
     }
 
@@ -112,12 +132,13 @@
             },
             { root: null, rootMargin: LOAD_ROOT_MARGIN, threshold: 0 }
         );
-        _nearViewportObserver.observe(widget);
+        _nearViewportObserver.observe(getLoadTarget(widget));
     }
 
     function initTrustpilot() {
         if (!readMarketingConsent()) {
             setWidgetActive(false);
+            setTrustpilotFallbackVisible(true);
             disconnectNearViewportObserver();
             return;
         }
@@ -130,6 +151,7 @@
             scheduleTrustpilotLoad();
         } else if (consent) {
             setWidgetActive(false);
+            setTrustpilotFallbackVisible(true);
             disconnectNearViewportObserver();
         }
     }
@@ -139,8 +161,13 @@
         initTrustpilot();
         window.addEventListener('aml-consent-updated', onConsentUpdated);
         window.addEventListener('storage', function (e) {
-            if (e.key === CONSENT_KEY && readMarketingConsent()) {
+            if (e.key !== CONSENT_KEY) return;
+            if (readMarketingConsent()) {
                 scheduleTrustpilotLoad();
+            } else {
+                setWidgetActive(false);
+                setTrustpilotFallbackVisible(true);
+                disconnectNearViewportObserver();
             }
         });
     }
