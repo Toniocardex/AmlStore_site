@@ -38,4 +38,5 @@ ADMIN_ALLOW_DELETE_ORDERS = "0"
 # PAYPAL_CLIENT_ID       — Client ID PayPal LIVE (esposto al frontend via
 #                          /api/paypal-config: è un dato pubblico)
 # PAYPAL_CLIENT_SECRET   — Client Secret PayPal LIVE (solo server-side)
+# Live credentials: Cloudflare Pages → Settings → Environment variables (Production).
 # Vedi GO-LIVE.md per la checklist completa di messa online.
