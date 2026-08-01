@@ -266,6 +266,8 @@
 [data-theme="light"] .v2-pricing-card .v2-price-msrp { color: #999; }
 [data-theme="light"] .v2-pricing-card .v2-price-sale { color: #0a0a0f; }
 [data-theme="light"] .v2-pricing-card .v2-price-tax { color: #888; }
+[data-theme="light"] .v2-pricing-card .v2-price-compare { color: #6b7280; }
+[data-theme="light"] .v2-pricing-card .v2-price-compare strong { color: #374151; }
 .v2-price-label {
     font-size: 0.78rem;
     font-weight: 600;
@@ -288,9 +290,10 @@
 .v2-price-sale {
     font-size: 2.8rem;
     font-weight: 800;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     color: #fff;
     line-height: 1;
+    white-space: nowrap;
 }
 .v2-price-badge {
     display: inline-flex;
@@ -466,6 +469,86 @@
     object-fit: contain;
     object-position: center;
     display: block;
+}
+
+@media (max-width: 480px) {
+    .v2-pricing-wrap {
+        margin-top: -48px;
+        padding: 0 16px;
+    }
+
+    .v2-pricing-card {
+        padding: 24px 20px;
+        gap: 20px;
+    }
+
+    .v2-price-label {
+        margin-bottom: 10px;
+    }
+
+    .v2-price-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "sale badge"
+            "msrp badge";
+        gap: 5px 12px;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .v2-price-sale {
+        grid-area: sale;
+        font-size: 2.35rem;
+    }
+
+    .v2-price-msrp {
+        grid-area: msrp;
+        font-size: 0.95rem;
+        line-height: 1.25;
+        white-space: nowrap;
+    }
+
+    .v2-price-badge {
+        grid-area: badge;
+        align-self: center;
+        justify-self: end;
+        padding: 5px 10px;
+    }
+
+    .v2-price-tax {
+        margin-top: 10px;
+        line-height: 1.45;
+    }
+
+    .v2-price-compare {
+        display: none;
+    }
+
+    .v2-pricing-actions {
+        width: 100%;
+        min-width: 0;
+        gap: 18px;
+    }
+
+    .v2-btn-primary {
+        width: 100%;
+        padding: 15px 16px;
+        font-size: 0.95rem;
+    }
+
+    .v2-payment-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px 16px;
+        justify-items: center;
+    }
+
+    .v2-payment-logo,
+    .v2-payment-logo[title="PayPal"] {
+        width: 100%;
+        max-width: 54px;
+    }
 }
 
 /* ── SECTION WRAPPER ── */
