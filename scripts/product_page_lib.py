@@ -244,6 +244,7 @@ def _ui_for(lang, sku, ui_map):
 BASE_LABELS = {
     "it": {
         "skip": "Vai al contenuto principale",
+        "product_code": "Codice articolo",
         "add": "Aggiungi al carrello",
         "detail": "Vedi prodotto",
         "price_label": "Il nostro prezzo",
@@ -259,6 +260,7 @@ BASE_LABELS = {
     },
     "en": {
         "skip": "Skip to main content",
+        "product_code": "Product code",
         "add": "Add to cart",
         "detail": "View product",
         "price_label": "Our price",
@@ -274,6 +276,7 @@ BASE_LABELS = {
     },
     "fr": {
         "skip": "Aller au contenu principal",
+        "product_code": "Référence produit",
         "add": "Ajouter au panier",
         "detail": "Voir le produit",
         "price_label": "Notre prix",
@@ -289,6 +292,7 @@ BASE_LABELS = {
     },
     "de": {
         "skip": "Zum Hauptinhalt springen",
+        "product_code": "Artikelnummer",
         "add": "In den Warenkorb",
         "detail": "Produkt ansehen",
         "price_label": "Unser Preis",
@@ -304,6 +308,7 @@ BASE_LABELS = {
     },
     "es": {
         "skip": "Ir al contenido principal",
+        "product_code": "Código de producto",
         "add": "Añadir al carrito",
         "detail": "Ver producto",
         "price_label": "Nuestro precio",
@@ -445,6 +450,13 @@ def entry(sku):
         if e["sku"] == sku:
             return e
     raise KeyError(sku)
+
+
+def product_code_html(labels, sku):
+    return (
+        f'<p class="v2-product-code"><span>{html_module.escape(labels["product_code"])}:</span> '
+        f'<code class="v2-product-code__value">{html_module.escape(sku)}</code></p>'
+    )
 
 
 def eur_fmt(minor):
@@ -617,8 +629,7 @@ def _render_lifestyle_band(lifestyle, lang):
             <figure class="bento-figure">
                 <img
                     class="bento-img"
-                    src="{src}"
-                    {srcset_attrs}
+                    src="{src}"{srcset_attrs}
                     width="{w}"
                     height="{h}"
                     alt="{alt}"
@@ -808,6 +819,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 "@id": f"{page_url}#product",
                 "name": short,
                 "sku": sku,
+                **({"mpn": e["mpn"]} if e.get("mpn") else {}),
                 "inLanguage": lang,
                 "url": page_url,
                 "image": og_image_abs,
@@ -923,6 +935,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
             <div class="v2-hero__left">
                 <p class="v2-hero__eyebrow">{eyebrow}</p>
                 <h1 class="v2-hero__title">{title_html}</h1>
+                {product_code_html(labels, sku)}
                 <p class="v2-hero__desc">{desc}</p>
                 <div class="v2-pills" aria-label="{ui['features_eyebrow']}">
 {_render_pills(content['pills'][lang])}
@@ -1023,6 +1036,7 @@ def build_compact_product_page(lang, prod):
                 "@id": f"https://aml-store.com/{lang}/{slug}.html#product",
                 "name": short,
                 "sku": sku,
+                **({"mpn": e["mpn"]} if e.get("mpn") else {}),
                 "inLanguage": lang,
                 "url": f"https://aml-store.com/{lang}/{slug}.html",
                 "image": og_image_abs,
@@ -1095,6 +1109,7 @@ def build_compact_product_page(lang, prod):
             <div class="v2-hero__left">
                 <p class="v2-hero__eyebrow">{eyebrow}</p>
                 <h1 class="v2-hero__title">{short}</h1>
+                {product_code_html(labels, sku)}
                 <p class="v2-hero__desc">{desc}</p>
             </div>
             <div class="v2-hero__right">

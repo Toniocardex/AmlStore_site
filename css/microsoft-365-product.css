@@ -151,6 +151,21 @@
     color: #3b82f6; /* hero sempre scura: serve l'accent luminoso */
 }
 
+.v2-product-code {
+    margin: -14px 0 18px;
+    color: rgba(255,255,255,0.58);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+
+.v2-product-code__value {
+    color: rgba(255,255,255,0.84);
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+}
+
 .v2-hero__desc {
     font-size: 1.05rem;
     color: rgba(255,255,255,0.72);
