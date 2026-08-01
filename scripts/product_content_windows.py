@@ -509,9 +509,8 @@ PRODUCTS = {
         },
         "lifestyle": {
             "image": "windows-11-pro-oem-dvd.webp",
-            "image_640": "windows-11-pro-oem-dvd.webp",
-            "width": 400,
-            "height": 400,
+            "width": 800,
+            "height": 800,
             "alt": L(
                 it="Confezione Windows 11 Pro OEM con DVD e COA.",
                 en="Windows 11 Pro OEM packaging with DVD and COA.",

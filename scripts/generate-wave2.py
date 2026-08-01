@@ -30,14 +30,6 @@ WAVE2 = [
         "woo_it": "/it/office-suite/microsoft-office-home-2024-pc-o-mac",
     },
     {
-        "slug": "office-2024-standard",
-        "sku": "SC871349",
-        "template": "office",
-        "image": "microsoft-365-personal.webp",
-        "card_name": "Office 2024 Standard",
-        "woo_it": "/it/office-suite/microsoft-office-2024-standard",
-    },
-    {
         "slug": "office-2021-home-student",
         "sku": "79G-05412",
         "template": "office",

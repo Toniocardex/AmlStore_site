@@ -12,7 +12,6 @@ from product_page_lib import LANGS, build_product_page  # noqa: E402
 # slug → (sku, card_name, image)
 OFFICE_DEFS = {
     "office-2024-home": ("EP2-06798", "Office 2024 Home", "microsoft-365-personal.webp"),
-    "office-2024-standard": ("SC871349", "Office 2024 Standard", "microsoft-365-personal.webp"),
     "office-2024-home-business": ("EP2-06606", "Office 2024 Home & Business", "microsoft-365-personal.webp"),
     "office-2019-home-student": ("79G-05018", "Office 2019 Home & Student", "microsoft-365-personal.webp"),
     "office-2019-professional-plus": ("269-17068", "Office 2019 Professional Plus", "microsoft-365-personal.webp"),

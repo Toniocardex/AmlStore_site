@@ -11,7 +11,6 @@ from product_page_lib import LANGS, build_product_page, resolve_rich_content  # 
 # sku, slug, template, card_name, image fallback
 DEFS = [
     ("EP2-06798", "office-2024-home", "office", "Office 2024 Home"),
-    ("SC871349", "office-2024-standard", "office", "Office 2024 Standard"),
     ("EP2-06606", "office-2024-home-business", "office", "Office 2024 Home & Business"),
     ("79G-05412", "office-2021-home-student", "office", "Office 2021 Home & Student"),
     ("T5D-03485", "office-2021-home-business", "office", "Office 2021 Home & Business"),

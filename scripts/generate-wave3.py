@@ -46,7 +46,6 @@ PRODUCT_DEFS = [
     ("SC_M365_KPremium_5Device", "bundle-m365-personal-kaspersky", "bundle", "M365 Personal + Kaspersky", IMG_OFFICE),
     ("KLQ-00388", "microsoft-365-business-standard", "m365", "Microsoft 365 Business Standard", IMG_OFFICE),
     ("EP2-06798", "office-2024-home", "office", "Office 2024 Home", IMG_OFFICE),
-    ("SC871349", "office-2024-standard", "office", "Office 2024 Standard", IMG_OFFICE),
     ("79G-05412", "office-2021-home-student", "office", "Office 2021 Home & Student", IMG_OFFICE),
     ("GMGF0D7FX-0002-P", "office-2021-professional-plus", "office", "Office 2021 Professional Plus", IMG_OFFICE),
     ("269-17068", "office-2019-professional-plus", "office", "Office 2019 Professional Plus", IMG_OFFICE),
