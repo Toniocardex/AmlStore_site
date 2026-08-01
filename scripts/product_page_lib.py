@@ -1012,7 +1012,8 @@ def build_compact_product_page(lang, prod):
     act_step = meta["activation"][lang]
     desc = f"{short}. {labels['desc_suffix']}"
     price_dec = f"{sale / 100:.2f}"
-    og_image = prod["image"]
+    img_src = _product_image_src(slug, prod.get("image"))
+    og_image_abs = "https://aml-store.com/" + img_src.lstrip("./").replace("../", "", 1)
 
     ld = {
         "@context": "https://schema.org",
@@ -1024,7 +1025,7 @@ def build_compact_product_page(lang, prod):
                 "sku": sku,
                 "inLanguage": lang,
                 "url": f"https://aml-store.com/{lang}/{slug}.html",
-                "image": f"https://aml-store.com/asset/media/{og_image}",
+                "image": og_image_abs,
                 "description": desc,
                 "brand": {"@type": "Brand", "name": brand},
                 "offers": {
@@ -1054,7 +1055,7 @@ def build_compact_product_page(lang, prod):
     <meta property="og:description" content="{desc}">
     <meta property="og:url" content="https://aml-store.com/{lang}/{slug}.html">
     <meta property="og:locale" content="{LOCALE[lang]}">
-    <meta property="og:image" content="https://aml-store.com/asset/media/{og_image}">
+    <meta property="og:image" content="{og_image_abs}">
     <meta property="product:price:amount" content="{price_dec}">
     <meta property="product:price:currency" content="EUR">
 {hreflang_block(slug)}
@@ -1097,7 +1098,7 @@ def build_compact_product_page(lang, prod):
                 <p class="v2-hero__desc">{desc}</p>
             </div>
             <div class="v2-hero__right">
-                <img class="v2-hero__cover" src="../asset/media/{og_image}" width="400" height="400" alt="" fetchpriority="high" decoding="async">
+                <img class="v2-hero__cover" src="{img_src}" width="400" height="400" alt="{short}" fetchpriority="high" decoding="async">
             </div>
         </div>
     </section>
