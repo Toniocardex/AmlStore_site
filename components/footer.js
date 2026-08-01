@@ -15,6 +15,7 @@ const FOOTER_I18N = {
         prodBusiness: 'Software Aziendali',
         prodDeals: 'Offerte Speciali',
         supportMyAccount: 'Il mio account',
+        supportContacts: 'Contatti',
         supportReturns: 'Resi e Rimborsi',
         supportTerms: 'Termini e Condizioni',
         supportPrivacy: 'Privacy Policy',
@@ -43,6 +44,7 @@ const FOOTER_I18N = {
         prodBusiness: 'Business software',
         prodDeals: 'Special offers',
         supportMyAccount: 'My account',
+        supportContacts: 'Contact',
         supportReturns: 'Returns & refunds',
         supportTerms: 'Terms & conditions',
         supportPrivacy: 'Privacy policy',
@@ -71,6 +73,7 @@ const FOOTER_I18N = {
         prodBusiness: 'Logiciels professionnels',
         prodDeals: 'Offres spéciales',
         supportMyAccount: 'Mon compte',
+        supportContacts: 'Contact',
         supportReturns: 'Retours et remboursements',
         supportTerms: 'Conditions générales',
         supportPrivacy: 'Politique de confidentialité',
@@ -99,6 +102,7 @@ const FOOTER_I18N = {
         prodBusiness: 'Business-Software',
         prodDeals: 'Sonderangebote',
         supportMyAccount: 'Mein Konto',
+        supportContacts: 'Kontakt',
         supportReturns: 'Rückgabe & Erstattung',
         supportTerms: 'Allgemeine Geschäftsbedingungen',
         supportPrivacy: 'Datenschutz',
@@ -127,6 +131,7 @@ const FOOTER_I18N = {
         prodBusiness: 'Software empresarial',
         prodDeals: 'Ofertas especiales',
         supportMyAccount: 'Mi cuenta',
+        supportContacts: 'Contacto',
         supportReturns: 'Devoluciones y reembolsos',
         supportTerms: 'Términos y condiciones',
         supportPrivacy: 'Política de privacidad',
@@ -758,6 +763,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="nav-col">
                         <h3 class="col-title">${esc(t.headingSupport)}</h3>
                         <ul class="link-list">
+                            <li><a href="${esc(staticRoot)}/${activeLang.code}/contacts">${esc(t.supportContacts)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/returns-and-refunds">${esc(t.supportReturns)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/terms-and-conditions">${esc(t.supportTerms)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/privacy-policy">${esc(t.supportPrivacy)}</a></li>

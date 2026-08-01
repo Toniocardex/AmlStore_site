@@ -487,8 +487,8 @@
 /it/categories/ /it/ 301
 /it/about /it/ 301
 /it/about/ /it/ 301
-/it/contacts /it/ 301
-/it/contacts/ /it/ 301
+/it/contatti /it/contacts 301
+/it/contatti/ /it/contacts 301
 /it/feedback /it/ 301
 /it/feedback/ /it/ 301
 /it/green-ecommerce /it/ 301
@@ -501,8 +501,6 @@
 /en/categories/ /en/ 301
 /en/about /en/ 301
 /en/about/ /en/ 301
-/en/contacts /en/ 301
-/en/contacts/ /en/ 301
 /en/feedback /en/ 301
 /en/feedback/ /en/ 301
 /en/green-ecommerce /en/ 301

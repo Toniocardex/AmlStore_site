@@ -21,8 +21,10 @@ urls = []
 for lang in LANGS:
     urls.append(f"https://aml-store.com/{lang}/")
 for lang in LANGS:
+    urls.append(f"https://aml-store.com/{lang}/contacts")
+for lang in LANGS:
     for html in sorted((ROOT / lang).glob("*.html")):
-        if html.stem in SKIP:
+        if html.stem in SKIP or html.stem == "contacts":
             continue
         urls.append(f"https://aml-store.com/{lang}/{html.stem}.html")
 
