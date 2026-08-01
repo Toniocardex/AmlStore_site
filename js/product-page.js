@@ -8,9 +8,12 @@
     var HEADER_MIN = 56;
     var HEADER_MAX = 120;
     var RESIZE_DEBOUNCE_MS = 100;
+    var MOBILE_MEDIA_QUERY = '(max-width: 768px)';
     var obs = null;
     var resizeTimer = null;
+    var scrollFrame = null;
     var lastInset = -1;
+    var lastMobileMode = null;
 
     function readSafeAreaTop() {
         try {
@@ -52,6 +55,16 @@
         sticky.inert = !on;
     }
 
+    function isMobileViewport() {
+        return window.matchMedia
+            ? window.matchMedia(MOBILE_MEDIA_QUERY).matches
+            : window.innerWidth <= 768;
+    }
+
+    function mobileCtaHasPassed(primaryCta, inset) {
+        return primaryCta.getBoundingClientRect().bottom <= inset;
+    }
+
     /** Doppio rAF: layout stabile (fonte/header) prima del primo IntersectionObserver. */
     function afterLayoutStable(fn) {
         requestAnimationFrame(function () {
@@ -64,21 +77,31 @@
 
         syncHeaderCssVar();
         var inset = headerInsetPx();
+        var mobileMode = isMobileViewport();
 
-        // Skip rebuild if header height hasn't changed — avoids unnecessary disconnect/reconnect
-        if (obs && inset === lastInset) return;
+        // Rebuild when either the header height or the mobile behavior changes.
+        if (obs && inset === lastInset && mobileMode === lastMobileMode) return;
         lastInset = inset;
+        lastMobileMode = mobileMode;
 
         if (obs) { obs.disconnect(); obs = null; }
 
         var topMargin = '-' + inset + 'px';
+
+        // Avoid flashing the desktop state while the observer initializes after a resize.
+        if (mobileMode) {
+            applySticky(sticky, mobileCtaHasPassed(primaryCta, inset));
+        }
 
         obs = new IntersectionObserver(
             function (entries) {
                 var e = entries[0];
                 if (!e) return;
                 var primaryVisible = e.isIntersecting === true;
-                applySticky(sticky, !primaryVisible);
+                var shouldShow = mobileMode
+                    ? e.boundingClientRect.bottom <= inset
+                    : !primaryVisible;
+                applySticky(sticky, shouldShow);
             },
             {
                 root: null,
@@ -108,6 +131,16 @@
             }, RESIZE_DEBOUNCE_MS);
         }
 
+        function scheduleMobileScrollSync() {
+            if (!isMobileViewport() || scrollFrame !== null) return;
+            scrollFrame = requestAnimationFrame(function () {
+                scrollFrame = null;
+                var inset = lastInset >= 0 ? lastInset : headerInsetPx();
+                applySticky(sticky, mobileCtaHasPassed(primaryCta, inset));
+            });
+        }
+
+        window.addEventListener('scroll', scheduleMobileScrollSync, { passive: true });
         window.addEventListener('resize', scheduleRebuild, { passive: true });
         window.addEventListener('orientationchange', scheduleRebuild, { passive: true });
 
