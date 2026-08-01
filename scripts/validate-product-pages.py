@@ -92,6 +92,18 @@ def check_product_pages():
             page = html.relative_to(ROOT)
             expected = CATALOG[sku]
 
+            if 'class="v2-faq"' in text:
+                errors.append(f"{page}: legacy FAQ markup is still present")
+            if 'class="home-faq-list"' in text:
+                faq_items = text.count('class="home-faq-item"')
+                faq_bodies = text.count('class="home-faq-body"')
+                if faq_items < 1 or faq_items != faq_bodies:
+                    errors.append(
+                        f"{page}: FAQ items/bodies mismatch ({faq_items}/{faq_bodies})"
+                    )
+                if '../js/faq.js' not in text:
+                    errors.append(f"{page}: shared FAQ script is missing")
+
             visible_codes = [html_lib.unescape(code.strip()) for code in VISIBLE_CODE_RE.findall(text)]
             if visible_codes != [sku]:
                 errors.append(f"{page}: visible product code {visible_codes or 'missing'} != {sku}")

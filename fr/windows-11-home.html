@@ -93,9 +93,9 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-800.woff2">
     <link rel="preload" as="image" href="../asset/media/products/windows-11-home.webp?v=ac6991220a" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=4a64ffe9db">
+    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=f33f135890">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
     <script>(function () {
     'use strict';
     var KEY = 'aml-theme';
@@ -327,20 +327,26 @@
 
         <hr class="v2-divider">
 
-        <section class="v2-section" aria-labelledby="v2-faq-title">
-            <h2 id="v2-faq-title" class="v2-section-title">Questions fréquentes</h2>
-            <div class="v2-faq">
-                <details>
+        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
+            <h2 id="v2-faq-title" class="home-section-title">Questions fréquentes</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
                     <summary>La licence est-elle à vie ou limitée dans le temps ?</summary>
-                    <p>La licence est perpétuelle (à vie) pour l'appareil sur lequel elle est activée. Elle n'expire pas et ne nécessite aucun renouvellement.</p>
+                    <div class="home-faq-body">
+                        <p>La licence est perpétuelle (à vie) pour l'appareil sur lequel elle est activée. Elle n'expire pas et ne nécessite aucun renouvellement.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Comment activer ma licence Windows 11 ?</summary>
-                    <p>Saisissez la clé de produit reçue par e-mail lors de l'installation du système d'exploitation, ou dans Paramètres sous Activation si Windows 11 est déjà installé.</p>
+                    <div class="home-faq-body">
+                        <p>Saisissez la clé de produit reçue par e-mail lors de l'installation du système d'exploitation, ou dans Paramètres sous Activation si Windows 11 est déjà installé.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Cette licence permet-elle de passer de Windows 10 à Windows 11 ?</summary>
-                    <p>Oui. Si votre PC respecte les exigences matérielles minimales de Microsoft, vous pouvez utiliser la clé de produit pour mettre à jour une installation Windows 10 compatible vers Windows 11.</p>
+                    <div class="home-faq-body">
+                        <p>Oui. Si votre PC respecte les exigences matérielles minimales de Microsoft, vous pouvez utiliser la clé de produit pour mettre à jour une installation Windows 10 compatible vers Windows 11.</p>
+                    </div>
                 </details>
             </div>
         </section>
@@ -377,6 +383,7 @@
     <script src="../js/locale-path.js?v=0c77df5095"></script>
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
         <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
+    <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>

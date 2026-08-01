@@ -108,9 +108,9 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-800.woff2">
     <link rel="preload" as="image" href="../asset/media/products/microsoft-365-family.webp?v=7503c711d3" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=4a64ffe9db">
+    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=f33f135890">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
     <script>(function () {
     'use strict';
     var KEY = 'aml-theme';
@@ -454,29 +454,38 @@
         <hr class="v2-divider">
 
         <!-- ── FAQ ── -->
-        <section class="v2-section" aria-labelledby="v2-faq-title">
-            <p class="v2-eyebrow">FAQ</p>
-            <h2 id="v2-faq-title" class="v2-section-title">Domande frequenti</h2>
-            <div class="v2-faq">
-                <details>
+        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
+            <h2 id="v2-faq-title" class="home-section-title">Domande frequenti</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
                     <summary>Qual è la differenza tra Microsoft 365 Family e Personal?</summary>
-                    <p>Family è pensato per condividere il piano con il tuo gruppo famiglia Microsoft (fino a 6 persone), ciascuna con account e spazio OneDrive distinti. Personal copre un solo utente con 1 TB, secondo le condizioni Microsoft aggiornate.</p>
+                    <div class="home-faq-body">
+                        <p>Family è pensato per condividere il piano con il tuo gruppo famiglia Microsoft (fino a 6 persone), ciascuna con account e spazio OneDrive distinti. Personal copre un solo utente con 1 TB, secondo le condizioni Microsoft aggiornate.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Come si invitano altri membri dopo l'acquisto?</summary>
-                    <p>Dopo l'attivazione sul tuo account Microsoft, usa le funzioni di condivisione del piano Family nell'area account Microsoft / abbonamenti, come indicato da Microsoft per il periodo di validità della licenza.</p>
+                    <div class="home-faq-body">
+                        <p>Dopo l'attivazione sul tuo account Microsoft, usa le funzioni di condivisione del piano Family nell'area account Microsoft / abbonamenti, come indicato da Microsoft per il periodo di validità della licenza.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>È un abbonamento o un acquisto una tantum?</summary>
-                    <p>È un abbonamento con rinnovo annuale (12 mesi acquistati su questa scheda). Durata, rinnovo e prezzo al rinnovo dipendono da Microsoft e dalle condizioni mostrate in fase d'ordine.</p>
+                    <div class="home-faq-body">
+                        <p>È un abbonamento con rinnovo annuale (12 mesi acquistati su questa scheda). Durata, rinnovo e prezzo al rinnovo dipendono da Microsoft e dalle condizioni mostrate in fase d'ordine.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Si possono usare le app Office anche offline?</summary>
-                    <p>Sì: con le app desktop installate puoi lavorare offline; servono comunque connessione e accesso periodici per la verifica della licenza, aggiornamenti e servizi cloud come OneDrive.</p>
+                    <div class="home-faq-body">
+                        <p>Sì: con le app desktop installate puoi lavorare offline; servono comunque connessione e accesso periodici per la verifica della licenza, aggiornamenti e servizi cloud come OneDrive.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Come si attiva Microsoft 365 Family dopo l'acquisto?</summary>
-                    <p>Vai su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, accedi con il tuo account Microsoft, inserisci il codice ricevuto via email e segui la procedura guidata. Al termine installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                    <div class="home-faq-body">
+                        <p>Vai su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, accedi con il tuo account Microsoft, inserisci il codice ricevuto via email e segui la procedura guidata. Al termine installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                    </div>
                 </details>
             </div>
         </section>
@@ -491,6 +500,7 @@
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
     <script src="../components/footer.js?v=95d3892cdc" defer></script>
         <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
+    <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
 </body>
 </html>

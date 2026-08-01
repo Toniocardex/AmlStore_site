@@ -135,9 +135,9 @@
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
     <link rel="preload" as="image" href="../asset/media/products/office-2024-home-business.webp?v=5e6a123f8c" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=4a64ffe9db">
+    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=f33f135890">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
@@ -391,29 +391,38 @@
             </div>
         </section>
         <hr class="v2-divider">
-        <section class="v2-section" aria-labelledby="v2-faq-title">
-            <p class="v2-eyebrow">FAQ</p>
-            <h2 id="v2-faq-title" class="v2-section-title">Questions fréquentes</h2>
-            <div class="v2-faq">
-                <details>
+        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
+            <h2 id="v2-faq-title" class="home-section-title">Questions fréquentes</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
                     <summary>Différence entre Office 2024 et Microsoft 365 ?</summary>
-                    <p>Home & Business 2024 est un achat unique, licence permanente pour 1 PC ou Mac. Pas les services cloud/AI typiques de Microsoft 365 (abonnement).</p>
+                    <div class="home-faq-body">
+                        <p>Home & Business 2024 est un achat unique, licence permanente pour 1 PC ou Mac. Pas les services cloud/AI typiques de Microsoft 365 (abonnement).</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>La licence expire-t-elle ?</summary>
-                    <p>Non — licence ESD perpétuelle selon Microsoft.</p>
+                    <div class="home-faq-body">
+                        <p>Non — licence ESD perpétuelle selon Microsoft.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Plusieurs appareils ?</summary>
-                    <p>En général 1 PC ou Mac. Pour plus d'appareils, voyez Microsoft 365 Personal ou Family.</p>
+                    <div class="home-faq-body">
+                        <p>En général 1 PC ou Mac. Pour plus d'appareils, voyez Microsoft 365 Personal ou Family.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Différence avec Office 2024 Home ?</summary>
-                    <p>Home & Business ajoute Outlook (et OneNote) pour un usage pro léger.</p>
+                    <div class="home-faq-body">
+                        <p>Home & Business ajoute Outlook (et OneNote) pour un usage pro léger.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Comment activer ?</summary>
-                    <p>setup.office.com avec le code reçu, compte Microsoft, installation via office.com.</p>
+                    <div class="home-faq-body">
+                        <p>setup.office.com avec le code reçu, compte Microsoft, installation via office.com.</p>
+                    </div>
                 </details>
             </div>
         </section>
@@ -422,6 +431,7 @@
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js?v=0c77df5095"></script>
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
+    <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>

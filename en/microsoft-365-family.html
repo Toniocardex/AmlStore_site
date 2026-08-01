@@ -117,9 +117,9 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-700.woff2">
     <link rel="preload" as="image" href="../asset/media/products/microsoft-365-family.webp?v=7503c711d3" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=4a64ffe9db">
+    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=f33f135890">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
     <script>(function () {
     'use strict';
     var KEY = 'aml-theme';
@@ -424,29 +424,38 @@
         <hr class="v2-divider">
 
         <!-- ── FAQ ── -->
-        <section class="v2-section" aria-labelledby="v2-faq-title">
-            <p class="v2-eyebrow">FAQ</p>
-            <h2 id="v2-faq-title" class="v2-section-title">Frequently asked questions</h2>
-            <div class="v2-faq">
-                <details>
+        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
+            <h2 id="v2-faq-title" class="home-section-title">Frequently asked questions</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
                     <summary>What is the difference between Microsoft 365 Family and Personal?</summary>
-                    <p>Family is designed to share the plan with your Microsoft family group (up to 6 people), each with their own account and separate OneDrive storage. Personal covers a single user with 1 TB, subject to Microsoft's current terms.</p>
+                    <div class="home-faq-body">
+                        <p>Family is designed to share the plan with your Microsoft family group (up to 6 people), each with their own account and separate OneDrive storage. Personal covers a single user with 1 TB, subject to Microsoft's current terms.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>How do I invite other members after purchase?</summary>
-                    <p>After activation on your Microsoft account, use the Family plan sharing features in the Microsoft account / subscriptions area, as directed by Microsoft for the duration of the licence.</p>
+                    <div class="home-faq-body">
+                        <p>After activation on your Microsoft account, use the Family plan sharing features in the Microsoft account / subscriptions area, as directed by Microsoft for the duration of the licence.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Is this a subscription or a one-time purchase?</summary>
-                    <p>It is a subscription with annual renewal (12 months purchased on this page). Duration, renewal, and renewal price depend on Microsoft and the terms shown at checkout.</p>
+                    <div class="home-faq-body">
+                        <p>It is a subscription with annual renewal (12 months purchased on this page). Duration, renewal, and renewal price depend on Microsoft and the terms shown at checkout.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Can I use Office apps offline?</summary>
-                    <p>Yes: with the desktop apps installed you can work offline; however, periodic internet connection and sign-in are required for licence verification, updates, and cloud services such as OneDrive.</p>
+                    <div class="home-faq-body">
+                        <p>Yes: with the desktop apps installed you can work offline; however, periodic internet connection and sign-in are required for licence verification, updates, and cloud services such as OneDrive.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>How do I activate Microsoft 365 Family after purchase?</summary>
-                    <p>Go to <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, sign in with your Microsoft account, enter the code received by email and follow the guided setup. Once done, install the apps from <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                    <div class="home-faq-body">
+                        <p>Go to <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, sign in with your Microsoft account, enter the code received by email and follow the guided setup. Once done, install the apps from <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                    </div>
                 </details>
             </div>
         </section>
@@ -461,6 +470,7 @@
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
     <script src="../components/footer.js?v=95d3892cdc" defer></script>
         <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
+    <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
 </body>
 </html>

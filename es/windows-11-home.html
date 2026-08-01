@@ -93,9 +93,9 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-800.woff2">
     <link rel="preload" as="image" href="../asset/media/products/windows-11-home.webp?v=ac6991220a" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=4a64ffe9db">
+    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=f33f135890">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
     <script>(function () {
     'use strict';
     var KEY = 'aml-theme';
@@ -327,20 +327,26 @@
 
         <hr class="v2-divider">
 
-        <section class="v2-section" aria-labelledby="v2-faq-title">
-            <h2 id="v2-faq-title" class="v2-section-title">Preguntas frecuentes</h2>
-            <div class="v2-faq">
-                <details>
+        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
+            <h2 id="v2-faq-title" class="home-section-title">Preguntas frecuentes</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
                     <summary>¿La licencia es perpetua o tiene caducidad?</summary>
-                    <p>La licencia es perpetua (de por vida) para el dispositivo en el que se activa. No caduca ni requiere renovaciones.</p>
+                    <div class="home-faq-body">
+                        <p>La licencia es perpetua (de por vida) para el dispositivo en el que se activa. No caduca ni requiere renovaciones.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>¿Cómo activo la licencia de Windows 11?</summary>
-                    <p>Introduce la clave de producto recibida por email durante la instalación del sistema operativo o en Configuración &gt; Activación si Windows 11 ya está instalado.</p>
+                    <div class="home-faq-body">
+                        <p>Introduce la clave de producto recibida por email durante la instalación del sistema operativo o en Configuración &gt; Activación si Windows 11 ya está instalado.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>¿Puede esta licencia actualizar desde Windows 10?</summary>
-                    <p>Sí. Si tu PC cumple los requisitos mínimos de hardware de Microsoft, puedes usar la clave de producto para actualizar una instalación compatible de Windows 10 a Windows 11.</p>
+                    <div class="home-faq-body">
+                        <p>Sí. Si tu PC cumple los requisitos mínimos de hardware de Microsoft, puedes usar la clave de producto para actualizar una instalación compatible de Windows 10 a Windows 11.</p>
+                    </div>
                 </details>
             </div>
         </section>
@@ -377,6 +383,7 @@
     <script src="../js/locale-path.js?v=0c77df5095"></script>
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
         <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
+    <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>

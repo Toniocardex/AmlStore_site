@@ -135,9 +135,9 @@
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
     <link rel="preload" as="image" href="../asset/media/products/office-2024-home-business.webp?v=5e6a123f8c" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=4a64ffe9db">
+    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=f33f135890">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
@@ -391,29 +391,38 @@
             </div>
         </section>
         <hr class="v2-divider">
-        <section class="v2-section" aria-labelledby="v2-faq-title">
-            <p class="v2-eyebrow">FAQ</p>
-            <h2 id="v2-faq-title" class="v2-section-title">Frequently asked questions</h2>
-            <div class="v2-faq">
-                <details>
+        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
+            <h2 id="v2-faq-title" class="home-section-title">Frequently asked questions</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
                     <summary>What’s the difference between Office 2024 and Microsoft 365?</summary>
-                    <p>Office 2024 Home & Business is a one-time perpetual licence for 1 PC or Mac. It does not include typical Microsoft 365 extras (1 TB OneDrive, Copilot, Defender). Microsoft 365 is a subscription with ongoing updates, cloud and AI.</p>
+                    <div class="home-faq-body">
+                        <p>Office 2024 Home & Business is a one-time perpetual licence for 1 PC or Mac. It does not include typical Microsoft 365 extras (1 TB OneDrive, Copilot, Defender). Microsoft 365 is a subscription with ongoing updates, cloud and AI.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Does the Office 2024 licence expire?</summary>
-                    <p>No—perpetual ESD licence. You pay once and keep the apps on the device where you installed them, under Microsoft’s terms.</p>
+                    <div class="home-faq-body">
+                        <p>No—perpetual ESD licence. You pay once and keep the apps on the device where you installed them, under Microsoft’s terms.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Can I install it on multiple devices?</summary>
-                    <p>No—typically 1 PC or Mac only. For more devices, consider Microsoft 365 Personal or Family.</p>
+                    <div class="home-faq-body">
+                        <p>No—typically 1 PC or Mac only. For more devices, consider Microsoft 365 Personal or Family.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>How does it differ from Office 2024 Home?</summary>
-                    <p>Home & Business adds Outlook (and OneNote) for light professional use, still as a perpetual licence.</p>
+                    <div class="home-faq-body">
+                        <p>Home & Business adds Outlook (and OneNote) for light professional use, still as a perpetual licence.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>How do I activate?</summary>
-                    <p>Use setup.office.com with the emailed key, link your Microsoft account and install from office.com.</p>
+                    <div class="home-faq-body">
+                        <p>Use setup.office.com with the emailed key, link your Microsoft account and install from office.com.</p>
+                    </div>
                 </details>
             </div>
         </section>
@@ -422,6 +431,7 @@
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js?v=0c77df5095"></script>
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
+    <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>

@@ -117,9 +117,9 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-700.woff2">
     <link rel="preload" as="image" href="../asset/media/products/microsoft-365-personal.webp?v=2cfdb89700" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=4a64ffe9db">
+    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=f33f135890">
+    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
     <script>(function () {
     'use strict';
     var KEY = 'aml-theme';
@@ -406,29 +406,38 @@
         <hr class="v2-divider">
 
         <!-- ── FAQ ── -->
-        <section class="v2-section" aria-labelledby="v2-faq-title">
-            <p class="v2-eyebrow">FAQ</p>
-            <h2 id="v2-faq-title" class="v2-section-title">Questions fréquentes</h2>
-            <div class="v2-faq">
-                <details>
+        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
+            <h2 id="v2-faq-title" class="home-section-title">Questions fréquentes</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
                     <summary>À qui s'adresse Microsoft 365 Personnel ?</summary>
-                    <p>Personnel couvre un compte Microsoft avec les applications Office premium et 1 To OneDrive, selon les conditions Microsoft. Pour partager avec plusieurs personnes sur des comptes distincts, choisissez Microsoft 365 Famille.</p>
+                    <div class="home-faq-body">
+                        <p>Personnel couvre un compte Microsoft avec les applications Office premium et 1 To OneDrive, selon les conditions Microsoft. Pour partager avec plusieurs personnes sur des comptes distincts, choisissez Microsoft 365 Famille.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Puis-je utiliser Personnel sur plusieurs appareils ?</summary>
-                    <p>Oui, dans les limites du plan Microsoft : installez les applications sur les PC, Mac, tablettes et smartphones pris en charge connectés à votre compte, comme décrit dans la documentation Microsoft.</p>
+                    <div class="home-faq-body">
+                        <p>Oui, dans les limites du plan Microsoft : installez les applications sur les PC, Mac, tablettes et smartphones pris en charge connectés à votre compte, comme décrit dans la documentation Microsoft.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>S'agit-il d'un abonnement ou d'un achat unique ?</summary>
-                    <p>Il s'agit d'un abonnement avec renouvellement annuel (12 mois achetés sur cette page). La durée, le renouvellement et le prix de renouvellement dépendent de Microsoft et des conditions affichées lors de la commande.</p>
+                    <div class="home-faq-body">
+                        <p>Il s'agit d'un abonnement avec renouvellement annuel (12 mois achetés sur cette page). La durée, le renouvellement et le prix de renouvellement dépendent de Microsoft et des conditions affichées lors de la commande.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Peut-on utiliser les applications Office hors connexion ?</summary>
-                    <p>Oui : avec les applications de bureau installées, vous pouvez travailler hors ligne ; une connexion internet et une authentification périodiques sont toutefois nécessaires pour la vérification de la licence, les mises à jour et les services cloud comme OneDrive.</p>
+                    <div class="home-faq-body">
+                        <p>Oui : avec les applications de bureau installées, vous pouvez travailler hors ligne ; une connexion internet et une authentification périodiques sont toutefois nécessaires pour la vérification de la licence, les mises à jour et les services cloud comme OneDrive.</p>
+                    </div>
                 </details>
-                <details>
+                <details class="home-faq-item">
                     <summary>Comment activer Microsoft 365 Personnel après l'achat ?</summary>
-                    <p>Rendez-vous sur <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, connectez-vous avec votre compte Microsoft, saisissez le code reçu par e-mail et suivez l'assistant d'installation. Une fois terminé, installez les applications depuis <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                    <div class="home-faq-body">
+                        <p>Rendez-vous sur <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, connectez-vous avec votre compte Microsoft, saisissez le code reçu par e-mail et suivez l'assistant d'installation. Une fois terminé, installez les applications depuis <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                    </div>
                 </details>
             </div>
         </section>
@@ -443,6 +452,7 @@
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
     <script src="../components/footer.js?v=95d3892cdc" defer></script>
         <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
+    <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
 </body>
 </html>

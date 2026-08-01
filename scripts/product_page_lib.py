@@ -670,9 +670,11 @@ def _render_faq(faq_items):
     parts = []
     for q, a in faq_items:
         parts.append(
-            f"""                <details>
+            f"""                <details class="home-faq-item">
                     <summary>{q}</summary>
-                    <p>{a}</p>
+                    <div class="home-faq-body">
+                        <p>{a}</p>
+                    </div>
                 </details>"""
         )
     return "\n".join(parts)
@@ -987,10 +989,9 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
 {_trustpilot_block(lang)}        <hr class="v2-divider">
 {specs_block}
         <hr class="v2-divider">
-        <section class="v2-section" aria-labelledby="v2-faq-title">
-            <p class="v2-eyebrow">{ui['faq_eyebrow']}</p>
-            <h2 id="v2-faq-title" class="v2-section-title">{ui['faq_title']}</h2>
-            <div class="v2-faq">
+        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
+            <h2 id="v2-faq-title" class="home-section-title">{ui['faq_title']}</h2>
+            <div class="home-faq-list">
 {_render_faq(content['faq'][lang])}
             </div>
         </section>
@@ -999,6 +1000,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
+    <script src="../js/faq.js" defer></script>
     <script src="../js/product-page.js" defer></script>
 {_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
