@@ -20,7 +20,7 @@ COPY = {
         "h_company": "Dati azienda",
         "company": "<strong>Aml Store</strong> — P.IVA 11461870963",
         "cta_email": "Scrivi una email",
-        "cta_wa": "Apri WhatsApp",
+        "cta_wa": "clicca per aprire su WhatsApp",
     },
     "en": {
         "skip": "Skip to main content",
@@ -34,7 +34,7 @@ COPY = {
         "h_company": "Company details",
         "company": "<strong>Aml Store</strong> — VAT 11461870963",
         "cta_email": "Send an email",
-        "cta_wa": "Open WhatsApp",
+        "cta_wa": "click to open on WhatsApp",
     },
     "fr": {
         "skip": "Aller au contenu principal",
@@ -48,7 +48,7 @@ COPY = {
         "h_company": "Informations société",
         "company": "<strong>Aml Store</strong> — TVA 11461870963",
         "cta_email": "Écrire un e-mail",
-        "cta_wa": "Ouvrir WhatsApp",
+        "cta_wa": "cliquez pour ouvrir sur WhatsApp",
     },
     "de": {
         "skip": "Zum Hauptinhalt springen",
@@ -62,7 +62,7 @@ COPY = {
         "h_company": "Unternehmensdaten",
         "company": "<strong>Aml Store</strong> — USt-IdNr. 11461870963",
         "cta_email": "E-Mail schreiben",
-        "cta_wa": "WhatsApp öffnen",
+        "cta_wa": "klicken, um WhatsApp zu öffnen",
     },
     "es": {
         "skip": "Ir al contenido principal",
@@ -76,7 +76,7 @@ COPY = {
         "h_company": "Datos de la empresa",
         "company": "<strong>Aml Store</strong> — NIF 11461870963",
         "cta_email": "Enviar un email",
-        "cta_wa": "Abrir WhatsApp",
+        "cta_wa": "haz clic para abrir en WhatsApp",
     },
 }
 
@@ -185,7 +185,7 @@ def page(lang: str) -> str:
             <li>
                 <span class="contacts-channels__label">{t['wa_label']}</span>
                 <a class="account-phone" href="https://wa.me/393925580413" target="_blank" rel="noopener noreferrer">+39 392 558 0413</a>
-                <span class="contacts-channels__cta"> — {t['cta_wa']}</span>
+                <span class="contacts-channels__cta"> — </span><a href="https://wa.me/393925580413" target="_blank" rel="noopener noreferrer">{t['cta_wa']}</a>
             </li>
         </ul>
 
