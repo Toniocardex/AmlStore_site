@@ -528,9 +528,10 @@ def product_card(lang, prod, labels):
 PAYMENT_LOGOS = [
     ("img-aml-store_Visa_logo.svg", "Visa"),
     ("img-aml-store_Mastercard_logo.svg", "Mastercard"),
-    ("img-aml-store_Stripe_Logo.svg", "Stripe"),
+    ("img-aml-store_PayPal-logo.svg", "PayPal"),
     ("img-aml-store_Apple_Pay_logo.svg", "Apple Pay"),
     ("img-aml-store_Google_Pay_Logo.svg", "Google Pay"),
+    ("img-aml-store_Stripe_Logo.svg", "Stripe"),
 ]
 
 CART_ICON = (
