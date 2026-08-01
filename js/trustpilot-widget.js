@@ -1,5 +1,6 @@
 /**
- * Trustpilot TrustBox — load only after marketing consent (ad_storage).
+ * Trustpilot TrustBox — load only after marketing consent (ad_storage),
+ * and only when the widget is near the viewport.
  * Shared by home + product pages.
  */
 (function () {
@@ -8,6 +9,10 @@
     var CONSENT_KEY = 'aml-consent-v2';
     var TRUSTPILOT_SCRIPT_ID = 'trustpilot-widget-script';
     var TRUSTPILOT_SCRIPT_SRC = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
+    var LOAD_ROOT_MARGIN = '200px 0px';
+
+    var _nearViewportObserver = null;
+    var _loadStarted = false;
 
     function readMarketingConsent() {
         try {
@@ -36,12 +41,30 @@
         });
     }
 
+    function disconnectNearViewportObserver() {
+        if (_nearViewportObserver) {
+            _nearViewportObserver.disconnect();
+            _nearViewportObserver = null;
+        }
+    }
+
     function loadTrustpilotWidget() {
         var widget = getTrustpilotWidget();
         if (!widget) return;
 
         var businessUnitId = (widget.getAttribute('data-businessunit-id') || '').trim();
         if (!businessUnitId) return;
+
+        if (_loadStarted && document.getElementById(TRUSTPILOT_SCRIPT_ID)) {
+            setWidgetActive(true);
+            if (window.Trustpilot && typeof window.Trustpilot.loadFromElement === 'function') {
+                window.Trustpilot.loadFromElement(widget, true);
+                hideTrustpilotFallback();
+            }
+            return;
+        }
+        _loadStarted = true;
+        disconnectNearViewportObserver();
 
         setWidgetActive(true);
 
@@ -65,20 +88,49 @@
         document.head.appendChild(script);
     }
 
+    /** Consent granted → load when widget is near viewport (or immediately if no IO). */
+    function scheduleTrustpilotLoad() {
+        var widget = getTrustpilotWidget();
+        if (!widget) return;
+
+        if (_loadStarted) {
+            loadTrustpilotWidget();
+            return;
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            loadTrustpilotWidget();
+            return;
+        }
+
+        disconnectNearViewportObserver();
+        _nearViewportObserver = new IntersectionObserver(
+            function (entries) {
+                var e = entries[0];
+                if (!e || !e.isIntersecting) return;
+                loadTrustpilotWidget();
+            },
+            { root: null, rootMargin: LOAD_ROOT_MARGIN, threshold: 0 }
+        );
+        _nearViewportObserver.observe(widget);
+    }
+
     function initTrustpilot() {
         if (!readMarketingConsent()) {
             setWidgetActive(false);
+            disconnectNearViewportObserver();
             return;
         }
-        loadTrustpilotWidget();
+        scheduleTrustpilotLoad();
     }
 
     function onConsentUpdated(event) {
         var consent = event && event.detail;
         if (consent && consent.ad_storage === 'granted') {
-            loadTrustpilotWidget();
+            scheduleTrustpilotLoad();
         } else if (consent) {
             setWidgetActive(false);
+            disconnectNearViewportObserver();
         }
     }
 
@@ -88,7 +140,7 @@
         window.addEventListener('aml-consent-updated', onConsentUpdated);
         window.addEventListener('storage', function (e) {
             if (e.key === CONSENT_KEY && readMarketingConsent()) {
-                loadTrustpilotWidget();
+                scheduleTrustpilotLoad();
             }
         });
     }

@@ -1857,6 +1857,31 @@
                         text-overflow: ellipsis;
                         overflow: hidden;
                     }
+
+                    /* Mobile: niente backdrop-filter (scroll/paint costosi su Android) */
+                    @media (max-width: 768px) {
+                        :host {
+                            --bg-base: rgba(5, 5, 5, 0.96);
+                            --bg-surface: rgba(17, 17, 17, 0.97);
+                            backdrop-filter: none;
+                            -webkit-backdrop-filter: none;
+                        }
+                        .nav-win-dropdown,
+                        .nav-m365-dropdown,
+                        .nav-office-dropdown,
+                        .nav-av-dropdown,
+                        .lang-dropdown,
+                        .search-panel,
+                        .mobile-drawer {
+                            backdrop-filter: none;
+                            -webkit-backdrop-filter: none;
+                        }
+                        .search-backdrop,
+                        .overlay {
+                            backdrop-filter: none;
+                            -webkit-backdrop-filter: none;
+                        }
+                    }
                 </style>
 
                 <div class="header-container">

@@ -798,6 +798,18 @@ html[data-theme='light'] .product-page .req-box {
     }
 }
 
+@media (max-width: 768px) {
+    .product-sticky-cta {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: color-mix(in srgb, var(--page-bg) 96%, var(--page-text));
+    }
+
+    html[data-theme='light'] .product-sticky-cta {
+        background: #ffffff;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .product-sticky-cta {
         transition: none;
