@@ -9,6 +9,11 @@ CATALOG = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
 LANGS = ("it", "en", "fr", "de", "es")
 LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
 
+# Neutro brand (non usare cover di un altro SKU come placeholder).
+PRODUCT_COVER_FALLBACK = "product-cover-fallback.webp"
+PRODUCT_COVER_FALLBACK_SRC = f"../asset/media/{PRODUCT_COVER_FALLBACK}"
+PRODUCT_COVER_FALLBACK_ABS = f"https://aml-store.com/asset/media/{PRODUCT_COVER_FALLBACK}"
+
 # Allineato a functions/api/_lib/catalog.js (physical: true)
 PHYSICAL_SKUS = frozenset({
     "FQC-10538",
@@ -507,7 +512,7 @@ def product_card(lang, prod, labels):
                 >
                     <a href="{href}" class="product-card-body product-card--link">
                         <div class="product-card-media">
-                            <img src="{image_src}" width="400" height="400" alt="{name}" decoding="async"{lazy_attr} class="product-card-img" onerror="this.src='../asset/media/home-hero-lifestyle.webp'">
+                            <img src="{image_src}" width="400" height="400" alt="{name}" decoding="async"{lazy_attr} class="product-card-img" onerror="this.onerror=null;this.src='{PRODUCT_COVER_FALLBACK_SRC}'">
                         </div>
                         <p class="product-card-name">{name}</p>
                         <p class="product-card-blurb">{blurb}</p>
@@ -535,11 +540,19 @@ CART_ICON = (
 )
 
 
-def _product_image_src(slug, fallback_image):
+def _product_image_src(slug, fallback_image=None):
+    """Prefer products/{slug}.webp; never silently reuse another SKU's box art."""
     product_path = ROOT / "asset" / "media" / "products" / f"{slug}.webp"
     if product_path.exists():
         return f"../asset/media/products/{slug}.webp"
-    return f"../asset/media/{fallback_image}"
+    if fallback_image:
+        stem = Path(fallback_image).stem
+        # Accept only a media file that clearly belongs to this slug.
+        if stem == slug or stem.startswith(f"{slug}-"):
+            media_path = ROOT / "asset" / "media" / fallback_image
+            if media_path.exists():
+                return f"../asset/media/{fallback_image}"
+    return PRODUCT_COVER_FALLBACK_SRC
 
 
 def _icon_src(key):
@@ -586,7 +599,7 @@ def _render_lifestyle_band(lifestyle, lang):
     if not lifestyle:
         return ""
     img = lifestyle["image"]
-    img_640 = lifestyle.get("image_640") or img
+    img_640 = lifestyle.get("image_640")
     w = int(lifestyle.get("width") or 1024)
     h = int(lifestyle.get("height") or 640)
     alt = lifestyle["alt"][lang]
@@ -594,17 +607,17 @@ def _render_lifestyle_band(lifestyle, lang):
     title = lifestyle["title"][lang]
     body = lifestyle["body"][lang]
     src = f"../asset/media/products/{img}"
-    src_640 = f"../asset/media/products/{img_640}"
-    # srcset: smaller first for mobile; sizes match full-bleed band
-    srcset = f"{src_640} 640w, {src} {w}w"
+    srcset_attrs = ""
+    if img_640 and img_640 != img:
+        src_640 = f"../asset/media/products/{img_640}"
+        srcset_attrs = f'\n                    srcset="{src_640} 640w, {src} {w}w"\n                    sizes="100vw"'
     return f"""        <hr class="v2-divider">
         <section class="v2-section v2-section--gallery" aria-label="{title}">
             <figure class="bento-figure">
                 <img
                     class="bento-img"
                     src="{src}"
-                    srcset="{srcset}"
-                    sizes="100vw"
+                    {srcset_attrs}
                     width="{w}"
                     height="{h}"
                     alt="{alt}"
@@ -1191,10 +1204,10 @@ def build_catalog_page(lang, catalog_slug, products):
     labels = BASE_LABELS[lang]
     title, lede = CATALOG_META[catalog_slug][lang]
     cards = "".join(product_card(lang, p, labels) for p in products)
-    og_image = "https://aml-store.com/asset/media/microsoft-365-personal.webp"
+    og_image = PRODUCT_COVER_FALLBACK_ABS
     if products:
         first = products[0]
-        rel = _product_image_src(first["slug"], first["image"])
+        rel = _product_image_src(first["slug"], first.get("image"))
         og_image = "https://aml-store.com/" + rel.lstrip("./").replace("../", "", 1)
     return f"""<!DOCTYPE html>
 <html lang="{lang}">

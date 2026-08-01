@@ -30,6 +30,7 @@ PRESERVE_PAGES = {
 
 IMG_OFFICE = "microsoft-365-personal.webp"
 IMG_WIN = "microsoft-windows-11-home.webp"
+IMG_FALLBACK = "product-cover-fallback.webp"
 
 # slug, template, card_name, image (optional), brand (optional), woo_it (optional)
 PRODUCT_DEFS = [
@@ -74,39 +75,39 @@ PRODUCT_DEFS = [
     ("P6L-00076", "sql-server-2022-enterprise", "server", "SQL Server 2022 Enterprise", IMG_WIN),
     ("SC835510", "sql-server-2022-standard", "server", "SQL Server 2022 Standard", IMG_WIN),
     # ── Antivirus — ESET ──
-    ("EAVH-N1-A1", "eset-nod32-1-device", "antivirus", "ESET NOD32 — 1 dispositivo", IMG_OFFICE, "ESET"),
-    ("EAVH-N1-A2", "eset-nod32-2-devices", "antivirus", "ESET NOD32 — 2 dispositivi", IMG_OFFICE, "ESET"),
-    ("EAVH-N1-A3", "eset-nod32-3-devices", "antivirus", "ESET NOD32 — 3 dispositivi", IMG_OFFICE, "ESET"),
-    ("EAVH-N1-A5", "eset-nod32-5-devices", "antivirus", "ESET NOD32 — 5 dispositivi", IMG_OFFICE, "ESET"),
-    ("EAVH-N1-A10", "eset-nod32-10-devices", "antivirus", "ESET NOD32 — 10 dispositivi", IMG_OFFICE, "ESET"),
-    ("EAVH-N2-A1", "eset-nod32-1-device-2y", "antivirus", "ESET NOD32 — 1 dispositivo · 2 anni", IMG_OFFICE, "ESET"),
+    ("EAVH-N1-A1", "eset-nod32-1-device", "antivirus", "ESET NOD32 — 1 dispositivo", IMG_FALLBACK, "ESET"),
+    ("EAVH-N1-A2", "eset-nod32-2-devices", "antivirus", "ESET NOD32 — 2 dispositivi", IMG_FALLBACK, "ESET"),
+    ("EAVH-N1-A3", "eset-nod32-3-devices", "antivirus", "ESET NOD32 — 3 dispositivi", IMG_FALLBACK, "ESET"),
+    ("EAVH-N1-A5", "eset-nod32-5-devices", "antivirus", "ESET NOD32 — 5 dispositivi", IMG_FALLBACK, "ESET"),
+    ("EAVH-N1-A10", "eset-nod32-10-devices", "antivirus", "ESET NOD32 — 10 dispositivi", IMG_FALLBACK, "ESET"),
+    ("EAVH-N2-A1", "eset-nod32-1-device-2y", "antivirus", "ESET NOD32 — 1 dispositivo · 2 anni", IMG_FALLBACK, "ESET"),
     # ── Norton ──
-    ("21395096E7", "norton-360-standard", "antivirus", "Norton 360 Standard", IMG_OFFICE, "Norton"),
-    ("P1433901", "norton-360-standard-no-sub", "antivirus", "Norton 360 Standard (no abbonamento)", IMG_OFFICE, "Norton"),
-    ("NORT_360DEL_3D_1A", "norton-360-deluxe", "antivirus", "Norton 360 Deluxe — 3 dispositivi", IMG_OFFICE, "Norton"),
-    ("NORT_360DEL_3D_1A-NOABB", "norton-360-deluxe-no-sub", "antivirus", "Norton 360 Deluxe (no abbonamento)", IMG_OFFICE, "Norton"),
+    ("21395096E7", "norton-360-standard", "antivirus", "Norton 360 Standard", IMG_FALLBACK, "Norton"),
+    ("P1433901", "norton-360-standard-no-sub", "antivirus", "Norton 360 Standard (no abbonamento)", IMG_FALLBACK, "Norton"),
+    ("NORT_360DEL_3D_1A", "norton-360-deluxe", "antivirus", "Norton 360 Deluxe — 3 dispositivi", IMG_FALLBACK, "Norton"),
+    ("NORT_360DEL_3D_1A-NOABB", "norton-360-deluxe-no-sub", "antivirus", "Norton 360 Deluxe (no abbonamento)", IMG_FALLBACK, "Norton"),
     # ── Bitdefender ──
-    ("7470A", "bitdefender-plus-1-device", "antivirus", "Bitdefender Plus — 1 dispositivo", IMG_OFFICE, "Bitdefender"),
-    ("TL11012001-EN", "bitdefender-plus-3-devices", "antivirus", "Bitdefender Plus — 3 dispositivi", IMG_OFFICE, "Bitdefender"),
-    ("TL11012001-EN-5D", "bitdefender-plus-5-devices", "antivirus", "Bitdefender Plus — 5 dispositivi", IMG_OFFICE, "Bitdefender"),
-    ("TL11011010-DE", "bitdefender-plus-10-devices", "antivirus", "Bitdefender Plus — 10 dispositivi", IMG_OFFICE, "Bitdefender"),
+    ("7470A", "bitdefender-plus-1-device", "antivirus", "Bitdefender Plus — 1 dispositivo", IMG_FALLBACK, "Bitdefender"),
+    ("TL11012001-EN", "bitdefender-plus-3-devices", "antivirus", "Bitdefender Plus — 3 dispositivi", IMG_FALLBACK, "Bitdefender"),
+    ("TL11012001-EN-5D", "bitdefender-plus-5-devices", "antivirus", "Bitdefender Plus — 5 dispositivi", IMG_FALLBACK, "Bitdefender"),
+    ("TL11011010-DE", "bitdefender-plus-10-devices", "antivirus", "Bitdefender Plus — 10 dispositivi", IMG_FALLBACK, "Bitdefender"),
     # ── Kaspersky ──
-    ("KASP_STD_1D_1A", "kaspersky-standard", "antivirus", "Kaspersky Standard", IMG_OFFICE, "Kaspersky"),
-    ("KASP_PLUS_1D_1A", "kaspersky-plus", "antivirus", "Kaspersky Plus", IMG_OFFICE, "Kaspersky"),
-    ("KL1047TDAFS", "kaspersky-premium-1-device", "antivirus", "Kaspersky Premium — 1 dispositivo", IMG_OFFICE, "Kaspersky"),
-    ("KL1047GDCFS1", "kaspersky-premium-3-devices", "antivirus", "Kaspersky Premium — 3 dispositivi", IMG_OFFICE, "Kaspersky"),
-    ("KL1047GDEFS", "kaspersky-premium-5-devices", "antivirus", "Kaspersky Premium — 5 dispositivi", IMG_OFFICE, "Kaspersky"),
-    ("KL1047GDKFS", "kaspersky-premium-10-devices", "antivirus", "Kaspersky Premium — 10 dispositivi", IMG_OFFICE, "Kaspersky"),
+    ("KASP_STD_1D_1A", "kaspersky-standard", "antivirus", "Kaspersky Standard", IMG_FALLBACK, "Kaspersky"),
+    ("KASP_PLUS_1D_1A", "kaspersky-plus", "antivirus", "Kaspersky Plus", IMG_FALLBACK, "Kaspersky"),
+    ("KL1047TDAFS", "kaspersky-premium-1-device", "antivirus", "Kaspersky Premium — 1 dispositivo", IMG_FALLBACK, "Kaspersky"),
+    ("KL1047GDCFS1", "kaspersky-premium-3-devices", "antivirus", "Kaspersky Premium — 3 dispositivi", IMG_FALLBACK, "Kaspersky"),
+    ("KL1047GDEFS", "kaspersky-premium-5-devices", "antivirus", "Kaspersky Premium — 5 dispositivi", IMG_FALLBACK, "Kaspersky"),
+    ("KL1047GDKFS", "kaspersky-premium-10-devices", "antivirus", "Kaspersky Premium — 10 dispositivi", IMG_FALLBACK, "Kaspersky"),
     # ── McAfee ──
-    ("1108921", "mcafee-total-protection-1-device", "antivirus", "McAfee Total Protection — 1 dispositivo", IMG_OFFICE, "McAfee"),
-    ("1108923", "mcafee-total-protection-5-devices", "antivirus", "McAfee Total Protection — 5 dispositivi", IMG_OFFICE, "McAfee"),
-    ("MTP00MNRXRAAD", "mcafee-total-protection-10-devices", "antivirus", "McAfee Total Protection — 10 dispositivi", IMG_OFFICE, "McAfee"),
+    ("1108921", "mcafee-total-protection-1-device", "antivirus", "McAfee Total Protection — 1 dispositivo", IMG_FALLBACK, "McAfee"),
+    ("1108923", "mcafee-total-protection-5-devices", "antivirus", "McAfee Total Protection — 5 dispositivi", IMG_FALLBACK, "McAfee"),
+    ("MTP00MNRXRAAD", "mcafee-total-protection-10-devices", "antivirus", "McAfee Total Protection — 10 dispositivi", IMG_FALLBACK, "McAfee"),
     # ── Strumenti / altro ──
-    ("AD_STD_2D-1A", "adobe-acrobat-standard", "tool", "Adobe Acrobat Standard", IMG_OFFICE, "Adobe"),
-    ("SC916509", "adobe-acrobat-pro", "tool", "Adobe Acrobat Pro", IMG_OFFICE, "Adobe"),
-    ("B0CXZR44LP", "coreldraw-2024", "tool", "CorelDRAW Graphics Suite 2024", IMG_OFFICE, "Corel"),
-    ("ACRTRIAD1D1Y", "acronis-true-image-advanced", "backup", "Acronis True Image Advanced", IMG_OFFICE, "Acronis"),
-    ("SC484126", "copilot-guide-2026", "training", "Guida Copilot Premium 2026", IMG_OFFICE),
+    ("AD_STD_2D-1A", "adobe-acrobat-standard", "tool", "Adobe Acrobat Standard", IMG_FALLBACK, "Adobe"),
+    ("SC916509", "adobe-acrobat-pro", "tool", "Adobe Acrobat Pro", IMG_FALLBACK, "Adobe"),
+    ("B0CXZR44LP", "coreldraw-2024", "tool", "CorelDRAW Graphics Suite 2024", IMG_FALLBACK, "Corel"),
+    ("ACRTRIAD1D1Y", "acronis-true-image-advanced", "backup", "Acronis True Image Advanced", IMG_FALLBACK, "Acronis"),
+    ("SC484126", "copilot-guide-2026", "training", "Guida Copilot Premium 2026", IMG_FALLBACK),
 ]
 
 WOO_REDIRECTS = {

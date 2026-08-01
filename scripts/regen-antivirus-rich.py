@@ -49,7 +49,7 @@ def main():
             "slug": slug,
             "template": "antivirus",
             "card_name": content["name"]["it"],
-            "image": "microsoft-365-personal.webp",
+            "image": "product-cover-fallback.webp",
             "brand": brand,
         }
         for lang in LANGS:
