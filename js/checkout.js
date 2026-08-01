@@ -679,23 +679,31 @@
 
     /* ─── PayPal Buttons ───────────────────────────────────────────────────── */
 
+    function setPaypalLoadingVisible(loadingEl, visible) {
+        if (!loadingEl) return;
+        loadingEl.hidden = !visible;
+        loadingEl.classList.toggle('is-visible', visible);
+    }
+
     function initPaypalButtons() {
         var container = document.getElementById('paypal-buttons-container');
         var loadingEl = document.getElementById('paypal-loading');
         var errorEl   = document.getElementById('checkout-error-msg');
 
         if (!container) return;
-        if (container.dataset.ppRendered) return;
+        if (container.dataset.ppRendered) {
+            setPaypalLoadingVisible(loadingEl, false);
+            return;
+        }
 
-        if (loadingEl) loadingEl.hidden = false;
+        setPaypalLoadingVisible(loadingEl, true);
         hideGlobalError();
 
         loadPaypalSDK()
             .then(function () {
-                if (loadingEl) loadingEl.hidden = true;
                 container.dataset.ppRendered = '1';
 
-                global.paypal.Buttons({
+                return global.paypal.Buttons({
                     style: {
                         layout: 'vertical',
                         color:  'gold',
@@ -784,9 +792,12 @@
 
                 }).render('#paypal-buttons-container');
             })
+            .then(function () {
+                setPaypalLoadingVisible(loadingEl, false);
+            })
             .catch(function (sdkErr) {
                 console.error('[PayPal] Impossibile caricare SDK:', sdkErr);
-                if (loadingEl) loadingEl.hidden = true;
+                setPaypalLoadingVisible(loadingEl, false);
                 showGlobalError('Impossibile caricare PayPal. Controlla la connessione o scegli un altro metodo.');
             });
     }
