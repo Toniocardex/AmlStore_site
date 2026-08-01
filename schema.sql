@@ -68,3 +68,17 @@ CREATE INDEX IF NOT EXISTS idx_orders_customer_email  ON orders(customer_email);
 CREATE INDEX IF NOT EXISTS idx_orders_created_at      ON orders(created_at);
 CREATE INDEX IF NOT EXISTS idx_orders_archived        ON orders(archived_at);
 CREATE INDEX IF NOT EXISTS idx_orders_requires_shipping ON orders(requires_shipping);
+
+-- Magazzino prodotti fisici. Incluso anche in schema-stock-migration.sql per
+-- aggiornare in sicurezza database creati prima dell'introduzione dello stock.
+CREATE TABLE IF NOT EXISTS product_stock (
+    sku         TEXT PRIMARY KEY,
+    qty         INTEGER NOT NULL CHECK (qty >= 0),
+    updated_at  TEXT NOT NULL,
+    updated_by  TEXT
+);
+
+CREATE TABLE IF NOT EXISTS stock_deductions (
+    order_id     TEXT PRIMARY KEY,
+    deducted_at  TEXT NOT NULL
+);
