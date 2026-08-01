@@ -906,7 +906,7 @@ html[data-theme='light'] .home-page .home-faq-item {
     }
 }
 
-/* ── Sezione categorie — 2 col mobile / 3 col desktop, tile orizzontali ── */
+/* ── Sezione categorie — mobile: card verticali 2 col; desktop: tile orizzontali 3 col ── */
 .home-categories {
     max-width: 1200px;
     margin: 0 auto;
@@ -919,9 +919,8 @@ html[data-theme='light'] .home-page .home-faq-item {
 
 .home-categories-grid {
     display: grid;
-    /* Mobile: 1 colonna — in 2 col il testo si spezzava su troppe righe */
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.65rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -931,13 +930,6 @@ html[data-theme='light'] .home-page .home-faq-item {
     min-width: 0;
     margin: 0;
     padding: 0;
-}
-
-@media (min-width: 640px) {
-    .home-categories-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.75rem;
-    }
 }
 
 @media (min-width: 900px) {
@@ -1010,24 +1002,25 @@ html[data-theme='light'] .home-page .home-faq-item {
     font-size: clamp(0.88rem, 2.4vw, 1rem);
     line-height: 1.25;
     color: var(--page-text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .home-category-desc {
     font-size: clamp(0.75rem, 2vw, 0.85rem);
     line-height: 1.4;
     color: var(--page-text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-@media (max-width: 639px) {
+/*
+ * Mobile / tablet: icona sopra, testo a tutta larghezza della cella.
+ * Evita la colonna testo stretta (icona | testo | freccia) che spezzava le parole.
+ */
+@media (max-width: 899px) {
     .home-category-tile {
-        gap: 0.65rem;
-        padding: 0.8rem 0.85rem;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.55rem;
+        padding: 0.85rem 0.8rem 0.9rem;
     }
 
     .home-category-icon {
@@ -1038,6 +1031,36 @@ html[data-theme='light'] .home-page .home-faq-item {
     .home-category-icon svg {
         width: 20px;
         height: 20px;
+    }
+
+    .home-category-copy {
+        width: 100%;
+        flex: none;
+    }
+
+    .home-category-name {
+        font-size: 0.9rem;
+        white-space: normal;
+        overflow: visible;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .home-category-desc {
+        font-size: 0.78rem;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .home-category-arrow {
+        display: none;
     }
 }
 
