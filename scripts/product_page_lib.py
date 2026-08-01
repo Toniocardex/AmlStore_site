@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Shared helpers for generating static product and catalog pages."""
+import html as html_module
 import json
 from pathlib import Path
 
@@ -151,70 +152,70 @@ def _trustpilot_script_tag():
 # Override copy per SKU fisici (tax/passi) — non tocca licenze digitali
 PHYSICAL_LABELS = {
     "it": {
-        "tax": "Tasse incluse. Articolo fisico con spedizione gratuita (non consegna solo digitale). Spedizione express in 24 ore.",
+        "tax": "Tasse incluse. Articolo fisico con spedizione gratuita (non consegna solo digitale). Affidamento al corriere entro 24 ore lavorative dopo il pagamento.",
         "steps_title": "Ordine, spedizione e attivazione",
         "step_email": "Spedizione del supporto",
-        "step_email_desc": "Spedizione gratuita express in 24 ore; conferma ordine via email",
-        "desc_suffix": "Articolo fisico con spedizione gratuita express in 24 ore. Conferma d'ordine via email.",
+        "step_email_desc": "Affidamento al corriere entro 24 ore lavorative; conferma ordine via email",
+        "desc_suffix": "Articolo fisico con spedizione gratuita: affidamento al corriere entro 24 ore lavorative. Conferma d'ordine via email.",
     },
     "en": {
-        "tax": "Tax included. Physical product with free shipping (not digital-only delivery). Dispatch within 48 hours.",
+        "tax": "Tax included. Physical product with free shipping (not digital-only delivery). Handed to the courier within 24 business hours after payment.",
         "steps_title": "Order, shipping and activation",
         "step_email": "Media shipping",
-        "step_email_desc": "Free shipping within 48 hours; order confirmation by email",
-        "desc_suffix": "Physical product with free shipping within 48 hours. Order confirmation by email.",
+        "step_email_desc": "Handed to the courier within 24 business hours; order confirmation by email",
+        "desc_suffix": "Physical product with free shipping: handed to the courier within 24 business hours. Order confirmation by email.",
     },
     "fr": {
-        "tax": "Taxes incluses. Article physique avec livraison gratuite (pas une livraison uniquement numérique). Expédition sous 48 heures.",
+        "tax": "Taxes incluses. Article physique avec livraison gratuite (pas une livraison uniquement numérique). Remise au transporteur sous 24 heures ouvrées après paiement.",
         "steps_title": "Commande, expédition et activation",
         "step_email": "Expédition du support",
-        "step_email_desc": "Livraison gratuite sous 48 heures ; confirmation de commande par e-mail",
-        "desc_suffix": "Article physique avec livraison gratuite sous 48 heures. Confirmation de commande par e-mail.",
+        "step_email_desc": "Remise au transporteur sous 24 heures ouvrées ; confirmation de commande par e-mail",
+        "desc_suffix": "Article physique avec livraison gratuite : remise au transporteur sous 24 heures ouvrées. Confirmation de commande par e-mail.",
     },
     "de": {
-        "tax": "Steuern inklusive. Physischer Artikel mit kostenlosem Versand (keine rein digitale Lieferung). Versand innerhalb von 48 Stunden.",
+        "tax": "Steuern inklusive. Physischer Artikel mit kostenlosem Versand (keine rein digitale Lieferung). Übergabe an den Versanddienst innerhalb von 24 Werktagsstunden nach Zahlung.",
         "steps_title": "Bestellung, Versand und Aktivierung",
         "step_email": "Versand des Mediums",
-        "step_email_desc": "Kostenloser Versand innerhalb von 48 Stunden; Bestellbestätigung per E-Mail",
-        "desc_suffix": "Physischer Artikel mit kostenlosem Versand innerhalb von 48 Stunden. Bestellbestätigung per E-Mail.",
+        "step_email_desc": "Übergabe an den Versanddienst innerhalb von 24 Werktagsstunden; Bestellbestätigung per E-Mail",
+        "desc_suffix": "Physischer Artikel mit kostenlosem Versand: Übergabe an den Versanddienst innerhalb von 24 Werktagsstunden. Bestellbestätigung per E-Mail.",
     },
     "es": {
-        "tax": "Impuestos incluidos. Artículo físico con envío gratuito (no es entrega solo digital). Envío en 48 horas.",
+        "tax": "Impuestos incluidos. Artículo físico con envío gratuito (no es entrega solo digital). Entrega al transportista en 24 horas laborables tras el pago.",
         "steps_title": "Pedido, envío y activación",
         "step_email": "Envío del soporte",
-        "step_email_desc": "Envío gratuito en 48 horas; confirmación del pedido por email",
-        "desc_suffix": "Artículo físico con envío gratuito en 48 horas. Confirmación del pedido por email.",
+        "step_email_desc": "Entrega al transportista en 24 horas laborables; confirmación del pedido por email",
+        "desc_suffix": "Artículo físico con envío gratuito: entrega al transportista en 24 horas laborables. Confirmación del pedido por email.",
     },
 }
 
 PHYSICAL_UI = {
     "it": {
         "step2_title": "Spedizione del supporto",
-        "step2_body": "Spediamo il <strong>supporto fisico</strong> (DVD/COA) con <strong>spedizione gratuita express in 24 ore</strong> dopo il pagamento — non è una consegna solo digitale. Ricevi anche la <strong>conferma d'ordine</strong> via email (con tracking quando disponibile).",
+        "step2_body": "Spediamo il <strong>supporto fisico</strong> con <strong>spedizione gratuita</strong>: affidamento al corriere entro <strong>24 ore lavorative</strong> dopo il pagamento — non è una consegna solo digitale. Ricevi anche la <strong>conferma d'ordine</strong> via email (con tracking quando disponibile).",
         "step3_title": "Attivazione",
         "step3_body": "Attiva Windows con la licenza/codice associati all'ordine: Impostazioni → Sistema → Attivazione (o la procedura indicata). Usa i canali ufficiali Microsoft.",
     },
     "en": {
         "step2_title": "Media shipping",
-        "step2_body": "We ship the <strong>physical media</strong> (DVD/COA) with <strong>free shipping within 48 hours</strong> after payment — not digital-only delivery. You also receive an <strong>order confirmation</strong> by email (with tracking when available).",
+        "step2_body": "We ship the <strong>physical media</strong> with <strong>free shipping</strong>: handed to the courier within <strong>24 business hours</strong> after payment — not digital-only delivery. You also receive an <strong>order confirmation</strong> by email (with tracking when available).",
         "step3_title": "Activation",
         "step3_body": "Activate Windows with the licence/key for your order: Settings → System → Activation (or the stated procedure). Use official Microsoft channels.",
     },
     "fr": {
         "step2_title": "Expédition du support",
-        "step2_body": "Nous expédions le <strong>support physique</strong> (DVD/COA) en <strong>livraison gratuite sous 48 heures</strong> après paiement — ce n'est pas une livraison uniquement numérique. Vous recevez aussi une <strong>confirmation de commande</strong> par e-mail (avec suivi si disponible).",
+        "step2_body": "Nous expédions le <strong>support physique</strong> en <strong>livraison gratuite</strong> : remise au transporteur sous <strong>24 heures ouvrées</strong> après paiement — ce n'est pas une livraison uniquement numérique. Vous recevez aussi une <strong>confirmation de commande</strong> par e-mail (avec suivi si disponible).",
         "step3_title": "Activation",
         "step3_body": "Activez Windows avec la licence/clé liée à la commande : Paramètres → Système → Activation (ou la procédure indiquée). Utilisez les canaux Microsoft officiels.",
     },
     "de": {
         "step2_title": "Versand des Mediums",
-        "step2_body": "Wir versenden das <strong>physische Medium</strong> (DVD/COA) mit <strong>kostenlosem Versand innerhalb von 48 Stunden</strong> nach Zahlung — keine rein digitale Lieferung. Sie erhalten außerdem eine <strong>Bestellbestätigung</strong> per E-Mail (mit Tracking, falls verfügbar).",
+        "step2_body": "Wir versenden das <strong>physische Medium</strong> mit <strong>kostenlosem Versand</strong>: Übergabe an den Versanddienst innerhalb von <strong>24 Werktagsstunden</strong> nach Zahlung — keine rein digitale Lieferung. Sie erhalten außerdem eine <strong>Bestellbestätigung</strong> per E-Mail (mit Tracking, falls verfügbar).",
         "step3_title": "Aktivierung",
         "step3_body": "Aktivieren Sie Windows mit der Lizenz/dem Key der Bestellung: Einstellungen → System → Aktivierung (oder die angegebene Prozedur). Offizielle Microsoft-Kanäle nutzen.",
     },
     "es": {
         "step2_title": "Envío del soporte",
-        "step2_body": "Enviamos el <strong>soporte físico</strong> (DVD/COA) con <strong>envío gratuito en 48 horas</strong> tras el pago — no es una entrega solo digital. También recibes la <strong>confirmación del pedido</strong> por email (con tracking cuando esté disponible).",
+        "step2_body": "Enviamos el <strong>soporte físico</strong> con <strong>envío gratuito</strong>: entrega al transportista en <strong>24 horas laborables</strong> tras el pago — no es una entrega solo digital. También recibes la <strong>confirmación del pedido</strong> por email (con tracking cuando esté disponible).",
         "step3_title": "Activación",
         "step3_body": "Activa Windows con la licencia/clave del pedido: Configuración → Sistema → Activación (o el procedimiento indicado). Usa canales oficiales Microsoft.",
     },
@@ -652,6 +653,65 @@ def _render_faq(faq_items):
     return "\n".join(parts)
 
 
+def _render_steps_block(ui, content, lang):
+    """3 install/order steps — content['steps'][lang] overrides UI defaults."""
+    custom = (content.get("steps") or {}).get(lang)
+    if custom and len(custom) >= 3:
+        items = custom[:3]
+        titles = [t for t, _ in items]
+        bodies = [b for _, b in items]
+    else:
+        titles = [ui["step1_title"], ui["step2_title"], ui["step3_title"]]
+        bodies = [ui["step1_body"], ui["step2_body"], ui["step3_body"]]
+    how_title = (content.get("steps_title") or {}).get(lang) or ui["how_title"]
+    parts = [
+        f"""        <section class="v2-section" aria-labelledby="v2-steps-title">
+            <p class="v2-eyebrow">{ui['how_eyebrow']}</p>
+            <h2 id="v2-steps-title" class="v2-section-title">{how_title}</h2>
+            <div class="v2-steps">"""
+    ]
+    for i, (title, body) in enumerate(zip(titles, bodies), start=1):
+        parts.append(
+            f"""                <div class="v2-step">
+                    <div class="v2-step__num" aria-hidden="true">{i}</div>
+                    <h3 class="v2-step__title">{title}</h3>
+                    <p class="v2-step__body">{body}</p>
+                </div>"""
+        )
+    parts.append("            </div>\n        </section>")
+    return "\n".join(parts)
+
+
+def _render_specs_block(ui, content, lang):
+    """4 requirement cells — content['specs'][lang] overrides UI defaults."""
+    custom = (content.get("specs") or {}).get(lang)
+    note = (content.get("specs_note") or {}).get(lang) or ui["specs_note"]
+    if custom and len(custom) >= 4:
+        cells = custom[:4]
+    else:
+        cells = [
+            (ui["spec_cpu"], ui["spec_cpu_body"]),
+            (ui["spec_os"], ui["spec_os_body"]),
+            (ui["spec_ram"], ui["spec_ram_body"]),
+            (ui["spec_disk"], ui["spec_disk_body"]),
+        ]
+    items = "\n".join(
+        f"""                <div class="v2-specs-item">
+                    <h3>{title}</h3>
+                    <p>{body}</p>
+                </div>"""
+        for title, body in cells
+    )
+    return f"""        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
+            <p class="v2-eyebrow">{ui['specs_eyebrow']}</p>
+            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">{ui['specs_title']}</h2>
+            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">{note}</p>
+            <div class="v2-specs-grid">
+{items}
+            </div>
+        </section>"""
+
+
 def _render_payment_row(ui):
     logos = "\n".join(
         f'                        <span class="v2-payment-logo" title="{alt}">'
@@ -678,10 +738,13 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     ui = _ui_for(lang, sku, ui_map)
     meta = TEMPLATE_META[prod["template"]]
     short = (content.get("name") or {}).get(lang) or prod["card_name"]
+    seo_title = (content.get("seo_title") or {}).get(lang) or f"{short} — Aml Store"
     brand = prod.get("brand") or meta["brand"] or "Microsoft"
     cat_slug = meta["listing"]
     cat_name = meta["cat_label"][lang]
     desc = content["desc"][lang]
+    desc_attr = html_module.escape(desc, quote=True)
+    seo_title_attr = html_module.escape(seo_title, quote=True)
     eyebrow = content["eyebrow"][lang]
     title_html = content["title_html"][lang]
     price_dec = f"{sale / 100:.2f}"
@@ -778,19 +841,22 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     else:
         apps_block = f"{lifestyle_block}        <hr class=\"v2-divider\">\n"
 
+    steps_block = _render_steps_block(ui, content, lang)
+    specs_block = _render_specs_block(ui, content, lang)
+
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{short} — Aml Store</title>
-    <meta name="description" content="{desc}">
+    <title>{seo_title_attr}</title>
+    <meta name="description" content="{desc_attr}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{page_url}">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
-    <meta property="og:title" content="{short} — Aml Store">
-    <meta property="og:description" content="{desc}">
+    <meta property="og:title" content="{seo_title_attr}">
+    <meta property="og:description" content="{desc_attr}">
     <meta property="og:url" content="{page_url}">
     <meta property="og:locale" content="{LOCALE[lang]}">
     <meta property="og:image" content="{og_image_abs}">
@@ -890,51 +956,9 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
 {_render_features(content['features'][lang])}
             </div>
         </section>
-{apps_block}        <section class="v2-section" aria-labelledby="v2-steps-title">
-            <p class="v2-eyebrow">{ui['how_eyebrow']}</p>
-            <h2 id="v2-steps-title" class="v2-section-title">{ui['how_title']}</h2>
-            <div class="v2-steps">
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">1</div>
-                    <h3 class="v2-step__title">{ui['step1_title']}</h3>
-                    <p class="v2-step__body">{ui['step1_body']}</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">2</div>
-                    <h3 class="v2-step__title">{ui['step2_title']}</h3>
-                    <p class="v2-step__body">{ui['step2_body']}</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">3</div>
-                    <h3 class="v2-step__title">{ui['step3_title']}</h3>
-                    <p class="v2-step__body">{ui['step3_body']}</p>
-                </div>
-            </div>
-        </section>
+{apps_block}{steps_block}
 {_trustpilot_block(lang)}        <hr class="v2-divider">
-        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
-            <p class="v2-eyebrow">{ui['specs_eyebrow']}</p>
-            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">{ui['specs_title']}</h2>
-            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">{ui['specs_note']}</p>
-            <div class="v2-specs-grid">
-                <div class="v2-specs-item">
-                    <h3>{ui['spec_cpu']}</h3>
-                    <p>{ui['spec_cpu_body']}</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>{ui['spec_os']}</h3>
-                    <p>{ui['spec_os_body']}</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>{ui['spec_ram']}</h3>
-                    <p>{ui['spec_ram_body']}</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>{ui['spec_disk']}</h3>
-                    <p>{ui['spec_disk_body']}</p>
-                </div>
-            </div>
-        </section>
+{specs_block}
         <hr class="v2-divider">
         <section class="v2-section" aria-labelledby="v2-faq-title">
             <p class="v2-eyebrow">{ui['faq_eyebrow']}</p>
