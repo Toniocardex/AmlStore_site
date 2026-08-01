@@ -1191,6 +1191,11 @@ def build_catalog_page(lang, catalog_slug, products):
     labels = BASE_LABELS[lang]
     title, lede = CATALOG_META[catalog_slug][lang]
     cards = "".join(product_card(lang, p, labels) for p in products)
+    og_image = "https://aml-store.com/asset/media/microsoft-365-personal.webp"
+    if products:
+        first = products[0]
+        rel = _product_image_src(first["slug"], first["image"])
+        og_image = "https://aml-store.com/" + rel.lstrip("./").replace("../", "", 1)
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
@@ -1209,7 +1214,7 @@ def build_catalog_page(lang, catalog_slug, products):
     <meta property="og:description" content="{lede}">
     <meta property="og:url" content="https://aml-store.com/{lang}/{catalog_slug}.html">
     <meta property="og:locale" content="{LOCALE[lang]}">
-    <meta property="og:image" content="https://aml-store.com/asset/media/microsoft-365-personal.webp">
+    <meta property="og:image" content="{og_image}">
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/home.css">

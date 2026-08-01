@@ -181,24 +181,16 @@ def append_redirects(products):
     lines = path.read_text(encoding="utf-8").rstrip().splitlines()
     existing = set(lines)
     added = 0
-    extra = [
-        ("/it/antivirus", "/it/antivirus.html"),
-        ("/it/sistema-operativo", "/it/sistemi-operativi.html"),
-    ]
+    # Do not add /it/antivirus → antivirus.html (loops with Pages pretty URLs).
     for p in products:
         woo = p.get("woo_it")
         if woo:
-            rule = f"{woo} /it/{p['slug']}.html 301"
-            if rule not in existing:
+            # Prefer extensionless destinations (Pages serves *.html at pretty URLs).
+            rule = f"{woo} /it/{p['slug']} 301"
+            if rule not in existing and f"{woo} /it/{p['slug']}.html 301" not in existing:
                 lines.append(rule)
                 existing.add(rule)
                 added += 1
-    for src, dest in extra:
-        rule = f"{src} {dest} 301"
-        if rule not in existing:
-            lines.append(rule)
-            existing.add(rule)
-            added += 1
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("redirects +", added)
 
