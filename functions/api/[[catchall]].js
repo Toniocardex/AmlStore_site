@@ -44,6 +44,7 @@ import { safeParseJSON }                                 from './_lib/utils.js';
 
 const ALLOWED_ORIGINS = [
     'https://aml-store.com',
+    'https://www.aml-store.com',
     'http://localhost:8788',
     'http://127.0.0.1:8788',
 ];

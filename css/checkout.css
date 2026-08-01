@@ -470,6 +470,11 @@
     padding: 0.6rem 0;
 }
 
+/* display:flex sopra sovrascrive l’UA [hidden] → il testo restava visibile */
+.paypal-loading[hidden] {
+    display: none !important;
+}
+
 .paypal-loading::before {
     content: '';
     display: inline-block;
