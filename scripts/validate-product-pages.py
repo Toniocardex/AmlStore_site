@@ -147,12 +147,21 @@ def check_sitemap():
     if len(locs) != len(set(locs)):
         errors.append("sitemap.xml: duplicate URLs")
     for lang in LANGS:
-        for html in (ROOT / lang).glob("*.html"):
-            if html.stem in SKIP:
+        for page in (ROOT / lang).glob("*.html"):
+            if page.stem in SKIP:
                 continue
-            url = f"https://aml-store.com/{lang}/{html.stem}.html"
+            page_text = page.read_text(encoding="utf-8")
+            canonical = re.search(
+                r'<link\b[^>]*rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\']',
+                page_text,
+                re.IGNORECASE,
+            )
+            if not canonical:
+                errors.append(f"{page.relative_to(ROOT)}: missing canonical URL")
+                continue
+            url = html_lib.unescape(canonical.group(1))
             if url not in locs:
-                errors.append(f"sitemap missing: {url}")
+                errors.append(f"sitemap missing canonical: {url}")
 
 
 def check_catalog_cards():
