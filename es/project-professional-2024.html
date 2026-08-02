@@ -138,9 +138,10 @@
     <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
     <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
+    <link rel="stylesheet" href="../css/product-v3.css?v=0834683341">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
-<body>
+<body class="pdp-page">
     <a class="skip-link" href="#main">Ir al contenido principal</a>
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Compra rápida" aria-hidden="true">
@@ -150,17 +151,16 @@
                 <span class="product-sticky-cta__msrp">€ 1659,00</span>
                 <span class="product-sticky-cta__sale">€ 689,99</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Añadir
+                Comprar ahora
             </button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="Producto y compra">
-        <div class="v2-hero__ambient" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
-        <div class="v2-breadcrumb">
+
+    <section class="pdp-hero" aria-label="Producto y compra">
+
+        <div class="pdp-breadcrumb">
             <nav aria-label="Ruta de navegación">
                 <a href="/es/">Home</a>
                 <span class="sep" aria-hidden="true">/</span>
@@ -169,58 +169,65 @@
                 <span aria-current="page">Project Professional 2024</span>
             </nav>
         </div>
-        <div class="v2-hero__inner">
-            <div class="v2-hero__left">
-                <p class="v2-hero__eyebrow">Licencia perpetua · Windows · ESD</p>
-                <h1 class="v2-hero__title">Project <span>Professional 2024</span></h1>
+
+        <div class="pdp-hero__inner">
+            <div class="pdp-hero__info">
+                <p class="pdp-eyebrow">Licencia perpetua · Windows · ESD</p>
+                <h1 class="pdp-h1 v2-hero__title">Project <span>Professional 2024</span></h1>
                 <p class="v2-product-code"><span>Código de producto:</span> <code class="v2-product-code__value">EP2-07001</code></p>
-                <p class="v2-hero__desc">Project Professional 2024: licencia digital original para planificación y diagramas profesionales (según Microsoft). Clave por email.</p>
-                <div class="v2-pills" aria-label="Por qué elegirlo">
-                        <span class="v2-pill">
-                            
-                            Project
-                        </span>
-                        <span class="v2-pill">
-                            
-                            Professional 2024
-                        </span>
-                        <span class="v2-pill">
-                            
-                            Windows
-                        </span>
-                </div>
-            </div>
-            <div class="v2-hero__right">
-                <div class="v2-hero__cover-wrap">
-                    <img class="v2-hero__cover" src="../asset/media/products/project-professional-2024.webp?v=bd667198a5" width="400" height="400" alt="Project Professional 2024" fetchpriority="high" decoding="async">
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="v2-pricing-wrap">
-        <div id="product-pricing" class="v2-pricing-card"
-            data-stripe-currency="eur"
-            data-stripe-unit-amount="68999"
-            data-stripe-compare-at-amount="165900"
-            data-stripe-product-sku="EP2-07001"
-            data-discount-percent="58">
-            <div>
-                <div class="v2-price-label">Nuestro precio</div>
-                <div class="v2-price-row" role="group" aria-label="Precios">
-                    <span class="v2-price-msrp" aria-label="1659,00">€ 1659,00</span>
-                    <span class="v2-price-sale">€ 689,99</span>
-                    <span class="v2-price-badge" aria-label="−58%">−58%</span>
-                </div>
-                <div class="v2-price-tax">Impuestos incluidos. Sin gastos de envío.</div>
-                    <div class="v2-price-compare">
-                        Ahorras <strong>€ 969,01</strong> respecto al precio de lista (€ 1659,00)
+
+                <div class="pdp-hero__split">
+                    <figure class="pdp-media">
+                        <img class="pdp-media__img product-cover-img" src="../asset/media/products/project-professional-2024.webp?v=bd667198a5" width="400" height="400" alt="Project Professional 2024" fetchpriority="high" decoding="async">
+                    </figure>
+                    <div class="pdp-hero__text">
+                        <p class="v2-hero__desc">Project Professional 2024: licencia digital original para planificación y diagramas profesionales (según Microsoft). Clave por email.</p>
+                        <ul class="pdp-keylist">
+                            <li>Professional</li>
+                            <li>Planificación avanzada</li>
+                            <li>Windows</li>
+                            <li>ESD email</li>
+                        </ul>
                     </div>
+                </div>
             </div>
-            <div class="v2-pricing-actions">
-                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
+
+            <div id="product-pricing" class="pdp-buy"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="68999"
+                data-stripe-compare-at-amount="165900"
+                data-stripe-product-sku="EP2-07001"
+                data-discount-percent="58">
+                <p class="pdp-buy__label">Nuestro precio</p>
+
+                <div class="pdp-price-row" role="group" aria-label="Precios">
+                    <span class="pdp-price-sale">€ 689,99</span>
+                    <span class="pdp-price-msrp" aria-label="1659,00">€ 1659,00</span>
+                    <span class="pdp-price-badge" aria-label="−58%">−58%</span>
+                </div>
+                <p class="pdp-price-note">Impuestos incluidos. Sin gastos de envío. Ahorras <strong>€ 969,01</strong> respecto al precio de lista (€ 1659,00).</p>
+
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Añadir al carrito
                 </button>
+
+                <p class="pdp-delivery">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+                    Clave por email en 5–15 minutos tras confirmar el pago
+                </p>
+
+                <ul class="pdp-assur">
+                            <li>Activación en portales oficiales</li>
+                            <li>Entrega digital, sin envío</li>
+                            <li>Asistencia tras la compra</li>
+                            <li>Pagos gestionados por Stripe y PayPal</li>
+                            <li>Factura disponible</li>
+                </ul>
+
+                <div class="pdp-pay">
+                    <p class="pdp-pay__label">Métodos de pago aceptados</p>
+                    <div class="pdp-pay__row">
                     <div class="v2-payment-row" role="group" aria-label="Métodos de pago aceptados">
                         <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
@@ -229,114 +236,108 @@
                         <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
                     </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
     <main id="main" class="product-page" data-cart-added-msg="Producto añadido al carrito.">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
-        <section class="v2-section" aria-labelledby="v2-features-title">
-            <p class="v2-eyebrow">Por qué elegirlo</p>
-            <h2 id="v2-features-title" class="v2-section-title">Project Professional 2024</h2>
-            <div class="v2-bento" role="list">
-                <div class="v2-bento__cell v2-bento__cell--c8 v2-bento__cell--blue" role="listitem">
-                    <p class="v2-bento__label">Edición</p>
-                    <h3 class="v2-bento__title">Professional</h3>
-                    <p class="v2-bento__body">Microsoft Project Professional 2024 con licencia ESD perpetua para Windows.</p>
+
+        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+            <p class="pdp-sec__eyebrow">Por qué elegirlo</p>
+            <h2 id="pdp-features-title" class="pdp-sec__title">Project Professional 2024</h2>
+            <ul class="pdp-cards">
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Edición</p>
+                    <h3 class="pdp-card__title">Professional</h3>
+                    <p class="pdp-card__body">Microsoft Project Professional 2024 con licencia ESD perpetua para Windows.</p>
+                </li>
+                <li class="pdp-card">
+                    <h3 class="pdp-card__title">Planificación avanzada</h3>
+                    <p class="pdp-card__body">Funciones Professional frente a Standard.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Plataforma</p>
+                    <h3 class="pdp-card__title">Windows</h3>
+                    <p class="pdp-card__body">Edición de escritorio Windows.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Entrega</p>
+                    <h3 class="pdp-card__title">ESD email</h3>
+                    <p class="pdp-card__body">Clave tras el pago.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Activación</p>
+                    <h3 class="pdp-card__title">Oficial</h3>
+                    <p class="pdp-card__body">Activa por canales Microsoft.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Nota</p>
+                    <h3 class="pdp-card__title">No es Microsoft 365</h3>
+                    <p class="pdp-card__body">Licencia perpetua, no un plan Project online.</p>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
+            <p class="pdp-sec__eyebrow">Cómo funciona</p>
+            <h2 id="pdp-steps-title" class="pdp-sec__title">Tres pasos para empezar</h2>
+            <ol class="pdp-steps">
+                <li class="pdp-step">
+                    <div>
+                        <h3>Pedido y pago</h3>
+                        <p>Añade el producto al carrito y completa el pago seguro con los métodos disponibles. Recibes la confirmación según las condiciones del checkout.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Entrega digital</h3>
+                        <p>Te enviamos la <strong>clave de producto</strong> e instrucciones por email, normalmente en minutos tras aprobar el pago.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Activación</h3>
+                        <p>Canjea el código en <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a>, asocia la licencia a tu cuenta Microsoft e instala las apps desde <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews product-trustpilot">
+                <h2 id="pdp-reviews-title" class="pdp-reviews__title">Lo que dicen los clientes</h2>
+                <p class="pdp-reviews__lead">Las reseñas las publica y verifica Trustpilot: las lees directamente en la plataforma, sin filtros por nuestra parte.</p>
+                <p class="product-trustpilot__fallback trustpilot-fallback">Experiencias reales de clientes en Trustpilot. <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+                <div
+                    id="trustpilot-widget"
+                    class="trustpilot-widget"
+                    data-locale="es-ES"
+                    data-template-id="5419b6a8b0d04a076446a9ad"
+                    data-businessunit-id="61c44c912f493a1a7cd810fa"
+                    data-style-height="40px"
+                    data-style-width="100%"
+                    data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
+                    data-min-review-count="0"
+                    data-style-alignment="center"
+                >
+                    <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                 </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--teal" role="listitem">
-                    
-                    <h3 class="v2-bento__title">Planificación avanzada</h3>
-                    <p class="v2-bento__body">Funciones Professional frente a Standard.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--purple" role="listitem">
-                    <p class="v2-bento__label">Plataforma</p>
-                    <h3 class="v2-bento__title">Windows</h3>
-                    <p class="v2-bento__body">Edición de escritorio Windows.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4" role="listitem">
-                    <p class="v2-bento__label">Entrega</p>
-                    <h3 class="v2-bento__title">ESD email</h3>
-                    <p class="v2-bento__body">Clave tras el pago.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4" role="listitem">
-                    <p class="v2-bento__label">Activación</p>
-                    <h3 class="v2-bento__title">Oficial</h3>
-                    <p class="v2-bento__body">Activa por canales Microsoft.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--dark" role="listitem">
-                    <p class="v2-bento__label">Nota</p>
-                    <h3 class="v2-bento__title">No es Microsoft 365</h3>
-                    <p class="v2-bento__body">Licencia perpetua, no un plan Project online.</p>
-                </div>
+                <a class="pdp-reviews__cta" href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Leer todas las reseñas</a>
             </div>
         </section>
-        <hr class="v2-divider">
-        <section class="v2-section" aria-labelledby="v2-steps-title">
-            <p class="v2-eyebrow">Cómo funciona</p>
-            <h2 id="v2-steps-title" class="v2-section-title">Tres pasos para empezar</h2>
-            <div class="v2-steps">
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">1</div>
-                    <h3 class="v2-step__title">Pedido y pago</h3>
-                    <p class="v2-step__body">Añade el producto al carrito y completa el pago seguro con los métodos disponibles. Recibes la confirmación según las condiciones del checkout.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">2</div>
-                    <h3 class="v2-step__title">Entrega digital</h3>
-                    <p class="v2-step__body">Te enviamos la <strong>clave de producto</strong> e instrucciones por email, normalmente en minutos tras aprobar el pago.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">3</div>
-                    <h3 class="v2-step__title">Activación</h3>
-                    <p class="v2-step__body">Canjea el código en <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a>, asocia la licencia a tu cuenta Microsoft e instala las apps desde <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
-                </div>
-            </div>
-        </section>
-        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
-            <h2 id="product-trustpilot-title" class="visually-hidden">Opiniones de clientes</h2>
-            <p class="product-trustpilot__fallback trustpilot-fallback">Experiencias reales de clientes en Trustpilot. <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
-            <div
-                id="trustpilot-widget"
-                class="trustpilot-widget"
-                data-locale="es-ES"
-                data-template-id="5419b6a8b0d04a076446a9ad"
-                data-businessunit-id="61c44c912f493a1a7cd810fa"
-                data-style-height="40px"
-                data-style-width="100%"
-                data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
-                data-min-review-count="0"
-                data-style-alignment="center"
-            >
-                <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
-            <p class="v2-eyebrow">Requisitos del sistema</p>
-            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">Especificaciones orientativas</h2>
-            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">Valores orientativos según documentación Microsoft; comprueba siempre los requisitos actualizados antes de instalar.</p>
-            <div class="v2-specs-grid">
-                <div class="v2-specs-item">
-                    <h3>Procesador</h3>
-                    <p>Windows: al menos 1,6 GHz dual-core. Mac: Intel o Apple Silicon con macOS compatible (si la ficha indica PC/Mac).</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Sistema operativo</h3>
-                    <p>Windows 10/11; versiones de macOS admitidas por Microsoft para la suite indicada.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Memoria (RAM)</h3>
-                    <p>Al menos 4 GB recomendados para apps de escritorio; más para archivos grandes.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Espacio en disco</h3>
-                    <p>Normalmente al menos 4 GB libres para la instalación; consulta la ficha oficial de Microsoft.</p>
-                </div>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
-            <h2 id="v2-faq-title" class="home-section-title">Preguntas frecuentes</h2>
+
+        <hr class="pdp-divider">
+
+        <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
+            <p class="pdp-sec__eyebrow">FAQ</p>
+            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Las respuestas antes de comprar</h2>
             <div class="home-faq-list">
                 <details class="home-faq-item">
                     <summary>¿Standard o Professional?</summary>
@@ -370,6 +371,52 @@
                 </details>
             </div>
         </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">Requisitos del sistema</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilidad y requisitos técnicos</h2>
+            <p class="pdp-sec__sub">Valores orientativos según documentación Microsoft; comprueba siempre los requisitos actualizados antes de instalar.</p>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
+                    <summary>Procesador</summary>
+                    <div class="home-faq-body">
+                        <p>Windows: al menos 1,6 GHz dual-core. Mac: Intel o Apple Silicon con macOS compatible (si la ficha indica PC/Mac).</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Sistema operativo</summary>
+                    <div class="home-faq-body">
+                        <p>Windows 10/11; versiones de macOS admitidas por Microsoft para la suite indicada.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Memoria (RAM)</summary>
+                    <div class="home-faq-body">
+                        <p>Al menos 4 GB recomendados para apps de escritorio; más para archivos grandes.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Espacio en disco</summary>
+                    <div class="home-faq-body">
+                        <p>Normalmente al menos 4 GB libres para la instalación; consulta la ficha oficial de Microsoft.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="pdp-final" aria-labelledby="pdp-final-title">
+            <div>
+                <h2 id="pdp-final-title">Todo listo para empezar</h2>
+                <p>Project Professional 2024 — Clave por email en 5–15 minutos tras confirmar el pago</p>
+                <span class="pdp-final__price">€ 689,99 <small>IVA incluido, en lugar de € 1659,00</small></span>
+            </div>
+            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Añadir al carrito
+            </button>
+        </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
@@ -377,9 +424,10 @@
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
+    <script src="../js/product-v3.js?v=c970f12b78" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
-    <script src="../components/footer.js?v=95d3892cdc" defer></script>
+    <script src="../components/footer.js?v=63eb1768ff" defer></script>
 </body>
 </html>

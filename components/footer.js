@@ -599,7 +599,12 @@ class EcommerceFooter extends HTMLElement {
                     align-items: center;
                     gap: 1rem;
                     flex-wrap: wrap;
-                    flex-shrink: 0;
+                    /* Deve poter rimpicciolirsi: con flex-shrink:0 la pill restava alla
+                       sua larghezza max-content (~610px) e usciva dal container sugli
+                       schermi stretti invece di mandare i loghi a capo. */
+                    flex-shrink: 1;
+                    min-width: 0;
+                    max-width: 100%;
                     background: rgba(255, 255, 255, 0.03);
                     border: 1px solid rgba(255, 255, 255, 0.07);
                     border-radius: 6px;
@@ -718,7 +723,31 @@ class EcommerceFooter extends HTMLElement {
                         text-align: center;
                         padding: 2.5rem 0;
                     }
-                    .payments { justify-content: center; }
+                    /* Griglia 3+3: il wrap del flex lasciava 5 loghi su una riga e 1
+                       sull'altra, che sembra un errore di impaginazione. */
+                    .payments {
+                        display: grid;
+                        grid-template-columns: repeat(3, minmax(0, 1fr));
+                        justify-items: center;
+                        align-items: center;
+                        gap: 0.85rem 0.5rem;
+                        padding: 0.7rem 0.75rem;
+                    }
+                    /* Etichetta come intestazione della pill: il divisore verticale non
+                       ha senso quando i loghi stanno su più righe. */
+                    .payment-secure {
+                        grid-column: 1 / -1;
+                        justify-content: center;
+                        padding-inline-end: 0;
+                        padding-bottom: 0.6rem;
+                        border-inline-end: none;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                        width: 100%;
+                    }
+                    .payment-logo img {
+                        height: 20px;
+                        max-width: 100%;
+                    }
                     .bottom-right-cluster {
                         justify-content: center;
                         width: 100%;

@@ -138,9 +138,10 @@
     <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
     <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
+    <link rel="stylesheet" href="../css/product-v3.css?v=0834683341">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
-<body>
+<body class="pdp-page">
     <a class="skip-link" href="#main">Aller au contenu principal</a>
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Achat rapide" aria-hidden="true">
@@ -150,17 +151,16 @@
                 <span class="product-sticky-cta__msrp">€ 149,00</span>
                 <span class="product-sticky-cta__sale">€ 57,99</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Ajouter
+                Acheter
             </button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="Produit et achat">
-        <div class="v2-hero__ambient" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
-        <div class="v2-breadcrumb">
+
+    <section class="pdp-hero" aria-label="Produit et achat">
+
+        <div class="pdp-breadcrumb">
             <nav aria-label="Fil d'Ariane">
                 <a href="/fr/">Home</a>
                 <span class="sep" aria-hidden="true">/</span>
@@ -169,58 +169,65 @@
                 <span aria-current="page">Windows 10 Pro</span>
             </nav>
         </div>
-        <div class="v2-hero__inner">
-            <div class="v2-hero__left">
-                <p class="v2-hero__eyebrow">Système d'exploitation · 32/64 bits · ESD</p>
-                <h1 class="v2-hero__title">Windows 10 <span>Pro</span></h1>
+
+        <div class="pdp-hero__inner">
+            <div class="pdp-hero__info">
+                <p class="pdp-eyebrow">Système d'exploitation · 32/64 bits · ESD</p>
+                <h1 class="pdp-h1 v2-hero__title">Windows 10 <span>Pro</span></h1>
                 <p class="v2-product-code"><span>Référence produit:</span> <code class="v2-product-code__value">FQC-08930</code></p>
-                <p class="v2-hero__desc">Windows 10 Pro : licence numérique 32/64 bits avec fonctions pro (BitLocker, Bureau à distance… selon Microsoft). Code par e-mail.</p>
-                <div class="v2-pills" aria-label="Pourquoi le choisir">
-                        <span class="v2-pill">
-                            
-                            Windows 10 Pro
-                        </span>
-                        <span class="v2-pill">
-                            
-                            32/64-bit
-                        </span>
-                        <span class="v2-pill">
-                            
-                            ESD
-                        </span>
-                </div>
-            </div>
-            <div class="v2-hero__right">
-                <div class="v2-hero__cover-wrap">
-                    <img class="v2-hero__cover" src="../asset/media/products/windows-10-pro.webp?v=5e12533d1e" width="400" height="400" alt="Windows 10 Pro" fetchpriority="high" decoding="async">
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="v2-pricing-wrap">
-        <div id="product-pricing" class="v2-pricing-card"
-            data-stripe-currency="eur"
-            data-stripe-unit-amount="5799"
-            data-stripe-compare-at-amount="14900"
-            data-stripe-product-sku="FQC-08930"
-            data-discount-percent="61">
-            <div>
-                <div class="v2-price-label">Notre prix</div>
-                <div class="v2-price-row" role="group" aria-label="Prix">
-                    <span class="v2-price-msrp" aria-label="149,00">€ 149,00</span>
-                    <span class="v2-price-sale">€ 57,99</span>
-                    <span class="v2-price-badge" aria-label="−61%">−61%</span>
-                </div>
-                <div class="v2-price-tax">Taxes incluses. Pas de frais de port.</div>
-                    <div class="v2-price-compare">
-                        Vous économisez <strong>€ 91,01</strong> par rapport au prix catalogue (€ 149,00)
+
+                <div class="pdp-hero__split">
+                    <figure class="pdp-media">
+                        <img class="pdp-media__img product-cover-img" src="../asset/media/products/windows-10-pro.webp?v=5e12533d1e" width="400" height="400" alt="Windows 10 Pro" fetchpriority="high" decoding="async">
+                    </figure>
+                    <div class="pdp-hero__text">
+                        <p class="v2-hero__desc">Windows 10 Pro : licence numérique 32/64 bits avec fonctions pro (BitLocker, Bureau à distance… selon Microsoft). Code par e-mail.</p>
+                        <ul class="pdp-keylist">
+                            <li>Pro</li>
+                            <li>BitLocker</li>
+                            <li>Bureau à distance</li>
+                            <li>ESD e-mail</li>
+                        </ul>
                     </div>
+                </div>
             </div>
-            <div class="v2-pricing-actions">
-                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
+
+            <div id="product-pricing" class="pdp-buy"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="5799"
+                data-stripe-compare-at-amount="14900"
+                data-stripe-product-sku="FQC-08930"
+                data-discount-percent="61">
+                <p class="pdp-buy__label">Notre prix</p>
+
+                <div class="pdp-price-row" role="group" aria-label="Prix">
+                    <span class="pdp-price-sale">€ 57,99</span>
+                    <span class="pdp-price-msrp" aria-label="149,00">€ 149,00</span>
+                    <span class="pdp-price-badge" aria-label="−61%">−61%</span>
+                </div>
+                <p class="pdp-price-note">Taxes incluses. Pas de frais de port. Vous économisez <strong>€ 91,01</strong> par rapport au prix catalogue (€ 149,00).</p>
+
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Ajouter au panier
                 </button>
+
+                <p class="pdp-delivery">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+                    Clé par e-mail sous 5 à 15 minutes après confirmation du paiement
+                </p>
+
+                <ul class="pdp-assur">
+                            <li>Activation sur les portails officiels</li>
+                            <li>Livraison numérique, rien à expédier</li>
+                            <li>Assistance après l'achat</li>
+                            <li>Paiements gérés par Stripe et PayPal</li>
+                            <li>Facture disponible</li>
+                </ul>
+
+                <div class="pdp-pay">
+                    <p class="pdp-pay__label">Moyens de paiement acceptés</p>
+                    <div class="pdp-pay__row">
                     <div class="v2-payment-row" role="group" aria-label="Moyens de paiement acceptés">
                         <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
@@ -229,114 +236,108 @@
                         <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
                     </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
     <main id="main" class="product-page" data-cart-added-msg="Produit ajouté au panier.">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
-        <section class="v2-section" aria-labelledby="v2-features-title">
-            <p class="v2-eyebrow">Pourquoi le choisir</p>
-            <h2 id="v2-features-title" class="v2-section-title">Windows 10 Pro pour le travail</h2>
-            <div class="v2-bento" role="list">
-                <div class="v2-bento__cell v2-bento__cell--c8 v2-bento__cell--blue" role="listitem">
-                    <p class="v2-bento__label">Édition</p>
-                    <h3 class="v2-bento__title">Pro</h3>
-                    <p class="v2-bento__body">Licence Pro avec outils pour pros/TPE par rapport à Home.</p>
+
+        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+            <p class="pdp-sec__eyebrow">Pourquoi le choisir</p>
+            <h2 id="pdp-features-title" class="pdp-sec__title">Windows 10 Pro pour le travail</h2>
+            <ul class="pdp-cards">
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Édition</p>
+                    <h3 class="pdp-card__title">Pro</h3>
+                    <p class="pdp-card__body">Licence Pro avec outils pour pros/TPE par rapport à Home.</p>
+                </li>
+                <li class="pdp-card">
+                    <h3 class="pdp-card__title">BitLocker</h3>
+                    <p class="pdp-card__body">Chiffrement si matériel et édition le permettent.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Distant</p>
+                    <h3 class="pdp-card__title">Bureau à distance</h3>
+                    <p class="pdp-card__body">Hôte Remote Desktop typique des éditions Pro.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Livraison</p>
+                    <h3 class="pdp-card__title">ESD e-mail</h3>
+                    <p class="pdp-card__body">Clé après paiement.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Activation</p>
+                    <h3 class="pdp-card__title">Officielle</h3>
+                    <p class="pdp-card__body">Activation dans les Paramètres Windows.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Note</p>
+                    <h3 class="pdp-card__title">Support Windows 10</h3>
+                    <p class="pdp-card__body">Vérifiez les dates de fin de support Microsoft.</p>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
+            <p class="pdp-sec__eyebrow">Comment ça marche</p>
+            <h2 id="pdp-steps-title" class="pdp-sec__title">Trois étapes pour commencer</h2>
+            <ol class="pdp-steps">
+                <li class="pdp-step">
+                    <div>
+                        <h3>Commande et paiement</h3>
+                        <p>Ajoutez le produit au panier et finalisez le paiement sécurisé avec les moyens proposés. Vous recevez une confirmation selon les conditions affichées au checkout.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Livraison numérique</h3>
+                        <p>Nous envoyons la <strong>clé produit</strong> (et les instructions) par e-mail, en général quelques minutes après validation du paiement. Pour DVD/COA, suivez aussi l'e-mail.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Activation</h3>
+                        <p>Activez Windows avec le code reçu : Paramètres → Système → Activation (ou la procédure de l'e-mail). Utilisez les canaux Microsoft officiels.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews product-trustpilot">
+                <h2 id="pdp-reviews-title" class="pdp-reviews__title">Ce que disent les clients</h2>
+                <p class="pdp-reviews__lead">Les avis sont publiés et vérifiés par Trustpilot : lisez-les directement sur la plateforme, sans filtre de notre part.</p>
+                <p class="product-trustpilot__fallback trustpilot-fallback">Expériences réelles des clients sur Trustpilot. <a href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+                <div
+                    id="trustpilot-widget"
+                    class="trustpilot-widget"
+                    data-locale="fr-FR"
+                    data-template-id="5419b6a8b0d04a076446a9ad"
+                    data-businessunit-id="61c44c912f493a1a7cd810fa"
+                    data-style-height="40px"
+                    data-style-width="100%"
+                    data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
+                    data-min-review-count="0"
+                    data-style-alignment="center"
+                >
+                    <a href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                 </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--teal" role="listitem">
-                    
-                    <h3 class="v2-bento__title">BitLocker</h3>
-                    <p class="v2-bento__body">Chiffrement si matériel et édition le permettent.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--purple" role="listitem">
-                    <p class="v2-bento__label">Distant</p>
-                    <h3 class="v2-bento__title">Bureau à distance</h3>
-                    <p class="v2-bento__body">Hôte Remote Desktop typique des éditions Pro.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4" role="listitem">
-                    <p class="v2-bento__label">Livraison</p>
-                    <h3 class="v2-bento__title">ESD e-mail</h3>
-                    <p class="v2-bento__body">Clé après paiement.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4" role="listitem">
-                    <p class="v2-bento__label">Activation</p>
-                    <h3 class="v2-bento__title">Officielle</h3>
-                    <p class="v2-bento__body">Activation dans les Paramètres Windows.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--dark" role="listitem">
-                    <p class="v2-bento__label">Note</p>
-                    <h3 class="v2-bento__title">Support Windows 10</h3>
-                    <p class="v2-bento__body">Vérifiez les dates de fin de support Microsoft.</p>
-                </div>
+                <a class="pdp-reviews__cta" href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Lire tous les avis</a>
             </div>
         </section>
-        <hr class="v2-divider">
-        <section class="v2-section" aria-labelledby="v2-steps-title">
-            <p class="v2-eyebrow">Comment ça marche</p>
-            <h2 id="v2-steps-title" class="v2-section-title">Trois étapes pour commencer</h2>
-            <div class="v2-steps">
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">1</div>
-                    <h3 class="v2-step__title">Commande et paiement</h3>
-                    <p class="v2-step__body">Ajoutez le produit au panier et finalisez le paiement sécurisé avec les moyens proposés. Vous recevez une confirmation selon les conditions affichées au checkout.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">2</div>
-                    <h3 class="v2-step__title">Livraison numérique</h3>
-                    <p class="v2-step__body">Nous envoyons la <strong>clé produit</strong> (et les instructions) par e-mail, en général quelques minutes après validation du paiement. Pour DVD/COA, suivez aussi l'e-mail.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">3</div>
-                    <h3 class="v2-step__title">Activation</h3>
-                    <p class="v2-step__body">Activez Windows avec le code reçu : Paramètres → Système → Activation (ou la procédure de l'e-mail). Utilisez les canaux Microsoft officiels.</p>
-                </div>
-            </div>
-        </section>
-        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
-            <h2 id="product-trustpilot-title" class="visually-hidden">Avis clients</h2>
-            <p class="product-trustpilot__fallback trustpilot-fallback">Expériences réelles des clients sur Trustpilot. <a href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
-            <div
-                id="trustpilot-widget"
-                class="trustpilot-widget"
-                data-locale="fr-FR"
-                data-template-id="5419b6a8b0d04a076446a9ad"
-                data-businessunit-id="61c44c912f493a1a7cd810fa"
-                data-style-height="40px"
-                data-style-width="100%"
-                data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
-                data-min-review-count="0"
-                data-style-alignment="center"
-            >
-                <a href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
-            <p class="v2-eyebrow">Configuration requise</p>
-            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">Spécifications indicatives</h2>
-            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">Valeurs indicatives d'après la documentation Microsoft ; vérifiez toujours les exigences à jour avant l'installation.</p>
-            <div class="v2-specs-grid">
-                <div class="v2-specs-item">
-                    <h3>Processeur</h3>
-                    <p>Processeur conforme aux exigences Microsoft pour la version Windows indiquée (Windows 11 : CPU sur la liste prise en charge).</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Système d'exploitation</h3>
-                    <p>Cette fiche concerne la licence du système indiqué. Vérifiez le matériel et TPM/Secure Boot si requis (ex. Windows 11).</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Mémoire (RAM)</h3>
-                    <p>Windows 10 : en général 2–4 Go. Windows 11 : au moins 4 Go selon Microsoft.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Espace disque</h3>
-                    <p>Espace libre suffisant pour l'installation selon la documentation Microsoft.</p>
-                </div>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
-            <h2 id="v2-faq-title" class="home-section-title">Questions fréquentes</h2>
+
+        <hr class="pdp-divider">
+
+        <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
+            <p class="pdp-sec__eyebrow">FAQ</p>
+            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Les réponses avant d'acheter</h2>
             <div class="home-faq-list">
                 <details class="home-faq-item">
                     <summary>Différence avec Home ?</summary>
@@ -370,6 +371,52 @@
                 </details>
             </div>
         </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">Configuration requise</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilité et configuration requise</h2>
+            <p class="pdp-sec__sub">Valeurs indicatives d'après la documentation Microsoft ; vérifiez toujours les exigences à jour avant l'installation.</p>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
+                    <summary>Processeur</summary>
+                    <div class="home-faq-body">
+                        <p>Processeur conforme aux exigences Microsoft pour la version Windows indiquée (Windows 11 : CPU sur la liste prise en charge).</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Système d'exploitation</summary>
+                    <div class="home-faq-body">
+                        <p>Cette fiche concerne la licence du système indiqué. Vérifiez le matériel et TPM/Secure Boot si requis (ex. Windows 11).</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Mémoire (RAM)</summary>
+                    <div class="home-faq-body">
+                        <p>Windows 10 : en général 2–4 Go. Windows 11 : au moins 4 Go selon Microsoft.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Espace disque</summary>
+                    <div class="home-faq-body">
+                        <p>Espace libre suffisant pour l'installation selon la documentation Microsoft.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="pdp-final" aria-labelledby="pdp-final-title">
+            <div>
+                <h2 id="pdp-final-title">Tout est prêt pour démarrer</h2>
+                <p>Windows 10 Pro — Clé par e-mail sous 5 à 15 minutes après confirmation du paiement</p>
+                <span class="pdp-final__price">€ 57,99 <small>TVA incluse, au lieu de € 149,00</small></span>
+            </div>
+            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Ajouter au panier
+            </button>
+        </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
@@ -377,9 +424,10 @@
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
+    <script src="../js/product-v3.js?v=c970f12b78" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
-    <script src="../components/footer.js?v=95d3892cdc" defer></script>
+    <script src="../components/footer.js?v=63eb1768ff" defer></script>
 </body>
 </html>

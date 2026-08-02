@@ -150,6 +150,27 @@ def _trustpilot_block(lang):
 """
 
 
+def _trustpilot_inner(lang):
+    """Solo fallback + widget: nel layout v3 la card recensioni fa da contenitore."""
+    tp_locale, tp_url = TRUSTPILOT_LOCALE[lang]
+    t = TRUSTPILOT_I18N[lang]
+    return f"""                <p class="product-trustpilot__fallback trustpilot-fallback">{t['fallback']} <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+                <div
+                    id="trustpilot-widget"
+                    class="trustpilot-widget"
+                    data-locale="{tp_locale}"
+                    data-template-id="{TRUSTPILOT_TEMPLATE_ID}"
+                    data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT}"
+                    data-style-height="40px"
+                    data-style-width="100%"
+                    data-token="{TRUSTPILOT_TOKEN}"
+                    data-min-review-count="0"
+                    data-style-alignment="center"
+                >
+                    <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+                </div>"""
+
+
 def _trustpilot_script_tag():
     return '    <script src="../js/trustpilot-widget.js" defer></script>\n'
 
@@ -225,6 +246,141 @@ PHYSICAL_UI = {
         "step3_body": "Activa Windows con la licencia/clave del pedido: Configuración → Sistema → Activación (o el procedimiento indicado). Usa canales oficiales Microsoft.",
     },
 }
+
+
+# ── Layout v3 (scheda prodotto standard) ────────────────────────────────────
+# Stringhe condivise da tutte le categorie: stanno qui e non nei moduli
+# product_content_*, così una sola definizione serve office, windows e antivirus.
+# Tono: diretto, seconda persona, orientato alla conversione.
+V3_UI = {
+    "it": {
+        "delivery_line": "Codice via email in 5–15 minuti dalla conferma del pagamento",
+        "assur_1": "Attivazione sui portali ufficiali",
+        "assur_2": "Consegna digitale, nessuna spedizione",
+        "assur_3": "Assistenza in italiano dopo l'acquisto",
+        "assur_4": "Pagamenti gestiti da Stripe e PayPal",
+        "assur_5": "Fattura elettronica disponibile",
+        "receive_eyebrow": "Cosa ricevi",
+        "apps_more": "Vedi tutte le app incluse",
+        "reviews_title": "Cosa dicono i clienti",
+        "reviews_lead": "Le recensioni sono pubblicate e verificate da Trustpilot: le leggi direttamente sulla piattaforma, senza filtri da parte nostra.",
+        "reviews_cta": "Leggi tutte le recensioni",
+        "specs_title": "Compatibilità e requisiti tecnici",
+        "faq_title": "Le risposte prima dell'acquisto",
+        "final_title": "Tutto pronto per iniziare",
+        "final_tax": "IVA inclusa",
+        "final_instead": "anziché",
+        "sticky_buy": "Acquista ora",
+    },
+    "en": {
+        "delivery_line": "Key by email 5–15 minutes after your payment is confirmed",
+        "assur_1": "Activation on official portals",
+        "assur_2": "Digital delivery, nothing to ship",
+        "assur_3": "Support after you buy",
+        "assur_4": "Payments handled by Stripe and PayPal",
+        "assur_5": "Invoice available",
+        "receive_eyebrow": "What you get",
+        "apps_more": "See all included apps",
+        "reviews_title": "What customers say",
+        "reviews_lead": "Reviews are published and verified by Trustpilot: read them straight on the platform, with nothing filtered by us.",
+        "reviews_cta": "Read all reviews",
+        "specs_title": "Compatibility and technical requirements",
+        "faq_title": "Answers before you buy",
+        "final_title": "Ready when you are",
+        "final_tax": "VAT included",
+        "final_instead": "instead of",
+        "sticky_buy": "Buy now",
+    },
+    "fr": {
+        "delivery_line": "Clé par e-mail sous 5 à 15 minutes après confirmation du paiement",
+        "assur_1": "Activation sur les portails officiels",
+        "assur_2": "Livraison numérique, rien à expédier",
+        "assur_3": "Assistance après l'achat",
+        "assur_4": "Paiements gérés par Stripe et PayPal",
+        "assur_5": "Facture disponible",
+        "receive_eyebrow": "Ce que vous recevez",
+        "apps_more": "Voir toutes les applications incluses",
+        "reviews_title": "Ce que disent les clients",
+        "reviews_lead": "Les avis sont publiés et vérifiés par Trustpilot : lisez-les directement sur la plateforme, sans filtre de notre part.",
+        "reviews_cta": "Lire tous les avis",
+        "specs_title": "Compatibilité et configuration requise",
+        "faq_title": "Les réponses avant d'acheter",
+        "final_title": "Tout est prêt pour démarrer",
+        "final_tax": "TVA incluse",
+        "final_instead": "au lieu de",
+        "sticky_buy": "Acheter",
+    },
+    "de": {
+        "delivery_line": "Key per E-Mail, 5–15 Minuten nach Zahlungsbestätigung",
+        "assur_1": "Aktivierung über offizielle Portale",
+        "assur_2": "Digitale Lieferung, kein Versand",
+        "assur_3": "Support nach dem Kauf",
+        "assur_4": "Zahlungen über Stripe und PayPal",
+        "assur_5": "Rechnung verfügbar",
+        "receive_eyebrow": "Das bekommst du",
+        "apps_more": "Alle enthaltenen Apps ansehen",
+        "reviews_title": "Was Kunden sagen",
+        "reviews_lead": "Die Bewertungen werden von Trustpilot veröffentlicht und geprüft: Du liest sie direkt auf der Plattform, ungefiltert von uns.",
+        "reviews_cta": "Alle Bewertungen lesen",
+        "specs_title": "Kompatibilität und Systemvoraussetzungen",
+        "faq_title": "Antworten vor dem Kauf",
+        "final_title": "Alles bereit zum Loslegen",
+        "final_tax": "inkl. MwSt.",
+        "final_instead": "statt",
+        "sticky_buy": "Jetzt kaufen",
+    },
+    "es": {
+        "delivery_line": "Clave por email en 5–15 minutos tras confirmar el pago",
+        "assur_1": "Activación en portales oficiales",
+        "assur_2": "Entrega digital, sin envío",
+        "assur_3": "Asistencia tras la compra",
+        "assur_4": "Pagos gestionados por Stripe y PayPal",
+        "assur_5": "Factura disponible",
+        "receive_eyebrow": "Qué recibes",
+        "apps_more": "Ver todas las apps incluidas",
+        "reviews_title": "Lo que dicen los clientes",
+        "reviews_lead": "Las reseñas las publica y verifica Trustpilot: las lees directamente en la plataforma, sin filtros por nuestra parte.",
+        "reviews_cta": "Leer todas las reseñas",
+        "specs_title": "Compatibilidad y requisitos técnicos",
+        "faq_title": "Las respuestas antes de comprar",
+        "final_title": "Todo listo para empezar",
+        "final_tax": "IVA incluido",
+        "final_instead": "en lugar de",
+        "sticky_buy": "Comprar ahora",
+    },
+}
+
+# SKU fisici (DVD/COA): niente "codice via email", si spedisce un supporto.
+V3_PHYSICAL_UI = {
+    "it": {
+        "delivery_line": "Affidamento al corriere entro 24 ore lavorative dal pagamento",
+        "assur_2": "Supporto fisico spedito, non solo digitale",
+    },
+    "en": {
+        "delivery_line": "Handed to the courier within 24 business hours of payment",
+        "assur_2": "Physical media shipped, not digital-only",
+    },
+    "fr": {
+        "delivery_line": "Remise au transporteur sous 24 heures ouvrées après paiement",
+        "assur_2": "Support physique expédié, pas seulement numérique",
+    },
+    "de": {
+        "delivery_line": "Übergabe an den Versanddienst innerhalb von 24 Werktagsstunden nach Zahlung",
+        "assur_2": "Physisches Medium wird versendet, nicht nur digital",
+    },
+    "es": {
+        "delivery_line": "Entrega al transportista en 24 horas laborables tras el pago",
+        "assur_2": "Soporte físico enviado, no solo digital",
+    },
+}
+
+
+def _v3_for(lang, sku):
+    """Stringhe del layout v3, con override per gli SKU fisici."""
+    v3 = dict(V3_UI[lang])
+    if is_physical_sku(sku):
+        v3.update(V3_PHYSICAL_UI[lang])
+    return v3
 
 
 def _labels_for(lang, sku):
@@ -750,6 +906,132 @@ def _render_payment_row(ui):
                     </div>"""
 
 
+# ── Renderer del layout v3 ──────────────────────────────────────────────────
+
+MAIL_ICON = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 '
+    '01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>'
+)
+
+
+def _render_assur(v3):
+    return "\n".join(
+        f"                            <li>{v3[k]}</li>"
+        for k in ("assur_1", "assur_2", "assur_3", "assur_4", "assur_5")
+    )
+
+
+def _render_keypoints(content, lang):
+    """
+    Checklist dell'hero. Usa `keypoints` se il prodotto li fornisce, altrimenti i
+    titoli delle prime quattro feature: sono già frasi-beneficio brevi. Le card più
+    in basso ripetono quei titoli ma con il corpo, quindi è un riassunto seguito dal
+    dettaglio, non la stessa informazione due volte allo stesso livello.
+    """
+    points = (content.get("keypoints") or {}).get(lang)
+    if not points:
+        points = [f[3] for f in content["features"][lang][:4]]
+    rows = "\n".join(
+        f"                            <li>{p}</li>" for p in points
+    )
+    return f"""                        <ul class="pdp-keylist">
+{rows}
+                        </ul>"""
+
+
+def _render_cards(features):
+    """features: (span, tone, label, title, body) — span e tone del vecchio bento non servono."""
+    parts = []
+    for item in features:
+        label, title, body = item[2], item[3], item[4]
+        label_html = (
+            f'                    <p class="pdp-card__label">{label}</p>\n' if label else ""
+        )
+        parts.append(
+            f"""                <li class="pdp-card">
+{label_html}                    <h3 class="pdp-card__title">{title}</h3>
+                    <p class="pdp-card__body">{body}</p>
+                </li>"""
+        )
+    return "\n".join(parts)
+
+
+APP_NAMES = {
+    "word": "Word", "excel": "Excel", "powerpoint": "PowerPoint", "outlook": "Outlook",
+    "onenote": "OneNote", "onedrive": "OneDrive", "teams": "Teams", "defender": "Defender",
+    "copilot": "Copilot", "designer": "Designer", "clipchamp": "Clipchamp",
+    "publisher": "Publisher", "access": "Access",
+}
+
+
+def _app_item(key, indent):
+    pad = " " * indent
+    return (
+        f"{pad}<li class=\"pdp-app\">\n"
+        f"{pad}    <img src=\"{_icon_src(key)}\" width=\"48\" height=\"48\" alt=\"\" loading=\"lazy\" decoding=\"async\">\n"
+        f"{pad}    {APP_NAMES.get(key, key.title())}\n"
+        f"{pad}</li>"
+    )
+
+
+def _render_apps_v3(app_keys, v3):
+    """Fino a 6 app in evidenza, le altre in un pannello espandibile."""
+    primary, extra = app_keys[:6], app_keys[6:]
+    main = "\n".join(_app_item(k, 20) for k in primary)
+    block = f"""                <ul class="pdp-apps">
+{main}
+                </ul>"""
+    if not extra:
+        return block
+    more = "\n".join(_app_item(k, 28) for k in extra)
+    return f"""{block}
+                <details class="pdp-apps-more">
+                    <summary>{v3['apps_more']}</summary>
+                    <div class="pdp-apps-more__body">
+                        <ul class="pdp-apps">
+{more}
+                        </ul>
+                    </div>
+                </details>"""
+
+
+def _render_steps_v3(ui, content, lang):
+    """content['steps'][lang] ha la precedenza sui default UI (es. spedizione di un DVD)."""
+    custom = (content.get("steps") or {}).get(lang)
+    if custom and len(custom) >= 3:
+        pairs = custom[:3]
+    else:
+        pairs = [(ui[f"step{n}_title"], ui[f"step{n}_body"]) for n in (1, 2, 3)]
+    return "\n".join(
+        f"""                <li class="pdp-step">
+                    <div>
+                        <h3>{title}</h3>
+                        <p>{body}</p>
+                    </div>
+                </li>"""
+        for title, body in pairs
+    )
+
+
+def _render_specs_v3(ui, content, lang):
+    """content['specs'][lang] ha la precedenza sui default UI."""
+    custom = (content.get("specs") or {}).get(lang)
+    if custom and len(custom) >= 4:
+        cells = custom[:4]
+    else:
+        cells = [(ui[f"spec_{k}"], ui[f"spec_{k}_body"]) for k in ("cpu", "os", "ram", "disk")]
+    return "\n".join(
+        f"""                <details class="home-faq-item">
+                    <summary>{title}</summary>
+                    <div class="home-faq-body">
+                        <p>{body}</p>
+                    </div>
+                </details>"""
+        for title, body in cells
+    )
+
+
 def build_rich_product_page(lang, prod, content, ui_map=None):
     if ui_map is None:
         from product_content_office import UI as ui_map
@@ -783,20 +1065,23 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     )
     page_url = f"https://aml-store.com/{lang}/{slug}.html"
     badge_html = (
-        f'<span class="v2-price-badge" aria-label="−{disc}%">−{disc}%</span>'
+        f'<span class="pdp-price-badge" aria-label="−{disc}%">−{disc}%</span>'
         if disc > 0
         else ""
     )
     msrp_html = (
-        f'<span class="v2-price-msrp" aria-label="{eur_fmt(compare)}">€ {eur_fmt(compare)}</span>'
+        f'<span class="pdp-price-msrp" aria-label="{eur_fmt(compare)}">€ {eur_fmt(compare)}</span>'
         if disc > 0
         else ""
     )
+    # Il risparmio è una frase dentro la nota prezzo, non più un blocco a sé.
     save_html = ""
     if save > 0:
-        save_html = f"""                    <div class="v2-price-compare">
-                        {ui['save_prefix']} <strong>€ {eur_fmt(save)}</strong> {ui['save_vs']} (€ {eur_fmt(compare)})
-                    </div>"""
+        save_html = (
+            f" {ui['save_prefix']} <strong>€ {eur_fmt(save)}</strong> "
+            f"{ui['save_vs']} (€ {eur_fmt(compare)})."
+        )
+    final_instead_html = f", {_v3_for(lang, sku)['final_instead']} € {eur_fmt(compare)}" if save > 0 else ""
 
     faq_entities = [
         {
@@ -854,23 +1139,24 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         ],
     }
 
-    lifestyle_block = _render_lifestyle_band(content.get("lifestyle"), lang)
+    v3 = _v3_for(lang, sku)
+    keypoints_html = _render_keypoints(content, lang)
+    steps_title = (content.get('steps_title') or {}).get(lang) or ui['how_title']
+    specs_note = (content.get('specs_note') or {}).get(lang) or ui['specs_note']
 
+    # Sezioni condizionali: compaiono solo se il prodotto fornisce i dati.
+    apps_block = ""
     if content.get("apps"):
-        apps_block = f"""{lifestyle_block}        <section class="v2-apps-section" aria-labelledby="v2-apps-title">
-            <p class="v2-eyebrow">{ui['apps_eyebrow']}</p>
-            <h2 id="v2-apps-title" class="v2-section-title" style="margin-bottom:32px;">{content['apps_title'][lang]}</h2>
-            <div class="v2-apps-grid">
-{_render_apps(content['apps'])}
-            </div>
-        </section>
-        <hr class="v2-divider">
-"""
-    else:
-        apps_block = f"{lifestyle_block}        <hr class=\"v2-divider\">\n"
+        apps_block = f"""        <hr class="pdp-divider">
 
-    steps_block = _render_steps_block(ui, content, lang)
-    specs_block = _render_specs_block(ui, content, lang)
+        <section class="pdp-sec" aria-labelledby="pdp-apps-title">
+            <p class="pdp-sec__eyebrow">{ui['apps_eyebrow']}</p>
+            <h2 id="pdp-apps-title" class="pdp-sec__title">{content['apps_title'][lang]}</h2>
+{_render_apps_v3(content['apps'], v3)}
+        </section>
+"""
+
+    lifestyle_block = _render_lifestyle_band(content.get("lifestyle"), lang)
 
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
@@ -902,9 +1188,10 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/product.css">
     <link rel="stylesheet" href="../css/microsoft-365-product.css">
+    <link rel="stylesheet" href="../css/product-v3.css">
     <script src="../js/theme-init.js"></script>
 </head>
-<body>
+<body class="pdp-page">
     <a class="skip-link" href="#main">{labels['skip']}</a>
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="{labels['sticky']}" aria-hidden="true">
@@ -914,17 +1201,16 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 <span class="product-sticky-cta__msrp">€ {eur_fmt(compare)}</span>
                 <span class="product-sticky-cta__sale">€ {eur_fmt(sale)}</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
                 {CART_ICON}
-                {ui['sticky_add']}
+                {v3['sticky_buy']}
             </button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="{ui['hero_aria']}">
-        <div class="v2-hero__ambient" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
-        <div class="v2-breadcrumb">
+
+    <section class="pdp-hero" aria-label="{ui['hero_aria']}">
+
+        <div class="pdp-breadcrumb">
             <nav aria-label="{ui['breadcrumb_nav']}">
                 <a href="/{lang}/">Home</a>
                 <span class="sep" aria-hidden="true">/</span>
@@ -933,67 +1219,126 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 <span aria-current="page">{short}</span>
             </nav>
         </div>
-        <div class="v2-hero__inner">
-            <div class="v2-hero__left">
-                <p class="v2-hero__eyebrow">{eyebrow}</p>
-                <h1 class="v2-hero__title">{title_html}</h1>
+
+        <div class="pdp-hero__inner">
+            <div class="pdp-hero__info">
+                <p class="pdp-eyebrow">{eyebrow}</p>
+                <h1 class="pdp-h1 v2-hero__title">{title_html}</h1>
                 {product_code_html(labels, sku)}
-                <p class="v2-hero__desc">{desc}</p>
-                <div class="v2-pills" aria-label="{ui['features_eyebrow']}">
-{_render_pills(content['pills'][lang])}
+
+                <div class="pdp-hero__split">
+                    <figure class="pdp-media">
+                        <img class="pdp-media__img product-cover-img" src="{img_src}" width="400" height="400" alt="{short}" fetchpriority="high" decoding="async">
+                    </figure>
+                    <div class="pdp-hero__text">
+                        <p class="v2-hero__desc">{desc}</p>
+{keypoints_html}
+                    </div>
                 </div>
             </div>
-            <div class="v2-hero__right">
-                <div class="v2-hero__cover-wrap">
-                    <img class="v2-hero__cover" src="{img_src}" width="400" height="400" alt="{short}" fetchpriority="high" decoding="async">
+
+            <div id="product-pricing" class="pdp-buy"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="{sale}"
+                data-stripe-compare-at-amount="{compare}"
+                data-stripe-product-sku="{sku}"
+                data-discount-percent="{disc}"{_physical_attr(sku)}>
+                <p class="pdp-buy__label">{labels['price_label']}</p>
+
+                <div class="pdp-price-row" role="group" aria-label="{ui['prices_aria']}">
+                    <span class="pdp-price-sale">€ {eur_fmt(sale)}</span>
+                    {msrp_html}
+                    {badge_html}
+                </div>
+                <p class="pdp-price-note">{labels['tax']}{save_html}</p>
+{_stock_block_html(lang, sku)}
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                    {CART_ICON}
+                    {labels['add']}
+                </button>
+
+                <p class="pdp-delivery">
+                    {MAIL_ICON}
+                    {v3['delivery_line']}
+                </p>
+
+                <ul class="pdp-assur">
+{_render_assur(v3)}
+                </ul>
+
+                <div class="pdp-pay">
+                    <p class="pdp-pay__label">{ui['payments_aria']}</p>
+                    <div class="pdp-pay__row">
+{_render_payment_row(ui)}
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="v2-pricing-wrap">
-        <div id="product-pricing" class="v2-pricing-card"
-            data-stripe-currency="eur"
-            data-stripe-unit-amount="{sale}"
-            data-stripe-compare-at-amount="{compare}"
-            data-stripe-product-sku="{sku}"
-            data-discount-percent="{disc}"{_physical_attr(sku)}>
-            <div>
-                <div class="v2-price-label">{labels['price_label']}</div>
-                <div class="v2-price-row" role="group" aria-label="{ui['prices_aria']}">
-                    {msrp_html}
-                    <span class="v2-price-sale">€ {eur_fmt(sale)}</span>
-                    {badge_html}
-                </div>
-                <div class="v2-price-tax">{labels['tax']}</div>
-{_stock_block_html(lang, sku)}{save_html}
-            </div>
-            <div class="v2-pricing-actions">
-                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
-                    {CART_ICON}
-                    {labels['add']}
-                </button>
-{_render_payment_row(ui)}
-            </div>
-        </div>
-    </div>
+
     <main id="main" class="product-page" data-cart-added-msg="{ui['cart_added']}">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
-        <section class="v2-section" aria-labelledby="v2-features-title">
-            <p class="v2-eyebrow">{ui['features_eyebrow']}</p>
-            <h2 id="v2-features-title" class="v2-section-title">{content['features_title'][lang]}</h2>
-            <div class="v2-bento" role="list">
-{_render_features(content['features'][lang])}
+
+        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+            <p class="pdp-sec__eyebrow">{ui['features_eyebrow']}</p>
+            <h2 id="pdp-features-title" class="pdp-sec__title">{content['features_title'][lang]}</h2>
+            <ul class="pdp-cards">
+{_render_cards(content['features'][lang])}
+            </ul>
+        </section>
+
+{apps_block}{lifestyle_block}        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
+            <p class="pdp-sec__eyebrow">{ui['how_eyebrow']}</p>
+            <h2 id="pdp-steps-title" class="pdp-sec__title">{steps_title}</h2>
+            <ol class="pdp-steps">
+{_render_steps_v3(ui, content, lang)}
+            </ol>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews product-trustpilot">
+                <h2 id="pdp-reviews-title" class="pdp-reviews__title">{v3['reviews_title']}</h2>
+                <p class="pdp-reviews__lead">{v3['reviews_lead']}</p>
+{_trustpilot_inner(lang)}
+                <a class="pdp-reviews__cta" href="{TRUSTPILOT_LOCALE[lang][1]}" target="_blank" rel="noopener noreferrer">{v3['reviews_cta']}</a>
             </div>
         </section>
-{apps_block}{steps_block}
-{_trustpilot_block(lang)}        <hr class="v2-divider">
-{specs_block}
-        <hr class="v2-divider">
-        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
-            <h2 id="v2-faq-title" class="home-section-title">{ui['faq_title']}</h2>
+
+        <hr class="pdp-divider">
+
+        <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
+            <p class="pdp-sec__eyebrow">{ui['faq_eyebrow']}</p>
+            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">{v3['faq_title']}</h2>
             <div class="home-faq-list">
 {_render_faq(content['faq'][lang])}
             </div>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">{ui['specs_eyebrow']}</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">{v3['specs_title']}</h2>
+            <p class="pdp-sec__sub">{specs_note}</p>
+            <div class="home-faq-list">
+{_render_specs_v3(ui, content, lang)}
+            </div>
+        </section>
+
+        <section class="pdp-final" aria-labelledby="pdp-final-title">
+            <div>
+                <h2 id="pdp-final-title">{v3['final_title']}</h2>
+                <p>{short} — {v3['delivery_line']}</p>
+                <span class="pdp-final__price">€ {eur_fmt(sale)} <small>{v3['final_tax']}{final_instead_html}</small></span>
+            </div>
+            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                {CART_ICON}
+                {labels['add']}
+            </button>
         </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
@@ -1002,6 +1347,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <script src="../js/cart.js" defer></script>
     <script src="../js/faq.js" defer></script>
     <script src="../js/product-page.js" defer></script>
+    <script src="../js/product-v3.js" defer></script>
 {_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>

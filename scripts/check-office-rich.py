@@ -49,7 +49,7 @@ for sku, slug, template, card_name in [
             errors.append(f"{lang}/{slug}: compare amount mismatch")
         if 'id="product-primary-cta"' not in t:
             errors.append(f"{lang}/{slug}: missing primary CTA")
-        if 'class="v2-bento"' not in t:
+        if 'class="pdp-cards"' not in t:
             errors.append(f"{lang}/{slug}: missing bento")
         if "−0%" in t or "data-discount-percent=\"0\"></span>\n                <span class=\"v2-price-badge\">" in t:
             errors.append(f"{lang}/{slug}: zero discount badge shown")

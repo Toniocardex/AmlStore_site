@@ -40,7 +40,7 @@ def main():
         for lang in LANGS:
             path = ROOT / lang / f"{slug}.html"
             html = build_product_page(lang, prod)
-            if 'class="v2-bento"' not in html:
+            if 'class="pdp-cards"' not in html:
                 raise SystemExit(f"rich markup missing for {slug}/{lang}")
             path.write_text(html, encoding="utf-8")
         print("rich", slug, "×", len(LANGS))

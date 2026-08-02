@@ -54,7 +54,7 @@ def main():
         }
         for lang in LANGS:
             html = build_product_page(lang, prod)
-            if "v2-hero__ambient" not in html:
+            if "pdp-hero" not in html:
                 raise SystemExit(f"Missing sample hero ambient: {slug}/{lang}")
             if 'id="product-primary-cta"' not in html:
                 raise SystemExit(f"Missing CTA: {slug}/{lang}")

@@ -146,9 +146,10 @@
     <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
     <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
+    <link rel="stylesheet" href="../css/product-v3.css?v=0834683341">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
-<body>
+<body class="pdp-page">
     <a class="skip-link" href="#main">Ir al contenido principal</a>
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Compra rápida" aria-hidden="true">
@@ -158,17 +159,16 @@
                 <span class="product-sticky-cta__msrp">€ 149,00</span>
                 <span class="product-sticky-cta__sale">€ 81,99</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Añadir
+                Comprar ahora
             </button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="Producto y compra">
-        <div class="v2-hero__ambient" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
-        <div class="v2-breadcrumb">
+
+    <section class="pdp-hero" aria-label="Producto y compra">
+
+        <div class="pdp-breadcrumb">
             <nav aria-label="Ruta de navegación">
                 <a href="/es/">Home</a>
                 <span class="sep" aria-hidden="true">/</span>
@@ -177,54 +177,44 @@
                 <span aria-current="page">Windows 11 Pro OEM DVD (inglés)</span>
             </nav>
         </div>
-        <div class="v2-hero__inner">
-            <div class="v2-hero__left">
-                <p class="v2-hero__eyebrow">Licencia OEM · DVD en inglés · COA</p>
-                <h1 class="v2-hero__title">Windows 11 Pro <span>OEM DVD</span></h1>
+
+        <div class="pdp-hero__inner">
+            <div class="pdp-hero__info">
+                <p class="pdp-eyebrow">Licencia OEM · DVD en inglés · COA</p>
+                <h1 class="pdp-h1 v2-hero__title">Windows 11 Pro <span>OEM DVD</span></h1>
                 <p class="v2-product-code"><span>Código de producto:</span> <code class="v2-product-code__value">FQC-10538</code></p>
-                <p class="v2-hero__desc">Microsoft Windows 11 Pro OEM en caja física con DVD en inglés y sticker COA con Product Key. Envío gratuito: entrega al transportista en 24 horas laborables. No es una licencia ESD solo digital.</p>
-                <div class="v2-pills" aria-label="Por qué elegirlo">
-                        <span class="v2-pill">
-                            
-                            Windows 11 Pro
-                        </span>
-                        <span class="v2-pill">
-                            
-                            OEM
-                        </span>
-                        <span class="v2-pill">
-                            
-                            DVD en inglés
-                        </span>
-                        <span class="v2-pill">
-                            
-                            COA
-                        </span>
+
+                <div class="pdp-hero__split">
+                    <figure class="pdp-media">
+                        <img class="pdp-media__img product-cover-img" src="../asset/media/products/windows-11-pro-oem-dvd.webp?v=52cf3025a6" width="400" height="400" alt="Windows 11 Pro OEM DVD (inglés)" fetchpriority="high" decoding="async">
+                    </figure>
+                    <div class="pdp-hero__text">
+                        <p class="v2-hero__desc">Microsoft Windows 11 Pro OEM en caja física con DVD en inglés y sticker COA con Product Key. Envío gratuito: entrega al transportista en 24 horas laborables. No es una licencia ESD solo digital.</p>
+                        <ul class="pdp-keylist">
+                            <li>DVD + COA</li>
+                            <li>Gratis · 24 h laborables</li>
+                            <li>Funciones Pro</li>
+                            <li>Un dispositivo</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="v2-hero__right">
-                <div class="v2-hero__cover-wrap">
-                    <img class="v2-hero__cover" src="../asset/media/products/windows-11-pro-oem-dvd.webp?v=52cf3025a6" width="400" height="400" alt="Windows 11 Pro OEM DVD (inglés)" fetchpriority="high" decoding="async">
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="v2-pricing-wrap">
-        <div id="product-pricing" class="v2-pricing-card"
-            data-stripe-currency="eur"
-            data-stripe-unit-amount="8199"
-            data-stripe-compare-at-amount="14900"
-            data-stripe-product-sku="FQC-10538"
-            data-discount-percent="45"
+
+            <div id="product-pricing" class="pdp-buy"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="8199"
+                data-stripe-compare-at-amount="14900"
+                data-stripe-product-sku="FQC-10538"
+                data-discount-percent="45"
             data-physical="true">
-            <div>
-                <div class="v2-price-label">Nuestro precio</div>
-                <div class="v2-price-row" role="group" aria-label="Precios">
-                    <span class="v2-price-msrp" aria-label="149,00">€ 149,00</span>
-                    <span class="v2-price-sale">€ 81,99</span>
-                    <span class="v2-price-badge" aria-label="−45%">−45%</span>
+                <p class="pdp-buy__label">Nuestro precio</p>
+
+                <div class="pdp-price-row" role="group" aria-label="Precios">
+                    <span class="pdp-price-sale">€ 81,99</span>
+                    <span class="pdp-price-msrp" aria-label="149,00">€ 149,00</span>
+                    <span class="pdp-price-badge" aria-label="−45%">−45%</span>
                 </div>
-                <div class="v2-price-tax">Impuestos incluidos. Artículo físico con envío gratuito (no es entrega solo digital). Entrega al transportista en 24 horas laborables tras el pago.</div>
+                <p class="pdp-price-note">Impuestos incluidos. Artículo físico con envío gratuito (no es entrega solo digital). Entrega al transportista en 24 horas laborables tras el pago. Ahorras <strong>€ 67,01</strong> respecto al precio de lista (€ 149,00).</p>
                 <p class="v2-stock" data-stock-status="loading" aria-live="polite"
                     data-stock-available="Disponibilidad: {n}"
                     data-stock-low="Últimas {n} unidades"
@@ -233,15 +223,28 @@
                     <span class="v2-stock__dot" aria-hidden="true"></span>
                     <span class="v2-stock__text"></span>
                 </p>
-                    <div class="v2-price-compare">
-                        Ahorras <strong>€ 67,01</strong> respecto al precio de lista (€ 149,00)
-                    </div>
-            </div>
-            <div class="v2-pricing-actions">
-                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
+
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Añadir al carrito
                 </button>
+
+                <p class="pdp-delivery">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+                    Entrega al transportista en 24 horas laborables tras el pago
+                </p>
+
+                <ul class="pdp-assur">
+                            <li>Activación en portales oficiales</li>
+                            <li>Soporte físico enviado, no solo digital</li>
+                            <li>Asistencia tras la compra</li>
+                            <li>Pagos gestionados por Stripe y PayPal</li>
+                            <li>Factura disponible</li>
+                </ul>
+
+                <div class="pdp-pay">
+                    <p class="pdp-pay__label">Métodos de pago aceptados</p>
+                    <div class="pdp-pay__row">
                     <div class="v2-payment-row" role="group" aria-label="Métodos de pago aceptados">
                         <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
@@ -250,42 +253,47 @@
                         <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
                     </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
     <main id="main" class="product-page" data-cart-added-msg="Producto añadido al carrito.">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
-        <section class="v2-section" aria-labelledby="v2-features-title">
-            <p class="v2-eyebrow">Por qué elegirlo</p>
-            <h2 id="v2-features-title" class="v2-section-title">Qué recibes y por qué elegirlo</h2>
-            <div class="v2-bento" role="list">
-                <div class="v2-bento__cell v2-bento__cell--c12 v2-bento__cell--blue" role="listitem">
-                    <p class="v2-bento__label">Qué recibes</p>
-                    <h3 class="v2-bento__title">DVD + COA</h3>
-                    <p class="v2-bento__body">Caja física Microsoft Windows 11 Pro OEM: DVD en inglés, sticker COA con Product Key y documentación. Confirmación del pedido por email. No es una licencia ESD solo digital.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c6 v2-bento__cell--purple" role="listitem">
-                    <p class="v2-bento__label">Envío</p>
-                    <h3 class="v2-bento__title">Gratis · 24 h laborables</h3>
-                    <p class="v2-bento__body">Entrega al transportista en 24 horas laborables tras el pago. Tracking por email cuando esté disponible. Los plazos a domicilio dependen del transportista.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
-                    <p class="v2-bento__label">Edición Pro</p>
-                    <h3 class="v2-bento__title">Funciones Pro</h3>
-                    <p class="v2-bento__body">BitLocker, Escritorio remoto, dominio o Microsoft Entra ID y herramientas avanzadas de seguridad y gestión — según Windows 11 Pro.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c6" role="listitem">
-                    <p class="v2-bento__label">Licencia</p>
-                    <h3 class="v2-bento__title">Un dispositivo</h3>
-                    <p class="v2-bento__body">Licencia OEM para instalar y usar Windows 11 Pro en un dispositivo a la vez. Transferencias o reactivaciones según condiciones Microsoft y la normativa aplicable.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c6 v2-bento__cell--dark" role="listitem">
-                    <p class="v2-bento__label">Idioma del soporte</p>
-                    <h3 class="v2-bento__title">DVD en inglés</h3>
-                    <p class="v2-bento__body">Fuera de Italia enviamos el DVD en inglés. La tienda italiana comercializa el DVD en italiano.</p>
-                </div>
-            </div>
+
+        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+            <p class="pdp-sec__eyebrow">Por qué elegirlo</p>
+            <h2 id="pdp-features-title" class="pdp-sec__title">Qué recibes y por qué elegirlo</h2>
+            <ul class="pdp-cards">
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Qué recibes</p>
+                    <h3 class="pdp-card__title">DVD + COA</h3>
+                    <p class="pdp-card__body">Caja física Microsoft Windows 11 Pro OEM: DVD en inglés, sticker COA con Product Key y documentación. Confirmación del pedido por email. No es una licencia ESD solo digital.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Envío</p>
+                    <h3 class="pdp-card__title">Gratis · 24 h laborables</h3>
+                    <p class="pdp-card__body">Entrega al transportista en 24 horas laborables tras el pago. Tracking por email cuando esté disponible. Los plazos a domicilio dependen del transportista.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Edición Pro</p>
+                    <h3 class="pdp-card__title">Funciones Pro</h3>
+                    <p class="pdp-card__body">BitLocker, Escritorio remoto, dominio o Microsoft Entra ID y herramientas avanzadas de seguridad y gestión — según Windows 11 Pro.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Licencia</p>
+                    <h3 class="pdp-card__title">Un dispositivo</h3>
+                    <p class="pdp-card__body">Licencia OEM para instalar y usar Windows 11 Pro en un dispositivo a la vez. Transferencias o reactivaciones según condiciones Microsoft y la normativa aplicable.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Idioma del soporte</p>
+                    <h3 class="pdp-card__title">DVD en inglés</h3>
+                    <p class="pdp-card__body">Fuera de Italia enviamos el DVD en inglés. La tienda italiana comercializa el DVD en italiano.</p>
+                </li>
+            </ul>
         </section>
+
         <hr class="v2-divider">
         <section class="v2-section v2-section--gallery" aria-label="DVD + COA, no solo código por email">
             <figure class="bento-figure">
@@ -306,73 +314,63 @@
             </figure>
         </section>
         <hr class="v2-divider">
-        <hr class="v2-divider">
-        <section class="v2-section" aria-labelledby="v2-steps-title">
-            <p class="v2-eyebrow">Cómo funciona</p>
-            <h2 id="v2-steps-title" class="v2-section-title">Instalación y activación</h2>
-            <div class="v2-steps">
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">1</div>
-                    <h3 class="v2-step__title">Comprobar compatibilidad</h3>
-                    <p class="v2-step__body">Antes de comprar, confirma que el PC cumple los requisitos de Windows 11 (CPU, RAM, TPM 2.0, UEFI con Arranque seguro).</p>
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
+            <p class="pdp-sec__eyebrow">Cómo funciona</p>
+            <h2 id="pdp-steps-title" class="pdp-sec__title">Instalación y activación</h2>
+            <ol class="pdp-steps">
+                <li class="pdp-step">
+                    <div>
+                        <h3>Comprobar compatibilidad</h3>
+                        <p>Antes de comprar, confirma que el PC cumple los requisitos de Windows 11 (CPU, RAM, TPM 2.0, UEFI con Arranque seguro).</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Instalar Windows 11 Pro</h3>
+                        <p>Inserta el DVD en inglés e inicia la instalación. Sin unidad DVD, crea un USB con las herramientas oficiales Microsoft y usa el Product Key del COA.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Activar Windows</h3>
+                        <p>Después: Configuración → Sistema → Activación → Cambiar clave de producto. Introduce la clave del COA y completa la activación con Microsoft.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews product-trustpilot">
+                <h2 id="pdp-reviews-title" class="pdp-reviews__title">Lo que dicen los clientes</h2>
+                <p class="pdp-reviews__lead">Las reseñas las publica y verifica Trustpilot: las lees directamente en la plataforma, sin filtros por nuestra parte.</p>
+                <p class="product-trustpilot__fallback trustpilot-fallback">Experiencias reales de clientes en Trustpilot. <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+                <div
+                    id="trustpilot-widget"
+                    class="trustpilot-widget"
+                    data-locale="es-ES"
+                    data-template-id="5419b6a8b0d04a076446a9ad"
+                    data-businessunit-id="61c44c912f493a1a7cd810fa"
+                    data-style-height="40px"
+                    data-style-width="100%"
+                    data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
+                    data-min-review-count="0"
+                    data-style-alignment="center"
+                >
+                    <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                 </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">2</div>
-                    <h3 class="v2-step__title">Instalar Windows 11 Pro</h3>
-                    <p class="v2-step__body">Inserta el DVD en inglés e inicia la instalación. Sin unidad DVD, crea un USB con las herramientas oficiales Microsoft y usa el Product Key del COA.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">3</div>
-                    <h3 class="v2-step__title">Activar Windows</h3>
-                    <p class="v2-step__body">Después: Configuración → Sistema → Activación → Cambiar clave de producto. Introduce la clave del COA y completa la activación con Microsoft.</p>
-                </div>
+                <a class="pdp-reviews__cta" href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Leer todas las reseñas</a>
             </div>
         </section>
-        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
-            <h2 id="product-trustpilot-title" class="visually-hidden">Opiniones de clientes</h2>
-            <p class="product-trustpilot__fallback trustpilot-fallback">Experiencias reales de clientes en Trustpilot. <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
-            <div
-                id="trustpilot-widget"
-                class="trustpilot-widget"
-                data-locale="es-ES"
-                data-template-id="5419b6a8b0d04a076446a9ad"
-                data-businessunit-id="61c44c912f493a1a7cd810fa"
-                data-style-height="40px"
-                data-style-width="100%"
-                data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
-                data-min-review-count="0"
-                data-style-alignment="center"
-            >
-                <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
-            <p class="v2-eyebrow">Requisitos del sistema</p>
-            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">Especificaciones orientativas</h2>
-            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">Requisitos mínimos orientativos de la documentación Microsoft. Pueden actualizarse: verifica siempre la compatibilidad antes de comprar.</p>
-            <div class="v2-specs-grid">
-                <div class="v2-specs-item">
-                    <h3>Procesador</h3>
-                    <p>Al menos 1 GHz, 2 o más núcleos, compatible con 64 bits.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Memoria y almacenamiento</h3>
-                    <p>Al menos 4 GB de RAM y 64 GB de almacenamiento.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Firmware y seguridad</h3>
-                    <p>UEFI con Arranque seguro; TPM versión 2.0.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Gráficos y pantalla</h3>
-                    <p>GPU DirectX 12 con controlador WDDM 2.0; pantalla al menos 9" HD 720p. Internet necesario para algunos pasos y actualizaciones.</p>
-                </div>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
-            <h2 id="v2-faq-title" class="home-section-title">Preguntas frecuentes</h2>
+
+        <hr class="pdp-divider">
+
+        <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
+            <p class="pdp-sec__eyebrow">FAQ</p>
+            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Las respuestas antes de comprar</h2>
             <div class="home-faq-list">
                 <details class="home-faq-item">
                     <summary>¿Se entrega por email?</summary>
@@ -412,6 +410,52 @@
                 </details>
             </div>
         </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">Requisitos del sistema</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilidad y requisitos técnicos</h2>
+            <p class="pdp-sec__sub">Requisitos mínimos orientativos de la documentación Microsoft. Pueden actualizarse: verifica siempre la compatibilidad antes de comprar.</p>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
+                    <summary>Procesador</summary>
+                    <div class="home-faq-body">
+                        <p>Al menos 1 GHz, 2 o más núcleos, compatible con 64 bits.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Memoria y almacenamiento</summary>
+                    <div class="home-faq-body">
+                        <p>Al menos 4 GB de RAM y 64 GB de almacenamiento.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Firmware y seguridad</summary>
+                    <div class="home-faq-body">
+                        <p>UEFI con Arranque seguro; TPM versión 2.0.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Gráficos y pantalla</summary>
+                    <div class="home-faq-body">
+                        <p>GPU DirectX 12 con controlador WDDM 2.0; pantalla al menos 9" HD 720p. Internet necesario para algunos pasos y actualizaciones.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="pdp-final" aria-labelledby="pdp-final-title">
+            <div>
+                <h2 id="pdp-final-title">Todo listo para empezar</h2>
+                <p>Windows 11 Pro OEM DVD (inglés) — Entrega al transportista en 24 horas laborables tras el pago</p>
+                <span class="pdp-final__price">€ 81,99 <small>IVA incluido, en lugar de € 149,00</small></span>
+            </div>
+            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Añadir al carrito
+            </button>
+        </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
@@ -419,10 +463,11 @@
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
+    <script src="../js/product-v3.js?v=c970f12b78" defer></script>
     <script src="../js/product-stock.js?v=9ca07ec72b" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
-    <script src="../components/footer.js?v=95d3892cdc" defer></script>
+    <script src="../components/footer.js?v=63eb1768ff" defer></script>
 </body>
 </html>

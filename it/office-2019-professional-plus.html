@@ -138,9 +138,10 @@
     <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
     <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
+    <link rel="stylesheet" href="../css/product-v3.css?v=0834683341">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
-<body>
+<body class="pdp-page">
     <a class="skip-link" href="#main">Vai al contenuto principale</a>
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Acquisto rapido" aria-hidden="true">
@@ -150,17 +151,16 @@
                 <span class="product-sticky-cta__msrp">€ 208,99</span>
                 <span class="product-sticky-cta__sale">€ 174,99</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Aggiungi
+                Acquista ora
             </button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="Prodotto e acquisto">
-        <div class="v2-hero__ambient" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
-        <div class="v2-breadcrumb">
+
+    <section class="pdp-hero" aria-label="Prodotto e acquisto">
+
+        <div class="pdp-breadcrumb">
             <nav aria-label="Percorso navigazione">
                 <a href="/it/">Home</a>
                 <span class="sep" aria-hidden="true">/</span>
@@ -169,62 +169,65 @@
                 <span aria-current="page">Office 2019 Professional Plus</span>
             </nav>
         </div>
-        <div class="v2-hero__inner">
-            <div class="v2-hero__left">
-                <p class="v2-hero__eyebrow">Licenza perpetua · Professional Plus</p>
-                <h1 class="v2-hero__title">Office 2019 <span>Professional Plus</span></h1>
+
+        <div class="pdp-hero__inner">
+            <div class="pdp-hero__info">
+                <p class="pdp-eyebrow">Licenza perpetua · Professional Plus</p>
+                <h1 class="pdp-h1 v2-hero__title">Office 2019 <span>Professional Plus</span></h1>
                 <p class="v2-product-code"><span>Codice articolo:</span> <code class="v2-product-code__value">269-17068</code></p>
-                <p class="v2-hero__desc">Office 2019 Professional Plus: suite desktop completa per uso professionale con licenza digitale ESD. Consegna del codice via email dopo l'acquisto.</p>
-                <div class="v2-pills" aria-label="Perché sceglierlo">
-                        <span class="v2-pill">
-                            <img src="../asset/icon/img-aml-store_Word-Icon-FY26.svg?v=0fdadd56bc" width="18" height="18" alt="" loading="lazy" decoding="async">
-                            Word
-                        </span>
-                        <span class="v2-pill">
-                            <img src="../asset/icon/img-aml-store_Excel-Icon-FY26.svg?v=94f3806389" width="18" height="18" alt="" loading="lazy" decoding="async">
-                            Excel
-                        </span>
-                        <span class="v2-pill">
-                            <img src="../asset/icon/img-aml-store_PowerPoint-Icon-FY26.svg?v=b17a44ff1f" width="18" height="18" alt="" loading="lazy" decoding="async">
-                            PowerPoint
-                        </span>
-                        <span class="v2-pill">
-                            <img src="../asset/icon/img-aml-store_Outlook-Icon-FY26.svg?v=262d4c90e3" width="18" height="18" alt="" loading="lazy" decoding="async">
-                            Outlook
-                        </span>
-                </div>
-            </div>
-            <div class="v2-hero__right">
-                <div class="v2-hero__cover-wrap">
-                    <img class="v2-hero__cover" src="../asset/media/products/office-2019-professional-plus.webp?v=743207dbb4" width="400" height="400" alt="Office 2019 Professional Plus" fetchpriority="high" decoding="async">
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="v2-pricing-wrap">
-        <div id="product-pricing" class="v2-pricing-card"
-            data-stripe-currency="eur"
-            data-stripe-unit-amount="17499"
-            data-stripe-compare-at-amount="20899"
-            data-stripe-product-sku="269-17068"
-            data-discount-percent="16">
-            <div>
-                <div class="v2-price-label">Il nostro prezzo</div>
-                <div class="v2-price-row" role="group" aria-label="Prezzi">
-                    <span class="v2-price-msrp" aria-label="208,99">€ 208,99</span>
-                    <span class="v2-price-sale">€ 174,99</span>
-                    <span class="v2-price-badge" aria-label="−16%">−16%</span>
-                </div>
-                <div class="v2-price-tax">Tasse incluse. Nessun costo di spedizione.</div>
-                    <div class="v2-price-compare">
-                        Risparmi <strong>€ 34,00</strong> rispetto al prezzo di listino (€ 208,99)
+
+                <div class="pdp-hero__split">
+                    <figure class="pdp-media">
+                        <img class="pdp-media__img product-cover-img" src="../asset/media/products/office-2019-professional-plus.webp?v=743207dbb4" width="400" height="400" alt="Office 2019 Professional Plus" fetchpriority="high" decoding="async">
+                    </figure>
+                    <div class="pdp-hero__text">
+                        <p class="v2-hero__desc">Office 2019 Professional Plus: suite desktop completa per uso professionale con licenza digitale ESD. Consegna del codice via email dopo l'acquisto.</p>
+                        <ul class="pdp-keylist">
+                            <li>Professional Plus</li>
+                            <li>Suite ampia</li>
+                            <li>Acquisto una tantum</li>
+                            <li>Digitale</li>
+                        </ul>
                     </div>
+                </div>
             </div>
-            <div class="v2-pricing-actions">
-                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
+
+            <div id="product-pricing" class="pdp-buy"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="17499"
+                data-stripe-compare-at-amount="20899"
+                data-stripe-product-sku="269-17068"
+                data-discount-percent="16">
+                <p class="pdp-buy__label">Il nostro prezzo</p>
+
+                <div class="pdp-price-row" role="group" aria-label="Prezzi">
+                    <span class="pdp-price-sale">€ 174,99</span>
+                    <span class="pdp-price-msrp" aria-label="208,99">€ 208,99</span>
+                    <span class="pdp-price-badge" aria-label="−16%">−16%</span>
+                </div>
+                <p class="pdp-price-note">Tasse incluse. Nessun costo di spedizione. Risparmi <strong>€ 34,00</strong> rispetto al prezzo di listino (€ 208,99).</p>
+
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Aggiungi al carrello
                 </button>
+
+                <p class="pdp-delivery">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+                    Codice via email in 5–15 minuti dalla conferma del pagamento
+                </p>
+
+                <ul class="pdp-assur">
+                            <li>Attivazione sui portali ufficiali</li>
+                            <li>Consegna digitale, nessuna spedizione</li>
+                            <li>Assistenza in italiano dopo l'acquisto</li>
+                            <li>Pagamenti gestiti da Stripe e PayPal</li>
+                            <li>Fattura elettronica disponibile</li>
+                </ul>
+
+                <div class="pdp-pay">
+                    <p class="pdp-pay__label">Metodi di pagamento accettati</p>
+                    <div class="pdp-pay__row">
                     <div class="v2-payment-row" role="group" aria-label="Metodi di pagamento accettati">
                         <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
@@ -233,140 +236,136 @@
                         <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
                     </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
     <main id="main" class="product-page" data-cart-added-msg="Prodotto aggiunto al carrello.">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
-        <section class="v2-section" aria-labelledby="v2-features-title">
-            <p class="v2-eyebrow">Perché sceglierlo</p>
-            <h2 id="v2-features-title" class="v2-section-title">Professional Plus 2019, senza abbonamento</h2>
-            <div class="v2-bento" role="list">
-                <div class="v2-bento__cell v2-bento__cell--c8 v2-bento__cell--blue" role="listitem">
-                    <p class="v2-bento__label">Edizione</p>
-                    <h3 class="v2-bento__title">Professional Plus</h3>
-                    <p class="v2-bento__body">Edizione Professional Plus di Office 2019 con licenza perpetua ESD, pensata per scenari professionali secondo Microsoft.</p>
+
+        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+            <p class="pdp-sec__eyebrow">Perché sceglierlo</p>
+            <h2 id="pdp-features-title" class="pdp-sec__title">Professional Plus 2019, senza abbonamento</h2>
+            <ul class="pdp-cards">
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Edizione</p>
+                    <h3 class="pdp-card__title">Professional Plus</h3>
+                    <p class="pdp-card__body">Edizione Professional Plus di Office 2019 con licenza perpetua ESD, pensata per scenari professionali secondo Microsoft.</p>
+                </li>
+                <li class="pdp-card">
+                    <h3 class="pdp-card__title">Suite ampia</h3>
+                    <p class="pdp-card__body">Word, Excel, PowerPoint, Outlook e OneNote tra le app tipiche della linea Pro Plus.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Modello</p>
+                    <h3 class="pdp-card__title">Acquisto una tantum</h3>
+                    <p class="pdp-card__body">Licenza descritta in scheda, senza rinnovo annuale tipico di Microsoft 365.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Consegna</p>
+                    <h3 class="pdp-card__title">Digitale</h3>
+                    <p class="pdp-card__body">Chiave e istruzioni via email dopo il pagamento.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Attivazione</p>
+                    <h3 class="pdp-card__title">Canali Microsoft</h3>
+                    <p class="pdp-card__body">Attivazione e installazione tramite i portali ufficiali Microsoft.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Nota</p>
+                    <h3 class="pdp-card__title">Generazione 2019</h3>
+                    <p class="pdp-card__body">Suite perpetua 2019: non include gli aggiornamenti continui di Microsoft 365.</p>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-apps-title">
+            <p class="pdp-sec__eyebrow">App incluse</p>
+            <h2 id="pdp-apps-title" class="pdp-sec__title">App in Professional Plus 2019</h2>
+                <ul class="pdp-apps">
+                    <li class="pdp-app">
+                        <img src="../asset/icon/img-aml-store_Word-Icon-FY26.svg?v=0fdadd56bc" width="48" height="48" alt="" loading="lazy" decoding="async">
+                        Word
+                    </li>
+                    <li class="pdp-app">
+                        <img src="../asset/icon/img-aml-store_Excel-Icon-FY26.svg?v=94f3806389" width="48" height="48" alt="" loading="lazy" decoding="async">
+                        Excel
+                    </li>
+                    <li class="pdp-app">
+                        <img src="../asset/icon/img-aml-store_PowerPoint-Icon-FY26.svg?v=b17a44ff1f" width="48" height="48" alt="" loading="lazy" decoding="async">
+                        PowerPoint
+                    </li>
+                    <li class="pdp-app">
+                        <img src="../asset/icon/img-aml-store_Outlook-Icon-FY26.svg?v=262d4c90e3" width="48" height="48" alt="" loading="lazy" decoding="async">
+                        Outlook
+                    </li>
+                    <li class="pdp-app">
+                        <img src="../asset/icon/img-aml-store_OneNote-Icon-FY26.svg?v=75e36769e6" width="48" height="48" alt="" loading="lazy" decoding="async">
+                        OneNote
+                    </li>
+                </ul>
+        </section>
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
+            <p class="pdp-sec__eyebrow">Come funziona</p>
+            <h2 id="pdp-steps-title" class="pdp-sec__title">Tre passi per iniziare</h2>
+            <ol class="pdp-steps">
+                <li class="pdp-step">
+                    <div>
+                        <h3>Ordine e pagamento</h3>
+                        <p>Aggiungi il prodotto al carrello e completa il pagamento sicuro con i metodi disponibili. Ricevi la conferma d'ordine come da condizioni mostrate in checkout.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Consegna digitale</h3>
+                        <p>Ti inviamo la <strong>product key</strong> e le istruzioni via email, di solito entro pochi minuti dall'approvazione del pagamento.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Attivazione</h3>
+                        <p>Riscatta il codice su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a>, associa la licenza al tuo account Microsoft e installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews product-trustpilot">
+                <h2 id="pdp-reviews-title" class="pdp-reviews__title">Cosa dicono i clienti</h2>
+                <p class="pdp-reviews__lead">Le recensioni sono pubblicate e verificate da Trustpilot: le leggi direttamente sulla piattaforma, senza filtri da parte nostra.</p>
+                <p class="product-trustpilot__fallback trustpilot-fallback">Esperienze reali dei clienti su Trustpilot. <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+                <div
+                    id="trustpilot-widget"
+                    class="trustpilot-widget"
+                    data-locale="it-IT"
+                    data-template-id="5419b6a8b0d04a076446a9ad"
+                    data-businessunit-id="61c44c912f493a1a7cd810fa"
+                    data-style-height="40px"
+                    data-style-width="100%"
+                    data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
+                    data-min-review-count="0"
+                    data-style-alignment="center"
+                >
+                    <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                 </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--teal" role="listitem">
-                    
-                    <h3 class="v2-bento__title">Suite ampia</h3>
-                    <p class="v2-bento__body">Word, Excel, PowerPoint, Outlook e OneNote tra le app tipiche della linea Pro Plus.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--purple" role="listitem">
-                    <p class="v2-bento__label">Modello</p>
-                    <h3 class="v2-bento__title">Acquisto una tantum</h3>
-                    <p class="v2-bento__body">Licenza descritta in scheda, senza rinnovo annuale tipico di Microsoft 365.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4" role="listitem">
-                    <p class="v2-bento__label">Consegna</p>
-                    <h3 class="v2-bento__title">Digitale</h3>
-                    <p class="v2-bento__body">Chiave e istruzioni via email dopo il pagamento.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4" role="listitem">
-                    <p class="v2-bento__label">Attivazione</p>
-                    <h3 class="v2-bento__title">Canali Microsoft</h3>
-                    <p class="v2-bento__body">Attivazione e installazione tramite i portali ufficiali Microsoft.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--dark" role="listitem">
-                    <p class="v2-bento__label">Nota</p>
-                    <h3 class="v2-bento__title">Generazione 2019</h3>
-                    <p class="v2-bento__body">Suite perpetua 2019: non include gli aggiornamenti continui di Microsoft 365.</p>
-                </div>
+                <a class="pdp-reviews__cta" href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Leggi tutte le recensioni</a>
             </div>
         </section>
-        <section class="v2-apps-section" aria-labelledby="v2-apps-title">
-            <p class="v2-eyebrow">App incluse</p>
-            <h2 id="v2-apps-title" class="v2-section-title" style="margin-bottom:32px;">App in Professional Plus 2019</h2>
-            <div class="v2-apps-grid">
-                <div class="v2-app-item">
-                    <img src="../asset/icon/img-aml-store_Word-Icon-FY26.svg?v=0fdadd56bc" width="48" height="48" alt="" loading="lazy" decoding="async">
-                    Word
-                </div>
-                <div class="v2-app-item">
-                    <img src="../asset/icon/img-aml-store_Excel-Icon-FY26.svg?v=94f3806389" width="48" height="48" alt="" loading="lazy" decoding="async">
-                    Excel
-                </div>
-                <div class="v2-app-item">
-                    <img src="../asset/icon/img-aml-store_PowerPoint-Icon-FY26.svg?v=b17a44ff1f" width="48" height="48" alt="" loading="lazy" decoding="async">
-                    PowerPoint
-                </div>
-                <div class="v2-app-item">
-                    <img src="../asset/icon/img-aml-store_Outlook-Icon-FY26.svg?v=262d4c90e3" width="48" height="48" alt="" loading="lazy" decoding="async">
-                    Outlook
-                </div>
-                <div class="v2-app-item">
-                    <img src="../asset/icon/img-aml-store_OneNote-Icon-FY26.svg?v=75e36769e6" width="48" height="48" alt="" loading="lazy" decoding="async">
-                    OneNote
-                </div>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section class="v2-section" aria-labelledby="v2-steps-title">
-            <p class="v2-eyebrow">Come funziona</p>
-            <h2 id="v2-steps-title" class="v2-section-title">Tre passi per iniziare</h2>
-            <div class="v2-steps">
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">1</div>
-                    <h3 class="v2-step__title">Ordine e pagamento</h3>
-                    <p class="v2-step__body">Aggiungi il prodotto al carrello e completa il pagamento sicuro con i metodi disponibili. Ricevi la conferma d'ordine come da condizioni mostrate in checkout.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">2</div>
-                    <h3 class="v2-step__title">Consegna digitale</h3>
-                    <p class="v2-step__body">Ti inviamo la <strong>product key</strong> e le istruzioni via email, di solito entro pochi minuti dall'approvazione del pagamento.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">3</div>
-                    <h3 class="v2-step__title">Attivazione</h3>
-                    <p class="v2-step__body">Riscatta il codice su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a>, associa la licenza al tuo account Microsoft e installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
-                </div>
-            </div>
-        </section>
-        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
-            <h2 id="product-trustpilot-title" class="visually-hidden">Recensioni dei clienti</h2>
-            <p class="product-trustpilot__fallback trustpilot-fallback">Esperienze reali dei clienti su Trustpilot. <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
-            <div
-                id="trustpilot-widget"
-                class="trustpilot-widget"
-                data-locale="it-IT"
-                data-template-id="5419b6a8b0d04a076446a9ad"
-                data-businessunit-id="61c44c912f493a1a7cd810fa"
-                data-style-height="40px"
-                data-style-width="100%"
-                data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
-                data-min-review-count="0"
-                data-style-alignment="center"
-            >
-                <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
-            <p class="v2-eyebrow">Requisiti di sistema</p>
-            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">Specifiche indicative</h2>
-            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">Valori orientativi da documentazione Microsoft; verifica sempre i requisiti aggiornati prima dell'installazione.</p>
-            <div class="v2-specs-grid">
-                <div class="v2-specs-item">
-                    <h3>Processore</h3>
-                    <p>Windows: almeno 1,6 GHz dual‑core. Mac: Intel o Apple Silicon compatibili con macOS supportato (dove la scheda indica PC/Mac).</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Sistema operativo</h3>
-                    <p>Windows 10/11; macOS nelle versioni supportate da Microsoft per la suite indicata.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Memoria (RAM)</h3>
-                    <p>Almeno 4 GB consigliati per le app desktop; esigenze maggiori per file grandi o funzioni avanzate.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Spazio su disco</h3>
-                    <p>Almeno 4 GB liberi tipici per l'installazione desktop; controlla la scheda ufficiale Microsoft.</p>
-                </div>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
-            <h2 id="v2-faq-title" class="home-section-title">Domande frequenti</h2>
+
+        <hr class="pdp-divider">
+
+        <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
+            <p class="pdp-sec__eyebrow">FAQ</p>
+            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Le risposte prima dell'acquisto</h2>
             <div class="home-faq-list">
                 <details class="home-faq-item">
                     <summary>Cosa significa Professional Plus?</summary>
@@ -400,6 +399,52 @@
                 </details>
             </div>
         </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">Requisiti di sistema</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilità e requisiti tecnici</h2>
+            <p class="pdp-sec__sub">Valori orientativi da documentazione Microsoft; verifica sempre i requisiti aggiornati prima dell'installazione.</p>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
+                    <summary>Processore</summary>
+                    <div class="home-faq-body">
+                        <p>Windows: almeno 1,6 GHz dual‑core. Mac: Intel o Apple Silicon compatibili con macOS supportato (dove la scheda indica PC/Mac).</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Sistema operativo</summary>
+                    <div class="home-faq-body">
+                        <p>Windows 10/11; macOS nelle versioni supportate da Microsoft per la suite indicata.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Memoria (RAM)</summary>
+                    <div class="home-faq-body">
+                        <p>Almeno 4 GB consigliati per le app desktop; esigenze maggiori per file grandi o funzioni avanzate.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Spazio su disco</summary>
+                    <div class="home-faq-body">
+                        <p>Almeno 4 GB liberi tipici per l'installazione desktop; controlla la scheda ufficiale Microsoft.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="pdp-final" aria-labelledby="pdp-final-title">
+            <div>
+                <h2 id="pdp-final-title">Tutto pronto per iniziare</h2>
+                <p>Office 2019 Professional Plus — Codice via email in 5–15 minuti dalla conferma del pagamento</p>
+                <span class="pdp-final__price">€ 174,99 <small>IVA inclusa, anziché € 208,99</small></span>
+            </div>
+            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Aggiungi al carrello
+            </button>
+        </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
@@ -407,9 +452,10 @@
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
+    <script src="../js/product-v3.js?v=c970f12b78" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
-    <script src="../components/footer.js?v=95d3892cdc" defer></script>
+    <script src="../components/footer.js?v=63eb1768ff" defer></script>
 </body>
 </html>

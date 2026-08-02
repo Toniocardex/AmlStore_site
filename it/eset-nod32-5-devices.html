@@ -137,9 +137,10 @@
     <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
     <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
+    <link rel="stylesheet" href="../css/product-v3.css?v=0834683341">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
-<body>
+<body class="pdp-page">
     <a class="skip-link" href="#main">Vai al contenuto principale</a>
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Acquisto rapido" aria-hidden="true">
@@ -149,17 +150,16 @@
                 <span class="product-sticky-cta__msrp">€ 59,99</span>
                 <span class="product-sticky-cta__sale">€ 42,98</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Aggiungi
+                Acquista ora
             </button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="Prodotto e acquisto">
-        <div class="v2-hero__ambient" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-2" aria-hidden="true"></div>
-        <div class="v2-hero__ambient-mid" aria-hidden="true"></div>
-        <div class="v2-breadcrumb">
+
+    <section class="pdp-hero" aria-label="Prodotto e acquisto">
+
+        <div class="pdp-breadcrumb">
             <nav aria-label="Percorso navigazione">
                 <a href="/it/">Home</a>
                 <span class="sep" aria-hidden="true">/</span>
@@ -168,58 +168,65 @@
                 <span aria-current="page">ESET NOD32 — 5 dispositivi</span>
             </nav>
         </div>
-        <div class="v2-hero__inner">
-            <div class="v2-hero__left">
-                <p class="v2-hero__eyebrow">ESET · 1 anno · 5 dispositivi</p>
-                <h1 class="v2-hero__title">ESET <span>NOD32 · 5 disp.</span></h1>
+
+        <div class="pdp-hero__inner">
+            <div class="pdp-hero__info">
+                <p class="pdp-eyebrow">ESET · 1 anno · 5 dispositivi</p>
+                <h1 class="pdp-h1 v2-hero__title">ESET <span>NOD32 · 5 disp.</span></h1>
                 <p class="v2-product-code"><span>Codice articolo:</span> <code class="v2-product-code__value">EAVH-N1-A5</code></p>
-                <p class="v2-hero__desc">ESET NOD32 per 5 dispositivi: protezione antivirus leggera con licenza digitale e consegna via email. Attivazione sul portale ufficiale ESET.</p>
-                <div class="v2-pills" aria-label="Perché sceglierlo">
-                        <span class="v2-pill">
-                            
-                            ESET
-                        </span>
-                        <span class="v2-pill">
-                            
-                            1 anno
-                        </span>
-                        <span class="v2-pill">
-                            
-                            5 dispositivi
-                        </span>
-                </div>
-            </div>
-            <div class="v2-hero__right">
-                <div class="v2-hero__cover-wrap">
-                    <img class="v2-hero__cover" src="../asset/media/products/eset-nod32-5-devices.webp?v=d233e27c06" width="400" height="400" alt="ESET NOD32 — 5 dispositivi" fetchpriority="high" decoding="async">
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="v2-pricing-wrap">
-        <div id="product-pricing" class="v2-pricing-card"
-            data-stripe-currency="eur"
-            data-stripe-unit-amount="4298"
-            data-stripe-compare-at-amount="5999"
-            data-stripe-product-sku="EAVH-N1-A5"
-            data-discount-percent="28">
-            <div>
-                <div class="v2-price-label">Il nostro prezzo</div>
-                <div class="v2-price-row" role="group" aria-label="Prezzi">
-                    <span class="v2-price-msrp" aria-label="59,99">€ 59,99</span>
-                    <span class="v2-price-sale">€ 42,98</span>
-                    <span class="v2-price-badge" aria-label="−28%">−28%</span>
-                </div>
-                <div class="v2-price-tax">Tasse incluse. Nessun costo di spedizione.</div>
-                    <div class="v2-price-compare">
-                        Risparmi <strong>€ 17,01</strong> rispetto al prezzo di listino (€ 59,99)
+
+                <div class="pdp-hero__split">
+                    <figure class="pdp-media">
+                        <img class="pdp-media__img product-cover-img" src="../asset/media/products/eset-nod32-5-devices.webp?v=d233e27c06" width="400" height="400" alt="ESET NOD32 — 5 dispositivi" fetchpriority="high" decoding="async">
+                    </figure>
+                    <div class="pdp-hero__text">
+                        <p class="v2-hero__desc">ESET NOD32 per 5 dispositivi: protezione antivirus leggera con licenza digitale e consegna via email. Attivazione sul portale ufficiale ESET.</p>
+                        <ul class="pdp-keylist">
+                            <li>NOD32 Antivirus</li>
+                            <li>Leggero e rapido</li>
+                            <li>Via email</li>
+                            <li>Portale ufficiale</li>
+                        </ul>
                     </div>
+                </div>
             </div>
-            <div class="v2-pricing-actions">
-                <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">
+
+            <div id="product-pricing" class="pdp-buy"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="4298"
+                data-stripe-compare-at-amount="5999"
+                data-stripe-product-sku="EAVH-N1-A5"
+                data-discount-percent="28">
+                <p class="pdp-buy__label">Il nostro prezzo</p>
+
+                <div class="pdp-price-row" role="group" aria-label="Prezzi">
+                    <span class="pdp-price-sale">€ 42,98</span>
+                    <span class="pdp-price-msrp" aria-label="59,99">€ 59,99</span>
+                    <span class="pdp-price-badge" aria-label="−28%">−28%</span>
+                </div>
+                <p class="pdp-price-note">Tasse incluse. Nessun costo di spedizione. Risparmi <strong>€ 17,01</strong> rispetto al prezzo di listino (€ 59,99).</p>
+
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Aggiungi al carrello
                 </button>
+
+                <p class="pdp-delivery">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+                    Codice via email in 5–15 minuti dalla conferma del pagamento
+                </p>
+
+                <ul class="pdp-assur">
+                            <li>Attivazione sui portali ufficiali</li>
+                            <li>Consegna digitale, nessuna spedizione</li>
+                            <li>Assistenza in italiano dopo l'acquisto</li>
+                            <li>Pagamenti gestiti da Stripe e PayPal</li>
+                            <li>Fattura elettronica disponibile</li>
+                </ul>
+
+                <div class="pdp-pay">
+                    <p class="pdp-pay__label">Metodi di pagamento accettati</p>
+                    <div class="pdp-pay__row">
                     <div class="v2-payment-row" role="group" aria-label="Metodi di pagamento accettati">
                         <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
@@ -228,114 +235,108 @@
                         <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
                         <span class="v2-payment-logo" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
                     </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
     <main id="main" class="product-page" data-cart-added-msg="Prodotto aggiunto al carrello.">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
-        <section class="v2-section" aria-labelledby="v2-features-title">
-            <p class="v2-eyebrow">Perché sceglierlo</p>
-            <h2 id="v2-features-title" class="v2-section-title">Protezione ESET NOD32</h2>
-            <div class="v2-bento" role="list">
-                <div class="v2-bento__cell v2-bento__cell--c8 v2-bento__cell--blue" role="listitem">
-                    <p class="v2-bento__label">Protezione</p>
-                    <h3 class="v2-bento__title">NOD32 Antivirus</h3>
-                    <p class="v2-bento__body">Licenza digitale ESET: protezione per i dispositivi indicati in scheda, con attivazione sul portale ufficiale del produttore.</p>
+
+        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+            <p class="pdp-sec__eyebrow">Perché sceglierlo</p>
+            <h2 id="pdp-features-title" class="pdp-sec__title">Protezione ESET NOD32</h2>
+            <ul class="pdp-cards">
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Protezione</p>
+                    <h3 class="pdp-card__title">NOD32 Antivirus</h3>
+                    <p class="pdp-card__body">Licenza digitale ESET: protezione per i dispositivi indicati in scheda, con attivazione sul portale ufficiale del produttore.</p>
+                </li>
+                <li class="pdp-card">
+                    <h3 class="pdp-card__title">Leggero e rapido</h3>
+                    <p class="pdp-card__body">Funzioni di sicurezza del piano acquistato, come descritte dal produttore.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Consegna</p>
+                    <h3 class="pdp-card__title">Via email</h3>
+                    <p class="pdp-card__body">Ricevi codice/licenza e istruzioni dopo il pagamento, senza spedizione fisica del software.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Attivazione</p>
+                    <h3 class="pdp-card__title">Portale ufficiale</h3>
+                    <p class="pdp-card__body">Attivi su ESET con il codice ricevuto e installi il client ufficiale.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Dispositivi</p>
+                    <h3 class="pdp-card__title">Come da scheda</h3>
+                    <p class="pdp-card__body">Il numero di dispositivi e la durata sono quelli indicati nel titolo prodotto.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Nota</p>
+                    <h3 class="pdp-card__title">Licenza digitale</h3>
+                    <p class="pdp-card__body">Niente stelle o recensioni inventate: per esperienze reali vedi Trustpilot e il sito del produttore.</p>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
+            <p class="pdp-sec__eyebrow">Come funziona</p>
+            <h2 id="pdp-steps-title" class="pdp-sec__title">Tre passi per iniziare</h2>
+            <ol class="pdp-steps">
+                <li class="pdp-step">
+                    <div>
+                        <h3>Ordine e pagamento</h3>
+                        <p>Aggiungi il prodotto al carrello e completa il pagamento sicuro con i metodi disponibili. Ricevi la conferma d'ordine come da condizioni mostrate in checkout.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Consegna digitale</h3>
+                        <p>Ti inviamo la <strong>licenza / codice</strong> e le istruzioni via email, di solito entro pochi minuti dall'approvazione del pagamento.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Attivazione</h3>
+                        <p>Attiva sul <strong>portale ufficiale del produttore</strong> (Norton, Kaspersky, Bitdefender, ESET o McAfee) con il codice ricevuto e segui le istruzioni nell'email.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews product-trustpilot">
+                <h2 id="pdp-reviews-title" class="pdp-reviews__title">Cosa dicono i clienti</h2>
+                <p class="pdp-reviews__lead">Le recensioni sono pubblicate e verificate da Trustpilot: le leggi direttamente sulla piattaforma, senza filtri da parte nostra.</p>
+                <p class="product-trustpilot__fallback trustpilot-fallback">Esperienze reali dei clienti su Trustpilot. <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+                <div
+                    id="trustpilot-widget"
+                    class="trustpilot-widget"
+                    data-locale="it-IT"
+                    data-template-id="5419b6a8b0d04a076446a9ad"
+                    data-businessunit-id="61c44c912f493a1a7cd810fa"
+                    data-style-height="40px"
+                    data-style-width="100%"
+                    data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
+                    data-min-review-count="0"
+                    data-style-alignment="center"
+                >
+                    <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
                 </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--teal" role="listitem">
-                    
-                    <h3 class="v2-bento__title">Leggero e rapido</h3>
-                    <p class="v2-bento__body">Funzioni di sicurezza del piano acquistato, come descritte dal produttore.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--purple" role="listitem">
-                    <p class="v2-bento__label">Consegna</p>
-                    <h3 class="v2-bento__title">Via email</h3>
-                    <p class="v2-bento__body">Ricevi codice/licenza e istruzioni dopo il pagamento, senza spedizione fisica del software.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4" role="listitem">
-                    <p class="v2-bento__label">Attivazione</p>
-                    <h3 class="v2-bento__title">Portale ufficiale</h3>
-                    <p class="v2-bento__body">Attivi su ESET con il codice ricevuto e installi il client ufficiale.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4" role="listitem">
-                    <p class="v2-bento__label">Dispositivi</p>
-                    <h3 class="v2-bento__title">Come da scheda</h3>
-                    <p class="v2-bento__body">Il numero di dispositivi e la durata sono quelli indicati nel titolo prodotto.</p>
-                </div>
-                <div class="v2-bento__cell v2-bento__cell--c4 v2-bento__cell--dark" role="listitem">
-                    <p class="v2-bento__label">Nota</p>
-                    <h3 class="v2-bento__title">Licenza digitale</h3>
-                    <p class="v2-bento__body">Niente stelle o recensioni inventate: per esperienze reali vedi Trustpilot e il sito del produttore.</p>
-                </div>
+                <a class="pdp-reviews__cta" href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Leggi tutte le recensioni</a>
             </div>
         </section>
-        <hr class="v2-divider">
-        <section class="v2-section" aria-labelledby="v2-steps-title">
-            <p class="v2-eyebrow">Come funziona</p>
-            <h2 id="v2-steps-title" class="v2-section-title">Tre passi per iniziare</h2>
-            <div class="v2-steps">
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">1</div>
-                    <h3 class="v2-step__title">Ordine e pagamento</h3>
-                    <p class="v2-step__body">Aggiungi il prodotto al carrello e completa il pagamento sicuro con i metodi disponibili. Ricevi la conferma d'ordine come da condizioni mostrate in checkout.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">2</div>
-                    <h3 class="v2-step__title">Consegna digitale</h3>
-                    <p class="v2-step__body">Ti inviamo la <strong>licenza / codice</strong> e le istruzioni via email, di solito entro pochi minuti dall'approvazione del pagamento.</p>
-                </div>
-                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">3</div>
-                    <h3 class="v2-step__title">Attivazione</h3>
-                    <p class="v2-step__body">Attiva sul <strong>portale ufficiale del produttore</strong> (Norton, Kaspersky, Bitdefender, ESET o McAfee) con il codice ricevuto e segui le istruzioni nell'email.</p>
-                </div>
-            </div>
-        </section>
-        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
-            <h2 id="product-trustpilot-title" class="visually-hidden">Recensioni dei clienti</h2>
-            <p class="product-trustpilot__fallback trustpilot-fallback">Esperienze reali dei clienti su Trustpilot. <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
-            <div
-                id="trustpilot-widget"
-                class="trustpilot-widget"
-                data-locale="it-IT"
-                data-template-id="5419b6a8b0d04a076446a9ad"
-                data-businessunit-id="61c44c912f493a1a7cd810fa"
-                data-style-height="40px"
-                data-style-width="100%"
-                data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
-                data-min-review-count="0"
-                data-style-alignment="center"
-            >
-                <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
-            <p class="v2-eyebrow">Requisiti di sistema</p>
-            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">Specifiche indicative</h2>
-            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">Valori orientativi; verifica sempre i requisiti aggiornati sul sito ufficiale del produttore prima dell'installazione.</p>
-            <div class="v2-specs-grid">
-                <div class="v2-specs-item">
-                    <h3>Processore</h3>
-                    <p>PC o dispositivi supportati dal produttore; verifica i requisiti aggiornati sulla scheda ufficiale del software.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Sistema operativo</h3>
-                    <p>Windows, macOS, Android o iOS secondo le piattaforme supportate dal prodotto acquistato.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Memoria (RAM)</h3>
-                    <p>Requisiti tipici da pochi GB di RAM; consulta la documentazione del produttore per il titolo specifico.</p>
-                </div>
-                <div class="v2-specs-item">
-                    <h3>Spazio su disco</h3>
-                    <p>Spazio libero sufficiente per l'installazione del client di sicurezza, come da requisiti del produttore.</p>
-                </div>
-            </div>
-        </section>
-        <hr class="v2-divider">
-        <section id="faq" class="v2-section home-faq" aria-labelledby="v2-faq-title">
-            <h2 id="v2-faq-title" class="home-section-title">Domande frequenti</h2>
+
+        <hr class="pdp-divider">
+
+        <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
+            <p class="pdp-sec__eyebrow">FAQ</p>
+            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Le risposte prima dell'acquisto</h2>
             <div class="home-faq-list">
                 <details class="home-faq-item">
                     <summary>Cosa ricevo dopo l'acquisto?</summary>
@@ -369,6 +370,52 @@
                 </details>
             </div>
         </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">Requisiti di sistema</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilità e requisiti tecnici</h2>
+            <p class="pdp-sec__sub">Valori orientativi; verifica sempre i requisiti aggiornati sul sito ufficiale del produttore prima dell'installazione.</p>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
+                    <summary>Processore</summary>
+                    <div class="home-faq-body">
+                        <p>PC o dispositivi supportati dal produttore; verifica i requisiti aggiornati sulla scheda ufficiale del software.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Sistema operativo</summary>
+                    <div class="home-faq-body">
+                        <p>Windows, macOS, Android o iOS secondo le piattaforme supportate dal prodotto acquistato.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Memoria (RAM)</summary>
+                    <div class="home-faq-body">
+                        <p>Requisiti tipici da pochi GB di RAM; consulta la documentazione del produttore per il titolo specifico.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Spazio su disco</summary>
+                    <div class="home-faq-body">
+                        <p>Spazio libero sufficiente per l'installazione del client di sicurezza, come da requisiti del produttore.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="pdp-final" aria-labelledby="pdp-final-title">
+            <div>
+                <h2 id="pdp-final-title">Tutto pronto per iniziare</h2>
+                <p>ESET NOD32 — 5 dispositivi — Codice via email in 5–15 minuti dalla conferma del pagamento</p>
+                <span class="pdp-final__price">€ 42,98 <small>IVA inclusa, anziché € 59,99</small></span>
+            </div>
+            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Aggiungi al carrello
+            </button>
+        </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
@@ -376,9 +423,10 @@
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
+    <script src="../js/product-v3.js?v=c970f12b78" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
-    <script src="../components/footer.js?v=95d3892cdc" defer></script>
+    <script src="../components/footer.js?v=63eb1768ff" defer></script>
 </body>
 </html>
