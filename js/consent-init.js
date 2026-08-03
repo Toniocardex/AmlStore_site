@@ -28,11 +28,22 @@
 
     try {
         var raw = w.localStorage.getItem(STORAGE_KEY);
-        if (!raw) return;
-        var parsed = JSON.parse(raw);
-        if (!parsed || !parsed.consent || typeof parsed.consent !== 'object') return;
-        w.gtag('consent', 'update', parsed.consent);
+        if (raw) {
+            var parsed = JSON.parse(raw);
+            if (parsed && parsed.consent && typeof parsed.consent === 'object') {
+                w.gtag('consent', 'update', parsed.consent);
+            }
+        }
     } catch (_) {
         /* ignore */
     }
+
+    var GTAG_ID = 'G-BBEBFJ5H18';
+    var tagScript = w.document.createElement('script');
+    tagScript.async = true;
+    tagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GTAG_ID;
+    w.document.head.appendChild(tagScript);
+
+    w.gtag('js', new Date());
+    w.gtag('config', GTAG_ID);
 })(typeof window !== 'undefined' ? window : globalThis);

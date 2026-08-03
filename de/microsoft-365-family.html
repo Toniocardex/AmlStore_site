@@ -100,17 +100,7 @@
 }
     </script>
 
-    <script>/**
- * Google Consent Mode v2
- */
-(function (w) {
-    'use strict';
-    var STORAGE_KEY = 'aml-consent-v2';
-    w.dataLayer = w.dataLayer || [];
-    if (typeof w.gtag !== 'function') { w.gtag = function gtag() { w.dataLayer.push(arguments); }; }
-    w.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', functionality_storage: 'denied', personalization_storage: 'denied', security_storage: 'granted', wait_for_update: 500 });
-    try { var raw = w.localStorage.getItem(STORAGE_KEY); if (!raw) return; var parsed = JSON.parse(raw); if (!parsed || !parsed.consent || typeof parsed.consent !== 'object') return; w.gtag('consent', 'update', parsed.consent); } catch (_) {}
-})(typeof window !== 'undefined' ? window : globalThis);</script>
+    <script src="../js/consent-init.js?v=1a2366909c"></script>
 
     <link rel="icon" href="../favicon/favicon.png?v=3bfa4181d2" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">

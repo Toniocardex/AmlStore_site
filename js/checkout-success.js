@@ -235,6 +235,39 @@
         hideEl('success-loading');
         hideEl('success-error');
         showEl('success-details');
+
+        if (isPaid) trackPurchase(order);
+    }
+
+    /* ─── Google Ads / GA4 — evento di acquisto ────────────────────────────── */
+
+    function trackPurchase(order) {
+        var FIRED_KEY = 'aml-purchase-tracked:' + order.orderId;
+        try {
+            if (global.sessionStorage.getItem(FIRED_KEY)) return;
+            global.sessionStorage.setItem(FIRED_KEY, '1');
+        } catch (_) {
+            /* se sessionStorage non è disponibile, procede comunque: meglio un
+               eventuale doppio conteggio raro che perdere la conversione */
+        }
+
+        if (typeof global.gtag !== 'function') return;
+
+        var items = (order.lineItems || []).map(function (item) {
+            return {
+                item_id:   item.sku,
+                item_name: orderLineLabel(item),
+                quantity:  item.qty || item.quantity || 1,
+                price:     (item.unit_amount_minor || item.unitAmount || 0) / 100,
+            };
+        });
+
+        global.gtag('event', 'purchase', {
+            transaction_id: order.orderId,
+            value:          order.totalMinor / 100,
+            currency:       String(order.currency || 'EUR').toUpperCase(),
+            items:          items,
+        });
     }
 
     /* ─── Errore / scadenza ────────────────────────────────────────────────── */
