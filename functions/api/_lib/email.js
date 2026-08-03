@@ -279,8 +279,6 @@ export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBc
         from:     FROM,
         to:       [buildRecipient(order)],
         subject:  emailSubject(locale, order.id, isPaid),
-        html:     emailHtml(tpl, isPaid),
-        text:     emailText(tpl, isPaid),
         reply_to: REPLY_TO,
     };
     if (trustpilotBcc && isPaid) payload.bcc = [trustpilotBcc];
@@ -288,7 +286,11 @@ export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBc
     // Guida Copilot omaggio: solo ordini pagati con licenza M365 (vedi guide.js).
     // Il bonifico appena creato è pending, quindi qui non allega nulla: ci pensa
     // sendPaidNotificationOnce quando l'admin marca il pagamento come ricevuto.
-    await attachGuideIfEligible(payload, order, guideBucket);
+    // Va risolta prima di generare html/text, cosi il messaggio "in allegato"
+    // corrisponde esattamente a un allegato davvero incluso nel payload.
+    const guideAttached = await attachGuideIfEligible(payload, order, guideBucket);
+    payload.html = emailHtml(tpl, isPaid, guideAttached);
+    payload.text = emailText(tpl, isPaid, guideAttached);
 
     const { ok, error } = await callResend(resendApiKey, payload);
     if (!ok) return { sent: false, error };
@@ -359,14 +361,14 @@ export async function sendPaidNotificationOnce(db, order, resendApiKey, trustpil
         from:     FROM,
         to:       [buildRecipient(order)],
         subject:  emailSubject(locale, order.id, true),
-        html:     emailHtml(tpl, true),
-        text:     emailText(tpl, true),
         reply_to: REPLY_TO,
     };
     if (trustpilotBcc) payload.bcc = [trustpilotBcc];
 
     // Guida Copilot omaggio per il bonifico ora effettivamente pagato.
-    await attachGuideIfEligible(payload, order, guideBucket);
+    const guideAttached = await attachGuideIfEligible(payload, order, guideBucket);
+    payload.html = emailHtml(tpl, true, guideAttached);
+    payload.text = emailText(tpl, true, guideAttached);
 
     const { ok, error } = await callResend(resendApiKey, payload);
     if (!ok) return { sent: false, error };

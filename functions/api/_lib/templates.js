@@ -43,6 +43,7 @@ const i18n = {
         footer_copy:      '© {year} AML STORE di Cardelli Antonino — P.IVA inclusa in fattura',
         cta:              'Vai al negozio',
         shipping_title:   'Indirizzo di spedizione',
+        guide_attached:   'In allegato trovi in omaggio la Guida Copilot per Microsoft 365 (PDF).',
     },
     en: {
         subject_paid:     'Order #{orderId} confirmed — Aml Store',
@@ -72,6 +73,7 @@ const i18n = {
         footer_copy:      '© {year} AML STORE di Cardelli Antonino',
         cta:              'Go to store',
         shipping_title:   'Shipping address',
+        guide_attached:   'Attached you\'ll find our free Copilot for Microsoft 365 guide (PDF).',
     },
     fr: {
         subject_paid:     'Commande #{orderId} confirmée — Aml Store',
@@ -101,6 +103,7 @@ const i18n = {
         footer_copy:      '© {year} AML STORE di Cardelli Antonino',
         cta:              'Aller à la boutique',
         shipping_title:   'Adresse de livraison',
+        guide_attached:   'Vous trouverez en pièce jointe notre guide gratuit Copilot pour Microsoft 365 (PDF).',
     },
     de: {
         subject_paid:     'Bestellung #{orderId} bestätigt — Aml Store',
@@ -130,6 +133,7 @@ const i18n = {
         footer_copy:      '© {year} AML STORE di Cardelli Antonino',
         cta:              'Zum Shop',
         shipping_title:   'Lieferadresse',
+        guide_attached:   'Im Anhang finden Sie unseren kostenlosen Copilot-Leitfaden für Microsoft 365 (PDF).',
     },
     es: {
         subject_paid:     'Pedido #{orderId} confirmado — Aml Store',
@@ -159,6 +163,7 @@ const i18n = {
         footer_copy:      '© {year} AML STORE di Cardelli Antonino',
         cta:              'Ir a la tienda',
         shipping_title:   'Dirección de envío',
+        guide_attached:   'Adjuntamos nuestra guía gratuita de Copilot para Microsoft 365 (PDF).',
     },
 };
 
@@ -222,9 +227,10 @@ export function emailSubject(locale, orderId, isPaid) {
  *
  * @param {object} order       — da toPublicOrder() + dati completi
  * @param {boolean} isPaid
+ * @param {boolean} guideAttached — true se la guida Copilot omaggio è allegata a questa email
  * @returns {string} HTML
  */
-export function emailHtml(order, isPaid) {
+export function emailHtml(order, isPaid, guideAttached = false) {
     const locale = order.locale || 'it';
     const t      = i18n[locale] || i18n.it;
     const year   = new Date().getFullYear();
@@ -352,13 +358,17 @@ export function emailHtml(order, isPaid) {
 
     ${shippingSection}
     ${transferSection}
+    ${guideAttached ? `
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:#eef4ff;border:1px solid #bcd4f5;border-radius:6px">
+      <tr><td style="padding:14px 20px;font-size:14px;color:${ACCENT_DARK}">📎 ${t.guide_attached}</td></tr>
+    </table>` : ''}
 
   </td></tr>
 
   <!-- CTA -->
   <tr><td style="background:${CARD_BG};padding:0 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER};text-align:center">
     <a href="https://aml-store.com/${escHtml(locale)}/"
-       style="display:inline-block;background:${ACCENT};color:#fff;font-size:14px;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:6px">${t.cta}</a>
+       style="display:inline-block;background:${ACCENT_DARK};color:#fff;font-size:14px;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:6px">${t.cta}</a>
   </td></tr>
 
   <!-- Footer -->
@@ -378,9 +388,10 @@ export function emailHtml(order, isPaid) {
  * Genera plain text fallback.
  * @param {object} order
  * @param {boolean} isPaid
+ * @param {boolean} guideAttached — true se la guida Copilot omaggio è allegata a questa email
  * @returns {string}
  */
-export function emailText(order, isPaid) {
+export function emailText(order, isPaid, guideAttached = false) {
     const locale = order.locale || 'it';
     const t      = i18n[locale] || i18n.it;
 
@@ -435,6 +446,10 @@ export function emailText(order, isPaid) {
             `${t.transfer_causale}: ${order.orderId}`,
             t.transfer_note,
         );
+    }
+
+    if (guideAttached) {
+        lines.push(``, `📎 ${t.guide_attached}`);
     }
 
     lines.push(``, `${t.footer_help} Info@amlstore.it`, `https://aml-store.com/${locale}/`);
