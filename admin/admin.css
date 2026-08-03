@@ -717,3 +717,102 @@ select.adm-input {
     .adm-modal { width: 100vw; height: calc(100vh - var(--adm-header-h)); }
     .adm-user-email { display: none; }
 }
+
+/* La tabella ordini (8 colonne) ha bisogno di ~830px per stare senza scroll
+   laterale; sopra i 768px la sidebar filtri (240px, vedi --adm-sidebar-w)
+   resta visibile e si mangia quello spazio, quindi la soglia reale è
+   sidebar + tabella + margini ≈ 1150px, non la larghezza del solo viewport.
+   Sotto i 1200px ogni riga diventa una card verticale — stesso pattern
+   usato per il carrello cliente (cart.css) — così il bottone "Dettagli"
+   resta sempre visibile invece di finire fuori schermo scorrendo. */
+@media (max-width: 1200px) {
+    .adm-table,
+    .adm-table thead,
+    .adm-table tbody,
+    .adm-table tr,
+    .adm-table th,
+    .adm-table td {
+        display: block;
+    }
+    .adm-table thead tr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    .adm-table tbody tr {
+        padding: 1rem 1.1rem;
+        border-bottom: 1px solid rgba(42, 46, 69, .6);
+    }
+    .adm-table tbody tr:last-child { border-bottom: none; }
+    .adm-table tbody tr:hover { background: transparent !important; }
+
+    .adm-table td {
+        padding: .35rem 0;
+        white-space: normal;
+    }
+    .adm-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: .66rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        color: var(--adm-muted);
+        margin-bottom: .15rem;
+    }
+
+    /* Campi con valore breve: etichetta e valore sulla stessa riga */
+    .adm-table td[data-label="Metodo"],
+    .adm-table td[data-label="Stato"],
+    .adm-table td[data-label="Totale"],
+    .adm-table td[data-label="Data"],
+    .adm-table td[data-label="Qty"],
+    .adm-table td[data-label="Aggiornato"] {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .75rem;
+    }
+    .adm-table td[data-label="Metodo"]::before,
+    .adm-table td[data-label="Stato"]::before,
+    .adm-table td[data-label="Totale"]::before,
+    .adm-table td[data-label="Data"]::before,
+    .adm-table td[data-label="Qty"]::before,
+    .adm-table td[data-label="Aggiornato"]::before {
+        margin-bottom: 0;
+    }
+
+    /* Ordine / SKU fanno da intestazione naturale della card */
+    .adm-table td[data-label="Ordine"],
+    .adm-table td[data-label="SKU"] {
+        padding-bottom: .6rem;
+        margin-bottom: .4rem;
+        border-bottom: 1px solid rgba(42, 46, 69, .4);
+        font-size: .95rem;
+    }
+    .adm-table td[data-label="Ordine"]::before,
+    .adm-table td[data-label="SKU"]::before {
+        content: none;
+    }
+
+    .adm-td--actions {
+        padding-top: .7rem !important;
+        margin-top: .3rem;
+        border-top: 1px solid rgba(42, 46, 69, .4);
+    }
+    .adm-table .btn-detail,
+    .adm-table [data-stock-save] {
+        width: 100%;
+        text-align: center;
+    }
+    .adm-table .adm-input--qty {
+        width: 100%;
+        max-width: 140px;
+    }
+}
