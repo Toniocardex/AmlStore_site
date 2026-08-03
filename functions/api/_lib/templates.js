@@ -313,9 +313,13 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
 
   <!-- Logo header -->
-  <tr><td style="background:${TEXT};border-radius:8px 8px 0 0;padding:20px 32px;text-align:center">
-    <img src="https://aml-store.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
-         style="display:inline-block;vertical-align:middle;max-width:140px">
+  <tr><td style="background:${ACCENT_DARK};border-radius:8px 8px 0 0;padding:20px 32px;text-align:center">
+    <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
+      <tr><td>
+        <img src="https://aml-store.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
+             style="display:block;max-width:140px">
+      </td></tr>
+    </table>
   </td></tr>
 
   <!-- Body card -->
