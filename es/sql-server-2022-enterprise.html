@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Server 2022 Enterprise — Aml Store</title>
-    <meta name="description" content="SQL Server 2022 Enterprise. Artículo físico con envío gratuito: entrega al transportista en 24 horas laborables. Confirmación del pedido por email.">
+    <title>SQL Server 2022 Enterprise 24 núcleos — Aml Store</title>
+    <meta name="description" content="SQL Server 2022 Enterprise con licencia perpetua por núcleo (24 núcleos). Con el modelo por núcleo no hacen falta CAL: el número de usuarios que acceden a la base de datos es ilimitado. Soporte físico incluido, interfaz en inglés.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aml-store.com/es/sql-server-2022-enterprise">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
-    <meta property="og:title" content="SQL Server 2022 Enterprise — Aml Store">
-    <meta property="og:description" content="SQL Server 2022 Enterprise. Artículo físico con envío gratuito: entrega al transportista en 24 horas laborables. Confirmación del pedido por email.">
+    <meta property="og:title" content="SQL Server 2022 Enterprise 24 núcleos — Aml Store">
+    <meta property="og:description" content="SQL Server 2022 Enterprise con licencia perpetua por núcleo (24 núcleos). Con el modelo por núcleo no hacen falta CAL: el número de usuarios que acceden a la base de datos es ilimitado. Soporte físico incluido, interfaz en inglés.">
     <meta property="og:url" content="https://aml-store.com/es/sql-server-2022-enterprise">
     <meta property="og:locale" content="es_ES">
     <meta property="og:image" content="https://aml-store.com/asset/media/products/sql-server-2022-enterprise.webp">
@@ -27,6 +27,12 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Organization",
+      "@id": "https://aml-store.com/#organization",
+      "name": "Aml Store",
+      "url": "https://aml-store.com/"
+    },
+    {
       "@type": "Product",
       "@id": "https://aml-store.com/es/sql-server-2022-enterprise#product",
       "name": "SQL Server 2022 Enterprise",
@@ -35,7 +41,7 @@
       "inLanguage": "es",
       "url": "https://aml-store.com/es/sql-server-2022-enterprise",
       "image": "https://aml-store.com/asset/media/products/sql-server-2022-enterprise.webp",
-      "description": "SQL Server 2022 Enterprise. Artículo físico con envío gratuito: entrega al transportista en 24 horas laborables. Confirmación del pedido por email.",
+      "description": "SQL Server 2022 Enterprise con licencia perpetua por núcleo (24 núcleos). Con el modelo por núcleo no hacen falta CAL: el número de usuarios que acceden a la base de datos es ilimitado. Soporte físico incluido, interfaz en inglés.",
       "brand": {
         "@type": "Brand",
         "name": "Microsoft"
@@ -46,21 +52,88 @@
         "priceCurrency": "EUR",
         "price": "3880.00",
         "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition"
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@id": "https://aml-store.com/#organization"
+        }
       }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aml-store.com/es/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Windows Server y SQL",
+          "item": "https://aml-store.com/es/windows-server"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SQL Server 2022 Enterprise"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "inLanguage": "es",
+      "url": "https://aml-store.com/es/sql-server-2022-enterprise",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Hacen falta CAL para SQL Server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. La licencia por núcleo no requiere licencias de acceso de cliente: pueden usar la base de datos cuantos usuarios o aplicaciones quieras, sin coste por puesto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hay un mínimo de núcleos a licenciar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí: Microsoft exige al menos cuatro núcleos licenciados por cada servidor físico o máquina virtual con SQL Server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué sistemas operativos se instala?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "En Windows Server 2016 y versiones posteriores, incluidas las instalaciones Server Core, o en Windows 10 versión 1607 y posteriores. Requiere .NET Framework 4.7.2."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué idioma está el sistema operativo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El soporte OEM está en inglés: la interfaz y la instalación son en inglés. Compruébalo antes de comprar si necesitas otro idioma."
+          }
+        }
+      ]
     }
   ]
 }
     </script>
     <script src="../js/consent-init.js?v=90e947b9a7"></script>
     <link rel="icon" href="../favicon/favicon.png?v=3bfa4181d2" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
+    <link rel="preload" as="image" href="../asset/media/products/sql-server-2022-enterprise.webp?v=6b6f7cb0dc" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
     <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
     <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
     <link rel="stylesheet" href="../css/microsoft-365-product.css?v=c2931e3d10">
+    <link rel="stylesheet" href="../css/product-v3.css?v=994e19488a">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
-<body>
+<body class="pdp-page">
     <a class="skip-link" href="#main">Ir al contenido principal</a>
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Compra rápida" aria-hidden="true">
@@ -70,44 +143,62 @@
                 <span class="product-sticky-cta__msrp">€ 6650,00</span>
                 <span class="product-sticky-cta__sale">€ 3880,00</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">Añadir al carrito</button>
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Comprar ahora
+            </button>
         </div>
     </div>
-    <section class="v2-hero" aria-label="Prodotto">
-        <div class="v2-breadcrumb">
-            <nav aria-label="Breadcrumb">
-                <a href="/es/">Home</a><span class="sep">/</span>
-                <a href="/es/windows-server">Windows Server y SQL</a><span class="sep">/</span>
+
+    <section class="pdp-hero" aria-label="Producto y compra">
+
+        <div class="pdp-breadcrumb">
+            <nav aria-label="Ruta de navegación">
+                <a href="/es/">Home</a>
+                <span class="sep" aria-hidden="true">/</span>
+                <a href="/es/windows-server">Windows Server y SQL</a>
+                <span class="sep" aria-hidden="true">/</span>
                 <span aria-current="page">SQL Server 2022 Enterprise</span>
             </nav>
         </div>
-        <div class="v2-hero__inner">
-            <div class="v2-hero__left">
-                <p class="v2-hero__eyebrow">Servidor / base de datos</p>
-                <h1 class="v2-hero__title">SQL Server 2022 Enterprise</h1>
+
+        <div class="pdp-hero__inner">
+            <div class="pdp-hero__info">
+                <p class="pdp-eyebrow">Licencia perpetua · 24 núcleos</p>
+                <h1 class="pdp-h1 v2-hero__title">SQL Server <span>2022 Enterprise</span></h1>
                 <p class="v2-product-code"><span>Código de producto:</span> <code class="v2-product-code__value">P6L-00076</code></p>
-                <p class="v2-hero__desc">SQL Server 2022 Enterprise. Artículo físico con envío gratuito: entrega al transportista en 24 horas laborables. Confirmación del pedido por email.</p>
+
+                <div class="pdp-hero__split">
+                    <figure class="pdp-media">
+                        <img class="pdp-media__img product-cover-img" src="../asset/media/products/sql-server-2022-enterprise.webp?v=6b6f7cb0dc" width="400" height="400" alt="SQL Server 2022 Enterprise" fetchpriority="high" decoding="async">
+                    </figure>
+                    <div class="pdp-hero__text">
+                        <p class="v2-hero__desc">SQL Server 2022 Enterprise con licencia perpetua por núcleo (24 núcleos). Con el modelo por núcleo no hacen falta CAL: el número de usuarios que acceden a la base de datos es ilimitado. Soporte físico incluido, interfaz en inglés.</p>
+                        <ul class="pdp-keylist">
+                            <li>Sin CAL que comprar</li>
+                            <li>Licencia para 24 núcleos</li>
+                            <li>Sin límite de núcleos</li>
+                            <li>Windows Server 2016 o posterior</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="v2-hero__right">
-                <img class="v2-hero__cover" src="../asset/media/products/sql-server-2022-enterprise.webp?v=6b6f7cb0dc" width="400" height="400" alt="SQL Server 2022 Enterprise" fetchpriority="high" decoding="async">
-            </div>
-        </div>
-    </section>
-    <div class="v2-pricing-wrap">
-        <div id="product-pricing" class="v2-pricing-card"
-            data-stripe-currency="eur"
-            data-stripe-unit-amount="388000"
-            data-stripe-compare-at-amount="665000"
-            data-stripe-product-sku="P6L-00076"
-            data-discount-percent="42"
+
+            <div id="product-pricing" class="pdp-buy"
+                data-stripe-currency="eur"
+                data-stripe-unit-amount="388000"
+                data-stripe-compare-at-amount="665000"
+                data-stripe-product-sku="P6L-00076"
+                data-discount-percent="42"
             data-physical="true">
-            <div class="v2-price-label">Nuestro precio</div>
-            <div class="v2-price-row">
-                <span class="v2-price-msrp">€ 6650,00</span>
-                <span class="v2-price-sale">€ 3880,00</span>
-                <span class="v2-price-badge">−42%</span>
-            </div>
-            <div class="v2-price-tax">Impuestos incluidos. Artículo físico con envío gratuito (no es entrega solo digital). Entrega al transportista en 24 horas laborables tras el pago.</div>
+                <p class="pdp-buy__label">Nuestro precio</p>
+
+                <div class="pdp-price-row" role="group" aria-label="Precios">
+                    <span class="pdp-price-sale">€ 3880,00</span>
+                    <span class="pdp-price-msrp" aria-label="6650,00">€ 6650,00</span>
+                    <span class="pdp-price-badge" aria-label="−42%">−42%</span>
+                </div>
+                <p class="pdp-price-note">Impuestos incluidos. Artículo físico con envío gratuito (no es entrega solo digital). Entrega al transportista en 24 horas laborables tras el pago. Ahorras <strong>€ 2770,00</strong> respecto al precio de lista (€ 6650,00).</p>
                 <p class="v2-stock" data-stock-status="loading" aria-live="polite"
                     data-stock-available="Disponibilidad: {n}"
                     data-stock-low="Últimas {n} unidades"
@@ -116,46 +207,214 @@
                     <span class="v2-stock__dot" aria-hidden="true"></span>
                     <span class="v2-stock__text"></span>
                 </p>
-            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">Añadir al carrito</button>
+
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    Añadir al carrito
+                </button>
+
+                <p class="pdp-delivery">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+                    Entrega al transportista en 24 horas laborables tras el pago
+                </p>
+
+                <ul class="pdp-assur">
+                            <li>Activación en portales oficiales</li>
+                            <li>Soporte físico enviado, no solo digital</li>
+                            <li>Asistencia tras la compra</li>
+                            <li>Pagos gestionados por Stripe y PayPal</li>
+                            <li>Factura disponible</li>
+                </ul>
+
+                <div class="pdp-pay">
+                    <p class="pdp-pay__label">Métodos de pago aceptados</p>
+                    <div class="pdp-pay__row">
+                    <div class="v2-payment-row" role="group" aria-label="Métodos de pago aceptados">
+                        <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" alt="PayPal" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" alt="Apple Pay" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
+                        <span class="v2-payment-logo" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <main id="main" class="product-page" data-cart-added-msg="Añadir al carrito">
-        <section class="product-process-steps" aria-labelledby="steps-title">
-            <h2 id="steps-title">Pedido, envío y activación</h2>
-            <ol class="product-process-steps__list">
-                <li><strong>Pedido</strong> — Checkout seguro</li>
-                <li><strong>Envío del soporte</strong> — Entrega al transportista en 24 horas laborables; confirmación del pedido por email</li>
-                <li><strong>Activación</strong> — Activación oficial Microsoft</li>
+    </section>
+
+    <main id="main" class="product-page" data-cart-added-msg="Producto añadido al carrito.">
+        <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+            <p class="pdp-sec__eyebrow">Por qué elegirlo</p>
+            <h2 id="pdp-features-title" class="pdp-sec__title">Qué incluye la licencia</h2>
+            <ul class="pdp-cards">
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Modelo de licencia</p>
+                    <h3 class="pdp-card__title">Sin CAL que comprar</h3>
+                    <p class="pdp-card__body">La licencia por núcleo no requiere licencias de acceso de cliente: cualquier número de usuarios o aplicaciones puede usar la base de datos sin coste por puesto.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Capacidad</p>
+                    <h3 class="pdp-card__title">Licencia para 24 núcleos</h3>
+                    <p class="pdp-card__body">Cubre 24 núcleos. Microsoft exige un mínimo de cuatro núcleos licenciados por servidor o máquina virtual.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Límites de edición</p>
+                    <h3 class="pdp-card__title">Sin límite de núcleos</h3>
+                    <p class="pdp-card__body">La edición Enterprise no tiene límite de núcleos con la licencia por núcleo, y desbloquea las funciones avanzadas de alta disponibilidad y análisis.</p>
+                </li>
+                <li class="pdp-card">
+                    <p class="pdp-card__label">Compatibilidad</p>
+                    <h3 class="pdp-card__title">Windows Server 2016 o posterior</h3>
+                    <p class="pdp-card__body">Se instala en Windows Server 2016 y versiones posteriores, incluido Server Core. Requiere .NET Framework 4.7.2.</p>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
+            <p class="pdp-sec__eyebrow">Cómo funciona</p>
+            <h2 id="pdp-steps-title" class="pdp-sec__title">Pedido, entrega y activación</h2>
+            <ol class="pdp-steps">
+                <li class="pdp-step">
+                    <div>
+                        <h3>Completa el pedido</h3>
+                        <p>Paga con cualquiera de los métodos disponibles en el checkout: tarjeta, PayPal o carteras digitales.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Recibe el soporte</h3>
+                        <p>Enviamos el DVD original con envío gratuito: entrega al transportista en 24 horas laborables tras el pago.</p>
+                    </div>
+                </li>
+                <li class="pdp-step">
+                    <div>
+                        <h3>Instala y activa</h3>
+                        <p>Instala el sistema y activa la licencia por los canales oficiales de Microsoft, siguiendo las instrucciones recibidas.</p>
+                    </div>
+                </li>
             </ol>
         </section>
-        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
-            <h2 id="product-trustpilot-title" class="visually-hidden">Opiniones de clientes</h2>
-            <p class="product-trustpilot__fallback trustpilot-fallback">Experiencias reales de clientes en Trustpilot. <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
-            <div
-                id="trustpilot-widget"
-                class="trustpilot-widget"
-                data-locale="es-ES"
-                data-template-id="5419b6a8b0d04a076446a9ad"
-                data-businessunit-id="61c44c912f493a1a7cd810fa"
-                data-style-height="40px"
-                data-style-width="100%"
-                data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
-                data-min-review-count="0"
-                data-style-alignment="center"
-            >
-                <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews product-trustpilot">
+                <h2 id="pdp-reviews-title" class="pdp-reviews__title">Lo que dicen los clientes</h2>
+                <p class="pdp-reviews__lead">Las reseñas las publica y verifica Trustpilot: las lees directamente en la plataforma, sin filtros por nuestra parte.</p>
+                <p class="product-trustpilot__fallback trustpilot-fallback">Experiencias reales de clientes en Trustpilot. <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
+                <div
+                    id="trustpilot-widget"
+                    class="trustpilot-widget"
+                    data-locale="es-ES"
+                    data-template-id="5419b6a8b0d04a076446a9ad"
+                    data-businessunit-id="61c44c912f493a1a7cd810fa"
+                    data-style-height="40px"
+                    data-style-width="100%"
+                    data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
+                    data-min-review-count="0"
+                    data-style-alignment="center"
+                >
+                    <a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+                </div>
+                <a class="pdp-reviews__cta" href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Leer todas las reseñas</a>
             </div>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
+            <p class="pdp-sec__eyebrow">FAQ</p>
+            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Las respuestas antes de comprar</h2>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
+                    <summary>¿Hacen falta CAL para SQL Server?</summary>
+                    <div class="home-faq-body">
+                        <p>No. La licencia por núcleo no requiere licencias de acceso de cliente: pueden usar la base de datos cuantos usuarios o aplicaciones quieras, sin coste por puesto.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>¿Hay un mínimo de núcleos a licenciar?</summary>
+                    <div class="home-faq-body">
+                        <p>Sí: Microsoft exige al menos cuatro núcleos licenciados por cada servidor físico o máquina virtual con SQL Server.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>¿En qué sistemas operativos se instala?</summary>
+                    <div class="home-faq-body">
+                        <p>En Windows Server 2016 y versiones posteriores, incluidas las instalaciones Server Core, o en Windows 10 versión 1607 y posteriores. Requiere .NET Framework 4.7.2.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>¿En qué idioma está el sistema operativo?</summary>
+                    <div class="home-faq-body">
+                        <p>El soporte OEM está en inglés: la interfaz y la instalación son en inglés. Compruébalo antes de comprar si necesitas otro idioma.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">Requisitos del sistema</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilidad y requisitos técnicos</h2>
+            <p class="pdp-sec__sub">Valores orientativos de la documentación de Microsoft. Comprueba siempre los requisitos actualizados antes de instalar.</p>
+            <div class="home-faq-list">
+                <details class="home-faq-item">
+                    <summary>Procesador</summary>
+                    <div class="home-faq-body">
+                        <p>Procesador x64 desde 1,4 GHz, 2,0 GHz o superior recomendado. La instalación solo se admite en procesadores x64.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Memoria</summary>
+                    <div class="home-faq-body">
+                        <p>Al menos 1 GB de RAM, 4 GB o más recomendados y a aumentar según crezca la base de datos.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Espacio en disco</summary>
+                    <div class="home-faq-body">
+                        <p>Al menos 6 GB libres. La instalación completa de todas las funciones requiere unos 8 GB.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Sistema operativo</summary>
+                    <div class="home-faq-body">
+                        <p>Windows Server 2016 o posterior, o Windows 10 versión 1607 o posterior. Requiere .NET Framework 4.7.2.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="pdp-final" aria-labelledby="pdp-final-title">
+            <div>
+                <h2 id="pdp-final-title">Todo listo para empezar</h2>
+                <p>SQL Server 2022 Enterprise — Entrega al transportista en 24 horas laborables tras el pago</p>
+                <span class="pdp-final__price">€ 3880,00 <small>IVA incluido, en lugar de € 6650,00</small></span>
+            </div>
+            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                Añadir al carrito
+            </button>
         </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js?v=0c77df5095"></script>
     <script src="../js/cart.js?v=32dc4d5333" defer></script>
+    <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>
+    <script src="../js/product-v3.js?v=c970f12b78" defer></script>
     <script src="../js/product-stock.js?v=9ca07ec72b" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/header.js?v=e3cb8bf70e" defer></script>
-    <script src="../components/footer.js?v=63eb1768ff" defer></script>
+    <script src="../components/footer.js?v=63013e094b" defer></script>
 </body>
 </html>

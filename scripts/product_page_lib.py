@@ -1574,6 +1574,18 @@ def resolve_rich_content(slug):
     except ImportError:
         pass
 
+    # Windows Server e SQL Server: riusano la UI Windows, ma forniscono passi e
+    # requisiti propri (l'attivazione server non è quella di un client).
+    try:
+        from product_content_server import get_server_content
+        from product_content_windows import UI as SERVER_UI
+
+        content = get_server_content(slug)
+        if content:
+            return content, SERVER_UI
+    except ImportError:
+        pass
+
     return None, None
 
 

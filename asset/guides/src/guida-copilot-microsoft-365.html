@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Copilot in Microsoft 365 — Guida pratica | Aml Store</title>
+<style>
+@font-face{font-family:'Montserrat';src:url('../../../fonts/montserrat-latin-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Montserrat';src:url('../../../fonts/montserrat-latin-800.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:'Montserrat';src:url('../../../fonts/montserrat-latin-600.woff2') format('woff2');font-weight:600;font-display:swap}
+
+:root{
+  --blu:#003182;
+  --blu-chiaro:#3b82f6;
+  --testo:#23262b;
+  --testo-soft:#55595f;
+  --testo-muto:#83878d;
+  --linea:#e3e6ea;
+  --sfondo-soft:#f5f7fa;
+  --ambra:#8a5a00;
+  --ambra-bg:#fdf6e7;
+  --rosso:#9b1c1c;
+  --rosso-bg:#fdf0f0;
+  --verde:#14603a;
+  --verde-bg:#eef8f2;
+}
+
+*{box-sizing:border-box}
+
+@page{size:A4;margin:17mm 15mm 15mm}
+@page:first{margin:0}
+
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+body{
+  margin:0;
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:10pt;
+  line-height:1.55;
+  color:var(--testo);
+}
+
+h1,h2,h3,h4{font-family:'Montserrat',"Segoe UI",sans-serif;margin:0;line-height:1.2}
+
+/* ---------- COPERTINA ---------- */
+.cover{
+  height:297mm;
+  padding:26mm 20mm 18mm;
+  background:linear-gradient(158deg,#002357 0%,#003182 46%,#00459f 100%);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  page-break-after:always;
+  position:relative;
+  overflow:hidden;
+}
+.cover::after{
+  content:"";position:absolute;right:-70mm;bottom:-70mm;
+  width:170mm;height:170mm;border-radius:50%;
+  background:rgba(255,255,255,.05);
+}
+.cover__logo{background:#fff;border-radius:12px;padding:14px 26px;width:fit-content;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.cover__logo img{display:block;height:46px;width:auto}
+.cover__eyebrow{
+  margin:24mm 0 0;font-size:9.5pt;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:#9dc4ff;
+}
+.cover__title{font-size:40pt;font-weight:800;margin:7mm 0 0;letter-spacing:-.022em}
+.cover__title span{display:block;color:#8fbcff}
+.cover__rule{width:56mm;height:4px;background:#5b9bff;border-radius:2px;margin:9mm 0 7mm}
+.cover__sub{font-size:14.5pt;line-height:1.45;font-weight:400;color:#dbe8fc;max-width:120mm;margin:0}
+.cover__badges{margin-top:11mm;display:flex;gap:7px;flex-wrap:wrap}
+.cover__badge{
+  border:1.4px solid rgba(255,255,255,.42);border-radius:100px;
+  padding:5px 15px;font-size:9.5pt;font-weight:600;color:#fff;
+}
+.cover__spacer{flex:1}
+.cover__foot{
+  border-top:1px solid rgba(255,255,255,.22);padding-top:6mm;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:10mm;
+  font-size:9.5pt;color:#c3d7f5;position:relative;z-index:2;
+}
+.cover__foot strong{display:block;color:#fff;font-size:11pt;font-family:'Montserrat',sans-serif;font-weight:700;margin-bottom:2px}
+.cover__gift{
+  background:rgba(255,255,255,.12);border:1.4px solid rgba(255,255,255,.3);
+  border-radius:10px;padding:9px 16px;text-align:right;
+}
+.cover__gift b{display:block;font-size:10.5pt;color:#fff}
+.cover__gift span{font-size:8.6pt;color:#bcd3f2}
+
+/* ---------- STRUTTURA ---------- */
+.break{page-break-before:always}
+h2.parte{
+  font-size:9pt;letter-spacing:.15em;text-transform:uppercase;color:var(--blu);
+  font-weight:700;margin:0 0 3mm;padding-bottom:2.5mm;border-bottom:2.5px solid var(--blu);
+}
+h3{
+  font-size:17pt;font-weight:800;color:var(--blu);margin:0 0 3.5mm;letter-spacing:-.015em;
+  page-break-after:avoid;
+}
+h3 .num{color:#a8bede;margin-right:3mm}
+/* separatore tra capitoli che scorrono sulla stessa pagina */
+section:not(.break)>h3:first-child{
+  margin-top:10mm;padding-top:7mm;border-top:2px solid var(--linea);
+}
+h4{
+  font-size:11.4pt;font-weight:700;color:var(--testo);margin:7mm 0 2.5mm;
+  page-break-after:avoid;
+}
+p{margin:0 0 2.8mm}
+ul,ol{margin:0 0 2.8mm;padding-left:5.5mm}
+li{margin-bottom:1.3mm}
+strong{font-weight:600;color:#14171b}
+a{color:var(--blu);text-decoration:none}
+.lead{font-size:11.2pt;color:var(--testo-soft);line-height:1.6;margin-bottom:5mm}
+
+/* ---------- COMPONENTI ---------- */
+.prompt{
+  background:#0d1b30;color:#e8eefb;border-radius:8px;padding:4mm 5mm;
+  margin:3mm 0 4mm;font-size:9.2pt;line-height:1.55;
+  border-left:4px solid var(--blu-chiaro);break-inside:avoid;
+}
+.prompt .etichetta{
+  display:block;font-family:'Montserrat',sans-serif;font-size:7.4pt;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:#7fb0ff;margin-bottom:2mm;
+}
+.prompt em{color:#ffd88a;font-style:normal}
+
+.box{border-radius:8px;padding:4mm 5mm;margin:4mm 0;break-inside:avoid;font-size:9.7pt}
+.box p:last-child,.box ul:last-child,.box ol:last-child{margin-bottom:0}
+.box .titolo{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:10pt;
+  margin-bottom:2mm;display:block;
+}
+.box--info{background:var(--sfondo-soft);border-left:4px solid var(--blu)}
+.box--info .titolo{color:var(--blu)}
+.box--attenzione{background:var(--ambra-bg);border-left:4px solid #d69e2e}
+.box--attenzione .titolo{color:var(--ambra)}
+.box--stop{background:var(--rosso-bg);border-left:4px solid #c53030}
+.box--stop .titolo{color:var(--rosso)}
+.box--ok{background:var(--verde-bg);border-left:4px solid #2f855a}
+.box--ok .titolo{color:var(--verde)}
+
+table{width:100%;border-collapse:collapse;margin:3mm 0 5mm;font-size:9.3pt;break-inside:avoid}
+th{
+  background:var(--blu);color:#fff;text-align:left;padding:2.6mm 3mm;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:8.8pt;
+}
+th:first-child{border-radius:6px 0 0 0}
+th:last-child{border-radius:0 6px 0 0}
+td{padding:2.6mm 3mm;border-bottom:1px solid var(--linea);vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfd}
+
+.confronto{display:flex;gap:4mm;margin:3mm 0 5mm;break-inside:avoid}
+.confronto>div{flex:1;border-radius:8px;padding:3.5mm 4mm;font-size:9.3pt}
+.confronto .no{background:var(--rosso-bg);border:1px solid #f2c7c7}
+.confronto .si{background:var(--verde-bg);border:1px solid #bfe3d0}
+.confronto .et{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:8.4pt;
+  letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2mm;
+}
+.confronto .no .et{color:var(--rosso)}
+.confronto .si .et{color:var(--verde)}
+
+.indice{margin:0}
+.indice__parte{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:8.6pt;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--blu);margin:6mm 0 2.5mm;
+}
+.indice__parte:first-child{margin-top:0}
+.indice ol{list-style:none;padding:0;margin:0;counter-reset:none}
+.indice li{
+  padding:1.9mm 0;border-bottom:1px solid var(--linea);
+  display:flex;gap:4mm;font-size:10pt;margin:0;
+}
+.indice li b{color:var(--blu);font-weight:700;min-width:7mm;font-family:'Montserrat',sans-serif}
+.indice li span{color:var(--testo-muto);font-size:9pt;margin-left:auto;text-align:right;flex-shrink:0}
+
+.scheda{
+  border:1px solid var(--linea);border-radius:9px;padding:4.5mm 5mm;margin:4mm 0;
+  break-inside:avoid;
+}
+.scheda__testa{display:flex;align-items:center;gap:3.5mm;margin-bottom:3mm}
+.scheda__icona{
+  width:9mm;height:9mm;border-radius:7px;background:var(--blu);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:12pt;flex-shrink:0;
+}
+.scheda__nome{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13pt;color:var(--blu)}
+.scheda__nome small{display:block;font-size:8.6pt;font-weight:600;color:var(--testo-muto);letter-spacing:.02em}
+
+.profilo{
+  background:linear-gradient(135deg,#002357,#00459f);color:#fff;border-radius:10px;
+  padding:5mm 6mm;margin:0 0 5mm;break-inside:avoid;
+}
+.profilo h3{color:#fff;margin-bottom:2mm;font-size:18pt}
+.profilo p{color:#cfe0f8;margin:0;font-size:10pt}
+
+.mini{font-size:8.8pt;color:var(--testo-muto);line-height:1.5}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding-left:7mm;position:relative;margin-bottom:2.2mm}
+.checklist li::before{
+  content:"";position:absolute;left:0;top:1.6mm;width:3.6mm;height:3.6mm;
+  border:1.6px solid var(--blu);border-radius:3px;
+}
+.kpi{display:flex;gap:3mm;margin:3mm 0 5mm;break-inside:avoid}
+.kpi>div{flex:1;background:var(--sfondo-soft);border-radius:8px;padding:3.5mm;text-align:center}
+.kpi b{display:block;font-family:'Montserrat',sans-serif;font-size:16pt;font-weight:800;color:var(--blu);line-height:1.1}
+.kpi span{font-size:8.4pt;color:var(--testo-soft);display:block;margin-top:1.5mm}
+
+.chiusura{
+  background:linear-gradient(158deg,#002357,#00459f);color:#fff;border-radius:12px;
+  padding:9mm 8mm;text-align:center;margin-top:6mm;
+}
+.chiusura h3{color:#fff;font-size:20pt;margin-bottom:3mm}
+.chiusura p{color:#cfe0f8;max-width:130mm;margin:0 auto 3mm}
+.chiusura .sito{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:13pt;color:#fff;
+  border:1.6px solid rgba(255,255,255,.45);border-radius:100px;padding:3mm 9mm;
+  display:inline-block;margin-top:2mm;
+}
+</style>
+</head>
+<body>
+
+<!-- ============ COPERTINA ============ -->
+<section class="cover">
+  <div class="cover__logo"><img src="../../../logo/logo-header-400.webp" alt="Aml Store"></div>
+
+  <p class="cover__eyebrow">Guida gratuita · Edizione 2026</p>
+  <h1 class="cover__title">Copilot in<br>Microsoft 365<span>senza perderci tempo</span></h1>
+  <div class="cover__rule"></div>
+  <p class="cover__sub">Il manuale pratico per usare l'intelligenza artificiale in Word, Excel, PowerPoint e Outlook. Con casi d'uso reali per studenti, famiglie e professionisti.</p>
+
+  <div class="cover__badges">
+    <span class="cover__badge">Microsoft 365 Personal</span>
+    <span class="cover__badge">Microsoft 365 Family</span>
+    <span class="cover__badge">120+ prompt pronti</span>
+  </div>
+
+  <div class="cover__spacer"></div>
+
+  <div class="cover__foot">
+    <div>
+      <strong>Aml Store</strong>
+      Licenze digitali originali · aml-store.com
+    </div>
+    <div class="cover__gift">
+      <b>Copia omaggio</b>
+      <span>Distribuzione libera, vietata la vendita</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDICE ============ -->
+<section>
+  <h2 class="parte">Indice</h2>
+  <h3 style="margin-bottom:5mm">Cosa trovi in questa guida</h3>
+
+  <div class="indice">
+    <p class="indice__parte">Parte 1 · Capire cosa hai già pagato</p>
+    <ol>
+      <li><b>1</b> Copilot in due minuti <span>cos'è e cosa non è</span></li>
+      <li><b>2</b> Cosa è incluso in Personal e Family <span>tabella completa</span></li>
+      <li><b>3</b> I 60 crediti AI al mese <span>cosa li consuma</span></li>
+      <li><b>4</b> Family: la regola che quasi nessuno conosce <span>da leggere</span></li>
+      <li><b>5</b> Attivazione e primo avvio <span>checklist</span></li>
+    </ol>
+
+    <p class="indice__parte">Parte 2 · Il metodo</p>
+    <ol>
+      <li><b>6</b> Il metodo R.I.C.C.O. <span>prompt che funzionano</span></li>
+      <li><b>7</b> Cinque prompt riscritti <span>prima e dopo</span></li>
+      <li><b>8</b> Le sette abitudini che fanno la differenza</li>
+    </ol>
+
+    <p class="indice__parte">Parte 3 · App per app</p>
+    <ol>
+      <li><b>9</b> Word</li>
+      <li><b>10</b> Excel</li>
+      <li><b>11</b> PowerPoint</li>
+      <li><b>12</b> Outlook</li>
+      <li><b>13</b> OneNote</li>
+      <li><b>14</b> Designer</li>
+      <li><b>15</b> L'app Copilot <span>chat, voce, immagini</span></li>
+    </ol>
+
+    <p class="indice__parte">Parte 4 · Casi d'uso per profilo</p>
+    <ol>
+      <li><b>16</b> Studenti <span>scuola e università</span></li>
+      <li><b>17</b> Casa e famiglia</li>
+      <li><b>18</b> Commercialisti</li>
+      <li><b>19</b> Avvocati</li>
+      <li><b>20</b> Infermieri e professioni sanitarie</li>
+    </ol>
+
+    <p class="indice__parte">Parte 5 · Usare bene</p>
+    <ol>
+      <li><b>21</b> Far durare i 60 crediti</li>
+      <li><b>22</b> Privacy, segreto professionale e GDPR <span>importante</span></li>
+      <li><b>23</b> Copilot sbaglia: come accorgersene</li>
+      <li><b>24</b> Problemi frequenti <span>e soluzioni</span></li>
+      <li><b>25</b> Appendice: libreria prompt</li>
+    </ol>
+  </div>
+
+  <div class="box box--info">
+    <span class="titolo">Come leggere questa guida</span>
+    <p>Le Parti 1 e 2 valgono per tutti: sono venti minuti che ti fanno risparmiare mesi di tentativi. Poi salta direttamente al tuo profilo nella Parte 4. La Parte 5 è quella che quasi nessuno legge ed è quella che evita i guai — in particolare il capitolo 22, se lavori con dati di clienti o pazienti.</p>
+  </div>
+
+  <p class="mini" style="margin-top:5mm">Guida aggiornata ad <strong>agosto 2026</strong>. Copilot cambia con frequenza: funzioni, nomi dei pulsanti e limiti di utilizzo possono variare dopo questa data. Documento informativo indipendente, non affiliato né approvato da Microsoft. Microsoft, Microsoft 365, Copilot, Word, Excel, PowerPoint, Outlook, OneNote e Designer sono marchi di Microsoft Corporation.</p>
+</section>
+
+<!-- ============ PARTE 1 ============ -->
+<section class="break">
+  <h2 class="parte">Parte 1 · Capire cosa hai già pagato</h2>
+  <h3><span class="num">1</span>Copilot in due minuti</h3>
+
+  <p class="lead">Copilot è un assistente di intelligenza artificiale che vive <em>dentro</em> le app di Office. Non è un sito separato dove copiare e incollare: è un pulsante nella barra degli strumenti di Word, un riquadro laterale in Excel, una voce nel menu di Outlook.</p>
+
+  <p>La differenza è tutta lì. Un chatbot generico non sa cosa c'è nel tuo documento. Copilot sì: legge il file che hai aperto, il foglio su cui stai lavorando, il thread di email che stai leggendo. Quando gli chiedi «riassumi», sa già cosa deve riassumere.</p>
+
+  <h4>Le tre cose che sa fare davvero bene</h4>
+  <ul>
+    <li><strong>Partire da zero.</strong> La pagina bianca è il problema più costoso che esista. Copilot produce una bozza in venti secondi: sarà da correggere, ma correggere è molto più veloce che inventare.</li>
+    <li><strong>Riassumere e cercare.</strong> Un contratto di 40 pagine, una casella con 200 email non lette, un foglio con 8.000 righe. Copilot estrae la sostanza in un attimo.</li>
+    <li><strong>Trasformare.</strong> Prendere un testo e cambiarne il formato: appunti disordinati che diventano una scaletta, un documento che diventa una presentazione, dati che diventano una tabella pulita.</li>
+  </ul>
+
+  <h4>Le tre cose in cui va sorvegliato</h4>
+  <ul>
+    <li><strong>I numeri e le date.</strong> Copilot può sbagliare un calcolo e presentarlo con assoluta sicurezza. Se un numero finisce in una dichiarazione, in una fattura o in una cartella clinica, va ricontrollato a mano. Sempre.</li>
+    <li><strong>Le fonti e le norme.</strong> Può citare un articolo di legge che non dice quello che sostiene, o inventare una sentenza che non esiste. È il fenomeno noto come «allucinazione».</li>
+    <li><strong>Il tuo stile.</strong> Di base scrive in un italiano corretto ma anonimo. Va guidato, e questa guida ti spiega come.</li>
+  </ul>
+
+  <div class="box box--info">
+    <span class="titolo">La regola d'oro, in una riga</span>
+    <p>Copilot è un ottimo <strong>primo stesore</strong> e un pessimo <strong>ultimo revisore</strong>. L'ultima parola resta sempre tua — ed è anche l'unica posizione in cui la responsabilità professionale può stare.</p>
+  </div>
+</section>
+
+<section>
+  <h3><span class="num">2</span>Cosa è incluso in Personal e Family</h3>
+
+  <p class="lead">Dal 2025 Copilot è compreso nell'abbonamento Microsoft 365 Personal e Family, senza costi aggiuntivi. Non serve comprare Copilot Pro a parte. Ecco dove lo trovi e cosa fa.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:26%">App</th><th>Cosa puoi fare</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Word</strong></td><td>Scrivere bozze da zero, riscrivere paragrafi, cambiare tono, accorciare o allungare, riassumere documenti lunghi, fare domande sul contenuto del file</td></tr>
+      <tr><td><strong>Excel</strong></td><td>Analizzare tabelle, suggerire formule, creare grafici, evidenziare tendenze e anomalie, generare colonne calcolate</td></tr>
+      <tr><td><strong>PowerPoint</strong></td><td>Creare una presentazione completa da un prompt o da un documento Word, riorganizzare le slide, generare note per il relatore</td></tr>
+      <tr><td><strong>Outlook</strong></td><td>Riassumere thread lunghi, scrivere risposte, sintetizzare la posta arretrata, suggerire il tono giusto</td></tr>
+      <tr><td><strong>OneNote</strong></td><td>Riordinare appunti, creare elenchi e piani, riassumere pagine di note</td></tr>
+      <tr><td><strong>Designer</strong></td><td>Generare e modificare immagini, creare grafiche per inviti, locandine, social</td></tr>
+      <tr><td><strong>App Copilot</strong></td><td>Chat generica, conversazione vocale, generazione di immagini, ricerca sul web</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Le novità del 2026: Copilot che agisce</h4>
+  <p>L'aggiornamento più rilevante dell'ultimo anno è la cosiddetta <strong>modalità agente</strong> (Agent Mode), disponibile in Word, Excel e PowerPoint dal menu Strumenti. La differenza rispetto a prima è sostanziale: Copilot non si limita più a suggerirti un testo che poi devi incollare, ma esegue direttamente più operazioni in sequenza nel documento — crea la struttura, applica gli stili, inserisce la tabella, aggiorna il grafico.</p>
+  <p>In pratica passi dal chiedere «scrivimi un testo» al chiedere «costruiscimi il documento». È molto più potente, e per questo va guardato con più attenzione: controlla sempre cosa ha modificato prima di salvare.</p>
+
+  <div class="box box--attenzione">
+    <span class="titolo">Un requisito tecnico che blocca molti</span>
+    <p>In <strong>Excel</strong>, Copilot funziona solo se il file è salvato su OneDrive con il <strong>salvataggio automatico attivo</strong>. Se lavori su un file in una cartella locale del PC, il pulsante Copilot resta spento o dà errore. È la causa numero uno delle segnalazioni «non mi funziona».</p>
+  </div>
+
+  <h4>Cosa serve per usarlo</h4>
+  <ul>
+    <li>Un abbonamento <strong>Microsoft 365 Personal o Family</strong> attivo (le versioni «una tantum» come Office 2021 o 2024 <strong>non</strong> includono Copilot: sono licenze perpetue senza servizi cloud).</li>
+    <li>Un <strong>account Microsoft personale</strong>, con cui devi aver effettuato l'accesso nelle app.</li>
+    <li>App aggiornate all'ultima versione.</li>
+    <li>Il requisito di <strong>età minima</strong> previsto per il tuo Paese: varia da area geografica e può escludere gli account per minori. È il motivo per cui, in una Family, l'account di un figlio adolescente può non vedere le funzioni AI.</li>
+    <li>Una connessione a Internet: Copilot elabora nel cloud, non sul tuo PC.</li>
+  </ul>
+</section>
+
+<section>
+  <h3><span class="num">3</span>I 60 crediti AI al mese</h3>
+
+  <p class="lead">Qui sta il punto che genera più confusione. Copilot è incluso, ma non è illimitato: Personal e Family danno <strong>60 crediti AI al mese</strong>, che si azzerano e si rinnovano ogni mese.</p>
+
+  <div class="kpi">
+    <div><b>60</b><span>crediti al mese<br>Personal e Family</span></div>
+    <div><b>1</b><span>credito per ogni<br>azione generativa</span></div>
+    <div><b>∞</b><span>chat nell'app Copilot<br>non consuma crediti</span></div>
+  </div>
+
+  <h4>Cosa consuma un credito</h4>
+  <p>In linea generale, ogni volta che chiedi a Copilot di <strong>produrre</strong> qualcosa dentro un'app Office o Windows:</p>
+  <ul>
+    <li>Scrivere una bozza, riscrivere o riassumere in Word</li>
+    <li>Analizzare dati o generare formule in Excel</li>
+    <li>Creare una presentazione in PowerPoint</li>
+    <li>Riassumere o far scrivere una risposta in Outlook</li>
+    <li>Generare o modificare un'immagine in Designer, Paint, Foto</li>
+  </ul>
+
+  <h4>Cosa <em>non</em> consuma crediti</h4>
+  <p>Alcune funzioni rientrano in quello che Microsoft chiama «uso estensivo», cioè senza contatore:</p>
+  <ul>
+    <li>La <strong>chat nell'app Copilot</strong> (web, desktop, mobile) e la conversazione vocale</li>
+    <li>Le <strong>Pagine</strong> di Copilot e le funzioni dei Notebook come la panoramica audio</li>
+  </ul>
+
+  <div class="box box--ok">
+    <span class="titolo">La strategia che raddoppia i tuoi crediti</span>
+    <p>Usa la <strong>chat gratuita dell'app Copilot</strong> per tutto il lavoro di pensiero: ragionare su un'impostazione, farti spiegare un concetto, buttare giù una scaletta, esplorare idee. Riserva i <strong>60 crediti</strong> alle azioni che devono succedere <em>dentro</em> il file, dove il valore è che Copilot vede il tuo documento e lo modifica direttamente.</p>
+    <p>Detto altrimenti: la conversazione è gratis, l'esecuzione sul documento è a consumo. Chi tratta i crediti così arriva a fine mese senza accorgersene.</p>
+  </div>
+
+  <p>Sessanta crediti sembrano pochi, ma per un uso domestico o di studio sono in genere sufficienti: sono due azioni al giorno. Se invece li usi in modo professionale e intensivo li esaurisci nella prima settimana — e a quel punto l'unica strada è passare a un piano superiore (Microsoft 365 Premium), che rimuove il tetto. Non esiste un sistema di ricarica a pacchetti sui piani domestici.</p>
+
+  <div class="box box--attenzione">
+    <span class="titolo">Come controllare quanti te ne restano</span>
+    <p>Apri l'app Copilot o la pagina dell'account Microsoft e cerca la voce relativa ai crediti AI. Controllalo la prima volta dopo una settimana di utilizzo: ti dà subito la misura del tuo ritmo di consumo e ti dice se devi cambiare abitudini o piano.</p>
+  </div>
+</section>
+
+<section>
+  <h3><span class="num">4</span>Family: la regola che quasi nessuno conosce</h3>
+
+  <div class="box box--stop">
+    <span class="titolo">Leggi questa pagina prima di ogni altra, se hai una Family</span>
+    <p>In <strong>Microsoft 365 Family</strong> le funzionalità di intelligenza artificiale in Word, Excel, PowerPoint, Outlook e Designer sono disponibili <strong>solo per il titolare dell'abbonamento</strong> e non possono essere condivise con gli altri membri.</p>
+  </div>
+
+  <p class="lead">Microsoft 365 Family si condivide fino a sei persone. Copilot no.</p>
+
+  <p>È la posizione ufficiale di Microsoft e la fonte assoluta della maggior parte delle delusioni: si compra la Family pensando che tutta la famiglia avrà Copilot, e invece il pulsante compare soltanto nell'account di chi ha sottoscritto l'abbonamento. Gli altri cinque membri continuano ad avere tutto il resto — le app complete, 1 TB di OneDrive a testa, le funzioni di sicurezza — ma non le funzioni AI.</p>
+
+  <h4>Cosa significa in pratica</h4>
+  <ul>
+    <li>Se la Family è intestata a un genitore, i figli <strong>non</strong> vedranno Copilot in Word mentre scrivono la tesina.</li>
+    <li>Non si può «trasferire» Copilot a un altro membro: è legato al titolare, non assegnabile.</li>
+    <li>Non serve reinstallare, riavviare o contattare l'assistenza: non è un guasto, è il funzionamento previsto.</li>
+    <li>L'unica strada perché un altro membro abbia Copilot è che disponga di un <strong>proprio abbonamento</strong> (Personal o Premium).</li>
+  </ul>
+
+  <h4>La scelta pratica</h4>
+  <table>
+    <thead>
+      <tr><th style="width:34%">Situazione</th><th>Cosa conviene</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Una sola persona usa davvero l'AI</td><td>Family intestata a quella persona. Gli altri hanno comunque app e spazio cloud.</td></tr>
+      <tr><td>Due o più persone vogliono Copilot</td><td>Valuta abbonamenti separati, o Family + un Personal per il secondo utente. Fai il conto: a volte due Personal costano quanto una Family.</td></tr>
+      <tr><td>Uso professionale intensivo</td><td>Un piano che rimuove il tetto dei 60 crediti, intestato a chi lavora.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box box--info">
+    <span class="titolo">Il consiglio che vale di più</span>
+    <p>Se stai per attivare una Family, <strong>intestala alla persona che userà davvero Copilot</strong>. Cambiare titolare dopo è complicato: spesso significa disdire e riattivare. Trenta secondi di attenzione al momento dell'acquisto valgono un anno di funzioni utilizzabili.</p>
+  </div>
+
+  <p class="mini">Nota: questa è la regola ufficiale in vigore alla data di questa guida. Microsoft ha modificato più volte la politica sulle funzioni AI dei piani domestici, e nel corso del 2026 si sono viste comunicazioni non del tutto allineate. Prima di acquistare in base a questo punto, una verifica sulla pagina di supporto Microsoft aggiornata è tempo ben speso.</p>
+</section>
+
+<section>
+  <h3><span class="num">5</span>Attivazione e primo avvio</h3>
+
+  <p class="lead">Dieci minuti, una volta sola. Falli bene e non ci torni più.</p>
+
+  <h4>Checklist di attivazione</h4>
+  <ul class="checklist">
+    <li><strong>Verifica l'abbonamento.</strong> Vai su <em>account.microsoft.com</em> → Servizi e abbonamenti. Deve comparire Microsoft 365 Personal o Family attivo, e tu devi essere il titolare (vedi capitolo 4).</li>
+    <li><strong>Accedi nelle app.</strong> Apri Word, in alto a destra controlla che compaia il tuo account Microsoft. Se c'è scritto «Accedi», Copilot non apparirà.</li>
+    <li><strong>Aggiorna Office.</strong> File → Account → Opzioni di aggiornamento → Aggiorna ora. Le funzioni Copilot arrivano con gli aggiornamenti: su una versione vecchia non ci sono.</li>
+    <li><strong>Attiva OneDrive e il salvataggio automatico.</strong> Indispensabile per Excel, molto utile ovunque. Sposta le cartelle di lavoro su OneDrive.</li>
+    <li><strong>Controlla la lingua.</strong> Copilot lavora bene in italiano, ma se l'interfaccia è in un'altra lingua tende a rispondere in quella. File → Opzioni → Lingua.</li>
+    <li><strong>Installa l'app Copilot.</strong> Da Microsoft Store su Windows, o dagli store su telefono. È la parte che non consuma crediti: averla a portata di mano cambia il modo in cui lavori.</li>
+    <li><strong>Fai la prova del nove.</strong> Apri un documento Word con del testo e cerca il pulsante Copilot nella scheda Home. Se c'è, sei operativo.</li>
+  </ul>
+
+  <h4>Dove si trova il pulsante</h4>
+  <table>
+    <thead><tr><th style="width:24%">App</th><th>Percorso</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Word</strong></td><td>Scheda Home, icona Copilot a destra. In un documento vuoto compare anche al centro pagina. Modalità agente: menu Strumenti.</td></tr>
+      <tr><td><strong>Excel</strong></td><td>Scheda Home, icona Copilot. Richiede file su OneDrive con salvataggio automatico.</td></tr>
+      <tr><td><strong>PowerPoint</strong></td><td>Scheda Home, icona Copilot. Per creare da zero: «Crea presentazione da...».</td></tr>
+      <tr><td><strong>Outlook</strong></td><td>In alto nel messaggio: «Riepiloga». In scrittura: «Bozza con Copilot».</td></tr>
+      <tr><td><strong>OneNote</strong></td><td>Scheda Home, icona Copilot, si apre il riquadro laterale.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box box--attenzione">
+    <span class="titolo">Se il pulsante non c'è</span>
+    <p>Nell'ordine: 1) sei il titolare dell'abbonamento? 2) hai fatto l'accesso con <em>quell'</em>account? 3) hai aggiornato Office? 4) hai più account collegati nelle app e ne stai usando uno sbagliato? Il punto 4 è subdolo: se hai un account di lavoro e uno personale sullo stesso PC, Word può usare quello senza Copilot. Rimuovi l'account che non serve e riavvia.</p>
+  </div>
+</section>
+
+<!-- ============ PARTE 2 ============ -->
+<section class="break">
+  <h2 class="parte">Parte 2 · Il metodo</h2>
+  <h3><span class="num">6</span>Il metodo R.I.C.C.O.</h3>
+
+  <p class="lead">La differenza tra chi trova Copilot inutile e chi non ne fa più a meno non è l'abbonamento: è come scrive le richieste. Un prompt vago produce un risultato vago, e la conclusione che «l'AI non serve a niente».</p>
+
+  <p>Cinque elementi, un acronimo facile da ricordare. Non servono tutti ogni volta, ma più ne metti più il risultato è utilizzabile al primo colpo — e meno crediti sprechi in tentativi.</p>
+
+  <table>
+    <thead><tr><th style="width:16%">Lettera</th><th style="width:22%">Elemento</th><th>Cosa ci scrivi</th></tr></thead>
+    <tbody>
+      <tr><td><strong>R</strong></td><td><strong>Ruolo</strong></td><td>Chi deve essere Copilot. «Agisci come un revisore contabile», «come un docente di liceo». Cambia lessico, profondità e priorità della risposta.</td></tr>
+      <tr><td><strong>I</strong></td><td><strong>Incarico</strong></td><td>Il verbo preciso. Non «parlami di», ma riassumi, confronta, riscrivi, elenca, traduci, correggi, classifica.</td></tr>
+      <tr><td><strong>C</strong></td><td><strong>Contesto</strong></td><td>Su cosa lavora e per chi. Il documento aperto, i dati, il destinatario, il perché.</td></tr>
+      <tr><td><strong>C</strong></td><td><strong>Criteri</strong></td><td>I vincoli. Lunghezza, tono, cosa includere, cosa evitare.</td></tr>
+      <tr><td><strong>O</strong></td><td><strong>Output</strong></td><td>La forma finale. Tabella, elenco puntato, email pronta da inviare, cinque slide.</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Come suona applicato</h4>
+
+  <div class="confronto">
+    <div class="no">
+      <span class="et">Prompt povero</span>
+      <p>«Riassumi questo documento»</p>
+      <p class="mini" style="margin-top:2mm">Ottieni: un riassunto generico di lunghezza imprevedibile, che ignora quello che ti serve davvero.</p>
+    </div>
+    <div class="si">
+      <span class="et">Prompt R.I.C.C.O.</span>
+      <p>«Agisci come consulente del lavoro. Riassumi questo contratto per un cliente che non conosce il gergo tecnico. Massimo 200 parole, evidenzia durata, recesso e penali. Restituisci un elenco puntato con un titoletto per punto.»</p>
+    </div>
+  </div>
+
+  <h4>La tecnica del raffinamento</h4>
+  <p>Il primo risultato non è quasi mai quello finale, e va benissimo così. Ma non ricominciare da capo: <strong>correggi</strong>. Copilot mantiene il contesto della conversazione, quindi frasi come queste funzionano benissimo:</p>
+  <ul>
+    <li>«Più corto, la metà.»</li>
+    <li>«Il tono è troppo formale, rendilo più diretto.»</li>
+    <li>«Togli il terzo punto e amplia il secondo.»</li>
+    <li>«Rifallo, ma per un destinatario che non è del settore.»</li>
+  </ul>
+  <p>Ogni raffinamento consuma un credito, per cui vale la pena scrivere bene il primo prompt. Ma tre raffinamenti su una bozza buona restano più veloci di scrivere tutto a mano.</p>
+
+  <div class="box box--info">
+    <span class="titolo">Il trucco più sottovalutato</span>
+    <p>Chiedi a Copilot di <strong>farti delle domande prima di rispondere</strong>: «Prima di scrivere, fammi le tre domande che ti servono per farlo bene». Spesso ti accorgi che stavi per chiedere la cosa sbagliata — e ti costa un credito invece di cinque.</p>
+  </div>
+</section>
+
+<section>
+  <h3><span class="num">7</span>Cinque prompt riscritti</h3>
+  <p class="lead">Casi reali, presi dai contesti che vedrai nella Parte 4. Confronta la colonna sinistra con la destra: la differenza di sforzo è di venti secondi, quella di risultato è enorme.</p>
+
+  <div class="confronto">
+    <div class="no"><span class="et">Prima</span><p>«Scrivi una mail al cliente»</p></div>
+    <div class="si"><span class="et">Dopo</span><p>«Scrivi una email a un cliente che ha superato di 15 giorni la scadenza di pagamento. Tono cortese ma fermo, è un cliente storico e voglio mantenerlo. Massimo 120 parole, con un invito chiaro a fissare una data. Non usare toni legali.»</p></div>
+  </div>
+
+  <div class="confronto">
+    <div class="no"><span class="et">Prima</span><p>«Analizza questi dati»</p></div>
+    <div class="si"><span class="et">Dopo</span><p>«In questa tabella di vendite mensili, individua i tre mesi con lo scostamento maggiore rispetto alla media annua e spiegami in due righe per ciascuno cosa potrebbe averlo causato. Rispondi con una tabella: mese, scostamento in %, ipotesi.»</p></div>
+  </div>
+
+  <div class="confronto">
+    <div class="no"><span class="et">Prima</span><p>«Fammi un riassunto per studiare»</p></div>
+    <div class="si"><span class="et">Dopo</span><p>«Agisci come un tutor universitario. Da questo capitolo genera una mappa di studio: i 5 concetti chiave con definizione in una riga, poi 8 domande d'esame con difficoltà crescente. Non darmi le risposte: le voglio provare da solo.»</p></div>
+  </div>
+
+  <div class="confronto">
+    <div class="no"><span class="et">Prima</span><p>«Fammi una presentazione sul progetto»</p></div>
+    <div class="si"><span class="et">Dopo</span><p>«Crea una presentazione di 8 slide da questo documento Word, per una riunione di 15 minuti con la direzione. Struttura: problema, dati, tre opzioni, raccomandazione, tempi, costi. Una sola idea per slide, massimo 30 parole ciascuna, e scrivimi le note per il relatore.»</p></div>
+  </div>
+
+  <div class="confronto">
+    <div class="no"><span class="et">Prima</span><p>«Correggi questo testo»</p></div>
+    <div class="si"><span class="et">Dopo</span><p>«Rivedi questo testo correggendo refusi, concordanze e punteggiatura. Non cambiare il lessico tecnico né la struttura dei paragrafi. Alla fine elencami separatamente le modifiche sostanziali che hai fatto, così le controllo.»</p></div>
+  </div>
+
+  <p>Il filo comune: <strong>chi legge, quanto deve essere lungo, che forma deve avere, cosa non deve succedere</strong>. Sono le quattro informazioni che daresti a un collaboratore alle prime armi. Copilot è esattamente quello.</p>
+</section>
+
+<section>
+  <h3><span class="num">8</span>Le sette abitudini che fanno la differenza</h3>
+
+  <h4>1. Apri il file giusto prima di chiedere</h4>
+  <p>Copilot ragiona su quello che vede. Chiedere un riassunto senza aver aperto il documento è il modo più rapido per ottenere una risposta inventata.</p>
+
+  <h4>2. Fai riferimento ai file con il nome</h4>
+  <p>In Word e nella chat puoi richiamare un documento specifico. «Confronta questo con il preventivo di marzo» funziona molto meglio se il file esiste su OneDrive e lo nomini con precisione.</p>
+
+  <h4>3. Dai un esempio quando il formato conta</h4>
+  <p>Se hai bisogno di un formato ricorrente, mostraglielo: «Segui esattamente questo schema: [incolli un esempio]». È il modo più affidabile per ottenere output uniformi, verbale dopo verbale.</p>
+
+  <h4>4. Spezza i compiti grandi</h4>
+  <p>«Scrivimi il bilancio commentato» produrrà qualcosa di mediocre. Tre richieste separate — struttura, poi sezione per sezione, poi revisione — producono un lavoro utilizzabile.</p>
+
+  <h4>5. Di' anche cosa non vuoi</h4>
+  <p>I vincoli negativi funzionano: «senza introduzioni», «niente frasi di circostanza», «non usare l'inglese», «non aggiungere disclaimer». Copilot tende a essere prolisso e cerimonioso: frenalo.</p>
+
+  <h4>6. Tieni una tua libreria di prompt</h4>
+  <p>Quando un prompt funziona bene, <strong>salvalo</strong>. Una pagina di OneNote intitolata «Prompt che funzionano» vale più di qualsiasi corso. Nell'appendice di questa guida ne trovi una da cui partire.</p>
+
+  <h4>7. Rileggi sempre prima di mandare</h4>
+  <p>Vale per una mail al condominio e vale, con tutt'altro peso, per un atto o una relazione clinica. Non è pignoleria: è l'unico punto in cui la responsabilità torna dove deve stare.</p>
+
+  <div class="box box--ok">
+    <span class="titolo">La prova che stai usando bene Copilot</span>
+    <p>Non è «quanto tempo ho risparmiato». È «quante cose faccio adesso che prima rimandavo». La newsletter mai scritta, il riepilogo mai fatto, la procedura mai messa nero su bianco: il vero guadagno è lì.</p>
+  </div>
+</section>
+
+<!-- ============ PARTE 3 ============ -->
+<section class="break">
+  <h2 class="parte">Parte 3 · App per app</h2>
+  <h3><span class="num">9</span>Word</h3>
+
+  <div class="scheda">
+    <div class="scheda__testa">
+      <div class="scheda__icona">W</div>
+      <div class="scheda__nome">Word<small>Dove Copilot rende di più</small></div>
+    </div>
+    <p>Word è l'app in cui Copilot dà il ritorno più immediato, perché il problema che risolve — la pagina bianca — è il più universale che ci sia.</p>
+  </div>
+
+  <h4>Creare da zero</h4>
+  <p>In un documento vuoto compare il riquadro «Scrivi una bozza con Copilot». Più contesto gli dai, meno dovrai riscrivere.</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Scrivi una lettera formale di contestazione a un fornitore per una consegna con 20 giorni di ritardo. Tono professionale ma fermo, richiesta di riscontro entro 10 giorni. Massimo una pagina. Lascia tra parentesi quadre i campi da compilare: <em>[nome fornitore]</em>, <em>[numero ordine]</em>, <em>[data]</em>.
+  </div>
+
+  <h4>Partire da un file esistente</h4>
+  <p>Puoi far generare un documento a partire da altri file su OneDrive: «Crea una relazione basata su <em>[nome file]</em>». È il modo più veloce per trasformare appunti sparsi in un documento presentabile.</p>
+
+  <h4>Riscrivere una porzione</h4>
+  <p>Seleziona il paragrafo, clicca l'icona Copilot a margine e scegli «Riscrivi». Puoi anche essere specifico:</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Riscrivi questo paragrafo in modo che lo capisca una persona senza competenze tecniche. Mantieni tutti i dati numerici invariati e non superare le 80 parole.
+  </div>
+
+  <h4>Interrogare un documento lungo</h4>
+  <p>Su un contratto, un regolamento, un manuale: apri Copilot e fai domande dirette invece di leggere tutto.</p>
+  <ul>
+    <li>«Quali obblighi ricadono sul cliente?»</li>
+    <li>«C'è una clausola di rinnovo automatico? Se sì, riportamela testualmente.»</li>
+    <li>«Elenca tutte le scadenze citate, in ordine cronologico, con la pagina.»</li>
+  </ul>
+
+  <div class="box box--attenzione">
+    <span class="titolo">Sempre: verifica le citazioni testuali</span>
+    <p>Quando Copilot dice «il contratto prevede che...», vai a leggere il punto. Su documenti lunghi capita che unisca due clausole diverse in una sintesi che suona plausibile e non è nel testo.</p>
+  </div>
+
+  <h4>Trucchi rapidi</h4>
+  <ul>
+    <li><strong>Sommario e struttura:</strong> «Genera una scaletta con titoli e sottotitoli per un documento su [tema]», poi scrivi sezione per sezione.</li>
+    <li><strong>Cambio di registro:</strong> «Rendi questo testo adatto a una comunicazione ai clienti anziché a un documento interno».</li>
+    <li><strong>Controllo finale:</strong> «Trova incoerenze, ripetizioni e frasi troppo lunghe. Elencale, non correggerle.»</li>
+  </ul>
+</section>
+
+<section>
+  <h3><span class="num">10</span>Excel</h3>
+
+  <div class="scheda">
+    <div class="scheda__testa">
+      <div class="scheda__icona">X</div>
+      <div class="scheda__nome">Excel<small>Il più potente e il più delicato</small></div>
+    </div>
+    <p>Copilot in Excel è quello che fa risparmiare più tempo in assoluto a chi non conosce le formule complesse. È anche quello dove un errore non controllato fa più danni.</p>
+  </div>
+
+  <div class="box box--stop">
+    <span class="titolo">Prerequisito obbligatorio</span>
+    <p>Il file deve stare su <strong>OneDrive</strong> con <strong>salvataggio automatico attivo</strong>, e i dati devono essere formattati come <strong>tabella</strong> (seleziona l'intervallo → Inserisci → Tabella, oppure Ctrl+T). Senza tabella, Copilot capisce molto meno bene la struttura dei dati.</p>
+  </div>
+
+  <h4>Capire dei dati che non conosci</h4>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Analizza questa tabella e dimmi: quali sono le 3 tendenze più rilevanti, quali valori sembrano anomali o sospetti, e quale grafico consiglieresti per presentarla a chi non l'ha mai vista.
+  </div>
+
+  <h4>Formule senza conoscere la sintassi</h4>
+  <p>Descrivi il risultato che vuoi, non la formula:</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Aggiungi una colonna che calcoli i giorni tra la data fattura e la data incasso, e che scriva "IN RITARDO" se superano i 30 giorni, altrimenti lasci la cella vuota.
+  </div>
+  <p>Chiedi sempre anche la spiegazione: «Aggiungi la formula e spiegami cosa fa ogni parte». Impari a usarla, e la volta dopo la scrivi da solo senza consumare crediti.</p>
+
+  <h4>Pulizia dei dati</h4>
+  <ul>
+    <li>«Trova i duplicati in questa tabella ed evidenziali.»</li>
+    <li>«Uniforma il formato delle date: sono scritte in tre modi diversi.»</li>
+    <li>«Separa la colonna Nome e Cognome in due colonne distinte.»</li>
+    <li>«Segnala le righe con campi obbligatori vuoti.»</li>
+  </ul>
+
+  <h4>Domande sui dati</h4>
+  <ul>
+    <li>«Qual è il cliente con il margine più basso e di quanto è sotto la media?»</li>
+    <li>«Confronta il primo semestre con il secondo per categoria di prodotto.»</li>
+    <li>«Quali voci di costo sono cresciute più dell'inflazione?»</li>
+  </ul>
+
+  <div class="box box--stop">
+    <span class="titolo">Il controllo che non puoi saltare</span>
+    <p>Prima di usare un numero prodotto da Copilot in qualcosa che ha conseguenze — una dichiarazione, una fattura, un preventivo, un bilancio — <strong>verificalo con un calcolo indipendente</strong>. Un totale a campione, una somma di controllo, un ordine di grandezza. Copilot sbaglia raramente le somme semplici, ma sbaglia perimetro: somma la colonna giusta di righe sbagliate, o include una riga di totale nel conteggio. E il risultato ti arriva con la stessa sicurezza di quello corretto.</p>
+  </div>
+</section>
+
+<section>
+  <h3><span class="num">11</span>PowerPoint</h3>
+
+  <div class="scheda">
+    <div class="scheda__testa">
+      <div class="scheda__icona">P</div>
+      <div class="scheda__nome">PowerPoint<small>Da zero a bozza in un minuto</small></div>
+    </div>
+    <p>La presentazione è il lavoro più ingrato che esista: si perde più tempo a spostare caselle di testo che a pensare i contenuti. Qui Copilot inverte il rapporto.</p>
+  </div>
+
+  <h4>Creare una presentazione da un prompt</h4>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Crea una presentazione di 10 slide sulla sicurezza informatica per dipendenti non tecnici di un piccolo studio. Struttura: 3 slide sui rischi reali con esempi concreti, 4 su comportamenti pratici, 2 su cosa fare in caso di incidente, 1 di chiusura. Massimo 30 parole per slide, tono diretto, niente gergo.
+  </div>
+
+  <h4>Creare una presentazione da un documento</h4>
+  <p>È l'uso migliore in assoluto. Hai già una relazione in Word? «Crea una presentazione da <em>[nome file]</em>». Copilot estrae la struttura, sintetizza e impagina. Il file deve essere su OneDrive.</p>
+
+  <h4>Lavorare su una presentazione esistente</h4>
+  <ul>
+    <li>«Riorganizza le slide in un ordine più logico e dimmi perché hai scelto questo.»</li>
+    <li>«Questa presentazione dura troppo: portala da 20 a 12 slide senza perdere i messaggi chiave.»</li>
+    <li>«Aggiungi le note per il relatore: cosa devo dire su ogni slide, in un tono discorsivo.»</li>
+    <li>«Scrivi una slide di apertura che catturi l'attenzione in 10 secondi.»</li>
+  </ul>
+
+  <div class="box box--info">
+    <span class="titolo">Aspettative realistiche</span>
+    <p>Copilot produce una <strong>struttura</strong> solida e testi decenti. Il design resta di base e le immagini generate automaticamente sono spesso da sostituire. Consideralo un impaginatore rapido, non un grafico: il 70% del lavoro fatto in un minuto, il restante 30% lo metti tu.</p>
+  </div>
+</section>
+
+<section>
+  <h3><span class="num">12</span>Outlook</h3>
+
+  <div class="scheda">
+    <div class="scheda__testa">
+      <div class="scheda__icona">O</div>
+      <div class="scheda__nome">Outlook<small>Il recupero di tempo più tangibile</small></div>
+    </div>
+    <p>Se ricevi molta posta, questo capitolo da solo giustifica l'abbonamento.</p>
+  </div>
+
+  <h4>Riepiloga un thread</h4>
+  <p>Su una conversazione con venti risposte, il pulsante <strong>Riepiloga</strong> in cima al messaggio produce la sintesi di chi ha detto cosa e cosa è stato deciso. Poi puoi chiedere il resto:</p>
+  <ul>
+    <li>«Cosa devo fare io, in questo scambio?»</li>
+    <li>«Ci sono scadenze o impegni presi? Elencali con le date.»</li>
+    <li>«Su cosa non si è ancora trovato un accordo?»</li>
+  </ul>
+
+  <h4>Scrivere risposte</h4>
+  <p>«Bozza con Copilot» durante la scrittura. Il segreto è dire cosa vuoi ottenere, non cosa vuoi scrivere:</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Rispondi declinando l'invito perché sono già impegnato, ma proponendo di risentirci a settembre. Tono cordiale, breve, non voglio sembrare sbrigativo.
+  </div>
+
+  <h4>Il tono giusto</h4>
+  <p>La funzione più preziosa nelle giornate storte: prima di rispondere a un'email irritante, scrivi la tua versione di getto e poi chiedi <em>«riscrivila in modo professionale, mantenendo la fermezza ma togliendo ogni traccia di irritazione»</em>. Ha salvato più rapporti professionali di qualsiasi corso di comunicazione.</p>
+
+  <h4>Le novità 2026</h4>
+  <p>Outlook ha introdotto modalità in cui Copilot può <strong>agire</strong> sulla posta: contrassegnare, spostare in cartelle, aiutare nello smaltimento dell'arretrato ragionando su tutta la casella e sul calendario. Attivale con calma e controlla le prime volte cosa sposta: una regola sbagliata su una casella piena è una serata persa.</p>
+
+  <div class="box box--attenzione">
+    <span class="titolo">Attenzione al contenuto delle email</span>
+    <p>Riepilogare un thread significa che il contenuto viene elaborato nel cloud. Per la corrispondenza ordinaria non è un problema. Per email che contengono dati sensibili di clienti o pazienti, leggi prima il capitolo 22.</p>
+  </div>
+</section>
+
+<section>
+  <h3><span class="num">13</span>OneNote</h3>
+
+  <div class="scheda">
+    <div class="scheda__testa">
+      <div class="scheda__icona">N</div>
+      <div class="scheda__nome">OneNote<small>Il più sottovalutato</small></div>
+    </div>
+    <p>OneNote è dove finiscono gli appunti disordinati: riunioni, lezioni, idee, liste. Copilot serve a trasformare quel caos in qualcosa di usabile.</p>
+  </div>
+
+  <ul>
+    <li><strong>Riordinare:</strong> «Riorganizza questi appunti per argomento, con titoli, e segnala le cose che ho lasciato a metà».</li>
+    <li><strong>Estrarre azioni:</strong> «Da queste note di riunione ricava solo le decisioni prese e le cose da fare, con il responsabile dove è indicato».</li>
+    <li><strong>Pianificare:</strong> «Crea un piano di studio di 3 settimane per questi argomenti, considerando che ho 2 ore al giorno».</li>
+    <li><strong>Sintetizzare:</strong> «Riassumi tutte le pagine di questa sezione in una pagina di riepilogo».</li>
+  </ul>
+
+  <p>È lo strumento ideale anche per costruire la tua <strong>libreria di prompt</strong> personale (abitudine 6): una sezione, una pagina per contesto, e li hai sempre sotto mano su tutti i dispositivi.</p>
+
+  <h3 style="margin-top:10mm"><span class="num">14</span>Designer</h3>
+
+  <div class="scheda">
+    <div class="scheda__testa">
+      <div class="scheda__icona">D</div>
+      <div class="scheda__nome">Designer<small>Immagini e grafiche</small></div>
+    </div>
+    <p>Genera immagini da descrizione testuale e crea grafiche impaginate: inviti, locandine, post social, copertine.</p>
+  </div>
+
+  <p>Funziona meglio se descrivi <strong>soggetto, stile, atmosfera e formato</strong> insieme:</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Illustrazione piatta e minimale di uno studio professionale visto dall'alto, toni blu e grigi, spazio vuoto in alto per inserire un titolo, formato orizzontale.
+  </div>
+
+  <div class="box box--attenzione">
+    <span class="titolo">Due avvertenze concrete</span>
+    <p><strong>Consuma crediti in fretta:</strong> ogni generazione e ogni modifica ne vale uno, e raramente la prima immagine è quella buona. È la voce che svuota i 60 crediti più rapidamente.</p>
+    <p><strong>Attenzione all'uso commerciale:</strong> prima di mettere un'immagine generata su materiale che vendi o su cui fai pubblicità, verifica le condizioni d'uso Microsoft in vigore. E non generare immagini che riproducono marchi, loghi o persone reali.</p>
+  </div>
+
+  <h3 style="margin-top:10mm"><span class="num">15</span>L'app Copilot</h3>
+
+  <div class="scheda">
+    <div class="scheda__testa">
+      <div class="scheda__icona">C</div>
+      <div class="scheda__nome">App Copilot<small>La parte che non consuma crediti</small></div>
+    </div>
+    <p>Disponibile su Windows, web, iPhone e Android. È una chat: non vede i tuoi documenti, ma non ti costa crediti.</p>
+  </div>
+
+  <p>Per questo è il posto giusto per tutto il <strong>lavoro preparatorio</strong>: ragionare su un'impostazione, farti spiegare una norma, provare tre versioni di un titolo, preparare le domande per un colloquio, buttare giù una scaletta. Poi porti il risultato dentro Word o Excel, dove i crediti li spendi solo per l'esecuzione.</p>
+  <p>La <strong>modalità vocale</strong> è ottima in auto o mentre cammini: puoi farti riassumere un argomento o preparare mentalmente una riunione parlando invece di scrivere.</p>
+</section>
+
+<!-- ============ PARTE 4 ============ -->
+<section class="break">
+  <h2 class="parte">Parte 4 · Casi d'uso per profilo</h2>
+
+  <div class="profilo">
+    <h3>16 · Studenti</h3>
+    <p>Scuola superiore e università. L'obiettivo non è farsi fare i compiti: è studiare meglio nello stesso tempo.</p>
+  </div>
+
+  <h4>Studiare, non copiare</h4>
+  <p>La distinzione è netta e conviene averla chiara subito. Far scrivere a Copilot un tema che consegni come tuo è, nella maggior parte degli istituti, una violazione disciplinare — e soprattutto non impari nulla. Usarlo per <strong>capire più in fretta</strong> e <strong>verificare quanto hai capito</strong> è tutta un'altra cosa, e funziona benissimo.</p>
+
+  <h4>I cinque usi che valgono di più</h4>
+
+  <p><strong>1. Il tutor che ti interroga.</strong> Il metodo di studio più efficace è l'autoverifica, ed è anche il più noioso da preparare.</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt · Word o app Copilot</span>
+    Agisci come un professore che mi prepara all'esame. Da questo capitolo genera 12 domande: 4 di definizione, 4 di collegamento tra concetti, 4 di applicazione pratica. Non darmi le risposte. Dopo che ti avrò risposto, correggimi indicando cosa manca.
+  </div>
+
+  <p><strong>2. Spiegazione a livelli.</strong> Quando un passaggio non entra:</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Spiegami <em>[concetto]</em> tre volte: come lo spiegheresti a un bambino di 10 anni, poi a uno studente del primo anno, poi con il linguaggio tecnico dell'esame. Alla fine dimmi qual è l'errore che fanno più spesso gli studenti su questo punto.
+  </div>
+
+  <p><strong>3. Appunti che diventano schemi.</strong> In OneNote: «Trasforma questi appunti di lezione in una mappa concettuale testuale, con i collegamenti tra i concetti esplicitati».</p>
+
+  <p><strong>4. Tesi e tesine: la struttura.</strong> Copilot non deve scriverti la tesi, ma può farti risparmiare settimane sull'impianto.</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Sto scrivendo una tesi triennale su <em>[argomento]</em>. Proponimi tre possibili strutture in capitoli, con la logica di ciascuna. Per quella che sceglierò, indicami quali sono i punti in cui un relatore chiederà più rigore.
+  </div>
+
+  <p><strong>5. Excel per le materie quantitative.</strong> Statistica, economia, laboratorio: fatti spiegare i calcoli oltre che eseguirli. «Calcola la deviazione standard e spiegami passo per passo cosa rappresenta in questo caso specifico».</p>
+
+  <div class="box box--stop">
+    <span class="titolo">Tre regole che ti evitano guai seri</span>
+    <ul>
+      <li><strong>Verifica ogni fonte.</strong> Copilot inventa citazioni, autori e date con grande naturalezza. Se una fonte non la trovi nel catalogo della biblioteca o su una banca dati vera, non esiste.</li>
+      <li><strong>Controlla il regolamento del tuo istituto</strong> sull'uso dell'AI. Molti atenei ora chiedono di dichiararlo. Le regole variano parecchio.</li>
+      <li><strong>Non consegnare mai un testo che non hai riscritto e capito.</strong> A parte l'aspetto etico: all'orale si vede in trenta secondi.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="break">
+  <div class="profilo">
+    <h3>17 · Casa e famiglia</h3>
+    <p>La parte meno «professionale» e forse quella che si usa di più. Qui i crediti si spendono volentieri.</p>
+  </div>
+
+  <h4>Organizzazione domestica</h4>
+  <ul>
+    <li><strong>Budget familiare in Excel:</strong> «Crea un modello di budget mensile con categorie di spesa tipiche di una famiglia di 4 persone, un confronto tra previsto e speso, e l'evidenziazione automatica degli sforamenti».</li>
+    <li><strong>Menu settimanale:</strong> «Piano dei pasti per una settimana per 4 persone, uno vegetariano, budget contenuto, massimo 30 minuti di preparazione a cena. Poi fammi la lista della spesa raggruppata per reparto del supermercato».</li>
+    <li><strong>Viaggi in OneNote:</strong> «Itinerario di 5 giorni a <em>[città]</em> con due bambini di 8 e 11 anni, ritmo tranquillo, con alternative in caso di pioggia».</li>
+    <li><strong>Traslochi, eventi, lavori:</strong> «Fammi una checklist a ritroso per organizzare una comunione per 60 persone tra 3 mesi, con le scadenze per ogni cosa».</li>
+  </ul>
+
+  <h4>Burocrazia e corrispondenza</h4>
+  <p>È l'uso che fa dire «adesso ho capito a cosa serve».</p>
+  <ul>
+    <li>«Spiegami in parole semplici cosa dice questa lettera dell'assicurazione e cosa devo fare, entro quando.»</li>
+    <li>«Scrivi un reclamo formale alla compagnia telefonica per un addebito non riconosciuto di <em>[importo]</em>. Tono fermo, cita la richiesta di rettifica, massimo mezza pagina.»</li>
+    <li>«Prepara una lettera di disdetta di un contratto in scadenza il <em>[data]</em>, con i riferimenti corretti da inserire.»</li>
+  </ul>
+
+  <h4>Con i figli</h4>
+  <ul>
+    <li>«Spiegami come funziona <em>[argomento scolastico]</em> in modo che possa aiutare mio figlio di terza media a capirlo, senza fargli il compito.»</li>
+    <li>«Inventa una storia della buonanotte di 5 minuti con protagonista una bambina che ha paura del buio e un gatto coraggioso.»</li>
+    <li>In Designer: inviti di compleanno, locandine per la recita, copertine per i quaderni.</li>
+  </ul>
+
+  <div class="box box--info">
+    <span class="titolo">Ricorda il capitolo 4</span>
+    <p>In una Family, Copilot funziona <strong>solo sull'account del titolare</strong>. Se l'abbonamento è intestato a te e tuo figlio non vede il pulsante, non è un guasto. Se serve a lui più che a te, valutate al rinnovo come sistemare l'intestazione.</p>
+  </div>
+</section>
+
+<section class="break">
+  <div class="profilo">
+    <h3>18 · Commercialisti</h3>
+    <p>Studio contabile e fiscale. Copilot lavora bene sulla parte ripetitiva e sulla comunicazione al cliente. Sulla norma, mai da solo.</p>
+  </div>
+
+  <h4>Excel: dove si recupera più tempo</h4>
+  <ul>
+    <li><strong>Prima lettura di dati altrui:</strong> «Analizza questo bilancio di verifica: segnalami le voci con variazione superiore al 20% rispetto all'anno precedente e quelle con saldo anomalo rispetto alla loro natura».</li>
+    <li><strong>Riconciliazioni:</strong> «Confronta questi due elenchi di movimenti e mostrami in una tabella cosa c'è nel primo e non nel secondo, e viceversa».</li>
+    <li><strong>Controlli di coerenza:</strong> «Verifica se in questa tabella ci sono partite IVA formalmente non valide, date incoerenti o importi con segno sospetto».</li>
+    <li><strong>Scadenzari:</strong> «Crea un prospetto delle scadenze con evidenziazione automatica di quelle entro 7 giorni».</li>
+  </ul>
+
+  <h4>Comunicazione al cliente</h4>
+  <p>È il collo di bottiglia di ogni studio: tanti clienti, stesse spiegazioni, ogni volta riscritte.</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt · Word</span>
+    Agisci come un commercialista che scrive a un cliente artigiano senza formazione contabile. Spiega in massimo 250 parole cosa comporta <em>[adempimento]</em>: cosa deve fare lui concretamente, cosa facciamo noi, quali documenti servono ed entro quando. Niente riferimenti normativi nel corpo del testo, mettili in una nota finale. Tono cordiale e rassicurante.
+  </div>
+
+  <p>Una volta trovato il registro giusto, salva il prompt: la circolare successiva ti costa trenta secondi.</p>
+
+  <ul>
+    <li><strong>Solleciti:</strong> «Scrivi tre versioni di sollecito di pagamento: cordiale, fermo, ultimo avviso prima delle vie legali. Ogni versione massimo 100 parole.»</li>
+    <li><strong>Riepiloghi periodici:</strong> «Da questi dati genera un commento sintetico dell'andamento del trimestre per il cliente, in linguaggio non tecnico, con tre osservazioni operative.»</li>
+    <li><strong>Preventivi:</strong> «Prepara la descrizione delle attività per un preventivo di consulenza continuativa a una SRL di piccole dimensioni.»</li>
+  </ul>
+
+  <h4>Documenti e ricerca interna</h4>
+  <p>Su documenti che <em>tu</em> hai già: «Riassumi questa circolare in 10 punti operativi», «Da questo verbale estrai solo le decisioni con impatto contabile», «Confronta questi due contratti di locazione e dimmi cosa cambia».</p>
+
+  <div class="box box--stop">
+    <span class="titolo">Il limite invalicabile</span>
+    <p>Copilot <strong>non è una fonte normativa</strong>. Su aliquote, scadenze, requisiti, regimi agevolati e interpretazioni può essere impreciso, aggiornato male o semplicemente inventarsi un riferimento. Usalo per <em>scrivere</em> e <em>organizzare</em>, mai per <em>stabilire</em>. Ogni riferimento normativo va verificato su banca dati professionale o fonte ufficiale prima di uscire dallo studio.</p>
+    <p>E sui dati dei clienti — codici fiscali, bilanci non pubblici, dati bancari — leggi il capitolo 22 prima di incollare qualsiasi cosa.</p>
+  </div>
+</section>
+
+<section class="break">
+  <div class="profilo">
+    <h3>19 · Avvocati</h3>
+    <p>Il profilo con il maggior potenziale di risparmio di tempo e i vincoli deontologici più stringenti. Le due cose vanno tenute insieme.</p>
+  </div>
+
+  <div class="box box--stop">
+    <span class="titolo">Da leggere prima di tutto il resto</span>
+    <p><strong>Non inserire in Copilot dati che identificano un assistito</strong> senza aver valutato il segreto professionale e gli obblighi deontologici. Nomi, numeri di procedimento, atti riservati, documenti di controparte: sono coperti da segreto, e Microsoft 365 Personal e Family sono prodotti <strong>consumer</strong>, non pensati per il trattamento professionale di dati riservati di terzi.</p>
+    <p>La pratica realistica: <strong>anonimizza sempre</strong> prima di incollare. Sostituisci i nomi con «Tizio», «Caio», «la Società Alfa», togli date e luoghi identificanti. Il ragionamento giuridico resta identico, il rischio no.</p>
+  </div>
+
+  <h4>Cosa funziona bene, entro quel perimetro</h4>
+
+  <p><strong>1. Redazione su schemi anonimi.</strong></p>
+  <div class="prompt">
+    <span class="etichetta">Prompt · Word</span>
+    Agisci come un avvocato civilista. Prepara lo <em>schema</em> di una diffida per inadempimento contrattuale in una fornitura di beni. Struttura completa con le parti indicate come <em>[CLIENTE]</em> e <em>[CONTROPARTE]</em>, campi da compilare tra parentesi quadre. Non inserire riferimenti normativi: li verifico e li aggiungo io.
+  </div>
+
+  <p><strong>2. Traduzione dal legalese.</strong> L'uso più apprezzato dai clienti:</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt</span>
+    Riscrivi questo testo per un cliente senza formazione giuridica: cosa significa in pratica, cosa deve fare, quali sono i rischi se non fa nulla. Massimo 200 parole, niente latinismi, niente citazioni di articoli. Mantieni la precisione sui termini di decadenza.
+  </div>
+
+  <p><strong>3. Lavoro sui tuoi documenti.</strong> Su atti che hai già e che hai anonimizzato: «Riassumi questo atto in 15 punti», «Estrai tutte le date e i termini processuali in ordine cronologico», «Confronta queste due versioni del contratto ed elencami le differenze sostanziali», «Fammi l'indice analitico di questa memoria».</p>
+
+  <p><strong>4. Preparazione e organizzazione.</strong> «Prepara una scaletta di domande per l'escussione di un teste su questi fatti [anonimizzati]», «Costruisci una timeline dei fatti da questa cronologia», «Che obiezioni potrebbe muovere una controparte a questa impostazione?» — quest'ultima è ottima come esercizio, purché resti un esercizio.</p>
+
+  <p><strong>5. Gestione dello studio.</strong> Preventivi, note informative, comunicazioni organizzative, modelli di privacy interna, testi per il sito. Qui non c'è segreto in gioco e Copilot va a briglia sciolta.</p>
+
+  <div class="box box--stop">
+    <span class="titolo">Le allucinazioni giurisprudenziali</span>
+    <p>È il rischio più documentato e più grave: <strong>Copilot inventa sentenze</strong>. Numero, sezione, data e massima, tutto verosimile, tutto inesistente. Nel mondo ci sono già stati provvedimenti disciplinari e sanzioni per atti depositati con citazioni inventate.</p>
+    <p>Regola operativa, senza eccezioni: <strong>nessuna citazione di norma o giurisprudenza entra in un atto senza essere stata verificata sulla banca dati.</strong> Meglio ancora: non chiedere a Copilot riferimenti giurisprudenziali. Chiedigli di scrivere, di riassumere, di organizzare. Per la ricerca usa gli strumenti professionali che già paghi.</p>
+  </div>
+
+  <p class="mini">Considera inoltre che il Consiglio Nazionale Forense e i consigli dell'ordine hanno emanato indicazioni sull'uso dell'AI nella professione, e che il quadro europeo sull'intelligenza artificiale impone obblighi crescenti. Verifica le indicazioni del tuo ordine prima di strutturare un flusso di lavoro che coinvolga dati di assistiti.</p>
+</section>
+
+<section class="break">
+  <div class="profilo">
+    <h3>20 · Infermieri e professioni sanitarie</h3>
+    <p>Il profilo dove Copilot è utilissimo per tutto ciò che sta <em>attorno</em> alla cura, e da tenere lontano da ciò che riguarda il singolo paziente.</p>
+  </div>
+
+  <div class="box box--stop">
+    <span class="titolo">Il confine, detto senza giri di parole</span>
+    <p><strong>Non inserire mai dati di pazienti reali in Copilot.</strong> Nomi, date di nascita, codici fiscali, diagnosi, terapie, referti, note di cartella clinica. I dati sanitari sono «categorie particolari» ai sensi dell'art. 9 del GDPR e godono della protezione più alta prevista dall'ordinamento.</p>
+    <p>Microsoft 365 Personal e Family sono <strong>abbonamenti consumer</strong>: non sono coperti dagli accordi sul trattamento dei dati che una struttura sanitaria deve avere con i propri fornitori, e non sono un ambiente idoneo al trattamento di dati sanitari di terzi. Usare un abbonamento domestico per dati di pazienti espone te e la struttura, a prescindere dalle intenzioni.</p>
+    <p><strong>E non è uno strumento di supporto alla decisione clinica.</strong> Dosaggi, interazioni farmacologiche, protocolli, valutazione di sintomi: si verificano su fonti cliniche validate e prontuari ufficiali. Copilot può sbagliare un dosaggio con la stessa sicurezza con cui te ne dà uno giusto.</p>
+  </div>
+
+  <h4>Dove invece è davvero utile</h4>
+
+  <p><strong>1. Formazione e aggiornamento personale.</strong> È l'uso migliore in assoluto.</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt · app Copilot, non consuma crediti</span>
+    Agisci come un tutor di infermieristica. Spiegami il meccanismo fisiopatologico di <em>[condizione]</em> partendo dalle basi, poi collegalo alle implicazioni assistenziali. Alla fine fammi 8 domande a risposta aperta per verificare se ho capito. Precisa che devo comunque verificare tutto su fonti cliniche aggiornate.
+  </div>
+
+  <p><strong>2. Preparazione di concorsi ed esami.</strong> Simulazioni di quiz, mappe di ripasso, piani di studio: «Crea un piano di ripasso di 6 settimane per il concorso, con 2 ore al giorno, alternando teoria e simulazioni».</p>
+
+  <p><strong>3. Materiale educativo per i pazienti — in forma generica.</strong> Non riferito a una persona, ma come modello riutilizzabile:</p>
+  <div class="prompt">
+    <span class="etichetta">Prompt · Word</span>
+    Prepara un foglio informativo per pazienti anziani sulla gestione domiciliare di una ferita chirurgica pulita. Linguaggio molto semplice, frasi corte, elenco puntato, caratteri grandi. Includi una sezione "quando chiamare subito il medico". Nessun riferimento a farmaci specifici. Lascio alla struttura la validazione clinica del contenuto.
+  </div>
+  <p>Il materiale prodotto va sempre <strong>validato dal referente clinico</strong> della struttura prima di essere consegnato a chiunque.</p>
+
+  <p><strong>4. Organizzazione del lavoro (senza dati di pazienti).</strong></p>
+  <ul>
+    <li>In Excel: «Crea un modello di pianificazione turni per 12 operatori su 3 turni, con controllo automatico dei riposi obbligatori e delle ore settimanali».</li>
+    <li>«Trasforma questa procedura in una checklist operativa passo-passo, con i punti critici evidenziati.»</li>
+    <li>«Prepara la traccia di una riunione di reparto di 30 minuti su [tema organizzativo], con i tempi per ogni punto.»</li>
+  </ul>
+
+  <p><strong>5. Comunicazione professionale.</strong> Relazioni organizzative, richieste al coordinatore, materiali per la formazione dei colleghi, presentazioni per un audit: tutto ciò che non contiene dati identificativi di pazienti.</p>
+
+  <p><strong>6. Documentazione personale.</strong> Curriculum, lettere di presentazione, preparazione ai colloqui, sintesi dei propri crediti formativi.</p>
+
+  <div class="box box--ok">
+    <span class="titolo">La regola pratica da tenere a mente</span>
+    <p>Chiediti sempre: <em>«se questo testo finisse pubblicato, qualcuno potrebbe risalire a un paziente?»</em> Se la risposta non è un no immediato e sicuro, non incollarlo. Con questa sola domanda resti dalla parte giusta nel 99% dei casi.</p>
+  </div>
+</section>
+
+<!-- ============ PARTE 5 ============ -->
+<section class="break">
+  <h2 class="parte">Parte 5 · Usare bene</h2>
+  <h3><span class="num">21</span>Far durare i 60 crediti</h3>
+
+  <p class="lead">Sessanta al mese sono due al giorno. Con qualche accorgimento diventano molti di più di quanto sembri.</p>
+
+  <h4>Le sei mosse che contano</h4>
+  <ul>
+    <li><strong>Sposta il pensiero nell'app Copilot.</strong> È gratis. Ragiona, esplora, prepara lì. Entra nelle app Office solo per l'esecuzione sul file. Da sola, questa abitudine vale il 40% dei crediti.</li>
+    <li><strong>Scrivi bene il primo prompt.</strong> Ogni tentativo a vuoto è un credito. Il metodo R.I.C.C.O. del capitolo 6 serve esattamente a questo.</li>
+    <li><strong>Accorpa le richieste.</strong> «Riassumi questo documento, estrai le scadenze e dimmi cosa devo fare» è un credito. Le stesse tre richieste separate ne costano tre.</li>
+    <li><strong>Riusa invece di rigenerare.</strong> Salva i risultati buoni come modelli. La seconda circolare non va rigenerata: si adatta a mano in due minuti.</li>
+    <li><strong>Attenzione alle immagini.</strong> Designer è la voce più vorace: raramente la prima immagine è quella giusta, e ogni ritentativo pesa. Descrivi bene, o rassegnati a spendere.</li>
+    <li><strong>Controlla il saldo a metà mese.</strong> Se a metà mese sei sotto la metà, sai già che devi cambiare passo o piano.</li>
+  </ul>
+
+  <h4>Quando i 60 non bastano</h4>
+  <p>Se li esaurisci sistematicamente nella prima settimana, non è un problema di tecnica: è un uso professionale intensivo su un piano domestico. Sui piani casa non esistono ricariche a pacchetto, quindi le opzioni reali sono due: passare a un piano con uso estensivo (Microsoft 365 Premium), oppure spostare sistematicamente sull'app Copilot tutto ciò che non richiede il file aperto.</p>
+
+  <div class="box box--info">
+    <span class="titolo">Un conto rapido</span>
+    <p>Se un'ora del tuo lavoro vale 40 euro e Copilot te ne fa risparmiare tre al mese, il piano si ripaga molte volte. Se invece lo usi due volte a settimana per la lista della spesa, i 60 crediti sono abbondanti e non c'è nulla da ottimizzare. Decidi in base a quale dei due sei.</p>
+  </div>
+</section>
+
+<section>
+  <h3><span class="num">22</span>Privacy, segreto professionale e GDPR</h3>
+
+  <p class="lead">Il capitolo che nessuno legge e che evita i problemi veri. Vale per tutti, ma è decisivo se lavori con dati di clienti o pazienti.</p>
+
+  <h4>Cosa succede quando scrivi a Copilot</h4>
+  <p>Copilot non elabora sul tuo computer: il contenuto viene inviato ai server Microsoft. Vale per il testo che scrivi nel prompt e per il contenuto dei documenti che gli fai leggere. Microsoft dichiara per i piani consumer di non usare questi contenuti per addestrare i modelli, ma il punto giuridico resta un altro: <strong>stai trasferendo dati a un fornitore terzo</strong>, e se quei dati riguardano altre persone questo è un trattamento di cui rispondi tu.</p>
+
+  <div class="box box--stop">
+    <span class="titolo">Non inserire mai in Copilot</span>
+    <ul>
+      <li>Dati sanitari di terzi: diagnosi, terapie, referti, cartelle</li>
+      <li>Dati identificativi di clienti o assistiti uniti a informazioni riservate</li>
+      <li>Documenti coperti da segreto professionale non anonimizzati</li>
+      <li>Credenziali, password, chiavi, codici di accesso</li>
+      <li>Coordinate bancarie, numeri di carta, dati di pagamento</li>
+      <li>Documenti di identità, codici fiscali associati ad altri dati personali</li>
+      <li>Materiale coperto da NDA o da vincoli contrattuali di riservatezza</li>
+    </ul>
+  </div>
+
+  <div class="box box--ok">
+    <span class="titolo">L'anonimizzazione, fatta bene</span>
+    <p>Nella grandissima parte dei casi non ti serve il dato reale: ti serve la <strong>struttura</strong> del problema. Sostituisci sistematicamente:</p>
+    <ul>
+      <li>Nomi di persone e società → «Tizio», «Caio», «la Società Alfa»</li>
+      <li>Date precise → «il mese scorso», «entro 30 giorni»</li>
+      <li>Importi identificanti → cifre tonde di ordine di grandezza simile</li>
+      <li>Luoghi, numeri di pratica, codici → rimossi o generici</li>
+    </ul>
+    <p>Il ragionamento che ottieni è identico. Poi reinserisci i dati reali a mano, nel documento finale, sul tuo computer.</p>
+  </div>
+
+  <h4>Se lavori in una struttura o in uno studio</h4>
+  <p>Tre cose da verificare prima di adottare Copilot su dati di lavoro:</p>
+  <ul>
+    <li>Esiste una <strong>policy interna</strong> sull'uso dell'AI? Molte strutture ne hanno adottata una nel corso del 2025-2026.</li>
+    <li>Il tuo abbonamento è <strong>personale o aziendale</strong>? Un abbonamento consumer usato su dati aziendali è quasi sempre fuori policy, e ti espone personalmente.</li>
+    <li>Serve un <strong>accordo sul trattamento dei dati</strong> con il fornitore? Per dati sanitari e dati di clienti la risposta è tipicamente sì, e i piani domestici non lo prevedono.</li>
+  </ul>
+
+  <h4>Impostazioni che conviene controllare</h4>
+  <ul>
+    <li>Nella <strong>dashboard privacy</strong> dell'account Microsoft puoi vedere ed eliminare la cronologia delle attività Copilot.</li>
+    <li>Nelle impostazioni dell'app Copilot puoi gestire memoria e personalizzazione: se lavori con contenuti riservati, valuta di tenerle disattivate.</li>
+    <li>Controlla periodicamente <strong>quali account</strong> sono collegati nelle app Office, specie su un PC condiviso.</li>
+  </ul>
+
+  <p class="mini">Questo capitolo fornisce indicazioni pratiche generali e non costituisce consulenza legale. Per l'adozione di strumenti di intelligenza artificiale in contesti professionali regolamentati, rivolgiti al tuo responsabile della protezione dei dati o a un consulente specializzato.</p>
+</section>
+
+<section>
+  <h3><span class="num">23</span>Copilot sbaglia: come accorgersene</h3>
+
+  <p class="lead">Non è una questione di «se», ma di «quando». La differenza tra un utente esperto e uno ingenuo è che il primo sa dove guardare.</p>
+
+  <h4>I quattro errori tipici</h4>
+  <table>
+    <thead><tr><th style="width:26%">Errore</th><th>Come si riconosce</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Allucinazione</strong></td><td>Cita una fonte, una sentenza, una norma o uno studio che non esiste. Sempre plausibile, spesso con numero e data. Verifica: cercalo. Se non lo trovi, non c'è.</td></tr>
+      <tr><td><strong>Errore di perimetro</strong></td><td>Il calcolo è giusto ma sui dati sbagliati: include una riga di totale, salta le righe filtrate, considera un periodo diverso. Verifica: ricontrolla su un campione.</td></tr>
+      <tr><td><strong>Sintesi che deforma</strong></td><td>Riassumendo unisce due passaggi distanti in un'affermazione che nel testo non c'è. Verifica: leggi il punto originale prima di citarlo.</td></tr>
+      <tr><td><strong>Dato obsoleto</strong></td><td>Riporta un'aliquota, una scadenza o una regola non più in vigore. Verifica: fonte ufficiale, sempre, per qualsiasi dato normativo.</td></tr>
+    </tbody>
+  </table>
+
+  <h4>I segnali d'allarme</h4>
+  <ul>
+    <li>Una risposta <strong>troppo sicura</strong> su una domanda complessa o controversa.</li>
+    <li>Numeri <strong>troppo tondi</strong> o troppo perfetti.</li>
+    <li>Riferimenti <strong>molto specifici</strong> a cose che non puoi verificare al volo.</li>
+    <li>Una risposta che ti dice <strong>esattamente quello che speravi</strong>. È il momento in cui abbassi la guardia, ed è per questo il più pericoloso.</li>
+  </ul>
+
+  <div class="box box--info">
+    <span class="titolo">Il controllo che costa dieci secondi</span>
+    <p>Chiedi: <em>«Su quali parti di questa risposta hai meno certezza, e cosa dovrei verificare io?»</em> Copilot in genere indica onestamente i punti deboli, e ti dice dove guardare.</p>
+  </div>
+
+  <h4>La scala di verifica</h4>
+  <p>Calibra il controllo sulle conseguenze:</p>
+  <ul>
+    <li><strong>Nessuna conseguenza</strong> (idee, bozze interne, liste della spesa): leggi e vai.</li>
+    <li><strong>Conseguenze reputazionali</strong> (email a un cliente, presentazione): rilettura attenta.</li>
+    <li><strong>Conseguenze economiche</strong> (preventivi, calcoli, bilanci): verifica indipendente dei numeri.</li>
+    <li><strong>Conseguenze legali o cliniche</strong> (atti, dichiarazioni, materiale sanitario): verifica integrale su fonte professionale, punto per punto. Qui Copilot è solo un dattilografo veloce.</li>
+  </ul>
+</section>
+
+<section>
+  <h3><span class="num">24</span>Problemi frequenti</h3>
+
+  <table>
+    <thead><tr><th style="width:34%">Problema</th><th>Soluzione</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Non vedo il pulsante Copilot</strong></td>
+        <td>Nell'ordine: sei il titolare dell'abbonamento (cap. 4)? Hai fatto l'accesso con quell'account? Office è aggiornato all'ultima versione? Hai più account collegati e ne stai usando uno sbagliato?</td>
+      </tr>
+      <tr>
+        <td><strong>In Excel è grigio o dà errore</strong></td>
+        <td>Il file deve essere su OneDrive con salvataggio automatico attivo. Formatta i dati come tabella (Ctrl+T). È la causa più comune in assoluto.</td>
+      </tr>
+      <tr>
+        <td><strong>I familiari non lo vedono</strong></td>
+        <td>Funzionamento previsto, non un guasto: in Family le funzioni AI sono solo del titolare. Vedi il capitolo 4.</td>
+      </tr>
+      <tr>
+        <td><strong>«Hai esaurito i crediti»</strong></td>
+        <td>I 60 mensili sono finiti. Si rinnovano il mese successivo. Nel frattempo usa l'app Copilot, che non li consuma. Vedi il capitolo 21.</td>
+      </tr>
+      <tr>
+        <td><strong>Risponde in inglese</strong></td>
+        <td>Controlla la lingua di Office (File → Opzioni → Lingua) oppure scrivi esplicitamente «rispondi sempre in italiano».</td>
+      </tr>
+      <tr>
+        <td><strong>Non trova un mio file</strong></td>
+        <td>Deve essere su OneDrive, sincronizzato e indicizzato. Un file appena caricato può richiedere qualche minuto. Nominalo con precisione.</td>
+      </tr>
+      <tr>
+        <td><strong>Le risposte sono generiche</strong></td>
+        <td>Prompt troppo vago. Applica il metodo R.I.C.C.O. del capitolo 6: ruolo, incarico preciso, contesto, criteri, formato dell'output.</td>
+      </tr>
+      <tr>
+        <td><strong>Ha modificato cose che non volevo</strong></td>
+        <td>Ctrl+Z funziona anche sulle modifiche di Copilot. Con la modalità agente, controlla sempre prima di salvare: la cronologia versioni di OneDrive è la tua rete di sicurezza.</td>
+      </tr>
+      <tr>
+        <td><strong>Rifiuta di rispondere</strong></td>
+        <td>Alcuni argomenti sono filtrati. Riformula in modo più specifico e professionale, oppure spezza la richiesta in parti.</td>
+      </tr>
+      <tr>
+        <td><strong>Ha smesso di funzionare</strong></td>
+        <td>Verifica che l'abbonamento sia attivo e non scaduto, controlla la connessione, esci e rientra nell'account, riavvia l'app.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="box box--info">
+    <span class="titolo">Prima di contattare l'assistenza</span>
+    <p>Nove segnalazioni su dieci si risolvono con una di queste tre cose: <strong>aggiornare Office</strong>, <strong>spostare il file su OneDrive</strong>, o <strong>rendersi conto di non essere il titolare dell'abbonamento</strong>. Provale nell'ordine.</p>
+  </div>
+</section>
+
+<section>
+  <h3><span class="num">25</span>Appendice · Libreria prompt</h3>
+  <p class="lead">Da copiare e adattare. Sostituisci il contenuto tra parentesi quadre. Salvali in OneNote e in un mese avrai la tua versione personale, molto più utile di questa.</p>
+
+  <h4>Universali</h4>
+  <ul>
+    <li>«Prima di rispondere, fammi le 3 domande che ti servono per farlo bene.»</li>
+    <li>«Riscrivilo per <em>[destinatario]</em>, che non conosce l'argomento. Massimo <em>[N]</em> parole.»</li>
+    <li>«Dammi tre versioni: una formale, una neutra, una diretta.»</li>
+    <li>«Su cosa hai meno certezza in questa risposta? Cosa devo verificare io?»</li>
+    <li>«Trova gli errori logici e le affermazioni non supportate in questo testo. Elencali, non correggerli.»</li>
+    <li>«Segui esattamente questo schema: <em>[incolla esempio]</em>.»</li>
+  </ul>
+
+  <h4>Word</h4>
+  <ul>
+    <li>«Scrivi <em>[tipo documento]</em> per <em>[destinatario]</em>. Tono <em>[X]</em>, massimo <em>[N]</em> parole. Lascia tra parentesi quadre i campi da compilare.»</li>
+    <li>«Genera una scaletta con titoli e sottotitoli per un documento su <em>[tema]</em>.»</li>
+    <li>«Riassumi questo documento in 10 punti operativi: cosa devo fare, entro quando.»</li>
+    <li>«Elenca tutte le scadenze e i termini citati, in ordine cronologico.»</li>
+    <li>«Rivedi correggendo refusi e punteggiatura. Non toccare il lessico tecnico. Elencami a parte le modifiche sostanziali.»</li>
+  </ul>
+
+  <h4>Excel</h4>
+  <ul>
+    <li>«Analizza questa tabella: 3 tendenze rilevanti, valori anomali, grafico consigliato.»</li>
+    <li>«Aggiungi una colonna che <em>[descrizione del calcolo]</em> e spiegami cosa fa ogni parte della formula.»</li>
+    <li>«Confronta questi due elenchi e mostrami in tabella le differenze nei due sensi.»</li>
+    <li>«Trova duplicati, celle vuote in campi obbligatori e formati incoerenti. Evidenziali.»</li>
+    <li>«Crea un modello di <em>[budget/scadenzario/pianificazione]</em> con evidenziazione automatica di <em>[condizione]</em>.»</li>
+  </ul>
+
+  <h4>PowerPoint</h4>
+  <ul>
+    <li>«Crea una presentazione di <em>[N]</em> slide da <em>[file]</em> per <em>[pubblico]</em>, durata <em>[N]</em> minuti. Una idea per slide, massimo 30 parole. Aggiungi le note per il relatore.»</li>
+    <li>«Portala da <em>[N]</em> a <em>[M]</em> slide senza perdere i messaggi chiave.»</li>
+    <li>«Scrivi una slide di apertura che catturi l'attenzione in 10 secondi.»</li>
+  </ul>
+
+  <h4>Outlook</h4>
+  <ul>
+    <li>«Riepiloga questo thread: decisioni prese, punti aperti, cosa devo fare io e entro quando.»</li>
+    <li>«Rispondi <em>[obiettivo]</em>. Tono <em>[X]</em>, massimo <em>[N]</em> parole.»</li>
+    <li>«Riscrivi questa mia risposta in modo professionale, mantenendo la fermezza ma togliendo l'irritazione.»</li>
+  </ul>
+
+  <h4>Studenti</h4>
+  <ul>
+    <li>«Agisci come un professore che mi prepara all'esame. Da questo capitolo, 12 domande di difficoltà crescente. Non darmi le risposte.»</li>
+    <li>«Spiegami <em>[concetto]</em> a tre livelli: bambino, matricola, linguaggio d'esame. Poi dimmi l'errore più comune su questo punto.»</li>
+    <li>«Trasforma questi appunti in una mappa concettuale testuale con i collegamenti espliciti.»</li>
+    <li>«Piano di studio di <em>[N]</em> settimane per <em>[materie]</em>, <em>[N]</em> ore al giorno, con ripasso a intervalli.»</li>
+  </ul>
+
+  <h4>Commercialisti</h4>
+  <ul>
+    <li>«Spiega a un cliente senza formazione contabile cosa comporta <em>[adempimento]</em>: cosa fa lui, cosa facciamo noi, documenti, scadenze. Massimo 250 parole, riferimenti normativi solo in nota finale.»</li>
+    <li>«Analizza questo bilancio di verifica: variazioni oltre il 20% e saldi anomali rispetto alla natura del conto.»</li>
+    <li>«Tre versioni di sollecito: cordiale, fermo, ultimo avviso. Massimo 100 parole ciascuna.»</li>
+    <li>«Da questi dati, un commento sintetico del trimestre per il cliente, non tecnico, con tre osservazioni operative.»</li>
+  </ul>
+
+  <h4>Avvocati <span class="mini">(sempre su materiale anonimizzato)</span></h4>
+  <ul>
+    <li>«Prepara lo schema di <em>[atto]</em> con parti indicate come [CLIENTE] e [CONTROPARTE], campi tra parentesi quadre. Nessun riferimento normativo: li aggiungo io.»</li>
+    <li>«Riscrivi per un cliente senza formazione giuridica: cosa significa, cosa deve fare, rischi. Massimo 200 parole, niente latinismi.»</li>
+    <li>«Estrai da questo atto tutte le date e i termini processuali in ordine cronologico.»</li>
+    <li>«Confronta queste due versioni ed elenca le differenze sostanziali.»</li>
+    <li>«Che obiezioni potrebbe muovere una controparte a questa impostazione?»</li>
+  </ul>
+
+  <h4>Professioni sanitarie <span class="mini">(mai dati di pazienti reali)</span></h4>
+  <ul>
+    <li>«Agisci come tutor. Spiegami <em>[argomento]</em> dalle basi, poi le implicazioni assistenziali, poi 8 domande di verifica.»</li>
+    <li>«Foglio informativo generico per pazienti su <em>[tema]</em>: linguaggio semplicissimo, frasi corte, sezione "quando chiamare il medico". Da far validare clinicamente.»</li>
+    <li>«Modello di pianificazione turni per <em>[N]</em> operatori su <em>[N]</em> turni, con controllo di riposi e ore settimanali.»</li>
+    <li>«Trasforma questa procedura in checklist operativa con i punti critici evidenziati.»</li>
+    <li>«Piano di ripasso di <em>[N]</em> settimane per il concorso, alternando teoria e simulazioni.»</li>
+  </ul>
+
+  <div class="chiusura">
+    <h3>Buon lavoro</h3>
+    <p>Se questa guida ti è stata utile, il regalo più grande che puoi farci è passarla a qualcuno a cui serve. È gratuita e liberamente condivisibile.</p>
+    <p>Su Aml Store trovi licenze digitali originali di Microsoft 365, Office e Windows, con consegna via email in pochi minuti e assistenza in italiano.</p>
+    <div class="sito">aml-store.com</div>
+  </div>
+
+  <p class="mini" style="margin-top:7mm">© Aml Store — Guida gratuita, edizione agosto 2026. È consentita la libera diffusione del documento nella sua forma integrale e non modificata. Non è consentita la vendita, né la rivendita, né l'estrazione di parti per l'attribuzione ad altri autori.<br><br>
+  Documento a scopo informativo e divulgativo, non affiliato né approvato da Microsoft Corporation. Le informazioni sono aggiornate alla data indicata: funzionalità, denominazioni e limiti di utilizzo di Microsoft 365 e Copilot possono variare successivamente. Nulla di quanto contenuto costituisce consulenza legale, fiscale, contabile o sanitaria. Microsoft, Microsoft 365, Copilot, Word, Excel, PowerPoint, Outlook, OneNote, OneDrive e Designer sono marchi registrati di Microsoft Corporation.</p>
+</section>
+
+</body>
+</html>
