@@ -456,6 +456,10 @@
         const qtyAria = mount.getAttribute('data-qty-aria') || 'Quantity';
         const qtyMinusAria = mount.getAttribute('data-label-qty-minus') || 'Decrease quantity for';
         const qtyPlusAria = mount.getAttribute('data-label-qty-plus') || 'Increase quantity for';
+        // Etichette di colonna riusate come data-label sui <td> per il layout a card sotto i 640px
+        // (vedi cart.css): senza thead visibile, ogni cella mostra la propria etichetta inline.
+        const colQtyLabel = mount.getAttribute('data-label-qty') || 'Qty';
+        const colSubtotalLabel = mount.getAttribute('data-label-subtotal') || 'Subtotal';
 
         function render() {
             const lines = readLines();
@@ -496,6 +500,7 @@
 
                 const tdQty = document.createElement('td');
                 tdQty.className = 'aml-cart-col-qty';
+                tdQty.setAttribute('data-label', colQtyLabel);
                 const stepper = document.createElement('div');
                 stepper.className = 'aml-cart-qty-stepper';
 
@@ -533,6 +538,7 @@
 
                 const tdPrice = document.createElement('td');
                 tdPrice.className = 'aml-cart-col-price';
+                tdPrice.setAttribute('data-label', colSubtotalLabel);
                 tdPrice.textContent = formatMoney(lineMinor, l.currency);
 
                 const tdRm = document.createElement('td');
