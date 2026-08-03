@@ -360,6 +360,20 @@
         width: 100%;
         text-align: center;
     }
+
+    /* Totale allineato a destra e CTA a piena larghezza: stesso trattamento
+       del pulsante "Rimuovi" nelle card sopra — target di tocco ampio per
+       l'azione principale della pagina, invece di un pulsante piccolo e
+       disallineato rispetto al totale. */
+    .cart-page .cart-total-row {
+        text-align: right;
+    }
+    .cart-page .cart-actions {
+        justify-content: stretch;
+    }
+    .cart-page .cart-actions .cart-btn {
+        width: 100%;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
