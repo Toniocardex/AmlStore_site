@@ -4,14 +4,23 @@
  * Accent: #3b82f6 (dark) / usato come unico colore per semplicità.
  */
 
-const ACCENT      = '#3b82f6';
-const ACCENT_DARK = '#003182';
-const BG          = '#f5f6f8';
-const CARD_BG     = '#ffffff';
-const TEXT        = '#1a1a2e';
-const TEXT_MUTED  = '#6b7280';
-const BORDER      = '#e5e7eb';
-const SUCCESS     = '#059669';
+const ACCENT       = '#3b82f6';
+const ACCENT_DARK  = '#003182';
+const ACCENT_SOFT  = '#eef4ff';
+const ACCENT_SOFT_BORDER = '#bcd4f5';
+const BG           = '#f5f6f8';
+const CARD_BG      = '#ffffff';
+const TEXT         = '#1a1a2e';
+const TEXT_MUTED   = '#6b7280';
+const BORDER       = '#e5e7eb';
+const SUCCESS      = '#059669';
+const SUCCESS_SOFT = '#e8f7f0';
+const AMBER_BG     = '#fffbeb';
+const AMBER_BORDER = '#fcd34d';
+const AMBER_TEXT   = '#92400e';
+const AMBER_TEXT_SOFT = '#78350f';
+const HEADING_FONT = "'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+const BODY_FONT    = "-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
 
 /** Stringhe localizzate */
 const i18n = {
@@ -44,6 +53,7 @@ const i18n = {
         cta:              'Vai al negozio',
         shipping_title:   'Indirizzo di spedizione',
         guide_attached:   'In allegato trovi in omaggio la Guida Copilot per Microsoft 365 (PDF).',
+        footer_tagline:   'Licenze digitali originali · aml-store.com',
     },
     en: {
         subject_paid:     'Order #{orderId} confirmed — Aml Store',
@@ -74,6 +84,7 @@ const i18n = {
         cta:              'Go to store',
         shipping_title:   'Shipping address',
         guide_attached:   'Attached you\'ll find our free Copilot for Microsoft 365 guide (PDF).',
+        footer_tagline:   'Genuine digital licences · aml-store.com',
     },
     fr: {
         subject_paid:     'Commande #{orderId} confirmée — Aml Store',
@@ -104,6 +115,7 @@ const i18n = {
         cta:              'Aller à la boutique',
         shipping_title:   'Adresse de livraison',
         guide_attached:   'Vous trouverez en pièce jointe notre guide gratuit Copilot pour Microsoft 365 (PDF).',
+        footer_tagline:   'Licences numériques originales · aml-store.com',
     },
     de: {
         subject_paid:     'Bestellung #{orderId} bestätigt — Aml Store',
@@ -134,6 +146,7 @@ const i18n = {
         cta:              'Zum Shop',
         shipping_title:   'Lieferadresse',
         guide_attached:   'Im Anhang finden Sie unseren kostenlosen Copilot-Leitfaden für Microsoft 365 (PDF).',
+        footer_tagline:   'Originale digitale Lizenzen · aml-store.com',
     },
     es: {
         subject_paid:     'Pedido #{orderId} confirmado — Aml Store',
@@ -164,6 +177,7 @@ const i18n = {
         cta:              'Ir a la tienda',
         shipping_title:   'Dirección de envío',
         guide_attached:   'Adjuntamos nuestra guía gratuita de Copilot para Microsoft 365 (PDF).',
+        footer_tagline:   'Licencias digitales originales · aml-store.com',
     },
 };
 
@@ -259,23 +273,23 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 
     // Sezione bonifico (solo se pending + bank_transfer)
     const transferSection = (!isPaid && order.payment_method === 'bank_transfer') ? `
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:24px;background:#fffbeb;border:1px solid #fcd34d;border-radius:6px">
-      <tr><td style="padding:16px 20px">
-        <p style="margin:0 0 12px;font-size:15px;font-weight:700;color:#92400e">${t.transfer_title}</p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;background:${AMBER_BG};border:1px solid ${AMBER_BORDER};border-radius:10px">
+      <tr><td style="padding:18px 22px">
+        <p style="margin:0 0 14px;font-size:14px;font-weight:700;color:${AMBER_TEXT};text-transform:uppercase;letter-spacing:.4px">🏦 ${t.transfer_title}</p>
         ${bankRow(t.transfer_iban,    BANK.iban)}
         ${bankRow(t.transfer_bene,    BANK.bene)}
         ${bankRow(t.transfer_bank,    BANK.bank)}
         ${bankRow(t.transfer_causale, order.orderId, true)}
-        <p style="margin:12px 0 0;font-size:12px;color:#78350f">${t.transfer_note}</p>
+        <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid ${AMBER_BORDER};font-size:12px;color:${AMBER_TEXT_SOFT};line-height:1.5">${t.transfer_note}</p>
       </td></tr>
     </table>` : '';
 
     // Indirizzo di spedizione (solo articoli fisici: DVD/COA)
     const shippingSection = (order.requiresShipping && order.shipping) ? `
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${BG};border-radius:6px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${BG};border-radius:10px">
       <tr><td style="padding:16px 20px">
-        <p style="margin:0 0 6px;font-size:13px;font-weight:700;color:${TEXT}">${t.shipping_title}</p>
-        <p style="margin:0;font-size:14px;color:${TEXT};line-height:1.5">
+        <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.5px">${t.shipping_title}</p>
+        <p style="margin:0;font-size:14px;color:${TEXT};line-height:1.6">
           ${escHtml(order.shipping.addressLine1)}<br>
           ${escHtml(order.shipping.postalCode)} ${escHtml(order.shipping.city)}${order.shipping.province ? ' (' + escHtml(order.shipping.province) + ')' : ''}<br>
           ${escHtml(order.shipping.country)}
@@ -297,8 +311,17 @@ export function emailHtml(order, isPaid, guideAttached = false) {
     const heading  = isPaid ? t.greeting         : t.greeting_pending;
     const introTxt = isPaid ? t.intro             : t.intro_pending;
     const badge    = isPaid
-        ? `<span style="display:inline-block;background:${SUCCESS};color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.3px">✓ ${methodLabel}</span>`
-        : `<span style="display:inline-block;background:#fbbf24;color:#1a1a2e;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.3px">⏳ ${methodLabel}</span>`;
+        ? `<span style="display:inline-block;background:${SUCCESS};color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.3px">✓ ${methodLabel}</span>`
+        : `<span style="display:inline-block;background:#fbbf24;color:#78350f;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.3px">⏳ ${methodLabel}</span>`;
+
+    // Icona di stato accanto al titolo: cerchio pieno con segno di spunta/orologio
+    const statusIcon = isPaid
+        ? `<td width="40" valign="top" style="padding-right:12px">
+             <table cellpadding="0" cellspacing="0"><tr><td width="36" height="36" align="center" valign="middle" style="background:${SUCCESS_SOFT};border-radius:50%;font-size:18px;color:${SUCCESS}">✓</td></tr></table>
+           </td>`
+        : `<td width="40" valign="top" style="padding-right:12px">
+             <table cellpadding="0" cellspacing="0"><tr><td width="36" height="36" align="center" valign="middle" style="background:#fef3c7;border-radius:50%;font-size:16px;color:${AMBER_TEXT}">⏳</td></tr></table>
+           </td>`;
 
     return `<!DOCTYPE html>
 <html lang="${escHtml(locale)}">
@@ -306,14 +329,18 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${emailSubject(locale, order.orderId, isPaid)}</title>
+<style>
+  @font-face{font-family:'Montserrat';src:url('https://aml-store.com/fonts/montserrat-latin-700.woff2') format('woff2');font-weight:700}
+  @font-face{font-family:'Montserrat';src:url('https://aml-store.com/fonts/montserrat-latin-800.woff2') format('woff2');font-weight:800}
+</style>
 </head>
-<body style="margin:0;padding:0;background:${BG};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif">
+<body style="margin:0;padding:0;background:${BG};font-family:${BODY_FONT}">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:32px 16px">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(0,49,130,0.1)">
 
   <!-- Logo header -->
-  <tr><td style="background:${ACCENT_DARK};border-radius:8px 8px 0 0;padding:20px 32px;text-align:center">
+  <tr><td style="background:${ACCENT_DARK};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
         <img src="https://aml-store.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
@@ -323,39 +350,46 @@ export function emailHtml(order, isPaid, guideAttached = false) {
   </td></tr>
 
   <!-- Body card -->
-  <tr><td style="background:${CARD_BG};padding:32px 32px 24px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER}">
+  <tr><td style="background:${CARD_BG};padding:36px 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER}">
 
-    <h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:${TEXT}">${heading}</h1>
-    <p style="margin:0 0 20px;font-size:15px;color:${TEXT_MUTED}">${introTxt}</p>
+    <table cellpadding="0" cellspacing="0" style="margin-bottom:22px">
+      <tr>
+        ${statusIcon}
+        <td valign="middle">
+          <h1 style="margin:0 0 4px;font-family:${HEADING_FONT};font-size:23px;font-weight:800;color:${TEXT};letter-spacing:-.2px">${heading}</h1>
+          <p style="margin:0;font-size:14.5px;color:${TEXT_MUTED};line-height:1.5">${introTxt}</p>
+        </td>
+      </tr>
+    </table>
 
     <!-- Info ordine -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};border-radius:6px;margin-bottom:20px">
-      <tr><td style="padding:16px 20px">
-        <p style="margin:0 0 6px;font-size:13px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.5px">${t.order_id}</p>
-        <p style="margin:0 0 12px;font-size:20px;font-weight:800;color:${ACCENT_DARK};font-family:monospace,monospace">${escHtml(order.orderId)}</p>
-        <p style="margin:0 0 4px;font-size:13px;color:${TEXT_MUTED}">${t.date}: <strong style="color:${TEXT}">${fmtDate(order.createdAt, locale)}</strong></p>
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${CARD_BG};border:1px solid ${BORDER};border-left:4px solid ${ACCENT_DARK};border-radius:10px;margin-bottom:22px">
+      <tr><td style="padding:18px 22px">
+        <p style="margin:0 0 5px;font-size:11.5px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.order_id}</p>
+        <p style="margin:0 0 14px;font-size:21px;font-weight:800;color:${ACCENT_DARK};font-family:'SFMono-Regular',Consolas,monospace">${escHtml(order.orderId)}</p>
+        <p style="margin:0 0 6px;font-size:13px;color:${TEXT_MUTED}">${t.date}: <strong style="color:${TEXT}">${fmtDate(order.createdAt, locale)}</strong></p>
         <p style="margin:0;font-size:13px;color:${TEXT_MUTED}">${t.payment}: ${badge}</p>
         ${pspRef}
       </td></tr>
     </table>
 
     <!-- Righe prodotto -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid ${BORDER};border-radius:6px;overflow:hidden;margin-bottom:8px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid ${BORDER};border-radius:10px;overflow:hidden;margin-bottom:4px">
       <thead>
-        <tr style="background:${BG}">
-          <th style="padding:10px 12px;font-size:12px;color:${TEXT_MUTED};text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.4px">${t.product}</th>
-          <th style="padding:10px 12px;font-size:12px;color:${TEXT_MUTED};text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:.4px">${t.qty}</th>
-          <th style="padding:10px 12px;font-size:12px;color:${TEXT_MUTED};text-align:right;font-weight:600;text-transform:uppercase;letter-spacing:.4px">${t.subtotal}</th>
+        <tr style="background:${ACCENT_SOFT}">
+          <th style="padding:11px 14px;font-size:11.5px;color:${ACCENT_DARK};text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:.5px">${t.product}</th>
+          <th style="padding:11px 14px;font-size:11.5px;color:${ACCENT_DARK};text-align:center;font-weight:700;text-transform:uppercase;letter-spacing:.5px">${t.qty}</th>
+          <th style="padding:11px 14px;font-size:11.5px;color:${ACCENT_DARK};text-align:right;font-weight:700;text-transform:uppercase;letter-spacing:.5px">${t.subtotal}</th>
         </tr>
       </thead>
       <tbody>${lineItemsRows}</tbody>
     </table>
 
     <!-- Totale -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:4px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};border-radius:0 0 10px 10px;margin-bottom:4px">
       <tr>
-        <td style="padding:12px 12px;font-size:15px;font-weight:700;color:${TEXT};text-align:right">
-          ${t.total}: <span style="font-size:18px;color:${ACCENT_DARK}">${fmt(order.totalMinor, order.currency)}</span>
+        <td style="padding:14px 16px;font-size:14px;font-weight:700;color:${TEXT};text-align:right">
+          ${t.total}&nbsp; <span style="font-family:${HEADING_FONT};font-size:20px;font-weight:800;color:${ACCENT_DARK}">${fmt(order.totalMinor, order.currency)}</span>
         </td>
       </tr>
     </table>
@@ -363,22 +397,26 @@ export function emailHtml(order, isPaid, guideAttached = false) {
     ${shippingSection}
     ${transferSection}
     ${guideAttached ? `
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:#eef4ff;border:1px solid #bcd4f5;border-radius:6px">
-      <tr><td style="padding:14px 20px;font-size:14px;color:${ACCENT_DARK}">📎 ${t.guide_attached}</td></tr>
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;background:${ACCENT_SOFT};border:1px solid ${ACCENT_SOFT_BORDER};border-radius:10px">
+      <tr>
+        <td width="44" valign="middle" style="padding:16px 0 16px 18px;font-size:20px">🎁</td>
+        <td valign="middle" style="padding:16px 18px 16px 10px;font-size:14px;color:${ACCENT_DARK};line-height:1.5">${t.guide_attached}</td>
+      </tr>
     </table>` : ''}
 
   </td></tr>
 
   <!-- CTA -->
-  <tr><td style="background:${CARD_BG};padding:0 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER};text-align:center">
+  <tr><td style="background:${CARD_BG};padding:6px 32px 32px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER};text-align:center">
     <a href="https://aml-store.com/${escHtml(locale)}/"
-       style="display:inline-block;background:${ACCENT_DARK};color:#fff;font-size:14px;font-weight:700;text-decoration:none;padding:12px 28px;border-radius:6px">${t.cta}</a>
+       style="display:inline-block;background:${ACCENT_DARK};color:#fff;font-size:14.5px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;box-shadow:0 6px 18px rgba(0,49,130,0.3)">${t.cta}</a>
   </td></tr>
 
   <!-- Footer -->
-  <tr><td style="background:#f0f2f5;border-radius:0 0 8px 8px;padding:18px 32px;border:1px solid ${BORDER};border-top:none;text-align:center">
-    <p style="margin:0 0 6px;font-size:13px;color:${TEXT_MUTED}">${t.footer_help} <a href="mailto:Info@amlstore.it" style="color:${ACCENT}">Info@amlstore.it</a></p>
-    <p style="margin:0;font-size:11px;color:#9ca3af">${t.footer_copy.replace('{year}', year)}</p>
+  <tr><td style="background:#f0f2f5;border-radius:0 0 10px 10px;padding:22px 32px;border:1px solid ${BORDER};border-top:none;text-align:center">
+    <p style="margin:0 0 8px;font-size:13px;color:${TEXT_MUTED}">${t.footer_help} <a href="mailto:Info@amlstore.it" style="color:${ACCENT_DARK};font-weight:600">Info@amlstore.it</a></p>
+    <p style="margin:0 0 10px;font-size:11px;color:#9ca3af">${t.footer_copy.replace('{year}', year)}</p>
+    <p style="margin:0;font-size:10.5px;color:#b0b5bd;letter-spacing:.3px">${t.footer_tagline}</p>
   </td></tr>
 
 </table>
