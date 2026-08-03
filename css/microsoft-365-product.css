@@ -315,6 +315,34 @@
     margin-top: 4px;
 }
 
+/* Badge omaggio guida Copilot — solo bundle che includono M365 Personal
+   (vedi functions/api/_lib/guide.js). Stesso linguaggio cromatico del box
+   guida nell'email di conferma (templates.js), per coerenza cross-canale. */
+.v2-pricing-card .pdp-bonus {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.28);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: left;
+}
+.v2-pricing-card .pdp-bonus svg { width: 16px; height: 16px; flex-shrink: 0; color: #60a5fa; }
+.v2-pricing-card .pdp-bonus strong { color: #93c5fd; }
+
+[data-theme="light"] .v2-pricing-card .pdp-bonus {
+    background: #eef4ff;
+    border-color: #bcd4f5;
+    color: #1e3a5f;
+}
+[data-theme="light"] .v2-pricing-card .pdp-bonus svg { color: #003182; }
+[data-theme="light"] .v2-pricing-card .pdp-bonus strong { color: #003182; }
+
 /* Stock magazzino (solo SKU fisici) — riga inventariale muted, anti-CLS */
 .v2-stock {
     display: inline-flex;
