@@ -26,7 +26,9 @@ for lang in LANGS:
     for html in sorted((ROOT / lang).glob("*.html")):
         if html.stem in SKIP or html.stem == "contacts":
             continue
-        urls.append(f"https://aml-store.com/{lang}/{html.stem}.html")
+        # Senza estensione: /foo.html risponde 308 verso /foo, quindi il .html
+        # nel sitemap indicherebbe una tappa intermedia invece della pagina.
+        urls.append(f"https://aml-store.com/{lang}/{html.stem}")
 
 urls = list(dict.fromkeys(urls))
 lines = [

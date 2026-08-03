@@ -143,10 +143,10 @@ def hreflang_block(lang, slug):
     lines = []
     for lg in LANGS:
         lines.append(
-            f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}.html">'
+            f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}">'
         )
     lines.append(
-        f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}.html">'
+        f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}">'
     )
     return "\n".join(lines)
 
@@ -179,17 +179,17 @@ def build_page(lang, prod):
         "@graph": [
             {
                 "@type": "Product",
-                "@id": f"https://aml-store.com/{lang}/{slug}.html#product",
+                "@id": f"https://aml-store.com/{lang}/{slug}#product",
                 "name": short,
                 "sku": sku,
                 "inLanguage": lang,
-                "url": f"https://aml-store.com/{lang}/{slug}.html",
+                "url": f"https://aml-store.com/{lang}/{slug}",
                 "image": f"https://aml-store.com/asset/media/{prod['image']}",
                 "description": desc,
                 "brand": {"@type": "Brand", "name": "Microsoft"},
                 "offers": {
                     "@type": "Offer",
-                    "url": f"https://aml-store.com/{lang}/{slug}.html",
+                    "url": f"https://aml-store.com/{lang}/{slug}",
                     "priceCurrency": "EUR",
                     "price": price_dec,
                     "availability": "https://schema.org/InStock",
@@ -207,12 +207,12 @@ def build_page(lang, prod):
     <title>{short} — Aml Store</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}.html">
+    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
     <meta property="og:title" content="{short} — Aml Store">
     <meta property="og:description" content="{desc}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}.html">
+    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
     <meta property="og:image" content="https://aml-store.com/asset/media/{prod['image']}">
     <meta property="product:price:amount" content="{price_dec}">

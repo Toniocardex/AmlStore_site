@@ -22,10 +22,11 @@ assert LIB_ROOT == ROOT
 CATALOG = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
 BY_SKU = {e["sku"]: e for e in CATALOG}
 
+# Solo Family resta scritta a mano: ha sezioni su misura (postazioni, tabelle di
+# confronto) che il template non genera. Personal e Windows 11 Home sono passate al
+# generatore con product_content_flagship.py.
 PRESERVE_PAGES = {
     "microsoft-365-family.html",
-    "microsoft-365-personal.html",
-    "windows-11-home.html",
 }
 
 IMG_OFFICE = "microsoft-365-personal.webp"
@@ -164,7 +165,7 @@ def append_sitemap(slugs):
     inserts = []
     for lang in LANGS:
         for slug in slugs:
-            url = f"https://aml-store.com/{lang}/{slug}.html"
+            url = f"https://aml-store.com/{lang}/{slug}"
             if url in text:
                 continue
             inserts.append(

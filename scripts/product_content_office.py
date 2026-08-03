@@ -8,6 +8,14 @@ ICON = {
     "powerpoint": "img-aml-store_PowerPoint-Icon-FY26.svg",
     "outlook": "img-aml-store_Outlook-Icon-FY26.svg",
     "onenote": "img-aml-store_OneNote-Icon-FY26.svg",
+    # Icone dei servizi Microsoft 365: prima esistevano solo come src letterali
+    # nelle pagine scritte a mano, ora servono anche al generatore.
+    "onedrive": "img-aml-store_OneDrive-Icon-FY26.svg",
+    "teams": "img-aml-store_Teams-Icon-FY26.svg",
+    "defender": "img-aml-store_Defender-Icon-FY26.svg",
+    "copilot": "img-aml-store_Copilot-Icon-FY26.svg",
+    "designer": "img-aml-store_Designer-Icon-FY26.svg",
+    "clipchamp": "img-aml-store_Clipchamp-Icon-FY26.svg",
 }
 
 APPS_HOME = ["word", "excel", "powerpoint"]

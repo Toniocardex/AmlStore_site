@@ -1083,6 +1083,22 @@ html[data-theme='light'] .pdp-acc .home-faq-item { background: transparent; box-
     .pdp-final .pdp-btn-primary { width: 100%; }
 }
 
+/* Fascia lifestyle: la didascalia del componente condiviso è a vetro smerigliato
+   (blur + saturate). Qui diventa un pannello pieno, coerente col resto. */
+.pdp-page .bento-caption,
+.pdp-page .v2-family-bridge__caption {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(14, 15, 20, 0.94);
+    box-shadow: none;
+}
+
+html[data-theme='light'] .pdp-page .bento-caption,
+html[data-theme='light'] .pdp-page .v2-family-bridge__caption {
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: none;
+}
+
 /* ── BARRA STICKY COMPATTA (desktop) / BARRA INFERIORE (mobile) ───────────── */
 
 /* Superficie piatta: il componente condiviso usa vetro smerigliato (blur +

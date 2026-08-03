@@ -629,10 +629,10 @@ def hreflang_block(slug):
     lines = []
     for lg in LANGS:
         lines.append(
-            f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}.html">'
+            f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}">'
         )
     lines.append(
-        f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}.html">'
+        f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}">'
     )
     return "\n".join(lines)
 
@@ -775,10 +775,13 @@ def _render_lifestyle_band(lifestyle, lang):
     kicker = lifestyle["kicker"][lang]
     title = lifestyle["title"][lang]
     body = lifestyle["body"][lang]
-    src = f"../asset/media/products/{img}"
+    # Di norma le foto lifestyle stanno sotto products/. `image_root: ""` serve alle
+    # immagini che vivono direttamente in asset/media/ (es. windows-11-home).
+    root = lifestyle.get("image_root", "products/")
+    src = f"../asset/media/{root}{img}"
     srcset_attrs = ""
     if img_640 and img_640 != img:
-        src_640 = f"../asset/media/products/{img_640}"
+        src_640 = f"../asset/media/{root}{img_640}"
         srcset_attrs = f'\n                    srcset="{src_640} 640w, {src} {w}w"\n                    sizes="100vw"'
     return f"""        <hr class="v2-divider">
         <section class="v2-section v2-section--gallery" aria-label="{title}">
@@ -1063,7 +1066,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         if (ROOT / "asset" / "media" / "products" / f"{slug}.webp").exists()
         else f"https://aml-store.com/asset/media/{prod['image']}"
     )
-    page_url = f"https://aml-store.com/{lang}/{slug}.html"
+    page_url = f"https://aml-store.com/{lang}/{slug}"
     badge_html = (
         f'<span class="pdp-price-badge" aria-label="−{disc}%">−{disc}%</span>'
         if disc > 0
@@ -1126,7 +1129,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "Home", "item": f"https://aml-store.com/{lang}/"},
-                    {"@type": "ListItem", "position": 2, "name": cat_name, "item": f"https://aml-store.com/{lang}/{cat_slug}.html"},
+                    {"@type": "ListItem", "position": 2, "name": cat_name, "item": f"https://aml-store.com/{lang}/{cat_slug}"},
                     {"@type": "ListItem", "position": 3, "name": short},
                 ],
             },
@@ -1214,7 +1217,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
             <nav aria-label="{ui['breadcrumb_nav']}">
                 <a href="/{lang}/">Home</a>
                 <span class="sep" aria-hidden="true">/</span>
-                <a href="/{lang}/{cat_slug}.html">{cat_name}</a>
+                <a href="/{lang}/{cat_slug}">{cat_name}</a>
                 <span class="sep" aria-hidden="true">/</span>
                 <span aria-current="page">{short}</span>
             </nav>
@@ -1381,18 +1384,18 @@ def build_compact_product_page(lang, prod):
         "@graph": [
             {
                 "@type": "Product",
-                "@id": f"https://aml-store.com/{lang}/{slug}.html#product",
+                "@id": f"https://aml-store.com/{lang}/{slug}#product",
                 "name": short,
                 "sku": sku,
                 **({"mpn": e["mpn"]} if e.get("mpn") else {}),
                 "inLanguage": lang,
-                "url": f"https://aml-store.com/{lang}/{slug}.html",
+                "url": f"https://aml-store.com/{lang}/{slug}",
                 "image": og_image_abs,
                 "description": desc,
                 "brand": {"@type": "Brand", "name": brand},
                 "offers": {
                     "@type": "Offer",
-                    "url": f"https://aml-store.com/{lang}/{slug}.html",
+                    "url": f"https://aml-store.com/{lang}/{slug}",
                     "priceCurrency": "EUR",
                     "price": price_dec,
                     "availability": "https://schema.org/InStock",
@@ -1410,12 +1413,12 @@ def build_compact_product_page(lang, prod):
     <title>{short} — Aml Store</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}.html">
+    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
     <meta property="og:title" content="{short} — Aml Store">
     <meta property="og:description" content="{desc}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}.html">
+    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
     <meta property="og:image" content="{og_image_abs}">
     <meta property="product:price:amount" content="{price_dec}">
@@ -1449,7 +1452,7 @@ def build_compact_product_page(lang, prod):
         <div class="v2-breadcrumb">
             <nav aria-label="Breadcrumb">
                 <a href="/{lang}/">Home</a><span class="sep">/</span>
-                <a href="/{lang}/{cat_slug}.html">{cat_name}</a><span class="sep">/</span>
+                <a href="/{lang}/{cat_slug}">{cat_name}</a><span class="sep">/</span>
                 <span aria-current="page">{short}</span>
             </nav>
         </div>
@@ -1507,6 +1510,22 @@ def build_compact_product_page(lang, prod):
 
 def resolve_rich_content(slug):
     """Return (content, ui_map) or (None, None)."""
+    # Ex PRESERVE_PAGES: contenuto estratto dalle vecchie pagine a mano.
+    try:
+        from product_content_flagship import get_flagship_content
+
+        flagship = get_flagship_content(slug)
+        if flagship:
+            if slug.startswith("windows"):
+                from product_content_windows import UI as W_UI
+
+                return flagship, W_UI
+            from product_content_office import UI as O_UI
+
+            return flagship, O_UI
+    except ImportError:
+        pass
+
     try:
         from product_content_office import UI as OFFICE_UI
         from product_content_office import get_office_content
@@ -1585,12 +1604,12 @@ def build_catalog_page(lang, catalog_slug, products):
     <script src="../js/consent-init.js"></script>
     <link rel="icon" href="../favicon/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{catalog_slug}.html">
+    <link rel="canonical" href="https://aml-store.com/{lang}/{catalog_slug}">
 {hreflang_block(catalog_slug)}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{title} | Aml Store">
     <meta property="og:description" content="{lede}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{catalog_slug}.html">
+    <meta property="og:url" content="https://aml-store.com/{lang}/{catalog_slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
     <meta property="og:image" content="{og_image}">
     <link rel="stylesheet" href="../fonts/montserrat.css">
@@ -1598,7 +1617,7 @@ def build_catalog_page(lang, catalog_slug, products):
     <link rel="stylesheet" href="../css/home.css">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
-    {{"@context":"https://schema.org","@type":"CollectionPage","name":"{title}","description":"{lede}","url":"https://aml-store.com/{lang}/{catalog_slug}.html","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://aml-store.com/"}}}}
+    {{"@context":"https://schema.org","@type":"CollectionPage","name":"{title}","description":"{lede}","url":"https://aml-store.com/{lang}/{catalog_slug}","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://aml-store.com/"}}}}
     </script>
 </head>
 <body>
