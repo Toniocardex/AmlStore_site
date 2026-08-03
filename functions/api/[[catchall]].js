@@ -507,7 +507,7 @@ async function handleStripeWebhook(request, env) {
             await sendConfirmationOnce(
                 env.DB, updatedOrder,
                 env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
-                'webhook_stripe'
+                'webhook_stripe', env.GUIDES
             );
             await sendInternalOrderNotificationOnce(
                 env.DB, updatedOrder,
@@ -618,7 +618,7 @@ async function handlePaypalCaptureOrder(request, env) {
     await sendConfirmationOnce(
         env.DB, updatedOrder,
         env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
-        'worker_capture'
+        'worker_capture', env.GUIDES
     );
     await sendInternalOrderNotificationOnce(
         env.DB, updatedOrder,
@@ -667,7 +667,7 @@ async function handleBankTransferOrder(request, env) {
     await sendConfirmationOnce(
         env.DB, newOrder,
         env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
-        'bank_transfer_created'
+        'bank_transfer_created', env.GUIDES
     );
     await sendInternalOrderNotificationOnce(
         env.DB, newOrder,
@@ -752,7 +752,7 @@ async function handleAdminRoute(path, request, env) {
 
         const result = await markBankTransferPaid(
             env.DB, orderId, actorEmail, notes,
-            env.RESEND_API_KEY || '', env.TRUSTPILOT_BCC || ''
+            env.RESEND_API_KEY || '', env.TRUSTPILOT_BCC || '', env.GUIDES
         );
 
         // Deduct anche su already_paid (idempotente): recupera stock se il primo

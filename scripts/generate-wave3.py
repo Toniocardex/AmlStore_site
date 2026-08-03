@@ -107,7 +107,6 @@ PRODUCT_DEFS = [
     ("SC916509", "adobe-acrobat-pro", "tool", "Adobe Acrobat Pro", IMG_FALLBACK, "Adobe"),
     ("B0CXZR44LP", "coreldraw-2024", "tool", "CorelDRAW Graphics Suite 2024", IMG_FALLBACK, "Corel"),
     ("ACRTRIAD1D1Y", "acronis-true-image-advanced", "backup", "Acronis True Image Advanced", IMG_FALLBACK, "Acronis"),
-    ("SC484126", "copilot-guide-2026", "training", "Guida Copilot Premium 2026", IMG_FALLBACK),
 ]
 
 WOO_REDIRECTS = {

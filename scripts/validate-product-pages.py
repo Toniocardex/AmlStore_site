@@ -22,7 +22,6 @@ INTERNAL_SKUS = {
     "SC_M365P_MTOTPROT_5Device",
     "SC_M365_KPremium_5Device",
     "SC835510",
-    "SC484126",
     "W11_PRO_STICKER",
     "P73-07788_ESD",
 }

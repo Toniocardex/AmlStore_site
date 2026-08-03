@@ -22,6 +22,23 @@
 /wrangler.toml /it/ 302
 /GO-LIVE.md /it/ 302
 
+# ── Prodotto ritirato: Guida Copilot (SC484126) → categoria ─────────────────────
+/it/copilot-guide-2026 /it/strumenti 301
+/it/copilot-guide-2026/ /it/strumenti 301
+/it/copilot-guide-2026.html /it/strumenti 301
+/en/copilot-guide-2026 /en/strumenti 301
+/en/copilot-guide-2026/ /en/strumenti 301
+/en/copilot-guide-2026.html /en/strumenti 301
+/fr/copilot-guide-2026 /fr/strumenti 301
+/fr/copilot-guide-2026/ /fr/strumenti 301
+/fr/copilot-guide-2026.html /fr/strumenti 301
+/de/copilot-guide-2026 /de/strumenti 301
+/de/copilot-guide-2026/ /de/strumenti 301
+/de/copilot-guide-2026.html /de/strumenti 301
+/es/copilot-guide-2026 /es/strumenti 301
+/es/copilot-guide-2026/ /es/strumenti 301
+/es/copilot-guide-2026.html /es/strumenti 301
+
 # ── Legacy prodotto.html ─────────────────────────────────────────────────────
 /it/prodotto.html /it/microsoft-365-family 301
 /en/prodotto.html /en/microsoft-365-family 301
@@ -153,8 +170,8 @@
 /it/office-suite/microsoft-365-personal-12-mesi-1-utente-include-copilot-ai-e-1tb-cloud/ /it/microsoft-365-personal 301
 /it/office-suite/microsoft-365-family-6-utenti-copilot-cloud /it/microsoft-365-family 301
 /it/office-suite/microsoft-365-family-6-utenti-copilot-cloud/ /it/microsoft-365-family 301
-/it/formazione/microsoft-copilot-guida-premium-2026 /it/copilot-guide-2026 301
-/it/formazione/microsoft-copilot-guida-premium-2026/ /it/copilot-guide-2026 301
+/it/formazione/microsoft-copilot-guida-premium-2026 /it/strumenti 301
+/it/formazione/microsoft-copilot-guida-premium-2026/ /it/strumenti 301
 /it/sistema-operativo/windows-11-home-licenza-esd-originale /it/windows-11-home 301
 /it/sistema-operativo/windows-11-home-licenza-esd-originale/ /it/windows-11-home 301
 /it/sistema-operativo/windows-11-pro-licenza-esd-originale /it/windows-11-pro 301
@@ -309,8 +326,8 @@
 /en/office-suite/microsoft-office-365-personal-1-year-5-devices-qq2-00012/ /en/microsoft-365-personal 301
 /en/office-suite/microsoft-office-365-family-1-year-6-users /en/microsoft-365-family 301
 /en/office-suite/microsoft-office-365-family-1-year-6-users/ /en/microsoft-365-family 301
-/en/guide/microsoft-copilot-guida-premium-2026 /en/copilot-guide-2026 301
-/en/guide/microsoft-copilot-guida-premium-2026/ /en/copilot-guide-2026 301
+/en/guide/microsoft-copilot-guida-premium-2026 /en/strumenti 301
+/en/guide/microsoft-copilot-guida-premium-2026/ /en/strumenti 301
 /en/sistema-operativo/microsoft-windows-11-home /en/windows-11-home 301
 /en/sistema-operativo/microsoft-windows-11-home/ /en/windows-11-home 301
 /en/sistema-operativo/microsoft-windows-11-professional-original-esd-license /en/windows-11-pro 301
@@ -378,10 +395,10 @@
 /it/office-tool/pdf-reader/ /it/strumenti 301
 /it/backup /it/acronis-true-image-advanced 301
 /it/backup/ /it/acronis-true-image-advanced 301
-/it/formazione /it/copilot-guide-2026 301
-/it/formazione/ /it/copilot-guide-2026 301
-/it/guide /it/copilot-guide-2026 301
-/it/guide/ /it/copilot-guide-2026 301
+/it/formazione /it/strumenti 301
+/it/formazione/ /it/strumenti 301
+/it/guide /it/strumenti 301
+/it/guide/ /it/strumenti 301
 /it/acronis /it/acronis-true-image-advanced 301
 /it/acronis/ /it/acronis-true-image-advanced 301
 /it/adobe /it/strumenti 301
@@ -457,10 +474,10 @@
 /en/office-tool/pdf-reader/ /en/strumenti 301
 /en/backup /en/acronis-true-image-advanced 301
 /en/backup/ /en/acronis-true-image-advanced 301
-/en/formazione /en/copilot-guide-2026 301
-/en/formazione/ /en/copilot-guide-2026 301
-/en/guide /en/copilot-guide-2026 301
-/en/guide/ /en/copilot-guide-2026 301
+/en/formazione /en/strumenti 301
+/en/formazione/ /en/strumenti 301
+/en/guide /en/strumenti 301
+/en/guide/ /en/strumenti 301
 /en/acronis /en/acronis-true-image-advanced 301
 /en/acronis/ /en/acronis-true-image-advanced 301
 /en/adobe /en/strumenti 301
@@ -524,8 +541,8 @@ https://www.aml-store.com/* https://aml-store.com/:splat 301
 /it/office-tool/* /it/strumenti 301
 /it/multimedia/* /it/strumenti 301
 /it/backup/* /it/acronis-true-image-advanced 301
-/it/formazione/* /it/copilot-guide-2026 301
-/it/guide/* /it/copilot-guide-2026 301
+/it/formazione/* /it/strumenti 301
+/it/guide/* /it/strumenti 301
 /en/sistema-operativo/* /en/sistemi-operativi 301
 /en/operating-system/* /en/sistemi-operativi 301
 /en/office-suite/* /en/suite-office 301
@@ -534,5 +551,5 @@ https://www.aml-store.com/* https://aml-store.com/:splat 301
 /en/office-tool/* /en/strumenti 301
 /en/multimedia/* /en/strumenti 301
 /en/backup/* /en/acronis-true-image-advanced 301
-/en/formazione/* /en/copilot-guide-2026 301
-/en/guide/* /en/copilot-guide-2026 301
+/en/formazione/* /en/strumenti 301
+/en/guide/* /en/strumenti 301

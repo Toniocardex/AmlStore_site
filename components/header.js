@@ -420,8 +420,7 @@
             const isStrumentiOverview = afterLangLower.includes('strumenti')
                 || afterLangLower.includes('adobe-acrobat')
                 || afterLangLower.includes('coreldraw-2024')
-                || afterLangLower.includes('acronis-true-image')
-                || afterLangLower.includes('copilot-guide-2026');
+                || afterLangLower.includes('acronis-true-image');
             const esc = S.escapeHtmlAttr;
 
             const cartAriaForCount = (n) => {

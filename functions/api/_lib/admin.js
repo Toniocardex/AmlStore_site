@@ -289,7 +289,7 @@ function formatAdminOrder(row) {
  * Atomico: WHERE status='pending_payment' AND payment_method='bank_transfer'.
  * Se changes === 0 → ordine non trovato, già pagato o metodo diverso.
  */
-export async function markBankTransferPaid(db, orderId, actorEmail, notes, resendApiKey, trustpilotBcc) {
+export async function markBankTransferPaid(db, orderId, actorEmail, notes, resendApiKey, trustpilotBcc, guideBucket) {
     const ts = now();
 
     const result = await db.prepare(`
@@ -318,7 +318,7 @@ export async function markBankTransferPaid(db, orderId, actorEmail, notes, resen
     const order = await db.prepare('SELECT * FROM orders WHERE id = ?').bind(orderId).first();
     if (!order) return { ok: true };
 
-    const emailResult = await sendPaidNotificationOnce(db, order, resendApiKey, trustpilotBcc);
+    const emailResult = await sendPaidNotificationOnce(db, order, resendApiKey, trustpilotBcc, guideBucket);
     const internalNotificationResult = await sendInternalOrderNotificationOnce(
         db, order, resendApiKey, 'bank_transfer_marked_paid'
     );

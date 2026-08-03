@@ -12,6 +12,7 @@ import { emailSubject, emailHtml, emailText }          from './templates.js';
 import { markConfirmationEmailSent, markPaidNotificationSent,
          markInternalNotificationSent }                from './order.js';
 import { safeParseJSON }                                from './utils.js';
+import { attachGuideIfEligible }                        from './guide.js';
 
 const RESEND_API = 'https://api.resend.com/emails';
 const FROM       = 'Aml Store <ordini@aml-store.com>';
@@ -259,8 +260,9 @@ async function callResend(apiKey, payload) {
  * @param {string}  resendApiKey
  * @param {string}  trustpilotBcc — '' se non configurato
  * @param {string}  eventSrc      — es. 'webhook_stripe', 'bank_transfer_created', ...
+ * @param {R2Bucket} [guideBucket] — binding env.GUIDES per la guida Copilot omaggio
  */
-export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBcc, eventSrc) {
+export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBcc, eventSrc, guideBucket) {
     if (order.confirmation_email_sent_at) return { sent: false, skipped: true };
     if (!resendApiKey) {
         console.warn('[email] RESEND_API_KEY non configurato');
@@ -282,6 +284,11 @@ export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBc
         reply_to: REPLY_TO,
     };
     if (trustpilotBcc && isPaid) payload.bcc = [trustpilotBcc];
+
+    // Guida Copilot omaggio: solo ordini pagati con licenza M365 (vedi guide.js).
+    // Il bonifico appena creato è pending, quindi qui non allega nulla: ci pensa
+    // sendPaidNotificationOnce quando l'admin marca il pagamento come ricevuto.
+    await attachGuideIfEligible(payload, order, guideBucket);
 
     const { ok, error } = await callResend(resendApiKey, payload);
     if (!ok) return { sent: false, error };
@@ -336,8 +343,9 @@ export async function sendInternalOrderNotificationOnce(db, order, resendApiKey,
  * @param {object}  order         — riga grezza D1 (già aggiornata a status='paid')
  * @param {string}  resendApiKey
  * @param {string}  trustpilotBcc
+ * @param {R2Bucket} [guideBucket] — binding env.GUIDES per la guida Copilot omaggio
  */
-export async function sendPaidNotificationOnce(db, order, resendApiKey, trustpilotBcc) {
+export async function sendPaidNotificationOnce(db, order, resendApiKey, trustpilotBcc, guideBucket) {
     if (order.paid_notification_sent_at) return { sent: false, skipped: true };
     if (!resendApiKey) {
         console.warn('[email] RESEND_API_KEY non configurato, email non inviata');
@@ -356,6 +364,9 @@ export async function sendPaidNotificationOnce(db, order, resendApiKey, trustpil
         reply_to: REPLY_TO,
     };
     if (trustpilotBcc) payload.bcc = [trustpilotBcc];
+
+    // Guida Copilot omaggio per il bonifico ora effettivamente pagato.
+    await attachGuideIfEligible(payload, order, guideBucket);
 
     const { ok, error } = await callResend(resendApiKey, payload);
     if (!ok) return { sent: false, error };

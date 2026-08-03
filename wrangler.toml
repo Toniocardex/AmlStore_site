@@ -14,6 +14,17 @@ binding       = "DB"
 database_name = "aml-orders"
 database_id   = "72e06b2b-7366-4298-8fd9-ccbb4540ad79"
 
+# ── R2: allegati omaggio (guida Copilot) ─────────────────────────────────────
+# Bucket PRIVATO: il PDF non deve essere raggiungibile dal sito, viene solo letto
+# dalla Function e allegato all'email d'ordine.
+# Creazione:  wrangler r2 bucket create aml-store-guides
+# Upload:     wrangler r2 object put aml-store-guides/guida-copilot-microsoft-365.pdf \
+#               --file="C:/Users/Anton/Desktop/AmlStore_guide/guida-copilot-microsoft-365.pdf" \
+#               --content-type=application/pdf --remote
+[[r2_buckets]]
+binding     = "GUIDES"
+bucket_name = "aml-store-guides"
+
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
 SITE_ORIGIN     = "https://aml-store.com"
