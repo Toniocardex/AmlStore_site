@@ -101,11 +101,6 @@
         },
         {
           "@type": "Question",
-          "name": "È un abbonamento o un acquisto una tantum?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Il prodotto attiva Microsoft 365 Family per 12 mesi. L'acquisto su AML Store è un pagamento una tantum e non prevede addebiti ricorrenti da parte di AML Store. Eventuali opzioni di rinnovo Microsoft si gestiscono separatamente nell'account Microsoft." }
-        },
-        {
-          "@type": "Question",
           "name": "Come si invitano altri membri dopo l'acquisto?",
           "acceptedAnswer": { "@type": "Answer", "text": "Dopo l'attivazione sul tuo account Microsoft, usa le funzioni di condivisione del piano Family nell'area account Microsoft / abbonamenti, come indicato da Microsoft per il periodo di validità della licenza." }
         },
@@ -131,6 +126,16 @@
         },
         {
           "@type": "Question",
+          "name": "Il codice si rinnova automaticamente dopo 12 mesi?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Il codice attiva Microsoft 365 Family per 12 mesi con un pagamento una tantum: AML Store non addebita nulla automaticamente alla scadenza. Eventuali opzioni di rinnovo si gestiscono separatamente, direttamente nell'account Microsoft." }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso usare il codice per rinnovare un abbonamento Family già attivo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sì, puoi riscattarlo sullo stesso account che ha già Microsoft 365 Family attivo. Il modo in cui viene applicato (estensione della durata attuale o avvio di un nuovo periodo) segue le regole Microsoft mostrate al momento del riscatto su setup.office.com, non è qualcosa che decidiamo noi come rivenditore." }
+        },
+        {
+          "@type": "Question",
           "name": "Cosa succede se il codice non funziona?",
           "acceptedAnswer": { "@type": "Answer", "text": "Scrivici indicando numero d'ordine ed eventuale messaggio di errore. Verifichiamo il caso e, se viene confermato un difetto imputabile a noi o al fornitore della chiave, proponiamo sostituzione o rimborso nei tempi usuali di elaborazione. Assistenza: Info@amlstore.it — +39 392 558 0413." }
         }
@@ -148,10 +153,11 @@
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/montserrat-latin-800.woff2">
     <link rel="preload" as="image" href="../asset/media/products/microsoft-365-family.webp?v=7503c711d3" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
-    <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=eb585d416d">
-    <link rel="stylesheet" href="../css/product-v3.css?v=ce7cd1d468">
+    <link rel="stylesheet" href="../css/page.css?v=d357a24535">
+    <link rel="stylesheet" href="../css/product.css?v=edfc197e2d">
+    <link rel="stylesheet" href="../css/product-v2.css?v=438b31b473">
+    <link rel="stylesheet" href="../css/product-v3.css?v=97c99c198a">
+    <link rel="stylesheet" href="../css/m365-family-pilot.css?v=45a695e02c">
     <script>(function () {
     'use strict';
     var KEY = 'aml-theme';
@@ -159,7 +165,7 @@
     document.documentElement.setAttribute('data-theme', 'light');
 })();</script>
 </head>
-<body class="pdp-page">
+<body class="pdp-page pf-page">
     <a class="skip-link" href="#main">Vai al contenuto principale</a>
 
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
@@ -230,7 +236,7 @@
                 data-stripe-product-sku="6GQ-00092"
                 data-discount-percent="19"
             >
-                <p class="pdp-buy__label">Il nostro prezzo</p>
+                <p class="pdp-buy__label">Prezzo AML Store</p>
 
                 <div class="pdp-price-row" role="group" aria-label="Prezzi">
                     <span class="pdp-price-sale" aria-label="Prezzo scontato 104,95 euro">€ 104,95</span>
@@ -251,14 +257,12 @@
 
                 <p class="pdp-bonus">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12v10H4V12M2 7h20v5H2V7zm10 15V7m0 0a2.5 2.5 0 10-2.5-2.5A2.5 2.5 0 0012 7zm0 0a2.5 2.5 0 102.5-2.5A2.5 2.5 0 0012 7z"/></svg>
-                    <span><strong>In regalo:</strong> Guida Copilot per Microsoft 365 (PDF, via email dopo l'acquisto)</span>
+                    <span><strong>Incluso con l'acquisto:</strong> guida PDF all'utilizzo di Copilot, via email dopo l'ordine</span>
                 </p>
 
                 <ul class="pdp-assur">
                     <li>Attivazione sui portali ufficiali Microsoft</li>
-                    <li>Consegna digitale, nessuna spedizione</li>
                     <li>Assistenza in italiano dopo l'acquisto</li>
-                    <li>Pagamenti gestiti da Stripe e PayPal</li>
                     <li>Fattura elettronica disponibile</li>
                 </ul>
 
@@ -273,9 +277,34 @@
                     <span class="pdp-pay__logo" data-brand="Stripe" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
                     </div>
                 </div>
+                <p class="pf-pay-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Pagamenti protetti tramite <strong>Stripe</strong> e <strong>PayPal</strong>
+                </p>
             </div>
         </div>
     </section>
+
+    <div class="pf-trustbar">
+        <div class="pf-trustbar__inner">
+            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M4 21V8l8-5 8 5v13M9 21v-6h6v6"/></svg></span>
+                <span class="pf-trustbar__text"><strong>Azienda italiana</strong><span>Sede e P.IVA in Italia</span></span>
+            </div>
+            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 2h9l5 5v15H6zM15 2v5h5M9 13h6M9 17h6"/></svg></span>
+                <span class="pf-trustbar__text"><strong>Fattura elettronica</strong><span>Disponibile per privati e aziende</span></span>
+            </div>
+            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h2v-8H5v-2a7 7 0 0 1 14 0v2h-3v8h2c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg></span>
+                <span class="pf-trustbar__text"><strong>Assistenza in italiano</strong><span>Supporto post-vendita via email</span></span>
+            </div>
+            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <span class="pf-trustbar__text"><strong>Pagamenti protetti</strong><span>Elaborati tramite Stripe e PayPal</span></span>
+            </div>
+        </div>
+    </div>
 
     <main id="main" class="product-page" data-cart-added-msg="Prodotto aggiunto al carrello.">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
@@ -283,7 +312,7 @@
         <!-- ── COSA RICEVI ── -->
         <section class="pdp-sec" aria-labelledby="pdp-what-title">
             <p class="pdp-sec__eyebrow">Cosa ricevi</p>
-            <h2 id="pdp-what-title" class="pdp-sec__title">Un piano, sei postazioni indipendenti</h2>
+            <h2 id="pdp-what-title" class="pdp-sec__title">Sei persone, account e spazi separati</h2>
             <p class="pdp-sec__sub">Microsoft 365 Family è pensato per essere condiviso: ogni persona lavora sul proprio account, con il proprio spazio cloud.</p>
             <ul class="pdp-stats">
                 <li class="pdp-stat">
@@ -307,6 +336,32 @@
                     <span class="pdp-stat__note">Accesso contemporaneo su PC, Mac, tablet e telefono, secondo le regole Microsoft.</span>
                 </li>
             </ul>
+        </section>
+
+        <hr class="pdp-divider">
+
+        <!-- ── SPECIFICHE DEL PRODOTTO ── -->
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-specs2-title">
+            <p class="pdp-sec__eyebrow">Specifiche del prodotto</p>
+            <h2 id="pdp-specs2-title" class="pdp-sec__title">Scheda tecnica</h2>
+            <div class="pdp-tablewrap">
+                <table class="pdp-table pdp-table--specs">
+                    <caption class="visually-hidden">Specifiche tecniche e commerciali di Microsoft 365 Family</caption>
+                    <tbody>
+                        <tr><th scope="row">Prodotto</th><td>Microsoft 365 Family</td></tr>
+                        <tr><th scope="row">Durata</th><td>12 mesi</td></tr>
+                        <tr><th scope="row">Utenti</th><td>Fino a 6 persone</td></tr>
+                        <tr><th scope="row">Archiviazione</th><td>1 TB OneDrive per persona</td></tr>
+                        <tr><th scope="row">Dispositivi</th><td>Fino a 5 contemporanei per persona</td></tr>
+                        <tr><th scope="row">Copilot</th><td>Incluso per il titolare dell'abbonamento</td></tr>
+                        <tr><th scope="row">Consegna</th><td>Codice digitale via email</td></tr>
+                        <tr><th scope="row">Attivazione</th><td>Account Microsoft, su setup.office.com</td></tr>
+                        <tr><th scope="row">Rinnovo</th><td>Nuova attivazione o estensione secondo le regole Microsoft</td></tr>
+                        <tr><th scope="row">Codice prodotto</th><td>6GQ-00092</td></tr>
+                        <tr><th scope="row">Fatturazione</th><td>IVA inclusa, fattura elettronica disponibile</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <hr class="pdp-divider">
@@ -468,7 +523,7 @@
         <!-- ── FAMILY VS PERSONAL ── -->
         <section class="pdp-sec" aria-labelledby="pdp-compare-title">
             <p class="pdp-sec__eyebrow">Quale scegliere</p>
-            <h2 id="pdp-compare-title" class="pdp-sec__title">Family o Personal?</h2>
+            <h2 id="pdp-compare-title" class="pdp-sec__title">Confronta i piani Microsoft 365</h2>
             <p class="pdp-sec__sub">La differenza non è la potenza delle app: è quante persone useranno davvero il piano.</p>
 
             <div class="pdp-tablewrap">
@@ -582,7 +637,18 @@
             </div>
         </section>
 
-        <hr class="pdp-divider">
+        <!-- ── FASCIA ISTITUZIONALE (navy) ── -->
+        <div class="pf-institutional">
+            <div class="pf-institutional__inner">
+                <h2 class="pf-institutional__title">Acquista con maggiore tranquillità</h2>
+                <ul class="pf-institutional__grid">
+                    <li><strong>Rivenditore europeo</strong><span>AML Store ha sede legale in Italia</span></li>
+                    <li><strong>Fattura disponibile</strong><span>Documentazione per privati e aziende</span></li>
+                    <li><strong>Supporto scritto</strong><span>Assistenza via email e WhatsApp</span></li>
+                    <li><strong>Pagamenti protetti</strong><span>Transazioni tramite Stripe e PayPal</span></li>
+                </ul>
+            </div>
+        </div>
 
         <!-- ── FAQ per argomento ── -->
         <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
@@ -592,108 +658,130 @@
             <div class="pdp-faq-group">
                 <h3 class="pdp-faq-group__title">Acquisto e consegna</h3>
                 <div class="home-faq-list">
-                    <details class="home-faq-item">
-                        <summary>Quando ricevo il codice dopo il pagamento?</summary>
-                        <div class="home-faq-body">
-                            <p>L'email di consegna parte dopo la conferma del pagamento, di norma entro 5–15 minuti; in rari casi servono alcuni minuti in più per le verifiche del pagamento.</p>
-                            <p>Se dopo <strong>30 minuti</strong> non hai ricevuto nulla, controlla anche spam e posta indesiderata e scrivi a <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> indicando prodotto acquistato ed email usata per l'ordine.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>Cosa ricevo esattamente nell'email?</summary>
-                        <div class="home-faq-body">
-                            <p>Ricevi la <strong>product key</strong> di Microsoft 365 Family e le istruzioni per riscattarla sui portali ufficiali Microsoft.</p>
-                            <p>La consegna è solo digitale: non viene spedito alcun supporto fisico e non ci sono costi di spedizione.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>Quali metodi di pagamento posso usare?</summary>
-                        <div class="home-faq-body">
-                            <p>Al checkout sono disponibili carta, PayPal e wallet digitali come Apple Pay e Google Pay dove abilitati. L'elaborazione del pagamento è gestita in modo sicuro tramite <strong>Stripe</strong>.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>Posso avere la fattura elettronica?</summary>
-                        <div class="home-faq-body">
-                            <p>Sì. Al checkout scegli il profilo <strong>Azienda</strong> e inserisci partita IVA e Codice SDI oppure PEC: la fattura elettronica viene emessa su quei dati.</p>
-                            <p>Se ti serve dopo l'ordine, scrivi a <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> indicando l'email usata per l'ordine e il numero d'ordine.</p>
-                        </div>
-                    </details>
+                    <div class="pf-faq-col">
+                        <details class="home-faq-item">
+                            <summary>Quando ricevo il codice dopo il pagamento?</summary>
+                            <div class="home-faq-body">
+                                <p>L'email di consegna parte dopo la conferma del pagamento, di norma entro 5–15 minuti; in rari casi servono alcuni minuti in più per le verifiche del pagamento.</p>
+                                <p>Se dopo <strong>30 minuti</strong> non hai ricevuto nulla, controlla anche spam e posta indesiderata e scrivi a <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> indicando prodotto acquistato ed email usata per l'ordine.</p>
+                            </div>
+                        </details>
+                        <details class="home-faq-item">
+                            <summary>Cosa ricevo esattamente nell'email?</summary>
+                            <div class="home-faq-body">
+                                <p>Ricevi la <strong>product key</strong> di Microsoft 365 Family e le istruzioni per riscattarla sui portali ufficiali Microsoft.</p>
+                                <p>La consegna è solo digitale: non viene spedito alcun supporto fisico e non ci sono costi di spedizione.</p>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="pf-faq-col">
+                        <details class="home-faq-item">
+                            <summary>Quali metodi di pagamento posso usare?</summary>
+                            <div class="home-faq-body">
+                                <p>Al checkout sono disponibili carta, PayPal e wallet digitali come Apple Pay e Google Pay dove abilitati. L'elaborazione del pagamento è gestita in modo sicuro tramite <strong>Stripe</strong>.</p>
+                            </div>
+                        </details>
+                        <details class="home-faq-item">
+                            <summary>Posso avere la fattura elettronica?</summary>
+                            <div class="home-faq-body">
+                                <p>Sì. Al checkout scegli il profilo <strong>Azienda</strong> e inserisci partita IVA e Codice SDI oppure PEC: la fattura elettronica viene emessa su quei dati.</p>
+                                <p>Se ti serve dopo l'ordine, scrivi a <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> indicando l'email usata per l'ordine e il numero d'ordine.</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
 
             <div class="pdp-faq-group">
                 <h3 class="pdp-faq-group__title">Attivazione e account</h3>
                 <div class="home-faq-list">
-                    <details class="home-faq-item">
-                        <summary>Come si attiva Microsoft 365 Family dopo l'acquisto?</summary>
-                        <div class="home-faq-body">
-                            <p>Vai su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, accedi con il tuo account Microsoft, inserisci il codice ricevuto via email e segui la procedura guidata. Al termine installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>Posso riscattare il codice su un account Microsoft che uso già?</summary>
-                        <div class="home-faq-body">
-                            <p>Sì: il riscatto avviene su setup.office.com con il tuo account Microsoft. Se su quell'account è già attivo un abbonamento Microsoft 365, il comportamento (estensione o conversione del piano) segue le regole Microsoft mostrate durante il riscatto.</p>
-                            <p><strong>Scegli l'account con attenzione:</strong> la licenza resta associata a quello usato al momento del riscatto.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>È un abbonamento o un acquisto una tantum?</summary>
-                        <div class="home-faq-body">
-                            <p>Il prodotto attiva Microsoft 365 Family per 12 mesi. L'acquisto su AML Store è un pagamento una tantum e non prevede addebiti ricorrenti da parte di AML Store. Eventuali opzioni di rinnovo Microsoft si gestiscono separatamente nell'account Microsoft.</p>
-                        </div>
-                    </details>
+                    <div class="pf-faq-col">
+                        <details class="home-faq-item">
+                            <summary>Come si attiva Microsoft 365 Family dopo l'acquisto?</summary>
+                            <div class="home-faq-body">
+                                <p>Vai su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, accedi con il tuo account Microsoft, inserisci il codice ricevuto via email e segui la procedura guidata. Al termine installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="pf-faq-col">
+                        <details class="home-faq-item">
+                            <summary>Posso riscattare il codice su un account Microsoft che uso già?</summary>
+                            <div class="home-faq-body">
+                                <p>Sì: il riscatto avviene su setup.office.com con il tuo account Microsoft. Se su quell'account è già attivo un abbonamento Microsoft 365, il comportamento (estensione o conversione del piano) segue le regole Microsoft mostrate durante il riscatto.</p>
+                                <p><strong>Scegli l'account con attenzione:</strong> la licenza resta associata a quello usato al momento del riscatto.</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
 
             <div class="pdp-faq-group">
                 <h3 class="pdp-faq-group__title">Membri e funzionalità</h3>
                 <div class="home-faq-list">
-                    <details class="home-faq-item">
-                        <summary>Come si invitano altri membri dopo l'acquisto?</summary>
-                        <div class="home-faq-body">
-                            <p>Dopo l'attivazione sul tuo account Microsoft, usa le funzioni di condivisione del piano Family nell'area account Microsoft / abbonamenti, come indicato da Microsoft per il periodo di validità della licenza.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>Copilot è disponibile per tutti i membri?</summary>
-                        <div class="home-faq-body">
-                            <p>No. Le funzionalità Copilot comprese nel piano sono utilizzabili dal <strong>titolare dell'abbonamento</strong>.</p>
-                            <p>Gli altri cinque membri ricevono le app Microsoft 365, 1 TB di OneDrive ciascuno e Microsoft Defender, ma non le funzionalità AI.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>I file sono condivisi automaticamente tra i membri?</summary>
-                        <div class="home-faq-body">
-                            <p>No. Ogni persona usa il proprio account Microsoft, con documenti, email, impostazioni e spazio OneDrive separati. La condivisione di singoli file o cartelle resta una scelta volontaria di chi li possiede.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>Si possono usare le app Office anche offline?</summary>
-                        <div class="home-faq-body">
-                            <p>Sì: con le app desktop installate puoi lavorare offline; servono comunque connessione e accesso periodici per la verifica della licenza, aggiornamenti e servizi cloud come OneDrive.</p>
-                        </div>
-                    </details>
+                    <div class="pf-faq-col">
+                        <details class="home-faq-item">
+                            <summary>Come si invitano altri membri dopo l'acquisto?</summary>
+                            <div class="home-faq-body">
+                                <p>Dopo l'attivazione sul tuo account Microsoft, usa le funzioni di condivisione del piano Family nell'area account Microsoft / abbonamenti, come indicato da Microsoft per il periodo di validità della licenza.</p>
+                            </div>
+                        </details>
+                        <details class="home-faq-item">
+                            <summary>Copilot è disponibile per tutti i membri?</summary>
+                            <div class="home-faq-body">
+                                <p>No. Le funzionalità Copilot comprese nel piano sono utilizzabili dal <strong>titolare dell'abbonamento</strong>.</p>
+                                <p>Gli altri cinque membri ricevono le app Microsoft 365, 1 TB di OneDrive ciascuno e Microsoft Defender, ma non le funzionalità AI.</p>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="pf-faq-col">
+                        <details class="home-faq-item">
+                            <summary>I file sono condivisi automaticamente tra i membri?</summary>
+                            <div class="home-faq-body">
+                                <p>No. Ogni persona usa il proprio account Microsoft, con documenti, email, impostazioni e spazio OneDrive separati. La condivisione di singoli file o cartelle resta una scelta volontaria di chi li possiede.</p>
+                            </div>
+                        </details>
+                        <details class="home-faq-item">
+                            <summary>Si possono usare le app Office anche offline?</summary>
+                            <div class="home-faq-body">
+                                <p>Sì: con le app desktop installate puoi lavorare offline; servono comunque connessione e accesso periodici per la verifica della licenza, aggiornamenti e servizi cloud come OneDrive.</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
 
             <div class="pdp-faq-group">
                 <h3 class="pdp-faq-group__title">Scelta del piano e assistenza</h3>
                 <div class="home-faq-list">
-                    <details class="home-faq-item">
-                        <summary>Qual è la differenza tra Microsoft 365 Family e Personal?</summary>
-                        <div class="home-faq-body">
-                            <p>Family è pensato per condividere il piano con il tuo gruppo famiglia Microsoft (fino a 6 persone), ciascuna con account e spazio OneDrive distinti. Personal copre un solo utente con 1 TB, secondo le condizioni Microsoft aggiornate.</p>
-                        </div>
-                    </details>
-                    <details class="home-faq-item">
-                        <summary>Cosa succede se il codice non funziona?</summary>
-                        <div class="home-faq-body">
-                            <p>Scrivici indicando numero d'ordine ed eventuale messaggio di errore. Verifichiamo il caso e, se viene confermato un difetto imputabile a noi o al fornitore della chiave, proponiamo sostituzione o rimborso nei tempi usuali di elaborazione.</p>
-                            <p>Assistenza: <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> — +39 392 558 0413.</p>
-                        </div>
-                    </details>
+                    <div class="pf-faq-col">
+                        <details class="home-faq-item">
+                            <summary>Qual è la differenza tra Microsoft 365 Family e Personal?</summary>
+                            <div class="home-faq-body">
+                                <p>Family è pensato per condividere il piano con il tuo gruppo famiglia Microsoft (fino a 6 persone), ciascuna con account e spazio OneDrive distinti. Personal copre un solo utente con 1 TB, secondo le condizioni Microsoft aggiornate.</p>
+                            </div>
+                        </details>
+                        <details class="home-faq-item">
+                            <summary>Il codice si rinnova automaticamente dopo 12 mesi?</summary>
+                            <div class="home-faq-body">
+                                <p>No. Il codice attiva Microsoft 365 Family per 12 mesi con un pagamento una tantum: AML Store non addebita nulla automaticamente alla scadenza. Eventuali opzioni di rinnovo si gestiscono separatamente, direttamente nell'account Microsoft.</p>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="pf-faq-col">
+                        <details class="home-faq-item">
+                            <summary>Posso usare il codice per rinnovare un abbonamento Family già attivo?</summary>
+                            <div class="home-faq-body">
+                                <p>Sì, puoi riscattarlo sullo stesso account che ha già Microsoft 365 Family attivo. Il modo in cui viene applicato (estensione della durata attuale o avvio di un nuovo periodo) segue le regole Microsoft mostrate al momento del riscatto su setup.office.com, non è qualcosa che decidiamo noi come rivenditore.</p>
+                            </div>
+                        </details>
+                        <details class="home-faq-item">
+                            <summary>Cosa succede se il codice non funziona?</summary>
+                            <div class="home-faq-body">
+                                <p>Scrivici indicando numero d'ordine ed eventuale messaggio di errore. Verifichiamo il caso e, se viene confermato un difetto imputabile a noi o al fornitore della chiave, proponiamo sostituzione o rimborso nei tempi usuali di elaborazione.</p>
+                                <p>Assistenza: <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> — +39 392 558 0413.</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
         </section>
@@ -706,45 +794,51 @@
             <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilità e requisiti tecnici</h2>
             <p class="pdp-sec__sub">Valori indicativi da documentazione Microsoft. Verifica sempre i requisiti aggiornati sulla scheda ufficiale Microsoft prima dell'installazione.</p>
             <div class="home-faq-list">
-                <details class="home-faq-item">
-                    <summary>Sistemi operativi supportati</summary>
-                    <div class="home-faq-body">
-                        <p>Windows 10 o versioni successive; le tre versioni più recenti di macOS; iOS e Android nelle versioni supportate da Microsoft.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>Processore e memoria</summary>
-                    <div class="home-faq-body">
-                        <p>Windows: processore a 1,6 GHz o superiore, due core. Mac: processore Intel o Apple Silicon compatibile con la versione di macOS supportata.</p>
-                        <p>Memoria: 4 GB di RAM per le versioni a 64 bit, 2 GB per quelle a 32 bit.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>Spazio su disco</summary>
-                    <div class="home-faq-body">
-                        <p>Circa 4 GB di spazio disponibile su Windows e circa 10 GB su macOS, a seconda delle app installate.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>Connessione e account Microsoft</summary>
-                    <div class="home-faq-body">
-                        <p>Servono un account Microsoft e una connessione internet per riscatto, attivazione, aggiornamenti e servizi cloud. Le app desktop installate funzionano anche offline, con verifiche periodiche della licenza.</p>
-                    </div>
-                </details>
+                <div class="pf-faq-col">
+                    <details class="home-faq-item">
+                        <summary>Sistemi operativi supportati</summary>
+                        <div class="home-faq-body">
+                            <p>Windows 10 o versioni successive; le tre versioni più recenti di macOS; iOS e Android nelle versioni supportate da Microsoft.</p>
+                        </div>
+                    </details>
+                    <details class="home-faq-item">
+                        <summary>Processore e memoria</summary>
+                        <div class="home-faq-body">
+                            <p>Windows: processore a 1,6 GHz o superiore, due core. Mac: processore Intel o Apple Silicon compatibile con la versione di macOS supportata.</p>
+                            <p>Memoria: 4 GB di RAM per le versioni a 64 bit, 2 GB per quelle a 32 bit.</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="pf-faq-col">
+                    <details class="home-faq-item">
+                        <summary>Spazio su disco</summary>
+                        <div class="home-faq-body">
+                            <p>Circa 4 GB di spazio disponibile su Windows e circa 10 GB su macOS, a seconda delle app installate.</p>
+                        </div>
+                    </details>
+                    <details class="home-faq-item">
+                        <summary>Connessione e account Microsoft</summary>
+                        <div class="home-faq-body">
+                            <p>Servono un account Microsoft e una connessione internet per riscatto, attivazione, aggiornamenti e servizi cloud. Le app desktop installate funzionano anche offline, con verifiche periodiche della licenza.</p>
+                        </div>
+                    </details>
+                </div>
             </div>
         </section>
 
         <!-- ── CTA FINALE ── -->
         <section class="pdp-final" aria-labelledby="pdp-final-title">
-            <div>
-                <h2 id="pdp-final-title">Microsoft 365 per tutta la famiglia</h2>
-                <p>12 mesi · Fino a 6 persone · 1 TB ciascuno · Codice via email in 5–15 minuti.</p>
-                <span class="pdp-final__price">€ 104,95 <small>IVA inclusa, anziché € 129,00</small></span>
+            <div class="pf-final-inner">
+                <div>
+                    <h2 id="pdp-final-title">Microsoft 365 per tutta la famiglia</h2>
+                    <p>12 mesi · Fino a 6 persone · 1 TB ciascuno · Codice via email in 5–15 minuti.</p>
+                    <span class="pdp-final__price">€ 104,95 <small>IVA inclusa, anziché € 129,00</small></span>
+                </div>
+                <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    Aggiungi al carrello
+                </button>
             </div>
-            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Aggiungi al carrello
-            </button>
         </section>
     </main>
 
@@ -754,8 +848,8 @@
     <script src="../js/locale-path.js?v=0c77df5095" defer></script>
     <script src="../js/cart.js?v=a34cf6c33e" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
-    <script src="../components/header.js?v=a21d25f7dc" defer></script>
-    <script src="../components/footer.js?v=63013e094b" defer></script>
+    <script src="../components/header.js?v=cea78a5720" defer></script>
+    <script src="../components/footer.js?v=8deedbce07" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=aa313f2f06" defer></script>

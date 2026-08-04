@@ -290,7 +290,7 @@ def build_page(lang, prod):
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/product.css">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css">
+    <link rel="stylesheet" href="../css/product-v2.css">
     <script src="../js/theme-init.js"></script>
 </head>
 <body>

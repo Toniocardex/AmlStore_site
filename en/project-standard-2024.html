@@ -135,10 +135,10 @@
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
     <link rel="preload" as="image" href="../asset/media/products/project-standard-2024.webp?v=74c1765ede" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
-    <link rel="stylesheet" href="../css/page.css?v=307a290ddf">
-    <link rel="stylesheet" href="../css/product.css?v=1a5c8051af">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css?v=eb585d416d">
-    <link rel="stylesheet" href="../css/product-v3.css?v=ce7cd1d468">
+    <link rel="stylesheet" href="../css/page.css?v=d357a24535">
+    <link rel="stylesheet" href="../css/product.css?v=edfc197e2d">
+    <link rel="stylesheet" href="../css/product-v2.css?v=438b31b473">
+    <link rel="stylesheet" href="../css/product-v3.css?v=97c99c198a">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body class="pdp-page">
@@ -198,7 +198,7 @@
                 data-stripe-compare-at-amount="34900"
                 data-stripe-product-sku="DG7GMGF0PN44"
                 data-discount-percent="0">
-                <p class="pdp-buy__label">Our price</p>
+                <p class="pdp-buy__label">AML Store price</p>
 
                 <div class="pdp-price-row" role="group" aria-label="Prices">
                     <span class="pdp-price-sale">€ 349,00</span>
@@ -224,23 +224,33 @@
                             <li>Payments handled by Stripe and PayPal</li>
                             <li>Invoice available</li>
                 </ul>
-
-                <div class="pdp-pay">
-                    <p class="pdp-pay__label">Accepted payment methods</p>
-                    <div class="pdp-pay__row">
-                    <div class="v2-payment-row" role="group" aria-label="Accepted payment methods">
-                        <span class="v2-payment-logo" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" alt="PayPal" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" alt="Apple Pay" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
-                        <span class="v2-payment-logo" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
-                    </div>
-                    </div>
-                </div>
+                <p class="pf-pay-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Secure payments via <strong>Stripe</strong> and <strong>PayPal</strong>
+                </p>
             </div>
         </div>
     </section>
+    <div class="pf-trustbar">
+        <div class="pf-trustbar__inner">
+            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M4 21V8l8-5 8 5v13M9 21v-6h6v6"/></svg></span>
+                <span class="pf-trustbar__text"><strong>European retailer</strong><span>Registered in Italy</span></span>
+            </div>
+            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 2h9l5 5v15H6zM15 2v5h5M9 13h6M9 17h6"/></svg></span>
+                <span class="pf-trustbar__text"><strong>Invoice available</strong><span>VAT invoice for businesses</span></span>
+            </div>
+            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h2v-8H5v-2a7 7 0 0 1 14 0v2h-3v8h2c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg></span>
+                <span class="pf-trustbar__text"><strong>Written support</strong><span>Email and WhatsApp</span></span>
+            </div>
+            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <span class="pf-trustbar__text"><strong>Secure payments</strong><span>Processed via Stripe and PayPal</span></span>
+            </div>
+        </div>
+    </div>
 
     <main id="main" class="product-page" data-cart-added-msg="Product added to cart.">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
@@ -333,12 +343,23 @@
             </div>
         </section>
 
-        <hr class="pdp-divider">
+        <div class="pf-institutional">
+            <div class="pf-institutional__inner">
+                <h2 class="pf-institutional__title">Buy with more peace of mind</h2>
+                <ul class="pf-institutional__grid">
+                    <li><strong>European retailer</strong><span>AML Store is registered in Italy</span></li>
+                    <li><strong>Invoice available</strong><span>Documentation for individuals and businesses</span></li>
+                    <li><strong>Written support</strong><span>Support via email and WhatsApp</span></li>
+                    <li><strong>Secure payments</strong><span>Processed via Stripe and PayPal</span></li>
+                </ul>
+            </div>
+        </div>
 
         <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
             <p class="pdp-sec__eyebrow">FAQ</p>
             <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Answers before you buy</h2>
             <div class="home-faq-list">
+                <div class="pf-faq-col">
                 <details class="home-faq-item">
                     <summary>Difference vs Project Professional?</summary>
                     <div class="home-faq-body">
@@ -357,6 +378,8 @@
                         <p>Yes, as listed on this Windows product page.</p>
                     </div>
                 </details>
+                </div>
+                <div class="pf-faq-col">
                 <details class="home-faq-item">
                     <summary>How do I activate?</summary>
                     <div class="home-faq-body">
@@ -369,6 +392,7 @@
                         <p>No—this is the Project licence listed, not the full Office suite.</p>
                     </div>
                 </details>
+                </div>
             </div>
         </section>
 
@@ -379,6 +403,7 @@
             <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibility and technical requirements</h2>
             <p class="pdp-sec__sub">Approximate values from Microsoft documentation; always check the latest requirements before installing.</p>
             <div class="home-faq-list">
+                <div class="pf-faq-col">
                 <details class="home-faq-item">
                     <summary>Processor</summary>
                     <div class="home-faq-body">
@@ -391,6 +416,8 @@
                         <p>Windows 10/11; macOS versions supported by Microsoft for the indicated suite.</p>
                     </div>
                 </details>
+                </div>
+                <div class="pf-faq-col">
                 <details class="home-faq-item">
                     <summary>Memory (RAM)</summary>
                     <div class="home-faq-body">
@@ -403,19 +430,22 @@
                         <p>Typically at least 4 GB free for a desktop install; check Microsoft’s official requirements.</p>
                     </div>
                 </details>
+                </div>
             </div>
         </section>
 
         <section class="pdp-final" aria-labelledby="pdp-final-title">
-            <div>
-                <h2 id="pdp-final-title">Ready when you are</h2>
-                <p>Project Standard 2024 — Key by email 5–15 minutes after your payment is confirmed</p>
-                <span class="pdp-final__price">€ 349,00 <small>VAT included</small></span>
+            <div class="pdp-final__inner">
+                <div>
+                    <h2 id="pdp-final-title">Ready when you are</h2>
+                    <p>Project Standard 2024 — Key by email 5–15 minutes after your payment is confirmed</p>
+                    <span class="pdp-final__price">€ 349,00 <small>VAT included</small></span>
+                </div>
+                <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    Add to cart
+                </button>
             </div>
-            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
-                <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Add to cart
-            </button>
         </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
@@ -427,7 +457,7 @@
     <script src="../js/product-v3.js?v=c970f12b78" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
-    <script src="../components/header.js?v=a21d25f7dc" defer></script>
-    <script src="../components/footer.js?v=63013e094b" defer></script>
+    <script src="../components/header.js?v=cea78a5720" defer></script>
+    <script src="../components/footer.js?v=8deedbce07" defer></script>
 </body>
 </html>

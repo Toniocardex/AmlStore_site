@@ -271,6 +271,16 @@ V3_UI = {
         "final_tax": "IVA inclusa",
         "final_instead": "anziché",
         "sticky_buy": "Acquista ora",
+        "pay_note": "Pagamenti protetti tramite <strong>Stripe</strong> e <strong>PayPal</strong>",
+        "trust_1_t": "Azienda italiana", "trust_1_d": "Sede e P.IVA in Italia",
+        "trust_2_t": "Fattura elettronica", "trust_2_d": "Disponibile per privati e aziende",
+        "trust_3_t": "Assistenza in italiano", "trust_3_d": "Supporto post-vendita via email",
+        "trust_4_t": "Pagamenti protetti", "trust_4_d": "Elaborati tramite Stripe e PayPal",
+        "inst_title": "Acquista con maggiore tranquillità",
+        "inst_1_t": "Rivenditore europeo", "inst_1_d": "AML Store ha sede legale in Italia",
+        "inst_2_t": "Fattura disponibile", "inst_2_d": "Documentazione per privati e aziende",
+        "inst_3_t": "Supporto scritto", "inst_3_d": "Assistenza via email e WhatsApp",
+        "inst_4_t": "Pagamenti protetti", "inst_4_d": "Transazioni tramite Stripe e PayPal",
     },
     "en": {
         "delivery_line": "Key by email 5–15 minutes after your payment is confirmed",
@@ -290,6 +300,16 @@ V3_UI = {
         "final_tax": "VAT included",
         "final_instead": "instead of",
         "sticky_buy": "Buy now",
+        "pay_note": "Secure payments via <strong>Stripe</strong> and <strong>PayPal</strong>",
+        "trust_1_t": "European retailer", "trust_1_d": "Registered in Italy",
+        "trust_2_t": "Invoice available", "trust_2_d": "VAT invoice for businesses",
+        "trust_3_t": "Written support", "trust_3_d": "Email and WhatsApp",
+        "trust_4_t": "Secure payments", "trust_4_d": "Processed via Stripe and PayPal",
+        "inst_title": "Buy with more peace of mind",
+        "inst_1_t": "European retailer", "inst_1_d": "AML Store is registered in Italy",
+        "inst_2_t": "Invoice available", "inst_2_d": "Documentation for individuals and businesses",
+        "inst_3_t": "Written support", "inst_3_d": "Support via email and WhatsApp",
+        "inst_4_t": "Secure payments", "inst_4_d": "Processed via Stripe and PayPal",
     },
     "fr": {
         "delivery_line": "Clé par e-mail sous 5 à 15 minutes après confirmation du paiement",
@@ -309,6 +329,16 @@ V3_UI = {
         "final_tax": "TVA incluse",
         "final_instead": "au lieu de",
         "sticky_buy": "Acheter",
+        "pay_note": "Paiements sécurisés via <strong>Stripe</strong> et <strong>PayPal</strong>",
+        "trust_1_t": "Revendeur européen", "trust_1_d": "Basé en Italie",
+        "trust_2_t": "Facture disponible", "trust_2_d": "TVA pour les entreprises",
+        "trust_3_t": "Support par écrit", "trust_3_d": "E-mail et WhatsApp",
+        "trust_4_t": "Paiements sécurisés", "trust_4_d": "Via Stripe et PayPal",
+        "inst_title": "Achetez en toute confiance",
+        "inst_1_t": "Revendeur européen", "inst_1_d": "AML Store a son siège en Italie",
+        "inst_2_t": "Facture disponible", "inst_2_d": "Documents pour particuliers et entreprises",
+        "inst_3_t": "Support par écrit", "inst_3_d": "Assistance par e-mail et WhatsApp",
+        "inst_4_t": "Paiements sécurisés", "inst_4_d": "Traités via Stripe et PayPal",
     },
     "de": {
         "delivery_line": "Key per E-Mail, 5–15 Minuten nach Zahlungsbestätigung",
@@ -328,6 +358,16 @@ V3_UI = {
         "final_tax": "inkl. MwSt.",
         "final_instead": "statt",
         "sticky_buy": "Jetzt kaufen",
+        "pay_note": "Sichere Zahlungen über <strong>Stripe</strong> und <strong>PayPal</strong>",
+        "trust_1_t": "Europäischer Händler", "trust_1_d": "Sitz in Italien",
+        "trust_2_t": "Rechnung verfügbar", "trust_2_d": "MwSt.-Rechnung für Firmen",
+        "trust_3_t": "Schriftlicher Support", "trust_3_d": "E-Mail und WhatsApp",
+        "trust_4_t": "Sichere Zahlungen", "trust_4_d": "Über Stripe und PayPal",
+        "inst_title": "Kaufen mit mehr Sicherheit",
+        "inst_1_t": "Europäischer Händler", "inst_1_d": "AML Store hat seinen Sitz in Italien",
+        "inst_2_t": "Rechnung verfügbar", "inst_2_d": "Unterlagen für Privatpersonen und Unternehmen",
+        "inst_3_t": "Schriftlicher Support", "inst_3_d": "Support per E-Mail und WhatsApp",
+        "inst_4_t": "Sichere Zahlungen", "inst_4_d": "Abgewickelt über Stripe und PayPal",
     },
     "es": {
         "delivery_line": "Clave por email en 5–15 minutos tras confirmar el pago",
@@ -347,6 +387,16 @@ V3_UI = {
         "final_tax": "IVA incluido",
         "final_instead": "en lugar de",
         "sticky_buy": "Comprar ahora",
+        "pay_note": "Pagos seguros mediante <strong>Stripe</strong> y <strong>PayPal</strong>",
+        "trust_1_t": "Distribuidor europeo", "trust_1_d": "Con sede en Italia",
+        "trust_2_t": "Factura disponible", "trust_2_d": "IVA para empresas",
+        "trust_3_t": "Soporte por escrito", "trust_3_d": "Email y WhatsApp",
+        "trust_4_t": "Pagos seguros", "trust_4_d": "A través de Stripe y PayPal",
+        "inst_title": "Compra con más tranquilidad",
+        "inst_1_t": "Distribuidor europeo", "inst_1_d": "AML Store tiene su sede en Italia",
+        "inst_2_t": "Factura disponible", "inst_2_d": "Documentación para particulares y empresas",
+        "inst_3_t": "Soporte por escrito", "inst_3_d": "Asistencia por email y WhatsApp",
+        "inst_4_t": "Pagos seguros", "inst_4_d": "Procesados a través de Stripe y PayPal",
     },
 }
 
@@ -403,7 +453,7 @@ BASE_LABELS = {
         "product_code": "Codice articolo",
         "add": "Aggiungi al carrello",
         "detail": "Vedi prodotto",
-        "price_label": "Il nostro prezzo",
+        "price_label": "Prezzo AML Store",
         "tax": "Tasse incluse. Nessun costo di spedizione.",
         "sticky": "Acquisto rapido",
         "steps_title": "Consegna e attivazione",
@@ -419,7 +469,7 @@ BASE_LABELS = {
         "product_code": "Product code",
         "add": "Add to cart",
         "detail": "View product",
-        "price_label": "Our price",
+        "price_label": "AML Store price",
         "tax": "Tax included. No shipping fees.",
         "sticky": "Quick purchase",
         "steps_title": "Delivery and activation",
@@ -435,7 +485,7 @@ BASE_LABELS = {
         "product_code": "Référence produit",
         "add": "Ajouter au panier",
         "detail": "Voir le produit",
-        "price_label": "Notre prix",
+        "price_label": "Prix AML Store",
         "tax": "Taxes incluses. Pas de frais de port.",
         "sticky": "Achat rapide",
         "steps_title": "Livraison et activation",
@@ -451,7 +501,7 @@ BASE_LABELS = {
         "product_code": "Artikelnummer",
         "add": "In den Warenkorb",
         "detail": "Produkt ansehen",
-        "price_label": "Unser Preis",
+        "price_label": "AML Store-Preis",
         "tax": "Steuern inklusive. Keine Versandkosten.",
         "sticky": "Schnellkauf",
         "steps_title": "Lieferung und Aktivierung",
@@ -467,7 +517,7 @@ BASE_LABELS = {
         "product_code": "Código de producto",
         "add": "Añadir al carrito",
         "detail": "Ver producto",
-        "price_label": "Nuestro precio",
+        "price_label": "Precio AML Store",
         "tax": "Impuestos incluidos. Sin gastos de envío.",
         "sticky": "Compra rápida",
         "steps_title": "Entrega y activación",
@@ -839,6 +889,24 @@ def _render_faq(faq_items):
     return "\n".join(parts)
 
 
+def _render_faq_columns(faq_items):
+    """Due colonne indipendenti (non una griglia a righe): aprire una risposta
+    in una non allunga più la riga né lascia un buco vuoto nell'altra. Taglio
+    sequenziale (non alternato), così l'ordine di lettura/tab resta naturale
+    anche su mobile, dove le colonne collassano in una sola (vedi CSS
+    .pf-faq-col { display: contents }, product-v3.css)."""
+    half = (len(faq_items) + 1) // 2
+    col1, col2 = faq_items[:half], faq_items[half:]
+    return (
+        '                <div class="pf-faq-col">\n'
+        f"{_render_faq(col1)}\n"
+        "                </div>\n"
+        '                <div class="pf-faq-col">\n'
+        f"{_render_faq(col2)}\n"
+        "                </div>"
+    )
+
+
 def _render_steps_block(ui, content, lang):
     """3 install/order steps — content['steps'][lang] overrides UI defaults."""
     custom = (content.get("steps") or {}).get(lang)
@@ -909,12 +977,90 @@ def _render_payment_row(ui):
                     </div>"""
 
 
+LOCK_ICON = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
+    '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>'
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
+)
+
+
+def _render_pay_note(v3):
+    """Sostituisce i 6 loghi pagamento nel pannello acquisto con una riga di
+    testo: nel punto più importante della pagina i loghi sono rumore, non
+    informazione (restano nel checkout/footer)."""
+    return f"""                <p class="pf-pay-note">
+                    {LOCK_ICON}
+                    {v3['pay_note']}
+                </p>"""
+
+
+TRUSTBAR_ICONS = [
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M4 21V8l8-5 8 5v13M9 21v-6h6v6"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 2h9l5 5v15H6zM15 2v5h5M9 13h6M9 17h6"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h2v-8H5v-2a7 7 0 0 1 14 0v2h-3v8h2c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+]
+
+
+def _render_trustbar(v3):
+    """Fascia di fiducia sotto l'hero: azienda/fatturazione/supporto/pagamenti.
+    Generica, non legata a un prodotto — uguale su tutte le pagine."""
+    items = "\n".join(
+        f"""            <div class="pf-trustbar__item">
+                <span class="pf-trustbar__icon" aria-hidden="true">{icon}</span>
+                <span class="pf-trustbar__text"><strong>{v3[f'trust_{i}_t']}</strong><span>{v3[f'trust_{i}_d']}</span></span>
+            </div>"""
+        for i, icon in enumerate(TRUSTBAR_ICONS, start=1)
+    )
+    return f"""    <div class="pf-trustbar">
+        <div class="pf-trustbar__inner">
+{items}
+        </div>
+    </div>
+"""
+
+
+def _render_institutional(v3):
+    """Fascia navy prima delle FAQ: stesso messaggio di fiducia, con più peso
+    visivo. Generica, non legata a un prodotto — uguale su tutte le pagine."""
+    items = "\n".join(
+        f"""                    <li><strong>{v3[f'inst_{i}_t']}</strong><span>{v3[f'inst_{i}_d']}</span></li>"""
+        for i in (1, 2, 3, 4)
+    )
+    return f"""        <div class="pf-institutional">
+            <div class="pf-institutional__inner">
+                <h2 class="pf-institutional__title">{v3['inst_title']}</h2>
+                <ul class="pf-institutional__grid">
+{items}
+                </ul>
+            </div>
+        </div>
+"""
+
+
 # ── Renderer del layout v3 ──────────────────────────────────────────────────
 
 MAIL_ICON = (
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
     '<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 '
     '01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>'
+)
+
+GIFT_ICON = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M20 12v10H4V12M2 7h20v5H2V7zm10 15V7m0 0a2.5 '
+    '2.5 0 10-2.5-2.5A2.5 2.5 0 0012 7zm0 0a2.5 2.5 0 102.5-2.5A2.5 2.5 0 0012 7z"/></svg>'
+)
+
+# Testo del badge omaggio guida Copilot: solo italiano perche' la guida esiste
+# solo in quella lingua (vedi functions/api/_lib/guide.js GUIDE_LOCALES) — un
+# ordine EN/FR/DE/ES non la riceve, quindi il badge non deve promettergliela.
+COPILOT_BONUS_HTML_IT = (
+    f'                <p class="pdp-bonus">\n'
+    f'                    {GIFT_ICON}\n'
+    f'                    <span><strong>In regalo:</strong> Guida Copilot per Microsoft 365 '
+    f'(PDF, via email dopo l\'acquisto)</span>\n'
+    f'                </p>\n'
 )
 
 
@@ -1018,21 +1164,14 @@ def _render_steps_v3(ui, content, lang):
 
 
 def _render_specs_v3(ui, content, lang):
-    """content['specs'][lang] ha la precedenza sui default UI."""
+    """content['specs'][lang] ha la precedenza sui default UI. Due colonne
+    indipendenti come le FAQ (vedi _render_faq_columns): stesso motivo."""
     custom = (content.get("specs") or {}).get(lang)
     if custom and len(custom) >= 4:
         cells = custom[:4]
     else:
         cells = [(ui[f"spec_{k}"], ui[f"spec_{k}_body"]) for k in ("cpu", "os", "ram", "disk")]
-    return "\n".join(
-        f"""                <details class="home-faq-item">
-                    <summary>{title}</summary>
-                    <div class="home-faq-body">
-                        <p>{body}</p>
-                    </div>
-                </details>"""
-        for title, body in cells
-    )
+    return _render_faq_columns(cells)
 
 
 def build_rich_product_page(lang, prod, content, ui_map=None):
@@ -1146,6 +1285,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     keypoints_html = _render_keypoints(content, lang)
     steps_title = (content.get('steps_title') or {}).get(lang) or ui['how_title']
     specs_note = (content.get('specs_note') or {}).get(lang) or ui['specs_note']
+    bonus_html = COPILOT_BONUS_HTML_IT if (content.get("copilot_bonus") and lang == "it") else ""
 
     # Sezioni condizionali: compaiono solo se il prodotto fornisce i dati.
     apps_block = ""
@@ -1190,7 +1330,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/product.css">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css">
+    <link rel="stylesheet" href="../css/product-v2.css">
     <link rel="stylesheet" href="../css/product-v3.css">
     <script src="../js/theme-init.js"></script>
 </head>
@@ -1264,21 +1404,15 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                     {MAIL_ICON}
                     {v3['delivery_line']}
                 </p>
-
+{bonus_html}
                 <ul class="pdp-assur">
 {_render_assur(v3)}
                 </ul>
-
-                <div class="pdp-pay">
-                    <p class="pdp-pay__label">{ui['payments_aria']}</p>
-                    <div class="pdp-pay__row">
-{_render_payment_row(ui)}
-                    </div>
-                </div>
+{_render_pay_note(v3)}
             </div>
         </div>
     </section>
-
+{_render_trustbar(v3)}
     <main id="main" class="product-page" data-cart-added-msg="{ui['cart_added']}">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 
@@ -1311,13 +1445,12 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
             </div>
         </section>
 
-        <hr class="pdp-divider">
-
+{_render_institutional(v3)}
         <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
             <p class="pdp-sec__eyebrow">{ui['faq_eyebrow']}</p>
             <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">{v3['faq_title']}</h2>
             <div class="home-faq-list">
-{_render_faq(content['faq'][lang])}
+{_render_faq_columns(content['faq'][lang])}
             </div>
         </section>
 
@@ -1333,15 +1466,17 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         </section>
 
         <section class="pdp-final" aria-labelledby="pdp-final-title">
-            <div>
-                <h2 id="pdp-final-title">{v3['final_title']}</h2>
-                <p>{short} — {v3['delivery_line']}</p>
-                <span class="pdp-final__price">€ {eur_fmt(sale)} <small>{v3['final_tax']}{final_instead_html}</small></span>
+            <div class="pdp-final__inner">
+                <div>
+                    <h2 id="pdp-final-title">{v3['final_title']}</h2>
+                    <p>{short} — {v3['delivery_line']}</p>
+                    <span class="pdp-final__price">€ {eur_fmt(sale)} <small>{v3['final_tax']}{final_instead_html}</small></span>
+                </div>
+                <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                    {CART_ICON}
+                    {labels['add']}
+                </button>
             </div>
-            <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
-                {CART_ICON}
-                {labels['add']}
-            </button>
         </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
@@ -1432,7 +1567,7 @@ def build_compact_product_page(lang, prod):
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/product.css">
-    <link rel="stylesheet" href="../css/microsoft-365-product.css">
+    <link rel="stylesheet" href="../css/product-v2.css">
     <script src="../js/theme-init.js"></script>
 </head>
 <body>
@@ -1583,6 +1718,31 @@ def resolve_rich_content(slug):
         content = get_server_content(slug)
         if content:
             return content, SERVER_UI
+    except ImportError:
+        pass
+
+    # Ex template compatto: Adobe Acrobat, CorelDRAW, Acronis. Riusano la UI
+    # Windows solo per il chrome condiviso — forniscono sempre `steps`/`specs`
+    # propri, quindi i default Microsoft-specific di quel dizionario non
+    # vengono mai letti (vedi _render_steps_v3/_render_specs_v3).
+    try:
+        from product_content_tools import get_tools_content
+        from product_content_windows import UI as TOOLS_UI
+
+        content = get_tools_content(slug)
+        if content:
+            return content, TOOLS_UI
+    except ImportError:
+        pass
+
+    # Ex template compatto: bundle M365 Personal + antivirus.
+    try:
+        from product_content_bundles import get_bundle_content
+        from product_content_windows import UI as BUNDLE_UI
+
+        content = get_bundle_content(slug)
+        if content:
+            return content, BUNDLE_UI
     except ImportError:
         pass
 

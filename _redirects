@@ -553,3 +553,7 @@ https://www.aml-store.com/* https://aml-store.com/:splat 301
 /en/backup/* /en/acronis-true-image-advanced 301
 /en/formazione/* /en/strumenti 301
 /en/guide/* /en/strumenti 301
+/it/antivirus/norton-360-standard /it/norton-360-standard 301
+/it/antivirus/bitdefender-antivirus-plus /it/bitdefender-plus-1-device 301
+/it/antivirus/kaspersky-standard /it/kaspersky-standard 301
+/it/antivirus/mcafee-total-protection /it/mcafee-total-protection-1-device 301

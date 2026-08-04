@@ -4,7 +4,8 @@ Erano pagine scritte a mano (PRESERVE_PAGES): il contenuto è stato estratto e
 portato qui, così seguono il template come tutte le altre schede.
 """
 
-PRODUCTS = {'microsoft-365-personal': {'name': {'it': 'Microsoft 365 Personal',
+PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
+                            'name': {'it': 'Microsoft 365 Personal',
                                      'en': 'Microsoft 365 Personal',
                                      'fr': 'Microsoft 365 Personnel',
                                      'de': 'Microsoft 365 Personal',

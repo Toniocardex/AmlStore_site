@@ -1,23 +1,23 @@
 /**
  * templates.js — template email HTML + plain text per Aml Store.
  * Inline styles obbligatori per compatibilità email client.
- * Accent: #3b82f6 (dark) / usato come unico colore per semplicità.
+ * Palette istituzionale navy, allineata a --aml-* in css/page.css.
  */
 
-const ACCENT       = '#3b82f6';
-const ACCENT_DARK  = '#003182';
-const ACCENT_SOFT  = '#eef4ff';
-const ACCENT_SOFT_BORDER = '#bcd4f5';
-const BG           = '#f5f6f8';
+const ACCENT       = '#3267AC';
+const ACCENT_DARK  = '#14243A';
+const ACCENT_SOFT  = '#EAF0F6';
+const ACCENT_SOFT_BORDER = '#C7D6E5';
+const BG           = '#F4F6F8';
 const CARD_BG      = '#ffffff';
-const TEXT         = '#1a1a2e';
-const TEXT_MUTED   = '#6b7280';
-const BORDER       = '#e5e7eb';
-const SUCCESS      = '#059669';
-const SUCCESS_SOFT = '#e8f7f0';
-const AMBER_BG     = '#fffbeb';
-const AMBER_BORDER = '#fcd34d';
-const AMBER_TEXT   = '#92400e';
+const TEXT         = '#152033';
+const TEXT_MUTED   = '#5F6B7A';
+const BORDER       = '#DCE3EA';
+const SUCCESS      = '#1F7A52';
+const SUCCESS_SOFT = '#E8F3ED';
+const AMBER_BG     = '#FCF3D9';
+const AMBER_BORDER = '#f3ce6b';
+const AMBER_TEXT   = '#92400E';
 const AMBER_TEXT_SOFT = '#78350f';
 const HEADING_FONT = "'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
 const BODY_FONT    = "-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
@@ -54,6 +54,12 @@ const i18n = {
         shipping_title:   'Indirizzo di spedizione',
         guide_attached:   'In allegato trovi in omaggio la Guida Copilot per Microsoft 365 (PDF).',
         footer_tagline:   'Licenze digitali originali · aml-store.com',
+        license_subject:  'La tua licenza — ordine #{orderId} — Aml Store',
+        license_greeting: 'Ecco la tua licenza, {name}!',
+        license_intro:    'Grazie per il tuo acquisto. Qui sotto trovi la chiave del tuo prodotto, pronta per l\'attivazione.',
+        license_key_label: 'Chiave prodotto',
+        license_note:     'Conserva questa email: la chiave è personale ed è associata al tuo ordine.',
+        license_help:     'Hai bisogno di assistenza con l\'attivazione? Scrivici:',
     },
     en: {
         subject_paid:     'Order #{orderId} confirmed — Aml Store',
@@ -85,6 +91,12 @@ const i18n = {
         shipping_title:   'Shipping address',
         guide_attached:   'Attached you\'ll find our free Copilot for Microsoft 365 guide (PDF).',
         footer_tagline:   'Genuine digital licences · aml-store.com',
+        license_subject:  'Your licence — order #{orderId} — Aml Store',
+        license_greeting: 'Here is your licence, {name}!',
+        license_intro:    'Thank you for your purchase. Below is your product key, ready to activate.',
+        license_key_label: 'Product key',
+        license_note:     'Keep this email: the key is personal and tied to your order.',
+        license_help:     'Need help activating it? Contact us:',
     },
     fr: {
         subject_paid:     'Commande #{orderId} confirmée — Aml Store',
@@ -116,6 +128,12 @@ const i18n = {
         shipping_title:   'Adresse de livraison',
         guide_attached:   'Vous trouverez en pièce jointe notre guide gratuit Copilot pour Microsoft 365 (PDF).',
         footer_tagline:   'Licences numériques originales · aml-store.com',
+        license_subject:  'Votre licence — commande #{orderId} — Aml Store',
+        license_greeting: 'Voici votre licence, {name} !',
+        license_intro:    'Merci pour votre achat. Vous trouverez ci-dessous la clé de votre produit, prête à activer.',
+        license_key_label: 'Clé produit',
+        license_note:     'Conservez cet e-mail : la clé est personnelle et liée à votre commande.',
+        license_help:     'Besoin d\'aide pour l\'activation ? Contactez-nous :',
     },
     de: {
         subject_paid:     'Bestellung #{orderId} bestätigt — Aml Store',
@@ -147,6 +165,12 @@ const i18n = {
         shipping_title:   'Lieferadresse',
         guide_attached:   'Im Anhang finden Sie unseren kostenlosen Copilot-Leitfaden für Microsoft 365 (PDF).',
         footer_tagline:   'Originale digitale Lizenzen · aml-store.com',
+        license_subject:  'Ihre Lizenz — Bestellung #{orderId} — Aml Store',
+        license_greeting: 'Hier ist Ihre Lizenz, {name}!',
+        license_intro:    'Vielen Dank für Ihren Kauf. Unten finden Sie Ihren Produktschlüssel, bereit zur Aktivierung.',
+        license_key_label: 'Produktschlüssel',
+        license_note:     'Bewahren Sie diese E-Mail auf: Der Schlüssel ist persönlich und Ihrer Bestellung zugeordnet.',
+        license_help:     'Brauchen Sie Hilfe bei der Aktivierung? Kontaktieren Sie uns:',
     },
     es: {
         subject_paid:     'Pedido #{orderId} confirmado — Aml Store',
@@ -178,6 +202,12 @@ const i18n = {
         shipping_title:   'Dirección de envío',
         guide_attached:   'Adjuntamos nuestra guía gratuita de Copilot para Microsoft 365 (PDF).',
         footer_tagline:   'Licencias digitales originales · aml-store.com',
+        license_subject:  'Su licencia — pedido #{orderId} — Aml Store',
+        license_greeting: '¡Aquí tiene su licencia, {name}!',
+        license_intro:    'Gracias por su compra. A continuación encontrará la clave de su producto, lista para activar.',
+        license_key_label: 'Clave de producto',
+        license_note:     'Conserve este correo: la clave es personal y está asociada a su pedido.',
+        license_help:     '¿Necesita ayuda con la activación? Contáctenos:',
     },
 };
 
@@ -495,6 +525,144 @@ export function emailText(order, isPaid, guideAttached = false) {
     }
 
     lines.push(``, `${t.footer_help} Info@amlstore.it`, `https://aml-store.com/${locale}/`);
+
+    return lines.join('\n');
+}
+
+/**
+ * Soggetto email di consegna licenza (evasione manuale).
+ * @param {string} locale
+ * @param {string} orderId
+ * @returns {string}
+ */
+export function licenseSubject(locale, orderId) {
+    const t = i18n[locale] || i18n.it;
+    return t.license_subject.replace('{orderId}', orderId);
+}
+
+/**
+ * Genera il corpo HTML dell'email di consegna licenza, per evasione manuale
+ * (vedi sendInternalOrderNotificationOnce in email.js — l'ammin riceve una
+ * notifica interna e invia questa email al cliente a mano, chiave alla mano).
+ *
+ * @param {object} data
+ * @param {string} data.locale
+ * @param {string} data.orderId
+ * @param {string} data.name — nome del cliente
+ * @param {Array<{productName:string, sku?:string, key:string}>} data.items
+ * @returns {string} HTML
+ */
+export function licenseEmailHtml({ locale, orderId, name, items }) {
+    locale = locale || 'it';
+    const t    = i18n[locale] || i18n.it;
+    const year = new Date().getFullYear();
+
+    const greeting = t.license_greeting.replace('{name}', escHtml(name || ''));
+
+    const cards = (items || []).map(item => `
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${CARD_BG};border:1px solid ${BORDER};border-left:4px solid ${ACCENT_DARK};border-radius:10px;margin-bottom:16px">
+      <tr><td style="padding:18px 22px">
+        <p style="margin:0 0 3px;font-size:15px;font-weight:700;color:${TEXT}">${escHtml(item.productName || '')}</p>
+        ${item.sku ? `<p style="margin:0 0 14px;font-size:12px;color:${TEXT_MUTED}">${escHtml(item.sku)}</p>` : '<div style="height:14px"></div>'}
+        <p style="margin:0 0 6px;font-size:11.5px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.license_key_label}</p>
+        <table cellpadding="0" cellspacing="0" style="background:${BG};border:1px solid ${BORDER};border-radius:8px">
+          <tr><td style="padding:12px 16px">
+            <span style="font-family:'SFMono-Regular',Consolas,monospace;font-size:17px;font-weight:700;color:${ACCENT_DARK};letter-spacing:.5px;word-break:break-all">${escHtml(item.key || '')}</span>
+          </td></tr>
+        </table>
+      </td></tr>
+    </table>`).join('');
+
+    return `<!DOCTYPE html>
+<html lang="${escHtml(locale)}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${licenseSubject(locale, orderId)}</title>
+<style>
+  @font-face{font-family:'Montserrat';src:url('https://aml-store.com/fonts/montserrat-latin-700.woff2') format('woff2');font-weight:700}
+  @font-face{font-family:'Montserrat';src:url('https://aml-store.com/fonts/montserrat-latin-800.woff2') format('woff2');font-weight:800}
+</style>
+</head>
+<body style="margin:0;padding:0;background:${BG};font-family:${BODY_FONT}">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:32px 16px">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(20,36,58,0.12)">
+
+  <!-- Logo header -->
+  <tr><td style="background:${ACCENT_DARK};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
+    <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
+      <tr><td>
+        <img src="https://aml-store.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
+             style="display:block;max-width:140px">
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Body card -->
+  <tr><td style="background:${CARD_BG};padding:36px 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER}">
+
+    <table cellpadding="0" cellspacing="0" style="margin-bottom:22px">
+      <tr>
+        <td width="40" valign="top" style="padding-right:12px">
+          <table cellpadding="0" cellspacing="0"><tr><td width="36" height="36" align="center" valign="middle" style="background:${SUCCESS_SOFT};border-radius:50%;font-size:18px;color:${SUCCESS}">🔑</td></tr></table>
+        </td>
+        <td valign="middle">
+          <h1 style="margin:0 0 4px;font-family:${HEADING_FONT};font-size:23px;font-weight:800;color:${TEXT};letter-spacing:-.2px">${greeting}</h1>
+          <p style="margin:0;font-size:14.5px;color:${TEXT_MUTED};line-height:1.5">${t.license_intro}</p>
+        </td>
+      </tr>
+    </table>
+
+    <p style="margin:0 0 5px;font-size:11.5px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.order_id}</p>
+    <p style="margin:0 0 20px;font-size:16px;font-weight:800;color:${ACCENT_DARK};font-family:'SFMono-Regular',Consolas,monospace">${escHtml(orderId)}</p>
+
+    ${cards}
+
+    <p style="margin:20px 0 0;padding-top:16px;border-top:1px solid ${BORDER};font-size:12px;color:${TEXT_MUTED};line-height:1.5">${t.license_note}</p>
+
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="background:#f0f2f5;border-radius:0 0 10px 10px;padding:22px 32px;border:1px solid ${BORDER};border-top:none;text-align:center">
+    <p style="margin:0 0 8px;font-size:13px;color:${TEXT_MUTED}">${t.license_help} <a href="mailto:Info@amlstore.it" style="color:${ACCENT_DARK};font-weight:600">Info@amlstore.it</a></p>
+    <p style="margin:0 0 10px;font-size:11px;color:#9ca3af">${t.footer_copy.replace('{year}', year)}</p>
+    <p style="margin:0;font-size:10.5px;color:#b0b5bd;letter-spacing:.3px">${t.footer_tagline}</p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+}
+
+/**
+ * Genera plain text fallback per l'email di consegna licenza.
+ * @param {object} data — vedi licenseEmailHtml
+ * @returns {string}
+ */
+export function licenseEmailText({ locale, orderId, name, items }) {
+    locale = locale || 'it';
+    const t = i18n[locale] || i18n.it;
+
+    const lines = [
+        `Aml Store`,
+        t.license_greeting.replace('{name}', name || ''),
+        ``,
+        t.license_intro,
+        ``,
+        `${t.order_id}: ${orderId}`,
+        ``,
+    ];
+
+    (items || []).forEach(item => {
+        lines.push(`${item.productName}${item.sku ? ' (' + item.sku + ')' : ''}`);
+        lines.push(`${t.license_key_label}: ${item.key}`);
+        lines.push(``);
+    });
+
+    lines.push(t.license_note, ``, `${t.license_help} Info@amlstore.it`);
 
     return lines.join('\n');
 }

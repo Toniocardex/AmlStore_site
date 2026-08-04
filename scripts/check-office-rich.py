@@ -61,7 +61,7 @@ for sku, slug, template, card_name in [
         if img.exists() and f"products/{slug}.webp" not in t:
             errors.append(f"{lang}/{slug}: product image not used")
         # green badge (not accent blue only)
-        if "v2-price-badge" in t and "#10b981" not in (ROOT / "css" / "microsoft-365-product.css").read_text(encoding="utf-8"):
+        if "v2-price-badge" in t and "#10b981" not in (ROOT / "css" / "product-v2.css").read_text(encoding="utf-8"):
             errors.append("css: green badge missing from stylesheet")
 
 if errors:

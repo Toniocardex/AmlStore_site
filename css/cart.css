@@ -52,8 +52,9 @@
     min-height: clamp(11rem, 28vw, 16rem);
     padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2rem);
     border: 1px solid var(--page-border);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--aml-radius-md);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
     box-sizing: border-box;
 }
 
@@ -77,9 +78,10 @@
 
 .cart-page .cart-table-wrap {
     border: 1px solid var(--page-border);
-    border-radius: 8px;
+    border-radius: var(--aml-radius-md);
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
 }
 
 .cart-page table {
@@ -91,7 +93,7 @@
 .cart-page thead th {
     text-align: left;
     padding: 0.85rem 1rem;
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--aml-paper);
     color: var(--page-text-secondary);
     font-weight: 700;
     font-size: 0.75rem;
@@ -224,7 +226,7 @@
 }
 
 .cart-page .aml-cart-remove:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--aml-paper);
     color: var(--page-text);
 }
 
@@ -282,14 +284,23 @@
 }
 
 .cart-page .cart-btn-primary {
-    background: linear-gradient(135deg, #ffffff 0%, #e4e4e7 100%);
-    color: #0a0a0a;
-    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.12);
+    background: var(--page-accent);
+    color: #ffffff;
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--page-accent) 22%, transparent);
 }
 
 .cart-page .cart-btn-primary:hover {
     transform: translateY(-2px);
-    filter: brightness(1.03);
+    filter: brightness(1.08);
+    box-shadow: 0 6px 18px color-mix(in srgb, var(--page-accent) 28%, transparent);
+}
+
+.cart-page .cart-btn-primary:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow:
+        0 0 0 4px var(--page-accent),
+        0 4px 14px color-mix(in srgb, var(--page-accent) 22%, transparent);
 }
 
 /* Sotto i 640px la tabella non scorre lateralmente (il pulsante "Rimuovi"
@@ -386,46 +397,3 @@
     }
 }
 
-html[data-theme='light'] .cart-page .cart-empty-panel,
-html[data-theme='light'] .cart-page .cart-table-wrap {
-    background: #ffffff;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-}
-
-/* Tema chiaro: CTA primario blu (come stepper / accent) — il gradiente chiaro su bianco poco visibile */
-html[data-theme='light'] .cart-page .cart-btn-primary {
-    background: var(--page-accent);
-    color: #ffffff;
-    box-shadow: 0 4px 14px rgba(0, 49, 130, 0.22);
-}
-
-html[data-theme='light'] .cart-page .cart-btn-primary:hover {
-    filter: brightness(1.08);
-    box-shadow: 0 6px 18px rgba(0, 49, 130, 0.28);
-}
-
-/* Focus su CTA piena: anello bianco + contorno accent — contrasto sul blu pieno */
-html[data-theme='light'] .cart-page .cart-btn-primary:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 2px;
-    box-shadow:
-        0 0 0 4px var(--page-accent),
-        0 4px 14px rgba(0, 49, 130, 0.22);
-}
-
-html[data-theme='light'] .cart-page thead th {
-    background: #f0f1f3;
-    color: var(--page-text-secondary);
-}
-
-html[data-theme='light'] .cart-page .aml-cart-remove:hover {
-    background: rgba(0, 0, 0, 0.06);
-}
-
-html[data-theme='light'] .cart-page .aml-cart-qty-stepper {
-    background: #f4f4f5;
-}
-
-html[data-theme='light'] .cart-page .aml-cart-qty {
-    background: #ffffff;
-}

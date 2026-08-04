@@ -1,20 +1,64 @@
 /**
- * Pagina principale — tema dark allineato a header/footer (palette premium).
+ * DESIGN SYSTEM — fonte unica dei token per tutto il sito.
+ * Identità istituzionale chiara: nessun tema scuro come stato permanente
+ * (era la palette dark "premium SaaS" di header/footer/prodotto, ora
+ * ritirata — vedi components/header.js, components/footer.js,
+ * css/product-v3.css). --page-* e --pdp-* restano come alias verso i
+ * token --aml-* per non dover riscrivere ogni consumer in un colpo solo:
+ * i componenti NUOVI devono referenziare --aml-* direttamente, quelli
+ * esistenti possono continuare a usare l'alias finché non vengono toccati.
  */
 :root {
-    --page-bg: #050505;
-    --page-border: rgba(255, 255, 255, 0.08);
-    --page-text: #fafafa;
-    --page-text-secondary: #a1a1aa;
-    --page-text-muted: #71717a;
-    --page-accent: #3b82f6;
-    --page-glow: rgba(59, 130, 246, 0.08);
-    --font-sans: 'Montserrat', sans-serif;
-    --font-display: 'Source Serif 4', 'Source Serif4', Georgia, serif;
+    /* Brand */
+    --aml-navy: #14243A;
+    --aml-navy-2: #1d3454;
+    --aml-brand: #3267AC;
+    --aml-brand-hover: #26507f;
+
+    /* Neutrali */
+    --aml-ink: #152033;
+    --aml-ink-2: #5F6B7A;
+    --aml-line: #DCE3EA;
+    --aml-paper: #F4F6F8;
+    --aml-surface: #FFFFFF;
+    --aml-trust-bg: #EAF0F6;
+
+    /* Semantici */
+    --aml-ok: #1F7A52;
+    --aml-ok-bg: #E8F3ED;
+    --aml-warn: #92400E;
+    --aml-warn-bg: #FCF3D9;
+    --aml-danger: #B3261E;
+    --aml-danger-bg: #FBEAE9;
+
+    /* Raggio / ombra / layout */
+    --aml-radius-sm: 6px;
+    --aml-radius-md: 8px;
+    --aml-radius-lg: 12px;
+    --aml-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.04);
+    --aml-shadow-md: 0 2px 8px rgba(20, 32, 51, 0.04);
+    --aml-shadow-lg: 0 12px 32px rgba(16, 24, 40, 0.10);
+    --aml-maxw: 1180px;
+    --aml-gutter: clamp(1rem, 4vw, 2rem);
+
+    /* Tipografia (formalizza la scelta esistente, non la cambia) */
+    --aml-font-sans: 'Montserrat', sans-serif;
+    --aml-font-display: 'Source Serif 4', 'Source Serif4', Georgia, serif;
+
+    /* ── Alias legacy: un solo posto dove sono definiti i valori reali ── */
+    --page-bg: var(--aml-paper);
+    --page-border: var(--aml-line);
+    --page-text: var(--aml-ink);
+    --page-text-secondary: var(--aml-ink-2);
+    --page-text-muted: var(--aml-ink-2);
+    --page-accent: var(--aml-brand);
+    --page-glow: rgba(50, 103, 172, 0.06);
+    --font-sans: var(--aml-font-sans);
+    --font-display: var(--aml-font-display);
 }
 
 html {
-    color-scheme: dark;
+    color-scheme: light;
     scroll-behavior: smooth;
 }
 
@@ -68,7 +112,7 @@ html {
     font-weight: 700;
     text-decoration: none;
     border-radius: 6px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .visually-hidden {
@@ -160,8 +204,9 @@ html[data-theme='light'] .home-section-title {
     min-width: 0;
     overflow: hidden;
     border: 1px solid var(--page-border);
-    border-radius: 8px;
-    background: color-mix(in srgb, var(--page-text) 3.5%, var(--page-bg));
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-md);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -184,20 +229,9 @@ html[data-theme='light'] .home-section-title {
     display: none;
 }
 
-.home-faq-item summary::before {
-    content: '?';
-    display: grid;
-    flex-shrink: 0;
-    width: 26px;
-    height: 26px;
-    place-items: center;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--page-accent) 14%, transparent);
-    color: var(--page-accent);
-    font-size: 0.85rem;
-    font-weight: 800;
-    transition: background 0.2s ease, color 0.2s ease;
-}
+/* Il chevron (::after) basta a comunicare l'interazione: il cerchio con "?"
+   è rumore, non informazione. */
+.home-faq-item summary::before { display: none; }
 
 .home-faq-item summary::after {
     content: '';
@@ -267,11 +301,6 @@ html[data-theme='light'] .home-section-title {
     border-radius: 2px;
 }
 
-html[data-theme='light'] .home-faq-item {
-    background: #ffffff;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-}
-
 @media (min-width: 768px) {
     .home-faq-list {
         max-width: min(48rem, 100%);
@@ -333,10 +362,10 @@ p.subtitle {
 }
 
 .product-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: var(--aml-surface);
     border: 1px solid var(--page-border);
-    border-radius: 8px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    border-radius: var(--aml-radius-md);
+    box-shadow: var(--aml-shadow-sm);
     min-height: 430px;
     padding: 1.5rem;
     display: flex;
@@ -347,8 +376,8 @@ p.subtitle {
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: var(--aml-shadow-lg);
+    border-color: color-mix(in srgb, var(--aml-ink) 12%, var(--page-border));
 }
 
 .product-card-body {
@@ -374,12 +403,12 @@ a.product-card--link:focus-visible {
 
 .product-card-media {
     position: relative;
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--aml-paper);
     height: 200px;
-    border-radius: 6px;
+    border-radius: var(--aml-radius-sm);
     display: grid;
     place-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--page-border);
     overflow: hidden;
 }
 
@@ -394,8 +423,8 @@ a.product-card--link:focus-visible {
     font-weight: 800;
     letter-spacing: 0.02em;
     color: #ffffff;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    background: var(--aml-ok);
+    box-shadow: var(--aml-shadow-sm);
     pointer-events: none;
 }
 
@@ -471,9 +500,9 @@ a.product-card--link:focus-visible {
     border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 800;
-    background: rgba(16, 185, 129, 0.16);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.35);
+    background: var(--aml-ok-bg);
+    color: var(--aml-ok);
+    border: 1px solid color-mix(in srgb, var(--aml-ok) 35%, transparent);
     white-space: nowrap;
     flex-shrink: 0;
 }
@@ -505,14 +534,14 @@ a.product-card--link:focus-visible {
     font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0, 103, 184, 0.35);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--page-accent) 35%, transparent);
     transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
     white-space: nowrap;
 }
 
 .btn-cta-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(0, 120, 215, 0.45);
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--page-accent) 45%, transparent);
     filter: brightness(1.06);
 }
 
@@ -564,13 +593,13 @@ a.product-card--link:focus-visible {
 }
 
 .skeleton-img {
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--aml-paper);
     height: 200px;
-    border-radius: 6px;
+    border-radius: var(--aml-radius-sm);
     display: grid;
     place-items: center;
     color: var(--page-text-muted);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--page-border);
 }
 
 .skeleton-img svg {
@@ -579,7 +608,7 @@ a.product-card--link:focus-visible {
 }
 
 .skeleton-text {
-    background: rgba(255, 255, 255, 0.1);
+    background: color-mix(in srgb, var(--aml-ink) 12%, var(--aml-paper));
     height: 16px;
     border-radius: 4px;
     width: 90%;
@@ -603,7 +632,7 @@ a.product-card--link:focus-visible {
     width: 30%;
     height: 24px;
     margin-top: 0;
-    background: rgba(255, 255, 255, 0.14);
+    background: color-mix(in srgb, var(--aml-ink) 18%, var(--aml-paper));
 }
 
 ecommerce-footer {
@@ -611,66 +640,6 @@ ecommerce-footer {
     width: 100%;
     position: relative;
     z-index: 1;
-}
-
-/* --- Tema chiaro (solo contenuto pagina; header/footer invariati) --- */
-html[data-theme="light"] {
-    color-scheme: light;
-    --page-bg: #f5f6f8;
-    --page-border: rgba(0, 0, 0, 0.08);
-    --page-text: #2d2d2d;
-    --page-text-secondary: #555555;
-    --page-text-muted: #888888;
-    --page-accent: #003182;
-    --page-glow: rgba(0, 49, 130, 0.06);
-}
-
-html[data-theme="light"] .skip-link:focus {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-html[data-theme="light"] .product-card {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
-
-html[data-theme="light"] .product-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border-color: rgba(0, 0, 0, 0.1);
-}
-
-html[data-theme="light"] .product-card-price-block__save {
-    background: rgba(16, 185, 129, 0.12);
-    color: #059669;
-    border-color: rgba(16, 185, 129, 0.28);
-}
-
-html[data-theme="light"] .skeleton-img {
-    background: #f0f2f5;
-    color: #cccccc;
-    border-color: rgba(0, 0, 0, 0.06);
-}
-
-html[data-theme="light"] .skeleton-text {
-    background: #e4e6eb;
-}
-
-html[data-theme="light"] .skeleton-text.price {
-    background: #d0d4db;
-}
-
-html[data-theme="light"] .product-card-media {
-    background: #f0f2f5;
-    border-color: rgba(0, 0, 0, 0.06);
-}
-
-html[data-theme="light"] .btn-cta-primary {
-    box-shadow: 0 6px 20px rgba(0, 103, 184, 0.28);
-}
-
-html[data-theme="light"] .btn-cta-primary:hover {
-    box-shadow: 0 10px 28px rgba(0, 120, 215, 0.38);
 }
 
 /* --- Pagine legali / testo lungo --- */
@@ -760,10 +729,6 @@ html[data-theme="light"] .btn-cta-primary:hover {
 
 .contacts-page .contacts-channels a {
     font-size: 1.05rem;
-}
-
-html[data-theme="light"] .legal-doc a {
-    color: var(--page-accent);
 }
 
 .cookie-panel-trigger {
@@ -870,9 +835,6 @@ html[data-theme="light"] .legal-doc a {
 
 .checkout-stepper__line--done { background: var(--page-accent); }
 .checkout-stepper__line--next { background: var(--page-border); }
-
-html[data-theme="light"] .checkout-stepper__step--next .checkout-stepper__dot { border-color: rgba(0,0,0,0.18); }
-html[data-theme="light"] .checkout-stepper__line--next                         { background: rgba(0,0,0,0.14); }
 
 @media (prefers-reduced-motion: reduce) {
     .checkout-stepper__dot,

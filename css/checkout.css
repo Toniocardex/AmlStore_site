@@ -59,10 +59,11 @@
 }
 
 .form-section {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
+    background: var(--aml-surface);
     border: 1px solid var(--page-border);
-    border-radius: 8px;
+    border-radius: var(--aml-radius-md);
     padding: clamp(1.25rem, 3vw, 1.75rem);
+    box-shadow: var(--aml-shadow-sm);
 }
 
 .form-section-title {
@@ -99,7 +100,7 @@
     box-sizing: border-box;
     min-height: 44px;
     padding: 0.6rem 0.85rem;
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--aml-surface);
     border: 1px solid var(--page-border);
     border-radius: 6px;
     color: var(--page-text);
@@ -132,14 +133,14 @@
 /* ── Stato errore ── */
 .form-field.is-invalid input,
 .form-field.is-invalid select {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    border-color: var(--aml-danger);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--aml-danger) 15%, transparent);
 }
 
 .field-error {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #ef4444;
+    color: var(--aml-danger);
     margin: 0;
     display: flex;
     align-items: center;
@@ -154,7 +155,7 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: #ef4444;
+    background: var(--aml-danger);
     color: #fff;
     font-size: 0.65rem;
     font-weight: 800;
@@ -193,7 +194,7 @@
 }
 
 .customer-tab-btn:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--aml-paper);
     color: var(--page-text);
 }
 
@@ -249,15 +250,15 @@
     gap: 1rem;
     padding: 1rem 1.1rem;
     border: 1px solid var(--page-border);
-    border-radius: 8px;
+    border-radius: var(--aml-radius-md);
     cursor: pointer;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--aml-surface);
 }
 
 .payment-option-label:hover {
-    border-color: rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.04);
+    border-color: color-mix(in srgb, var(--aml-ink) 20%, var(--page-border));
+    background: var(--aml-paper);
 }
 
 .payment-option input[type="radio"]:checked + .payment-option-label {
@@ -334,12 +335,12 @@
     height: 20px;
     padding: 0 0.4rem;
     border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--aml-paper);
     font-size: 0.65rem;
     font-weight: 800;
     color: var(--page-text);
     letter-spacing: 0.02em;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--page-border);
     white-space: nowrap;
 }
 
@@ -349,6 +350,7 @@
     font-size: 0;
     letter-spacing: 0;
     white-space: normal;
+    background: var(--aml-surface);
 }
 
 .payment-icon--img img {
@@ -377,12 +379,10 @@
 }
 
 .transfer-card {
-    background: linear-gradient(145deg, rgba(59, 130, 246, 0.07) 0%, rgba(59, 130, 246, 0.03) 100%);
-    border: 1px solid rgba(59, 130, 246, 0.22);
-    border-radius: 8px;
+    background: color-mix(in srgb, var(--page-accent) 6%, var(--aml-surface));
+    border: 1px solid color-mix(in srgb, var(--page-accent) 22%, transparent);
+    border-radius: var(--aml-radius-md);
     padding: 1.25rem 1.35rem;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
 }
 
 .transfer-card h3 {
@@ -436,7 +436,7 @@
     margin: 0.85rem 0 0;
     line-height: 1.5;
     padding-top: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-top: 1px solid var(--page-border);
 }
 
 /* ─── PayPal (testo placeholder — non usato se c’è .payment-icon--img) ─────── */
@@ -493,18 +493,16 @@
 /* ─── Sezione conferma ordine bonifico ─────────────────────────────────────── */
 
 .transfer-confirm-section {
-    background: linear-gradient(145deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.03) 100%);
-    border: 1px solid rgba(16, 185, 129, 0.25);
-    border-radius: 8px;
+    background: var(--aml-ok-bg);
+    border: 1px solid color-mix(in srgb, var(--aml-ok) 25%, transparent);
+    border-radius: var(--aml-radius-md);
     padding: 1.5rem 1.75rem;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
 }
 
 .transfer-confirm-title {
     font-size: 1.1rem;
     font-weight: 800;
-    color: #10b981;
+    color: var(--aml-ok);
     margin: 0 0 0.5rem;
     display: flex;
     align-items: center;
@@ -519,10 +517,10 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: rgba(16, 185, 129, 0.18);
+    background: color-mix(in srgb, var(--aml-ok) 18%, transparent);
     font-size: 0.8rem;
     font-weight: 900;
-    color: #10b981;
+    color: var(--aml-ok);
     flex-shrink: 0;
 }
 
@@ -541,12 +539,11 @@
 }
 
 .checkout-summary {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: var(--aml-surface);
     border: 1px solid var(--page-border);
-    border-radius: 8px;
+    border-radius: var(--aml-radius-md);
     padding: clamp(1.25rem, 3vw, 1.75rem);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--aml-shadow-sm);
 }
 
 .checkout-summary-title {
@@ -774,8 +771,9 @@
     text-align: center;
     padding: 3rem 2rem;
     border: 1px solid var(--page-border);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--aml-radius-md);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
 }
 
 .checkout-empty-icon {
@@ -824,79 +822,18 @@
 /* ─── Messaggio di errore globale (rete, ecc.) ──────────────────────────────── */
 
 .checkout-error-msg {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    background: var(--aml-danger-bg);
+    border: 1px solid color-mix(in srgb, var(--aml-danger) 30%, transparent);
     border-radius: 6px;
     padding: 0.85rem 1rem;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #f87171;
+    color: var(--aml-danger);
     margin-top: 0.75rem;
 }
 
 .checkout-error-msg[hidden] {
     display: none;
-}
-
-/* ─── Tema chiaro ───────────────────────────────────────────────────────────── */
-
-html[data-theme="light"] .form-section {
-    background: #ffffff;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-}
-
-html[data-theme="light"] .form-field input,
-html[data-theme="light"] .form-field select {
-    background: #f9fafb;
-    border-color: rgba(0, 0, 0, 0.12);
-    color: #1a1a1a;
-}
-
-html[data-theme="light"] .form-field input::placeholder {
-    color: #aaaaaa;
-}
-
-html[data-theme="light"] .customer-tabs {
-    border-color: rgba(0, 0, 0, 0.1);
-}
-
-html[data-theme="light"] .customer-tab-btn {
-    border-right-color: rgba(0, 0, 0, 0.1);
-    color: #555;
-}
-
-html[data-theme="light"] .payment-option-label {
-    background: #fff;
-    border-color: rgba(0, 0, 0, 0.1);
-}
-
-html[data-theme="light"] .payment-icon {
-    background: rgba(0, 0, 0, 0.06);
-    border-color: rgba(0, 0, 0, 0.08);
-    color: #333;
-}
-
-html[data-theme="light"] .payment-icon--img {
-    background: rgba(255, 255, 255, 0.95);
-}
-
-html[data-theme="light"] .checkout-summary {
-    background: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-}
-
-html[data-theme="light"] .transfer-card {
-    background: linear-gradient(145deg, rgba(0, 49, 130, 0.06) 0%, rgba(0, 49, 130, 0.02) 100%);
-    border-color: rgba(0, 49, 130, 0.18);
-}
-
-html[data-theme="light"] .checkout-empty {
-    background: #ffffff;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-}
-
-html[data-theme="light"] .checkout-error-msg {
-    color: #dc2626;
 }
 
 /* ─── prefers-reduced-motion ────────────────────────────────────────────────── */
@@ -984,7 +921,7 @@ html[data-theme="light"] .checkout-error-msg {
 
 .checkout-success__msg {
     font-size: 1rem;
-    color: var(--text-muted, #666);
+    color: var(--page-text-muted);
     max-width: 480px;
     line-height: 1.6;
     margin: 0;
@@ -1076,8 +1013,8 @@ html[data-theme="light"] .checkout-error-msg {
     margin-left: 0.4rem;
 }
 
-.success-badge--paid    { background: #d1fae5; color: #065f46; }
-.success-badge--pending { background: #fef3c7; color: #92400e; }
+.success-badge--paid    { background: var(--aml-ok-bg); color: var(--aml-ok); }
+.success-badge--pending { background: var(--aml-warn-bg); color: var(--aml-warn); }
 
 /* Tabella items */
 .success-items-table {
@@ -1095,12 +1032,12 @@ html[data-theme="light"] .checkout-error-msg {
     color: var(--page-text-muted, #888);
     text-transform: uppercase;
     letter-spacing: 0.3px;
-    border-bottom: 1px solid var(--border-color, rgba(255,255,255,0.08));
+    border-bottom: 1px solid var(--page-border);
 }
 
 .success-td {
     padding: 10px;
-    border-bottom: 1px solid var(--border-color, rgba(255,255,255,0.08));
+    border-bottom: 1px solid var(--page-border);
 }
 
 .success-td--center { text-align: center; }
@@ -1116,20 +1053,20 @@ html[data-theme="light"] .checkout-error-msg {
 
 /* Box bonifico */
 .success-transfer-box {
-    background: #fffbeb;
-    border: 1px solid #fcd34d;
+    background: var(--aml-warn-bg);
+    border: 1px solid color-mix(in srgb, var(--aml-warn) 40%, transparent);
     border-radius: 6px;
     padding: 1rem 1.25rem;
     margin-top: 1rem;
     font-size: 0.875rem;
-    color: #78350f;
+    color: var(--aml-warn);
 }
 
 .success-transfer-box strong {
     display: block;
     font-size: 0.95rem;
     font-weight: 700;
-    color: #92400e;
+    color: var(--aml-warn);
     margin-bottom: 0.5rem;
 }
 
@@ -1137,19 +1074,6 @@ html[data-theme="light"] .checkout-error-msg {
     font-family: monospace, monospace;
     font-size: 0.95rem;
     font-weight: 700;
-    color: #92400e;
+    color: var(--aml-warn);
     word-break: break-all;
-}
-
-/* Light mode overrides */
-@media (prefers-color-scheme: light) {
-    .success-items-table th,
-    .success-td {
-        border-bottom-color: #e5e7eb;
-    }
-}
-
-[data-theme="light"] .success-items-table th,
-[data-theme="light"] .success-td {
-    border-bottom-color: #e5e7eb;
 }

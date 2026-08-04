@@ -1,0 +1,521 @@
+/**
+ * PILOTA — Microsoft 365 Family, redesign istituzionale
+ * Sistema colori/tipografia derivato dal blu del logo AML Store (non dal blu
+ * SaaS #3b82f6 di header/footer). Scopato su body.pf-page: non tocca
+ * product-v3.css né le altre pagine del catalogo. Caricato dopo product-v3.css.
+ *
+ * Fase 1 di un design system più ampio (vedi discussione col cliente): qui si
+ * ridisegna solo la pagina pilota. L'header/footer condivisi (Shadow DOM)
+ * ricevono un semplice swap d'accento quando rilevano body.pf-page — vedi
+ * components/header.js e components/footer.js.
+ */
+
+/* ── TOKEN ─────────────────────────────────────────────────────────────────── */
+body.pf-page {
+    --pf-navy: #14243A;
+    --pf-navy-2: #1d3454;
+    --pf-brand: #3267AC;
+    --pf-brand-dark: #26507f;
+    --pf-ink: #152033;
+    --pf-ink-2: #5F6B7A;
+    --pf-paper: #F4F6F8;
+    --pf-hero-bg: #F5F8FB;
+    --pf-trust-bg: #EAF0F6;
+    --pf-surface: #FFFFFF;
+    --pf-line: #DCE3EA;
+    --pf-ok: #1F7A52;
+
+    /* Rimappa i token del template condiviso sulla nuova palette. */
+    --page-accent: var(--pf-brand);
+    --pdp-radius: 8px;
+    --pdp-maxw: 1180px;
+    --pdp-ok: var(--pf-ok);
+    --pdp-border: var(--pf-line);
+    --pdp-surface-2: var(--pf-paper);
+    --pdp-muted: var(--pf-ink-2);
+    --pdp-hero-bg: var(--pf-hero-bg);
+}
+
+html[data-theme='light'] body.pf-page {
+    --pdp-border: var(--pf-line);
+    --pdp-surface-2: var(--pf-paper);
+    --pdp-muted: var(--pf-ink-2);
+}
+
+/* Anche in tema scuro la pagina pilota resta su fondo chiaro: è la scelta
+   editoriale del redesign, non un'inversione automatica del tema. Il tono
+   grigio-azzurro (non bianco puro) dà profondità: le superfici bianche
+   (card, tabelle, pannello acquisto) risaltano sopra, invece di fondersi. */
+html[data-theme='dark'] body.pf-page,
+body.pf-page {
+    background: var(--pf-paper);
+}
+
+body.pf-page .pdp-sec__eyebrow,
+body.pf-page .pdp-faq-group__title,
+body.pf-page .pdp-app__tag,
+body.pf-page .pdp-stat__value {
+    color: var(--pf-brand);
+}
+
+body.pf-page .pdp-sec__title,
+body.pf-page .home-faq .home-section-title,
+body.pf-page .pdp-faq__title {
+    color: var(--pf-ink);
+    /* Il componente condiviso usa anche -webkit-text-fill-color, che in
+       WebKit/Blink vince su "color" per il colore del testo: sovrascrivere
+       solo "color" non basta, il titolo resta (quasi) invisibile in tema
+       scuro perché eredita --page-text (chiaro) invece del nostro token. */
+    -webkit-text-fill-color: var(--pf-ink);
+}
+
+/* ── HERO: da fascia scura "premium SaaS" a superficie chiara istituzionale ── */
+body.pf-page .pdp-hero {
+    background: var(--pf-surface);
+    color: var(--pf-ink);
+    border-bottom: 1px solid var(--pf-line);
+}
+
+body.pf-page .pdp-breadcrumb nav { color: var(--pf-ink-2); }
+body.pf-page .pdp-breadcrumb a { color: var(--pf-ink-2); }
+body.pf-page .pdp-breadcrumb a:hover { color: var(--pf-ink); }
+body.pf-page .pdp-breadcrumb .sep { color: var(--pf-line); }
+
+body.pf-page .pdp-eyebrow { color: var(--pf-brand); }
+body.pf-page .pdp-eyebrow::before { background: var(--pf-brand); }
+
+body.pf-page .pdp-h1 { color: var(--pf-ink); }
+body.pf-page .pdp-h1 span { color: var(--pf-brand); }
+
+body.pf-page .v2-product-code { color: var(--pf-ink-2); }
+body.pf-page .v2-product-code__value {
+    color: var(--pf-ink);
+    background: var(--pf-paper);
+    border: 1px solid var(--pf-line);
+}
+
+body.pf-page .pdp-hero__info .v2-hero__desc { color: var(--pf-ink-2); }
+
+body.pf-page .pdp-keylist li { color: var(--pf-ink); }
+body.pf-page .pdp-keylist li::before { color: var(--pf-ok); }
+body.pf-page .pdp-keylist em { color: var(--pf-ink-2); }
+
+body.pf-page .pdp-media {
+    background: var(--pf-paper);
+    border: 1px solid var(--pf-line);
+    box-shadow: none;
+    padding: 12px;
+}
+
+/* La colonna immagine era pari alla colonna testo: il testo restava stretto
+   e andava a capo spesso. Più spazio al testo, meno cornice vuota attorno
+   all'immagine (già ridotta sopra). */
+body.pf-page .pdp-hero__split {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
+}
+
+/* Meno vuoto tra il pannello acquisto e la fascia di fiducia sotto. */
+body.pf-page .pdp-hero__inner { padding-bottom: 36px; }
+
+/* ── FASCIA DI FIDUCIA ISTITUZIONALE (nuova, sotto l'hero) ───────────────── */
+.pf-trustbar {
+    border-bottom: 1px solid var(--pf-line);
+    background: var(--pf-trust-bg);
+}
+
+.pf-trustbar__inner {
+    max-width: var(--pdp-maxw);
+    margin: 0 auto;
+    padding: 20px var(--pdp-gutter);
+    min-height: 72px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    gap: 12px 32px;
+}
+
+.pf-trustbar__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.pf-trustbar__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    color: var(--pf-navy);
+}
+.pf-trustbar__icon svg { width: 100%; height: 100%; }
+
+.pf-trustbar__text { display: flex; flex-direction: column; gap: 2px; }
+
+.pf-trustbar__text strong {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--pf-navy);
+    letter-spacing: -0.005em;
+}
+
+.pf-trustbar__text > span {
+    font-size: 0.8rem;
+    color: var(--pf-ink-2);
+}
+
+@media (max-width: 900px) {
+    .pf-trustbar__inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 480px) {
+    .pf-trustbar__inner { grid-template-columns: 1fr; }
+}
+
+/* ── PANNELLO D'ACQUISTO: da card "premium dark" a superficie bianca netta ── */
+body.pf-page .pdp-buy {
+    background: var(--pf-surface);
+    border: 1px solid var(--pf-line);
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+body.pf-page .pdp-buy__label { color: var(--pf-brand); font-weight: 700; }
+
+body.pf-page .pdp-price-sale { color: var(--pf-ink); }
+body.pf-page .pdp-price-msrp { color: var(--pf-ink-2); }
+
+/* La percentuale di sconto è ridondante con barrato + risparmio in euro. */
+body.pf-page .pdp-price-badge { display: none; }
+
+body.pf-page .pdp-price-note { color: var(--pf-ink-2); }
+body.pf-page .pdp-price-note strong { color: var(--pf-ink); }
+
+body.pf-page .pdp-btn-primary {
+    background: var(--pf-brand);
+    border-radius: 6px;
+}
+body.pf-page .pdp-btn-primary:hover { background: var(--pf-brand-dark); }
+body.pf-page .pdp-btn-primary:active { background: var(--pf-navy); }
+body.pf-page .pdp-btn-primary:focus-visible { outline-color: var(--pf-brand); }
+body.pf-page .pdp-btn-primary.is-added { background: var(--pf-ok); }
+
+body.pf-page .pdp-delivery { color: var(--pf-ink); }
+body.pf-page .pdp-delivery svg { color: var(--pf-ok); }
+body.pf-page .pdp-buy .pdp-delivery {
+    background: var(--pf-paper);
+    border: 1px solid var(--pf-line);
+}
+
+/* Omaggio: nota sobria, non più un riquadro "in regalo" da landing promozionale. */
+body.pf-page .pdp-bonus {
+    background: none;
+    border: none;
+    border-top: 1px solid var(--pf-line);
+    border-radius: 0;
+    padding: 10px 0 0;
+    margin-top: 10px;
+    color: var(--pf-ink-2);
+    font-weight: 500;
+}
+body.pf-page .pdp-bonus svg { display: none; }
+body.pf-page .pdp-bonus strong { color: var(--pf-ink); font-weight: 700; }
+
+/* Rassicurazioni: da checklist a 5 voci a un'unica riga compatta (vedi HTML). */
+body.pf-page .pdp-assur {
+    border-top-color: var(--pf-line);
+    color: var(--pf-ink-2);
+    grid-template-columns: 1fr;
+    gap: 6px;
+}
+body.pf-page .pdp-assur li::before { color: var(--pf-ok); }
+
+/* Sei loghi pagamento nel punto più importante della pagina sono rumore:
+   restano nel checkout/footer, qui una riga di testo basta. */
+body.pf-page .pdp-pay { display: none; }
+
+.pf-pay-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--pf-line);
+    font-size: 0.8rem;
+    color: var(--pf-ink-2);
+}
+.pf-pay-note svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--pf-ink-2); }
+.pf-pay-note strong { color: var(--pf-ink); font-weight: 700; }
+
+/* ── SEZIONI: bordi netti invece di sfondi "card" pieni ──────────────────── */
+body.pf-page .pdp-divider { border-top-color: var(--pf-line); }
+body.pf-page .pdp-sec__sub { color: var(--pf-ink-2); }
+
+body.pf-page .pdp-stat,
+body.pf-page .pdp-card,
+body.pf-page .pdp-step,
+body.pf-page .pdp-seat,
+body.pf-page .pdp-app {
+    background: var(--pf-surface);
+    border: 1px solid var(--pf-line);
+    box-shadow: none;
+}
+
+body.pf-page .pdp-stat__label,
+body.pf-page .pdp-card__title,
+body.pf-page .pdp-step h3,
+body.pf-page .pdp-seat__role {
+    color: var(--pf-ink);
+}
+
+body.pf-page .pdp-stat__note,
+body.pf-page .pdp-card__body,
+body.pf-page .pdp-step p,
+body.pf-page .pdp-seat__quota,
+body.pf-page .pdp-seats__foot {
+    color: var(--pf-ink-2);
+}
+
+body.pf-page .pdp-step::before { background: var(--pf-brand); }
+body.pf-page .pdp-step a { color: var(--pf-brand); }
+
+body.pf-page .pdp-seat--owner {
+    border-color: var(--pf-brand);
+    background: color-mix(in srgb, var(--pf-brand) 6%, var(--pf-surface));
+}
+body.pf-page .pdp-seat--owner .pdp-seat__avatar { background: var(--pf-brand); color: #fff; }
+body.pf-page .pdp-seat--owner .pdp-seat__quota b { color: var(--pf-brand); }
+body.pf-page .pdp-seat__avatar { background: var(--pf-paper); color: var(--pf-ink-2); }
+
+/* App incluse: riga ordinata, non una parata di tessere colorate. */
+body.pf-page .pdp-app {
+    border: none;
+    background: none;
+    padding: 8px 4px;
+    color: var(--pf-ink);
+}
+
+body.pf-page .pdp-apps-more,
+html[data-theme='light'] body.pf-page .pdp-apps-more {
+    background: var(--pf-surface);
+    border-color: var(--pf-line);
+}
+body.pf-page .pdp-apps-more > summary { color: var(--pf-brand); }
+
+/* Tabelle: intestazione su grigio chiarissimo, righe sottili — già la struttura
+   giusta nel template condiviso, qui solo la palette. */
+body.pf-page .pdp-tablewrap {
+    background: var(--pf-surface);
+    border-color: var(--pf-line);
+}
+body.pf-page .pdp-table th,
+body.pf-page .pdp-table td { border-bottom-color: var(--pf-line); }
+body.pf-page .pdp-table thead th { background: var(--pf-paper); color: var(--pf-ink-2); }
+body.pf-page .pdp-table tbody th { color: var(--pf-ink); }
+body.pf-page .pdp-table td { color: var(--pf-ink-2); }
+body.pf-page .pdp-table .pdp-yes { color: var(--pf-ok); }
+body.pf-page .pdp-table tbody tr.pdp-row--flag th,
+body.pf-page .pdp-table tbody tr.pdp-row--flag td {
+    background: color-mix(in srgb, var(--pf-brand) 6%, transparent);
+}
+body.pf-page .pdp-table-foot { color: var(--pf-ink-2); }
+body.pf-page .pdp-table-foot a { color: var(--pf-brand); }
+
+/* Tabella specifiche: due colonne, etichetta/valore, non 3 colonne di confronto. */
+body.pf-page .pdp-table--specs th { width: 220px; }
+body.pf-page .pdp-table--specs td {
+    width: auto;
+    text-align: left;
+    color: var(--pf-ink);
+}
+
+body.pf-page .pdp-split__media { border-color: var(--pf-line); }
+body.pf-page .pdp-split__body h2 { color: var(--pf-ink); }
+
+body.pf-page .pdp-note {
+    border-color: color-mix(in srgb, var(--pf-brand) 30%, transparent);
+    background: color-mix(in srgb, var(--pf-brand) 6%, transparent);
+    color: var(--pf-ink);
+}
+body.pf-page .pdp-note svg { color: var(--pf-brand); }
+
+body.pf-page .pdp-reviews {
+    background: var(--pf-surface);
+    border-color: var(--pf-line);
+    text-align: left;
+    justify-items: start;
+    /* .product-trustpilot (regola condivisa) azzera padding-top per il vecchio
+       layout senza bordo/sfondo: qui la card è visibile, serve il respiro. */
+    padding-top: 26px;
+}
+body.pf-page .pdp-reviews__title { color: var(--pf-ink); }
+body.pf-page .pdp-reviews__lead { color: var(--pf-ink-2); }
+body.pf-page .pdp-reviews__cta {
+    border-color: var(--pf-brand);
+    color: var(--pf-brand);
+}
+body.pf-page .pdp-reviews__cta:hover {
+    background: color-mix(in srgb, var(--pf-brand) 8%, transparent);
+}
+
+/* ── CTA finale: banda navy a tutta larghezza, allineata alla fascia
+   istituzionale sopra (stesso trattamento "banda", non "card" arrotondata
+   e staccata dai bordi — coerenza tra i due unici blocchi navy della pagina). */
+body.pf-page .pdp-final {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background: var(--pf-navy);
+    border: none;
+    display: block;
+}
+.pf-final-inner {
+    max-width: var(--pdp-maxw);
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 44px) var(--pdp-gutter);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px 32px;
+    align-items: center;
+}
+@media (max-width: 760px) {
+    .pf-final-inner { grid-template-columns: 1fr; }
+    body.pf-page .pdp-final .pdp-btn-primary { width: 100%; }
+}
+body.pf-page .pdp-final .pdp-btn-primary {
+    background: var(--pf-surface);
+    color: var(--pf-navy);
+}
+body.pf-page .pdp-final .pdp-btn-primary:hover { background: var(--pf-paper); }
+
+/* ── Barra sticky: chiara sempre, non solo quando il tema del sito è chiaro
+   (la pagina pilota resta istituzionale anche in tema scuro — vedi sopra). ── */
+body.pf-page .product-sticky-cta {
+    background: var(--pf-surface);
+    border-bottom-color: var(--pf-line);
+}
+body.pf-page .product-sticky-cta .btn-primary { background: var(--pf-brand); }
+body.pf-page .product-sticky-cta .btn-primary:hover { background: var(--pf-brand-dark); }
+
+/* Titolo e prezzi della barra sticky usano i token globali del sito
+   (--page-text ecc.), che in tema scuro diventano quasi bianchi: invisibili
+   sullo sfondo chiaro forzato qui sopra. Li fissiamo anche loro. */
+body.pf-page .product-sticky-cta__title,
+body.pf-page .product-sticky-cta__sale { color: var(--pf-ink); }
+body.pf-page .product-sticky-cta__msrp { color: var(--pf-ink-2); }
+body.pf-page .product-sticky-cta__prices {
+    background: var(--pf-paper);
+    border-color: var(--pf-line);
+}
+
+/* ── Requisiti/FAQ: card più sobrie, meno "component library" ────────────── */
+body.pf-page .home-faq-item {
+    background: var(--pf-surface);
+    border-color: var(--pf-line);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(20, 32, 51, 0.04);
+}
+body.pf-page .home-faq-item summary { color: var(--pf-ink); }
+body.pf-page .home-faq-body { color: var(--pf-ink-2); }
+
+/* Il chevron basta a comunicare l'interazione: il cerchio con "?" ripetuto
+   13 volte è rumore, non informazione. */
+body.pf-page .home-faq-item summary::before { display: none; }
+
+body.pf-page .home-faq-item:hover { border-color: color-mix(in srgb, var(--pf-brand) 45%, var(--pf-line)); }
+body.pf-page .home-faq-list .home-faq-item[open] {
+    border-color: #9eb9d7;
+    box-shadow: 0 2px 8px rgba(20, 32, 51, 0.04);
+}
+body.pf-page .home-faq-item summary::after { border-color: var(--pf-brand); }
+
+/* Più respiro tra i gruppi tematici, meno tra l'etichetta e la prima domanda. */
+body.pf-page .pdp-faq-group + .pdp-faq-group { margin-top: 28px; }
+body.pf-page .pdp-faq-group__title {
+    margin-bottom: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+/* Due colonne indipendenti, non una griglia a righe: aprire una risposta in
+   una colonna non allunga più la riga né lascia un buco vuoto accanto
+   nell'altra. Ogni .pf-faq-col contiene metà delle domande in ordine
+   naturale (non alternate), così su mobile — dove collassa a colonna unica
+   via display:contents — l'ordine di lettura resta 1,2,3,4. */
+body.pf-page .pf-faq-col { display: contents; }
+
+@media (min-width: 1024px) {
+    body.pf-page .home-faq-list {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    body.pf-page .pf-faq-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1 1 0;
+        min-width: 0;
+    }
+}
+
+/* ── RITMO TONALE: la prima sezione dopo la fascia di fiducia torna bianca,
+   così non c'è un unico blocco grigio-azzurro indistinto dall'hero in poi. ── */
+body.pf-page .pdp-sec:has(#pdp-what-title) {
+    background: var(--pf-surface);
+    border-radius: var(--pdp-radius);
+    padding-inline: clamp(20px, 3vw, 32px);
+    padding-top: clamp(28px, 4vw, 40px);
+    margin-block: 0;
+}
+
+/* ── SEZIONE ISTITUZIONALE NAVY (nuova, prima delle FAQ) ──────────────────── */
+.pf-institutional {
+    background: var(--pf-navy);
+    color: #ffffff;
+}
+.pf-institutional__inner {
+    max-width: var(--pdp-maxw);
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 64px) var(--pdp-gutter);
+}
+.pf-institutional__title {
+    margin: 0 0 24px;
+    font-family: var(--font-sans);
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    max-width: 40ch;
+}
+.pf-institutional__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.pf-institutional__grid li {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-inline-start: 14px;
+    border-inline-start: 2px solid rgba(255, 255, 255, 0.25);
+}
+.pf-institutional__grid li strong {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+.pf-institutional__grid li span {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.72);
+}
+@media (max-width: 900px) {
+    .pf-institutional__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+    .pf-institutional__grid { grid-template-columns: 1fr; }
+}

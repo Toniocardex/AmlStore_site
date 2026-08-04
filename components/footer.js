@@ -173,8 +173,9 @@ class EcommerceFooter extends HTMLElement {
         const esc = S.escapeHtmlAttr;
         const staticRoot = S.staticRootFromScriptPath('/components/footer.js');
         const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
-        const pageTheme =
-            document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        // Accento derivato dal blu del logo AML Store (design system istituzionale,
+        // css/page.css --aml-brand), non più il blu SaaS generico di un tempo.
+        const accentColor = 'var(--aml-brand, #3267AC)';
 
         try {
             this.shadowRoot.innerHTML = `
@@ -183,24 +184,24 @@ class EcommerceFooter extends HTMLElement {
                 :host {
                     display: block;
                     font-family: 'Montserrat', sans-serif;
-                    /* Colori base "Premium Dark" */
-                    --bg-base: #050505;
-                    --bg-surface: #111111;
-                    --border-color: rgba(255, 255, 255, 0.08);
-                    --text-primary: #ffffff;
-                    --text-secondary: #a1a1aa; /* Zinco 400 */
-                    --text-muted: #71717a; /* Zinco 500 */
-                    --accent: #3b82f6;
-                    --accent-hover: #ffffff;
-                    --glow-color: rgba(59, 130, 246, 0.10);
-                    
+                    /* Alias verso i token globali del design system (css/page.css). */
+                    --bg-base: var(--aml-paper, #F4F6F8);
+                    --bg-surface: var(--aml-surface, #FFFFFF);
+                    --border-color: var(--aml-line, #DCE3EA);
+                    --text-primary: var(--aml-ink, #152033);
+                    --text-secondary: var(--aml-ink-2, #5F6B7A);
+                    --text-muted: var(--aml-ink-2, #5F6B7A);
+                    --accent: ${accentColor};
+                    --accent-hover: #26507f;
+                    --glow-color: color-mix(in srgb, ${accentColor} 10%, transparent);
+
                     position: relative;
                     z-index: 10;
                     background-color: var(--bg-base);
                     color: var(--text-primary);
                     overflow: hidden;
-                    /* Sottile linea di separazione sfumata in alto */
-                    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+                    /* Sottile linea di separazione in alto */
+                    box-shadow: inset 0 1px 0 0 rgba(16, 24, 40, 0.06);
                 }
 
                 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -274,19 +275,19 @@ class EcommerceFooter extends HTMLElement {
                     flex-direction: column;
                 }
 
-                /* CARD CONTATTI (Glassmorfica) */
+                /* CARD CONTATTI */
                 .contact-card {
                     flex: 1 1 280px; /* Colonna contatti un po' più larga */
-                    background: linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-                    border: 1px solid rgba(255,255,255,0.08);
+                    background: var(--bg-surface);
+                    border: 1px solid var(--border-color);
                     border-radius: 8px;
                     padding: 1.75rem;
-                    box-shadow: 0 4px 24px -1px rgba(0,0,0,0.1);
+                    box-shadow: var(--aml-shadow-sm, 0 1px 2px rgba(16, 24, 40, 0.04));
                     display: flex;
                     flex-direction: column;
                     gap: 1.5rem;
-                    backdrop-filter: blur(10px);
-                    -webkit-backdrop-filter: blur(10px);
+                    backdrop-filter: none;
+                    -webkit-backdrop-filter: none;
                 }
 
                 /* TITOLI COLONNE */
@@ -394,13 +395,13 @@ class EcommerceFooter extends HTMLElement {
                 .contact-icon {
                     display: flex; align-items: center; justify-content: center;
                     width: 42px; height: 42px; border-radius: 8px;
-                    background: rgba(255, 255, 255, 0.05);
-                    color: var(--text-primary);
+                    background: color-mix(in srgb, var(--accent) 8%, transparent);
+                    color: var(--accent);
                     flex-shrink: 0;
                     transition: background 0.3s ease, transform 0.3s ease;
                 }
                 .contact-item:hover .contact-icon {
-                    background: rgba(255, 255, 255, 0.1);
+                    background: color-mix(in srgb, var(--accent) 14%, transparent);
                     transform: scale(1.05);
                 }
                 .contact-icon svg { width: 20px; height: 20px; fill: currentColor; }
@@ -429,7 +430,7 @@ class EcommerceFooter extends HTMLElement {
                 }
                 .footer-bottom::before {
                     content: ''; position: absolute; top: 0; left: 10%; width: 80%; height: 1px;
-                    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+                    background: linear-gradient(90deg, transparent, rgba(16, 24, 40, 0.12), transparent);
                 }
 
                 .bottom-content {
@@ -463,136 +464,6 @@ class EcommerceFooter extends HTMLElement {
                     min-width: 0;
                 }
 
-                .theme-toggle {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.55rem;
-                    flex-wrap: nowrap;
-                    flex-shrink: 0;
-                    margin-inline-end: auto;
-                }
-                .theme-toggle-label {
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 0.08em;
-                    color: var(--text-muted);
-                    white-space: nowrap;
-                }
-
-                /* Pill + thumb: inset simmetrico, corsa = larghezza − thumb − 2 inset */
-                .theme-glass-switch {
-                    --theme-track-w: 52px;
-                    --theme-track-h: 30px;
-                    --theme-thumb: 24px;
-                    --theme-inset: 3px;
-                    --theme-travel: calc(var(--theme-track-w) - var(--theme-thumb) - 2 * var(--theme-inset));
-                    --theme-ease: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                    margin: 0;
-                    padding: 0.5rem 0.55rem;
-                    border: none;
-                    background: transparent;
-                    cursor: pointer;
-                    font-family: inherit;
-                    line-height: 0;
-                    border-radius: 6px;
-                    -webkit-tap-highlight-color: transparent;
-                    flex-shrink: 0;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    min-width: 2.75rem;
-                    min-height: 2.75rem;
-                }
-                .theme-glass-switch:focus-visible {
-                    outline: 2px solid var(--accent);
-                    outline-offset: 3px;
-                    border-radius: 6px;
-                }
-                .theme-glass-track {
-                    position: relative;
-                    display: block;
-                    width: var(--theme-track-w);
-                    height: var(--theme-track-h);
-                    box-sizing: border-box;
-                    border-radius: calc(var(--theme-track-h) / 2);
-                    background: rgba(0, 0, 0, 0.5);
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
-                    border: 1px solid rgba(255, 255, 255, 0.12);
-                    box-shadow:
-                        inset 0 1px 0 rgba(255, 255, 255, 0.07),
-                        inset 0 -1px 0 rgba(0, 0, 0, 0.35),
-                        inset 0 2px 6px rgba(0, 0, 0, 0.4);
-                    overflow: hidden;
-                }
-                .theme-glass-thumb {
-                    position: absolute;
-                    left: var(--theme-inset);
-                    top: 50%;
-                    width: var(--theme-thumb);
-                    height: var(--theme-thumb);
-                    border-radius: 50%;
-                    box-sizing: border-box;
-                    background: linear-gradient(160deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.1) 48%, rgba(255, 255, 255, 0.06) 100%);
-                    backdrop-filter: blur(10px);
-                    -webkit-backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255, 255, 255, 0.48);
-                    box-shadow:
-                        0 2px 8px rgba(0, 0, 0, 0.45),
-                        0 1px 0 rgba(255, 255, 255, 0.55) inset;
-                    display: grid;
-                    place-items: center;
-                    transform: translateY(-50%) translateX(0);
-                    transition:
-                        transform 0.45s var(--theme-ease),
-                        box-shadow 0.35s ease,
-                        border-color 0.35s ease;
-                    z-index: 1;
-                }
-                .theme-glass-switch.theme-is-dark .theme-glass-thumb {
-                    transform: translateY(-50%) translateX(var(--theme-travel));
-                }
-                .theme-glass-ico {
-                    position: absolute;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #fff;
-                    transition:
-                        opacity 0.38s var(--theme-ease),
-                        transform 0.38s var(--theme-ease);
-                }
-                .theme-glass-ico svg {
-                    width: 14px;
-                    height: 14px;
-                    display: block;
-                }
-                .theme-glass-switch.theme-is-dark .ico-moon {
-                    opacity: 1;
-                    transform: scale(1) rotate(0deg);
-                }
-                .theme-glass-switch.theme-is-dark .ico-sun {
-                    opacity: 0;
-                    transform: scale(0.5) rotate(45deg);
-                }
-                .theme-glass-switch.theme-is-light .ico-moon {
-                    opacity: 0;
-                    transform: scale(0.5) rotate(-40deg);
-                }
-                .theme-glass-switch.theme-is-light .ico-sun {
-                    opacity: 1;
-                    transform: scale(1) rotate(0deg);
-                }
-                @media (prefers-reduced-motion: reduce) {
-                    .theme-glass-thumb {
-                        transition-duration: 0.12s;
-                    }
-                    .theme-glass-ico {
-                        transition-duration: 0.12s;
-                    }
-                }
-
                 /* PAGAMENTI — pill glassmorphism */
                 .payments {
                     display: flex;
@@ -605,8 +476,8 @@ class EcommerceFooter extends HTMLElement {
                     flex-shrink: 1;
                     min-width: 0;
                     max-width: 100%;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.07);
+                    background: var(--bg-surface);
+                    border: 1px solid var(--border-color);
                     border-radius: 6px;
                     padding: 0.45rem 0.875rem;
                 }
@@ -623,7 +494,7 @@ class EcommerceFooter extends HTMLElement {
                     letter-spacing: 0.09em;
                     white-space: nowrap;
                     padding-inline-end: 0.75rem;
-                    border-inline-end: 1px solid rgba(255, 255, 255, 0.1);
+                    border-inline-end: 1px solid var(--border-color);
                     flex-shrink: 0;
                 }
                 .payment-secure svg {
@@ -705,7 +576,7 @@ class EcommerceFooter extends HTMLElement {
                         padding: 0.75rem 0;
                         width: 100%;
                         font-size: 1rem;
-                        border-bottom: 1px solid rgba(255,255,255,0.05);
+                        border-bottom: 1px solid var(--border-color);
                     }
                     /* Rimuove separatore sull'ultima voce di ogni lista */
                     .link-list li:last-child a,
@@ -741,7 +612,7 @@ class EcommerceFooter extends HTMLElement {
                         padding-inline-end: 0;
                         padding-bottom: 0.6rem;
                         border-inline-end: none;
-                        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                        border-bottom: 1px solid var(--border-color);
                         width: 100%;
                     }
                     .payment-logo img {
@@ -753,12 +624,10 @@ class EcommerceFooter extends HTMLElement {
                         width: 100%;
                         margin-inline-end: 0;
                     }
-                    .theme-toggle {
-                        margin-inline-end: 0;
-                        flex-wrap: wrap;
-                        justify-content: center;
-                    }
                 }
+
+                .footer-bg-glow { display: none; }
+                .footer-logo img { filter: none; }
             </style>
 
             <div class="footer-bg-glow"></div>
@@ -837,22 +706,6 @@ class EcommerceFooter extends HTMLElement {
                         <span class="copyright-vat">&nbsp;·&nbsp;${esc(t.vatLabel)}</span>
                     </p>
                     <div class="bottom-right-cluster">
-                        <div class="theme-toggle">
-                            <span class="theme-toggle-label">${esc(t.themeLabel)}</span>
-                            <button type="button" class="theme-glass-switch${pageTheme === 'dark' ? ' theme-is-dark' : ' theme-is-light'}" role="switch" aria-checked="${pageTheme === 'dark' ? 'true' : 'false'}" aria-label="${esc(t.themeAria)}">
-                                <span class="theme-glass-track">
-                                    <span class="theme-glass-thumb">
-                                        <span class="theme-glass-ico ico-moon" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
-                                        </span>
-                                        <span class="theme-glass-ico ico-sun" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-                                        </span>
-                                    </span>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="bottom-divider" aria-hidden="true"></div>
                         <div class="payments" role="group" aria-label="${esc(t.paymentLogosAria)}">
                             <span class="payment-secure" aria-hidden="true">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -870,56 +723,6 @@ class EcommerceFooter extends HTMLElement {
                 </div>
             </div>
         `;
-            const THEME_KEY = 'aml-theme';
-            const docEl = document.documentElement;
-            const storedThemeValue = () => {
-                try {
-                    return localStorage.getItem(THEME_KEY);
-                } catch (_) {
-                    return null;
-                }
-            };
-            const hasUserThemeOverride = () => {
-                const v = storedThemeValue();
-                return v === 'light' || v === 'dark';
-            };
-            const syncGlassToggle = () => {
-                const isDark = docEl.getAttribute('data-theme') !== 'light';
-                const glassBtn = this.shadowRoot.querySelector('.theme-glass-switch');
-                if (!glassBtn) return;
-                glassBtn.classList.toggle('theme-is-dark', isDark);
-                glassBtn.classList.toggle('theme-is-light', !isDark);
-                glassBtn.setAttribute('aria-checked', isDark ? 'true' : 'false');
-            };
-            const applyDefaultTheme = () => {
-                if (hasUserThemeOverride()) return;
-                docEl.setAttribute('data-theme', 'light');
-                syncGlassToggle();
-            };
-            const glassBtn = this.shadowRoot.querySelector('.theme-glass-switch');
-            if (glassBtn) {
-                glassBtn.addEventListener('click', () => {
-                    const next = docEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-                    docEl.setAttribute('data-theme', next);
-                    try {
-                        localStorage.setItem(THEME_KEY, next);
-                    } catch (_) {}
-                    syncGlassToggle();
-                });
-            }
-            const onStorage = (e) => {
-                if (e.key !== THEME_KEY || !e.newValue) return;
-                if (e.newValue !== 'light' && e.newValue !== 'dark') return;
-                docEl.setAttribute('data-theme', e.newValue);
-                syncGlassToggle();
-            };
-            window.addEventListener('storage', onStorage);
-            applyDefaultTheme();
-            this.__footerThemeCleanup = () => {
-                window.removeEventListener('storage', onStorage);
-            };
-            syncGlassToggle();
-
             this.shadowRoot.querySelector('[data-aml-cookie-settings]')?.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.dispatchEvent(new CustomEvent('aml-open-cookie-settings'));
@@ -931,12 +734,6 @@ class EcommerceFooter extends HTMLElement {
         }
     }
 
-    disconnectedCallback() {
-        if (typeof this.__footerThemeCleanup === 'function') {
-            this.__footerThemeCleanup();
-            this.__footerThemeCleanup = null;
-        }
-    }
 }
 
 if (!customElements.get('ecommerce-footer')) {

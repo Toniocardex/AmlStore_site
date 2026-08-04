@@ -1,30 +1,20 @@
 /**
- * Microsoft 365 — pagina soluzioni (tema v2 come scheda prodotto: hero #0a0a0f, glass, CTA var(--page-accent, #003182)).
+ * Microsoft 365 — pagina soluzioni. Design system istituzionale (token --aml-*
+ * e --page-* in page.css): identità unica sempre chiara, come il resto del
+ * sito — non più l'hero scuro "SaaS" con badge ciano/gradiente arcobaleno del
+ * layout originale.
  */
 
-/* ── Pagina: stesso fondo della scheda prodotto v2 ── */
 body.m365sol {
     --m365sol-gutter: clamp(1rem, 4vw, 5rem);
     --m365sol-content-max: 1200px; /* larghezza massima contenuto (come sezioni v2 prodotto) */
     font-family: 'Montserrat', system-ui, sans-serif;
-    /* Unico piano colore con hero e main (prima #0d0d14 creava fascia rispetto a #0a0a0f) */
-    background-color: #0a0a0f !important;
-    background-image: none !important;
-    color: var(--page-text);
-}
-
-html[data-theme="light"] body.m365sol {
-    background-color: var(--page-bg) !important;
-    background-image: radial-gradient(
-        ellipse 120% 80% at 50% -20%,
-        var(--page-glow),
-        transparent 55%
-    ) !important;
+    background-color: var(--page-bg);
     color: var(--page-text);
 }
 
 body.m365sol ::selection {
-    background: rgba(0, 120, 215, 0.35);
+    background: color-mix(in srgb, var(--page-accent) 35%, transparent);
 }
 
 /* Contenuto centrato con larghezza massima + gutter fluido ai lati */
@@ -38,11 +28,12 @@ body.m365sol main.product-page.m365sol-main {
     padding-right: max(var(--m365sol-gutter), env(safe-area-inset-right, 0px));
 }
 
-/* ── Hero (allineato a .v2-hero scheda prodotto) ── */
+/* ── Hero istituzionale: superficie chiara, non più fascia scura con blob animati ── */
 .m365sol-hero {
     position: relative;
-    background: #0a0a0f;
-    color: #fff;
+    background: var(--aml-surface, #fff);
+    color: var(--page-text);
+    border-bottom: 1px solid var(--page-border);
     overflow: hidden;
     padding: 0;
     contain: layout paint;
@@ -51,66 +42,7 @@ body.m365sol main.product-page.m365sol-main {
 .m365sol-hero__ambient,
 .m365sol-hero__ambient-2,
 .m365sol-hero__ambient-mid {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    will-change: transform;
-}
-
-.m365sol-hero__ambient {
-    top: -120px;
-    left: -80px;
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 120, 215, 0.28) 0%, transparent 65%);
-    filter: blur(60px);
-    animation: m365solAmbientDrift1 12s ease-in-out infinite alternate;
-}
-
-.m365sol-hero__ambient-2 {
-    bottom: -80px;
-    right: -100px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle at 50% 50%, rgba(120, 60, 220, 0.22) 0%, transparent 65%);
-    filter: blur(70px);
-    animation: m365solAmbientDrift2 15s ease-in-out infinite alternate;
-}
-
-@keyframes m365solAmbientDrift1 {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(60px, 40px) scale(1.12); }
-}
-
-@keyframes m365solAmbientDrift2 {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(-50px, -30px) scale(1.08); }
-}
-
-.m365sol-hero__ambient-mid {
-    top: 40%;
-    left: 45%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(0, 188, 212, 0.12) 0%, transparent 70%);
-    filter: blur(80px);
-    animation: m365solAmbientDrift1 9s ease-in-out infinite alternate-reverse;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .m365sol-hero__ambient,
-    .m365sol-hero__ambient-2,
-    .m365sol-hero__ambient-mid {
-        animation: none;
-        will-change: auto;
-    }
-
-    .m365sol-badge-dot,
-    .m365sol-mockup-float,
-    .m365sol-illu-float {
-        animation: none;
-    }
+    display: none;
 }
 
 .m365sol-hero__inner {
@@ -120,17 +52,16 @@ body.m365sol main.product-page.m365sol-main {
     max-width: var(--m365sol-content-max);
     margin: 0 auto;
     text-align: center;
-    padding: 80px max(var(--m365sol-gutter), 1rem) 160px;
+    padding: 80px max(var(--m365sol-gutter), 1rem) 56px;
     box-sizing: border-box;
 }
 
 @media (max-width: 900px) {
     .m365sol-hero__inner {
-        padding: 64px max(var(--m365sol-gutter), 1rem) 120px;
+        padding: 64px max(var(--m365sol-gutter), 1rem) 44px;
     }
 }
 
-/* Eyebrow come .v2-hero__eyebrow */
 .m365sol-badge {
     display: inline-flex;
     align-items: center;
@@ -139,12 +70,11 @@ body.m365sol main.product-page.m365sol-main {
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(0, 188, 212, 0.9);
+    color: var(--page-accent);
     margin: 0 auto 20px;
     padding: 0;
     border: none;
     background: transparent;
-    backdrop-filter: none;
 }
 
 .m365sol-badge-dot {
@@ -156,13 +86,13 @@ body.m365sol main.product-page.m365sol-main {
     display: block;
     width: 20px;
     height: 2px;
-    background: rgba(0, 188, 212, 0.8);
+    background: var(--page-accent);
 }
 
 .m365sol-hero h1 {
     font-size: clamp(2rem, 4.5vw, 3.4rem);
     font-weight: 800;
-    color: #fff;
+    color: var(--page-text);
     letter-spacing: -0.03em;
     line-height: 1.1;
     margin: 0 0 1.5rem;
@@ -170,48 +100,26 @@ body.m365sol main.product-page.m365sol-main {
 
 .m365sol-gradient-text {
     display: block;
-    background: linear-gradient(135deg, var(--page-accent, #003182) 0%, #00bcd4 50%, #7c3aed 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--page-accent);
 }
 
 .m365sol-hero-lede {
     font-size: 1.05rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.72);
+    color: var(--page-text-secondary);
     max-width: 42rem;
     margin: 0 auto;
     line-height: 1.7;
 }
 
 .m365sol-hero-fade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: none;
-    height: 7rem;
-    background: linear-gradient(to top, #0a0a0f, transparent);
-    z-index: 2;
-    pointer-events: none;
-}
-
-html[data-theme="light"] .m365sol-hero-fade {
-    background: linear-gradient(to top, var(--page-bg), transparent);
-}
-
-@media (max-width: 900px) {
-    .m365sol-hero-fade {
-        height: 5rem;
-    }
+    display: none;
 }
 
 /*
  * Path cards — FUORI da main.product-page: il main ha overflow-x: hidden che taglia
  * il margine negativo (anche la parte che “sale” sopra la hero).
- * Wrapper come .v2-pricing-wrap sulla scheda prodotto: overlap sulla hero + z-index sopra il fade.
+ * Wrapper come .v2-pricing-wrap sulla scheda prodotto: overlap sulla hero.
  */
 .m365sol-path-wrap {
     position: relative;
@@ -220,19 +128,12 @@ html[data-theme="light"] .m365sol-hero-fade {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: clamp(-132px, -12vw, -88px);
+    margin-top: clamp(28px, 4vw, 40px);
     padding-left: max(var(--m365sol-gutter), env(safe-area-inset-left, 0px));
     padding-right: max(var(--m365sol-gutter), env(safe-area-inset-right, 0px));
     box-sizing: border-box;
 }
 
-@media (max-width: 900px) {
-    .m365sol-path-wrap {
-        margin-top: clamp(-104px, -16vw, -72px);
-    }
-}
-
-/* ── Path cards (glass / bento come .v2-pricing-card / .v2-bento__cell) ── */
 .m365sol-path {
     position: relative;
     margin: 0 0 4rem;
@@ -260,76 +161,59 @@ html[data-theme="light"] .m365sol-hero-fade {
     }
 }
 
-/* Flex: evita artefatti sui bordi con -webkit-box sul <p> dentro <a> e mantiene angoli uniformi */
+/* ── Path cards: card istituzionale, bordo superiore navy come "flag" e
+   numerazione (counter, non testo) — stesso linguaggio dei passi numerati
+   .pdp-step altrove sul sito, così resta corretto in tutte le lingue. ── */
+.m365sol-path-grid {
+    counter-reset: m365sol-path;
+}
+
 .m365sol-path-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     min-height: 0;
-    border-radius: 8px;
+    border-radius: var(--aml-radius-sm, 6px);
     padding: 1.75rem;
     text-decoration: none;
     color: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid var(--page-border);
+    border-top: 3px solid var(--aml-navy);
+    box-shadow: var(--aml-shadow-md);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: var(--aml-surface, #fff);
+    counter-increment: m365sol-path;
+}
+
+.m365sol-path-card::after {
+    content: counter(m365sol-path, decimal-leading-zero);
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--page-text-muted);
 }
 
 .m365sol-path-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
-}
-
-.m365sol-path-card--blue {
-    background-image: linear-gradient(145deg, rgba(0, 120, 215, 0.35) 0%, rgba(0, 188, 212, 0.14) 55%, rgba(10, 10, 18, 0.65) 100%);
-    border-color: rgba(0, 160, 220, 0.35);
-}
-
-.m365sol-path-card--purple {
-    background-image: linear-gradient(145deg, rgba(124, 58, 237, 0.32) 0%, rgba(0, 120, 215, 0.12) 50%, rgba(10, 10, 18, 0.65) 100%);
-    border-color: rgba(147, 112, 219, 0.35);
-}
-
-/* Terza card: stesso linguaggio delle altre (gradiente neutro + accento), non “piatta” diversa */
-.m365sol-path-card--ink {
-    background-image: linear-gradient(150deg, rgba(255, 255, 255, 0.09) 0%, rgba(10, 10, 22, 0.85) 45%, rgba(0, 120, 215, 0.12) 100%);
-    border-color: rgba(255, 255, 255, 0.14);
-}
-
-html[data-theme="light"] .m365sol-path-card {
-    background-color: #f5f7fa;
-    background-image: none;
-    border-color: rgba(0, 0, 0, 0.07);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-}
-
-html[data-theme="light"] .m365sol-path-card--blue {
-    background-image: linear-gradient(145deg, rgba(0, 120, 215, 0.1) 0%, #f0f6fc 60%);
-}
-
-html[data-theme="light"] .m365sol-path-card--purple {
-    background-image: linear-gradient(145deg, rgba(124, 58, 237, 0.12) 0%, #f4f2fb 60%);
-}
-
-html[data-theme="light"] .m365sol-path-card--ink {
-    background-image: linear-gradient(145deg, rgba(0, 0, 0, 0.04) 0%, #f0f2f5 70%);
+    box-shadow: var(--aml-shadow-lg);
+    border-top-color: var(--page-accent);
 }
 
 .m365sol-path-icon {
     width: 48px;
     height: 48px;
-    border-radius: 8px;
+    border-radius: var(--aml-radius-sm, 8px);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-html[data-theme="light"] .m365sol-path-icon {
-    background: rgba(0, 0, 0, 0.06);
+    background: var(--aml-navy);
+    color: #fff;
 }
 
 .m365sol-path-icon svg {
@@ -337,28 +221,12 @@ html[data-theme="light"] .m365sol-path-icon {
     height: 24px;
 }
 
-.m365sol-path-card--blue .m365sol-path-icon {
-    color: #38bdf8;
-}
-
-.m365sol-path-card--purple .m365sol-path-icon {
-    color: #a78bfa;
-}
-
-.m365sol-path-card--ink .m365sol-path-icon {
-    color: rgba(255, 255, 255, 0.9);
-}
-
 .m365sol-path-card h2 {
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0 0 10px;
     line-height: 1.3;
-    color: #fff;
-}
-
-html[data-theme="light"] .m365sol-path-card h2 {
-    color: #0a0a0f;
+    color: var(--page-text);
 }
 
 .m365sol-path-card p {
@@ -366,16 +234,12 @@ html[data-theme="light"] .m365sol-path-card h2 {
     font-size: 0.88rem;
     line-height: 1.65;
     margin: 0 0 1.25rem;
-    color: rgba(255, 255, 255, 0.62);
+    color: var(--page-text-secondary);
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     line-clamp: 3;
-}
-
-html[data-theme="light"] .m365sol-path-card p {
-    color: #555;
 }
 
 .m365sol-path-link {
@@ -385,36 +249,12 @@ html[data-theme="light"] .m365sol-path-card p {
     align-items: center;
     gap: 0.5rem;
     margin-top: auto;
-    color: #7fe8ff;
+    color: var(--page-accent);
     transition: color 0.15s, filter 0.15s;
 }
 
-.m365sol-path-card--blue .m365sol-path-link {
-    color: #7fe8ff;
-}
-
-.m365sol-path-card--purple .m365sol-path-link {
-    color: #d4c4ff;
-}
-
-.m365sol-path-card--ink .m365sol-path-link {
-    color: #b9f6ff;
-}
-
 .m365sol-path-link:hover {
-    filter: brightness(1.12);
-}
-
-html[data-theme="light"] .m365sol-path-link {
-    color: var(--page-accent, #003182);
-}
-
-html[data-theme="light"] .m365sol-path-card--purple .m365sol-path-link {
-    color: #6d28d9;
-}
-
-html[data-theme="light"] .m365sol-path-card--ink .m365sol-path-link {
-    color: #005a9e;
+    filter: brightness(1.15);
 }
 
 .m365sol-path-link svg {
@@ -422,7 +262,7 @@ html[data-theme="light"] .m365sol-path-card--ink .m365sol-path-link {
     height: 1rem;
 }
 
-/* ── Apps (titoli come .v2-section) ── */
+/* ── Apps ── */
 .m365sol-apps {
     width: 100%;
     max-width: none;
@@ -441,25 +281,17 @@ html[data-theme="light"] .m365sol-path-card--ink .m365sol-path-link {
     font-size: clamp(1.5rem, 3vw, 2.2rem);
     font-weight: 800;
     letter-spacing: -0.025em;
-    color: #fff;
+    color: var(--page-text);
     margin: 0 0 1rem;
     line-height: 1.2;
 }
 
-html[data-theme="light"] .m365sol-apps-head h2 {
-    color: #0a0a0f;
-}
-
 .m365sol-apps-head p {
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.62);
+    color: var(--page-text-secondary);
     max-width: 42rem;
     margin: 0 auto;
     line-height: 1.65;
-}
-
-html[data-theme="light"] .m365sol-apps-head p {
-    color: #555;
 }
 
 .m365sol-apps-grid {
@@ -478,41 +310,31 @@ html[data-theme="light"] .m365sol-apps-head p {
 .m365sol-app-tile {
     cursor: default;
     padding: 24px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--aml-radius-md, 8px);
+    background: var(--aml-paper, #f5f7fa);
+    border: 1px solid var(--page-border);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .m365sol-app-tile:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-}
-
-html[data-theme="light"] .m365sol-app-tile {
-    background: #f5f7fa;
-    border-color: rgba(0, 0, 0, 0.07);
+    box-shadow: var(--aml-shadow-md);
 }
 
 .m365sol-app-icon {
     width: 5rem;
     height: 5rem;
-    border-radius: 8px;
+    border-radius: var(--aml-radius-sm, 8px);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1rem;
     transition: transform 0.2s;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--aml-surface, #fff);
+    border: 1px solid var(--page-border);
+    box-shadow: var(--aml-shadow-sm);
     padding: 10px;
     box-sizing: border-box;
-}
-
-html[data-theme="light"] .m365sol-app-icon {
-    background: #fff;
-    border-color: rgba(0, 0, 0, 0.06);
-    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
 }
 
 .m365sol-app-icon img {
@@ -529,37 +351,25 @@ html[data-theme="light"] .m365sol-app-icon {
 .m365sol-app-tile h3 {
     font-size: 1rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--page-text);
     margin: 0;
-}
-
-html[data-theme="light"] .m365sol-app-tile h3 {
-    color: #0a0a0f;
 }
 
 .m365sol-app-tile p {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--page-text-secondary);
     margin: 0.35rem 0 0;
-}
-
-html[data-theme="light"] .m365sol-app-tile p {
-    color: #666;
 }
 
 /* ── Bande feature (Copilot, OneDrive, Defender, Outlook) ── */
 .m365sol-copilot {
-    color: #fff;
+    color: var(--page-text);
     padding: 80px 0;
     margin: 2rem 0 0;
 }
 
 .m365sol-copilot + .m365sol-copilot {
     margin-top: 0;
-}
-
-html[data-theme="light"] .m365sol-copilot {
-    color: #0a0a0f;
 }
 
 .m365sol-copilot-inner {
@@ -596,21 +406,15 @@ html[data-theme="light"] .m365sol-copilot {
 .m365sol-copilot-tag {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: rgba(0, 188, 212, 0.95);
+    border-radius: var(--aml-radius-sm, 6px);
+    background: color-mix(in srgb, var(--page-accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--page-accent) 22%, transparent);
+    color: var(--page-accent);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: 1rem;
-}
-
-html[data-theme="light"] .m365sol-copilot-tag {
-    background: rgba(0, 120, 215, 0.1);
-    border-color: rgba(0, 120, 215, 0.2);
-    color: var(--page-accent, #003182);
 }
 
 .m365sol-copilot-text h2 {
@@ -619,20 +423,17 @@ html[data-theme="light"] .m365sol-copilot-tag {
     letter-spacing: -0.025em;
     line-height: 1.2;
     margin: 0 0 1rem;
+    color: var(--page-text);
 }
 
 .m365sol-copilot-text p {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.62);
+    color: var(--page-text-secondary);
     line-height: 1.65;
     margin: 0 0 1.5rem;
 }
 
-html[data-theme="light"] .m365sol-copilot-text p {
-    color: #555;
-}
-
-/* Illustrazioni SVG (Copilot, OneDrive, Defender, Outlook) */
+/* Illustrazioni (Copilot, OneDrive, Defender, Outlook) */
 .m365sol-illustration-wrap {
     position: relative;
     width: 100%;
@@ -642,13 +443,7 @@ html[data-theme="light"] .m365sol-copilot-text p {
 }
 
 .m365sol-illustration-glow {
-    position: absolute;
-    inset: -12% -8% -8% -8%;
-    background: radial-gradient(ellipse 80% 70% at 50% 45%, rgba(0, 120, 215, 0.22), transparent 70%);
-    filter: blur(36px);
-    z-index: 0;
-    pointer-events: none;
-    border-radius: 50%;
+    display: none;
 }
 
 .m365sol-feature-illu-picture {
@@ -668,16 +463,12 @@ html[data-theme="light"] .m365sol-copilot-text p {
     max-width: 100%;
     height: auto;
     aspect-ratio: 560 / 360;
-    border-radius: 8px;
-    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.42);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--aml-radius-md, 8px);
+    box-shadow: var(--aml-shadow-lg);
+    border: 1px solid var(--page-border);
     object-fit: contain;
     vertical-align: middle;
-}
-
-html[data-theme="light"] .m365sol-feature-illu {
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.1);
-    border-color: rgba(0, 0, 0, 0.07);
+    background: var(--aml-paper, #f5f7fa);
 }
 
 .m365sol-illu-float {
@@ -685,162 +476,19 @@ html[data-theme="light"] .m365sol-feature-illu {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .m365sol-hero__ambient,
+    .m365sol-hero__ambient-2,
+    .m365sol-hero__ambient-mid,
+    .m365sol-badge-dot,
     .m365sol-illu-float {
         animation: none;
+        will-change: auto;
     }
-}
-
-.m365sol-mockup-wrap {
-    position: relative;
-    width: 100%;
-}
-
-.m365sol-mockup {
-    position: relative;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-    padding: 1.5rem;
-}
-
-html[data-theme="light"] .m365sol-mockup {
-    background: #fff;
-    border-color: rgba(0, 0, 0, 0.08);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-}
-
-.m365sol-mockup-float {
-    animation: m365sol-float 6s ease-in-out infinite;
 }
 
 @keyframes m365sol-float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
-}
-
-.m365sol-mockup-dots {
-    display: flex;
-    gap: 0.75rem;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-html[data-theme="light"] .m365sol-mockup-dots {
-    border-bottom-color: rgba(0, 0, 0, 0.08);
-}
-
-.m365sol-mockup-dots span {
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 6px;
-}
-
-.m365sol-mockup-dots span:nth-child(1) { background: #ef4444; }
-.m365sol-mockup-dots span:nth-child(2) { background: #eab308; }
-.m365sol-mockup-dots span:nth-child(3) { background: #22c55e; }
-
-.m365sol-mockup-line {
-    height: 0.65rem;
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 4px;
-    margin-bottom: 0.65rem;
-}
-
-html[data-theme="light"] .m365sol-mockup-line {
-    background: #e4e6eb;
-}
-
-.m365sol-mockup-line--w75 { width: 75%; }
-.m365sol-mockup-line--w50 { width: 50%; }
-.m365sol-mockup-line--w83 { width: 83%; }
-
-.m365sol-mockup-ai {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background: rgba(0, 120, 215, 0.15);
-    border: 1px solid rgba(0, 120, 215, 0.35);
-    border-radius: 8px;
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-}
-
-.m365sol-mockup-ai-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 6px;
-    background: #00bcd4;
-    margin-top: 0.35rem;
-    flex-shrink: 0;
-}
-
-.m365sol-mockup-ai p {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-}
-
-html[data-theme="light"] .m365sol-mockup-ai p {
-    color: #444;
-}
-
-.m365sol-mockup-brand {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.m365sol-mockup-brand img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    opacity: 0.95;
-}
-
-.m365sol-mockup-ai--defender {
-    background: rgba(16, 185, 129, 0.12);
-    border-color: rgba(52, 211, 153, 0.4);
-}
-
-.m365sol-mockup-ai--defender .m365sol-mockup-ai-dot {
-    background: #34d399;
-}
-
-html[data-theme="light"] .m365sol-mockup-ai--defender {
-    background: rgba(16, 185, 129, 0.12);
-    border-color: rgba(5, 150, 105, 0.35);
-}
-
-.m365sol-mockup-ai--outlook {
-    background: rgba(0, 120, 215, 0.14);
-    border-color: rgba(0, 138, 255, 0.4);
-}
-
-.m365sol-mockup-ai--outlook .m365sol-mockup-ai-dot {
-    background: #5eb8ff;
-}
-
-html[data-theme="light"] .m365sol-mockup-ai--outlook {
-    background: rgba(0, 120, 215, 0.1);
-    border-color: rgba(0, 103, 184, 0.35);
-}
-
-.m365sol-mockup-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 120, 215, 0.18);
-    filter: blur(100px);
-    border-radius: 6px;
-    z-index: 0;
-    pointer-events: none;
 }
 
 /* ── Disclaimer ── */
@@ -850,11 +498,7 @@ html[data-theme="light"] .m365sol-mockup-ai--outlook {
     margin: 0 auto;
     padding: 2rem 0 4rem;
     font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--page-text-muted);
     line-height: 1.55;
     text-align: center;
-}
-
-html[data-theme="light"] .m365sol-disclaimer {
-    color: #888;
 }
