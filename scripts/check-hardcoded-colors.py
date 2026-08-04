@@ -97,6 +97,10 @@ ALLOWLIST = {
         # Testo bianco su icona/bottone colorato
         "color: #ffffff;",
         "color: #fff;",
+        # Fascia navy sempre scura (.home-institutional), stesso pattern di
+        # .pf-institutional sulle pagine prodotto — testo bianco intenzionale.
+        "border-inline-start: 2px solid rgba(255, 255, 255, 0.25);",
+        "color: rgba(255, 255, 255, 0.72);",
     },
     "css/cart.css": {
         # Testo/outline bianco sul bottone primario (sfondo accent) — vedi .cart-btn-primary

@@ -169,16 +169,6 @@ main {
     line-height: 1.2;
     letter-spacing: 0;
     color: var(--page-text);
-    background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-html[data-theme='light'] .home-section-title {
-    background: none;
-    background-clip: unset;
-    -webkit-text-fill-color: var(--page-text);
 }
 
 .home-faq {

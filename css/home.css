@@ -397,8 +397,12 @@
     width: 100%;
 }
 
-/* Ritmo sezioni — sfondo alternato per dare profondità tonale alla pagina. */
-.home-page > section:nth-of-type(even):not(.home-hero) {
+/* Ritmo sezioni — sfondo alternato per dare profondità tonale alla pagina.
+   Esclude .home-institutional (banda navy fissa, gestisce da sé il proprio
+   full-bleed), .home-business (pannello contenuto, non a tutta larghezza) e
+   .home-social-proof (blocco centrato via margin-inline:auto) — altrimenti
+   questa regola vince per specificità e ne rompe lo stile/allineamento. */
+.home-page > section:nth-of-type(even):not(.home-hero):not(.home-institutional):not(.home-business):not(.home-social-proof) {
     background: var(--aml-paper);
     margin-inline: calc(50% - 50vw);
     width: 100vw;
@@ -439,43 +443,6 @@
     outline: 2px solid var(--page-accent);
     outline-offset: 3px;
     border-radius: 4px;
-}
-
-/* Strip pagamenti sotto catalogo */
-.home-payments-strip {
-    text-align: center;
-    max-width: 52rem;
-    margin-inline: auto;
-    padding: clamp(1.5rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem);
-    border: 1px solid var(--page-border);
-    border-radius: var(--aml-radius-md);
-    background: var(--aml-surface);
-    box-shadow: var(--aml-shadow-sm);
-}
-
-.home-payments-strip__title {
-    margin: 0 0 1rem;
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--page-text-muted);
-}
-
-.home-payments-strip__logos {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem 1.35rem;
-}
-
-.home-payments-strip__logos img {
-    height: 22px;
-    width: auto;
-    max-width: 72px;
-    opacity: 1;
-    filter: none;
 }
 
 .home-catalog-lede-block {
@@ -865,5 +832,154 @@
     .home-category-tile:hover .home-category-arrow {
         transition: none;
         transform: none;
+    }
+}
+
+/* ── Fascia di fiducia istituzionale — stesso pattern/copia di .pf-institutional
+   sulle pagine prodotto (product-v3.css), riproposto qui full-bleed: stessa
+   fonte di verità, non una nuova variante di testo o colore. ── */
+.home-institutional {
+    position: relative;
+    margin-inline: calc(50% - 50vw);
+    width: 100vw;
+    background: var(--aml-navy);
+    color: #ffffff;
+}
+
+.home-institutional__inner {
+    max-width: var(--aml-maxw);
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 64px) var(--aml-gutter);
+}
+
+.home-institutional__title {
+    margin: 0 0 24px;
+    font-family: var(--font-sans);
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    max-width: 40ch;
+}
+
+.home-institutional__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.home-institutional__grid li {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-inline-start: 14px;
+    border-inline-start: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.home-institutional__grid li strong {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.home-institutional__grid li span {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 900px) {
+    .home-institutional__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 480px) {
+    .home-institutional__grid { grid-template-columns: 1fr; }
+}
+
+/* ── Pannello "per aziende" — accenno leggero, non una seconda hero: bordo
+   sinistro d'accento come .pdp-note, checklist come .pdp-assur/.pdp-keylist,
+   link verso pagine reali del catalogo, nessuna promessa di flusso che non
+   esiste ancora (niente form "richiedi consulenza"). ── */
+.home-business-card {
+    display: grid;
+    gap: 1.75rem;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    border: 1px solid var(--page-border);
+    border-inline-start: 4px solid var(--aml-navy);
+    border-radius: var(--aml-radius-md);
+    background: var(--aml-paper);
+}
+
+@media (min-width: 900px) {
+    .home-business-card {
+        grid-template-columns: 1.3fr 1fr;
+        align-items: center;
+    }
+}
+
+.home-business-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+    margin: 0 0 0.6rem;
+}
+
+.home-business-card h2 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.3rem, 2.6vw, 1.65rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--page-text);
+}
+
+.home-business-card > div:first-child > p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--page-text-secondary);
+    max-width: 52ch;
+}
+
+.home-business-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.home-business-points li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--page-text);
+    font-weight: 600;
+}
+
+.home-business-points li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--aml-ok);
+    font-weight: 800;
+}
+
+.home-business-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 899px) {
+    .home-business-actions {
+        margin-top: 1.25rem;
     }
 }
