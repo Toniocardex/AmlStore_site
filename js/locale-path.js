@@ -10,6 +10,18 @@
         { code: 'es', label: 'ES', flag: 'es' },
     ];
 
+    // Gruppi di slug localizzati che devono mantenere la stessa destinazione
+    // concettuale quando l'utente cambia lingua.
+    const LOCALIZED_PAGE_SLUGS = [
+        {
+            it: 'consulenza',
+            en: 'consultation',
+            fr: 'consultation',
+            de: 'beratung',
+            es: 'consultoria',
+        },
+    ];
+
     function isKnownLangCode(segment) {
         return LANGS.some((l) => l.code === segment);
     }
@@ -39,7 +51,12 @@
     function hrefSwitchLocale(pathPrefix, langCode, pathAfterLang, search, hash) {
         const qsAndHash = (search || '') + (hash || '');
         const middle = pathPrefix ? `${pathPrefix}/${langCode}` : `/${langCode}`;
-        const path = pathAfterLang ? `${middle}/${pathAfterLang}` : `${middle}/`;
+        const currentPath = String(pathAfterLang || '').replace(/^\/+|\/+$/g, '');
+        const localizedGroup = LOCALIZED_PAGE_SLUGS.find((group) => (
+            Object.values(group).includes(currentPath)
+        ));
+        const localizedPath = localizedGroup?.[langCode] || currentPath;
+        const path = localizedPath ? `${middle}/${localizedPath}` : `${middle}/`;
         return path + qsAndHash;
     }
 

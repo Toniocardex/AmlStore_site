@@ -13,6 +13,8 @@ import { markConfirmationEmailSent, markPaidNotificationSent,
          markInternalNotificationSent }                from './order.js';
 import { safeParseJSON }                                from './utils.js';
 import { attachGuideIfEligible }                        from './guide.js';
+import { consultationInternalEmail,
+         consultationConfirmationEmail }                from './consultation-email-templates.js';
 
 const RESEND_API = 'https://api.resend.com/emails';
 const FROM       = 'Aml Store <ordini@aml-store.com>';
@@ -380,4 +382,49 @@ export async function sendPaidNotificationOnce(db, order, resendApiKey, trustpil
     }
 
     return { sent: true };
+}
+
+/**
+ * Invia una richiesta di consulenza al team e, se possibile, la conferma al
+ * richiedente. La consegna interna determina il successo dell'operazione:
+ * un eventuale errore della sola conferma cliente non perde il lead.
+ */
+export async function sendConsultationRequest(lead, resendApiKey) {
+    if (!resendApiKey) {
+        console.warn('[consultation-email] RESEND_API_KEY non configurato');
+        return { sent: false, error: 'no_resend_key' };
+    }
+
+    const internal = consultationInternalEmail(lead);
+    const internalResult = await callResend(resendApiKey, {
+        from: FROM,
+        to: [REPLY_TO],
+        subject: internal.subject,
+        html: internal.html,
+        text: internal.text,
+        reply_to: `${lead.firstName} ${lead.lastName} <${lead.email}>`,
+    });
+
+    if (!internalResult.ok) {
+        return { sent: false, error: internalResult.error || 'internal_email_failed' };
+    }
+
+    const confirmation = consultationConfirmationEmail(lead);
+    const confirmationResult = await callResend(resendApiKey, {
+        from: FROM,
+        to: [`${lead.firstName} ${lead.lastName} <${lead.email}>`],
+        subject: confirmation.subject,
+        html: confirmation.html,
+        text: confirmation.text,
+        reply_to: REPLY_TO,
+    });
+
+    if (!confirmationResult.ok) {
+        console.warn('[consultation-email] Conferma cliente non inviata:', confirmationResult.error);
+    }
+
+    return {
+        sent: true,
+        confirmationSent: Boolean(confirmationResult.ok),
+    };
 }

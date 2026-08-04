@@ -11,6 +11,7 @@
  *   POST /api/bank-transfer-order
  *   GET  /api/order-status
  *   GET  /api/stock
+ *   POST /api/consultation-request
  *
  * Routes admin (protette da Cloudflare Access + verifica JWT):
  *   GET  /api/admin/orders
@@ -31,7 +32,8 @@ import { createCheckoutSession, verifyStripeWebhook }    from './_lib/stripe.js'
 import { getAccessToken, createPaypalOrder,
          capturePaypalOrder }                            from './_lib/paypal.js';
 import { sendConfirmationOnce,
-         sendInternalOrderNotificationOnce }             from './_lib/email.js';
+         sendInternalOrderNotificationOnce,
+         sendConsultationRequest }                       from './_lib/email.js';
 import { resolveAdminAuth, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
          unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
@@ -128,6 +130,9 @@ export async function onRequest(context) {
         if (path === '/api/paypal-config' && request.method === 'GET') {
             return handlePaypalConfig(request, env);
         }
+        if (path === '/api/consultation-request' && request.method === 'POST') {
+            return await handleConsultationRequest(request, env);
+        }
 
         return err('Not found', 404, request);
 
@@ -206,6 +211,14 @@ function validateEmail(v) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || ''));
 }
 
+const CONSULTATION_TOPICS = new Set([
+    'licences',
+    'workstations',
+    'microsoft-365',
+    'server-database',
+    'other',
+]);
+
 function validatePIVA(v) {
     v = String(v || '').trim();
     if (!/^\d{11}$/.test(v)) return false;
@@ -220,6 +233,70 @@ function validatePIVA(v) {
 
 function cleanString(v, maxLen = 120) {
     return String(v || '').trim().slice(0, maxLen);
+}
+
+function cleanLine(v, maxLen = 120) {
+    return cleanString(v, maxLen).replace(/[\r\n\t]+/g, ' ').replace(/\s{2,}/g, ' ');
+}
+
+function consultationFromBody(body) {
+    const locale = cleanLine(body?.locale || 'it', 2).toLowerCase();
+    if (!ALLOWED_LOCALES.has(locale)) {
+        throw Object.assign(new Error('Lingua non valida'), { status: 400 });
+    }
+
+    const firstName = cleanLine(body?.firstName, 80);
+    const lastName = cleanLine(body?.lastName, 80);
+    const company = cleanLine(body?.company, 160);
+    const email = cleanLine(body?.email, 254).toLowerCase();
+    const topic = cleanLine(body?.topic, 32).toLowerCase();
+    const message = cleanString(body?.message, 4000).replace(/\0/g, '');
+    const website = cleanLine(body?.website, 200);
+    const sourcePathRaw = cleanLine(body?.sourcePath, 240);
+    const sourcePath = sourcePathRaw.startsWith(`/${locale}/`) ? sourcePathRaw : `/${locale}/`;
+
+    if (website) return { honeypot: true };
+    if (!firstName || !lastName) {
+        throw Object.assign(new Error('Nome e cognome sono obbligatori'), { status: 400 });
+    }
+    if (!validateEmail(email)) {
+        throw Object.assign(new Error('Email non valida'), { status: 400 });
+    }
+    if (!CONSULTATION_TOPICS.has(topic)) {
+        throw Object.assign(new Error('Tipo di richiesta non valido'), { status: 400 });
+    }
+    if (message.length < 20) {
+        throw Object.assign(new Error('Il messaggio deve contenere almeno 20 caratteri'), { status: 400 });
+    }
+    if (body?.privacy !== true) {
+        throw Object.assign(new Error('Consenso privacy obbligatorio'), { status: 400 });
+    }
+
+    let seats = null;
+    if (body?.seats !== '' && body?.seats !== null && body?.seats !== undefined) {
+        seats = Number(body.seats);
+        if (!Number.isInteger(seats) || seats < 1 || seats > 100000) {
+            throw Object.assign(new Error('Numero di postazioni non valido'), { status: 400 });
+        }
+    }
+
+    return {
+        honeypot: false,
+        lead: {
+            id: crypto.randomUUID(),
+            receivedAt: new Date().toISOString(),
+            firstName,
+            lastName,
+            company,
+            email,
+            topic,
+            seats,
+            message,
+            locale,
+            supportLanguage: locale === 'it' ? 'it' : 'en',
+            sourcePath,
+        },
+    };
 }
 
 function normalizeIdempotencyKey(v) {
@@ -343,6 +420,61 @@ function orderParamsFromBody(body, paymentMethod) {
 
 function handlePaypalConfig(request, env) {
     return json({ clientId: env.PAYPAL_CLIENT_ID || '' }, 200, request, env);
+}
+
+/* ─── POST /api/consultation-request ───────────────────────────────────────── */
+
+async function handleConsultationRequest(request, env) {
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
+
+    const rawBody = await request.text();
+    if (new TextEncoder().encode(rawBody).byteLength > MAX_JSON_BODY_BYTES) {
+        return err('Payload troppo grande', 413, request, env);
+    }
+
+    const body = safeParseJSON(rawBody, null);
+    if (!body) return err('Invalid JSON', 400, request, env);
+
+    let normalized;
+    try {
+        normalized = consultationFromBody(body);
+    } catch (e) {
+        if (e.status === 400) return err(e.message, 400, request, env);
+        throw e;
+    }
+
+    // I bot che compilano il campo honeypot ricevono una risposta neutra senza
+    // invio email. Turnstile e rate limiting restano obbligatori pre-deploy.
+    if (normalized.honeypot) {
+        return json({ ok: true }, 200, request, env);
+    }
+
+    const lead = normalized.lead;
+    const reference = lead.id.slice(0, 8).toUpperCase();
+
+    // Sviluppo locale: valida l'intero flusso frontend/API senza inviare email.
+    if (String(env.CONSULTATION_DRY_RUN || '') === '1') {
+        return json({ ok: true, dryRun: true, reference }, 200, request, env);
+    }
+
+    if (!env.RESEND_API_KEY) {
+        console.error('[consultation] RESEND_API_KEY non configurato');
+        return err('Servizio temporaneamente non disponibile', 503, request, env);
+    }
+
+    const result = await sendConsultationRequest(lead, env.RESEND_API_KEY);
+    if (!result.sent) {
+        console.error('[consultation] Invio interno fallito:', result.error || 'unknown');
+        return err('Impossibile inviare la richiesta', 502, request, env);
+    }
+
+    return json({
+        ok: true,
+        dryRun: false,
+        reference,
+        confirmationSent: Boolean(result.confirmationSent),
+    }, 200, request, env);
 }
 
 /* ─── POST /api/stripe-create-session ───────────────────────────────────────── */

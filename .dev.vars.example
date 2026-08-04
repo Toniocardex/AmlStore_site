@@ -16,3 +16,7 @@ PAYPAL_CLIENT_SECRET=<client-secret-sandbox>
 
 # Pannello admin senza Cloudflare Access in locale
 # ADMIN_DEV_BYPASS=1
+
+# Modulo consulenza: valida il flusso locale senza inviare email reali.
+# Non impostare in produzione.
+CONSULTATION_DRY_RUN=1

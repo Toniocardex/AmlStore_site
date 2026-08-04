@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulenza software — Aml Store</title>
+    <meta name="description" content="Descrivi la tua esigenza software: Aml Store ti aiuta a individuare licenze e soluzioni adatte a privati, professionisti e aziende.">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="../js/consent-init.js?v=1a2366909c"></script>
+
+    <link rel="icon" href="../favicon/favicon.png?v=3bfa4181d2" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
+    <link rel="canonical" href="https://aml-store.com/it/consulenza">
+    <link rel="alternate" hreflang="it" href="https://aml-store.com/it/consulenza">
+    <link rel="alternate" hreflang="en" href="https://aml-store.com/en/consultation">
+    <link rel="alternate" hreflang="fr" href="https://aml-store.com/fr/consultation">
+    <link rel="alternate" hreflang="de" href="https://aml-store.com/de/beratung">
+    <link rel="alternate" hreflang="es" href="https://aml-store.com/es/consultoria">
+    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/consulenza">
+
+    <link rel="stylesheet" href="../fonts/montserrat.css?v=a86a00fd48">
+    <link rel="stylesheet" href="../fonts/source-serif.css?v=2793a4ae8e">
+    <link rel="stylesheet" href="../css/page.css?v=bffacc81c7">
+    <link rel="stylesheet" href="../css/consultation.css?v=3">
+    <script src="../js/theme-init.js?v=d487584e0d"></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Vai al contenuto principale</a>
+    <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
+
+    <main id="main" class="consultation-page">
+        <nav class="consultation-breadcrumb" aria-label="Percorso di navigazione">
+            <a href="./">Home</a> <span aria-hidden="true">/</span> Consulenza
+        </nav>
+
+        <div class="consultation-layout">
+            <section class="consultation-intro" aria-labelledby="consultation-title">
+                <p class="consultation-eyebrow">Consulenza software</p>
+                <h1 id="consultation-title" class="consultation-title">Partiamo dalla tua esigenza</h1>
+                <p class="consultation-lede">Raccontaci come lavori e cosa devi risolvere. Ti aiutiamo a orientarti tra edizioni, durata, numero di postazioni e modalità di licenza.</p>
+
+                <ul class="consultation-benefits">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Indicazioni più chiare prima dell'acquisto</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Soluzioni per singole postazioni, team e infrastrutture server</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Fatturazione disponibile per professionisti e aziende</span></li>
+                </ul>
+
+                <div class="consultation-channel">
+                    <span class="consultation-channel__label">Preferisci scrivere direttamente?</span>
+                    <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>
+                    <p>L'assistenza per l'Italia è fornita in italiano.</p>
+                </div>
+            </section>
+
+            <section class="consultation-form-panel" aria-labelledby="consultation-form-title">
+                <h2 id="consultation-form-title" class="consultation-form-heading">Richiedi una consulenza</h2>
+                <p class="consultation-form-intro">Compila i campi essenziali: queste informazioni ci aiuteranno a comprendere la richiesta prima di ricontattarti.</p>
+
+                <form class="consultation-form" action="/api/consultation-request" method="post" data-consultation-form data-locale="it" data-sending="Invio in corso…" data-success="Richiesta inviata correttamente." data-dry-run="Test locale completato: nessuna email reale è stata inviata." data-error="Non è stato possibile inviare la richiesta. Riprova oppure scrivi a Info@amlstore.it." data-reference="Riferimento" aria-describedby="consultation-form-status">
+                    <div class="consultation-honeypot" aria-hidden="true">
+                        <label for="consultation-website">Sito web</label>
+                        <input id="consultation-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                    </div>
+                    <div class="consultation-form__row">
+                        <div class="consultation-field">
+                            <label for="consultation-first-name">Nome</label>
+                            <input id="consultation-first-name" name="firstName" type="text" autocomplete="given-name" maxlength="80" required>
+                        </div>
+                        <div class="consultation-field">
+                            <label for="consultation-last-name">Cognome</label>
+                            <input id="consultation-last-name" name="lastName" type="text" autocomplete="family-name" maxlength="80" required>
+                        </div>
+                    </div>
+
+                    <div class="consultation-form__row">
+                        <div class="consultation-field">
+                            <label for="consultation-company">Azienda <span class="consultation-field__optional">(facoltativa)</span></label>
+                            <input id="consultation-company" name="company" type="text" autocomplete="organization" maxlength="160">
+                        </div>
+                        <div class="consultation-field">
+                            <label for="consultation-email">Email</label>
+                            <input id="consultation-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+                        </div>
+                    </div>
+
+                    <div class="consultation-form__row">
+                        <div class="consultation-field">
+                            <label for="consultation-topic">Tipo di richiesta</label>
+                            <select id="consultation-topic" name="topic" required>
+                                <option value="">Seleziona un'opzione</option>
+                                <option value="licences">Licenze software</option>
+                                <option value="workstations">Più postazioni</option>
+                                <option value="microsoft-365">Microsoft 365</option>
+                                <option value="server-database">Server e database</option>
+                                <option value="other">Altro</option>
+                            </select>
+                        </div>
+                        <div class="consultation-field">
+                            <label for="consultation-seats">Numero di postazioni <span class="consultation-field__optional">(facoltativo)</span></label>
+                            <input id="consultation-seats" name="seats" type="number" min="1" max="100000" inputmode="numeric">
+                        </div>
+                    </div>
+
+                    <div class="consultation-field">
+                        <label for="consultation-message">Descrivi la tua esigenza</label>
+                        <textarea id="consultation-message" name="message" minlength="20" maxlength="4000" required></textarea>
+                    </div>
+
+                    <label class="consultation-consent">
+                        <input name="privacy" type="checkbox" required>
+                        <span>Ho letto la <a href="privacy-policy">Privacy Policy</a> e acconsento al trattamento dei dati per essere ricontattato.</span>
+                    </label>
+
+                    <button class="consultation-submit" type="submit">Invia la richiesta</button>
+                    <p id="consultation-form-status" class="consultation-form-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <aml-cookie-banner></aml-cookie-banner>
+    <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
+    <script src="../js/locale-path.js?v=consultation-1"></script>
+    <script src="../js/consultation-form.js?v=1" defer></script>
+    <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
+    <script src="../components/header.js?v=53155c8689" defer></script>
+    <script src="../components/footer.js?v=8deedbce07" defer></script>
+</body>
+</html>

@@ -15,6 +15,8 @@ const FOOTER_I18N = {
         prodBusiness: 'Software Aziendali',
         prodDeals: 'Offerte Speciali',
         supportMyAccount: 'Il mio account',
+        supportConsultation: 'Consulenza software',
+        consultationSlug: 'consulenza',
         supportContacts: 'Contatti',
         supportReturns: 'Resi e Rimborsi',
         supportTerms: 'Termini e Condizioni',
@@ -44,6 +46,8 @@ const FOOTER_I18N = {
         prodBusiness: 'Business software',
         prodDeals: 'Special offers',
         supportMyAccount: 'My account',
+        supportConsultation: 'Software consultation',
+        consultationSlug: 'consultation',
         supportContacts: 'Contact',
         supportReturns: 'Returns & refunds',
         supportTerms: 'Terms & conditions',
@@ -73,6 +77,8 @@ const FOOTER_I18N = {
         prodBusiness: 'Logiciels professionnels',
         prodDeals: 'Offres spéciales',
         supportMyAccount: 'Mon compte',
+        supportConsultation: 'Conseil logiciel',
+        consultationSlug: 'consultation',
         supportContacts: 'Contact',
         supportReturns: 'Retours et remboursements',
         supportTerms: 'Conditions générales',
@@ -102,6 +108,8 @@ const FOOTER_I18N = {
         prodBusiness: 'Business-Software',
         prodDeals: 'Sonderangebote',
         supportMyAccount: 'Mein Konto',
+        supportConsultation: 'Softwareberatung',
+        consultationSlug: 'beratung',
         supportContacts: 'Kontakt',
         supportReturns: 'Rückgabe & Erstattung',
         supportTerms: 'Allgemeine Geschäftsbedingungen',
@@ -131,6 +139,8 @@ const FOOTER_I18N = {
         prodBusiness: 'Software empresarial',
         prodDeals: 'Ofertas especiales',
         supportMyAccount: 'Mi cuenta',
+        supportConsultation: 'Asesoramiento de software',
+        consultationSlug: 'consultoria',
         supportContacts: 'Contacto',
         supportReturns: 'Devoluciones y reembolsos',
         supportTerms: 'Términos y condiciones',
@@ -170,6 +180,7 @@ class EcommerceFooter extends HTMLElement {
         const activeLang = parsed.activeLang;
         const t = FOOTER_I18N[activeLang.code] || FOOTER_I18N.it;
         const homeHref = S.homeHref(parsed.pathPrefix, activeLang.code);
+        const consultationHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, t.consultationSlug);
         const esc = S.escapeHtmlAttr;
         const staticRoot = S.staticRootFromScriptPath('/components/footer.js');
         const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
@@ -661,6 +672,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="nav-col">
                         <h3 class="col-title">${esc(t.headingSupport)}</h3>
                         <ul class="link-list">
+                            <li><a href="${esc(consultationHref)}">${esc(t.supportConsultation)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/contacts">${esc(t.supportContacts)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/returns-and-refunds">${esc(t.supportReturns)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/terms-and-conditions">${esc(t.supportTerms)}</a></li>

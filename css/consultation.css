@@ -1,0 +1,417 @@
+/**
+ * Consultation — struttura visuale condivisa dalle cinque lingue.
+ * Usa esclusivamente i token del design system definiti in page.css.
+ *
+ * TODO prima del deploy:
+ * - collegare il form a un endpoint same-origin;
+ * - aggiungere Turnstile, honeypot, rate limiting e validazione server;
+ * - attivare analytics e stati reali di invio/errore;
+ * - rimuovere lo stato prototype e abilitare il submit.
+ */
+
+.consultation-page {
+    max-width: var(--aml-maxw);
+    padding-top: clamp(2rem, 5vw, 4rem);
+    padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.consultation-breadcrumb {
+    margin: 0 0 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--aml-ink-2);
+}
+
+.consultation-breadcrumb a {
+    color: var(--aml-brand);
+    text-decoration: none;
+}
+
+.consultation-breadcrumb a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.consultation-breadcrumb a:focus-visible,
+.consultation-channel a:focus-visible,
+.consultation-form a:focus-visible {
+    outline: 2px solid var(--aml-brand);
+    outline-offset: 3px;
+    border-radius: var(--aml-radius-sm);
+}
+
+.consultation-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    align-items: stretch;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-lg);
+    overflow: hidden;
+}
+
+.consultation-intro {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(2rem, 5vw, 4rem);
+    background: var(--aml-navy);
+    color: var(--aml-surface);
+}
+
+.consultation-intro::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: -20%;
+    bottom: -18%;
+    width: 24rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--aml-brand) 28%, transparent);
+    filter: blur(1px);
+}
+
+.consultation-eyebrow {
+    margin: 0 0 1rem;
+    color: color-mix(in srgb, var(--aml-surface) 72%, transparent);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.consultation-title {
+    max-width: 14ch;
+    margin: 0 0 1.25rem;
+    font-family: var(--aml-font-display);
+    font-size: clamp(2.15rem, 5vw, 3.65rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+    color: var(--aml-surface);
+}
+
+.consultation-lede {
+    max-width: 48ch;
+    margin: 0;
+    color: color-mix(in srgb, var(--aml-surface) 82%, transparent);
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.consultation-benefits {
+    display: grid;
+    gap: 0.9rem;
+    margin: clamp(2rem, 5vw, 3rem) 0;
+    padding: 0;
+    list-style: none;
+}
+
+.consultation-benefits li {
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    gap: 0.7rem;
+    align-items: start;
+    color: color-mix(in srgb, var(--aml-surface) 90%, transparent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.consultation-benefits svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.08rem;
+    color: color-mix(in srgb, var(--aml-brand) 55%, var(--aml-surface));
+}
+
+.consultation-channel {
+    padding-top: 1.35rem;
+    border-top: 1px solid color-mix(in srgb, var(--aml-surface) 16%, transparent);
+}
+
+.consultation-channel__label {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: color-mix(in srgb, var(--aml-surface) 58%, transparent);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.consultation-channel a {
+    color: var(--aml-surface);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.consultation-channel a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.consultation-channel p {
+    margin: 0.5rem 0 0;
+    color: color-mix(in srgb, var(--aml-surface) 68%, transparent);
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+
+.consultation-form-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(2rem, 5vw, 4rem);
+    background: var(--aml-surface);
+}
+
+.consultation-form-heading {
+    margin: 0 0 0.55rem;
+    font-family: var(--aml-font-display);
+    color: var(--aml-ink);
+    font-size: clamp(1.65rem, 3vw, 2.2rem);
+    line-height: 1.15;
+}
+
+.consultation-form-intro {
+    max-width: 58ch;
+    margin: 0 0 1.75rem;
+    color: var(--aml-ink-2);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.consultation-language-note {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    margin: 0 0 1.5rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-md);
+    background: var(--aml-trust-bg);
+    color: var(--aml-ink);
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.consultation-language-note svg {
+    flex: 0 0 auto;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.08rem;
+    color: var(--aml-brand);
+}
+
+.consultation-form {
+    display: grid;
+    gap: 1.15rem;
+}
+
+.consultation-form__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.consultation-field {
+    display: grid;
+    gap: 0.42rem;
+}
+
+.consultation-field label,
+.consultation-field legend {
+    color: var(--aml-ink);
+    font-size: 0.78rem;
+    font-weight: 750;
+    line-height: 1.4;
+}
+
+.consultation-field__optional {
+    color: var(--aml-ink-2);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.consultation-field input,
+.consultation-field select,
+.consultation-field textarea {
+    width: 100%;
+    min-height: 46px;
+    box-sizing: border-box;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-surface);
+    color: var(--aml-ink);
+    font: inherit;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 0.72rem 0.85rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.consultation-field textarea {
+    min-height: 132px;
+    resize: vertical;
+}
+
+.consultation-field input::placeholder,
+.consultation-field textarea::placeholder {
+    color: color-mix(in srgb, var(--aml-ink-2) 72%, transparent);
+}
+
+.consultation-field input:hover,
+.consultation-field select:hover,
+.consultation-field textarea:hover {
+    border-color: color-mix(in srgb, var(--aml-brand) 42%, var(--aml-line));
+}
+
+.consultation-field input:focus,
+.consultation-field select:focus,
+.consultation-field textarea:focus {
+    outline: none;
+    border-color: var(--aml-brand);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--aml-brand) 16%, transparent);
+}
+
+.consultation-consent {
+    display: grid;
+    grid-template-columns: 1.1rem 1fr;
+    gap: 0.65rem;
+    align-items: start;
+    color: var(--aml-ink-2);
+    font-size: 0.76rem;
+    line-height: 1.55;
+}
+
+.consultation-consent input {
+    width: 1rem;
+    height: 1rem;
+    margin: 0.16rem 0 0;
+    accent-color: var(--aml-brand);
+}
+
+.consultation-consent a {
+    color: var(--aml-brand);
+    font-weight: 700;
+}
+
+.consultation-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    width: fit-content;
+    padding: 0.75rem 1.4rem;
+    border: 0;
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-brand);
+    color: var(--aml-surface);
+    font-family: var(--aml-font-sans);
+    font-size: 0.88rem;
+    font-weight: 750;
+    box-shadow: var(--aml-shadow-md);
+}
+
+.consultation-submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.72;
+}
+
+.consultation-submit:not(:disabled):hover {
+    background: var(--aml-brand-hover);
+}
+
+.consultation-submit:focus-visible {
+    outline: 2px solid var(--aml-brand);
+    outline-offset: 3px;
+}
+
+.consultation-honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.consultation-form-status {
+    display: none;
+    margin: -0.25rem 0 0;
+    padding: 0.8rem 0.95rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-md);
+    font-size: 0.76rem;
+    font-weight: 650;
+    line-height: 1.55;
+}
+
+.consultation-form-status[data-state] {
+    display: block;
+}
+
+.consultation-form-status[data-state='pending'] {
+    background: var(--aml-trust-bg);
+    color: var(--aml-ink);
+}
+
+.consultation-form-status[data-state='success'] {
+    border-color: color-mix(in srgb, var(--aml-ok) 34%, var(--aml-line));
+    background: var(--aml-ok-bg);
+    color: var(--aml-ok);
+}
+
+.consultation-form-status[data-state='error'] {
+    border-color: color-mix(in srgb, var(--aml-danger) 34%, var(--aml-line));
+    background: var(--aml-danger-bg);
+    color: var(--aml-danger);
+}
+
+@media (max-width: 860px) {
+    .consultation-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .consultation-intro,
+    .consultation-form-panel {
+        padding: clamp(1.5rem, 6vw, 2.5rem);
+    }
+
+    .consultation-title {
+        max-width: 18ch;
+    }
+}
+
+@media (max-width: 560px) {
+    .consultation-page {
+        padding-inline: 1rem;
+        padding-top: 1.5rem;
+    }
+
+    .consultation-layout {
+        border-radius: var(--aml-radius-md);
+    }
+
+    .consultation-form__row {
+        grid-template-columns: 1fr;
+    }
+
+    .consultation-submit {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .consultation-field input,
+    .consultation-field select,
+    .consultation-field textarea {
+        transition: none;
+    }
+}
