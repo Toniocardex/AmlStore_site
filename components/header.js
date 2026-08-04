@@ -56,6 +56,17 @@
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
             navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
             navServerOverview: 'Windows Server e SQL',
             navPacchetti: 'Pacchetti',
             navBundleWinM365: 'Win11 + M365 Personal',
@@ -111,6 +122,17 @@
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
             navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
             navServerOverview: 'Windows Server & SQL',
             navPacchetti: 'Bundles',
             navBundleWinM365: 'Win11 + M365 Personal',
@@ -166,6 +188,17 @@
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
             navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
             navServerOverview: 'Windows Server et SQL',
             navPacchetti: 'Packs',
             navBundleWinM365: 'Win11 + M365 Personal',
@@ -221,6 +254,17 @@
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
             navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
             navServerOverview: 'Windows Server & SQL',
             navPacchetti: 'Pakete',
             navBundleWinM365: 'Win11 + M365 Personal',
@@ -276,6 +320,17 @@
             navOffice2021HS: 'Office 2021 Home & Student',
             navOffice2021PP: 'Office 2021 Pro Plus',
             navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
             navServerOverview: 'Windows Server y SQL',
             navPacchetti: 'Packs',
             navBundleWinM365: 'Win11 + M365 Personal',
@@ -379,12 +434,34 @@
             const hrefOffice2021HS = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-student');
             const hrefOffice2021PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-professional-plus');
             const hrefOffice2019PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2019-professional-plus');
+            const hrefWord2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'word-2024');
+            const hrefExcel2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'excel-2024');
+            const hrefPowerPoint2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'powerpoint-2024');
+            const hrefOutlook2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'outlook-2024');
+            const hrefOffice2021HB = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-business');
+            const hrefOffice2021HBMac = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-business-mac');
+            const hrefOffice2019HS = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2019-home-student');
+            const hrefProjectStd2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'project-standard-2024');
+            const hrefProjectPro2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'project-professional-2024');
+            const hrefVisioStd2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'visio-standard-2024');
+            const hrefVisioPro2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'visio-professional-2024');
             const isOfficeOverview = afterLangLower.includes('suite-office');
             const isOffice2024HB = afterLangLower.includes('office-2024-home-business');
             const isOffice2024Home = afterLangLower.includes('office-2024-home') && !isOffice2024HB;
             const isOffice2021HS = afterLangLower.includes('office-2021-home-student');
             const isOffice2021PP = afterLangLower.includes('office-2021-professional-plus');
             const isOffice2019PP = afterLangLower.includes('office-2019-professional-plus');
+            const isWord2024 = afterLangLower.includes('word-2024');
+            const isExcel2024 = afterLangLower.includes('excel-2024');
+            const isPowerPoint2024 = afterLangLower.includes('powerpoint-2024');
+            const isOutlook2024 = afterLangLower.includes('outlook-2024');
+            const isOffice2021HB = afterLangLower.includes('office-2021-home-business') && !afterLangLower.includes('office-2021-home-business-mac');
+            const isOffice2021HBMac = afterLangLower.includes('office-2021-home-business-mac');
+            const isOffice2019HS = afterLangLower.includes('office-2019-home-student');
+            const isProjectStd2024 = afterLangLower.includes('project-standard-2024');
+            const isProjectPro2024 = afterLangLower.includes('project-professional-2024');
+            const isVisioStd2024 = afterLangLower.includes('visio-standard-2024');
+            const isVisioPro2024 = afterLangLower.includes('visio-professional-2024');
             const isOfficeNavActive = isOfficeOverview || isOffice2024Home || isOffice2024HB
                 || isOffice2021HS || isOffice2021PP || isOffice2019PP
                 || /\/(office-|word-2024|excel-2024|powerpoint-2024|outlook-2024|project-|visio-)/.test(afterLangLower);
@@ -1956,6 +2033,17 @@
                                     <a href="${esc(hrefOffice2021HS)}" role="menuitem"${isOffice2021HS ? ' aria-current="page"' : ''}>${esc(t.navOffice2021HS)}</a>
                                     <a href="${esc(hrefOffice2021PP)}" role="menuitem"${isOffice2021PP ? ' aria-current="page"' : ''}>${esc(t.navOffice2021PP)}</a>
                                     <a href="${esc(hrefOffice2019PP)}" role="menuitem"${isOffice2019PP ? ' aria-current="page"' : ''}>${esc(t.navOffice2019PP)}</a>
+                                    <a href="${esc(hrefOffice2021HB)}" role="menuitem"${isOffice2021HB ? ' aria-current="page"' : ''}>${esc(t.navOffice2021HB)}</a>
+                                    <a href="${esc(hrefOffice2021HBMac)}" role="menuitem"${isOffice2021HBMac ? ' aria-current="page"' : ''}>${esc(t.navOffice2021HBMac)}</a>
+                                    <a href="${esc(hrefOffice2019HS)}" role="menuitem"${isOffice2019HS ? ' aria-current="page"' : ''}>${esc(t.navOffice2019HS)}</a>
+                                    <a href="${esc(hrefWord2024)}" role="menuitem"${isWord2024 ? ' aria-current="page"' : ''}>${esc(t.navWord2024)}</a>
+                                    <a href="${esc(hrefExcel2024)}" role="menuitem"${isExcel2024 ? ' aria-current="page"' : ''}>${esc(t.navExcel2024)}</a>
+                                    <a href="${esc(hrefPowerPoint2024)}" role="menuitem"${isPowerPoint2024 ? ' aria-current="page"' : ''}>${esc(t.navPowerPoint2024)}</a>
+                                    <a href="${esc(hrefOutlook2024)}" role="menuitem"${isOutlook2024 ? ' aria-current="page"' : ''}>${esc(t.navOutlook2024)}</a>
+                                    <a href="${esc(hrefProjectStd2024)}" role="menuitem"${isProjectStd2024 ? ' aria-current="page"' : ''}>${esc(t.navProjectStd2024)}</a>
+                                    <a href="${esc(hrefProjectPro2024)}" role="menuitem"${isProjectPro2024 ? ' aria-current="page"' : ''}>${esc(t.navProjectPro2024)}</a>
+                                    <a href="${esc(hrefVisioStd2024)}" role="menuitem"${isVisioStd2024 ? ' aria-current="page"' : ''}>${esc(t.navVisioStd2024)}</a>
+                                    <a href="${esc(hrefVisioPro2024)}" role="menuitem"${isVisioPro2024 ? ' aria-current="page"' : ''}>${esc(t.navVisioPro2024)}</a>
                                 </div>
                             </div>
                             <div class="nav-m365-wrap">
