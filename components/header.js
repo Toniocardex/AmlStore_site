@@ -512,7 +512,7 @@
             const flagSrc = (flag) => `${staticRoot}/images/flags/${flag}.svg`;
             // Accento derivato dal blu del logo AML Store (design system istituzionale,
             // css/page.css --aml-brand), non più il blu SaaS generico di un tempo.
-            const accentColor = 'var(--aml-brand, #3267AC)';
+            const accentColor = 'var(--aml-brand, #245EAC)';
             const accentHoverColor = 'var(--aml-brand-hover, #26507f)';
 
             this.shadowRoot.innerHTML = `
@@ -542,7 +542,7 @@
                         backdrop-filter: none;
                         -webkit-backdrop-filter: none;
                         border-bottom: 1px solid var(--border-color);
-                        box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06);
+                        box-shadow: none;
                     }
 
                     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -552,12 +552,12 @@
                         align-items: center;
                         justify-content: space-between;
                         gap: 2rem;
-                        height: 88px;
+                        height: 72px;
                         
                         /* FIX: Allineamento e Padding condiviso con il Footer */
                         max-width: 1280px;
                         margin: 0 auto;
-                        padding: 0 clamp(2rem, 5vw, 4rem);
+                        padding: 0 clamp(1.5rem, 5vw, 3.5rem);
                     }
 
                     .left-section {
@@ -577,11 +577,12 @@
                     .logo:hover { opacity: 0.9; transform: scale(1.02); }
                     .logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
                     .logo img {
-                        height: 56px;
+                        height: 48px;
                         width: auto;
                         max-height: 100%;
                         display: block;
-                        filter: brightness(0) invert(1);
+                        /* Logo pensato per header bianco (identità Licensoft / Aml Store). */
+                        filter: none;
                     }
 
                     .nav-links {

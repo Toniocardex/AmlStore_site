@@ -9,19 +9,20 @@
  * esistenti possono continuare a usare l'alias finché non vengono toccati.
  */
 :root {
-    /* Brand */
-    --aml-navy: #14243A;
-    --aml-navy-2: #1d3454;
-    --aml-brand: #3267AC;
-    --aml-brand-hover: #26507f;
+    /* Brand — allineato a identità Licensoft (navy / blue / soft) */
+    --aml-navy: #0A1830;
+    --aml-navy-2: #122445;
+    --aml-brand: #245EAC;
+    --aml-brand-hover: #1c4c8c;
+    --aml-brand-soft: #8FB2D9;
 
     /* Neutrali */
     --aml-ink: #152033;
     --aml-ink-2: #5F6B7A;
     --aml-line: #DCE3EA;
-    --aml-paper: #F4F6F8;
+    --aml-paper: #E9EEF4;
     --aml-surface: #FFFFFF;
-    --aml-trust-bg: #EAF0F6;
+    --aml-trust-bg: #E9EEF4;
 
     /* Semantici */
     --aml-ok: #1F7A52;
@@ -52,7 +53,7 @@
     --page-text-secondary: var(--aml-ink-2);
     --page-text-muted: var(--aml-ink-2);
     --page-accent: var(--aml-brand);
-    --page-glow: rgba(50, 103, 172, 0.06);
+    --page-glow: rgba(36, 94, 172, 0.06);
     --font-sans: var(--aml-font-sans);
     --font-display: var(--aml-font-display);
 }
@@ -84,7 +85,7 @@ html {
 }
 
 /* Ancora centrata visivamente: 40vh porta il target a metà schermo
-   tenendo conto dell'header sticky (~88px) */
+   tenendo conto dell'header sticky (~72px) */
 [id] {
     scroll-margin-top: 40vh;
 }

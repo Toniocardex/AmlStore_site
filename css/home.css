@@ -11,179 +11,231 @@
     padding-bottom: 0;
 }
 
-/* ── Hero lifestyle — full-bleed, edge-to-edge redesign ────── */
+/* ── Hero corporate — navy istituzionale, cover B2B ordinate ── */
 
-/* Rompe fuori dal padding/max-width di <main> per coprire tutta la larghezza */
-.home-hero--lifestyle {
+.home-hero--corporate {
     position: relative;
     margin-inline: calc(50% - 50vw);
     width: 100vw;
     margin-top: -4rem;
-    min-height: 92svh;
-}
-
-/* <figure> come tela full-bleed */
-.home-hero--lifestyle .home-hero-visual {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 92svh;
-    display: flex;
-    align-items: center;
+    background: var(--aml-navy, #0A1830);
+    color: #ffffff;
     overflow: hidden;
-    background: #050505;
+    isolation: isolate;
 }
 
-/* Immagine di sfondo a copertura totale */
-.home-hero--lifestyle .home-hero-img {
+/* Accento tecnico molto discreto: niente griglia “startup” dominante */
+.home-hero--corporate::before {
+    content: '';
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 65% center;
-}
-
-/* Overlay direzionale: denso sul lato testo, si dissolve verso destra */
-.home-hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
+    z-index: 0;
     pointer-events: none;
     background: linear-gradient(
         105deg,
-        rgba(5, 5, 5, 0.94) 0%,
-        rgba(5, 5, 5, 0.78) 38%,
-        rgba(5, 5, 5, 0.30) 65%,
-        rgba(5, 5, 5, 0.08) 100%
+        transparent 42%,
+        rgba(143, 178, 217, 0.06) 72%,
+        transparent 100%
     );
 }
 
-/* Contenuto testo: allineato a sinistra, centrato verticalmente */
-.home-hero-content {
+.home-hero-inner {
     position: relative;
-    z-index: 2;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(4rem, 9vw, 7rem) clamp(1.5rem, 5vw, 3rem);
+    min-height: min(72svh, 600px);
+    box-sizing: border-box;
+}
+
+.home-hero-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(6rem, 10vw, 9rem) clamp(1.5rem, 8vw, 6rem) clamp(5rem, 8vw, 7rem);
-    max-width: min(640px, 90vw);
-    box-sizing: border-box;
+    max-width: 32rem;
     margin: 0;
+    animation: home-hero-copy-in 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Eyebrow: etichetta allcaps con regoli decorativi affiancati */
-.home-hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    margin: 0 0 1.1rem;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(250, 250, 250, 0.65);
-}
-
-.home-hero-eyebrow-rule {
-    display: block;
-    flex-shrink: 0;
-    width: 2rem;
-    height: 1px;
-    background: rgba(250, 250, 250, 0.35);
-}
-
-/* H1 display: Source Serif 4 (UI resta Montserrat) */
 .home-hero-title {
-    margin: 0 0 1.35rem;
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 5.8vw, 4rem);
+    margin: 0 0 1.25rem;
+    font-family: var(--aml-font-sans, var(--font-sans));
+    font-size: clamp(2.15rem, 4.4vw, 3.15rem);
     font-weight: 700;
-    line-height: 1.07;
-    letter-spacing: -0.03em;
-    color: #fafafa;
-    text-shadow: 0 2px 44px rgba(0, 0, 0, 0.5);
-    max-width: 15ch;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    max-width: 18ch;
 }
 
-/* Sottotitolo sotto l’H1 */
 .home-hero-subtitle {
     margin: 0 0 2rem;
-    font-size: clamp(0.92rem, 2vw, 1.08rem);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
     line-height: 1.65;
-    font-weight: 500;
-    color: rgba(250, 250, 250, 0.78);
-    max-width: 44ch;
+    font-weight: 400;
+    color: rgba(233, 238, 244, 0.78);
+    max-width: 38ch;
 }
 
-/* Bottone ghost per il CTA secondario dentro la hero scura */
+.home-hero-actions {
+    gap: 0.65rem 0.85rem;
+}
+
+/* Cover in fila ordinata, overlap leggero — niente ventaglio “marketing” */
+.home-hero-products {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: min(100%, 440px);
+    min-height: clamp(220px, 36vw, 300px);
+    margin-inline: auto 0;
+    justify-self: end;
+    padding: 0.5rem 0;
+}
+
+.home-hero-product {
+    position: relative;
+    display: block;
+    flex: 0 0 auto;
+    width: clamp(132px, 18vw, 168px);
+    aspect-ratio: 1;
+    margin-left: -2.25rem;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--aml-surface, #fff);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+    border: none;
+    outline: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: home-hero-product-in 600ms ease both;
+}
+
+.home-hero-product:first-child {
+    margin-left: 0;
+}
+
+.home-hero-product img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home-hero-product--back {
+    z-index: 1;
+    animation-delay: 40ms;
+}
+
+.home-hero-product--mid {
+    z-index: 2;
+    animation-delay: 100ms;
+}
+
+.home-hero-product--front {
+    z-index: 3;
+    animation-delay: 160ms;
+}
+
+.home-hero-product:hover,
+.home-hero-product:focus-visible {
+    z-index: 4;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+.home-hero-product:focus-visible {
+    outline: 2px solid var(--aml-brand-soft, #8FB2D9);
+    outline-offset: 3px;
+}
+
+@keyframes home-hero-product-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes home-hero-copy-in {
+    from { opacity: 0; transform: translate3d(0, 10px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .home-hero-product,
+    .home-hero-content {
+        animation: none;
+    }
+
+    .home-hero-product,
+    .home-hero-product:hover,
+    .home-hero-product:focus-visible {
+        transition: none;
+    }
+}
+
+/* Ghost CTA sobrio sulla navy */
 .home-btn-ghost {
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.90);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(233, 238, 244, 0.35);
 }
 
 .home-btn-ghost:hover {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(233, 238, 244, 0.55);
 }
 
-/* Trust bar glassmorphism ancorata al fondo della sezione */
-.home-hero-trust-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 0.85rem clamp(1.5rem, 6vw, 4rem);
-    background: rgba(5, 5, 5, 0.62);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
+/* Primary senza glow “SaaS” (override locale in hero) */
+.home-hero--corporate .home-btn-primary {
+    box-shadow: none;
+    border-radius: 4px;
 }
 
-.home-hero-trust-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1.75rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: rgba(250, 250, 250, 0.80);
-    white-space: nowrap;
+.home-hero--corporate .home-btn-primary:hover {
+    box-shadow: none;
+    filter: brightness(1.05);
 }
 
-.home-hero-trust-item + .home-hero-trust-item {
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+.home-hero--corporate .home-btn-ghost {
+    border-radius: 4px;
 }
 
-.home-hero-trust-item svg {
-    flex-shrink: 0;
-    width: 1rem;
-    height: 1rem;
-    color: var(--page-accent);
-}
-
-/* Mobile: trust bar e CTA in una sola riga; titolo sotto l’header sticky */
-@media (max-width: 768px) {
-    .home-hero-content {
-        padding: calc(5.75rem + env(safe-area-inset-top, 0px)) 1.25rem 5.5rem;
-        max-width: min(640px, 100%);
+@media (max-width: 900px) {
+    .home-hero-inner {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: clamp(3rem, 10vw, 4.25rem) 1.25rem 3rem;
+        gap: 2rem;
     }
 
     .home-hero-title {
-        font-size: clamp(1.85rem, 8.5vw, 2.6rem);
         max-width: none;
+        font-size: clamp(1.9rem, 8vw, 2.5rem);
     }
 
+    .home-hero-products {
+        order: -1;
+        width: 100%;
+        min-height: 180px;
+        justify-content: flex-start;
+        margin-inline: 0;
+    }
+
+    .home-hero-product {
+        width: clamp(108px, 28vw, 140px);
+        margin-left: -1.5rem;
+    }
+
+    .home-hero-product:first-child {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
     .home-hero-actions {
         flex-wrap: nowrap;
         gap: 0.5rem;
@@ -197,47 +249,6 @@
         font-size: 0.8rem;
         min-height: 42px;
         white-space: nowrap;
-    }
-
-    .home-btn-ghost {
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-    }
-
-    .home-hero-trust-bar {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.15rem;
-        padding: 0.55rem 0.65rem;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        background: rgba(5, 5, 5, 0.92);
-    }
-
-    .home-hero-trust-item {
-        flex: 1 1 0;
-        min-width: 0;
-        justify-content: center;
-        gap: 0.3rem;
-        padding: 0.35rem 0.25rem;
-        font-size: 0.62rem;
-    }
-
-    .home-hero-trust-item span {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .home-hero-trust-item + .home-hero-trust-item {
-        border-left: 1px solid rgba(255, 255, 255, 0.1);
-        border-top: none;
-    }
-
-    .home-hero-trust-item svg {
-        width: 0.85rem;
-        height: 0.85rem;
     }
 }
 
