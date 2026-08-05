@@ -17,7 +17,7 @@
     padding-bottom: 0;
 }
 
-/* ── Hero corporate — navy + brand AVIF (art-direction), cover B2B ── */
+/* ── Hero corporate — mobile: navy + geometria CSS; ≥768: AVIF desktop ── */
 
 .home-hero--corporate {
     position: relative;
@@ -25,10 +25,20 @@
     width: 100vw;
     margin-top: -4rem;
     background-color: var(--aml-navy, #0a1830);
-    background-image: url("../asset/media/aml_store_media_background_mobile.avif");
+    background-image:
+        linear-gradient(
+            132deg,
+            transparent 0 61%,
+            rgba(36, 94, 172, 0.14) 61% 74%,
+            transparent 74%
+        ),
+        linear-gradient(
+            42deg,
+            transparent 0 78%,
+            rgba(143, 178, 217, 0.08) 78% 89%,
+            transparent 89%
+        );
     background-repeat: no-repeat;
-    background-position: 58% top;
-    background-size: cover;
     color: #ffffff;
     overflow: hidden;
     isolation: isolate;
@@ -51,16 +61,12 @@
     );
 }
 
-@media (min-width: 600px) and (max-width: 767px) {
-    .home-hero--corporate {
-        background-position: 62% center;
-    }
-}
-
 @media (min-width: 768px) {
     .home-hero--corporate {
         background-image: url("../asset/media/aml_store_media_background.avif");
+        background-size: cover;
         background-position: center right;
+        background-repeat: no-repeat;
     }
 }
 
