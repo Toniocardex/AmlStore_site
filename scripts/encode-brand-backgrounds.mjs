@@ -17,6 +17,16 @@ const jobs = [
     output: "aml_store_media_background_mobile.avif",
     maxSide: 1080,
   },
+  {
+    input: "aml_store_media_background_footer.png",
+    output: "aml_store_media_background_footer.avif",
+    maxSide: 1920,
+  },
+  {
+    input: "aml_store_media_background_footer_mobile.png",
+    output: "aml_store_media_background_footer_mobile.avif",
+    maxSide: 1080,
+  },
 ];
 
 for (const job of jobs) {

@@ -198,6 +198,8 @@ class EcommerceFooter extends HTMLElement {
         const reviewHost = activeLang.code === 'en' ? 'www.trustpilot.com' : `${activeLang.code}.trustpilot.com`;
         const reviewsHref = `https://${reviewHost}/review/aml-store.com`;
         const logoSrc = `${staticRoot}/logo/logo-header-400-light.webp`;
+        const footerBgSrc = `${staticRoot}/asset/media/aml_store_media_background_footer.avif`;
+        const footerBgMobileSrc = `${staticRoot}/asset/media/aml_store_media_background_footer_mobile.avif`;
 
         try {
             this.shadowRoot.innerHTML = `
@@ -206,7 +208,7 @@ class EcommerceFooter extends HTMLElement {
                         display: block;
                         position: relative;
                         z-index: 10;
-                        background: var(--aml-navy, #14243A);
+                        background: var(--aml-navy, #0A1830);
                         color: #c6d1df;
                         font-family: var(--aml-font-sans, 'Montserrat', sans-serif);
                     }
@@ -214,9 +216,38 @@ class EcommerceFooter extends HTMLElement {
                     * { box-sizing: border-box; }
 
                     .site-footer {
-                        background: var(--aml-navy, #14243A);
+                        position: relative;
+                        isolation: isolate;
+                        overflow: hidden;
+                        background-color: var(--aml-navy, #0A1830);
+                        background-image: url("${esc(footerBgMobileSrc)}");
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-position: center bottom;
                         color: #c6d1df;
                         border-top: 1px solid rgba(255, 255, 255, 0.08);
+                    }
+
+                    @media (min-width: 768px) {
+                        .site-footer {
+                            background-image: url("${esc(footerBgSrc)}");
+                            background-position: right bottom;
+                        }
+                    }
+
+                    /* Echo soft: geometria residuale, testo sempre leggibile */
+                    .site-footer::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        z-index: 0;
+                        pointer-events: none;
+                        background: rgba(10, 24, 48, 0.82);
+                    }
+
+                    .site-footer > * {
+                        position: relative;
+                        z-index: 1;
                     }
 
                     .container {
