@@ -719,6 +719,8 @@ def product_card(lang, prod, labels):
     href = f"{slug}{href_suffix}"
     image_src = prod.get("image_src") or _product_image_src(slug, image)
     lazy_attr = ' loading="lazy"' if prod.get("lazy") else ""
+    fp = prod.get("fetchpriority")
+    fp_attr = f' fetchpriority="{fp}"' if fp in ("high", "low", "auto") else ""
     price_html = product_card_price_block(sale, compare, disc)
     return f"""                <div
                     class="product-card"
@@ -730,7 +732,7 @@ def product_card(lang, prod, labels):
                 >
                     <a href="{href}" class="product-card-body product-card--link">
                         <div class="product-card-media">
-                            <img src="{image_src}" width="400" height="400" alt="{name}" decoding="async"{lazy_attr} class="product-card-img" onerror="this.onerror=null;this.src='{PRODUCT_COVER_FALLBACK_SRC}'">
+                            <img src="{image_src}" width="400" height="400" alt="{name}" decoding="async"{lazy_attr}{fp_attr} class="product-card-img" onerror="this.onerror=null;this.src='{PRODUCT_COVER_FALLBACK_SRC}'">
                         </div>
                         <p class="product-card-name">{name}</p>
                         <p class="product-card-blurb">{blurb}</p>

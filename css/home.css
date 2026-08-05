@@ -1,5 +1,5 @@
 /**
- * Home — hero → trust → passi → catalogo → FAQ → social proof → closing.
+ * Home — hero → trust → passi → catalogo → FAQ → social proof → consigliati.
  * Dipende da page.css (token + .visually-hidden). Solo pagine index.
  */
 
@@ -399,55 +399,52 @@
     display: none;
 }
 
-/* ── Closing CTA — band con titolo + sottotitolo + bottone ── */
-.home-closing {
-    position: relative;
-    overflow: hidden;
+/* ── Prodotti consigliati — 4 card complementari ai bestseller ── */
+.home-recommended__inner {
+    width: min(100%, var(--aml-maxw, 1180px));
+    margin-inline: auto;
+}
+
+.home-recommended__intro {
+    max-width: 720px;
+    margin-inline: auto;
+    margin-bottom: 2rem;
     text-align: center;
-    padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 3rem);
-    border-radius: var(--aml-radius-md);
-    border: 1px solid var(--page-border);
-    background: linear-gradient(145deg, #ffffff 0%, #f4f4f5 100%);
-    box-shadow: var(--aml-shadow-md);
 }
 
-/* Bagliore accent dal basso */
-.home-closing::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 80% 55% at 50% 110%, color-mix(in srgb, var(--page-accent) 10%, transparent), transparent 70%);
-    pointer-events: none;
+.home-recommended__intro .home-section-title {
+    margin-bottom: 0.75rem;
 }
 
-.home-closing-inner {
-    position: relative;
+.home-recommended__intro .home-catalog-lede {
+    margin-bottom: 0;
 }
 
-.home-closing-eyebrow {
-    margin: 0 0 0.75rem;
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--page-accent);
+.home-recommended .product-grid,
+.home-recommended__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
 }
 
-.home-closing-title {
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.12;
-    color: var(--page-text);
-    margin: 0 0 0.85rem;
+@media (min-width: 768px) {
+    .home-recommended .product-grid,
+    .home-recommended__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
 }
 
-.home-closing-sub {
-    font-size: clamp(0.88rem, 2vw, 1rem);
-    line-height: 1.6;
-    color: var(--page-text-secondary);
-    max-width: 44ch;
-    margin: 0 auto 2rem;
+@media (min-width: 1024px) {
+    .home-recommended .product-grid,
+    .home-recommended__grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.home-recommended .home-catalog-more {
+    display: table;
+    margin: 2rem auto 0;
 }
 
 .home-page .product-card-foot {
