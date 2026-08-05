@@ -409,7 +409,7 @@
                 + '<p class="adm-detail-section__title">Archivio</p>'
                 + '<div class="adm-detail-grid">'
                 + field('Archiviato il', esc(fmtDate(o.archivedAt)))
-                + field('Eliminazione test', state.capabilities.deleteOrders ? 'Disponibile' : 'Disattivata da configurazione')
+                + field('Eliminazione', state.capabilities.deleteOrders ? 'Disponibile' : 'Disattivata da configurazione')
             + '</div></div>';
         }
 
@@ -417,6 +417,8 @@
 
         // ── Footer con azioni ─────────────────────────────────────────────────
         var footerHtml = '';
+        var canDelete = state.capabilities.deleteOrders
+            && (isPending || o.status === 'cancelled' || isArchived);
 
         // "Segna come pagato": solo per bonifico pending e non archiviato
         if (isBT && isPending && !isArchived) {
@@ -430,8 +432,9 @@
             footerHtml += '<button class="adm-btn adm-btn--ghost" id="btn-unarchive">Ripristina</button>';
         }
 
-        if (isArchived && state.capabilities.deleteOrders) {
-            footerHtml += '<button class="adm-btn adm-btn--danger adm-btn--sm" id="btn-delete" title="Solo per ordini di test gia archiviati">Elimina test</button>';
+        if (canDelete) {
+            footerHtml += '<button class="adm-btn adm-btn--danger adm-btn--sm" id="btn-delete"'
+                + ' title="Elimina definitivamente dal database">Elimina</button>';
         }
         footerHtml += '<button class="adm-btn adm-btn--ghost" id="btn-close-detail">Chiudi</button>';
         $('modal-footer').innerHTML = footerHtml;
@@ -573,7 +576,8 @@
         $('delete-msg').innerHTML =
             'Stai per <strong>eliminare definitivamente</strong> l\'ordine ' +
             '<code style="color:#ef4444">' + esc(orderId) + '</code>.<br><br>' +
-            'Usa questa azione solo per ordini di test gia archiviati. ' +
+            'Consentito su ordini <strong>in attesa</strong> / <strong>annullati</strong> ' +
+            '(es. spam) oppure su ordini già <strong>archiviati</strong>. ' +
             'Questa operazione è <strong>irreversibile</strong>: tutti i dati ' +
             '(cliente, articoli, riferimenti PSP) saranno cancellati dal database.';
         $('delete-confirm-input').value = '';
@@ -614,8 +618,9 @@
             if (btn) { btn.disabled = false; btn.textContent = 'Elimina definitivamente'; }
             var reason = e.data && e.data.reason;
             var msg = {
-                delete_disabled: 'Eliminazione disattivata: abilita ADMIN_ALLOW_DELETE_ORDERS solo per pulire test.',
-                not_archived:    'Prima archivia l\'ordine, poi potrai eliminarlo come test.',
+                delete_disabled: 'Eliminazione disattivata da configurazione (ADMIN_ALLOW_DELETE_ORDERS).',
+                not_archived:    'Per ordini pagati: prima archivia, poi elimina.',
+                not_deletable:   'Eliminabile solo se in attesa/annullato, oppure dopo archivio.',
                 order_not_found: 'Ordine non trovato.',
             }[reason] || e.message;
             toast('Errore eliminazione: ' + msg, 'error');

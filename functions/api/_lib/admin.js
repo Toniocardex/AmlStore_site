@@ -8,6 +8,7 @@
  *   markBankTransferPaid(db, orderId, ...) — transizione pending → paid + email
  *   archiveOrder(db, orderId)              — soft-archive
  *   unarchiveOrder(db, orderId)            — rimuove archive
+ *   deleteOrder(db, orderId)               — hard-delete (pending/cancelled o archiviati)
  *
  * Variabili ambiente richieste:
  *   CF_ACCESS_TEAM_DOMAIN — es. "amlstore.cloudflareaccess.com"
@@ -342,16 +343,27 @@ export async function unarchiveOrder(db, orderId) {
 
 /**
  * Elimina definitivamente un ordine dal DB.
- * Operazione irreversibile — usare solo per ordini di test o casi estremi.
+ * Consentito se:
+ *   - status pending_payment | cancelled (spam / abbandoni), oppure
+ *   - ordine già soft-archiviato (incluso paid, dopo archivio consapevole).
+ * Operazione irreversibile.
  * @returns {{ ok: boolean, reason?: string }}
  */
 export async function deleteOrder(db, orderId) {
     const existing = await db
-        .prepare('SELECT id, archived_at FROM orders WHERE id = ?')
+        .prepare('SELECT id, status, archived_at FROM orders WHERE id = ?')
         .bind(orderId).first();
     if (!existing) return { ok: false, reason: 'order_not_found' };
-    if (!existing.archived_at) return { ok: false, reason: 'not_archived' };
 
-    await db.prepare('DELETE FROM orders WHERE id = ?').bind(orderId).run();
+    const status = String(existing.status || '');
+    const isDisposable = status === 'pending_payment' || status === 'cancelled';
+    if (!isDisposable && !existing.archived_at) {
+        return { ok: false, reason: 'not_deletable' };
+    }
+
+    await db.batch([
+        db.prepare('DELETE FROM stock_deductions WHERE order_id = ?').bind(orderId),
+        db.prepare('DELETE FROM orders WHERE id = ?').bind(orderId),
+    ]);
     return { ok: true };
 }

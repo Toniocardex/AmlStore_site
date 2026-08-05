@@ -1006,7 +1006,9 @@ async function handleAdminRoute(path, request, env) {
 
         const orderId = deleteMatch[1];
         const result  = await deleteOrder(env.DB, orderId);
-        const status  = result.ok ? 200 : (result.reason === 'order_not_found' ? 404 : 409);
+        const status  = result.ok
+            ? 200
+            : (result.reason === 'order_not_found' ? 404 : 409);
         return new Response(JSON.stringify(result), {
             status, headers: { 'Content-Type': 'application/json' },
         });

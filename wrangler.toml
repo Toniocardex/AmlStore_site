@@ -38,7 +38,7 @@ PAYPAL_BASE_URL = "https://api-m.paypal.com"
 CF_ACCESS_AUD         = "61bb5d94ba4477a21b272c98ef419414d508f3a3f5378f949c87b5bce2d403c1"
 CF_ACCESS_TEAM_DOMAIN = "amlstore.cloudflareaccess.com"
 ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
-ADMIN_ALLOW_DELETE_ORDERS = "0"
+ADMIN_ALLOW_DELETE_ORDERS = "1"
 
 # ── Segreti (MAI committare — impostare con `wrangler secret put <NAME>`) ────
 # TOKEN_SECRET           — stringa random ≥32 caratteri per HMAC token thank-you
