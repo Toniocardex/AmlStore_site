@@ -17,7 +17,7 @@
     padding-bottom: 0;
 }
 
-/* ── Hero corporate — mobile: navy + geometria CSS; ≥768: AVIF desktop ── */
+/* ── Hero corporate — mobile: navy sul nodo + geometria su ::after; ≥768: AVIF ── */
 
 .home-hero--corporate {
     position: relative;
@@ -25,6 +25,19 @@
     width: 100vw;
     margin-top: -4rem;
     background-color: var(--aml-navy, #0a1830);
+    background-image: none;
+    color: #ffffff;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Geometria leggera (non URL): isolata dal nodo LCP */
+.home-hero--corporate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
     background-image:
         linear-gradient(
             132deg,
@@ -39,9 +52,6 @@
             transparent 89%
         );
     background-repeat: no-repeat;
-    color: #ffffff;
-    overflow: hidden;
-    isolation: isolate;
 }
 
 /* Scrim navy a sinistra: leggibilità copy/CTA senza coprire interazioni */
@@ -49,7 +59,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 0;
+    z-index: 1;
     pointer-events: none;
     background: linear-gradient(
         90deg,
@@ -61,12 +71,21 @@
     );
 }
 
+.home-hero--corporate .home-hero-inner {
+    position: relative;
+    z-index: 2;
+}
+
 @media (min-width: 768px) {
     .home-hero--corporate {
         background-image: url("../asset/media/aml_store_media_background.avif");
         background-size: cover;
         background-position: center right;
         background-repeat: no-repeat;
+    }
+
+    .home-hero--corporate::after {
+        content: none;
     }
 }
 
