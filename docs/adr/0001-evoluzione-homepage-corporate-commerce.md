@@ -23,9 +23,24 @@ Le seguenti decisioni sono state approvate e possono guidare l'implementazione l
 - il modulo può essere collegato localmente all'endpoint reale in modalità `CONSULTATION_DRY_RUN=1`, così da verificare frontend e validazione senza inviare email; le misure anti-abuso restano bloccanti prima di qualsiasi rilascio;
 - commit, push su `main` e deploy richiedono sempre una richiesta esplicita successiva alla verifica locale.
 
+## Dati e claim verificati
+
+I seguenti dati sono stati confermati il 2026-08-05 e possono essere usati nei contenuti corporate, nel footer e nei dati strutturati:
+
+- **marchio:** Aml Store;
+- **denominazione legale:** Licensoft di Cardelli Antonino;
+- **sede:** Via Trento 5/A, 20015 Parabiago (MI), Italia;
+- **assistenza:** dal lunedì al venerdì, dalle 09:00 alle 19:00, ora italiana;
+- **canali coperti dagli orari:** email, telefono e WhatsApp;
+- **lingue dell'assistenza:** italiano per l'Italia, inglese per tutti gli altri Paesi;
+- **servizi B2B effettivamente offerti:** consulenza pre-acquisto, preventivi per più postazioni, soluzioni Server, database e Microsoft 365;
+- **certificazioni, partnership, testimonianze e casi cliente utilizzabili:** nessuno attualmente approvato.
+
+Non è approvato alcuno SLA sul tempo di risposta. Le formule “Rispondiamo h24”, “risposta entro un giorno lavorativo”, “miglior prezzo garantito” e le garanzie di rimborso sintetiche non devono essere presentate come claim corporate in assenza di condizioni pubbliche e verificabili.
+
 ## Stato dell'implementazione locale
 
-Al 2026-08-04 è disponibile localmente il primo percorso completo di richiesta consulenza, non ancora destinato alla produzione:
+Al 2026-08-05 sono disponibili localmente, ma non ancora destinati alla produzione:
 
 - CTA hero e pagina dedicata nelle cinque lingue, con slug localizzati;
 - tre accessi coerenti alla pagina in ogni lingua: CTA primaria della hero, CTA primaria del blocco aziende/professionisti e voce dedicata nell'area Supporto del footer;
@@ -36,7 +51,12 @@ Al 2026-08-04 è disponibile localmente il primo percorso completo di richiesta 
 - template email separati dal flusso ordini: notifica interna in italiano e conferma utente localizzata;
 - destinatario interno `Info@amlstore.it`; il `Reply-To` della notifica interna coincide con l'email del richiedente;
 - conferma in italiano per `/it/`, in inglese per `/en/` e localizzata per `/fr/`, `/de/`, `/es/`, con indicazione che l'assistenza fuori dall'Italia risponde in inglese;
-- pagine ancora impostate su `noindex,nofollow`.
+- pagine consulenza ancora impostate su `noindex,nofollow`;
+- footer condiviso con denominazione legale, sede e P.IVA raccolte nella barra inferiore; nessun testo descrittivo di brand nella colonna del logo; orari e lingua effettiva dell'assistenza restano nella card contatti; la navigazione è divisa tra Prodotti, Supporto operativo e Informazioni legali;
+- metadati e dati strutturati delle cinque homepage privi del claim “miglior prezzo garantito” e completati con i dati societari approvati;
+- rassicurazione sintetica sul rimborso sostituita nelle cinque hero con il supporto pre e post-vendita;
+- blocco aziende/professionisti riscritto nelle cinque lingue sui servizi effettivamente disponibili;
+- pagine contatti allineate agli orari e alle lingue approvate, senza promessa di risposta entro un giorno lavorativo.
 
 L'integrazione riusa il servizio Resend già presente nel repository, ma mantiene template e funzione di invio separati dagli ordini. La consegna della notifica interna determina l'esito della richiesta; un eventuale errore della sola email di conferma non deve causare la perdita del lead. Il mittente resta temporaneamente quello Resend già verificato dal progetto (`Aml Store <ordini@aml-store.com>`): un indirizzo mittente dedicato alla consulenza richiederà una decisione e una verifica DNS/Resend esplicite.
 
@@ -445,10 +465,10 @@ La Content Security Policy dovrà essere allineata agli strumenti di misurazione
 
 ### Fase 0 — Validazione dei contenuti
 
-1. Confermare denominazione legale, indirizzo e dati societari pubblicabili.
-2. Confermare canali, orari e tempi di assistenza sostenibili.
-3. Inventariare partnership, certificazioni, recensioni, numeri e testimonianze documentabili.
-4. Definire i servizi realmente offerti ad aziende e professionisti.
+1. **Completato:** denominazione legale, indirizzo e dati societari pubblicabili.
+2. **Completato:** canali e orari di assistenza sostenibili; nessuno SLA di risposta approvato.
+3. **Completato per lo stato attuale:** non risultano partnership, certificazioni, testimonianze o casi cliente approvati.
+4. **Completato:** servizi realmente offerti ad aziende e professionisti.
 5. Registrare baseline analytics, performance e conversione.
 
 ### Fase 1 — Pilota italiano
@@ -567,17 +587,11 @@ Questo ADR non decide:
 
 ## Questioni aperte prima dell'accettazione
 
-1. Qual è la denominazione legale completa da mostrare pubblicamente?
-2. Quali indirizzo e recapiti aziendali possono essere pubblicati?
-3. Quali tempi e orari di assistenza possono essere promessi?
-4. Quali numeri aziendali sono documentati e aggiornabili?
-5. Esistono testimonianze, clienti o casi d'uso autorizzati?
-6. Esistono partnership o certificazioni utilizzabili nel marketing?
-7. Quali eventi analytics sono già disponibili e qual è la baseline?
-8. Google Ads richiede realmente le chiamate attualmente bloccate dalla CSP?
-9. Quali nuove pagine istituzionali devono essere create prima della nuova homepage?
-10. Il mittente Resend deve restare quello già verificato oppure va creato un indirizzo dedicato alle consulenze?
-11. Le richieste devono essere persistite in D1 oltre all'invio email, e per quale periodo di conservazione?
+1. Quali eventi analytics sono già disponibili e qual è la baseline?
+2. Google Ads richiede realmente le chiamate attualmente bloccate dalla CSP?
+3. Quali nuove pagine istituzionali devono essere create prima della nuova homepage?
+4. Il mittente Resend deve restare quello già verificato oppure va creato un indirizzo dedicato alle consulenze?
+5. Le richieste devono essere persistite in D1 oltre all'invio email, e per quale periodo di conservazione?
 
 ## Condizione per il passaggio ad Accepted
 

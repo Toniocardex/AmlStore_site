@@ -4,10 +4,13 @@
 const FOOTER_I18N = {
     it: {
         logoAlt: 'Aml Store',
-        brandDesc:
-            "Il tuo partner affidabile per l'acquisto di licenze software originali. Sistemi Operativi, Office e Antivirus al miglior prezzo garantito.",
+        legalName: 'Licensoft di Cardelli Antonino',
+        legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italia',
+        supportHours: 'Lun–Ven · 09:00–19:00',
+        supportLanguage: 'Assistenza in italiano',
         headingProducts: 'Prodotti',
         headingSupport: 'Supporto',
+        headingLegal: 'Informazioni legali',
         headingContact: 'Contattaci',
         prodOs: 'Sistemi Operativi',
         prodOffice: 'Office',
@@ -23,8 +26,9 @@ const FOOTER_I18N = {
         supportPrivacy: 'Privacy Policy',
         supportCookies: 'Cookie policy',
         cookieManage: 'Gestisci preferenze cookie',
-        assistanceLabel: 'Assistenza',
-        emailSub: 'Rispondiamo h24',
+        assistanceLabel: 'Telefono',
+        whatsappLabel: 'WhatsApp',
+        emailSub: 'Email',
         copyright: 'Aml Store. Tutti i diritti riservati.',
         vatLabel: 'P.IVA 11461870963',
         paymentSecure: 'Pagamenti sicuri',
@@ -35,10 +39,13 @@ const FOOTER_I18N = {
     },
     en: {
         logoAlt: 'Aml Store',
-        brandDesc:
-            'Your trusted partner for genuine software licenses. Operating systems, Office and antivirus at the best guaranteed price.',
+        legalName: 'Licensoft di Cardelli Antonino',
+        legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italia',
+        supportHours: 'Mon–Fri · 09:00–19:00 (Italy time)',
+        supportLanguage: 'Support in English',
         headingProducts: 'Products',
         headingSupport: 'Support',
+        headingLegal: 'Legal information',
         headingContact: 'Contact us',
         prodOs: 'Operating systems',
         prodOffice: 'Office',
@@ -54,8 +61,9 @@ const FOOTER_I18N = {
         supportPrivacy: 'Privacy policy',
         supportCookies: 'Cookie policy',
         cookieManage: 'Manage cookie preferences',
-        assistanceLabel: 'Support',
-        emailSub: 'We respond 24/7',
+        assistanceLabel: 'Phone',
+        whatsappLabel: 'WhatsApp',
+        emailSub: 'Email',
         copyright: 'Aml Store. All rights reserved.',
         vatLabel: 'VAT 11461870963',
         paymentSecure: 'Secure payments',
@@ -66,10 +74,13 @@ const FOOTER_I18N = {
     },
     fr: {
         logoAlt: 'Aml Store',
-        brandDesc:
-            "Votre partenaire de confiance pour des licences logicielles d'origine. Systèmes d'exploitation, Office et antivirus au meilleur prix garanti.",
+        legalName: 'Licensoft di Cardelli Antonino',
+        legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italia',
+        supportHours: 'Lun–Ven · 09:00–19:00 (heure italienne)',
+        supportLanguage: 'Assistance en anglais',
         headingProducts: 'Produits',
         headingSupport: 'Assistance',
+        headingLegal: 'Informations légales',
         headingContact: 'Contact',
         prodOs: "Systèmes d'exploitation",
         prodOffice: 'Office',
@@ -85,8 +96,9 @@ const FOOTER_I18N = {
         supportPrivacy: 'Politique de confidentialité',
         supportCookies: 'Politique cookies',
         cookieManage: 'Gérer les préférences cookies',
-        assistanceLabel: 'Assistance',
-        emailSub: 'Réponse 24h/24',
+        assistanceLabel: 'Téléphone',
+        whatsappLabel: 'WhatsApp',
+        emailSub: 'E-mail',
         copyright: 'Aml Store. Tous droits réservés.',
         vatLabel: 'TVA 11461870963',
         paymentSecure: 'Paiements sécurisés',
@@ -97,10 +109,13 @@ const FOOTER_I18N = {
     },
     de: {
         logoAlt: 'Aml Store',
-        brandDesc:
-            'Ihr zuverlässiger Partner für originale Softwarelizenzen. Betriebssysteme, Office und Antivirus zum besten garantierten Preis.',
+        legalName: 'Licensoft di Cardelli Antonino',
+        legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italia',
+        supportHours: 'Mo–Fr · 09:00–19:00 Uhr (italienische Zeit)',
+        supportLanguage: 'Support auf Englisch',
         headingProducts: 'Produkte',
         headingSupport: 'Support',
+        headingLegal: 'Rechtliche Informationen',
         headingContact: 'Kontakt',
         prodOs: 'Betriebssysteme',
         prodOffice: 'Office',
@@ -116,8 +131,9 @@ const FOOTER_I18N = {
         supportPrivacy: 'Datenschutz',
         supportCookies: 'Cookie-Richtlinie',
         cookieManage: 'Cookie-Einstellungen',
-        assistanceLabel: 'Support',
-        emailSub: 'Wir antworten rund um die Uhr',
+        assistanceLabel: 'Telefon',
+        whatsappLabel: 'WhatsApp',
+        emailSub: 'E-Mail',
         copyright: 'Aml Store. Alle Rechte vorbehalten.',
         vatLabel: 'USt-IdNr. 11461870963',
         paymentSecure: 'Sichere Zahlungen',
@@ -128,10 +144,13 @@ const FOOTER_I18N = {
     },
     es: {
         logoAlt: 'Aml Store',
-        brandDesc:
-            'Tu socio de confianza para licencias de software originales. Sistemas operativos, Office y antivirus al mejor precio garantizado.',
+        legalName: 'Licensoft di Cardelli Antonino',
+        legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italia',
+        supportHours: 'Lun–Vie · 09:00–19:00 (hora de Italia)',
+        supportLanguage: 'Asistencia en inglés',
         headingProducts: 'Productos',
         headingSupport: 'Soporte',
+        headingLegal: 'Información legal',
         headingContact: 'Contacto',
         prodOs: 'Sistemas operativos',
         prodOffice: 'Office',
@@ -147,8 +166,9 @@ const FOOTER_I18N = {
         supportPrivacy: 'Política de privacidad',
         supportCookies: 'Política de cookies',
         cookieManage: 'Gestionar cookies',
-        assistanceLabel: 'Asistencia',
-        emailSub: 'Respondemos 24/7',
+        assistanceLabel: 'Teléfono',
+        whatsappLabel: 'WhatsApp',
+        emailSub: 'Email',
         copyright: 'Aml Store. Todos los derechos reservados.',
         vatLabel: 'NIF 11461870963',
         paymentSecure: 'Pagos seguros',
@@ -248,8 +268,8 @@ class EcommerceFooter extends HTMLElement {
 
                 /* BRAND COL (A Sinistra) */
                 .brand-col {
-                    flex: 1 1 320px; /* Cresce e si restringe, base 320px */
-                    max-width: 420px;
+                    flex: 0 1 140px;
+                    max-width: 160px;
                 }
 
                 .footer-logo {
@@ -265,30 +285,26 @@ class EcommerceFooter extends HTMLElement {
                     filter: brightness(0) invert(1); 
                 }
 
-                .brand-desc {
-                    color: var(--text-secondary);
-                    font-size: 0.95rem;
-                    line-height: 1.8;
-                    font-weight: 500;
-                }
-
                 /* GRUPPO NAVIGAZIONE (A Destra) */
                 .nav-group {
-                    flex: 2 1 600px; /* Prende più spazio del brand */
+                    flex: 1 1 900px;
                     display: flex;
-                    flex-wrap: wrap;
-                    gap: 3rem 2rem;
+                    flex-wrap: nowrap;
+                    align-items: flex-start;
+                    gap: 3rem clamp(1rem, 2vw, 2rem);
                 }
 
                 .nav-col {
-                    flex: 1 1 140px; /* Colonne link base 140px */
+                    flex: 1 1 145px;
+                    min-width: 0;
                     display: flex;
                     flex-direction: column;
                 }
+                .nav-col:nth-child(3) { flex-grow: 1.4; flex-basis: 210px; }
 
                 /* CARD CONTATTI */
                 .contact-card {
-                    flex: 1 1 280px; /* Colonna contatti un po' più larga */
+                    flex: 0 0 280px;
                     background: var(--bg-surface);
                     border: 1px solid var(--border-color);
                     border-radius: 8px;
@@ -396,6 +412,19 @@ class EcommerceFooter extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     gap: 1.25rem;
+                }
+
+                .support-availability {
+                    padding-top: 1rem;
+                    border-top: 1px solid var(--border-color);
+                    color: var(--text-secondary);
+                    font-size: 0.8rem;
+                    line-height: 1.6;
+                }
+                .support-availability strong {
+                    display: block;
+                    color: var(--text-primary);
+                    font-weight: 700;
                 }
 
                 .contact-item {
@@ -524,10 +553,12 @@ class EcommerceFooter extends HTMLElement {
                     align-self: center;
                 }
 
-                /* P.IVA muted rispetto al copyright principale */
-                .copyright-vat {
+                .copyright-legal {
+                    display: block;
+                    margin-top: 0.35rem;
                     color: var(--text-muted);
-                    font-size: 0.8rem;
+                    font-size: 0.78rem;
+                    line-height: 1.55;
                 }
                 .payment-logo {
                     display: block;
@@ -555,20 +586,34 @@ class EcommerceFooter extends HTMLElement {
 
                 /* --- STRATEGIA RESPONSIVE --- */
                 
-                /* BREAKPOINT 1 (Laptop/Tablet Landscape < 1024px) */
-                @media (max-width: 1024px) {
+                /* BREAKPOINT 1 (Laptop/Tablet Landscape < 1240px) */
+                @media (max-width: 1240px) {
                     .brand-col {
                         flex: 1 1 100%;
                         max-width: 100%;
                         margin-bottom: 1rem;
                     }
-                    .brand-desc { max-width: 600px; }
+                    .nav-group {
+                        flex: 1 1 100%;
+                        display: grid;
+                        grid-template-columns: repeat(3, minmax(0, 1fr));
+                    }
+                    .contact-card {
+                        grid-column: 1 / -1;
+                        width: 100%;
+                    }
                     .footer-main { padding-top: 4rem; }
                 }
 
-                /* BREAKPOINT 2 (Tablet Portrait < 768px) */
-                @media (max-width: 768px) {
-                    .nav-group { flex-direction: column; gap: 2.5rem; }
+                /* BREAKPOINT 2 (Tablet Portrait < 960px) */
+                @media (max-width: 960px) {
+                    .nav-group { display: flex; flex-direction: column; gap: 2.5rem; }
+                    .nav-col,
+                    .nav-col:nth-child(3),
+                    .contact-card {
+                        flex: 1 1 auto;
+                        width: 100%;
+                    }
                     .contact-card {
                         border-radius: 8px;
                         padding: 1.5rem;
@@ -649,9 +694,6 @@ class EcommerceFooter extends HTMLElement {
                     <a href="${esc(homeHref)}" class="footer-logo">
                         <img src="${esc(logoSrc)}" width="200" height="48" alt="${esc(t.logoAlt)}">
                     </a>
-                    <p class="brand-desc">
-                        ${esc(t.brandDesc)}
-                    </p>
                 </div>
 
                 <!-- Gruppo Navigazione (Destra) -->
@@ -675,6 +717,13 @@ class EcommerceFooter extends HTMLElement {
                             <li><a href="${esc(consultationHref)}">${esc(t.supportConsultation)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/contacts">${esc(t.supportContacts)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/returns-and-refunds">${esc(t.supportReturns)}</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Informazioni legali -->
+                    <div class="nav-col">
+                        <h3 class="col-title">${esc(t.headingLegal)}</h3>
+                        <ul class="link-list">
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/terms-and-conditions">${esc(t.supportTerms)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/privacy-policy">${esc(t.supportPrivacy)}</a></li>
                             <li><a href="${esc(staticRoot)}/${activeLang.code}/cookie-policy">${esc(t.supportCookies)}</a></li>
@@ -686,12 +735,21 @@ class EcommerceFooter extends HTMLElement {
                     <div class="contact-card">
                         <h3 class="col-title">${esc(t.headingContact)}</h3>
                         <div class="contact-items-wrapper">
-                            <a href="https://wa.me/393925580413" class="contact-item" target="_blank" rel="noopener noreferrer">
+                            <a href="tel:+393925580413" class="contact-item">
                                 <div class="contact-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
                                 </div>
                                 <div class="contact-text">
                                     <span class="contact-label">${esc(t.assistanceLabel)}</span>
+                                    <span class="contact-value">+39 392 558 0413</span>
+                                </div>
+                            </a>
+                            <a href="https://wa.me/393925580413" class="contact-item" target="_blank" rel="noopener noreferrer">
+                                <div class="contact-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a9.6 9.6 0 0 0-8.28 14.46L2.4 21.6l5.26-1.38A9.6 9.6 0 1 0 12 2Zm0 17.2a7.55 7.55 0 0 1-3.85-1.06l-.28-.16-3.12.82.83-3.04-.18-.3A7.6 7.6 0 1 1 12 19.2Zm4.17-5.7c-.23-.12-1.35-.67-1.56-.74-.21-.08-.36-.12-.52.11-.15.23-.59.74-.73.89-.13.15-.27.17-.5.06-1.34-.67-2.22-1.2-3.1-2.72-.23-.4.23-.37.67-1.23.08-.15.04-.29-.02-.4-.05-.12-.51-1.24-.7-1.69-.19-.45-.38-.39-.52-.4h-.44c-.15 0-.4.06-.61.29-.21.23-.8.78-.8 1.9s.82 2.2.93 2.35c.12.15 1.61 2.46 3.9 3.45 1.45.63 2.02.68 2.74.58.44-.07 1.35-.55 1.54-1.08.19-.53.19-.99.13-1.08-.05-.1-.2-.15-.43-.27Z"/></svg>
+                                </div>
+                                <div class="contact-text">
+                                    <span class="contact-label">${esc(t.whatsappLabel)}</span>
                                     <span class="contact-value">+39 392 558 0413</span>
                                 </div>
                             </a>
@@ -705,6 +763,10 @@ class EcommerceFooter extends HTMLElement {
                                 </div>
                             </a>
                         </div>
+                        <p class="support-availability">
+                            <strong>${esc(t.supportHours)}</strong>
+                            ${esc(t.supportLanguage)}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -715,7 +777,7 @@ class EcommerceFooter extends HTMLElement {
                 <div class="bottom-content">
                     <p class="copyright">
                         &copy; ${new Date().getFullYear()} ${esc(t.copyright)}
-                        <span class="copyright-vat">&nbsp;·&nbsp;${esc(t.vatLabel)}</span>
+                        <span class="copyright-legal">${esc(t.legalName)} &nbsp;·&nbsp; ${esc(t.legalAddress)} &nbsp;·&nbsp; ${esc(t.vatLabel)}</span>
                     </p>
                     <div class="bottom-right-cluster">
                         <div class="payments" role="group" aria-label="${esc(t.paymentLogosAria)}">
