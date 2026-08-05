@@ -11,32 +11,51 @@
     padding-bottom: 0;
 }
 
-/* ── Hero corporate — navy istituzionale, cover B2B ordinate ── */
+/* ── Hero corporate — navy + brand AVIF (art-direction), cover B2B ── */
 
 .home-hero--corporate {
     position: relative;
     margin-inline: calc(50% - 50vw);
     width: 100vw;
     margin-top: -4rem;
-    background: var(--aml-navy, #0A1830);
+    background-color: var(--aml-navy, #0a1830);
+    background-image: url("../asset/media/aml_store_media_background_mobile.avif");
+    background-repeat: no-repeat;
+    background-position: 58% top;
+    background-size: cover;
     color: #ffffff;
     overflow: hidden;
     isolation: isolate;
 }
 
-/* Accento tecnico molto discreto: niente griglia “startup” dominante */
+/* Scrim navy a sinistra: leggibilità copy/CTA senza coprire interazioni */
 .home-hero--corporate::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
     background: linear-gradient(
-        105deg,
-        transparent 42%,
-        rgba(143, 178, 217, 0.06) 72%,
+        90deg,
+        rgba(10, 24, 48, 0.96) 0%,
+        rgba(10, 24, 48, 0.84) 34%,
+        rgba(10, 24, 48, 0.46) 57%,
+        rgba(10, 24, 48, 0.08) 78%,
         transparent 100%
     );
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+    .home-hero--corporate {
+        background-position: 62% center;
+    }
+}
+
+@media (min-width: 768px) {
+    .home-hero--corporate {
+        background-image: url("../asset/media/aml_store_media_background.avif");
+        background-position: center right;
+    }
 }
 
 .home-hero-inner {
@@ -848,19 +867,52 @@
 
 /* ── Fascia di fiducia istituzionale — stesso pattern/copia di .pf-institutional
    sulle pagine prodotto (product-v3.css), riproposto qui full-bleed: stessa
-   fonte di verità, non una nuova variante di testo o colore. ── */
+   fonte di verità, non una nuova variante di testo o colore.
+   Background: riuso AVIF brand con cover (crop, non stretch) + scrim 2-layer. ── */
 .home-institutional {
     position: relative;
+    isolation: isolate;
+    overflow: hidden;
     margin-inline: calc(50% - 50vw);
     width: 100vw;
-    background: var(--aml-navy);
+    min-height: 260px;
     color: #ffffff;
+    background-color: var(--aml-navy, #0a1830);
+    background-image: url("../asset/media/aml_store_media_background_mobile.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 68% center;
+}
+
+.home-institutional::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10, 24, 48, 0.25) 0%,
+            transparent 62%
+        ),
+        rgba(10, 24, 48, 0.7);
 }
 
 .home-institutional__inner {
+    position: relative;
+    z-index: 1;
     max-width: var(--aml-maxw);
     margin: 0 auto;
     padding: clamp(40px, 6vw, 64px) var(--aml-gutter);
+}
+
+@media (min-width: 768px) {
+    .home-institutional {
+        min-height: 210px;
+        background-image: url("../asset/media/aml_store_media_background.avif");
+        background-position: 72% 58%;
+    }
 }
 
 .home-institutional__title {
