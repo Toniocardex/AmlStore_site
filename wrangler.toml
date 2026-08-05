@@ -42,6 +42,7 @@ ADMIN_ALLOW_DELETE_ORDERS = "0"
 
 # ── Segreti (MAI committare — impostare con `wrangler secret put <NAME>`) ────
 # TOKEN_SECRET           — stringa random ≥32 caratteri per HMAC token thank-you
+# FRAUD_HASH_SECRET      — stringa random ≥16 caratteri per HMAC rate-limit checkout (email)
 # RESEND_API_KEY         — API key Resend (re_xxxx...)
 # TRUSTPILOT_BCC         — indirizzo ...+token@invite.trustpilot.com
 # STRIPE_SECRET_KEY      — sk_live_... (o sk_test_... in sviluppo)

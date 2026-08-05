@@ -41,6 +41,7 @@ import { resolveAndValidateItems, itemsRequireShipping } from './_lib/catalog.js
 import { assertCartStock, deductStockForPaidOrder, getStockQty,
          listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
 import { safeParseJSON }                                 from './_lib/utils.js';
+import { checkCheckoutEmailRateLimit }                   from './_lib/checkout-rate-limit.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -82,6 +83,40 @@ function json(data, status = 200, request = null, env = null) {
 
 function err(msg, status = 400, request = null, env = null) {
     return json({ error: msg }, status, request, env);
+}
+
+function rateLimitResponse(result, request, env) {
+    const status = result.status || 429;
+    return new Response(
+        JSON.stringify({
+            error: result.message,
+            code: result.code || 'CHECKOUT_RATE_LIMITED',
+        }),
+        {
+            status,
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-store',
+                'Retry-After': String(result.retryAfter || 60),
+                ...corsHeaders(request, env || {}),
+            },
+        }
+    );
+}
+
+/**
+ * Rate limit email solo per nuovi checkout. Riuso stessa idempotency_key = ok.
+ * @returns {Promise<Response|null>}
+ */
+async function gateNewCheckoutAttempt(env, request, params) {
+    const existing = await env.DB
+        .prepare('SELECT id FROM orders WHERE idempotency_key = ?')
+        .bind(params.idempotencyKey)
+        .first();
+    if (existing?.id) return null;
+    const limited = await checkCheckoutEmailRateLimit(env, params.customerEmail);
+    if (limited) return rateLimitResponse(limited, request, env);
+    return null;
 }
 
 /* ─── Entry point Pages Function ────────────────────────────────────────────── */
@@ -531,6 +566,9 @@ async function handleStripeCreateSession(request, env) {
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
 
+    const rateGate = await gateNewCheckoutAttempt(env, request, params);
+    if (rateGate) return rateGate;
+
     // Crea ordine in D1
     let orderId;
     try {
@@ -665,6 +703,9 @@ async function handlePaypalCreateOrder(request, env) {
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
 
+    const rateGate = await gateNewCheckoutAttempt(env, request, params);
+    if (rateGate) return rateGate;
+
     // Crea ordine in D1
     let orderId;
     try {
@@ -776,6 +817,9 @@ async function handleBankTransferOrder(request, env) {
     const paramsOrErr = await orderParamsFromBodySafe(body, 'bank_transfer', request, env);
     if (paramsOrErr.error) return paramsOrErr.error;
     const params = paramsOrErr;
+
+    const rateGate = await gateNewCheckoutAttempt(env, request, params);
+    if (rateGate) return rateGate;
 
     // Crea ordine in D1
     let orderId;

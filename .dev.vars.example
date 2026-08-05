@@ -4,6 +4,9 @@
 # Obbligatoria per i token della thank-you page (qualsiasi stringa lunga va bene in dev)
 TOKEN_SECRET=stringa-random-di-almeno-32-caratteri
 
+# Rate-limit checkout (HMAC email). Obbligatoria: senza di essa create-order risponde 503.
+FRAUD_HASH_SECRET=dev-fraud-hash-secret-min-32-chars!!
+
 # PayPal SANDBOX per i test locali (in produzione si usano i secret live)
 PAYPAL_BASE_URL=https://api-m.sandbox.paypal.com
 PAYPAL_CLIENT_ID=<client-id-sandbox>

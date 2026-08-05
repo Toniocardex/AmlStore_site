@@ -130,6 +130,29 @@
 
     /* ─── Gestione errori inline ───────────────────────────────────────────── */
 
+    function checkoutApiErrorMessage(res, body, fallback) {
+        if (res && (res.status === 429 || res.status === 503)) {
+            if (body && body.error) return body.error;
+            var el = document.getElementById('checkout-error-msg');
+            return (el && el.getAttribute('data-rate-limit-error'))
+                || 'Troppi tentativi di checkout. Riprova tra qualche minuto.';
+        }
+        if (body && body.error) return body.error;
+        return fallback || ('HTTP ' + (res && res.status));
+    }
+
+    function readCheckoutApi(res) {
+        return res.json().catch(function () { return {}; }).then(function (body) {
+            if (!res.ok) {
+                var err = new Error(checkoutApiErrorMessage(res, body, 'HTTP ' + res.status));
+                err.status = res.status;
+                err.code = body && body.code;
+                throw err;
+            }
+            return body;
+        });
+    }
+
     function showFieldError(field, msg) {
         field.classList.add('is-invalid');
         var existing = field.querySelector('.field-error');
@@ -534,8 +557,7 @@
             });
         })
         .then(function (res) {
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            return res.json();
+            return readCheckoutApi(res);
         })
         .then(function (data) {
             if (data && data.url) {
@@ -547,7 +569,8 @@
         .catch(function (err) {
             console.error('[Checkout] Stripe error:', err);
             var errorEl = document.getElementById('checkout-error-msg');
-            showGlobalError(errorEl && errorEl.getAttribute('data-network-error') || 'Errore di connessione. Riprova.');
+            var fallback = errorEl && errorEl.getAttribute('data-network-error') || 'Errore di connessione. Riprova.';
+            showGlobalError(err && err.message && err.status ? err.message : fallback);
             if (btn) { btn.removeAttribute('aria-busy'); btn.disabled = false; }
             _isSubmitting = false;
         });
@@ -585,8 +608,7 @@
             });
         })
         .then(function (res) {
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            return res.json();
+            return readCheckoutApi(res);
         })
         .then(function (data) {
             if (data && data.oid) {
@@ -604,7 +626,8 @@
         .catch(function (fetchErr) {
             console.error('[Checkout] Transfer error:', fetchErr);
             var errorEl = document.getElementById('checkout-error-msg');
-            showGlobalError(errorEl && errorEl.getAttribute('data-network-error') || 'Errore di connessione. Riprova.');
+            var fallback = errorEl && errorEl.getAttribute('data-network-error') || 'Errore di connessione. Riprova.';
+            showGlobalError(fetchErr && fetchErr.message && fetchErr.status ? fetchErr.message : fallback);
             if (btn) { btn.removeAttribute('aria-busy'); btn.disabled = false; }
             _isSubmitting = false;
         });
@@ -743,8 +766,7 @@
                             });
                         })
                         .then(function (res) {
-                            if (!res.ok) throw new Error('HTTP ' + res.status);
-                            return res.json();
+                            return readCheckoutApi(res);
                         })
                         .then(function (data) {
                             if (!data.orderID) throw new Error('orderID mancante dalla risposta Worker');
@@ -781,6 +803,10 @@
                         _isSubmitting = false;
                         if (ppErr && ppErr.message === 'aml-validation') return;
                         console.error('[PayPal] SDK error:', ppErr);
+                        if (ppErr && ppErr.status && ppErr.message) {
+                            showGlobalError(ppErr.message);
+                            return;
+                        }
                         var netErr = errorEl && errorEl.getAttribute('data-network-error');
                         showGlobalError(netErr || 'Errore PayPal. Riprova o scegli un altro metodo.');
                     },
