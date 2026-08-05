@@ -10,3 +10,5 @@ Thumbs.db
 *.log
 dist/
 __pycache__/
+.playwright-cli/
+output/
