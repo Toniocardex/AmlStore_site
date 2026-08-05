@@ -56,21 +56,40 @@
     isolation: isolate;
     overflow: hidden;
     padding: clamp(2rem, 5vw, 4rem);
-    background: var(--aml-navy);
     color: var(--aml-surface);
+    background-color: var(--aml-navy, #0a1830);
+    background-image: url("../asset/media/aml_store_media_background_mobile.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 68% center;
 }
 
-.consultation-intro::after {
-    content: '';
+/* Scrim uniforme + lieve enfasi sinistra: testo su tutta la colonna */
+.consultation-intro::before {
+    content: "";
     position: absolute;
-    z-index: -1;
-    right: -20%;
-    bottom: -18%;
-    width: 24rem;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--aml-brand) 28%, transparent);
-    filter: blur(1px);
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10, 24, 48, 0.28) 0%,
+            transparent 58%
+        ),
+        rgba(10, 24, 48, 0.72);
+}
+
+.consultation-intro > * {
+    position: relative;
+    z-index: 1;
+}
+
+@media (min-width: 861px) {
+    .consultation-intro {
+        background-image: url("../asset/media/aml_store_media_background.avif");
+        background-position: center right;
+    }
 }
 
 .consultation-eyebrow {
