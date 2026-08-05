@@ -535,7 +535,7 @@
 
 .checkout-summary-col {
     position: sticky;
-    top: calc(88px + 1.5rem); /* header height + gap */
+    top: calc(var(--aml-header-offset, 64px) + 1.5rem);
 }
 
 .checkout-summary {

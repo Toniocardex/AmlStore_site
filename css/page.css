@@ -85,7 +85,7 @@ html {
 }
 
 /* Ancora centrata visivamente: 40vh porta il target a metà schermo
-   tenendo conto dell'header sticky (~72px) */
+   tenendo conto dell'header sticky (utility + barra; offset via --aml-header-offset) */
 [id] {
     scroll-margin-top: 40vh;
 }
@@ -146,7 +146,18 @@ ecommerce-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    min-height: 88px;
+    /* Riserva CLS prima che il Web Component sia definito */
+    min-height: 105px;
+}
+
+ecommerce-header:defined {
+    min-height: 0;
+}
+
+@media (max-width: 767px) {
+    ecommerce-header {
+        min-height: 64px;
+    }
 }
 
 main {

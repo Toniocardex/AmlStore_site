@@ -38,7 +38,6 @@
     const HEADER_I18N = {
         it: {
             logoAlt: 'Aml Store',
-            navHome: 'Home',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Apri sottomenu Windows',
             navWindowsOverview: 'Sistemi Operativi',
@@ -87,15 +86,21 @@
             navM365Family: 'Microsoft 365 Family',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
-            assistanceSmall: 'Assistenza',
+            utilityClaim1: 'Azienda italiana',
+            utilityClaim2: 'Fattura disponibile',
+            utilityClaim3: 'Supporto via email e WhatsApp',
+            supportLabel: 'Supporto',
+            supportHeading: 'Supporto scritto',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Lun–Ven · 09:00–19:00',
+            supportSectionTitle: 'Supporto',
             openNavMenu: 'Apri menu di navigazione',
             closeNavMenu: 'Chiudi menu',
             selectLanguage: 'Seleziona lingua',
             cartAriaEmpty: 'Carrello, nessun articolo',
             cartAriaOne: 'Carrello, 1 articolo',
             cartAriaMany: 'Carrello, {{n}} articoli',
-            signIn: 'Accedi',
-            drawerAssist: 'Assistenza: +39 392 558 0413',
             searchToggleLabel: 'Cerca prodotti',
             searchPlaceholder: 'Cerca un prodotto…',
             searchHint: 'Inizia a digitare per cercare',
@@ -104,7 +109,6 @@
         },
         en: {
             logoAlt: 'Aml Store',
-            navHome: 'Home',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Open Windows submenu',
             navWindowsOverview: 'Operating Systems',
@@ -153,15 +157,21 @@
             navM365Family: 'Microsoft 365 Family',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
-            assistanceSmall: 'Support',
+            utilityClaim1: 'European software retailer',
+            utilityClaim2: 'VAT invoice available',
+            utilityClaim3: 'Support via email and WhatsApp',
+            supportLabel: 'Support',
+            supportHeading: 'Written support',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Mon–Fri · 09:00–19:00 CET/CEST',
+            supportSectionTitle: 'Support',
             openNavMenu: 'Open navigation menu',
             closeNavMenu: 'Close menu',
             selectLanguage: 'Select language',
             cartAriaEmpty: 'Shopping cart, empty',
             cartAriaOne: 'Shopping cart, 1 item',
             cartAriaMany: 'Shopping cart, {{n}} items',
-            signIn: 'Sign in',
-            drawerAssist: 'Support: +39 392 558 0413',
             searchToggleLabel: 'Search products',
             searchPlaceholder: 'Search for a product…',
             searchHint: 'Start typing to search',
@@ -170,7 +180,6 @@
         },
         fr: {
             logoAlt: 'Aml Store',
-            navHome: 'Home',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Ouvrir le sous-menu Windows',
             navWindowsOverview: "Systèmes d'exploitation",
@@ -219,15 +228,21 @@
             navM365Family: 'Microsoft 365 Famille',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
-            assistanceSmall: 'Assistance',
+            utilityClaim1: 'Revendeur logiciel européen',
+            utilityClaim2: 'Facture TVA disponible',
+            utilityClaim3: 'Assistance par e-mail et WhatsApp',
+            supportLabel: 'Assistance',
+            supportHeading: 'Assistance écrite',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Lun–Ven · 09:00–19:00 CET/CEST',
+            supportSectionTitle: 'Assistance',
             openNavMenu: 'Ouvrir le menu de navigation',
             closeNavMenu: 'Fermer le menu',
             selectLanguage: 'Choisir la langue',
             cartAriaEmpty: 'Panier vide',
             cartAriaOne: 'Panier, 1 article',
             cartAriaMany: 'Panier, {{n}} articles',
-            signIn: 'Se connecter',
-            drawerAssist: 'Assistance : +39 392 558 0413',
             searchToggleLabel: 'Rechercher des produits',
             searchPlaceholder: 'Rechercher un produit…',
             searchHint: 'Commencez à taper pour rechercher',
@@ -236,7 +251,6 @@
         },
         de: {
             logoAlt: 'Aml Store',
-            navHome: 'Home',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Windows-Untermenü öffnen',
             navWindowsOverview: 'Betriebssysteme',
@@ -285,15 +299,21 @@
             navM365Family: 'Microsoft 365 Family',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
-            assistanceSmall: 'Support',
+            utilityClaim1: 'Europäischer Softwarehändler',
+            utilityClaim2: 'MwSt.-Rechnung verfügbar',
+            utilityClaim3: 'Support per E-Mail und WhatsApp',
+            supportLabel: 'Support',
+            supportHeading: 'Schriftlicher Support',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Mo–Fr · 09:00–19:00 Uhr CET/CEST',
+            supportSectionTitle: 'Support',
             openNavMenu: 'Navigationsmenü öffnen',
             closeNavMenu: 'Menü schließen',
             selectLanguage: 'Sprache wählen',
             cartAriaEmpty: 'Warenkorb leer',
             cartAriaOne: 'Warenkorb, 1 Artikel',
             cartAriaMany: 'Warenkorb, {{n}} Artikel',
-            signIn: 'Anmelden',
-            drawerAssist: 'Support: +39 392 558 0413',
             searchToggleLabel: 'Produkte durchsuchen',
             searchPlaceholder: 'Produkt suchen…',
             searchHint: 'Tippen Sie, um zu suchen',
@@ -302,7 +322,6 @@
         },
         es: {
             logoAlt: 'Aml Store',
-            navHome: 'Home',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Abrir submenú Windows',
             navWindowsOverview: 'Sistemas operativos',
@@ -351,15 +370,21 @@
             navM365Family: 'Microsoft 365 Familia',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
-            assistanceSmall: 'Asistencia',
+            utilityClaim1: 'Distribuidor de software europeo',
+            utilityClaim2: 'Factura con IVA disponible',
+            utilityClaim3: 'Soporte por email y WhatsApp',
+            supportLabel: 'Soporte',
+            supportHeading: 'Soporte escrito',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Lun–Vie · 09:00–19:00 CET/CEST',
+            supportSectionTitle: 'Soporte',
             openNavMenu: 'Abrir menú de navegación',
             closeNavMenu: 'Cerrar menú',
             selectLanguage: 'Seleccionar idioma',
             cartAriaEmpty: 'Carrito vacío',
             cartAriaOne: 'Carrito, 1 artículo',
             cartAriaMany: 'Carrito, {{n}} artículos',
-            signIn: 'Iniciar sesión',
-            drawerAssist: 'Asistencia: +39 392 558 0413',
             searchToggleLabel: 'Buscar productos',
             searchPlaceholder: 'Buscar un producto…',
             searchHint: 'Empieza a escribir para buscar',
@@ -367,6 +392,10 @@
             searchCloseLabel: 'Cerrar búsqueda',
         },
     };
+
+    const SUPPORT_EMAIL = 'info@amlstore.it';
+    const SUPPORT_WHATSAPP_URL = 'https://wa.me/393925580413';
+
 
     class EcommerceHeader extends HTMLElement {
         constructor() {
@@ -402,9 +431,7 @@
             const cartHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'cart');
             const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
 
-            /* Rileva se siamo sulla home page della lingua attiva */
             const afterLang = (parsed.pathAfterLang || '').replace(/^\//, '');
-            const isHome = afterLang === '' || afterLang === 'index';
             const hrefM365Solutions = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-solutions');
             const hrefM365Personal = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-personal');
             const hrefM365Family = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-family');
@@ -510,10 +537,6 @@
             const staticRoot = S.staticRootFromScriptPath('/components/header.js');
             const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
             const flagSrc = (flag) => `${staticRoot}/images/flags/${flag}.svg`;
-            // Accento derivato dal blu del logo AML Store (design system istituzionale,
-            // css/page.css --aml-brand), non più il blu SaaS generico di un tempo.
-            const accentColor = 'var(--aml-brand, #245EAC)';
-            const accentHoverColor = 'var(--aml-brand-hover, #26507f)';
 
             this.shadowRoot.innerHTML = `
 
@@ -523,20 +546,18 @@
                         position: sticky;
                         top: 0;
                         z-index: 1000;
-                        font-family: 'Montserrat', sans-serif;
-                        /* Alias verso i token globali del design system (css/page.css):
-                           un solo posto dove i colori sono definiti per davvero. I custom
-                           property attraversano lo Shadow DOM per ereditarietà, ma li
-                           ridichiariamo qui per restare indipendenti da cosa la pagina
-                           ospitante ha (o non ha) ancora caricato. */
-                        --bg-base: var(--aml-surface, #ffffff);
-                        --bg-surface: var(--aml-surface, #ffffff);
+                        font-family: var(--aml-font-sans, 'Montserrat', sans-serif);
+                        /* Alias locali → token design system (css/page.css).
+                           I --aml-* ereditano dal light DOM; i fallback restano
+                           canonici se page.css non è ancora caricato. */
+                        --bg-base: var(--aml-surface, #FFFFFF);
+                        --bg-surface: var(--aml-surface, #FFFFFF);
                         --border-color: var(--aml-line, #DCE3EA);
                         --text-primary: var(--aml-ink, #152033);
                         --text-secondary: var(--aml-ink-2, #5F6B7A);
                         --text-muted: var(--aml-ink-2, #5F6B7A);
-                        --accent: ${accentColor};
-                        --accent-hover: ${accentHoverColor};
+                        --accent: var(--aml-brand, #245EAC);
+                        --accent-hover: var(--aml-brand-hover, #1c4c8c);
 
                         background-color: var(--bg-base);
                         backdrop-filter: none;
@@ -547,85 +568,133 @@
 
                     * { box-sizing: border-box; margin: 0; padding: 0; }
 
-                    .header-container {
+                    .header-utility {
+                        display: none;
+                        background: var(--aml-navy, #0A1830);
+                        color: color-mix(in srgb, var(--aml-surface, #FFFFFF) 82%, transparent);
+                        font-size: 0.75rem;
+                        line-height: 1.2;
+                    }
+                    .header-utility__inner {
+                        width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, clamp(1rem, 4vw, 2rem)))));
+                        min-height: 31px;
+                        margin-inline: auto;
                         display: flex;
                         align-items: center;
-                        justify-content: space-between;
-                        gap: 2rem;
-                        height: 72px;
-                        
-                        /* FIX: Allineamento e Padding condiviso con il Footer */
-                        max-width: 1280px;
-                        margin: 0 auto;
-                        padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+                        gap: 1.125rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
+                    .header-utility__inner > span {
+                        display: inline-flex;
+                        align-items: center;
+                    }
+                    .header-utility__inner > span + span::before {
+                        content: "";
+                        display: inline-block;
+                        width: 1px;
+                        height: 0.75rem;
+                        margin-right: 1.125rem;
+                        background: color-mix(in srgb, var(--aml-surface, #FFFFFF) 24%, transparent);
+                        flex-shrink: 0;
+                    }
+                    @media (min-width: 768px) {
+                        .header-utility { display: block; }
+                    }
+                    :host(.is-compact) .header-utility {
+                        display: none;
                     }
 
-                    .left-section {
+                    .header-container {
+                        width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, clamp(1rem, 4vw, 2rem)))));
+                        min-height: 74px;
+                        margin-inline: auto;
+                        display: grid;
+                        grid-template-columns: auto minmax(0, 1fr) auto;
+                        align-items: center;
+                        gap: 2rem;
+                        background: var(--bg-base);
+                        box-sizing: border-box;
+                    }
+                    :host(.is-compact) .header-container {
+                        min-height: 63px;
+                    }
+
+                    .header-brand {
                         display: flex;
                         align-items: center;
-                        gap: clamp(1.5rem, 3vw, 3rem); /* Spazio Fluido tra logo e nav */
+                        flex-shrink: 0;
                     }
 
                     .logo {
                         display: flex;
                         align-items: center;
                         text-decoration: none;
-                        transition: opacity 0.2s ease, transform 0.2s ease;
-                        border-radius: 6px;
+                        transition: opacity 0.2s ease;
+                        border-radius: var(--aml-radius-sm, 6px);
                         flex-shrink: 0;
                     }
-                    .logo:hover { opacity: 0.9; transform: scale(1.02); }
+                    .logo:hover { opacity: 0.9; }
                     .logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
                     .logo img {
-                        height: 48px;
+                        height: 54px;
                         width: auto;
                         max-height: 100%;
                         display: block;
-                        /* Logo pensato per header bianco (identità Licensoft / Aml Store). */
                         filter: none;
+                        transition: height 0.12s ease;
+                    }
+                    :host(.is-compact) .logo img {
+                        height: 46px;
                     }
 
+                    .header-nav,
                     .nav-links {
                         display: flex;
-                        align-items: center;
-                        gap: clamp(1rem, 2vw, 2rem); /* Spazio fluido tra i link */
+                        justify-content: center;
+                        align-items: stretch;
+                        gap: 1.6875rem;
+                        min-width: 0;
                     }
 
                     .nav-links a {
                         color: var(--text-secondary);
                         text-decoration: none;
-                        font-size: 0.9rem;
+                        font-size: 0.875rem;
                         font-weight: 500;
-                        transition: color 0.3s ease, text-shadow 0.3s ease;
+                        transition: color 0.2s ease;
                         position: relative;
-                        padding-bottom: 4px; /* Spazio per l'animazione della linea */
-                        white-space: nowrap; /* Impedisce che i link si spezzino su due righe */
+                        padding-bottom: 4px;
+                        white-space: nowrap;
                     }
-                    
-                    /* Linea animata dal centro sui link */
+
                     .nav-links a::after {
                         content: '';
                         position: absolute;
-                        bottom: -2px;
-                        left: 50%;
-                        width: 0;
+                        inset-inline: 0;
+                        bottom: -1px;
+                        width: 100%;
                         height: 2px;
-                        background-color: var(--text-primary);
-                        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                        border-radius: 2px;
+                        background-color: var(--accent);
+                        transform: scaleX(0);
+                        transform-origin: center;
+                        transition: transform 0.2s ease;
+                        border-radius: 1px;
                     }
 
                     .nav-links a:hover {
-                        color: var(--text-primary);
-                    }
-                    
-                    .nav-links a:hover::after, .nav-links a.active::after {
-                        width: 100%;
-                        left: 0;
+                        color: var(--aml-navy, #0A1830);
                     }
 
-                    .nav-links a.active {
-                        color: var(--text-primary);
+                    .nav-links a:hover::after,
+                    .nav-links a.active::after,
+                    .nav-links a[aria-current="page"]::after {
+                        transform: scaleX(1);
+                    }
+
+                    .nav-links a.active,
+                    .nav-links a[aria-current="page"] {
+                        color: var(--aml-navy, #0A1830);
                         font-weight: 600;
                     }
 
@@ -643,9 +712,9 @@
                     .nav-win-root {
                         color: var(--text-secondary);
                         text-decoration: none;
-                        font-size: 0.9rem;
+                        font-size: 0.875rem;
                         font-weight: 500;
-                        transition: color 0.3s ease, text-shadow 0.3s ease;
+                        transition: color 0.2s ease;
                         position: relative;
                         padding-bottom: 4px;
                         white-space: nowrap;
@@ -653,18 +722,20 @@
                     .nav-win-root::after {
                         content: '';
                         position: absolute;
-                        bottom: -2px;
-                        left: 50%;
-                        width: 0;
+                        inset-inline: 0;
+                        bottom: -1px;
+                        width: 100%;
                         height: 2px;
-                        background-color: var(--text-primary);
-                        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                        border-radius: 2px;
+                        background-color: var(--accent);
+                        transform: scaleX(0);
+                        transform-origin: center;
+                        transition: transform 0.2s ease;
+                        border-radius: 1px;
                     }
-                    .nav-win-root:hover { color: var(--text-primary); }
+                    .nav-win-root:hover { color: var(--aml-navy, #0A1830); }
                     .nav-win-root:hover::after,
-                    .nav-win-root.active::after { width: 100%; left: 0; }
-                    .nav-win-root.active { color: var(--text-primary); font-weight: 600; }
+                    .nav-win-root.active::after { transform: scaleX(1); }
+                    .nav-win-root.active { color: var(--aml-navy, #0A1830); font-weight: 600; }
                     .nav-win-caret {
                         display: inline-flex;
                         align-items: center;
@@ -674,7 +745,7 @@
                         padding: 0;
                         margin: 0 0 2px 0;
                         border: none;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         background: transparent;
                         color: var(--text-secondary);
                         cursor: pointer;
@@ -705,9 +776,9 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 8px;
+                        border-radius: var(--aml-radius-md, 8px);
                         padding: 0.4rem;
-                        box-shadow: var(--aml-shadow-lg);
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
                         opacity: 0;
                         visibility: hidden;
                         pointer-events: none;
@@ -727,7 +798,7 @@
                     .nav-win-dropdown a {
                         display: block;
                         padding: 0.55rem 0.75rem;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         color: var(--text-secondary);
                         text-decoration: none;
                         font-size: 0.85rem;
@@ -740,11 +811,11 @@
                         font-weight: 700;
                         color: var(--text-primary);
                         border-bottom: 1px solid var(--border-color);
-                        border-radius: 6px 6px 0 0;
+                        border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
                         margin-bottom: 0.15rem;
                         padding-bottom: 0.65rem;
                     }
-                    .nav-win-dropdown a.nav-win-dropdown__overview:hover { background: rgba(59,130,246,0.12); }
+                    .nav-win-dropdown a.nav-win-dropdown__overview:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
 
                     /* Drawer mobile — gruppi Windows / M365 (sottomenu) */
                     .drawer-win-block,
@@ -795,9 +866,9 @@
                     .nav-m365-root {
                         color: var(--text-secondary);
                         text-decoration: none;
-                        font-size: 0.9rem;
+                        font-size: 0.875rem;
                         font-weight: 500;
-                        transition: color 0.3s ease, text-shadow 0.3s ease;
+                        transition: color 0.2s ease;
                         position: relative;
                         padding-bottom: 4px;
                         white-space: nowrap;
@@ -805,24 +876,25 @@
                     .nav-m365-root::after {
                         content: '';
                         position: absolute;
-                        bottom: -2px;
-                        left: 50%;
-                        width: 0;
+                        inset-inline: 0;
+                        bottom: -1px;
+                        width: 100%;
                         height: 2px;
-                        background-color: var(--text-primary);
-                        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                        border-radius: 2px;
+                        background-color: var(--accent);
+                        transform: scaleX(0);
+                        transform-origin: center;
+                        transition: transform 0.2s ease;
+                        border-radius: 1px;
                     }
                     .nav-m365-root:hover {
-                        color: var(--text-primary);
+                        color: var(--aml-navy, #0A1830);
                     }
                     .nav-m365-root:hover::after,
                     .nav-m365-root.active::after {
-                        width: 100%;
-                        left: 0;
+                        transform: scaleX(1);
                     }
                     .nav-m365-root.active {
-                        color: var(--text-primary);
+                        color: var(--aml-navy, #0A1830);
                         font-weight: 600;
                     }
                     .nav-m365-caret {
@@ -834,7 +906,7 @@
                         padding: 0;
                         margin: 0 0 2px 0;
                         border: none;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         background: transparent;
                         color: var(--text-secondary);
                         cursor: pointer;
@@ -877,9 +949,9 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 8px;
+                        border-radius: var(--aml-radius-md, 8px);
                         padding: 0.4rem;
-                        box-shadow: var(--aml-shadow-lg);
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
                         opacity: 0;
                         visibility: hidden;
                         pointer-events: none;
@@ -901,7 +973,7 @@
                     .nav-m365-dropdown a {
                         display: block;
                         padding: 0.55rem 0.75rem;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         color: var(--text-secondary);
                         text-decoration: none;
                         font-size: 0.85rem;
@@ -917,7 +989,7 @@
                         font-weight: 700;
                         color: var(--text-primary);
                         border-bottom: 1px solid var(--border-color);
-                        border-radius: 6px 6px 0 0;
+                        border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
                         margin-bottom: 0.15rem;
                         padding-bottom: 0.65rem;
                     }
@@ -942,9 +1014,9 @@
                     .nav-av-root {
                         color: var(--text-secondary);
                         text-decoration: none;
-                        font-size: 0.9rem;
+                        font-size: 0.875rem;
                         font-weight: 500;
-                        transition: color 0.3s ease, text-shadow 0.3s ease;
+                        transition: color 0.2s ease;
                         position: relative;
                         padding-bottom: 4px;
                         white-space: nowrap;
@@ -953,22 +1025,24 @@
                     .nav-av-root::after {
                         content: '';
                         position: absolute;
-                        bottom: -2px;
-                        left: 50%;
-                        width: 0;
+                        inset-inline: 0;
+                        bottom: -1px;
+                        width: 100%;
                         height: 2px;
-                        background-color: var(--text-primary);
-                        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                        border-radius: 2px;
+                        background-color: var(--accent);
+                        transform: scaleX(0);
+                        transform-origin: center;
+                        transition: transform 0.2s ease;
+                        border-radius: 1px;
                     }
                     .nav-office-root:hover,
-                    .nav-av-root:hover { color: var(--text-primary); }
+                    .nav-av-root:hover { color: var(--aml-navy, #0A1830); }
                     .nav-office-root:hover::after,
                     .nav-av-root:hover::after,
                     .nav-office-root.active::after,
-                    .nav-av-root.active::after { width: 100%; left: 0; }
+                    .nav-av-root.active::after { transform: scaleX(1); }
                     .nav-office-root.active,
-                    .nav-av-root.active { color: var(--text-primary); font-weight: 600; }
+                    .nav-av-root.active { color: var(--aml-navy, #0A1830); font-weight: 600; }
                     .nav-office-caret,
                     .nav-av-caret {
                         display: inline-flex;
@@ -979,7 +1053,7 @@
                         padding: 0;
                         margin: 0 0 2px 0;
                         border: none;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         background: transparent;
                         color: var(--text-secondary);
                         cursor: pointer;
@@ -1029,9 +1103,9 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 8px;
+                        border-radius: var(--aml-radius-md, 8px);
                         padding: 0.4rem;
-                        box-shadow: var(--aml-shadow-lg);
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
                         opacity: 0;
                         visibility: hidden;
                         pointer-events: none;
@@ -1063,7 +1137,7 @@
                     .nav-av-dropdown a {
                         display: block;
                         padding: 0.55rem 0.75rem;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         color: var(--text-secondary);
                         text-decoration: none;
                         font-size: 0.85rem;
@@ -1081,7 +1155,7 @@
                         font-weight: 700;
                         color: var(--text-primary);
                         border-bottom: 1px solid var(--border-color);
-                        border-radius: 6px 6px 0 0;
+                        border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
                         margin-bottom: 0.15rem;
                         padding-bottom: 0.65rem;
                     }
@@ -1090,61 +1164,118 @@
                         background: color-mix(in srgb, var(--accent) 12%, transparent);
                     }
 
+                    .header-actions,
                     .right-section {
                         display: flex;
                         align-items: center;
-                        gap: clamp(0.75rem, 1.5vw, 1.5rem); /* Spazio fluido tra gli elementi di destra */
+                        gap: 1.0625rem;
+                        flex-shrink: 0;
+                        justify-self: end;
                     }
 
-                    .support-info {
-                        display: flex;
-                        align-items: center;
-                        gap: 0.75rem;
-                        text-decoration: none;
-                        border-radius: 6px;
+                    .support-wrap {
+                        position: relative;
+                        z-index: 2;
                     }
-                    .support-info:focus-visible {
+                    .support-trigger {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.4rem;
+                        min-height: 36px;
+                        padding: 0.5rem 0.65rem;
+                        border: 1px solid transparent;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        background: transparent;
+                        color: var(--text-primary);
+                        font-family: inherit;
+                        font-size: 0.875rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        pointer-events: auto;
+                        transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+                    }
+                    .support-trigger:hover,
+                    .support-wrap.open .support-trigger {
+                        color: var(--aml-navy, #0A1830);
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                        border-color: var(--border-color);
+                    }
+                    .support-trigger:focus-visible {
                         outline: 2px solid var(--accent);
-                        outline-offset: 3px;
+                        outline-offset: 2px;
                     }
-                    .support-icon {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 36px;
-                        height: 36px;
-                        border-radius: 50%;
-                        background: color-mix(in srgb, var(--accent) 6%, transparent);
-                        color: var(--text-secondary);
-                        transition: background 0.3s ease, color 0.3s ease;
+                    .support-trigger svg {
+                        width: 18px;
+                        height: 18px;
+                        fill: currentColor;
                         flex-shrink: 0;
                     }
-                    .support-info:hover .support-icon {
-                        background: color-mix(in srgb, var(--accent) 10%, transparent);
-                        color: var(--text-primary);
+                    .support-trigger__chevron {
+                        width: 14px;
+                        height: 14px;
+                        fill: currentColor;
+                        transition: transform 0.2s ease;
                     }
-                    .support-text {
-                        display: flex;
-                        flex-direction: column;
-                        white-space: nowrap; /* Impedisce al testo di andare a capo */
+                    .support-wrap.open .support-trigger__chevron {
+                        transform: rotate(180deg);
                     }
-                    .support-text small {
+                    .support-trigger__label {
+                        white-space: nowrap;
+                    }
+                    .support-panel {
+                        position: absolute;
+                        top: calc(100% + 0.5rem);
+                        right: 0;
+                        min-width: 240px;
+                        padding: 0.85rem 1rem;
+                        background: var(--bg-surface);
+                        border: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-md, 8px);
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+                        z-index: 80;
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-4px);
+                        transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+                    }
+                    .support-wrap.open .support-panel {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        transform: translateY(0);
+                    }
+                    .support-panel[hidden] {
+                        display: none !important;
+                    }
+                    .support-panel__heading {
+                        margin: 0 0 0.65rem;
                         font-size: 0.7rem;
+                        font-weight: 700;
+                        letter-spacing: 0.06em;
                         text-transform: uppercase;
-                        letter-spacing: 0.05em;
                         color: var(--text-muted);
-                        font-weight: 600;
                     }
-                    .support-text span {
+                    .support-panel__link {
+                        display: block;
+                        color: var(--aml-navy, #0A1830);
+                        text-decoration: none;
                         font-size: 0.9rem;
-                        color: var(--text-primary);
                         font-weight: 600;
+                        padding: 0.25rem 0;
+                        border-radius: 4px;
                     }
-
-                    .divider {
-                        width: 1px;
-                        height: 24px;
-                        background: linear-gradient(to bottom, transparent, var(--border-color), transparent);
+                    .support-panel__link:hover {
+                        color: var(--accent);
+                    }
+                    .support-panel__link:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                    }
+                    .support-panel__hours {
+                        margin: 0.55rem 0 0;
+                        font-size: 0.8rem;
+                        color: var(--text-secondary);
                     }
 
                     /* Ponte hover sotto i wrap: copre il gap trigger→pannello per tutti
@@ -1176,7 +1307,7 @@
                         cursor: pointer;
                         font-family: inherit;
                         padding: 0.5rem;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         transition: color 0.3s ease, background 0.3s ease, border 0.3s ease;
                     }
                     .lang-selector:hover, .lang-wrapper.open .lang-selector {
@@ -1216,10 +1347,10 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 8px;
+                        border-radius: var(--aml-radius-md, 8px);
                         padding: 0.5rem;
                         min-width: 140px;
-                        box-shadow: var(--aml-shadow-lg);
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
                         /* Stato chiuso: invisibile ma nel flusso — permette transizione in uscita */
                         opacity: 0;
                         visibility: hidden;
@@ -1246,7 +1377,7 @@
                         text-decoration: none;
                         font-size: 0.85rem;
                         font-weight: 500;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
                     }
                     .lang-option:hover {
@@ -1300,7 +1431,7 @@
                         position: absolute;
                         top: 0;
                         right: -2px;
-                        background: linear-gradient(135deg, #ef4444, #dc2626);
+                        background: var(--aml-danger, #B3261E);
                         color: white;
                         font-size: 0.65rem;
                         font-weight: 800;
@@ -1398,10 +1529,10 @@
 
                     .btn-signin {
                         background: var(--accent);
-                        color: #ffffff;
+                        color: var(--aml-surface, #FFFFFF);
                         border: none;
                         padding: 0.6rem 1.4rem;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         font-family: inherit;
                         font-size: 0.9rem;
                         font-weight: 700;
@@ -1430,10 +1561,14 @@
                         color: var(--text-primary);
                         cursor: pointer;
                         padding: 0.5rem;
-                        margin-left: -0.5rem; /* Compensa il padding per l'allineamento */
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         transition: opacity 0.2s;
-                        touch-action: manipulation; /* Ottimizzazione touch */
+                        touch-action: manipulation;
+                        width: 36px;
+                        height: 36px;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
                     }
                     .mobile-toggle:hover {
                         opacity: 0.7;
@@ -1443,8 +1578,8 @@
                         outline-offset: 3px;
                     }
                     .mobile-toggle svg {
-                        width: 28px;
-                        height: 28px;
+                        width: 22px;
+                        height: 22px;
                         fill: none;
                         stroke: currentColor;
                         stroke-width: 2;
@@ -1453,47 +1588,56 @@
 
                     /* --- RESPONSIVE DESIGN HEADER --- */
 
-                    /* GRACEFUL DEGRADATION 1: Tolgo la parola ASSISTENZA per far spazio */
-                    @media (max-width: 1280px) {
-                        .support-text small { display: none; }
-                        .support-info { gap: 0.5rem; }
+                    @media (min-width: 768px) and (max-width: 1120px) {
+                        .header-nav,
+                        .nav-links { gap: 1.125rem; }
+                        .header-actions,
+                        .right-section { gap: 0.75rem; }
+                        .support-trigger__label { display: none; }
+                        .header-container { gap: 20px; }
                     }
 
-                    /* GRACEFUL DEGRADATION 2: Nascondo anche il numero, lascio solo l'icona cuffia con Tooltip */
-                    @media (max-width: 1180px) {
-                        .support-text { display: none; }
-                    }
-
-                    /* Breakpoint 1: Tablet o schermi piccoli - Nasconde nav links e attiva menu mobile */
+                    /* Tablet: nav → drawer */
                     @media (max-width: 1100px) {
-                        .nav-links { display: none; }
-                        .mobile-toggle { display: block; }
-                        .left-section { gap: 1rem; }
-                    }
-
-                    /* Breakpoint 2: Tablet verticali - Nasconde assistenza del tutto per pulizia */
-                    @media (max-width: 900px) {
-                        .support-info { display: none; }
-                        .divider:first-of-type { display: none; }
-                    }
-
-                    /* Breakpoint 3: Smartphone - Ottimizzazione estrema spazi */
-                    @media (max-width: 640px) {
-                        .header-container { 
-                            padding: 0 clamp(1.25rem, 5vw, 2rem); 
-                            height: 72px; /* Barra mobile: spazio per marchio più leggibile */
+                        .header-container {
+                            display: flex;
+                            justify-content: space-between;
                             gap: 1rem;
+                            width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, 1.25rem))));
                         }
-                        .btn-signin { display: none; } /* Lo user troverà il login nel drawer */
-                        .divider { display: none; }
-                        .lang-selector span { display: none; } /* Solo icona lingua */
-                        .lang-selector { padding: 0.4rem; }
-                        .right-section { gap: 0.5rem; }
-                        .header-container .left-section .logo img { height: 44px; }
-                        .cart-wrapper { 
-                            width: 36px; 
-                            height: 36px; 
+                        .header-nav,
+                        .nav-links { display: none; }
+                        .mobile-toggle { display: inline-flex; }
+                        .header-brand { flex: 1 1 auto; min-width: 0; }
+                        .lang-wrapper { display: none; }
+                        .support-wrap { display: none; }
+                    }
+
+                    @media (max-width: 767px) {
+                        .header-utility { display: none !important; }
+                        .header-container {
+                            min-height: 64px;
+                            width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, 1rem))));
+                            gap: 0.5rem;
                         }
+                        :host(.is-compact) .header-container {
+                            min-height: 64px;
+                        }
+                        .logo img,
+                        :host(.is-compact) .logo img {
+                            height: 44px;
+                        }
+                        .header-actions,
+                        .right-section { gap: 0.35rem; }
+                        .cart-wrapper {
+                            width: 36px;
+                            height: 36px;
+                        }
+                        .search-panel { top: 72px; width: min(94vw, 640px); max-height: calc(100vh - 100px); }
+                    }
+
+                    @media (prefers-reduced-motion: reduce) {
+                        .logo img { transition: none; }
                     }
 
                     /* RICERCA PRODOTTI */
@@ -1503,7 +1647,7 @@
                         justify-content: center;
                         width: 36px;
                         height: 36px;
-                        border-radius: 8px;
+                        border-radius: var(--aml-radius-md, 8px);
                         border: none;
                         background: transparent;
                         color: var(--text-secondary);
@@ -1513,6 +1657,10 @@
                     }
                     .search-toggle:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--text-primary); }
                     .search-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+                    .search-toggle svg {
+                        width: 20px;
+                        height: 20px;
+                    }
 
                     .search-backdrop {
                         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -1529,7 +1677,7 @@
 
                     .search-panel {
                         position: fixed;
-                        top: 90px;
+                        top: 112px;
                         left: 50%;
                         transform: translate(-50%, -12px);
                         width: min(92vw, 640px);
@@ -1540,8 +1688,8 @@
                         backdrop-filter: blur(16px);
                         -webkit-backdrop-filter: blur(16px);
                         border: 1px solid var(--border-color);
-                        border-radius: 12px;
-                        box-shadow: var(--aml-shadow-lg);
+                        border-radius: var(--aml-radius-lg, 12px);
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
                         z-index: 2001;
                         opacity: 0;
                         visibility: hidden;
@@ -1550,6 +1698,10 @@
                                     transform 0.25s cubic-bezier(0.16,1,0.3,1),
                                     visibility 0.25s;
                         overflow: hidden;
+                    }
+                    :host(.is-compact) ~ .search-panel,
+                    :host(.is-compact) .search-panel {
+                        top: 72px;
                     }
                     .search-panel.open {
                         opacity: 1; visibility: visible; pointer-events: auto;
@@ -1582,7 +1734,7 @@
                         justify-content: center;
                         width: 28px;
                         height: 28px;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         border: none;
                         background: transparent;
                         color: var(--text-secondary);
@@ -1609,7 +1761,7 @@
                         align-items: center;
                         gap: 0.75rem;
                         padding: 0.5rem 0.6rem;
-                        border-radius: 8px;
+                        border-radius: var(--aml-radius-md, 8px);
                         color: var(--text-secondary);
                         text-decoration: none;
                         transition: background 0.2s ease, color 0.2s ease;
@@ -1623,7 +1775,7 @@
                     .search-result-thumb {
                         width: 40px;
                         height: 40px;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         object-fit: contain;
                         background: color-mix(in srgb, var(--accent) 6%, transparent);
                         flex-shrink: 0;
@@ -1830,7 +1982,7 @@
                     .drawer-lang-link {
                         display: flex; align-items: center; gap: 0.5rem;
                         padding: 0.5rem 0.65rem;
-                        border-radius: 6px;
+                        border-radius: var(--aml-radius-sm, 6px);
                         font-size: 0.8125rem; font-weight: 500;
                         color: var(--text-secondary);
                         text-decoration: none;
@@ -1859,81 +2011,27 @@
                         border-top: 1px solid var(--border-color);
                         flex-shrink: 0;
                     }
-                    .drawer-btn-signin {
-                        width: 100%;
-                        background: var(--accent);
-                        color: #fff;
-                        border: none;
-                        padding: 0.75rem 1rem;
-                        border-radius: 6px;
-                        font-weight: 700;
-                        font-size: 0.875rem;
-                        cursor: pointer;
-                        margin-bottom: 1.5rem;
-                        transition: opacity 0.2s ease, transform 0.2s ease;
-                    }
-                    @media (hover: hover) and (pointer: fine) {
-                        .drawer-btn-signin:hover {
-                            opacity: 0.92;
-                        }
-                    }
-                    .drawer-btn-signin:focus-visible {
-                        outline: 2px solid var(--accent);
-                        outline-offset: 3px;
-                    }
-                    .drawer-assist {
-                        display: flex;
-                        align-items: center;
-                        gap: 0.6rem;
-                        text-decoration: none;
-                        padding: 0.65rem 0.75rem;
-                        border-radius: 6px;
-                        background: color-mix(in srgb, var(--accent) 4%, transparent);
-                        border: 1px solid var(--border-color);
-                        transition: background 0.2s ease, border-color 0.2s ease;
-                    }
-                    @media (hover: hover) and (pointer: fine) {
-                        .drawer-assist:hover {
-                            background: color-mix(in srgb, var(--accent) 6%, transparent);
-                            border-color: var(--border-color);
-                        }
-                    }
-                    .drawer-assist:focus-visible {
-                        outline: 2px solid var(--accent);
-                        outline-offset: 3px;
-                    }
-                    .drawer-assist-icon {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 36px;
-                        height: 36px;
-                        border-radius: 6px;
-                        background: color-mix(in srgb, var(--accent) 6%, transparent);
-                        color: var(--text-secondary);
-                        flex-shrink: 0;
-                    }
-                    .drawer-assist-icon svg { width: 18px; height: 18px; fill: currentColor; }
-                    .drawer-assist-text {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 0.1rem;
-                        overflow: hidden;
-                    }
-                    .drawer-assist-label {
-                        font-size: 0.7rem;
-                        font-weight: 600;
-                        text-transform: uppercase;
-                        letter-spacing: 0.06em;
+                    .drawer-support-title {
+                        font-size: 0.65rem;
                         color: var(--text-muted);
+                        text-transform: uppercase;
+                        letter-spacing: 0.08em;
+                        font-weight: 700;
+                        margin: 0 0 0.55rem;
                     }
-                    .drawer-assist-number {
+                    .drawer-support-link {
+                        display: block;
+                        color: var(--aml-navy, #0A1830);
+                        text-decoration: none;
                         font-size: 0.9rem;
                         font-weight: 600;
-                        color: var(--text-primary);
-                        white-space: nowrap;
-                        text-overflow: ellipsis;
-                        overflow: hidden;
+                        padding: 0.3rem 0;
+                    }
+                    .drawer-support-link:hover { color: var(--accent); }
+                    .drawer-support-hours {
+                        margin: 0.5rem 0 0;
+                        font-size: 0.8rem;
+                        color: var(--text-secondary);
                     }
 
                     /* Sfondi ora opachi (bianco pieno): il blur dietro non serve più,
@@ -1992,16 +2090,21 @@
                     }
                 </style>
 
+                <div class="header-utility">
+                    <div class="header-utility__inner">
+                        <span>${esc(t.utilityClaim1)}</span>
+                        <span>${esc(t.utilityClaim2)}</span>
+                        <span>${esc(t.utilityClaim3)}</span>
+                    </div>
+                </div>
+
                 <div class="header-container">
-                    <div class="left-section">
-                        <button type="button" class="mobile-toggle" aria-label="${esc(t.openNavMenu)}">
-                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        </button>
+                    <div class="header-brand">
                         <a href="${esc(homeHref)}" class="logo">
                             <img src="${esc(logoSrc)}" width="280" height="56" alt="${esc(t.logoAlt)}">
                         </a>
-                        <nav class="nav-links">
-                            <a href="${esc(homeHref)}"${isHome ? ' class="active"' : ''}>${esc(t.navHome)}</a>
+                    </div>
+                    <nav class="header-nav nav-links" aria-label="Primary">
                             <div class="nav-win-wrap">
                                 <div class="nav-win-inner">
                                     <a href="${esc(hrefWinOverview)}" class="nav-win-root${isWinNavActive ? ' active' : ''}">${esc(t.navWindows)}</a>
@@ -2082,25 +2185,33 @@
                                     <a href="${esc(hrefStrumenti)}" role="menuitem"${isStrumentiOverview ? ' aria-current="page"' : ''}>${esc(t.navStrumenti)}</a>
                                 </div>
                             </div>
-                        </nav>
-                    </div>
+                    </nav>
                     
-                    <div class="right-section">
+                    <div class="header-actions right-section">
                         <button type="button" class="search-toggle" aria-label="${esc(t.searchToggleLabel)}" aria-haspopup="true" aria-expanded="false">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
                         </button>
 
-                        <a href="tel:+393925580413" class="support-info" title="${esc(t.assistanceSmall)}: +39 392 558 0413">
-                            <div class="support-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
+                        <div class="support-wrap">
+                            <button
+                                type="button"
+                                class="support-trigger"
+                                aria-expanded="false"
+                                aria-controls="header-support-panel"
+                                aria-haspopup="true"
+                                aria-label="${esc(t.supportLabel)}"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
+                                <span class="support-trigger__label">${esc(t.supportLabel)}</span>
+                                <svg class="support-trigger__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                            </button>
+                            <div id="header-support-panel" class="support-panel" hidden>
+                                <p class="support-panel__heading">${esc(t.supportHeading)}</p>
+                                <a class="support-panel__link" href="mailto:${esc(SUPPORT_EMAIL)}">${esc(t.supportEmailDisplay)}</a>
+                                <a class="support-panel__link" href="${esc(SUPPORT_WHATSAPP_URL)}" target="_blank" rel="noopener noreferrer">${esc(t.supportWhatsApp)}</a>
+                                <p class="support-panel__hours">${esc(t.supportHours)}</p>
                             </div>
-                            <div class="support-text">
-                                <small>${esc(t.assistanceSmall)}</small>
-                                <span>+39 392 558 0413</span>
-                            </div>
-                        </a>
-
-                        <div class="divider"></div>
+                        </div>
 
                         <div class="lang-wrapper">
                             <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.selectLanguage)}">
@@ -2117,13 +2228,14 @@
                             </div>
                         </div>
 
-                        <div class="divider"></div>
-
                         <a href="${esc(cartHref)}" class="cart-wrapper" aria-label="${esc(cartAriaForCount(0))}">
                             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                             <span class="cart-badge" aria-hidden="true">0</span>
                         </a>
 
+                        <button type="button" class="mobile-toggle" aria-label="${esc(t.openNavMenu)}">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
                     </div>
                 </div>
 
@@ -2151,7 +2263,6 @@
                     </div>
                     
                     <nav class="drawer-nav">
-                        <a href="${esc(homeHref)}"${isHome ? ' class="active"' : ''}>${esc(t.navHome)}</a>
                         <div class="drawer-win-block">
                             <div class="drawer-win-heading">${esc(t.navWindows)}</div>
                             <a href="${esc(hrefWinOverview)}"${isWinOverview ? ' class="active"' : ''}>${esc(t.navWindowsOverview)}</a>
@@ -2208,15 +2319,10 @@
                     </div>
                     
                     <div class="drawer-footer">
-                        <a href="tel:+393925580413" class="drawer-assist">
-                            <div class="drawer-assist-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
-                            </div>
-                            <div class="drawer-assist-text">
-                                <span class="drawer-assist-label">${esc(t.assistanceSmall)}</span>
-                                <span class="drawer-assist-number">+39 392 558 0413</span>
-                            </div>
-                        </a>
+                        <p class="drawer-support-title">${esc(t.supportSectionTitle)}</p>
+                        <a class="drawer-support-link" href="mailto:${esc(SUPPORT_EMAIL)}">${esc(t.supportEmailDisplay)}</a>
+                        <a class="drawer-support-link" href="${esc(SUPPORT_WHATSAPP_URL)}" target="_blank" rel="noopener noreferrer">${esc(t.supportWhatsApp)}</a>
+                        <p class="drawer-support-hours">${esc(t.supportHours)}</p>
                     </div>
                 </div>
             `;
@@ -2227,8 +2333,42 @@
             const drawer = this.shadowRoot.querySelector('.mobile-drawer');
             const langWrapper = this.shadowRoot.querySelector('.lang-wrapper');
             const langSelector = this.shadowRoot.querySelector('.lang-selector');
+            const supportWrap = this.shadowRoot.querySelector('.support-wrap');
+            const supportTrigger = this.shadowRoot.querySelector('.support-trigger');
+            const supportPanel = this.shadowRoot.querySelector('#header-support-panel');
+
+            const isSupportOpen = () => Boolean(supportWrap && supportWrap.classList.contains('open'));
+
+            const closeSupport = ({ restoreFocus = false } = {}) => {
+                if (!supportWrap || !supportTrigger || !supportPanel) return;
+                supportWrap.classList.remove('open');
+                supportPanel.hidden = true;
+                supportTrigger.setAttribute('aria-expanded', 'false');
+                if (restoreFocus) supportTrigger.focus();
+            };
+
+            const openSupport = () => {
+                if (!supportWrap || !supportTrigger || !supportPanel) return;
+                closeNavSubmenus();
+                if (langWrapper) {
+                    langWrapper.classList.remove('open');
+                    if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                }
+                closeSearch({ returnFocus: false });
+                closeMenu();
+                supportPanel.hidden = false;
+                supportWrap.classList.add('open');
+                supportTrigger.setAttribute('aria-expanded', 'true');
+            };
 
             const openMenu = () => {
+                closeSupport({ restoreFocus: false });
+                if (langWrapper) {
+                    langWrapper.classList.remove('open');
+                    if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                }
+                closeSearch({ returnFocus: false });
+                closeNavSubmenus();
                 if (drawer) drawer.classList.add('open');
                 if (overlay) overlay.classList.add('open');
             };
@@ -2341,6 +2481,7 @@
             const openSearch = () => {
                 if (!searchPanel || !searchBackdrop) return;
                 closeNavSubmenus();
+                closeSupport({ restoreFocus: false });
                 if (langWrapper) {
                     langWrapper.classList.remove('open');
                     if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
@@ -2365,6 +2506,15 @@
                     if (returnFocus) searchToggle.focus();
                 }
             };
+
+            if (supportTrigger) {
+                supportTrigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (isSupportOpen()) closeSupport({ restoreFocus: false });
+                    else openSupport();
+                });
+            }
 
             if (searchToggle) {
                 searchToggle.addEventListener('click', (e) => {
@@ -2410,6 +2560,8 @@
             const toggleLangMenu = (e) => {
                 if (e) e.stopPropagation();
                 closeNavSubmenus();
+                closeSupport({ restoreFocus: false });
+                closeSearch({ returnFocus: false });
                 if (!langWrapper || !langSelector) return;
                 const isOpen = langWrapper.classList.toggle('open');
                 langSelector.setAttribute('aria-expanded', isOpen);
@@ -2429,6 +2581,53 @@
                 });
             }
 
+            /* Compact header: isteresi scrollY > 16 / < 4 */
+            let compact = false;
+            let compactTicking = false;
+            const updateCompactState = () => {
+                const y = window.scrollY || window.pageYOffset || 0;
+                if (!compact && y > 16) {
+                    compact = true;
+                    this.classList.add('is-compact');
+                    closeSupport({ restoreFocus: false });
+                } else if (compact && y < 4) {
+                    compact = false;
+                    this.classList.remove('is-compact');
+                }
+                compactTicking = false;
+            };
+            const onCompactScroll = () => {
+                if (compactTicking) return;
+                compactTicking = true;
+                requestAnimationFrame(updateCompactState);
+            };
+            updateCompactState();
+            window.addEventListener('scroll', onCompactScroll, { passive: true });
+            this.__compactScrollHandler = onCompactScroll;
+
+            const publishHeaderOffset = () => {
+                const h = Math.ceil(this.getBoundingClientRect().height || this.offsetHeight || 64);
+                document.documentElement.style.setProperty('--aml-header-offset', h + 'px');
+            };
+            publishHeaderOffset();
+            if (typeof ResizeObserver !== 'undefined') {
+                this.__headerResizeObserver = new ResizeObserver((entries) => {
+                    const entry = entries && entries[0];
+                    let height = 0;
+                    if (entry && entry.borderBoxSize && entry.borderBoxSize[0]) {
+                        height = entry.borderBoxSize[0].blockSize;
+                    } else if (entry) {
+                        height = entry.contentRect.height;
+                    }
+                    const px = Math.ceil(height || this.getBoundingClientRect().height || 64);
+                    document.documentElement.style.setProperty('--aml-header-offset', px + 'px');
+                });
+                this.__headerResizeObserver.observe(this);
+            } else {
+                window.addEventListener('resize', publishHeaderOffset, { passive: true });
+                this.__headerResizeFallback = publishHeaderOffset;
+            }
+
             /* ── Windows dropdown ── */
             const winWrap = this.shadowRoot.querySelector('.nav-win-wrap');
             const winCaret = this.shadowRoot.querySelector('.nav-win-caret');
@@ -2445,6 +2644,7 @@
                         langWrapper.classList.remove('open');
                         if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
                     }
+                    closeSupport({ restoreFocus: false });
                     closeNavSubmenus();
                     const isOpen = winWrap.classList.toggle('open');
                     winCaret.setAttribute('aria-expanded', isOpen);
@@ -2470,6 +2670,7 @@
                         langWrapper.classList.remove('open');
                         if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
                     }
+                    closeSupport({ restoreFocus: false });
                     closeNavSubmenus();
                     const isOpen = officeWrap.classList.toggle('open');
                     officeCaret.setAttribute('aria-expanded', isOpen);
@@ -2495,6 +2696,7 @@
                         langWrapper.classList.remove('open');
                         if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
                     }
+                    closeSupport({ restoreFocus: false });
                     closeNavSubmenus();
                     const isOpen = avWrap.classList.toggle('open');
                     avCaret.setAttribute('aria-expanded', isOpen);
@@ -2520,6 +2722,7 @@
                         langWrapper.classList.remove('open');
                         if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
                     }
+                    closeSupport({ restoreFocus: false });
                     closeNavSubmenus();
                     const isOpen = m365Wrap.classList.toggle('open');
                     m365Caret.setAttribute('aria-expanded', isOpen);
@@ -2543,6 +2746,7 @@
                 hoverMenus.forEach(([wrap, caret]) => {
                     wrap.addEventListener('mouseenter', () => {
                         clearTimeout(hoverCloseTimer);
+                        closeSupport({ restoreFocus: false });
                         hoverMenus.forEach(([w2, c2]) => {
                             if (w2 !== wrap && w2.classList.contains('open')) {
                                 w2.classList.remove('open');
@@ -2564,6 +2768,11 @@
 
             this.__docClickHandler = (e) => {
                 const path = typeof e.composedPath === 'function' ? e.composedPath() : [];
+                if (isSupportOpen()
+                    && supportWrap
+                    && !path.includes(supportWrap)) {
+                    closeSupport({ restoreFocus: false });
+                }
                 if (searchPanel && searchToggle && isSearchOpen()
                     && !path.includes(searchPanel) && !path.includes(searchToggle)) {
                     closeSearch({ returnFocus: false });
@@ -2592,6 +2801,10 @@
                     closeSearch();
                     return;
                 }
+                if (isSupportOpen()) {
+                    closeSupport({ restoreFocus: true });
+                    return;
+                }
                 if (langWrapper?.classList.contains('open')) {
                     langWrapper.classList.remove('open');
                     if (langSelector) {
@@ -2615,12 +2828,13 @@
                         return;
                     }
                 }
+                if (drawer?.classList.contains('open')) {
+                    closeMenu();
+                }
             };
             document.addEventListener('click', this.__docClickHandler);
             document.addEventListener('keydown', this.__docKeydownHandler);
 
-            // TODO: collegare btn-signin e drawer-btn-signin al sistema di autenticazione
-            //       (es. Stripe Identity, custom auth) — al momento visivi/placeholder.
             const cartLink = this.shadowRoot.querySelector('a.cart-wrapper');
             const cartBadge = this.shadowRoot.querySelector('.cart-badge');
             let prevCartQty = null;
@@ -2675,6 +2889,18 @@
             if (typeof this.__syncCartChrome === 'function') {
                 document.removeEventListener('aml-cart-changed', this.__syncCartChrome);
                 this.__syncCartChrome = null;
+            }
+            if (typeof this.__compactScrollHandler === 'function') {
+                window.removeEventListener('scroll', this.__compactScrollHandler);
+                this.__compactScrollHandler = null;
+            }
+            if (this.__headerResizeObserver) {
+                this.__headerResizeObserver.disconnect();
+                this.__headerResizeObserver = null;
+            }
+            if (typeof this.__headerResizeFallback === 'function') {
+                window.removeEventListener('resize', this.__headerResizeFallback);
+                this.__headerResizeFallback = null;
             }
         }
     }

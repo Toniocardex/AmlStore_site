@@ -6,7 +6,7 @@
     'use strict';
 
     var HEADER_MIN = 56;
-    var HEADER_MAX = 120;
+    var HEADER_MAX = 140;
     var RESIZE_DEBOUNCE_MS = 100;
     var MOBILE_MEDIA_QUERY = '(max-width: 768px)';
     var obs = null;
@@ -35,10 +35,10 @@
 
     function headerInsetPx() {
         var el = headerElement();
-        var h = 88;
+        var h = 64;
         if (el) {
             var rect = el.getBoundingClientRect();
-            h = Math.round(rect.height || el.offsetHeight || 88);
+            h = Math.ceil(rect.height || el.offsetHeight || 64);
         }
         h = Math.min(HEADER_MAX, Math.max(HEADER_MIN, h));
         return Math.round(h + readSafeAreaTop());
