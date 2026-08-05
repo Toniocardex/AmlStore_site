@@ -13,7 +13,7 @@ HEROES = {
         "sub": "Consulenza, acquisto e attivazione con fatturazione italiana e assistenza dedicata — senza complessità inutili.",
         "cta1_href": "consulenza",
         "cta1": "Richiedi una consulenza",
-        "cta2": "Esplora il catalogo",
+        "cta2": "Esplora le soluzioni",
         "products_aria": "Esempi di prodotti business",
         "p1_alt": "Microsoft 365 Business Standard",
         "p2_alt": "Office 2024 Home & Business",
@@ -24,7 +24,7 @@ HEROES = {
         "sub": "Advisory, purchase and activation with Italian invoicing and dedicated support — without unnecessary complexity.",
         "cta1_href": "consultation",
         "cta1": "Request a consultation",
-        "cta2": "Browse the catalogue",
+        "cta2": "Explore solutions",
         "products_aria": "Business product examples",
         "p1_alt": "Microsoft 365 Business Standard",
         "p2_alt": "Office 2024 Home & Business",
@@ -35,7 +35,7 @@ HEROES = {
         "sub": "Conseil, achat et activation avec facturation et accompagnement dédié — sans complexité inutile.",
         "cta1_href": "consultation",
         "cta1": "Demander une consultation",
-        "cta2": "Explorer le catalogue",
+        "cta2": "Découvrir les solutions",
         "products_aria": "Exemples de produits professionnels",
         "p1_alt": "Microsoft 365 Business Standard",
         "p2_alt": "Office 2024 Home & Business",
@@ -46,7 +46,7 @@ HEROES = {
         "sub": "Beratung, Kauf und Aktivierung mit Rechnung und persönlicher Betreuung — ohne unnötige Komplexität.",
         "cta1_href": "beratung",
         "cta1": "Beratung anfragen",
-        "cta2": "Katalog entdecken",
+        "cta2": "Lösungen entdecken",
         "products_aria": "Beispiele für Business-Produkte",
         "p1_alt": "Microsoft 365 Business Standard",
         "p2_alt": "Office 2024 Home & Business",
@@ -57,7 +57,7 @@ HEROES = {
         "sub": "Asesoramiento, compra y activación con facturación y asistencia dedicada — sin complejidad innecesaria.",
         "cta1_href": "consultoria",
         "cta1": "Solicitar asesoramiento",
-        "cta2": "Explorar el catálogo",
+        "cta2": "Explorar las soluciones",
         "products_aria": "Ejemplos de productos business",
         "p1_alt": "Microsoft 365 Business Standard",
         "p2_alt": "Office 2024 Home & Business",
@@ -74,7 +74,7 @@ def hero_html(t: dict[str, str]) -> str:
                     <p class="home-hero-subtitle">{t['sub']}</p>
                     <div class="home-hero-actions">
                         <a class="home-btn home-btn-primary" href="{t['cta1_href']}">{t['cta1']}</a>
-                        <a class="home-btn home-btn-ghost" href="#catalogo">{t['cta2']}</a>
+                        <a class="home-btn home-btn-ghost" href="#soluzioni">{t['cta2']}</a>
                     </div>
                 </div>
                 <div class="home-hero-products" role="group" aria-label="{t['products_aria']}">

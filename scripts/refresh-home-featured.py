@@ -17,7 +17,7 @@ HOME_COPY = {
     "it": {
         "catalog_title": "I più venduti",
         "catalog_lede": "Le licenze più richieste, con prezzi chiari e consegna digitale immediata.",
-        "hero_catalog_cta": "Vedi i più venduti",
+        "hero_catalog_cta": "Esplora le soluzioni",
         "payments_title": "Pagamenti sicuri",
         "social_hidden": "Recensioni dei clienti",
         "social_fallback": (
@@ -30,7 +30,7 @@ HOME_COPY = {
     "en": {
         "catalog_title": "Best sellers",
         "catalog_lede": "Our most popular licences with clear pricing and instant digital delivery.",
-        "hero_catalog_cta": "See best sellers",
+        "hero_catalog_cta": "Explore solutions",
         "payments_title": "Secure payments",
         "social_hidden": "Customer reviews",
         "social_fallback": (
@@ -43,7 +43,7 @@ HOME_COPY = {
     "fr": {
         "catalog_title": "Les plus vendus",
         "catalog_lede": "Les licences les plus demandées, prix clairs et livraison numérique immédiate.",
-        "hero_catalog_cta": "Voir les plus vendus",
+        "hero_catalog_cta": "Découvrir les solutions",
         "payments_title": "Paiements sécurisés",
         "social_hidden": "Avis clients",
         "social_fallback": (
@@ -56,7 +56,7 @@ HOME_COPY = {
     "de": {
         "catalog_title": "Bestseller",
         "catalog_lede": "Beliebteste Lizenzen mit klaren Preisen und sofortiger digitaler Lieferung.",
-        "hero_catalog_cta": "Bestseller ansehen",
+        "hero_catalog_cta": "Lösungen entdecken",
         "payments_title": "Sichere Zahlungen",
         "social_hidden": "Kundenbewertungen",
         "social_fallback": (
@@ -69,7 +69,7 @@ HOME_COPY = {
     "es": {
         "catalog_title": "Los más vendidos",
         "catalog_lede": "Licencias más solicitadas, precios claros y entrega digital inmediata.",
-        "hero_catalog_cta": "Ver los más vendidos",
+        "hero_catalog_cta": "Explorar las soluciones",
         "payments_title": "Pagos seguros",
         "social_hidden": "Opiniones de clientes",
         "social_fallback": (
@@ -199,12 +199,12 @@ HOME_TRUST_RE = re.compile(
 )
 
 CATALOG_SECTION_RE = re.compile(
-    r"<section id=\"catalogo\"[^>]*>.*?</section>",
+    r"<section id=\"piu-venduti\"[^>]*>.*?</section>",
     re.DOTALL,
 )
 
 HERO_CATALOG_CTA_RE = re.compile(
-    r'(<a class="home-btn home-btn-primary" href="#catalogo">)[^<]+(</a>)',
+    r'(<a class="home-btn home-btn-primary" href="#soluzioni">)[^<]+(</a>)',
 )
 
 PAYMENTS_STRIP_RE = re.compile(
@@ -283,7 +283,7 @@ def patch_index(lang):
 
     if not CATALOG_SECTION_RE.search(text):
         raise RuntimeError(f"catalog section not found in {path}")
-    catalog_section = f"""<section id="catalogo" class="home-catalog" aria-labelledby="catalog-title">
+    catalog_section = f"""<section id="piu-venduti" class="home-catalog" aria-labelledby="catalog-title">
             <h2 id="catalog-title" class="home-section-title">{copy['catalog_title']}</h2>
             <div class="home-catalog-intro">
                 <p class="home-catalog-lede">{copy['catalog_lede']}</p>
