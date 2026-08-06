@@ -283,6 +283,36 @@
 
 .pdp-price-note strong { color: var(--page-text); font-weight: 700; }
 
+/* Regione attivazione / meta prodotto — token --aml-* (design system page.css) */
+.pdp-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 14px;
+    width: 100%;
+}
+
+.pdp-meta-chip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35em 0.5em;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 11px;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-trust-bg);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--aml-ink);
+}
+
+.pdp-meta-chip strong {
+    font-weight: 700;
+    color: var(--aml-ink);
+}
+
 .pdp-btn-primary {
     display: inline-flex;
     align-items: center;
@@ -309,6 +339,17 @@
 
 .pdp-btn-primary.is-added {
     background: var(--pdp-ok);
+}
+
+/* Trust sintetico sotto CTA — non pill cluster */
+.pdp-trust-line {
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.45;
+    text-align: center;
+    color: var(--aml-ink-2);
 }
 
 .pdp-delivery {

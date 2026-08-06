@@ -190,6 +190,14 @@ body.pf-page .pdp-price-badge { display: none; }
 body.pf-page .pdp-price-note { color: var(--pf-ink-2); }
 body.pf-page .pdp-price-note strong { color: var(--pf-ink); }
 
+body.pf-page .pdp-meta-chip {
+    border-color: var(--pf-line);
+    background: var(--pf-trust-bg);
+    color: var(--pf-ink);
+}
+body.pf-page .pdp-meta-chip strong { color: var(--pf-ink); }
+body.pf-page .pdp-trust-line { color: var(--pf-ink-2); }
+
 body.pf-page .pdp-btn-primary {
     background: var(--pf-brand);
     border-radius: 6px;
