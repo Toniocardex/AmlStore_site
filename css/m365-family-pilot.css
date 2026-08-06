@@ -341,8 +341,8 @@ body.pf-page .pdp-note svg { color: var(--pf-brand); }
 body.pf-page .pdp-reviews {
     background: var(--pf-surface);
     border-color: var(--pf-line);
-    text-align: left;
-    justify-items: start;
+    text-align: center;
+    justify-items: center;
     /* .product-trustpilot (regola condivisa) azzera padding-top per il vecchio
        layout senza bordo/sfondo: qui la card è visibile, serve il respiro. */
     padding-top: 26px;
