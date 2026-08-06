@@ -38,7 +38,7 @@
         /* ignore */
     }
 
-    var GTAG_ID = 'G-558Y1HHQ4L';
+    var GTAG_ID = 'G-BBEBFJ5H18';
     var tagScript = w.document.createElement('script');
     tagScript.async = true;
     tagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GTAG_ID;
