@@ -299,7 +299,9 @@
     }
 
     function selectedIds() {
-        return Array.prototype.slice.call(state.selected);
+        var out = [];
+        state.selected.forEach(function (id) { out.push(id); });
+        return out;
     }
 
     /* ─── Paginazione ──────────────────────────────────────────────────────── */
