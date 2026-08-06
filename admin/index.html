@@ -83,6 +83,22 @@
             </div>
         </div>
 
+        <!-- Barra azioni bulk (visibile con selezione) -->
+        <div class="adm-bulk-bar" id="adm-bulk-bar" hidden>
+            <span class="adm-bulk-bar__count" id="adm-bulk-count">0 selezionati</span>
+            <div class="adm-bulk-bar__actions">
+                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btn-bulk-archive">
+                    Archivia selezionati
+                </button>
+                <button type="button" class="adm-btn adm-btn--danger adm-btn--sm" id="btn-bulk-delete" hidden>
+                    Elimina selezionati
+                </button>
+                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btn-bulk-clear">
+                    Deseleziona
+                </button>
+            </div>
+        </div>
+
         <!-- Loading -->
         <div class="adm-loading" id="adm-loading" aria-live="polite">
             <div class="adm-spinner"></div>
@@ -109,6 +125,10 @@
             <table class="adm-table" id="adm-table">
                 <thead>
                     <tr>
+                        <th class="adm-th--check" scope="col">
+                            <input type="checkbox" id="orders-select-all" class="adm-checkbox"
+                                   aria-label="Seleziona tutti gli ordini in questa pagina">
+                        </th>
                         <th>Ordine</th>
                         <th>Cliente</th>
                         <th>Articoli</th>
@@ -217,7 +237,7 @@
         <div class="adm-modal__body">
             <p id="delete-msg"></p>
             <div class="adm-delete-confirm-box">
-                <label class="adm-label" for="delete-confirm-input">
+                <label class="adm-label" for="delete-confirm-input" id="delete-confirm-label">
                     Digita l'ID ordine per confermare:
                 </label>
                 <input id="delete-confirm-input" type="text" class="adm-input adm-input--danger"

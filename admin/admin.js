@@ -24,6 +24,7 @@
         capabilities:    { deleteOrders: false },
         view:            'orders',
         stockLoading:    false,
+        selected:        new Set(),
     };
 
     /* ─── Utility DOM ──────────────────────────────────────────────────────── */
@@ -115,6 +116,7 @@
     function loadOrders() {
         if (state.loading) return;
         state.loading = true;
+        clearSelection();
 
         show('adm-loading');
         hide('adm-error');
@@ -183,6 +185,7 @@
         if (!orders.length) {
             show('adm-empty');
             text('adm-count', '0 ordini');
+            updateBulkBar();
             return;
         }
 
@@ -195,9 +198,15 @@
             }).join('');
 
             var archived = o.archivedAt ? ' adm-row--archived' : '';
+            var checked  = state.selected.has(o.orderId) ? ' checked' : '';
 
             var cust = o.customer || {};
             return '<tr class="adm-order-row' + archived + '" data-id="' + esc(o.orderId) + '">'
+                + '<td class="adm-td--check" data-label="Seleziona">'
+                    + '<input type="checkbox" class="adm-checkbox adm-row-check" data-id="'
+                    + esc(o.orderId) + '"' + checked
+                    + ' aria-label="Seleziona ordine ' + esc(o.orderId) + '">'
+                + '</td>'
                 + '<td class="adm-td--nowrap" data-label="Ordine"><span class="adm-order-id">' + esc(o.orderId) + '</span>' + (o.requiresShipping ? ' <span title="Contiene articoli fisici da spedire">📦</span>' : '') + '</td>'
                 + '<td data-label="Cliente">'
                     + '<div class="adm-customer-name">' + esc((cust.firstName || '') + ' ' + (cust.lastName || '')) + '</div>'
@@ -220,7 +229,8 @@
         // Click su riga o pulsante dettaglio
         $('adm-tbody').querySelectorAll('.adm-order-row').forEach(function (row) {
             row.addEventListener('click', function (e) {
-                if (e.target.closest('.adm-td--actions')) return; // gestito da btn-detail
+                if (e.target.closest('.adm-td--actions')) return;
+                if (e.target.closest('.adm-td--check')) return;
                 openDetail(row.dataset.id);
             });
         });
@@ -230,6 +240,66 @@
                 openDetail(btn.dataset.id);
             });
         });
+        $('adm-tbody').querySelectorAll('.adm-row-check').forEach(function (cb) {
+            cb.addEventListener('click', function (e) { e.stopPropagation(); });
+            cb.addEventListener('change', function () {
+                var id = cb.dataset.id;
+                if (cb.checked) state.selected.add(id);
+                else state.selected.delete(id);
+                syncSelectAll();
+                updateBulkBar();
+            });
+        });
+
+        syncSelectAll();
+        updateBulkBar();
+    }
+
+    /* ─── Selezione multipla ───────────────────────────────────────────────── */
+
+    function clearSelection() {
+        state.selected.clear();
+        var selectAll = $('orders-select-all');
+        if (selectAll) {
+            selectAll.checked = false;
+            selectAll.indeterminate = false;
+        }
+        updateBulkBar();
+    }
+
+    function syncSelectAll() {
+        var selectAll = $('orders-select-all');
+        if (!selectAll) return;
+        var boxes = $('adm-tbody')
+            ? Array.prototype.slice.call($('adm-tbody').querySelectorAll('.adm-row-check'))
+            : [];
+        if (!boxes.length) {
+            selectAll.checked = false;
+            selectAll.indeterminate = false;
+            return;
+        }
+        var nChecked = boxes.filter(function (b) { return b.checked; }).length;
+        selectAll.checked = nChecked === boxes.length;
+        selectAll.indeterminate = nChecked > 0 && nChecked < boxes.length;
+    }
+
+    function updateBulkBar() {
+        var bar = $('adm-bulk-bar');
+        if (!bar) return;
+        var n = state.selected.size;
+        if (n === 0) {
+            bar.hidden = true;
+            return;
+        }
+        bar.hidden = false;
+        var countEl = $('adm-bulk-count');
+        if (countEl) countEl.textContent = n + (n === 1 ? ' selezionato' : ' selezionati');
+        var btnDel = $('btn-bulk-delete');
+        if (btnDel) btnDel.hidden = !state.capabilities.deleteOrders;
+    }
+
+    function selectedIds() {
+        return Array.prototype.slice.call(state.selected);
     }
 
     /* ─── Paginazione ──────────────────────────────────────────────────────── */
@@ -567,12 +637,52 @@
             .catch(function (e) { toast('Errore ripristino: ' + e.message, 'error'); });
     }
 
+    function doBulkArchive(ids) {
+        closeConfirm();
+        var ok = 0;
+        var fail = 0;
+        var i = 0;
+
+        function next() {
+            if (i >= ids.length) {
+                toast(
+                    'Archiviati ' + ok + '/' + ids.length
+                        + (fail ? ', errori ' + fail : ''),
+                    fail ? 'error' : 'info'
+                );
+                loadOrders();
+                return;
+            }
+            var id = ids[i++];
+            apiPost('/api/admin/orders/' + encodeURIComponent(id) + '/archive')
+                .then(function () { ok++; next(); })
+                .catch(function () { fail++; next(); });
+        }
+        next();
+    }
+
     /* ─── Dialog eliminazione definitiva ──────────────────────────────────── */
 
     var _deleteOrderId = null;
+    var _deleteMode    = 'single'; // 'single' | 'bulk'
+    var _deleteIds     = [];
+    var BULK_DELETE_TOKEN = 'ELIMINA';
+
+    function deleteConfirmExpected() {
+        return _deleteMode === 'bulk' ? BULK_DELETE_TOKEN : _deleteOrderId;
+    }
+
+    function syncDeleteOkEnabled() {
+        var deleteInput = $('delete-confirm-input');
+        var deleteOk    = $('delete-ok');
+        if (!deleteInput || !deleteOk) return;
+        deleteOk.disabled = (deleteInput.value.trim() !== deleteConfirmExpected());
+    }
 
     function openDeleteConfirm(orderId) {
+        _deleteMode    = 'single';
         _deleteOrderId = orderId;
+        _deleteIds     = [];
         $('delete-msg').innerHTML =
             'Stai per <strong>eliminare definitivamente</strong> l\'ordine ' +
             '<code style="color:#ef4444">' + esc(orderId) + '</code>.<br><br>' +
@@ -580,8 +690,40 @@
             '(es. spam) oppure su ordini già <strong>archiviati</strong>. ' +
             'Questa operazione è <strong>irreversibile</strong>: tutti i dati ' +
             '(cliente, articoli, riferimenti PSP) saranno cancellati dal database.';
-        $('delete-confirm-input').value = '';
+        var label = $('delete-confirm-label');
+        if (label) label.textContent = 'Digita l\'ID ordine per confermare:';
+        var input = $('delete-confirm-input');
+        if (input) {
+            input.value = '';
+            input.placeholder = 'AML-XXXXXXXX';
+        }
         $('delete-ok').disabled = true;
+        $('delete-ok').textContent = 'Elimina definitivamente';
+        show('adm-delete-backdrop');
+        $('adm-delete-backdrop').removeAttribute('aria-hidden');
+        setTimeout(function () { $('delete-confirm-input').focus(); }, 50);
+    }
+
+    function openBulkDeleteConfirm(ids) {
+        _deleteMode    = 'bulk';
+        _deleteOrderId = null;
+        _deleteIds     = ids.slice();
+        $('delete-msg').innerHTML =
+            'Stai per <strong>eliminare definitivamente</strong> ' +
+            '<strong style="color:#ef4444">' + ids.length + ' ordini</strong> selezionati.<br><br>' +
+            'Consentito su ordini <strong>in attesa</strong> / <strong>annullati</strong> ' +
+            '(es. spam) oppure già <strong>archiviati</strong>. ' +
+            'Gli ordini non eliminabili verranno saltati. ' +
+            'Operazione <strong>irreversibile</strong>.';
+        var label = $('delete-confirm-label');
+        if (label) label.textContent = 'Digita ELIMINA per confermare:';
+        var input = $('delete-confirm-input');
+        if (input) {
+            input.value = '';
+            input.placeholder = 'ELIMINA';
+        }
+        $('delete-ok').disabled = true;
+        $('delete-ok').textContent = 'Elimina definitivamente';
         show('adm-delete-backdrop');
         $('adm-delete-backdrop').removeAttribute('aria-hidden');
         setTimeout(function () { $('delete-confirm-input').focus(); }, 50);
@@ -591,13 +733,21 @@
         hide('adm-delete-backdrop');
         $('adm-delete-backdrop').setAttribute('aria-hidden', 'true');
         _deleteOrderId = null;
+        _deleteMode    = 'single';
+        _deleteIds     = [];
     }
 
-    function doDelete(orderId) {
-        var btn = $('delete-ok');
-        if (btn) { btn.disabled = true; btn.textContent = 'Eliminazione…'; }
+    function deleteReasonMessage(reason, fallback) {
+        return {
+            delete_disabled: 'Eliminazione disattivata da configurazione (ADMIN_ALLOW_DELETE_ORDERS).',
+            not_archived:    'Per ordini pagati: prima archivia, poi elimina.',
+            not_deletable:   'Eliminabile solo se in attesa/annullato, oppure dopo archivio.',
+            order_not_found: 'Ordine non trovato.',
+        }[reason] || fallback;
+    }
 
-        fetch('/api/admin/orders/' + encodeURIComponent(orderId), {
+    function apiDeleteOrder(orderId) {
+        return fetch('/api/admin/orders/' + encodeURIComponent(orderId), {
             method:      'DELETE',
             credentials: 'same-origin',
             headers:     authHeaders(),
@@ -609,7 +759,14 @@
                 });
                 return data;
             });
-        }).then(function () {
+        });
+    }
+
+    function doDelete(orderId) {
+        var btn = $('delete-ok');
+        if (btn) { btn.disabled = true; btn.textContent = 'Eliminazione…'; }
+
+        apiDeleteOrder(orderId).then(function () {
             closeDeleteConfirm();
             closeDetail();
             toast('Ordine ' + orderId + ' eliminato definitivamente', 'error');
@@ -617,14 +774,35 @@
         }).catch(function (e) {
             if (btn) { btn.disabled = false; btn.textContent = 'Elimina definitivamente'; }
             var reason = e.data && e.data.reason;
-            var msg = {
-                delete_disabled: 'Eliminazione disattivata da configurazione (ADMIN_ALLOW_DELETE_ORDERS).',
-                not_archived:    'Per ordini pagati: prima archivia, poi elimina.',
-                not_deletable:   'Eliminabile solo se in attesa/annullato, oppure dopo archivio.',
-                order_not_found: 'Ordine non trovato.',
-            }[reason] || e.message;
-            toast('Errore eliminazione: ' + msg, 'error');
+            toast('Errore eliminazione: ' + deleteReasonMessage(reason, e.message), 'error');
         });
+    }
+
+    function doBulkDelete(ids) {
+        var btn = $('delete-ok');
+        if (btn) { btn.disabled = true; btn.textContent = 'Eliminazione…'; }
+
+        var ok = 0;
+        var skip = 0;
+        var i = 0;
+
+        function next() {
+            if (i >= ids.length) {
+                closeDeleteConfirm();
+                toast(
+                    'Eliminati ' + ok + '/' + ids.length
+                        + (skip ? ', saltati ' + skip : ''),
+                    ok ? 'error' : 'info'
+                );
+                loadOrders();
+                return;
+            }
+            var id = ids[i++];
+            apiDeleteOrder(id)
+                .then(function () { ok++; next(); })
+                .catch(function () { skip++; next(); });
+        }
+        next();
     }
 
     /* ─── Event listeners globali ──────────────────────────────────────────── */
@@ -712,20 +890,76 @@
         var deleteBack   = $('adm-delete-backdrop');
 
         if (deleteInput) {
-            deleteInput.addEventListener('input', function () {
-                deleteOk.disabled = (deleteInput.value.trim() !== _deleteOrderId);
-            });
+            deleteInput.addEventListener('input', syncDeleteOkEnabled);
             deleteInput.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' && !deleteOk.disabled) doDelete(_deleteOrderId);
+                if (e.key !== 'Enter' || deleteOk.disabled) return;
+                if (_deleteMode === 'bulk') doBulkDelete(_deleteIds.slice());
+                else if (_deleteOrderId) doDelete(_deleteOrderId);
             });
         }
-        if (deleteOk)     deleteOk.addEventListener('click', function () {
-            if (_deleteOrderId) doDelete(_deleteOrderId);
+        if (deleteOk) deleteOk.addEventListener('click', function () {
+            if (_deleteMode === 'bulk') doBulkDelete(_deleteIds.slice());
+            else if (_deleteOrderId) doDelete(_deleteOrderId);
         });
         if (deleteCancel) deleteCancel.addEventListener('click', closeDeleteConfirm);
         if (deleteBack)   deleteBack.addEventListener('click', function (e) {
             if (e.target === deleteBack) closeDeleteConfirm();
         });
+
+        // Selezione multipla
+        var selectAll = $('orders-select-all');
+        if (selectAll) {
+            selectAll.addEventListener('change', function () {
+                var boxes = $('adm-tbody')
+                    ? Array.prototype.slice.call($('adm-tbody').querySelectorAll('.adm-row-check'))
+                    : [];
+                boxes.forEach(function (cb) {
+                    cb.checked = selectAll.checked;
+                    if (selectAll.checked) state.selected.add(cb.dataset.id);
+                    else state.selected.delete(cb.dataset.id);
+                });
+                selectAll.indeterminate = false;
+                updateBulkBar();
+            });
+        }
+
+        var btnBulkArchive = $('btn-bulk-archive');
+        if (btnBulkArchive) {
+            btnBulkArchive.addEventListener('click', function () {
+                var ids = selectedIds();
+                if (!ids.length) return;
+                openConfirm(
+                    'Archivia ' + ids.length + ' ordini?',
+                    'Gli ordini selezionati saranno nascosti dalla lista principale ma non eliminati.',
+                    false,
+                    function () { doBulkArchive(ids); }
+                );
+            });
+        }
+
+        var btnBulkDelete = $('btn-bulk-delete');
+        if (btnBulkDelete) {
+            btnBulkDelete.addEventListener('click', function () {
+                var ids = selectedIds();
+                if (!ids.length) return;
+                if (!state.capabilities.deleteOrders) {
+                    toast('Eliminazione disattivata da configurazione.', 'error');
+                    return;
+                }
+                openBulkDeleteConfirm(ids);
+            });
+        }
+
+        var btnBulkClear = $('btn-bulk-clear');
+        if (btnBulkClear) {
+            btnBulkClear.addEventListener('click', function () {
+                clearSelection();
+                var boxes = $('adm-tbody')
+                    ? Array.prototype.slice.call($('adm-tbody').querySelectorAll('.adm-row-check'))
+                    : [];
+                boxes.forEach(function (cb) { cb.checked = false; });
+            });
+        }
 
         // ESC per chiudere modal
         document.addEventListener('keydown', function (e) {

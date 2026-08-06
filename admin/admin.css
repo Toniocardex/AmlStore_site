@@ -318,6 +318,38 @@ select.adm-input {
     padding: .15rem .65rem;
 }
 
+/* ─── Bulk selection bar ─────────────────────────────────────────────────── */
+
+.adm-bulk-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .65rem;
+    margin-top: -.15rem;
+    padding: .65rem .85rem;
+    border-radius: var(--adm-radius);
+    border: 1px solid color-mix(in srgb, var(--adm-accent) 35%, var(--adm-border));
+    background: color-mix(in srgb, var(--adm-accent) 12%, var(--adm-card));
+}
+
+.adm-bulk-bar[hidden] {
+    display: none !important;
+}
+
+.adm-bulk-bar__count {
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--adm-text);
+}
+
+.adm-bulk-bar__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem;
+}
+
 /* ─── Pagination ─────────────────────────────────────────────────────────── */
 
 .adm-pagination {
@@ -378,6 +410,13 @@ select.adm-input {
 }
 .adm-th--right  { text-align: right; }
 .adm-th--center { text-align: center; }
+.adm-th--check {
+    width: 2.5rem;
+    padding-left: .75rem !important;
+    padding-right: .35rem !important;
+    text-align: center;
+    vertical-align: middle;
+}
 
 .adm-table tbody tr {
     border-bottom: 1px solid rgba(42,46,69,.6);
@@ -392,6 +431,18 @@ select.adm-input {
 
 .adm-table td {
     padding: .75rem 1rem;
+    vertical-align: middle;
+}
+
+.adm-td--check {
+    width: 2.5rem;
+    padding-left: .75rem;
+    padding-right: .35rem;
+    text-align: center;
+    vertical-align: middle;
+    cursor: default;
+}
+.adm-td--check .adm-checkbox {
     vertical-align: middle;
 }
 
@@ -748,6 +799,7 @@ select.adm-input {
     .adm-table tbody tr {
         padding: 1rem 1.1rem;
         border-bottom: 1px solid rgba(42, 46, 69, .6);
+        position: relative;
     }
     .adm-table tbody tr:last-child { border-bottom: none; }
     .adm-table tbody tr:hover { background: transparent !important; }
@@ -765,6 +817,19 @@ select.adm-input {
         letter-spacing: .5px;
         color: var(--adm-muted);
         margin-bottom: .15rem;
+    }
+
+    /* Checkbox in alto a sinistra della card */
+    .adm-table td.adm-td--check {
+        position: absolute;
+        top: .85rem;
+        left: .85rem;
+        width: auto;
+        padding: 0;
+        z-index: 1;
+    }
+    .adm-table td.adm-td--check::before {
+        content: none;
     }
 
     /* Campi con valore breve: etichetta e valore sulla stessa riga */
@@ -793,6 +858,7 @@ select.adm-input {
     .adm-table td[data-label="SKU"] {
         padding-bottom: .6rem;
         margin-bottom: .4rem;
+        padding-left: 1.75rem;
         border-bottom: 1px solid rgba(42, 46, 69, .4);
         font-size: .95rem;
     }
@@ -814,5 +880,16 @@ select.adm-input {
     .adm-table .adm-input--qty {
         width: 100%;
         max-width: 140px;
+    }
+
+    .adm-bulk-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .adm-bulk-bar__actions {
+        width: 100%;
+    }
+    .adm-bulk-bar__actions .adm-btn {
+        flex: 1 1 auto;
     }
 }
