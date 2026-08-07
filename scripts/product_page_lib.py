@@ -125,50 +125,36 @@ TRUSTPILOT_TEMPLATE_ID = "5419b6a8b0d04a076446a9ad"
 TRUSTPILOT_TOKEN = "27270fde-f5a0-4937-9101-76b7ebae8a1a"
 
 
-def _trustpilot_block(lang):
-    """Micro TrustBox + fallback link (loader: js/trustpilot-widget.js)."""
+def _trustpilot_buy_mini(lang):
+    """Micro TrustBox nella buy card (sotto CTA)."""
     tp_locale, tp_url = TRUSTPILOT_LOCALE[lang]
-    t = TRUSTPILOT_I18N[lang]
-    return f"""        <section class="product-trustpilot v2-section v2-section--tight" aria-labelledby="product-trustpilot-title">
-            <h2 id="product-trustpilot-title" class="visually-hidden">{t['title']}</h2>
-            <p class="product-trustpilot__fallback trustpilot-fallback">{t['fallback']} <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
-            <div
-                id="trustpilot-widget"
-                class="trustpilot-widget"
-                data-locale="{tp_locale}"
-                data-template-id="{TRUSTPILOT_TEMPLATE_ID}"
-                data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT}"
-                data-style-height="40px"
-                data-style-width="100%"
-                data-token="{TRUSTPILOT_TOKEN}"
-                data-min-review-count="0"
-                data-style-alignment="center"
-            >
-                <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-            </div>
-        </section>
+    return f"""                <div class="product-trustpilot pdp-buy-trustpilot">
+                    <div
+                        id="trustpilot-widget"
+                        class="trustpilot-widget"
+                        data-locale="{tp_locale}"
+                        data-template-id="{TRUSTPILOT_TEMPLATE_ID}"
+                        data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT}"
+                        data-style-height="28px"
+                        data-style-width="100%"
+                        data-token="{TRUSTPILOT_TOKEN}"
+                        data-min-review-count="0"
+                        data-style-alignment="center"
+                    >
+                        <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>
+                    </div>
+                </div>
 """
 
 
+def _trustpilot_block(lang):
+    """Deprecated layout: prefer _trustpilot_buy_mini nella buy card."""
+    return _trustpilot_buy_mini(lang)
+
+
 def _trustpilot_inner(lang):
-    """Solo fallback + widget: nel layout v3 la card recensioni fa da contenitore."""
-    tp_locale, tp_url = TRUSTPILOT_LOCALE[lang]
-    t = TRUSTPILOT_I18N[lang]
-    return f"""                <p class="product-trustpilot__fallback trustpilot-fallback">{t['fallback']} <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a></p>
-                <div
-                    id="trustpilot-widget"
-                    class="trustpilot-widget"
-                    data-locale="{tp_locale}"
-                    data-template-id="{TRUSTPILOT_TEMPLATE_ID}"
-                    data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT}"
-                    data-style-height="40px"
-                    data-style-width="100%"
-                    data-token="{TRUSTPILOT_TOKEN}"
-                    data-min-review-count="0"
-                    data-style-alignment="center"
-                >
-                    <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-                </div>"""
+    """Compat: stesso markup del mini in buy card (senza wrapper extra di sezione)."""
+    return _trustpilot_buy_mini(lang).rstrip() + "\n"
 
 
 def _trustpilot_script_tag():
@@ -1402,6 +1388,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                     {labels['add']}
                 </button>
 
+{_trustpilot_buy_mini(lang)}
                 <p class="pdp-delivery">
                     {MAIL_ICON}
                     {v3['delivery_line']}
@@ -1434,17 +1421,6 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
             <ol class="pdp-steps">
 {_render_steps_v3(ui, content, lang)}
             </ol>
-        </section>
-
-        <hr class="pdp-divider">
-
-        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-reviews-title">
-            <div class="pdp-reviews product-trustpilot">
-                <h2 id="pdp-reviews-title" class="pdp-reviews__title">{v3['reviews_title']}</h2>
-                <p class="pdp-reviews__lead">{v3['reviews_lead']}</p>
-{_trustpilot_inner(lang)}
-                <a class="pdp-reviews__cta" href="{TRUSTPILOT_LOCALE[lang][1]}" target="_blank" rel="noopener noreferrer">{v3['reviews_cta']}</a>
-            </div>
         </section>
 
 {_render_institutional(v3)}
@@ -1620,7 +1596,7 @@ def build_compact_product_page(lang, prod):
             </div>
             <div class="v2-price-tax">{labels['tax']}</div>
 {_stock_block_html(lang, sku)}            <button type="button" id="product-primary-cta" class="v2-btn-primary" data-cart-add data-cart-source="product-pricing">{labels['add']}</button>
-        </div>
+{_trustpilot_buy_mini(lang)}        </div>
     </div>
     <main id="main" class="product-page" data-cart-added-msg="{labels['add']}">
         <section class="product-process-steps" aria-labelledby="steps-title">
@@ -1631,7 +1607,7 @@ def build_compact_product_page(lang, prod):
                 <li><strong>{labels['step_act']}</strong> — {act_step}</li>
             </ol>
         </section>
-{_trustpilot_block(lang)}    </main>
+    </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js"></script>

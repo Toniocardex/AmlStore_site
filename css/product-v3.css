@@ -1004,7 +1004,18 @@
 .pdp-note svg { width: 20px; height: 20px; color: var(--page-accent, #003182); }
 .pdp-note strong { font-weight: 800; }
 
-/* ── RECENSIONI ───────────────────────────────────────────────────────────── */
+/* Trustpilot Micro TrustBox nella buy card (sotto CTA) */
+.pdp-buy-trustpilot {
+    margin: 12px 0 4px;
+    min-height: 28px;
+    width: 100%;
+}
+
+.pdp-buy-trustpilot .trustpilot-widget {
+    min-height: 28px;
+}
+
+/* ── RECENSIONI (sezione pagina, se ancora presente) ─────────────────────── */
 .pdp-reviews {
     display: grid;
     gap: 14px;
