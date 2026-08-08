@@ -1,0 +1,330 @@
+/**
+ * Contacts — pagina corporate condivisa dalle cinque lingue.
+ * Usa esclusivamente i token del design system definiti in page.css.
+ */
+
+.contacts-page {
+    max-width: var(--aml-maxw);
+    padding-top: clamp(2rem, 5vw, 4rem);
+    padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.contacts-breadcrumb {
+    margin: 0 0 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--aml-ink-2);
+}
+
+.contacts-breadcrumb a {
+    color: var(--aml-brand);
+    text-decoration: none;
+}
+
+.contacts-breadcrumb a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.contacts-hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(2.25rem, 5vw, 3.5rem);
+    border-radius: var(--aml-radius-lg);
+    background: radial-gradient(120% 160% at 100% 0%, var(--aml-navy-2) 0%, var(--aml-navy) 62%);
+    color: var(--aml-surface);
+    box-shadow: var(--aml-shadow-lg);
+}
+
+.contacts-eyebrow {
+    margin: 0 0 0.85rem;
+    color: color-mix(in srgb, var(--aml-surface) 72%, transparent);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.contacts-title {
+    max-width: 16ch;
+    margin: 0 0 1rem;
+    font-family: var(--aml-font-display);
+    font-size: clamp(2rem, 4.6vw, 3.1rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.06;
+    color: var(--aml-surface);
+}
+
+.contacts-lede {
+    max-width: 56ch;
+    margin: 0;
+    color: color-mix(in srgb, var(--aml-surface) 84%, transparent);
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.contacts-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    margin: clamp(1.5rem, 4vw, 2.25rem) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.contacts-meta li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid color-mix(in srgb, var(--aml-surface) 22%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--aml-surface) 8%, transparent);
+    color: color-mix(in srgb, var(--aml-surface) 92%, transparent);
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+.contacts-meta svg {
+    flex: 0 0 auto;
+    width: 1.05rem;
+    height: 1.05rem;
+    color: color-mix(in srgb, var(--aml-brand) 55%, var(--aml-surface));
+}
+
+/* ── Sezioni ──────────────────────────────────────────────────────────── */
+.contacts-section {
+    margin-top: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.contacts-section__heading {
+    margin: 0 0 1.25rem;
+    font-family: var(--aml-font-display);
+    color: var(--aml-ink);
+    font-size: clamp(1.35rem, 2.6vw, 1.65rem);
+    line-height: 1.2;
+}
+
+/* ── Canali di assistenza ─────────────────────────────────────────────── */
+.contacts-channel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+.contacts-channel-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1.5rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.contacts-channel-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--aml-brand) 32%, var(--aml-line));
+    box-shadow: var(--aml-shadow-md);
+}
+
+.contacts-channel-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--aml-radius-md);
+    background: var(--aml-trust-bg);
+    color: var(--aml-brand);
+}
+
+.contacts-channel-card__icon svg {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.contacts-channel-card__label {
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--aml-ink-2);
+}
+
+.contacts-channel-card__value {
+    color: var(--aml-ink);
+    font-size: 1.08rem;
+    font-weight: 750;
+    text-decoration: none;
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.contacts-channel-card__value:hover {
+    color: var(--aml-brand);
+}
+
+.contacts-channel-card__hint {
+    margin: -0.35rem 0 0;
+    color: var(--aml-ink-2);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.contacts-channel-card a.contacts-channel-card__hint {
+    color: var(--aml-brand);
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.contacts-channel-card a.contacts-channel-card__hint:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+/* ── Azienda + orari ──────────────────────────────────────────────────── */
+.contacts-info-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 1.1rem;
+}
+
+.contacts-info-card {
+    padding: 1.75rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
+}
+
+.contacts-info-card__head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin: 0 0 1rem;
+}
+
+.contacts-info-card__head svg {
+    flex: 0 0 auto;
+    width: 1.3rem;
+    height: 1.3rem;
+    color: var(--aml-brand);
+}
+
+.contacts-info-card h2 {
+    margin: 0;
+    color: var(--aml-ink);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.contacts-info-card address {
+    margin: 0;
+    color: var(--aml-ink-2);
+    font-style: normal;
+    font-size: 0.92rem;
+    line-height: 1.75;
+}
+
+.contacts-info-card address strong {
+    color: var(--aml-ink);
+}
+
+.contacts-hours-rows {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.contacts-hours-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--aml-line);
+    color: var(--aml-ink-2);
+    font-size: 0.88rem;
+}
+
+.contacts-hours-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.contacts-hours-row strong {
+    color: var(--aml-ink);
+    font-weight: 700;
+}
+
+/* ── Prima di scriverci ───────────────────────────────────────────────── */
+.contacts-quicklinks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+.contacts-quicklink-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.15rem 1.4rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-paper);
+    color: var(--aml-ink);
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.contacts-quicklink-card:hover {
+    border-color: color-mix(in srgb, var(--aml-brand) 32%, var(--aml-line));
+    background: var(--aml-surface);
+}
+
+.contacts-quicklink-card span {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.contacts-quicklink-card svg {
+    flex: 0 0 auto;
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--aml-brand);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .contacts-channel-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .contacts-info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .contacts-page {
+        padding-inline: 1rem;
+    }
+
+    .contacts-hero {
+        border-radius: var(--aml-radius-md);
+    }
+
+    .contacts-channel-grid,
+    .contacts-quicklinks {
+        grid-template-columns: 1fr;
+    }
+}
