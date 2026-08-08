@@ -67,7 +67,7 @@ export const CATALOG = {
   "SC_M365P_MTOTPROT_5Device": { name: "Microsoft Office 365 Personal | McAfee Total Protection 5 Dispositivi - 1 Anno", unitAmountMinor: 9799, compareAtMinor: 13895, currency: 'EUR', type: "subscription", category: "suite office > microsoft 365" },
   "SC_W11HOME_M365PERS": { name: "Microsoft Windows 11 Home | Microsoft 365 Personal 5 Dispositivi 1 Anno", unitAmountMinor: 14900, compareAtMinor: 17800, currency: 'EUR', type: "bundle", category: "sistema operativo > windows > microsoft windows 11" },
   "ACRTRIAD1D1Y": { name: "Acronis True Image Advanced | 1 Dispositivo 1 Anno + 50 GB Cloud Storage", unitAmountMinor: 3499, compareAtMinor: 5799, currency: 'EUR', type: "subscription", category: "backup" },
-  "EP2-06606": { name: "Microsoft Office 2024 Home and Business | Windows/Mac | Licenza ESD", unitAmountMinor: 17900, compareAtMinor: 29900, currency: 'EUR', type: "perpetual", category: "suite office" },
+  "EP2-06606": { name: "Microsoft Office 2024 Home and Business | Windows/Mac | Licenza ESD", unitAmountMinor: 20490, compareAtMinor: 29900, currency: 'EUR', type: "perpetual", category: "suite office" },
   "5W1-04285": { name: "Microsoft Outlook 2024 (Standalone) | Licenza ESD Originale", unitAmountMinor: 7900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
   "EAVH-N2-A1": { name: "Eset Nod32 Antivirus | 2 Anni | 1 Dispositivo", unitAmountMinor: 4990, compareAtMinor: 7998, currency: 'EUR', type: "subscription", category: "antivirus" },
 };
