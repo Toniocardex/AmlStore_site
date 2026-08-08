@@ -25,6 +25,16 @@
         view:            'orders',
         stockLoading:    false,
         selected:        new Set(),
+        cart: {
+            page:     1,
+            status:   'abandoned',
+            days:     '30',
+            hasEmail: '',
+            country:  '',
+            total:    0,
+            pageSize: 50,
+            loading:  false,
+        },
     };
 
     /* ─── Utility DOM ──────────────────────────────────────────────────────── */
@@ -976,17 +986,22 @@
     /* ─── Magazzino ────────────────────────────────────────────────────────── */
 
     function setView(view) {
-        state.view = view === 'stock' ? 'stock' : 'orders';
-        var ordersEl = $('adm-view-orders');
-        var stockEl  = $('adm-view-stock');
+        state.view = (view === 'stock' || view === 'carts') ? view : 'orders';
+        var ordersEl  = $('adm-view-orders');
+        var stockEl   = $('adm-view-stock');
+        var cartsEl   = $('adm-view-carts');
         var navOrders = $('nav-orders');
         var navStock  = $('nav-stock');
+        var navCarts  = $('nav-carts');
         if (ordersEl) ordersEl.hidden = state.view !== 'orders';
         if (stockEl)  stockEl.hidden  = state.view !== 'stock';
+        if (cartsEl)  cartsEl.hidden  = state.view !== 'carts';
         if (navOrders) navOrders.classList.toggle('is-active', state.view === 'orders');
         if (navStock)  navStock.classList.toggle('is-active', state.view === 'stock');
-        if (state.view === 'stock') loadStock();
-        else loadOrders();
+        if (navCarts)  navCarts.classList.toggle('is-active', state.view === 'carts');
+        if (state.view === 'stock')      loadStock();
+        else if (state.view === 'carts') loadCarts();
+        else                              loadOrders();
     }
 
     function loadStock() {
@@ -1060,6 +1075,192 @@
         });
     }
 
+    /* ─── Carrelli (analytics carrelli abbandonati) ───────────────────────────── */
+
+    function buildCartQueryString() {
+        var params = new URLSearchParams();
+        if (state.cart.page > 1)                                     params.set('page', state.cart.page);
+        if (state.cart.status)                                       params.set('status', state.cart.status);
+        if (state.cart.days !== '' && state.cart.days != null)       params.set('days', state.cart.days);
+        if (state.cart.hasEmail === '1' || state.cart.hasEmail === '0') params.set('hasEmail', state.cart.hasEmail);
+        if (state.cart.country)                                      params.set('country', state.cart.country);
+        return params.toString() ? '?' + params.toString() : '';
+    }
+
+    function loadCarts() {
+        if (state.cart.loading) return;
+        state.cart.loading = true;
+
+        show('adm-cart-loading');
+        hide('adm-cart-error');
+        hide('adm-cart-empty');
+        hide('adm-cart-table-wrap');
+
+        apiGet('/api/admin/carts' + buildCartQueryString()).then(function (data) {
+            state.cart.total    = data.total    || 0;
+            state.cart.pageSize = data.pageSize || 50;
+            state.cart.loading  = false;
+
+            renderCartStats(data.stats || {});
+            renderCartsTable(data.carts || []);
+            renderCartPagination();
+        }).catch(function (e) {
+            state.cart.loading = false;
+            hide('adm-cart-loading');
+            if (e.message !== '401') {
+                show('adm-cart-error');
+                text('adm-cart-error-msg', 'Errore caricamento carrelli: ' + e.message);
+            }
+        });
+    }
+
+    /** Stato visivo di una riga: la vera fonte di verità sul pagato resta orders.status (join). */
+    function cartStatusInfo(c) {
+        if (c.checkoutOrderId) {
+            return c.orderStatus === 'paid' ? ['paid', 'Pagato'] : ['checkout', 'Checkout avviato'];
+        }
+        if (!c.itemCount) return ['empty', 'Vuoto'];
+        var idleMs = Date.now() - new Date(c.updatedAt).getTime();
+        return idleMs < 2 * 60 * 60 * 1000 ? ['active', 'Attivo'] : ['abandoned', 'Abbandonato'];
+    }
+
+    function renderCartsTable(carts) {
+        hide('adm-cart-loading');
+
+        if (!carts.length) {
+            show('adm-cart-empty');
+            text('adm-cart-count', '0 carrelli');
+            return;
+        }
+
+        text('adm-cart-count', state.cart.total + ' carrelli totali');
+        show('adm-cart-table-wrap');
+
+        $('adm-cart-tbody').innerHTML = carts.map(function (c) {
+            var items = (c.lineItems || []).map(function (i) {
+                return '<span>' + esc((i.qty || 1) + '× ' + (i.name || i.sku || '?')) + '</span>';
+            }).join('');
+            var emailCell = c.email
+                ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>'
+                : '<span class="adm-td--muted">Anonimo</span>';
+            var st = cartStatusInfo(c);
+
+            return '<tr>'
+                + '<td class="adm-td--nowrap adm-td--muted" data-label="Aggiornato">' + esc(fmtDate(c.updatedAt)) + '</td>'
+                + '<td data-label="Email">' + emailCell + '</td>'
+                + '<td data-label="Paese">' + esc(c.country || '—') + '</td>'
+                + '<td data-label="Articoli"><div class="adm-items-list">' + (items || '<span class="adm-td--muted">—</span>') + '</div></td>'
+                + '<td class="adm-td--center adm-td--nowrap" data-label="Totale"><strong>' + esc(fmtMoney(c.totalMinor, c.currency)) + '</strong></td>'
+                + '<td data-label="Lingua">' + esc((c.locale || '').toUpperCase()) + '</td>'
+                + '<td class="adm-td--center" data-label="Stato"><span class="adm-badge adm-badge--' + st[0] + '">' + esc(st[1]) + '</span></td>'
+            + '</tr>';
+        }).join('');
+    }
+
+    function statRow(label, value) {
+        // esc() tratta 0 come falsy (0 || '' → ''): i numeri vanno convertiti a parte,
+        // altrimenti i contatori a zero (es. "Abbandonati: 0") sparirebbero dalla vista.
+        var v = (typeof value === 'number') ? String(value) : esc(value);
+        return '<div class="adm-stat-row"><span>' + esc(label) + '</span><strong>' + v + '</strong></div>';
+    }
+
+    function pct(n) { return (Math.round((n || 0) * 1000) / 10) + '%'; }
+
+    function renderCartStats(stats) {
+        var el = $('adm-cart-stats');
+        if (!el) return;
+
+        var html = '<p class="adm-filter-section__title">Statistiche (' + (stats.days || 30) + ' gg)</p>'
+            + statRow('Creati',                  stats.created || 0)
+            + statRow('Attivi',                  stats.active || 0)
+            + statRow('Abbandonati',              stats.abandoned || 0)
+            + statRow('Tasso abbandono',          pct(stats.abandonmentRate))
+            + statRow('Checkout avviati',         stats.checkoutStarted || 0)
+            + statRow('Tasso carrello → checkout', pct(stats.cartToCheckoutRate))
+            + statRow('Ordini pagati',            stats.paid || 0)
+            + statRow('Tasso carrello → pagato',   pct(stats.cartToPaidRate))
+            + statRow('Valore abbandonato',       fmtMoney(stats.abandonedValueMinor, 'EUR'))
+            + statRow('Valore medio',             fmtMoney(stats.abandonedAvgValueMinor, 'EUR'));
+
+        if ((stats.topProducts || []).length) {
+            html += '<p class="adm-filter-section__title" style="margin-top:1rem">Top prodotti abbandonati</p>'
+                + stats.topProducts.map(function (p) { return statRow(p.name || p.sku, p.carts); }).join('');
+        }
+        if ((stats.topCountries || []).length) {
+            html += '<p class="adm-filter-section__title" style="margin-top:1rem">Top paesi</p>'
+                + stats.topCountries.map(function (c) { return statRow(c.country, c.carts); }).join('');
+        }
+
+        el.innerHTML = html;
+    }
+
+    function renderCartPagination() {
+        var totalPages = Math.ceil(state.cart.total / state.cart.pageSize) || 1;
+        var el = $('adm-cart-pagination');
+        if (!el) return;
+
+        if (totalPages <= 1) { el.innerHTML = ''; return; }
+
+        var html = '<button class="adm-page-btn" id="cart-pg-prev" '
+            + (state.cart.page <= 1 ? 'disabled' : '') + '>‹</button>';
+
+        var start = Math.max(1, state.cart.page - 2);
+        var end   = Math.min(totalPages, start + 4);
+        start     = Math.max(1, end - 4);
+
+        for (var p = start; p <= end; p++) {
+            html += '<button class="adm-page-btn' + (p === state.cart.page ? ' adm-page-btn--active' : '')
+                + '" data-cart-page="' + p + '">' + p + '</button>';
+        }
+
+        html += '<button class="adm-page-btn" id="cart-pg-next" '
+            + (state.cart.page >= totalPages ? 'disabled' : '') + '>›</button>';
+
+        el.innerHTML = html;
+
+        el.querySelector('#cart-pg-prev').addEventListener('click', function () {
+            if (state.cart.page > 1) { state.cart.page--; loadCarts(); }
+        });
+        el.querySelector('#cart-pg-next').addEventListener('click', function () {
+            if (state.cart.page < totalPages) { state.cart.page++; loadCarts(); }
+        });
+        el.querySelectorAll('[data-cart-page]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                state.cart.page = Number(btn.dataset.cartPage);
+                loadCarts();
+            });
+        });
+    }
+
+    function applyCartFilters() {
+        var statusSel  = $('cart-filter-status');
+        var daysSel    = $('cart-filter-days');
+        var emailSel   = $('cart-filter-email');
+        var countryInp = $('cart-filter-country');
+
+        state.cart.status   = statusSel  ? statusSel.value  : 'abandoned';
+        state.cart.days     = daysSel    ? daysSel.value    : '30';
+        state.cart.hasEmail = emailSel   ? emailSel.value   : '';
+        state.cart.country  = countryInp ? countryInp.value.trim().toUpperCase() : '';
+        state.cart.page     = 1;
+        loadCarts();
+    }
+
+    function initCartEvents() {
+        var btnSearch = $('btn-cart-search');
+        if (btnSearch) btnSearch.addEventListener('click', applyCartFilters);
+
+        var countryInput = $('cart-filter-country');
+        if (countryInput) {
+            countryInput.addEventListener('input', function () {
+                countryInput.value = countryInput.value.toUpperCase();
+            });
+            countryInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') applyCartFilters();
+            });
+        }
+    }
+
     /* ─── Init ─────────────────────────────────────────────────────────────── */
 
     function init() {
@@ -1100,6 +1301,7 @@
                 saveStock(inp.getAttribute('data-stock-qty'));
             });
         }
+        initCartEvents();
 
         loadOrders();
     }
@@ -1107,8 +1309,9 @@
     // Espone reload per il pulsante "Riprova"
     window.adminApp = {
         reload: function () {
-            if (state.view === 'stock') loadStock();
-            else loadOrders();
+            if (state.view === 'stock')      loadStock();
+            else if (state.view === 'carts') loadCarts();
+            else                              loadOrders();
         },
     };
 

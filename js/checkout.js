@@ -255,6 +255,24 @@
         });
     }
 
+    /* ─── Tracking carrello: aggancia l'email digitata al cartId ─────────────── */
+    // Statistica carrelli abbandonati (fase 1): nessun campo nuovo, si riusa
+    // l'email già presente nel form. Solo se sintatticamente valida, altrimenti
+    // un'email incompleta a metà digitazione finirebbe salvata come "abbandono".
+
+    function initCartEmailSync() {
+        var cart = global.AmlCart;
+        if (!cart || !cart.notifyEmail) return;
+        ['field-email', 'field-email-b'].forEach(function (id) {
+            var input = document.getElementById(id);
+            if (!input) return;
+            input.addEventListener('blur', function () {
+                var value = input.value.trim();
+                if (value && validateEmail(value)) cart.notifyEmail(value);
+            });
+        });
+    }
+
     /* ─── Raccolta dati form ───────────────────────────────────────────────── */
 
     function collectFormData() {
@@ -553,6 +571,7 @@
                     items:          items,
                     lang:           lang,
                     shipping:       shippingPayloadIfNeeded(),
+                    cartId:         global.AmlCart && global.AmlCart.getCartId ? global.AmlCart.getCartId() : undefined,
                 }),
             });
         })
@@ -604,6 +623,7 @@
                     items:          items,
                     lang:           lang,
                     shipping:       shippingPayloadIfNeeded(),
+                    cartId:         global.AmlCart && global.AmlCart.getCartId ? global.AmlCart.getCartId() : undefined,
                 }),
             });
         })
@@ -762,6 +782,7 @@
                                     items:          items,
                                     lang:           lang,
                                     shipping:       shippingPayloadIfNeeded(),
+                                    cartId:         global.AmlCart && global.AmlCart.getCartId ? global.AmlCart.getCartId() : undefined,
                                 }),
                             });
                         })
@@ -857,6 +878,7 @@
         initPaymentMethod();
         initSummaryToggle();
         initSubmitButtons();
+        initCartEmailSync();
     }
 
     if (document.readyState === 'loading') {

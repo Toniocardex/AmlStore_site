@@ -356,6 +356,10 @@
             // Pulisce il carrello solo se ordine trovato (qualunque status)
             if (global.AmlCart && global.AmlCart.clear) {
                 global.AmlCart.clear();
+                // Chiude il ciclo di vita del cartId: il prossimo add-to-cart ne genera uno
+                // nuovo, altrimenti erediterebbe il checkout_order_id di questo acquisto e
+                // non potrebbe mai più risultare "abbandonato" nelle statistiche.
+                if (global.AmlCart.resetCartSession) global.AmlCart.resetCartSession();
             }
 
             // Ruota il sale delle idempotency key: il prossimo checkout è un nuovo ordine

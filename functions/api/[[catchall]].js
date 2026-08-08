@@ -12,6 +12,7 @@
  *   GET  /api/order-status
  *   GET  /api/stock
  *   POST /api/consultation-request
+ *   POST /api/cart/sync
  *
  * Routes admin (protette da Cloudflare Access + verifica JWT):
  *   GET  /api/admin/orders
@@ -21,6 +22,7 @@
  *   POST /api/admin/orders/:id/unarchive
  *   GET  /api/admin/stock
  *   POST /api/admin/stock
+ *   GET  /api/admin/carts
  */
 
 import { generateToken, verifyToken }                    from './_lib/token.js';
@@ -42,6 +44,8 @@ import { assertCartStock, deductStockForPaidOrder, getStockQty,
          listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
 import { safeParseJSON }                                 from './_lib/utils.js';
 import { checkCheckoutEmailRateLimit }                   from './_lib/checkout-rate-limit.js';
+import { upsertCartSession, markCartCheckoutStarted,
+         checkCartSyncRateLimit, listCarts, getCartStats } from './_lib/cart.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -167,6 +171,9 @@ export async function onRequest(context) {
         }
         if (path === '/api/consultation-request' && request.method === 'POST') {
             return await handleConsultationRequest(request, env);
+        }
+        if (path === '/api/cart/sync' && request.method === 'POST') {
+            return await handleCartSync(request, env);
         }
 
         return err('Not found', 404, request);
@@ -532,6 +539,17 @@ async function orderParamsFromBodySafe(body, paymentMethod, request, env) {
     }
 }
 
+/** Collega il cartId (se presente nel body) all'ordine appena creato. Non deve mai bloccare il checkout. */
+async function linkCartCheckoutStarted(env, body, orderId) {
+    const cartId = String(body?.cartId || '').trim();
+    if (!CART_ID_RE.test(cartId)) return;
+    try {
+        await markCartCheckoutStarted(env.DB, cartId, orderId);
+    } catch (e) {
+        console.warn('[cart] markCartCheckoutStarted failed:', orderId, e?.message || e);
+    }
+}
+
 async function deductStockForOrderRow(db, order) {
     if (!order?.id) return;
     const items = safeParseJSON(order.line_items, []);
@@ -553,6 +571,66 @@ async function handlePublicStock(request, env) {
     const headers = new Headers(res.headers);
     headers.set('Cache-Control', 'public, max-age=30');
     return new Response(res.body, { status: 200, headers });
+}
+
+/* ─── POST /api/cart/sync ────────────────────────────────────────────────────── */
+// Tracking carrelli (analytics fase 1). Endpoint pubblico, non autenticato:
+// niente prezzo/nome/valuta dal client — le righe passano sempre dal catalogo
+// server (resolveAndValidateItems), come per il checkout.
+
+const CART_ID_RE      = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const CART_EMAIL_RE   = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const CART_MAX_ITEMS  = 50;
+
+async function handleCartSync(request, env) {
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
+
+    const limited = await checkCartSyncRateLimit(env, request);
+    if (limited) {
+        return rateLimitResponse(
+            { ...limited, message: 'Too many requests', code: 'CART_SYNC_RATE_LIMITED' },
+            request, env
+        );
+    }
+
+    const body = await request.json().catch(() => null);
+    if (!body) return err('Invalid JSON', 400, request, env);
+
+    const cartId = String(body.cartId || '').trim();
+    if (!CART_ID_RE.test(cartId)) return err('cartId non valido', 400, request, env);
+
+    const rawItems = Array.isArray(body.items) ? body.items : [];
+    if (rawItems.length > CART_MAX_ITEMS) return err('Troppi articoli', 400, request, env);
+
+    let items;
+    try {
+        items = rawItems.length ? resolveAndValidateItems(rawItems) : [];
+    } catch (catalogErr) {
+        return err(catalogErr.message || 'Invalid catalog', 400, request, env);
+    }
+
+    let email = String(body.email || '').trim().toLowerCase();
+    if (email && (email.length > 254 || !CART_EMAIL_RE.test(email))) {
+        return err('Email non valida', 400, request, env);
+    }
+    if (!email) email = null;
+
+    const rawLocale = String(body.locale || 'it').toLowerCase();
+    const locale = ALLOWED_LOCALES.has(rawLocale) ? rawLocale : 'it';
+    const country = request.cf?.country || null;
+
+    await upsertCartSession(env.DB, {
+        id:          cartId,
+        email,
+        locale,
+        country,
+        lineItems:   items,
+        totalMinor:  totalMinorFromItems(items),
+        currency:    items[0]?.currency || 'EUR',
+    });
+
+    return json({ ok: true }, 200, request, env);
 }
 
 async function handleStripeCreateSession(request, env) {
@@ -591,6 +669,7 @@ async function handleStripeCreateSession(request, env) {
             throw dbErr;
         }
     }
+    await linkCartCheckoutStarted(env, body, orderId);
 
     const origin     = env.SITE_ORIGIN || 'https://aml-store.com';
     const lang       = params.locale || 'it';
@@ -721,6 +800,7 @@ async function handlePaypalCreateOrder(request, env) {
             throw dbErr;
         }
     }
+    await linkCartCheckoutStarted(env, body, orderId);
 
     // Crea ordine su PayPal
     const accessToken = await getAccessToken(
@@ -836,6 +916,7 @@ async function handleBankTransferOrder(request, env) {
             throw dbErr;
         }
     }
+    await linkCartCheckoutStarted(env, body, orderId);
 
     // Per il bonifico invia subito email "ordine ricevuto + istruzioni IBAN"
     // (status = pending_payment, isPaid = false nel template → mostra IBAN + causale)
@@ -991,6 +1072,28 @@ async function handleAdminRoute(path, request, env) {
 
         await unarchiveOrder(env.DB, unarchiveMatch[1]);
         return new Response(JSON.stringify({ ok: true }), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── GET /api/admin/carts ──────────────────────────────────────────────────
+    if (sub === '/carts' && request.method === 'GET') {
+        const qs   = new URL(request.url).searchParams;
+        const days = qs.has('days') ? Number(qs.get('days')) : 30;
+
+        const [result, stats] = await Promise.all([
+            listCarts(env.DB, {
+                page:      Number(qs.get('page')) || 1,
+                status:    qs.get('status') || 'abandoned',
+                hoursIdle: qs.has('hoursIdle') ? Number(qs.get('hoursIdle')) : undefined,
+                hasEmail:  qs.get('hasEmail') === '1' ? true : (qs.get('hasEmail') === '0' ? false : undefined),
+                country:   qs.get('country') || '',
+                days,
+            }),
+            getCartStats(env.DB, { days }),
+        ]);
+        result.stats = stats;
+        return new Response(JSON.stringify(result), {
             headers: { 'Content-Type': 'application/json' },
         });
     }

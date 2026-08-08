@@ -5,7 +5,7 @@
  * Fail-closed se manca FRAUD_HASH_SECRET o D1 non disponibile.
  */
 
-import { now } from './utils.js';
+import { windowSlot, retryAfterForWindow, hmacIdentifier, bumpBucket } from './rate-limit.js';
 
 /** Massimo tentativi ammessi per email in ciascuna finestra corta. */
 export const CHECKOUT_EMAIL_MAX_ATTEMPTS = 3;
@@ -18,52 +18,6 @@ const WINDOWS = [
 
 function normalizeEmail(email) {
     return String(email || '').trim().toLowerCase();
-}
-
-function windowSlot(windowMs, t = Date.now()) {
-    return Math.floor(t / windowMs);
-}
-
-function retryAfterForWindow(windowMs, t = Date.now()) {
-    const slot = windowSlot(windowMs, t);
-    const end = (slot + 1) * windowMs;
-    return Math.max(1, Math.ceil((end - t) / 1000));
-}
-
-async function hmacHex(secret, kind, value, version = 1) {
-    const key = await crypto.subtle.importKey(
-        'raw',
-        new TextEncoder().encode(secret),
-        { name: 'HMAC', hash: 'SHA-256' },
-        false,
-        ['sign']
-    );
-    const payload = `${version}:${kind}:${value}`;
-    const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
-    return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, '0')).join('');
-}
-
-/**
- * Incrementa atomicamente il bucket e restituisce il nuovo count.
- * @param {D1Database} db
- * @param {string} bucketKey
- * @param {string} windowId
- * @returns {Promise<number>}
- */
-async function bumpBucket(db, bucketKey, windowId) {
-    const ts = now();
-    const row = await db
-        .prepare(
-            `INSERT INTO checkout_rate_buckets (bucket_key, window_id, count, updated_at)
-             VALUES (?, ?, 1, ?)
-             ON CONFLICT(bucket_key, window_id) DO UPDATE SET
-               count = count + 1,
-               updated_at = excluded.updated_at
-             RETURNING count`
-        )
-        .bind(bucketKey, windowId, ts)
-        .first();
-    return Number(row?.count || 0);
 }
 
 /**
@@ -111,7 +65,7 @@ export async function checkCheckoutEmailRateLimit(env, customerEmail) {
     const t = Date.now();
     let emailHash;
     try {
-        emailHash = await hmacHex(secret, 'email', email);
+        emailHash = await hmacIdentifier(secret, 'email', email);
     } catch (e) {
         console.error('[rate-limit] HMAC failed:', e?.message || e);
         return {

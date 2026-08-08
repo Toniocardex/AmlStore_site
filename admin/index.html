@@ -19,6 +19,7 @@
     <nav class="adm-header__nav" aria-label="Sezioni admin">
         <button type="button" class="adm-nav-btn is-active" data-adm-view="orders" id="nav-orders">Ordini</button>
         <button type="button" class="adm-nav-btn" data-adm-view="stock" id="nav-stock">Magazzino</button>
+        <button type="button" class="adm-nav-btn" data-adm-view="carts" id="nav-carts">Carrelli</button>
     </nav>
     <div class="adm-header__right">
         <span class="adm-user-email" id="adm-user-email"></span>
@@ -179,6 +180,101 @@
                 <tbody id="adm-stock-tbody"></tbody>
             </table>
         </div>
+    </main>
+</div>
+
+<!-- ── Vista Carrelli (analytics carrelli abbandonati) ───────────────────────── -->
+<div class="adm-layout" id="adm-view-carts" hidden>
+
+    <!-- Sidebar filtri + statistiche -->
+    <aside class="adm-sidebar">
+        <section class="adm-filter-section">
+            <h2 class="adm-filter-section__title">Filtri</h2>
+
+            <label class="adm-label" for="cart-filter-status">Stato</label>
+            <select id="cart-filter-status" class="adm-input">
+                <option value="abandoned" selected>Abbandonati</option>
+                <option value="active">Attivi</option>
+                <option value="checkout">Checkout avviato</option>
+                <option value="paid">Pagati</option>
+                <option value="all">Tutti</option>
+            </select>
+
+            <label class="adm-label" for="cart-filter-days">Periodo</label>
+            <select id="cart-filter-days" class="adm-input">
+                <option value="7">Ultimi 7 giorni</option>
+                <option value="30" selected>Ultimi 30 giorni</option>
+                <option value="90">Ultimi 90 giorni</option>
+                <option value="0">Tutto</option>
+            </select>
+
+            <label class="adm-label" for="cart-filter-email">Email</label>
+            <select id="cart-filter-email" class="adm-input">
+                <option value="">Tutti</option>
+                <option value="1">Solo con email</option>
+                <option value="0">Solo anonimi</option>
+            </select>
+
+            <label class="adm-label" for="cart-filter-country">Paese</label>
+            <input id="cart-filter-country" type="text" class="adm-input" maxlength="2"
+                   placeholder="Es. IT" autocomplete="off" style="text-transform:uppercase">
+
+            <button id="btn-cart-search" class="adm-btn adm-btn--primary adm-btn--full">
+                Cerca
+            </button>
+        </section>
+
+        <section class="adm-filter-section adm-filter-section--stats" id="adm-cart-stats">
+            <!-- Popolato da JS -->
+        </section>
+    </aside>
+
+    <!-- Contenuto principale -->
+    <main class="adm-main" id="adm-cart-main">
+
+        <div class="adm-toolbar">
+            <h1 class="adm-page-title">Carrelli</h1>
+            <div class="adm-toolbar__right">
+                <span class="adm-count" id="adm-cart-count"></span>
+                <div class="adm-pagination" id="adm-cart-pagination"></div>
+            </div>
+        </div>
+
+        <div class="adm-loading" id="adm-cart-loading" aria-live="polite">
+            <div class="adm-spinner"></div>
+            <span>Caricamento carrelli…</span>
+        </div>
+
+        <div class="adm-empty" id="adm-cart-error" hidden>
+            <p class="adm-empty__icon">⚠️</p>
+            <p id="adm-cart-error-msg">Errore nel caricamento dei carrelli.</p>
+            <button class="adm-btn adm-btn--primary" onclick="window.adminApp.reload()">
+                Riprova
+            </button>
+        </div>
+
+        <div class="adm-empty" id="adm-cart-empty" hidden>
+            <p class="adm-empty__icon">🛒</p>
+            <p>Nessun carrello trovato per questi filtri.</p>
+        </div>
+
+        <div class="adm-table-wrap" id="adm-cart-table-wrap" hidden>
+            <table class="adm-table" id="adm-cart-table">
+                <thead>
+                    <tr>
+                        <th>Ultimo aggiornamento</th>
+                        <th>Email</th>
+                        <th>Paese</th>
+                        <th>Articoli</th>
+                        <th class="adm-th--center">Totale</th>
+                        <th>Lingua</th>
+                        <th class="adm-th--center">Stato</th>
+                    </tr>
+                </thead>
+                <tbody id="adm-cart-tbody"></tbody>
+            </table>
+        </div>
+
     </main>
 </div>
 

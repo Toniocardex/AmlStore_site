@@ -10,6 +10,14 @@
     var flashAddedTimer = null;
     var liveRegionClearTimer = null;
 
+    /* ─── Tracking carrello (analytics) — id ciclo di vita + sync server ─────────── */
+
+    const CART_SESSION_KEY = 'aml-cart-id-v1';
+    const CONSENT_KEY = 'aml-consent-v2';
+    const CART_SYNC_URL = '/api/cart/sync';
+    const CART_SYNC_DEBOUNCE_MS = 1500;
+    var cartSyncTimer = null;
+
     /* ─── Storage ──────────────────────────────────────────────────────────────── */
 
     function readLines() {
@@ -66,7 +74,115 @@
         try {
             document.dispatchEvent(new CustomEvent(EVT, { detail, bubbles: true }));
         } catch (_) { /* SSR / tests */ }
+        scheduleSync();
     }
+
+    /* ─── Tracking carrello: consenso, id ciclo di vita, sync debounced ──────────── */
+    // Statistica carrelli abbandonati (fase 1). Il carrello locale funziona sempre,
+    // a prescindere dal consenso: cambia solo se lo stato viene anche inviato al
+    // server. Stesso pattern di lettura consenso di js/trustpilot-widget.js.
+
+    function hasAnalyticsConsent() {
+        try {
+            const raw = global.localStorage.getItem(CONSENT_KEY);
+            if (!raw) return false;
+            const parsed = JSON.parse(raw);
+            const consent = parsed && parsed.consent;
+            return Boolean(consent && consent.analytics_storage === 'granted');
+        } catch (_) {
+            return false;
+        }
+    }
+
+    function generateCartId() {
+        if (global.crypto && typeof global.crypto.randomUUID === 'function') {
+            return global.crypto.randomUUID();
+        }
+        // Fallback RFC4122 v4 per browser senza crypto.randomUUID.
+        const buf = new Uint8Array(16);
+        if (global.crypto && global.crypto.getRandomValues) global.crypto.getRandomValues(buf);
+        else for (let i = 0; i < 16; i++) buf[i] = Math.floor(Math.random() * 256);
+        buf[6] = (buf[6] & 0x0f) | 0x40;
+        buf[8] = (buf[8] & 0x3f) | 0x80;
+        const hex = Array.prototype.map.call(buf, (b) => b.toString(16).padStart(2, '0')).join('');
+        return hex.slice(0, 8) + '-' + hex.slice(8, 12) + '-' + hex.slice(12, 16) + '-'
+             + hex.slice(16, 20) + '-' + hex.slice(20);
+    }
+
+    function readCartId() {
+        try { return global.localStorage.getItem(CART_SESSION_KEY) || null; } catch (_) { return null; }
+    }
+
+    /** Crea (lazy) il cartId al primo utilizzo utile; lo persiste per il ciclo di vita corrente del carrello. */
+    function ensureCartId() {
+        let id = readCartId();
+        if (id) return id;
+        id = generateCartId();
+        try { global.localStorage.setItem(CART_SESSION_KEY, id); } catch (_) { /* storage negato */ }
+        return id;
+    }
+
+    /** Chiude il ciclo di vita del carrello corrente (es. dopo un acquisto): il prossimo add genera un cartId nuovo. */
+    function resetCartSession() {
+        try { global.localStorage.removeItem(CART_SESSION_KEY); } catch (_) { /* ignore */ }
+    }
+
+    function performSync(extra) {
+        if (!hasAnalyticsConsent()) return;
+
+        const lines = readLines();
+        const email = extra && extra.email ? String(extra.email).trim().toLowerCase() : '';
+        const existingId = readCartId();
+
+        // Niente da registrare: mai toccato il carrello e nessuna email da agganciare adesso.
+        if (!existingId && lines.length === 0 && !email) return;
+
+        const cartId = ensureCartId();
+        const payload = {
+            cartId,
+            locale: toastLang(),
+            items: lines.map((l) => ({ sku: l.sku, quantity: Number(l.quantity) || 1 })),
+        };
+        if (email) payload.email = email;
+
+        try {
+            fetch(CART_SYNC_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                keepalive: true,
+                body: JSON.stringify(payload),
+            }).catch(() => {});
+        } catch (_) { /* fetch non disponibile (SSR/test) */ }
+    }
+
+    // Accumula `extra` tra chiamate ravvicinate (es. dispatch() anonimo subito dopo
+    // notifyEmail()): senza merge, l'ultima scheduleSync() prima dello scatto del
+    // timer sovrascriverebbe silenziosamente l'email in sospeso.
+    var cartSyncPendingExtra = null;
+
+    function scheduleSync(extra) {
+        if (extra) cartSyncPendingExtra = Object.assign({}, cartSyncPendingExtra, extra);
+        clearTimeout(cartSyncTimer);
+        cartSyncTimer = setTimeout(flushCartSync, CART_SYNC_DEBOUNCE_MS);
+    }
+
+    /** Esegue subito il sync in sospeso (se presente). Chiamato dal debounce e su pagehide. */
+    function flushCartSync() {
+        if (cartSyncTimer === null) return;
+        clearTimeout(cartSyncTimer);
+        cartSyncTimer = null;
+        const extra = cartSyncPendingExtra;
+        cartSyncPendingExtra = null;
+        performSync(extra);
+    }
+
+    try {
+        global.addEventListener('aml-consent-updated', function () { scheduleSync(); });
+        // Se l'utente naviga via prima che scatti il debounce, il timer verrebbe
+        // distrutto senza mai inviare nulla: pagehide forza l'invio immediato
+        // (fetch keepalive:true sopravvive comunque alla navigazione).
+        global.addEventListener('pagehide', flushCartSync);
+    } catch (_) { /* SSR / test */ }
 
     /* ─── Helpers lettura dati da DOM ──────────────────────────────────────────── */
 
@@ -646,6 +762,15 @@
         },
         // Mantenuto per compatibilità; la delegazione è ora automatica su document.
         bindAddButtons: function () {},
+        /** cartId del ciclo di vita corrente (creato al bisogno). Usato dal checkout per collegare l'ordine. */
+        getCartId: ensureCartId,
+        /** Chiude il ciclo di vita del cartId corrente: da chiamare dopo un acquisto completato. */
+        resetCartSession: resetCartSession,
+        /** Aggancia un'email (dal form di checkout) al cartId corrente, se sintatticamente valida. */
+        notifyEmail: function (email) {
+            if (!email) return;
+            scheduleSync({ email: email });
+        },
     };
 
     /* ─── Init ─────────────────────────────────────────────────────────────────── */

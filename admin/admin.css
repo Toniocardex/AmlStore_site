@@ -495,6 +495,12 @@ select.adm-input {
 .adm-badge--paypal   { background: rgba(59,130,246,.12); color: #93c5fd; border-color: rgba(59,130,246,.25); }
 .adm-badge--transfer { background: rgba(249,115,22,.12); color: #fdba74; border-color: rgba(249,115,22,.25); }
 
+/* Stato carrelli */
+.adm-badge--active    { background: rgba(6,182,212,.12);   color: #22d3ee; border-color: rgba(6,182,212,.25); }
+.adm-badge--abandoned { background: rgba(234,88,12,.12);   color: #fb923c; border-color: rgba(234,88,12,.25); }
+.adm-badge--checkout  { background: rgba(139,92,246,.12);  color: #c4b5fd; border-color: rgba(139,92,246,.25); }
+.adm-badge--empty     { background: rgba(100,116,139,.08); color: #64748b; border-color: rgba(100,116,139,.15); }
+
 /* ─── Hidden attribute override (previene che display:flex sovrascriva [hidden]) */
 [hidden] { display: none !important; }
 
