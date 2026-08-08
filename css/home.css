@@ -646,7 +646,8 @@
     text-align: center;
 }
 
-/* Più venduti — righe piene: 2 col mobile, 6 col desktop (stessa densità di prima).
+/* Più venduti — 6 prodotti, righe piene senza scarti: 2 col mobile, 3 col
+   desktop (2 righe da 3, non più 1 riga da 6 — meno densa, card più grandi).
    Scoped alla home: le listing categoria restano su .product-grid globale. */
 .home-page .home-catalog .product-grid {
     display: grid;
@@ -656,8 +657,8 @@
 
 @media (min-width: 1024px) {
     .home-page .home-catalog .product-grid {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        gap: 1.25rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
     }
 }
 
