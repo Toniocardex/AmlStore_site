@@ -376,7 +376,7 @@ def recommended_section(lang):
     copy = RECOMMENDED_COPY[lang]
     labels = BASE_LABELS[lang]
     cards = "".join(
-        product_card(lang, featured_prod(lang, p), labels) for p in RECOMMENDED
+        product_card(lang, featured_prod(lang, p), labels, clean_price=True) for p in RECOMMENDED
     )
     return f"""
         <section id="prodotti-consigliati" class="home-recommended" aria-labelledby="prodotti-consigliati-title">
@@ -403,7 +403,7 @@ def patch_index(lang):
     text = PAYMENTS_STRIP_RE.sub("\n", text)
 
     cards = "".join(
-        product_card(lang, featured_prod(lang, p), labels) for p in FEATURED
+        product_card(lang, featured_prod(lang, p), labels, clean_price=True) for p in FEATURED
     )
 
     if not CATALOG_SECTION_RE.search(text):

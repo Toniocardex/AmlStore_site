@@ -683,8 +683,8 @@ def hreflang_block(slug):
     return "\n".join(lines)
 
 
-def product_card_price_block(sale, compare, disc):
-    if disc > 0:
+def product_card_price_block(sale, compare, disc, clean=False):
+    if disc > 0 and not clean:
         return f"""                    <div class="product-card-price-block">
                         <div class="product-card-price-block__row">
                             <span class="product-card-price-block__msrp">€ {eur_fmt(compare)}</span>
@@ -695,7 +695,7 @@ def product_card_price_block(sale, compare, disc):
     return f"""                    <p class="product-card-price">€ {eur_fmt(sale)}</p>"""
 
 
-def product_card(lang, prod, labels):
+def product_card(lang, prod, labels, clean_price=False):
     e = entry(prod["sku"])
     sale = e["unitAmountMinor"]
     compare = e["compareAtMinor"]
@@ -717,7 +717,7 @@ def product_card(lang, prod, labels):
     lazy_attr = ' loading="lazy"' if prod.get("lazy") else ""
     fp = prod.get("fetchpriority")
     fp_attr = f' fetchpriority="{fp}"' if fp in ("high", "low", "auto") else ""
-    price_html = product_card_price_block(sale, compare, disc)
+    price_html = product_card_price_block(sale, compare, disc, clean=clean_price)
     return f"""                <div
                     class="product-card"
                     data-stripe-currency="eur"
