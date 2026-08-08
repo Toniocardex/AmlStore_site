@@ -456,11 +456,14 @@
 }
 
 /* Ritmo sezioni — sfondo alternato per dare profondità tonale alla pagina.
-   Esclude .home-institutional (banda navy fissa, gestisce da sé il proprio
-   full-bleed), .home-business (pannello contenuto, non a tutta larghezza) e
+   Esclude .home-business (pannello contenuto, non a tutta larghezza) e
    .home-social-proof (blocco centrato via margin-inline:auto) — altrimenti
-   questa regola vince per specificità e ne rompe lo stile/allineamento. */
-.home-page > section:nth-of-type(even):not(.home-hero):not(.home-institutional):not(.home-business):not(.home-social-proof) {
+   questa regola vince per specificità e ne rompe lo stile/allineamento.
+   .home-faq e .home-recommended sono escluse esplicitamente: dopo la
+   rimozione di .home-institutional la loro posizione nth-of-type è
+   diventata pari, ma il loro aspetto (nessuno sfondo speciale) non deve
+   cambiare per un effetto collaterale della numerazione. */
+.home-page > section:nth-of-type(even):not(.home-hero):not(.home-business):not(.home-social-proof):not(.home-faq):not(.home-recommended) {
     background: var(--aml-paper);
     margin-inline: calc(50% - 50vw);
     width: 100vw;
@@ -480,6 +483,26 @@
     line-height: 1.55;
     color: var(--page-text-secondary);
     font-weight: 500;
+}
+
+/* Unico avviso non ridondante rimasto dalla ex fascia .home-institutional:
+   gli altri 3 claim duplicavano parola per parola la barra utility in
+   header (sempre visibile), questo no — resta qui, vicino ai CTA. */
+.home-catalog-payment-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    color: var(--page-text-muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.home-catalog-payment-note svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    color: var(--aml-ok);
 }
 
 .home-catalog-more {
@@ -909,102 +932,6 @@
         transition: none;
         transform: none;
     }
-}
-
-/* ── Fascia di fiducia istituzionale — stesso pattern/copia di .pf-institutional
-   sulle pagine prodotto (product-v3.css), riproposto qui full-bleed: stessa
-   fonte di verità, non una nuova variante di testo o colore.
-   Background: riuso AVIF brand con cover (crop, non stretch) + scrim 2-layer. ── */
-.home-institutional {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    margin-inline: calc(50% - 50vw);
-    width: 100vw;
-    min-height: 260px;
-    color: #ffffff;
-    background-color: var(--aml-navy, #0a1830);
-    background-image: url("../asset/media/aml_store_media_background_mobile.avif");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 68% center;
-}
-
-.home-institutional::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(10, 24, 48, 0.25) 0%,
-            transparent 62%
-        ),
-        rgba(10, 24, 48, 0.7);
-}
-
-.home-institutional__inner {
-    position: relative;
-    z-index: 1;
-    max-width: var(--aml-maxw);
-    margin: 0 auto;
-    padding: clamp(40px, 6vw, 64px) var(--aml-gutter);
-}
-
-@media (min-width: 768px) {
-    .home-institutional {
-        min-height: 210px;
-        background-image: url("../asset/media/aml_store_media_background.avif");
-        background-position: 72% 58%;
-    }
-}
-
-.home-institutional__title {
-    margin: 0 0 24px;
-    font-family: var(--font-sans);
-    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    max-width: 40ch;
-}
-
-.home-institutional__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px 24px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.home-institutional__grid li {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    padding-inline-start: 14px;
-    border-inline-start: 2px solid rgba(255, 255, 255, 0.25);
-}
-
-.home-institutional__grid li strong {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.home-institutional__grid li span {
-    font-size: 0.85rem;
-    line-height: 1.45;
-    color: rgba(255, 255, 255, 0.72);
-}
-
-@media (max-width: 900px) {
-    .home-institutional__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 480px) {
-    .home-institutional__grid { grid-template-columns: 1fr; }
 }
 
 /* ── Pannello "per aziende" — accenno leggero, non una seconda hero: bordo
