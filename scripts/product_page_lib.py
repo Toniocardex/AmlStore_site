@@ -135,7 +135,7 @@ def _trustpilot_buy_mini(lang):
                         data-locale="{tp_locale}"
                         data-template-id="{TRUSTPILOT_TEMPLATE_ID}"
                         data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT}"
-                        data-style-height="28px"
+                        data-style-height="40px"
                         data-style-width="100%"
                         data-token="{TRUSTPILOT_TOKEN}"
                         data-min-review-count="0"
