@@ -668,8 +668,21 @@
     gap: 0.75rem;
 }
 
-.home-page .home-catalog .product-card-media {
+.home-page .home-catalog .product-card-media,
+.home-page .home-recommended .product-card-media {
     height: clamp(140px, 38vw, 200px);
+}
+
+/* Cornice uniforme: le immagini prodotto arrivano con stili molto diversi
+   tra loro (illustrazioni piatte, render scatola, gradienti) e riempiono
+   già da sole il proprio canvas 400×400, quindi object-fit:contain da solo
+   non lascia margine. Un padding fisso sul riquadro forza lo stesso respiro
+   neutro attorno a ogni immagine, cosa che le fa leggere come un'unica
+   collezione invece di un accostamento casuale di stili. */
+.home-page .home-catalog .product-card-media,
+.home-page .home-recommended .product-card-media {
+    padding: 0.85rem;
+    box-sizing: border-box;
 }
 
 .home-page .home-catalog .product-card-name {
