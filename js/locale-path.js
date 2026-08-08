@@ -20,6 +20,13 @@
             de: 'beratung',
             es: 'consultoria',
         },
+        {
+            it: 'chi-siamo',
+            en: 'about-us',
+            fr: 'qui-sommes-nous',
+            de: 'ueber-uns',
+            es: 'quienes-somos',
+        },
     ];
 
     function isKnownLangCode(segment) {
