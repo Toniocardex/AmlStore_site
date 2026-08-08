@@ -1007,12 +1007,12 @@
 /* Trustpilot Micro TrustBox nella buy card (sotto CTA) */
 .pdp-buy-trustpilot {
     margin: 12px 0 4px;
-    min-height: 28px;
+    min-height: 40px;
     width: 100%;
 }
 
 .pdp-buy-trustpilot .trustpilot-widget {
-    min-height: 28px;
+    min-height: 40px;
 }
 
 /* ── RECENSIONI (sezione pagina, se ancora presente) ─────────────────────── */

@@ -35,7 +35,7 @@ def buy_mini_html(lang: str) -> str:
         f'                        data-locale="{tp_locale}"\n'
         f'                        data-template-id="{TRUSTPILOT_TEMPLATE_ID}"\n'
         f'                        data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT}"\n'
-        f'                        data-style-height="28px"\n'
+        f'                        data-style-height="40px"\n'
         f'                        data-style-width="100%"\n'
         f'                        data-token="{TRUSTPILOT_TOKEN}"\n'
         f'                        data-min-review-count="0"\n'
