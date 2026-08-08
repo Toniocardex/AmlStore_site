@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from product_page_lib import (  # noqa: E402
     TRUSTPILOT_BUSINESS_UNIT,
+    TRUSTPILOT_FALLBACK_LEAD,
     TRUSTPILOT_LOCALE,
     TRUSTPILOT_TEMPLATE_ID,
     TRUSTPILOT_TOKEN,
@@ -27,8 +28,10 @@ LANGS = ("it", "en", "fr", "de", "es")
 
 def buy_mini_html(lang: str) -> str:
     tp_locale, tp_url = TRUSTPILOT_LOCALE[lang]
+    fallback_lead = TRUSTPILOT_FALLBACK_LEAD[lang]
     return (
         f'                <div class="product-trustpilot pdp-buy-trustpilot">\n'
+        f'                    <p class="product-trustpilot__fallback trustpilot-fallback">{fallback_lead} <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>.</p>\n'
         f'                    <div\n'
         f'                        id="trustpilot-widget"\n'
         f'                        class="trustpilot-widget"\n'

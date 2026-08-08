@@ -120,6 +120,14 @@ TRUSTPILOT_I18N = {
     },
 }
 
+TRUSTPILOT_FALLBACK_LEAD = {
+    "it": "Esperienze reali condivise dai clienti su",
+    "en": "Real experiences shared by customers on",
+    "fr": "Expériences réelles partagées sur",
+    "de": "Echte Erfahrungen von Kunden auf",
+    "es": "Experiencias reales compartidas en",
+}
+
 TRUSTPILOT_BUSINESS_UNIT = "61c44c912f493a1a7cd810fa"
 TRUSTPILOT_TEMPLATE_ID = "5419b6a8b0d04a076446a9ad"
 TRUSTPILOT_TOKEN = "27270fde-f5a0-4937-9101-76b7ebae8a1a"
@@ -128,7 +136,9 @@ TRUSTPILOT_TOKEN = "27270fde-f5a0-4937-9101-76b7ebae8a1a"
 def _trustpilot_buy_mini(lang):
     """Micro TrustBox nella buy card (sotto CTA)."""
     tp_locale, tp_url = TRUSTPILOT_LOCALE[lang]
+    fallback_lead = TRUSTPILOT_FALLBACK_LEAD[lang]
     return f"""                <div class="product-trustpilot pdp-buy-trustpilot">
+                    <p class="product-trustpilot__fallback trustpilot-fallback">{fallback_lead} <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>.</p>
                     <div
                         id="trustpilot-widget"
                         class="trustpilot-widget"
