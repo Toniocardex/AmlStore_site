@@ -644,25 +644,81 @@ ecommerce-footer {
     z-index: 1;
 }
 
-/* --- Pagine legali / testo lungo --- */
+/* --- Pagine legali / testo lungo ---
+   Stesso linguaggio visivo di about.css: card su sfondo --aml-paper,
+   accenti brand sui titoli di sezione, bullet colorati. Nessuna modifica
+   all'HTML: la card si adatta alla struttura h1/.legal-meta/p/h2 già
+   condivisa da cookie-policy, privacy-policy, terms, returns e account. */
 .legal-doc {
     max-width: 52rem;
+    padding: clamp(1.75rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3.5rem);
+    background: var(--aml-surface);
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-lg);
+    box-shadow: var(--aml-shadow-sm);
+}
+
+.legal-doc h1 {
+    font-family: var(--aml-font-display);
+    font-size: clamp(1.85rem, 4vw, 2.35rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--aml-ink);
+    margin: 0 0 0.75rem;
+}
+
+.legal-doc .legal-meta {
+    display: inline-block;
+    margin: 0 0 1.75rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    background: var(--aml-trust-bg);
+    color: var(--aml-brand);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+/* Paragrafo introduttivo (subito dopo il chip data): leggermente più
+   grande e con misura di riga contenuta, come i "lede" del sito. */
+.legal-doc h1 + .legal-meta + p {
+    font-size: 1.02rem;
+    color: var(--aml-ink-2);
+    max-width: 62ch;
 }
 
 .legal-doc h2 {
-    font-size: 1.25rem;
+    position: relative;
+    margin: 2.5rem 0 1rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--aml-line);
+    font-size: 1.15rem;
     font-weight: 800;
-    margin: 2.25rem 0 0.75rem;
-    color: var(--page-text);
+    letter-spacing: -0.01em;
+    color: var(--aml-ink);
+}
+
+.legal-doc h2::before {
+    content: '';
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.6rem;
+    border-radius: 2px;
+    background: var(--aml-brand);
+    vertical-align: middle;
+    transform: translateY(-2px);
 }
 
 .legal-doc h2:first-of-type {
-    margin-top: 1.5rem;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
 }
 
 .legal-doc p,
 .legal-doc li {
-    color: var(--page-text-secondary);
+    color: var(--aml-ink-2);
     line-height: 1.75;
     font-size: 0.95rem;
 }
@@ -672,29 +728,39 @@ ecommerce-footer {
 }
 
 .legal-doc ul {
-    margin: 0 0 1rem 1.1rem;
+    list-style: none;
+    margin: 0 0 1.1rem;
     padding: 0;
 }
 
 .legal-doc li {
-    margin-bottom: 0.35rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+    padding-left: 1.35rem;
+}
+
+.legal-doc li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--aml-brand);
 }
 
 .legal-doc a {
-    color: var(--page-accent);
+    color: var(--aml-brand);
     font-weight: 600;
     text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--aml-brand) 35%, transparent);
     text-underline-offset: 2px;
+    transition: text-decoration-color 0.15s ease;
 }
 
 .legal-doc a:hover {
-    filter: brightness(1.08);
-}
-
-.legal-doc .legal-meta {
-    font-size: 0.85rem;
-    color: var(--page-text-muted);
-    margin-bottom: 1.5rem;
+    text-decoration-color: var(--aml-brand);
 }
 
 .legal-doc a.account-phone {
@@ -702,20 +768,37 @@ ecommerce-footer {
 }
 
 .cookie-panel-trigger {
-    min-height: 44px;
-    padding: 0.6rem 1.25rem;
-    border-radius: 6px;
-    border: 1px solid var(--page-border);
-    background: var(--page-text);
-    color: var(--page-bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0.75rem 1.4rem;
+    border: none;
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-brand);
+    color: var(--aml-surface);
     font-weight: 700;
-    cursor: pointer;
+    font-size: 0.92rem;
     font-family: inherit;
+    cursor: pointer;
+    box-shadow: var(--aml-shadow-md);
+    transition: background-color 0.15s ease;
+}
+
+.cookie-panel-trigger:hover {
+    background: var(--aml-brand-hover);
 }
 
 .cookie-panel-trigger:focus-visible {
-    outline: 2px solid var(--page-accent);
+    outline: 2px solid var(--aml-brand);
     outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+    .legal-doc {
+        padding: 1.5rem 1.25rem;
+        border-radius: var(--aml-radius-md);
+    }
 }
 
 /* ─── Checkout stepper (cart → checkout → conferma) ────────────────────────── */
