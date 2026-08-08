@@ -18,6 +18,8 @@ const FOOTER_I18N = {
         prodOffice: 'Office',
         prodM365: 'Microsoft 365',
         prodAntivirus: 'Antivirus',
+        companyAbout: 'Chi siamo',
+        aboutSlug: 'chi-siamo',
         companyConsultation: 'Consulenza software',
         consultationSlug: 'consulenza',
         companyBusiness: 'Soluzioni business',
@@ -51,6 +53,8 @@ const FOOTER_I18N = {
         prodOffice: 'Office',
         prodM365: 'Microsoft 365',
         prodAntivirus: 'Antivirus',
+        companyAbout: 'About us',
+        aboutSlug: 'about-us',
         companyConsultation: 'Software consultation',
         consultationSlug: 'consultation',
         companyBusiness: 'Business solutions',
@@ -84,6 +88,8 @@ const FOOTER_I18N = {
         prodOffice: 'Office',
         prodM365: 'Microsoft 365',
         prodAntivirus: 'Antivirus',
+        companyAbout: 'Qui sommes-nous',
+        aboutSlug: 'qui-sommes-nous',
         companyConsultation: 'Conseil logiciel',
         consultationSlug: 'consultation',
         companyBusiness: 'Solutions professionnelles',
@@ -117,6 +123,8 @@ const FOOTER_I18N = {
         prodOffice: 'Office',
         prodM365: 'Microsoft 365',
         prodAntivirus: 'Antivirus',
+        companyAbout: 'Über uns',
+        aboutSlug: 'ueber-uns',
         companyConsultation: 'Softwareberatung',
         consultationSlug: 'beratung',
         companyBusiness: 'Business-Lösungen',
@@ -150,6 +158,8 @@ const FOOTER_I18N = {
         prodOffice: 'Office',
         prodM365: 'Microsoft 365',
         prodAntivirus: 'Antivirus',
+        companyAbout: 'Quiénes somos',
+        aboutSlug: 'quienes-somos',
         companyConsultation: 'Asesoramiento de software',
         consultationSlug: 'consultoria',
         companyBusiness: 'Soluciones empresariales',
@@ -192,6 +202,7 @@ class EcommerceFooter extends HTMLElement {
         const t = FOOTER_I18N[activeLang.code] || FOOTER_I18N.it;
         const homeHref = S.homeHref(parsed.pathPrefix, activeLang.code);
         const consultationHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, t.consultationSlug);
+        const aboutHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, t.aboutSlug);
         const esc = S.escapeHtmlAttr;
         const staticRoot = S.staticRootFromScriptPath('/components/footer.js');
         const pageHref = (slug) => `${staticRoot}/${activeLang.code}/${slug}`;
@@ -499,6 +510,7 @@ class EcommerceFooter extends HTMLElement {
                             <section class="nav-col" aria-labelledby="footer-company-${esc(activeLang.code)}">
                                 <h2 id="footer-company-${esc(activeLang.code)}" class="col-title">${esc(t.headingCompany)}</h2>
                                 <ul class="link-list">
+                                    <li><a href="${esc(aboutHref)}">${esc(t.companyAbout)}</a></li>
                                     <li><a href="${esc(consultationHref)}">${esc(t.companyConsultation)}</a></li>
                                     <li><a href="${esc(pageHref('windows-server'))}">${esc(t.companyBusiness)}</a></li>
                                     <li><a href="${esc(reviewsHref)}" target="_blank" rel="noopener noreferrer">${esc(t.companyReviews)}</a></li>
