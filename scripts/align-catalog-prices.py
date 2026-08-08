@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Align HTML data-stripe-* and visible prices with catalog SKUs (CSV source)."""
+"""Align HTML data-stripe-* and visible prices with catalog SKUs (CSV source).
+
+LEGACY — one-off script for a single historical price bump (Personal/Family).
+Do NOT extend this hardcoded-pairs pattern for future catalog-wide price
+changes: it does not scale and is not SKU-aware across the whole catalog.
+See scripts/apply-pricing-policy-3pct.py for the SKU-aware, data-driven
+approach used by the ADR pricing-policy-3pct migration.
+"""
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]

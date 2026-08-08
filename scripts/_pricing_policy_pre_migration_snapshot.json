@@ -1,0 +1,254 @@
+{
+  "_comment": "Baseline pre-migrazione ADR pricing-policy-3pct. Non modificare.",
+  "formula": "newUnitAmountMinor = floor((oldUnitAmountMinor * 103 + 50) / 100)",
+  "entries": {
+    "QQ2-00012": {
+      "unitAmountMinor": 7900,
+      "compareAtMinor": 9900
+    },
+    "EP2-06798": {
+      "unitAmountMinor": 13900,
+      "compareAtMinor": 14900
+    },
+    "EP2-07219": {
+      "unitAmountMinor": 7900,
+      "compareAtMinor": 14900
+    },
+    "065-09748": {
+      "unitAmountMinor": 7900,
+      "compareAtMinor": 14900
+    },
+    "065-09804": {
+      "unitAmountMinor": 7900,
+      "compareAtMinor": 14900
+    },
+    "KW9-00642": {
+      "unitAmountMinor": 5900,
+      "compareAtMinor": 9900
+    },
+    "FQC-10528": {
+      "unitAmountMinor": 7900,
+      "compareAtMinor": 14900
+    },
+    "6GQ-00092": {
+      "unitAmountMinor": 10495,
+      "compareAtMinor": 12900
+    },
+    "FQC-08930": {
+      "unitAmountMinor": 5799,
+      "compareAtMinor": 14900
+    },
+    "KW9-00136": {
+      "unitAmountMinor": 3799,
+      "compareAtMinor": 9900
+    },
+    "79G-05412": {
+      "unitAmountMinor": 13400,
+      "compareAtMinor": 14900
+    },
+    "T5D-03485": {
+      "unitAmountMinor": 19989,
+      "compareAtMinor": 29900
+    },
+    "DG7GMGF0PN44": {
+      "unitAmountMinor": 34900,
+      "compareAtMinor": 34900
+    },
+    "EAVH-N1-A1": {
+      "unitAmountMinor": 2199,
+      "compareAtMinor": 3999
+    },
+    "GMGF0D7FX-0002-P": {
+      "unitAmountMinor": 23400,
+      "compareAtMinor": 47900
+    },
+    "T5D-03489": {
+      "unitAmountMinor": 15990,
+      "compareAtMinor": 29900
+    },
+    "EAVH-N1-A2": {
+      "unitAmountMinor": 3199,
+      "compareAtMinor": 4499
+    },
+    "EAVH-N1-A3": {
+      "unitAmountMinor": 3499,
+      "compareAtMinor": 4998
+    },
+    "EAVH-N1-A5": {
+      "unitAmountMinor": 4298,
+      "compareAtMinor": 5999
+    },
+    "EAVH-N1-A10": {
+      "unitAmountMinor": 6999,
+      "compareAtMinor": 8499
+    },
+    "KLQ-00388": {
+      "unitAmountMinor": 13998,
+      "compareAtMinor": 17100
+    },
+    "21395096E7": {
+      "unitAmountMinor": 1499,
+      "compareAtMinor": 2999
+    },
+    "269-17068": {
+      "unitAmountMinor": 17499,
+      "compareAtMinor": 20899
+    },
+    "7470A": {
+      "unitAmountMinor": 1999,
+      "compareAtMinor": 2299
+    },
+    "TL11012001-EN": {
+      "unitAmountMinor": 2899,
+      "compareAtMinor": 3499
+    },
+    "TL11012001-EN-5D": {
+      "unitAmountMinor": 3899,
+      "compareAtMinor": 5671
+    },
+    "TL11011010-DE": {
+      "unitAmountMinor": 5499,
+      "compareAtMinor": 7999
+    },
+    "FQC-10538": {
+      "unitAmountMinor": 8199,
+      "compareAtMinor": 14900
+    },
+    "EP2-07110": {
+      "unitAmountMinor": 44700,
+      "compareAtMinor": 88900
+    },
+    "EP2-07167": {
+      "unitAmountMinor": 28495,
+      "compareAtMinor": 47900
+    },
+    "P73-08328": {
+      "unitAmountMinor": 35999,
+      "compareAtMinor": 38900
+    },
+    "79G-05018": {
+      "unitAmountMinor": 10259,
+      "compareAtMinor": 14900
+    },
+    "NORT_360DEL_3D_1A": {
+      "unitAmountMinor": 1999,
+      "compareAtMinor": 3999
+    },
+    "P1433901": {
+      "unitAmountMinor": 1899,
+      "compareAtMinor": 2999
+    },
+    "EP2-25187": {
+      "unitAmountMinor": 39495,
+      "compareAtMinor": 74900
+    },
+    "P73-08538": {
+      "unitAmountMinor": 38999,
+      "compareAtMinor": 78895
+    },
+    "P73-07788": {
+      "unitAmountMinor": 13900,
+      "compareAtMinor": 27900
+    },
+    "EP2-07001": {
+      "unitAmountMinor": 68999,
+      "compareAtMinor": 165900
+    },
+    "KASP_STD_1D_1A": {
+      "unitAmountMinor": 1899,
+      "compareAtMinor": 3499
+    },
+    "KASP_PLUS_1D_1A": {
+      "unitAmountMinor": 3199,
+      "compareAtMinor": 5499
+    },
+    "KL1047TDAFS": {
+      "unitAmountMinor": 2999,
+      "compareAtMinor": 7999
+    },
+    "NORT_360DEL_3D_1A-NOABB": {
+      "unitAmountMinor": 1899,
+      "compareAtMinor": 3999
+    },
+    "AD_STD_2D-1A": {
+      "unitAmountMinor": 17999,
+      "compareAtMinor": 19020
+    },
+    "SC916509": {
+      "unitAmountMinor": 23999,
+      "compareAtMinor": 29119
+    },
+    "W11_PRO_STICKER": {
+      "unitAmountMinor": 3199,
+      "compareAtMinor": 7900
+    },
+    "P6L-00076": {
+      "unitAmountMinor": 388000,
+      "compareAtMinor": 665000
+    },
+    "P73-07788_ESD": {
+      "unitAmountMinor": 14799,
+      "compareAtMinor": 67999
+    },
+    "B0CXZR44LP": {
+      "unitAmountMinor": 56900,
+      "compareAtMinor": 77900
+    },
+    "1108921": {
+      "unitAmountMinor": 995,
+      "compareAtMinor": 2995
+    },
+    "1108923": {
+      "unitAmountMinor": 1499,
+      "compareAtMinor": 3995
+    },
+    "MTP00MNRXRAAD": {
+      "unitAmountMinor": 1790,
+      "compareAtMinor": 7999
+    },
+    "KL1047GDCFS1": {
+      "unitAmountMinor": 3499,
+      "compareAtMinor": 6899
+    },
+    "KL1047GDEFS": {
+      "unitAmountMinor": 4499,
+      "compareAtMinor": 7899
+    },
+    "KL1047GDKFS": {
+      "unitAmountMinor": 5499,
+      "compareAtMinor": 8999
+    },
+    "SC835510": {
+      "unitAmountMinor": 189900,
+      "compareAtMinor": 375500
+    },
+    "SC_M365_KPremium_5Device": {
+      "unitAmountMinor": 11899,
+      "compareAtMinor": 17898
+    },
+    "SC_M365P_MTOTPROT_5Device": {
+      "unitAmountMinor": 9799,
+      "compareAtMinor": 13895
+    },
+    "SC_W11HOME_M365PERS": {
+      "unitAmountMinor": 14900,
+      "compareAtMinor": 17800
+    },
+    "ACRTRIAD1D1Y": {
+      "unitAmountMinor": 3499,
+      "compareAtMinor": 5799
+    },
+    "EP2-06606": {
+      "unitAmountMinor": 20490,
+      "compareAtMinor": 29900
+    },
+    "5W1-04285": {
+      "unitAmountMinor": 7900,
+      "compareAtMinor": 14900
+    },
+    "EAVH-N2-A1": {
+      "unitAmountMinor": 4990,
+      "compareAtMinor": 7998
+    }
+  }
+}

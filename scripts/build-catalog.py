@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
-"""Generate functions/api/_lib/catalog.js and catalog.json from a legacy shop CSV export (not used at runtime)."""
+"""Generate functions/api/_lib/catalog.js and catalog.json from a legacy shop CSV export (not used at runtime).
+
+LEGACY / NON eseguire senza rileggere docs/adr/pricing-policy-3pct.md.
+Il catalogo attuale ha gia' ricevuto il markup one-shot +3% (vedi
+scripts/apply-pricing-policy-3pct.py e il relativo snapshot in
+scripts/_pricing_policy_pre_migration_snapshot.json). Se questo script
+viene rieseguito sullo stesso CSV legacy, applica comunque la pricing
+policy (vedi apply_pricing_policy_minor) cosi' da non reintrodurre i
+prezzi pre-migrazione — ma il CSV stesso resta una fonte pre-3% "grezza",
+quindi il risultato NON coincide necessariamente col catalogo attuale se
+nel frattempo i prezzi correnti sono stati aggiustati manualmente.
+
+Public selling price = source/base selling price + 3%.
+Do not psychological-round the result.
+"""
 import csv
 import json
 import re
@@ -9,6 +23,11 @@ ROOT = Path(__file__).resolve().parents[1]
 CSV_PATH = Path(r"c:\Users\Anton\Downloads\export-products-complete-25-05-2026_02-37.csv")
 OUT_JS = ROOT / "functions" / "api" / "_lib" / "catalog.js"
 OUT_JSON = ROOT / "catalog.json"
+
+
+def apply_pricing_policy_minor(base_minor: int) -> int:
+    """ADR pricing-policy-3pct: +3% sul prezzo di vendita, un solo arrotondamento."""
+    return (base_minor * 103 + 50) // 100
 
 
 def eur_to_minor(v):
@@ -77,10 +96,11 @@ def load_entries():
             if not name:
                 continue
             sku = disambiguate_code(row.get("code", "").strip(), name, counts)
-            sale = eur_to_minor(row.get("price_1_special") or row.get("price_1"))
+            base_sale = eur_to_minor(row.get("price_1_special") or row.get("price_1"))
             compare = eur_to_minor(row.get("price_1"))
-            if sale <= 0:
+            if base_sale <= 0:
                 continue
+            sale = apply_pricing_policy_minor(base_sale)
             if compare < sale:
                 compare = sale
             entries.append(
