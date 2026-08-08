@@ -71,36 +71,9 @@ ALLOWLIST = {
         "background: rgba(127, 127, 127, 0.05);",
     },
     "css/home.css": {
-        # Hero fotografico full-bleed: overlay scuro sempre presente sopra la foto,
-        # non e' un residuo del tema scuro — vedi commento nel file.
-        "background: #050505;",
-        "rgba(5, 5, 5, 0.94) 0%,",
-        "rgba(5, 5, 5, 0.78) 38%,",
-        "rgba(5, 5, 5, 0.30) 65%,",
-        "rgba(5, 5, 5, 0.08) 100%",
-        "color: rgba(250, 250, 250, 0.65);",
-        "background: rgba(250, 250, 250, 0.35);",
-        "color: #fafafa;",
-        "color: rgba(250, 250, 250, 0.78);",
-        "background: rgba(255, 255, 255, 0.08);",
-        "color: rgba(255, 255, 255, 0.90);",
-        "border: 1px solid rgba(255, 255, 255, 0.22);",
-        "background: rgba(255, 255, 255, 0.14);",
-        "border-color: rgba(255, 255, 255, 0.32);",
-        "background: rgba(5, 5, 5, 0.62);",
-        "border-top: 1px solid rgba(255, 255, 255, 0.07);",
-        "color: rgba(250, 250, 250, 0.80);",
-        "border-left: 1px solid rgba(255, 255, 255, 0.1);",
-        "background: rgba(5, 5, 5, 0.92);",
-        # Card chiara (bianco -> grigio chiarissimo), non un bug di contrasto
-        "background: linear-gradient(145deg, #ffffff 0%, #f4f4f5 100%);",
         # Testo bianco su icona/bottone colorato
         "color: #ffffff;",
         "color: #fff;",
-        # Fascia navy sempre scura (.home-institutional), stesso pattern di
-        # .pf-institutional sulle pagine prodotto — testo bianco intenzionale.
-        "border-inline-start: 2px solid rgba(255, 255, 255, 0.25);",
-        "color: rgba(255, 255, 255, 0.72);",
     },
     "css/cart.css": {
         # Testo/outline bianco sul bottone primario (sfondo accent) — vedi .cart-btn-primary
