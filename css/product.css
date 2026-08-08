@@ -193,6 +193,7 @@ main.product-page {
     color: var(--page-text-muted);
     text-decoration: line-through;
     text-decoration-thickness: 1px;
+    white-space: nowrap;
 }
 
 .product-sticky-cta__sale {
@@ -201,6 +202,7 @@ main.product-page {
     color: var(--page-text);
     letter-spacing: -0.03em;
     line-height: 1;
+    white-space: nowrap;
 }
 
 .product-sticky-cta .btn-primary {
