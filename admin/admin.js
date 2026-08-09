@@ -26,14 +26,18 @@
         stockLoading:    false,
         selected:        new Set(),
         cart: {
-            page:     1,
-            status:   'abandoned',
-            days:     '30',
-            hasEmail: '',
-            country:  '',
-            total:    0,
-            pageSize: 50,
-            loading:  false,
+            page:      1,
+            status:    'abandoned',
+            days:      '30',
+            hoursIdle: '2',
+            hasEmail:  '',
+            country:   '',
+            total:     0,
+            pageSize:  50,
+            loading:   false,
+            // Soglia effettivamente applicata, come la rimanda l'API: le etichette
+            // di stato devono usare quella, non una copia locale.
+            effectiveHoursIdle: 2,
         },
     };
 
@@ -1082,6 +1086,7 @@
         if (state.cart.page > 1)                                     params.set('page', state.cart.page);
         if (state.cart.status)                                       params.set('status', state.cart.status);
         if (state.cart.days !== '' && state.cart.days != null)       params.set('days', state.cart.days);
+        if (state.cart.hoursIdle)                                    params.set('hoursIdle', state.cart.hoursIdle);
         if (state.cart.hasEmail === '1' || state.cart.hasEmail === '0') params.set('hasEmail', state.cart.hasEmail);
         if (state.cart.country)                                      params.set('country', state.cart.country);
         return params.toString() ? '?' + params.toString() : '';
@@ -1100,6 +1105,7 @@
             state.cart.total    = data.total    || 0;
             state.cart.pageSize = data.pageSize || 50;
             state.cart.loading  = false;
+            state.cart.effectiveHoursIdle = Number(data.hoursIdle) || state.cart.effectiveHoursIdle;
 
             renderCartStats(data.stats || {});
             renderCartsTable(data.carts || []);
@@ -1114,14 +1120,22 @@
         });
     }
 
-    /** Stato visivo di una riga: la vera fonte di verità sul pagato resta orders.status (join). */
+    /**
+     * Stato visivo di una riga. Due fonti di verità restano fuori da qui:
+     * il pagato viene da orders.status (join lato server) e la soglia di
+     * inattività è quella che l'API dichiara di aver applicato — riscriverla
+     * qui significherebbe mostrare "Attivo" con criteri diversi da quelli con
+     * cui la riga è stata selezionata.
+     */
     function cartStatusInfo(c) {
         if (c.checkoutOrderId) {
             return c.orderStatus === 'paid' ? ['paid', 'Pagato'] : ['checkout', 'Checkout avviato'];
         }
         if (!c.itemCount) return ['empty', 'Vuoto'];
         var idleMs = Date.now() - new Date(c.updatedAt).getTime();
-        return idleMs < 2 * 60 * 60 * 1000 ? ['active', 'Attivo'] : ['abandoned', 'Abbandonato'];
+        return idleMs < state.cart.effectiveHoursIdle * 60 * 60 * 1000
+            ? ['active', 'Attivo']
+            : ['abandoned', 'Abbandonato'];
     }
 
     function renderCartsTable(carts) {
@@ -1170,17 +1184,26 @@
         var el = $('adm-cart-stats');
         if (!el) return;
 
-        var html = '<p class="adm-filter-section__title">Statistiche (' + (stats.days || 30) + ' gg)</p>'
-            + statRow('Creati',                  stats.created || 0)
-            + statRow('Attivi',                  stats.active || 0)
-            + statRow('Abbandonati',              stats.abandoned || 0)
-            + statRow('Tasso abbandono',          pct(stats.abandonmentRate))
-            + statRow('Checkout avviati',         stats.checkoutStarted || 0)
+        var days  = stats.days || 30;
+        var hours = Number(stats.hoursIdle) || state.cart.effectiveHoursIdle;
+        var periodo = days > 0 ? 'creati negli ultimi ' + days + ' gg' : 'tutti i carrelli';
+
+        // I tassi hanno per denominatore "Con contenuto": dirlo evita che vengano
+        // letti sul totale delle righe, svuotati compresi.
+        var html = '<p class="adm-filter-section__title">Statistiche</p>'
+            + '<p class="adm-stat-note">Coorte: ' + esc(periodo) + '.<br>'
+            + 'Abbandonato = fermo da oltre ' + hours + (hours === 1 ? ' ora' : ' ore') + '.</p>'
+            + statRow('Con contenuto',             stats.created || 0)
+            + statRow('Svuotati',                  stats.emptied || 0)
+            + statRow('Attivi',                    stats.active || 0)
+            + statRow('Abbandonati',               stats.abandoned || 0)
+            + statRow('Tasso abbandono',           pct(stats.abandonmentRate))
+            + statRow('Checkout avviati',          stats.checkoutStarted || 0)
             + statRow('Tasso carrello → checkout', pct(stats.cartToCheckoutRate))
-            + statRow('Ordini pagati',            stats.paid || 0)
+            + statRow('Ordini pagati',             stats.paid || 0)
             + statRow('Tasso carrello → pagato',   pct(stats.cartToPaidRate))
-            + statRow('Valore abbandonato',       fmtMoney(stats.abandonedValueMinor, 'EUR'))
-            + statRow('Valore medio',             fmtMoney(stats.abandonedAvgValueMinor, 'EUR'));
+            + statRow('Valore abbandonato',        fmtMoney(stats.abandonedValueMinor, 'EUR'))
+            + statRow('Valore medio',              fmtMoney(stats.abandonedAvgValueMinor, 'EUR'));
 
         if ((stats.topProducts || []).length) {
             html += '<p class="adm-filter-section__title" style="margin-top:1rem">Top prodotti abbandonati</p>'
@@ -1238,11 +1261,14 @@
         var emailSel   = $('cart-filter-email');
         var countryInp = $('cart-filter-country');
 
-        state.cart.status   = statusSel  ? statusSel.value  : 'abandoned';
-        state.cart.days     = daysSel    ? daysSel.value    : '30';
-        state.cart.hasEmail = emailSel   ? emailSel.value   : '';
-        state.cart.country  = countryInp ? countryInp.value.trim().toUpperCase() : '';
-        state.cart.page     = 1;
+        var hoursSel = $('cart-filter-hours');
+
+        state.cart.status    = statusSel  ? statusSel.value  : 'abandoned';
+        state.cart.days      = daysSel    ? daysSel.value    : '30';
+        state.cart.hoursIdle = hoursSel   ? hoursSel.value   : '2';
+        state.cart.hasEmail  = emailSel   ? emailSel.value   : '';
+        state.cart.country   = countryInp ? countryInp.value.trim().toUpperCase() : '';
+        state.cart.page      = 1;
         loadCarts();
     }
 

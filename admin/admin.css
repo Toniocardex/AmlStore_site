@@ -215,6 +215,20 @@ a:hover { text-decoration: underline; }
     margin-top: .25rem;
 }
 
+/* Precisazione accanto a un'etichetta di filtro: dice su quale campo agisce. */
+.adm-hint {
+    font-weight: 400;
+    opacity: .75;
+}
+
+/* Nota sotto il titolo delle statistiche: come vanno letti i numeri sotto. */
+.adm-stat-note {
+    font-size: .7rem;
+    line-height: 1.45;
+    color: var(--adm-muted2);
+    margin: -.25rem 0 .6rem;
+}
+
 .adm-input {
     width: 100%;
     background: var(--adm-card);

@@ -23,3 +23,11 @@ PAYPAL_CLIENT_SECRET=<client-secret-sandbox>
 # Modulo consulenza: valida il flusso locale senza inviare email reali.
 # Non impostare in produzione.
 CONSULTATION_DRY_RUN=1
+
+# Conservazione dei carrelli tracciati (analytics). Facoltative: senza di esse
+# valgono i default indicati. La pulizia gira da sola, in coda alle richieste,
+# al massimo una volta all'ora.
+#   fase 1 — l'email viene azzerata, la riga resta e continua a fare statistica
+# CART_ANONYMIZE_AFTER_DAYS=30
+#   fase 2 — la riga viene cancellata (non può essere inferiore alla fase 1)
+# CART_DELETE_AFTER_DAYS=180

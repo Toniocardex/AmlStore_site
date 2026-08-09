@@ -7,6 +7,9 @@
  *   checkCartSyncRateLimit(env, request)   — rate limit per IP su /api/cart/sync
  *   listCarts(db, opts)                    — lista admin paginata e filtrabile
  *   getCartStats(db, opts)                 — KPI aggregati per la vista admin
+ *   normalizeHoursIdle(value)              — valida la soglia "inattivo da N ore"
+ *   runCartRetention(db, env)              — applica i termini di conservazione
+ *   maybeRunCartRetention(context)         — la lancia al piu' una volta all'ora
  *
  * Nota sugli stati: nessuna colonna di stato salvata. "Abbandonato" = nessun
  * checkout avviato, carrello non vuoto, inattivo da più di `hoursIdle` ore.
@@ -99,10 +102,117 @@ export async function checkCartSyncRateLimit(env, request) {
     return null;
 }
 
+/* ─── Conservazione limitata ─────────────────────────────────────────────────── */
+
+/*
+ * I carrelli sono dati personali raccolti col consenso alla misurazione: senza
+ * un termine tecnico che li faccia scadere resterebbero in D1 per sempre, email
+ * comprese. Due stadi, contati dall'ultima attivita' (`updated_at`):
+ *
+ *   1. dopo ANONYMIZE giorni  -> `email` azzerata; la riga resta e continua a
+ *      contribuire alle statistiche aggregate, che non usano l'email;
+ *   2. dopo DELETE giorni     -> la riga sparisce.
+ *
+ * Le finestre della vista admin arrivano a 90 giorni, quindi il default di 180
+ * per la cancellazione non toglie nulla di operativo. Entrambi i termini sono
+ * sovrascrivibili da variabile d'ambiente.
+ */
+const RETENTION_ANONYMIZE_DAYS_DEFAULT = 30;
+const RETENTION_DELETE_DAYS_DEFAULT    = 180;
+const RETENTION_LOCK_WINDOW_MS         = 60 * 60 * 1000;
+
+function retentionDays(env) {
+    const read = (key, fallback) => {
+        const n = Number(env?.[key]);
+        return Number.isFinite(n) && n > 0 ? Math.floor(n) : fallback;
+    };
+    const anonymize = read('CART_ANONYMIZE_AFTER_DAYS', RETENTION_ANONYMIZE_DAYS_DEFAULT);
+    const remove    = read('CART_DELETE_AFTER_DAYS', RETENTION_DELETE_DAYS_DEFAULT);
+    // Cancellare prima di anonimizzare renderebbe il primo stadio inutile.
+    return { anonymize, remove: Math.max(anonymize, remove) };
+}
+
+/** Applica i due stadi. Restituisce quante righe ha toccato. */
+export async function runCartRetention(db, env) {
+    const { anonymize, remove } = retentionDays(env);
+
+    const anonymized = await db.prepare(`
+        UPDATE cart_sessions
+        SET email = NULL
+        WHERE email IS NOT NULL AND updated_at < ?
+    `).bind(cutoffDaysAgo(anonymize)).run();
+
+    const deleted = await db.prepare(`
+        DELETE FROM cart_sessions WHERE updated_at < ?
+    `).bind(cutoffDaysAgo(remove)).run();
+
+    return {
+        anonymizedAfterDays: anonymize,
+        deletedAfterDays:    remove,
+        anonymized:          anonymized?.meta?.changes ?? 0,
+        deleted:             deleted?.meta?.changes ?? 0,
+    };
+}
+
+/**
+ * Lancia la pulizia al massimo una volta all'ora, in coda alla risposta.
+ *
+ * Pages Functions non ha cron trigger, quindi il giro parte dal traffico. Il
+ * "chi lo fa" si decide con lo stesso bucket usato dal rate limit: l'INSERT..
+ * ON CONFLICT e' atomico e restituisce il contatore, quindi solo la prima
+ * richiesta della finestra oraria vede 1 e procede. `waitUntil` la sposta dopo
+ * la risposta: l'utente non paga la latenza.
+ *
+ * `cheapGate` serve a non pagare quella scrittura su ogni sync: /api/cart/sync
+ * fa gia' un bumpBucket per il rate limit, e tentare sempre anche il lock ne
+ * raddoppierebbe le scritture su D1 per non fare nulla nel 99,99% dei casi. Sul
+ * percorso pubblico si prova quindi solo a inizio ora; la vista admin, che e'
+ * rara, tenta sempre, cosi' la pulizia ha comunque un innesco certo.
+ *
+ * @param {object} context             contesto Pages Functions (env, waitUntil)
+ * @param {boolean} [opts.cheapGate]   true sui percorsi ad alto traffico
+ */
+export function maybeRunCartRetention(context, { cheapGate = false } = {}) {
+    const { env } = context;
+    if (!env?.DB) return;
+    if (cheapGate && new Date().getUTCMinutes() >= 2) return;
+
+    const work = (async () => {
+        try {
+            const windowId = `1h:${windowSlot(RETENTION_LOCK_WINDOW_MS)}`;
+            const count = await bumpBucket(env.DB, 'cart-retention', windowId);
+            if (count !== 1) return;
+            const res = await runCartRetention(env.DB, env);
+            if (res.anonymized || res.deleted) {
+                console.log(
+                    `[cart] retention: ${res.anonymized} email azzerate (>${res.anonymizedAfterDays}gg), ` +
+                    `${res.deleted} righe cancellate (>${res.deletedAfterDays}gg)`
+                );
+            }
+        } catch (e) {
+            // Non deve mai disturbare la richiesta in corso.
+            console.warn('[cart] retention fallita:', e?.message || e);
+        }
+    })();
+
+    if (typeof context.waitUntil === 'function') context.waitUntil(work);
+}
+
 /* ─── Query D1 lista admin ───────────────────────────────────────────────────── */
 
 const PAGE_SIZE = 50;
 const DEFAULT_HOURS_IDLE = 2;
+const MAX_HOURS_IDLE = 24 * 30;
+
+/**
+ * Soglia "inattivo da N ore" proveniente dalla query string: un valore non
+ * numerico diventerebbe NaN e farebbe esplodere `toISOString()`.
+ */
+export function normalizeHoursIdle(value) {
+    const n = Number(value);
+    if (!Number.isFinite(n) || n <= 0) return DEFAULT_HOURS_IDLE;
+    return Math.min(Math.round(n), MAX_HOURS_IDLE);
+}
 
 function isoHoursAgo(hours) {
     return new Date(Date.now() - hours * 60 * 60 * 1000).toISOString();
@@ -124,7 +234,7 @@ function cutoffDaysAgo(days) {
  * @param {number}  [opts.hoursIdle=2]  soglia di inattività per "abbandonato"
  * @param {boolean} [opts.hasEmail]     filtra per presenza/assenza email
  * @param {string}  [opts.country]      filtro paese esatto (ISO-2)
- * @param {number}  [opts.days=30]      finestra temporale su updated_at (0/undefined = nessun limite)
+ * @param {number}  [opts.days=30]      finestra temporale su created_at (0 = nessun limite)
  */
 export async function listCarts(db, {
     page      = 1,
@@ -139,8 +249,12 @@ export async function listCarts(db, {
     const bindings   = [];
     const cutoffIdle = isoHoursAgo(hoursIdle);
 
+    // Il periodo e' una coorte: "carrelli nati in questi giorni", non "toccati".
+    // Filtrare su updated_at faceva rientrare nel periodo carrelli molto piu'
+    // vecchi solo perche' ripresi di recente, e faceva divergere i numeri della
+    // sidebar da quelli della tabella.
     if (days > 0) {
-        conditions.push('cart_sessions.updated_at >= ?');
+        conditions.push('cart_sessions.created_at >= ?');
         bindings.push(cutoffDaysAgo(days));
     }
 
@@ -205,30 +319,45 @@ function formatCartRow(row) {
 /* ─── Statistiche aggregate (vista admin "Carrelli") ─────────────────────────── */
 
 /**
- * KPI aggregati sugli ultimi `days` giorni (default 30) per non mescolare
- * carrelli vecchissimi con la situazione commerciale corrente.
+ * KPI aggregati sulla coorte dei carrelli **nati** negli ultimi `days` giorni.
+ *
+ * Due scelte che cambiano i numeri rispetto alla prima versione:
+ *
+ *  - la finestra e' su `created_at`, non su `updated_at`: "di quelli iniziati
+ *    nel periodo, com'e' finita". Prima un carrello di due mesi fa ripreso ieri
+ *    entrava fra i "creati negli ultimi 30 giorni";
+ *  - il denominatore conta solo i carrelli che hanno avuto contenuto. Prima era
+ *    `COUNT(*)`, quindi comprendeva anche quelli svuotati dall'utente, che pero'
+ *    sono esclusi dai numeratori (`item_count > 0`): il tasso di abbandono
+ *    risultava sistematicamente piu' basso del reale. I carrelli svuotati sono
+ *    ora esposti a parte come `emptied`, invece di sparire dentro il totale.
  */
 export async function getCartStats(db, { days = 30, hoursIdle = DEFAULT_HOURS_IDLE } = {}) {
     const cutoffDays = cutoffDaysAgo(days);
     const cutoffIdle = isoHoursAgo(hoursIdle);
 
+    /* Un carrello "ha avuto contenuto" se ne ha ancora, o se e' arrivato al
+       checkout (dopo il quale lo snapshot puo' essere vuoto). */
+    const HAD_CONTENT = '(item_count > 0 OR checkout_order_id IS NOT NULL)';
+
     const [counts, paidRow, topProducts, topCountries] = await Promise.all([
         db.prepare(`
             SELECT
-                COUNT(*) as created,
+                SUM(CASE WHEN ${HAD_CONTENT} THEN 1 ELSE 0 END) as created,
+                SUM(CASE WHEN NOT ${HAD_CONTENT} THEN 1 ELSE 0 END) as emptied,
                 SUM(CASE WHEN checkout_order_id IS NULL AND item_count > 0 AND updated_at >= ? THEN 1 ELSE 0 END) as active,
                 SUM(CASE WHEN checkout_order_id IS NULL AND item_count > 0 AND updated_at <  ? THEN 1 ELSE 0 END) as abandoned,
                 SUM(CASE WHEN checkout_order_id IS NULL AND item_count > 0 AND updated_at <  ? THEN total_minor ELSE 0 END) as abandoned_value_minor,
                 SUM(CASE WHEN checkout_order_id IS NOT NULL THEN 1 ELSE 0 END) as checkout_started
             FROM cart_sessions
-            WHERE updated_at >= ?
+            WHERE created_at >= ?
         `).bind(cutoffIdle, cutoffIdle, cutoffIdle, cutoffDays).first(),
 
         db.prepare(`
             SELECT COUNT(*) as paid
             FROM cart_sessions
             JOIN orders ON orders.id = cart_sessions.checkout_order_id
-            WHERE orders.status = 'paid' AND cart_sessions.updated_at >= ?
+            WHERE orders.status = 'paid' AND cart_sessions.created_at >= ?
         `).bind(cutoffDays).first(),
 
         db.prepare(`
@@ -236,7 +365,7 @@ export async function getCartStats(db, { days = 30, hoursIdle = DEFAULT_HOURS_ID
                    COUNT(DISTINCT cart_sessions.id) as carts
             FROM cart_sessions, json_each(cart_sessions.line_items) as je
             WHERE checkout_order_id IS NULL AND item_count > 0
-              AND updated_at < ? AND updated_at >= ?
+              AND updated_at < ? AND created_at >= ?
             GROUP BY sku
             ORDER BY carts DESC
             LIMIT 5
@@ -246,7 +375,7 @@ export async function getCartStats(db, { days = 30, hoursIdle = DEFAULT_HOURS_ID
             SELECT country, COUNT(*) as carts
             FROM cart_sessions
             WHERE checkout_order_id IS NULL AND item_count > 0
-              AND updated_at < ? AND updated_at >= ? AND country IS NOT NULL
+              AND updated_at < ? AND created_at >= ? AND country IS NOT NULL
             GROUP BY country
             ORDER BY carts DESC
             LIMIT 5
@@ -254,6 +383,7 @@ export async function getCartStats(db, { days = 30, hoursIdle = DEFAULT_HOURS_ID
     ]);
 
     const created         = counts?.created || 0;
+    const emptied         = counts?.emptied || 0;
     const active          = counts?.active || 0;
     const abandoned       = counts?.abandoned || 0;
     const checkoutStarted = counts?.checkout_started || 0;
@@ -262,7 +392,9 @@ export async function getCartStats(db, { days = 30, hoursIdle = DEFAULT_HOURS_ID
 
     return {
         days,
+        hoursIdle,
         created,
+        emptied,
         active,
         abandoned,
         abandonmentRate:    created ? abandoned / created : 0,

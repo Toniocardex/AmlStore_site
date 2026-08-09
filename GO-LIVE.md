@@ -54,6 +54,14 @@ wrangler pages secret put TRUSTPILOT_BCC        # facoltativo: ...@invite.trustp
 ```
 
 Note:
+- **Conservazione carrelli** (facoltativa, ma da decidere consapevolmente): le
+  righe di `cart_sessions` sono dati personali raccolti col consenso alla
+  misurazione. Di default l'email viene azzerata dopo **30 giorni** dall'ultima
+  attività e la riga cancellata dopo **180**. Per cambiare i termini, come
+  variabili d'ambiente del progetto Pages (non secret):
+  `CART_ANONYMIZE_AFTER_DAYS` e `CART_DELETE_AFTER_DAYS`. La pulizia non ha
+  bisogno di un cron: parte dal traffico, in coda alla risposta, al massimo una
+  volta all'ora.
 - `PAYPAL_BASE_URL` in wrangler.toml è già **live** (`https://api-m.paypal.com`).
   Il frontend prende il Client ID da `/api/paypal-config`: non c'è più nulla di
   hardcodato. In locale la sandbox arriva da `.dev.vars` (vedi `.dev.vars.example`).

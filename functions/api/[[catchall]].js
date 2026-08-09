@@ -45,7 +45,8 @@ import { assertCartStock, deductStockForPaidOrder, getStockQty,
 import { safeParseJSON }                                 from './_lib/utils.js';
 import { checkCheckoutEmailRateLimit }                   from './_lib/checkout-rate-limit.js';
 import { upsertCartSession, markCartCheckoutStarted,
-         checkCartSyncRateLimit, listCarts, getCartStats } from './_lib/cart.js';
+         checkCartSyncRateLimit, listCarts, getCartStats,
+         normalizeHoursIdle, maybeRunCartRetention }     from './_lib/cart.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -138,7 +139,7 @@ export async function onRequest(context) {
     try {
         // ── Admin routes (protette da Cloudflare Access + JWT) ───────────────────
         if (path.startsWith('/api/admin/')) {
-            return await handleAdminRoute(path, request, env);
+            return await handleAdminRoute(path, request, env, context);
         }
 
         // ── Routes pubbliche ─────────────────────────────────────────────────────
@@ -173,7 +174,7 @@ export async function onRequest(context) {
             return await handleConsultationRequest(request, env);
         }
         if (path === '/api/cart/sync' && request.method === 'POST') {
-            return await handleCartSync(request, env);
+            return await handleCartSync(request, env, context);
         }
 
         return err('Not found', 404, request);
@@ -582,7 +583,7 @@ const CART_ID_RE      = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-
 const CART_EMAIL_RE   = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const CART_MAX_ITEMS  = 50;
 
-async function handleCartSync(request, env) {
+async function handleCartSync(request, env, context) {
     const invalidRequest = validateCheckoutRequest(request, env);
     if (invalidRequest) return invalidRequest;
 
@@ -629,6 +630,10 @@ async function handleCartSync(request, env) {
         totalMinor:  totalMinorFromItems(items),
         currency:    items[0]?.currency || 'EUR',
     });
+
+    // Pulizia dei carrelli scaduti: dopo la risposta, al piu' una volta all'ora
+    // e con gate a inizio ora, per non aggiungere una scrittura D1 a ogni sync.
+    maybeRunCartRetention(context, { cheapGate: true });
 
     return json({ ok: true }, 200, request, env);
 }
@@ -951,7 +956,7 @@ async function handleBankTransferOrder(request, env) {
  * Le API admin sono same-origin (no CORS aggiuntivo): la UI è su /admin/
  * protetto dallo stesso Cloudflare Access Policy.
  */
-async function handleAdminRoute(path, request, env) {
+async function handleAdminRoute(path, request, env, context) {
     // ── Autenticazione JWT ────────────────────────────────────────────────────
     const jwt = await resolveAdminAuth(request, env);
     if (!jwt.valid) {
@@ -1080,19 +1085,27 @@ async function handleAdminRoute(path, request, env) {
     if (sub === '/carts' && request.method === 'GET') {
         const qs   = new URL(request.url).searchParams;
         const days = qs.has('days') ? Number(qs.get('days')) : 30;
+        // Unica soglia per lista, statistiche ed etichette: viene rimandata al
+        // client, che non deve avere una copia propria del valore.
+        const hoursIdle = normalizeHoursIdle(qs.get('hoursIdle') ?? undefined);
 
         const [result, stats] = await Promise.all([
             listCarts(env.DB, {
                 page:      Number(qs.get('page')) || 1,
                 status:    qs.get('status') || 'abandoned',
-                hoursIdle: qs.has('hoursIdle') ? Number(qs.get('hoursIdle')) : undefined,
+                hoursIdle,
                 hasEmail:  qs.get('hasEmail') === '1' ? true : (qs.get('hasEmail') === '0' ? false : undefined),
                 country:   qs.get('country') || '',
                 days,
             }),
-            getCartStats(env.DB, { days }),
+            getCartStats(env.DB, { days, hoursIdle }),
         ]);
         result.stats = stats;
+        result.hoursIdle = hoursIdle;
+
+        // Anche in periodi di poco traffico la pulizia trova un'occasione per girare.
+        maybeRunCartRetention(context);
+
         return new Response(JSON.stringify(result), {
             headers: { 'Content-Type': 'application/json' },
         });
