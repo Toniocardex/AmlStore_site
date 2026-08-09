@@ -806,9 +806,17 @@ body { background: var(--page-bg); }
     .pdp-assur { grid-template-columns: 1fr; }
 }
 
-/* .pdp-pay: pagine scritte a mano. .v2-payment-row: pagine generate, che
-   riusano il renderer condiviso dei loghi. Stesso trattamento per entrambe. */
-.pdp-pay,
+/* .pdp-pay: pagine scritte a mano (etichetta + riga loghi, in colonna).
+   .v2-payment-row: pagine generate, riga di soli loghi senza etichetta. */
+.pdp-pay {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--pdp-border);
+}
+
 .pdp-buy .v2-payment-row {
     display: flex;
     align-items: center;

@@ -651,7 +651,7 @@ ecommerce-footer {
    Stesso linguaggio visivo di about.css: card su sfondo --aml-paper,
    accenti brand sui titoli di sezione, bullet colorati. Nessuna modifica
    all'HTML: la card si adatta alla struttura h1/.legal-meta/p/h2 già
-   condivisa da cookie-policy, privacy-policy, terms, returns e account. */
+   condivisa da cookie-policy, privacy-policy, terms e returns. */
 .legal-doc {
     max-width: 52rem;
     padding: clamp(1.75rem, 4vw, 3rem) clamp(1.5rem, 5vw, 3.5rem);
@@ -764,10 +764,6 @@ ecommerce-footer {
 
 .legal-doc a:hover {
     text-decoration-color: var(--aml-brand);
-}
-
-.legal-doc a.account-phone {
-    white-space: nowrap;
 }
 
 .cookie-panel-trigger {

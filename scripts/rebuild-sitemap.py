@@ -9,7 +9,6 @@ SKIP = {
     "cart",
     "checkout",
     "checkout-success",
-    "account",
     "privacy-policy",
     "cookie-policy",
     "terms-and-conditions",
