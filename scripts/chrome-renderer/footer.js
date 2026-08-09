@@ -470,7 +470,18 @@ class EcommerceFooter extends HTMLElement {
                             padding-block: 1.3rem 1.5rem;
                         }
 
-                        .legal-links { justify-content: flex-start; }
+                        .legal-links {
+                            justify-content: flex-start;
+                            gap: 0.25rem 0.5rem;
+                        }
+
+                        .legal-links a,
+                        .legal-links button {
+                            display: inline-flex;
+                            align-items: center;
+                            min-height: 2.75rem;
+                            padding-inline: 0.25rem;
+                        }
                     }
 
                     @media (prefers-reduced-motion: reduce) {

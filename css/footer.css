@@ -261,7 +261,21 @@ ecommerce-footer .link-list button {
         padding-block: 1.3rem 1.5rem;
     }
 
-    ecommerce-footer .legal-links { justify-content: flex-start; }
+    ecommerce-footer .legal-links {
+        justify-content: flex-start;
+        gap: 0.25rem 0.5rem;
+    }
+
+    /* Lighthouse richiede touch target sufficientemente grandi e separati.
+       Il testo legale resta compatto, ma ogni controllo offre un'area di
+       attivazione comoda anche su schermi piccoli. */
+    ecommerce-footer .legal-links a,
+    ecommerce-footer .legal-links button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.75rem;
+        padding-inline: 0.25rem;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
