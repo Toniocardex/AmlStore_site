@@ -42,9 +42,12 @@
     --aml-maxw: 1180px;
     --aml-gutter: clamp(1rem, 4vw, 2rem);
 
-    /* Tipografia (formalizza la scelta esistente, non la cambia) */
-    --aml-font-sans: 'Montserrat', sans-serif;
-    --aml-font-display: 'Source Serif 4', 'Source Serif4', Georgia, serif;
+    /* Tipografia (formalizza la scelta esistente, non la cambia).
+       Il secondo nome di ogni stack e' il ripiego con le metriche del font vero,
+       definito in fonts/montserrat.css e fonts/source-serif.css: regge il testo
+       finche' il woff2 non arriva, senza che al cambio si sposti nulla. */
+    --aml-font-sans: 'Montserrat', 'Montserrat Fallback', sans-serif;
+    --aml-font-display: 'Source Serif 4', 'Source Serif4', 'Source Serif Fallback', Georgia, serif;
 
     /* ── Alias legacy: un solo posto dove sono definiti i valori reali ── */
     --page-bg: var(--aml-paper);

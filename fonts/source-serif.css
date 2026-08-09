@@ -1,5 +1,25 @@
 /* Source Serif 4 600–700: latin + latin-ext (woff2 self-hosted, OFL via fontsource builds). */
 
+/* Ripiego con le metriche di Source Serif — stesso ragionamento del fallback in
+   fonts/montserrat.css: Georgia riscalato per occupare lo stesso spazio, cosi'
+   i titoli non si spostano quando il woff2 arriva. Misurato su Source Serif 600
+   contro Georgia 400. */
+@font-face {
+    font-family: 'Source Serif Fallback';
+    src: local('Georgia'), local('Times New Roman'), local('Liberation Serif');
+    size-adjust: 106.66%;
+    ascent-override: 97.13%;
+    descent-override: 31.41%;
+    line-gap-override: 0%;
+    /* Unione dei subset qui sotto: il ripiego non deve coprire caratteri che
+       Source Serif non ha, o li disegnerebbe alla scala sbagliata. */
+    unicode-range: U+0000-00FF, U+0100-02BA, U+02BB-02BC, U+02BD-02C5, U+02C6, U+02C7-02CC,
+                   U+02CE-02D7, U+02DA, U+02DC, U+02DD-02FF, U+0304, U+0308, U+0329, U+0131,
+                   U+0152-0153, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2000-206F, U+2020,
+                   U+20A0-20AB, U+20AC, U+20AD-20C0, U+2113, U+2122, U+2191, U+2193, U+2212,
+                   U+2215, U+2C60-2C7F, U+A720-A7FF, U+FEFF, U+FFFD;
+}
+
 @font-face {
     font-family: 'Source Serif 4';
     font-style: normal;

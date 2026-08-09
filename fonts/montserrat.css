@@ -1,5 +1,40 @@
 /* Montserrat 500–800: latin + latin-ext (woff2 self-hosted, OFL via fontsource builds). */
 
+/* Font di ripiego con le metriche di Montserrat.
+ *
+ * I woff2 non sono precaricati, quindi arrivano dopo il primo render: con
+ * `font-display: swap` il testo compare prima nel font di sistema e poi cambia.
+ * Montserrat e' pero' piu' largo (+12%) e piu' alto di Arial, quindi al cambio
+ * il testo si rimpaginava e la pagina si spostava — era la causa del CLS
+ * residuo sulle schede prodotto (blocchi come .pdp-keylist e .pdp-assur).
+ *
+ * Questa famiglia e' Arial riscalato per occupare esattamente lo spazio di
+ * Montserrat: il testo appare subito, e quando Montserrat arriva non si muove
+ * nulla. Va messa nello stack *dopo* 'Montserrat' e prima del generico.
+ *
+ * Valori misurati con canvas TextMetrics su Montserrat 500 e Arial 400
+ * (vedi la nota in cima a css/page.css). Se si cambia il font del sito vanno
+ * rimisurati: numeri sbagliati spostano il testo invece di tenerlo fermo.
+ *
+ * `unicode-range` e' l'unione esatta dei due subset di Montserrat qui sotto, e
+ * non e' un dettaglio: senza, il ripiego rimpiazzerebbe anche i caratteri che
+ * Montserrat non ha — le frecce → e ← per esempio, che non sono nei subset —
+ * disegnandoli al 112% invece che alla dimensione giusta.
+ */
+@font-face {
+    font-family: 'Montserrat Fallback';
+    src: local('Arial'), local('Helvetica Neue'), local('Liberation Sans');
+    size-adjust: 112.23%;
+    ascent-override: 86.26%;
+    descent-override: 22.37%;
+    line-gap-override: 0%;
+    unicode-range: U+0000-00FF, U+0100-02BA, U+02BB-02BC, U+02BD-02C5, U+02C6, U+02C7-02CC,
+                   U+02CE-02D7, U+02DA, U+02DC, U+02DD-02FF, U+0304, U+0308, U+0329, U+0131,
+                   U+0152-0153, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2000-206F, U+2020,
+                   U+20A0-20AB, U+20AC, U+20AD-20C0, U+2113, U+2122, U+2191, U+2193, U+2212,
+                   U+2215, U+2C60-2C7F, U+A720-A7FF, U+FEFF, U+FFFD;
+}
+
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
