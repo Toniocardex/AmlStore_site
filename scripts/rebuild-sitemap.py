@@ -5,6 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKIP = {
     "index",
+    "404",
     "cart",
     "checkout",
     "checkout-success",

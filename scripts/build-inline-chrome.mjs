@@ -33,8 +33,9 @@ const BASE = process.env.AML_DEV_ORIGIN || 'http://localhost:8788';
 const LANGS = ['it', 'en', 'fr', 'de', 'es'];
 const CHECK_ONLY = process.argv.includes('--check');
 
-/* I fogli di stile estratti dai componenti, da agganciare in <head>. */
-const CHROME_STYLESHEETS = ['../css/header.css', '../css/footer.css'];
+/* I fogli di stile estratti dai componenti, da agganciare in <head>. Il
+   prefisso non e' qui: lo detta la pagina, vedi ensureStylesheets(). */
+const CHROME_STYLESHEETS = ['css/header.css', 'css/footer.css'];
 
 /** it/windows-11-pro.html -> /it/windows-11-pro ; it/index.html -> /it/ */
 function urlForPage(rel) {
@@ -67,17 +68,30 @@ function replaceElementContent(html, tag, markup) {
 const eolOf = (html) => (html.includes('\r\n') ? '\r\n' : '\n');
 const toEol = (text, eol) => text.replace(/\r?\n/g, eol);
 
+/** Il <link> a page.css: e' l'ancora a cui si agganciano i fogli del chrome. */
+const PAGE_CSS_LINK = /<link rel="stylesheet" href="(\.\.\/|\/)css\/page\.css(?:\?v=[^"]*)?">/;
+
 /** Aggancia i fogli di stile del chrome subito dopo page.css, una volta sola. */
 function ensureStylesheets(html) {
     let out = html;
     const eol = eolOf(html);
+
+    // Quasi tutte le pagine indirizzano gli asset con `../`, ma le 404.html per
+    // lingua devono farlo dalla root: Pages le serve anche per URL profondi
+    // (/it/a/b/c), dove un path relativo punterebbe a una cartella inesistente.
+    // Il prefisso dei fogli del chrome segue quello che la pagina usa per
+    // page.css, invece di essere deciso qui.
+    const probe = out.match(PAGE_CSS_LINK);
+    if (!probe) throw new Error('link a page.css non trovato: non so dove agganciare il CSS del chrome');
+    const prefix = probe[1];
+
     // A ritroso: ogni link si infila subito dopo page.css, quindi partendo
     // dall'ultimo l'ordine finale in <head> resta quello dell'array.
-    for (const href of [...CHROME_STYLESHEETS].reverse()) {
+    for (const name of [...CHROME_STYLESHEETS].reverse()) {
+        const href = prefix + name;
         const already = new RegExp(`href="${href.replace(/[.*+?^$()|[\]\\]/g, '\\$&')}(\\?v=[^"]*)?"`);
         if (already.test(out)) continue;
-        const anchor = out.match(/<link rel="stylesheet" href="\.\.\/css\/page\.css(?:\?v=[^"]*)?">/);
-        if (!anchor) throw new Error('link a page.css non trovato: non so dove agganciare il CSS del chrome');
+        const anchor = out.match(PAGE_CSS_LINK);
 
         // Alcune pagine hanno piu' <link> sulla stessa riga: in quel caso il
         // nuovo tag va accodato li', non su una riga nuova con rientro.

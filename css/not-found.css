@@ -1,0 +1,215 @@
+/**
+ * Not found — pagina 404 condivisa dalle cinque lingue.
+ * Usa esclusivamente i token del design system definiti in page.css.
+ *
+ * Cloudflare Pages serve la 404.html piu' vicina risalendo l'albero: le pagine
+ * in it/ en/ fr/ de/ es/ coprono i miss dentro la rispettiva lingua, la 404.html
+ * in root resta la rete di sicurezza per gli URL fuori da ogni cartella lingua.
+ */
+
+.nf-page {
+    max-width: var(--aml-maxw);
+    padding-top: clamp(2rem, 5vw, 4rem);
+    padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.nf-hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(2.25rem, 5vw, 3.5rem);
+    border-radius: var(--aml-radius-lg);
+    background: radial-gradient(120% 160% at 100% 0%, var(--aml-navy-2) 0%, var(--aml-navy) 62%);
+    color: var(--aml-surface);
+    box-shadow: var(--aml-shadow-lg);
+    text-align: center;
+}
+
+/* Il codice di stato: grande ma decorativo, il messaggio vero e' l'h1. */
+.nf-code {
+    margin: 0;
+    font-family: var(--aml-font-display);
+    font-size: clamp(3.5rem, 12vw, 6rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--aml-brand-soft);
+    opacity: 0.55;
+}
+
+.nf-title {
+    margin: 0.35rem 0 0;
+    font-family: var(--aml-font-display);
+    font-size: clamp(1.75rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.nf-lede {
+    margin: 1rem auto 0;
+    max-width: 46rem;
+    font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+    line-height: 1.65;
+    color: color-mix(in srgb, var(--aml-surface) 82%, transparent);
+}
+
+.nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+}
+
+/* .btn-cta-primary nasce a larghezza piena per le card prodotto: qui i due
+   bottoni stanno affiancati, quindi la larghezza torna a seguire il contenuto. */
+.nf-actions .btn-cta-primary {
+    width: auto;
+    min-width: 13rem;
+}
+
+.nf-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 13rem;
+    min-height: 44px;
+    padding: 0.85rem 1.35rem;
+    box-sizing: border-box;
+    border: 1px solid color-mix(in srgb, var(--aml-surface) 45%, transparent);
+    border-radius: var(--aml-radius-sm);
+    color: var(--aml-surface);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.nf-btn-ghost:hover {
+    background: color-mix(in srgb, var(--aml-surface) 12%, transparent);
+    border-color: var(--aml-surface);
+}
+
+.nf-btn-ghost:focus-visible {
+    outline: 2px solid var(--aml-surface);
+    outline-offset: 3px;
+}
+
+/* ── Sezioni ──────────────────────────────────────────────────────────── */
+.nf-section {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.nf-section-title {
+    margin: 0 0 1.25rem;
+    font-family: var(--aml-font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--aml-ink);
+}
+
+/* ── Categorie ────────────────────────────────────────────────────────── */
+.nf-cat-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nf-cat-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--aml-line);
+    border-radius: 999px;
+    background: var(--aml-surface);
+    color: var(--aml-ink);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--aml-shadow-sm);
+    transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.nf-cat-list a:hover {
+    border-color: var(--aml-brand);
+    color: var(--aml-brand);
+    transform: translateY(-1px);
+}
+
+.nf-cat-list a:focus-visible {
+    outline: 2px solid var(--aml-brand);
+    outline-offset: 2px;
+}
+
+/* ── Scelta lingua (solo 404.html in root) ────────────────────────────── */
+/* La 404 in root risponde agli URL fuori da ogni cartella lingua: non sa in
+   che lingua parlare all'utente, quindi invece di sceglierne una gliele offre. */
+.nf-langs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nf-langs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid color-mix(in srgb, var(--aml-surface) 35%, transparent);
+    border-radius: 999px;
+    color: var(--aml-surface);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.nf-langs a:hover {
+    background: color-mix(in srgb, var(--aml-surface) 12%, transparent);
+    border-color: var(--aml-surface);
+}
+
+.nf-langs a:focus-visible {
+    outline: 2px solid var(--aml-surface);
+    outline-offset: 3px;
+}
+
+.nf-langs img {
+    width: 20px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+/* ── Aiuto ────────────────────────────────────────────────────────────── */
+.nf-help {
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-md);
+    background: var(--aml-trust-bg);
+    color: var(--aml-ink-2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.nf-help a {
+    color: var(--aml-brand);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.nf-help a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}

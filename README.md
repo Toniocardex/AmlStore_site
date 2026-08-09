@@ -62,6 +62,7 @@ condivisi); sopra, ogni tipo di pagina carica **un** foglio dedicato:
 | soluzioni M365 | `product.css` + `microsoft-365-solutions.css` |
 | M365 Family | come scheda prodotto, più `m365-family-pilot.css` |
 | home / carrello / checkout / contatti / consulenza / chi siamo | il foglio omonimo |
+| pagine 404 | `not-found.css` |
 
 `product.css` è il guscio della pagina prodotto (`.product-page`, CTA sticky),
 condiviso dalle schede e dalla pagina soluzioni; `product-pdp.css` è il layout
@@ -73,6 +74,31 @@ Per sapere cosa in un foglio non aggancia più niente:
 ```
 node scripts/audit-css-usage.mjs --verbose css/product-pdp.css
 ```
+
+## Pagine 404
+
+Cloudflare Pages, su un URL che non esiste, serve la `404.html` **più vicina**
+risalendo l'albero delle cartelle. Da qui la divisione:
+
+| file | risponde a | ha header e footer |
+|---|---|---|
+| `it/404.html`, `en/…`, `fr/…`, `de/…`, `es/…` | i miss dentro quella lingua (`/it/qualsiasi/cosa`) | sì, pre-renderizzati come ogni altra pagina |
+| `404.html` in root | solo gli URL fuori da ogni cartella lingua (`/vecchio-slug`) | no: lì la lingua non è nota, la pagina la fa scegliere |
+
+Le cinque pagine per lingua sono pagine normali del sito: `build-inline-chrome.mjs`
+le prende da sé, quindi dopo averle toccate va rilanciato come per le altre.
+
+Due vincoli, se le si modifica:
+
+- **Path assoluti**, mai `../`: la stessa pagina risponde anche a `/it/a/b/c`,
+  dove un path relativo punterebbe a una cartella che non esiste. Vale per CSS,
+  JS, immagini e link. `ensureStylesheets()` in `build-inline-chrome.mjs` segue
+  il prefisso che la pagina usa per `page.css`, quindi aggancia il CSS del
+  chrome in modo coerente senza altre configurazioni.
+- **`noindex, follow`** nel `<meta name="robots">`, e lo slug `404` è in `SKIP`
+  dentro `scripts/rebuild-sitemap.py`: queste pagine rispondono 200 se aperte
+  per il loro indirizzo (`/it/404`), quindi senza il noindex finirebbero
+  indicizzate.
 
 ## Header e footer
 

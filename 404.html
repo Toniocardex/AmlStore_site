@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<!--
+    Fallback per gli URL fuori da ogni cartella lingua (es. /vecchio-slug).
+    I miss dentro una lingua non arrivano qui: Cloudflare Pages risale l'albero
+    e serve la 404.html piu' vicina, quindi /it/... prende it/404.html, che ha
+    header, footer, ricerca e prodotti. Qui la lingua del visitatore non e'
+    nota, percio' la pagina non la indovina: la fa scegliere.
+-->
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -6,69 +13,42 @@
     <title>Pagina non trovata — Aml Store</title>
     <meta name="robots" content="noindex, follow">
     <script src="/js/consent-init.js?v=1a2366909c"></script>
+
     <link rel="icon" href="/favicon/favicon.png?v=3bfa4181d2" type="image/png">
-    <style>
-        :root {
-            color-scheme: light dark;
-            --bg: #f7f8fa; --card: #ffffff; --text: #1f2937; --muted: #6b7280;
-            --accent: #0f62fe; --border: #e5e7eb;
-        }
-        @media (prefers-color-scheme: dark) {
-            :root { --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --muted: #94a3b8; --border: #334155; }
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            background: var(--bg); color: var(--text);
-            font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            padding: 24px;
-        }
-        .card {
-            max-width: 560px; width: 100%; background: var(--card);
-            border: 1px solid var(--border); border-radius: 8px;
-            padding: 40px 32px; text-align: center;
-        }
-        .code { font-size: 64px; font-weight: 800; letter-spacing: 2px; color: var(--accent); }
-        h1 { font-size: 22px; margin: 8px 0 12px; }
-        p { color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
-        .btn {
-            display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
-            font-weight: 700; padding: 12px 28px; border-radius: 6px; margin-bottom: 26px;
-        }
-        .btn:hover { filter: brightness(1.1); }
-        .langs { border-top: 1px solid var(--border); padding-top: 18px; font-size: 14px; color: var(--muted); }
-        .langs a { color: var(--accent); text-decoration: none; margin: 0 8px; font-weight: 600; }
-        .langs a:hover { text-decoration: underline; }
-    </style>
+    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png?v=998f6e4af4">
+
+    <link rel="stylesheet" href="/fonts/montserrat.css?v=a86a00fd48">
+    <link rel="stylesheet" href="/fonts/source-serif.css?v=2793a4ae8e">
+    <link rel="stylesheet" href="/css/page.css?v=39e289d50a">
+    <link rel="stylesheet" href="/css/not-found.css?v=8015d68ff9">
+    <script src="/js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
-    <main class="card">
-        <div class="code">404</div>
-        <h1 id="nf-title">Pagina non trovata</h1>
-        <p id="nf-msg">La pagina che cerchi non esiste o è stata spostata. Il catalogo completo ti aspetta in home.</p>
-        <a class="btn" id="nf-home" href="/it/">Vai al negozio</a>
-        <div class="langs">
-            <a href="/it/">Italiano</a>·<a href="/en/">English</a>·<a href="/fr/">Français</a>·<a href="/de/">Deutsch</a>·<a href="/es/">Español</a>
-        </div>
+    <main id="main" class="nf-page">
+        <section class="nf-hero" aria-labelledby="nf-title">
+            <p class="nf-code" aria-hidden="true">404</p>
+            <h1 id="nf-title" class="nf-title">Pagina non trovata</h1>
+            <p class="nf-lede">
+                L'indirizzo che hai aperto non esiste o è stato spostato.
+                Scegli la lingua per entrare nel negozio.
+            </p>
+            <p class="nf-lede" lang="en">
+                The address you opened does not exist or has moved.
+                Choose your language to enter the store.
+            </p>
+            <ul class="nf-langs">
+                <li><a href="/it/"><img src="/images/flags/it.svg?v=7bbc73a46f" width="20" height="15" alt="" aria-hidden="true">Italiano</a></li>
+                <li><a href="/en/"><img src="/images/flags/gb.svg?v=639d2928f3" width="20" height="15" alt="" aria-hidden="true">English</a></li>
+                <li><a href="/fr/"><img src="/images/flags/fr.svg?v=8b4c9afc91" width="20" height="15" alt="" aria-hidden="true">Français</a></li>
+                <li><a href="/de/"><img src="/images/flags/de.svg?v=ae5c2f2cf6" width="20" height="15" alt="" aria-hidden="true">Deutsch</a></li>
+                <li><a href="/es/"><img src="/images/flags/es.svg?v=3b261cecdc" width="20" height="15" alt="" aria-hidden="true">Español</a></li>
+            </ul>
+        </section>
+
+        <p class="nf-help">
+            Scrivici a <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> ·
+            <span lang="en">Write to us at <a href="mailto:Info@amlstore.it">Info@amlstore.it</a></span>
+        </p>
     </main>
-    <script>
-    (function () {
-        var i18n = {
-            en: { title: 'Page not found', msg: 'The page you are looking for does not exist or has been moved. Browse the full catalog from the home page.', btn: 'Back to store', home: '/en/' },
-            fr: { title: 'Page introuvable', msg: "La page que vous cherchez n'existe pas ou a été déplacée. Retrouvez tout le catalogue depuis l'accueil.", btn: 'Retour à la boutique', home: '/fr/' },
-            de: { title: 'Seite nicht gefunden', msg: 'Die gesuchte Seite existiert nicht oder wurde verschoben. Den gesamten Katalog finden Sie auf der Startseite.', btn: 'Zum Shop', home: '/de/' },
-            es: { title: 'Página no encontrada', msg: 'La página que buscas no existe o se ha movido. Encuentra todo el catálogo en la página de inicio.', btn: 'Volver a la tienda', home: '/es/' },
-        };
-        var m = location.pathname.match(/^\/(en|fr|de|es)(\/|$)/);
-        if (!m) return;
-        var t = i18n[m[1]];
-        document.documentElement.lang = m[1];
-        document.getElementById('nf-title').textContent = t.title;
-        document.getElementById('nf-msg').textContent = t.msg;
-        var btn = document.getElementById('nf-home');
-        btn.textContent = t.btn;
-        btn.href = t.home;
-    })();
-    </script>
 </body>
 </html>
