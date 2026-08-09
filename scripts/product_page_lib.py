@@ -1327,9 +1327,10 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <link rel="preload" as="image" href="{img_src}" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/product.css">
-    <link rel="stylesheet" href="../css/product-v2.css">
-    <link rel="stylesheet" href="../css/product-v3.css">
+    <link rel="stylesheet" href="../css/product-pdp.css">
     <script src="../js/theme-init.js"></script>
 </head>
 <body class="pdp-page">
@@ -1554,8 +1555,10 @@ def build_compact_product_page(lang, prod):
     <link rel="icon" href="../favicon/favicon.png" type="image/png">
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/product.css">
-    <link rel="stylesheet" href="../css/product-v2.css">
+    <link rel="stylesheet" href="../css/product-pdp.css">
     <script src="../js/theme-init.js"></script>
 </head>
 <body>

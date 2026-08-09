@@ -1,0 +1,1589 @@
+/* header.css — stili del header del sito.
+   Generato da scripts/extract-chrome-css.mjs a partire dal blocco <style>
+   di scripts/chrome-renderer/header.js. Ogni selettore e' ancorato a `ecommerce-header`: prima
+   l'isolamento lo dava lo Shadow DOM, ora lo da' l'ancoraggio al custom element.
+   Non modificare a mano: le modifiche vanno fatte nel renderer e poi rigenerate. */
+
+ecommerce-header {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: var(--aml-font-sans, 'Montserrat', sans-serif);
+    /* Alias locali → token design system (css/page.css).
+       I --aml-* ereditano dal light DOM; i fallback restano
+       canonici se page.css non è ancora caricato. */
+    --bg-base: var(--aml-surface, #FFFFFF);
+    --bg-surface: var(--aml-surface, #FFFFFF);
+    --border-color: var(--aml-line, #DCE3EA);
+    --text-primary: var(--aml-ink, #152033);
+    --text-secondary: var(--aml-ink-2, #5F6B7A);
+    --text-muted: var(--aml-ink-2, #5F6B7A);
+    --accent: var(--aml-brand, #245EAC);
+    --accent-hover: var(--aml-brand-hover, #1c4c8c);
+
+    background-color: var(--bg-base);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: none;
+}
+
+ecommerce-header * { box-sizing: border-box; margin: 0; padding: 0; }
+
+ecommerce-header .header-utility {
+    display: none;
+    background: var(--aml-navy, #0A1830);
+    color: color-mix(in srgb, var(--aml-surface, #FFFFFF) 82%, transparent);
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+ecommerce-header .header-utility__inner {
+    width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, clamp(1rem, 4vw, 2rem)))));
+    min-height: 31px;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+ecommerce-header .header-utility__inner > span {
+    display: inline-flex;
+    align-items: center;
+}
+ecommerce-header .header-utility__inner > span + span::before {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 0.75rem;
+    margin-right: 1.125rem;
+    background: color-mix(in srgb, var(--aml-surface, #FFFFFF) 24%, transparent);
+    flex-shrink: 0;
+}
+@media (min-width: 768px) {
+    ecommerce-header .header-utility { display: block; }
+}
+ecommerce-header.is-compact .header-utility {
+    display: none;
+}
+
+ecommerce-header .header-container {
+    width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, clamp(1rem, 4vw, 2rem)))));
+    min-height: 74px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2rem;
+    background: var(--bg-base);
+    box-sizing: border-box;
+}
+ecommerce-header.is-compact .header-container {
+    min-height: 63px;
+}
+
+ecommerce-header .header-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+ecommerce-header .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    border-radius: var(--aml-radius-sm, 6px);
+    flex-shrink: 0;
+}
+ecommerce-header .logo:hover { opacity: 0.9; }
+ecommerce-header .logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+ecommerce-header .logo img {
+    height: 54px;
+    width: auto;
+    max-height: 100%;
+    display: block;
+    filter: none;
+    transition: height 0.12s ease;
+}
+ecommerce-header.is-compact .logo img {
+    height: 46px;
+}
+
+ecommerce-header .header-nav,
+ecommerce-header .nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.6875rem;
+    min-width: 0;
+}
+
+ecommerce-header .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-bottom: 4px;
+    white-space: nowrap;
+}
+
+ecommerce-header .nav-links a::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+    border-radius: 1px;
+}
+
+ecommerce-header .nav-links a:hover {
+    color: var(--aml-navy, #0A1830);
+}
+
+ecommerce-header .nav-links a:hover::after,
+ecommerce-header .nav-links a.active::after,
+ecommerce-header .nav-links a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+ecommerce-header .nav-links a.active,
+ecommerce-header .nav-links a[aria-current="page"] {
+    color: var(--aml-navy, #0A1830);
+    font-weight: 600;
+}
+
+/* Windows — voce principale + sottomenù (identica struttura di M365) */
+
+
+ecommerce-header .nav-win-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+ecommerce-header .nav-win-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+ecommerce-header .nav-win-root {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-bottom: 4px;
+    white-space: nowrap;
+}
+ecommerce-header .nav-win-root::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+    border-radius: 1px;
+}
+ecommerce-header .nav-win-root:hover { color: var(--aml-navy, #0A1830); }
+ecommerce-header .nav-win-root:hover::after,
+ecommerce-header .nav-win-root.active::after { transform: scaleX(1); }
+ecommerce-header .nav-win-root.active { color: var(--aml-navy, #0A1830); font-weight: 600; }
+ecommerce-header .nav-win-caret {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    margin: 0 0 2px 0;
+    border: none;
+    border-radius: var(--aml-radius-sm, 6px);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+ecommerce-header .nav-win-caret:hover,
+ecommerce-header .nav-win-wrap.open .nav-win-caret { color: var(--text-primary); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+ecommerce-header .nav-win-caret:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ecommerce-header .nav-win-caret svg {
+    width: 12px; height: 12px; fill: currentColor;
+    transition: transform 0.25s ease;
+}
+ecommerce-header .nav-win-wrap.open .nav-win-caret svg { transform: rotate(180deg); }
+ecommerce-header .nav-win-dropdown::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    height: calc(0.5rem + 12px);
+}
+ecommerce-header .nav-win-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: 16.5rem;
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-md, 8px);
+    padding: 0.4rem;
+    box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-6px) scale(0.98);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 50;
+}
+ecommerce-header .nav-win-wrap:hover .nav-win-dropdown,
+ecommerce-header .nav-win-wrap:focus-within .nav-win-dropdown,
+ecommerce-header .nav-win-wrap.open .nav-win-dropdown {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.25s cubic-bezier(0.16,1,0.3,1),
+                transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                visibility 0.25s;
+}
+ecommerce-header .nav-win-dropdown a {
+    display: block;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--aml-radius-sm, 6px);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+ecommerce-header .nav-win-dropdown a:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--text-primary); }
+ecommerce-header .nav-win-dropdown a.nav-win-dropdown__overview {
+    font-weight: 700;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
+    margin-bottom: 0.15rem;
+    padding-bottom: 0.65rem;
+}
+ecommerce-header .nav-win-dropdown a.nav-win-dropdown__overview:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+/* Drawer mobile — gruppi Windows / M365 (sottomenu) */
+
+
+ecommerce-header .drawer-win-block,
+ecommerce-header .drawer-office-block,
+ecommerce-header .drawer-m365-block,
+ecommerce-header .drawer-bundle-block,
+ecommerce-header .drawer-av-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin-bottom: 0.35rem;
+}
+ecommerce-header .drawer-win-heading,
+ecommerce-header .drawer-office-heading,
+ecommerce-header .drawer-m365-heading,
+ecommerce-header .drawer-bundle-heading,
+ecommerce-header .drawer-av-heading {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    padding: 0.4rem 0.75rem 0.2rem;
+    line-height: 1.2;
+}
+
+/* reduced-motion: Windows */
+@media (prefers-reduced-motion: reduce) {
+    ecommerce-header .nav-win-root,
+ecommerce-header .nav-win-root::after { transition: none; }
+    ecommerce-header .nav-win-caret svg { transition: none; }
+    ecommerce-header .nav-win-dropdown,
+ecommerce-header .nav-win-wrap:hover .nav-win-dropdown,
+ecommerce-header .nav-win-wrap:focus-within .nav-win-dropdown,
+ecommerce-header .nav-win-wrap.open .nav-win-dropdown { transition: none; }
+}
+
+/* Microsoft 365 — voce principale (link overview) + sottomenù */
+
+
+ecommerce-header .nav-m365-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+ecommerce-header .nav-m365-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+ecommerce-header .nav-m365-root {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-bottom: 4px;
+    white-space: nowrap;
+}
+ecommerce-header .nav-m365-root::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+    border-radius: 1px;
+}
+ecommerce-header .nav-m365-root:hover {
+    color: var(--aml-navy, #0A1830);
+}
+ecommerce-header .nav-m365-root:hover::after,
+ecommerce-header .nav-m365-root.active::after {
+    transform: scaleX(1);
+}
+ecommerce-header .nav-m365-root.active {
+    color: var(--aml-navy, #0A1830);
+    font-weight: 600;
+}
+ecommerce-header .nav-m365-caret {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    margin: 0 0 2px 0;
+    border: none;
+    border-radius: var(--aml-radius-sm, 6px);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+ecommerce-header .nav-m365-caret:hover,
+ecommerce-header .nav-m365-wrap.open .nav-m365-caret {
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+ecommerce-header .nav-m365-caret:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+ecommerce-header .nav-m365-caret svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    transition: transform 0.25s ease;
+}
+ecommerce-header .nav-m365-wrap.open .nav-m365-caret svg {
+    transform: rotate(180deg);
+}
+/* Ponte invisibile sopra il pannello: senza, il mouse attraversa il gap
+   tra trigger e dropdown e :hover sul wrap cade → il menu si chiude. */
+
+ecommerce-header .nav-m365-dropdown::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    height: calc(0.5rem + 12px);
+}
+ecommerce-header .nav-m365-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: 16.5rem;
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-md, 8px);
+    padding: 0.4rem;
+    box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-6px) scale(0.98);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 50;
+}
+ecommerce-header .nav-m365-wrap:hover .nav-m365-dropdown,
+ecommerce-header .nav-m365-wrap:focus-within .nav-m365-dropdown,
+ecommerce-header .nav-m365-wrap.open .nav-m365-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.25s;
+}
+ecommerce-header .nav-m365-dropdown a {
+    display: block;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--aml-radius-sm, 6px);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+ecommerce-header .nav-m365-dropdown a:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--text-primary);
+}
+ecommerce-header .nav-m365-dropdown a.nav-m365-dropdown__overview {
+    font-weight: 700;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
+    margin-bottom: 0.15rem;
+    padding-bottom: 0.65rem;
+}
+ecommerce-header .nav-m365-dropdown a.nav-m365-dropdown__overview:hover {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* Office — voce principale + sottomenù */
+
+
+ecommerce-header .nav-office-wrap,
+ecommerce-header .nav-av-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+ecommerce-header .nav-office-inner,
+ecommerce-header .nav-av-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+}
+ecommerce-header .nav-office-root,
+ecommerce-header .nav-av-root {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-bottom: 4px;
+    white-space: nowrap;
+}
+ecommerce-header .nav-office-root::after,
+ecommerce-header .nav-av-root::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+    border-radius: 1px;
+}
+ecommerce-header .nav-office-root:hover,
+ecommerce-header .nav-av-root:hover { color: var(--aml-navy, #0A1830); }
+ecommerce-header .nav-office-root:hover::after,
+ecommerce-header .nav-av-root:hover::after,
+ecommerce-header .nav-office-root.active::after,
+ecommerce-header .nav-av-root.active::after { transform: scaleX(1); }
+ecommerce-header .nav-office-root.active,
+ecommerce-header .nav-av-root.active { color: var(--aml-navy, #0A1830); font-weight: 600; }
+ecommerce-header .nav-office-caret,
+ecommerce-header .nav-av-caret {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    margin: 0 0 2px 0;
+    border: none;
+    border-radius: var(--aml-radius-sm, 6px);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+ecommerce-header .nav-office-caret:hover,
+ecommerce-header .nav-av-caret:hover,
+ecommerce-header .nav-office-wrap.open .nav-office-caret,
+ecommerce-header .nav-av-wrap.open .nav-av-caret {
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+ecommerce-header .nav-office-caret:focus-visible,
+ecommerce-header .nav-av-caret:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+ecommerce-header .nav-office-caret svg,
+ecommerce-header .nav-av-caret svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    transition: transform 0.25s ease;
+}
+ecommerce-header .nav-office-wrap.open .nav-office-caret svg,
+ecommerce-header .nav-av-wrap.open .nav-av-caret svg {
+    transform: rotate(180deg);
+}
+ecommerce-header .nav-office-dropdown::before,
+ecommerce-header .nav-av-dropdown::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    height: calc(0.5rem + 12px);
+}
+ecommerce-header .nav-office-dropdown,
+ecommerce-header .nav-av-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: 16.5rem;
+    max-height: min(70vh, 22rem);
+    overflow-y: auto;
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-md, 8px);
+    padding: 0.4rem;
+    box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-6px) scale(0.98);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 50;
+}
+/* Ultima voce del nav: il pannello si apre verso sinistra, così non
+   si estende sotto l'area assistenza/lingua/carrello a destra. */
+
+ecommerce-header .nav-av-dropdown {
+    left: auto;
+    right: 0;
+}
+ecommerce-header .nav-office-wrap:hover .nav-office-dropdown,
+ecommerce-header .nav-av-wrap:hover .nav-av-dropdown,
+ecommerce-header .nav-office-wrap:focus-within .nav-office-dropdown,
+ecommerce-header .nav-av-wrap:focus-within .nav-av-dropdown,
+ecommerce-header .nav-office-wrap.open .nav-office-dropdown,
+ecommerce-header .nav-av-wrap.open .nav-av-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.25s;
+}
+ecommerce-header .nav-office-dropdown a,
+ecommerce-header .nav-av-dropdown a {
+    display: block;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--aml-radius-sm, 6px);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+ecommerce-header .nav-office-dropdown a:hover,
+ecommerce-header .nav-av-dropdown a:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--text-primary);
+}
+ecommerce-header .nav-office-dropdown a.nav-office-dropdown__overview,
+ecommerce-header .nav-av-dropdown a.nav-av-dropdown__overview {
+    font-weight: 700;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
+    margin-bottom: 0.15rem;
+    padding-bottom: 0.65rem;
+}
+ecommerce-header .nav-office-dropdown a.nav-office-dropdown__overview:hover,
+ecommerce-header .nav-av-dropdown a.nav-av-dropdown__overview:hover {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+ecommerce-header .header-actions,
+ecommerce-header .right-section {
+    display: flex;
+    align-items: center;
+    gap: 1.0625rem;
+    flex-shrink: 0;
+    justify-self: end;
+}
+
+ecommerce-header .support-wrap {
+    position: relative;
+    z-index: 2;
+}
+ecommerce-header .support-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 36px;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid transparent;
+    border-radius: var(--aml-radius-sm, 6px);
+    background: transparent;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+ecommerce-header .support-trigger:hover,
+ecommerce-header .support-wrap.open .support-trigger {
+    color: var(--aml-navy, #0A1830);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border-color: var(--border-color);
+}
+ecommerce-header .support-trigger:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+ecommerce-header .support-trigger svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+ecommerce-header .support-trigger__chevron {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    transition: transform 0.2s ease;
+}
+ecommerce-header .support-wrap.open .support-trigger__chevron {
+    transform: rotate(180deg);
+}
+ecommerce-header .support-trigger__label {
+    white-space: nowrap;
+}
+ecommerce-header .support-panel {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    min-width: 240px;
+    padding: 0.85rem 1rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-md, 8px);
+    box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+    z-index: 80;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+}
+ecommerce-header .support-wrap.open .support-panel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+ecommerce-header .support-panel[hidden] {
+    display: none !important;
+}
+ecommerce-header .support-panel__heading {
+    margin: 0 0 0.65rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+ecommerce-header .support-panel__link {
+    display: block;
+    color: var(--aml-navy, #0A1830);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.25rem 0;
+    border-radius: 4px;
+}
+ecommerce-header .support-panel__link:hover {
+    color: var(--accent);
+}
+ecommerce-header .support-panel__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+ecommerce-header .support-panel__hours {
+    margin: 0.55rem 0 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Ponte hover sotto i wrap: copre il gap trigger→pannello per tutti
+   i menu. Serve sul wrap (non sul dropdown) perché nei pannelli con
+   overflow-y:auto (Office/Antivirus) il ::before del dropdown viene
+   ritagliato e l'hover cadeva attraversando il gap. */
+
+
+ecommerce-header .nav-win-wrap:hover::after,
+ecommerce-header .nav-win-wrap.open::after,
+ecommerce-header .nav-office-wrap:hover::after,
+ecommerce-header .nav-office-wrap.open::after,
+ecommerce-header .nav-m365-wrap:hover::after,
+ecommerce-header .nav-m365-wrap.open::after,
+ecommerce-header .nav-av-wrap:hover::after,
+ecommerce-header .nav-av-wrap.open::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: -0.75rem;
+    right: -0.75rem;
+    height: 0.75rem;
+}
+
+ecommerce-header .lang-wrapper { position: relative; }
+ecommerce-header .lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0.5rem;
+    border-radius: var(--aml-radius-sm, 6px);
+    transition: color 0.3s ease, background 0.3s ease, border 0.3s ease;
+}
+ecommerce-header .lang-selector:hover,
+ecommerce-header .lang-wrapper.open .lang-selector {
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+    border-color: var(--border-color);
+}
+ecommerce-header .lang-selector:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+/* Sostituto visivo per l'anteprima se non c'è l'immagine della flag */
+
+ecommerce-header .lang-selector img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: transparent;
+    border: 1px solid var(--border-color);
+}
+ecommerce-header .chevron-down {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+ecommerce-header .lang-wrapper.open .chevron-down {
+    transform: rotate(180deg);
+}
+
+ecommerce-header .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-md, 8px);
+    padding: 0.5rem;
+    min-width: 140px;
+    box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+    /* Stato chiuso: invisibile ma nel flusso — permette transizione in uscita */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-6px) scale(0.98);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+ecommerce-header .lang-wrapper.open .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.25s;
+}
+
+ecommerce-header .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.75rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: var(--aml-radius-sm, 6px);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+ecommerce-header .lang-option:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--text-primary);
+    transform: translateX(2px);
+}
+ecommerce-header .lang-option img {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: transparent;
+}
+
+ecommerce-header .cart-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease, background 0.3s ease;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+ecommerce-header .cart-wrapper:hover {
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+ecommerce-header .cart-wrapper:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+ecommerce-header .cart-wrapper svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+/* Rimbalzo giocoso ma elegante al passaggio del mouse sul carrello */
+
+ecommerce-header .cart-wrapper:hover svg {
+    transform: scale(1.1) rotate(-8deg);
+}
+
+ecommerce-header .cart-badge {
+    position: absolute;
+    top: 0;
+    right: -2px;
+    background: var(--aml-danger, #B3261E);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 800;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--bg-base); /* Bordo che "buca" l'icona sottostante */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+ecommerce-header .cart-badge.is-visible {
+    display: flex;
+}
+
+ecommerce-header .cart-badge.is-visible.cart-badge-pop {
+    animation: aml-cart-badge-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes aml-cart-badge-pop {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(1.14);
+    }
+}
+
+ecommerce-header .cart-wrapper.cart-nudge {
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+ecommerce-header .cart-wrapper.cart-nudge svg {
+    animation: aml-cart-icon-nudge 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes aml-cart-icon-nudge {
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+    35% {
+        transform: scale(1.12) rotate(-10deg);
+    }
+    70% {
+        transform: scale(1.05) rotate(4deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    /* Carrello */
+
+    ecommerce-header .cart-badge.is-visible.cart-badge-pop { animation: none; }
+    ecommerce-header .cart-wrapper.cart-nudge svg { animation: none; }
+    /* Logo */
+
+    ecommerce-header .logo { transition: none; }
+    /* Nav desktop */
+
+    ecommerce-header .nav-links a,
+ecommerce-header .nav-links a::after { transition: none; }
+    /* Supporto */
+
+    ecommerce-header .support-icon { transition: none; }
+    /* Selettore lingua */
+
+    ecommerce-header .lang-selector { transition: none; }
+    ecommerce-header .chevron-down { transition: none; }
+    ecommerce-header .lang-dropdown,
+ecommerce-header .lang-wrapper.open .lang-dropdown { transition: none; }
+    ecommerce-header .nav-m365-dropdown,
+ecommerce-header .nav-m365-wrap:hover .nav-m365-dropdown,
+ecommerce-header .nav-m365-wrap:focus-within .nav-m365-dropdown,
+ecommerce-header .nav-m365-wrap.open .nav-m365-dropdown { transition: none; }
+    ecommerce-header .nav-m365-caret svg { transition: none; }
+    ecommerce-header .nav-office-dropdown,
+ecommerce-header .nav-av-dropdown,
+ecommerce-header .nav-office-wrap:hover .nav-office-dropdown,
+ecommerce-header .nav-av-wrap:hover .nav-av-dropdown,
+ecommerce-header .nav-office-wrap:focus-within .nav-office-dropdown,
+ecommerce-header .nav-av-wrap:focus-within .nav-av-dropdown,
+ecommerce-header .nav-office-wrap.open .nav-office-dropdown,
+ecommerce-header .nav-av-wrap.open .nav-av-dropdown { transition: none; }
+    ecommerce-header .nav-office-caret svg,
+ecommerce-header .nav-av-caret svg { transition: none; }
+    /* Pulsante Accedi */
+
+    ecommerce-header .btn-signin { transition: none; }
+    /* Overlay e Drawer mobile */
+
+    ecommerce-header .overlay { transition: none; }
+    ecommerce-header .mobile-drawer { transition: none; }
+    ecommerce-header .close-drawer { transition: none; }
+    ecommerce-header .drawer-nav a { transition: none; }
+    ecommerce-header .drawer-lang-link { transition: none; }
+    ecommerce-header .drawer-btn-signin { transition: none; }
+}
+
+ecommerce-header .btn-signin {
+    background: var(--accent);
+    color: var(--aml-surface, #FFFFFF);
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--aml-radius-sm, 6px);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 22%, transparent);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, filter 0.3s ease;
+    white-space: nowrap;
+}
+ecommerce-header .btn-signin:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.08);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+ecommerce-header .btn-signin:active {
+    transform: translateY(0) scale(0.98);
+}
+ecommerce-header .btn-signin:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+ecommerce-header .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--aml-radius-sm, 6px);
+    transition: opacity 0.2s;
+    touch-action: manipulation;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+ecommerce-header .mobile-toggle:hover {
+    opacity: 0.7;
+}
+ecommerce-header .mobile-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+ecommerce-header .mobile-toggle svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+/* --- RESPONSIVE DESIGN HEADER --- */
+
+@media (min-width: 768px) and (max-width: 1120px) {
+    ecommerce-header .header-nav,
+ecommerce-header .nav-links { gap: 1.125rem; }
+    ecommerce-header .header-actions,
+ecommerce-header .right-section { gap: 0.75rem; }
+    ecommerce-header .support-trigger__label { display: none; }
+    ecommerce-header .header-container { gap: 20px; }
+}
+
+/* Tablet: nav → drawer */
+@media (max-width: 1100px) {
+    ecommerce-header .header-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, 1.25rem))));
+    }
+    ecommerce-header .header-nav,
+ecommerce-header .nav-links { display: none; }
+    ecommerce-header .mobile-toggle { display: inline-flex; }
+    ecommerce-header .header-brand { flex: 1 1 auto; min-width: 0; }
+    ecommerce-header .lang-wrapper { display: none; }
+    ecommerce-header .support-wrap { display: none; }
+}
+
+@media (max-width: 767px) {
+    ecommerce-header .header-utility { display: none !important; }
+    ecommerce-header .header-container {
+        min-height: 64px;
+        width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, 1rem))));
+        gap: 0.5rem;
+    }
+    ecommerce-header.is-compact .header-container {
+        min-height: 64px;
+    }
+    ecommerce-header .logo img,
+ecommerce-header.is-compact .logo img {
+        height: 44px;
+    }
+    ecommerce-header .header-actions,
+ecommerce-header .right-section { gap: 0.35rem; }
+    ecommerce-header .cart-wrapper {
+        width: 36px;
+        height: 36px;
+    }
+    ecommerce-header .search-panel { top: 72px; width: min(94vw, 640px); max-height: calc(100vh - 100px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ecommerce-header .logo img { transition: none; }
+}
+
+/* RICERCA PRODOTTI */
+
+
+ecommerce-header .search-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--aml-radius-md, 8px);
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+ecommerce-header .search-toggle:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--text-primary); }
+ecommerce-header .search-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+ecommerce-header .search-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+ecommerce-header .search-backdrop {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    z-index: 1999;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 1, 1);
+}
+ecommerce-header .search-backdrop.open {
+    opacity: 1; pointer-events: auto;
+    transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1);
+}
+
+ecommerce-header .search-panel {
+    position: fixed;
+    top: 112px;
+    left: 50%;
+    transform: translate(-50%, -12px);
+    width: min(92vw, 640px);
+    max-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--aml-radius-lg, 12px);
+    box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+    z-index: 2001;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.16,1,0.3,1),
+                transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                visibility 0.25s;
+    overflow: hidden;
+}
+ecommerce-header.is-compact ~ .search-panel,
+ecommerce-header.is-compact .search-panel {
+    top: 72px;
+}
+ecommerce-header .search-panel.open {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: translate(-50%, 0);
+}
+ecommerce-header .search-panel-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+ecommerce-header .search-input-icon { color: var(--text-muted); flex-shrink: 0; }
+ecommerce-header .search-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+ecommerce-header .search-input::placeholder { color: var(--text-muted); }
+ecommerce-header .search-input::-webkit-search-cancel-button { display: none; }
+ecommerce-header .search-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--aml-radius-sm, 6px);
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+ecommerce-header .search-close:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--text-primary); }
+ecommerce-header .search-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+ecommerce-header .search-results {
+    overflow-y: auto;
+    padding: 0.4rem;
+}
+ecommerce-header .search-hint,
+ecommerce-header .search-empty {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+ecommerce-header .search-result {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: var(--aml-radius-md, 8px);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+ecommerce-header .search-result:hover,
+ecommerce-header .search-result:focus-visible {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    color: var(--text-primary);
+    outline: none;
+}
+ecommerce-header .search-result-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--aml-radius-sm, 6px);
+    object-fit: contain;
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+    flex-shrink: 0;
+}
+ecommerce-header .search-result-info { min-width: 0; flex: 1 1 auto; }
+ecommerce-header .search-result-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+ecommerce-header .search-result-category {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+ecommerce-header .search-result-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+@media (max-width: 640px) {
+    ecommerce-header .search-panel { top: 76px; width: min(94vw, 640px); max-height: calc(100vh - 100px); }
+}
+@media (prefers-reduced-motion: reduce) {
+    ecommerce-header .search-backdrop { transition: none; }
+    ecommerce-header .search-panel { transition: none; }
+}
+
+/* DRAWER MOBILE */
+
+
+ecommerce-header .overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+    z-index: 1999;
+    opacity: 0; pointer-events: none;
+    /* Chiusura: ease-in (veloce all'uscita) */
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 1, 1);
+}
+ecommerce-header .overlay.open {
+    opacity: 1; pointer-events: auto;
+    /* Apertura: ease-out (parte veloce, rallenta) */
+    transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1);
+}
+
+ecommerce-header .mobile-drawer {
+    position: fixed; top: 0; left: -100%;
+    width: 100%; max-width: 320px;
+    height: 100vh;
+    background: var(--bg-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid var(--border-color);
+    z-index: 2000;
+    /* Chiusura: ease-in più rapida */
+    transition: left 0.3s cubic-bezier(0.4, 0, 1, 1);
+    padding: 1rem 0.9rem 1.25rem;
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+}
+ecommerce-header .mobile-drawer.open {
+    left: 0;
+    /* Apertura: ease-out con overshoot leggero */
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+ecommerce-header .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    flex-shrink: 0;
+}
+ecommerce-header .mobile-drawer .drawer-header .logo img {
+    height: 40px;
+    width: auto;
+}
+ecommerce-header .close-drawer {
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+    ecommerce-header .close-drawer:hover {
+        background: color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+}
+ecommerce-header .close-drawer:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+ecommerce-header .close-drawer svg { width: 20px; height: 20px; fill: currentColor; }
+
+ecommerce-header .drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-bottom: 1.25rem;
+    flex-shrink: 0;
+}
+ecommerce-header .drawer-nav > a,
+ecommerce-header .drawer-win-block a,
+ecommerce-header .drawer-office-block a,
+ecommerce-header .drawer-m365-block a,
+ecommerce-header .drawer-bundle-block a,
+ecommerce-header .drawer-av-block a {
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    color: var(--text-secondary);
+    font-weight: 500;
+    line-height: 1.35;
+    padding: 0.35rem 0.5rem;
+    box-sizing: border-box;
+    background: transparent;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+ecommerce-header .drawer-nav > a {
+    font-size: 0.9375rem;
+    color: var(--text-primary);
+}
+ecommerce-header .drawer-win-block a,
+ecommerce-header .drawer-office-block a,
+ecommerce-header .drawer-m365-block a,
+ecommerce-header .drawer-bundle-block a,
+ecommerce-header .drawer-av-block a {
+    font-size: 0.875rem;
+}
+ecommerce-header .drawer-nav > a.active,
+ecommerce-header .drawer-win-block a.active,
+ecommerce-header .drawer-office-block a.active,
+ecommerce-header .drawer-m365-block a.active,
+ecommerce-header .drawer-bundle-block a.active,
+ecommerce-header .drawer-av-block a.active {
+    color: var(--text-primary);
+    text-decoration-color: color-mix(in srgb, var(--text-primary) 55%, transparent);
+}
+@media (hover: hover) and (pointer: fine) {
+    ecommerce-header .drawer-nav > a:hover,
+ecommerce-header .drawer-win-block a:hover,
+ecommerce-header .drawer-office-block a:hover,
+ecommerce-header .drawer-m365-block a:hover,
+ecommerce-header .drawer-bundle-block a:hover,
+ecommerce-header .drawer-av-block a:hover {
+        color: var(--text-primary);
+        text-decoration-color: color-mix(in srgb, var(--text-primary) 40%, transparent);
+    }
+}
+@media (hover: none), (pointer: coarse) {
+    ecommerce-header .drawer-nav > a:hover,
+ecommerce-header .drawer-win-block a:hover,
+ecommerce-header .drawer-office-block a:hover,
+ecommerce-header .drawer-m365-block a:hover,
+ecommerce-header .drawer-bundle-block a:hover,
+ecommerce-header .drawer-av-block a:hover {
+        color: inherit;
+        text-decoration-color: transparent;
+    }
+    ecommerce-header .drawer-nav > a:active,
+ecommerce-header .drawer-win-block a:active,
+ecommerce-header .drawer-office-block a:active,
+ecommerce-header .drawer-m365-block a:active,
+ecommerce-header .drawer-bundle-block a:active,
+ecommerce-header .drawer-av-block a:active {
+        color: var(--text-primary);
+        text-decoration-color: color-mix(in srgb, var(--text-primary) 45%, transparent);
+    }
+}
+
+ecommerce-header .drawer-section-title {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    padding-left: 0.75rem;
+}
+
+ecommerce-header .drawer-langs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem;
+    margin-bottom: auto;
+}
+ecommerce-header .drawer-lang-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: var(--aml-radius-sm, 6px);
+    font-size: 0.8125rem; font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+ecommerce-header .drawer-lang-link.active {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+@media (hover: hover) and (pointer: fine) {
+    ecommerce-header .drawer-lang-link:hover:not(.active) {
+        background: color-mix(in srgb, var(--accent) 6%, transparent);
+        color: var(--text-primary);
+    }
+}
+ecommerce-header .drawer-lang-link img {
+    width: 20px; height: 20px; border-radius: 50%; object-fit: cover;
+    background: color-mix(in srgb, var(--accent) 10%, transparent); color: transparent;
+}
+
+ecommerce-header .drawer-footer {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+ecommerce-header .drawer-support-title {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin: 0 0 0.55rem;
+}
+ecommerce-header .drawer-support-link {
+    display: block;
+    color: var(--aml-navy, #0A1830);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.3rem 0;
+}
+ecommerce-header .drawer-support-link:hover { color: var(--accent); }
+ecommerce-header .drawer-support-hours {
+    margin: 0.5rem 0 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Sfondi ora opachi (bianco pieno): il blur dietro non serve più,
+   evita il costo di compositing extra su mobile. */
+
+
+ecommerce-header .nav-win-dropdown,
+ecommerce-header .nav-m365-dropdown,
+ecommerce-header .nav-office-dropdown,
+ecommerce-header .nav-av-dropdown,
+ecommerce-header .lang-dropdown,
+ecommerce-header .search-panel,
+ecommerce-header .mobile-drawer,
+ecommerce-header .search-backdrop,
+ecommerce-header .overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* Il logo ha un solo file (lavora su sfondo chiaro): niente filtro. */
+
+
+ecommerce-header .logo img { filter: none; }
+ecommerce-header .nav-win-root:hover,
+ecommerce-header .nav-office-root:hover,
+ecommerce-header .nav-av-root:hover { text-shadow: none; }
+ecommerce-header .nav-win-wrap.open .nav-win-caret,
+ecommerce-header .nav-office-wrap.open .nav-office-caret,
+ecommerce-header .nav-av-wrap.open .nav-av-caret {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+ecommerce-header .nav-win-dropdown a:hover,
+ecommerce-header .nav-office-dropdown a:hover,
+ecommerce-header .nav-av-dropdown a:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+/* Menu largo, ombra morbida, voci alte: niente più "pannello anni 2010". */
+
+ecommerce-header .nav-win-dropdown,
+ecommerce-header .nav-office-dropdown,
+ecommerce-header .nav-av-dropdown,
+ecommerce-header .search-panel,
+ecommerce-header .mobile-drawer {
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.12), inset 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+ecommerce-header .search-toggle:hover,
+ecommerce-header .search-close:hover {
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+ecommerce-header .nav-win-dropdown,
+ecommerce-header .nav-office-dropdown,
+ecommerce-header .nav-av-dropdown {
+    min-width: 300px;
+}
+ecommerce-header .nav-win-dropdown a,
+ecommerce-header .nav-office-dropdown a,
+ecommerce-header .nav-av-dropdown a {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}

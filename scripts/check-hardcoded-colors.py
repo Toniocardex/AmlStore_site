@@ -22,8 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 TARGET_FILES = [
-    "css/product-v3.css",
-    "css/product-v2.css",
+    "css/product-pdp.css",
     "css/home.css",
     "css/cart.css",
     "css/checkout.css",
@@ -39,7 +38,9 @@ SHADOW_LINE_RE = re.compile(r"(?:box-|text-|-webkit-box-)?shadow\s*:", re.IGNORE
 # Righe riviste a mano: colori intenzionali, non hardcoding "sfuggito".
 # Chiave = percorso relativo, valore = insieme di righe (trimmed) ammesse.
 ALLOWLIST = {
-    "css/product-v3.css": {
+    # product-v2.css e product-v3.css sono confluiti in product-pdp.css:
+    # le due allowlist sono state unite qui sotto.
+    "css/product-pdp.css": {
         # Badge sconto: nascosto sitewide (.pdp-page .pdp-price-badge { display:none }),
         # colori mai visibili — codice morto innocuo, non vale il rischio di toccarlo.
         "background: rgba(6, 78, 59, 0.55);",
@@ -57,16 +58,12 @@ ALLOWLIST = {
         "background: rgba(255, 255, 255, 0.96);",
         # Bordo di accento decorativo sull'item FAQ aperto
         "border-color: #9eb9d7;",
-    },
-    "css/product-v2.css": {
-        "background: rgba(255, 255, 255, 0.96);",
+        # ── ex product-v2.css ──
         ".bento-caption { background: rgba(255, 255, 255, 0.96); }",
         "background: rgba(255, 255, 255, 0.88);",
         "rgba(255, 255, 255, 0) 0%,",
         "rgba(255, 255, 255, 0.5) 48%,",
         "#ffffff 100%",
-        "color: #fff;",
-        "color: #ffffff;",
         # Zebra striping neutro (grigio, non un colore di tema)
         "background: rgba(127, 127, 127, 0.05);",
     },

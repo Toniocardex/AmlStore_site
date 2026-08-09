@@ -35,8 +35,9 @@ Il sito **non usa WooCommerce**: è solo HTML/CSS/JS statico + **Pages Functions
 ├── _headers            # Cache-Control e security headers per Cloudflare Pages
 ├── robots.txt          # Sitemap: https://aml-store.com/sitemap.xml
 ├── sitemap.xml         # Tutte le URL indicizzabili (5 lingue × pagine)
-├── components/         # Web Components riutilizzabili (header, footer, cookie-banner)
-├── css/                # Fogli di stile (page.css, home.css, product.css, cart.css)
+├── components/         # Web Components (header, footer, cookie-banner)
+├── css/                # Un foglio per tipo di pagina, sopra la base page.css
+│                       # header.css e footer.css sono generati, non modificarli a mano
 ├── js/                 # Script (locale-path.js, consent-init.js, theme-init.js, cart.js…)
 ├── fonts/              # Montserrat self-hosted (woff2)
 ├── images/flags/       # SVG bandiere per selettore lingua
@@ -49,3 +50,42 @@ Il sito **non usa WooCommerce**: è solo HTML/CSS/JS statico + **Pages Functions
 ├── de/                 # Pagine in tedesco
 └── es/                 # Pagine in spagnolo
 ```
+
+## Fogli di stile
+
+`page.css` è la base comune (token del design system, tipografia, elementi
+condivisi); sopra, ogni tipo di pagina carica **un** foglio dedicato:
+
+| pagina | fogli oltre a `page.css` |
+|---|---|
+| scheda prodotto | `product.css` + `product-pdp.css` |
+| soluzioni M365 | `product.css` + `microsoft-365-solutions.css` |
+| M365 Family | come scheda prodotto, più `m365-family-pilot.css` |
+| home / carrello / checkout / contatti / consulenza / chi siamo | il foglio omonimo |
+
+`product.css` è il guscio della pagina prodotto (`.product-page`, CTA sticky),
+condiviso dalle schede e dalla pagina soluzioni; `product-pdp.css` è il layout
+della scheda vera e propria. Nasce dalla fusione di `product-v2.css` e
+`product-v3.css`, che erano due generazioni successive caricate insieme.
+
+Per sapere cosa in un foglio non aggancia più niente:
+
+```
+node scripts/audit-css-usage.mjs --verbose css/product-pdp.css
+```
+
+## Header e footer
+
+Sono **pre-renderizzati nell'HTML** di ogni pagina, non costruiti dal JS a
+runtime: così i loro link stanno nel sorgente servito (crawlabili anche senza
+esecuzione di JavaScript) e non c'è spostamento di layout all'arrivo degli script.
+
+| dove | cosa | servito ai browser |
+|---|---|---|
+| `scripts/chrome-renderer/` | il **markup** — unica sorgente, solo build | no |
+| `components/header.js`, `footer.js` | il **comportamento** (menu, ricerca, carrello) | sì |
+| `css/header.css`, `css/footer.css` | gli **stili**, generati dai renderer | sì |
+
+Chi tocca navigazione o footer deve rigenerare: vedi
+[`scripts/chrome-renderer/README.md`](scripts/chrome-renderer/README.md) e la
+sezione «Ordine dei comandi di build» in [`GO-LIVE.md`](GO-LIVE.md).

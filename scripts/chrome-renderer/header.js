@@ -1,0 +1,2911 @@
+(function () {
+    'use strict';
+
+    /* Cache indice ricerca per lingua, condivisa tra eventuali piu' istanze dell'header. */
+    const SEARCH_INDEX_CACHE = {};
+
+    /* Range combining diacritical marks (U+0300-U+036F) costruito da codepoint
+       per evitare di incorporare caratteri Unicode non stampabili nel sorgente. */
+    const DIACRITICS_RE = new RegExp(
+        '[' + String.fromCharCode(0x0300) + '-' + String.fromCharCode(0x036f) + ']', 'g'
+    );
+
+    function stripDiacritics(str) {
+        return String(str || '').normalize('NFD').replace(DIACRITICS_RE, '');
+    }
+
+    function normalizeSearchText(str) {
+        return stripDiacritics(str).toLowerCase().trim();
+    }
+
+    function rankSearchResults(entries, query) {
+        const q = normalizeSearchText(query);
+        if (!q) return [];
+        const scored = [];
+        entries.forEach((entry, idx) => {
+            const name = normalizeSearchText(entry.name);
+            const category = normalizeSearchText(entry.category);
+            let tier = -1;
+            if (name.indexOf(q) === 0) tier = 3;
+            else if (name.indexOf(q) !== -1) tier = 2;
+            else if (category.indexOf(q) !== -1) tier = 1;
+            if (tier >= 0) scored.push({ entry, tier, idx });
+        });
+        scored.sort((a, b) => (b.tier - a.tier) || (a.idx - b.idx));
+        return scored.slice(0, 8).map((s) => s.entry);
+    }
+
+    const HEADER_I18N = {
+        it: {
+            logoAlt: 'Aml Store',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Apri sottomenu Windows',
+            navWindowsOverview: 'Sistemi Operativi',
+            navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Apri sottomenu Office',
+            navOfficeOverview: 'Suite Office',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
+            navServerOverview: 'Windows Server e SQL',
+            navPacchetti: 'Pacchetti',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Apri sottomenu Antivirus',
+            navAvOverview: 'Catalogo antivirus',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Strumenti e altro',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Apri sottomenu Microsoft 365',
+            navM365Overview: 'Panoramica suite',
+            navM365Personal: 'Microsoft 365 Personal',
+            navM365Family: 'Microsoft 365 Family',
+            navM365Business: 'Microsoft 365 Business Standard',
+            navAntivirus: 'Antivirus',
+            utilityClaim1: 'Azienda italiana',
+            utilityClaim2: 'Fattura disponibile',
+            utilityClaim3: 'Supporto via email e WhatsApp',
+            supportLabel: 'Supporto',
+            supportHeading: 'Supporto scritto',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Lun–Ven · 09:00–19:00',
+            supportSectionTitle: 'Supporto',
+            openNavMenu: 'Apri menu di navigazione',
+            closeNavMenu: 'Chiudi menu',
+            selectLanguage: 'Seleziona lingua',
+            cartAriaEmpty: 'Carrello, nessun articolo',
+            cartAriaOne: 'Carrello, 1 articolo',
+            cartAriaMany: 'Carrello, {{n}} articoli',
+            searchToggleLabel: 'Cerca prodotti',
+            searchPlaceholder: 'Cerca un prodotto…',
+            searchHint: 'Inizia a digitare per cercare',
+            searchNoResults: 'Nessun risultato per "{{q}}"',
+            searchCloseLabel: 'Chiudi ricerca',
+        },
+        en: {
+            logoAlt: 'Aml Store',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Open Windows submenu',
+            navWindowsOverview: 'Operating Systems',
+            navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Open Office submenu',
+            navOfficeOverview: 'Office suite',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
+            navServerOverview: 'Windows Server & SQL',
+            navPacchetti: 'Bundles',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Open Antivirus submenu',
+            navAvOverview: 'Antivirus catalog',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Tools & more',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Open Microsoft 365 submenu',
+            navM365Overview: 'Suite overview',
+            navM365Personal: 'Microsoft 365 Personal',
+            navM365Family: 'Microsoft 365 Family',
+            navM365Business: 'Microsoft 365 Business Standard',
+            navAntivirus: 'Antivirus',
+            utilityClaim1: 'European software retailer',
+            utilityClaim2: 'VAT invoice available',
+            utilityClaim3: 'Support via email and WhatsApp',
+            supportLabel: 'Support',
+            supportHeading: 'Written support',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Mon–Fri · 09:00–19:00 CET/CEST',
+            supportSectionTitle: 'Support',
+            openNavMenu: 'Open navigation menu',
+            closeNavMenu: 'Close menu',
+            selectLanguage: 'Select language',
+            cartAriaEmpty: 'Shopping cart, empty',
+            cartAriaOne: 'Shopping cart, 1 item',
+            cartAriaMany: 'Shopping cart, {{n}} items',
+            searchToggleLabel: 'Search products',
+            searchPlaceholder: 'Search for a product…',
+            searchHint: 'Start typing to search',
+            searchNoResults: 'No results for "{{q}}"',
+            searchCloseLabel: 'Close search',
+        },
+        fr: {
+            logoAlt: 'Aml Store',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Ouvrir le sous-menu Windows',
+            navWindowsOverview: "Systèmes d'exploitation",
+            navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Ouvrir le sous-menu Office',
+            navOfficeOverview: 'Suite Office',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
+            navServerOverview: 'Windows Server et SQL',
+            navPacchetti: 'Packs',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Ouvrir le sous-menu Antivirus',
+            navAvOverview: 'Catalogue antivirus',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Outils et plus',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Ouvrir le sous-menu Microsoft 365',
+            navM365Overview: 'Vue d’ensemble de la suite',
+            navM365Personal: 'Microsoft 365 Personnel',
+            navM365Family: 'Microsoft 365 Famille',
+            navM365Business: 'Microsoft 365 Business Standard',
+            navAntivirus: 'Antivirus',
+            utilityClaim1: 'Revendeur logiciel européen',
+            utilityClaim2: 'Facture TVA disponible',
+            utilityClaim3: 'Assistance par e-mail et WhatsApp',
+            supportLabel: 'Assistance',
+            supportHeading: 'Assistance écrite',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Lun–Ven · 09:00–19:00 CET/CEST',
+            supportSectionTitle: 'Assistance',
+            openNavMenu: 'Ouvrir le menu de navigation',
+            closeNavMenu: 'Fermer le menu',
+            selectLanguage: 'Choisir la langue',
+            cartAriaEmpty: 'Panier vide',
+            cartAriaOne: 'Panier, 1 article',
+            cartAriaMany: 'Panier, {{n}} articles',
+            searchToggleLabel: 'Rechercher des produits',
+            searchPlaceholder: 'Rechercher un produit…',
+            searchHint: 'Commencez à taper pour rechercher',
+            searchNoResults: 'Aucun résultat pour « {{q}} »',
+            searchCloseLabel: 'Fermer la recherche',
+        },
+        de: {
+            logoAlt: 'Aml Store',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Windows-Untermenü öffnen',
+            navWindowsOverview: 'Betriebssysteme',
+            navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Office-Untermenü öffnen',
+            navOfficeOverview: 'Office-Suite',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
+            navServerOverview: 'Windows Server & SQL',
+            navPacchetti: 'Pakete',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Antivirus-Untermenü öffnen',
+            navAvOverview: 'Antivirus-Katalog',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Tools & mehr',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Microsoft-365-Untermenü öffnen',
+            navM365Overview: 'Suite-Überblick',
+            navM365Personal: 'Microsoft 365 Personal',
+            navM365Family: 'Microsoft 365 Family',
+            navM365Business: 'Microsoft 365 Business Standard',
+            navAntivirus: 'Antivirus',
+            utilityClaim1: 'Europäischer Softwarehändler',
+            utilityClaim2: 'MwSt.-Rechnung verfügbar',
+            utilityClaim3: 'Support per E-Mail und WhatsApp',
+            supportLabel: 'Support',
+            supportHeading: 'Schriftlicher Support',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Mo–Fr · 09:00–19:00 Uhr CET/CEST',
+            supportSectionTitle: 'Support',
+            openNavMenu: 'Navigationsmenü öffnen',
+            closeNavMenu: 'Menü schließen',
+            selectLanguage: 'Sprache wählen',
+            cartAriaEmpty: 'Warenkorb leer',
+            cartAriaOne: 'Warenkorb, 1 Artikel',
+            cartAriaMany: 'Warenkorb, {{n}} Artikel',
+            searchToggleLabel: 'Produkte durchsuchen',
+            searchPlaceholder: 'Produkt suchen…',
+            searchHint: 'Tippen Sie, um zu suchen',
+            searchNoResults: 'Keine Ergebnisse für „{{q}}"',
+            searchCloseLabel: 'Suche schließen',
+        },
+        es: {
+            logoAlt: 'Aml Store',
+            navWindows: 'Windows',
+            navWindowsOpenSubmenu: 'Abrir submenú Windows',
+            navWindowsOverview: 'Sistemas operativos',
+            navWindows11Home: 'Windows 11 Home',
+            navWindows11Pro: 'Windows 11 Pro',
+            navWindows11ProDvd: 'Windows 11 Pro OEM DVD',
+            navWindows11ProCoa: 'Windows 11 Pro COA',
+            navWindows10Home: 'Windows 10 Home',
+            navWindows10Pro: 'Windows 10 Pro',
+            navOffice: 'Office',
+            navOfficeOpenSubmenu: 'Abrir submenú Office',
+            navOfficeOverview: 'Suite Office',
+            navOffice2024Home: 'Office 2024 Home',
+            navOffice2024HB: 'Office 2024 Home & Business',
+            navOffice2021HS: 'Office 2021 Home & Student',
+            navOffice2021PP: 'Office 2021 Pro Plus',
+            navOffice2019PP: 'Office 2019 Pro Plus',
+            navWord2024: 'Word 2024',
+            navExcel2024: 'Excel 2024',
+            navPowerPoint2024: 'PowerPoint 2024',
+            navOutlook2024: 'Outlook 2024',
+            navOffice2021HB: 'Office 2021 Home & Business',
+            navOffice2021HBMac: 'Office 2021 Home & Business Mac',
+            navOffice2019HS: 'Office 2019 Home & Student',
+            navProjectStd2024: 'Project Standard 2024',
+            navProjectPro2024: 'Project Professional 2024',
+            navVisioStd2024: 'Visio Standard 2024',
+            navVisioPro2024: 'Visio Professional 2024',
+            navServerOverview: 'Windows Server y SQL',
+            navPacchetti: 'Packs',
+            navBundleWinM365: 'Win11 + M365 Personal',
+            navBundleM365Mcafee: 'M365 + McAfee',
+            navBundleM365Kaspersky: 'M365 + Kaspersky',
+            navAvOpenSubmenu: 'Abrir submenú Antivirus',
+            navAvOverview: 'Catálogo antivirus',
+            navAvMcafee: 'McAfee Total Protection',
+            navAvNorton: 'Norton 360 Standard',
+            navAvEset: 'ESET NOD32',
+            navAvBitdefender: 'Bitdefender Plus',
+            navAvKaspersky: 'Kaspersky Standard',
+            navStrumenti: 'Herramientas y más',
+            navM365: 'Microsoft 365',
+            navM365OpenSubmenu: 'Abrir submenú Microsoft 365',
+            navM365Overview: 'Panorama de la suite',
+            navM365Personal: 'Microsoft 365 Personal',
+            navM365Family: 'Microsoft 365 Familia',
+            navM365Business: 'Microsoft 365 Business Standard',
+            navAntivirus: 'Antivirus',
+            utilityClaim1: 'Distribuidor de software europeo',
+            utilityClaim2: 'Factura con IVA disponible',
+            utilityClaim3: 'Soporte por email y WhatsApp',
+            supportLabel: 'Soporte',
+            supportHeading: 'Soporte escrito',
+            supportEmailDisplay: 'info@amlstore.it',
+            supportWhatsApp: 'WhatsApp',
+            supportHours: 'Lun–Vie · 09:00–19:00 CET/CEST',
+            supportSectionTitle: 'Soporte',
+            openNavMenu: 'Abrir menú de navegación',
+            closeNavMenu: 'Cerrar menú',
+            selectLanguage: 'Seleccionar idioma',
+            cartAriaEmpty: 'Carrito vacío',
+            cartAriaOne: 'Carrito, 1 artículo',
+            cartAriaMany: 'Carrito, {{n}} artículos',
+            searchToggleLabel: 'Buscar productos',
+            searchPlaceholder: 'Buscar un producto…',
+            searchHint: 'Empieza a escribir para buscar',
+            searchNoResults: 'Sin resultados para "{{q}}"',
+            searchCloseLabel: 'Cerrar búsqueda',
+        },
+    };
+
+    const SUPPORT_EMAIL = 'info@amlstore.it';
+    const SUPPORT_WHATSAPP_URL = 'https://wa.me/393925580413';
+
+
+    class EcommerceHeader extends HTMLElement {
+        constructor() {
+            super();
+            this.attachShadow({ mode: 'open' });
+        }
+
+        connectedCallback() {
+            if (this.__headerUiInit) return;
+            this.__headerUiInit = true;
+
+            this.setAttribute('translate', 'no');
+            this.classList.add('notranslate');
+
+            const S = window.AmlSite;
+            if (!S) {
+                console.error('ecommerce-header: includere ../js/locale-path.js prima di questo script.');
+                return;
+            }
+            const parsed = S.parseLocalePath(window.location.pathname);
+            const LANGS = S.LANGS;
+            const activeLang = parsed.activeLang;
+            const otherLangs = LANGS.filter((l) => l.code !== activeLang.code);
+            const hrefForLang = (code) =>
+                S.hrefSwitchLocale(
+                    parsed.pathPrefix,
+                    code,
+                    parsed.pathAfterLang,
+                    window.location.search,
+                    window.location.hash
+                );
+            const homeHref = S.homeHref(parsed.pathPrefix, activeLang.code);
+            const cartHref = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'cart');
+            const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
+
+            const afterLang = (parsed.pathAfterLang || '').replace(/^\//, '');
+            const hrefM365Solutions = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-solutions');
+            const hrefM365Personal = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-personal');
+            const hrefM365Family = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-family');
+            const afterLangLower = String(parsed.pathAfterLang || '').toLowerCase();
+            const isM365Solutions = afterLangLower.includes('microsoft-365-solutions');
+            const isM365Personal = afterLangLower.includes('microsoft-365-personal');
+            const isM365Family = afterLangLower.includes('microsoft-365-family');
+            const hrefM365Business = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'microsoft-365-business-standard');
+            const isM365Business = afterLangLower.includes('microsoft-365-business-standard');
+            const hrefWinOverview = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'sistemi-operativi');
+            const hrefWin11Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-home');
+            const hrefWin11Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro');
+            const hrefWin11ProDvd = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro-oem-dvd');
+            const hrefWin11ProCoa = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-11-pro-coa');
+            const hrefWin10Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-home');
+            const hrefWin10Pro = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-10-pro');
+            const isWinOverview = afterLangLower.includes('sistemi-operativi');
+            const isWin11Home = afterLangLower.includes('windows-11-home');
+            const isWin11Pro = afterLangLower.includes('windows-11-pro') && !afterLangLower.includes('windows-11-pro-oem-dvd') && !afterLangLower.includes('windows-11-pro-coa');
+            const isWin11ProDvd = afterLangLower.includes('windows-11-pro-oem-dvd');
+            const isWin11ProCoa = afterLangLower.includes('windows-11-pro-coa');
+            const isWin10Home = afterLangLower.includes('windows-10-home');
+            const isWin10Pro = afterLangLower.includes('windows-10-pro');
+            const hrefSuiteOffice = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'suite-office');
+            const hrefOffice2024Home = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-home');
+            const hrefOffice2024HB = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2024-home-business');
+            const hrefOffice2021HS = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-student');
+            const hrefOffice2021PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-professional-plus');
+            const hrefOffice2019PP = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2019-professional-plus');
+            const hrefWord2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'word-2024');
+            const hrefExcel2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'excel-2024');
+            const hrefPowerPoint2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'powerpoint-2024');
+            const hrefOutlook2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'outlook-2024');
+            const hrefOffice2021HB = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-business');
+            const hrefOffice2021HBMac = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2021-home-business-mac');
+            const hrefOffice2019HS = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'office-2019-home-student');
+            const hrefProjectStd2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'project-standard-2024');
+            const hrefProjectPro2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'project-professional-2024');
+            const hrefVisioStd2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'visio-standard-2024');
+            const hrefVisioPro2024 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'visio-professional-2024');
+            const isOfficeOverview = afterLangLower.includes('suite-office');
+            const isOffice2024HB = afterLangLower.includes('office-2024-home-business');
+            const isOffice2024Home = afterLangLower.includes('office-2024-home') && !isOffice2024HB;
+            const isOffice2021HS = afterLangLower.includes('office-2021-home-student');
+            const isOffice2021PP = afterLangLower.includes('office-2021-professional-plus');
+            const isOffice2019PP = afterLangLower.includes('office-2019-professional-plus');
+            const isWord2024 = afterLangLower.includes('word-2024');
+            const isExcel2024 = afterLangLower.includes('excel-2024');
+            const isPowerPoint2024 = afterLangLower.includes('powerpoint-2024');
+            const isOutlook2024 = afterLangLower.includes('outlook-2024');
+            const isOffice2021HB = afterLangLower.includes('office-2021-home-business') && !afterLangLower.includes('office-2021-home-business-mac');
+            const isOffice2021HBMac = afterLangLower.includes('office-2021-home-business-mac');
+            const isOffice2019HS = afterLangLower.includes('office-2019-home-student');
+            const isProjectStd2024 = afterLangLower.includes('project-standard-2024');
+            const isProjectPro2024 = afterLangLower.includes('project-professional-2024');
+            const isVisioStd2024 = afterLangLower.includes('visio-standard-2024');
+            const isVisioPro2024 = afterLangLower.includes('visio-professional-2024');
+            const isOfficeNavActive = isOfficeOverview || isOffice2024Home || isOffice2024HB
+                || isOffice2021HS || isOffice2021PP || isOffice2019PP
+                || /\/(office-|word-2024|excel-2024|powerpoint-2024|outlook-2024|project-|visio-)/.test(afterLangLower);
+            const hrefWinServer = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'windows-server');
+            const hrefPacchetti = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'pacchetti');
+            const hrefAntivirus = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'antivirus');
+            const hrefStrumenti = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'strumenti');
+            const hrefBundleWinM365 = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-windows-11-home-m365-personal');
+            const hrefBundleM365Mcafee = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-m365-personal-mcafee');
+            const hrefBundleM365Kaspersky = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bundle-m365-personal-kaspersky');
+            const hrefAvMcafee = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'mcafee-total-protection-1-device');
+            const hrefAvNorton = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'norton-360-standard');
+            const hrefAvEset = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'eset-nod32-1-device');
+            const hrefAvBitdefender = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'bitdefender-plus-1-device');
+            const hrefAvKaspersky = S.localePageUrl(parsed.pathPrefix, activeLang.code, 'kaspersky-standard');
+            const isServerOverview = afterLangLower.includes('windows-server') || afterLangLower.includes('sql-server');
+            const isPacchettiOverview = afterLangLower.includes('pacchetti');
+            const isBundleWinM365 = afterLangLower.includes('bundle-windows-11-home-m365-personal');
+            const isBundleM365Mcafee = afterLangLower.includes('bundle-m365-personal-mcafee');
+            const isBundleM365Kaspersky = afterLangLower.includes('bundle-m365-personal-kaspersky');
+            const isWinNavActive = isWinOverview || isWin11Home || isWin11Pro || isWin11ProDvd || isWin11ProCoa || isWin10Home || isWin10Pro || isServerOverview;
+            const isM365NavActive = isM365Solutions || isM365Personal || isM365Family || isM365Business
+                || isPacchettiOverview || isBundleWinM365 || isBundleM365Mcafee || isBundleM365Kaspersky;
+            const isAvOverview = afterLangLower.includes('antivirus');
+            const isAvMcafee = afterLangLower.includes('mcafee-total-protection');
+            const isAvNorton = afterLangLower.includes('norton-360');
+            const isAvEset = afterLangLower.includes('eset-nod32');
+            const isAvBitdefender = afterLangLower.includes('bitdefender-plus');
+            const isAvKaspersky = afterLangLower.includes('kaspersky-standard')
+                || afterLangLower.includes('kaspersky-plus')
+                || afterLangLower.includes('kaspersky-premium');
+            const isAvNavActive = isAvOverview || isAvMcafee || isAvNorton || isAvEset || isAvBitdefender || isAvKaspersky;
+            const isStrumentiOverview = afterLangLower.includes('strumenti')
+                || afterLangLower.includes('adobe-acrobat')
+                || afterLangLower.includes('coreldraw-2024')
+                || afterLangLower.includes('acronis-true-image');
+            const esc = S.escapeHtmlAttr;
+
+            const cartAriaForCount = (n) => {
+                const c = Number(n) || 0;
+                if (c <= 0) return t.cartAriaEmpty;
+                if (c === 1) return t.cartAriaOne;
+                return String(t.cartAriaMany).replace('{{n}}', String(c));
+            };
+
+            const staticRoot = S.staticRootFromScriptPath('/components/header.js');
+            const logoSrc = `${staticRoot}/logo/logo-header-400.webp`;
+            const flagSrc = (flag) => `${staticRoot}/images/flags/${flag}.svg`;
+
+            this.shadowRoot.innerHTML = `
+
+                <style>
+                    :host {
+                        display: block;
+                        position: sticky;
+                        top: 0;
+                        z-index: 1000;
+                        font-family: var(--aml-font-sans, 'Montserrat', sans-serif);
+                        /* Alias locali → token design system (css/page.css).
+                           I --aml-* ereditano dal light DOM; i fallback restano
+                           canonici se page.css non è ancora caricato. */
+                        --bg-base: var(--aml-surface, #FFFFFF);
+                        --bg-surface: var(--aml-surface, #FFFFFF);
+                        --border-color: var(--aml-line, #DCE3EA);
+                        --text-primary: var(--aml-ink, #152033);
+                        --text-secondary: var(--aml-ink-2, #5F6B7A);
+                        --text-muted: var(--aml-ink-2, #5F6B7A);
+                        --accent: var(--aml-brand, #245EAC);
+                        --accent-hover: var(--aml-brand-hover, #1c4c8c);
+
+                        background-color: var(--bg-base);
+                        backdrop-filter: none;
+                        -webkit-backdrop-filter: none;
+                        border-bottom: 1px solid var(--border-color);
+                        box-shadow: none;
+                    }
+
+                    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+                    .header-utility {
+                        display: none;
+                        background: var(--aml-navy, #0A1830);
+                        color: color-mix(in srgb, var(--aml-surface, #FFFFFF) 82%, transparent);
+                        font-size: 0.75rem;
+                        line-height: 1.2;
+                    }
+                    .header-utility__inner {
+                        width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, clamp(1rem, 4vw, 2rem)))));
+                        min-height: 31px;
+                        margin-inline: auto;
+                        display: flex;
+                        align-items: center;
+                        gap: 1.125rem;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
+                    .header-utility__inner > span {
+                        display: inline-flex;
+                        align-items: center;
+                    }
+                    .header-utility__inner > span + span::before {
+                        content: "";
+                        display: inline-block;
+                        width: 1px;
+                        height: 0.75rem;
+                        margin-right: 1.125rem;
+                        background: color-mix(in srgb, var(--aml-surface, #FFFFFF) 24%, transparent);
+                        flex-shrink: 0;
+                    }
+                    @media (min-width: 768px) {
+                        .header-utility { display: block; }
+                    }
+                    :host(.is-compact) .header-utility {
+                        display: none;
+                    }
+
+                    .header-container {
+                        width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, clamp(1rem, 4vw, 2rem)))));
+                        min-height: 74px;
+                        margin-inline: auto;
+                        display: grid;
+                        grid-template-columns: auto minmax(0, 1fr) auto;
+                        align-items: center;
+                        gap: 2rem;
+                        background: var(--bg-base);
+                        box-sizing: border-box;
+                    }
+                    :host(.is-compact) .header-container {
+                        min-height: 63px;
+                    }
+
+                    .header-brand {
+                        display: flex;
+                        align-items: center;
+                        flex-shrink: 0;
+                    }
+
+                    .logo {
+                        display: flex;
+                        align-items: center;
+                        text-decoration: none;
+                        transition: opacity 0.2s ease;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        flex-shrink: 0;
+                    }
+                    .logo:hover { opacity: 0.9; }
+                    .logo:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+                    .logo img {
+                        height: 54px;
+                        width: auto;
+                        max-height: 100%;
+                        display: block;
+                        filter: none;
+                        transition: height 0.12s ease;
+                    }
+                    :host(.is-compact) .logo img {
+                        height: 46px;
+                    }
+
+                    .header-nav,
+                    .nav-links {
+                        display: flex;
+                        justify-content: center;
+                        align-items: stretch;
+                        gap: 1.6875rem;
+                        min-width: 0;
+                    }
+
+                    .nav-links a {
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        transition: color 0.2s ease;
+                        position: relative;
+                        padding-bottom: 4px;
+                        white-space: nowrap;
+                    }
+
+                    .nav-links a::after {
+                        content: '';
+                        position: absolute;
+                        inset-inline: 0;
+                        bottom: -1px;
+                        width: 100%;
+                        height: 2px;
+                        background-color: var(--accent);
+                        transform: scaleX(0);
+                        transform-origin: center;
+                        transition: transform 0.2s ease;
+                        border-radius: 1px;
+                    }
+
+                    .nav-links a:hover {
+                        color: var(--aml-navy, #0A1830);
+                    }
+
+                    .nav-links a:hover::after,
+                    .nav-links a.active::after,
+                    .nav-links a[aria-current="page"]::after {
+                        transform: scaleX(1);
+                    }
+
+                    .nav-links a.active,
+                    .nav-links a[aria-current="page"] {
+                        color: var(--aml-navy, #0A1830);
+                        font-weight: 600;
+                    }
+
+                    /* Windows — voce principale + sottomenù (identica struttura di M365) */
+                    .nav-win-wrap {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .nav-win-inner {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.15rem;
+                    }
+                    .nav-win-root {
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        transition: color 0.2s ease;
+                        position: relative;
+                        padding-bottom: 4px;
+                        white-space: nowrap;
+                    }
+                    .nav-win-root::after {
+                        content: '';
+                        position: absolute;
+                        inset-inline: 0;
+                        bottom: -1px;
+                        width: 100%;
+                        height: 2px;
+                        background-color: var(--accent);
+                        transform: scaleX(0);
+                        transform-origin: center;
+                        transition: transform 0.2s ease;
+                        border-radius: 1px;
+                    }
+                    .nav-win-root:hover { color: var(--aml-navy, #0A1830); }
+                    .nav-win-root:hover::after,
+                    .nav-win-root.active::after { transform: scaleX(1); }
+                    .nav-win-root.active { color: var(--aml-navy, #0A1830); font-weight: 600; }
+                    .nav-win-caret {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        padding: 0;
+                        margin: 0 0 2px 0;
+                        border: none;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        transition: color 0.2s ease, background 0.2s ease;
+                    }
+                    .nav-win-caret:hover,
+                    .nav-win-wrap.open .nav-win-caret { color: var(--text-primary); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+                    .nav-win-caret:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+                    .nav-win-caret svg {
+                        width: 12px; height: 12px; fill: currentColor;
+                        transition: transform 0.25s ease;
+                    }
+                    .nav-win-wrap.open .nav-win-caret svg { transform: rotate(180deg); }
+                    .nav-win-dropdown::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 100%;
+                        left: 0;
+                        right: 0;
+                        height: calc(0.5rem + 12px);
+                    }
+                    .nav-win-dropdown {
+                        position: absolute;
+                        top: calc(100% + 0.5rem);
+                        left: 0;
+                        min-width: 16.5rem;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-md, 8px);
+                        padding: 0.4rem;
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-6px) scale(0.98);
+                        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+                        z-index: 50;
+                    }
+                    .nav-win-wrap:hover .nav-win-dropdown,
+                    .nav-win-wrap:focus-within .nav-win-dropdown,
+                    .nav-win-wrap.open .nav-win-dropdown {
+                        opacity: 1; visibility: visible; pointer-events: auto;
+                        transform: translateY(0) scale(1);
+                        transition: opacity 0.25s cubic-bezier(0.16,1,0.3,1),
+                                    transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                                    visibility 0.25s;
+                    }
+                    .nav-win-dropdown a {
+                        display: block;
+                        padding: 0.55rem 0.75rem;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                        white-space: nowrap;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .nav-win-dropdown a:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--text-primary); }
+                    .nav-win-dropdown a.nav-win-dropdown__overview {
+                        font-weight: 700;
+                        color: var(--text-primary);
+                        border-bottom: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
+                        margin-bottom: 0.15rem;
+                        padding-bottom: 0.65rem;
+                    }
+                    .nav-win-dropdown a.nav-win-dropdown__overview:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+                    /* Drawer mobile — gruppi Windows / M365 (sottomenu) */
+                    .drawer-win-block,
+                    .drawer-office-block,
+                    .drawer-m365-block,
+                    .drawer-bundle-block,
+                    .drawer-av-block {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.125rem;
+                        margin-bottom: 0.35rem;
+                    }
+                    .drawer-win-heading,
+                    .drawer-office-heading,
+                    .drawer-m365-heading,
+                    .drawer-bundle-heading,
+                    .drawer-av-heading {
+                        font-size: 0.65rem;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.07em;
+                        color: var(--text-muted);
+                        padding: 0.4rem 0.75rem 0.2rem;
+                        line-height: 1.2;
+                    }
+
+                    /* reduced-motion: Windows */
+                    @media (prefers-reduced-motion: reduce) {
+                        .nav-win-root, .nav-win-root::after { transition: none; }
+                        .nav-win-caret svg { transition: none; }
+                        .nav-win-dropdown,
+                        .nav-win-wrap:hover .nav-win-dropdown,
+                        .nav-win-wrap:focus-within .nav-win-dropdown,
+                        .nav-win-wrap.open .nav-win-dropdown { transition: none; }
+                    }
+
+                    /* Microsoft 365 — voce principale (link overview) + sottomenù */
+                    .nav-m365-wrap {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .nav-m365-inner {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.15rem;
+                    }
+                    .nav-m365-root {
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        transition: color 0.2s ease;
+                        position: relative;
+                        padding-bottom: 4px;
+                        white-space: nowrap;
+                    }
+                    .nav-m365-root::after {
+                        content: '';
+                        position: absolute;
+                        inset-inline: 0;
+                        bottom: -1px;
+                        width: 100%;
+                        height: 2px;
+                        background-color: var(--accent);
+                        transform: scaleX(0);
+                        transform-origin: center;
+                        transition: transform 0.2s ease;
+                        border-radius: 1px;
+                    }
+                    .nav-m365-root:hover {
+                        color: var(--aml-navy, #0A1830);
+                    }
+                    .nav-m365-root:hover::after,
+                    .nav-m365-root.active::after {
+                        transform: scaleX(1);
+                    }
+                    .nav-m365-root.active {
+                        color: var(--aml-navy, #0A1830);
+                        font-weight: 600;
+                    }
+                    .nav-m365-caret {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        padding: 0;
+                        margin: 0 0 2px 0;
+                        border: none;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        transition: color 0.2s ease, background 0.2s ease;
+                    }
+                    .nav-m365-caret:hover,
+                    .nav-m365-wrap.open .nav-m365-caret {
+                        color: var(--text-primary);
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                    }
+                    .nav-m365-caret:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                    }
+                    .nav-m365-caret svg {
+                        width: 12px;
+                        height: 12px;
+                        fill: currentColor;
+                        transition: transform 0.25s ease;
+                    }
+                    .nav-m365-wrap.open .nav-m365-caret svg {
+                        transform: rotate(180deg);
+                    }
+                    /* Ponte invisibile sopra il pannello: senza, il mouse attraversa il gap
+                       tra trigger e dropdown e :hover sul wrap cade → il menu si chiude. */
+                    .nav-m365-dropdown::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 100%;
+                        left: 0;
+                        right: 0;
+                        height: calc(0.5rem + 12px);
+                    }
+                    .nav-m365-dropdown {
+                        position: absolute;
+                        top: calc(100% + 0.5rem);
+                        left: 0;
+                        min-width: 16.5rem;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-md, 8px);
+                        padding: 0.4rem;
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-6px) scale(0.98);
+                        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+                        z-index: 50;
+                    }
+                    .nav-m365-wrap:hover .nav-m365-dropdown,
+                    .nav-m365-wrap:focus-within .nav-m365-dropdown,
+                    .nav-m365-wrap.open .nav-m365-dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        transform: translateY(0) scale(1);
+                        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    visibility 0.25s;
+                    }
+                    .nav-m365-dropdown a {
+                        display: block;
+                        padding: 0.55rem 0.75rem;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                        white-space: nowrap;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .nav-m365-dropdown a:hover {
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                        color: var(--text-primary);
+                    }
+                    .nav-m365-dropdown a.nav-m365-dropdown__overview {
+                        font-weight: 700;
+                        color: var(--text-primary);
+                        border-bottom: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
+                        margin-bottom: 0.15rem;
+                        padding-bottom: 0.65rem;
+                    }
+                    .nav-m365-dropdown a.nav-m365-dropdown__overview:hover {
+                        background: color-mix(in srgb, var(--accent) 12%, transparent);
+                    }
+
+                    /* Office — voce principale + sottomenù */
+                    .nav-office-wrap,
+                    .nav-av-wrap {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                    }
+                    .nav-office-inner,
+                    .nav-av-inner {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.15rem;
+                    }
+                    .nav-office-root,
+                    .nav-av-root {
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        transition: color 0.2s ease;
+                        position: relative;
+                        padding-bottom: 4px;
+                        white-space: nowrap;
+                    }
+                    .nav-office-root::after,
+                    .nav-av-root::after {
+                        content: '';
+                        position: absolute;
+                        inset-inline: 0;
+                        bottom: -1px;
+                        width: 100%;
+                        height: 2px;
+                        background-color: var(--accent);
+                        transform: scaleX(0);
+                        transform-origin: center;
+                        transition: transform 0.2s ease;
+                        border-radius: 1px;
+                    }
+                    .nav-office-root:hover,
+                    .nav-av-root:hover { color: var(--aml-navy, #0A1830); }
+                    .nav-office-root:hover::after,
+                    .nav-av-root:hover::after,
+                    .nav-office-root.active::after,
+                    .nav-av-root.active::after { transform: scaleX(1); }
+                    .nav-office-root.active,
+                    .nav-av-root.active { color: var(--aml-navy, #0A1830); font-weight: 600; }
+                    .nav-office-caret,
+                    .nav-av-caret {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        padding: 0;
+                        margin: 0 0 2px 0;
+                        border: none;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        transition: color 0.2s ease, background 0.2s ease;
+                    }
+                    .nav-office-caret:hover,
+                    .nav-av-caret:hover,
+                    .nav-office-wrap.open .nav-office-caret,
+                    .nav-av-wrap.open .nav-av-caret {
+                        color: var(--text-primary);
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                    }
+                    .nav-office-caret:focus-visible,
+                    .nav-av-caret:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                    }
+                    .nav-office-caret svg,
+                    .nav-av-caret svg {
+                        width: 12px;
+                        height: 12px;
+                        fill: currentColor;
+                        transition: transform 0.25s ease;
+                    }
+                    .nav-office-wrap.open .nav-office-caret svg,
+                    .nav-av-wrap.open .nav-av-caret svg {
+                        transform: rotate(180deg);
+                    }
+                    .nav-office-dropdown::before,
+                    .nav-av-dropdown::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 100%;
+                        left: 0;
+                        right: 0;
+                        height: calc(0.5rem + 12px);
+                    }
+                    .nav-office-dropdown,
+                    .nav-av-dropdown {
+                        position: absolute;
+                        top: calc(100% + 0.5rem);
+                        left: 0;
+                        min-width: 16.5rem;
+                        max-height: min(70vh, 22rem);
+                        overflow-y: auto;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-md, 8px);
+                        padding: 0.4rem;
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-6px) scale(0.98);
+                        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+                        z-index: 50;
+                    }
+                    /* Ultima voce del nav: il pannello si apre verso sinistra, così non
+                       si estende sotto l'area assistenza/lingua/carrello a destra. */
+                    .nav-av-dropdown {
+                        left: auto;
+                        right: 0;
+                    }
+                    .nav-office-wrap:hover .nav-office-dropdown,
+                    .nav-av-wrap:hover .nav-av-dropdown,
+                    .nav-office-wrap:focus-within .nav-office-dropdown,
+                    .nav-av-wrap:focus-within .nav-av-dropdown,
+                    .nav-office-wrap.open .nav-office-dropdown,
+                    .nav-av-wrap.open .nav-av-dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        transform: translateY(0) scale(1);
+                        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    visibility 0.25s;
+                    }
+                    .nav-office-dropdown a,
+                    .nav-av-dropdown a {
+                        display: block;
+                        padding: 0.55rem 0.75rem;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                        white-space: nowrap;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .nav-office-dropdown a:hover,
+                    .nav-av-dropdown a:hover {
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                        color: var(--text-primary);
+                    }
+                    .nav-office-dropdown a.nav-office-dropdown__overview,
+                    .nav-av-dropdown a.nav-av-dropdown__overview {
+                        font-weight: 700;
+                        color: var(--text-primary);
+                        border-bottom: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-sm, 6px) var(--aml-radius-sm, 6px) 0 0;
+                        margin-bottom: 0.15rem;
+                        padding-bottom: 0.65rem;
+                    }
+                    .nav-office-dropdown a.nav-office-dropdown__overview:hover,
+                    .nav-av-dropdown a.nav-av-dropdown__overview:hover {
+                        background: color-mix(in srgb, var(--accent) 12%, transparent);
+                    }
+
+                    .header-actions,
+                    .right-section {
+                        display: flex;
+                        align-items: center;
+                        gap: 1.0625rem;
+                        flex-shrink: 0;
+                        justify-self: end;
+                    }
+
+                    .support-wrap {
+                        position: relative;
+                        z-index: 2;
+                    }
+                    .support-trigger {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.4rem;
+                        min-height: 36px;
+                        padding: 0.5rem 0.65rem;
+                        border: 1px solid transparent;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        background: transparent;
+                        color: var(--text-primary);
+                        font-family: inherit;
+                        font-size: 0.875rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        pointer-events: auto;
+                        transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+                    }
+                    .support-trigger:hover,
+                    .support-wrap.open .support-trigger {
+                        color: var(--aml-navy, #0A1830);
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                        border-color: var(--border-color);
+                    }
+                    .support-trigger:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                    }
+                    .support-trigger svg {
+                        width: 18px;
+                        height: 18px;
+                        fill: currentColor;
+                        flex-shrink: 0;
+                    }
+                    .support-trigger__chevron {
+                        width: 14px;
+                        height: 14px;
+                        fill: currentColor;
+                        transition: transform 0.2s ease;
+                    }
+                    .support-wrap.open .support-trigger__chevron {
+                        transform: rotate(180deg);
+                    }
+                    .support-trigger__label {
+                        white-space: nowrap;
+                    }
+                    .support-panel {
+                        position: absolute;
+                        top: calc(100% + 0.5rem);
+                        right: 0;
+                        min-width: 240px;
+                        padding: 0.85rem 1rem;
+                        background: var(--bg-surface);
+                        border: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-md, 8px);
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+                        z-index: 80;
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-4px);
+                        transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+                    }
+                    .support-wrap.open .support-panel {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        transform: translateY(0);
+                    }
+                    .support-panel[hidden] {
+                        display: none !important;
+                    }
+                    .support-panel__heading {
+                        margin: 0 0 0.65rem;
+                        font-size: 0.7rem;
+                        font-weight: 700;
+                        letter-spacing: 0.06em;
+                        text-transform: uppercase;
+                        color: var(--text-muted);
+                    }
+                    .support-panel__link {
+                        display: block;
+                        color: var(--aml-navy, #0A1830);
+                        text-decoration: none;
+                        font-size: 0.9rem;
+                        font-weight: 600;
+                        padding: 0.25rem 0;
+                        border-radius: 4px;
+                    }
+                    .support-panel__link:hover {
+                        color: var(--accent);
+                    }
+                    .support-panel__link:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 2px;
+                    }
+                    .support-panel__hours {
+                        margin: 0.55rem 0 0;
+                        font-size: 0.8rem;
+                        color: var(--text-secondary);
+                    }
+
+                    /* Ponte hover sotto i wrap: copre il gap trigger→pannello per tutti
+                       i menu. Serve sul wrap (non sul dropdown) perché nei pannelli con
+                       overflow-y:auto (Office/Antivirus) il ::before del dropdown viene
+                       ritagliato e l'hover cadeva attraversando il gap. */
+                    .nav-win-wrap:hover::after, .nav-win-wrap.open::after,
+                    .nav-office-wrap:hover::after, .nav-office-wrap.open::after,
+                    .nav-m365-wrap:hover::after, .nav-m365-wrap.open::after,
+                    .nav-av-wrap:hover::after, .nav-av-wrap.open::after {
+                        content: '';
+                        position: absolute;
+                        top: 100%;
+                        left: -0.75rem;
+                        right: -0.75rem;
+                        height: 0.75rem;
+                    }
+
+                    .lang-wrapper { position: relative; }
+                    .lang-selector {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        background: transparent;
+                        border: 1px solid transparent;
+                        color: var(--text-secondary);
+                        font-size: 0.9rem;
+                        font-weight: 500;
+                        cursor: pointer;
+                        font-family: inherit;
+                        padding: 0.5rem;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        transition: color 0.3s ease, background 0.3s ease, border 0.3s ease;
+                    }
+                    .lang-selector:hover, .lang-wrapper.open .lang-selector {
+                        color: var(--text-primary);
+                        background: color-mix(in srgb, var(--accent) 6%, transparent);
+                        border-color: var(--border-color);
+                    }
+                    .lang-selector:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
+                    }
+                    /* Sostituto visivo per l'anteprima se non c'è l'immagine della flag */
+                    .lang-selector img {
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        background: color-mix(in srgb, var(--accent) 10%, transparent);
+                        color: transparent;
+                        border: 1px solid var(--border-color);
+                    }
+                    .chevron-down {
+                        width: 14px;
+                        height: 14px;
+                        fill: currentColor;
+                        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+                    .lang-wrapper.open .chevron-down {
+                        transform: rotate(180deg);
+                    }
+
+                    .lang-dropdown {
+                        position: absolute;
+                        top: calc(100% + 0.75rem);
+                        right: 0;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-md, 8px);
+                        padding: 0.5rem;
+                        min-width: 140px;
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+                        /* Stato chiuso: invisibile ma nel flusso — permette transizione in uscita */
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transform: translateY(-6px) scale(0.98);
+                        transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+                    }
+                    .lang-wrapper.open .lang-dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        transform: translateY(0) scale(1);
+                        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                                    visibility 0.25s;
+                    }
+
+                    .lang-option {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        padding: 0.6rem 0.75rem;
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        font-size: 0.85rem;
+                        font-weight: 500;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+                    }
+                    .lang-option:hover {
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                        color: var(--text-primary);
+                        transform: translateX(2px);
+                    }
+                    .lang-option img {
+                        width: 18px;
+                        height: 18px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        background: color-mix(in srgb, var(--accent) 10%, transparent);
+                        color: transparent;
+                    }
+
+                    .cart-wrapper {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 42px;
+                        height: 42px;
+                        border-radius: 50%;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        transition: color 0.3s ease, background 0.3s ease;
+                        flex-shrink: 0;
+                        text-decoration: none;
+                    }
+                    .cart-wrapper:hover {
+                        color: var(--text-primary);
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                    }
+                    .cart-wrapper:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
+                    }
+                    .cart-wrapper svg {
+                        width: 22px;
+                        height: 22px;
+                        fill: currentColor;
+                        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    }
+                    /* Rimbalzo giocoso ma elegante al passaggio del mouse sul carrello */
+                    .cart-wrapper:hover svg {
+                        transform: scale(1.1) rotate(-8deg);
+                    }
+                    
+                    .cart-badge {
+                        position: absolute;
+                        top: 0;
+                        right: -2px;
+                        background: var(--aml-danger, #B3261E);
+                        color: white;
+                        font-size: 0.65rem;
+                        font-weight: 800;
+                        min-width: 18px;
+                        height: 18px;
+                        padding: 0 4px;
+                        display: none;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        border: 2px solid var(--bg-base); /* Bordo che "buca" l'icona sottostante */
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+                    }
+                    .cart-badge.is-visible {
+                        display: flex;
+                    }
+
+                    .cart-badge.is-visible.cart-badge-pop {
+                        animation: aml-cart-badge-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    }
+
+                    @keyframes aml-cart-badge-pop {
+                        0%,
+                        100% {
+                            transform: scale(1);
+                        }
+                        45% {
+                            transform: scale(1.14);
+                        }
+                    }
+
+                    .cart-wrapper.cart-nudge {
+                        color: var(--text-primary);
+                        background: color-mix(in srgb, var(--accent) 10%, transparent);
+                    }
+
+                    .cart-wrapper.cart-nudge svg {
+                        animation: aml-cart-icon-nudge 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+                    }
+
+                    @keyframes aml-cart-icon-nudge {
+                        0%,
+                        100% {
+                            transform: scale(1) rotate(0deg);
+                        }
+                        35% {
+                            transform: scale(1.12) rotate(-10deg);
+                        }
+                        70% {
+                            transform: scale(1.05) rotate(4deg);
+                        }
+                    }
+
+                    @media (prefers-reduced-motion: reduce) {
+                        /* Carrello */
+                        .cart-badge.is-visible.cart-badge-pop { animation: none; }
+                        .cart-wrapper.cart-nudge svg { animation: none; }
+                        /* Logo */
+                        .logo { transition: none; }
+                        /* Nav desktop */
+                        .nav-links a,
+                        .nav-links a::after { transition: none; }
+                        /* Supporto */
+                        .support-icon { transition: none; }
+                        /* Selettore lingua */
+                        .lang-selector { transition: none; }
+                        .chevron-down { transition: none; }
+                        .lang-dropdown,
+                        .lang-wrapper.open .lang-dropdown { transition: none; }
+                        .nav-m365-dropdown,
+                        .nav-m365-wrap:hover .nav-m365-dropdown,
+                        .nav-m365-wrap:focus-within .nav-m365-dropdown,
+                        .nav-m365-wrap.open .nav-m365-dropdown { transition: none; }
+                        .nav-m365-caret svg { transition: none; }
+                        .nav-office-dropdown,
+                        .nav-av-dropdown,
+                        .nav-office-wrap:hover .nav-office-dropdown,
+                        .nav-av-wrap:hover .nav-av-dropdown,
+                        .nav-office-wrap:focus-within .nav-office-dropdown,
+                        .nav-av-wrap:focus-within .nav-av-dropdown,
+                        .nav-office-wrap.open .nav-office-dropdown,
+                        .nav-av-wrap.open .nav-av-dropdown { transition: none; }
+                        .nav-office-caret svg,
+                        .nav-av-caret svg { transition: none; }
+                        /* Pulsante Accedi */
+                        .btn-signin { transition: none; }
+                        /* Overlay e Drawer mobile */
+                        .overlay { transition: none; }
+                        .mobile-drawer { transition: none; }
+                        .close-drawer { transition: none; }
+                        .drawer-nav a { transition: none; }
+                        .drawer-lang-link { transition: none; }
+                        .drawer-btn-signin { transition: none; }
+                    }
+
+                    .btn-signin {
+                        background: var(--accent);
+                        color: var(--aml-surface, #FFFFFF);
+                        border: none;
+                        padding: 0.6rem 1.4rem;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        font-family: inherit;
+                        font-size: 0.9rem;
+                        font-weight: 700;
+                        cursor: pointer;
+                        box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 22%, transparent);
+                        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, filter 0.3s ease;
+                        white-space: nowrap;
+                    }
+                    .btn-signin:hover {
+                        transform: translateY(-2px) scale(1.02);
+                        filter: brightness(1.08);
+                        box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 28%, transparent);
+                    }
+                    .btn-signin:active {
+                        transform: translateY(0) scale(0.98);
+                    }
+                    .btn-signin:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
+                    }
+
+                    .mobile-toggle {
+                        display: none;
+                        background: none;
+                        border: none;
+                        color: var(--text-primary);
+                        cursor: pointer;
+                        padding: 0.5rem;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        transition: opacity 0.2s;
+                        touch-action: manipulation;
+                        width: 36px;
+                        height: 36px;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                    }
+                    .mobile-toggle:hover {
+                        opacity: 0.7;
+                    }
+                    .mobile-toggle:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
+                    }
+                    .mobile-toggle svg {
+                        width: 22px;
+                        height: 22px;
+                        fill: none;
+                        stroke: currentColor;
+                        stroke-width: 2;
+                        stroke-linecap: round;
+                    }
+
+                    /* --- RESPONSIVE DESIGN HEADER --- */
+
+                    @media (min-width: 768px) and (max-width: 1120px) {
+                        .header-nav,
+                        .nav-links { gap: 1.125rem; }
+                        .header-actions,
+                        .right-section { gap: 0.75rem; }
+                        .support-trigger__label { display: none; }
+                        .header-container { gap: 20px; }
+                    }
+
+                    /* Tablet: nav → drawer */
+                    @media (max-width: 1100px) {
+                        .header-container {
+                            display: flex;
+                            justify-content: space-between;
+                            gap: 1rem;
+                            width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, 1.25rem))));
+                        }
+                        .header-nav,
+                        .nav-links { display: none; }
+                        .mobile-toggle { display: inline-flex; }
+                        .header-brand { flex: 1 1 auto; min-width: 0; }
+                        .lang-wrapper { display: none; }
+                        .support-wrap { display: none; }
+                    }
+
+                    @media (max-width: 767px) {
+                        .header-utility { display: none !important; }
+                        .header-container {
+                            min-height: 64px;
+                            width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, 1rem))));
+                            gap: 0.5rem;
+                        }
+                        :host(.is-compact) .header-container {
+                            min-height: 64px;
+                        }
+                        .logo img,
+                        :host(.is-compact) .logo img {
+                            height: 44px;
+                        }
+                        .header-actions,
+                        .right-section { gap: 0.35rem; }
+                        .cart-wrapper {
+                            width: 36px;
+                            height: 36px;
+                        }
+                        .search-panel { top: 72px; width: min(94vw, 640px); max-height: calc(100vh - 100px); }
+                    }
+
+                    @media (prefers-reduced-motion: reduce) {
+                        .logo img { transition: none; }
+                    }
+
+                    /* RICERCA PRODOTTI */
+                    .search-toggle {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 36px;
+                        height: 36px;
+                        border-radius: var(--aml-radius-md, 8px);
+                        border: none;
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        flex-shrink: 0;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .search-toggle:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--text-primary); }
+                    .search-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+                    .search-toggle svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+
+                    .search-backdrop {
+                        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                        background: rgba(0,0,0,0.6);
+                        backdrop-filter: blur(6px);
+                        z-index: 1999;
+                        opacity: 0; pointer-events: none;
+                        transition: opacity 0.25s cubic-bezier(0.4, 0, 1, 1);
+                    }
+                    .search-backdrop.open {
+                        opacity: 1; pointer-events: auto;
+                        transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1);
+                    }
+
+                    .search-panel {
+                        position: fixed;
+                        top: 112px;
+                        left: 50%;
+                        transform: translate(-50%, -12px);
+                        width: min(92vw, 640px);
+                        max-height: calc(100vh - 140px);
+                        display: flex;
+                        flex-direction: column;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(16px);
+                        -webkit-backdrop-filter: blur(16px);
+                        border: 1px solid var(--border-color);
+                        border-radius: var(--aml-radius-lg, 12px);
+                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
+                        z-index: 2001;
+                        opacity: 0;
+                        visibility: hidden;
+                        pointer-events: none;
+                        transition: opacity 0.25s cubic-bezier(0.16,1,0.3,1),
+                                    transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                                    visibility 0.25s;
+                        overflow: hidden;
+                    }
+                    :host(.is-compact) ~ .search-panel,
+                    :host(.is-compact) .search-panel {
+                        top: 72px;
+                    }
+                    .search-panel.open {
+                        opacity: 1; visibility: visible; pointer-events: auto;
+                        transform: translate(-50%, 0);
+                    }
+                    .search-panel-row {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.6rem;
+                        padding: 0.75rem 1rem;
+                        border-bottom: 1px solid var(--border-color);
+                        flex-shrink: 0;
+                    }
+                    .search-input-icon { color: var(--text-muted); flex-shrink: 0; }
+                    .search-input {
+                        flex: 1 1 auto;
+                        min-width: 0;
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                        color: var(--text-primary);
+                        font-family: inherit;
+                        font-size: 0.95rem;
+                    }
+                    .search-input::placeholder { color: var(--text-muted); }
+                    .search-input::-webkit-search-cancel-button { display: none; }
+                    .search-close {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 28px;
+                        height: 28px;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        border: none;
+                        background: transparent;
+                        color: var(--text-secondary);
+                        cursor: pointer;
+                        flex-shrink: 0;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .search-close:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); color: var(--text-primary); }
+                    .search-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+                    .search-results {
+                        overflow-y: auto;
+                        padding: 0.4rem;
+                    }
+                    .search-hint,
+                    .search-empty {
+                        padding: 1.5rem 1rem;
+                        text-align: center;
+                        color: var(--text-muted);
+                        font-size: 0.85rem;
+                    }
+                    .search-result {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75rem;
+                        padding: 0.5rem 0.6rem;
+                        border-radius: var(--aml-radius-md, 8px);
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        transition: background 0.2s ease, color 0.2s ease;
+                    }
+                    .search-result:hover,
+                    .search-result:focus-visible {
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                        color: var(--text-primary);
+                        outline: none;
+                    }
+                    .search-result-thumb {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        object-fit: contain;
+                        background: color-mix(in srgb, var(--accent) 6%, transparent);
+                        flex-shrink: 0;
+                    }
+                    .search-result-info { min-width: 0; flex: 1 1 auto; }
+                    .search-result-name {
+                        font-size: 0.88rem;
+                        font-weight: 600;
+                        color: var(--text-primary);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .search-result-category {
+                        font-size: 0.75rem;
+                        color: var(--text-muted);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .search-result-price {
+                        font-size: 0.85rem;
+                        font-weight: 700;
+                        color: var(--text-primary);
+                        flex-shrink: 0;
+                        white-space: nowrap;
+                    }
+                    @media (max-width: 640px) {
+                        .search-panel { top: 76px; width: min(94vw, 640px); max-height: calc(100vh - 100px); }
+                    }
+                    @media (prefers-reduced-motion: reduce) {
+                        .search-backdrop { transition: none; }
+                        .search-panel { transition: none; }
+                    }
+
+                    /* DRAWER MOBILE */
+                    .overlay {
+                        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                        background: rgba(0,0,0,0.6);
+                        backdrop-filter: blur(6px);
+                        z-index: 1999;
+                        opacity: 0; pointer-events: none;
+                        /* Chiusura: ease-in (veloce all'uscita) */
+                        transition: opacity 0.25s cubic-bezier(0.4, 0, 1, 1);
+                    }
+                    .overlay.open {
+                        opacity: 1; pointer-events: auto;
+                        /* Apertura: ease-out (parte veloce, rallenta) */
+                        transition: opacity 0.4s cubic-bezier(0, 0, 0.2, 1);
+                    }
+
+                    .mobile-drawer {
+                        position: fixed; top: 0; left: -100%;
+                        width: 100%; max-width: 320px;
+                        height: 100vh;
+                        background: var(--bg-surface);
+                        backdrop-filter: blur(20px);
+                        -webkit-backdrop-filter: blur(20px);
+                        border-right: 1px solid var(--border-color);
+                        z-index: 2000;
+                        /* Chiusura: ease-in più rapida */
+                        transition: left 0.3s cubic-bezier(0.4, 0, 1, 1);
+                        padding: 1rem 0.9rem 1.25rem;
+                        display: flex; flex-direction: column;
+                        overflow-y: auto;
+                        box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+                    }
+                    .mobile-drawer.open {
+                        left: 0;
+                        /* Apertura: ease-out con overshoot leggero */
+                        transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    }
+
+                    .drawer-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 1.25rem;
+                        flex-shrink: 0;
+                    }
+                    .mobile-drawer .drawer-header .logo img {
+                        height: 40px;
+                        width: auto;
+                    }
+                    .close-drawer {
+                        background: color-mix(in srgb, var(--accent) 6%, transparent);
+                        border: 1px solid var(--border-color);
+                        color: var(--text-primary);
+                        width: 36px; height: 36px;
+                        border-radius: 50%;
+                        display: flex; align-items: center; justify-content: center;
+                        cursor: pointer;
+                        transition: background 0.3s ease, transform 0.3s ease;
+                    }
+                    @media (hover: hover) and (pointer: fine) {
+                        .close-drawer:hover {
+                            background: color-mix(in srgb, var(--accent) 10%, transparent);
+                        }
+                    }
+                    .close-drawer:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: 3px;
+                    }
+                    .close-drawer svg { width: 20px; height: 20px; fill: currentColor; }
+
+                    .drawer-nav {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.2rem;
+                        margin-bottom: 1.25rem;
+                        flex-shrink: 0;
+                    }
+                    .drawer-nav > a,
+                    .drawer-win-block a,
+                    .drawer-office-block a,
+                    .drawer-m365-block a,
+                    .drawer-bundle-block a,
+                    .drawer-av-block a {
+                        -webkit-tap-highlight-color: transparent;
+                        position: relative;
+                        display: block;
+                        width: fit-content;
+                        max-width: 100%;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                        line-height: 1.35;
+                        padding: 0.35rem 0.5rem;
+                        box-sizing: border-box;
+                        background: transparent;
+                        text-decoration-line: underline;
+                        text-decoration-color: transparent;
+                        text-decoration-thickness: 1px;
+                        text-underline-offset: 0.2em;
+                        transition: color 0.15s ease, text-decoration-color 0.15s ease;
+                    }
+                    .drawer-nav > a {
+                        font-size: 0.9375rem;
+                        color: var(--text-primary);
+                    }
+                    .drawer-win-block a,
+                    .drawer-office-block a,
+                    .drawer-m365-block a,
+                    .drawer-bundle-block a,
+                    .drawer-av-block a {
+                        font-size: 0.875rem;
+                    }
+                    .drawer-nav > a.active,
+                    .drawer-win-block a.active,
+                    .drawer-office-block a.active,
+                    .drawer-m365-block a.active,
+                    .drawer-bundle-block a.active,
+                    .drawer-av-block a.active {
+                        color: var(--text-primary);
+                        text-decoration-color: color-mix(in srgb, var(--text-primary) 55%, transparent);
+                    }
+                    @media (hover: hover) and (pointer: fine) {
+                        .drawer-nav > a:hover,
+                        .drawer-win-block a:hover,
+                        .drawer-office-block a:hover,
+                        .drawer-m365-block a:hover,
+                        .drawer-bundle-block a:hover,
+                        .drawer-av-block a:hover {
+                            color: var(--text-primary);
+                            text-decoration-color: color-mix(in srgb, var(--text-primary) 40%, transparent);
+                        }
+                    }
+                    @media (hover: none), (pointer: coarse) {
+                        .drawer-nav > a:hover,
+                        .drawer-win-block a:hover,
+                        .drawer-office-block a:hover,
+                        .drawer-m365-block a:hover,
+                        .drawer-bundle-block a:hover,
+                        .drawer-av-block a:hover {
+                            color: inherit;
+                            text-decoration-color: transparent;
+                        }
+                        .drawer-nav > a:active,
+                        .drawer-win-block a:active,
+                        .drawer-office-block a:active,
+                        .drawer-m365-block a:active,
+                        .drawer-bundle-block a:active,
+                        .drawer-av-block a:active {
+                            color: var(--text-primary);
+                            text-decoration-color: color-mix(in srgb, var(--text-primary) 45%, transparent);
+                        }
+                    }
+
+                    .drawer-section-title {
+                        font-size: 0.65rem;
+                        color: var(--text-muted);
+                        text-transform: uppercase;
+                        letter-spacing: 0.08em;
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                        padding-left: 0.75rem;
+                    }
+
+                    .drawer-langs {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 0.35rem;
+                        margin-bottom: auto;
+                    }
+                    .drawer-lang-link {
+                        display: flex; align-items: center; gap: 0.5rem;
+                        padding: 0.5rem 0.65rem;
+                        border-radius: var(--aml-radius-sm, 6px);
+                        font-size: 0.8125rem; font-weight: 500;
+                        color: var(--text-secondary);
+                        text-decoration: none;
+                        border: 1px solid transparent;
+                        transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+                    }
+                    .drawer-lang-link.active {
+                        background: color-mix(in srgb, var(--accent) 10%, transparent);
+                        border-color: var(--border-color);
+                        color: var(--text-primary);
+                    }
+                    @media (hover: hover) and (pointer: fine) {
+                        .drawer-lang-link:hover:not(.active) {
+                            background: color-mix(in srgb, var(--accent) 6%, transparent);
+                            color: var(--text-primary);
+                        }
+                    }
+                    .drawer-lang-link img {
+                        width: 20px; height: 20px; border-radius: 50%; object-fit: cover;
+                        background: color-mix(in srgb, var(--accent) 10%, transparent); color: transparent;
+                    }
+
+                    .drawer-footer {
+                        margin-top: 1.25rem;
+                        padding-top: 1rem;
+                        border-top: 1px solid var(--border-color);
+                        flex-shrink: 0;
+                    }
+                    .drawer-support-title {
+                        font-size: 0.65rem;
+                        color: var(--text-muted);
+                        text-transform: uppercase;
+                        letter-spacing: 0.08em;
+                        font-weight: 700;
+                        margin: 0 0 0.55rem;
+                    }
+                    .drawer-support-link {
+                        display: block;
+                        color: var(--aml-navy, #0A1830);
+                        text-decoration: none;
+                        font-size: 0.9rem;
+                        font-weight: 600;
+                        padding: 0.3rem 0;
+                    }
+                    .drawer-support-link:hover { color: var(--accent); }
+                    .drawer-support-hours {
+                        margin: 0.5rem 0 0;
+                        font-size: 0.8rem;
+                        color: var(--text-secondary);
+                    }
+
+                    /* Sfondi ora opachi (bianco pieno): il blur dietro non serve più,
+                       evita il costo di compositing extra su mobile. */
+                    .nav-win-dropdown,
+                    .nav-m365-dropdown,
+                    .nav-office-dropdown,
+                    .nav-av-dropdown,
+                    .lang-dropdown,
+                    .search-panel,
+                    .mobile-drawer,
+                    .search-backdrop,
+                    .overlay {
+                        backdrop-filter: none;
+                        -webkit-backdrop-filter: none;
+                    }
+
+                    /* Il logo ha un solo file (lavora su sfondo chiaro): niente filtro. */
+                    .logo img { filter: none; }
+                    .nav-win-root:hover,
+                    .nav-office-root:hover,
+                    .nav-av-root:hover { text-shadow: none; }
+                    .nav-win-wrap.open .nav-win-caret,
+                    .nav-office-wrap.open .nav-office-caret,
+                    .nav-av-wrap.open .nav-av-caret {
+                        background: color-mix(in srgb, var(--accent) 10%, transparent);
+                    }
+                    .nav-win-dropdown a:hover,
+                    .nav-office-dropdown a:hover,
+                    .nav-av-dropdown a:hover {
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                    }
+                    /* Menu largo, ombra morbida, voci alte: niente più "pannello anni 2010". */
+                    .nav-win-dropdown,
+                    .nav-office-dropdown,
+                    .nav-av-dropdown,
+                    .search-panel,
+                    .mobile-drawer {
+                        box-shadow: 0 10px 30px rgba(16, 24, 40, 0.12), inset 0 1px 0 rgba(0, 0, 0, 0.02);
+                    }
+                    .search-toggle:hover,
+                    .search-close:hover {
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                    }
+                    .nav-win-dropdown,
+                    .nav-office-dropdown,
+                    .nav-av-dropdown {
+                        min-width: 300px;
+                    }
+                    .nav-win-dropdown a,
+                    .nav-office-dropdown a,
+                    .nav-av-dropdown a {
+                        min-height: 40px;
+                        display: flex;
+                        align-items: center;
+                    }
+                </style>
+
+                <div class="header-utility">
+                    <div class="header-utility__inner">
+                        <span>${esc(t.utilityClaim1)}</span>
+                        <span>${esc(t.utilityClaim2)}</span>
+                        <span>${esc(t.utilityClaim3)}</span>
+                    </div>
+                </div>
+
+                <div class="header-container">
+                    <div class="header-brand">
+                        <a href="${esc(homeHref)}" class="logo">
+                            <img src="${esc(logoSrc)}" width="280" height="56" alt="${esc(t.logoAlt)}">
+                        </a>
+                    </div>
+                    <nav class="header-nav nav-links" aria-label="Primary">
+                            <div class="nav-win-wrap">
+                                <div class="nav-win-inner">
+                                    <a href="${esc(hrefWinOverview)}" class="nav-win-root${isWinNavActive ? ' active' : ''}">${esc(t.navWindows)}</a>
+                                    <button type="button" class="nav-win-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navWindowsOpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-win-dropdown" role="menu">
+                                    <a href="${esc(hrefWinOverview)}" class="nav-win-dropdown__overview" role="menuitem"${isWinOverview ? ' aria-current="page"' : ''}>${esc(t.navWindowsOverview)}</a>
+                                    <a href="${esc(hrefWin11Home)}" role="menuitem"${isWin11Home ? ' aria-current="page"' : ''}>${esc(t.navWindows11Home)}</a>
+                                    <a href="${esc(hrefWin11Pro)}" role="menuitem"${isWin11Pro ? ' aria-current="page"' : ''}>${esc(t.navWindows11Pro)}</a>
+                                    <a href="${esc(hrefWin11ProDvd)}" role="menuitem"${isWin11ProDvd ? ' aria-current="page"' : ''}>${esc(t.navWindows11ProDvd)}</a>
+                                    <a href="${esc(hrefWin11ProCoa)}" role="menuitem"${isWin11ProCoa ? ' aria-current="page"' : ''}>${esc(t.navWindows11ProCoa)}</a>
+                                    <a href="${esc(hrefWin10Home)}" role="menuitem"${isWin10Home ? ' aria-current="page"' : ''}>${esc(t.navWindows10Home)}</a>
+                                    <a href="${esc(hrefWin10Pro)}" role="menuitem"${isWin10Pro ? ' aria-current="page"' : ''}>${esc(t.navWindows10Pro)}</a>
+                                    <a href="${esc(hrefWinServer)}" class="nav-win-dropdown__overview" role="menuitem"${isServerOverview ? ' aria-current="page"' : ''}>${esc(t.navServerOverview)}</a>
+                                </div>
+                            </div>
+                            <div class="nav-office-wrap">
+                                <div class="nav-office-inner">
+                                    <a href="${esc(hrefSuiteOffice)}" class="nav-office-root${isOfficeNavActive ? ' active' : ''}">${esc(t.navOffice)}</a>
+                                    <button type="button" class="nav-office-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navOfficeOpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-office-dropdown" role="menu">
+                                    <a href="${esc(hrefSuiteOffice)}" class="nav-office-dropdown__overview" role="menuitem"${isOfficeOverview ? ' aria-current="page"' : ''}>${esc(t.navOfficeOverview)}</a>
+                                    <a href="${esc(hrefOffice2024Home)}" role="menuitem"${isOffice2024Home ? ' aria-current="page"' : ''}>${esc(t.navOffice2024Home)}</a>
+                                    <a href="${esc(hrefOffice2024HB)}" role="menuitem"${isOffice2024HB ? ' aria-current="page"' : ''}>${esc(t.navOffice2024HB)}</a>
+                                    <a href="${esc(hrefOffice2021HS)}" role="menuitem"${isOffice2021HS ? ' aria-current="page"' : ''}>${esc(t.navOffice2021HS)}</a>
+                                    <a href="${esc(hrefOffice2021PP)}" role="menuitem"${isOffice2021PP ? ' aria-current="page"' : ''}>${esc(t.navOffice2021PP)}</a>
+                                    <a href="${esc(hrefOffice2019PP)}" role="menuitem"${isOffice2019PP ? ' aria-current="page"' : ''}>${esc(t.navOffice2019PP)}</a>
+                                    <a href="${esc(hrefOffice2021HB)}" role="menuitem"${isOffice2021HB ? ' aria-current="page"' : ''}>${esc(t.navOffice2021HB)}</a>
+                                    <a href="${esc(hrefOffice2021HBMac)}" role="menuitem"${isOffice2021HBMac ? ' aria-current="page"' : ''}>${esc(t.navOffice2021HBMac)}</a>
+                                    <a href="${esc(hrefOffice2019HS)}" role="menuitem"${isOffice2019HS ? ' aria-current="page"' : ''}>${esc(t.navOffice2019HS)}</a>
+                                    <a href="${esc(hrefWord2024)}" role="menuitem"${isWord2024 ? ' aria-current="page"' : ''}>${esc(t.navWord2024)}</a>
+                                    <a href="${esc(hrefExcel2024)}" role="menuitem"${isExcel2024 ? ' aria-current="page"' : ''}>${esc(t.navExcel2024)}</a>
+                                    <a href="${esc(hrefPowerPoint2024)}" role="menuitem"${isPowerPoint2024 ? ' aria-current="page"' : ''}>${esc(t.navPowerPoint2024)}</a>
+                                    <a href="${esc(hrefOutlook2024)}" role="menuitem"${isOutlook2024 ? ' aria-current="page"' : ''}>${esc(t.navOutlook2024)}</a>
+                                    <a href="${esc(hrefProjectStd2024)}" role="menuitem"${isProjectStd2024 ? ' aria-current="page"' : ''}>${esc(t.navProjectStd2024)}</a>
+                                    <a href="${esc(hrefProjectPro2024)}" role="menuitem"${isProjectPro2024 ? ' aria-current="page"' : ''}>${esc(t.navProjectPro2024)}</a>
+                                    <a href="${esc(hrefVisioStd2024)}" role="menuitem"${isVisioStd2024 ? ' aria-current="page"' : ''}>${esc(t.navVisioStd2024)}</a>
+                                    <a href="${esc(hrefVisioPro2024)}" role="menuitem"${isVisioPro2024 ? ' aria-current="page"' : ''}>${esc(t.navVisioPro2024)}</a>
+                                </div>
+                            </div>
+                            <div class="nav-m365-wrap">
+                                <div class="nav-m365-inner">
+                                    <a href="${esc(hrefM365Solutions)}" class="nav-m365-root${isM365NavActive ? ' active' : ''}">${esc(t.navM365)}</a>
+                                    <button type="button" class="nav-m365-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navM365OpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-m365-dropdown" role="menu">
+                                    <a href="${esc(hrefM365Solutions)}" class="nav-m365-dropdown__overview" role="menuitem">${esc(t.navM365Overview)}</a>
+                                    <a href="${esc(hrefM365Personal)}" role="menuitem">${esc(t.navM365Personal)}</a>
+                                    <a href="${esc(hrefM365Family)}" role="menuitem">${esc(t.navM365Family)}</a>
+                                    <a href="${esc(hrefM365Business)}" role="menuitem"${isM365Business ? ' aria-current="page"' : ''}>${esc(t.navM365Business)}</a>
+                                    <a href="${esc(hrefPacchetti)}" role="menuitem"${isPacchettiOverview ? ' aria-current="page"' : ''}>${esc(t.navPacchetti)}</a>
+                                    <a href="${esc(hrefBundleWinM365)}" role="menuitem"${isBundleWinM365 ? ' aria-current="page"' : ''}>${esc(t.navBundleWinM365)}</a>
+                                    <a href="${esc(hrefBundleM365Mcafee)}" role="menuitem"${isBundleM365Mcafee ? ' aria-current="page"' : ''}>${esc(t.navBundleM365Mcafee)}</a>
+                                    <a href="${esc(hrefBundleM365Kaspersky)}" role="menuitem"${isBundleM365Kaspersky ? ' aria-current="page"' : ''}>${esc(t.navBundleM365Kaspersky)}</a>
+                                </div>
+                            </div>
+                            <div class="nav-av-wrap">
+                                <div class="nav-av-inner">
+                                    <a href="${esc(hrefAntivirus)}" class="nav-av-root${isAvNavActive ? ' active' : ''}">${esc(t.navAntivirus)}</a>
+                                    <button type="button" class="nav-av-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navAvOpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-av-dropdown" role="menu">
+                                    <a href="${esc(hrefAntivirus)}" class="nav-av-dropdown__overview" role="menuitem"${isAvOverview ? ' aria-current="page"' : ''}>${esc(t.navAvOverview)}</a>
+                                    <a href="${esc(hrefAvMcafee)}" role="menuitem"${isAvMcafee ? ' aria-current="page"' : ''}>${esc(t.navAvMcafee)}</a>
+                                    <a href="${esc(hrefAvNorton)}" role="menuitem"${isAvNorton ? ' aria-current="page"' : ''}>${esc(t.navAvNorton)}</a>
+                                    <a href="${esc(hrefAvEset)}" role="menuitem"${isAvEset ? ' aria-current="page"' : ''}>${esc(t.navAvEset)}</a>
+                                    <a href="${esc(hrefAvBitdefender)}" role="menuitem"${isAvBitdefender ? ' aria-current="page"' : ''}>${esc(t.navAvBitdefender)}</a>
+                                    <a href="${esc(hrefAvKaspersky)}" role="menuitem"${isAvKaspersky ? ' aria-current="page"' : ''}>${esc(t.navAvKaspersky)}</a>
+                                    <a href="${esc(hrefStrumenti)}" role="menuitem"${isStrumentiOverview ? ' aria-current="page"' : ''}>${esc(t.navStrumenti)}</a>
+                                </div>
+                            </div>
+                    </nav>
+                    
+                    <div class="header-actions right-section">
+                        <button type="button" class="search-toggle" aria-label="${esc(t.searchToggleLabel)}" aria-haspopup="true" aria-expanded="false">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+                        </button>
+
+                        <div class="support-wrap">
+                            <button
+                                type="button"
+                                class="support-trigger"
+                                aria-expanded="false"
+                                aria-controls="header-support-panel"
+                                aria-haspopup="true"
+                                aria-label="${esc(t.supportLabel)}"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
+                                <span class="support-trigger__label">${esc(t.supportLabel)}</span>
+                                <svg class="support-trigger__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                            </button>
+                            <div id="header-support-panel" class="support-panel" hidden>
+                                <p class="support-panel__heading">${esc(t.supportHeading)}</p>
+                                <a class="support-panel__link" href="mailto:${esc(SUPPORT_EMAIL)}">${esc(t.supportEmailDisplay)}</a>
+                                <a class="support-panel__link" href="${esc(SUPPORT_WHATSAPP_URL)}" target="_blank" rel="noopener noreferrer">${esc(t.supportWhatsApp)}</a>
+                                <p class="support-panel__hours">${esc(t.supportHours)}</p>
+                            </div>
+                        </div>
+
+                        <div class="lang-wrapper">
+                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.selectLanguage)}">
+                                <img class="flag-icon" src="${esc(flagSrc(activeLang.flag))}" alt="" decoding="async">
+                                <span>${activeLang.label}</span>
+                                <svg class="chevron-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                            </button>
+                            <div class="lang-dropdown" role="menu">
+                                ${otherLangs.map(l => `
+                                <a href="${esc(hrefForLang(l.code))}" class="lang-option" role="menuitem" hreflang="${l.code}">
+                                    <img class="flag-icon" src="${esc(flagSrc(l.flag))}" alt="" decoding="async">
+                                    ${l.label}
+                                </a>`).join('')}
+                            </div>
+                        </div>
+
+                        <a href="${esc(cartHref)}" class="cart-wrapper" aria-label="${esc(cartAriaForCount(0))}">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            <span class="cart-badge" aria-hidden="true">0</span>
+                        </a>
+
+                        <button type="button" class="mobile-toggle" aria-label="${esc(t.openNavMenu)}">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-backdrop"></div>
+                <div class="search-panel" role="dialog" aria-modal="true" aria-label="${esc(t.searchToggleLabel)}">
+                    <div class="search-panel-row">
+                        <svg class="search-input-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+                        <input type="search" class="search-input" placeholder="${esc(t.searchPlaceholder)}" aria-label="${esc(t.searchPlaceholder)}" autocomplete="off">
+                        <button type="button" class="search-close" aria-label="${esc(t.searchCloseLabel)}">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                        </button>
+                    </div>
+                    <div class="search-results" role="region" aria-live="polite" aria-atomic="true"></div>
+                </div>
+
+                <div class="overlay"></div>
+                <div class="mobile-drawer">
+                    <div class="drawer-header">
+                        <a href="${esc(homeHref)}" class="logo">
+                            <img src="${esc(logoSrc)}" width="260" height="52" alt="${esc(t.logoAlt)}">
+                        </a>
+                        <button type="button" class="close-drawer" aria-label="${esc(t.closeNavMenu)}">
+                            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                        </button>
+                    </div>
+                    
+                    <nav class="drawer-nav">
+                        <div class="drawer-win-block">
+                            <div class="drawer-win-heading">${esc(t.navWindows)}</div>
+                            <a href="${esc(hrefWinOverview)}"${isWinOverview ? ' class="active"' : ''}>${esc(t.navWindowsOverview)}</a>
+                            <a href="${esc(hrefWin11Home)}"${isWin11Home ? ' class="active"' : ''}>${esc(t.navWindows11Home)}</a>
+                            <a href="${esc(hrefWin11Pro)}"${isWin11Pro ? ' class="active"' : ''}>${esc(t.navWindows11Pro)}</a>
+                            <a href="${esc(hrefWin11ProDvd)}"${isWin11ProDvd ? ' class="active"' : ''}>${esc(t.navWindows11ProDvd)}</a>
+                            <a href="${esc(hrefWin11ProCoa)}"${isWin11ProCoa ? ' class="active"' : ''}>${esc(t.navWindows11ProCoa)}</a>
+                            <a href="${esc(hrefWin10Home)}"${isWin10Home ? ' class="active"' : ''}>${esc(t.navWindows10Home)}</a>
+                            <a href="${esc(hrefWin10Pro)}"${isWin10Pro ? ' class="active"' : ''}>${esc(t.navWindows10Pro)}</a>
+                            <a href="${esc(hrefWinServer)}"${isServerOverview ? ' class="active"' : ''}>${esc(t.navServerOverview)}</a>
+                        </div>
+                        <div class="drawer-office-block">
+                            <div class="drawer-office-heading">${esc(t.navOffice)}</div>
+                            <a href="${esc(hrefSuiteOffice)}"${isOfficeOverview ? ' class="active"' : ''}>${esc(t.navOfficeOverview)}</a>
+                            <a href="${esc(hrefOffice2024Home)}"${isOffice2024Home ? ' class="active"' : ''}>${esc(t.navOffice2024Home)}</a>
+                            <a href="${esc(hrefOffice2024HB)}"${isOffice2024HB ? ' class="active"' : ''}>${esc(t.navOffice2024HB)}</a>
+                            <a href="${esc(hrefOffice2021HS)}"${isOffice2021HS ? ' class="active"' : ''}>${esc(t.navOffice2021HS)}</a>
+                            <a href="${esc(hrefOffice2021PP)}"${isOffice2021PP ? ' class="active"' : ''}>${esc(t.navOffice2021PP)}</a>
+                            <a href="${esc(hrefOffice2019PP)}"${isOffice2019PP ? ' class="active"' : ''}>${esc(t.navOffice2019PP)}</a>
+                        </div>
+                        <div class="drawer-m365-block">
+                            <div class="drawer-m365-heading">${esc(t.navM365)}</div>
+                            <a href="${esc(hrefM365Solutions)}"${isM365Solutions ? ' class="active"' : ''}>${esc(t.navM365Overview)}</a>
+                            <a href="${esc(hrefM365Personal)}"${isM365Personal ? ' class="active"' : ''}>${esc(t.navM365Personal)}</a>
+                            <a href="${esc(hrefM365Family)}"${isM365Family ? ' class="active"' : ''}>${esc(t.navM365Family)}</a>
+                            <a href="${esc(hrefM365Business)}"${isM365Business ? ' class="active"' : ''}>${esc(t.navM365Business)}</a>
+                        </div>
+                        <div class="drawer-bundle-block">
+                            <div class="drawer-bundle-heading">${esc(t.navPacchetti)}</div>
+                            <a href="${esc(hrefPacchetti)}"${isPacchettiOverview ? ' class="active"' : ''}>${esc(t.navPacchetti)}</a>
+                            <a href="${esc(hrefBundleWinM365)}"${isBundleWinM365 ? ' class="active"' : ''}>${esc(t.navBundleWinM365)}</a>
+                            <a href="${esc(hrefBundleM365Mcafee)}"${isBundleM365Mcafee ? ' class="active"' : ''}>${esc(t.navBundleM365Mcafee)}</a>
+                            <a href="${esc(hrefBundleM365Kaspersky)}"${isBundleM365Kaspersky ? ' class="active"' : ''}>${esc(t.navBundleM365Kaspersky)}</a>
+                        </div>
+                        <div class="drawer-av-block">
+                            <div class="drawer-av-heading">${esc(t.navAntivirus)}</div>
+                            <a href="${esc(hrefAntivirus)}"${isAvOverview ? ' class="active"' : ''}>${esc(t.navAvOverview)}</a>
+                            <a href="${esc(hrefAvMcafee)}"${isAvMcafee ? ' class="active"' : ''}>${esc(t.navAvMcafee)}</a>
+                            <a href="${esc(hrefAvNorton)}"${isAvNorton ? ' class="active"' : ''}>${esc(t.navAvNorton)}</a>
+                            <a href="${esc(hrefAvEset)}"${isAvEset ? ' class="active"' : ''}>${esc(t.navAvEset)}</a>
+                            <a href="${esc(hrefAvBitdefender)}"${isAvBitdefender ? ' class="active"' : ''}>${esc(t.navAvBitdefender)}</a>
+                            <a href="${esc(hrefAvKaspersky)}"${isAvKaspersky ? ' class="active"' : ''}>${esc(t.navAvKaspersky)}</a>
+                            <a href="${esc(hrefStrumenti)}"${isStrumentiOverview ? ' class="active"' : ''}>${esc(t.navStrumenti)}</a>
+                        </div>
+                    </nav>
+                    
+                    <div class="drawer-section-title">${esc(t.selectLanguage)}</div>
+                    <div class="drawer-langs">
+                        ${LANGS.map(l => `
+                        <a href="${esc(hrefForLang(l.code))}" class="drawer-lang-link${l.code === activeLang.code ? ' active' : ''}" hreflang="${l.code}">
+                            <img class="flag-icon" src="${esc(flagSrc(l.flag))}" alt="" decoding="async">
+                            ${l.label}
+                        </a>`).join('')}
+                    </div>
+                    
+                    <div class="drawer-footer">
+                        <p class="drawer-support-title">${esc(t.supportSectionTitle)}</p>
+                        <a class="drawer-support-link" href="mailto:${esc(SUPPORT_EMAIL)}">${esc(t.supportEmailDisplay)}</a>
+                        <a class="drawer-support-link" href="${esc(SUPPORT_WHATSAPP_URL)}" target="_blank" rel="noopener noreferrer">${esc(t.supportWhatsApp)}</a>
+                        <p class="drawer-support-hours">${esc(t.supportHours)}</p>
+                    </div>
+                </div>
+            `;
+
+            const toggle = this.shadowRoot.querySelector('.mobile-toggle');
+            const close = this.shadowRoot.querySelector('.close-drawer');
+            const overlay = this.shadowRoot.querySelector('.overlay');
+            const drawer = this.shadowRoot.querySelector('.mobile-drawer');
+            const langWrapper = this.shadowRoot.querySelector('.lang-wrapper');
+            const langSelector = this.shadowRoot.querySelector('.lang-selector');
+            const supportWrap = this.shadowRoot.querySelector('.support-wrap');
+            const supportTrigger = this.shadowRoot.querySelector('.support-trigger');
+            const supportPanel = this.shadowRoot.querySelector('#header-support-panel');
+
+            const isSupportOpen = () => Boolean(supportWrap && supportWrap.classList.contains('open'));
+
+            const closeSupport = ({ restoreFocus = false } = {}) => {
+                if (!supportWrap || !supportTrigger || !supportPanel) return;
+                supportWrap.classList.remove('open');
+                supportPanel.hidden = true;
+                supportTrigger.setAttribute('aria-expanded', 'false');
+                if (restoreFocus) supportTrigger.focus();
+            };
+
+            const openSupport = () => {
+                if (!supportWrap || !supportTrigger || !supportPanel) return;
+                closeNavSubmenus();
+                if (langWrapper) {
+                    langWrapper.classList.remove('open');
+                    if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                }
+                closeSearch({ returnFocus: false });
+                closeMenu();
+                supportPanel.hidden = false;
+                supportWrap.classList.add('open');
+                supportTrigger.setAttribute('aria-expanded', 'true');
+            };
+
+            const openMenu = () => {
+                closeSupport({ restoreFocus: false });
+                if (langWrapper) {
+                    langWrapper.classList.remove('open');
+                    if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                }
+                closeSearch({ returnFocus: false });
+                closeNavSubmenus();
+                if (drawer) drawer.classList.add('open');
+                if (overlay) overlay.classList.add('open');
+            };
+            const closeMenu = () => {
+                if (drawer) drawer.classList.remove('open');
+                if (overlay) overlay.classList.remove('open');
+            };
+
+            if (toggle) toggle.addEventListener('click', openMenu);
+            if (close) close.addEventListener('click', closeMenu);
+            if (overlay) overlay.addEventListener('click', closeMenu);
+
+            const closeNavSubmenus = () => {
+                [
+                    ['.nav-win-wrap', '.nav-win-caret'],
+                    ['.nav-office-wrap', '.nav-office-caret'],
+                    ['.nav-m365-wrap', '.nav-m365-caret'],
+                    ['.nav-av-wrap', '.nav-av-caret'],
+                ].forEach(([wrapSel, caretSel]) => {
+                    const wrap = this.shadowRoot.querySelector(wrapSel);
+                    const caret = this.shadowRoot.querySelector(caretSel);
+                    if (wrap) wrap.classList.remove('open');
+                    if (caret) caret.setAttribute('aria-expanded', 'false');
+                });
+            };
+
+            /* ── Ricerca prodotti ── */
+            const searchToggle = this.shadowRoot.querySelector('.search-toggle');
+            const searchBackdrop = this.shadowRoot.querySelector('.search-backdrop');
+            const searchPanel = this.shadowRoot.querySelector('.search-panel');
+            const searchInput = this.shadowRoot.querySelector('.search-input');
+            const searchClose = this.shadowRoot.querySelector('.search-close');
+            const searchResultsEl = this.shadowRoot.querySelector('.search-results');
+            const searchLang = activeLang.code;
+            const searchPathPrefix = parsed.pathPrefix;
+            let searchDebounceTimer = null;
+
+            const isSearchOpen = () => Boolean(searchPanel && searchPanel.classList.contains('open'));
+
+            const renderSearchResults = (entries, query) => {
+                if (!searchResultsEl) return;
+                searchResultsEl.textContent = '';
+                if (!query) {
+                    const hint = document.createElement('p');
+                    hint.className = 'search-hint';
+                    hint.textContent = t.searchHint;
+                    searchResultsEl.appendChild(hint);
+                    return;
+                }
+                if (!entries.length) {
+                    const empty = document.createElement('p');
+                    empty.className = 'search-empty';
+                    empty.textContent = t.searchNoResults.replace('{{q}}', query);
+                    searchResultsEl.appendChild(empty);
+                    return;
+                }
+                entries.forEach((entry) => {
+                    const a = document.createElement('a');
+                    a.className = 'search-result';
+                    a.href = S.localePageUrl(searchPathPrefix, searchLang, entry.slug);
+
+                    const thumb = document.createElement('img');
+                    thumb.className = 'search-result-thumb';
+                    thumb.src = `${staticRoot}${entry.image}`;
+                    thumb.alt = '';
+                    thumb.loading = 'lazy';
+                    thumb.decoding = 'async';
+                    a.appendChild(thumb);
+
+                    const info = document.createElement('div');
+                    info.className = 'search-result-info';
+                    const name = document.createElement('div');
+                    name.className = 'search-result-name';
+                    name.textContent = entry.name;
+                    const category = document.createElement('div');
+                    category.className = 'search-result-category';
+                    category.textContent = entry.category;
+                    info.appendChild(name);
+                    info.appendChild(category);
+                    a.appendChild(info);
+
+                    const price = document.createElement('span');
+                    price.className = 'search-result-price';
+                    price.textContent = (window.AmlCart && window.AmlCart.formatMoney)
+                        ? window.AmlCart.formatMoney(entry.priceMinor, entry.currency)
+                        : '';
+                    a.appendChild(price);
+
+                    searchResultsEl.appendChild(a);
+                });
+            };
+
+            const runSearch = (query) => {
+                const cached = SEARCH_INDEX_CACHE[searchLang];
+                if (!cached) return;
+                renderSearchResults(rankSearchResults(cached, query), query.trim());
+            };
+
+            const ensureSearchIndexLoaded = () => {
+                if (SEARCH_INDEX_CACHE[searchLang]) return Promise.resolve(SEARCH_INDEX_CACHE[searchLang]);
+                return fetch(`${staticRoot}/asset/search-index/${searchLang}.json`)
+                    .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+                    .then((data) => {
+                        SEARCH_INDEX_CACHE[searchLang] = Array.isArray(data) ? data : [];
+                        return SEARCH_INDEX_CACHE[searchLang];
+                    })
+                    .catch(() => { SEARCH_INDEX_CACHE[searchLang] = []; return []; });
+            };
+
+            const openSearch = () => {
+                if (!searchPanel || !searchBackdrop) return;
+                closeNavSubmenus();
+                closeSupport({ restoreFocus: false });
+                if (langWrapper) {
+                    langWrapper.classList.remove('open');
+                    if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                }
+                closeMenu();
+                searchPanel.classList.add('open');
+                searchBackdrop.classList.add('open');
+                if (searchToggle) searchToggle.setAttribute('aria-expanded', 'true');
+                renderSearchResults([], '');
+                ensureSearchIndexLoaded().then(() => {
+                    if (searchInput && searchInput.value.trim()) runSearch(searchInput.value);
+                });
+                if (searchInput) setTimeout(() => searchInput.focus(), 0);
+            };
+
+            const closeSearch = ({ returnFocus = true } = {}) => {
+                if (!searchPanel || !searchBackdrop) return;
+                searchPanel.classList.remove('open');
+                searchBackdrop.classList.remove('open');
+                if (searchToggle) {
+                    searchToggle.setAttribute('aria-expanded', 'false');
+                    if (returnFocus) searchToggle.focus();
+                }
+            };
+
+            if (supportTrigger) {
+                supportTrigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (isSupportOpen()) closeSupport({ restoreFocus: false });
+                    else openSupport();
+                });
+            }
+
+            if (searchToggle) {
+                searchToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (isSearchOpen()) closeSearch();
+                    else openSearch();
+                });
+            }
+            if (searchClose) searchClose.addEventListener('click', () => closeSearch());
+            if (searchBackdrop) searchBackdrop.addEventListener('click', () => closeSearch({ returnFocus: false }));
+            if (searchInput) {
+                searchInput.addEventListener('input', () => {
+                    clearTimeout(searchDebounceTimer);
+                    const value = searchInput.value;
+                    searchDebounceTimer = setTimeout(() => runSearch(value), 150);
+                });
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const first = searchResultsEl && searchResultsEl.querySelector('.search-result');
+                        if (first) first.focus();
+                    }
+                });
+            }
+            if (searchResultsEl) {
+                searchResultsEl.addEventListener('keydown', (e) => {
+                    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+                    const items = Array.from(searchResultsEl.querySelectorAll('.search-result'));
+                    const active = this.shadowRoot.activeElement;
+                    const idx = items.indexOf(active);
+                    if (idx === -1) return;
+                    e.preventDefault();
+                    if (e.key === 'ArrowDown') {
+                        (items[idx + 1] || items[idx]).focus();
+                    } else if (idx === 0) {
+                        if (searchInput) searchInput.focus();
+                    } else {
+                        items[idx - 1].focus();
+                    }
+                });
+            }
+
+            const toggleLangMenu = (e) => {
+                if (e) e.stopPropagation();
+                closeNavSubmenus();
+                closeSupport({ restoreFocus: false });
+                closeSearch({ returnFocus: false });
+                if (!langWrapper || !langSelector) return;
+                const isOpen = langWrapper.classList.toggle('open');
+                langSelector.setAttribute('aria-expanded', isOpen);
+            };
+
+            if (langSelector && langWrapper) {
+                langSelector.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleLangMenu(e);
+                });
+                langSelector.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleLangMenu(e);
+                    }
+                });
+            }
+
+            /* Compact header: isteresi scrollY > 16 / < 4 */
+            let compact = false;
+            let compactTicking = false;
+            const updateCompactState = () => {
+                const y = window.scrollY || window.pageYOffset || 0;
+                if (!compact && y > 16) {
+                    compact = true;
+                    this.classList.add('is-compact');
+                    closeSupport({ restoreFocus: false });
+                } else if (compact && y < 4) {
+                    compact = false;
+                    this.classList.remove('is-compact');
+                }
+                compactTicking = false;
+            };
+            const onCompactScroll = () => {
+                if (compactTicking) return;
+                compactTicking = true;
+                requestAnimationFrame(updateCompactState);
+            };
+            updateCompactState();
+            window.addEventListener('scroll', onCompactScroll, { passive: true });
+            this.__compactScrollHandler = onCompactScroll;
+
+            const publishHeaderOffset = () => {
+                const h = Math.ceil(this.getBoundingClientRect().height || this.offsetHeight || 64);
+                document.documentElement.style.setProperty('--aml-header-offset', h + 'px');
+            };
+            publishHeaderOffset();
+            if (typeof ResizeObserver !== 'undefined') {
+                this.__headerResizeObserver = new ResizeObserver((entries) => {
+                    const entry = entries && entries[0];
+                    let height = 0;
+                    if (entry && entry.borderBoxSize && entry.borderBoxSize[0]) {
+                        height = entry.borderBoxSize[0].blockSize;
+                    } else if (entry) {
+                        height = entry.contentRect.height;
+                    }
+                    const px = Math.ceil(height || this.getBoundingClientRect().height || 64);
+                    document.documentElement.style.setProperty('--aml-header-offset', px + 'px');
+                });
+                this.__headerResizeObserver.observe(this);
+            } else {
+                window.addEventListener('resize', publishHeaderOffset, { passive: true });
+                this.__headerResizeFallback = publishHeaderOffset;
+            }
+
+            /* ── Windows dropdown ── */
+            const winWrap = this.shadowRoot.querySelector('.nav-win-wrap');
+            const winCaret = this.shadowRoot.querySelector('.nav-win-caret');
+            const closeWinMenu = () => {
+                if (!winWrap || !winCaret) return;
+                winWrap.classList.remove('open');
+                winCaret.setAttribute('aria-expanded', 'false');
+            };
+            if (winCaret && winWrap) {
+                winCaret.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (langWrapper) {
+                        langWrapper.classList.remove('open');
+                        if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                    }
+                    closeSupport({ restoreFocus: false });
+                    closeNavSubmenus();
+                    const isOpen = winWrap.classList.toggle('open');
+                    winCaret.setAttribute('aria-expanded', isOpen);
+                });
+                this.shadowRoot.querySelectorAll('.nav-win-dropdown a').forEach((a) => {
+                    a.addEventListener('click', closeWinMenu);
+                });
+            }
+
+            /* ── Office dropdown ── */
+            const officeWrap = this.shadowRoot.querySelector('.nav-office-wrap');
+            const officeCaret = this.shadowRoot.querySelector('.nav-office-caret');
+            const closeOfficeMenu = () => {
+                if (!officeWrap || !officeCaret) return;
+                officeWrap.classList.remove('open');
+                officeCaret.setAttribute('aria-expanded', 'false');
+            };
+            if (officeCaret && officeWrap) {
+                officeCaret.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (langWrapper) {
+                        langWrapper.classList.remove('open');
+                        if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                    }
+                    closeSupport({ restoreFocus: false });
+                    closeNavSubmenus();
+                    const isOpen = officeWrap.classList.toggle('open');
+                    officeCaret.setAttribute('aria-expanded', isOpen);
+                });
+                this.shadowRoot.querySelectorAll('.nav-office-dropdown a').forEach((a) => {
+                    a.addEventListener('click', closeOfficeMenu);
+                });
+            }
+
+            /* ── Antivirus dropdown ── */
+            const avWrap = this.shadowRoot.querySelector('.nav-av-wrap');
+            const avCaret = this.shadowRoot.querySelector('.nav-av-caret');
+            const closeAvMenu = () => {
+                if (!avWrap || !avCaret) return;
+                avWrap.classList.remove('open');
+                avCaret.setAttribute('aria-expanded', 'false');
+            };
+            if (avCaret && avWrap) {
+                avCaret.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (langWrapper) {
+                        langWrapper.classList.remove('open');
+                        if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                    }
+                    closeSupport({ restoreFocus: false });
+                    closeNavSubmenus();
+                    const isOpen = avWrap.classList.toggle('open');
+                    avCaret.setAttribute('aria-expanded', isOpen);
+                });
+                this.shadowRoot.querySelectorAll('.nav-av-dropdown a').forEach((a) => {
+                    a.addEventListener('click', closeAvMenu);
+                });
+            }
+
+            /* ── Microsoft 365 dropdown ── */
+            const m365Wrap = this.shadowRoot.querySelector('.nav-m365-wrap');
+            const m365Caret = this.shadowRoot.querySelector('.nav-m365-caret');
+            const closeM365Menu = () => {
+                if (!m365Wrap || !m365Caret) return;
+                m365Wrap.classList.remove('open');
+                m365Caret.setAttribute('aria-expanded', 'false');
+            };
+            if (m365Caret && m365Wrap) {
+                m365Caret.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (langWrapper) {
+                        langWrapper.classList.remove('open');
+                        if (langSelector) langSelector.setAttribute('aria-expanded', 'false');
+                    }
+                    closeSupport({ restoreFocus: false });
+                    closeNavSubmenus();
+                    const isOpen = m365Wrap.classList.toggle('open');
+                    m365Caret.setAttribute('aria-expanded', isOpen);
+                });
+                this.shadowRoot.querySelectorAll('.nav-m365-dropdown a').forEach((a) => {
+                    a.addEventListener('click', closeM365Menu);
+                });
+            }
+
+            /* ── Hover-intent: apertura al passaggio e tolleranza di uscita per
+                  tutti i menu desktop (stessa esperienza del menu Microsoft 365).
+                  Solo su dispositivi con hover reale: sul touch resta il caret. ── */
+            if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+                const hoverMenus = [
+                    [winWrap, winCaret],
+                    [officeWrap, officeCaret],
+                    [m365Wrap, m365Caret],
+                    [avWrap, avCaret],
+                ].filter(([w, c]) => w && c);
+                let hoverCloseTimer = null;
+                hoverMenus.forEach(([wrap, caret]) => {
+                    wrap.addEventListener('mouseenter', () => {
+                        clearTimeout(hoverCloseTimer);
+                        closeSupport({ restoreFocus: false });
+                        hoverMenus.forEach(([w2, c2]) => {
+                            if (w2 !== wrap && w2.classList.contains('open')) {
+                                w2.classList.remove('open');
+                                c2.setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                        wrap.classList.add('open');
+                        caret.setAttribute('aria-expanded', 'true');
+                    });
+                    wrap.addEventListener('mouseleave', () => {
+                        clearTimeout(hoverCloseTimer);
+                        hoverCloseTimer = setTimeout(() => {
+                            wrap.classList.remove('open');
+                            caret.setAttribute('aria-expanded', 'false');
+                        }, 300);
+                    });
+                });
+            }
+
+            this.__docClickHandler = (e) => {
+                const path = typeof e.composedPath === 'function' ? e.composedPath() : [];
+                if (isSupportOpen()
+                    && supportWrap
+                    && !path.includes(supportWrap)) {
+                    closeSupport({ restoreFocus: false });
+                }
+                if (searchPanel && searchToggle && isSearchOpen()
+                    && !path.includes(searchPanel) && !path.includes(searchToggle)) {
+                    closeSearch({ returnFocus: false });
+                }
+                if (langWrapper && langSelector && !path.includes(langWrapper)) {
+                    langWrapper.classList.remove('open');
+                    langSelector.setAttribute('aria-expanded', 'false');
+                }
+                [
+                    ['.nav-win-wrap', '.nav-win-caret'],
+                    ['.nav-office-wrap', '.nav-office-caret'],
+                    ['.nav-m365-wrap', '.nav-m365-caret'],
+                    ['.nav-av-wrap', '.nav-av-caret'],
+                ].forEach(([wrapSel, caretSel]) => {
+                    const wrap = this.shadowRoot.querySelector(wrapSel);
+                    const caret = this.shadowRoot.querySelector(caretSel);
+                    if (wrap && !path.includes(wrap)) {
+                        wrap.classList.remove('open');
+                        if (caret) caret.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            };
+            this.__docKeydownHandler = (e) => {
+                if (e.key !== 'Escape') return;
+                if (isSearchOpen()) {
+                    closeSearch();
+                    return;
+                }
+                if (isSupportOpen()) {
+                    closeSupport({ restoreFocus: true });
+                    return;
+                }
+                if (langWrapper?.classList.contains('open')) {
+                    langWrapper.classList.remove('open');
+                    if (langSelector) {
+                        langSelector.setAttribute('aria-expanded', 'false');
+                        langSelector.focus();
+                    }
+                    return;
+                }
+                const submenus = [
+                    ['.nav-win-wrap', '.nav-win-caret'],
+                    ['.nav-office-wrap', '.nav-office-caret'],
+                    ['.nav-m365-wrap', '.nav-m365-caret'],
+                    ['.nav-av-wrap', '.nav-av-caret'],
+                ];
+                for (const [wrapSel, caretSel] of submenus) {
+                    const wrap = this.shadowRoot.querySelector(wrapSel);
+                    const caret = this.shadowRoot.querySelector(caretSel);
+                    if (wrap?.classList.contains('open')) {
+                        wrap.classList.remove('open');
+                        if (caret) { caret.setAttribute('aria-expanded', 'false'); caret.focus(); }
+                        return;
+                    }
+                }
+                if (drawer?.classList.contains('open')) {
+                    closeMenu();
+                }
+            };
+            document.addEventListener('click', this.__docClickHandler);
+            document.addEventListener('keydown', this.__docKeydownHandler);
+
+            const cartLink = this.shadowRoot.querySelector('a.cart-wrapper');
+            const cartBadge = this.shadowRoot.querySelector('.cart-badge');
+            let prevCartQty = null;
+            let cartBadgePopTimer = null;
+            let cartIconNudgeTimer = null;
+            const syncCartChrome = () => {
+                const count =
+                    window.AmlCart && typeof window.AmlCart.totalQty === 'function' ? window.AmlCart.totalQty() : 0;
+                const increased = prevCartQty !== null && count > prevCartQty;
+
+                if (cartBadge) {
+                    cartBadge.textContent = count > 99 ? '99+' : String(count);
+                    cartBadge.classList.toggle('is-visible', count > 0);
+                    if (increased && count > 0) {
+                        cartBadge.classList.remove('cart-badge-pop');
+                        void cartBadge.offsetWidth;
+                        cartBadge.classList.add('cart-badge-pop');
+                        clearTimeout(cartBadgePopTimer);
+                        cartBadgePopTimer = setTimeout(function () {
+                            cartBadge.classList.remove('cart-badge-pop');
+                        }, 600);
+                    }
+                }
+                if (cartLink) {
+                    cartLink.setAttribute('aria-label', cartAriaForCount(count));
+                    if (increased) {
+                        cartLink.classList.remove('cart-nudge');
+                        void cartLink.offsetWidth;
+                        cartLink.classList.add('cart-nudge');
+                        clearTimeout(cartIconNudgeTimer);
+                        cartIconNudgeTimer = setTimeout(function () {
+                            cartLink.classList.remove('cart-nudge');
+                        }, 650);
+                    }
+                }
+                prevCartQty = count;
+            };
+            syncCartChrome();
+            this.__syncCartChrome = syncCartChrome;
+            document.addEventListener('aml-cart-changed', syncCartChrome);
+        }
+
+        disconnectedCallback() {
+            if (typeof this.__docClickHandler === 'function') {
+                document.removeEventListener('click', this.__docClickHandler);
+                this.__docClickHandler = null;
+            }
+            if (typeof this.__docKeydownHandler === 'function') {
+                document.removeEventListener('keydown', this.__docKeydownHandler);
+                this.__docKeydownHandler = null;
+            }
+            if (typeof this.__syncCartChrome === 'function') {
+                document.removeEventListener('aml-cart-changed', this.__syncCartChrome);
+                this.__syncCartChrome = null;
+            }
+            if (typeof this.__compactScrollHandler === 'function') {
+                window.removeEventListener('scroll', this.__compactScrollHandler);
+                this.__compactScrollHandler = null;
+            }
+            if (this.__headerResizeObserver) {
+                this.__headerResizeObserver.disconnect();
+                this.__headerResizeObserver = null;
+            }
+            if (typeof this.__headerResizeFallback === 'function') {
+                window.removeEventListener('resize', this.__headerResizeFallback);
+                this.__headerResizeFallback = null;
+            }
+        }
+    }
+
+    if (!customElements.get('ecommerce-header')) {
+        customElements.define('ecommerce-header', EcommerceHeader);
+    }
+})();

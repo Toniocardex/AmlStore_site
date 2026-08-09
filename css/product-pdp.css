@@ -1,3 +1,365 @@
+/* product-pdp.css — layout della scheda prodotto (PDP).
+ *
+ * Nasce dalla fusione di product-v2.css e product-v3.css, che erano due
+ * generazioni successive dello stesso foglio caricate insieme: la v3 aveva
+ * sostituito quasi tutta la v2, ma la v2 continuava a viaggiare con 132 regole
+ * che nessuna pagina agganciava piu'. Concatenati nell'ordine di caricamento di
+ * allora (v2, poi v3), quindi la cascata e' la stessa di prima.
+ *
+ * Il guscio della pagina prodotto (.product-page, .product-sticky-cta) resta in
+ * product.css, perche' lo condivide anche microsoft-365-solutions.
+ *
+ * Per sapere cosa qui dentro e' ancora vivo:
+ *     node scripts/audit-css-usage.mjs --verbose css/product-pdp.css
+ */
+
+/* ─────────────────────────────────────────────────────────────────────
+   Componenti ereditati dalla v2 ancora in uso:
+   titolo e codice articolo, indicatore di stock, blocco Trustpilot,
+   galleria bento, scaffolding delle sezioni.
+   ───────────────────────────────────────────────────────────────────── */
+
+.v2-family-bridge__caption,
+.bento-caption {
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.v2-hero__title {
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0 0 24px;
+    color: var(--aml-ink);
+}
+
+.v2-hero__title span {
+    color: var(--page-accent);
+}
+
+.v2-product-code {
+    margin: -14px 0 18px;
+    color: var(--aml-ink-2);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    letter-spacing: 0;
+}
+
+.v2-product-code__value {
+    color: var(--aml-ink);
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+}
+
+.v2-hero__desc {
+    font-size: 1.05rem;
+    color: var(--aml-ink-2);
+    line-height: 1.7;
+    margin: 0 0 32px;
+    max-width: 480px;
+}
+
+.v2-pricing-card {
+    background: var(--aml-surface);
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-md);
+    box-shadow: var(--aml-shadow-lg);
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px 48px;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .v2-pricing-card { grid-template-columns: 1fr; padding: 28px 24px; gap: 24px; }
+}
+
+/* Badge omaggio guida Copilot — solo bundle che includono M365 Personal
+   (vedi functions/api/_lib/guide.js). */
+.v2-pricing-card .pdp-bonus {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 0 0;
+    margin-top: 9px;
+    border-top: 1px solid var(--aml-line);
+    border-radius: 0;
+    background: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--aml-ink-2);
+    text-align: left;
+}
+
+.v2-pricing-card .pdp-bonus svg { display: none; }
+
+.v2-pricing-card .pdp-bonus strong { color: var(--aml-ink); font-weight: 700; }
+
+/* Stock magazzino (solo SKU fisici) — riga inventariale muted, anti-CLS */
+.v2-stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 1.5rem;
+    margin: 8px 0 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--aml-ink-2);
+}
+
+.v2-stock__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--aml-ink-2);
+}
+
+.v2-stock__text {
+    min-width: 0;
+}
+
+.v2-stock[data-stock-status="ok"] { color: var(--aml-ink-2); }
+
+.v2-stock[data-stock-status="ok"] .v2-stock__dot { background: var(--aml-ok); }
+
+.v2-stock[data-stock-status="low"] { color: var(--aml-warn); }
+
+.v2-stock[data-stock-status="low"] .v2-stock__dot { background: var(--aml-warn); }
+
+.v2-stock[data-stock-status="out"] { color: var(--aml-danger); }
+
+.v2-stock[data-stock-status="out"] .v2-stock__dot { background: var(--aml-danger); }
+
+.v2-stock[data-stock-status="error"] { color: var(--aml-ink-2); }
+
+.v2-stock[data-stock-status="error"] .v2-stock__dot { background: var(--aml-ink-2); }
+
+.v2-stock[data-stock-status="loading"] .v2-stock__dot { background: var(--aml-line); }
+
+.v2-btn-primary.is-stock-out,
+.btn-primary.is-stock-out,
+[data-cart-add].is-stock-out {
+    opacity: 0.45;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.v2-btn-primary.is-added {
+    background: var(--aml-ok);
+    box-shadow: none;
+}
+
+@media (max-width: 480px) {
+    .v2-pricing-card {
+        padding: 24px 20px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 390px) {
+    .v2-pricing-card {
+        padding: 22px 16px;
+    }
+}
+
+/* ── SECTION WRAPPER ── */
+.v2-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px;
+}
+
+/* Trustpilot micro-widget (post-consent; fallback link always visible) */
+.product-trustpilot {
+    text-align: center;
+    max-width: 40rem;
+    margin-inline: auto;
+    padding-top: 8px;
+}
+
+.product-trustpilot__fallback {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--aml-ink-2);
+}
+
+.product-trustpilot__fallback a {
+    color: var(--page-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}
+
+.product-trustpilot .trustpilot-widget {
+    min-height: 40px;
+    width: 100%;
+}
+
+.product-trustpilot .trustpilot-widget:not(.trustpilot-widget--active) {
+    display: none;
+}
+
+/* Divider */
+.v2-divider {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    border: none;
+    border-top: 1px solid var(--aml-line);
+}
+
+body { background: var(--page-bg); }
+
+/* ── BENTO FIGURE / INFORMATIVA — Full-width breakout ── */
+
+/* Annulla tutto il padding della sezione per l'immagine galleria */
+.v2-section--gallery {
+    padding: 0;
+    /* Override per CLS: altezza stimata precisa per content-visibility: auto */
+    contain-intrinsic-size: 0 62.5vw;
+}
+
+.bento-figure {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0;
+    border: none;
+    background: var(--aml-paper);
+}
+
+/* Gradiente superiore: sfuma dal colore pagina verso trasparente */
+.bento-figure::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--page-bg) 0%, transparent 100%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Gradiente inferiore: sfuma da trasparente al colore pagina */
+.bento-figure::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to top, var(--page-bg) 0%, transparent 100%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Zoom dell'immagine sull'hover */
+.bento-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 8 / 5; /* 1024×640 — allineato agli attributi width/height dell'img */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bento-figure:hover .bento-img {
+    transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bento-figure:hover .bento-img { transform: none; }
+}
+
+/* Glass card caption ancorata in basso a sinistra */
+.bento-caption {
+    position: absolute;
+    bottom: 28px;
+    left: 28px;
+    right: auto;
+    width: auto;
+    max-width: min(26rem, calc(100% - 56px));
+    padding: 14px 20px 16px 18px;
+    box-sizing: border-box;
+    color: var(--aml-ink);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    border-radius: var(--aml-radius-md);
+    border: 1px solid var(--aml-line);
+    border-left: 3px solid var(--page-accent);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(18px) saturate(1.25);
+    -webkit-backdrop-filter: blur(18px) saturate(1.25);
+    box-shadow: var(--aml-shadow-lg);
+    z-index: 2;
+    pointer-events: none;
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .bento-caption { background: rgba(255, 255, 255, 0.96); }
+}
+
+.bento-kicker {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--page-accent);
+    line-height: 1.2;
+}
+
+.bento-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+}
+
+.bento-text {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    opacity: 0.82;
+}
+
+@media (max-width: 640px) {
+    .bento-caption {
+        bottom: 14px;
+        left: 14px;
+        max-width: calc(100% - 28px);
+        padding: 11px 14px 13px 13px;
+        font-size: 0.84rem;
+        border-radius: 8px;
+        gap: 0.28em;
+    }
+
+    .bento-kicker { letter-spacing: 0.12em; }
+
+    .bento-title { font-size: 0.95rem; }
+
+    .bento-text { font-size: 0.82rem; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Layout corrente della scheda (v3).
+   ───────────────────────────────────────────────────────────────────── */
+
 /**
  * PRODUCT PAGE v3 — layout standard delle schede prodotto
  * Scheda prodotto ristrutturata per la conversione: hero + prezzo + CTA in un unico
@@ -38,16 +400,6 @@
     --page-border: #DCE3EA;
 }
 
-/* La card prezzo larga e centrata (.v2-pricing-wrap, in microsoft-365-product.css) è
-   tornata in uso: nel layout ibrido sta sotto l'hero, non dentro.
-   `width: 100%` è necessario: body è un flex column e i margini orizzontali `auto`
-   disattivano lo stretch, facendo dimensionare il wrap sul contenuto. Senza, la
-   larghezza dipende da quanto testo c'è dentro invece che dal max-width. */
-.pdp-page .v2-pricing-wrap {
-    width: 100%;
-    box-sizing: border-box;
-}
-
 /* ── HERO UNIFICATO (immagine + info + prezzo + CTA nello stesso blocco) ───── */
 .pdp-hero {
     position: relative;
@@ -75,7 +427,9 @@
 }
 
 .pdp-breadcrumb a { color: var(--pdp-muted); text-decoration: none; }
+
 .pdp-breadcrumb a:hover { color: var(--pdp-ink); }
+
 .pdp-breadcrumb .sep { color: var(--pdp-border); }
 
 .pdp-hero__inner {
@@ -130,6 +484,7 @@
 
 @media (max-width: 560px) {
     .pdp-hero__split { grid-template-columns: 1fr; }
+
     .pdp-media { max-width: 260px; }
 }
 
@@ -182,13 +537,6 @@
     padding: 0;
     display: grid;
     gap: 7px;
-}
-
-/* I chip sono l'alternativa alla checklist quando il prodotto non ha `keypoints`.
-   .v2-pills arriva con margin-bottom:0 (nel vecchio hero era l'ultimo elemento):
-   qui sotto c'è la card prezzo, quindi serve lo stesso respiro della checklist. */
-.pdp-hero__info .v2-pills {
-    margin-bottom: 18px;
 }
 
 /* Marker fuori flusso: il contenuto inline (em, strong…) resta nella stessa riga. */
@@ -333,8 +681,11 @@
 }
 
 .pdp-btn-primary:hover { background: var(--aml-brand-hover, #26507f); }
+
 .pdp-btn-primary:active { background: var(--pdp-navy); }
+
 .pdp-btn-primary:focus-visible { outline: 3px solid var(--page-accent); outline-offset: 2px; }
+
 .pdp-btn-primary svg { width: 20px; height: 20px; flex-shrink: 0; }
 
 .pdp-btn-primary.is-added {
@@ -393,12 +744,6 @@
     gap: 10px;
 }
 
-.pdp-buy .v2-payment-row {
-    margin: 0;
-    padding: 0;
-    border: none;
-}
-
 /* Nella card prezzo la riga consegna occupa tutta la larghezza, sotto prezzo e CTA.
    La card è bianca in tema chiaro: il colore dell'hero scuro sarebbe illeggibile. */
 .v2-pricing-card .pdp-delivery {
@@ -425,7 +770,9 @@
     color: var(--page-text);
     text-align: left;
 }
+
 .pdp-bonus svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--page-accent); }
+
 .pdp-bonus strong { color: var(--page-accent); }
 
 .pdp-assur {
@@ -454,7 +801,6 @@
     color: var(--pdp-ok);
     font-weight: 700;
 }
-.pdp-assur a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 
 @media (max-width: 520px) {
     .pdp-assur { grid-template-columns: 1fr; }
@@ -483,6 +829,7 @@
 }
 
 .pdp-pay__logo[data-brand='PayPal'] { width: 52px; }
+
 .pdp-pay__logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 /* Nota pagamenti testuale: sostituisce i 6 loghi nel pannello acquisto
@@ -497,7 +844,9 @@
     font-size: 0.8rem;
     color: var(--pdp-muted);
 }
+
 .pdp-page .pf-pay-note svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--pdp-muted); }
+
 .pdp-page .pf-pay-note strong { color: var(--page-text); font-weight: 700; }
 
 /* ── SEZIONI ──────────────────────────────────────────────────────────────── */
@@ -610,19 +959,6 @@
     border: 1px solid var(--pdp-border);
 }
 
-.pdp-card__icon {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    margin-bottom: 14px;
-    border-radius: 8px;
-    background: color-mix(in srgb, var(--page-accent) 12%, transparent);
-}
-
-.pdp-card__icon img,
-.pdp-card__icon svg { width: 22px; height: 22px; }
-
 .pdp-card__label {
     margin: 0 0 6px;
     font-size: 0.7rem;
@@ -705,6 +1041,7 @@
 .pdp-table thead th:not(:first-child) { text-align: center; }
 
 .pdp-table .pdp-yes { color: var(--pdp-ok); font-weight: 800; }
+
 .pdp-table .pdp-no { color: var(--page-text-muted, #888); font-weight: 700; }
 
 .pdp-table tbody tr.pdp-row--flag th,
@@ -804,6 +1141,7 @@
 }
 
 .pdp-apps-more[open] > summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
+
 .pdp-apps-more > summary:focus-visible { outline: 2px solid var(--page-accent); outline-offset: -2px; }
 
 .pdp-apps-more__body { padding: 0 16px 16px; }
@@ -920,7 +1258,9 @@
 
 @media (max-width: 1024px) {
     .pdp-seats { gap: 8px; }
+
     .pdp-seat { padding: 12px 6px 10px; }
+
     .pdp-seat__role { font-size: 0.78rem; }
 }
 
@@ -1002,6 +1342,7 @@
 }
 
 .pdp-note svg { width: 20px; height: 20px; color: var(--page-accent, #003182); }
+
 .pdp-note strong { font-weight: 800; }
 
 /* Trustpilot Micro TrustBox nella buy card (sotto CTA) */
@@ -1015,56 +1356,12 @@
     min-height: 40px;
 }
 
-/* ── RECENSIONI (sezione pagina, se ancora presente) ─────────────────────── */
-.pdp-reviews {
-    display: grid;
-    gap: 14px;
-    padding: 26px var(--pdp-gutter);
-    border-radius: var(--pdp-radius);
-    border: 1px solid var(--pdp-border);
-    background: var(--pdp-surface-2);
-    text-align: center;
-    justify-items: center;
-}
-
-.pdp-reviews__title {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-size: 1.2rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--page-text);
-}
-
-.pdp-reviews__lead {
-    margin: 0;
-    max-width: 52ch;
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--pdp-muted);
-}
-
 .pdp-page .product-trustpilot {
     max-width: 100%;
     padding-top: 0;
 }
 
 .pdp-page .product-trustpilot__fallback { margin-bottom: 0; }
-
-.pdp-reviews__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 11px 20px;
-    border-radius: 8px;
-    border: 1px solid var(--page-accent, #003182);
-    color: var(--page-accent, #003182);
-    font-size: 0.88rem;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.pdp-reviews__cta:hover { background: color-mix(in srgb, var(--page-accent) 10%, transparent); }
 
 /* ── FAQ per argomento (override del componente condiviso) ────────────────── */
 .pdp-page .home-faq .home-section-title,
@@ -1096,8 +1393,11 @@
 
 /* Accordion secondario (requisiti / condizioni): stessa meccanica, peso minore */
 .pdp-acc .home-faq-item { background: transparent; box-shadow: none; }
+
 .pdp-acc .home-faq-item summary { font-size: 0.92rem; font-weight: 700; }
+
 .pdp-acc .home-faq-item summary::before { content: '+'; }
+
 .pdp-acc .home-faq-body { font-size: 0.88rem; }
 
 /* ── CTA FINALE ───────────────────────────────────────────────────────────── */
@@ -1113,6 +1413,7 @@
     color: #fff;
     display: block;
 }
+
 .pdp-final__inner {
     max-width: var(--pdp-maxw);
     margin: 0 auto;
@@ -1122,8 +1423,10 @@
     gap: 20px 32px;
     align-items: center;
 }
+
 @media (max-width: 760px) {
     .pdp-final__inner { grid-template-columns: 1fr; }
+
     .pdp-final .pdp-btn-primary { width: 100%; }
 }
 
@@ -1194,7 +1497,9 @@
    tema scuro salvato da un'altra pagina non ancora convertita. */
 .pdp-page .product-sticky-cta__title,
 .pdp-page .product-sticky-cta__sale { color: var(--page-text); }
+
 .pdp-page .product-sticky-cta__msrp { color: var(--pdp-muted); }
+
 .pdp-page .product-sticky-cta__prices {
     background: var(--pdp-surface-2);
     border-color: var(--pdp-border);
@@ -1221,6 +1526,7 @@
 }
 
 .pdp-page .product-sticky-cta__sale { font-size: 1.35rem; }
+
 .pdp-page .product-sticky-cta__msrp { font-size: 0.95rem; }
 
 .pdp-page .product-sticky-cta .btn-primary {
@@ -1239,7 +1545,9 @@
 
 @media (min-width: 769px) {
     html.pdp-nav-hidden .pdp-page ecommerce-header { transform: translateY(-100%); }
+
     html.pdp-nav-hidden .product-sticky-cta { top: 0; }
+
     .pdp-page .product-sticky-cta { transition-property: transform, opacity, box-shadow, top; }
 }
 
@@ -1301,6 +1609,7 @@
 @media (prefers-reduced-motion: reduce) {
     .pdp-page ecommerce-header,
     .pdp-btn-primary { transition: none; }
+
     .pdp-btn-primary:hover { transform: none; }
 }
 
@@ -1338,6 +1647,7 @@
     margin-top: 1px;
     color: var(--pdp-navy);
 }
+
 .pf-trustbar__icon svg { width: 100%; height: 100%; }
 
 .pf-trustbar__text { display: flex; flex-direction: column; gap: 2px; }
@@ -1357,6 +1667,7 @@
 @media (max-width: 900px) {
     .pf-trustbar__inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
 @media (max-width: 480px) {
     .pf-trustbar__inner { grid-template-columns: 1fr; }
 }
@@ -1366,11 +1677,13 @@
     background: var(--pdp-navy);
     color: #ffffff;
 }
+
 .pf-institutional__inner {
     max-width: var(--pdp-maxw);
     margin: 0 auto;
     padding: clamp(40px, 6vw, 64px) var(--pdp-gutter);
 }
+
 .pf-institutional__title {
     margin: 0 0 24px;
     font-family: var(--font-sans);
@@ -1379,6 +1692,7 @@
     letter-spacing: -0.02em;
     max-width: 40ch;
 }
+
 .pf-institutional__grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1387,6 +1701,7 @@
     margin: 0;
     padding: 0;
 }
+
 .pf-institutional__grid li {
     display: flex;
     flex-direction: column;
@@ -1394,19 +1709,23 @@
     padding-inline-start: 14px;
     border-inline-start: 2px solid rgba(255, 255, 255, 0.25);
 }
+
 .pf-institutional__grid li strong {
     font-size: 0.92rem;
     font-weight: 700;
     color: #ffffff;
 }
+
 .pf-institutional__grid li span {
     font-size: 0.85rem;
     line-height: 1.45;
     color: rgba(255, 255, 255, 0.72);
 }
+
 @media (max-width: 900px) {
     .pf-institutional__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
 @media (max-width: 480px) {
     .pf-institutional__grid { grid-template-columns: 1fr; }
 }
@@ -1414,10 +1733,12 @@
 /* ── FAQ/REQUISITI: niente cerchi "?" (il chevron basta), due colonne
    indipendenti invece di una griglia a righe ──────────────────────────────── */
 .pdp-page .home-faq-item summary::before { display: none; }
+
 .pdp-page .home-faq-item {
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(20, 32, 51, 0.04);
 }
+
 .pdp-page .home-faq-list .home-faq-item[open] {
     border-color: #9eb9d7;
     box-shadow: 0 2px 8px rgba(20, 32, 51, 0.04);
@@ -1432,6 +1753,7 @@
         align-items: flex-start;
         gap: 0.75rem;
     }
+
     .pdp-page .pf-faq-col {
         display: flex;
         flex-direction: column;

@@ -8,6 +8,23 @@
 > rieseguire anche `python scripts/build-search-index.py` (rigenera
 > `asset/search-index/{lang}.json` usati dalla ricerca nell'header — altrimenti
 > la ricerca resta con dati vecchi fino a 24h per via della cache in `_headers`).
+>
+> **Dopo aver aggiunto una pagina, o modificato navigazione / footer**:
+> `node scripts/build-inline-chrome.mjs` (serve il dev server attivo).
+> Header e footer sono scritti dentro l'HTML di ogni pagina, non più costruiti
+> dal JS: una pagina nuova nasce con i tag vuoti e resta **senza header e senza
+> footer** finché non si lancia questo comando. Per accorgersene prima del
+> deploy: `node scripts/build-inline-chrome.mjs --check` (esce ≠0 se qualcosa è
+> disallineato). Dettagli in `scripts/chrome-renderer/README.md`.
+
+## Ordine dei comandi di build
+
+```
+node scripts/build-inline-chrome.mjs      # markup di header/footer nelle pagine
+node scripts/extract-chrome-css.mjs       # solo se sono cambiati i loro stili
+python scripts/build-search-index.py      # solo se è cambiato il catalogo
+python scripts/bump-asset-version.py      # sempre per ultimo: ricalcola gli hash
+```
 
 Stato al 2026-07-17. Il codice è pronto (redirect migrazione, URL senza `.html`,
 fix checkout, PayPal parametrizzato). Restano i passi qui sotto, che richiedono

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Rigenera le 6 pagine ex template compatto (product-v2.css) sul template
-rich (product-v3.css): Adobe Acrobat Pro/Standard, CorelDRAW 2024, Acronis
+"""Rigenera le 6 pagine ex template compatto (l'ex product-v2.css) sul template
+rich (product-pdp.css): Adobe Acrobat Pro/Standard, CorelDRAW 2024, Acronis
 True Image Advanced, bundle M365 Personal + Kaspersky/McAfee.
 
 Contenuto in product_content_tools.py / product_content_bundles.py, agganciato
