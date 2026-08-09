@@ -267,7 +267,7 @@ V3_UI = {
         "final_tax": "IVA inclusa",
         "final_instead": "anziché",
         "sticky_buy": "Acquista ora",
-        "pay_note": "Pagamenti protetti tramite <strong>Stripe</strong> e <strong>PayPal</strong>",
+        "payments_aria": "Metodi di pagamento accettati",
         "trust_1_t": "Azienda italiana", "trust_1_d": "Sede e P.IVA in Italia",
         "trust_2_t": "Fattura elettronica", "trust_2_d": "Disponibile per privati e aziende",
         "trust_3_t": "Assistenza in italiano", "trust_3_d": "Supporto post-vendita via email",
@@ -296,7 +296,7 @@ V3_UI = {
         "final_tax": "VAT included",
         "final_instead": "instead of",
         "sticky_buy": "Buy now",
-        "pay_note": "Secure payments via <strong>Stripe</strong> and <strong>PayPal</strong>",
+        "payments_aria": "Accepted payment methods",
         "trust_1_t": "European retailer", "trust_1_d": "Registered in Italy",
         "trust_2_t": "Invoice available", "trust_2_d": "VAT invoice for businesses",
         "trust_3_t": "Written support", "trust_3_d": "Email and WhatsApp",
@@ -325,7 +325,7 @@ V3_UI = {
         "final_tax": "TVA incluse",
         "final_instead": "au lieu de",
         "sticky_buy": "Acheter",
-        "pay_note": "Paiements sécurisés via <strong>Stripe</strong> et <strong>PayPal</strong>",
+        "payments_aria": "Moyens de paiement acceptés",
         "trust_1_t": "Revendeur européen", "trust_1_d": "Basé en Italie",
         "trust_2_t": "Facture disponible", "trust_2_d": "TVA pour les entreprises",
         "trust_3_t": "Support par écrit", "trust_3_d": "E-mail et WhatsApp",
@@ -354,7 +354,7 @@ V3_UI = {
         "final_tax": "inkl. MwSt.",
         "final_instead": "statt",
         "sticky_buy": "Jetzt kaufen",
-        "pay_note": "Sichere Zahlungen über <strong>Stripe</strong> und <strong>PayPal</strong>",
+        "payments_aria": "Akzeptierte Zahlungsmethoden",
         "trust_1_t": "Europäischer Händler", "trust_1_d": "Sitz in Italien",
         "trust_2_t": "Rechnung verfügbar", "trust_2_d": "MwSt.-Rechnung für Firmen",
         "trust_3_t": "Schriftlicher Support", "trust_3_d": "E-Mail und WhatsApp",
@@ -383,7 +383,7 @@ V3_UI = {
         "final_tax": "IVA incluido",
         "final_instead": "en lugar de",
         "sticky_buy": "Comprar ahora",
-        "pay_note": "Pagos seguros mediante <strong>Stripe</strong> y <strong>PayPal</strong>",
+        "payments_aria": "Métodos de pago aceptados",
         "trust_1_t": "Distribuidor europeo", "trust_1_d": "Con sede en Italia",
         "trust_2_t": "Factura disponible", "trust_2_d": "IVA para empresas",
         "trust_3_t": "Soporte por escrito", "trust_3_d": "Email y WhatsApp",
@@ -975,21 +975,18 @@ def _render_payment_row(ui):
                     </div>"""
 
 
-LOCK_ICON = (
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
-    '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>'
-    '<path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
-)
-
-
-def _render_pay_note(v3):
-    """Sostituisce i 6 loghi pagamento nel pannello acquisto con una riga di
-    testo: nel punto più importante della pagina i loghi sono rumore, non
-    informazione (restano nel checkout/footer)."""
-    return f"""                <p class="pf-pay-note">
-                    {LOCK_ICON}
-                    {v3['pay_note']}
-                </p>"""
+def _render_payment_logos(v3):
+    logos = "\n".join(
+        f'                    <span class="pdp-pay__logo" data-brand="{alt}" title="{alt}">'
+        f'<img src="../asset/payments_logo/{fname}" alt="{alt}" loading="lazy" decoding="async"></span>'
+        for fname, alt in PAYMENT_LOGOS
+    )
+    return f"""                <div class="pdp-pay" role="group" aria-label="{v3['payments_aria']}">
+                    <p class="pdp-pay__label">{v3['payments_aria']}</p>
+                    <div class="pdp-pay__row">
+{logos}
+                    </div>
+                </div>"""
 
 
 TRUSTBAR_ICONS = [
@@ -1408,7 +1405,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 <ul class="pdp-assur">
 {_render_assur(v3)}
                 </ul>
-{_render_pay_note(v3)}
+{_render_payment_logos(v3)}
             </div>
         </div>
     </section>
