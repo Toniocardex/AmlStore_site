@@ -72,7 +72,17 @@ a:hover { text-decoration: underline; }
     gap: .35rem;
     margin-left: auto;
     margin-right: 1rem;
+    /* Se le schede non entrano nella larghezza disponibile la barra scorre,
+       invece di far finire le ultime oltre il bordo: l'header è `fixed`, quindi
+       quello che esce non è più raggiungibile in alcun modo. Su mobile ci pensa
+       già il layout a due righe (vedi media query in fondo), questo copre i casi
+       limite: schermi molto stretti, testi più lunghi, una scheda in più. */
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
 }
+
+.adm-header__nav::-webkit-scrollbar { display: none; }
 
 .adm-nav-btn {
     appearance: none;
@@ -85,6 +95,7 @@ a:hover { text-decoration: underline; }
     padding: .4rem .85rem;
     border-radius: 6px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .adm-nav-btn:hover { color: var(--adm-text); background: rgba(255,255,255,.04); }
@@ -783,7 +794,36 @@ select.adm-input {
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
-    :root { --adm-sidebar-w: 0px; }
+    /* Header su due righe: brand e uscita sopra, schede sotto a tutta
+       larghezza. Su una riga sola le ultime schede finivano oltre il bordo
+       dello schermo, e con l'header `fixed` non c'era modo di raggiungerle. */
+    :root {
+        --adm-sidebar-w: 0px;
+        --adm-header-h: 96px;
+    }
+
+    .adm-header {
+        flex-wrap: wrap;
+        align-content: center;
+        padding: .45rem .75rem;
+        gap: .45rem;
+    }
+
+    .adm-header__nav {
+        order: 3;
+        width: 100%;
+        margin: 0;
+        justify-content: space-between;
+    }
+
+    .adm-nav-btn {
+        flex: 1 1 0;
+        padding-inline: .5rem;
+        /* Area di tocco comoda: da desktop bastano 31px di altezza, col dito no. */
+        padding-block: .55rem;
+        text-align: center;
+    }
+
     .adm-sidebar { display: none; }
     .adm-modal { width: 100vw; height: calc(100vh - var(--adm-header-h)); }
     .adm-user-email { display: none; }
