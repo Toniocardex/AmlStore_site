@@ -113,6 +113,7 @@
         var views = data.views || 0;
         renderTopList('adm-analytics-pages-tbody',     data.topPages     || [], 'path',    views, 'Pagina');
         renderTopList('adm-analytics-countries-tbody', data.topCountries || [], 'country', views, 'Paese');
+        renderTopList('adm-analytics-lang-suggest-tbody', data.topSuggestedLangs || [], 'suggested_lang', views, 'Lingua');
         renderTopList('adm-analytics-devices-tbody',   data.devices      || [], 'device',  views, 'Tipo');
         renderReferrers(data, views);
     }

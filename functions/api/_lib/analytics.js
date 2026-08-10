@@ -61,6 +61,41 @@ function localeFromPath(path) {
     return ALLOWED_LOCALES.has(seg) ? seg : null;
 }
 
+/**
+ * Ordina le lingue di un header Accept-Language per preferenza (q-value
+ * decrescente, a parità di q mantiene l'ordine del header) e ne estrae i
+ * primary subtag ('it-IT' -> 'it').
+ */
+function parseAcceptLanguage(header) {
+    if (!header) return [];
+    return header.split(',')
+        .map((part, idx) => {
+            const bits = part.trim().split(';q=');
+            const tag = (bits[0] || '').trim();
+            const q = bits[1] !== undefined ? parseFloat(bits[1]) : 1;
+            return { tag, q: Number.isFinite(q) ? q : 1, idx };
+        })
+        .filter((e) => e.tag)
+        .sort((a, b) => b.q - a.q || a.idx - b.idx)
+        .map((e) => e.tag.split('-')[0].toLowerCase());
+}
+
+/**
+ * Lingua che <aml-lang-suggest> (components/lang-suggest.js) suggerirebbe per
+ * questa richiesta: stesso identico algoritmo del componente client
+ * (topSupportedBrowserLang), solo che qui legge Accept-Language invece di
+ * navigator.languages. Ferma la scansione alla prima lingua supportata
+ * dell'header, anche se coincide con la pagina — non continua a cercarne
+ * una diversa più in basso (altrimenti un browser bilingue it/en su una
+ * pagina già in italiano risulterebbe "suggerirebbe inglese", falso: la sua
+ * preferenza principale è già soddisfatta).
+ */
+function suggestedLangFromRequest(request, pageLocale) {
+    const prefs = parseAcceptLanguage(request.headers.get('Accept-Language') || '');
+    const top = prefs.find((code) => ALLOWED_LOCALES.has(code)) || null;
+    return (top && top !== pageLocale) ? top : null;
+}
+
 function referrerHostFrom(request, siteUrl) {
     const raw = request.headers.get('Referer');
     if (!raw) return null;
@@ -98,15 +133,18 @@ export async function recordPageView(context) {
             ? await hmacIdentifier(secret, `pv-${day}`, `${ip}|${ua}`)
             : await hmacIdentifier(secret, `pv-${day}`, `anon|${ua}`);
 
+        const locale = localeFromPath(url.pathname);
+
         await env.DB.prepare(`
             INSERT INTO page_views (
                 day, ts, path, locale, referrer_host, utm_source,
-                country, device, visitor_hash
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                country, device, visitor_hash, suggested_lang
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `).bind(
-            day, ts, url.pathname, localeFromPath(url.pathname),
+            day, ts, url.pathname, locale,
             referrerHostFrom(request, url), url.searchParams.get('utm_source') || null,
-            request.cf?.country || null, deviceFromUA(ua), visitorHash
+            request.cf?.country || null, deviceFromUA(ua), visitorHash,
+            suggestedLangFromRequest(request, locale)
         ).run();
     } catch (e) {
         console.warn('[analytics] recordPageView fallita:', e?.message || e);
@@ -172,7 +210,7 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS } = {}) {
     days = normalizeDays(days);
     const cutoff = dayCutoff(days);
 
-    const [totals, daily, topPages, topReferrers, topCountries, devices, direct] = await Promise.all([
+    const [totals, daily, topPages, topReferrers, topCountries, topSuggestedLangs, devices, direct] = await Promise.all([
         db.prepare(`
             SELECT COUNT(*) as views, COUNT(DISTINCT visitor_hash) as visitors
             FROM page_views WHERE day >= ?
@@ -200,6 +238,17 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS } = {}) {
             SELECT country, COUNT(*) as views
             FROM page_views WHERE day >= ? AND country IS NOT NULL
             GROUP BY country ORDER BY views DESC LIMIT 10
+        `).bind(cutoff).all(),
+
+        /* Lingua che <aml-lang-suggest> avrebbe suggerito (da Accept-Language,
+           vedi suggestedLangFromRequest): quante pageview arrivano da un
+           visitatore la cui lingua preferita differisce da quella della
+           pagina, e verso quale lingua. NULL = nessun suggerimento (lingua
+           già corretta, o nessuna delle 5 supportate in Accept-Language). */
+        db.prepare(`
+            SELECT suggested_lang, COUNT(*) as views
+            FROM page_views WHERE day >= ? AND suggested_lang IS NOT NULL
+            GROUP BY suggested_lang ORDER BY views DESC LIMIT 10
         `).bind(cutoff).all(),
 
         db.prepare(`
@@ -232,6 +281,7 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS } = {}) {
         topReferrers: (topReferrers.results || []).map(r => ({ host: r.referrer_host, views: r.views })),
         directViews:  direct?.views || 0,
         topCountries: (topCountries.results || []).map(r => ({ country: r.country, views: r.views })),
+        topSuggestedLangs: (topSuggestedLangs.results || []).map(r => ({ suggested_lang: r.suggested_lang, views: r.views })),
         devices:      (devices.results      || []).map(r => ({ device: r.device, views: r.views })),
     };
 }
