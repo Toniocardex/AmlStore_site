@@ -940,19 +940,60 @@ select.adm-input {
     .adm-analytics-grid { grid-template-columns: 1fr; }
 }
 
-.adm-analytics-chart {
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    height: 160px;
-    overflow-x: auto;
-    padding-bottom: 1.5rem;
+/* Grafico visite giornaliere.
+   L'area di disegno ha un padding a sinistra che ospita le etichette della
+   scala: senza un asse esplicito l'altezza di una barra non dice nulla. */
+.adm-analytics-chart { padding-top: .25rem; }
+
+/* Il padding destro non è estetico: le etichette delle date sono centrate
+   sotto la barra e sono molto più larghe di essa, quindi l'ultima sborderebbe
+   dal riquadro (con 90 giorni le barre sono 4px, le date ~35px). */
+.adm-chart__plot {
     position: relative;
+    height: 190px;
+    padding-left: 2.6rem;
+    padding-right: 1.4rem;
 }
 
-.adm-analytics-bar {
-    flex: 1 0 10px;
-    min-width: 10px;
+.adm-chart__gridline {
+    position: absolute;
+    left: 2.6rem;
+    right: 1.4rem;
+    height: 0;
+    border-top: 1px solid var(--adm-border);
+}
+
+.adm-chart__gridline span {
+    position: absolute;
+    right: calc(100% + .5rem);
+    transform: translateY(-50%);
+    font-size: .68rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--adm-muted);
+}
+
+.adm-chart__cols {
+    position: absolute;
+    inset: 0 1.4rem 0 2.6rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.adm-chart__cols.is-dense { gap: 1px; }
+
+@media (max-width: 700px) {
+    .adm-chart__cols.is-dense { gap: 0; }
+}
+
+.adm-chart__col {
+    flex: 1 1 0;
+    /* Con pochi giorni le barre resterebbero larghissime, riempiendo il
+       riquadro e smettendo di leggersi come un grafico. */
+    max-width: 46px;
+    /* Senza questo il min-width:auto del flex item impedisce la compressione e
+       la finestra a 90 giorni (91 barre) esce dal riquadro. */
+    min-width: 0;
     height: 100%;
     display: flex;
     align-items: flex-end;
@@ -960,19 +1001,105 @@ select.adm-input {
     position: relative;
 }
 
-.adm-analytics-bar__fill {
+.adm-chart__col:hover { background: rgba(59, 130, 246, .07); }
+
+.adm-chart__bar {
+    position: relative;
     width: 100%;
-    background: var(--adm-accent);
-    border-radius: 2px 2px 0 0;
+    max-width: 34px;
     min-height: 2px;
+    background: color-mix(in srgb, var(--adm-accent) 42%, transparent);
+    border-radius: 3px 3px 0 0;
 }
 
-.adm-analytics-bar__label {
+/* Un giorno senza visite deve restare visibile come giorno, non come vuoto. */
+.adm-chart__bar.is-empty {
+    min-height: 2px;
+    background: var(--adm-border);
+}
+
+.adm-chart__bar-visitors {
     position: absolute;
-    bottom: -1.3rem;
-    font-size: .65rem;
-    color: var(--adm-muted2);
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: var(--adm-accent);
+    border-radius: 3px 3px 0 0;
+}
+
+.adm-chart__label {
+    position: absolute;
+    top: calc(100% + .35rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .66rem;
     white-space: nowrap;
-    transform: rotate(-45deg) translateX(-4px);
-    transform-origin: top right;
+    color: var(--adm-muted2);
+}
+
+.adm-chart__legend {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 1.9rem;
+    font-size: .72rem;
+    color: var(--adm-muted2);
+}
+
+.adm-chart__legend span { display: inline-flex; align-items: center; gap: .4rem; }
+
+.adm-chart__key {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--adm-accent) 42%, transparent);
+}
+
+.adm-chart__key--visitors { background: var(--adm-accent); }
+
+/* Righe di classifica: la barra di sfondo rende confrontabili le voci senza
+   dover rapportare i numeri a mente. */
+.adm-rank {
+    position: relative;
+    display: block;
+    padding: .3rem .5rem;
+    border-radius: var(--adm-radius);
+    overflow: hidden;
+}
+
+.adm-rank__fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: color-mix(in srgb, var(--adm-accent) 16%, transparent);
+    border-radius: var(--adm-radius);
+}
+
+.adm-rank__text {
+    position: relative;
+    word-break: break-word;
+}
+
+/* Le classifiche di Analytics hanno due sole colonne: non soffrono il problema
+   di larghezza che sotto i 1200px trasforma la tabella ordini in card (vedi
+   sopra). Restano tabelle, altrimenti ogni voce occuperebbe tre righe e la
+   pagina diventerebbe lunghissima senza guadagnare leggibilità. */
+@media (max-width: 1200px) {
+    .adm-table--compact        { display: table; width: 100%; }
+    .adm-table--compact thead  { display: table-header-group; }
+    .adm-table--compact tbody  { display: table-row-group; }
+    .adm-table--compact tr     { display: table-row; }
+    .adm-table--compact th,
+    .adm-table--compact td     { display: table-cell; }
+
+    .adm-table--compact thead tr {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+    }
+
+    .adm-table--compact tbody tr { padding: 0; }
+    .adm-table--compact td { padding: .3rem .4rem; }
+    .adm-table--compact td::before { content: none; }
 }

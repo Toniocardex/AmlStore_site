@@ -123,15 +123,56 @@ function dayCutoff(days) {
 }
 
 /**
+ * Completa la serie giornaliera con i giorni a zero.
+ *
+ * `GROUP BY day` restituisce solo i giorni che hanno almeno una riga: passata
+ * cosi' com'e' a un grafico, una settimana senza traffico sparisce e le barre
+ * si stringono, facendo sembrare continuo un andamento che non lo e'. Qui la
+ * serie viene riempita fino a oggi, cosi' un giorno vuoto resta visibile come
+ * tale.
+ */
+function fillDailyGaps(rows, days) {
+    if (!(days > 0)) return rows;
+
+    const byDay = new Map(rows.map(r => [r.day, r]));
+    const out = [];
+    const cursor = new Date(`${dayCutoff(days)}T00:00:00Z`);
+    const today = new Date(`${new Date().toISOString().slice(0, 10)}T00:00:00Z`);
+
+    while (cursor <= today) {
+        const day = cursor.toISOString().slice(0, 10);
+        const row = byDay.get(day);
+        out.push({ day, views: row?.views || 0, visitors: row?.visitors || 0 });
+        cursor.setUTCDate(cursor.getUTCDate() + 1);
+    }
+    return out;
+}
+
+const DEFAULT_DAYS = 30;
+const MAX_DAYS     = 365;
+
+/**
+ * Finestra in giorni proveniente dalla query string. Oltre a scartare i valori
+ * non numerici, il tetto evita che un `?days=99999` faccia costruire a
+ * fillDailyGaps una serie di decine di migliaia di punti.
+ */
+export function normalizeDays(value) {
+    const n = Number(value);
+    if (!Number.isFinite(n) || n <= 0) return DEFAULT_DAYS;
+    return Math.min(Math.round(n), MAX_DAYS);
+}
+
+/**
  * Aggregati per la vista admin "Analytics", finestra di `days` giorni.
  * @param {D1Database} db
  * @param {object} opts
  * @param {number} [opts.days=30]
  */
-export async function getAnalyticsSummary(db, { days = 30 } = {}) {
+export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS } = {}) {
+    days = normalizeDays(days);
     const cutoff = dayCutoff(days);
 
-    const [totals, daily, topPages, topReferrers, topCountries, devices] = await Promise.all([
+    const [totals, daily, topPages, topReferrers, topCountries, devices, direct] = await Promise.all([
         db.prepare(`
             SELECT COUNT(*) as views, COUNT(DISTINCT visitor_hash) as visitors
             FROM page_views WHERE day >= ?
@@ -166,15 +207,30 @@ export async function getAnalyticsSummary(db, { days = 30 } = {}) {
             FROM page_views WHERE day >= ?
             GROUP BY device ORDER BY views DESC
         `).bind(cutoff).all(),
+
+        /* Contato a parte e non per differenza dalla classifica: quella è
+           limitata ai primi 10, quindi sottrarla dal totale farebbe passare per
+           "diretto" anche il traffico delle sorgenti dall'undicesima in giù. */
+        db.prepare(`
+            SELECT COUNT(*) as views
+            FROM page_views WHERE day >= ? AND referrer_host IS NULL
+        `).bind(cutoff).first(),
     ]);
 
+    /* `directViews` sta fuori dalla classifica: "nessun referrer" non e' una
+       sorgente fra le altre, ma e' il dato che dice quanta parte del traffico
+       non arriva da un link esterno. */
     return {
         days,
         views:    totals?.views    || 0,
         visitors: totals?.visitors || 0,
-        daily:        (daily.results        || []).map(r => ({ day: r.day, views: r.views, visitors: r.visitors })),
+        daily: fillDailyGaps(
+            (daily.results || []).map(r => ({ day: r.day, views: r.views, visitors: r.visitors })),
+            days
+        ),
         topPages:     (topPages.results     || []).map(r => ({ path: r.path, views: r.views })),
         topReferrers: (topReferrers.results || []).map(r => ({ host: r.referrer_host, views: r.views })),
+        directViews:  direct?.views || 0,
         topCountries: (topCountries.results || []).map(r => ({ country: r.country, views: r.views })),
         devices:      (devices.results      || []).map(r => ({ device: r.device, views: r.views })),
     };

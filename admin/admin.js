@@ -1009,13 +1009,27 @@
         if (navAnalytics) navAnalytics.classList.toggle('is-active', state.view === 'analytics');
         if (state.view === 'stock')          loadStock();
         else if (state.view === 'carts')     loadCarts();
-        else if (state.view === 'analytics') { if (window.adminAnalytics) window.adminAnalytics.load(); }
+        else if (state.view === 'analytics') loadAnalytics();
         else                                   loadOrders();
 
         // Persiste la scheda attiva nell'URL: un refresh o un link diretto
         // deve riaprire la stessa vista, non ripartire sempre da Ordini.
         var hash = '#' + state.view;
         if (window.location.hash !== hash) history.replaceState(null, '', hash);
+    }
+
+    /**
+     * La vista Analytics vive in admin-analytics.js, uno script separato.
+     * Entrambi i file sono `defer`, quindi quando init() gira (readyState è già
+     * 'interactive') quel modulo può non essersi ancora registrato: chiamarlo
+     * solo se presente lasciava lo spinner acceso per sempre. Qui il
+     * caricamento parte comunque, appena il modulo si annuncia.
+     */
+    function loadAnalytics() {
+        if (window.adminAnalytics) { window.adminAnalytics.load(); return; }
+        window.addEventListener('aml-analytics-ready', function () {
+            window.adminAnalytics.load();
+        }, { once: true });
     }
 
     function loadStock() {
@@ -1347,7 +1361,7 @@
         reload: function () {
             if (state.view === 'stock')          loadStock();
             else if (state.view === 'carts')     loadCarts();
-            else if (state.view === 'analytics') { if (window.adminAnalytics) window.adminAnalytics.load(); }
+            else if (state.view === 'analytics') loadAnalytics();
             else                                   loadOrders();
         },
     };
