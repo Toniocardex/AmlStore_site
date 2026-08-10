@@ -36,6 +36,7 @@ const FOOTER_I18N = {
         emailLabel: 'Email',
         copyright: 'Aml Store. Tutti i diritti riservati.',
         vatLabel: 'P.IVA 11461870963',
+        paymentsLabel: 'Metodi di pagamento accettati',
     },
     en: {
         logoAlt: 'Aml Store',
@@ -71,6 +72,7 @@ const FOOTER_I18N = {
         emailLabel: 'Email',
         copyright: 'Aml Store. All rights reserved.',
         vatLabel: 'VAT 11461870963',
+        paymentsLabel: 'Accepted payment methods',
     },
     fr: {
         logoAlt: 'Aml Store',
@@ -106,6 +108,7 @@ const FOOTER_I18N = {
         emailLabel: 'E-mail',
         copyright: 'Aml Store. Tous droits réservés.',
         vatLabel: 'TVA 11461870963',
+        paymentsLabel: 'Moyens de paiement acceptés',
     },
     de: {
         logoAlt: 'Aml Store',
@@ -141,6 +144,7 @@ const FOOTER_I18N = {
         emailLabel: 'E-Mail',
         copyright: 'Aml Store. Alle Rechte vorbehalten.',
         vatLabel: 'USt-IdNr. 11461870963',
+        paymentsLabel: 'Akzeptierte Zahlungsmethoden',
     },
     es: {
         logoAlt: 'Aml Store',
@@ -176,6 +180,7 @@ const FOOTER_I18N = {
         emailLabel: 'Email',
         copyright: 'Aml Store. Todos los derechos reservados.',
         vatLabel: 'NIF 11461870963',
+        paymentsLabel: 'Métodos de pago aceptados',
     },
 };
 
@@ -327,6 +332,43 @@ class EcommerceFooter extends HTMLElement {
                     }
 
                     .brand-support span { display: block; }
+
+                    /* Stesso linguaggio visivo del blocco pagamenti in PDP (.pdp-pay__logo
+                       in css/product-pdp.css: stessa opacita', proporzioni), ma piu'
+                       piccolo e senza wrap. La colonna brand e' larga 260-310px (vedi
+                       .footer-main sopra): a dimensione PDP il sesto logo andava a capo
+                       e la forma "a pillola" si rompeva, quindi i 6 loghi vanno tenuti
+                       su una riga sola. */
+                    .footer-pay {
+                        display: inline-flex;
+                        align-items: center;
+                        flex-wrap: nowrap;
+                        gap: 6px;
+                        margin-top: 1.2rem;
+                        padding: 8px 10px;
+                        background: #ffffff;
+                        border-radius: 999px;
+                        box-shadow: var(--aml-shadow-sm, 0 1px 2px rgba(16, 24, 40, 0.04));
+                    }
+
+                    .footer-pay__logo {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                        width: 30px;
+                        height: 14px;
+                        opacity: 0.75;
+                    }
+
+                    .footer-pay__logo[data-brand='PayPal'] { width: 40px; }
+
+                    .footer-pay__logo img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        display: block;
+                    }
 
                     .footer-nav {
                         display: contents;
@@ -505,6 +547,14 @@ class EcommerceFooter extends HTMLElement {
                                 <span>${esc(t.supportHours)}</span>
                                 <span>${esc(t.supportLanguage)}</span>
                             </p>
+                            <div class="footer-pay" role="group" aria-label="${esc(t.paymentsLabel)}">
+                                <span class="footer-pay__logo" data-brand="Visa"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Visa_logo.svg" alt="Visa" width="30" height="14" loading="lazy" decoding="async"></span>
+                                <span class="footer-pay__logo" data-brand="Mastercard"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Mastercard_logo.svg" alt="Mastercard" width="30" height="14" loading="lazy" decoding="async"></span>
+                                <span class="footer-pay__logo" data-brand="PayPal"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_PayPal-logo.svg" alt="PayPal" width="40" height="14" loading="lazy" decoding="async"></span>
+                                <span class="footer-pay__logo" data-brand="Apple Pay"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Apple_Pay_logo.svg" alt="Apple Pay" width="30" height="14" loading="lazy" decoding="async"></span>
+                                <span class="footer-pay__logo" data-brand="Google Pay"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Google_Pay_Logo.svg" alt="Google Pay" width="30" height="14" loading="lazy" decoding="async"></span>
+                                <span class="footer-pay__logo" data-brand="Stripe"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Stripe_Logo.svg" alt="Stripe" width="30" height="14" loading="lazy" decoding="async"></span>
+                            </div>
                         </div>
 
                         <nav class="footer-nav" aria-label="${esc(t.footerNavAria)}">
