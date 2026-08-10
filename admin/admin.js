@@ -990,22 +990,27 @@
     /* ─── Magazzino ────────────────────────────────────────────────────────── */
 
     function setView(view) {
-        state.view = (view === 'stock' || view === 'carts') ? view : 'orders';
-        var ordersEl  = $('adm-view-orders');
-        var stockEl   = $('adm-view-stock');
-        var cartsEl   = $('adm-view-carts');
-        var navOrders = $('nav-orders');
-        var navStock  = $('nav-stock');
-        var navCarts  = $('nav-carts');
-        if (ordersEl) ordersEl.hidden = state.view !== 'orders';
-        if (stockEl)  stockEl.hidden  = state.view !== 'stock';
-        if (cartsEl)  cartsEl.hidden  = state.view !== 'carts';
-        if (navOrders) navOrders.classList.toggle('is-active', state.view === 'orders');
-        if (navStock)  navStock.classList.toggle('is-active', state.view === 'stock');
-        if (navCarts)  navCarts.classList.toggle('is-active', state.view === 'carts');
-        if (state.view === 'stock')      loadStock();
-        else if (state.view === 'carts') loadCarts();
-        else                              loadOrders();
+        state.view = (view === 'stock' || view === 'carts' || view === 'analytics') ? view : 'orders';
+        var ordersEl    = $('adm-view-orders');
+        var stockEl     = $('adm-view-stock');
+        var cartsEl     = $('adm-view-carts');
+        var analyticsEl = $('adm-view-analytics');
+        var navOrders    = $('nav-orders');
+        var navStock     = $('nav-stock');
+        var navCarts     = $('nav-carts');
+        var navAnalytics = $('nav-analytics');
+        if (ordersEl)    ordersEl.hidden    = state.view !== 'orders';
+        if (stockEl)     stockEl.hidden     = state.view !== 'stock';
+        if (cartsEl)     cartsEl.hidden     = state.view !== 'carts';
+        if (analyticsEl) analyticsEl.hidden = state.view !== 'analytics';
+        if (navOrders)    navOrders.classList.toggle('is-active', state.view === 'orders');
+        if (navStock)     navStock.classList.toggle('is-active', state.view === 'stock');
+        if (navCarts)     navCarts.classList.toggle('is-active', state.view === 'carts');
+        if (navAnalytics) navAnalytics.classList.toggle('is-active', state.view === 'analytics');
+        if (state.view === 'stock')          loadStock();
+        else if (state.view === 'carts')     loadCarts();
+        else if (state.view === 'analytics') { if (window.adminAnalytics) window.adminAnalytics.load(); }
+        else                                   loadOrders();
     }
 
     function loadStock() {
@@ -1335,9 +1340,10 @@
     // Espone reload per il pulsante "Riprova"
     window.adminApp = {
         reload: function () {
-            if (state.view === 'stock')      loadStock();
-            else if (state.view === 'carts') loadCarts();
-            else                              loadOrders();
+            if (state.view === 'stock')          loadStock();
+            else if (state.view === 'carts')     loadCarts();
+            else if (state.view === 'analytics') { if (window.adminAnalytics) window.adminAnalytics.load(); }
+            else                                   loadOrders();
         },
     };
 

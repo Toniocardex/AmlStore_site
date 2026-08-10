@@ -23,6 +23,7 @@
  *   GET  /api/admin/stock
  *   POST /api/admin/stock
  *   GET  /api/admin/carts
+ *   GET  /api/admin/analytics
  */
 
 import { generateToken, verifyToken }                    from './_lib/token.js';
@@ -47,6 +48,7 @@ import { checkCheckoutEmailRateLimit }                   from './_lib/checkout-r
 import { upsertCartSession, markCartCheckoutStarted,
          checkCartSyncRateLimit, listCarts, getCartStats,
          normalizeHoursIdle, maybeRunCartRetention }     from './_lib/cart.js';
+import { getAnalyticsSummary }                           from './_lib/analytics.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -1107,6 +1109,17 @@ async function handleAdminRoute(path, request, env, context) {
         maybeRunCartRetention(context);
 
         return new Response(JSON.stringify(result), {
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── GET /api/admin/analytics ──────────────────────────────────────────────
+    if (sub === '/analytics' && request.method === 'GET') {
+        const qs   = new URL(request.url).searchParams;
+        const days = qs.has('days') ? Number(qs.get('days')) : 30;
+
+        const summary = await getAnalyticsSummary(env.DB, { days });
+        return new Response(JSON.stringify(summary), {
             headers: { 'Content-Type': 'application/json' },
         });
     }

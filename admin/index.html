@@ -20,6 +20,7 @@
         <button type="button" class="adm-nav-btn is-active" data-adm-view="orders" id="nav-orders">Ordini</button>
         <button type="button" class="adm-nav-btn" data-adm-view="stock" id="nav-stock">Magazzino</button>
         <button type="button" class="adm-nav-btn" data-adm-view="carts" id="nav-carts">Carrelli</button>
+        <button type="button" class="adm-nav-btn" data-adm-view="analytics" id="nav-analytics">Analytics</button>
     </nav>
     <div class="adm-header__right">
         <span class="adm-user-email" id="adm-user-email"></span>
@@ -287,6 +288,97 @@
     </main>
 </div>
 
+<!-- ── Vista Analytics (visite giornaliere, provenienza) ───────────────────── -->
+<div class="adm-layout" id="adm-view-analytics" hidden>
+
+    <!-- Sidebar filtri + statistiche -->
+    <aside class="adm-sidebar">
+        <section class="adm-filter-section">
+            <h2 class="adm-filter-section__title">Periodo</h2>
+
+            <label class="adm-label" for="analytics-filter-days">Intervallo</label>
+            <select id="analytics-filter-days" class="adm-input">
+                <option value="7">Ultimi 7 giorni</option>
+                <option value="30" selected>Ultimi 30 giorni</option>
+                <option value="90">Ultimi 90 giorni</option>
+            </select>
+
+            <button id="btn-analytics-reload" class="adm-btn adm-btn--primary adm-btn--full">
+                Aggiorna
+            </button>
+        </section>
+
+        <section class="adm-filter-section adm-filter-section--stats" id="adm-analytics-stats">
+            <!-- Popolato da JS -->
+        </section>
+    </aside>
+
+    <!-- Contenuto principale -->
+    <main class="adm-main">
+
+        <div class="adm-toolbar">
+            <h1 class="adm-page-title">Analytics</h1>
+        </div>
+
+        <div class="adm-loading" id="adm-analytics-loading" aria-live="polite">
+            <div class="adm-spinner"></div>
+            <span>Caricamento analytics…</span>
+        </div>
+
+        <div class="adm-empty" id="adm-analytics-error" hidden>
+            <p class="adm-empty__icon">⚠️</p>
+            <p id="adm-analytics-error-msg">Errore nel caricamento delle analytics.</p>
+            <button class="adm-btn adm-btn--primary" onclick="window.adminApp.reload()">
+                Riprova
+            </button>
+        </div>
+
+        <div id="adm-analytics-content" hidden>
+
+            <section class="adm-analytics-section">
+                <h2 class="adm-analytics-section__title">Visite giornaliere</h2>
+                <div class="adm-analytics-chart" id="adm-analytics-chart"></div>
+            </section>
+
+            <div class="adm-analytics-grid">
+                <section class="adm-analytics-section">
+                    <h2 class="adm-analytics-section__title">Pagine più viste</h2>
+                    <table class="adm-table">
+                        <thead><tr><th>Pagina</th><th class="adm-th--center">Visite</th></tr></thead>
+                        <tbody id="adm-analytics-pages-tbody"></tbody>
+                    </table>
+                </section>
+
+                <section class="adm-analytics-section">
+                    <h2 class="adm-analytics-section__title">Provenienza (referrer)</h2>
+                    <table class="adm-table">
+                        <thead><tr><th>Origine</th><th class="adm-th--center">Visite</th></tr></thead>
+                        <tbody id="adm-analytics-referrers-tbody"></tbody>
+                    </table>
+                </section>
+
+                <section class="adm-analytics-section">
+                    <h2 class="adm-analytics-section__title">Paesi</h2>
+                    <table class="adm-table">
+                        <thead><tr><th>Paese</th><th class="adm-th--center">Visite</th></tr></thead>
+                        <tbody id="adm-analytics-countries-tbody"></tbody>
+                    </table>
+                </section>
+
+                <section class="adm-analytics-section">
+                    <h2 class="adm-analytics-section__title">Dispositivi</h2>
+                    <table class="adm-table">
+                        <thead><tr><th>Tipo</th><th class="adm-th--center">Visite</th></tr></thead>
+                        <tbody id="adm-analytics-devices-tbody"></tbody>
+                    </table>
+                </section>
+            </div>
+
+        </div>
+
+    </main>
+</div>
+
 <!-- ── Modal dettaglio ordine ─────────────────────────────────────────────── -->
 <div class="adm-modal-backdrop" id="adm-modal-backdrop" hidden aria-hidden="true">
     <div class="adm-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -360,5 +452,6 @@
 <div class="adm-toast-container" id="adm-toast-container" aria-live="polite"></div>
 
 <script src="/admin/admin.js" defer></script>
+<script src="/admin/admin-analytics.js" defer></script>
 </body>
 </html>
