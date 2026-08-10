@@ -1011,6 +1011,11 @@
         else if (state.view === 'carts')     loadCarts();
         else if (state.view === 'analytics') { if (window.adminAnalytics) window.adminAnalytics.load(); }
         else                                   loadOrders();
+
+        // Persiste la scheda attiva nell'URL: un refresh o un link diretto
+        // deve riaprire la stessa vista, non ripartire sempre da Ordini.
+        var hash = '#' + state.view;
+        if (window.location.hash !== hash) history.replaceState(null, '', hash);
     }
 
     function loadStock() {
@@ -1334,7 +1339,7 @@
         }
         initCartEvents();
 
-        loadOrders();
+        setView((window.location.hash || '').slice(1));
     }
 
     // Espone reload per il pulsante "Riprova"
