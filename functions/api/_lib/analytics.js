@@ -113,6 +113,11 @@ function deviceFromUA(ua) {
     return 'desktop';
 }
 
+/* Reload, tasto "indietro" o un bot che ribatte la stessa pagina in rapida
+   successione non sono nuove visite: se lo stesso visitor_hash ha già una riga
+   sullo stesso path entro questa finestra, la pageview non viene ri-contata. */
+const PAGEVIEW_DEDUP_WINDOW_MS = 30 * 60 * 1000;
+
 /**
  * Registra una pageview. Va chiamata dopo next(), dentro context.waitUntil.
  * @param {object} context   contesto Pages Functions (request, env)
@@ -132,6 +137,14 @@ export async function recordPageView(context) {
         const visitorHash = ip
             ? await hmacIdentifier(secret, `pv-${day}`, `${ip}|${ua}`)
             : await hmacIdentifier(secret, `pv-${day}`, `anon|${ua}`);
+
+        const dedupSince = new Date(Date.parse(ts) - PAGEVIEW_DEDUP_WINDOW_MS).toISOString();
+        const recent = await env.DB.prepare(`
+            SELECT 1 FROM page_views
+            WHERE day = ? AND path = ? AND visitor_hash = ? AND ts >= ?
+            LIMIT 1
+        `).bind(day, url.pathname, visitorHash, dedupSince).first();
+        if (recent) return;
 
         const locale = localeFromPath(url.pathname);
 

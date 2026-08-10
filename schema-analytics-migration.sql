@@ -20,3 +20,8 @@ CREATE INDEX IF NOT EXISTS idx_page_views_day         ON page_views(day);
 CREATE INDEX IF NOT EXISTS idx_page_views_day_path     ON page_views(day, path);
 CREATE INDEX IF NOT EXISTS idx_page_views_day_referrer ON page_views(day, referrer_host);
 CREATE INDEX IF NOT EXISTS idx_page_views_day_visitor  ON page_views(day, visitor_hash);
+
+-- Usato dal controllo anti-reload in recordPageView (analytics.js): verifica se
+-- lo stesso visitatore ha già una pageview sullo stesso path nella finestra di
+-- dedup, prima di inserirne una nuova.
+CREATE INDEX IF NOT EXISTS idx_page_views_dedup ON page_views(day, path, visitor_hash, ts);
