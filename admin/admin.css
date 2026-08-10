@@ -1118,6 +1118,19 @@ select.adm-input {
     word-break: break-word;
 }
 
+/* Valore e percentuale: la percentuale è una chiosa del numero, non un secondo
+   dato appiccicato. Le cifre tabulari tengono incolonnate le unità fra righe di
+   lunghezza diversa (9 / 14 / 209). */
+.adm-rank__value {
+    font-variant-numeric: tabular-nums;
+}
+
+.adm-rank__pct {
+    margin-left: .6rem;
+    color: var(--adm-muted);
+    font-variant-numeric: tabular-nums;
+}
+
 /* Le classifiche di Analytics hanno due sole colonne: non soffrono il problema
    di larghezza che sotto i 1200px trasforma la tabella ordini in card (vedi
    sopra). Restano tabelle, altrimenti ogni voce occuperebbe tre righe e la

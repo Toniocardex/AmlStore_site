@@ -219,7 +219,8 @@
              +   '<span class="adm-rank__text">' + esc(label) + '</span></span>'
              + '</td>'
              + '<td class="adm-th--center adm-td--nowrap" data-label="Visite">'
-             +   esc(fmtNum(views)) + ' <span class="adm-muted">' + esc(fmtPct(views, total)) + '</span>'
+             +   '<span class="adm-rank__value">' + esc(fmtNum(views)) + '</span>'
+             +   '<span class="adm-rank__pct">' + esc(fmtPct(views, total)) + '</span>'
              + '</td>'
              + '</tr>';
     }
