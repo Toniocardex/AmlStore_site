@@ -268,6 +268,14 @@
             currency:       String(order.currency || 'EUR').toUpperCase(),
             items:          items,
         });
+
+        // Google Ads — conversione Acquisto (4)
+        global.gtag('event', 'conversion', {
+            send_to:        'AW-16453121097/DyZtCIeFnOAcEMnouqU9',
+            value:           order.totalMinor / 100,
+            currency:        String(order.currency || 'EUR').toUpperCase(),
+            transaction_id:  order.orderId,
+        });
     }
 
     /* ─── Errore / scadenza ────────────────────────────────────────────────── */
