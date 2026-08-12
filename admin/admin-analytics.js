@@ -12,8 +12,9 @@
     'use strict';
 
     var state = {
-        days:    '30',
-        loading: false,
+        days:        '30',
+        includeBots: false,
+        loading:     false,
     };
 
     /* ─── Utility DOM (copia minima, stesso stile di admin.js) ───────────────── */
@@ -88,7 +89,8 @@
         hide('adm-analytics-error');
         hide('adm-analytics-content');
 
-        apiGet('/api/admin/analytics?days=' + encodeURIComponent(state.days)).then(function (data) {
+        var qs = 'days=' + encodeURIComponent(state.days) + (state.includeBots ? '&bots=include' : '');
+        apiGet('/api/admin/analytics?' + qs).then(function (data) {
             state.loading = false;
             hide('adm-analytics-loading');
             show('adm-analytics-content');
@@ -130,6 +132,13 @@
             return (!best || d.views > best.views) ? d : best;
         }, null);
 
+        var botViews = data.botViews || 0;
+        var botNote = data.includeBots
+            ? 'Bot inclusi nei dati sopra: ' + fmtNum(botViews) + ' visite riconosciute come bot (crawler, motori di ricerca…).'
+            : (botViews
+                ? fmtNum(botViews) + ' visite bot escluse dai dati sopra. Spunta "Includi bot" per vederle.'
+                : 'Nessuna visita bot rilevata nel periodo.');
+
         var html = '<p class="adm-filter-section__title">Statistiche</p>'
             + statRow('Visite totali',      fmtNum(views))
             + statRow('Visitatori unici',   fmtNum(visitors))
@@ -140,7 +149,8 @@
                 : '')
             + '<p class="adm-stat-note">Visitatore unico = combinazione anonima di '
             + 'IP e browser, rinnovata ogni giorno: chi torna in giorni diversi '
-            + 'viene contato una volta per giorno.</p>';
+            + 'viene contato una volta per giorno.</p>'
+            + '<p class="adm-stat-note">' + esc(botNote) + '</p>';
 
         el.innerHTML = html;
     }
@@ -270,6 +280,13 @@
         if (daysSelect) {
             daysSelect.addEventListener('change', function () {
                 state.days = daysSelect.value;
+                load();
+            });
+        }
+        var botsCheck = $('analytics-filter-bots');
+        if (botsCheck) {
+            botsCheck.addEventListener('change', function () {
+                state.includeBots = botsCheck.checked;
                 load();
             });
         }

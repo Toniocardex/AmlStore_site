@@ -1115,10 +1115,11 @@ async function handleAdminRoute(path, request, env, context) {
 
     // ── GET /api/admin/analytics ──────────────────────────────────────────────
     if (sub === '/analytics' && request.method === 'GET') {
-        const qs   = new URL(request.url).searchParams;
-        const days = qs.has('days') ? Number(qs.get('days')) : 30;
+        const qs          = new URL(request.url).searchParams;
+        const days        = qs.has('days') ? Number(qs.get('days')) : 30;
+        const includeBots = qs.get('bots') === 'include';
 
-        const summary = await getAnalyticsSummary(env.DB, { days });
+        const summary = await getAnalyticsSummary(env.DB, { days, includeBots });
         return new Response(JSON.stringify(summary), {
             headers: { 'Content-Type': 'application/json' },
         });

@@ -8,6 +8,11 @@
  *   runAnalyticsRetention(db, env)             — cancella righe oltre il termine
  *   maybeRunAnalyticsRetention(context, opts)  — la lancia al più una volta all'ora
  *
+ * I bot riconosciuti (BOT_UA_RE) non vengono più scartati: sono registrati
+ * con is_bot = 1 e restano fuori dagli aggregati di default, ma
+ * getAnalyticsSummary può includerli su richiesta (opts.includeBots) così il
+ * pannello admin li mostra come categoria a sé invece di farli sparire.
+ *
  * Nessun cookie, nessun ID persistente: `visitor_hash` è un HMAC(ip+ua) con un
  * salt che include il giorno (kind = "pv-<day>"), quindi ruota ogni 24h e non è
  * riconducibile tra un giorno e l'altro. Riusa FRAUD_HASH_SECRET — nessun nuovo
@@ -33,7 +38,9 @@ const BOT_UA_RE = new RegExp([
 
 /**
  * Vero solo per navigazioni reali verso una pagina HTML servita con successo.
- * Esclude API, admin, asset statici e i bot più comuni.
+ * Esclude API, admin e asset statici. I bot noti (BOT_UA_RE) non sono
+ * esclusi qui: passano il filtro e vengono registrati da recordPageView con
+ * is_bot = 1, cosi' restano visibili come categoria a se' invece di sparire.
  */
 export function shouldTrackPageView(request, response) {
     if (request.method !== 'GET')   return false;
@@ -48,10 +55,12 @@ export function shouldTrackPageView(request, response) {
     const contentType = response.headers.get('content-type') || '';
     if (!contentType.includes('text/html')) return false;
 
-    const ua = request.headers.get('User-Agent') || '';
-    if (BOT_UA_RE.test(ua)) return false;
-
     return true;
+}
+
+/** Vero se lo User-Agent corrisponde a un bot/crawler noto (vedi BOT_UA_RE). */
+export function isBotUA(ua) {
+    return BOT_UA_RE.test(ua || '');
 }
 
 /* ─── Scrittura pageview ──────────────────────────────────────────────────────── */
@@ -151,13 +160,13 @@ export async function recordPageView(context) {
         await env.DB.prepare(`
             INSERT INTO page_views (
                 day, ts, path, locale, referrer_host, utm_source,
-                country, device, visitor_hash, suggested_lang
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                country, device, visitor_hash, suggested_lang, is_bot
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `).bind(
             day, ts, url.pathname, locale,
             referrerHostFrom(request, url), url.searchParams.get('utm_source') || null,
             request.cf?.country || null, deviceFromUA(ua), visitorHash,
-            suggestedLangFromRequest(request, locale)
+            suggestedLangFromRequest(request, locale), isBotUA(ua) ? 1 : 0
         ).run();
     } catch (e) {
         console.warn('[analytics] recordPageView fallita:', e?.message || e);
@@ -215,41 +224,51 @@ export function normalizeDays(value) {
 
 /**
  * Aggregati per la vista admin "Analytics", finestra di `days` giorni.
+ *
+ * Di default i bot (is_bot = 1, vedi recordPageView) restano fuori da tutti
+ * gli aggregati: gonfierebbero pagine e conteggi con traffico che non è
+ * pubblico reale. `botViews`/`botVisitors` sono comunque sempre calcolati sul
+ * periodo, cosi' il pannello puo' mostrarne l'esistenza anche a bot esclusi.
+ * Con `includeBots: true` il filtro cade e gli aggregati coprono tutto il
+ * traffico, bot compresi.
+ *
  * @param {D1Database} db
  * @param {object} opts
  * @param {number} [opts.days=30]
+ * @param {boolean} [opts.includeBots=false]
  */
-export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS } = {}) {
+export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS, includeBots = false } = {}) {
     days = normalizeDays(days);
     const cutoff = dayCutoff(days);
+    const botClause = includeBots ? '' : 'AND is_bot = 0';
 
-    const [totals, daily, topPages, topReferrers, topCountries, topSuggestedLangs, devices, direct] = await Promise.all([
+    const [totals, daily, topPages, topReferrers, topCountries, topSuggestedLangs, devices, direct, bots] = await Promise.all([
         db.prepare(`
             SELECT COUNT(*) as views, COUNT(DISTINCT visitor_hash) as visitors
-            FROM page_views WHERE day >= ?
+            FROM page_views WHERE day >= ? ${botClause}
         `).bind(cutoff).first(),
 
         db.prepare(`
             SELECT day, COUNT(*) as views, COUNT(DISTINCT visitor_hash) as visitors
-            FROM page_views WHERE day >= ?
+            FROM page_views WHERE day >= ? ${botClause}
             GROUP BY day ORDER BY day ASC
         `).bind(cutoff).all(),
 
         db.prepare(`
             SELECT path, COUNT(*) as views
-            FROM page_views WHERE day >= ?
+            FROM page_views WHERE day >= ? ${botClause}
             GROUP BY path ORDER BY views DESC LIMIT 10
         `).bind(cutoff).all(),
 
         db.prepare(`
             SELECT referrer_host, COUNT(*) as views
-            FROM page_views WHERE day >= ? AND referrer_host IS NOT NULL
+            FROM page_views WHERE day >= ? AND referrer_host IS NOT NULL ${botClause}
             GROUP BY referrer_host ORDER BY views DESC LIMIT 10
         `).bind(cutoff).all(),
 
         db.prepare(`
             SELECT country, COUNT(*) as views
-            FROM page_views WHERE day >= ? AND country IS NOT NULL
+            FROM page_views WHERE day >= ? AND country IS NOT NULL ${botClause}
             GROUP BY country ORDER BY views DESC LIMIT 10
         `).bind(cutoff).all(),
 
@@ -260,13 +279,13 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS } = {}) {
            già corretta, o nessuna delle 5 supportate in Accept-Language). */
         db.prepare(`
             SELECT suggested_lang, COUNT(*) as views
-            FROM page_views WHERE day >= ? AND suggested_lang IS NOT NULL
+            FROM page_views WHERE day >= ? AND suggested_lang IS NOT NULL ${botClause}
             GROUP BY suggested_lang ORDER BY views DESC LIMIT 10
         `).bind(cutoff).all(),
 
         db.prepare(`
             SELECT device, COUNT(*) as views
-            FROM page_views WHERE day >= ?
+            FROM page_views WHERE day >= ? ${botClause}
             GROUP BY device ORDER BY views DESC
         `).bind(cutoff).all(),
 
@@ -275,7 +294,12 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS } = {}) {
            "diretto" anche il traffico delle sorgenti dall'undicesima in giù. */
         db.prepare(`
             SELECT COUNT(*) as views
-            FROM page_views WHERE day >= ? AND referrer_host IS NULL
+            FROM page_views WHERE day >= ? AND referrer_host IS NULL ${botClause}
+        `).bind(cutoff).first(),
+
+        db.prepare(`
+            SELECT COUNT(*) as views, COUNT(DISTINCT visitor_hash) as visitors
+            FROM page_views WHERE day >= ? AND is_bot = 1
         `).bind(cutoff).first(),
     ]);
 
@@ -284,8 +308,11 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS } = {}) {
        non arriva da un link esterno. */
     return {
         days,
+        includeBots,
         views:    totals?.views    || 0,
         visitors: totals?.visitors || 0,
+        botViews:    bots?.views    || 0,
+        botVisitors: bots?.visitors || 0,
         daily: fillDailyGaps(
             (daily.results || []).map(r => ({ day: r.day, views: r.views, visitors: r.visitors })),
             days
