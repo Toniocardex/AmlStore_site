@@ -68,6 +68,30 @@
     }
 
     /**
+     * Riga statistica per il traffico bot: a differenza delle altre non è un
+     * numero isolato, ma anche lo stato del filtro (escluse/incluse dai dati
+     * sopra) e la quota sul traffico totale — senza il badge di stato, un
+     * utente che apre la vista per la prima volta non ha modo di sapere se il
+     * "Visite bot" che vede è già dentro o fuori dal resto dei numeri.
+     *
+     * Etichetta+badge stanno su una riga propria sopra il valore (non affiancati
+     * come le altre statistiche): con numeri a 4 cifre e percentuale, tutto sulla
+     * stessa riga della label non ci sta nella sidebar da 240px e va a capo in
+     * modo disordinato. Impilando le due righe c'è sempre spazio a sufficienza.
+     */
+    function botStatRow(botViews, includeBots, totalWithBots) {
+        var pct = totalWithBots ? fmtPct(botViews, totalWithBots) : null;
+        var badgeClass = includeBots ? 'adm-badge--active' : 'adm-badge--empty';
+        var badgeText  = includeBots ? 'incluse' : 'escluse';
+
+        return '<div class="adm-stat-row adm-stat-row--bot">'
+             +   '<div class="adm-stat-row--bot__head"><span>Visite bot</span>'
+             +     '<span class="adm-badge ' + badgeClass + '">' + esc(badgeText) + '</span></div>'
+             +   '<strong>' + fmtNum(botViews) + (pct ? ' <span class="adm-stat-row__pct">(' + esc(pct) + ')</span>' : '') + '</strong>'
+             + '</div>';
+    }
+
+    /**
      * Tetto "tondo" per la scala del grafico (10, 25, 50, 100, 250…): un asse
      * che finisce sul valore grezzo del picco produce etichette come 137,
      * illeggibili a colpo d'occhio.
@@ -132,12 +156,11 @@
             return (!best || d.views > best.views) ? d : best;
         }, null);
 
+        // Se sono escluse, i bot stanno fuori da `views`: il totale su cui
+        // calcolare la loro quota è views + botViews. Se sono incluse,
+        // `views` li contiene già.
         var botViews = data.botViews || 0;
-        var botNote = data.includeBots
-            ? 'Bot inclusi nei dati sopra: ' + fmtNum(botViews) + ' visite riconosciute come bot (crawler, motori di ricerca…).'
-            : (botViews
-                ? fmtNum(botViews) + ' visite bot escluse dai dati sopra. Spunta "Includi bot" per vederle.'
-                : 'Nessuna visita bot rilevata nel periodo.');
+        var totalWithBots = data.includeBots ? views : (views + botViews);
 
         var html = '<p class="adm-filter-section__title">Statistiche</p>'
             + statRow('Visite totali',      fmtNum(views))
@@ -147,10 +170,16 @@
             + (peak && peak.views
                 ? statRow('Giorno di picco', fmtDay(peak.day) + ' · ' + fmtNum(peak.views))
                 : '')
+            + botStatRow(botViews, data.includeBots, totalWithBots)
             + '<p class="adm-stat-note">Visitatore unico = combinazione anonima di '
             + 'IP e browser, rinnovata ogni giorno: chi torna in giorni diversi '
             + 'viene contato una volta per giorno.</p>'
-            + '<p class="adm-stat-note">' + esc(botNote) + '</p>';
+            + (botViews
+                ? '<p class="adm-stat-note">Bot = crawler e motori di ricerca riconosciuti '
+                  + '(Googlebot, Bingbot, semrush…). ' + (data.includeBots
+                    ? 'Deseleziona "Includi bot" per tornare a vedere solo traffico umano.'
+                    : 'Spunta "Includi bot" per includerle nei dati sopra.') + '</p>'
+                : '');
 
         el.innerHTML = html;
     }

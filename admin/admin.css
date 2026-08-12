@@ -217,6 +217,30 @@ a:hover { text-decoration: underline; }
 }
 .adm-stat-row strong { color: var(--adm-text); }
 
+/* Riga "Visite bot": distanziata dalle altre e su due righe (etichetta+badge,
+   poi il valore) invece che affiancate come le altre statistiche — con numeri
+   a piu' cifre e percentuale, tutto su una riga sola non ci sta nella sidebar
+   da 240px e andrebbe a capo in modo disordinato. */
+.adm-stat-row--bot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .3rem;
+    margin-top: .35rem;
+    padding-top: .6rem;
+    border-top: 1px dashed var(--adm-border);
+}
+.adm-stat-row--bot__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.adm-stat-row__pct {
+    margin-left: .3rem;
+    color: var(--adm-muted);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+}
+
 /* ─── Form controls ──────────────────────────────────────────────────────── */
 
 .adm-label {
