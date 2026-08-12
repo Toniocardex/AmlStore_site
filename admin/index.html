@@ -250,6 +250,19 @@
             </div>
         </div>
 
+        <!-- Barra azioni bulk (visibile con selezione) -->
+        <div class="adm-bulk-bar" id="adm-cart-bulk-bar" hidden>
+            <span class="adm-bulk-bar__count" id="adm-cart-bulk-count">0 selezionati</span>
+            <div class="adm-bulk-bar__actions">
+                <button type="button" class="adm-btn adm-btn--danger adm-btn--sm" id="btn-cart-bulk-delete" hidden>
+                    Elimina selezionati
+                </button>
+                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btn-cart-bulk-clear">
+                    Deseleziona
+                </button>
+            </div>
+        </div>
+
         <div class="adm-loading" id="adm-cart-loading" aria-live="polite">
             <div class="adm-spinner"></div>
             <span>Caricamento carrelli…</span>
@@ -272,6 +285,10 @@
             <table class="adm-table" id="adm-cart-table">
                 <thead>
                     <tr>
+                        <th class="adm-th--check" scope="col">
+                            <input type="checkbox" id="carts-select-all" class="adm-checkbox"
+                                   aria-label="Seleziona tutti i carrelli in questa pagina">
+                        </th>
                         <th>Ultimo aggiornamento</th>
                         <th>Email</th>
                         <th>Paese</th>
@@ -279,6 +296,7 @@
                         <th class="adm-th--center">Totale</th>
                         <th>Lingua</th>
                         <th class="adm-th--center">Stato</th>
+                        <th class="adm-th--center">Azioni</th>
                     </tr>
                 </thead>
                 <tbody id="adm-cart-tbody"></tbody>

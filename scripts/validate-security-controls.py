@@ -53,6 +53,7 @@ require("admin mutation origin guard missing", "validateAdminMutationRequest(req
 require("admin mutation body-size guard missing", "MAX_ADMIN_JSON_BODY_BYTES" in CATCHALL)
 require("admin delete flag missing", "ADMIN_ALLOW_DELETE_ORDERS" in CATCHALL)
 require("admin delete requires archived order", "not_archived" in ADMIN and "archived_at" in ADMIN)
+require("admin cart delete flag missing", "ADMIN_ALLOW_DELETE_CARTS" in CATCHALL)
 
 require("PayPal capture amount not returned", "amountValue:" in PAYPAL)
 require("PayPal capture currency not returned", "currencyCode:" in PAYPAL)

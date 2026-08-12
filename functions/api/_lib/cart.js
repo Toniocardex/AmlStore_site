@@ -7,6 +7,7 @@
  *   checkCartSyncRateLimit(env, request)   — rate limit per IP su /api/cart/sync
  *   listCarts(db, opts)                    — lista admin paginata e filtrabile
  *   getCartStats(db, opts)                 — KPI aggregati per la vista admin
+ *   deleteCart(db, cartId)                 — hard-delete manuale dalla vista admin
  *   normalizeHoursIdle(value)              — valida la soglia "inattivo da N ore"
  *   runCartRetention(db, env)              — applica i termini di conservazione
  *   maybeRunCartRetention(context)         — la lancia al piu' una volta all'ora
@@ -407,4 +408,20 @@ export async function getCartStats(db, { days = 30, hoursIdle = DEFAULT_HOURS_ID
         topProducts:  (topProducts.results  || []).map(r => ({ sku: r.sku, name: r.name, carts: r.carts })),
         topCountries: (topCountries.results || []).map(r => ({ country: r.country, carts: r.carts })),
     };
+}
+
+/* ─── Eliminazione manuale (vista admin) ─────────────────────────────────────── */
+
+/**
+ * Elimina definitivamente una sessione carrello dal DB.
+ * A differenza degli ordini non esiste uno stato "pagato" da proteggere qui:
+ * l'ordine risultante da un checkout vive nella tabella `orders`, separata,
+ * quindi cancellare la riga di tracking non tocca mai dati di vendita.
+ * Operazione irreversibile.
+ * @returns {{ ok: boolean, reason?: string }}
+ */
+export async function deleteCart(db, cartId) {
+    const result = await db.prepare('DELETE FROM cart_sessions WHERE id = ?').bind(cartId).run();
+    if ((result.meta?.changes ?? 0) === 0) return { ok: false, reason: 'cart_not_found' };
+    return { ok: true };
 }

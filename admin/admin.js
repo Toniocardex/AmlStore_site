@@ -38,6 +38,12 @@
             // Soglia effettivamente applicata, come la rimanda l'API: le etichette
             // di stato devono usare quella, non una copia locale.
             effectiveHoursIdle: 2,
+            capabilities: { deleteCarts: false },
+            selected:     new Set(),
+            // cartId con checkout_order_id valorizzato nell'ultima riga renderizzata:
+            // eliminarli fa sparire dati storici da "Checkout avviati"/"Pagati" in
+            // getCartStats (JOIN su checkout_order_id), quindi il dialog li segnala.
+            linkedIds:    new Set(),
         },
     };
 
@@ -682,10 +688,15 @@
     var _deleteOrderId = null;
     var _deleteMode    = 'single'; // 'single' | 'bulk'
     var _deleteIds     = [];
+    var _deleteEntity  = 'order'; // 'order' | 'cart' — quale API/reload usare alla conferma
     var BULK_DELETE_TOKEN = 'ELIMINA';
 
     function deleteConfirmExpected() {
-        return _deleteMode === 'bulk' ? BULK_DELETE_TOKEN : _deleteOrderId;
+        // I cartId sono UUID opachi: farli ridigitare per intero sarebbe solo
+        // attrito, quindi anche l'eliminazione singola di un carrello usa il
+        // token fisso come il bulk.
+        if (_deleteMode === 'bulk' || _deleteEntity === 'cart') return BULK_DELETE_TOKEN;
+        return _deleteOrderId;
     }
 
     function syncDeleteOkEnabled() {
@@ -697,6 +708,7 @@
 
     function openDeleteConfirm(orderId) {
         _deleteMode    = 'single';
+        _deleteEntity  = 'order';
         _deleteOrderId = orderId;
         _deleteIds     = [];
         $('delete-msg').innerHTML =
@@ -722,6 +734,7 @@
 
     function openBulkDeleteConfirm(ids) {
         _deleteMode    = 'bulk';
+        _deleteEntity  = 'order';
         _deleteOrderId = null;
         _deleteIds     = ids.slice();
         $('delete-msg').innerHTML =
@@ -745,11 +758,69 @@
         setTimeout(function () { $('delete-confirm-input').focus(); }, 50);
     }
 
+    function openCartDeleteConfirm(cartId) {
+        _deleteMode    = 'single';
+        _deleteEntity  = 'cart';
+        _deleteOrderId = cartId;
+        _deleteIds     = [];
+        $('delete-msg').innerHTML =
+            'Stai per <strong>eliminare definitivamente</strong> questo carrello.<br><br>' +
+            'Verranno cancellati lo snapshot e l\'email eventualmente associata. ' +
+            'L\'ordine collegato (se il checkout è stato completato) non viene toccato: ' +
+            'vive in una tabella separata. Operazione <strong>irreversibile</strong>.' +
+            (state.cart.linkedIds.has(cartId)
+                ? '<br><br>⚠️ <strong>Questo carrello ha un checkout collegato</strong>: eliminandolo, il conteggio storico ' +
+                  '"Checkout avviati"/"Pagati" nelle statistiche di questo periodo diminuirà di conseguenza.'
+                : '');
+        var label = $('delete-confirm-label');
+        if (label) label.textContent = 'Digita ELIMINA per confermare:';
+        var input = $('delete-confirm-input');
+        if (input) {
+            input.value = '';
+            input.placeholder = 'ELIMINA';
+        }
+        $('delete-ok').disabled = true;
+        $('delete-ok').textContent = 'Elimina definitivamente';
+        show('adm-delete-backdrop');
+        $('adm-delete-backdrop').removeAttribute('aria-hidden');
+        setTimeout(function () { $('delete-confirm-input').focus(); }, 50);
+    }
+
+    function openCartBulkDeleteConfirm(ids) {
+        _deleteMode    = 'bulk';
+        _deleteEntity  = 'cart';
+        _deleteOrderId = null;
+        _deleteIds     = ids.slice();
+        var linkedCount = ids.filter(function (id) { return state.cart.linkedIds.has(id); }).length;
+        $('delete-msg').innerHTML =
+            'Stai per <strong>eliminare definitivamente</strong> ' +
+            '<strong style="color:#ef4444">' + ids.length + ' carrelli</strong> selezionati.<br><br>' +
+            'Gli ordini collegati (se presenti) non vengono toccati. ' +
+            'Operazione <strong>irreversibile</strong>.' +
+            (linkedCount
+                ? '<br><br>⚠️ <strong>' + linkedCount + ' di questi hanno un checkout collegato</strong>: eliminandoli, il conteggio storico ' +
+                  '"Checkout avviati"/"Pagati" nelle statistiche di questo periodo diminuirà di conseguenza.'
+                : '');
+        var label = $('delete-confirm-label');
+        if (label) label.textContent = 'Digita ELIMINA per confermare:';
+        var input = $('delete-confirm-input');
+        if (input) {
+            input.value = '';
+            input.placeholder = 'ELIMINA';
+        }
+        $('delete-ok').disabled = true;
+        $('delete-ok').textContent = 'Elimina definitivamente';
+        show('adm-delete-backdrop');
+        $('adm-delete-backdrop').removeAttribute('aria-hidden');
+        setTimeout(function () { $('delete-confirm-input').focus(); }, 50);
+    }
+
     function closeDeleteConfirm() {
         hide('adm-delete-backdrop');
         $('adm-delete-backdrop').setAttribute('aria-hidden', 'true');
         _deleteOrderId = null;
         _deleteMode    = 'single';
+        _deleteEntity  = 'order';
         _deleteIds     = [];
     }
 
@@ -815,6 +886,73 @@
             }
             var id = ids[i++];
             apiDeleteOrder(id)
+                .then(function () { ok++; next(); })
+                .catch(function () { skip++; next(); });
+        }
+        next();
+    }
+
+    function cartDeleteReasonMessage(reason, fallback) {
+        return {
+            delete_disabled: 'Eliminazione disattivata da configurazione (ADMIN_ALLOW_DELETE_CARTS).',
+            cart_not_found:  'Carrello non trovato (forse già rimosso dalla conservazione automatica).',
+        }[reason] || fallback;
+    }
+
+    function apiDeleteCart(cartId) {
+        return fetch('/api/admin/carts/' + encodeURIComponent(cartId), {
+            method:      'DELETE',
+            credentials: 'same-origin',
+            headers:     authHeaders(),
+        }).then(function (res) {
+            return res.json().then(function (data) {
+                if (!res.ok) throw Object.assign(new Error(data.error || 'HTTP ' + res.status), {
+                    data: data,
+                    status: res.status,
+                });
+                return data;
+            });
+        });
+    }
+
+    function doCartDelete(cartId) {
+        var btn = $('delete-ok');
+        if (btn) { btn.disabled = true; btn.textContent = 'Eliminazione…'; }
+
+        apiDeleteCart(cartId).then(function () {
+            closeDeleteConfirm();
+            state.cart.selected.delete(cartId);
+            toast('Carrello eliminato definitivamente', 'error');
+            loadCarts();
+        }).catch(function (e) {
+            if (btn) { btn.disabled = false; btn.textContent = 'Elimina definitivamente'; }
+            var reason = e.data && e.data.reason;
+            toast('Errore eliminazione: ' + cartDeleteReasonMessage(reason, e.message), 'error');
+        });
+    }
+
+    function doCartBulkDelete(ids) {
+        var btn = $('delete-ok');
+        if (btn) { btn.disabled = true; btn.textContent = 'Eliminazione…'; }
+
+        var ok = 0;
+        var skip = 0;
+        var i = 0;
+
+        function next() {
+            if (i >= ids.length) {
+                closeDeleteConfirm();
+                clearCartSelection();
+                toast(
+                    'Eliminati ' + ok + '/' + ids.length
+                        + (skip ? ', saltati ' + skip : ''),
+                    ok ? 'error' : 'info'
+                );
+                loadCarts();
+                return;
+            }
+            var id = ids[i++];
+            apiDeleteCart(id)
                 .then(function () { ok++; next(); })
                 .catch(function () { skip++; next(); });
         }
@@ -905,18 +1043,24 @@
         var deleteCancel = $('delete-cancel');
         var deleteBack   = $('adm-delete-backdrop');
 
+        function confirmDelete() {
+            if (_deleteEntity === 'cart') {
+                if (_deleteMode === 'bulk') doCartBulkDelete(_deleteIds.slice());
+                else if (_deleteOrderId) doCartDelete(_deleteOrderId);
+            } else {
+                if (_deleteMode === 'bulk') doBulkDelete(_deleteIds.slice());
+                else if (_deleteOrderId) doDelete(_deleteOrderId);
+            }
+        }
+
         if (deleteInput) {
             deleteInput.addEventListener('input', syncDeleteOkEnabled);
             deleteInput.addEventListener('keydown', function (e) {
                 if (e.key !== 'Enter' || deleteOk.disabled) return;
-                if (_deleteMode === 'bulk') doBulkDelete(_deleteIds.slice());
-                else if (_deleteOrderId) doDelete(_deleteOrderId);
+                confirmDelete();
             });
         }
-        if (deleteOk) deleteOk.addEventListener('click', function () {
-            if (_deleteMode === 'bulk') doBulkDelete(_deleteIds.slice());
-            else if (_deleteOrderId) doDelete(_deleteOrderId);
-        });
+        if (deleteOk) deleteOk.addEventListener('click', confirmDelete);
         if (deleteCancel) deleteCancel.addEventListener('click', closeDeleteConfirm);
         if (deleteBack)   deleteBack.addEventListener('click', function (e) {
             if (e.target === deleteBack) closeDeleteConfirm();
@@ -1119,6 +1263,7 @@
     function loadCarts() {
         if (state.cart.loading) return;
         state.cart.loading = true;
+        clearCartSelection();
 
         show('adm-cart-loading');
         hide('adm-cart-error');
@@ -1130,6 +1275,7 @@
             state.cart.pageSize = data.pageSize || 50;
             state.cart.loading  = false;
             state.cart.effectiveHoursIdle = Number(data.hoursIdle) || state.cart.effectiveHoursIdle;
+            state.cart.capabilities = data.capabilities || { deleteCarts: false };
 
             renderCartStats(data.stats || {});
             renderCartsTable(data.carts || []);
@@ -1168,11 +1314,14 @@
         if (!carts.length) {
             show('adm-cart-empty');
             text('adm-cart-count', '0 carrelli');
+            updateCartBulkBar();
             return;
         }
 
         text('adm-cart-count', state.cart.total + ' carrelli totali');
         show('adm-cart-table-wrap');
+
+        state.cart.linkedIds.clear();
 
         $('adm-cart-tbody').innerHTML = carts.map(function (c) {
             var items = (c.lineItems || []).map(function (i) {
@@ -1182,8 +1331,15 @@
                 ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>'
                 : '<span class="adm-td--muted">Anonimo</span>';
             var st = cartStatusInfo(c);
+            var checked = state.cart.selected.has(c.cartId) ? ' checked' : '';
+            if (c.checkoutOrderId) state.cart.linkedIds.add(c.cartId);
 
-            return '<tr>'
+            return '<tr data-id="' + esc(c.cartId) + '">'
+                + '<td class="adm-td--check" data-label="Seleziona">'
+                    + '<input type="checkbox" class="adm-checkbox adm-cart-row-check" data-id="'
+                    + esc(c.cartId) + '"' + checked
+                    + ' aria-label="Seleziona carrello">'
+                + '</td>'
                 + '<td class="adm-td--nowrap adm-td--muted" data-label="Aggiornato">' + esc(fmtDate(c.updatedAt)) + '</td>'
                 + '<td data-label="Email">' + emailCell + '</td>'
                 + '<td data-label="Paese">' + esc(c.country || '—') + '</td>'
@@ -1191,8 +1347,80 @@
                 + '<td class="adm-td--center adm-td--nowrap" data-label="Totale"><strong>' + esc(fmtMoney(c.totalMinor, c.currency)) + '</strong></td>'
                 + '<td data-label="Lingua">' + esc((c.locale || '').toUpperCase()) + '</td>'
                 + '<td class="adm-td--center" data-label="Stato"><span class="adm-badge adm-badge--' + st[0] + '">' + esc(st[1]) + '</span></td>'
+                + '<td class="adm-td--center adm-td--actions">'
+                    + (state.cart.capabilities.deleteCarts
+                        ? '<button class="adm-btn adm-btn--ghost adm-btn--sm btn-cart-delete" data-id="' + esc(c.cartId) + '" title="Elimina definitivamente">Elimina</button>'
+                        : '')
+                + '</td>'
             + '</tr>';
         }).join('');
+
+        $('adm-cart-tbody').querySelectorAll('.adm-cart-row-check').forEach(function (cb) {
+            cb.addEventListener('change', function () {
+                var id = cb.dataset.id;
+                if (cb.checked) state.cart.selected.add(id);
+                else state.cart.selected.delete(id);
+                syncCartSelectAll();
+                updateCartBulkBar();
+            });
+        });
+        $('adm-cart-tbody').querySelectorAll('.btn-cart-delete').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                openCartDeleteConfirm(btn.dataset.id);
+            });
+        });
+
+        syncCartSelectAll();
+        updateCartBulkBar();
+    }
+
+    /* ─── Selezione multipla carrelli ──────────────────────────────────────── */
+
+    function clearCartSelection() {
+        state.cart.selected.clear();
+        var selectAll = $('carts-select-all');
+        if (selectAll) {
+            selectAll.checked = false;
+            selectAll.indeterminate = false;
+        }
+        updateCartBulkBar();
+    }
+
+    function syncCartSelectAll() {
+        var selectAll = $('carts-select-all');
+        if (!selectAll) return;
+        var boxes = $('adm-cart-tbody')
+            ? Array.prototype.slice.call($('adm-cart-tbody').querySelectorAll('.adm-cart-row-check'))
+            : [];
+        if (!boxes.length) {
+            selectAll.checked = false;
+            selectAll.indeterminate = false;
+            return;
+        }
+        var nChecked = boxes.filter(function (b) { return b.checked; }).length;
+        selectAll.checked = nChecked === boxes.length;
+        selectAll.indeterminate = nChecked > 0 && nChecked < boxes.length;
+    }
+
+    function updateCartBulkBar() {
+        var bar = $('adm-cart-bulk-bar');
+        if (!bar) return;
+        var n = state.cart.selected.size;
+        if (n === 0) {
+            bar.hidden = true;
+            return;
+        }
+        bar.hidden = false;
+        var countEl = $('adm-cart-bulk-count');
+        if (countEl) countEl.textContent = n + (n === 1 ? ' selezionato' : ' selezionati');
+        var btnDel = $('btn-cart-bulk-delete');
+        if (btnDel) btnDel.hidden = !state.cart.capabilities.deleteCarts;
+    }
+
+    function selectedCartIds() {
+        var out = [];
+        state.cart.selected.forEach(function (id) { out.push(id); });
+        return out;
     }
 
     function statRow(label, value) {
@@ -1307,6 +1535,46 @@
             });
             countryInput.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter') applyCartFilters();
+            });
+        }
+
+        var selectAll = $('carts-select-all');
+        if (selectAll) {
+            selectAll.addEventListener('change', function () {
+                var boxes = $('adm-cart-tbody')
+                    ? Array.prototype.slice.call($('adm-cart-tbody').querySelectorAll('.adm-cart-row-check'))
+                    : [];
+                boxes.forEach(function (cb) {
+                    cb.checked = selectAll.checked;
+                    if (selectAll.checked) state.cart.selected.add(cb.dataset.id);
+                    else state.cart.selected.delete(cb.dataset.id);
+                });
+                selectAll.indeterminate = false;
+                updateCartBulkBar();
+            });
+        }
+
+        var btnCartBulkDelete = $('btn-cart-bulk-delete');
+        if (btnCartBulkDelete) {
+            btnCartBulkDelete.addEventListener('click', function () {
+                var ids = selectedCartIds();
+                if (!ids.length) return;
+                if (!state.cart.capabilities.deleteCarts) {
+                    toast('Eliminazione disattivata da configurazione.', 'error');
+                    return;
+                }
+                openCartBulkDeleteConfirm(ids);
+            });
+        }
+
+        var btnCartBulkClear = $('btn-cart-bulk-clear');
+        if (btnCartBulkClear) {
+            btnCartBulkClear.addEventListener('click', function () {
+                clearCartSelection();
+                var boxes = $('adm-cart-tbody')
+                    ? Array.prototype.slice.call($('adm-cart-tbody').querySelectorAll('.adm-cart-row-check'))
+                    : [];
+                boxes.forEach(function (cb) { cb.checked = false; });
             });
         }
     }

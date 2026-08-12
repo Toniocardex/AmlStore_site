@@ -47,7 +47,7 @@ import { safeParseJSON }                                 from './_lib/utils.js';
 import { checkCheckoutEmailRateLimit }                   from './_lib/checkout-rate-limit.js';
 import { upsertCartSession, markCartCheckoutStarted,
          checkCartSyncRateLimit, listCarts, getCartStats,
-         normalizeHoursIdle, maybeRunCartRetention }     from './_lib/cart.js';
+         normalizeHoursIdle, maybeRunCartRetention, deleteCart } from './_lib/cart.js';
 import { getAnalyticsSummary }                           from './_lib/analytics.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
@@ -245,6 +245,10 @@ function validateAdminMutationRequest(request, env, { requireJson = true } = {})
 
 function adminDeleteEnabled(env) {
     return String(env.ADMIN_ALLOW_DELETE_ORDERS || '') === '1';
+}
+
+function adminDeleteCartsEnabled(env) {
+    return String(env.ADMIN_ALLOW_DELETE_CARTS || '') === '1';
 }
 
 function normalizeAdminNotes(v) {
@@ -1104,12 +1108,30 @@ async function handleAdminRoute(path, request, env, context) {
         ]);
         result.stats = stats;
         result.hoursIdle = hoursIdle;
+        result.capabilities = { deleteCarts: adminDeleteCartsEnabled(env) };
 
         // Anche in periodi di poco traffico la pulizia trova un'occasione per girare.
         maybeRunCartRetention(context);
 
         return new Response(JSON.stringify(result), {
             headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    // ── DELETE /api/admin/carts/:id ─────────────────────────────────────────────
+    const deleteCartMatch = sub.match(/^\/carts\/([^/]+)$/);
+    if (deleteCartMatch && request.method === 'DELETE') {
+        const invalidRequest = validateAdminMutationRequest(request, env, { requireJson: false });
+        if (invalidRequest) return invalidRequest;
+        if (!adminDeleteCartsEnabled(env)) {
+            return adminJson({ ok: false, error: 'Delete disabled', reason: 'delete_disabled' }, 403);
+        }
+
+        const cartId = deleteCartMatch[1];
+        const result = await deleteCart(env.DB, cartId);
+        const status = result.ok ? 200 : (result.reason === 'cart_not_found' ? 404 : 409);
+        return new Response(JSON.stringify(result), {
+            status, headers: { 'Content-Type': 'application/json' },
         });
     }
 
