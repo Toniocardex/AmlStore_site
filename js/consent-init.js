@@ -39,6 +39,7 @@
     }
 
     var GTAG_ID = 'G-BBEBFJ5H18';
+    var ADS_ID  = 'AW-16453121097';
     var tagScript = w.document.createElement('script');
     tagScript.async = true;
     tagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GTAG_ID;
@@ -46,4 +47,5 @@
 
     w.gtag('js', new Date());
     w.gtag('config', GTAG_ID);
+    w.gtag('config', ADS_ID);
 })(typeof window !== 'undefined' ? window : globalThis);
