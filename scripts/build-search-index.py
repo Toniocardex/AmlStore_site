@@ -23,6 +23,8 @@ SKIP_UTILITY = {
     "index", "cart", "checkout", "checkout-success", "account",
     "privacy-policy", "cookie-policy", "terms-and-conditions",
     "returns-and-refunds", "microsoft-365-solutions",
+    "404", "chi-siamo", "about-us", "qui-sommes-nous", "ueber-uns", "quienes-somos",
+    "consulenza", "consultation", "beratung", "consultoria", "contacts",
 }
 # Pagine categoria/listino (elencano prodotti, non sono un prodotto)
 SKIP_CATEGORY = {

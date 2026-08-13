@@ -229,6 +229,8 @@ function fmt(minor, currency) {
         return new Intl.NumberFormat('it-IT', {
             style:    'currency',
             currency: (currency || 'EUR').toUpperCase(),
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
         }).format(minor / 100);
     } catch (_) {
         return `€ ${(minor / 100).toFixed(2)}`;

@@ -1,0 +1,25 @@
+{
+  "currency": "EUR",
+  "products": {
+    "EP2-06798": {
+      "mode": "manual",
+      "publicPriceMinor": 13900
+    },
+    "EP2-06606": {
+      "mode": "manual",
+      "publicPriceMinor": 20900
+    },
+    "FQC-10528": {
+      "mode": "manual",
+      "publicPriceMinor": 9900
+    },
+    "79G-05412": {
+      "mode": "manual",
+      "publicPriceMinor": 13400
+    },
+    "79G-05018": {
+      "mode": "manual",
+      "publicPriceMinor": 10200
+    }
+  }
+}

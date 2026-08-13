@@ -72,6 +72,8 @@ function formatMoney(minor, currency) {
         return new Intl.NumberFormat('it-IT', {
             style: 'currency',
             currency: (currency || 'EUR').toUpperCase(),
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
         }).format(Number(minor || 0) / 100);
     } catch (_) {
         return 'EUR ' + (Number(minor || 0) / 100).toFixed(2);

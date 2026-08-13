@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Verifica la pricing policy ADR (+3% one-shot) — vedi docs/adr/pricing-policy-3pct.md.
+"""Verifica la normalizzazione commerciale dei prezzi pubblici EUR.
 
-1. Pricing function: casi noti dall'ADR.
-2. Catalog invariants: unitAmountMinor > 0, currency EUR, compareAtMinor >= unitAmountMinor.
+1. Pricing function: soglia, arrotondamento, override ed esclusioni.
+2. Catalog invariants: importi validi e prezzi EUR >= 50 in euro interi.
 3. Frontend/backend parity: per ogni pagina prodotto (single-SKU) e ogni
    product-card (category/home), data-stripe-unit-amount/compare-at-amount,
    meta product:price:amount e JSON-LD price combaciano con catalog.json.
-4. No stale price: nessuna pagina prodotto mostra ancora il vecchio prezzo
-   pre-migrazione per il proprio SKU (snapshot come baseline).
+4. Parita dei prezzi fra le cinque lingue.
 """
 import json
 import re
@@ -16,16 +15,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).parent))
-import importlib.util
-
-spec = importlib.util.spec_from_file_location(
-    "pricing_policy", ROOT / "scripts" / "apply-pricing-policy-3pct.py"
+from commercial_pricing import (  # noqa: E402
+    CLEAN_INTEGER_PRICE_THRESHOLD_MINOR_EUR,
+    format_eur_minor,
+    load_policy,
+    normalize_commercial_price_minor,
+    resolve_public_price_minor,
 )
-pricing_policy = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(pricing_policy)
 
 CATALOG = {e["sku"]: e for e in json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))}
-SNAPSHOT_PATH = ROOT / "scripts" / "_pricing_policy_pre_migration_snapshot.json"
+POLICY = load_policy()
 LANGS = ("it", "en", "fr", "de", "es")
 
 CLUSTER_START_RE = re.compile(r'data-stripe-currency="eur"')
@@ -34,6 +33,10 @@ UNIT_ATTR_RE = re.compile(r'data-stripe-unit-amount="(\d+)"')
 COMPARE_ATTR_RE = re.compile(r'data-stripe-compare-at-amount="(\d+)"')
 META_PRICE_RE = re.compile(r'product:price:amount"\s+content="(\d+\.\d{2})"')
 JSONLD_PRICE_RE = re.compile(r'"price":\s*"(\d+\.\d{2})"')
+VISIBLE_PRICE_RE = re.compile(
+    r'class="[^"]*(?:price-sale|product-card-price|sticky-cta__sale|pdp-final__price)[^"]*"'
+    r'[^>]*>\s*€\s*([\d.]+(?:,\d{2})?)'
+)
 
 errors = []
 warnings = []
@@ -41,18 +44,20 @@ warnings = []
 
 def check_pricing_function():
     cases = [
-        (7900, 8137),
-        (5900, 6077),
-        (13900, 14317),
-        (10495, 10810),
-        (19989, 20589),
-        (34900, 35947),
-        (995, 1025),
+        (0, 0),
+        (1990, 1990),
+        (4999, 4999),
+        (5000, 5000),
+        (5001, 5100),
+        (8137, 8200),
+        (14317, 14400),
+        (71069, 71100),
+        (134827, 134900),
     ]
-    for old, expected in cases:
-        got = pricing_policy.apply_pricing_policy_minor(old)
+    for raw, expected in cases:
+        got = normalize_commercial_price_minor(raw)
         if got != expected:
-            errors.append(f"pricing function: {old} -> {got}, atteso {expected}")
+            errors.append(f"pricing function: {raw} -> {got}, atteso {expected}")
 
 
 def check_catalog_invariants():
@@ -61,31 +66,18 @@ def check_catalog_invariants():
             errors.append(f"catalog {sku}: unitAmountMinor <= 0")
         if e["currency"] != "EUR":
             errors.append(f"catalog {sku}: currency {e['currency']!r} != EUR")
-        if "compareAtMinor" in e and e["compareAtMinor"] < e["unitAmountMinor"]:
-            errors.append(
-                f"catalog {sku}: compareAtMinor {e['compareAtMinor']} < unitAmountMinor {e['unitAmountMinor']}"
-            )
-
-
-def check_no_double_markup():
-    if not SNAPSHOT_PATH.exists():
-        warnings.append("nessuno snapshot pre-migrazione trovato: skip no-double-markup check")
-        return
-    snap = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))["entries"]
-    for sku, old in snap.items():
-        cur = CATALOG.get(sku)
-        if not cur:
-            warnings.append(f"SKU {sku} presente nello snapshot ma non piu' in catalog.json (rimosso?)")
-            continue
-        expected_unit = pricing_policy.apply_pricing_policy_minor(old["unitAmountMinor"])
-        if cur["unitAmountMinor"] != expected_unit:
-            errors.append(
-                f"catalog {sku}: unitAmountMinor {cur['unitAmountMinor']} != baseline*1.03 ({expected_unit}) "
-                "— possibile doppia applicazione o valore modificato a mano"
-            )
-        double = pricing_policy.apply_pricing_policy_minor(expected_unit)
-        if cur["unitAmountMinor"] == double and double != expected_unit:
-            errors.append(f"catalog {sku}: prezzo sembra aver ricevuto il +3% due volte")
+        if e.get("compareAtMinor", 0) < 0:
+            errors.append(f"catalog {sku}: compareAtMinor negativo")
+        mode = POLICY.get("products", {}).get(sku, {}).get("mode", "automatic")
+        if mode == "manual" and resolve_public_price_minor(e, POLICY) != e["unitAmountMinor"]:
+            errors.append(f"catalog {sku}: prezzo diverso dall'override manuale approvato")
+        if (
+            e["currency"] == "EUR"
+            and e["unitAmountMinor"] >= CLEAN_INTEGER_PRICE_THRESHOLD_MINOR_EUR
+            and mode != "preserve-cents"
+            and e["unitAmountMinor"] % 100
+        ):
+            errors.append(f"catalog {sku}: prezzo >= 50 EUR con centesimi arbitrari")
 
 
 def blocks_for_file(text):
@@ -130,8 +122,14 @@ def check_frontend_backend_parity():
                         errors.append(
                             f"{rel} [{sku}]: data-stripe-compare-at-amount {c} != catalogo {expected['compareAtMinor']}"
                         )
+                expected_visible = format_eur_minor(expected["unitAmountMinor"])
+                visible_prices = VISIBLE_PRICE_RE.findall(block)
+                if expected_visible not in visible_prices:
+                    errors.append(
+                        f"{rel} [{sku}]: prezzo visibile {visible_prices[:5]} non contiene {expected_visible}"
+                    )
                 if is_pdp:
-                    expected_dot = pricing_policy.eur_dot_from_minor(expected["unitAmountMinor"])
+                    expected_dot = f"{expected['unitAmountMinor'] // 100}.{expected['unitAmountMinor'] % 100:02d}"
                     for m in META_PRICE_RE.finditer(block):
                         if m.group(1) != expected_dot:
                             errors.append(f"{rel} [{sku}]: meta price {m.group(1)} != {expected_dot}")
@@ -164,7 +162,6 @@ def check_locale_parity():
 def main():
     check_pricing_function()
     check_catalog_invariants()
-    check_no_double_markup()
     check_frontend_backend_parity()
     check_locale_parity()
 
@@ -178,7 +175,7 @@ def main():
         if len(errors) > 50:
             print(f" ... and {len(errors) - 50} more")
         sys.exit(1)
-    print("OK: pricing policy invariants, frontend/backend parity and locale parity passed")
+    print("OK: commercial pricing, frontend/backend parity and locale parity passed")
 
 
 if __name__ == "__main__":

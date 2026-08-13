@@ -1,5 +1,9 @@
 # ADR-002 — Pricing Policy: applicazione markup strutturale del 3%
 
+> Nota: la trasformazione del risultato grezzo in prezzo pubblico è ora
+> disciplinata da ADR-003. La maggiorazione del 3% resta un input economico,
+> ma non determina più i centesimi esposti al cliente.
+
 Status: Accepted
 Project: AML STORE
 Repository: `Toniocardex/AmlStore_site`

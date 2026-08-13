@@ -145,7 +145,10 @@
     function formatMoney(minor, currency) {
         var cur = String(currency || 'EUR').toUpperCase();
         try {
-            return new Intl.NumberFormat(getLang(), { style: 'currency', currency: cur }).format(minor / 100);
+            return new Intl.NumberFormat(getLang(), {
+                style: 'currency', currency: cur,
+                minimumFractionDigits: 2, maximumFractionDigits: 2
+            }).format(minor / 100);
         } catch (_) {
             return '€ ' + (minor / 100).toFixed(2);
         }

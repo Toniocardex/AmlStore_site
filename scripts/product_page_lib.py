@@ -662,7 +662,9 @@ def product_code_html(labels, sku):
 
 
 def eur_fmt(minor):
-    return f"{minor / 100:.2f}".replace(".", ",")
+    euros, cents = divmod(minor, 100)
+    integer = f"{euros:,}".replace(",", ".")
+    return f"{integer},{cents:02d}"
 
 
 def pct(sale, compare):
@@ -1337,7 +1339,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         <div class="product-sticky-cta__inner">
             <span class="product-sticky-cta__title">{short}</span>
             <div class="product-sticky-cta__prices" aria-hidden="true">
-                <span class="product-sticky-cta__msrp">€ {eur_fmt(compare)}</span>
+                {f'<span class="product-sticky-cta__msrp">€ {eur_fmt(compare)}</span>' if disc > 0 else ''}
                 <span class="product-sticky-cta__sale">€ {eur_fmt(sale)}</span>
             </div>
             <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
@@ -1565,7 +1567,7 @@ def build_compact_product_page(lang, prod):
         <div class="product-sticky-cta__inner">
             <span class="product-sticky-cta__title">{short}</span>
             <div class="product-sticky-cta__prices" aria-hidden="true">
-                <span class="product-sticky-cta__msrp">€ {eur_fmt(compare)}</span>
+                {f'<span class="product-sticky-cta__msrp">€ {eur_fmt(compare)}</span>' if disc > 0 else ''}
                 <span class="product-sticky-cta__sale">€ {eur_fmt(sale)}</span>
             </div>
             <button type="button" class="btn-primary" data-cart-add data-cart-source="sticky-cta">{labels['add']}</button>

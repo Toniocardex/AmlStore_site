@@ -11,13 +11,16 @@ prezzi pre-migrazione — ma il CSV stesso resta una fonte pre-3% "grezza",
 quindi il risultato NON coincide necessariamente col catalogo attuale se
 nel frattempo i prezzi correnti sono stati aggiustati manualmente.
 
-Public selling price = source/base selling price + 3%.
-Do not psychological-round the result.
+Public selling price = commercial normalization(source/base selling price + 3%).
+Per EUR, i prezzi da 50 euro in su vengono arrotondati per eccesso all'euro
+intero; eccezioni e override sono centralizzati in commercial-pricing-policy.json.
 """
 import csv
 import json
 import re
 from pathlib import Path
+
+from commercial_pricing import load_policy, normalize_commercial_price_minor
 
 ROOT = Path(__file__).resolve().parents[1]
 CSV_PATH = Path(r"c:\Users\Anton\Downloads\export-products-complete-25-05-2026_02-37.csv")
@@ -88,6 +91,7 @@ def disambiguate_code(code, name, counts):
 def load_entries():
     counts = {}
     entries = []
+    policy = load_policy()
     with CSV_PATH.open(encoding="utf-8-sig", newline="") as f:
         for row in csv.DictReader(f):
             if row.get("state") != "published":
@@ -100,7 +104,14 @@ def load_entries():
             compare = eur_to_minor(row.get("price_1"))
             if base_sale <= 0:
                 continue
-            sale = apply_pricing_policy_minor(base_sale)
+            raw_sale = apply_pricing_policy_minor(base_sale)
+            product_policy = policy.get("products", {}).get(sku, {})
+            sale = normalize_commercial_price_minor(
+                raw_sale,
+                "EUR",
+                product_policy.get("mode", "automatic"),
+                product_policy.get("publicPriceMinor"),
+            )
             if compare < sale:
                 compare = sale
             entries.append(
