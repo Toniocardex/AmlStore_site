@@ -893,6 +893,17 @@ body { background: var(--page-bg); }
     color: var(--pdp-muted);
 }
 
+.pdp-overview__copy {
+    display: grid;
+    gap: 14px;
+    max-width: 82ch;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--pdp-muted);
+}
+
+.pdp-overview__copy p { margin: 0; }
+
 .pdp-divider {
     max-width: var(--pdp-maxw);
     margin: 0 auto;

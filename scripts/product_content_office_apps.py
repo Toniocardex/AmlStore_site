@@ -200,6 +200,49 @@ PRODUCTS = {
     ),
 }
 
+PRODUCTS["word-2024"]["overview"] = {
+    "it": {
+        "eyebrow": "Descrizione",
+        "title": "Crea documenti chiari e professionali con Word 2024",
+        "paragraphs": [
+            "Microsoft Word 2024 è l'applicazione desktop dedicata alla creazione, modifica e formattazione di documenti. Puoi usarla per lettere, relazioni, curriculum, materiale didattico e documenti aziendali, organizzando testo, immagini, tabelle e impaginazione in un unico ambiente di lavoro.",
+            "Questa edizione viene fornita come licenza perpetua standalone: acquisti Word 2024 senza abbonamento e senza le altre applicazioni della suite Office. Dopo il pagamento ricevi via email il product key e le istruzioni per l'attivazione tramite i canali ufficiali Microsoft.",
+        ],
+    },
+    "en": {
+        "eyebrow": "Description",
+        "title": "Create clear, professional documents with Word 2024",
+        "paragraphs": [
+            "Microsoft Word 2024 is the desktop application for creating, editing and formatting documents. Use it for letters, reports, CVs, learning materials and business documents, bringing text, images, tables and page layout together in one workspace.",
+            "This edition is supplied as a standalone perpetual licence: you purchase Word 2024 without a subscription and without the other Office suite applications. After payment, you receive the product key and activation instructions by email for use through official Microsoft channels.",
+        ],
+    },
+    "fr": {
+        "eyebrow": "Description",
+        "title": "Créez des documents clairs et professionnels avec Word 2024",
+        "paragraphs": [
+            "Microsoft Word 2024 est l'application de bureau conçue pour créer, modifier et mettre en forme des documents. Utilisez-la pour vos lettres, rapports, CV, supports pédagogiques et documents professionnels, avec texte, images, tableaux et mise en page dans un même espace de travail.",
+            "Cette édition est fournie sous forme de licence perpétuelle autonome : vous achetez Word 2024 sans abonnement et sans les autres applications de la suite Office. Après le paiement, vous recevez par e-mail la clé produit et les instructions d'activation via les canaux officiels Microsoft.",
+        ],
+    },
+    "de": {
+        "eyebrow": "Beschreibung",
+        "title": "Klare und professionelle Dokumente mit Word 2024 erstellen",
+        "paragraphs": [
+            "Microsoft Word 2024 ist die Desktop-Anwendung zum Erstellen, Bearbeiten und Formatieren von Dokumenten. Sie eignet sich für Briefe, Berichte, Lebensläufe, Lernmaterialien und Geschäftsdokumente und verbindet Text, Bilder, Tabellen und Seitenlayout in einer Arbeitsumgebung.",
+            "Diese Edition wird als eigenständige Dauerlizenz angeboten: Sie erwerben Word 2024 ohne Abonnement und ohne die weiteren Anwendungen der Office-Suite. Nach der Zahlung erhalten Sie den Product Key und die Aktivierungsanleitung per E-Mail für die offiziellen Microsoft-Kanäle.",
+        ],
+    },
+    "es": {
+        "eyebrow": "Descripción",
+        "title": "Crea documentos claros y profesionales con Word 2024",
+        "paragraphs": [
+            "Microsoft Word 2024 es la aplicación de escritorio para crear, editar y dar formato a documentos. Puedes utilizarla para cartas, informes, currículums, material educativo y documentos empresariales, combinando texto, imágenes, tablas y diseño de página en un único entorno de trabajo.",
+            "Esta edición se suministra como licencia perpetua independiente: compras Word 2024 sin suscripción y sin las demás aplicaciones de la suite Office. Después del pago recibirás por email la clave de producto y las instrucciones de activación mediante los canales oficiales de Microsoft.",
+        ],
+    },
+}
+
 PRODUCTS["project-standard-2024"] = _project_or_visio(
     "project-standard-2024",
     "Project",

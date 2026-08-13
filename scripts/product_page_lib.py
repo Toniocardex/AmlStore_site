@@ -1171,6 +1171,30 @@ def _render_specs_v3(ui, content, lang):
     return _render_faq_columns(cells)
 
 
+def _render_overview(content, lang):
+    """Optional long-form product description shown before feature cards."""
+    localized = (content.get("overview") or {}).get(lang)
+    if not localized:
+        return ""
+    eyebrow = html_module.escape(localized["eyebrow"])
+    title = html_module.escape(localized["title"])
+    paragraphs = "\n".join(
+        f"                <p>{html_module.escape(paragraph)}</p>"
+        for paragraph in localized.get("paragraphs", [])
+    )
+    return f"""        <section class="pdp-sec pdp-overview" aria-labelledby="pdp-overview-title">
+            <p class="pdp-sec__eyebrow">{eyebrow}</p>
+            <h2 id="pdp-overview-title" class="pdp-sec__title">{title}</h2>
+            <div class="pdp-overview__copy">
+{paragraphs}
+            </div>
+        </section>
+
+        <hr class="pdp-divider">
+
+"""
+
+
 def build_rich_product_page(lang, prod, content, ui_map=None):
     if ui_map is None:
         from product_content_office import UI as ui_map
@@ -1283,6 +1307,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     steps_title = (content.get('steps_title') or {}).get(lang) or ui['how_title']
     specs_note = (content.get('specs_note') or {}).get(lang) or ui['specs_note']
     bonus_html = COPILOT_BONUS_HTML_IT if (content.get("copilot_bonus") and lang == "it") else ""
+    overview_block = _render_overview(content, lang)
 
     # Sezioni condizionali: compaiono solo se il prodotto fornisce i dati.
     apps_block = ""
@@ -1415,7 +1440,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <main id="main" class="product-page" data-cart-added-msg="{ui['cart_added']}">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 
-        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+{overview_block}        <section class="pdp-sec" aria-labelledby="pdp-features-title">
             <p class="pdp-sec__eyebrow">{ui['features_eyebrow']}</p>
             <h2 id="pdp-features-title" class="pdp-sec__title">{content['features_title'][lang]}</h2>
             <ul class="pdp-cards">
