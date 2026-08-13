@@ -114,6 +114,15 @@ body.pf-page .pdp-hero__split {
     grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
 }
 
+/* Sopra vince sempre per specificità (2 classi) sulla regola mobile del
+   template condiviso (1 classe): senza questo reset qui, l'immagine e il
+   testo restano affiancati anche sotto 560px invece di impilarsi. */
+@media (max-width: 560px) {
+    body.pf-page .pdp-hero__split {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Meno vuoto tra il pannello acquisto e la fascia di fiducia sotto. */
 body.pf-page .pdp-hero__inner { padding-bottom: 36px; }
 
