@@ -1023,6 +1023,32 @@
     gap: 0.65rem;
 }
 
+/* Step 1 (categoria): chip affiancate invece della colonna verticale, cosi'
+   le due domande insieme non allungano troppo la sezione. */
+.home-guide__options--inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.home-guide__options--inline .home-guide__option {
+    width: auto;
+    padding: 0.6rem 0.9rem;
+    border-radius: 999px;
+}
+
+/* Separatore tra le due domande: il gruppo attivo e' l'unico non [hidden],
+   quindi la regola colpisce sempre e solo quello visibile. */
+.home-guide__step2 {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--aml-slate-700);
+}
+
+.home-guide__step2[hidden] {
+    display: none;
+}
+
 .home-guide__option {
     display: flex;
     align-items: center;
