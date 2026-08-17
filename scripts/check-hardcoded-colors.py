@@ -33,7 +33,12 @@ TARGET_FILES = [
 COLOR_RE = re.compile(r"#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)")
 VAR_CALL_RE = re.compile(r"var\((?:[^()]|\([^()]*\))*\)")
 CUSTOM_PROP_RE = re.compile(r"^--[\w-]+\s*:\s*(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))\s*;?$")
-SHADOW_LINE_RE = re.compile(r"(?:box-|text-|-webkit-box-)?shadow\s*:", re.IGNORECASE)
+# Le ombre sono ammesse col nero/rgba letterale: non sono colori di tema, sono
+# profondita'. `filter: drop-shadow(...)` e' la stessa cosa applicata a un PNG
+# ritagliato (l'immagine prodotto nell'hero), quindi rientra nella stessa regola.
+SHADOW_LINE_RE = re.compile(
+    r"(?:box-|text-|-webkit-box-)?shadow\s*:|filter\s*:[^;]*drop-shadow\(", re.IGNORECASE
+)
 
 # Ridefinizione di un token GLOBALE con un colore letterale, fuori da page.css.
 # Sintatticamente e' una dichiarazione di custom property, quindi la regola

@@ -39,10 +39,10 @@
 
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <link rel="stylesheet" href="../fonts/source-serif.css?v=332697df42">
-    <link rel="stylesheet" href="../css/page.css?v=7c3dd50743">
+    <link rel="stylesheet" href="../css/page.css?v=335e9a5317">
     <link rel="stylesheet" href="../css/header.css?v=c293162178">
     <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
-    <link rel="stylesheet" href="../css/home.css?v=64cb2f8708">
+    <link rel="stylesheet" href="../css/home.css?v=2fd5663e46">
 <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it","legalName":"Licensoft di Cardelli Antonino","vatID":"IT11461870963","address":{"@type":"PostalAddress","streetAddress":"Via Trento 5/A","postalCode":"20015","addressLocality":"Parabiago","addressRegion":"MI","addressCountry":"IT"},"telephone":"+39 392 558 0413"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/en/#webpage","url":"https://aml-store.com/en/","name":"Genuine software for individuals and businesses | Aml Store","description":"Genuine software licences for individuals, professionals and businesses, with digital delivery, invoicing and dedicated support.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"en"},{"@type":"FAQPage","inLanguage":"en","url":"https://aml-store.com/en/","mainEntity":[{"@type":"Question","name":"What exactly do I receive after purchase?","acceptedAnswer":{"@type":"Answer","text":"You receive a digital delivery email with what you need to use the licence (typically a product code and/or practical instructions, plus useful purchase references, as shown in the message we send). Delivery is digital only: keep the email and check spam/junk if nothing appears in your inbox."}},{"@type":"Question","name":"How long until I receive the email with the licence?","acceptedAnswer":{"@type":"Answer","text":"Usually the email arrives shortly after payment is confirmed; in rare cases payment checks may add a few more minutes. If you still haven't received anything within 30 minutes, check spam/junk and email Info@amlstore.it with the product purchased and the order email address so we can verify delivery."}},{"@type":"Question","name":"I've never bought a digital licence: how does it work from start to finish?","acceptedAnswer":{"@type":"Answer","text":"Choose your product, complete checkout and payment using the options available at checkout — card, PayPal and digital wallets (Apple Pay, Google Pay, where enabled). Processing is handled securely with Stripe. Once payment is confirmed you receive digital delivery by email; to use the licence follow both the email and the product page on our site, where you'll find references that match that product."}},{"@type":"Question","name":"The price is lower than elsewhere: is the licence genuine? Why does it cost less?","acceptedAnswer":{"@type":"Answer","text":"We sell digital licences described on our product pages, with clear prices and terms you can read in Terms and Conditions and Privacy before purchase. If you want an external reference, you can read public reviews on Trustpilot (https://it.trustpilot.com/review/aml-store.com). For operational questions, email Info@amlstore.it."}},{"@type":"Question","name":"Where do I enter the code and how do I install the software?","acceptedAnswer":{"@type":"Answer","text":"Activation and installation take place on the vendor's official websites and portals, according to that product's rules. After purchase use the instructions in your email and, for step-by-step detail, the product page on our site. If something doesn't work, email Info@amlstore.it with the product and order email."}},{"@type":"Question","name":"How do I contact you about order, payment or activation issues?","acceptedAnswer":{"@type":"Answer","text":"Email Info@amlstore.it: it's the main channel shown in the site footer too. Include product, order email address and a short description; for privacy, terms and refunds use the footer links (Privacy, Terms and Conditions, Returns and refunds)."}}]}]}
@@ -313,45 +313,21 @@
             </ecommerce-header>
 
     <main id="main" class="home-page">
-        <section class="home-hero home-hero--corporate" aria-labelledby="home-hero-title">
+        <section class="home-hero home-hero--consumer" aria-labelledby="home-hero-title">
+            <picture class="home-hero__bg">
+                <source type="image/avif" srcset="../asset/media/home-hero-bg-800.avif?v=35455260de 800w, ../asset/media/home-hero-bg-1200.avif?v=e7286e5872 1200w, ../asset/media/home-hero-bg-1600.avif?v=b89d27eb7c 1600w" sizes="100vw">
+                <source type="image/webp" srcset="../asset/media/home-hero-bg-800.webp?v=933b677ec4 800w, ../asset/media/home-hero-bg-1200.webp?v=7c2b1c8071 1200w, ../asset/media/home-hero-bg-1600.webp?v=6ed4c20849 1600w" sizes="100vw">
+                <img src="../asset/media/home-hero-bg-1600.webp?v=6ed4c20849" width="1600" height="678" alt="" fetchpriority="high" decoding="async">
+            </picture>
             <div class="home-hero-inner">
                 <div class="home-hero-content">
-                    <h1 id="home-hero-title" class="home-hero-title">Licensing for businesses<br>and professionals.</h1>
-                    <p class="home-hero-subtitle">Advisory, purchase and activation with Italian invoicing and dedicated support — without unnecessary complexity.</p>
+                    <h1 id="home-hero-title" class="home-hero-title">Your software<br><span class="home-hero__accent">ready in 2–15 minutes.</span></h1>
+                    <p class="home-hero-subtitle">100% genuine digital licences for your home, your studies and your family. Instant activation, no hidden auto-renewal.</p>
                     <div class="home-hero-actions">
-                        <a class="home-btn home-btn-primary" href="consultation">Request a consultation</a>
-                        <a class="home-btn home-btn-ghost" href="#soluzioni">Explore solutions</a>
+                        <a class="home-btn home-btn-primary" href="microsoft-365-personal">Discover Microsoft 365 Personal</a>
                     </div>
                 </div>
-                <div class="home-hero-products" role="group" aria-label="Business product examples">
-                    <a class="home-hero-product home-hero-product--back" href="windows-server-2025">
-                        <img src="../asset/media/products/windows-server-2025.webp?v=7640a99259" width="400" height="400" alt="Windows Server 2025 Standard" fetchpriority="low">
-                    </a>
-                    <a class="home-hero-product home-hero-product--mid" href="office-2024-home-business">
-                        <img src="../asset/media/products/office-2024-home-business.webp?v=5e6a123f8c" width="400" height="400" alt="Office 2024 Home & Business" fetchpriority="low">
-                    </a>
-                    <a class="home-hero-product home-hero-product--front" href="microsoft-365-business-standard">
-                        <img src="../asset/media/products/microsoft-365-business-standard-240.webp?v=7f9294b60f" srcset="../asset/media/products/microsoft-365-business-standard-240.webp 240w, ../asset/media/products/microsoft-365-business-standard-320.webp 320w, ../asset/media/products/microsoft-365-business-standard.webp 400w" sizes="(max-width: 899px) 140px, 168px" width="400" height="400" alt="Microsoft 365 Business Standard" fetchpriority="high">
-                    </a>
-                </div>
             </div>
-        </section>
-<section id="come-funziona" class="home-steps" aria-labelledby="steps-title">
-            <h2 id="steps-title" class="home-section-title">How it works</h2>
-            <ol class="home-steps-list">
-                <li class="home-step">
-                    <h3>Choose a product</h3>
-                    <p>Choose the right solution from the categories (Microsoft 365, Windows, Office, security, servers, Project and Visio) and open the product page for price, term and activation guidance.</p>
-                </li>
-                <li class="home-step">
-                    <h3>Complete your purchase</h3>
-                    <p>Open checkout when available, choose your payment method (card, PayPal, Apple Pay, Google Pay) and confirm your order.</p>
-                </li>
-                <li class="home-step">
-                    <h3>Receive digital delivery</h3>
-                    <p>Complete activation on the vendor's official channel using the code and instructions in your delivery email.</p>
-                </li>
-            </ol>
         </section>
 
         <section id="soluzioni" class="home-categories" aria-labelledby="home-categories-title">
@@ -418,27 +394,6 @@
                     </a>
                 </li>
             </ul>
-        </section>
-
-        <section class="home-business" aria-labelledby="home-business-title">
-            <div class="home-business-card">
-                <div>
-                    <p class="home-business-eyebrow">For businesses and professionals</p>
-                    <h2 id="home-business-title">Software solutions for business continuity</h2>
-                    <p>From a single workstation to server environments, we help professionals and businesses identify the editions, terms and licensing options suited to their needs.</p>
-                </div>
-                <div>
-                    <ul class="home-business-points">
-                        <li>Pre-sales advice on editions and licensing options</li>
-                        <li>Quotes for multiple workstations</li>
-                        <li>Server, database and Microsoft 365 solutions</li>
-                    </ul>
-                    <div class="home-business-actions">
-                        <a class="home-btn home-btn-primary" href="consultation">Request a consultation</a>
-                        <a class="home-btn home-btn-secondary" href="windows-server">Explore Server &amp; database</a>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <section id="piu-venduti" class="home-catalog" aria-labelledby="catalog-title">
@@ -570,53 +525,78 @@
             </div>
         </section>
 
-        <section id="faq" class="home-faq" aria-labelledby="home-faq-title">
-            <h2 id="home-faq-title" class="home-section-title">Frequently asked questions</h2>
-            <div class="home-faq-list">
-                <details class="home-faq-item">
-                    <summary>What exactly do I receive after purchase?</summary>
-                    <div class="home-faq-body">
-                        <p>You receive a <strong>digital delivery email</strong> with what you need to use the licence (typically a <strong>product code</strong> and/or practical instructions, plus useful purchase references, as shown in the message we send).</p>
-                        <p>Delivery is <strong>digital only</strong>: keep the email and check <strong>spam/junk</strong> if nothing appears in your inbox.</p>
+        <section class="home-guide" aria-labelledby="home-guide-title" data-home-guide>
+            <div class="home-guide__inner">
+                <p class="home-section-eyebrow">Buying guide</p>
+                <h2 id="home-guide-title" class="home-section-title">Not sure which licence to choose?</h2>
+                <p class="home-guide__lede">Answer one question and we'll tell you which software suits you.</p>
+                <div class="home-guide__cols">
+                    <div>
+                        <p class="home-guide__question">Who will use the software?</p>
+                        <div class="home-guide__options">
+                        <button type="button" class="home-guide__option is-selected" data-guide-option
+                            aria-pressed="true"
+                            data-guide-href="microsoft-365-personal"
+                            data-guide-title-value="Microsoft 365 Personal · 12 months"
+                            data-guide-body-value="Word, Excel, PowerPoint and Outlook, 1 TB of OneDrive and Copilot, on 5 devices at once.">Just me (1 user)</button>
+                        <button type="button" class="home-guide__option" data-guide-option
+                            aria-pressed="false"
+                            data-guide-href="microsoft-365-family"
+                            data-guide-title-value="Microsoft 365 Family · 12 months"
+                            data-guide-body-value="Up to 6 people, each with their own account and 1 TB of OneDrive. Copilot stays with the subscription owner.">The whole family (up to 6)</button>
+                        <button type="button" class="home-guide__option" data-guide-option
+                            aria-pressed="false"
+                            data-guide-href="office-2021-professional-plus"
+                            data-guide-title-value="Office 2021 Professional Plus"
+                            data-guide-body-value="Perpetual licence: you pay once, with no yearly renewal.">Study or work</button>
+                        </div>
                     </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>How long until I receive the email with the licence?</summary>
-                    <div class="home-faq-body">
-                        <p>Usually the email arrives <strong>shortly after payment is confirmed</strong>; in rare cases <strong>a few extra minutes</strong> may be needed for payment checks.</p>
-                        <p>If you still have <strong>nothing within 30 minutes</strong>, check spam/junk and email <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> with the <strong>product purchased</strong> and the <strong>order email address</strong> so we can verify delivery.</p>
+                    <div class="home-guide__result">
+                        <p class="home-guide__result-label">Recommended for you</p>
+                        <p class="home-guide__result-title" data-guide-title>Microsoft 365 Personal · 12 months</p>
+                        <p class="home-guide__result-body" data-guide-body>Word, Excel, PowerPoint and Outlook, 1 TB of OneDrive and Copilot, on 5 devices at once.</p>
+                        <a class="home-btn home-btn-primary" href="microsoft-365-personal" data-guide-link>See the product page</a>
                     </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>I've never bought a digital licence: how does it work from start to finish?</summary>
-                    <div class="home-faq-body">
-                        <p>Choose your product, <strong>complete checkout and payment</strong> with the options available at checkout — card, PayPal and digital wallets (Apple Pay, Google Pay, where enabled). Processing is handled securely with <strong>Stripe</strong>.</p>
-                        <p>Once payment is confirmed you receive <strong>digital delivery by email</strong>; to use the licence follow both the <strong>email</strong> and the <strong>product page</strong> on our site, where you'll find references that match that product.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>The price is lower than elsewhere: is the licence genuine? Why does it cost less?</summary>
-                    <div class="home-faq-body">
-                        <p>We sell <strong>digital licences</strong> described on our <strong>product pages</strong>, with clear prices and terms you can read in <strong>Terms &amp; Conditions</strong> and <strong>Privacy</strong> before purchase.</p>
-                        <p>If you want an external reference, you can read <strong>public reviews</strong> on <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>. For operational questions, email <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>Where do I enter the code and how do I install the software?</summary>
-                    <div class="home-faq-body">
-                        <p>Activation and installation take place on the <strong>vendor's official websites and portals</strong>, according to that product's rules.</p>
-                        <p>After purchase use the <strong>instructions in your email</strong> and, for step-by-step detail, the <strong>product page</strong> on our site. If something doesn't work, email <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> with the product and order email.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>How do I contact you about order, payment or activation issues?</summary>
-                    <div class="home-faq-body">
-                        <p>Email <a href="mailto:Info@amlstore.it">Info@amlstore.it</a>: it's the main channel shown in the site <strong>footer</strong> too.</p>
-                        <p>Include <strong>product</strong>, <strong>order email address</strong> and a short description; for privacy, terms and refunds use the footer links (<strong>Privacy</strong>, <strong>Terms &amp; Conditions</strong>, <strong>Returns &amp; refunds</strong>).</p>
-                    </div>
-                </details>
+                </div>
             </div>
         </section>
+
+        <section class="home-guarantee" aria-labelledby="home-guarantee-title">
+            <p class="home-section-eyebrow">Guarantee and security</p>
+            <h2 id="home-guarantee-title" class="home-section-title">Buy with greater peace of mind</h2>
+            <p class="home-guarantee__lede">We follow you step by step through to full licence activation.</p>
+            <ul class="home-guarantee__grid">
+                <li class="home-guarantee__item">
+                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v10h-5v-6h-2v6H6V11H3l9-8z"></path></svg></span>
+                    <div>
+                        <h3>Italian company</h3>
+                        <p>Registered office and VAT number in Italy.</p>
+                    </div>
+                </li>
+                <li class="home-guarantee__item">
+                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l6 6v14H6V2zm7 1.5V9h5.5L13 3.5zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"></path></svg></span>
+                    <div>
+                        <h3>Electronic invoice</h3>
+                        <p>Available for individuals and businesses.</p>
+                    </div>
+                </li>
+                <li class="home-guarantee__item">
+                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 00-9 9v4a3 3 0 003 3h2v-8H5v1a7 7 0 1114 0v-1h-3v8h3a3 3 0 003-3v-4a9 9 0 00-9-9z"></path></svg></span>
+                    <div>
+                        <h3>Support in Italian</h3>
+                        <p>After-sales support by email and WhatsApp.</p>
+                    </div>
+                </li>
+                <li class="home-guarantee__item">
+                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 015 5v3h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2h1V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v3h6V7a3 3 0 00-3-3z"></path></svg></span>
+                    <div>
+                        <h3>Protected payments</h3>
+                        <p>Processed through Stripe and PayPal.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
         <section class="home-social-proof" aria-labelledby="home-social-title">
             <h2 id="home-social-title" class="visually-hidden">Customer reviews</h2>
             <p class="home-social-proof__fallback">Real experiences shared by customers on <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.</p>
@@ -633,98 +613,6 @@
                 data-style-alignment="center"
             >
                 <a href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-            </div>
-        </section>
-
-        <section id="prodotti-consigliati" class="home-recommended" aria-labelledby="prodotti-consigliati-title">
-            <div class="home-recommended__inner">
-                <header class="home-recommended__intro">
-                    <h2 id="prodotti-consigliati-title" class="home-section-title">Recommended products</h2>
-                    <p class="home-catalog-lede">A selection of solutions for productivity, work, and security.</p>
-                </header>
-                <div class="product-grid home-recommended__grid">
-                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="20900"
-                    data-stripe-compare-at-amount="29900"
-                    data-stripe-product-sku="EP2-06606"
-                    data-discount-percent="30"
-                >
-                    <a href="office-2024-home-business" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/products/office-2024-home-business.webp?v=5e6a123f8c" width="400" height="400" alt="Office 2024 Home & Business" decoding="async" loading="lazy" fetchpriority="low" class="product-card-img" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
-                        </div>
-                        <p class="product-card-name">Office 2024 Home & Business</p>
-                        <p class="product-card-blurb">Perpetual licence · Word, Excel, PowerPoint, Outlook · PC/Mac</p>
-                    </a>
-                    <p class="product-card-price">€ 209,00</p>
-                    <div class="product-card-foot">
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Add to cart</button>
-                    </div>
-                </div>
-                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="71100"
-                    data-stripe-compare-at-amount="165900"
-                    data-stripe-product-sku="EP2-07001"
-                    data-discount-percent="57"
-                >
-                    <a href="project-professional-2024" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/products/project-professional-2024.webp?v=336178d538" width="400" height="400" alt="Project Professional 2024" decoding="async" loading="lazy" fetchpriority="low" class="product-card-img" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
-                        </div>
-                        <p class="product-card-name">Project Professional 2024</p>
-                        <p class="product-card-blurb">Perpetual licence · project planning · Windows</p>
-                    </a>
-                    <p class="product-card-price">€ 711,00</p>
-                    <div class="product-card-foot">
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Add to cart</button>
-                    </div>
-                </div>
-                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="37100"
-                    data-stripe-compare-at-amount="38900"
-                    data-stripe-product-sku="P73-08328"
-                    data-discount-percent="5"
-                >
-                    <a href="windows-server-2022" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/products/windows-server-2022.webp?v=a14715b4d6" width="400" height="400" alt="Windows Server 2022 Standard" decoding="async" loading="lazy" fetchpriority="low" class="product-card-img" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
-                        </div>
-                        <p class="product-card-name">Windows Server 2022 Standard</p>
-                        <p class="product-card-blurb">Server licence · Standard · Microsoft activation</p>
-                    </a>
-                    <p class="product-card-price">€ 371,00</p>
-                    <div class="product-card-foot">
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Add to cart</button>
-                    </div>
-                </div>
-                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="3295"
-                    data-stripe-compare-at-amount="5499"
-                    data-stripe-product-sku="KASP_PLUS_1D_1A"
-                    data-discount-percent="40"
-                >
-                    <a href="kaspersky-plus" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/products/kaspersky-plus.webp?v=8aa0d15603" width="400" height="400" alt="Kaspersky Plus" decoding="async" loading="lazy" fetchpriority="low" class="product-card-img" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
-                        </div>
-                        <p class="product-card-name">Kaspersky Plus</p>
-                        <p class="product-card-blurb">12-month subscription · 1 device · digital licence</p>
-                    </a>
-                    <p class="product-card-price">€ 32,95</p>
-                    <div class="product-card-foot">
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Add to cart</button>
-                    </div>
-                </div>
-                </div>
-                <a class="home-catalog-more" href="#soluzioni">Explore all solutions →</a>
             </div>
         </section>
 </main>
@@ -817,5 +705,6 @@
     <script src="../components/header.js?v=766d52658b" defer></script>
     <script src="../components/footer.js?v=a9b6a8315d" defer></script>
 
+    <script src="../js/home-guide.js?v=3be911ed8c" defer></script>
 </body>
 </html>

@@ -44,6 +44,9 @@
     --aml-slate-700: #334155;
     --aml-slate-800: #1E293B;
     --aml-slate-900: #0F172A;
+    /* Un gradino sotto slate-900: fondo dell'hero della home, dove i glow
+       arancioni devono staccare piu' di quanto facciano sul navy. */
+    --aml-slate-950: #090D16;
 
     /* ── Scala Amber (Copilot AI & Rating Stars) ──────────────────────── */
     --aml-amber-50: #FFFBEB;

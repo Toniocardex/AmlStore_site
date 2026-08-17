@@ -1,92 +1,23 @@
 /**
- * Home — hero → trust → passi → catalogo → FAQ → social proof → consigliati.
- * Dipende da page.css (token + .visually-hidden). Solo pagine index.
+ * Home — hero → categorie → piu' venduti → guida → garanzie → recensioni.
+ * Stesso ordine del mockup. Dipende da page.css (token + .visually-hidden).
+ * Solo pagine index.
  */
+
+/* Larghezza del contenuto: e' quella dell'area interna di main.home-page
+   (max-width 1200 meno i 32px di padding per lato). Le sezioni a tutta pagina
+   escono da quel contenitore, quindi devono riapplicarla ai figli o le loro
+   colonne non si allineano con quelle delle sezioni normali. */
+.home-page {
+    --home-content-w: 1136px;
+}
 
 .home-page > section + section {
     margin-top: clamp(3rem, 6vw, 5rem);
 }
 
-/* Ritmo più stretto: Soluzioni → business → I più venduti */
-.home-page > .home-categories + .home-business,
-.home-page > .home-business + .home-catalog {
-    margin-top: clamp(2.15rem, 4.5vw, 3.75rem);
-}
-
 .home-hero {
     padding-bottom: 0;
-}
-
-/* ── Hero corporate — mobile: navy sul nodo + geometria su ::after; ≥768: AVIF ── */
-
-.home-hero--corporate {
-    position: relative;
-    margin-inline: calc(50% - 50vw);
-    width: 100vw;
-    margin-top: -4rem;
-    background-color: var(--aml-navy, #0a1830);
-    background-image: none;
-    color: #ffffff;
-    overflow: hidden;
-    isolation: isolate;
-}
-
-/* Geometria leggera (non URL): isolata dal nodo LCP */
-.home-hero--corporate::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image:
-        linear-gradient(
-            132deg,
-            transparent 0 61%,
-            color-mix(in srgb, var(--aml-brand) 14%, transparent) 61% 74%,
-            transparent 74%
-        ),
-        linear-gradient(
-            42deg,
-            transparent 0 78%,
-            color-mix(in srgb, var(--aml-brand-soft) 8%, transparent) 78% 89%,
-            transparent 89%
-        );
-    background-repeat: no-repeat;
-}
-
-/* Scrim navy a sinistra: leggibilità copy/CTA senza coprire interazioni */
-.home-hero--corporate::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(
-        90deg,
-        color-mix(in srgb, var(--aml-navy) 96%, transparent) 0%,
-        color-mix(in srgb, var(--aml-navy) 84%, transparent) 34%,
-        color-mix(in srgb, var(--aml-navy) 46%, transparent) 57%,
-        color-mix(in srgb, var(--aml-navy) 8%, transparent) 78%,
-        transparent 100%
-    );
-}
-
-.home-hero--corporate .home-hero-inner {
-    position: relative;
-    z-index: 2;
-}
-
-@media (min-width: 768px) {
-    .home-hero--corporate {
-        background-image: url("../asset/media/aml_store_media_background.avif");
-        background-size: cover;
-        background-position: center right;
-        background-repeat: no-repeat;
-    }
-
-    .home-hero--corporate::after {
-        content: none;
-    }
 }
 
 .home-hero-inner {
@@ -136,122 +67,15 @@
     gap: 0.65rem 0.85rem;
 }
 
-/* Cover in fila ordinata, overlap leggero — niente ventaglio “marketing” */
-.home-hero-products {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: min(100%, 440px);
-    min-height: clamp(220px, 36vw, 300px);
-    margin-inline: auto 0;
-    justify-self: end;
-    padding: 0.5rem 0;
-}
-
-.home-hero-product {
-    position: relative;
-    display: block;
-    flex: 0 0 auto;
-    width: clamp(132px, 18vw, 168px);
-    aspect-ratio: 1;
-    margin-left: -2.25rem;
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--aml-surface, #fff);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
-    border: none;
-    outline: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    animation: home-hero-product-in 600ms ease both;
-}
-
-.home-hero-product:first-child {
-    margin-left: 0;
-}
-
-.home-hero-product img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.home-hero-product--back {
-    z-index: 1;
-    animation-delay: 40ms;
-}
-
-.home-hero-product--mid {
-    z-index: 2;
-    animation-delay: 100ms;
-}
-
-.home-hero-product--front {
-    z-index: 3;
-    animation-delay: 160ms;
-}
-
-.home-hero-product:hover,
-.home-hero-product:focus-visible {
-    z-index: 4;
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
-}
-
-.home-hero-product:focus-visible {
-    outline: 2px solid var(--aml-brand-soft, #FDBA74);
-    outline-offset: 3px;
-}
-
-@keyframes home-hero-product-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 @keyframes home-hero-copy-in {
     from { opacity: 0; transform: translate3d(0, 10px, 0); }
     to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .home-hero-product,
     .home-hero-content {
         animation: none;
     }
-
-    .home-hero-product,
-    .home-hero-product:hover,
-    .home-hero-product:focus-visible {
-        transition: none;
-    }
-}
-
-/* Ghost CTA sobrio sulla navy */
-.home-btn-ghost {
-    background: transparent;
-    color: color-mix(in srgb, var(--aml-surface) 92%, transparent);
-    border: 1px solid color-mix(in srgb, var(--aml-paper) 35%, transparent);
-}
-
-.home-btn-ghost:hover {
-    background: color-mix(in srgb, var(--aml-surface) 6%, transparent);
-    border-color: color-mix(in srgb, var(--aml-paper) 55%, transparent);
-}
-
-/* Primary senza glow “SaaS” (override locale in hero) */
-.home-hero--corporate .home-btn-primary {
-    box-shadow: none;
-    border-radius: 4px;
-}
-
-.home-hero--corporate .home-btn-primary:hover {
-    box-shadow: none;
-    filter: brightness(1.05);
-}
-
-.home-hero--corporate .home-btn-ghost {
-    border-radius: 4px;
 }
 
 @media (max-width: 900px) {
@@ -266,39 +90,26 @@
         max-width: none;
         font-size: clamp(1.9rem, 8vw, 2.5rem);
     }
-
-    .home-hero-products {
-        order: -1;
-        width: 100%;
-        min-height: 180px;
-        justify-content: flex-start;
-        margin-inline: 0;
-    }
-
-    .home-hero-product {
-        width: clamp(108px, 28vw, 140px);
-        margin-left: -1.5rem;
-    }
-
-    .home-hero-product:first-child {
-        margin-left: 0;
-    }
 }
 
+/* Su schermo stretto la CTA va a piena larghezza e il testo puo' andare a
+   capo: prima era nowrap + flex:1 1 0, e un'etichetta lunga come "Scopri
+   Microsoft 365 Personal" usciva dal riquadro invece di adattarsi. */
 @media (max-width: 768px) {
     .home-hero-actions {
-        flex-wrap: nowrap;
-        gap: 0.5rem;
+        flex-wrap: wrap;
+        gap: 0.6rem;
         width: 100%;
     }
 
     .home-hero-actions .home-btn {
-        flex: 1 1 0;
+        flex: 1 1 100%;
         min-width: 0;
-        padding: 0.55rem 0.65rem;
-        font-size: 0.8rem;
-        min-height: 42px;
-        white-space: nowrap;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.85rem;
+        min-height: 44px;
+        white-space: normal;
+        text-align: center;
     }
 }
 
@@ -361,10 +172,21 @@
     border-radius: 2px;
 }
 
+/* Il vincolo di larghezza sta sui figli, non sulla sezione: cosi' la banda
+   grigia del ritmo alternato puo' andare a tutta pagina (come nel mockup,
+   dove le recensioni sono su slate-50) mentre il contenuto resta centrato. */
 .home-social-proof {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Centratura via flex e non via margin-inline:auto: i figli hanno regole
+   `margin: 0` piu' avanti nel file che azzererebbero i margini automatici. */
+.home-social-proof > * {
     max-width: 48rem;
-    margin-inline: auto;
+    width: 100%;
 }
 
 .home-social-proof__text {
@@ -399,54 +221,6 @@
     display: none;
 }
 
-/* ── Prodotti consigliati — 4 card complementari ai bestseller ── */
-.home-recommended__inner {
-    width: min(100%, var(--aml-maxw, 1180px));
-    margin-inline: auto;
-}
-
-.home-recommended__intro {
-    max-width: 720px;
-    margin-inline: auto;
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.home-recommended__intro .home-section-title {
-    margin-bottom: 0.75rem;
-}
-
-.home-recommended__intro .home-catalog-lede {
-    margin-bottom: 0;
-}
-
-.home-page .home-recommended .product-grid,
-.home-page .home-recommended__grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-}
-
-@media (min-width: 768px) {
-    .home-page .home-recommended .product-grid,
-    .home-page .home-recommended__grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.5rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    .home-page .home-recommended .product-grid,
-    .home-page .home-recommended__grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-}
-
-.home-recommended .home-catalog-more {
-    display: table;
-    margin: 2rem auto 0;
-}
-
 .home-page .product-card-foot {
     margin-top: auto;
 }
@@ -456,14 +230,15 @@
 }
 
 /* Ritmo sezioni — sfondo alternato per dare profondità tonale alla pagina.
-   Esclude .home-business (pannello contenuto, non a tutta larghezza) e
-   .home-social-proof (blocco centrato via margin-inline:auto) — altrimenti
-   questa regola vince per specificità e ne rompe lo stile/allineamento.
-   .home-faq e .home-recommended sono escluse esplicitamente: dopo la
-   rimozione di .home-institutional la loro posizione nth-of-type è
-   diventata pari, ma il loro aspetto (nessuno sfondo speciale) non deve
-   cambiare per un effetto collaterale della numerazione. */
-.home-page > section:nth-of-type(even):not(.home-hero):not(.home-business):not(.home-social-proof):not(.home-faq):not(.home-recommended) {
+   Esclude .home-guide, che ha una banda scura tutta sua come nel mockup e
+   che senza esclusione perderebbe: il selettore vale 0,7,1 contro lo 0,1,0
+   della classe.
+   .home-social-proof non e' piu' esclusa: il suo vincolo di larghezza e'
+   passato ai figli, quindi la banda puo' andare a tutta pagina senza
+   scentrare il contenuto — ed e' cosi' anche nel mockup.
+   .home-business, .home-faq e .home-recommended erano nell'elenco ma le
+   sezioni non esistono piu' (home allineata al mockup). */
+.home-page > section:nth-of-type(even):not(.home-hero):not(.home-guide) {
     background: var(--aml-paper);
     margin-inline: calc(50% - 50vw);
     width: 100vw;
@@ -590,77 +365,6 @@
     border-color: color-mix(in srgb, var(--aml-ink) 20%, var(--page-border));
 }
 
-.home-steps-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    counter-reset: home-step;
-    display: grid;
-    gap: 1rem;
-    position: relative;
-    isolation: isolate;
-}
-
-@media (min-width: 768px) {
-    .home-steps-list {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-    }
-
-    /* Linea tratteggiata orizzontale che connette i cerchi numerici */
-    .home-steps-list::before {
-        content: '';
-        position: absolute;
-        top: calc(1.15rem + 0.875rem); /* centro dei cerchi (top + metà altezza) */
-        left: calc(100% / 6);
-        right: calc(100% / 6);
-        border-top: 1.5px dashed var(--page-border);
-        z-index: -1;
-        pointer-events: none;
-    }
-}
-
-.home-step {
-    position: relative;
-    border: 1px solid var(--page-border);
-    border-radius: var(--aml-radius-md);
-    padding: 1.25rem 1.25rem 1.25rem 3.25rem;
-    background: var(--aml-surface);
-    box-shadow: var(--aml-shadow-sm);
-    counter-increment: home-step;
-}
-
-.home-step::before {
-    content: counter(home-step);
-    position: absolute;
-    left: 1rem;
-    top: 1.15rem;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 50%;
-    background: var(--page-accent);
-    color: #fff;
-    font-size: 0.8rem;
-    font-weight: 800;
-    display: grid;
-    place-items: center;
-    line-height: 1;
-}
-
-.home-step h3 {
-    margin: 0 0 0.35rem;
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: var(--page-text);
-}
-
-.home-step p {
-    margin: 0;
-    font-size: 0.85rem;
-    line-height: 1.55;
-    color: var(--page-text-secondary);
-}
-
 .home-catalog .home-section-title {
     margin-bottom: 1.5rem;
 }
@@ -692,8 +396,7 @@
     gap: 0.75rem;
 }
 
-.home-page .home-catalog .product-card-media,
-.home-page .home-recommended .product-card-media {
+.home-page .home-catalog .product-card-media {
     height: clamp(140px, 38vw, 200px);
 }
 
@@ -703,8 +406,7 @@
    non lascia margine. Un padding fisso sul riquadro forza lo stesso respiro
    neutro attorno a ogni immagine, cosa che le fa leggere come un'unica
    collezione invece di un accostamento casuale di stili. */
-.home-page .home-catalog .product-card-media,
-.home-page .home-recommended .product-card-media {
+.home-page .home-catalog .product-card-media {
     padding: 0.85rem;
     box-sizing: border-box;
 }
@@ -751,10 +453,22 @@
 }
 
 /* ── Sezione categorie — mobile: card verticali 2 col; desktop: tile orizzontali 3 col ── */
+/* Come .home-social-proof: il vincolo di larghezza sta sui figli, non sulla
+   sezione. La sezione e' in posizione pari, quindi il ritmo alternato le da'
+   margin-inline: calc(50% - 50vw) per la banda a tutta pagina; quel margine
+   vince sul `margin: 0 auto` (0,7,1 contro 0,1,0) e senza questo accorgimento
+   il blocco da 1200px restava incollato al bordo sinistro. Centratura via
+   flex perche' i figli hanno `margin: 0` che azzererebbe i margini automatici. */
 .home-categories {
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2rem) 0;
+}
+
+.home-categories > * {
+    max-width: var(--home-content-w);
+    width: 100%;
 }
 
 .home-page .home-categories .home-section-title {
@@ -934,125 +648,285 @@
     }
 }
 
-/* ── Pannello "per aziende" — accenno leggero, non una seconda hero: bordo
-   sinistro d'accento come .pdp-note, checklist come .pdp-assur/.pdp-keylist,
-   link verso pagine reali del catalogo, nessuna promessa di flusso che non
-   esiste ancora (niente form "richiedi consulenza"). ── */
-.home-business {
-    max-width: 1200px;
-    margin-inline: auto;
-    padding-inline: clamp(1.25rem, 4vw, 2rem);
+/* ══ HERO CONSUMER — sfondo fotografico ════════════════════════════════════
+   L'immagine e' un <picture> in markup, non un background-image: cosi' e'
+   l'elemento LCP, il browser la scopre subito e le applica fetchpriority.
+   Sopra ci va uno scrim orizzontale, altrimenti il testo bianco finisce su
+   una foto molto chiara — stesso accorgimento dell'hero precedente. */
+
+.home-hero--consumer {
+    position: relative;
+    margin-inline: calc(50% - 50vw);
+    width: 100vw;
+    margin-top: -4rem;
+    background-color: var(--aml-slate-100);
+    color: var(--aml-slate-900);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.home-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+}
+
+.home-hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Soggetto a destra, meta' sinistra libera: si tiene la foto centrata
+       cosi' il testo cade sulla parte sgombra. */
+    object-position: 50% center;
+    display: block;
+}
+
+.home-hero--consumer .home-hero-inner {
+    position: relative;
+    z-index: 2;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+}
+
+/* Niente velo sopra la foto: il soggetto sta a destra e la meta' sinistra e'
+   gia' chiara e sgombra, quindi il testo ci sta sopra in inchiostro scuro
+   senza bisogno di schiarirla. La larghezza resta contenuta per non arrivare
+   sulla persona. */
+.home-hero--consumer .home-hero-content {
+    max-width: 30rem;
+}
+
+.home-hero--consumer .home-hero-title {
+    color: var(--aml-slate-900);
+}
+
+.home-hero--consumer .home-hero-subtitle {
+    color: var(--aml-slate-700);
+}
+
+/* Gradiente come nel mockup, ma sui gradini scuri della scala: sulla foto
+   chiara l'orange-600 dava 2,6:1 di contrasto (1,7:1 nel punto peggiore),
+   sotto la soglia 3:1 del testo grande. Con 800/900 si sta sopra restando
+   nella stessa famiglia del brand. */
+.home-hero-title .home-hero__accent {
+    background: linear-gradient(90deg, var(--aml-orange-800), var(--aml-orange-900) 55%, var(--aml-orange-800));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+@media (max-width: 900px) {
+    .home-hero__bg img {
+        object-position: 62% center;
+    }
+
+    .home-hero--consumer .home-hero-content {
+        max-width: none;
+    }
+}
+
+/* ══ GARANZIA E SICUREZZA (mockup 2026-08-17) ══════════════════════════════
+   Prende il posto del blocco B2B "Per aziende e professionisti". Quattro
+   punti come nel mockup, ma con la copy gia' in uso nella trustbar delle
+   schede prodotto: la "Garanzia AML Care" e il tempo medio di risposta che
+   il mockup dichiara non sono affermazioni che il sito fa. */
+
+.home-section-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--aml-brand-vivid);
+}
+
+.home-guarantee__lede {
+    margin: -0.5rem 0 1.75rem;
+    max-width: 56ch;
+    font-size: var(--aml-text-base);
+    line-height: 1.6;
+    color: var(--page-text-muted);
+}
+
+.home-guarantee__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.home-guarantee__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1.15rem;
+    border: 1px solid var(--page-border);
+    border-radius: 10px;
+    background: var(--aml-surface);
+}
+
+.home-guarantee__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--aml-orange-50);
+    color: var(--aml-brand-vivid);
+}
+
+.home-guarantee__icon svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.home-guarantee__item h3 {
+    margin: 0 0 0.2rem;
+    font-size: var(--aml-text-base);
+    font-weight: 700;
+    color: var(--page-text);
+}
+
+.home-guarantee__item p {
+    margin: 0;
+    font-size: var(--aml-text-sm);
+    line-height: 1.5;
+    color: var(--page-text-muted);
+}
+
+/* ══ GUIDA ALL'ACQUISTO (mockup 2026-08-17) ════════════════════════════════
+   Banda scura come nel mockup (bg-slate-900): tre opzioni a sinistra, il
+   consiglio a destra. Senza JS resta la domanda con il consiglio iniziale,
+   che e' gia' un link valido — non un blocco morto. */
+
+.home-guide {
+    background: var(--aml-slate-900);
+    color: #ffffff;
+    margin-inline: calc(50% - 50vw);
+    width: 100vw;
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2rem);
     box-sizing: border-box;
 }
 
-.home-business-card {
-    position: relative;
-    display: grid;
-    gap: 1.35rem;
-    padding: clamp(1.5rem, 3.5vw, 2.35rem) clamp(1.5rem, 3.5vw, 2.35rem) clamp(1.5rem, 3.5vw, 2.35rem) clamp(1.65rem, 3.8vw, 2.5rem);
-    border: 1px solid var(--page-border);
-    border-radius: var(--aml-radius-md);
-    background: var(--aml-paper);
+.home-guide__inner {
+    max-width: var(--home-content-w);
+    margin: 0 auto;
 }
 
-/* Rail navy allineata al contenuto, non all'intero box */
-.home-business-card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 1.15rem;
-    bottom: 1.15rem;
-    width: 3px;
-    background: var(--aml-navy);
-    border-radius: 0 2px 2px 0;
+.home-guide .home-section-eyebrow {
+    color: var(--aml-orange-400);
 }
 
-@media (min-width: 900px) {
-    .home-business-card {
-        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-        align-items: center;
-        gap: 1.5rem 2rem;
-    }
-
-    .home-business-card > div:last-child {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.85rem;
-        min-width: 0;
-    }
+.home-guide .home-section-title {
+    color: #ffffff;
 }
 
-.home-business-eyebrow {
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--page-accent);
-    margin: 0 0 0.5rem;
-}
-
-.home-business-card h2 {
-    margin: 0 0 0.6rem;
-    font-size: clamp(1.3rem, 2.6vw, 1.65rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.25;
-    color: var(--page-text);
-}
-
-.home-business-card > div:first-child > p {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--page-text-secondary);
+.home-guide__lede {
+    margin: -0.5rem 0 2rem;
     max-width: 52ch;
+    font-size: var(--aml-text-base);
+    line-height: 1.6;
+    color: var(--aml-slate-300);
 }
 
-.home-business-points {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.home-guide__cols {
     display: grid;
-    gap: 0.45rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    align-items: start;
 }
 
-.home-business-points li {
-    position: relative;
-    padding-left: 1.5rem;
-    font-size: 0.88rem;
-    line-height: 1.45;
-    color: var(--page-text);
-    font-weight: 600;
+.home-guide__question {
+    margin: 0 0 1rem;
+    font-size: var(--aml-text-sm);
+    font-weight: 700;
+    color: var(--aml-slate-200);
 }
 
-.home-business-points li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--aml-ok);
-    font-weight: 800;
-}
-
-.home-business-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+.home-guide__options {
+    display: grid;
     gap: 0.65rem;
-    margin-top: 0;
 }
 
-@media (min-width: 900px) {
-    .home-business-actions {
-        flex-wrap: nowrap;
+.home-guide__option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--aml-slate-700);
+    background: color-mix(in srgb, var(--aml-slate-900) 55%, transparent);
+    color: var(--aml-slate-300);
+    font: inherit;
+    font-size: var(--aml-text-sm);
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+
+.home-guide__option:hover {
+    border-color: var(--aml-slate-500);
+    color: #ffffff;
+}
+
+.home-guide__option.is-selected {
+    background: var(--aml-slate-900);
+    border-color: var(--aml-orange-500);
+    color: #ffffff;
+}
+
+.home-guide__option:focus-visible {
+    outline: 2px solid var(--aml-orange-400);
+    outline-offset: 2px;
+}
+
+.home-guide__result {
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+    border-radius: 12px;
+    border: 1px solid color-mix(in srgb, var(--aml-orange-500) 40%, transparent);
+    background: color-mix(in srgb, var(--aml-slate-800) 70%, transparent);
+}
+
+.home-guide__result-label {
+    margin: 0 0 0.35rem;
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--aml-orange-400);
+}
+
+.home-guide__result-title {
+    margin: 0 0 0.5rem;
+    font-size: var(--aml-text-lg);
+    font-weight: 700;
+    line-height: 1.3;
+    color: #ffffff;
+}
+
+.home-guide__result-body {
+    margin: 0 0 1.25rem;
+    font-size: var(--aml-text-sm);
+    line-height: 1.55;
+    color: var(--aml-slate-300);
+}
+
+@media (max-width: 760px) {
+    .home-guide__cols {
+        grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 899px) {
-    .home-business-card > div:last-child {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+@media (prefers-reduced-motion: reduce) {
+    .home-guide__option {
+        transition: none;
     }
 }
