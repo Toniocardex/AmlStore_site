@@ -712,8 +712,12 @@ def _render_lifestyle_band(lifestyle, lang):
     h = int(lifestyle.get("height") or 640)
     alt = lifestyle["alt"][lang]
     kicker = lifestyle["kicker"][lang]
-    title = lifestyle["title"][lang]
+    # Come per features_title: un titolo assente arrivava in pagina come la
+    # stringa "None". Se manca si tiene il kicker e si etichetta la sezione
+    # con l'alt dell'immagine, che c'e' sempre.
+    title = (lifestyle.get("title") or {}).get(lang)
     body = lifestyle["body"][lang]
+    title_html = f'\n                <h3 class="bento-title">{title}</h3>' if title else ""
     # Di norma le foto lifestyle stanno sotto products/. `image_root: ""` serve alle
     # immagini che vivono direttamente in asset/media/ (es. windows-11-home).
     root = lifestyle.get("image_root", "products/")
@@ -723,7 +727,7 @@ def _render_lifestyle_band(lifestyle, lang):
         src_640 = f"../asset/media/{root}{img_640}"
         srcset_attrs = f'\n                    srcset="{src_640} 640w, {src} {w}w"\n                    sizes="100vw"'
     return f"""        <hr class="v2-divider">
-        <section class="v2-section v2-section--gallery" aria-label="{title}">
+        <section class="v2-section v2-section--gallery" aria-label="{title or alt}">
             <figure class="bento-figure">
                 <img
                     class="bento-img"
@@ -736,8 +740,7 @@ def _render_lifestyle_band(lifestyle, lang):
                 >
             </figure>
             <div class="bento-caption">
-                <span class="bento-kicker">{kicker}</span>
-                <h3 class="bento-title">{title}</h3>
+                <span class="bento-kicker">{kicker}</span>{title_html}
                 <p class="bento-text">{body}</p>
             </div>
         </section>
@@ -1844,10 +1847,18 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     # e non hanno card feature: pretenderle significherebbe inventarle.
     features_block = ""
     features = (content.get("features") or {}).get(lang)
+    # Il titolo puo' mancare (None) quando il contenuto e' stato estratto da una
+    # vecchia pagina che non aveva l'<h2>: interpolarlo cosi' com'e' stampava la
+    # stringa "None" in pagina. Meglio l'occhiello da solo che un titolo falso.
+    features_title = (content.get("features_title") or {}).get(lang)
+    features_title_html = (
+        f'\n            <h2 id="pdp-features-title" class="pdp-sec__title">{features_title}</h2>'
+        if features_title else ""
+    )
+    labelled_by = ' aria-labelledby="pdp-features-title"' if features_title else ""
     if features:
-        features_block = f"""        <section class="pdp-sec" aria-labelledby="pdp-features-title">
-            <p class="pdp-sec__eyebrow">{ui['features_eyebrow']}</p>
-            <h2 id="pdp-features-title" class="pdp-sec__title">{content['features_title'][lang]}</h2>
+        features_block = f"""        <section class="pdp-sec"{labelled_by}>
+            <p class="pdp-sec__eyebrow">{ui['features_eyebrow']}</p>{features_title_html}
             <ul class="pdp-cards">
 {_render_cards(features)}
             </ul>

@@ -39,6 +39,13 @@ PRODUCTS = [
     # scripts/extract-m365-family-content.py + scripts/build-m365-family-content.py
     # e vive in product_content_flagship.PRODUCTS['microsoft-365-family'].
     {"sku": "6GQ-00092", "slug": "microsoft-365-family", "template": "m365", "card_name": "Microsoft 365 Family", "image": "microsoft-365-family.webp"},
+    # Ultima pagina rimasta sul layout vecchio: era in PRESERVE_PAGES, ne e'
+    # uscita quando il contenuto e' finito in product_content_flagship, ma
+    # nessuno script la rigenerava piu' — l'HTML su disco era ancora quello
+    # scritto a mano (eyebrow con trattino, codice sotto il titolo, CTA
+    # singola, blocco pagamenti proprio). Agganciata qui perche' il contenuto
+    # vive in flagship, come Personal e Family.
+    {"sku": "KW9-00642", "slug": "windows-11-home", "template": "windows", "card_name": "Windows 11 Home", "image": IMG_WIN},
 ]
 
 

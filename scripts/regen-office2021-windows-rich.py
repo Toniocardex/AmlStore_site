@@ -14,7 +14,8 @@ DEFS = [
     ("T5D-03485", "office-2021-home-business", "office", "Office 2021 Home & Business"),
     ("T5D-03489", "office-2021-home-business-mac", "office", "Office 2021 Home & Business Mac"),
     ("GMGF0D7FX-0002-P", "office-2021-professional-plus", "office", "Office 2021 Professional Plus"),
-    # Windows (not windows-11-home — PRESERVE_PAGES)
+    # Windows (windows-11-home no: contenuto in product_content_flagship,
+    # rigenerata da regen-legacy-rich.py insieme a Personal e Family)
     ("FQC-10528", "windows-11-pro", "windows", "Windows 11 Pro"),
     ("KW9-00136", "windows-10-home", "windows", "Windows 10 Home"),
     ("FQC-08930", "windows-10-pro", "windows", "Windows 10 Pro"),
