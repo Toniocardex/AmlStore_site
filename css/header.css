@@ -52,6 +52,10 @@ ecommerce-header .header-utility__inner > span {
     display: inline-flex;
     align-items: center;
 }
+ecommerce-header .header-utility__rating {
+    font-weight: 700;
+    color: #FBBF24;
+}
 ecommerce-header .header-utility__inner > span + span::before {
     content: "";
     display: inline-block;

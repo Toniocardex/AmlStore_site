@@ -86,6 +86,7 @@
             navM365Family: 'Microsoft 365 Family',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
+            utilityRating: '★ 4,8/5 su Trustpilot',
             utilityClaim1: 'Azienda italiana',
             utilityClaim2: 'Fattura disponibile',
             utilityClaim3: 'Supporto via email e WhatsApp',
@@ -157,6 +158,7 @@
             navM365Family: 'Microsoft 365 Family',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
+            utilityRating: '★ 4.8/5 on Trustpilot',
             utilityClaim1: 'European software retailer',
             utilityClaim2: 'VAT invoice available',
             utilityClaim3: 'Support via email and WhatsApp',
@@ -228,6 +230,7 @@
             navM365Family: 'Microsoft 365 Famille',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
+            utilityRating: '★ 4,8/5 sur Trustpilot',
             utilityClaim1: 'Revendeur logiciel européen',
             utilityClaim2: 'Facture TVA disponible',
             utilityClaim3: 'Assistance par e-mail et WhatsApp',
@@ -299,6 +302,7 @@
             navM365Family: 'Microsoft 365 Family',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
+            utilityRating: '★ 4,8/5 auf Trustpilot',
             utilityClaim1: 'Europäischer Softwarehändler',
             utilityClaim2: 'MwSt.-Rechnung verfügbar',
             utilityClaim3: 'Support per E-Mail und WhatsApp',
@@ -370,6 +374,7 @@
             navM365Family: 'Microsoft 365 Familia',
             navM365Business: 'Microsoft 365 Business Standard',
             navAntivirus: 'Antivirus',
+            utilityRating: '★ 4,8/5 en Trustpilot',
             utilityClaim1: 'Distribuidor de software europeo',
             utilityClaim2: 'Factura con IVA disponible',
             utilityClaim3: 'Soporte por email y WhatsApp',
@@ -588,6 +593,10 @@
                     .header-utility__inner > span {
                         display: inline-flex;
                         align-items: center;
+                    }
+                    .header-utility__rating {
+                        font-weight: 700;
+                        color: #FBBF24;
                     }
                     .header-utility__inner > span + span::before {
                         content: "";
@@ -2092,6 +2101,7 @@
 
                 <div class="header-utility">
                     <div class="header-utility__inner">
+                        <span class="header-utility__rating">${esc(t.utilityRating)}</span>
                         <span>${esc(t.utilityClaim1)}</span>
                         <span>${esc(t.utilityClaim2)}</span>
                         <span>${esc(t.utilityClaim3)}</span>
