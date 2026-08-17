@@ -387,8 +387,13 @@
    passato ai figli, quindi la banda puo' andare a tutta pagina senza
    scentrare il contenuto — ed e' cosi' anche nel mockup.
    .home-business, .home-faq e .home-recommended erano nell'elenco ma le
-   sezioni non esistono piu' (home allineata al mockup). */
-.home-page > section:nth-of-type(even):not(.home-hero):not(.home-guide) {
+   sezioni non esistono piu' (home allineata al mockup).
+   .home-guarantee e' esclusa perche' il suo eyebrow/titolo/lede non hanno un
+   wrapper di larghezza proprio (a differenza di .home-guide/.home-vendors):
+   affidarsi alla parita' nth-of-type e' fragile, ogni sezione aggiunta prima
+   di lei ne cambia la parita' e la fa sbandierare a tutta pagina disallineata
+   a sinistra, come successo aggiungendo .home-vendors. */
+.home-page > section:nth-of-type(even):not(.home-hero):not(.home-guide):not(.home-guarantee) {
     background: var(--aml-paper);
     margin-inline: calc(50% - 50vw);
     width: 100vw;
