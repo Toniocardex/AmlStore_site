@@ -551,6 +551,13 @@
             const next = mergeAdd(readLines(), line);
             if (writeLines(next)) {
                 dispatch(next);
+                // Checkout espresso: si aggiunge al carrello e si salta dritti al
+                // pagamento, niente toast/flash che tanto non fa in tempo a vedersi.
+                const redirect = btn.getAttribute('data-cart-checkout-redirect');
+                if (redirect) {
+                    global.location.href = redirect;
+                    return;
+                }
                 // Il toast ha role="status": annuncia già ai lettori di schermo.
                 // announceCartAdded() resta per le pagine senza body (fallback).
                 if (document.body) showCartToast(line);

@@ -19,8 +19,7 @@
    galleria bento, scaffolding delle sezioni.
    ───────────────────────────────────────────────────────────────────── */
 
-.v2-family-bridge__caption,
-.bento-caption {
+.v2-family-bridge__caption {
     background: rgba(255, 255, 255, 0.96);
 }
 
@@ -40,7 +39,7 @@
 .v2-product-code {
     margin: -14px 0 18px;
     color: var(--aml-ink-2);
-    font-size: 0.78rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.5;
     letter-spacing: 0;
 }
@@ -48,12 +47,12 @@
 .v2-product-code__value {
     color: var(--aml-ink);
     font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-    font-size: 0.82rem;
+    font-size: var(--aml-text-sm);
     overflow-wrap: anywhere;
 }
 
 .v2-hero__desc {
-    font-size: 1.05rem;
+    font-size: var(--aml-text-lg);
     color: var(--aml-ink-2);
     line-height: 1.7;
     margin: 0 0 32px;
@@ -88,7 +87,7 @@
     border-top: 1px solid var(--aml-line);
     border-radius: 0;
     background: none;
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
     font-weight: 500;
     color: var(--aml-ink-2);
     text-align: left;
@@ -105,7 +104,7 @@
     gap: 6px;
     min-height: 1.5rem;
     margin: 8px 0 0;
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
     font-weight: 500;
     line-height: 1.3;
     color: var(--aml-ink-2);
@@ -186,7 +185,7 @@
 
 .product-trustpilot__fallback {
     margin: 0 0 0.75rem;
-    font-size: 0.9rem;
+    font-size: var(--aml-text-base);
     line-height: 1.5;
     font-weight: 500;
     color: var(--aml-ink-2);
@@ -221,9 +220,13 @@ body { background: var(--page-bg); }
 
 /* ── BENTO FIGURE / INFORMATIVA — Full-width breakout ── */
 
-/* Annulla tutto il padding della sezione per l'immagine galleria */
+/* Azzera solo l'alto e i lati per la foto a piena larghezza (la didascalia
+   gestisce da se' il proprio gutter orizzontale) — il basso resta con lo
+   stesso ritmo di .pdp-sec, altrimenti il divider che segue la sezione
+   arriva subito dopo l'ultima riga di testo, senza il respiro che hanno
+   tutte le altre sezioni prima del proprio <hr>. */
 .v2-section--gallery {
-    padding: 0;
+    padding: 0 0 clamp(40px, 6vw, 64px);
     /* Override per CLS: altezza stimata precisa per content-visibility: auto */
     contain-intrinsic-size: 0 62.5vw;
 }
@@ -234,35 +237,9 @@ body { background: var(--page-bg); }
     padding: 0;
     width: 100%;
     overflow: hidden;
-    border-radius: 0;
+    border-radius: var(--aml-radius-md);
     border: none;
     background: var(--aml-paper);
-}
-
-/* Gradiente superiore: sfuma dal colore pagina verso trasparente */
-.bento-figure::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to bottom, var(--page-bg) 0%, transparent 100%);
-    z-index: 3;
-    pointer-events: none;
-}
-
-/* Gradiente inferiore: sfuma da trasparente al colore pagina */
-.bento-figure::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to top, var(--page-bg) 0%, transparent 100%);
-    z-index: 3;
-    pointer-events: none;
 }
 
 /* Zoom dell'immagine sull'hover */
@@ -283,77 +260,49 @@ body { background: var(--page-bg); }
     .bento-figure:hover .bento-img { transform: none; }
 }
 
-/* Glass card caption ancorata in basso a sinistra */
+/* Didascalia fuori dalla foto (ora un <div> fratello di <figure>, non piu'
+   un <figcaption> annidato dentro): nello stesso ritmo eyebrow/titolo/testo
+   di tutte le altre sezioni della pagina — non la card "glass" ancorata
+   sull'immagine di prima, ne' il riquadro/bordo arrotondato che restava
+   quando la didascalia viveva ancora dentro .bento-figure (stesso sfondo,
+   stesso overflow:hidden e border-radius della foto). La sezione ha
+   padding:0 per la foto a piena larghezza, quindi qui serve il gutter di
+   pagina esplicito: senza, il testo tocca il bordo della viewport. */
 .bento-caption {
-    position: absolute;
-    bottom: 28px;
-    left: 28px;
-    right: auto;
-    width: auto;
-    max-width: min(26rem, calc(100% - 56px));
-    padding: 14px 20px 16px 18px;
-    box-sizing: border-box;
+    max-width: 62ch;
+    margin: 28px auto 0;
+    padding: 0 var(--pdp-gutter);
     color: var(--aml-ink);
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 0.3em;
-    border-radius: var(--aml-radius-md);
-    border: 1px solid var(--aml-line);
-    border-left: 3px solid var(--page-accent);
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(18px) saturate(1.25);
-    -webkit-backdrop-filter: blur(18px) saturate(1.25);
-    box-shadow: var(--aml-shadow-lg);
-    z-index: 2;
-    pointer-events: none;
-}
-
-@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-    .bento-caption { background: rgba(255, 255, 255, 0.96); }
+    gap: 6px;
 }
 
 .bento-kicker {
     display: block;
-    font-size: 0.68rem;
+    font-size: var(--aml-text-xs);
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--page-accent);
+    color: var(--aml-brand-vivid);
     line-height: 1.2;
 }
 
 .bento-title {
     margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: var(--aml-text-h3);
+    font-weight: 800;
     line-height: 1.3;
     letter-spacing: -0.01em;
+    color: var(--page-text);
 }
 
 .bento-text {
     margin: 0;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    opacity: 0.82;
-}
-
-@media (max-width: 640px) {
-    .bento-caption {
-        bottom: 14px;
-        left: 14px;
-        max-width: calc(100% - 28px);
-        padding: 11px 14px 13px 13px;
-        font-size: 0.84rem;
-        border-radius: 8px;
-        gap: 0.28em;
-    }
-
-    .bento-kicker { letter-spacing: 0.12em; }
-
-    .bento-title { font-size: 0.95rem; }
-
-    .bento-text { font-size: 0.82rem; }
+    font-size: var(--aml-text-base);
+    line-height: 1.55;
+    color: var(--pdp-muted);
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -376,28 +325,39 @@ body { background: var(--page-bg); }
    più il nero/blu SaaS. Fissa a prescindere dal toggle chiaro/scuro del sito —
    scelta editoriale, non un'inversione di tema — vedi anche header.js/footer.js
    dove lo stesso ragionamento rende l'header/footer sempre chiari. */
+/* I --pdp-* sono ALIAS verso i token globali, mai valori propri: erano
+   duplicati a mano e per questo le PDP sono rimaste blu quando --aml-brand
+   è passato all'arancione. Se serve un valore che qui non esiste, si aggiunge
+   un token in page.css — non si riscrive un literal in questo file. */
 .pdp-page {
-    --pdp-maxw: 1180px;
-    --pdp-gutter: clamp(1rem, 4vw, 2rem);
-    --pdp-radius: 8px;
-    --pdp-surface: #FFFFFF;
-    --pdp-surface-2: #F4F6F8;
-    --pdp-border: #DCE3EA;
-    --pdp-muted: #5F6B7A;
-    --pdp-ok: #1F7A52;
-    --pdp-navy: #14243A;
-    --pdp-navy-2: #1d3454;
-    --pdp-trust-bg: #EAF0F6;
-    --pdp-ink: #152033;
+    --pdp-maxw: var(--aml-maxw);
+    --pdp-gutter: var(--aml-gutter);
+    --pdp-radius: var(--aml-radius-md);
+    --pdp-surface: var(--aml-surface);
+    --pdp-surface-2: var(--aml-paper-2);
+    --pdp-border: var(--aml-line);
+    --pdp-muted: var(--aml-ink-2);
+    --pdp-ok: var(--aml-ok);
+    --pdp-navy: var(--aml-navy);
+    --pdp-navy-2: var(--aml-navy-2);
+    --pdp-trust-bg: var(--aml-trust-bg);
+    --pdp-ink: var(--aml-ink);
 
-    /* Rimappa anche i token globali del sito: le pagine prodotto sono chiare
-       anche finché il resto del sito (home, ecc.) non è ancora convertito. */
-    --page-accent: #3267AC;
-    --page-text: #152033;
-    --page-text-secondary: #5F6B7A;
-    --page-text-muted: #5F6B7A;
-    --page-bg: #F4F6F8;
-    --page-border: #DCE3EA;
+    /* Le PDP restano chiare a prescindere dal resto del sito: qui si rimappa
+       solo la CARTA, non l'accento — l'accento deve seguire il brand. */
+    --page-accent: var(--aml-brand);
+    --page-text: var(--aml-ink);
+    --page-text-secondary: var(--aml-ink-2);
+    --page-text-muted: var(--aml-ink-2);
+    /* Pagina bianca come nel mockup: il rapporto si inverte rispetto a prima,
+       quindi il pannello d'acquisto passa a --pdp-surface-2 (carta chiara). */
+    --page-bg: var(--aml-surface);
+    --page-border: var(--aml-line);
+
+    /* Font del mockup di riferimento, scopato alla sola PDP (vedi commento
+       sul <link> Google Fonts in product_page_lib.py) — non tocca header/
+       footer, che leggono --aml-font-sans direttamente e restano Montserrat. */
+    --font-sans: 'Plus Jakarta Sans', 'Inter', var(--aml-font-sans), sans-serif;
 }
 
 /* ── HERO UNIFICATO (immagine + info + prezzo + CTA nello stesso blocco) ───── */
@@ -422,7 +382,7 @@ body { background: var(--page-bg); }
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.76rem;
+    font-size: var(--aml-text-xs);
     color: var(--pdp-muted);
 }
 
@@ -447,31 +407,21 @@ body { background: var(--page-bg); }
 
 .pdp-hero__info { min-width: 0; }
 
-/* Dentro la colonna sinistra: box prodotto + testo. */
-.pdp-hero__split {
-    margin-top: 22px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(18px, 2.5vw, 28px);
-    align-items: start;
-}
-
-.pdp-hero__text { min-width: 0; }
-
-/* Box prodotto: contenitore pieno con bordo netto, nessun alone. */
+/* Immagine prodotto libera, senza riquadro/sfondo attorno. Autonoma (non piu'
+   incolonnata accanto alle tab): dimensione contenuta per non dominare la
+   colonna sinistra dell'hero. */
 .pdp-media {
-    margin: 0;
-    padding: 20px;
+    margin: 22px 0 0;
+    padding: 0;
+    max-width: 320px;
     border-radius: var(--pdp-radius);
-    background: var(--pdp-surface-2);
-    border: 1px solid var(--pdp-border);
 }
 
 .pdp-media__img {
     display: block;
     width: 100%;
     height: auto;
-    border-radius: 6px;
+    border-radius: var(--pdp-radius);
 }
 
 @media (max-width: 1024px) {
@@ -480,11 +430,38 @@ body { background: var(--page-bg); }
         gap: 28px;
         padding: 20px var(--pdp-gutter) 44px;
     }
+
+    /* Sotto i 1024px l'acquisto (.pdp-buy) va subito dopo l'immagine, prima
+       delle tab app: meno scroll per arrivare al box prezzo/CTA. display:
+       contents smonta il riquadro di .pdp-hero__info cosi' i suoi figli
+       diventano item diretti della grid, riordinabili insieme a .pdp-buy. */
+    .pdp-hero__info { display: contents; }
+
+    /* I grid item hanno min-width:auto di default: senza azzerarlo, i figli
+       flex/nowrap (es. .pdp-badges) sforano la colonna invece di andare a
+       capo, ora che non sono piu' dentro il box di .pdp-hero__info. */
+    .pdp-badges,
+    .pdp-h1,
+    .v2-hero__desc,
+    .pdp-media,
+    .pdp-buy,
+    .pdp-apptabs-block,
+    .pdp-keylist,
+    .pdp-guide-link {
+        min-width: 0;
+    }
+
+    .pdp-badges { order: 1; }
+    .pdp-h1 { order: 2; }
+    .v2-hero__desc { order: 3; }
+    .pdp-media { order: 4; }
+    .pdp-buy { order: 5; }
+    .pdp-apptabs-block { order: 6; }
+    .pdp-keylist { order: 7; }
+    .pdp-guide-link { order: 8; }
 }
 
 @media (max-width: 560px) {
-    .pdp-hero__split { grid-template-columns: 1fr; }
-
     .pdp-media { max-width: 260px; }
 }
 
@@ -493,7 +470,7 @@ body { background: var(--page-bg); }
     align-items: center;
     gap: 8px;
     margin: 0 0 12px;
-    font-size: 0.7rem;
+    font-size: var(--aml-text-xs);
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -516,7 +493,9 @@ body { background: var(--page-bg); }
     color: var(--pdp-ink);
 }
 
-.pdp-h1 span { color: var(--page-accent); }
+/* Orange-600 come nel mockup (text-orange-600 su "Personal"/"Family" nell'H1):
+   testo grande, la regola dei 3.6:1 di --aml-brand-vivid vale qui. */
+.pdp-h1 span { color: var(--aml-brand-vivid); }
 
 .pdp-page .v2-product-code {
     margin: 0 0 12px;
@@ -526,26 +505,45 @@ body { background: var(--page-bg); }
 .pdp-hero__info .v2-hero__desc {
     margin: 0 0 16px;
     max-width: 46ch;
-    font-size: 1rem;
+    font-size: var(--aml-text-base);
     line-height: 1.6;
     color: var(--pdp-muted);
 }
 
+/* Blocco a piena larghezza sotto immagine+tab (non piu' incolonnato accanto
+   all'immagine), con filetto sopra — come nel mockup di riferimento. */
 .pdp-keylist {
     list-style: none;
     margin: 0 0 18px;
-    padding: 0;
+    padding-top: 14px;
+    padding-inline: 0;
+    padding-bottom: 0;
+    border-top: 1px solid var(--pdp-border);
     display: grid;
     gap: 7px;
+}
+
+/* Due colonne come nel concept: i punti chiave sono frasi brevi, in colonna
+   singola sprecavano meta' larghezza dell'hero. Sotto i 640px torna a una. */
+@media (min-width: 640px) {
+    .pdp-keylist {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 20px;
+    }
 }
 
 /* Marker fuori flusso: il contenuto inline (em, strong…) resta nella stessa riga. */
 .pdp-keylist li {
     position: relative;
-    padding-left: 26px;
-    font-size: 0.92rem;
-    line-height: 1.45;
-    color: var(--pdp-ink);
+    padding-left: 24px;
+    font-size: var(--aml-text-xs, 12px);
+    line-height: 1.5;
+    color: var(--aml-slate-700);
+}
+
+.pdp-keylist li strong {
+    color: var(--aml-slate-900);
+    font-weight: 700;
 }
 
 .pdp-keylist li::before {
@@ -553,9 +551,9 @@ body { background: var(--page-bg); }
     position: absolute;
     left: 0;
     top: 0;
-    color: var(--pdp-ok);
+    color: var(--aml-orange-600);
     font-weight: 800;
-    line-height: 1.45;
+    line-height: 1.5;
 }
 
 .pdp-keylist em {
@@ -563,14 +561,41 @@ body { background: var(--page-bg); }
     color: var(--pdp-muted);
 }
 
+.pdp-guide-link {
+    margin: 12px 0 0;
+    font-size: var(--aml-text-xs, 12px);
+}
+
+.pdp-guide-link a,
+.pdp-guide-link [data-pdp-guide] {
+    color: var(--aml-orange-700);
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.pdp-guide-link a:hover,
+.pdp-guide-link [data-pdp-guide]:hover {
+    color: var(--aml-orange-800);
+    text-decoration: underline;
+}
+
 /* ── CARD D'ACQUISTO (colonna destra dell'hero, sticky) ───────────────────── */
 .pdp-buy {
     position: sticky;
     top: calc(var(--aml-header-offset, 88px) + 16px);
     min-width: 0;
-    padding: 22px;
+    padding: 24px;
     border-radius: var(--pdp-radius);
-    background: var(--pdp-surface);
+    /* Pannello carta su pagina bianca, come nel mockup. */
+    background: var(--pdp-surface-2);
     border: 1px solid var(--pdp-border);
     box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
 }
@@ -581,7 +606,7 @@ body { background: var(--page-bg); }
 
 .pdp-buy__label {
     margin: 0 0 8px;
-    font-size: 0.69rem;
+    font-size: var(--aml-text-xs);
     font-weight: 700;
     letter-spacing: 0.09em;
     text-transform: uppercase;
@@ -598,33 +623,57 @@ body { background: var(--page-bg); }
 
 .pdp-price-sale {
     font-size: clamp(2rem, 4.5vw, 2.5rem);
-    font-weight: 800;
+    font-weight: var(--aml-weight-price);
     line-height: 1;
     color: var(--page-text);
     white-space: nowrap;
 }
 
 .pdp-price-msrp {
-    font-size: 1rem;
+    font-size: var(--aml-text-base);
     color: var(--pdp-muted);
     text-decoration: line-through;
 }
 
+/* Ruolo "risparmio": e' l'unico elemento oltre alla CTA che puo' essere
+   arancione. I colori di prima venivano dal tema scuro ritirato — verde acceso
+   su verde traslucido — e sul fondo chiaro erano illeggibili. */
 .pdp-price-badge {
     display: inline-flex;
     align-items: center;
     padding: 4px 9px;
     border-radius: 6px;
-    background: rgba(6, 78, 59, 0.55);
-    border: 1px solid rgba(6, 95, 70, 0.7);
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #34d399;
+    background: var(--aml-save-bg);
+    border: 1px solid var(--aml-save-border);
+    font-size: var(--aml-text-xs);
+    font-weight: 800;
+    color: var(--aml-save-ink);
 }
+
+/* Etichetta prezzo e badge sconto sulla stessa riga, come nel mockup. */
+.pdp-buy__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Riga risparmio, sopra la nota tasse/consegna — in evidenza, come nel
+   mockup di riferimento (arancione, prima del testo neutro sotto). Orange-700
+   come "Risparmi €X..." nel mockup, non 800: --aml-save-ink resta all'800
+   perche' lo usa anche il badge sconto, che quel tono lo vuole davvero. */
+.pdp-price-save {
+    margin: 0 0 4px;
+    font-size: var(--aml-text-sm);
+    font-weight: 600;
+    color: var(--aml-brand);
+}
+
+.pdp-price-save strong { font-weight: 800; }
 
 .pdp-price-note {
     margin: 0 0 14px;
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.5;
     color: var(--pdp-muted);
 }
@@ -651,7 +700,7 @@ body { background: var(--page-bg); }
     border: 1px solid var(--aml-line);
     border-radius: var(--aml-radius-sm);
     background: var(--aml-trust-bg);
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.4;
     color: var(--aml-ink);
 }
@@ -670,17 +719,17 @@ body { background: var(--page-bg); }
     padding: 15px 24px;
     border: none;
     border-radius: 6px;
-    background: var(--page-accent);
-    color: #fff;
+    background: var(--aml-cta-bg);
+    color: var(--aml-cta-ink);
     font-family: inherit;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: var(--aml-text-base);
+    font-weight: 800;
     cursor: pointer;
     box-shadow: none;
     transition: background-color 0.15s ease;
 }
 
-.pdp-btn-primary:hover { background: var(--aml-brand-hover, #26507f); }
+.pdp-btn-primary:hover { background: var(--aml-cta-bg-hover); }
 
 .pdp-btn-primary:active { background: var(--pdp-navy); }
 
@@ -696,7 +745,7 @@ body { background: var(--page-bg); }
 .pdp-trust-line {
     margin: 10px 0 0;
     padding: 0;
-    font-size: 0.78rem;
+    font-size: var(--aml-text-sm);
     font-weight: 500;
     line-height: 1.45;
     text-align: center;
@@ -709,7 +758,7 @@ body { background: var(--page-bg); }
     justify-content: center;
     gap: 7px;
     margin: 12px 0 0;
-    font-size: 0.83rem;
+    font-size: var(--aml-text-sm);
     font-weight: 600;
     color: var(--page-text);
     text-align: center;
@@ -724,13 +773,13 @@ body { background: var(--page-bg); }
     border-radius: 6px;
     background: var(--pdp-surface-2);
     border: 1px solid var(--pdp-border);
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
 }
 
 /* Etichetta dei metodi di pagamento, come nel prototipo. */
 .pdp-pay__label {
     margin: 0 0 9px;
-    font-size: 0.69rem;
+    font-size: var(--aml-text-xs);
     font-weight: 600;
     letter-spacing: 0.09em;
     text-transform: uppercase;
@@ -765,7 +814,7 @@ body { background: var(--page-bg); }
     border-radius: 6px;
     background: color-mix(in srgb, var(--page-accent) 8%, transparent);
     border: 1px solid color-mix(in srgb, var(--page-accent) 30%, transparent);
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
     font-weight: 600;
     color: var(--page-text);
     text-align: left;
@@ -783,7 +832,7 @@ body { background: var(--page-bg); }
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 7px 16px;
-    font-size: 0.78rem;
+    font-size: var(--aml-text-sm);
     color: var(--pdp-muted);
 }
 
@@ -849,7 +898,7 @@ body { background: var(--page-bg); }
     margin-top: 14px;
     padding-top: 12px;
     border-top: 1px solid var(--pdp-border);
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
     color: var(--pdp-muted);
 }
 
@@ -868,11 +917,13 @@ body { background: var(--page-bg); }
 
 .pdp-sec__eyebrow {
     margin: 0 0 8px;
-    font-size: 0.72rem;
+    font-size: var(--aml-text-xs);
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--page-accent, #003182);
+    /* Orange-600 come nel mockup (tutti gli eyebrow: "PER OGNI TUA ESIGENZA",
+       "FACILE E VELOCE", "DOMANDE FREQUENTI" usano text-orange-600, non 700). */
+    color: var(--aml-brand-vivid);
 }
 
 .pdp-sec__title {
@@ -888,7 +939,7 @@ body { background: var(--page-bg); }
 .pdp-sec__sub {
     margin: 0 0 28px;
     max-width: 68ch;
-    font-size: 0.95rem;
+    font-size: var(--aml-text-base);
     line-height: 1.6;
     color: var(--pdp-muted);
 }
@@ -897,7 +948,7 @@ body { background: var(--page-bg); }
     display: grid;
     gap: 14px;
     max-width: 82ch;
-    font-size: 1rem;
+    font-size: var(--aml-text-base);
     line-height: 1.75;
     color: var(--pdp-muted);
 }
@@ -929,18 +980,20 @@ body { background: var(--page-bg); }
 }
 
 .pdp-stat__value {
+    /* Neutro, non accento: sono numeri descrittivi (persone, TB, mesi), non
+       un'azione o uno sconto — l'arancione qui competerebbe con la CTA. */
     display: block;
     font-size: clamp(1.6rem, 3vw, 2.1rem);
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.05;
-    color: var(--page-accent, #003182);
+    color: var(--page-text);
 }
 
 .pdp-stat__label {
     display: block;
     margin-top: 6px;
-    font-size: 0.9rem;
+    font-size: var(--aml-text-base);
     font-weight: 700;
     color: var(--page-text);
 }
@@ -948,7 +1001,7 @@ body { background: var(--page-bg); }
 .pdp-stat__note {
     display: block;
     margin-top: 4px;
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.45;
     color: var(--pdp-muted);
 }
@@ -961,43 +1014,75 @@ body { background: var(--page-bg); }
     .pdp-stats { grid-template-columns: 1fr; }
 }
 
-/* ── CARD DEI BENEFICI (sezione "perché sceglierlo" delle pagine generate) ── */
+/* ── BENEFICI (sezione "perché sceglierlo") ──────────────────────────────────
+   Flat: niente riquadro/bordo per singolo beneficio, come nel mockup di
+   riferimento (icona/etichetta + titolo + corpo, separati solo dallo spazio
+   della griglia). Prima ogni voce era una card con sfondo e bordo — la
+   stessa gerarchia si legge lo stesso con l'etichetta arancione in maiuscolo
+   a fare da ancora visiva, senza bisogno del contenitore. */
 .pdp-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    gap: 28px 24px;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
+/* Icona e titolo affiancati sulla stessa riga (non piu' impilati), testo
+   sotto su tutta la larghezza: griglia 2 colonne, icona ancorata alla prima. */
 .pdp-card {
-    padding: 22px 22px 20px;
-    border-radius: var(--pdp-radius);
-    background: var(--pdp-surface-2);
-    border: 1px solid var(--pdp-border);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 12px;
+    row-gap: 4px;
+    padding: 0;
 }
 
-.pdp-card__label {
-    margin: 0 0 6px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--page-accent, #003182);
+/* Badge decorativo che sostituisce l'etichetta di categoria in maiuscolo
+   (vedi _render_cards in product_page_lib.py): due tonalita' alternate,
+   entrambe gia' nella palette a tre ruoli, nessun colore nuovo introdotto. */
+.pdp-card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 1;
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    border-radius: 50%;
+    font-size: var(--aml-text-base);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.pdp-card__icon--a {
+    background: var(--aml-save-bg);
+    color: var(--aml-brand-vivid);
+}
+
+.pdp-card__icon--b {
+    background: var(--aml-ok-bg);
+    color: var(--aml-ok);
 }
 
 .pdp-card__title {
-    margin: 0 0 8px;
-    font-size: 1.05rem;
+    grid-row: 1;
+    grid-column: 2;
+    align-self: center;
+    margin: 0;
+    font-size: var(--aml-text-lg);
     font-weight: 700;
     line-height: 1.3;
     color: var(--page-text);
 }
 
 .pdp-card__body {
+    grid-row: 2;
+    grid-column: 1 / -1;
     margin: 0;
-    font-size: 0.88rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.6;
     color: var(--pdp-muted);
 }
@@ -1022,7 +1107,7 @@ body { background: var(--page-bg); }
     width: 100%;
     min-width: 460px;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: var(--aml-text-base);
 }
 
 .pdp-table th,
@@ -1037,7 +1122,7 @@ body { background: var(--page-bg); }
 .pdp-table tbody tr:last-child td { border-bottom: none; }
 
 .pdp-table thead th {
-    font-size: 0.75rem;
+    font-size: var(--aml-text-xs);
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -1071,30 +1156,33 @@ body { background: var(--page-bg); }
 .pdp-table__hint {
     display: block;
     margin-top: 3px;
-    font-size: 0.76rem;
+    font-size: var(--aml-text-xs);
     font-weight: 500;
     color: var(--pdp-muted);
 }
 
 .pdp-table-foot {
     margin: 12px 0 0;
-    font-size: 0.84rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.55;
     color: var(--pdp-muted);
 }
 
 .pdp-table-foot a {
-    color: var(--page-accent, #003182);
+    color: var(--page-accent);
     font-weight: 700;
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
-/* ── APP INCLUSE ──────────────────────────────────────────────────────────── */
+/* ── ALTRE APP (elenco a comparsa dentro le tab dell'hero) ───────────────────
+   Le prime 6 app vivono nelle tab qui sopra; questo e' solo l'elenco delle
+   restanti, aperto su richiesta — righe piatte con hairline, non piu' una
+   card per app: era una griglia a se' che duplicava le tab, tolta dopo il
+   confronto col mockup (le app compaiono una volta sola). */
 .pdp-apps {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -1103,29 +1191,19 @@ body { background: var(--page-bg); }
 .pdp-app {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding: 16px 8px 14px;
-    border-radius: var(--pdp-radius);
-    background: var(--pdp-surface-2);
-    border: 1px solid var(--pdp-border);
-    font-size: 0.78rem;
+    gap: 10px;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--pdp-border);
+    font-size: var(--aml-text-sm);
     font-weight: 700;
     color: var(--page-text);
-    text-align: center;
+    text-align: left;
 }
 
-.pdp-app img { width: 34px; height: 34px; }
+.pdp-app:last-child { border-bottom: none; }
 
-.pdp-app__tag {
-    display: inline-block;
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--page-accent, #003182);
-}
+.pdp-app img { width: 24px; height: 24px; }
 
 .pdp-apps-more {
     margin-top: 12px;
@@ -1139,9 +1217,9 @@ body { background: var(--page-bg); }
     align-items: center;
     gap: 8px;
     padding: 13px 16px;
-    font-size: 0.88rem;
+    font-size: var(--aml-text-sm);
     font-weight: 700;
-    color: var(--page-accent, #003182);
+    color: var(--page-accent);
     cursor: pointer;
     list-style: none;
 }
@@ -1239,14 +1317,14 @@ body { background: var(--page-bg); }
 .pdp-seat__avatar svg { width: 20px; height: 20px; }
 
 .pdp-seat__role {
-    font-size: 0.82rem;
+    font-size: var(--aml-text-sm);
     font-weight: 700;
     color: var(--page-text);
     line-height: 1.2;
 }
 
 .pdp-seat__quota {
-    font-size: 0.76rem;
+    font-size: var(--aml-text-xs);
     font-weight: 600;
     color: var(--pdp-muted);
 }
@@ -1258,19 +1336,19 @@ body { background: var(--page-bg); }
 }
 
 .pdp-seat--owner .pdp-seat__avatar {
-    background: var(--page-accent, #003182);
+    background: var(--page-accent);
     color: #fff;
 }
 
 /* Nessun badge: sballerebbe l'altezza della prima riga. La differenza sta nel testo. */
 .pdp-seat--owner .pdp-seat__quota b {
-    color: var(--page-accent, #003182);
+    color: var(--page-accent);
     font-weight: 800;
 }
 
 .pdp-seats__foot {
     margin: 12px 0 0;
-    font-size: 0.84rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.55;
     color: var(--pdp-muted);
 }
@@ -1280,7 +1358,7 @@ body { background: var(--page-bg); }
 
     .pdp-seat { padding: 12px 6px 10px; }
 
-    .pdp-seat__role { font-size: 0.78rem; }
+    .pdp-seat__role { font-size: var(--aml-text-sm); }
 }
 
 @media (max-width: 420px) {
@@ -1295,52 +1373,46 @@ body { background: var(--page-bg); }
 .pdp-steps {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    gap: 28px 24px;
     list-style: none;
     margin: 0;
     padding: 0;
     counter-reset: pdp-step;
 }
 
+/* Flat, come nel mockup: numero grande in testo (non un badge/cerchio),
+   titolo, corpo — impilati, senza riquadro. */
 .pdp-step {
-    display: grid;
-    grid-template-columns: 30px 1fr;
-    gap: 12px;
-    padding: 18px 18px 16px;
-    border-radius: var(--pdp-radius);
-    background: var(--pdp-surface-2);
-    border: 1px solid var(--pdp-border);
+    padding: 0;
 }
 
 .pdp-step::before {
     counter-increment: pdp-step;
-    content: counter(pdp-step);
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    background: var(--page-accent, #003182);
-    color: #fff;
-    font-size: 0.85rem;
+    content: counter(pdp-step) ".";
+    display: block;
+    margin: 0 0 6px;
+    font-size: var(--aml-text-h3);
     font-weight: 800;
+    /* Orange-600 come nel mockup ("01." "02." "03." sono text-orange-600). */
+    color: var(--aml-brand-vivid);
+    line-height: 1;
 }
 
 .pdp-step h3 {
-    margin: 4px 0 5px;
-    font-size: 0.98rem;
+    margin: 0 0 5px;
+    font-size: var(--aml-text-base);
     font-weight: 700;
     color: var(--page-text);
 }
 
 .pdp-step p {
     margin: 0;
-    font-size: 0.86rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.55;
     color: var(--pdp-muted);
 }
 
-.pdp-step a { color: var(--page-accent, #003182); font-weight: 600; }
+.pdp-step a { color: var(--page-accent); font-weight: 600; }
 
 @media (max-width: 820px) {
     .pdp-steps { grid-template-columns: 1fr; }
@@ -1355,12 +1427,12 @@ body { background: var(--page-bg); }
     border-radius: var(--pdp-radius);
     border: 1px solid color-mix(in srgb, var(--page-accent) 30%, transparent);
     background: color-mix(in srgb, var(--page-accent) 8%, transparent);
-    font-size: 0.87rem;
+    font-size: var(--aml-text-sm);
     line-height: 1.55;
     color: var(--page-text);
 }
 
-.pdp-note svg { width: 20px; height: 20px; color: var(--page-accent, #003182); }
+.pdp-note svg { width: 20px; height: 20px; color: var(--page-accent); }
 
 .pdp-note strong { font-weight: 800; }
 
@@ -1397,11 +1469,11 @@ body { background: var(--page-bg); }
 .pdp-faq-group__title {
     margin: 0 0 12px;
     font-family: var(--font-sans);
-    font-size: 0.78rem;
+    font-size: var(--aml-text-sm);
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--page-accent, #003182);
+    color: var(--page-accent);
 }
 
 .pdp-page .home-faq-list { max-width: 100%; }
@@ -1413,79 +1485,14 @@ body { background: var(--page-bg); }
 /* Accordion secondario (requisiti / condizioni): stessa meccanica, peso minore */
 .pdp-acc .home-faq-item { background: transparent; box-shadow: none; }
 
-.pdp-acc .home-faq-item summary { font-size: 0.92rem; font-weight: 700; }
+.pdp-acc .home-faq-item summary { font-size: var(--aml-text-base); font-weight: 700; }
 
 .pdp-acc .home-faq-item summary::before { content: '+'; }
 
-.pdp-acc .home-faq-body { font-size: 0.88rem; }
-
-/* ── CTA FINALE ───────────────────────────────────────────────────────────── */
-/* Banda navy a tutta larghezza, come la fascia istituzionale sopra: stesso
-   trattamento "banda", non "card" arrotondata staccata dai bordi. */
-.pdp-final {
-    max-width: none;
-    margin: 0;
-    padding: 0;
-    border-radius: 0;
-    background: var(--pdp-navy);
-    border: none;
-    color: #fff;
-    display: block;
-}
-
-.pdp-final__inner {
-    max-width: var(--pdp-maxw);
-    margin: 0 auto;
-    padding: clamp(28px, 4vw, 44px) var(--pdp-gutter);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 20px 32px;
-    align-items: center;
-}
-
-@media (max-width: 760px) {
-    .pdp-final__inner { grid-template-columns: 1fr; }
-
-    .pdp-final .pdp-btn-primary { width: 100%; }
-}
-
-.pdp-final h2 {
-    margin: 0 0 8px;
-    font-family: var(--font-sans);
-    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    color: #fff;
-}
-
-.pdp-final p {
-    margin: 0;
-    font-size: 0.92rem;
-    line-height: 1.55;
-    color: rgba(255, 255, 255, 0.72);
-}
-
-.pdp-final__price {
-    display: block;
-    margin-top: 10px;
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #fff;
-}
-
-.pdp-final__price small {
-    display: block;
-    margin-top: 2px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.55);
-}
-
-.pdp-final .pdp-btn-primary { width: auto; }
+.pdp-acc .home-faq-body { font-size: var(--aml-text-sm); }
 
 /* Fascia lifestyle: la didascalia del componente condiviso è a vetro smerigliato
    (blur + saturate). Qui diventa un pannello pieno, coerente col resto. */
-.pdp-page .bento-caption,
 .pdp-page .v2-family-bridge__caption {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -1524,6 +1531,11 @@ body { background: var(--page-bg); }
     border-color: var(--pdp-border);
 }
 
+.pdp-page .product-sticky-cta__thumb {
+    background: var(--pdp-surface-2);
+    border-color: var(--pdp-border);
+}
+
 .pdp-page .product-sticky-cta__inner {
     max-width: var(--pdp-maxw);
     min-height: 0;
@@ -1533,7 +1545,7 @@ body { background: var(--page-bg); }
 }
 
 .pdp-page .product-sticky-cta__title {
-    font-size: 1rem;
+    font-size: var(--aml-text-base);
     font-weight: 700;
 }
 
@@ -1546,11 +1558,11 @@ body { background: var(--page-bg); }
 
 .pdp-page .product-sticky-cta__sale { font-size: 1.35rem; }
 
-.pdp-page .product-sticky-cta__msrp { font-size: 0.95rem; }
+.pdp-page .product-sticky-cta__msrp { font-size: var(--aml-text-base); }
 
 .pdp-page .product-sticky-cta .btn-primary {
     padding: 0.8rem 1.6rem;
-    font-size: 1rem;
+    font-size: var(--aml-text-base);
 }
 
 .pdp-page .product-sticky-cta .btn-primary svg { width: 20px; height: 20px; }
@@ -1593,7 +1605,16 @@ body { background: var(--page-bg); }
         gap: 12px;
     }
 
-    .pdp-page .product-sticky-cta__title { display: none; }
+    /* Nome prodotto + riga di consegna: spazio troppo stretto per entrambi
+       insieme al prezzo e alla CTA, restano fuori come gia' faceva il titolo.
+       La miniatura resta: senza il titolo e' l'unico riferimento visivo al
+       prodotto nella barra. */
+    .pdp-page .product-sticky-cta__name { display: none; }
+
+    .pdp-page .product-sticky-cta__thumb {
+        width: 34px;
+        height: 34px;
+    }
 
     .pdp-page .product-sticky-cta__prices {
         flex: 1 1 auto;
@@ -1602,19 +1623,19 @@ body { background: var(--page-bg); }
     }
 
     .pdp-page .product-sticky-cta__msrp {
-        font-size: 0.78rem;
+        font-size: var(--aml-text-sm);
         white-space: nowrap;
     }
 
     .pdp-page .product-sticky-cta__sale {
-        font-size: 1.15rem;
+        font-size: var(--aml-text-lg);
         white-space: nowrap;
     }
 
     .pdp-page .product-sticky-cta .btn-primary {
         flex: 0 0 auto;
         padding: 0.75rem 1.3rem;
-        font-size: 0.92rem;
+        font-size: var(--aml-text-base);
         gap: 0.4rem;
     }
 
@@ -1632,8 +1653,11 @@ body { background: var(--page-bg); }
     .pdp-btn-primary:hover { transform: none; }
 }
 
-/* ── SCONTO SOBRIO: prezzo barrato + risparmio in euro bastano ───────────── */
-.pdp-page .pdp-price-badge { display: none; }
+/* Il badge percentuale era nascosto ("sconto sobrio: prezzo barrato +
+   risparmio in euro bastano"). Il mockup di riferimento lo mostra accanto
+   all'etichetta prezzo, quindi torna visibile: la regola qui sotto e' stata
+   rimossa di proposito, non persa. Per tornare indietro basta rimettere
+   .pdp-page .pdp-price-badge { display: none; } */
 
 /* ── FASCIA DI FIDUCIA (sotto l'hero, su tutte le pagine prodotto) ────────── */
 .pf-trustbar {
@@ -1672,14 +1696,14 @@ body { background: var(--page-bg); }
 .pf-trustbar__text { display: flex; flex-direction: column; gap: 2px; }
 
 .pf-trustbar__text strong {
-    font-size: 0.9rem;
+    font-size: var(--aml-text-base);
     font-weight: 700;
     color: var(--pdp-navy);
     letter-spacing: -0.005em;
 }
 
 .pf-trustbar__text > span {
-    font-size: 0.8rem;
+    font-size: var(--aml-text-sm);
     color: var(--pdp-muted);
 }
 
@@ -1689,64 +1713,6 @@ body { background: var(--page-bg); }
 
 @media (max-width: 480px) {
     .pf-trustbar__inner { grid-template-columns: 1fr; }
-}
-
-/* ── FASCIA ISTITUZIONALE NAVY (prima delle FAQ, su tutte le pagine prodotto) ── */
-.pf-institutional {
-    background: var(--pdp-navy);
-    color: #ffffff;
-}
-
-.pf-institutional__inner {
-    max-width: var(--pdp-maxw);
-    margin: 0 auto;
-    padding: clamp(40px, 6vw, 64px) var(--pdp-gutter);
-}
-
-.pf-institutional__title {
-    margin: 0 0 24px;
-    font-family: var(--font-sans);
-    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    max-width: 40ch;
-}
-
-.pf-institutional__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px 24px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.pf-institutional__grid li {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    padding-inline-start: 14px;
-    border-inline-start: 2px solid rgba(255, 255, 255, 0.25);
-}
-
-.pf-institutional__grid li strong {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.pf-institutional__grid li span {
-    font-size: 0.85rem;
-    line-height: 1.45;
-    color: rgba(255, 255, 255, 0.72);
-}
-
-@media (max-width: 900px) {
-    .pf-institutional__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 480px) {
-    .pf-institutional__grid { grid-template-columns: 1fr; }
 }
 
 /* ── FAQ/REQUISITI: niente cerchi "?" (il chevron basta), due colonne
@@ -1759,7 +1725,7 @@ body { background: var(--page-bg); }
 }
 
 .pdp-page .home-faq-list .home-faq-item[open] {
-    border-color: #9eb9d7;
+    border-color: var(--aml-brand-soft);
     box-shadow: 0 2px 8px rgba(20, 32, 51, 0.04);
 }
 
@@ -1780,4 +1746,901 @@ body { background: var(--page-bg); }
         flex: 1 1 0;
         min-width: 0;
     }
+}
+
+/* ── CONCEPT RETAIL: badge hero, selettore versione, tab app ────────────────
+   Blocchi introdotti con il passaggio allo stile del concept. Consumano i
+   token globali tramite gli alias --pdp-*: nessun literal in questo file. */
+
+.pdp-badges {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 0 0 12px;
+}
+
+.pdp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: var(--aml-radius-sm, 6px);
+    background: var(--aml-save-bg);
+    border: 1px solid var(--aml-save-border);
+    color: var(--aml-save-ink);
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.pdp-badge svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: var(--aml-orange-600);
+}
+
+.pdp-badge--copilot,
+.pdp-badge--amber {
+    background: var(--aml-amber-50);
+    border-color: var(--aml-amber-200);
+    color: var(--aml-amber-800);
+}
+
+.pdp-badge--copilot svg,
+.pdp-badge--amber svg {
+    color: var(--aml-amber-600);
+}
+
+.pdp-badges .v2-product-code {
+    margin: 0 0 0 auto;
+}
+
+/* Selettore versione: stesso aspetto del segmented control del concept, ma la
+   variante non attiva e' un link alla sua pagina — vedi VARIANT_SETS in
+   scripts/product_page_lib.py per il perche'. */
+.pdp-plans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 4px;
+    margin: 0 0 16px;
+    border-radius: var(--pdp-radius);
+    background: var(--pdp-surface-2);
+    border: 1px solid var(--pdp-border);
+}
+
+.pdp-plan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 9px 8px;
+    border-radius: calc(var(--pdp-radius) - 2px);
+    text-align: center;
+    text-decoration: none;
+    color: var(--pdp-muted);
+    font-size: var(--aml-text-sm);
+    line-height: 1.2;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.pdp-plan b {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.pdp-plan span {
+    font-size: var(--aml-text-xs);
+    font-weight: 500;
+}
+
+.pdp-plan:hover {
+    background: var(--pdp-surface);
+    color: var(--pdp-ink);
+}
+
+.pdp-plan.is-current {
+    background: var(--pdp-surface);
+    color: var(--pdp-ink);
+    border: 1px solid var(--pdp-border);
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+}
+
+.pdp-plan:focus-visible {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 2px;
+}
+
+/* Tab app: radio + label, nessun JS. Il pannello visibile e' scelto dal
+   :checked del radio corrispondente, cosi' le tab restano usabili da
+   tastiera e non dipendono dal caricamento di uno script.
+
+   La riga delle tab (.pdp-apptabs__row) scorre in orizzontale a QUALSIASI
+   larghezza, non solo sotto i 640px: con 6 app (Word/Excel/PowerPoint/
+   Outlook/OneDrive/Teams, contro le 4 del mockup di riferimento) la riga
+   andava a capo su piu' righe gia' a schermo intero — tagliare le app per
+   farle stare su una riga sola avrebbe voluto dire mostrare un elenco meno
+   completo di quello vero. Lo scroll tiene tutte le app e risolve il
+   problema visivo senza toccare il contenuto. */
+.pdp-apptabs {
+    margin: 22px 0 16px;
+}
+
+/* Frecce di scroll: su desktop non c'e' lo swipe del touch, e senza la
+   scrollbar (nascosta sotto) non resta nessun indizio che ci sono altre app
+   fuori dallo schermo. Mostrate via JS (product-v3.js) solo se la riga scorre
+   davvero, nascoste su touch dove lo swipe basta gia'. */
+.pdp-apptabs__wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pdp-apptabs__wrap .pdp-apptabs__row {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.pdp-apptabs__nav {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--pdp-border);
+    background: var(--pdp-surface);
+    color: var(--pdp-ink);
+    cursor: pointer;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.pdp-apptabs__nav svg {
+    width: 16px;
+    height: 16px;
+}
+
+.pdp-apptabs__nav:hover {
+    background: var(--pdp-surface-2);
+}
+
+.pdp-apptabs__nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+}
+
+.pdp-apptabs__wrap--scrollable .pdp-apptabs__nav {
+    display: inline-flex;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .pdp-apptabs__nav { display: none !important; }
+}
+
+/* Stesso segmented control di .pdp-plans (selettore Personal/Family): un solo
+   linguaggio visivo per i "pulsanti a pillola" della pagina, non un pattern
+   nuovo. Lo scroll orizzontale resta (vedi commento sopra sulle 6 app), ma
+   senza la barra di scroll grigia del browser — resta scorrevole con drag,
+   swipe e tastiera, solo l'indicatore visivo sparisce. */
+.pdp-apptabs__row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--pdp-radius);
+    background: var(--pdp-surface-2);
+    border: 1px solid var(--pdp-border);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.pdp-apptabs__row::-webkit-scrollbar {
+    display: none;
+}
+
+.pdp-apptab__radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.pdp-apptab {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: calc(var(--pdp-radius) - 2px);
+    color: var(--pdp-muted);
+    font-size: var(--aml-text-sm);
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.pdp-apptab:hover {
+    color: var(--pdp-ink);
+}
+
+.pdp-apppanels {
+    padding: 14px 0 0;
+}
+
+.pdp-apppanel {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--aml-text-base);
+    font-weight: 700;
+    color: var(--pdp-ink);
+}
+
+.pdp-apptab__radio:focus-visible + .pdp-apptab {
+    outline: 2px solid var(--page-accent);
+    outline-offset: 2px;
+}
+
+/* Tab attiva e pannello corrispondente. Una coppia di regole per ogni chiave
+   nota di APP_NAMES (product_page_lib.py): l'elenco e' chiuso, quindi si puo'
+   risolvere in CSS statico senza JS. */
+#pdp-apptab-word:checked ~ label[for="pdp-apptab-word"],
+#pdp-apptab-excel:checked ~ label[for="pdp-apptab-excel"],
+#pdp-apptab-powerpoint:checked ~ label[for="pdp-apptab-powerpoint"],
+#pdp-apptab-outlook:checked ~ label[for="pdp-apptab-outlook"],
+#pdp-apptab-onenote:checked ~ label[for="pdp-apptab-onenote"],
+#pdp-apptab-onedrive:checked ~ label[for="pdp-apptab-onedrive"],
+#pdp-apptab-teams:checked ~ label[for="pdp-apptab-teams"],
+#pdp-apptab-defender:checked ~ label[for="pdp-apptab-defender"],
+#pdp-apptab-copilot:checked ~ label[for="pdp-apptab-copilot"],
+#pdp-apptab-designer:checked ~ label[for="pdp-apptab-designer"],
+#pdp-apptab-clipchamp:checked ~ label[for="pdp-apptab-clipchamp"],
+#pdp-apptab-publisher:checked ~ label[for="pdp-apptab-publisher"],
+#pdp-apptab-access:checked ~ label[for="pdp-apptab-access"] {
+    /* Pillola bianca sollevata, stessa resa di .pdp-plan.is-current — non piu'
+       la sottolineatura arancione del mockup, per coerenza col resto della
+       pagina dopo il passaggio a segmented control. */
+    background: var(--pdp-surface);
+    color: var(--pdp-ink);
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+}
+
+/* :has() invece di ~: da quando le tab sono in .pdp-apptabs__row (per lo
+   scroll orizzontale), il radio non e' piu' fratello diretto di .pdp-apppanels
+   ma nipote — il combinatore ~ non li raggiunge piu', serve risalire al
+   contenitore comune. */
+.pdp-apptabs:has(#pdp-apptab-word:checked) .pdp-apppanels .pdp-apppanel[data-app="word"],
+.pdp-apptabs:has(#pdp-apptab-excel:checked) .pdp-apppanels .pdp-apppanel[data-app="excel"],
+.pdp-apptabs:has(#pdp-apptab-powerpoint:checked) .pdp-apppanels .pdp-apppanel[data-app="powerpoint"],
+.pdp-apptabs:has(#pdp-apptab-outlook:checked) .pdp-apppanels .pdp-apppanel[data-app="outlook"],
+.pdp-apptabs:has(#pdp-apptab-onenote:checked) .pdp-apppanels .pdp-apppanel[data-app="onenote"],
+.pdp-apptabs:has(#pdp-apptab-onedrive:checked) .pdp-apppanels .pdp-apppanel[data-app="onedrive"],
+.pdp-apptabs:has(#pdp-apptab-teams:checked) .pdp-apppanels .pdp-apppanel[data-app="teams"],
+.pdp-apptabs:has(#pdp-apptab-defender:checked) .pdp-apppanels .pdp-apppanel[data-app="defender"],
+.pdp-apptabs:has(#pdp-apptab-copilot:checked) .pdp-apppanels .pdp-apppanel[data-app="copilot"],
+.pdp-apptabs:has(#pdp-apptab-designer:checked) .pdp-apppanels .pdp-apppanel[data-app="designer"],
+.pdp-apptabs:has(#pdp-apptab-clipchamp:checked) .pdp-apppanels .pdp-apppanel[data-app="clipchamp"],
+.pdp-apptabs:has(#pdp-apptab-publisher:checked) .pdp-apppanels .pdp-apppanel[data-app="publisher"],
+.pdp-apptabs:has(#pdp-apptab-access:checked) .pdp-apppanels .pdp-apppanel[data-app="access"] {
+    display: flex;
+}
+
+/* ── MODALE ATTIVAZIONE ─────────────────────────────────────────────────────
+   <dialog> nativo: centratura, backdrop, focus trap e chiusura con Esc sono
+   del browser. Qui c'e' solo la veste. */
+
+.pdp-guide-link {
+    margin: 4px 0 0;
+    font-size: var(--aml-text-sm);
+}
+
+.pdp-guide-link a {
+    color: var(--page-accent);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.14em;
+}
+
+.pdp-dialog {
+    width: min(34rem, calc(100vw - 2rem));
+    padding: 24px;
+    border: 1px solid var(--pdp-border);
+    border-radius: var(--pdp-radius);
+    background: var(--pdp-surface);
+    color: var(--pdp-ink);
+    box-shadow: 0 12px 32px rgba(16, 24, 40, 0.18);
+}
+
+.pdp-dialog::backdrop {
+    background: color-mix(in srgb, var(--aml-navy) 55%, transparent);
+}
+
+.pdp-dialog__title {
+    margin: 0 0 14px;
+    font-size: var(--aml-text-lg);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.pdp-dialog__steps {
+    margin: 0;
+    padding-left: 1.2em;
+    display: grid;
+    gap: 10px;
+    font-size: var(--aml-text-sm);
+    line-height: 1.55;
+    color: var(--pdp-muted);
+}
+
+.pdp-dialog__steps strong {
+    display: block;
+    color: var(--pdp-ink);
+    font-weight: 700;
+}
+
+.pdp-dialog__steps a {
+    color: var(--page-accent);
+    font-weight: 600;
+}
+
+.pdp-dialog__foot {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--pdp-border);
+    text-align: right;
+}
+
+.pdp-dialog__close {
+    padding: 9px 16px;
+    border: none;
+    border-radius: calc(var(--pdp-radius) - 2px);
+    background: var(--pdp-navy);
+    color: var(--pdp-surface);
+    font-family: inherit;
+    font-size: var(--aml-text-sm);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.pdp-dialog__close:hover {
+    background: var(--pdp-navy-2);
+}
+
+/* ── DISPONIBILITA' E CTA SECONDARIA ────────────────────────────────────────
+   La disponibilita' e' verde, non arancione come nel concept: nella palette a
+   tre ruoli l'arancione resta a CTA e sconto, il verde alla rassicurazione.
+   Vedi i token --aml-trust-* in page.css. */
+
+.pdp-breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pdp-avail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 0 0 14px;
+}
+
+/* Verde fiducia, non arancione: "disponibile/consegna immediata" e' un
+   segnale di stato/garanzia, non un'azione — regola dei tre ruoli stabilita
+   in sessione. L'arancione resta riservato alla CTA. */
+.pdp-avail__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--aml-trust-soft);
+    color: var(--aml-trust-ink);
+    font-size: var(--aml-text-xs);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.pdp-avail__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--aml-trust-ink);
+    flex-shrink: 0;
+    animation: pdpPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pdpPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .4; transform: scale(0.85); }
+}
+
+.pdp-avail__eta {
+    font-size: var(--aml-text-xs);
+    font-weight: 500;
+    color: var(--pdp-muted);
+}
+
+/* Ghost button per "Aggiungi al carrello" */
+.pdp-btn-ghost,
+.pdp-btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: 1px solid var(--aml-slate-300);
+    background: transparent;
+    color: var(--aml-slate-800);
+    font-family: inherit;
+    font-size: var(--aml-text-sm);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.pdp-btn-ghost:hover,
+.pdp-btn-secondary:hover {
+    background: var(--aml-slate-100);
+    border-color: var(--aml-slate-400);
+    color: var(--aml-slate-900);
+}
+
+.pdp-btn-ghost:active,
+.pdp-btn-secondary:active {
+    background: var(--aml-slate-200);
+}
+
+.pdp-btn-ghost svg,
+.pdp-btn-secondary svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--aml-orange-600);
+}
+
+.pdp-btn-ghost.is-added,
+.pdp-btn-secondary.is-added {
+    background: var(--aml-ok-bg);
+    border-color: var(--aml-ok);
+    color: var(--aml-ok);
+}
+
+.pdp-btn-ghost.is-added svg,
+.pdp-btn-secondary.is-added svg {
+    color: var(--aml-ok);
+}
+
+/* ── FASCIA SOTTO L'HERO ────────────────────────────────────────────────────
+   Trustpilot, riga consegna, badge omaggio, garanzie residue e loghi di
+   pagamento: nel mockup non stanno nel pannello d'acquisto, che si ferma alle
+   due garanzie. Qui vivono sotto l'hero, su tutta la larghezza. */
+
+.pdp-hero__extras {
+    max-width: var(--pdp-maxw);
+    margin: 28px auto 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--pdp-border);
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    align-items: start;
+}
+
+.pdp-hero__extras .pdp-delivery,
+.pdp-hero__extras .pdp-assur,
+.pdp-hero__extras .product-trustpilot,
+.pdp-hero__extras .pdp-bonus {
+    margin: 0;
+}
+
+.pdp-hero__extras .product-trustpilot {
+    text-align: left;
+    padding-top: 0;
+}
+
+/* Il pannello tiene solo le due garanzie principali: niente colonne, sono due
+   righe che devono leggersi come chiusura della card. */
+.pdp-buy .pdp-assur {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--pdp-border);
+}
+
+/* Etichetta sopra il selettore versione, come nel mockup. */
+.pdp-plans__label {
+    margin: 0 0 6px;
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--pdp-muted);
+}
+
+/* Secondo badge dell'hero: stessa forma del primo, tono neutro per non
+   aggiungere un terzo colore accanto ad arancione e verde. */
+.pdp-badge--alt {
+    background: var(--pdp-surface-2);
+    border-color: var(--pdp-border);
+    color: var(--pdp-ink);
+}
+
+/* Pannello della tab app: icona + nome + descrizione dell'app. */
+.pdp-apppanel__text {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+}
+
+.pdp-apppanel__desc {
+    font-size: var(--aml-text-sm);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--pdp-muted);
+}
+
+/* Senza questa regola il <b> del nome app eredita "bolder" dal 700 di
+   .pdp-apppanel e il browser lo risolve a 900 (tabella CSS2 bolder/lighter) —
+   troppo pesante rispetto al font-semibold (600) del mockup. */
+.pdp-apppanel__text b {
+    font-weight: 600;
+}
+
+.pdp-apppanel {
+    align-items: flex-start;
+}
+
+/* ── RECENSIONI TRUSTPILOT (reali, vedi REVIEWS_IT in product_page_lib.py) ──
+   Flat come le altre sezioni: niente card, solo spazio e un hairline tra le
+   colonne su desktop. Il link in alto porta alla pagina Trustpilot vera. */
+.pdp-reviews__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.pdp-reviews__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 6px;
+    font-size: var(--aml-text-sm);
+}
+
+.pdp-reviews__tp {
+    /* Verde Trustpilot (brand esterno, come il blu PayPal in checkout.css —
+       non e' un colore del nostro design system, e' l'identita' reale del
+       servizio). Font-bold (700) come nel mockup, non 800. */
+    font-weight: 700;
+    color: #059669;
+    white-space: nowrap;
+}
+
+.pdp-reviews__stars {
+    color: #FBBF24;
+    letter-spacing: 0.05em;
+}
+
+/* Solo le stelle del riepilogo aggregato (dentro .pdp-reviews__rating) sono
+   verdi come nel mockup — le stelle sulle singole recensioni restano ambra,
+   la convenzione universale di rating. */
+.pdp-reviews__rating .pdp-reviews__stars {
+    color: #10B981;
+}
+
+.pdp-reviews__count {
+    color: var(--pdp-muted);
+    font-weight: 500;
+}
+
+.pdp-reviews__cta {
+    font-size: var(--aml-text-sm);
+    font-weight: 700;
+    color: var(--page-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    white-space: nowrap;
+}
+
+.pdp-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+}
+
+.pdp-reviews__grid li {
+    padding: 20px 0 0;
+    border-top: 1px solid var(--pdp-border);
+}
+
+.pdp-reviews__grid .pdp-reviews__name {
+    display: block;
+    font-weight: 700;
+    color: var(--page-text);
+    font-size: var(--aml-text-sm);
+}
+
+.pdp-reviews__grid .pdp-reviews__stars {
+    display: block;
+    margin: 4px 0 10px;
+    font-size: 0.8rem;
+}
+
+.pdp-reviews__grid p {
+    margin: 0;
+    font-size: var(--aml-text-sm);
+    line-height: 1.6;
+    color: var(--pdp-muted);
+}
+
+@media (max-width: 820px) {
+    .pdp-reviews__grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* ── CLEAN UNDERLINE TABS & INTERACTIVE APP WORKSPACE (MOCKUP ACCURATE) ── */
+.pdp-tabs-clean {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--aml-slate-200);
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    color: var(--aml-slate-600);
+    gap: 24px;
+    margin-top: 22px;
+    /* Sei tab non entrano nella larghezza di un telefono: senza scroll qui
+       l'eccedenza (Copilot, OneDrive) veniva tagliata da .pdp-hero
+       {overflow:hidden} e non era piu' raggiungibile. Stesso trattamento
+       della variante semplice .pdp-apptabs__row, scrollbar nascosta. */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.pdp-tabs-clean::-webkit-scrollbar {
+    display: none;
+}
+
+/* I bottoni non devono restringersi per far entrare tutto: si scorre. */
+.pdp-tabs-clean .pdp-tab-btn {
+    flex-shrink: 0;
+}
+
+.pdp-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 10px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--aml-slate-600);
+    font-family: inherit;
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.pdp-tab-btn:hover {
+    color: var(--aml-slate-900);
+}
+
+.pdp-tab-btn.active {
+    color: var(--aml-orange-600);
+    border-bottom-color: var(--aml-orange-600);
+    font-weight: 800;
+}
+
+.pdp-tab-btn img,
+.pdp-tab-btn svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.pdp-preview-workspace {
+    padding: 16px 0 20px;
+}
+
+.pdp-preview-panel {
+    display: none;
+}
+
+.pdp-preview-panel.active {
+    display: block;
+}
+
+.pdp-preview-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--aml-text-xs);
+    color: var(--aml-slate-600);
+    margin-bottom: 10px;
+}
+
+.pdp-preview-filename {
+    font-weight: 600;
+    color: var(--aml-slate-800);
+}
+
+.pdp-preview-copilot-tag {
+    color: var(--aml-orange-700);
+    background: var(--aml-orange-50);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.pdp-preview-docbox {
+    padding: 16px;
+    background: var(--aml-slate-50);
+    border-radius: 12px;
+    font-size: var(--aml-text-xs);
+    color: var(--aml-slate-700);
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
+/* App senza demo dedicata (oggi Outlook, Copilot): stessa cornice del
+   docbox ma senza corsivo, non e' una citazione tra virgolette. */
+.pdp-preview-text {
+    padding: 16px;
+    background: var(--aml-slate-50);
+    border-radius: 12px;
+    font-size: var(--aml-text-xs);
+    color: var(--aml-slate-700);
+    line-height: 1.6;
+}
+
+.pdp-preview-callout {
+    font-size: var(--aml-text-xs);
+    color: var(--aml-orange-900);
+    background: color-mix(in srgb, var(--aml-orange-50) 70%, transparent);
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--aml-orange-100);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.pdp-preview-callout svg {
+    width: 16px;
+    height: 16px;
+    color: var(--aml-orange-600);
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.pdp-preview-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    text-align: center;
+    font-size: var(--aml-text-xs);
+}
+
+.pdp-stat-card {
+    padding: 12px;
+    background: var(--aml-slate-50);
+    border-radius: 12px;
+}
+
+.pdp-stat-card--highlight {
+    background: color-mix(in srgb, var(--aml-orange-50) 80%, transparent);
+    border: 1px solid var(--aml-orange-100);
+}
+
+.pdp-stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--aml-slate-400);
+    letter-spacing: 0.04em;
+}
+
+.pdp-stat-card--highlight .pdp-stat-label {
+    color: var(--aml-orange-700);
+}
+
+.pdp-stat-val {
+    font-weight: 800;
+    color: var(--aml-slate-800);
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.pdp-stat-card--highlight .pdp-stat-val {
+    color: var(--aml-orange-900);
+}
+
+.pdp-slide-preview {
+    background: var(--aml-slate-900);
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: var(--aml-text-xs);
+}
+
+.pdp-slide-num {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--aml-orange-400);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.pdp-slide-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.pdp-slide-desc {
+    font-size: 11px;
+    color: var(--aml-slate-300);
+}
+
+.pdp-cloud-progress-wrap {
+    margin-top: 8px;
+}
+
+.pdp-cloud-progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--aml-text-xs);
+    color: var(--aml-slate-600);
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.pdp-cloud-progress-info strong {
+    color: var(--aml-orange-600);
+    font-weight: 700;
+}
+
+.pdp-cloud-track {
+    width: 100%;
+    background: var(--aml-slate-100);
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.pdp-cloud-bar {
+    background: var(--aml-orange-500);
+    height: 100%;
+    border-radius: 999px;
+    width: 34%;
 }

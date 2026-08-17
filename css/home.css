@@ -200,7 +200,7 @@
 }
 
 .home-hero-product:focus-visible {
-    outline: 2px solid var(--aml-brand-soft, #8FB2D9);
+    outline: 2px solid var(--aml-brand-soft, #FDBA74);
     outline-offset: 3px;
 }
 

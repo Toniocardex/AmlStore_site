@@ -250,7 +250,6 @@ PHYSICAL_UI = {
 # Tono: diretto, seconda persona, orientato alla conversione.
 V3_UI = {
     "it": {
-        "delivery_line": "Codice via email in 5–15 minuti dalla conferma del pagamento",
         "assur_1": "Attivazione sui portali ufficiali",
         "assur_2": "Consegna digitale, nessuna spedizione",
         "assur_3": "Assistenza in italiano dopo l'acquisto",
@@ -258,28 +257,21 @@ V3_UI = {
         "assur_5": "Fattura elettronica disponibile",
         "receive_eyebrow": "Cosa ricevi",
         "apps_more": "Vedi tutte le app incluse",
+        "apps_scroll_prev": "Scorri indietro",
+        "apps_scroll_next": "Scorri avanti",
         "reviews_title": "Cosa dicono i clienti",
         "reviews_lead": "Le recensioni sono pubblicate e verificate da Trustpilot: le leggi direttamente sulla piattaforma, senza filtri da parte nostra.",
         "reviews_cta": "Leggi tutte le recensioni",
         "specs_title": "Compatibilità e requisiti tecnici",
-        "faq_title": "Le risposte prima dell'acquisto",
-        "final_title": "Tutto pronto per iniziare",
-        "final_tax": "IVA inclusa",
-        "final_instead": "anziché",
+        "faq_title": "Hai dubbi prima dell'acquisto?",
         "sticky_buy": "Acquista ora",
         "payments_aria": "Metodi di pagamento accettati",
         "trust_1_t": "Azienda italiana", "trust_1_d": "Sede e P.IVA in Italia",
         "trust_2_t": "Fattura elettronica", "trust_2_d": "Disponibile per privati e aziende",
-        "trust_3_t": "Assistenza in italiano", "trust_3_d": "Supporto post-vendita via email",
+        "trust_3_t": "Assistenza in italiano", "trust_3_d": "Supporto post-vendita via email e WhatsApp",
         "trust_4_t": "Pagamenti protetti", "trust_4_d": "Elaborati tramite Stripe e PayPal",
-        "inst_title": "Acquista con maggiore tranquillità",
-        "inst_1_t": "Rivenditore europeo", "inst_1_d": "AML Store ha sede legale in Italia",
-        "inst_2_t": "Fattura disponibile", "inst_2_d": "Documentazione per privati e aziende",
-        "inst_3_t": "Supporto scritto", "inst_3_d": "Assistenza via email e WhatsApp",
-        "inst_4_t": "Pagamenti protetti", "inst_4_d": "Transazioni tramite Stripe e PayPal",
     },
     "en": {
-        "delivery_line": "Key by email 5–15 minutes after your payment is confirmed",
         "assur_1": "Activation on official portals",
         "assur_2": "Digital delivery, nothing to ship",
         "assur_3": "Support after you buy",
@@ -287,28 +279,21 @@ V3_UI = {
         "assur_5": "Invoice available",
         "receive_eyebrow": "What you get",
         "apps_more": "See all included apps",
+        "apps_scroll_prev": "Scroll back",
+        "apps_scroll_next": "Scroll forward",
         "reviews_title": "What customers say",
         "reviews_lead": "Reviews are published and verified by Trustpilot: read them straight on the platform, with nothing filtered by us.",
         "reviews_cta": "Read all reviews",
         "specs_title": "Compatibility and technical requirements",
         "faq_title": "Answers before you buy",
-        "final_title": "Ready when you are",
-        "final_tax": "VAT included",
-        "final_instead": "instead of",
         "sticky_buy": "Buy now",
         "payments_aria": "Accepted payment methods",
         "trust_1_t": "European retailer", "trust_1_d": "Registered in Italy",
         "trust_2_t": "Invoice available", "trust_2_d": "VAT invoice for businesses",
         "trust_3_t": "Written support", "trust_3_d": "Email and WhatsApp",
         "trust_4_t": "Secure payments", "trust_4_d": "Processed via Stripe and PayPal",
-        "inst_title": "Buy with more peace of mind",
-        "inst_1_t": "European retailer", "inst_1_d": "AML Store is registered in Italy",
-        "inst_2_t": "Invoice available", "inst_2_d": "Documentation for individuals and businesses",
-        "inst_3_t": "Written support", "inst_3_d": "Support via email and WhatsApp",
-        "inst_4_t": "Secure payments", "inst_4_d": "Processed via Stripe and PayPal",
     },
     "fr": {
-        "delivery_line": "Clé par e-mail sous 5 à 15 minutes après confirmation du paiement",
         "assur_1": "Activation sur les portails officiels",
         "assur_2": "Livraison numérique, rien à expédier",
         "assur_3": "Assistance après l'achat",
@@ -316,28 +301,21 @@ V3_UI = {
         "assur_5": "Facture disponible",
         "receive_eyebrow": "Ce que vous recevez",
         "apps_more": "Voir toutes les applications incluses",
+        "apps_scroll_prev": "Défiler vers l'arrière",
+        "apps_scroll_next": "Défiler vers l'avant",
         "reviews_title": "Ce que disent les clients",
         "reviews_lead": "Les avis sont publiés et vérifiés par Trustpilot : lisez-les directement sur la plateforme, sans filtre de notre part.",
         "reviews_cta": "Lire tous les avis",
         "specs_title": "Compatibilité et configuration requise",
         "faq_title": "Les réponses avant d'acheter",
-        "final_title": "Tout est prêt pour démarrer",
-        "final_tax": "TVA incluse",
-        "final_instead": "au lieu de",
         "sticky_buy": "Acheter",
         "payments_aria": "Moyens de paiement acceptés",
         "trust_1_t": "Revendeur européen", "trust_1_d": "Basé en Italie",
         "trust_2_t": "Facture disponible", "trust_2_d": "TVA pour les entreprises",
         "trust_3_t": "Support par écrit", "trust_3_d": "E-mail et WhatsApp",
         "trust_4_t": "Paiements sécurisés", "trust_4_d": "Via Stripe et PayPal",
-        "inst_title": "Achetez en toute confiance",
-        "inst_1_t": "Revendeur européen", "inst_1_d": "AML Store a son siège en Italie",
-        "inst_2_t": "Facture disponible", "inst_2_d": "Documents pour particuliers et entreprises",
-        "inst_3_t": "Support par écrit", "inst_3_d": "Assistance par e-mail et WhatsApp",
-        "inst_4_t": "Paiements sécurisés", "inst_4_d": "Traités via Stripe et PayPal",
     },
     "de": {
-        "delivery_line": "Key per E-Mail, 5–15 Minuten nach Zahlungsbestätigung",
         "assur_1": "Aktivierung über offizielle Portale",
         "assur_2": "Digitale Lieferung, kein Versand",
         "assur_3": "Support nach dem Kauf",
@@ -345,28 +323,21 @@ V3_UI = {
         "assur_5": "Rechnung verfügbar",
         "receive_eyebrow": "Das bekommst du",
         "apps_more": "Alle enthaltenen Apps ansehen",
+        "apps_scroll_prev": "Zurückscrollen",
+        "apps_scroll_next": "Weiterscrollen",
         "reviews_title": "Was Kunden sagen",
         "reviews_lead": "Die Bewertungen werden von Trustpilot veröffentlicht und geprüft: Du liest sie direkt auf der Plattform, ungefiltert von uns.",
         "reviews_cta": "Alle Bewertungen lesen",
         "specs_title": "Kompatibilität und Systemvoraussetzungen",
         "faq_title": "Antworten vor dem Kauf",
-        "final_title": "Alles bereit zum Loslegen",
-        "final_tax": "inkl. MwSt.",
-        "final_instead": "statt",
         "sticky_buy": "Jetzt kaufen",
         "payments_aria": "Akzeptierte Zahlungsmethoden",
         "trust_1_t": "Europäischer Händler", "trust_1_d": "Sitz in Italien",
         "trust_2_t": "Rechnung verfügbar", "trust_2_d": "MwSt.-Rechnung für Firmen",
         "trust_3_t": "Schriftlicher Support", "trust_3_d": "E-Mail und WhatsApp",
         "trust_4_t": "Sichere Zahlungen", "trust_4_d": "Über Stripe und PayPal",
-        "inst_title": "Kaufen mit mehr Sicherheit",
-        "inst_1_t": "Europäischer Händler", "inst_1_d": "AML Store hat seinen Sitz in Italien",
-        "inst_2_t": "Rechnung verfügbar", "inst_2_d": "Unterlagen für Privatpersonen und Unternehmen",
-        "inst_3_t": "Schriftlicher Support", "inst_3_d": "Support per E-Mail und WhatsApp",
-        "inst_4_t": "Sichere Zahlungen", "inst_4_d": "Abgewickelt über Stripe und PayPal",
     },
     "es": {
-        "delivery_line": "Clave por email en 5–15 minutos tras confirmar el pago",
         "assur_1": "Activación en portales oficiales",
         "assur_2": "Entrega digital, sin envío",
         "assur_3": "Asistencia tras la compra",
@@ -374,50 +345,29 @@ V3_UI = {
         "assur_5": "Factura disponible",
         "receive_eyebrow": "Qué recibes",
         "apps_more": "Ver todas las apps incluidas",
+        "apps_scroll_prev": "Desplazar hacia atrás",
+        "apps_scroll_next": "Desplazar hacia adelante",
         "reviews_title": "Lo que dicen los clientes",
         "reviews_lead": "Las reseñas las publica y verifica Trustpilot: las lees directamente en la plataforma, sin filtros por nuestra parte.",
         "reviews_cta": "Leer todas las reseñas",
         "specs_title": "Compatibilidad y requisitos técnicos",
         "faq_title": "Las respuestas antes de comprar",
-        "final_title": "Todo listo para empezar",
-        "final_tax": "IVA incluido",
-        "final_instead": "en lugar de",
         "sticky_buy": "Comprar ahora",
         "payments_aria": "Métodos de pago aceptados",
         "trust_1_t": "Distribuidor europeo", "trust_1_d": "Con sede en Italia",
         "trust_2_t": "Factura disponible", "trust_2_d": "IVA para empresas",
         "trust_3_t": "Soporte por escrito", "trust_3_d": "Email y WhatsApp",
         "trust_4_t": "Pagos seguros", "trust_4_d": "A través de Stripe y PayPal",
-        "inst_title": "Compra con más tranquilidad",
-        "inst_1_t": "Distribuidor europeo", "inst_1_d": "AML Store tiene su sede en Italia",
-        "inst_2_t": "Factura disponible", "inst_2_d": "Documentación para particulares y empresas",
-        "inst_3_t": "Soporte por escrito", "inst_3_d": "Asistencia por email y WhatsApp",
-        "inst_4_t": "Pagos seguros", "inst_4_d": "Procesados a través de Stripe y PayPal",
     },
 }
 
 # SKU fisici (DVD/COA): niente "codice via email", si spedisce un supporto.
 V3_PHYSICAL_UI = {
-    "it": {
-        "delivery_line": "Affidamento al corriere entro 24 ore lavorative dal pagamento",
-        "assur_2": "Supporto fisico spedito, non solo digitale",
-    },
-    "en": {
-        "delivery_line": "Handed to the courier within 24 business hours of payment",
-        "assur_2": "Physical media shipped, not digital-only",
-    },
-    "fr": {
-        "delivery_line": "Remise au transporteur sous 24 heures ouvrées après paiement",
-        "assur_2": "Support physique expédié, pas seulement numérique",
-    },
-    "de": {
-        "delivery_line": "Übergabe an den Versanddienst innerhalb von 24 Werktagsstunden nach Zahlung",
-        "assur_2": "Physisches Medium wird versendet, nicht nur digital",
-    },
-    "es": {
-        "delivery_line": "Entrega al transportista en 24 horas laborables tras el pago",
-        "assur_2": "Soporte físico enviado, no solo digital",
-    },
+    "it": {"assur_2": "Supporto fisico spedito, non solo digitale"},
+    "en": {"assur_2": "Physical media shipped, not digital-only"},
+    "fr": {"assur_2": "Support physique expédié, pas seulement numérique"},
+    "de": {"assur_2": "Physisches Medium wird versendet, nicht nur digital"},
+    "es": {"assur_2": "Soporte físico enviado, no solo digital"},
 }
 
 
@@ -449,7 +399,7 @@ BASE_LABELS = {
         "product_code": "Codice articolo",
         "add": "Aggiungi al carrello",
         "detail": "Vedi prodotto",
-        "price_label": "Prezzo AML Store",
+        "price_label": "Prezzo Riservato",
         "tax": "Tasse incluse. Nessun costo di spedizione.",
         "sticky": "Acquisto rapido",
         "steps_title": "Consegna e attivazione",
@@ -845,14 +795,13 @@ def _render_lifestyle_band(lifestyle, lang):
                     loading="lazy"
                     decoding="async"
                 >
-                <figcaption class="bento-caption">
-                    <span class="bento-kicker">{kicker}</span>
-                    <h3 class="bento-title">{title}</h3>
-                    <p class="bento-text">{body}</p>
-                </figcaption>
             </figure>
+            <div class="bento-caption">
+                <span class="bento-kicker">{kicker}</span>
+                <h3 class="bento-title">{title}</h3>
+                <p class="bento-text">{body}</p>
+            </div>
         </section>
-        <hr class="v2-divider">
 """
 
 
@@ -876,15 +825,51 @@ def _render_apps(app_keys, labels_map=None):
 
 
 def _render_faq(faq_items):
+    """
+    `a` e' di norma una stringa (un paragrafo, wrappato qui in un <p>). M365
+    Family ha portato le prime risposte a piu' paragrafi (es. "arriva in
+    2-15 minuti" + "se non arriva, scrivici"): per quei casi `a` puo' essere
+    una lista di paragrafi, uno per <p>. Senza questo ramo, una risposta a
+    piu' paragrafi finiva innestata dentro un <p> solo (<p><p>...</p><p>...
+    </p></p>), HTML non valido — scoperto confrontando la pagina Family
+    rigenerata con l'originale scritto a mano.
+    """
     parts = []
     for q, a in faq_items:
+        if isinstance(a, (list, tuple)):
+            body = "\n".join(f"                        <p>{p}</p>" for p in a)
+        else:
+            body = f"                        <p>{a}</p>"
         parts.append(
             f"""                <details class="home-faq-item">
                     <summary>{q}</summary>
                     <div class="home-faq-body">
-                        <p>{a}</p>
+{body}
                     </div>
                 </details>"""
+        )
+    return "\n".join(parts)
+
+
+def _render_faq_groups(faq_groups):
+    """
+    FAQ organizzate per argomento (.pdp-faq-group / .pdp-faq-group__title):
+    variante di _render_faq_columns per i casi — M365 Family in testa — dove
+    le domande sono troppe e troppo eterogenee per stare in una sola lista
+    piatta. Ogni gruppo e' internamente identico a una sezione FAQ normale
+    (stesse due colonne, stesso _render_faq), solo con un titolo sopra e un
+    margine tra un gruppo e il successivo (--pdp-faq-group + .pdp-faq-group
+    in product-pdp.css).
+    """
+    parts = []
+    for title, items in faq_groups:
+        parts.append(
+            f'            <div class="pdp-faq-group">\n'
+            f'                <h3 class="pdp-faq-group__title">{title}</h3>\n'
+            f'                <div class="home-faq-list">\n'
+            f'{_render_faq_columns(items)}\n'
+            f'                </div>\n'
+            f'            </div>'
         )
     return "\n".join(parts)
 
@@ -1017,21 +1002,189 @@ def _render_trustbar(v3):
 """
 
 
-def _render_institutional(v3):
-    """Fascia navy prima delle FAQ: stesso messaggio di fiducia, con più peso
-    visivo. Generica, non legata a un prodotto — uguale su tutte le pagine."""
+# Recensioni reali, copiate da https://it.trustpilot.com/review/aml-store.com
+# il 2026-08-16 (TrustScore 4,8 "Eccellente", 94 recensioni, 91% a 5 stelle).
+# Nomi come mostrati pubblicamente da Trustpilot sulla propria pagina. Solo
+# italiano: tradurre la testimonianza di un cliente reale in un'altra lingua
+# significherebbe fargli dire parole sue in una forma che non ha scelto —
+# niente traduzione finta spacciata per citazione.
+REVIEWS_IT = [
+    ("Roberto Galoppini", "Ho appena acquistato una copia di Microsoft 365, il codice è arrivato 2 minuti dopo il pagamento, ho potuto rinnovare il mio account per 1 anno, azienda superlativa!!"),
+    ("Laura Ceccacci", "Il prodotto è arrivato in tempo reale, il supporto da parte del fornitore è eccezionale, davvero un serio distributore da tenere in considerazione per il futuro."),
+    ("Mario", "Miglior prezzo del web per il prodotto originale, assistenza tempestiva e competente, fornitura via email immediata e nessun problema di attivazione."),
+]
+TRUSTPILOT_URL = "https://it.trustpilot.com/review/aml-store.com"
+TRUSTPILOT_SCORE = "4,8"
+TRUSTPILOT_COUNT_IT = "94 recensioni"
+
+
+def _render_reviews(v3, lang):
+    """
+    Recensioni Trustpilot reali (vedi REVIEWS_IT sopra). Struttura del mockup
+    di riferimento — intestazione con voto+conteggio, 3 card piatte — ma dati
+    veri: il mockup aveva 3 citazioni scritte a mano con badge "Acquisto
+    Verificato" fittizio, non riproducibili (vedi memoria guest-checkout /
+    fedelta-mockup). Solo IT finche' non ci sono recensioni vere in altre
+    lingue da mostrare.
+    """
+    if lang != "it" or not REVIEWS_IT:
+        return ""
+    stars = "★★★★★"
     items = "\n".join(
-        f"""                    <li><strong>{v3[f'inst_{i}_t']}</strong><span>{v3[f'inst_{i}_d']}</span></li>"""
-        for i in (1, 2, 3, 4)
+        f"""                <li>
+                    <span class="pdp-reviews__name">{name}</span>
+                    <span class="pdp-reviews__stars" aria-hidden="true">{stars}</span>
+                    <p>«{quote}»</p>
+                </li>"""
+        for name, quote in REVIEWS_IT
     )
-    return f"""        <div class="pf-institutional">
-            <div class="pf-institutional__inner">
-                <h2 class="pf-institutional__title">{v3['inst_title']}</h2>
-                <ul class="pf-institutional__grid">
-{items}
-                </ul>
+    return f"""        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews__head">
+                <div>
+                    <p class="pdp-reviews__rating">
+                        <span class="pdp-reviews__tp">★ Trustpilot</span>
+                        <span class="pdp-reviews__stars" aria-hidden="true">{stars}</span>
+                        <span class="pdp-reviews__count">({TRUSTPILOT_SCORE}/5 su {TRUSTPILOT_COUNT_IT})</span>
+                    </p>
+                    <h2 id="pdp-reviews-title" class="pdp-sec__title">{v3['reviews_title']}</h2>
+                </div>
+                <a class="pdp-reviews__cta" href="{TRUSTPILOT_URL}" target="_blank" rel="noopener noreferrer">{v3['reviews_cta']}</a>
             </div>
-        </div>
+            <ul class="pdp-reviews__grid">
+{items}
+            </ul>
+        </section>
+"""
+
+
+def _render_stats(stats, lang):
+    """
+    Blocco statistiche (es. "6 Persone incluse"). Terzo blocco bespoke della
+    pagina M365 Family portato nel generatore, stesso schema di seats/compare:
+    opzionale, attivo solo con la chiave `stats`.
+    """
+    if not stats:
+        return ""
+    s = stats.get(lang) or stats.get("it")
+    if not s:
+        return ""
+    items = "\n".join(
+        f'                <li class="pdp-stat">\n'
+        f'                    <span class="pdp-stat__value">{value}</span>\n'
+        f'                    <span class="pdp-stat__label">{label}</span>\n'
+        f'                    <span class="pdp-stat__note">{note}</span>\n'
+        f'                </li>'
+        for value, label, note in s["rows"]
+    )
+    # Divider IN TESTA, non in coda: come apps_block/seats_block/compare_block
+    # (gia' esistenti), cosi' la sezione che segue non deve sapere se aggiungere
+    # il proprio o no. Un trailing hr qui + un leading hr nel blocco dopo
+    # produceva due <hr> consecutivi tra ruoli e app quando questi renderer
+    # sono stati aggiunti — vedi verifica nella sessione che li ha introdotti.
+    return f"""        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-what-title">
+            <p class="pdp-sec__eyebrow">{s['eyebrow']}</p>
+            <h2 id="pdp-what-title" class="pdp-sec__title">{s['title']}</h2>
+            <p class="pdp-sec__sub">{s['sub']}</p>
+            <ul class="pdp-stats">
+{items}
+            </ul>
+        </section>
+"""
+
+
+def _render_specs_table(specs_table, lang, sku):
+    """
+    Scheda tecnica completa (chiave/valore, N righe libere) — diversa dal
+    blocco `specs` a 4 celle gia' supportato da _render_specs_v3. Il valore
+    '@sku' nella riga viene sostituito con lo SKU reale del prodotto: cosi'
+    la scheda tecnica non puo' restare disallineata dal codice articolo vero
+    se la stessa struttura di contenuto viene riusata su un altro prodotto.
+    """
+    if not specs_table:
+        return ""
+    t = specs_table.get(lang) or specs_table.get("it")
+    if not t:
+        return ""
+    rows = "\n".join(
+        f'                        <tr><th scope="row">{k}</th>'
+        f'<td>{sku if v == "@sku" else v}</td></tr>'
+        for k, v in t["rows"]
+    )
+    return f"""        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-specs2-title">
+            <p class="pdp-sec__eyebrow">{t['eyebrow']}</p>
+            <h2 id="pdp-specs2-title" class="pdp-sec__title">{t['title']}</h2>
+            <div class="pdp-tablewrap">
+                <table class="pdp-table pdp-table--specs">
+                    <caption class="visually-hidden">{t['caption']}</caption>
+                    <tbody>
+{rows}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+"""
+
+
+def _render_roles(roles, lang):
+    """
+    Tabella titolare/membri: struttura simile a _render_compare (stesse
+    label yes/no) ma con un elemento in piu' — una riga puo' avere un hint
+    (.pdp-table__hint) e il modificatore .pdp-row--flag per segnalarla senza
+    spezzare l'allineamento della prima riga. Tenuta separata da
+    _render_compare invece di sovraccaricarne la firma con parametri opzionali.
+    """
+    if not roles:
+        return ""
+    r = roles.get(lang) or roles.get("it")
+    if not r:
+        return ""
+
+    def cell(value):
+        if value == "yes":
+            return f'<span class="pdp-yes" aria-label="{html_module.escape(r["yes_label"], quote=True)}">✓</span>'
+        if value == "no":
+            return f'<span class="pdp-no" aria-label="{html_module.escape(r["no_label"], quote=True)}">—</span>'
+        return value
+
+    rows = []
+    for label, hint, flagged, *values in r["rows"]:
+        tr_cls = ' class="pdp-row--flag"' if flagged else ""
+        hint_html = f'<span class="pdp-table__hint">{hint}</span>' if hint else ""
+        cells = "".join(f"<td>{cell(v)}</td>" for v in values)
+        rows.append(
+            f'                        <tr{tr_cls}>\n'
+            f'                            <th scope="row">{label}{hint_html}</th>\n'
+            f'                            {cells}\n'
+            f'                        </tr>'
+        )
+    body = "\n".join(rows)
+    head = "".join(f'<th scope="col">{h}</th>' for h in r["cols"])
+
+    return f"""        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-roles-title">
+            <p class="pdp-sec__eyebrow">{r['eyebrow']}</p>
+            <h2 id="pdp-roles-title" class="pdp-sec__title">{r['title']}</h2>
+            <p class="pdp-sec__sub">{r['sub']}</p>
+
+            <div class="pdp-tablewrap">
+                <table class="pdp-table">
+                    <caption class="visually-hidden">{r['caption']}</caption>
+                    <thead>
+                        <tr>{head}</tr>
+                    </thead>
+                    <tbody>
+{body}
+                    </tbody>
+                </table>
+            </div>
+        </section>
 """
 
 
@@ -1043,29 +1196,23 @@ MAIL_ICON = (
     '01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>'
 )
 
-GIFT_ICON = (
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
-    '<path stroke-linecap="round" stroke-linejoin="round" d="M20 12v10H4V12M2 7h20v5H2V7zm10 15V7m0 0a2.5 '
-    '2.5 0 10-2.5-2.5A2.5 2.5 0 0012 7zm0 0a2.5 2.5 0 102.5-2.5A2.5 2.5 0 0012 7z"/></svg>'
-)
-
-# Testo del badge omaggio guida Copilot: solo italiano perche' la guida esiste
-# solo in quella lingua (vedi functions/api/_lib/guide.js GUIDE_LOCALES) — un
-# ordine EN/FR/DE/ES non la riceve, quindi il badge non deve promettergliela.
-COPILOT_BONUS_HTML_IT = (
-    f'                <p class="pdp-bonus">\n'
-    f'                    {GIFT_ICON}\n'
-    f'                    <span><strong>In regalo:</strong> Guida Copilot per Microsoft 365 '
-    f'(PDF, via email dopo l\'acquisto)</span>\n'
-    f'                </p>\n'
+NOTE_ICON = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">'
+    '<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.9L2.6 17.3A2 2 0 004.3 20.3h15.4a2 '
+    '2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>'
 )
 
 
-def _render_assur(v3):
-    return "\n".join(
-        f"                            <li>{v3[k]}</li>"
-        for k in ("assur_1", "assur_2", "assur_3", "assur_4", "assur_5")
-    )
+ASSUR_KEYS = ("assur_1", "assur_2", "assur_3", "assur_4", "assur_5")
+
+
+def _render_assur(v3, keys=ASSUR_KEYS):
+    """
+    `keys` permette di spezzare l'elenco: nel mockup il pannello d'acquisto
+    tiene solo le due garanzie principali e tutto il resto sta fuori. Senza
+    argomento il comportamento e' quello di prima (tutte e cinque).
+    """
+    return "\n".join(f"                            <li>{v3[k]}</li>" for k in keys)
 
 
 def _render_keypoints(content, lang):
@@ -1087,16 +1234,20 @@ def _render_keypoints(content, lang):
 
 
 def _render_cards(features):
-    """features: (span, tone, label, title, body) — span e tone del vecchio bento non servono."""
+    """features: (span, tone, label, title, body) — span, tone e label (testo)
+    del vecchio bento non servono piu': l'etichetta per-card e' stata sostituita
+    da un'icona decorativa a cerchio colorato (mockup di riferimento), le due
+    tonalita' alternate restano dentro la palette a tre ruoli gia' approvata
+    (arancione brand / verde fiducia), senza introdurre un terzo colore."""
+    ICON_TONES = ("a", "b")
     parts = []
-    for item in features:
-        label, title, body = item[2], item[3], item[4]
-        label_html = (
-            f'                    <p class="pdp-card__label">{label}</p>\n' if label else ""
-        )
+    for i, item in enumerate(features):
+        title, body = item[3], item[4]
+        tone = ICON_TONES[i % len(ICON_TONES)]
         parts.append(
             f"""                <li class="pdp-card">
-{label_html}                    <h3 class="pdp-card__title">{title}</h3>
+                    <span class="pdp-card__icon pdp-card__icon--{tone}" aria-hidden="true">&#10003;</span>
+                    <h3 class="pdp-card__title">{title}</h3>
                     <p class="pdp-card__body">{body}</p>
                 </li>"""
         )
@@ -1119,27 +1270,6 @@ def _app_item(key, indent):
         f"{pad}    {APP_NAMES.get(key, key.title())}\n"
         f"{pad}</li>"
     )
-
-
-def _render_apps_v3(app_keys, v3):
-    """Fino a 6 app in evidenza, le altre in un pannello espandibile."""
-    primary, extra = app_keys[:6], app_keys[6:]
-    main = "\n".join(_app_item(k, 20) for k in primary)
-    block = f"""                <ul class="pdp-apps">
-{main}
-                </ul>"""
-    if not extra:
-        return block
-    more = "\n".join(_app_item(k, 28) for k in extra)
-    return f"""{block}
-                <details class="pdp-apps-more">
-                    <summary>{v3['apps_more']}</summary>
-                    <div class="pdp-apps-more__body">
-                        <ul class="pdp-apps">
-{more}
-                        </ul>
-                    </div>
-                </details>"""
 
 
 def _render_steps_v3(ui, content, lang):
@@ -1195,6 +1325,508 @@ def _render_overview(content, lang):
 """
 
 
+def _render_seats(seats, lang):
+    """
+    Blocco postazioni: era scritto a mano nella sola pagina M365 Family, che per
+    questo restava fuori dal generatore. Qui diventa una sezione opzionale —
+    compare solo se il contenuto dichiara `seats` — cosi' Family puo' rientrare
+    nel flusso normale senza perdere il pezzo che spiega il prodotto, e il
+    blocco resta riusabile per altri piani multi-utente.
+
+    Il CSS (.pdp-seats, .pdp-seat, .pdp-seat--owner) e' gia' in product-pdp.css.
+    """
+    if not seats:
+        return ""
+    s = seats.get(lang) or seats.get("it")
+    if not s:
+        return ""
+
+    rows = []
+    for role, quota, is_owner in s["rows"]:
+        cls = "pdp-seat pdp-seat--owner" if is_owner else "pdp-seat"
+        rows.append(
+            f'                        <li class="{cls}">\n'
+            f'                            <span class="pdp-seat__avatar" aria-hidden="true">'
+            f'<svg viewBox="0 0 24 24"><use href="#pdp-person"/></svg></span>\n'
+            f'                            <span class="pdp-seat__role">{role}</span>\n'
+            f'                            <span class="pdp-seat__quota">{quota}</span>\n'
+            f'                        </li>'
+        )
+
+    media = ""
+    if s.get("media_src"):
+        media = f"""                <figure class="pdp-split__media">
+                    <img src="{s['media_src']}" width="1200" height="675" alt="{html_module.escape(s.get('media_alt', ''), quote=True)}" loading="lazy" decoding="async">
+                </figure>
+"""
+
+    return f"""        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-share-title">
+            <div class="pdp-split">
+{media}                <div class="pdp-split__body">
+                    <p class="pdp-sec__eyebrow">{s['eyebrow']}</p>
+                    <h2 id="pdp-share-title" class="pdp-sec__title">{s['title']}</h2>
+                    <p class="pdp-sec__sub" style="margin-bottom:0;">{s['sub']}</p>
+                    <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+                        <symbol id="pdp-person" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 12a4.2 4.2 0 100-8.4 4.2 4.2 0 000 8.4zm0 1.9c-3.6 0-7 1.9-7 4.2v1.4c0 .4.3.7.7.7h12.6c.4 0 .7-.3.7-.7v-1.4c0-2.3-3.4-4.2-7-4.2z"/>
+                        </symbol>
+                    </svg>
+
+                    <ul class="pdp-seats" aria-label="{html_module.escape(s['list_aria'], quote=True)}">
+{chr(10).join(rows)}
+                    </ul>
+                    <p class="pdp-seats__foot">{s['foot']}</p>
+                </div>
+            </div>
+        </section>
+"""
+
+
+# Etichette del pannello acquisto in stile concept.
+#
+# Il claim di disponibilita' immediata esce SOLO sugli SKU digitali: i fisici
+# vengono spediti e hanno gia' la loro riga di stock reale, alimentata da
+# product-stock.js. Dire "consegna immediata" su quelli sarebbe falso.
+#
+# Nessun conteggio di pezzi: il concept scriveva "14 chiavi pronta consegna",
+# ma quel numero non viene da nessuna fonte. Qui si dichiara la disponibilita',
+# non una scorta inventata.
+BUY_LABELS = {
+    "it": {"avail": "Disponibile · consegna immediata", "eta": "Email in 2–15 min",
+           "plan": "Seleziona la versione", "checkout": "Acquista ora",
+           "sticky_delivery": "Consegna in 2 minuti via Email"},
+    "en": {"avail": "In stock · instant delivery", "eta": "Email in 2–15 min",
+           "plan": "Choose your edition", "checkout": "Buy now",
+           "sticky_delivery": "Delivered in 2 minutes by email"},
+    "fr": {"avail": "Disponible · livraison immédiate", "eta": "E-mail en 2–15 min",
+           "plan": "Choisissez la version", "checkout": "Acheter maintenant",
+           "sticky_delivery": "Livraison en 2 minutes par e-mail"},
+    "de": {"avail": "Verfügbar · sofortige Lieferung", "eta": "E-Mail in 2–15 Min.",
+           "plan": "Version auswählen", "checkout": "Jetzt kaufen",
+           "sticky_delivery": "Lieferung in 2 Minuten per E-Mail"},
+    "es": {"avail": "Disponible · entrega inmediata", "eta": "Email en 2–15 min",
+           "plan": "Selecciona la versión", "checkout": "Comprar ahora",
+           "sticky_delivery": "Entrega en 2 minutos por email"},
+}
+
+# Riga descrittiva del pannello dentro le tab app. Sono descrizioni di cosa fa
+# l'app Microsoft, non claim su Aml Store: nessun numero, nessuna promessa.
+# Le app non elencate qui ricadono sul solo nome, quindi la tabella puo'
+# restare corta senza rompere niente.
+APP_DEMOS = {
+    "word": {
+        "it": "Documenti, lettere e tesi con correzione e formattazione automatica.",
+        "en": "Documents, letters and theses with automatic proofing and formatting.",
+        "fr": "Documents, lettres et mémoires avec correction et mise en forme automatiques.",
+        "de": "Dokumente, Briefe und Arbeiten mit automatischer Korrektur und Formatierung.",
+        "es": "Documentos, cartas y trabajos con corrección y formato automáticos.",
+    },
+    "excel": {
+        "it": "Fogli di calcolo, budget e grafici con formule e tabelle pivot.",
+        "en": "Spreadsheets, budgets and charts with formulas and pivot tables.",
+        "fr": "Feuilles de calcul, budgets et graphiques avec formules et tableaux croisés.",
+        "de": "Tabellen, Budgets und Diagramme mit Formeln und Pivot-Tabellen.",
+        "es": "Hojas de cálculo, presupuestos y gráficos con fórmulas y tablas dinámicas.",
+    },
+    "powerpoint": {
+        "it": "Presentazioni con layout, transizioni e note per il relatore.",
+        "en": "Presentations with layouts, transitions and speaker notes.",
+        "fr": "Présentations avec mises en page, transitions et notes du présentateur.",
+        "de": "Präsentationen mit Layouts, Übergängen und Sprechernotizen.",
+        "es": "Presentaciones con diseños, transiciones y notas del orador.",
+    },
+    "outlook": {
+        "it": "Posta, calendario e contatti in un'unica applicazione.",
+        "en": "Mail, calendar and contacts in a single application.",
+        "fr": "Messagerie, calendrier et contacts dans une seule application.",
+        "de": "E-Mail, Kalender und Kontakte in einer Anwendung.",
+        "es": "Correo, calendario y contactos en una sola aplicación.",
+    },
+    "onedrive": {
+        "it": "Spazio cloud per file e foto, sincronizzati su tutti i dispositivi.",
+        "en": "Cloud storage for files and photos, synced across your devices.",
+        "fr": "Stockage cloud pour fichiers et photos, synchronisé sur vos appareils.",
+        "de": "Cloud-Speicher für Dateien und Fotos, auf allen Geräten synchronisiert.",
+        "es": "Almacenamiento en la nube para archivos y fotos, sincronizado en tus dispositivos.",
+    },
+    "teams": {
+        "it": "Chat, chiamate e riunioni video con condivisione dello schermo.",
+        "en": "Chat, calls and video meetings with screen sharing.",
+        "fr": "Chat, appels et réunions vidéo avec partage d'écran.",
+        "de": "Chat, Anrufe und Videobesprechungen mit Bildschirmfreigabe.",
+        "es": "Chat, llamadas y reuniones de vídeo con pantalla compartida.",
+    },
+}
+
+
+def _buy_labels(lang):
+    return BUY_LABELS.get(lang, BUY_LABELS["en"])
+
+
+def _render_avail_banner(lang, sku):
+    if is_physical_sku(sku):
+        return ""
+    b = _buy_labels(lang)
+    return f"""                <p class="pdp-avail">
+                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>{b['avail']}</span>
+                    <span class="pdp-avail__eta">{b['eta']}</span>
+                </p>
+"""
+
+
+def _render_secondary_cta(add_label):
+    """Ghost "Aggiungi al carrello": secondaria sotto la CTA piena "Acquista
+    ora" (che aggiunge e salta al checkout, vedi data-cart-checkout-redirect
+    sul bottone primario). Resta per chi vuole aggiungere piu' prodotti prima
+    di pagare, senza essere spinto subito al checkout."""
+    return f"""                <button type="button" class="pdp-btn-ghost" data-cart-add data-cart-source="product-pricing">
+                    {CART_ICON}
+                    {add_label}
+                </button>
+"""
+
+
+# Etichette della modale attivazione. Le uniche stringhe nuove: il titolo e i
+# passi arrivano da ui['how_title'] e content['steps'], gia' localizzati.
+GUIDE_LABELS = {
+    "it": {"open": "Come funziona l'attivazione dopo l'acquisto?", "close": "Ho capito, chiudi"},
+    "en": {"open": "How does activation work?", "close": "Got it, close"},
+    "fr": {"open": "Comment fonctionne l'activation ?", "close": "J'ai compris, fermer"},
+    "de": {"open": "Wie funktioniert die Aktivierung?", "close": "Verstanden, schließen"},
+    "es": {"open": "¿Cómo funciona la activación?", "close": "Entendido, cerrar"},
+}
+
+# Suffisso del badge sconto ("−17% SCONTO" nel mockup di riferimento): micro-
+# etichetta di interfaccia, non testo di un cliente — tradurla per lingua e'
+# la stessa cosa che si fa per qualunque altra label dell'interfaccia.
+DISCOUNT_SUFFIX = {"it": "SCONTO", "en": "OFF", "fr": "REMISE", "de": "RABATT", "es": "DTO"}
+
+
+def _render_activation_modal(ui, content, lang):
+    """
+    Modale "come si attiva", come nel concept. Il bottone ha un href verso la
+    sezione passi gia' in pagina: se il browser non supporta <dialog> — o se il
+    JS non parte — resta un'ancora funzionante invece di un bottone morto.
+    """
+    steps = (content.get("steps") or {}).get(lang)
+    if not steps:
+        return "", ""
+    g = GUIDE_LABELS.get(lang, GUIDE_LABELS["en"])
+
+    items = "\n".join(
+        f"                    <li><strong>{title}</strong> {body}</li>"
+        for title, body in steps
+    )
+
+    trigger = f"""                        <p class="pdp-guide-link">
+                            <a href="#pdp-steps-title" data-pdp-guide>{g['open']}</a>
+                        </p>
+"""
+
+    dialog = f"""    <dialog id="pdp-activation" class="pdp-dialog" aria-labelledby="pdp-activation-title">
+        <h2 id="pdp-activation-title" class="pdp-dialog__title">{ui['how_title']}</h2>
+        <ol class="pdp-dialog__steps">
+{items}
+        </ol>
+        <div class="pdp-dialog__foot">
+            <button type="button" class="pdp-dialog__close" data-pdp-guide-close>{g['close']}</button>
+        </div>
+    </dialog>
+"""
+    return trigger, dialog
+
+
+def _render_compare(compare, lang):
+    """
+    Tabella di confronto tra piani. Come le postazioni, era scritta a mano nella
+    sola pagina Family: qui diventa opzionale, attiva solo con la chiave
+    `compare`.
+
+    Una differenza rispetto all'originale: la riga prezzo NON e' testo. Nella
+    pagina scritta a mano erano due literal (€ 79,00 / € 109,00) rimasti indietro
+    rispetto al listino; qui arrivano da entry(), quindi seguono il catalogo come
+    tutti gli altri prezzi della scheda e non possono piu' divergere in silenzio.
+
+    Nelle celle, i token "yes" e "no" diventano i marcatori ✓ / —; qualsiasi
+    altro valore e' testo.
+    """
+    if not compare:
+        return ""
+    c = compare.get(lang) or compare.get("it")
+    if not c:
+        return ""
+
+    def cell(value):
+        if value == "yes":
+            return f'<span class="pdp-yes" aria-label="{html_module.escape(c["yes_label"], quote=True)}">✓</span>'
+        if value == "no":
+            return f'<span class="pdp-no" aria-label="{html_module.escape(c["no_label"], quote=True)}">—</span>'
+        return value
+
+    rows = list(c["rows"])
+    if c.get("price_row") and c.get("skus"):
+        prices = tuple(f"€ {eur_fmt(entry(s)['unitAmountMinor'])}" for s in c["skus"])
+        rows.append((c["price_row"],) + prices)
+
+    body = "\n".join(
+        "                        <tr>\n"
+        f"                            <th scope=\"row\">{r[0]}</th>\n"
+        + "".join(f"                            <td>{cell(v)}</td>\n" for v in r[1:])
+        + "                        </tr>"
+        for r in rows
+    )
+    head = "".join(
+        f'                            <th scope="col">{h}</th>\n' for h in c["cols"]
+    )
+
+    return f"""        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-compare-title">
+            <p class="pdp-sec__eyebrow">{c['eyebrow']}</p>
+            <h2 id="pdp-compare-title" class="pdp-sec__title">{c['title']}</h2>
+            <p class="pdp-sec__sub">{c['sub']}</p>
+
+            <div class="pdp-tablewrap">
+                <table class="pdp-table">
+                    <caption class="visually-hidden">{c['caption']}</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">&nbsp;</th>
+{head}                        </tr>
+                    </thead>
+                    <tbody>
+{body}
+                    </tbody>
+                </table>
+            </div>
+            <p class="pdp-table-foot">{c['foot']}</p>
+        </section>
+"""
+
+
+# ── Concept retail: selettore di versione ─────────────────────────────────────
+# Nel concept lo switcher Personal/Family cambia SKU dentro la stessa pagina.
+# Qui le due versioni sono pagine distinte, ognuna col proprio prezzo, canonical
+# e dati strutturati: il controllo ha lo stesso aspetto ma naviga, così non si
+# tocca né il carrello né la SEO. Se lo SKU non appartiene a un gruppo, lo
+# switcher non viene emesso e l'hero resta invariato.
+VARIANT_SETS = {
+    "m365-consumer": [
+        {"sku": "QQ2-00012", "slug": "microsoft-365-personal", "label": "Personal",
+         "sub": {"it": "1 utente", "en": "1 user", "de": "1 Nutzer",
+                 "fr": "1 utilisateur", "es": "1 usuario"}},
+        {"sku": "6GQ-00092", "slug": "microsoft-365-family", "label": "Family",
+         "sub": {"it": "fino a 6 utenti", "en": "up to 6 users", "de": "bis zu 6 Nutzer",
+                 "fr": "jusqu'à 6 utilisateurs", "es": "hasta 6 usuarios"}},
+    ],
+}
+
+VARIANT_OF = {
+    v["sku"]: name for name, variants in VARIANT_SETS.items() for v in variants
+}
+
+
+def _render_plan_switcher(sku, lang, ui):
+    group = VARIANT_OF.get(sku)
+    if not group:
+        return ""
+    items = []
+    for v in VARIANT_SETS[group]:
+        sub = v["sub"].get(lang) or v["sub"]["en"]
+        # Il prezzo nel selettore viene dal catalogo, come nel resto della
+        # scheda: nel concept era scritto a mano e gia' divergeva dal listino.
+        sub = f'{sub} · € {eur_fmt(entry(v["sku"])["unitAmountMinor"])}'
+        if v["sku"] == sku:
+            items.append(
+                f'                    <span class="pdp-plan is-current" aria-current="true">'
+                f'<b>{v["label"]}</b><span>{sub}</span></span>'
+            )
+        else:
+            items.append(
+                f'                    <a class="pdp-plan" href="/{lang}/{v["slug"]}">'
+                f'<b>{v["label"]}</b><span>{sub}</span></a>'
+            )
+    rows = "\n".join(items)
+    label = _buy_labels(lang)["plan"]
+    return f"""                <p class="pdp-plans__label" id="pdp-plans-label">{label}</p>
+                <div class="pdp-plans" role="group" aria-labelledby="pdp-plans-label">
+{rows}
+                </div>
+"""
+
+
+def _render_app_tabs(app_keys, v3, lang="it"):
+    """
+    Barra di tab del concept al posto della griglia di icone: stessa lista di
+    app, ma una alla volta e con il nome in chiaro. Senza JS le tab sono radio
+    + label, così restano navigabili da tastiera e funzionano anche se lo
+    script non parte.
+    """
+    keys = app_keys[:6]
+    if not keys:
+        return ""
+    tabs, panels = [], []
+    for i, k in enumerate(keys):
+        name = APP_NAMES.get(k, k.title())
+        checked = " checked" if i == 0 else ""
+        tabs.append(
+            f'                    <input type="radio" name="pdp-apptab" id="pdp-apptab-{k}"'
+            f' class="pdp-apptab__radio"{checked}>\n'
+            f'                    <label class="pdp-apptab" for="pdp-apptab-{k}">'
+            f'<img src="{_icon_src(k)}" width="20" height="20" alt="" loading="lazy" decoding="async">'
+            f'{name}</label>'
+        )
+        demo = (APP_DEMOS.get(k) or {}).get(lang) or (APP_DEMOS.get(k) or {}).get("en")
+        desc = f'<span class="pdp-apppanel__desc">{demo}</span>' if demo else ""
+        panels.append(
+            f'                    <div class="pdp-apppanel" data-app="{k}">'
+            f'<img src="{_icon_src(k)}" width="40" height="40" alt="" loading="lazy" decoding="async">'
+            f'<span class="pdp-apppanel__text"><b>{name}</b>{desc}</span></div>'
+        )
+
+    # App oltre la sesta: non una sezione a parte piu' in basso (duplicava le
+    # tab qui sopra, stesso elenco due volte — vedi confronto col mockup che
+    # non ripete mai le app), solo un elenco a comparsa nello stesso blocco.
+    extra = app_keys[6:]
+    more_html = ""
+    if extra:
+        items = "\n".join(_app_item(k, 24) for k in extra)
+        more_html = f"""
+                <details class="pdp-apps-more">
+                    <summary>{v3['apps_more']}</summary>
+                    <div class="pdp-apps-more__body">
+                        <ul class="pdp-apps">
+{items}
+                        </ul>
+                    </div>
+                </details>"""
+
+    return f"""                <div class="pdp-apptabs">
+                    <div class="pdp-apptabs__wrap">
+                        <button type="button" class="pdp-apptabs__nav pdp-apptabs__nav--prev" data-apptabs-nav="-1" aria-label="{v3['apps_scroll_prev']}">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="pdp-apptabs__row">
+{chr(10).join(tabs)}
+                        </div>
+                        <button type="button" class="pdp-apptabs__nav pdp-apptabs__nav--next" data-apptabs-nav="1" aria-label="{v3['apps_scroll_next']}">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
+                    <div class="pdp-apppanels">
+{chr(10).join(panels)}
+                    </div>
+                </div>{more_html}"""
+
+
+def _render_app_tabs_rich(app_keys, featured, demos, v3, lang="it"):
+    """
+    Variante "ricca" delle tab app (bottoni onclick + pannelli con anteprima
+    per-app — filename, badge, contenuto specifico) invece delle radio/label
+    CSS-only di _render_app_tabs. Solo opt-in: usata quando il prodotto
+    fornisce `app_demo_rich` in product_content_flagship.py (oggi solo
+    microsoft-365-personal), tutti gli altri restano su _render_app_tabs
+    esattamente come prima — nessuna modifica per chi non ha questo contenuto.
+
+    Richiede window.switchAppTab (js/product-page.js), gia' caricato su ogni
+    pagina prodotto ricca. La CSP del sito permette script-src 'unsafe-inline',
+    quindi gli onclick funzionano regolarmente in produzione.
+    """
+    keys = (featured or app_keys)[:6]
+    if not keys:
+        return ""
+    tabs, panels = [], []
+    for i, k in enumerate(keys):
+        name = APP_NAMES.get(k, k.title())
+        active = " active" if i == 0 else ""
+        tabs.append(
+            f'                    <button type="button" onclick="switchAppTab(\'{k}\')" id="btn-tab-{k}" class="pdp-tab-btn{active}">'
+            f'<img src="{_icon_src(k)}" width="16" height="16" alt="" loading="lazy" decoding="async">'
+            f'<span>{name}</span></button>'
+        )
+        demo = demos.get(k) or {}
+        dtype = demo.get("type")
+        if dtype == "richtext":
+            body = f"""
+                        <div class="pdp-preview-head">
+                            <span class="pdp-preview-filename">{demo['filename'][lang]}</span>
+                            <span class="pdp-preview-copilot-tag">{demo['tag'][lang]}</span>
+                        </div>
+                        <div class="pdp-preview-docbox">{demo['quote'][lang]}</div>
+                        <div class="pdp-preview-callout">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                            <span><strong>{demo['callout_label'][lang]}</strong> "{demo['callout_text'][lang]}"</span>
+                        </div>"""
+        elif dtype == "stats":
+            cards = "\n".join(
+                f'                            <div class="pdp-stat-card{" pdp-stat-card--highlight" if hi else ""}">'
+                f'<div class="pdp-stat-label">{label}</div><div class="pdp-stat-val">{val}</div></div>'
+                for label, val, hi in demo['stats'][lang]
+            )
+            body = f"""
+                        <div class="pdp-preview-head">
+                            <span class="pdp-preview-filename">{demo['filename'][lang]}</span>
+                            <span class="pdp-preview-copilot-tag">{demo['tag'][lang]}</span>
+                        </div>
+                        <div class="pdp-preview-stats">
+{cards}
+                        </div>"""
+        elif dtype == "slide":
+            body = f"""
+                        <div class="pdp-preview-head">
+                            <span class="pdp-preview-filename">{demo['filename'][lang]}</span>
+                            <span class="pdp-preview-copilot-tag">{demo['tag'][lang]}</span>
+                        </div>
+                        <div class="pdp-slide-preview">
+                            <div class="pdp-slide-num">{demo['slide_num'][lang]}</div>
+                            <div class="pdp-slide-title">{demo['slide_title'][lang]}</div>
+                            <div class="pdp-slide-desc">{demo['slide_desc'][lang]}</div>
+                        </div>"""
+        elif dtype == "cloud":
+            body = f"""
+                        <div class="pdp-preview-head">
+                            <span class="pdp-preview-filename">{demo['filename'][lang]}</span>
+                            <span class="pdp-preview-copilot-tag">{demo['tag'][lang]}</span>
+                        </div>
+                        <div class="pdp-cloud-progress-wrap">
+                            <div class="pdp-cloud-progress-info">
+                                <span>{demo['used_label'][lang]}</span>
+                                <strong>{demo['free_label'][lang]}</strong>
+                            </div>
+                            <div class="pdp-cloud-track"><div class="pdp-cloud-bar" style="width:{demo['percent']}%"></div></div>
+                        </div>"""
+        else:
+            text = (demo.get("text") or {}).get(lang) or (APP_DEMOS.get(k) or {}).get(lang) or (APP_DEMOS.get(k) or {}).get("en") or ""
+            body = f'\n                        <div class="pdp-preview-text">{text}</div>' if text else ""
+        panels.append(
+            f'                    <div id="preview-content-{k}" class="pdp-preview-panel{active}">{body}\n'
+            f'                    </div>'
+        )
+
+    extra = [a for a in app_keys if a not in keys]
+    more_html = ""
+    if extra:
+        items = "\n".join(_app_item(k, 24) for k in extra)
+        more_html = f"""
+                <details class="pdp-apps-more">
+                    <summary>{v3['apps_more']}</summary>
+                    <div class="pdp-apps-more__body">
+                        <ul class="pdp-apps">
+{items}
+                        </ul>
+                    </div>
+                </details>"""
+
+    return f"""                <div class="pdp-tabs-clean">
+{chr(10).join(tabs)}
+                </div>
+                <div class="pdp-preview-workspace" id="app-preview-container">
+{chr(10).join(panels)}
+                </div>{more_html}"""
+
+
 def build_rich_product_page(lang, prod, content, ui_map=None):
     if ui_map is None:
         from product_content_office import UI as ui_map
@@ -1228,7 +1860,8 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     )
     page_url = f"https://aml-store.com/{lang}/{slug}"
     badge_html = (
-        f'<span class="pdp-price-badge" aria-label="−{disc}%">−{disc}%</span>'
+        f'<span class="pdp-price-badge" aria-label="−{disc}%">−{disc}% '
+        f'{DISCOUNT_SUFFIX.get(lang, DISCOUNT_SUFFIX["en"])}</span>'
         if disc > 0
         else ""
     )
@@ -1237,20 +1870,28 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         if disc > 0
         else ""
     )
-    # Il risparmio è una frase dentro la nota prezzo, non più un blocco a sé.
+    # Riga propria sopra la nota tasse/consegna (risparmio in evidenza, poi il
+    # resto in tono neutro sotto) — come nel mockup di riferimento, non più
+    # concatenata nella stessa frase.
     save_html = ""
     if save > 0:
         save_html = (
-            f" {ui['save_prefix']} <strong>€ {eur_fmt(save)}</strong> "
-            f"{ui['save_vs']} (€ {eur_fmt(compare)})."
+            f'                <p class="pdp-price-save">{ui["save_prefix"]} '
+            f'<strong>€ {eur_fmt(save)}</strong> {ui["save_vs"]} '
+            f'(€ {eur_fmt(compare)}).</p>\n'
         )
-    final_instead_html = f", {_v3_for(lang, sku)['final_instead']} € {eur_fmt(compare)}" if save > 0 else ""
-
     faq_entities = [
         {
             "@type": "Question",
             "name": q,
-            "acceptedAnswer": {"@type": "Answer", "text": a},
+            # "text" nello schema.org Answer vuole una stringa: una risposta a
+            # piu' paragrafi (vedi _render_faq) va congiunta qui, altrimenti
+            # json.dumps la serializza come array e il rich result FAQPage
+            # smette di validare.
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": " ".join(a) if isinstance(a, (list, tuple)) else a,
+            },
         }
         for q, a in content["faq"][lang]
     ]
@@ -1304,24 +1945,92 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
 
     v3 = _v3_for(lang, sku)
     keypoints_html = _render_keypoints(content, lang)
+    plan_switcher_html = _render_plan_switcher(sku, lang, ui)
+    rich_demos = content.get("app_demo_rich")
+    if rich_demos:
+        app_tabs_html = _render_app_tabs_rich(
+            content.get("apps") or [], content.get("app_tabs_featured"), rich_demos, v3, lang
+        )
+    else:
+        app_tabs_html = _render_app_tabs(content.get("apps") or [], v3, lang)
+    # Secondo badge dell'hero: prima pill del prodotto, gia' localizzata e
+    # specifica (es. "Include Copilot"). Niente claim inventati.
+    pills = (content.get("pills") or {}).get(lang) or []
+    badge2_html = (
+        f'\n                    <span class="pdp-badge pdp-badge--alt">{pills[0][1]}</span>'
+        if pills
+        else ""
+    )
     steps_title = (content.get('steps_title') or {}).get(lang) or ui['how_title']
     specs_note = (content.get('specs_note') or {}).get(lang) or ui['specs_note']
-    bonus_html = COPILOT_BONUS_HTML_IT if (content.get("copilot_bonus") and lang == "it") else ""
+    # Nota facoltativa dopo i 3 passi (es. avviso account Microsoft su M365
+    # Family). Stessa veste .pdp-note usata altrove nel file, gia' styled.
+    steps_note = (content.get('steps_note') or {}).get(lang)
+    steps_note_html = (
+        f'            <p class="pdp-note">\n'
+        f'                {NOTE_ICON}\n'
+        f'                <span>{steps_note}</span>\n'
+        f'            </p>\n'
+        if steps_note
+        else ""
+    )
     overview_block = _render_overview(content, lang)
 
     # Sezioni condizionali: compaiono solo se il prodotto fornisce i dati.
+    # Le app sono gia' tutte nelle tab dell'hero (con l'elenco a comparsa per
+    # quelle oltre la sesta): questa sezione non ripete piu' la griglia, e
+    # quindi ha senso SOLO quando c'e' un sottotitolo con contenuto vero da
+    # dire (M365 Family: "installa le app desktop, lavora offline..."). Senza
+    # sottotitolo sarebbe un titolo isolato che duplica l'hero — via, come nel
+    # mockup, che le app le mostra una volta sola.
     apps_block = ""
-    if content.get("apps"):
+    apps_sub = (content.get("apps_sub") or {}).get(lang)
+    if content.get("apps") and apps_sub:
         apps_block = f"""        <hr class="pdp-divider">
 
         <section class="pdp-sec" aria-labelledby="pdp-apps-title">
             <p class="pdp-sec__eyebrow">{ui['apps_eyebrow']}</p>
             <h2 id="pdp-apps-title" class="pdp-sec__title">{content['apps_title'][lang]}</h2>
-{_render_apps_v3(content['apps'], v3)}
+            <p class="pdp-sec__sub">{apps_sub}</p>
         </section>
 """
 
+    # Sezione feature: opzionale come le altre. Alcune schede — M365 Family in
+    # testa — costruiscono la pagina su blocchi propri (postazioni, confronto)
+    # e non hanno card feature: pretenderle significherebbe inventarle.
+    features_block = ""
+    features = (content.get("features") or {}).get(lang)
+    if features:
+        features_block = f"""        <section class="pdp-sec" aria-labelledby="pdp-features-title">
+            <p class="pdp-sec__eyebrow">{ui['features_eyebrow']}</p>
+            <h2 id="pdp-features-title" class="pdp-sec__title">{content['features_title'][lang]}</h2>
+            <ul class="pdp-cards">
+{_render_cards(features)}
+            </ul>
+        </section>
+
+"""
+
     lifestyle_block = _render_lifestyle_band(content.get("lifestyle"), lang)
+    seats_block = _render_seats(content.get("seats"), lang)
+    compare_block = _render_compare(content.get("compare"), lang)
+    stats_block = _render_stats(content.get("stats"), lang)
+    specs_table_block = _render_specs_table(content.get("specs_table"), lang, sku)
+    roles_block = _render_roles(content.get("roles"), lang)
+
+    # FAQ per argomento se il prodotto le fornisce (M365 Family), altrimenti
+    # la lista piatta a due colonne di sempre — nessun cambiamento per tutti
+    # gli altri prodotti.
+    faq_groups = (content.get("faq_groups") or {}).get(lang)
+    if faq_groups:
+        faq_body_html = _render_faq_groups(faq_groups)
+    else:
+        faq_body_html = (
+            '            <div class="home-faq-list">\n'
+            f"{_render_faq_columns(content['faq'][lang])}\n"
+            "            </div>"
+        )
+    guide_trigger, guide_dialog = _render_activation_modal(ui, content, lang)
 
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
@@ -1350,6 +2059,16 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
     <link rel="preload" as="image" href="{img_src}" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css">
+    <!-- Font del mockup di riferimento (Plus Jakarta Sans + Inter), scopato alla
+         sola PDP tramite --font-sans su .pdp-page — non tocca header/footer,
+         che leggono --aml-font-sans direttamente (restano su Montserrat).
+         Da Google Fonts, non auto-ospitato come Montserrat: senza le metriche
+         di fallback calibrate apposta (vedi fonts/montserrat.css), il primo
+         render usa il font di sistema e poi scatta al cambio font — piccolo
+         CLS accettato per allinearsi al mockup, non ancora ottimizzato. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
@@ -1362,7 +2081,11 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="{labels['sticky']}" aria-hidden="true">
         <div class="product-sticky-cta__inner">
-            <span class="product-sticky-cta__title">{short}</span>
+            <img class="product-sticky-cta__thumb" src="{img_src}" width="40" height="40" alt="" loading="lazy" decoding="async">
+            <div class="product-sticky-cta__name">
+                <span class="product-sticky-cta__title">{short}</span>
+                {f'<span class="product-sticky-cta__eta">{_buy_labels(lang)["sticky_delivery"]}</span>' if not is_physical_sku(sku) else ''}
+            </div>
             <div class="product-sticky-cta__prices" aria-hidden="true">
                 {f'<span class="product-sticky-cta__msrp">€ {eur_fmt(compare)}</span>' if disc > 0 else ''}
                 <span class="product-sticky-cta__sale">€ {eur_fmt(sale)}</span>
@@ -1388,20 +2111,24 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
 
         <div class="pdp-hero__inner">
             <div class="pdp-hero__info">
-                <p class="pdp-eyebrow">{eyebrow}</p>
-                <h1 class="pdp-h1 v2-hero__title">{title_html}</h1>
-                {product_code_html(labels, sku)}
-
-                <div class="pdp-hero__split">
-                    <figure class="pdp-media">
-                        <img class="pdp-media__img product-cover-img" src="{img_src}" width="400" height="400" alt="{short}" fetchpriority="high" decoding="async">
-                    </figure>
-                    <div class="pdp-hero__text">
-                        <p class="v2-hero__desc">{desc}</p>
-{keypoints_html}
-                    </div>
+                <div class="pdp-badges">
+                    <span class="pdp-badge">{eyebrow}</span>{badge2_html}
+                    {product_code_html(labels, sku)}
                 </div>
-            </div>
+                <h1 class="pdp-h1 v2-hero__title">{title_html}</h1>
+                <p class="v2-hero__desc">{desc}</p>
+
+                <figure class="pdp-media">
+                    <img class="pdp-media__img product-cover-img" src="{img_src}" width="400" height="400" alt="{short}" fetchpriority="high" decoding="async">
+                </figure>
+
+                <div class="pdp-apptabs-block">
+{app_tabs_html}
+                </div>
+
+{keypoints_html}
+
+{guide_trigger}            </div>
 
             <div id="product-pricing" class="pdp-buy"
                 data-stripe-currency="eur"
@@ -1409,30 +2136,22 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 data-stripe-compare-at-amount="{compare}"
                 data-stripe-product-sku="{sku}"
                 data-discount-percent="{disc}"{_physical_attr(sku)}>
-                <p class="pdp-buy__label">{labels['price_label']}</p>
+{_render_avail_banner(lang, sku)}{plan_switcher_html}                <p class="pdp-buy__label">{labels['price_label']}{badge_html}</p>
 
                 <div class="pdp-price-row" role="group" aria-label="{ui['prices_aria']}">
                     <span class="pdp-price-sale">€ {eur_fmt(sale)}</span>
                     {msrp_html}
-                    {badge_html}
                 </div>
-                <p class="pdp-price-note">{labels['tax']}{save_html}</p>
+{save_html}                <p class="pdp-price-note">{labels['tax']}</p>
 {_stock_block_html(lang, sku)}
-                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/{lang}/checkout">
                     {CART_ICON}
-                    {labels['add']}
+                    {_buy_labels(lang)['checkout']}
                 </button>
-
-{_trustpilot_buy_mini(lang)}
-                <p class="pdp-delivery">
-                    {MAIL_ICON}
-                    {v3['delivery_line']}
-                </p>
-{bonus_html}
+{_render_secondary_cta(labels['add'])}
                 <ul class="pdp-assur">
-{_render_assur(v3)}
+{_render_assur(v3, ASSUR_KEYS[:2])}
                 </ul>
-{_render_payment_logos(v3)}
             </div>
         </div>
     </section>
@@ -1440,15 +2159,8 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <main id="main" class="product-page" data-cart-added-msg="{ui['cart_added']}">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 
-{overview_block}        <section class="pdp-sec" aria-labelledby="pdp-features-title">
-            <p class="pdp-sec__eyebrow">{ui['features_eyebrow']}</p>
-            <h2 id="pdp-features-title" class="pdp-sec__title">{content['features_title'][lang]}</h2>
-            <ul class="pdp-cards">
-{_render_cards(content['features'][lang])}
-            </ul>
-        </section>
-
-{apps_block}{lifestyle_block}        <hr class="pdp-divider">
+{overview_block}{features_block}
+{stats_block}{specs_table_block}{roles_block}{apps_block}{seats_block}{compare_block}{lifestyle_block}        <hr class="pdp-divider">
 
         <section class="pdp-sec" aria-labelledby="pdp-steps-title">
             <p class="pdp-sec__eyebrow">{ui['how_eyebrow']}</p>
@@ -1456,15 +2168,14 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
             <ol class="pdp-steps">
 {_render_steps_v3(ui, content, lang)}
             </ol>
-        </section>
+{steps_note_html}        </section>
+{_render_reviews(v3, lang)}
+        <hr class="pdp-divider">
 
-{_render_institutional(v3)}
         <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
             <p class="pdp-sec__eyebrow">{ui['faq_eyebrow']}</p>
             <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">{v3['faq_title']}</h2>
-            <div class="home-faq-list">
-{_render_faq_columns(content['faq'][lang])}
-            </div>
+{faq_body_html}
         </section>
 
         <hr class="pdp-divider">
@@ -1477,28 +2188,15 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
 {_render_specs_v3(ui, content, lang)}
             </div>
         </section>
-
-        <section class="pdp-final" aria-labelledby="pdp-final-title">
-            <div class="pdp-final__inner">
-                <div>
-                    <h2 id="pdp-final-title">{v3['final_title']}</h2>
-                    <p>{short} — {v3['delivery_line']}</p>
-                    <span class="pdp-final__price">€ {eur_fmt(sale)} <small>{v3['final_tax']}{final_instead_html}</small></span>
-                </div>
-                <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
-                    {CART_ICON}
-                    {labels['add']}
-                </button>
-            </div>
-        </section>
     </main>
-    <aml-cookie-banner></aml-cookie-banner>
+{guide_dialog}    <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/faq.js" defer></script>
     <script src="../js/product-page.js" defer></script>
     <script src="../js/product-v3.js" defer></script>
+    <script src="../js/pdp-activation-modal.js" defer></script>
 {_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
@@ -1590,7 +2288,11 @@ def build_compact_product_page(lang, prod):
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="{labels['sticky']}" aria-hidden="true">
         <div class="product-sticky-cta__inner">
-            <span class="product-sticky-cta__title">{short}</span>
+            <img class="product-sticky-cta__thumb" src="{img_src}" width="40" height="40" alt="" loading="lazy" decoding="async">
+            <div class="product-sticky-cta__name">
+                <span class="product-sticky-cta__title">{short}</span>
+                {f'<span class="product-sticky-cta__eta">{_buy_labels(lang)["sticky_delivery"]}</span>' if not is_physical_sku(sku) else ''}
+            </div>
             <div class="product-sticky-cta__prices" aria-hidden="true">
                 {f'<span class="product-sticky-cta__msrp">€ {eur_fmt(compare)}</span>' if disc > 0 else ''}
                 <span class="product-sticky-cta__sale">€ {eur_fmt(sale)}</span>

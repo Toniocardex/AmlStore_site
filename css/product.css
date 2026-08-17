@@ -39,9 +39,13 @@ main.product-page {
 .product-sticky-cta {
     --pp-success: #10b981;
     --pp-warning: #f59e0b;
-    --pp-accent-hover: var(--aml-brand-hover, #26507f);
-    --pp-brand: var(--page-accent, #003182);
-    --pp-brand-hover: var(--aml-brand-hover, #26507f);
+    /* Stessa CTA del pannello d'acquisto principale (--aml-cta-bg/-hover in
+       page.css): prima puntava a --page-accent (700, piu' scuro con hover
+       ancora piu' scuro), un arancione diverso da quello del bottone
+       "Aggiungi al carrello" sulla stessa pagina — un solo colore, non due. */
+    --pp-accent-hover: var(--aml-cta-bg-hover);
+    --pp-brand: var(--aml-cta-bg);
+    --pp-brand-hover: var(--aml-cta-bg-hover);
     --pp-pricing-bg: var(--aml-paper, #f9fafb);
     --pp-pricing-border: var(--page-border);
 }
@@ -158,18 +162,47 @@ main.product-page {
     flex-wrap: wrap;
 }
 
+.product-sticky-cta__thumb {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    object-fit: contain;
+    background: var(--page-bg);
+    border: 1px solid var(--page-border);
+}
+
+.product-sticky-cta__name {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    flex: 1 1 140px;
+}
+
 .product-sticky-cta__title {
     font-size: 0.9rem;
     font-weight: 800;
     color: var(--page-text);
     letter-spacing: -0.02em;
     line-height: 1.25;
-    min-width: 0;
-    flex: 1 1 140px;
+}
+
+/* Riga di consegna sotto il titolo, come nel mockup ("Consegna in ... via
+   Email"): riusa la stessa etichetta eta del pannello d'acquisto principale,
+   niente copy duplicato. Assente sugli SKU fisici (vedi is_physical_sku). */
+.product-sticky-cta__eta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    /* Orange-600 come nel mockup (la riga di consegna e' text-orange-600,
+       non 700). */
+    color: var(--aml-brand-vivid);
+    line-height: 1.2;
 }
 
 @media (min-width: 641px) {
-    .product-sticky-cta__title {
+    .product-sticky-cta__title,
+    .product-sticky-cta__eta {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -228,11 +261,26 @@ main.product-page {
             max(0.75rem, env(safe-area-inset-left, 0px));
     }
 
-    .product-sticky-cta__title {
+    .product-sticky-cta__thumb {
+        width: 32px;
+        height: 32px;
+    }
+
+    .product-sticky-cta__name {
         flex: 1 1 auto;
         order: 0;
         min-width: 0;
+    }
+
+    .product-sticky-cta__title {
         font-size: 0.78rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .product-sticky-cta__eta {
+        font-size: 0.68rem;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

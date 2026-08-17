@@ -35,6 +35,18 @@ VAR_CALL_RE = re.compile(r"var\((?:[^()]|\([^()]*\))*\)")
 CUSTOM_PROP_RE = re.compile(r"^--[\w-]+\s*:\s*(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))\s*;?$")
 SHADOW_LINE_RE = re.compile(r"(?:box-|text-|-webkit-box-)?shadow\s*:", re.IGNORECASE)
 
+# Ridefinizione di un token GLOBALE con un colore letterale, fuori da page.css.
+# Sintatticamente e' una dichiarazione di custom property, quindi la regola
+# "le definizioni di token sono sempre ammesse" la lasciava passare — ma qui
+# non si sta definendo un token: si sta schermando quello globale con un
+# literal, e da quel momento il file smette di seguire il design system.
+# E' esattamente cosi' che le PDP sono rimaste blu dopo il passaggio del
+# brand all'arancione: .pdp-page ridichiarava --page-accent: #3267AC.
+GLOBAL_TOKEN_SHADOW_RE = re.compile(
+    r"^--(?:aml|page|pdp)-[\w-]+\s*:\s*(?:#[0-9a-fA-F]{3,8}|rgba?\([^)]*\))\s*;?$"
+)
+TOKEN_SOURCE_FILE = "css/page.css"
+
 # Righe riviste a mano: colori intenzionali, non hardcoding "sfuggito".
 # Chiave = percorso relativo, valore = insieme di righe (trimmed) ammesse.
 ALLOWLIST = {
@@ -66,6 +78,16 @@ ALLOWLIST = {
         "#ffffff 100%",
         # Zebra striping neutro (grigio, non un colore di tema)
         "background: rgba(127, 127, 127, 0.05);",
+        # Stelle di valutazione (.pdp-reviews__stars): l'ambra/oro delle stelle
+        # e' una convenzione universale dei sistemi di recensione (Trustpilot
+        # compreso), indipendente dalla palette del brand — non un accento
+        # arancione mascherato.
+        "color: #FBBF24;",
+        # Verde ufficiale Trustpilot (".pdp-reviews__tp", stelle del riepilogo
+        # aggregato): identita' del brand esterno, come il blu PayPal sotto —
+        # non fa parte della nostra palette e non deve seguirne i token.
+        "color: #059669;",
+        "color: #10B981;",
     },
     "css/home.css": {
         # Testo bianco su icona/bottone colorato
@@ -114,9 +136,22 @@ def check_file(rel_path: str) -> list[str]:
     allowed = ALLOWLIST.get(rel_path, set())
     violations = []
 
+    is_token_source = rel_path.replace("\\", "/") == TOKEN_SOURCE_FILE
+
     for lineno, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         stripped = raw_line.strip()
-        if not stripped or CUSTOM_PROP_RE.match(stripped):
+        if not stripped:
+            continue
+
+        if not is_token_source and GLOBAL_TOKEN_SHADOW_RE.match(stripped):
+            if stripped not in allowed:
+                violations.append(
+                    f"{rel_path}:{lineno}: token globale ridefinito con un literal "
+                    f"(usa var(--aml-*) o aggiungi il token in {TOKEN_SOURCE_FILE}): {stripped}"
+                )
+            continue
+
+        if CUSTOM_PROP_RE.match(stripped):
             continue
         if SHADOW_LINE_RE.search(stripped):
             continue

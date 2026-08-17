@@ -9,20 +9,68 @@
  * esistenti possono continuare a usare l'alias finché non vengono toccati.
  */
 :root {
-    /* Brand — allineato a identità Licensoft (navy / blue / soft) */
-    --aml-navy: #0A1830;
-    --aml-navy-2: #122445;
-    --aml-brand: #245EAC;
-    --aml-brand-hover: #1c4c8c;
-    --aml-brand-soft: #8FB2D9;
+    /* ── Palette a tre ruoli ────────────────────────────────────────────
+       Ogni colore ha UN significato, e i componenti referenziano il ruolo
+       (--aml-cta-bg, --aml-trust-ink), mai il colore grezzo:
+
+         arancione  →  agire e risparmiare   (CTA primaria, badge sconto)
+         verde      →  rassicurare           (stock, garanzia, pagamenti)
+         slate/navy →  tutto il resto        (contenuto, feature, chrome)
+
+       Se per colorare qualcosa serve scrivere var(--aml-cta-bg) su un
+       elemento che non è una CTA, l'errore si vede leggendo il codice:
+       è quell'attrito il motivo per cui i ruoli esistono. */
+
+    /* ── Scala Arancione Brand (dal mockup Tailwind) ─────────────────── */
+    --aml-orange-50: #FFF7ED;
+    --aml-orange-100: #FFEDD5;
+    --aml-orange-200: #FED7AA;
+    --aml-orange-300: #FDBA74;
+    --aml-orange-400: #FB923C;
+    --aml-orange-500: #F97316;
+    --aml-orange-600: #EA580C;
+    --aml-orange-700: #C2410C;
+    --aml-orange-800: #9A3412;
+    --aml-orange-900: #7C2D12;
+
+    /* ── Scala Slate / Neutrali Scuro ─────────────────────────────────── */
+    --aml-slate-50: #F8FAFC;
+    --aml-slate-100: #F1F5F9;
+    --aml-slate-200: #E2E8F0;
+    --aml-slate-300: #CBD5E1;
+    --aml-slate-400: #94A3B8;
+    --aml-slate-500: #64748B;
+    --aml-slate-600: #475569;
+    --aml-slate-700: #334155;
+    --aml-slate-800: #1E293B;
+    --aml-slate-900: #0F172A;
+
+    /* ── Scala Amber (Copilot AI & Rating Stars) ──────────────────────── */
+    --aml-amber-50: #FFFBEB;
+    --aml-amber-100: #FEF3C7;
+    --aml-amber-200: #FDE68A;
+    --aml-amber-400: #FBBF24;
+    --aml-amber-600: #D97706;
+    --aml-amber-800: #92400E;
+
+    /* Brand — arancione. --aml-navy NON è il brand: è la superficie scura
+       (barra annuncio, footer, bottoni secondari) e resta invariata. */
+    --aml-navy: var(--aml-slate-900);
+    --aml-navy-2: var(--aml-slate-800);
+    --aml-brand: var(--aml-orange-700);         /* 5.2:1 su bianco — usato per testo/link/risparmio */
+    --aml-brand-hover: var(--aml-orange-800);   /* 7.3:1 */
+    --aml-brand-soft: var(--aml-orange-300);
+    --aml-brand-vivid: var(--aml-orange-600);   /* 3.6:1 — campiture ampie, titoli accentati, CTA, check */
+    --aml-brand-vivid-hover: var(--aml-orange-500); /* hover della CTA: piu' chiaro (hover:bg-orange-500) */
 
     /* Neutrali */
-    --aml-ink: #152033;
-    --aml-ink-2: #5F6B7A;
-    --aml-line: #DCE3EA;
-    --aml-paper: #E9EEF4;
+    --aml-ink: var(--aml-slate-800);
+    --aml-ink-2: var(--aml-slate-600);
+    --aml-line: var(--aml-slate-200);
+    --aml-paper: var(--aml-slate-100);
+    --aml-paper-2: var(--aml-slate-50);   /* carta più chiara: fondo delle PDP e delle card interne */
     --aml-surface: #FFFFFF;
-    --aml-trust-bg: #E9EEF4;
+    --aml-trust-bg: var(--aml-slate-100);
 
     /* Semantici */
     --aml-ok: #1F7A52;
@@ -31,6 +79,24 @@
     --aml-warn-bg: #FCF3D9;
     --aml-danger: #B3261E;
     --aml-danger-bg: #FBEAE9;
+
+    /* ── Ruoli applicativi: qui vive la regola dei tre colori ──────────
+       I componenti usano QUESTI, non --aml-brand / --aml-ok diretti. */
+
+    /* Agire */
+    --aml-cta-bg: var(--aml-brand-vivid);
+    --aml-cta-bg-hover: var(--aml-brand-vivid-hover);
+    --aml-cta-ink: #FFFFFF;
+
+    /* Risparmiare */
+    --aml-save-ink: var(--aml-orange-800);
+    --aml-save-bg: var(--aml-orange-50);
+    --aml-save-border: var(--aml-orange-200);
+
+    /* Rassicurare */
+    --aml-trust-ink: var(--aml-ok);
+    --aml-trust-soft: var(--aml-ok-bg);
+    --aml-stock-ink: var(--aml-ok);
 
     /* Raggio / ombra / layout */
     --aml-radius-sm: 6px;
@@ -49,6 +115,29 @@
     --aml-font-sans: 'Montserrat', 'Montserrat Fallback', sans-serif;
     --aml-font-display: 'Source Serif 4', 'Source Serif4', 'Source Serif Fallback', Georgia, serif;
 
+    /* Scala tipografica — quattro livelli sotto il titolo, non sei taglie
+       indistinguibili tra 10 e 12px. Senza contenitori è la leva
+       principale della gerarchia, quindi va tenuta corta. */
+    --aml-text-xs: 0.75rem;      /* 12px — badge, note legali */
+    --aml-text-sm: 0.875rem;     /* 14px — corpo secondario */
+    --aml-text-base: 0.9375rem;  /* 15px — corpo */
+    --aml-text-lg: 1.125rem;
+    --aml-text-h3: 1.375rem;
+    --aml-text-h2: clamp(1.5rem, 3vw, 2rem);
+    --aml-text-h1: clamp(2rem, 5vw, 2.75rem);
+    --aml-text-price: clamp(2.25rem, 5vw, 3rem);
+
+    --aml-weight-body: 400;
+    --aml-weight-strong: 600;
+    --aml-weight-display: 700;
+    --aml-weight-price: 900;     /* riservato al prezzo: il piu' pesante della pagina */
+
+    /* Ritmo verticale — sostituisce i bordi tra sezioni: senza filetti,
+       lo spazio è l'unico separatore e va tokenizzato o riparte a caso. */
+    --aml-section-gap: clamp(3rem, 8vw, 6rem);
+    --aml-section-gap-lg: clamp(4.5rem, 11vw, 8rem);
+    --aml-stack: 1rem;
+
     /* ── Alias legacy: un solo posto dove sono definiti i valori reali ── */
     --page-bg: var(--aml-paper);
     --page-border: var(--aml-line);
@@ -56,7 +145,7 @@
     --page-text-secondary: var(--aml-ink-2);
     --page-text-muted: var(--aml-ink-2);
     --page-accent: var(--aml-brand);
-    --page-glow: rgba(36, 94, 172, 0.06);
+    --page-glow: rgba(194, 65, 12, 0.06);
     --font-sans: var(--aml-font-sans);
     --font-display: var(--aml-font-display);
 }
@@ -64,6 +153,11 @@
 html {
     color-scheme: light;
     scroll-behavior: smooth;
+}
+
+::selection {
+    background: var(--aml-orange-500);
+    color: #ffffff;
 }
 
 @media (prefers-reduced-motion: reduce) {

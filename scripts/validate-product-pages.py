@@ -107,11 +107,18 @@ def check_product_pages():
             if visible_codes != [sku]:
                 errors.append(f"{page}: visible product code {visible_codes or 'missing'} != {sku}")
 
+            # Con il passaggio allo stile del concept il codice articolo e' salito
+            # nella riga badge sopra il titolo (vedi .pdp-badges in
+            # product_page_lib.py): l'ordine atteso e' badge+codice, H1, descrizione.
+            badges_position = text.find('class="pdp-badges"')
+            title_start = text.find("<h1")
             title_end = text.find("</h1>")
             code_position = text.find('class="v2-product-code"')
             desc_position = text.find('class="v2-hero__desc"')
-            if not (title_end >= 0 and title_end < code_position < desc_position):
-                errors.append(f"{page}: product code must be between H1 and description")
+            if not (0 <= badges_position < code_position < title_start):
+                errors.append(f"{page}: product code must sit in the badge row above the H1")
+            if not (0 <= title_end < desc_position):
+                errors.append(f"{page}: description must follow the H1")
 
             product = product_json_ld(text, page)
             if product:

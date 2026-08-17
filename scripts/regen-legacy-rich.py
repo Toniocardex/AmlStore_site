@@ -34,6 +34,11 @@ PRODUCTS = [
     # Riscritta solo per aggiungere il badge omaggio guida Copilot (copilot_bonus),
     # assente nel generatore fino ad ora: nessun'altra modifica di contenuto.
     {"sku": "QQ2-00012", "slug": "microsoft-365-personal", "template": "m365", "card_name": "Microsoft 365 Personal", "image": IMG_OFFICE},
+    # Era l'ultima pagina PRESERVE_PAGES fuori dal generatore (port_m365_family_locales.py,
+    # ora superseduto): il contenuto e' stato estratto con
+    # scripts/extract-m365-family-content.py + scripts/build-m365-family-content.py
+    # e vive in product_content_flagship.PRODUCTS['microsoft-365-family'].
+    {"sku": "6GQ-00092", "slug": "microsoft-365-family", "template": "m365", "card_name": "Microsoft 365 Family", "image": "microsoft-365-family.webp"},
 ]
 
 

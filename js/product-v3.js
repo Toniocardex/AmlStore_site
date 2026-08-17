@@ -54,5 +54,41 @@
             window.location.href = '/it/checkout';
         }, 220);
     });
+
+    /**
+     * Frecce di scroll della barra tab app: su desktop non c'e' lo swipe del
+     * touch e la scrollbar resta nascosta (vedi product-pdp.css), quindi senza
+     * questo non c'e' alcun indizio che Outlook/OneDrive/Copilot esistono
+     * oltre il bordo. Le frecce restano invisibili finche' non c'e' davvero
+     * altro da scorrere, e si disabilitano da sole a inizio/fine corsa.
+     */
+    document.addEventListener('DOMContentLoaded', function () {
+        var wraps = document.querySelectorAll('.pdp-apptabs__wrap');
+        if (!wraps.length) return;
+
+        wraps.forEach(function (wrap) {
+            var row = wrap.querySelector('.pdp-apptabs__row');
+            var prev = wrap.querySelector('[data-apptabs-nav="-1"]');
+            var next = wrap.querySelector('[data-apptabs-nav="1"]');
+            if (!row || !prev || !next) return;
+
+            function sync() {
+                var max = row.scrollWidth - row.clientWidth;
+                wrap.classList.toggle('pdp-apptabs__wrap--scrollable', max > 2);
+                prev.disabled = row.scrollLeft <= 1;
+                next.disabled = row.scrollLeft >= max - 1;
+            }
+
+            prev.addEventListener('click', function () {
+                row.scrollBy({ left: -160, behavior: 'smooth' });
+            });
+            next.addEventListener('click', function () {
+                row.scrollBy({ left: 160, behavior: 'smooth' });
+            });
+            row.addEventListener('scroll', sync, { passive: true });
+            window.addEventListener('resize', sync, { passive: true });
+            sync();
+        });
+    });
 })();
 

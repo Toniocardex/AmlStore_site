@@ -149,4 +149,25 @@
             new ResizeObserver(scheduleRebuild).observe(headerEl);
         }
     });
+
+    /**
+     * Switch App preview tab (Word, Excel, PowerPoint, OneDrive)
+     */
+    window.switchAppTab = function (appId) {
+        var buttons = document.querySelectorAll('.pdp-tab-btn');
+        var panels = document.querySelectorAll('.pdp-preview-panel');
+
+        buttons.forEach(function (btn) {
+            btn.classList.remove('active');
+        });
+        panels.forEach(function (panel) {
+            panel.classList.remove('active');
+        });
+
+        var activeBtn = document.getElementById('btn-tab-' + appId);
+        var activePanel = document.getElementById('preview-content-' + appId);
+
+        if (activeBtn) activeBtn.classList.add('active');
+        if (activePanel) activePanel.classList.add('active');
+    };
 })();

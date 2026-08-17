@@ -135,17 +135,27 @@
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
     <link rel="preload" as="image" href="../asset/media/products/office-2021-home-business-mac.webp?v=7e8ae9a9b1" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
-    <link rel="stylesheet" href="../css/page.css?v=9beb0fd5ce">
-    <link rel="stylesheet" href="../css/header.css?v=9fe5ec9bbd">
+    <!-- Font del mockup di riferimento (Plus Jakarta Sans + Inter), scopato alla
+         sola PDP tramite --font-sans su .pdp-page — non tocca header/footer,
+         che leggono --aml-font-sans direttamente (restano su Montserrat).
+         Da Google Fonts, non auto-ospitato come Montserrat: senza le metriche
+         di fallback calibrate apposta (vedi fonts/montserrat.css), il primo
+         render usa il font di sistema e poi scatta al cambio font — piccolo
+         CLS accettato per allinearsi al mockup, non ancora ottimizzato. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/page.css?v=7c3dd50743">
+    <link rel="stylesheet" href="../css/header.css?v=c293162178">
     <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
-    <link rel="stylesheet" href="../css/product.css?v=d8883bbd23">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=6315a197ef">
+    <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=762d0234a4">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body class="pdp-page">
     <a class="skip-link" href="#main">Aller au contenu principal</a>
     <aml-lang-suggest></aml-lang-suggest>
-    <ecommerce-header translate="no" class="notranslate">
+<ecommerce-header translate="no" class="notranslate">
 <div class="header-utility">
                     <div class="header-utility__inner">
                         <span>Revendeur logiciel européen</span>
@@ -405,7 +415,11 @@
             </ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Achat rapide" aria-hidden="true">
         <div class="product-sticky-cta__inner">
-            <span class="product-sticky-cta__title">Office 2021 Home & Business Mac</span>
+            <img class="product-sticky-cta__thumb" src="../asset/media/products/office-2021-home-business-mac.webp?v=7e8ae9a9b1" width="40" height="40" alt="" loading="lazy" decoding="async">
+            <div class="product-sticky-cta__name">
+                <span class="product-sticky-cta__title">Office 2021 Home & Business Mac</span>
+                <span class="product-sticky-cta__eta">Livraison en 2 minutes par e-mail</span>
+            </div>
             <div class="product-sticky-cta__prices" aria-hidden="true">
                 <span class="product-sticky-cta__msrp">€ 299,00</span>
                 <span class="product-sticky-cta__sale">€ 165,00</span>
@@ -431,24 +445,57 @@
 
         <div class="pdp-hero__inner">
             <div class="pdp-hero__info">
-                <p class="pdp-eyebrow">Licence perpétuelle · Mac uniquement</p>
+                <div class="pdp-badges">
+                    <span class="pdp-badge">Licence perpétuelle · Mac uniquement</span>
+                    <span class="pdp-badge pdp-badge--alt">Word</span>
+                    <p class="v2-product-code"><span>Référence produit:</span> <code class="v2-product-code__value">T5D-03489</code></p>
+                </div>
                 <h1 class="pdp-h1 v2-hero__title">Office 2021 Home &amp; Business <span>Mac</span></h1>
-                <p class="v2-product-code"><span>Référence produit:</span> <code class="v2-product-code__value">T5D-03489</code></p>
+                <p class="v2-hero__desc">Office 2021 Home & Business pour Mac : Word, Excel, PowerPoint et Outlook. Licence ESD originale, code par e-mail.</p>
 
-                <div class="pdp-hero__split">
-                    <figure class="pdp-media">
-                        <img class="pdp-media__img product-cover-img" src="../asset/media/products/office-2021-home-business-mac.webp?v=7e8ae9a9b1" width="400" height="400" alt="Office 2021 Home & Business Mac" fetchpriority="high" decoding="async">
-                    </figure>
-                    <div class="pdp-hero__text">
-                        <p class="v2-hero__desc">Office 2021 Home & Business pour Mac : Word, Excel, PowerPoint et Outlook. Licence ESD originale, code par e-mail.</p>
+                <figure class="pdp-media">
+                    <img class="pdp-media__img product-cover-img" src="../asset/media/products/office-2021-home-business-mac.webp?v=7e8ae9a9b1" width="400" height="400" alt="Office 2021 Home & Business Mac" fetchpriority="high" decoding="async">
+                </figure>
+
+                <div class="pdp-apptabs-block">
+                <div class="pdp-apptabs">
+                    <div class="pdp-apptabs__wrap">
+                        <button type="button" class="pdp-apptabs__nav pdp-apptabs__nav--prev" data-apptabs-nav="-1" aria-label="Défiler vers l'arrière">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="pdp-apptabs__row">
+                    <input type="radio" name="pdp-apptab" id="pdp-apptab-word" class="pdp-apptab__radio" checked>
+                    <label class="pdp-apptab" for="pdp-apptab-word"><img src="../asset/icon/img-aml-store_Word-Icon-FY26.svg?v=0fdadd56bc" width="20" height="20" alt="" loading="lazy" decoding="async">Word</label>
+                    <input type="radio" name="pdp-apptab" id="pdp-apptab-excel" class="pdp-apptab__radio">
+                    <label class="pdp-apptab" for="pdp-apptab-excel"><img src="../asset/icon/img-aml-store_Excel-Icon-FY26.svg?v=94f3806389" width="20" height="20" alt="" loading="lazy" decoding="async">Excel</label>
+                    <input type="radio" name="pdp-apptab" id="pdp-apptab-powerpoint" class="pdp-apptab__radio">
+                    <label class="pdp-apptab" for="pdp-apptab-powerpoint"><img src="../asset/icon/img-aml-store_PowerPoint-Icon-FY26.svg?v=b17a44ff1f" width="20" height="20" alt="" loading="lazy" decoding="async">PowerPoint</label>
+                    <input type="radio" name="pdp-apptab" id="pdp-apptab-outlook" class="pdp-apptab__radio">
+                    <label class="pdp-apptab" for="pdp-apptab-outlook"><img src="../asset/icon/img-aml-store_Outlook-Icon-FY26.svg?v=262d4c90e3" width="20" height="20" alt="" loading="lazy" decoding="async">Outlook</label>
+                    <input type="radio" name="pdp-apptab" id="pdp-apptab-onenote" class="pdp-apptab__radio">
+                    <label class="pdp-apptab" for="pdp-apptab-onenote"><img src="../asset/icon/img-aml-store_OneNote-Icon-FY26.svg?v=75e36769e6" width="20" height="20" alt="" loading="lazy" decoding="async">OneNote</label>
+                        </div>
+                        <button type="button" class="pdp-apptabs__nav pdp-apptabs__nav--next" data-apptabs-nav="1" aria-label="Défiler vers l'avant">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
+                    <div class="pdp-apppanels">
+                    <div class="pdp-apppanel" data-app="word"><img src="../asset/icon/img-aml-store_Word-Icon-FY26.svg?v=0fdadd56bc" width="40" height="40" alt="" loading="lazy" decoding="async"><span class="pdp-apppanel__text"><b>Word</b><span class="pdp-apppanel__desc">Documents, lettres et mémoires avec correction et mise en forme automatiques.</span></span></div>
+                    <div class="pdp-apppanel" data-app="excel"><img src="../asset/icon/img-aml-store_Excel-Icon-FY26.svg?v=94f3806389" width="40" height="40" alt="" loading="lazy" decoding="async"><span class="pdp-apppanel__text"><b>Excel</b><span class="pdp-apppanel__desc">Feuilles de calcul, budgets et graphiques avec formules et tableaux croisés.</span></span></div>
+                    <div class="pdp-apppanel" data-app="powerpoint"><img src="../asset/icon/img-aml-store_PowerPoint-Icon-FY26.svg?v=b17a44ff1f" width="40" height="40" alt="" loading="lazy" decoding="async"><span class="pdp-apppanel__text"><b>PowerPoint</b><span class="pdp-apppanel__desc">Présentations avec mises en page, transitions et notes du présentateur.</span></span></div>
+                    <div class="pdp-apppanel" data-app="outlook"><img src="../asset/icon/img-aml-store_Outlook-Icon-FY26.svg?v=262d4c90e3" width="40" height="40" alt="" loading="lazy" decoding="async"><span class="pdp-apppanel__text"><b>Outlook</b><span class="pdp-apppanel__desc">Messagerie, calendrier et contacts dans une seule application.</span></span></div>
+                    <div class="pdp-apppanel" data-app="onenote"><img src="../asset/icon/img-aml-store_OneNote-Icon-FY26.svg?v=75e36769e6" width="40" height="40" alt="" loading="lazy" decoding="async"><span class="pdp-apppanel__text"><b>OneNote</b></span></div>
+                    </div>
+                </div>
+                </div>
+
                         <ul class="pdp-keylist">
                             <li>Édition Mac</li>
                             <li>Outlook inclus</li>
                             <li>Sans abonnement</li>
                             <li>Numérique</li>
                         </ul>
-                    </div>
-                </div>
+
             </div>
 
             <div id="product-pricing" class="pdp-buy"
@@ -457,66 +504,36 @@
                 data-stripe-compare-at-amount="29900"
                 data-stripe-product-sku="T5D-03489"
                 data-discount-percent="45">
-                <p class="pdp-buy__label">Prix AML Store</p>
+                <p class="pdp-avail">
+                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>Disponible · livraison immédiate</span>
+                    <span class="pdp-avail__eta">E-mail en 2–15 min</span>
+                </p>
+                <p class="pdp-buy__label">Prix AML Store<span class="pdp-price-badge" aria-label="−45%">−45% REMISE</span></p>
 
                 <div class="pdp-price-row" role="group" aria-label="Prix">
                     <span class="pdp-price-sale">€ 165,00</span>
                     <span class="pdp-price-msrp" aria-label="299,00">€ 299,00</span>
-                    <span class="pdp-price-badge" aria-label="−45%">−45%</span>
                 </div>
-                <p class="pdp-price-note">Taxes incluses. Pas de frais de port. Vous économisez <strong>€ 134,00</strong> par rapport au prix catalogue (€ 299,00).</p>
+                <p class="pdp-price-save">Vous économisez <strong>€ 134,00</strong> par rapport au prix catalogue (€ 299,00).</p>
+                <p class="pdp-price-note">Taxes incluses. Pas de frais de port.</p>
 
                 <p class="pdp-meta-row" role="group" aria-label="Détails de la licence">
                     <span class="pdp-meta-chip"><strong>Zone d'activation</strong> Union européenne / EEE</span>
                 </p>
 
-                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/fr/checkout">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    Acheter maintenant
+                </button>
+                <button type="button" class="pdp-btn-ghost" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Ajouter au panier
                 </button>
 
-                <div class="product-trustpilot pdp-buy-trustpilot">
-                    <p class="product-trustpilot__fallback trustpilot-fallback">Expériences réelles partagées sur <a href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.</p>
-                    <div
-                        id="trustpilot-widget"
-                        class="trustpilot-widget"
-                        data-locale="fr-FR"
-                        data-template-id="5419b6a8b0d04a076446a9ad"
-                        data-businessunit-id="61c44c912f493a1a7cd810fa"
-                        data-style-height="40px"
-                        data-style-width="100%"
-                        data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
-                        data-min-review-count="0"
-                        data-style-alignment="center"
-                    >
-                        <a href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-                    </div>
-                </div>
-
-
-                <p class="pdp-delivery">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
-                    Clé par e-mail sous 5 à 15 minutes après confirmation du paiement
-                </p>
-
                 <ul class="pdp-assur">
                             <li>Activation sur les portails officiels</li>
                             <li>Livraison numérique, rien à expédier</li>
-                            <li>Assistance après l'achat</li>
-                            <li>Paiements gérés par Stripe et PayPal</li>
-                            <li>Facture disponible</li>
                 </ul>
-                <div class="pdp-pay" role="group" aria-label="Moyens de paiement acceptés">
-                    <p class="pdp-pay__label">Moyens de paiement acceptés</p>
-                    <div class="pdp-pay__row">
-                    <span class="pdp-pay__logo" data-brand="Visa" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="Mastercard" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="PayPal" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" alt="PayPal" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="Apple Pay" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" alt="Apple Pay" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="Google Pay" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="Stripe" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -549,65 +566,39 @@
             <h2 id="pdp-features-title" class="pdp-sec__title">Home & Business 2021 pour Mac</h2>
             <ul class="pdp-cards">
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Plateforme</p>
+                    <span class="pdp-card__icon pdp-card__icon--a" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Édition Mac</h3>
                     <p class="pdp-card__body">Licence ESD Home & Business 2021 perpétuelle pour Mac selon Microsoft.</p>
                 </li>
                 <li class="pdp-card">
+                    <span class="pdp-card__icon pdp-card__icon--b" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Outlook inclus</h3>
                     <p class="pdp-card__body">Messagerie Outlook plus Word, Excel et PowerPoint.</p>
                 </li>
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Modèle</p>
+                    <span class="pdp-card__icon pdp-card__icon--a" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Sans abonnement</h3>
                     <p class="pdp-card__body">Achat unique de la suite 2021 — pas Microsoft 365.</p>
                 </li>
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Livraison</p>
+                    <span class="pdp-card__icon pdp-card__icon--b" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Numérique</h3>
                     <p class="pdp-card__body">Code et instructions par e-mail après paiement.</p>
                 </li>
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Activation</p>
+                    <span class="pdp-card__icon pdp-card__icon--a" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Compte Microsoft</h3>
                     <p class="pdp-card__body">Activation sur le portail officiel et installation des apps Mac.</p>
                 </li>
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Note</p>
+                    <span class="pdp-card__icon pdp-card__icon--b" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Mac uniquement</h3>
                     <p class="pdp-card__body">Ce n'est pas la variante Windows — vérifiez la compatibilité Office 2021.</p>
                 </li>
             </ul>
         </section>
 
-        <hr class="pdp-divider">
 
-        <section class="pdp-sec" aria-labelledby="pdp-apps-title">
-            <p class="pdp-sec__eyebrow">Applications incluses</p>
-            <h2 id="pdp-apps-title" class="pdp-sec__title">Apps Mac Home & Business 2021</h2>
-                <ul class="pdp-apps">
-                    <li class="pdp-app">
-                        <img src="../asset/icon/img-aml-store_Word-Icon-FY26.svg?v=0fdadd56bc" width="48" height="48" alt="" loading="lazy" decoding="async">
-                        Word
-                    </li>
-                    <li class="pdp-app">
-                        <img src="../asset/icon/img-aml-store_Excel-Icon-FY26.svg?v=94f3806389" width="48" height="48" alt="" loading="lazy" decoding="async">
-                        Excel
-                    </li>
-                    <li class="pdp-app">
-                        <img src="../asset/icon/img-aml-store_PowerPoint-Icon-FY26.svg?v=b17a44ff1f" width="48" height="48" alt="" loading="lazy" decoding="async">
-                        PowerPoint
-                    </li>
-                    <li class="pdp-app">
-                        <img src="../asset/icon/img-aml-store_Outlook-Icon-FY26.svg?v=262d4c90e3" width="48" height="48" alt="" loading="lazy" decoding="async">
-                        Outlook
-                    </li>
-                    <li class="pdp-app">
-                        <img src="../asset/icon/img-aml-store_OneNote-Icon-FY26.svg?v=75e36769e6" width="48" height="48" alt="" loading="lazy" decoding="async">
-                        OneNote
-                    </li>
-                </ul>
-        </section>
         <hr class="pdp-divider">
 
         <section class="pdp-sec" aria-labelledby="pdp-steps-title">
@@ -635,17 +626,7 @@
             </ol>
         </section>
 
-<div class="pf-institutional">
-            <div class="pf-institutional__inner">
-                <h2 class="pf-institutional__title">Achetez en toute confiance</h2>
-                <ul class="pf-institutional__grid">
-                    <li><strong>Revendeur européen</strong><span>AML Store a son siège en Italie</span></li>
-                    <li><strong>Facture disponible</strong><span>Documents pour particuliers et entreprises</span></li>
-                    <li><strong>Support par écrit</strong><span>Assistance par e-mail et WhatsApp</span></li>
-                    <li><strong>Paiements sécurisés</strong><span>Traités via Stripe et PayPal</span></li>
-                </ul>
-            </div>
-        </div>
+        <hr class="pdp-divider">
 
         <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
             <p class="pdp-sec__eyebrow">FAQ</p>
@@ -723,20 +704,6 @@
                     </div>
                 </details>
                 </div>
-            </div>
-        </section>
-
-        <section class="pdp-final" aria-labelledby="pdp-final-title">
-            <div class="pdp-final__inner">
-                <div>
-                    <h2 id="pdp-final-title">Tout est prêt pour démarrer</h2>
-                    <p>Office 2021 Home & Business Mac — Clé par e-mail sous 5 à 15 minutes après confirmation du paiement</p>
-                    <span class="pdp-final__price">€ 165,00 <small>TVA incluse, au lieu de € 299,00</small></span>
-                </div>
-                <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                    Ajouter au panier
-                </button>
             </div>
         </section>
     </main>
@@ -818,13 +785,13 @@
                 </footer>
             </ecommerce-footer>
     <script src="../js/locale-path.js?v=e47f0483f7"></script>
-    <script src="../js/cart.js?v=66477c1d7e" defer></script>
+    <script src="../js/cart.js?v=9faf437bac" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
-    <script src="../js/product-page.js?v=7983285b96" defer></script>
-    <script src="../js/product-v3.js?v=c970f12b78" defer></script>
+    <script src="../js/product-page.js?v=eaccc91630" defer></script>
+    <script src="../js/product-v3.js?v=cc997542a2" defer></script>
+    <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
-    <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
-    <script src="../components/lang-suggest.js?v=2eb871748f" defer></script>
+    <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script><script src="../components/lang-suggest.js?v=2eb871748f" defer></script>
     <script src="../components/header.js?v=766d52658b" defer></script>
     <script src="../components/footer.js?v=a9b6a8315d" defer></script>
 </body>

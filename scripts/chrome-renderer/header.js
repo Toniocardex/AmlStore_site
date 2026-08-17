@@ -556,8 +556,8 @@
                         --text-primary: var(--aml-ink, #152033);
                         --text-secondary: var(--aml-ink-2, #5F6B7A);
                         --text-muted: var(--aml-ink-2, #5F6B7A);
-                        --accent: var(--aml-brand, #245EAC);
-                        --accent-hover: var(--aml-brand-hover, #1c4c8c);
+                        --accent: var(--aml-brand, #C2410C);
+                        --accent-hover: var(--aml-brand-hover, #9A3412);
 
                         background-color: var(--bg-base);
                         backdrop-filter: none;

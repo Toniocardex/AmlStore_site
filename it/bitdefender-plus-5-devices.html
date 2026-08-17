@@ -134,17 +134,27 @@
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
     <link rel="preload" as="image" href="../asset/media/products/bitdefender-plus-5-devices.webp?v=e0a6b7339b" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
-    <link rel="stylesheet" href="../css/page.css?v=9beb0fd5ce">
-    <link rel="stylesheet" href="../css/header.css?v=9fe5ec9bbd">
+    <!-- Font del mockup di riferimento (Plus Jakarta Sans + Inter), scopato alla
+         sola PDP tramite --font-sans su .pdp-page — non tocca header/footer,
+         che leggono --aml-font-sans direttamente (restano su Montserrat).
+         Da Google Fonts, non auto-ospitato come Montserrat: senza le metriche
+         di fallback calibrate apposta (vedi fonts/montserrat.css), il primo
+         render usa il font di sistema e poi scatta al cambio font — piccolo
+         CLS accettato per allinearsi al mockup, non ancora ottimizzato. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/page.css?v=7c3dd50743">
+    <link rel="stylesheet" href="../css/header.css?v=c293162178">
     <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
-    <link rel="stylesheet" href="../css/product.css?v=d8883bbd23">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=6315a197ef">
+    <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=762d0234a4">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body class="pdp-page">
     <a class="skip-link" href="#main">Vai al contenuto principale</a>
     <aml-lang-suggest></aml-lang-suggest>
-    <ecommerce-header translate="no" class="notranslate">
+<ecommerce-header translate="no" class="notranslate">
 <div class="header-utility">
                     <div class="header-utility__inner">
                         <span>Azienda italiana</span>
@@ -404,7 +414,11 @@
             </ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Acquisto rapido" aria-hidden="true">
         <div class="product-sticky-cta__inner">
-            <span class="product-sticky-cta__title">Bitdefender Plus  — 5 dispositivi</span>
+            <img class="product-sticky-cta__thumb" src="../asset/media/products/bitdefender-plus-5-devices.webp?v=e0a6b7339b" width="40" height="40" alt="" loading="lazy" decoding="async">
+            <div class="product-sticky-cta__name">
+                <span class="product-sticky-cta__title">Bitdefender Plus  — 5 dispositivi</span>
+                <span class="product-sticky-cta__eta">Consegna in 2 minuti via Email</span>
+            </div>
             <div class="product-sticky-cta__prices" aria-hidden="true">
                 <span class="product-sticky-cta__msrp">€ 56,71</span>
                 <span class="product-sticky-cta__sale">€ 40,16</span>
@@ -430,24 +444,29 @@
 
         <div class="pdp-hero__inner">
             <div class="pdp-hero__info">
-                <p class="pdp-eyebrow">Bitdefender · 1 anno · 5 dispositivi</p>
+                <div class="pdp-badges">
+                    <span class="pdp-badge">Bitdefender · 1 anno · 5 dispositivi</span>
+                    <span class="pdp-badge pdp-badge--alt">Bitdefender</span>
+                    <p class="v2-product-code"><span>Codice articolo:</span> <code class="v2-product-code__value">TL11012001-EN-5D</code></p>
+                </div>
                 <h1 class="pdp-h1 v2-hero__title">Bitdefender <span>Plus · 5 dispositivi</span></h1>
-                <p class="v2-product-code"><span>Codice articolo:</span> <code class="v2-product-code__value">TL11012001-EN-5D</code></p>
+                <p class="v2-hero__desc">Bitdefender Antivirus Plus per 5 dispositivi: protezione digitale con consegna del codice via email e attivazione sul portale ufficiale Bitdefender.</p>
 
-                <div class="pdp-hero__split">
-                    <figure class="pdp-media">
-                        <img class="pdp-media__img product-cover-img" src="../asset/media/products/bitdefender-plus-5-devices.webp?v=e0a6b7339b" width="400" height="400" alt="Bitdefender Plus  — 5 dispositivi" fetchpriority="high" decoding="async">
-                    </figure>
-                    <div class="pdp-hero__text">
-                        <p class="v2-hero__desc">Bitdefender Antivirus Plus per 5 dispositivi: protezione digitale con consegna del codice via email e attivazione sul portale ufficiale Bitdefender.</p>
+                <figure class="pdp-media">
+                    <img class="pdp-media__img product-cover-img" src="../asset/media/products/bitdefender-plus-5-devices.webp?v=e0a6b7339b" width="400" height="400" alt="Bitdefender Plus  — 5 dispositivi" fetchpriority="high" decoding="async">
+                </figure>
+
+                <div class="pdp-apptabs-block">
+
+                </div>
+
                         <ul class="pdp-keylist">
                             <li>Antivirus Plus</li>
                             <li>Protezione web</li>
                             <li>Via email</li>
                             <li>Portale ufficiale</li>
                         </ul>
-                    </div>
-                </div>
+
             </div>
 
             <div id="product-pricing" class="pdp-buy"
@@ -456,66 +475,36 @@
                 data-stripe-compare-at-amount="5671"
                 data-stripe-product-sku="TL11012001-EN-5D"
                 data-discount-percent="29">
-                <p class="pdp-buy__label">Prezzo AML Store</p>
+                <p class="pdp-avail">
+                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>Disponibile · consegna immediata</span>
+                    <span class="pdp-avail__eta">Email in 2–15 min</span>
+                </p>
+                <p class="pdp-buy__label">Prezzo Riservato<span class="pdp-price-badge" aria-label="−29%">−29% SCONTO</span></p>
 
                 <div class="pdp-price-row" role="group" aria-label="Prezzi">
                     <span class="pdp-price-sale">€ 40,16</span>
                     <span class="pdp-price-msrp" aria-label="56,71">€ 56,71</span>
-                    <span class="pdp-price-badge" aria-label="−29%">−29%</span>
                 </div>
-                <p class="pdp-price-note">Tasse incluse. Nessun costo di spedizione. Risparmi <strong>€ 16,55</strong> rispetto al prezzo di listino (€ 56,71).</p>
+                <p class="pdp-price-save">Risparmi <strong>€ 16,55</strong> rispetto al prezzo di listino (€ 56,71).</p>
+                <p class="pdp-price-note">Tasse incluse. Nessun costo di spedizione.</p>
 
                 <p class="pdp-meta-row" role="group" aria-label="Dettagli licenza">
                     <span class="pdp-meta-chip"><strong>Regione di attivazione</strong> Unione Europea / SEE</span>
                 </p>
 
-                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/it/checkout">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                    Acquista ora
+                </button>
+                <button type="button" class="pdp-btn-ghost" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Aggiungi al carrello
                 </button>
 
-                <div class="product-trustpilot pdp-buy-trustpilot">
-                    <p class="product-trustpilot__fallback trustpilot-fallback">Esperienze reali condivise dai clienti su <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>.</p>
-                    <div
-                        id="trustpilot-widget"
-                        class="trustpilot-widget"
-                        data-locale="it-IT"
-                        data-template-id="5419b6a8b0d04a076446a9ad"
-                        data-businessunit-id="61c44c912f493a1a7cd810fa"
-                        data-style-height="40px"
-                        data-style-width="100%"
-                        data-token="27270fde-f5a0-4937-9101-76b7ebae8a1a"
-                        data-min-review-count="0"
-                        data-style-alignment="center"
-                    >
-                        <a href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-                    </div>
-                </div>
-
-
-                <p class="pdp-delivery">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
-                    Codice via email in 5–15 minuti dalla conferma del pagamento
-                </p>
-
                 <ul class="pdp-assur">
                             <li>Attivazione sui portali ufficiali</li>
                             <li>Consegna digitale, nessuna spedizione</li>
-                            <li>Assistenza in italiano dopo l'acquisto</li>
-                            <li>Pagamenti gestiti da Stripe e PayPal</li>
-                            <li>Fattura elettronica disponibile</li>
                 </ul>
-                <div class="pdp-pay" role="group" aria-label="Metodi di pagamento accettati">
-                    <p class="pdp-pay__label">Metodi di pagamento accettati</p>
-                    <div class="pdp-pay__row">
-                    <span class="pdp-pay__logo" data-brand="Visa" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="Mastercard" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="PayPal" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" alt="PayPal" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="Apple Pay" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" alt="Apple Pay" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="Google Pay" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" loading="lazy" decoding="async"></span>
-                    <span class="pdp-pay__logo" data-brand="Stripe" title="Stripe"><img src="../asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" loading="lazy" decoding="async"></span>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -531,7 +520,7 @@
             </div>
             <div class="pf-trustbar__item">
                 <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h2v-8H5v-2a7 7 0 0 1 14 0v2h-3v8h2c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg></span>
-                <span class="pf-trustbar__text"><strong>Assistenza in italiano</strong><span>Supporto post-vendita via email</span></span>
+                <span class="pf-trustbar__text"><strong>Assistenza in italiano</strong><span>Supporto post-vendita via email e WhatsApp</span></span>
             </div>
             <div class="pf-trustbar__item">
                 <span class="pf-trustbar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
@@ -548,41 +537,43 @@
             <h2 id="pdp-features-title" class="pdp-sec__title">Bitdefender Antivirus Plus</h2>
             <ul class="pdp-cards">
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Protezione</p>
+                    <span class="pdp-card__icon pdp-card__icon--a" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Antivirus Plus</h3>
                     <p class="pdp-card__body">Licenza digitale Bitdefender: protezione per i dispositivi indicati in scheda, con attivazione sul portale ufficiale del produttore.</p>
                 </li>
                 <li class="pdp-card">
+                    <span class="pdp-card__icon pdp-card__icon--b" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Protezione web</h3>
                     <p class="pdp-card__body">Funzioni di sicurezza del piano acquistato, come descritte dal produttore.</p>
                 </li>
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Consegna</p>
+                    <span class="pdp-card__icon pdp-card__icon--a" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Via email</h3>
                     <p class="pdp-card__body">Ricevi codice/licenza e istruzioni dopo il pagamento, senza spedizione fisica del software.</p>
                 </li>
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Attivazione</p>
+                    <span class="pdp-card__icon pdp-card__icon--b" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Portale ufficiale</h3>
                     <p class="pdp-card__body">Attivi su Bitdefender con il codice ricevuto e installi il client ufficiale.</p>
                 </li>
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Dispositivi</p>
+                    <span class="pdp-card__icon pdp-card__icon--a" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Come da scheda</h3>
                     <p class="pdp-card__body">Il numero di dispositivi e la durata sono quelli indicati nel titolo prodotto.</p>
                 </li>
                 <li class="pdp-card">
-                    <p class="pdp-card__label">Nota</p>
+                    <span class="pdp-card__icon pdp-card__icon--b" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Licenza digitale</h3>
                     <p class="pdp-card__body">Niente stelle o recensioni inventate: per esperienze reali vedi Trustpilot e il sito del produttore.</p>
                 </li>
             </ul>
         </section>
 
+
         <hr class="pdp-divider">
 
         <section class="pdp-sec" aria-labelledby="pdp-steps-title">
-            <p class="pdp-sec__eyebrow">Come funziona</p>
+            <p class="pdp-sec__eyebrow">Facile e Veloce</p>
             <h2 id="pdp-steps-title" class="pdp-sec__title">Tre passi per iniziare</h2>
             <ol class="pdp-steps">
                 <li class="pdp-step">
@@ -605,22 +596,44 @@
                 </li>
             </ol>
         </section>
+        <hr class="pdp-divider">
 
-<div class="pf-institutional">
-            <div class="pf-institutional__inner">
-                <h2 class="pf-institutional__title">Acquista con maggiore tranquillità</h2>
-                <ul class="pf-institutional__grid">
-                    <li><strong>Rivenditore europeo</strong><span>AML Store ha sede legale in Italia</span></li>
-                    <li><strong>Fattura disponibile</strong><span>Documentazione per privati e aziende</span></li>
-                    <li><strong>Supporto scritto</strong><span>Assistenza via email e WhatsApp</span></li>
-                    <li><strong>Pagamenti protetti</strong><span>Transazioni tramite Stripe e PayPal</span></li>
-                </ul>
+        <section class="pdp-sec" aria-labelledby="pdp-reviews-title">
+            <div class="pdp-reviews__head">
+                <div>
+                    <p class="pdp-reviews__rating">
+                        <span class="pdp-reviews__tp">★ Trustpilot</span>
+                        <span class="pdp-reviews__stars" aria-hidden="true">★★★★★</span>
+                        <span class="pdp-reviews__count">(4,8/5 su 94 recensioni)</span>
+                    </p>
+                    <h2 id="pdp-reviews-title" class="pdp-sec__title">Cosa dicono i clienti</h2>
+                </div>
+                <a class="pdp-reviews__cta" href="https://it.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Leggi tutte le recensioni</a>
             </div>
-        </div>
+            <ul class="pdp-reviews__grid">
+                <li>
+                    <span class="pdp-reviews__name">Roberto Galoppini</span>
+                    <span class="pdp-reviews__stars" aria-hidden="true">★★★★★</span>
+                    <p>«Ho appena acquistato una copia di Microsoft 365, il codice è arrivato 2 minuti dopo il pagamento, ho potuto rinnovare il mio account per 1 anno, azienda superlativa!!»</p>
+                </li>
+                <li>
+                    <span class="pdp-reviews__name">Laura Ceccacci</span>
+                    <span class="pdp-reviews__stars" aria-hidden="true">★★★★★</span>
+                    <p>«Il prodotto è arrivato in tempo reale, il supporto da parte del fornitore è eccezionale, davvero un serio distributore da tenere in considerazione per il futuro.»</p>
+                </li>
+                <li>
+                    <span class="pdp-reviews__name">Mario</span>
+                    <span class="pdp-reviews__stars" aria-hidden="true">★★★★★</span>
+                    <p>«Miglior prezzo del web per il prodotto originale, assistenza tempestiva e competente, fornitura via email immediata e nessun problema di attivazione.»</p>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="pdp-divider">
 
         <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
-            <p class="pdp-sec__eyebrow">FAQ</p>
-            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Le risposte prima dell'acquisto</h2>
+            <p class="pdp-sec__eyebrow">Domande Frequenti</p>
+            <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">Hai dubbi prima dell'acquisto?</h2>
             <div class="home-faq-list">
                 <div class="pf-faq-col">
                 <details class="home-faq-item">
@@ -694,20 +707,6 @@
                     </div>
                 </details>
                 </div>
-            </div>
-        </section>
-
-        <section class="pdp-final" aria-labelledby="pdp-final-title">
-            <div class="pdp-final__inner">
-                <div>
-                    <h2 id="pdp-final-title">Tutto pronto per iniziare</h2>
-                    <p>Bitdefender Plus  — 5 dispositivi — Codice via email in 5–15 minuti dalla conferma del pagamento</p>
-                    <span class="pdp-final__price">€ 40,16 <small>IVA inclusa, anziché € 56,71</small></span>
-                </div>
-                <button type="button" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                    Aggiungi al carrello
-                </button>
             </div>
         </section>
     </main>
@@ -789,13 +788,13 @@
                 </footer>
             </ecommerce-footer>
     <script src="../js/locale-path.js?v=e47f0483f7"></script>
-    <script src="../js/cart.js?v=66477c1d7e" defer></script>
+    <script src="../js/cart.js?v=9faf437bac" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
-    <script src="../js/product-page.js?v=7983285b96" defer></script>
-    <script src="../js/product-v3.js?v=c970f12b78" defer></script>
+    <script src="../js/product-page.js?v=eaccc91630" defer></script>
+    <script src="../js/product-v3.js?v=cc997542a2" defer></script>
+    <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
-    <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
-    <script src="../components/lang-suggest.js?v=2eb871748f" defer></script>
+    <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script><script src="../components/lang-suggest.js?v=2eb871748f" defer></script>
     <script src="../components/header.js?v=766d52658b" defer></script>
     <script src="../components/footer.js?v=a9b6a8315d" defer></script>
 </body>
