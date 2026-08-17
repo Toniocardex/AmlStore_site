@@ -97,29 +97,6 @@ TRUSTPILOT_LOCALE = {
     "es": ("es-ES", "https://es.trustpilot.com/review/aml-store.com"),
 }
 
-TRUSTPILOT_I18N = {
-    "it": {
-        "title": "Recensioni dei clienti",
-        "fallback": "Esperienze reali dei clienti su Trustpilot.",
-    },
-    "en": {
-        "title": "Customer reviews",
-        "fallback": "Real customer experiences on Trustpilot.",
-    },
-    "fr": {
-        "title": "Avis clients",
-        "fallback": "Expériences réelles des clients sur Trustpilot.",
-    },
-    "de": {
-        "title": "Kundenbewertungen",
-        "fallback": "Echte Kundenerfahrungen auf Trustpilot.",
-    },
-    "es": {
-        "title": "Opiniones de clientes",
-        "fallback": "Experiencias reales de clientes en Trustpilot.",
-    },
-}
-
 TRUSTPILOT_FALLBACK_LEAD = {
     "it": "Esperienze reali condivise dai clienti su",
     "en": "Real experiences shared by customers on",
@@ -160,11 +137,6 @@ def _trustpilot_buy_mini(lang):
 def _trustpilot_block(lang):
     """Deprecated layout: prefer _trustpilot_buy_mini nella buy card."""
     return _trustpilot_buy_mini(lang)
-
-
-def _trustpilot_inner(lang):
-    """Compat: stesso markup del mini in buy card (senza wrapper extra di sezione)."""
-    return _trustpilot_buy_mini(lang).rstrip() + "\n"
 
 
 def _trustpilot_script_tag():
@@ -730,39 +702,6 @@ def _icon_src(key):
     return f"../asset/icon/{ICON[key]}"
 
 
-def _render_pills(pills):
-    parts = []
-    for icon_key, label in pills:
-        icon_html = ""
-        if icon_key:
-            icon_html = (
-                f'<img src="{_icon_src(icon_key)}" width="18" height="18" alt="" '
-                f'loading="lazy" decoding="async">'
-            )
-        parts.append(
-            f"""                        <span class="v2-pill">
-                            {icon_html}
-                            {label}
-                        </span>"""
-        )
-    return "\n".join(parts)
-
-
-def _render_features(features):
-    parts = []
-    for span, tone, label, title, body in features:
-        tone_cls = f" v2-bento__cell--{tone}" if tone else ""
-        label_html = f'<p class="v2-bento__label">{label}</p>' if label else ""
-        parts.append(
-            f"""                <div class="v2-bento__cell v2-bento__cell--{span}{tone_cls}" role="listitem">
-                    {label_html}
-                    <h3 class="v2-bento__title">{title}</h3>
-                    <p class="v2-bento__body">{body}</p>
-                </div>"""
-        )
-    return "\n".join(parts)
-
-
 def _render_lifestyle_band(lifestyle, lang):
     """Full-bleed lifestyle band (Win11 gallery CWV pattern). Optional per SKU."""
     if not lifestyle:
@@ -803,25 +742,6 @@ def _render_lifestyle_band(lifestyle, lang):
             </div>
         </section>
 """
-
-
-def _render_apps(app_keys, labels_map=None):
-    names = {
-        "word": "Word",
-        "excel": "Excel",
-        "powerpoint": "PowerPoint",
-        "outlook": "Outlook",
-        "onenote": "OneNote",
-    }
-    parts = []
-    for key in app_keys:
-        parts.append(
-            f"""                <div class="v2-app-item">
-                    <img src="{_icon_src(key)}" width="48" height="48" alt="" loading="lazy" decoding="async">
-                    {names.get(key, key.title())}
-                </div>"""
-        )
-    return "\n".join(parts)
 
 
 def _render_faq(faq_items):
@@ -890,76 +810,6 @@ def _render_faq_columns(faq_items):
         f"{_render_faq(col2)}\n"
         "                </div>"
     )
-
-
-def _render_steps_block(ui, content, lang):
-    """3 install/order steps — content['steps'][lang] overrides UI defaults."""
-    custom = (content.get("steps") or {}).get(lang)
-    if custom and len(custom) >= 3:
-        items = custom[:3]
-        titles = [t for t, _ in items]
-        bodies = [b for _, b in items]
-    else:
-        titles = [ui["step1_title"], ui["step2_title"], ui["step3_title"]]
-        bodies = [ui["step1_body"], ui["step2_body"], ui["step3_body"]]
-    how_title = (content.get("steps_title") or {}).get(lang) or ui["how_title"]
-    parts = [
-        f"""        <section class="v2-section" aria-labelledby="v2-steps-title">
-            <p class="v2-eyebrow">{ui['how_eyebrow']}</p>
-            <h2 id="v2-steps-title" class="v2-section-title">{how_title}</h2>
-            <div class="v2-steps">"""
-    ]
-    for i, (title, body) in enumerate(zip(titles, bodies), start=1):
-        parts.append(
-            f"""                <div class="v2-step">
-                    <div class="v2-step__num" aria-hidden="true">{i}</div>
-                    <h3 class="v2-step__title">{title}</h3>
-                    <p class="v2-step__body">{body}</p>
-                </div>"""
-        )
-    parts.append("            </div>\n        </section>")
-    return "\n".join(parts)
-
-
-def _render_specs_block(ui, content, lang):
-    """4 requirement cells — content['specs'][lang] overrides UI defaults."""
-    custom = (content.get("specs") or {}).get(lang)
-    note = (content.get("specs_note") or {}).get(lang) or ui["specs_note"]
-    if custom and len(custom) >= 4:
-        cells = custom[:4]
-    else:
-        cells = [
-            (ui["spec_cpu"], ui["spec_cpu_body"]),
-            (ui["spec_os"], ui["spec_os_body"]),
-            (ui["spec_ram"], ui["spec_ram_body"]),
-            (ui["spec_disk"], ui["spec_disk_body"]),
-        ]
-    items = "\n".join(
-        f"""                <div class="v2-specs-item">
-                    <h3>{title}</h3>
-                    <p>{body}</p>
-                </div>"""
-        for title, body in cells
-    )
-    return f"""        <section class="v2-section v2-section--tight" aria-labelledby="v2-specs-title">
-            <p class="v2-eyebrow">{ui['specs_eyebrow']}</p>
-            <h2 id="v2-specs-title" class="v2-section-title" style="margin-bottom:8px;">{ui['specs_title']}</h2>
-            <p style="font-size:.85rem;color:rgba(255,255,255,0.5);margin:0 0 32px;">{note}</p>
-            <div class="v2-specs-grid">
-{items}
-            </div>
-        </section>"""
-
-
-def _render_payment_row(ui):
-    logos = "\n".join(
-        f'                        <span class="v2-payment-logo" title="{alt}">'
-        f'<img src="../asset/payments_logo/{fname}" alt="{alt}" loading="lazy" decoding="async"></span>'
-        for fname, alt in PAYMENT_LOGOS
-    )
-    return f"""                    <div class="v2-payment-row" role="group" aria-label="{ui['payments_aria']}">
-{logos}
-                    </div>"""
 
 
 def _render_payment_logos(v3):
@@ -1189,12 +1039,6 @@ def _render_roles(roles, lang):
 
 
 # ── Renderer del layout v3 ──────────────────────────────────────────────────
-
-MAIL_ICON = (
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
-    '<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 '
-    '01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>'
-)
 
 NOTE_ICON = (
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">'

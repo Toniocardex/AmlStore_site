@@ -13,16 +13,6 @@
  *     node scripts/audit-css-usage.mjs --verbose css/product-pdp.css
  */
 
-/* ─────────────────────────────────────────────────────────────────────
-   Componenti ereditati dalla v2 ancora in uso:
-   titolo e codice articolo, indicatore di stock, blocco Trustpilot,
-   galleria bento, scaffolding delle sezioni.
-   ───────────────────────────────────────────────────────────────────── */
-
-.v2-family-bridge__caption {
-    background: rgba(255, 255, 255, 0.96);
-}
-
 .v2-hero__title {
     font-size: clamp(2rem, 4.5vw, 3.4rem);
     font-weight: 800;
@@ -74,28 +64,6 @@
 @media (max-width: 768px) {
     .v2-pricing-card { grid-template-columns: 1fr; padding: 28px 24px; gap: 24px; }
 }
-
-/* Badge omaggio guida Copilot — solo bundle che includono M365 Personal
-   (vedi functions/api/_lib/guide.js). */
-.v2-pricing-card .pdp-bonus {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 0 0;
-    margin-top: 9px;
-    border-top: 1px solid var(--aml-line);
-    border-radius: 0;
-    background: none;
-    font-size: var(--aml-text-sm);
-    font-weight: 500;
-    color: var(--aml-ink-2);
-    text-align: left;
-}
-
-.v2-pricing-card .pdp-bonus svg { display: none; }
-
-.v2-pricing-card .pdp-bonus strong { color: var(--aml-ink); font-weight: 700; }
 
 /* Stock magazzino (solo SKU fisici) — riga inventariale muted, anti-CLS */
 .v2-stock {
@@ -741,17 +709,6 @@ body { background: var(--page-bg); }
     background: var(--pdp-ok);
 }
 
-/* Trust sintetico sotto CTA — non pill cluster */
-.pdp-trust-line {
-    margin: 10px 0 0;
-    padding: 0;
-    font-size: var(--aml-text-sm);
-    font-weight: 500;
-    line-height: 1.45;
-    text-align: center;
-    color: var(--aml-ink-2);
-}
-
 .pdp-delivery {
     display: flex;
     align-items: center;
@@ -802,28 +759,6 @@ body { background: var(--page-bg); }
     text-align: left;
 }
 
-/* Badge omaggio guida Copilot — solo prodotti idonei (vedi functions/api/_lib/guide.js:
-   Personal, Family, bundle che li contengono). Stesso linguaggio cromatico del box
-   guida nell'email di conferma (templates.js), per coerenza cross-canale. */
-.pdp-bonus {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 10px 0 0;
-    padding: 9px 12px;
-    border-radius: 6px;
-    background: color-mix(in srgb, var(--page-accent) 8%, transparent);
-    border: 1px solid color-mix(in srgb, var(--page-accent) 30%, transparent);
-    font-size: var(--aml-text-sm);
-    font-weight: 600;
-    color: var(--page-text);
-    text-align: left;
-}
-
-.pdp-bonus svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--page-accent); }
-
-.pdp-bonus strong { color: var(--page-accent); }
-
 .pdp-assur {
     list-style: none;
     margin: 14px 0 0;
@@ -855,22 +790,13 @@ body { background: var(--page-bg); }
     .pdp-assur { grid-template-columns: 1fr; }
 }
 
-/* .pdp-pay: pagine scritte a mano (etichetta + riga loghi, in colonna).
-   .v2-payment-row: pagine generate, riga di soli loghi senza etichetta. */
+/* .pdp-pay: etichetta + riga loghi in colonna. Oggi lo emette solo
+   apply-payment-logos.py sulle pagine scritte a mano (windows-11-home):
+   le schede generate mostrano i pagamenti nella trustbar sotto l'hero. */
 .pdp-pay {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid var(--pdp-border);
-}
-
-.pdp-buy .v2-payment-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
     margin-top: 14px;
     padding-top: 12px;
     border-top: 1px solid var(--pdp-border);
@@ -888,23 +814,6 @@ body { background: var(--page-bg); }
 .pdp-pay__logo[data-brand='PayPal'] { width: 52px; }
 
 .pdp-pay__logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-
-/* Nota pagamenti testuale: sostituisce i 6 loghi nel pannello acquisto
-   (vedi _render_pay_note in product_page_lib.py). */
-.pdp-page .pf-pay-note {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 1px solid var(--pdp-border);
-    font-size: var(--aml-text-sm);
-    color: var(--pdp-muted);
-}
-
-.pdp-page .pf-pay-note svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--pdp-muted); }
-
-.pdp-page .pf-pay-note strong { color: var(--page-text); font-weight: 700; }
 
 /* ── SEZIONI ──────────────────────────────────────────────────────────────── */
 .pdp-sec {
@@ -1491,15 +1400,6 @@ body { background: var(--page-bg); }
 
 .pdp-acc .home-faq-body { font-size: var(--aml-text-sm); }
 
-/* Fascia lifestyle: la didascalia del componente condiviso è a vetro smerigliato
-   (blur + saturate). Qui diventa un pannello pieno, coerente col resto. */
-.pdp-page .v2-family-bridge__caption {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: none;
-}
-
 /* ── BARRA STICKY COMPATTA (desktop) / BARRA INFERIORE (mobile) ───────────── */
 
 /* Superficie piatta: il componente condiviso usa vetro smerigliato (blur +
@@ -1525,11 +1425,6 @@ body { background: var(--page-bg); }
 .pdp-page .product-sticky-cta__sale { color: var(--page-text); }
 
 .pdp-page .product-sticky-cta__msrp { color: var(--pdp-muted); }
-
-.pdp-page .product-sticky-cta__prices {
-    background: var(--pdp-surface-2);
-    border-color: var(--pdp-border);
-}
 
 .pdp-page .product-sticky-cta__thumb {
     background: var(--pdp-surface-2);
@@ -1774,25 +1669,6 @@ body { background: var(--page-bg); }
     letter-spacing: 0.02em;
 }
 
-.pdp-badge svg {
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-    color: var(--aml-orange-600);
-}
-
-.pdp-badge--copilot,
-.pdp-badge--amber {
-    background: var(--aml-amber-50);
-    border-color: var(--aml-amber-200);
-    color: var(--aml-amber-800);
-}
-
-.pdp-badge--copilot svg,
-.pdp-badge--amber svg {
-    color: var(--aml-amber-600);
-}
-
 .pdp-badges .v2-product-code {
     margin: 0 0 0 auto;
 }
@@ -1977,7 +1853,7 @@ body { background: var(--page-bg); }
 
 .pdp-apppanel {
     display: none;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     font-size: var(--aml-text-base);
     font-weight: 700;
@@ -2229,34 +2105,6 @@ body { background: var(--page-bg); }
     color: var(--aml-ok);
 }
 
-/* ── FASCIA SOTTO L'HERO ────────────────────────────────────────────────────
-   Trustpilot, riga consegna, badge omaggio, garanzie residue e loghi di
-   pagamento: nel mockup non stanno nel pannello d'acquisto, che si ferma alle
-   due garanzie. Qui vivono sotto l'hero, su tutta la larghezza. */
-
-.pdp-hero__extras {
-    max-width: var(--pdp-maxw);
-    margin: 28px auto 0;
-    padding: 20px 0 0;
-    border-top: 1px solid var(--pdp-border);
-    display: grid;
-    gap: 14px;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    align-items: start;
-}
-
-.pdp-hero__extras .pdp-delivery,
-.pdp-hero__extras .pdp-assur,
-.pdp-hero__extras .product-trustpilot,
-.pdp-hero__extras .pdp-bonus {
-    margin: 0;
-}
-
-.pdp-hero__extras .product-trustpilot {
-    text-align: left;
-    padding-top: 0;
-}
-
 /* Il pannello tiene solo le due garanzie principali: niente colonne, sono due
    righe che devono leggersi come chiusura della card. */
 .pdp-buy .pdp-assur {
@@ -2302,10 +2150,6 @@ body { background: var(--page-bg); }
    troppo pesante rispetto al font-semibold (600) del mockup. */
 .pdp-apppanel__text b {
     font-weight: 600;
-}
-
-.pdp-apppanel {
-    align-items: flex-start;
 }
 
 /* ── RECENSIONI TRUSTPILOT (reali, vedi REVIEWS_IT in product_page_lib.py) ──
