@@ -25,6 +25,13 @@
     margin-top: 0;
 }
 
+/* La fascia loghi vendor segue subito la foto hero: ha gia' un suo padding
+   verticale (1.5rem) che fa da respiro, sommarci anche il margine standard
+   tra sezioni (fino a 5rem) lasciava troppo bianco sotto la foto. */
+.home-page > .home-hero + .home-vendors {
+    margin-top: 0;
+}
+
 /* ══ MARCHI CHE TRATTIAMO — fascia loghi vendor subito sotto l'hero ═══════ */
 .home-vendors {
     padding: 1.5rem clamp(1.25rem, 4vw, 2rem);
