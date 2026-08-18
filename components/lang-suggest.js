@@ -151,6 +151,13 @@
                 ':host{--ls-bg:#101827;--ls-bg-2:#0a101d;--ls-border:rgba(255,255,255,.1);--ls-text:#f4f6fb;' +
                 '--ls-muted:#aab2c5;--ls-accent:#3b82f6;--ls-accent-hover:#5b9bf7;' +
                 'font-family:"Montserrat",system-ui,sans-serif;display:block;' +
+                /* Overlay, non in flusso: appare *sopra* l'header invece di spingerlo
+                   giu'. L'inserimento arriva dopo il primo paint (script deferred),
+                   quindi in flusso normale sposterebbe di colpo header/hero/contenuto
+                   sottostante — un CLS reale per ogni visitatore con lingua browser
+                   diversa da quella della pagina. Fixed lo esclude dal flusso: stesso
+                   pattern gia' usato da components/cookie-banner.js. */
+                'position:fixed;top:0;left:0;right:0;z-index:1500;' +
                 'animation:ls-in .3s ease-out;}' +
                 '@keyframes ls-in{from{opacity:0;transform:translateY(-100%);}to{opacity:1;transform:translateY(0);}}' +
                 '.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.6rem 1rem;' +
