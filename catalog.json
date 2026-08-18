@@ -2,6 +2,7 @@
   {
     "sku": "QQ2-00012",
     "mpn": "QQ2-00012",
+    "ean": "0885370750119",
     "name": "Microsoft 365 Personal | 12 Mesi | Copilot AI + 1TB Cloud",
     "unitAmountMinor": 8400,
     "compareAtMinor": 9900,
@@ -12,6 +13,7 @@
   {
     "sku": "EP2-06798",
     "mpn": "EP2-06798",
+    "ean": "0196388411757",
     "name": "Microsoft Office 2024 Home | PC/Mac",
     "unitAmountMinor": 13900,
     "compareAtMinor": 14900,
@@ -52,6 +54,7 @@
   {
     "sku": "KW9-00642",
     "mpn": "KW9-00642",
+    "ean": "0889842905366",
     "name": "Microsoft Windows 11 Home OEM | Copilot AI incluso",
     "unitAmountMinor": 6100,
     "compareAtMinor": 9900,
@@ -62,6 +65,7 @@
   {
     "sku": "FQC-10528",
     "mpn": "FQC-10528",
+    "ean": "0889842905892",
     "name": "Microsoft Windows 11 Professional - Licenza ESD Originale",
     "unitAmountMinor": 9900,
     "compareAtMinor": 14900,
@@ -72,6 +76,7 @@
   {
     "sku": "6GQ-00092",
     "mpn": "6GQ-00092",
+    "ean": "0885370509571",
     "name": "Microsoft 365 Family | 12 Mesi | Fino a 6 Persone | Copilot AI per il Titolare | 6TB Cloud",
     "unitAmountMinor": 10900,
     "compareAtMinor": 12900,
@@ -82,6 +87,7 @@
   {
     "sku": "FQC-08930",
     "mpn": "FQC-08930",
+    "ean": "0885370920932",
     "name": "Microsoft Windows 10 Professional 32/64-bit",
     "unitAmountMinor": 6000,
     "compareAtMinor": 14900,
@@ -92,6 +98,7 @@
   {
     "sku": "KW9-00136",
     "mpn": "KW9-00136",
+    "ean": "0885370922233",
     "name": "Microsoft Windows 10 Home 32/64-bit",
     "unitAmountMinor": 3913,
     "compareAtMinor": 9900,
@@ -102,6 +109,7 @@
   {
     "sku": "79G-05412",
     "mpn": "79G-05412",
+    "ean": "0889842854992",
     "name": "Microsoft Office 2021 Home & Student | Windows o Mac",
     "unitAmountMinor": 13400,
     "compareAtMinor": 14900,
@@ -112,6 +120,7 @@
   {
     "sku": "T5D-03485",
     "mpn": "T5D-03485",
+    "ean": "0655887481758",
     "name": "Microsoft Office 2021 Home & Business | PC/MAC",
     "unitAmountMinor": 20600,
     "compareAtMinor": 29900,
@@ -151,6 +160,7 @@
   {
     "sku": "T5D-03489",
     "mpn": "T5D-03489",
+    "ean": "0889842822526",
     "name": "Microsoft Office 2021 Home & Business | Mac",
     "unitAmountMinor": 16500,
     "compareAtMinor": 29900,
@@ -197,6 +207,7 @@
   {
     "sku": "KLQ-00388",
     "mpn": "KLQ-00388",
+    "ean": "0889842380996",
     "name": "Microsoft 365 Business Standard | 1 Utente | 15 Dispositivi",
     "unitAmountMinor": 14500,
     "compareAtMinor": 17100,
@@ -216,6 +227,7 @@
   {
     "sku": "269-17068",
     "mpn": "269-17068",
+    "ean": "8718469573936",
     "name": "Microsoft Office 2019 Professional Plus",
     "unitAmountMinor": 18100,
     "compareAtMinor": 20899,
@@ -262,6 +274,7 @@
   {
     "sku": "FQC-10538",
     "mpn": "FQC-10538",
+    "ean": "0889842905991",
     "name": "Microsoft Windows 11 Professional DVD Ita OEM | FQC-10538",
     "unitAmountMinor": 8500,
     "compareAtMinor": 14900,
@@ -292,6 +305,7 @@
   {
     "sku": "P73-08328",
     "mpn": "P73-08328",
+    "ean": "0889842769883",
     "name": "Microsoft Windows Server 2022 Standard 64-bit 16 Core | OEM DVD ENG | P73-08328",
     "unitAmountMinor": 37100,
     "compareAtMinor": 38900,
@@ -302,6 +316,7 @@
   {
     "sku": "79G-05018",
     "mpn": "79G-05018",
+    "ean": "0889842326659",
     "name": "Microsoft Office 2019 Home and Student | PC/Mac",
     "unitAmountMinor": 10200,
     "compareAtMinor": 14900,
@@ -330,6 +345,7 @@
   {
     "sku": "EP2-25187",
     "mpn": "EP2-25187",
+    "ean": "0196388487103",
     "name": "Microsoft Windows Server 2025 Standard 64-bit 16 Core",
     "unitAmountMinor": 40700,
     "compareAtMinor": 74900,
@@ -350,6 +366,7 @@
   {
     "sku": "P73-07788",
     "mpn": "P73-07788",
+    "ean": "0889842425611",
     "name": "Microsoft Windows Server 2019 Standard 64-bit 16 Core | OEM DVD ENG | P73-07788",
     "unitAmountMinor": 14400,
     "compareAtMinor": 27900,
@@ -387,6 +404,7 @@
   },
   {
     "sku": "KL1047TDAFS",
+    "ean": "5056244926649",
     "name": "Kaspersky Premium | 1 Dispositivo | 1 Anno",
     "unitAmountMinor": 3089,
     "compareAtMinor": 7999,
@@ -442,6 +460,7 @@
   },
   {
     "sku": "P73-07788_ESD",
+    "ean": "0889842425611",
     "name": "Microsoft Windows Server 2019 Standard 64-bit 16 Core",
     "unitAmountMinor": 15300,
     "compareAtMinor": 67999,
@@ -460,6 +479,7 @@
   },
   {
     "sku": "1108921",
+    "ean": "0731944741994",
     "name": "McAfee Total Protection 2026 | 1 Dispositivo | 1 Anno",
     "unitAmountMinor": 1025,
     "compareAtMinor": 2995,
@@ -469,6 +489,7 @@
   },
   {
     "sku": "1108923",
+    "ean": "0731944742038",
     "name": "McAfee Total Protection 2026 | 5 Dispositivi | 1 Anno",
     "unitAmountMinor": 1544,
     "compareAtMinor": 3995,
@@ -478,6 +499,7 @@
   },
   {
     "sku": "MTP00MNRXRAAD",
+    "ean": "0731944715155",
     "name": "McAfee Total Protection | 10 Dispositivi | 1 Anno",
     "unitAmountMinor": 1844,
     "compareAtMinor": 7999,
@@ -487,6 +509,7 @@
   },
   {
     "sku": "KL1047GDCFS1",
+    "ean": "5056244915377",
     "name": "Kaspersky Premium | 3 Dispositivi | 1 Anno",
     "unitAmountMinor": 3604,
     "compareAtMinor": 6899,
@@ -496,6 +519,7 @@
   },
   {
     "sku": "KL1047GDEFS",
+    "ean": "5056244915384",
     "name": "Kaspersky Premium | 5 Dispositivi | 1 Anno",
     "unitAmountMinor": 4634,
     "compareAtMinor": 7899,
@@ -505,6 +529,7 @@
   },
   {
     "sku": "KL1047GDKFS",
+    "ean": "5056244915391",
     "name": "Kaspersky Premium | 10 Dispositivi | 1 Anno",
     "unitAmountMinor": 5700,
     "compareAtMinor": 8999,
@@ -560,6 +585,7 @@
   {
     "sku": "EP2-06606",
     "mpn": "EP2-06606",
+    "ean": "0196388409839",
     "name": "Microsoft Office 2024 Home and Business | Windows/Mac | Licenza ESD",
     "unitAmountMinor": 20900,
     "compareAtMinor": 29900,
