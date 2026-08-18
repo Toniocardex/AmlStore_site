@@ -256,6 +256,24 @@
 
         if (typeof global.gtag !== 'function') return;
 
+        // Conversioni avanzate: dati proprietari (email/nome/indirizzo) per il
+        // matching lato Google quando il cookie di clic pubblicitario non è
+        // disponibile (Safari ITP e simili). gtag.js normalizza e fa l'hashing
+        // in autonomia — qui si passa testo semplice, mai valori già hashati.
+        if (order.email || order.firstName || order.lastName) {
+            var address = { first_name: order.firstName || '', last_name: order.lastName || '' };
+            if (order.shipping) {
+                address.street      = order.shipping.addressLine1 || '';
+                address.city        = order.shipping.city         || '';
+                address.region      = order.shipping.province     || '';
+                address.postal_code = order.shipping.postalCode   || '';
+                address.country     = order.shipping.country      || '';
+            }
+            var userData = { address: address };
+            if (order.email) userData.email = order.email;
+            global.gtag('set', 'user_data', userData);
+        }
+
         var items = (order.lineItems || []).map(function (item) {
             return {
                 item_id:   item.sku,
