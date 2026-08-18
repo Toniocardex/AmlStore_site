@@ -15,7 +15,7 @@ export const CATALOG = {
   "065-09804": { name: "Microsoft PowerPoint 2024 (Standalone) | Licenza ESD Originale", unitAmountMinor: 8200, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
   "KW9-00642": { name: "Microsoft Windows 11 Home OEM | Copilot AI incluso", unitAmountMinor: 6100, compareAtMinor: 9900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows" },
   "FQC-10528": { name: "Microsoft Windows 11 Professional - Licenza ESD Originale", unitAmountMinor: 9900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows" },
-  "6GQ-00092": { name: "Microsoft 365 Family | 12 Mesi | Fino a 6 Persone | Copilot AI per il Titolare | 6TB Cloud", unitAmountMinor: 10900, compareAtMinor: 12900, currency: 'EUR', type: "subscription", category: "suite office > microsoft 365" },
+  "6GQ-00092": { name: "Microsoft 365 Family | 12 Mesi | Fino a 6 Persone | Copilot AI per il Titolare | 6TB Cloud", unitAmountMinor: 10495, compareAtMinor: 12900, currency: 'EUR', type: "subscription", category: "suite office > microsoft 365" },
   "FQC-08930": { name: "Microsoft Windows 10 Professional 32/64-bit", unitAmountMinor: 6000, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows" },
   "KW9-00136": { name: "Microsoft Windows 10 Home 32/64-bit", unitAmountMinor: 3913, compareAtMinor: 9900, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows" },
   "79G-05412": { name: "Microsoft Office 2021 Home & Student | Windows o Mac", unitAmountMinor: 13400, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office" },
