@@ -1174,6 +1174,15 @@
     background: color-mix(in srgb, var(--aml-slate-800) 70%, transparent);
 }
 
+.home-guide__result-img {
+    display: block;
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    margin: 0 0 0.85rem;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.35));
+}
+
 .home-guide__result-label {
     margin: 0 0 0.35rem;
     font-size: var(--aml-text-xs);

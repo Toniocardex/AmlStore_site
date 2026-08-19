@@ -26,6 +26,7 @@
         var title = root.querySelector('[data-guide-title]');
         var body = root.querySelector('[data-guide-body]');
         var link = root.querySelector('[data-guide-link]');
+        var image = root.querySelector('[data-guide-image]');
         if (!categories.length || !groups.length || !title || !body || !link) return;
 
         function showResult(btn) {
@@ -40,7 +41,13 @@
             title.textContent = btn.getAttribute('data-guide-title-value') || title.textContent;
             body.textContent = btn.getAttribute('data-guide-body-value') || body.textContent;
             var href = btn.getAttribute('data-guide-href');
-            if (href) link.setAttribute('href', href);
+            if (href) {
+                link.setAttribute('href', href);
+                /* Il nome file immagine coincide sempre con lo slug prodotto
+                   (data-guide-href), come per le card di tutto il sito: non
+                   serve un attributo dati separato solo per l'immagine. */
+                if (image) image.src = '../asset/media/products/' + href + '.webp';
+            }
         }
 
         function selectCategory(btn) {
