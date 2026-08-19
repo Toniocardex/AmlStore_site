@@ -610,9 +610,21 @@
                     @media (min-width: 768px) {
                         .header-utility { display: block; }
                     }
-                    :host(.is-compact) .header-utility {
+                    /* Scorrendo, la barra non sparisce piu': prima .is-compact la
+                       toglieva del tutto e nello stato piu' visto del sito non
+                       restava nessun segnale di identita' o riprova, solo una
+                       barra bianca con logo e link grigi. Ne resta una versione
+                       bassa con il voto Trustpilot e la fattura; gli altri due
+                       claim si tolgono perche' su una riga da 22px la fila
+                       intera diventava rumore. */
+                    :host(.is-compact) .header-utility__inner {
+                        min-height: 22px;
+                    }
+                    :host(.is-compact) .header-utility__claim:not(.header-utility__claim--persistent) {
                         display: none;
                     }
+                    /* Sotto i 767px la barra resta nascosta in ogni caso: ci pensa
+                       gia' la regola con !important nel blocco mobile. */
 
                     .header-container {
                         width: min(var(--aml-maxw, 1180px), calc(100% - (2 * var(--aml-gutter, clamp(1rem, 4vw, 2rem)))));
@@ -627,6 +639,12 @@
                     }
                     :host(.is-compact) .header-container {
                         min-height: 63px;
+                    }
+                    /* Da compatto la barra sta sopra al contenuto e con il solo
+                       bordo da 1px il bianco su bianco non si stacca. */
+                    :host(.is-compact) {
+                        box-shadow: 0 1px 3px color-mix(in srgb, var(--aml-navy, #0A1830) 10%, transparent),
+                                    0 4px 12px color-mix(in srgb, var(--aml-navy, #0A1830) 6%, transparent);
                     }
 
                     .header-brand {
@@ -692,7 +710,7 @@
                     }
 
                     .nav-links a:hover {
-                        color: var(--aml-navy, #0A1830);
+                        color: var(--accent);
                     }
 
                     .nav-links a:hover::after,
@@ -703,7 +721,7 @@
 
                     .nav-links a.active,
                     .nav-links a[aria-current="page"] {
-                        color: var(--aml-navy, #0A1830);
+                        color: var(--accent);
                         font-weight: 600;
                     }
 
@@ -741,10 +759,10 @@
                         transition: transform 0.2s ease;
                         border-radius: 1px;
                     }
-                    .nav-win-root:hover { color: var(--aml-navy, #0A1830); }
+                    .nav-win-root:hover { color: var(--accent); }
                     .nav-win-root:hover::after,
                     .nav-win-root.active::after { transform: scaleX(1); }
-                    .nav-win-root.active { color: var(--aml-navy, #0A1830); font-weight: 600; }
+                    .nav-win-root.active { color: var(--accent); font-weight: 600; }
                     .nav-win-caret {
                         display: inline-flex;
                         align-items: center;
@@ -896,14 +914,14 @@
                         border-radius: 1px;
                     }
                     .nav-m365-root:hover {
-                        color: var(--aml-navy, #0A1830);
+                        color: var(--accent);
                     }
                     .nav-m365-root:hover::after,
                     .nav-m365-root.active::after {
                         transform: scaleX(1);
                     }
                     .nav-m365-root.active {
-                        color: var(--aml-navy, #0A1830);
+                        color: var(--accent);
                         font-weight: 600;
                     }
                     .nav-m365-caret {
@@ -1045,13 +1063,13 @@
                         border-radius: 1px;
                     }
                     .nav-office-root:hover,
-                    .nav-av-root:hover { color: var(--aml-navy, #0A1830); }
+                    .nav-av-root:hover { color: var(--accent); }
                     .nav-office-root:hover::after,
                     .nav-av-root:hover::after,
                     .nav-office-root.active::after,
                     .nav-av-root.active::after { transform: scaleX(1); }
                     .nav-office-root.active,
-                    .nav-av-root.active { color: var(--aml-navy, #0A1830); font-weight: 600; }
+                    .nav-av-root.active { color: var(--accent); font-weight: 600; }
                     .nav-office-caret,
                     .nav-av-caret {
                         display: inline-flex;
@@ -1205,7 +1223,7 @@
                     }
                     .support-trigger:hover,
                     .support-wrap.open .support-trigger {
-                        color: var(--aml-navy, #0A1830);
+                        color: var(--accent);
                         background: color-mix(in srgb, var(--accent) 8%, transparent);
                         border-color: var(--border-color);
                     }
@@ -1403,6 +1421,11 @@
                         color: transparent;
                     }
 
+                    /* Il carrello e' l'unico elemento della barra tenuto nel colore
+                       del brand a riposo, non solo in hover: prima nel
+                       .header-container non c'era un solo elemento con
+                       l'arancione e la barra risultava anonima. Sta sull'icona
+                       dell'azione, coerente con il ruolo "arancione = agire". */
                     .cart-wrapper {
                         position: relative;
                         display: flex;
@@ -1411,14 +1434,14 @@
                         width: 42px;
                         height: 42px;
                         border-radius: 50%;
-                        color: var(--text-secondary);
+                        color: var(--accent);
                         cursor: pointer;
                         transition: color 0.3s ease, background 0.3s ease;
                         flex-shrink: 0;
                         text-decoration: none;
                     }
                     .cart-wrapper:hover {
-                        color: var(--text-primary);
+                        color: var(--accent-hover);
                         background: color-mix(in srgb, var(--accent) 8%, transparent);
                     }
                     .cart-wrapper:focus-visible {
@@ -2102,9 +2125,9 @@
                 <div class="header-utility">
                     <div class="header-utility__inner">
                         <span class="header-utility__rating">${esc(t.utilityRating)}</span>
-                        <span>${esc(t.utilityClaim1)}</span>
-                        <span>${esc(t.utilityClaim2)}</span>
-                        <span>${esc(t.utilityClaim3)}</span>
+                        <span class="header-utility__claim">${esc(t.utilityClaim1)}</span>
+                        <span class="header-utility__claim header-utility__claim--persistent">${esc(t.utilityClaim2)}</span>
+                        <span class="header-utility__claim">${esc(t.utilityClaim3)}</span>
                     </div>
                 </div>
 
