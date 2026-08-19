@@ -914,13 +914,57 @@
     gap: 0.3rem;
 }
 
-/* La stella resta nell'inchiostro della riga e non nell'arancione del brand:
-   qui sotto il velo si e' gia' spento e la scrivania e' scura, e l'orange-700
-   scendeva a 1,6:1 (l'800 a 2,2:1, il 900 a 2,8:1). Slate-900 e' l'unico che
-   sta sopra 4,5:1 su tutta l'area della riga. */
+/* Striscia bianca sottile, solo dietro alla riga di riprova (non su titolo e
+   sottotitolo, che restano sulla foto col velo sopra), con l'angolo arrotondato
+   sul lato destro dove finisce subito dopo "1000+ ordini dal 2020" (l'unico
+   angolo visibile: a sinistra sborda fuori pagina). align-self:flex-start
+   toglie lo stretch del flex column del contenitore, altrimenti la riga si
+   allargava a tutta la colonna e la striscia finiva ben oltre il testo invece
+   di aderirci.
+   Il pieno copre solo gli ultimi ~27rem prima del bordo destro (la riga di
+   testo e' larga circa 26rem) e sfuma a trasparente nei 6rem prima di quello:
+   sotto i 1180px di contenuto centrato lo spazio a sinistra del testo e'
+   minimo, ma su schermi larghi diventava un rettangolo bianco vuoto sulla
+   foto per centinaia di px. Gli stop in rem (non %) restano ancorati al
+   bordo destro qualunque sia la larghezza del pseudo-elemento (100vw).
+   Solo sopra i 900px: sotto quella soglia la riga passa a bianco per il
+   velo scuro mobile e sparirebbe su questo stesso sfondo chiaro. */
+@media (min-width: 901px) {
+    .home-hero--consumer .home-hero-trust {
+        position: relative;
+        z-index: 1;
+        align-self: flex-start;
+    }
+
+    .home-hero--consumer .home-hero-trust::before {
+        content: "";
+        position: absolute;
+        top: -0.7rem;
+        bottom: -0.7rem;
+        right: -0.9rem;
+        width: 100vw;
+        background: linear-gradient(
+            90deg,
+            transparent 0,
+            transparent calc(100% - 33rem),
+            var(--aml-paper) calc(100% - 27rem),
+            var(--aml-paper) 100%
+        );
+        border-radius: 0 var(--aml-radius-lg) var(--aml-radius-lg) 0;
+        z-index: -1;
+    }
+}
+
+/* Ora che la riga siede sulla striscia bianca (non piu' sulla foto), l'inchiostro
+   di fondo puo' tornare l'arancione brand: --aml-brand e' orange-700, 5,2:1 su
+   bianco. Il resto della riga resta slate-900 apposta (vedi sopra la striscia):
+   qui e' solo la stella a prendere colore, il testo intorno resta un segnale di
+   fiducia neutro. Su mobile il media query sotto forza comunque il bianco sul
+   velo scuro, quindi qui non serve alcuna condizione di larghezza. */
 .home-hero-trust__star {
     font-size: 0.95em;
     line-height: 1;
+    color: var(--aml-brand);
 }
 
 /* Gradiente come nel mockup, ma sui gradini scuri della scala: sulla foto
