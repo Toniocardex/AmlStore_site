@@ -537,11 +537,20 @@ a.product-card--link:focus-visible {
     border-radius: 6px;
 }
 
+/* display:flex, non grid: in una riga di grid implicita (auto) l'altezza
+   percentuale di un figlio non si risolve, anche se il contenitore ha
+   un'altezza esplicita (per evitare una dipendenza circolare nel motore di
+   layout) - la larghezza percentuale invece si risolve, quindi l'<img> sotto
+   (che ha width/height="400" in HTML, aspect-ratio implicito 1/1) diventava
+   sempre un quadrato pari alla sua larghezza risolta, sforando sotto al
+   riquadro quando questo non era quadrato. Con flex l'altezza del
+   contenitore e' definita anche per il figlio, niente ambiguita'. */
 .product-card-media {
     position: relative;
     height: 200px;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Stessa lingua visiva del badge sconto in PDP (.pdp-price-badge): il
@@ -564,8 +573,10 @@ a.product-card--link:focus-visible {
 }
 
 .product-card-img {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: contain;
     display: block;
     filter: drop-shadow(0 10px 14px color-mix(in srgb, var(--aml-ink) 16%, transparent));
