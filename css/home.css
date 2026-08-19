@@ -1094,7 +1094,15 @@
     .home-guide__figure {
         display: block;
         position: absolute;
-        right: max(-70px, calc(50% - var(--home-content-w) / 2 - 170px));
+        /* La figura vive nel gutter a destra della colonna centrale: il suo
+           bordo sinistro si allinea al bordo destro del contenuto, cosi' su
+           schermi larghi non copre affatto il pannello. Il 438px e' la sua
+           larghezza resa (570px di altezza per l'aspect ratio 769/1000).
+           Quando il gutter e' piu' stretto della figura il valore diventa
+           negativo e la figura sborda a destra invece di invadere il
+           pannello; il max() ferma lo sbordo a 70px per non perdere la
+           spalla destra. */
+        right: max(-70px, calc(50% - var(--home-content-w) / 2 - 438px));
         /* Ancorata al fondo della banda, non sospesa a mezz'aria. L'altezza
            e' volutamente contenuta: oltre i ~580px la figura diventa cosi'
            larga da finire con il viso dietro il pannello invece che accanto. */
