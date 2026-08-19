@@ -539,7 +539,7 @@ a.product-card--link:focus-visible {
 
 .product-card-media {
     position: relative;
-    background: var(--aml-paper);
+    background: radial-gradient(120% 120% at 50% 20%, var(--aml-surface) 0%, var(--aml-paper) 65%, var(--aml-orange-50) 130%);
     height: 200px;
     border-radius: var(--aml-radius-sm);
     display: grid;
@@ -572,6 +572,12 @@ a.product-card--link:focus-visible {
     height: 100%;
     object-fit: contain;
     display: block;
+    filter: drop-shadow(0 10px 14px color-mix(in srgb, var(--aml-ink) 16%, transparent));
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover .product-card-img {
+    transform: translateY(-2px) scale(1.02);
 }
 
 .product-card-name {
