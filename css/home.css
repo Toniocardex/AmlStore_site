@@ -1059,6 +1059,8 @@
    che e' gia' un link valido — non un blocco morto. */
 
 .home-guide {
+    position: relative;
+    overflow: hidden;
     background: var(--aml-slate-900);
     color: #ffffff;
     margin-inline: calc(50% - 50vw);
@@ -1068,8 +1070,41 @@
 }
 
 .home-guide__inner {
+    position: relative;
+    z-index: 1;
     max-width: var(--home-content-w);
     margin: 0 auto;
+}
+
+/* Il consulente non vive dentro una card: e' parte della composizione della
+   banda scura, ancorato al bordo destro con il configuratore che gli passa
+   davanti. Serve un ritaglio su sfondo TRASPARENTE: una foto con fondo
+   bianco qui stonerebbe sul navy.
+
+   E' un background e non un <img> di proposito: sotto i 1200px il gutter
+   destro sparisce e la figura finirebbe sopra il configuratore, ma un <img>
+   display:none veniva comunque scaricato dai telefoni (61 KB sprecati su
+   ogni visita mobile). Dichiarato dentro la media query non viene proprio
+   richiesto — stessa tecnica di footer.css e consultation.css. */
+.home-guide__figure {
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    .home-guide__figure {
+        display: block;
+        position: absolute;
+        right: max(-70px, calc(50% - var(--home-content-w) / 2 - 170px));
+        /* Ancorata al fondo della banda, non sospesa a mezz'aria. L'altezza
+           e' volutamente contenuta: oltre i ~580px la figura diventa cosi'
+           larga da finire con il viso dietro il pannello invece che accanto. */
+        bottom: 0;
+        z-index: 0;
+        height: min(84%, 570px);
+        aspect-ratio: 769 / 1000;
+        background: url("../asset/media/home-guide-consultant.webp") bottom right / contain no-repeat;
+        pointer-events: none;
+    }
 }
 
 .home-guide .home-section-eyebrow {
@@ -1171,7 +1206,9 @@
     padding: clamp(1.25rem, 3vw, 1.75rem);
     border-radius: 12px;
     border: 1px solid color-mix(in srgb, var(--aml-orange-500) 40%, transparent);
-    background: color-mix(in srgb, var(--aml-slate-800) 70%, transparent);
+    /* Quasi opaco, non piu' 70%: con la figura del consulente dietro, un
+       pannello traslucido lascerebbe trasparire il viso sotto il testo. */
+    background: color-mix(in srgb, var(--aml-slate-800) 96%, transparent);
 }
 
 .home-guide__result-img {
