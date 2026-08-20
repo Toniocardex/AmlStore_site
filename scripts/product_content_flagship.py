@@ -3,6 +3,7 @@ Rigenerato via pprint — vedi scripts/build-m365-family-content.py per il patte
 """
 
 PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
+                            'hide_steps_section': True,
                             'name': {'it': 'Microsoft 365 Personal',
                                      'en': 'Microsoft 365 Personal',
                                      'fr': 'Microsoft 365 Personnel',
@@ -496,17 +497,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'Sì: con le app desktop installate puoi lavorare '
                                             'offline; servono comunque connessione e accesso '
                                             'periodici per la verifica della licenza, '
-                                            'aggiornamenti e servizi cloud come OneDrive.'),
-                                           ('Come si attiva Microsoft 365 Personal dopo '
-                                            "l'acquisto?",
-                                            'Vai su <a href="https://setup.office.com/Home" '
-                                            'target="_blank" rel="noopener '
-                                            'noreferrer">setup.office.com/Home</a>, accedi con il '
-                                            'tuo account Microsoft, inserisci il codice ricevuto '
-                                            'via email e segui la procedura guidata. Al termine '
-                                            'installa le app da <a href="https://www.office.com" '
-                                            'target="_blank" rel="noopener '
-                                            'noreferrer">office.com</a>.')],
+                                            'aggiornamenti e servizi cloud come OneDrive.')],
                                     'en': [('Who is Microsoft 365 Personal for?',
                                             'Personal covers one Microsoft account with premium '
                                             "Office apps and 1 TB OneDrive, subject to Microsoft's "
@@ -526,17 +517,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'Yes: with the desktop apps installed you can work '
                                             'offline; however, periodic internet connection and '
                                             'sign-in are required for licence verification, '
-                                            'updates, and cloud services such as OneDrive.'),
-                                           ('How do I activate Microsoft 365 Personal after '
-                                            'purchase?',
-                                            'Go to <a href="https://setup.office.com/Home" '
-                                            'target="_blank" rel="noopener '
-                                            'noreferrer">setup.office.com/Home</a>, sign in with '
-                                            'your Microsoft account, enter the code received by '
-                                            'email and follow the guided setup. Once done, install '
-                                            'the apps from <a href="https://www.office.com" '
-                                            'target="_blank" rel="noopener '
-                                            'noreferrer">office.com</a>.')],
+                                            'updates, and cloud services such as OneDrive.')],
                                     'fr': [("À qui s'adresse Microsoft 365 Personnel ?",
                                             'Personnel couvre un compte Microsoft avec les '
                                             'applications Office premium et 1 To OneDrive, selon '
@@ -561,18 +542,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'internet et une authentification périodiques sont '
                                             'toutefois nécessaires pour la vérification de la '
                                             'licence, les mises à jour et les services cloud comme '
-                                            'OneDrive.'),
-                                           ("Comment activer Microsoft 365 Personnel après l'achat "
-                                            '?',
-                                            'Rendez-vous sur <a '
-                                            'href="https://setup.office.com/Home" target="_blank" '
-                                            'rel="noopener noreferrer">setup.office.com/Home</a>, '
-                                            'connectez-vous avec votre compte Microsoft, saisissez '
-                                            "le code reçu par e-mail et suivez l'assistant "
-                                            "d'installation. Une fois terminé, installez les "
-                                            'applications depuis <a href="https://www.office.com" '
-                                            'target="_blank" rel="noopener '
-                                            'noreferrer">office.com</a>.')],
+                                            'OneDrive.')],
                                     'de': [('Für wen ist Microsoft 365 Personal gedacht?',
                                             'Personal gilt für ein Microsoft-Konto mit '
                                             'Premium-Office-Apps und 1 TB OneDrive, gemäß den '
@@ -595,18 +565,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'offline arbeiten; für die Lizenzprüfung, Updates und '
                                             'Cloud-Dienste wie OneDrive ist jedoch eine '
                                             'gelegentliche Internetverbindung und Anmeldung '
-                                            'erforderlich.'),
-                                           ('Wie aktiviere ich Microsoft 365 Personal nach dem '
-                                            'Kauf?',
-                                            'Rufen Sie <a href="https://setup.office.com/Home" '
-                                            'target="_blank" rel="noopener '
-                                            'noreferrer">setup.office.com/Home</a> auf, melden Sie '
-                                            'sich mit Ihrem Microsoft-Konto an, geben Sie den per '
-                                            'E-Mail erhaltenen Code ein und folgen Sie dem '
-                                            'Einrichtungsassistenten. Installieren Sie '
-                                            'anschließend die Apps von <a '
-                                            'href="https://www.office.com" target="_blank" '
-                                            'rel="noopener noreferrer">office.com</a>.')],
+                                            'erforderlich.')],
                                     'es': [('¿Para quién es Microsoft 365 Personal?',
                                             'Personal cubre una cuenta Microsoft con apps Office '
                                             'premium y 1 TB en OneDrive, según las condiciones de '
@@ -628,17 +587,325 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'requiere conexión a internet e inicio de sesión '
                                             'periódicos para la verificación de la licencia, las '
                                             'actualizaciones y los servicios en la nube como '
-                                            'OneDrive.'),
-                                           ('¿Cómo activo Microsoft 365 Personal después de la '
-                                            'compra?',
-                                            'Ve a <a href="https://setup.office.com/Home" '
-                                            'target="_blank" rel="noopener '
-                                            'noreferrer">setup.office.com/Home</a>, inicia sesión '
-                                            'con tu cuenta Microsoft, introduce el código recibido '
-                                            'por email y sigue el asistente de configuración. Una '
-                                            'vez finalizado, instala las apps desde <a '
-                                            'href="https://www.office.com" target="_blank" '
-                                            'rel="noopener noreferrer">office.com</a>.')]},
+                                            'OneDrive.')]},
+                            'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
+                                                    'title': 'Scheda tecnica',
+                                                    'caption': 'Specifiche tecniche e commerciali '
+                                                               'di Microsoft 365 Personal',
+                                                    'rows': [('Prodotto', 'Microsoft 365 Personal'),
+                                                             ('Durata', '12 mesi'),
+                                                             ('Utenti', '1 persona'),
+                                                             ('Archiviazione', '1 TB OneDrive'),
+                                                             ('Dispositivi',
+                                                              'Fino a 5 contemporanei'),
+                                                             ('Copilot', 'Incluso'),
+                                                             ('Consegna',
+                                                              'Codice digitale via email'),
+                                                             ('Attivazione',
+                                                              'Account Microsoft, su '
+                                                              'setup.office.com'),
+                                                             ('Rinnovo',
+                                                              'Nuova attivazione o estensione '
+                                                              'secondo le regole Microsoft'),
+                                                             ('Codice prodotto', '@sku'),
+                                                             ('Regione di attivazione',
+                                                              'Unione Europea / SEE'),
+                                                             ('Fatturazione',
+                                                              'IVA inclusa, fattura elettronica '
+                                                              'disponibile')]},
+                                             'en': {'eyebrow': 'Product specifications',
+                                                    'title': 'Technical sheet',
+                                                    'caption': 'Technical and commercial '
+                                                               'specifications of Microsoft 365 '
+                                                               'Personal',
+                                                    'rows': [('Product', 'Microsoft 365 Personal'),
+                                                             ('Term', '12 months'),
+                                                             ('Users', '1 person'),
+                                                             ('Storage', '1 TB OneDrive'),
+                                                             ('Devices', 'Up to 5 simultaneous'),
+                                                             ('Copilot', 'Included'),
+                                                             ('Delivery',
+                                                              'Digital code by email'),
+                                                             ('Activation',
+                                                              'Microsoft account, at '
+                                                              'setup.office.com'),
+                                                             ('Renewal',
+                                                              'New activation or extension per '
+                                                              "Microsoft's rules"),
+                                                             ('Product code', '@sku'),
+                                                             ('Activation region',
+                                                              'European Union / EEA'),
+                                                             ('Billing',
+                                                              'VAT included, e-invoice '
+                                                              'available')]},
+                                             'fr': {'eyebrow': 'Caractéristiques du produit',
+                                                    'title': 'Fiche technique',
+                                                    'caption': 'Caractéristiques techniques et '
+                                                               'commerciales de Microsoft 365 '
+                                                               'Personnel',
+                                                    'rows': [('Produit', 'Microsoft 365 Personnel'),
+                                                             ('Durée', '12 mois'),
+                                                             ('Utilisateurs', '1 personne'),
+                                                             ('Stockage', '1 To OneDrive'),
+                                                             ('Appareils',
+                                                              "Jusqu'à 5 simultanés"),
+                                                             ('Copilot', 'Inclus'),
+                                                             ('Livraison',
+                                                              'Code numérique par e-mail'),
+                                                             ('Activation',
+                                                              'Compte Microsoft, sur '
+                                                              'setup.office.com'),
+                                                             ('Renouvellement',
+                                                              'Nouvelle activation ou '
+                                                              'prolongation selon les règles '
+                                                              'Microsoft'),
+                                                             ('Code produit', '@sku'),
+                                                             ("Région d'activation",
+                                                              'Union européenne / EEE'),
+                                                             ('Facturation',
+                                                              'TVA incluse, facture disponible')]},
+                                             'de': {'eyebrow': 'Produktspezifikationen',
+                                                    'title': 'Technisches Datenblatt',
+                                                    'caption': 'Technische und kommerzielle Daten '
+                                                               'zu Microsoft 365 Personal',
+                                                    'rows': [('Produkt', 'Microsoft 365 Personal'),
+                                                             ('Laufzeit', '12 Monate'),
+                                                             ('Nutzer', '1 Person'),
+                                                             ('Speicher', '1 TB OneDrive'),
+                                                             ('Geräte', 'Bis zu 5 gleichzeitig'),
+                                                             ('Copilot', 'Enthalten'),
+                                                             ('Lieferung',
+                                                              'Digitaler Code per E-Mail'),
+                                                             ('Aktivierung',
+                                                              'Microsoft-Konto, auf '
+                                                              'setup.office.com'),
+                                                             ('Verlängerung',
+                                                              'Neuaktivierung oder Verlängerung '
+                                                              'gemäß Microsoft-Regeln'),
+                                                             ('Produktcode', '@sku'),
+                                                             ('Aktivierungsregion',
+                                                              'Europäische Union / EWR'),
+                                                             ('Abrechnung',
+                                                              'MwSt. inklusive, Rechnung '
+                                                              'verfügbar')]},
+                                             'es': {'eyebrow': 'Especificaciones del producto',
+                                                    'title': 'Ficha técnica',
+                                                    'caption': 'Especificaciones técnicas y '
+                                                               'comerciales de Microsoft 365 '
+                                                               'Personal',
+                                                    'rows': [('Producto', 'Microsoft 365 Personal'),
+                                                             ('Duración', '12 meses'),
+                                                             ('Usuarios', '1 persona'),
+                                                             ('Almacenamiento', '1 TB OneDrive'),
+                                                             ('Dispositivos',
+                                                              'Hasta 5 simultáneos'),
+                                                             ('Copilot', 'Incluido'),
+                                                             ('Entrega',
+                                                              'Código digital por email'),
+                                                             ('Activación',
+                                                              'Cuenta Microsoft, en '
+                                                              'setup.office.com'),
+                                                             ('Renovación',
+                                                              'Nueva activación o prórroga '
+                                                              'según las reglas de Microsoft'),
+                                                             ('Código de producto', '@sku'),
+                                                             ('Región de activación',
+                                                              'Unión Europea / EEE'),
+                                                             ('Facturación',
+                                                              'IVA incluido, factura '
+                                                              'disponible')]}},
+                            'compare': {'it': {'eyebrow': 'Quale scegliere',
+                                                'title': 'Confronta i piani Microsoft 365',
+                                                'sub': 'La differenza non è la potenza delle app: '
+                                                       'è quante persone useranno davvero il '
+                                                       'piano.',
+                                                'caption': 'Confronto tra Microsoft 365 Personal e '
+                                                           'Microsoft 365 Family',
+                                                'cols': ['Microsoft 365 Personal',
+                                                         'Microsoft 365 Family'],
+                                                'rows': [('Persone', '1', 'Fino a 6'),
+                                                         ('Spazio OneDrive',
+                                                          '1 TB',
+                                                          '1 TB a persona'),
+                                                         ('Account separati per ogni utente',
+                                                          'no',
+                                                          'yes'),
+                                                         ('Funzionalità Copilot',
+                                                          'Titolare',
+                                                          'Solo titolare'),
+                                                         ('Ideale per',
+                                                          'Chi usa Office da solo',
+                                                          'Due o più persone')],
+                                                'yes_label': 'Incluso',
+                                                'no_label': 'Non previsto',
+                                                'price_row': 'Prezzo su AML Store',
+                                                'skus': ['QQ2-00012', '6GQ-00092'],
+                                                'foot': ['Scegli Personal se sei l\'unica persona '
+                                                         'a usare davvero le app o lo spazio '
+                                                         'OneDrive. Se in futuro dovessi '
+                                                         'condividerlo con altri, valuta subito '
+                                                         '<a href="/it/microsoft-365-family">'
+                                                         'Microsoft 365 Family</a>.',
+                                                         'Il passaggio a Family costa solo '
+                                                         '<strong>€ {price1_minus_price0} in '
+                                                         'più</strong> (€ {price1} contro € '
+                                                         '{price0}) per includere altre 5 persone, '
+                                                         'ciascuna con il proprio account e 1 TB '
+                                                         'dedicato — molto meno che comprare una '
+                                                         'seconda licenza Personal a parte.']},
+                                        'en': {'eyebrow': 'Which to choose',
+                                               'title': 'Compare Microsoft 365 plans',
+                                               'sub': 'The difference is not app power: it is how '
+                                                      'many people will actually use the plan.',
+                                               'caption': 'Comparison between Microsoft 365 '
+                                                          'Personal and Microsoft 365 Family',
+                                               'cols': ['Microsoft 365 Personal',
+                                                        'Microsoft 365 Family'],
+                                               'rows': [('People', '1', 'Up to 6'),
+                                                        ('OneDrive storage',
+                                                         '1 TB',
+                                                         '1 TB per person'),
+                                                        ('Separate account per user',
+                                                         'no',
+                                                         'yes'),
+                                                        ('Copilot features',
+                                                         'Owner',
+                                                         'Owner only'),
+                                                        ('Best for',
+                                                         'Someone using Office alone',
+                                                         'Two or more people')],
+                                               'yes_label': 'Included',
+                                               'no_label': 'Not applicable',
+                                               'price_row': 'AML Store price',
+                                               'skus': ['QQ2-00012', '6GQ-00092'],
+                                               'foot': ['Choose Personal if you are the only '
+                                                        'person who will really use the apps or '
+                                                        'OneDrive storage. If you might share it '
+                                                        'with others later, consider Microsoft '
+                                                        '365 Family now.',
+                                                        'Upgrading to Family costs only <strong>€ '
+                                                        '{price1_minus_price0} more</strong> (€ '
+                                                        '{price1} vs € {price0}) to include 5 more '
+                                                        'people, each with their own account and '
+                                                        '1 TB — far less than buying a second '
+                                                        'Personal licence separately.']},
+                                        'fr': {'eyebrow': 'Lequel choisir',
+                                               'title': 'Comparer les plans Microsoft 365',
+                                               'sub': "La différence n'est pas la puissance des "
+                                                      "apps : c'est le nombre de personnes qui "
+                                                      'utiliseront vraiment le plan.',
+                                               'caption': 'Comparaison entre Microsoft 365 '
+                                                          'Personal et Microsoft 365 Family',
+                                               'cols': ['Microsoft 365 Personal',
+                                                        'Microsoft 365 Family'],
+                                               'rows': [('Personnes', '1', "Jusqu'à 6"),
+                                                        ('Espace OneDrive',
+                                                         '1 TB',
+                                                         '1 To par personne'),
+                                                        ('Compte séparé par utilisateur',
+                                                         'no',
+                                                         'yes'),
+                                                        ('Fonctions Copilot',
+                                                         'Titulaire',
+                                                         'Titulaire uniquement'),
+                                                        ('Idéal pour',
+                                                         'Qui utilise Office seul',
+                                                         'Deux personnes ou plus')],
+                                               'yes_label': 'Inclus',
+                                               'no_label': 'Non applicable',
+                                               'price_row': 'Prix sur AML Store',
+                                               'skus': ['QQ2-00012', '6GQ-00092'],
+                                               'foot': ['Choisissez Personal si vous êtes la '
+                                                        'seule personne à vraiment utiliser les '
+                                                        "apps ou l'espace OneDrive. Si vous devez "
+                                                        'le partager avec d\'autres plus tard, '
+                                                        'envisagez dès maintenant Microsoft 365 '
+                                                        'Family.',
+                                                        'Passer à Family coûte seulement '
+                                                        '<strong>€ {price1_minus_price0} de '
+                                                        'plus</strong> (€ {price1} contre € '
+                                                        '{price0}) pour inclure 5 personnes '
+                                                        'supplémentaires, chacune avec son propre '
+                                                        'compte et 1 To dédié — bien moins cher '
+                                                        "qu'une deuxième licence Personal "
+                                                        'séparée.']},
+                                        'de': {'eyebrow': 'Welchen Plan wählen',
+                                               'title': 'Microsoft 365 Pläne im Vergleich',
+                                               'sub': 'Der Unterschied liegt nicht in der '
+                                                      'App-Leistung, sondern darin, wie viele '
+                                                      'Personen den Plan wirklich nutzen.',
+                                               'caption': 'Vergleich zwischen Microsoft 365 '
+                                                          'Personal und Microsoft 365 Family',
+                                               'cols': ['Microsoft 365 Personal',
+                                                        'Microsoft 365 Family'],
+                                               'rows': [('Personen', '1', 'Bis zu 6'),
+                                                        ('OneDrive-Speicher',
+                                                         '1 TB',
+                                                         '1 TB pro Person'),
+                                                        ('Eigenes Konto pro Nutzer',
+                                                         'no',
+                                                         'yes'),
+                                                        ('Copilot-Funktionen',
+                                                         'Inhaber',
+                                                         'Nur Inhaber'),
+                                                        ('Ideal für',
+                                                         'Wer Office allein nutzt',
+                                                         'Zwei oder mehr Personen')],
+                                               'yes_label': 'Enthalten',
+                                               'no_label': 'Nicht zutreffend',
+                                               'price_row': 'AML Store-Preis',
+                                               'skus': ['QQ2-00012', '6GQ-00092'],
+                                               'foot': ['Wählen Sie Personal, wenn Sie die '
+                                                        'einzige Person sind, die die Apps oder '
+                                                        'den OneDrive-Speicher wirklich nutzt. '
+                                                        'Falls Sie es später mit anderen teilen '
+                                                        'möchten, ziehen Sie gleich Microsoft 365 '
+                                                        'Family in Betracht.',
+                                                        'Der Wechsel zu Family kostet nur '
+                                                        '<strong>€ {price1_minus_price0} '
+                                                        'mehr</strong> (€ {price1} statt € '
+                                                        '{price0}) für 5 weitere Personen, jeweils '
+                                                        'mit eigenem Konto und 1 TB — deutlich '
+                                                        'weniger als eine zweite separate '
+                                                        'Personal-Lizenz.']},
+                                        'es': {'eyebrow': 'Cuál elegir',
+                                               'title': 'Compara los planes Microsoft 365',
+                                               'sub': 'La diferencia no es la potencia de las '
+                                                      'apps: es cuántas personas van a usar '
+                                                      'realmente el plan.',
+                                               'caption': 'Comparación entre Microsoft 365 '
+                                                          'Personal y Microsoft 365 Family',
+                                               'cols': ['Microsoft 365 Personal',
+                                                        'Microsoft 365 Family'],
+                                               'rows': [('Personas', '1', 'Hasta 6'),
+                                                        ('Almacenamiento OneDrive',
+                                                         '1 TB',
+                                                         '1 TB por persona'),
+                                                        ('Cuenta separada por usuario',
+                                                         'no',
+                                                         'yes'),
+                                                        ('Funciones de Copilot',
+                                                         'Titular',
+                                                         'Solo titular'),
+                                                        ('Ideal para',
+                                                         'Quien usa Office en solitario',
+                                                         'Dos o más personas')],
+                                               'yes_label': 'Incluido',
+                                               'no_label': 'No aplicable',
+                                               'price_row': 'Precio AML Store',
+                                               'skus': ['QQ2-00012', '6GQ-00092'],
+                                               'foot': ['Elige Personal si eres la única persona '
+                                                        'que va a usar de verdad las apps o el '
+                                                        'almacenamiento OneDrive. Si en el futuro '
+                                                        'vas a compartirlo con otros, valora ya '
+                                                        'Microsoft 365 Family.',
+                                                        'Pasar a Family cuesta solo <strong>€ '
+                                                        '{price1_minus_price0} más</strong> (€ '
+                                                        '{price1} frente a € {price0}) para '
+                                                        'incluir 5 personas más, cada una con su '
+                                                        'propia cuenta y 1 TB — mucho menos que '
+                                                        'comprar una segunda licencia Personal '
+                                                        'aparte.']}},
                             'apps': ['word',
                                      'excel',
                                      'powerpoint',
@@ -1367,7 +1634,10 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                   'acceder rápidamente a tus aplicaciones '
                                                   'favoritas y archivos recientes en un entorno '
                                                   'limpio, fluido y moderno.'}}},
- 'microsoft-365-family': {'name': {'it': 'Microsoft 365 Family',
+ 'microsoft-365-family': {'copilot_bonus': True,
+                          'hide_steps_section': True,
+                          'seats_count': 6,
+                          'name': {'it': 'Microsoft 365 Family',
                                    'en': 'Microsoft 365 Family',
                                    'fr': 'Microsoft 365 Family',
                                    'de': 'Microsoft 365 Family',
@@ -1406,27 +1676,6 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                          'fr': 'Microsoft 365 <span>Family</span>',
                                          'de': 'Microsoft 365 <span>Family</span>',
                                          'es': 'Microsoft 365 <span>Family</span>'},
-                          'apps_title': {'it': 'Tutte le app che usi, su tutti i tuoi dispositivi',
-                                         'en': 'All the apps you use, on all your devices',
-                                         'fr': 'Toutes les apps que vous utilisez, sur tous vos '
-                                               'appareils',
-                                         'de': 'Alle Apps, die Sie nutzen — auf allen Geräten',
-                                         'es': 'Todas las apps que usas, en todos tus '
-                                               'dispositivos'},
-                          'apps_sub': {'it': 'Installa le applicazioni desktop supportate e '
-                                             'continua a lavorare anche offline. I documenti '
-                                             'possono essere sincronizzati tramite OneDrive.',
-                                       'en': 'Install the supported desktop apps and keep working '
-                                             'offline. Documents can sync via OneDrive.',
-                                       'fr': 'Installez les applications de bureau prises en '
-                                             'charge et continuez à travailler hors ligne. Les '
-                                             'documents peuvent être synchronisés via OneDrive.',
-                                       'de': 'Installieren Sie die unterstützten Desktop-Apps und '
-                                             'arbeiten Sie auch offline weiter. Dokumente können '
-                                             'über OneDrive synchronisiert werden.',
-                                       'es': 'Instala las apps de escritorio compatibles y sigue '
-                                             'trabajando sin conexión. Los documentos pueden '
-                                             'sincronizarse con OneDrive.'},
                           'apps': ['word',
                                    'excel',
                                    'powerpoint',
@@ -1710,68 +1959,29 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
                                            "indicando l'email usata per l'ordine e il numero "
                                            "d'ordine."]),
-                                         ("Come si attiva Microsoft 365 Family dopo l'acquisto?",
-                                          'Vai su <a href="https://setup.office.com/Home" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">setup.office.com/Home</a>, accedi con il '
-                                          'tuo account Microsoft, inserisci il codice ricevuto via '
-                                          'email e segui la procedura guidata. Al termine installa '
-                                          'le app da <a href="https://www.office.com" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">office.com</a>.'),
-                                         ('Posso riscattare il codice su un account Microsoft che '
-                                          'uso già?',
+                                         ('Posso riscattare il codice su un account che ha già '
+                                          'Microsoft 365 attivo?',
                                           ['Sì: il riscatto avviene su setup.office.com con il tuo '
-                                           "account Microsoft. Se su quell'account è già attivo un "
-                                           'abbonamento Microsoft 365, il comportamento '
-                                           '(estensione o conversione del piano) segue le regole '
-                                           'Microsoft mostrate durante il riscatto.',
+                                           'account Microsoft, anche se ha già un abbonamento '
+                                           'Microsoft 365 Family attivo. Il modo in cui viene '
+                                           'applicato — estensione della durata attuale, avvio di '
+                                           'un nuovo periodo o conversione del piano — segue le '
+                                           'regole Microsoft mostrate al momento del riscatto, non '
+                                           'è qualcosa che decidiamo noi come rivenditore.',
                                            "<strong>Scegli l'account con attenzione:</strong> la "
                                            'licenza resta associata a quello usato al momento del '
                                            'riscatto.']),
-                                         ("Come si invitano altri membri dopo l'acquisto?",
-                                          "Dopo l'attivazione sul tuo account Microsoft, usa le "
-                                          "funzioni di condivisione del piano Family nell'area "
-                                          'account Microsoft / abbonamenti, come indicato da '
-                                          'Microsoft per il periodo di validità della licenza.'),
-                                         ('Copilot è disponibile per tutti i membri?',
-                                          ['No. Le funzionalità Copilot comprese nel piano sono '
-                                           'utilizzabili dal <strong>titolare '
-                                           "dell'abbonamento</strong>.",
-                                           'Gli altri cinque membri ricevono le app Microsoft 365, '
-                                           '1 TB di OneDrive ciascuno e Microsoft Defender, ma non '
-                                           'le funzionalità AI.']),
                                          ('I file sono condivisi automaticamente tra i membri?',
                                           'No. Ogni persona usa il proprio account Microsoft, con '
                                           'documenti, email, impostazioni e spazio OneDrive '
                                           'separati. La condivisione di singoli file o cartelle '
                                           'resta una scelta volontaria di chi li possiede.'),
-                                         ('Si possono usare le app Office anche offline?',
-                                          'Sì: con le app desktop installate puoi lavorare '
-                                          'offline; servono comunque connessione e accesso '
-                                          'periodici per la verifica della licenza, aggiornamenti '
-                                          'e servizi cloud come OneDrive.'),
-                                         ('Qual è la differenza tra Microsoft 365 Family e '
-                                          'Personal?',
-                                          'Family è pensato per condividere il piano con il tuo '
-                                          'gruppo famiglia Microsoft (fino a 6 persone), ciascuna '
-                                          'con account e spazio OneDrive distinti. Personal copre '
-                                          'un solo utente con 1 TB, secondo le condizioni '
-                                          'Microsoft aggiornate.'),
                                          ('Il codice si rinnova automaticamente dopo 12 mesi?',
                                           'No. Il codice attiva Microsoft 365 Family per 12 mesi '
                                           'con un pagamento una tantum: AML Store non addebita '
                                           'nulla automaticamente alla scadenza. Eventuali opzioni '
                                           'di rinnovo si gestiscono separatamente, direttamente '
                                           "nell'account Microsoft."),
-                                         ('Posso usare il codice per rinnovare un abbonamento '
-                                          'Family già attivo?',
-                                          'Sì, puoi riscattarlo sullo stesso account che ha già '
-                                          'Microsoft 365 Family attivo. Il modo in cui viene '
-                                          'applicato (estensione della durata attuale o avvio di '
-                                          'un nuovo periodo) segue le regole Microsoft mostrate al '
-                                          'momento del riscatto su setup.office.com, non è '
-                                          'qualcosa che decidiamo noi come rivenditore.'),
                                          ('Cosa succede se il codice non funziona?',
                                           ["Scrivici indicando numero d'ordine ed eventuale "
                                            'messaggio di errore. Verifichiamo il caso e, se viene '
@@ -1808,66 +2018,28 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'If you need it after the order, email <a '
                                            'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
                                            'with the order email and order number.']),
-                                         ('How do I activate Microsoft 365 Family after purchase?',
-                                          'Go to <a href="https://setup.office.com/Home" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">setup.office.com/Home</a>, sign in with '
-                                          'your Microsoft account, enter the code received by '
-                                          'email and follow the guided setup. Then install the '
-                                          'apps from <a href="https://www.office.com" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">office.com</a>.'),
-                                         ('Can I redeem the code on a Microsoft account I already '
-                                          'use?',
+                                         ('Can I redeem the code on an account that already has '
+                                          'Microsoft 365 active?',
                                           ['Yes: redemption happens on setup.office.com with your '
-                                           'Microsoft account. If that account already has an '
-                                           'active Microsoft 365 subscription, the outcome '
-                                           "(extension or plan conversion) follows Microsoft's "
-                                           'rules shown during redemption.',
+                                           'Microsoft account, even if it already has an active '
+                                           'Microsoft 365 Family subscription. How it is applied — '
+                                           'extending the current term, starting a new period, or '
+                                           "converting the plan — follows Microsoft's rules shown "
+                                           'at redemption; it is not something we decide as a '
+                                           'reseller.',
                                            '<strong>Choose the account carefully:</strong> the '
                                            'licence stays tied to the one used at redemption.']),
-                                         ('How do I invite other members after purchase?',
-                                          'After activation on your Microsoft account, use the '
-                                          'Family plan sharing features in the Microsoft account / '
-                                          'subscriptions area, as directed by Microsoft for the '
-                                          'licence term.'),
-                                         ('Is Copilot available to all members?',
-                                          ['No. Copilot features included in the plan are '
-                                           'available to the <strong>subscription owner</strong>.',
-                                           'The other five members get Microsoft 365 apps, 1 TB of '
-                                           'OneDrive each and Microsoft Defender, but not the AI '
-                                           'features.']),
                                          ('Are files shared automatically between members?',
                                           'No. Each person uses their own Microsoft account, with '
                                           'separate documents, email, settings and OneDrive space. '
                                           'Sharing individual files or folders remains a voluntary '
                                           'choice by the owner.'),
-                                         ('Can I use Office apps offline too?',
-                                          'Yes: with the desktop apps installed you can work '
-                                          'offline; periodic connection and sign-in are still '
-                                          'required for licence checks, updates and cloud services '
-                                          'such as OneDrive.'),
-                                         ('What is the difference between Microsoft 365 Family and '
-                                          'Personal?',
-                                          'Family is designed to share the plan with your '
-                                          'Microsoft family group (up to 6 people), each with a '
-                                          'separate account and OneDrive space. Personal covers a '
-                                          "single user with 1 TB, subject to Microsoft's current "
-                                          'terms.'),
                                          ('Does the code renew automatically after 12 months?',
                                           'No. The code activates Microsoft 365 Family for 12 '
                                           'months with a one-time payment: AML Store does not '
                                           'charge anything automatically at expiry. Any renewal '
                                           'options are managed separately in your Microsoft '
                                           'account.'),
-                                         ('Can I use the code to renew an active Family '
-                                          'subscription?',
-                                          'Yes, you can redeem it on the same account that already '
-                                          'has Microsoft 365 Family active. How it is applied '
-                                          '(extending the current term or starting a new period) '
-                                          "follows Microsoft's rules shown at redemption on "
-                                          'setup.office.com — it is not something we decide as a '
-                                          'reseller.'),
                                          ('What if the code does not work?',
                                           ['Contact us with your order number and any error '
                                            'message. We review the case and, if a defect '
@@ -1907,37 +2079,18 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'href="mailto:Info@amlstore.it">Info@amlstore.it</a> en '
                                            "indiquant l'e-mail de commande et le numéro de "
                                            'commande.']),
-                                         ("Comment activer Microsoft 365 Family après l'achat ?",
-                                          'Allez sur <a href="https://setup.office.com/Home" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">setup.office.com/Home</a>, connectez-vous '
-                                          'avec votre compte Microsoft, saisissez le code reçu par '
-                                          "e-mail et suivez l'assistant. Ensuite, installez les "
-                                          'apps depuis <a href="https://www.office.com" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">office.com</a>.'),
-                                         ('Puis-je utiliser le code sur un compte Microsoft que '
-                                          "j'utilise déjà ?",
+                                         ('Puis-je activer le code sur un compte qui a déjà '
+                                          'Microsoft 365 actif ?',
                                           ["Oui : l'activation se fait sur setup.office.com avec "
-                                           'votre compte Microsoft. Si un abonnement Microsoft 365 '
-                                           'est déjà actif sur ce compte, le comportement '
-                                           '(prolongation ou conversion) suit les règles Microsoft '
-                                           "affichées pendant l'activation.",
+                                           'votre compte Microsoft, même s\'il a déjà un abonnement '
+                                           'Microsoft 365 Family actif. La façon dont il '
+                                           "s'applique — prolongation de la durée actuelle, "
+                                           'nouvelle période ou conversion du plan — suit les '
+                                           "règles Microsoft affichées lors de l'activation ; ce "
+                                           "n'est pas nous qui le décidons en tant que revendeur.",
                                            '<strong>Choisissez le compte avec attention :</strong> '
                                            'la licence reste associée à celui utilisé lors de '
                                            "l'activation."]),
-                                         ("Comment inviter d'autres membres après l'achat ?",
-                                          'Après activation sur votre compte Microsoft, utilisez '
-                                          'les fonctions de partage du plan Family dans la zone '
-                                          'compte Microsoft / abonnements, comme indiqué par '
-                                          'Microsoft pour la durée de la licence.'),
-                                         ('Copilot est-il disponible pour tous les membres ?',
-                                          ['Non. Les fonctions Copilot incluses dans le plan sont '
-                                           'utilisables par le <strong>titulaire de '
-                                           "l'abonnement</strong>.",
-                                           'Les cinq autres membres reçoivent les apps Microsoft '
-                                           "365, 1 To d'OneDrive chacun et Microsoft Defender, "
-                                           "mais pas les fonctions d'IA."]),
                                          ('Les fichiers sont-ils partagés automatiquement entre '
                                           'les membres ?',
                                           'Non. Chaque personne utilise son propre compte '
@@ -1945,19 +2098,6 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                           'espace OneDrive séparés. Le partage de fichiers ou '
                                           'dossiers individuels reste un choix volontaire du '
                                           'propriétaire.'),
-                                         ('Peut-on utiliser les apps Office hors ligne ?',
-                                          'Oui : avec les apps de bureau installées, vous pouvez '
-                                          'travailler hors ligne ; une connexion et une connexion '
-                                          'périodiques restent nécessaires pour la vérification de '
-                                          'licence, les mises à jour et les services cloud comme '
-                                          'OneDrive.'),
-                                         ('Quelle est la différence entre Microsoft 365 Family et '
-                                          'Personal ?',
-                                          'Family est conçu pour partager le plan avec votre '
-                                          "groupe famille Microsoft (jusqu'à 6 personnes), chacune "
-                                          'avec un compte et un espace OneDrive distincts. '
-                                          'Personal couvre un seul utilisateur avec 1 To, selon '
-                                          'les conditions Microsoft à jour.'),
                                          ('Le code se renouvelle-t-il automatiquement après 12 '
                                           'mois ?',
                                           'Non. Le code active Microsoft 365 Family pour 12 mois '
@@ -1965,14 +2105,6 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                           "automatiquement à l'échéance. Les options de "
                                           'renouvellement éventuelles se gèrent séparément dans le '
                                           'compte Microsoft.'),
-                                         ('Puis-je utiliser le code pour renouveler un abonnement '
-                                          'Family déjà actif ?',
-                                          "Oui, vous pouvez l'activer sur le même compte qui a "
-                                          "déjà Microsoft 365 Family. La façon dont il s'applique "
-                                          '(prolongation de la durée actuelle ou nouveau période) '
-                                          'suit les règles Microsoft affichées lors de '
-                                          "l'activation sur setup.office.com — ce n'est pas nous "
-                                          'qui le décidons en tant que revendeur.'),
                                          ('Que se passe-t-il si le code ne fonctionne pas ?',
                                           ['Écrivez-nous en indiquant le numéro de commande et le '
                                            "message d'erreur éventuel. Nous examinons le cas et, "
@@ -2013,39 +2145,19 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Sie an <a '
                                            'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
                                            'mit der Bestell-E-Mail und der Bestellnummer.']),
-                                         ('Wie aktiviere ich Microsoft 365 Family nach dem Kauf?',
-                                          'Rufen Sie <a href="https://setup.office.com/Home" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">setup.office.com/Home</a> auf, melden Sie '
-                                          'sich mit Ihrem Microsoft-Konto an, geben Sie den per '
-                                          'E-Mail erhaltenen Code ein und folgen Sie dem '
-                                          'Einrichtungsassistenten. Installieren Sie anschließend '
-                                          'die Apps von <a href="https://www.office.com" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">office.com</a>.'),
-                                         ('Kann ich den Code auf einem Microsoft-Konto einlösen, '
-                                          'das ich bereits nutze?',
+                                         ('Kann ich den Code auf einem Konto einlösen, das bereits '
+                                          'Microsoft 365 aktiv hat?',
                                           ['Ja: Die Einlösung erfolgt auf setup.office.com mit '
-                                           'Ihrem Microsoft-Konto. Wenn dieses Konto bereits ein '
-                                           'aktives Microsoft 365-Abonnement hat, richtet sich das '
-                                           'Ergebnis (Verlängerung oder Planwechsel) nach den '
-                                           'Microsoft-Regeln, die bei der Einlösung angezeigt '
-                                           'werden.',
+                                           'Ihrem Microsoft-Konto, auch wenn darauf bereits ein '
+                                           'aktives Microsoft 365 Family-Abonnement besteht. Wie '
+                                           'es angewendet wird — Verlängerung der aktuellen '
+                                           'Laufzeit, Beginn einer neuen Periode oder Planwechsel '
+                                           '— richtet sich nach den Microsoft-Regeln, die bei der '
+                                           'Einlösung angezeigt werden; das entscheiden nicht wir '
+                                           'als Händler.',
                                            '<strong>Wählen Sie das Konto sorgfältig:</strong> Die '
                                            'Lizenz bleibt an das bei der Einlösung verwendete '
                                            'Konto gebunden.']),
-                                         ('Wie lade ich nach dem Kauf weitere Mitglieder ein?',
-                                          'Nach der Aktivierung auf Ihrem Microsoft-Konto nutzen '
-                                          'Sie die Freigabefunktionen des Family-Plans im Bereich '
-                                          'Microsoft-Konto / Abonnements, wie von Microsoft für '
-                                          'die Lizenzlaufzeit vorgesehen.'),
-                                         ('Ist Copilot für alle Mitglieder verfügbar?',
-                                          ['Nein. Die im Plan enthaltenen Copilot-Funktionen '
-                                           'stehen dem <strong>Abonnementinhaber</strong> zur '
-                                           'Verfügung.',
-                                           'Die anderen fünf Mitglieder erhalten Microsoft 365 '
-                                           'Apps, jeweils 1 TB OneDrive und Microsoft Defender, '
-                                           'jedoch nicht die KI-Funktionen.']),
                                          ('Werden Dateien automatisch zwischen Mitgliedern '
                                           'geteilt?',
                                           'Nein. Jede Person nutzt ihr eigenes Microsoft-Konto mit '
@@ -2053,33 +2165,12 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                           'OneDrive-Speicher. Das Teilen einzelner Dateien oder '
                                           'Ordner bleibt eine freiwillige Entscheidung des '
                                           'Besitzers.'),
-                                         ('Kann ich Office-Apps auch offline nutzen?',
-                                          'Ja: Mit den installierten Desktop-Apps können Sie '
-                                          'offline arbeiten; für Lizenzprüfungen, Updates und '
-                                          'Cloud-Dienste wie OneDrive sind weiterhin eine '
-                                          'gelegentliche Verbindung und Anmeldung erforderlich.'),
-                                         ('Was ist der Unterschied zwischen Microsoft 365 Family '
-                                          'und Personal?',
-                                          'Family ist zum Teilen des Plans mit Ihrer '
-                                          'Microsoft-Familiengruppe gedacht (bis zu 6 Personen), '
-                                          'jeweils mit eigenem Konto und OneDrive-Speicher. '
-                                          'Personal gilt für einen einzelnen Nutzer mit 1 TB, '
-                                          'gemäß den aktuellen Microsoft-Bedingungen.'),
                                          ('Verlängert sich der Code nach 12 Monaten automatisch?',
                                           'Nein. Der Code aktiviert Microsoft 365 Family für 12 '
                                           'Monate mit einer einmaligen Zahlung: AML Store belastet '
                                           'bei Ablauf nichts automatisch. Etwaige '
                                           'Verlängerungsoptionen verwalten Sie separat in Ihrem '
                                           'Microsoft-Konto.'),
-                                         ('Kann ich den Code zur Verlängerung eines aktiven '
-                                          'Family-Abonnements nutzen?',
-                                          'Ja, Sie können ihn auf demselben Konto einlösen, auf '
-                                          'dem Microsoft 365 Family bereits aktiv ist. Wie er '
-                                          'angewendet wird (Verlängerung der aktuellen Laufzeit '
-                                          'oder Beginn einer neuen Periode) richtet sich nach den '
-                                          'Microsoft-Regeln, die bei der Einlösung auf '
-                                          'setup.office.com angezeigt werden — das entscheiden '
-                                          'nicht wir als Händler.'),
                                          ('Was tun, wenn der Code nicht funktioniert?',
                                           ['Kontaktieren Sie uns mit Ihrer Bestellnummer und einer '
                                            'etwaigen Fehlermeldung. Wir prüfen den Fall und bieten '
@@ -2119,56 +2210,23 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Si la necesitas después del pedido, escribe a <a '
                                            'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
                                            'con el email del pedido y el número de pedido.']),
-                                         ('¿Cómo activo Microsoft 365 Family después de la compra?',
-                                          'Ve a <a href="https://setup.office.com/Home" '
-                                          'target="_blank" rel="noopener '
-                                          'noreferrer">setup.office.com/Home</a>, inicia sesión '
-                                          'con tu cuenta Microsoft, introduce el código recibido '
-                                          'por email y sigue el asistente de configuración. '
-                                          'Después instala las apps desde <a '
-                                          'href="https://www.office.com" target="_blank" '
-                                          'rel="noopener noreferrer">office.com</a>.'),
-                                         ('¿Puedo canjear el código en una cuenta Microsoft que ya '
-                                          'uso?',
+                                         ('¿Puedo canjear el código en una cuenta que ya tiene '
+                                          'Microsoft 365 activo?',
                                           ['Sí: el canje se realiza en setup.office.com con tu '
-                                           'cuenta Microsoft. Si esa cuenta ya tiene una '
-                                           'suscripción Microsoft 365 activa, el resultado '
-                                           '(prórroga o conversión de plan) sigue las reglas de '
-                                           'Microsoft mostradas durante el canje.',
+                                           'cuenta Microsoft, aunque ya tenga una suscripción '
+                                           'Microsoft 365 Family activa. Cómo se aplica —prórroga '
+                                           'del periodo actual, inicio de uno nuevo o conversión '
+                                           'del plan— sigue las reglas de Microsoft mostradas '
+                                           'durante el canje; no es algo que decidamos nosotros '
+                                           'como revendedores.',
                                            '<strong>Elige la cuenta con cuidado:</strong> la '
                                            'licencia queda vinculada a la usada en el canje.']),
-                                         ('¿Cómo invito a otros miembros después de la compra?',
-                                          'Tras la activación en tu cuenta Microsoft, usa las '
-                                          'funciones para compartir el plan Family en el área de '
-                                          'cuenta Microsoft / suscripciones, según las '
-                                          'indicaciones de Microsoft durante la vigencia de la '
-                                          'licencia.'),
-                                         ('¿Copilot está disponible para todos los miembros?',
-                                          ['No. Las funciones de Copilot incluidas en el plan '
-                                           'están disponibles para el <strong>titular de la '
-                                           'suscripción</strong>.',
-                                           'Los otros cinco miembros obtienen las apps Microsoft '
-                                           '365, 1 TB de OneDrive cada uno y Microsoft Defender, '
-                                           'pero no las funciones de IA.']),
                                          ('¿Los archivos se comparten automáticamente entre los '
                                           'miembros?',
                                           'No. Cada persona usa su propia cuenta Microsoft, con '
                                           'documentos, email, ajustes y espacio OneDrive '
                                           'separados. Compartir archivos o carpetas concretos '
                                           'sigue siendo una elección voluntaria del propietario.'),
-                                         ('¿Puedo usar también las apps de Office sin conexión?',
-                                          'Sí: con las aplicaciones de escritorio instaladas '
-                                          'puedes trabajar sin conexión; aun así se requieren '
-                                          'conexión e inicio de sesión periódicos para la '
-                                          'verificación de la licencia, las actualizaciones y los '
-                                          'servicios en la nube como OneDrive.'),
-                                         ('¿Cuál es la diferencia entre Microsoft 365 Family y '
-                                          'Personal?',
-                                          'Family está pensado para compartir el plan con tu grupo '
-                                          'familiar de Microsoft (hasta 6 personas), cada una con '
-                                          'una cuenta y espacio OneDrive propios. Personal cubre a '
-                                          'un solo usuario con 1 TB, según las condiciones '
-                                          'vigentes de Microsoft.'),
                                          ('¿El código se renueva automáticamente después de 12 '
                                           'meses?',
                                           'No. El código activa Microsoft 365 Family durante 12 '
@@ -2176,13 +2234,6 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                           'automáticamente al vencimiento. Cualquier opción de '
                                           'renovación se gestiona por separado en tu cuenta '
                                           'Microsoft.'),
-                                         ('¿Puedo usar el código para renovar una suscripción '
-                                          'Family activa?',
-                                          'Sí, puedes canjearlo en la misma cuenta que ya tiene '
-                                          'Microsoft 365 Family activo. Cómo se aplica (prorrogar '
-                                          'el periodo actual o iniciar uno nuevo) sigue las reglas '
-                                          'de Microsoft mostradas en el canje en setup.office.com: '
-                                          'no es algo que decidamos nosotros como revendedor.'),
                                          ('¿Qué pasa si el código no funciona?',
                                           ['Contáctanos con tu número de pedido y cualquier '
                                            'mensaje de error. Revisamos el caso y, si se confirma '
@@ -2192,742 +2243,6 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Soporte: <a '
                                            'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
                                            '+39 392 558 0413.'])]},
-                          'faq_groups': {'it': [('Acquisto e consegna',
-                                                 [('Quando ricevo il codice dopo il pagamento?',
-                                                   ["L'email di consegna parte dopo la conferma "
-                                                    'del pagamento, di norma entro 2–15 minuti; in '
-                                                    'rari casi servono alcuni minuti in più per le '
-                                                    'verifiche del pagamento.',
-                                                    'Se dopo <strong>30 minuti</strong> non hai '
-                                                    'ricevuto nulla, controlla anche spam e posta '
-                                                    'indesiderata e scrivi a <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    'indicando prodotto acquistato ed email usata '
-                                                    "per l'ordine."]),
-                                                  ("Cosa ricevo esattamente nell'email?",
-                                                   ['Ricevi la <strong>product key</strong> di '
-                                                    'Microsoft 365 Family e le istruzioni per '
-                                                    'riscattarla sui portali ufficiali Microsoft.',
-                                                    'La consegna è solo digitale: non viene '
-                                                    'spedito alcun supporto fisico e non ci sono '
-                                                    'costi di spedizione.']),
-                                                  ('Quali metodi di pagamento posso usare?',
-                                                   'Al checkout sono disponibili carta, PayPal e '
-                                                   'wallet digitali come Apple Pay e Google Pay '
-                                                   "dove abilitati. L'elaborazione del pagamento è "
-                                                   'gestita in modo sicuro tramite '
-                                                   '<strong>Stripe</strong>.'),
-                                                  ('Posso avere la fattura elettronica?',
-                                                   ['Sì. Al checkout scegli il profilo '
-                                                    '<strong>Azienda</strong> e inserisci partita '
-                                                    'IVA e Codice SDI oppure PEC: la fattura '
-                                                    'elettronica viene emessa su quei dati.',
-                                                    "Se ti serve dopo l'ordine, scrivi a <a "
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    "indicando l'email usata per l'ordine e il "
-                                                    "numero d'ordine."])]),
-                                                ('Attivazione e account',
-                                                 [('Come si attiva Microsoft 365 Family dopo '
-                                                   "l'acquisto?",
-                                                   'Vai su <a href="https://setup.office.com/Home" '
-                                                   'target="_blank" rel="noopener '
-                                                   'noreferrer">setup.office.com/Home</a>, accedi '
-                                                   'con il tuo account Microsoft, inserisci il '
-                                                   'codice ricevuto via email e segui la procedura '
-                                                   'guidata. Al termine installa le app da <a '
-                                                   'href="https://www.office.com" target="_blank" '
-                                                   'rel="noopener noreferrer">office.com</a>.'),
-                                                  ('Posso riscattare il codice su un account '
-                                                   'Microsoft che uso già?',
-                                                   ['Sì: il riscatto avviene su setup.office.com '
-                                                    'con il tuo account Microsoft. Se su '
-                                                    "quell'account è già attivo un abbonamento "
-                                                    'Microsoft 365, il comportamento (estensione o '
-                                                    'conversione del piano) segue le regole '
-                                                    'Microsoft mostrate durante il riscatto.',
-                                                    "<strong>Scegli l'account con "
-                                                    'attenzione:</strong> la licenza resta '
-                                                    'associata a quello usato al momento del '
-                                                    'riscatto.'])]),
-                                                ('Membri e funzionalità',
-                                                 [("Come si invitano altri membri dopo l'acquisto?",
-                                                   "Dopo l'attivazione sul tuo account Microsoft, "
-                                                   'usa le funzioni di condivisione del piano '
-                                                   "Family nell'area account Microsoft / "
-                                                   'abbonamenti, come indicato da Microsoft per il '
-                                                   'periodo di validità della licenza.'),
-                                                  ('Copilot è disponibile per tutti i membri?',
-                                                   ['No. Le funzionalità Copilot comprese nel '
-                                                    'piano sono utilizzabili dal <strong>titolare '
-                                                    "dell'abbonamento</strong>.",
-                                                    'Gli altri cinque membri ricevono le app '
-                                                    'Microsoft 365, 1 TB di OneDrive ciascuno e '
-                                                    'Microsoft Defender, ma non le funzionalità '
-                                                    'AI.']),
-                                                  ('I file sono condivisi automaticamente tra i '
-                                                   'membri?',
-                                                   'No. Ogni persona usa il proprio account '
-                                                   'Microsoft, con documenti, email, impostazioni '
-                                                   'e spazio OneDrive separati. La condivisione di '
-                                                   'singoli file o cartelle resta una scelta '
-                                                   'volontaria di chi li possiede.'),
-                                                  ('Si possono usare le app Office anche offline?',
-                                                   'Sì: con le app desktop installate puoi '
-                                                   'lavorare offline; servono comunque connessione '
-                                                   'e accesso periodici per la verifica della '
-                                                   'licenza, aggiornamenti e servizi cloud come '
-                                                   'OneDrive.')]),
-                                                ('Scelta del piano e assistenza',
-                                                 [('Qual è la differenza tra Microsoft 365 Family '
-                                                   'e Personal?',
-                                                   'Family è pensato per condividere il piano con '
-                                                   'il tuo gruppo famiglia Microsoft (fino a 6 '
-                                                   'persone), ciascuna con account e spazio '
-                                                   'OneDrive distinti. Personal copre un solo '
-                                                   'utente con 1 TB, secondo le condizioni '
-                                                   'Microsoft aggiornate.'),
-                                                  ('Il codice si rinnova automaticamente dopo 12 '
-                                                   'mesi?',
-                                                   'No. Il codice attiva Microsoft 365 Family per '
-                                                   '12 mesi con un pagamento una tantum: AML Store '
-                                                   'non addebita nulla automaticamente alla '
-                                                   'scadenza. Eventuali opzioni di rinnovo si '
-                                                   'gestiscono separatamente, direttamente '
-                                                   "nell'account Microsoft."),
-                                                  ('Posso usare il codice per rinnovare un '
-                                                   'abbonamento Family già attivo?',
-                                                   'Sì, puoi riscattarlo sullo stesso account che '
-                                                   'ha già Microsoft 365 Family attivo. Il modo in '
-                                                   'cui viene applicato (estensione della durata '
-                                                   'attuale o avvio di un nuovo periodo) segue le '
-                                                   'regole Microsoft mostrate al momento del '
-                                                   'riscatto su setup.office.com, non è qualcosa '
-                                                   'che decidiamo noi come rivenditore.'),
-                                                  ('Cosa succede se il codice non funziona?',
-                                                   ["Scrivici indicando numero d'ordine ed "
-                                                    'eventuale messaggio di errore. Verifichiamo '
-                                                    'il caso e, se viene confermato un difetto '
-                                                    'imputabile a noi o al fornitore della chiave, '
-                                                    'proponiamo sostituzione o rimborso nei tempi '
-                                                    'usuali di elaborazione.',
-                                                    'Assistenza: <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    '— +39 392 558 0413.'])])],
-                                         'en': [('Purchase and delivery',
-                                                 [('When do I receive the code after payment?',
-                                                   ['The delivery email is sent after payment '
-                                                    'confirmation, usually within 2–15 minutes; in '
-                                                    'rare cases a few extra minutes are needed for '
-                                                    'payment checks.',
-                                                    'If after <strong>30 minutes</strong> you have '
-                                                    'received nothing, also check spam/junk and '
-                                                    'email <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    'with the product purchased and the email used '
-                                                    'for the order.']),
-                                                  ('What exactly do I receive in the email?',
-                                                   ['You receive the Microsoft 365 Family '
-                                                    '<strong>product key</strong> and instructions '
-                                                    'to redeem it on official Microsoft portals.',
-                                                    'Delivery is digital only: nothing physical is '
-                                                    'shipped and there are no shipping fees.']),
-                                                  ('Which payment methods can I use?',
-                                                   'At checkout you can pay by card, PayPal and '
-                                                   'digital wallets such as Apple Pay and Google '
-                                                   'Pay where enabled. Payment processing is '
-                                                   'handled securely via <strong>Stripe</strong>.'),
-                                                  ('Can I get a VAT invoice?',
-                                                   ['Yes. At checkout choose the '
-                                                    '<strong>Business</strong> profile and enter '
-                                                    'your VAT details: we issue a VAT invoice on '
-                                                    'those details.',
-                                                    'If you need it after the order, email <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    'with the order email and order number.'])]),
-                                                ('Activation and account',
-                                                 [('How do I activate Microsoft 365 Family after '
-                                                   'purchase?',
-                                                   'Go to <a href="https://setup.office.com/Home" '
-                                                   'target="_blank" rel="noopener '
-                                                   'noreferrer">setup.office.com/Home</a>, sign in '
-                                                   'with your Microsoft account, enter the code '
-                                                   'received by email and follow the guided setup. '
-                                                   'Then install the apps from <a '
-                                                   'href="https://www.office.com" target="_blank" '
-                                                   'rel="noopener noreferrer">office.com</a>.'),
-                                                  ('Can I redeem the code on a Microsoft account I '
-                                                   'already use?',
-                                                   ['Yes: redemption happens on setup.office.com '
-                                                    'with your Microsoft account. If that account '
-                                                    'already has an active Microsoft 365 '
-                                                    'subscription, the outcome (extension or plan '
-                                                    "conversion) follows Microsoft's rules shown "
-                                                    'during redemption.',
-                                                    '<strong>Choose the account '
-                                                    'carefully:</strong> the licence stays tied to '
-                                                    'the one used at redemption.'])]),
-                                                ('Members and features',
-                                                 [('How do I invite other members after purchase?',
-                                                   'After activation on your Microsoft account, '
-                                                   'use the Family plan sharing features in the '
-                                                   'Microsoft account / subscriptions area, as '
-                                                   'directed by Microsoft for the licence term.'),
-                                                  ('Is Copilot available to all members?',
-                                                   ['No. Copilot features included in the plan are '
-                                                    'available to the <strong>subscription '
-                                                    'owner</strong>.',
-                                                    'The other five members get Microsoft 365 '
-                                                    'apps, 1 TB of OneDrive each and Microsoft '
-                                                    'Defender, but not the AI features.']),
-                                                  ('Are files shared automatically between '
-                                                   'members?',
-                                                   'No. Each person uses their own Microsoft '
-                                                   'account, with separate documents, email, '
-                                                   'settings and OneDrive space. Sharing '
-                                                   'individual files or folders remains a '
-                                                   'voluntary choice by the owner.'),
-                                                  ('Can I use Office apps offline too?',
-                                                   'Yes: with the desktop apps installed you can '
-                                                   'work offline; periodic connection and sign-in '
-                                                   'are still required for licence checks, updates '
-                                                   'and cloud services such as OneDrive.')]),
-                                                ('Plan choice and support',
-                                                 [('What is the difference between Microsoft 365 '
-                                                   'Family and Personal?',
-                                                   'Family is designed to share the plan with your '
-                                                   'Microsoft family group (up to 6 people), each '
-                                                   'with a separate account and OneDrive space. '
-                                                   'Personal covers a single user with 1 TB, '
-                                                   "subject to Microsoft's current terms."),
-                                                  ('Does the code renew automatically after 12 '
-                                                   'months?',
-                                                   'No. The code activates Microsoft 365 Family '
-                                                   'for 12 months with a one-time payment: AML '
-                                                   'Store does not charge anything automatically '
-                                                   'at expiry. Any renewal options are managed '
-                                                   'separately in your Microsoft account.'),
-                                                  ('Can I use the code to renew an active Family '
-                                                   'subscription?',
-                                                   'Yes, you can redeem it on the same account '
-                                                   'that already has Microsoft 365 Family active. '
-                                                   'How it is applied (extending the current term '
-                                                   "or starting a new period) follows Microsoft's "
-                                                   'rules shown at redemption on setup.office.com '
-                                                   '— it is not something we decide as a '
-                                                   'reseller.'),
-                                                  ('What if the code does not work?',
-                                                   ['Contact us with your order number and any '
-                                                    'error message. We review the case and, if a '
-                                                    'defect attributable to us or the key supplier '
-                                                    'is confirmed, we offer a replacement or '
-                                                    'refund within usual processing times.',
-                                                    'Support: <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    '— +39 392 558 0413.'])])],
-                                         'fr': [('Achat et livraison',
-                                                 [('Quand vais-je recevoir le code après le '
-                                                   'paiement ?',
-                                                   ["L'e-mail de livraison part après confirmation "
-                                                    'du paiement, en général sous 2 à 15 minutes ; '
-                                                    'dans de rares cas, quelques minutes '
-                                                    'supplémentaires sont nécessaires pour les '
-                                                    'vérifications.',
-                                                    'Si après <strong>30 minutes</strong> vous '
-                                                    "n'avez rien reçu, vérifiez aussi les "
-                                                    'indésirables et écrivez à <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    "en indiquant le produit acheté et l'e-mail "
-                                                    'utilisé pour la commande.']),
-                                                  ("Que vais-je exactement recevoir dans l'e-mail "
-                                                   '?',
-                                                   ['Vous recevez la <strong>clé produit</strong> '
-                                                    'Microsoft 365 Family et les instructions pour '
-                                                    "l'activer sur les portails officiels "
-                                                    'Microsoft.',
-                                                    'La livraison est uniquement numérique : aucun '
-                                                    "support physique n'est expédié et il n'y a "
-                                                    'pas de frais de port.']),
-                                                  ('Quels moyens de paiement puis-je utiliser ?',
-                                                   'Au paiement sont disponibles carte, PayPal et '
-                                                   'portefeuilles numériques comme Apple Pay et '
-                                                   "Google Pay lorsqu'ils sont activés. Le "
-                                                   'paiement est traité de façon sécurisée via '
-                                                   '<strong>Stripe</strong>.'),
-                                                  ('Puis-je obtenir une facture ?',
-                                                   ['Oui. Au paiement, choisissez le profil '
-                                                    '<strong>Entreprise</strong> et saisissez vos '
-                                                    'données de TVA : la facture est émise sur ces '
-                                                    'informations.',
-                                                    'Si vous en avez besoin après la commande, '
-                                                    'écrivez à <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    "en indiquant l'e-mail de commande et le "
-                                                    'numéro de commande.'])]),
-                                                ('Activation et compte',
-                                                 [('Comment activer Microsoft 365 Family après '
-                                                   "l'achat ?",
-                                                   'Allez sur <a '
-                                                   'href="https://setup.office.com/Home" '
-                                                   'target="_blank" rel="noopener '
-                                                   'noreferrer">setup.office.com/Home</a>, '
-                                                   'connectez-vous avec votre compte Microsoft, '
-                                                   'saisissez le code reçu par e-mail et suivez '
-                                                   "l'assistant. Ensuite, installez les apps "
-                                                   'depuis <a href="https://www.office.com" '
-                                                   'target="_blank" rel="noopener '
-                                                   'noreferrer">office.com</a>.'),
-                                                  ('Puis-je utiliser le code sur un compte '
-                                                   "Microsoft que j'utilise déjà ?",
-                                                   ["Oui : l'activation se fait sur "
-                                                    'setup.office.com avec votre compte Microsoft. '
-                                                    'Si un abonnement Microsoft 365 est déjà actif '
-                                                    'sur ce compte, le comportement (prolongation '
-                                                    'ou conversion) suit les règles Microsoft '
-                                                    "affichées pendant l'activation.",
-                                                    '<strong>Choisissez le compte avec attention '
-                                                    ':</strong> la licence reste associée à celui '
-                                                    "utilisé lors de l'activation."])]),
-                                                ('Membres et fonctionnalités',
-                                                 [("Comment inviter d'autres membres après l'achat "
-                                                   '?',
-                                                   'Après activation sur votre compte Microsoft, '
-                                                   'utilisez les fonctions de partage du plan '
-                                                   'Family dans la zone compte Microsoft / '
-                                                   'abonnements, comme indiqué par Microsoft pour '
-                                                   'la durée de la licence.'),
-                                                  ('Copilot est-il disponible pour tous les '
-                                                   'membres ?',
-                                                   ['Non. Les fonctions Copilot incluses dans le '
-                                                    'plan sont utilisables par le '
-                                                    "<strong>titulaire de l'abonnement</strong>.",
-                                                    'Les cinq autres membres reçoivent les apps '
-                                                    "Microsoft 365, 1 To d'OneDrive chacun et "
-                                                    'Microsoft Defender, mais pas les fonctions '
-                                                    "d'IA."]),
-                                                  ('Les fichiers sont-ils partagés automatiquement '
-                                                   'entre les membres ?',
-                                                   'Non. Chaque personne utilise son propre compte '
-                                                   'Microsoft, avec documents, e-mails, paramètres '
-                                                   'et espace OneDrive séparés. Le partage de '
-                                                   'fichiers ou dossiers individuels reste un '
-                                                   'choix volontaire du propriétaire.'),
-                                                  ('Peut-on utiliser les apps Office hors ligne ?',
-                                                   'Oui : avec les apps de bureau installées, vous '
-                                                   'pouvez travailler hors ligne ; une connexion '
-                                                   'et une connexion périodiques restent '
-                                                   'nécessaires pour la vérification de licence, '
-                                                   'les mises à jour et les services cloud comme '
-                                                   'OneDrive.')]),
-                                                ('Choix du plan et assistance',
-                                                 [('Quelle est la différence entre Microsoft 365 '
-                                                   'Family et Personal ?',
-                                                   'Family est conçu pour partager le plan avec '
-                                                   "votre groupe famille Microsoft (jusqu'à 6 "
-                                                   'personnes), chacune avec un compte et un '
-                                                   'espace OneDrive distincts. Personal couvre un '
-                                                   'seul utilisateur avec 1 To, selon les '
-                                                   'conditions Microsoft à jour.'),
-                                                  ('Le code se renouvelle-t-il automatiquement '
-                                                   'après 12 mois ?',
-                                                   'Non. Le code active Microsoft 365 Family pour '
-                                                   '12 mois avec un paiement unique : AML Store ne '
-                                                   "prélève rien automatiquement à l'échéance. Les "
-                                                   'options de renouvellement éventuelles se '
-                                                   'gèrent séparément dans le compte Microsoft.'),
-                                                  ('Puis-je utiliser le code pour renouveler un '
-                                                   'abonnement Family déjà actif ?',
-                                                   "Oui, vous pouvez l'activer sur le même compte "
-                                                   'qui a déjà Microsoft 365 Family. La façon dont '
-                                                   "il s'applique (prolongation de la durée "
-                                                   'actuelle ou nouveau période) suit les règles '
-                                                   "Microsoft affichées lors de l'activation sur "
-                                                   "setup.office.com — ce n'est pas nous qui le "
-                                                   'décidons en tant que revendeur.'),
-                                                  ('Que se passe-t-il si le code ne fonctionne pas '
-                                                   '?',
-                                                   ['Écrivez-nous en indiquant le numéro de '
-                                                    "commande et le message d'erreur éventuel. "
-                                                    'Nous examinons le cas et, si un défaut '
-                                                    'imputable à nous ou au fournisseur de la clé '
-                                                    'est confirmé, nous proposons un remplacement '
-                                                    'ou un remboursement dans les délais '
-                                                    'habituels.',
-                                                    'Assistance : <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    '— +39 392 558 0413.'])])],
-                                         'de': [('Kauf und Lieferung',
-                                                 [('Wann erhalte ich den Code nach der Zahlung?',
-                                                   ['Die Liefer-E-Mail wird nach '
-                                                    'Zahlungsbestätigung versendet, in der Regel '
-                                                    'innerhalb von 2–15 Minuten; in seltenen '
-                                                    'Fällen dauern Zahlungsprüfungen etwas länger.',
-                                                    'Wenn Sie nach <strong>30 Minuten</strong> '
-                                                    'nichts erhalten haben, prüfen Sie auch '
-                                                    'Spam/Junk und schreiben Sie an <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    'mit dem gekauften Produkt und der für die '
-                                                    'Bestellung verwendeten E-Mail-Adresse.']),
-                                                  ('Was genau erhalte ich in der E-Mail?',
-                                                   ['Sie erhalten den <strong>Product Key</strong> '
-                                                    'für Microsoft 365 Family sowie Anweisungen '
-                                                    'zur Einlösung auf den offiziellen '
-                                                    'Microsoft-Portalen.',
-                                                    'Die Lieferung erfolgt ausschließlich digital: '
-                                                    'Es wird nichts physisch versendet und es '
-                                                    'fallen keine Versandkosten an.']),
-                                                  ('Welche Zahlungsmethoden kann ich nutzen?',
-                                                   'Beim Checkout können Sie mit Karte, PayPal und '
-                                                   'digitalen Wallets wie Apple Pay und Google Pay '
-                                                   'zahlen, sofern freigeschaltet. Die '
-                                                   'Zahlungsabwicklung erfolgt sicher über '
-                                                   '<strong>Stripe</strong>.'),
-                                                  ('Kann ich eine MwSt.-Rechnung erhalten?',
-                                                   ['Ja. Wählen Sie beim Checkout das Profil '
-                                                    '<strong>Unternehmen</strong> und geben Sie '
-                                                    'Ihre MwSt.-Daten ein: Wir stellen die '
-                                                    'MwSt.-Rechnung auf diese Daten aus.',
-                                                    'Wenn Sie sie nach der Bestellung benötigen, '
-                                                    'schreiben Sie an <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    'mit der Bestell-E-Mail und der '
-                                                    'Bestellnummer.'])]),
-                                                ('Aktivierung und Konto',
-                                                 [('Wie aktiviere ich Microsoft 365 Family nach '
-                                                   'dem Kauf?',
-                                                   'Rufen Sie <a '
-                                                   'href="https://setup.office.com/Home" '
-                                                   'target="_blank" rel="noopener '
-                                                   'noreferrer">setup.office.com/Home</a> auf, '
-                                                   'melden Sie sich mit Ihrem Microsoft-Konto an, '
-                                                   'geben Sie den per E-Mail erhaltenen Code ein '
-                                                   'und folgen Sie dem Einrichtungsassistenten. '
-                                                   'Installieren Sie anschließend die Apps von <a '
-                                                   'href="https://www.office.com" target="_blank" '
-                                                   'rel="noopener noreferrer">office.com</a>.'),
-                                                  ('Kann ich den Code auf einem Microsoft-Konto '
-                                                   'einlösen, das ich bereits nutze?',
-                                                   ['Ja: Die Einlösung erfolgt auf '
-                                                    'setup.office.com mit Ihrem Microsoft-Konto. '
-                                                    'Wenn dieses Konto bereits ein aktives '
-                                                    'Microsoft 365-Abonnement hat, richtet sich '
-                                                    'das Ergebnis (Verlängerung oder Planwechsel) '
-                                                    'nach den Microsoft-Regeln, die bei der '
-                                                    'Einlösung angezeigt werden.',
-                                                    '<strong>Wählen Sie das Konto '
-                                                    'sorgfältig:</strong> Die Lizenz bleibt an das '
-                                                    'bei der Einlösung verwendete Konto '
-                                                    'gebunden.'])]),
-                                                ('Mitglieder und Funktionen',
-                                                 [('Wie lade ich nach dem Kauf weitere Mitglieder '
-                                                   'ein?',
-                                                   'Nach der Aktivierung auf Ihrem Microsoft-Konto '
-                                                   'nutzen Sie die Freigabefunktionen des '
-                                                   'Family-Plans im Bereich Microsoft-Konto / '
-                                                   'Abonnements, wie von Microsoft für die '
-                                                   'Lizenzlaufzeit vorgesehen.'),
-                                                  ('Ist Copilot für alle Mitglieder verfügbar?',
-                                                   ['Nein. Die im Plan enthaltenen '
-                                                    'Copilot-Funktionen stehen dem '
-                                                    '<strong>Abonnementinhaber</strong> zur '
-                                                    'Verfügung.',
-                                                    'Die anderen fünf Mitglieder erhalten '
-                                                    'Microsoft 365 Apps, jeweils 1 TB OneDrive und '
-                                                    'Microsoft Defender, jedoch nicht die '
-                                                    'KI-Funktionen.']),
-                                                  ('Werden Dateien automatisch zwischen '
-                                                   'Mitgliedern geteilt?',
-                                                   'Nein. Jede Person nutzt ihr eigenes '
-                                                   'Microsoft-Konto mit getrennten Dokumenten, '
-                                                   'E-Mails, Einstellungen und OneDrive-Speicher. '
-                                                   'Das Teilen einzelner Dateien oder Ordner '
-                                                   'bleibt eine freiwillige Entscheidung des '
-                                                   'Besitzers.'),
-                                                  ('Kann ich Office-Apps auch offline nutzen?',
-                                                   'Ja: Mit den installierten Desktop-Apps können '
-                                                   'Sie offline arbeiten; für Lizenzprüfungen, '
-                                                   'Updates und Cloud-Dienste wie OneDrive sind '
-                                                   'weiterhin eine gelegentliche Verbindung und '
-                                                   'Anmeldung erforderlich.')]),
-                                                ('Planwahl und Support',
-                                                 [('Was ist der Unterschied zwischen Microsoft 365 '
-                                                   'Family und Personal?',
-                                                   'Family ist zum Teilen des Plans mit Ihrer '
-                                                   'Microsoft-Familiengruppe gedacht (bis zu 6 '
-                                                   'Personen), jeweils mit eigenem Konto und '
-                                                   'OneDrive-Speicher. Personal gilt für einen '
-                                                   'einzelnen Nutzer mit 1 TB, gemäß den aktuellen '
-                                                   'Microsoft-Bedingungen.'),
-                                                  ('Verlängert sich der Code nach 12 Monaten '
-                                                   'automatisch?',
-                                                   'Nein. Der Code aktiviert Microsoft 365 Family '
-                                                   'für 12 Monate mit einer einmaligen Zahlung: '
-                                                   'AML Store belastet bei Ablauf nichts '
-                                                   'automatisch. Etwaige Verlängerungsoptionen '
-                                                   'verwalten Sie separat in Ihrem '
-                                                   'Microsoft-Konto.'),
-                                                  ('Kann ich den Code zur Verlängerung eines '
-                                                   'aktiven Family-Abonnements nutzen?',
-                                                   'Ja, Sie können ihn auf demselben Konto '
-                                                   'einlösen, auf dem Microsoft 365 Family bereits '
-                                                   'aktiv ist. Wie er angewendet wird '
-                                                   '(Verlängerung der aktuellen Laufzeit oder '
-                                                   'Beginn einer neuen Periode) richtet sich nach '
-                                                   'den Microsoft-Regeln, die bei der Einlösung '
-                                                   'auf setup.office.com angezeigt werden — das '
-                                                   'entscheiden nicht wir als Händler.'),
-                                                  ('Was tun, wenn der Code nicht funktioniert?',
-                                                   ['Kontaktieren Sie uns mit Ihrer Bestellnummer '
-                                                    'und einer etwaigen Fehlermeldung. Wir prüfen '
-                                                    'den Fall und bieten bei einem nachweislich '
-                                                    'uns oder dem Key-Lieferanten zurechenbaren '
-                                                    'Defekt Ersatz oder Erstattung innerhalb der '
-                                                    'üblichen Bearbeitungszeiten.',
-                                                    'Support: <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    '— +39 392 558 0413.'])])],
-                                         'es': [('Compra y entrega',
-                                                 [('¿Cuándo recibo el código después del pago?',
-                                                   ['El email de entrega se envía tras la '
-                                                    'confirmación del pago, normalmente en 2–15 '
-                                                    'minutos; en casos excepcionales pueden hacer '
-                                                    'falta unos minutos más para las '
-                                                    'comprobaciones del pago.',
-                                                    'Si tras <strong>30 minutos</strong> no has '
-                                                    'recibido nada, revisa también spam/correo no '
-                                                    'deseado y escribe a <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    'indicando el producto comprado y el email '
-                                                    'usado en el pedido.']),
-                                                  ('¿Qué recibo exactamente en el email?',
-                                                   ['Recibes la <strong>clave de producto</strong> '
-                                                    'de Microsoft 365 Family y las instrucciones '
-                                                    'para canjearla en los portales oficiales de '
-                                                    'Microsoft.',
-                                                    'La entrega es solo digital: no se envía nada '
-                                                    'físico y no hay gastos de envío.']),
-                                                  ('¿Qué métodos de pago puedo usar?',
-                                                   'En el checkout puedes pagar con tarjeta, '
-                                                   'PayPal y monederos digitales como Apple Pay y '
-                                                   'Google Pay donde estén habilitados. El '
-                                                   'procesamiento del pago se gestiona de forma '
-                                                   'segura a través de <strong>Stripe</strong>.'),
-                                                  ('¿Puedo obtener factura con IVA?',
-                                                   ['Sí. En el checkout elige el perfil '
-                                                    '<strong>Empresa</strong> e introduce tus '
-                                                    'datos de IVA: emitimos la factura con IVA con '
-                                                    'esos datos.',
-                                                    'Si la necesitas después del pedido, escribe a '
-                                                    '<a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    'con el email del pedido y el número de '
-                                                    'pedido.'])]),
-                                                ('Activación y cuenta',
-                                                 [('¿Cómo activo Microsoft 365 Family después de '
-                                                   'la compra?',
-                                                   'Ve a <a href="https://setup.office.com/Home" '
-                                                   'target="_blank" rel="noopener '
-                                                   'noreferrer">setup.office.com/Home</a>, inicia '
-                                                   'sesión con tu cuenta Microsoft, introduce el '
-                                                   'código recibido por email y sigue el asistente '
-                                                   'de configuración. Después instala las apps '
-                                                   'desde <a href="https://www.office.com" '
-                                                   'target="_blank" rel="noopener '
-                                                   'noreferrer">office.com</a>.'),
-                                                  ('¿Puedo canjear el código en una cuenta '
-                                                   'Microsoft que ya uso?',
-                                                   ['Sí: el canje se realiza en setup.office.com '
-                                                    'con tu cuenta Microsoft. Si esa cuenta ya '
-                                                    'tiene una suscripción Microsoft 365 activa, '
-                                                    'el resultado (prórroga o conversión de plan) '
-                                                    'sigue las reglas de Microsoft mostradas '
-                                                    'durante el canje.',
-                                                    '<strong>Elige la cuenta con cuidado:</strong> '
-                                                    'la licencia queda vinculada a la usada en el '
-                                                    'canje.'])]),
-                                                ('Miembros y funciones',
-                                                 [('¿Cómo invito a otros miembros después de la '
-                                                   'compra?',
-                                                   'Tras la activación en tu cuenta Microsoft, usa '
-                                                   'las funciones para compartir el plan Family en '
-                                                   'el área de cuenta Microsoft / suscripciones, '
-                                                   'según las indicaciones de Microsoft durante la '
-                                                   'vigencia de la licencia.'),
-                                                  ('¿Copilot está disponible para todos los '
-                                                   'miembros?',
-                                                   ['No. Las funciones de Copilot incluidas en el '
-                                                    'plan están disponibles para el '
-                                                    '<strong>titular de la suscripción</strong>.',
-                                                    'Los otros cinco miembros obtienen las apps '
-                                                    'Microsoft 365, 1 TB de OneDrive cada uno y '
-                                                    'Microsoft Defender, pero no las funciones de '
-                                                    'IA.']),
-                                                  ('¿Los archivos se comparten automáticamente '
-                                                   'entre los miembros?',
-                                                   'No. Cada persona usa su propia cuenta '
-                                                   'Microsoft, con documentos, email, ajustes y '
-                                                   'espacio OneDrive separados. Compartir archivos '
-                                                   'o carpetas concretos sigue siendo una elección '
-                                                   'voluntaria del propietario.'),
-                                                  ('¿Puedo usar también las apps de Office sin '
-                                                   'conexión?',
-                                                   'Sí: con las aplicaciones de escritorio '
-                                                   'instaladas puedes trabajar sin conexión; aun '
-                                                   'así se requieren conexión e inicio de sesión '
-                                                   'periódicos para la verificación de la '
-                                                   'licencia, las actualizaciones y los servicios '
-                                                   'en la nube como OneDrive.')]),
-                                                ('Elección del plan y soporte',
-                                                 [('¿Cuál es la diferencia entre Microsoft 365 '
-                                                   'Family y Personal?',
-                                                   'Family está pensado para compartir el plan con '
-                                                   'tu grupo familiar de Microsoft (hasta 6 '
-                                                   'personas), cada una con una cuenta y espacio '
-                                                   'OneDrive propios. Personal cubre a un solo '
-                                                   'usuario con 1 TB, según las condiciones '
-                                                   'vigentes de Microsoft.'),
-                                                  ('¿El código se renueva automáticamente después '
-                                                   'de 12 meses?',
-                                                   'No. El código activa Microsoft 365 Family '
-                                                   'durante 12 meses con un pago único: AML Store '
-                                                   'no cobra nada automáticamente al vencimiento. '
-                                                   'Cualquier opción de renovación se gestiona por '
-                                                   'separado en tu cuenta Microsoft.'),
-                                                  ('¿Puedo usar el código para renovar una '
-                                                   'suscripción Family activa?',
-                                                   'Sí, puedes canjearlo en la misma cuenta que ya '
-                                                   'tiene Microsoft 365 Family activo. Cómo se '
-                                                   'aplica (prorrogar el periodo actual o iniciar '
-                                                   'uno nuevo) sigue las reglas de Microsoft '
-                                                   'mostradas en el canje en setup.office.com: no '
-                                                   'es algo que decidamos nosotros como '
-                                                   'revendedor.'),
-                                                  ('¿Qué pasa si el código no funciona?',
-                                                   ['Contáctanos con tu número de pedido y '
-                                                    'cualquier mensaje de error. Revisamos el caso '
-                                                    'y, si se confirma un defecto imputable a '
-                                                    'nosotros o al proveedor de la clave, '
-                                                    'ofrecemos sustitución o reembolso en los '
-                                                    'plazos habituales de gestión.',
-                                                    'Soporte: <a '
-                                                    'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
-                                                    '— +39 392 558 0413.'])])]},
-                          'bonus': {'it': "<strong>Incluso con l'acquisto:</strong> guida PDF "
-                                          "all'utilizzo di Copilot, via email dopo l'ordine",
-                                    'en': '<strong>Included with your purchase:</strong> Copilot '
-                                          'PDF guide, sent by email after the order',
-                                    'fr': "<strong>Inclus avec l'achat :</strong> guide PDF "
-                                          'Copilot, envoyé par e-mail après la commande',
-                                    'de': '<strong>Im Kauf enthalten:</strong> '
-                                          'Copilot-PDF-Leitfaden, nach der Bestellung per E-Mail',
-                                    'es': '<strong>Incluido con tu compra:</strong> guía PDF de '
-                                          'Copilot, enviada por email tras el pedido'},
-                          'stats': {'it': {'eyebrow': 'Cosa ricevi',
-                                           'title': 'Sei persone, account e spazi separati',
-                                           'sub': 'Microsoft 365 Family è pensato per essere '
-                                                  'condiviso: ogni persona lavora sul proprio '
-                                                  'account, con il proprio spazio cloud.',
-                                           'rows': [('6',
-                                                     'Persone incluse',
-                                                     'Titolare più 5 membri invitati, ognuno con '
-                                                     'account Microsoft separato.'),
-                                                    ('1 TB',
-                                                     'OneDrive a persona',
-                                                     'Fino a 6 TB complessivi sul piano, non '
-                                                     'condivisi automaticamente.'),
-                                                    ('12 mesi',
-                                                     'Durata',
-                                                     'Pagamento una tantum su AML Store, senza '
-                                                     'addebiti ricorrenti da parte nostra.'),
-                                                    ('5',
-                                                     'Dispositivi per persona',
-                                                     'Accesso contemporaneo su PC, Mac, tablet e '
-                                                     'telefono, secondo le regole Microsoft.')]},
-                                    'en': {'eyebrow': 'What you get',
-                                           'title': 'Six people, separate accounts and storage',
-                                           'sub': 'Microsoft 365 Family is built to be shared: '
-                                                  'each person works on their own account, with '
-                                                  'their own cloud storage.',
-                                           'rows': [('6',
-                                                     'People included',
-                                                     'Owner plus 5 invited members, each with a '
-                                                     'separate Microsoft account.'),
-                                                    ('1 TB',
-                                                     'OneDrive per person',
-                                                     'Up to 6 TB total on the plan, not shared '
-                                                     'automatically.'),
-                                                    ('12 months',
-                                                     'Term',
-                                                     'One-time payment on AML Store, with no '
-                                                     'recurring charges from us.'),
-                                                    ('5',
-                                                     'Devices per person',
-                                                     'Simultaneous access on PC, Mac, tablet and '
-                                                     'phone, subject to Microsoft rules.')]},
-                                    'fr': {'eyebrow': 'Ce que vous recevez',
-                                           'title': 'Six personnes, comptes et espaces séparés',
-                                           'sub': 'Microsoft 365 Family est conçu pour être '
-                                                  'partagé : chaque personne travaille sur son '
-                                                  'propre compte, avec son propre espace cloud.',
-                                           'rows': [('6',
-                                                     'Personnes incluses',
-                                                     'Titulaire plus 5 membres invités, chacun '
-                                                     'avec un compte Microsoft séparé.'),
-                                                    ('1 TB',
-                                                     'OneDrive par personne',
-                                                     "Jusqu'à 6 To au total sur le plan, non "
-                                                     'partagés automatiquement.'),
-                                                    ('12 mois',
-                                                     'Durée',
-                                                     'Paiement unique sur AML Store, sans '
-                                                     'prélèvement récurrent de notre part.'),
-                                                    ('5',
-                                                     'Appareils par personne',
-                                                     'Accès simultané sur PC, Mac, tablette et '
-                                                     'téléphone, selon les règles Microsoft.')]},
-                                    'de': {'eyebrow': 'Was Sie erhalten',
-                                           'title': 'Sechs Personen, getrennte Konten und Speicher',
-                                           'sub': 'Microsoft 365 Family ist zum Teilen gedacht: '
-                                                  'Jede Person arbeitet auf ihrem eigenen Konto '
-                                                  'mit eigenem Cloud-Speicher.',
-                                           'rows': [('6',
-                                                     'Personen inklusive',
-                                                     'Inhaber plus 5 eingeladene Mitglieder, '
-                                                     'jeweils mit eigenem Microsoft-Konto.'),
-                                                    ('1 TB',
-                                                     'OneDrive pro Person',
-                                                     'Bis zu 6 TB insgesamt im Plan, nicht '
-                                                     'automatisch geteilt.'),
-                                                    ('12 Monate',
-                                                     'Laufzeit',
-                                                     'Einmalzahlung bei AML Store, ohne '
-                                                     'wiederkehrende Belastung durch uns.'),
-                                                    ('5',
-                                                     'Geräte pro Person',
-                                                     'Gleichzeitiger Zugriff auf PC, Mac, Tablet '
-                                                     'und Smartphone, gemäß Microsoft-Regeln.')]},
-                                    'es': {'eyebrow': 'Qué recibes',
-                                           'title': 'Seis personas, cuentas y almacenamiento '
-                                                    'separados',
-                                           'sub': 'Microsoft 365 Family está pensado para '
-                                                  'compartir: cada persona trabaja en su propia '
-                                                  'cuenta, con su propio almacenamiento en la '
-                                                  'nube.',
-                                           'rows': [('6',
-                                                     'Personas incluidas',
-                                                     'Titular más 5 miembros invitados, cada uno '
-                                                     'con una cuenta Microsoft distinta.'),
-                                                    ('1 TB',
-                                                     'OneDrive por persona',
-                                                     'Hasta 6 TB en total en el plan, no '
-                                                     'compartidos automáticamente.'),
-                                                    ('12 meses',
-                                                     'Duración',
-                                                     'Pago único en AML Store, sin cargos '
-                                                     'recurrentes por nuestra parte.'),
-                                                    ('5',
-                                                     'Dispositivos por persona',
-                                                     'Acceso simultáneo en PC, Mac, tablet y '
-                                                     'móvil, según las reglas de Microsoft.')]}},
                           'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
                                                  'title': 'Scheda tecnica',
                                                  'caption': 'Specifiche tecniche e commerciali di '
@@ -3059,230 +2374,6 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                           ('Facturación',
                                                            'Impuestos incluidos, factura con IVA '
                                                            'disponible')]}},
-                          'roles': {'it': {'eyebrow': 'Chi riceve cosa',
-                                           'title': 'Un abbonamento condiviso, sei esperienze '
-                                                    'separate',
-                                           'sub': 'Ogni persona utilizza il proprio account '
-                                                  'Microsoft. Documenti, email, fotografie e '
-                                                  'spazio cloud non vengono condivisi '
-                                                  "automaticamente con gli altri membri. L'unica "
-                                                  'differenza reale riguarda le funzionalità '
-                                                  'Copilot.',
-                                           'caption': "Confronto tra titolare dell'abbonamento e "
-                                                      'altri membri del gruppo famiglia',
-                                           'cols': ['Funzionalità', 'Titolare', 'Altri 5 membri'],
-                                           'rows': [('Word, Excel, PowerPoint e Outlook',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('1 TB di OneDrive personale',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Account, file e impostazioni separati',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Installazione su più dispositivi',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Microsoft Defender',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Funzionalità Copilot',
-                                                     'Le funzioni AI comprese nel piano restano al '
-                                                     "proprietario dell'abbonamento.",
-                                                     True,
-                                                     'yes',
-                                                     'no')],
-                                           'yes_label': 'Incluso',
-                                           'no_label': 'Non incluso'},
-                                    'en': {'eyebrow': 'Who gets what',
-                                           'title': 'One shared subscription, six separate '
-                                                    'experiences',
-                                           'sub': 'Each person uses their own Microsoft account. '
-                                                  'Documents, email, photos and cloud storage are '
-                                                  'not shared automatically with other members. '
-                                                  'The only real difference is Copilot features.',
-                                           'caption': 'Comparison between subscription owner and '
-                                                      'other family group members',
-                                           'cols': ['Feature', 'Owner', 'Other 5 members'],
-                                           'rows': [('Word, Excel, PowerPoint and Outlook',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('1 TB of personal OneDrive',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Separate accounts, files and settings',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Install on multiple devices',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Microsoft Defender',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Copilot features',
-                                                     'AI features included in the plan stay with '
-                                                     'the subscription owner.',
-                                                     True,
-                                                     'yes',
-                                                     'no')],
-                                           'yes_label': 'Included',
-                                           'no_label': 'Not included'},
-                                    'fr': {'eyebrow': 'Qui reçoit quoi',
-                                           'title': 'Un abonnement partagé, six expériences '
-                                                    'séparées',
-                                           'sub': 'Chaque personne utilise son propre compte '
-                                                  'Microsoft. Documents, e-mails, photos et espace '
-                                                  'cloud ne sont pas partagés automatiquement avec '
-                                                  'les autres membres. La seule vraie différence '
-                                                  'concerne les fonctions Copilot.',
-                                           'caption': 'Comparaison entre le titulaire de '
-                                                      "l'abonnement et les autres membres du "
-                                                      'groupe famille',
-                                           'cols': ['Fonctionnalité',
-                                                    'Titulaire',
-                                                    '5 autres membres'],
-                                           'rows': [('Word, Excel, PowerPoint et Outlook',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ("1 To d'OneDrive personnel",
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Comptes, fichiers et paramètres séparés',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Installation sur plusieurs appareils',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Microsoft Defender',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Fonctions Copilot',
-                                                     "Les fonctions d'IA incluses dans le plan "
-                                                     "restent au propriétaire de l'abonnement.",
-                                                     True,
-                                                     'yes',
-                                                     'no')],
-                                           'yes_label': 'Inclus',
-                                           'no_label': 'Non inclus'},
-                                    'de': {'eyebrow': 'Wer erhält was',
-                                           'title': 'Ein gemeinsames Abo, sechs getrennte '
-                                                    'Erlebnisse',
-                                           'sub': 'Jede Person nutzt ihr eigenes Microsoft-Konto. '
-                                                  'Dokumente, E-Mails, Fotos und Cloud-Speicher '
-                                                  'werden nicht automatisch mit anderen '
-                                                  'Mitgliedern geteilt. Der einzige echte '
-                                                  'Unterschied sind die Copilot-Funktionen.',
-                                           'caption': 'Vergleich zwischen Abonnementinhaber und '
-                                                      'anderen Mitgliedern der Familiengruppe',
-                                           'cols': ['Funktion', 'Inhaber', 'Andere 5 Mitglieder'],
-                                           'rows': [('Word, Excel, PowerPoint und Outlook',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('1 TB persönliches OneDrive',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Getrennte Konten, Dateien und Einstellungen',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Installation auf mehreren Geräten',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Microsoft Defender',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Copilot-Funktionen',
-                                                     'Die im Plan enthaltenen KI-Funktionen '
-                                                     'bleiben beim Abonnementinhaber.',
-                                                     True,
-                                                     'yes',
-                                                     'no')],
-                                           'yes_label': 'Enthalten',
-                                           'no_label': 'Nicht enthalten'},
-                                    'es': {'eyebrow': 'Quién recibe qué',
-                                           'title': 'Una suscripción compartida, seis experiencias '
-                                                    'separadas',
-                                           'sub': 'Cada persona usa su propia cuenta Microsoft. '
-                                                  'Documentos, email, fotos y almacenamiento en la '
-                                                  'nube no se comparten automáticamente con los '
-                                                  'demás miembros. La única diferencia real son '
-                                                  'las funciones de Copilot.',
-                                           'caption': 'Comparación entre el titular de la '
-                                                      'suscripción y los demás miembros del grupo '
-                                                      'familiar',
-                                           'cols': ['Función', 'Titular', 'Otros 5 miembros'],
-                                           'rows': [('Word, Excel, PowerPoint y Outlook',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('1 TB de OneDrive personal',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Cuentas, archivos y ajustes separados',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Instalación en varios dispositivos',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Microsoft Defender',
-                                                     None,
-                                                     False,
-                                                     'yes',
-                                                     'yes'),
-                                                    ('Funciones de Copilot',
-                                                     'Las funciones de IA incluidas en el plan '
-                                                     'permanecen con el titular de la suscripción.',
-                                                     True,
-                                                     'yes',
-                                                     'no')],
-                                           'yes_label': 'Incluido',
-                                           'no_label': 'No incluido'}},
                           'seats': {'it': {'eyebrow': 'Condivisione',
                                            'title': 'Un piano, account separati',
                                            'sub': 'Inviti fino a cinque persone dal tuo account '
@@ -3400,11 +2491,16 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                              'no_label': 'Non previsto',
                                              'price_row': 'Prezzo su AML Store',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
-                                             'foot': 'Scegli Family se almeno due persone useranno '
-                                                     'realmente le app o lo spazio OneDrive. '
-                                                     'Altrimenti valuta <a '
-                                                     'href="/it/microsoft-365-personal">Microsoft '
-                                                     '365 Personal</a>.'},
+                                             'foot': ['Scegli Family se almeno due persone useranno '
+                                                      'realmente le app o lo spazio OneDrive. '
+                                                      'Altrimenti valuta <a '
+                                                      'href="/it/microsoft-365-personal">Microsoft '
+                                                      '365 Personal</a>.',
+                                                      'Sei licenze Personal separate su AML Store '
+                                                      'costerebbero € {price0_x6} (6 × € {price0}). '
+                                                      'Con Family paghi € {price1} per le stesse sei '
+                                                      'persone: <strong>€ {savings_6x0_vs_1} in '
+                                                      'meno</strong>.']},
                                       'en': {'eyebrow': 'Which to choose',
                                              'title': 'Compare Microsoft 365 plans',
                                              'sub': 'The difference is not app power: it is how '
@@ -3426,11 +2522,16 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                              'no_label': 'Not applicable',
                                              'price_row': 'AML Store price',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
-                                             'foot': 'Choose Family if at least two people will '
-                                                     'really use the apps or OneDrive storage. '
-                                                     'Otherwise consider <a '
-                                                     'href="/en/microsoft-365-personal">Microsoft '
-                                                     '365 Personal</a>.'},
+                                             'foot': ['Choose Family if at least two people will '
+                                                      'really use the apps or OneDrive storage. '
+                                                      'Otherwise consider <a '
+                                                      'href="/en/microsoft-365-personal">Microsoft '
+                                                      '365 Personal</a>.',
+                                                      'Six separate Personal licences on AML Store '
+                                                      'would cost € {price0_x6} (6 × € {price0}). '
+                                                      'With Family you pay € {price1} for the same '
+                                                      'six people: <strong>€ {savings_6x0_vs_1} '
+                                                      'less</strong>.']},
                                       'fr': {'eyebrow': 'Lequel choisir',
                                              'title': 'Comparer les plans Microsoft 365',
                                              'sub': "La différence n'est pas la puissance des apps "
@@ -3457,11 +2558,16 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                              'no_label': 'Non applicable',
                                              'price_row': 'Prix sur AML Store',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
-                                             'foot': 'Choisissez Family si au moins deux personnes '
-                                                     "utiliseront réellement les apps ou l'espace "
-                                                     'OneDrive. Sinon, voyez <a '
-                                                     'href="/fr/microsoft-365-personal">Microsoft '
-                                                     '365 Personal</a>.'},
+                                             'foot': ['Choisissez Family si au moins deux personnes '
+                                                      "utiliseront réellement les apps ou l'espace "
+                                                      'OneDrive. Sinon, voyez <a '
+                                                      'href="/fr/microsoft-365-personal">Microsoft '
+                                                      '365 Personal</a>.',
+                                                      'Six licences Personal séparées sur AML Store '
+                                                      'coûteraient € {price0_x6} (6 × € {price0}). '
+                                                      'Avec Family, vous payez € {price1} pour les '
+                                                      'mêmes six personnes : <strong>€ '
+                                                      '{savings_6x0_vs_1} de moins</strong>.']},
                                       'de': {'eyebrow': 'Welchen Plan wählen',
                                              'title': 'Microsoft 365 Pläne im Vergleich',
                                              'sub': 'Der Unterschied liegt nicht in der '
@@ -3486,11 +2592,16 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                              'no_label': 'Nicht zutreffend',
                                              'price_row': 'AML Store-Preis',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
-                                             'foot': 'Wählen Sie Family, wenn mindestens zwei '
-                                                     'Personen die Apps oder den OneDrive-Speicher '
-                                                     'wirklich nutzen. Sonst kommt <a '
-                                                     'href="/de/microsoft-365-personal">Microsoft '
-                                                     '365 Personal</a> infrage.'},
+                                             'foot': ['Wählen Sie Family, wenn mindestens zwei '
+                                                      'Personen die Apps oder den OneDrive-Speicher '
+                                                      'wirklich nutzen. Sonst kommt <a '
+                                                      'href="/de/microsoft-365-personal">Microsoft '
+                                                      '365 Personal</a> infrage.',
+                                                      'Sechs separate Personal-Lizenzen bei AML '
+                                                      'Store würden € {price0_x6} kosten (6 × € '
+                                                      '{price0}). Mit Family zahlen Sie € {price1} '
+                                                      'für dieselben sechs Personen: <strong>€ '
+                                                      '{savings_6x0_vs_1} weniger</strong>.']},
                                       'es': {'eyebrow': 'Cuál elegir',
                                              'title': 'Compara los planes Microsoft 365',
                                              'sub': 'La diferencia no es la potencia de las apps: '
@@ -3515,11 +2626,16 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                              'no_label': 'No aplicable',
                                              'price_row': 'Precio AML Store',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
-                                             'foot': 'Elige Family si al menos dos personas van a '
-                                                     'usar de verdad las apps o el almacenamiento '
-                                                     'OneDrive. Si no, considera <a '
-                                                     'href="/es/microsoft-365-personal">Microsoft '
-                                                     '365 Personal</a>.'}}}}
+                                             'foot': ['Elige Family si al menos dos personas van a '
+                                                      'usar de verdad las apps o el almacenamiento '
+                                                      'OneDrive. Si no, considera <a '
+                                                      'href="/es/microsoft-365-personal">Microsoft '
+                                                      '365 Personal</a>.',
+                                                      'Seis licencias Personal separadas en AML '
+                                                      'Store costarían € {price0_x6} (6 × € '
+                                                      '{price0}). Con Family pagas € {price1} por '
+                                                      'las mismas seis personas: <strong>€ '
+                                                      '{savings_6x0_vs_1} menos</strong>.']}}}}
 
 
 def get_flagship_content(slug):

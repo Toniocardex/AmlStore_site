@@ -649,7 +649,13 @@ body { background: var(--page-bg); }
 .pdp-price-note strong { color: var(--page-text); font-weight: 700; }
 
 /* Regione attivazione / meta prodotto — token --aml-* (design system page.css) */
-.pdp-meta-row {
+/* .pdp-price-meta: stesso aspetto di .pdp-meta-row (i chip generati dal
+   template, es. costo per persona) ma classe diversa apposta — add-
+   activation-region-badge.py riconosce una pagina gia' patchata cercando
+   "pdp-meta-row"+"pdp-meta-chip" nel testo; condividere la classe farebbe
+   credere allo script che il badge regione c'e' gia' e lo farebbe saltare. */
+.pdp-meta-row,
+.pdp-price-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -1611,18 +1617,11 @@ body { background: var(--page-bg); }
 }
 
 /* ── FAQ/REQUISITI: niente cerchi "?" (il chevron basta), due colonne
-   indipendenti invece di una griglia a righe ──────────────────────────────── */
+   indipendenti invece di una griglia a righe. Lo stile "a card" (bordo
+   radius + ombra) non si applica più qui: la lista con separatori arriva
+   già dalla regola base .home-faq-item in page.css, condivisa da tutto il
+   sito — niente più override che la smentiva solo sulle PDP. ──────────────── */
 .pdp-page .home-faq-item summary::before { display: none; }
-
-.pdp-page .home-faq-item {
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(20, 32, 51, 0.04);
-}
-
-.pdp-page .home-faq-list .home-faq-item[open] {
-    border-color: var(--aml-brand-soft);
-    box-shadow: 0 2px 8px rgba(20, 32, 51, 0.04);
-}
 
 .pdp-page .pf-faq-col { display: contents; }
 
@@ -1640,6 +1639,24 @@ body { background: var(--page-bg); }
         gap: 0.75rem;
         flex: 1 1 0;
         min-width: 0;
+    }
+}
+
+/* ── FAQ principale: nessun gruppo, una sola .home-faq-list piatta. Lo
+   stile (separatori, non card) arriva ormai dalla regola base condivisa in
+   page.css — qui serve solo forzare il layout a griglia: senza .pf-faq-col,
+   la regola .pdp-page qui sopra metterebbe le domande in un'unica riga
+   invece che a due colonne. L'ID batte le regole a due classi qui sopra. */
+#faq .home-faq-list {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+    #faq .home-faq-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 40px;
     }
 }
 

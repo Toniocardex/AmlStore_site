@@ -1002,9 +1002,9 @@
     .home-hero__bg::after {
         background: linear-gradient(
             180deg,
-            color-mix(in srgb, var(--aml-slate-900) 68%, transparent) 0%,
-            color-mix(in srgb, var(--aml-slate-900) 80%, transparent) 38%,
-            color-mix(in srgb, var(--aml-slate-900) 88%, transparent) 100%
+            color-mix(in srgb, var(--aml-slate-900) 30%, transparent) 0%,
+            color-mix(in srgb, var(--aml-slate-900) 48%, transparent) 38%,
+            color-mix(in srgb, var(--aml-slate-900) 62%, transparent) 100%
         );
     }
 

@@ -116,14 +116,6 @@
             "@type": "Answer",
             "text": "Sì: con le app desktop installate puoi lavorare offline; servono comunque connessione e accesso periodici per la verifica della licenza, aggiornamenti e servizi cloud come OneDrive."
           }
-        },
-        {
-          "@type": "Question",
-          "name": "Come si attiva Microsoft 365 Personal dopo l'acquisto?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Vai su <a href=\"https://setup.office.com/Home\" target=\"_blank\" rel=\"noopener noreferrer\">setup.office.com/Home</a>, accedi con il tuo account Microsoft, inserisci il codice ricevuto via email e segui la procedura guidata. Al termine installa le app da <a href=\"https://www.office.com\" target=\"_blank\" rel=\"noopener noreferrer\">office.com</a>."
-          }
         }
       ]
     }
@@ -145,11 +137,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/page.css?v=1f890f6341">
+    <link rel="stylesheet" href="../css/page.css?v=ca728ed0e3">
     <link rel="stylesheet" href="../css/header.css?v=89452832bc">
     <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=badc1440bc">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=d929f84eaa">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body class="pdp-page">
@@ -558,7 +550,7 @@
                         </ul>
 
                         <p class="pdp-guide-link">
-                            <a href="#pdp-steps-title" data-pdp-guide>Come funziona l'attivazione dopo l'acquisto?</a>
+                            <a href="#pdp-steps-title" data-pdp-guide><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>Come funziona l'attivazione dopo l'acquisto?</a>
                         </p>
             </div>
 
@@ -586,6 +578,7 @@
                 <p class="pdp-price-save">Risparmi <strong>€ 15,00</strong> rispetto al prezzo di listino (€ 99,00).</p>
                 <p class="pdp-price-note">Tasse incluse. Nessun costo di spedizione.</p>
 
+
                 <p class="pdp-meta-row" role="group" aria-label="Dettagli licenza">
                     <span class="pdp-meta-chip"><strong>Regione di attivazione</strong> Unione Europea / SEE</span>
                 </p>
@@ -603,6 +596,11 @@
                             <li>Attivazione sui portali ufficiali</li>
                             <li>Consegna digitale, nessuna spedizione</li>
                 </ul>
+
+                <p class="pdp-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span><strong>Guida Copilot inclusa in omaggio:</strong> allegata in PDF alla stessa email di consegna del codice, con esempi pratici di utilizzo in Word, Excel e PowerPoint.</span>
+                </p>
             </div>
         </div>
     </section>
@@ -691,29 +689,82 @@
         </section>
         <hr class="pdp-divider">
 
-        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
-            <p class="pdp-sec__eyebrow">Facile e Veloce</p>
-            <h2 id="pdp-steps-title" class="pdp-sec__title">Tre passi per iniziare</h2>
-            <ol class="pdp-steps">
-                <li class="pdp-step">
-                    <div>
-                        <h3>Ordine e pagamento</h3>
-                        <p>Aggiungi il prodotto al carrello e completa il pagamento sicuro con i metodi disponibili. Ricevi la conferma d'ordine come da condizioni mostrate in checkout.</p>
-                    </div>
-                </li>
-                <li class="pdp-step">
-                    <div>
-                        <h3>Consegna digitale</h3>
-                        <p>Ti inviamo la <strong>product key</strong> e le istruzioni via email, di solito entro pochi minuti dall'approvazione del pagamento.</p>
-                    </div>
-                </li>
-                <li class="pdp-step">
-                    <div>
-                        <h3>Attivazione</h3>
-                        <p>Riscatta il codice su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a>, associa la licenza al tuo account Microsoft e installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
-                    </div>
-                </li>
-            </ol>
+        <section class="pdp-sec" aria-labelledby="pdp-compare-title">
+            <p class="pdp-sec__eyebrow">Quale scegliere</p>
+            <h2 id="pdp-compare-title" class="pdp-sec__title">Confronta i piani Microsoft 365</h2>
+            <p class="pdp-sec__sub">La differenza non è la potenza delle app: è quante persone useranno davvero il piano.</p>
+
+            <div class="pdp-tablewrap">
+                <table class="pdp-table">
+                    <caption class="visually-hidden">Confronto tra Microsoft 365 Personal e Microsoft 365 Family</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">&nbsp;</th>
+                            <th scope="col">Microsoft 365 Personal</th>
+                            <th scope="col">Microsoft 365 Family</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Persone</th>
+                            <td>1</td>
+                            <td>Fino a 6</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Spazio OneDrive</th>
+                            <td>1 TB</td>
+                            <td>1 TB a persona</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Account separati per ogni utente</th>
+                            <td><span class="pdp-no" aria-label="Non previsto">—</span></td>
+                            <td><span class="pdp-yes" aria-label="Incluso">✓</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Funzionalità Copilot</th>
+                            <td>Titolare</td>
+                            <td>Solo titolare</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ideale per</th>
+                            <td>Chi usa Office da solo</td>
+                            <td>Due o più persone</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Prezzo su AML Store</th>
+                            <td>€ 84,00</td>
+                            <td>€ 104,95</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="pdp-table-foot">Scegli Personal se sei l'unica persona a usare davvero le app o lo spazio OneDrive. Se in futuro dovessi condividerlo con altri, valuta subito <a href="/it/microsoft-365-family">Microsoft 365 Family</a>.</p>
+            <p class="pdp-table-foot">Il passaggio a Family costa solo <strong>€ 20,95 in più</strong> (€ 104,95 contro € 84,00) per includere altre 5 persone, ciascuna con il proprio account e 1 TB dedicato — molto meno che comprare una seconda licenza Personal a parte.</p>
+        </section>
+        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-specs2-title">
+            <p class="pdp-sec__eyebrow">Specifiche del prodotto</p>
+            <h2 id="pdp-specs2-title" class="pdp-sec__title">Scheda tecnica</h2>
+            <div class="pdp-tablewrap">
+                <table class="pdp-table pdp-table--specs">
+                    <caption class="visually-hidden">Specifiche tecniche e commerciali di Microsoft 365 Personal</caption>
+                    <tbody>
+                        <tr><th scope="row">Prodotto</th><td>Microsoft 365 Personal</td></tr>
+                        <tr><th scope="row">Durata</th><td>12 mesi</td></tr>
+                        <tr><th scope="row">Utenti</th><td>1 persona</td></tr>
+                        <tr><th scope="row">Archiviazione</th><td>1 TB OneDrive</td></tr>
+                        <tr><th scope="row">Dispositivi</th><td>Fino a 5 contemporanei</td></tr>
+                        <tr><th scope="row">Copilot</th><td>Incluso</td></tr>
+                        <tr><th scope="row">Consegna</th><td>Codice digitale via email</td></tr>
+                        <tr><th scope="row">Attivazione</th><td>Account Microsoft, su setup.office.com</td></tr>
+                        <tr><th scope="row">Rinnovo</th><td>Nuova attivazione o estensione secondo le regole Microsoft</td></tr>
+                        <tr><th scope="row">Codice prodotto</th><td>QQ2-00012</td></tr>
+                        <tr><th scope="row">Regione di attivazione</th><td>Unione Europea / SEE</td></tr>
+                        <tr><th scope="row">Fatturazione</th><td>IVA inclusa, fattura elettronica disponibile</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
         <hr class="pdp-divider">
 
@@ -767,24 +818,18 @@
                         <p>Sì, entro i limiti del piano Microsoft: installa le app su PC, Mac, tablet e smartphone supportati collegati al tuo account, come descritto nella documentazione ufficiale.</p>
                     </div>
                 </details>
+                </div>
+                <div class="pf-faq-col">
                 <details class="home-faq-item">
                     <summary>È un abbonamento o un acquisto una tantum?</summary>
                     <div class="home-faq-body">
                         <p>È un abbonamento con rinnovo annuale (12 mesi acquistati su questa scheda). Durata, rinnovo e prezzo al rinnovo dipendono da Microsoft e dalle condizioni mostrate in fase d'ordine.</p>
                     </div>
                 </details>
-                </div>
-                <div class="pf-faq-col">
                 <details class="home-faq-item">
                     <summary>Si possono usare le app Office anche offline?</summary>
                     <div class="home-faq-body">
                         <p>Sì: con le app desktop installate puoi lavorare offline; servono comunque connessione e accesso periodici per la verifica della licenza, aggiornamenti e servizi cloud come OneDrive.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>Come si attiva Microsoft 365 Personal dopo l'acquisto?</summary>
-                    <div class="home-faq-body">
-                        <p>Vai su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com/Home</a>, accedi con il tuo account Microsoft, inserisci il codice ricevuto via email e segui la procedura guidata. Al termine installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.</p>
                     </div>
                 </details>
                 </div>

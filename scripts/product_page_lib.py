@@ -1345,6 +1345,66 @@ GUIDE_LABELS = {
     "es": {"open": "¿Cómo funciona la activación?", "close": "Entendido, cerrar"},
 }
 
+# Icona informativa davanti al trigger della modale "come si attiva": prima
+# era testo nudo, poco visibile in mezzo alla lista di rassicurazioni.
+GUIDE_ICON = (
+    '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" '
+    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    '<circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>'
+)
+
+# Nota "guida Copilot in omaggio": il flag content['copilot_bonus'] esisteva
+# gia' nei dati (microsoft-365-personal, microsoft-365-family, i bundle M365)
+# ma non era mai stato agganciato al render — la funzione GUIDE.js/guide.js
+# allega davvero il PDF via email solo per quegli SKU, quindi qui si limita a
+# rendere visibile un'automazione che gia' esiste, non a inventarne una nuova.
+COPILOT_BONUS_NOTE = {
+    "it": "<strong>Guida Copilot inclusa in omaggio:</strong> allegata in PDF alla stessa email di consegna del codice, con esempi pratici di utilizzo in Word, Excel e PowerPoint.",
+    "en": "<strong>Copilot guide included free:</strong> attached as a PDF to the same delivery email as your code, with practical examples for Word, Excel and PowerPoint.",
+    "fr": "<strong>Guide Copilot inclus gratuitement :</strong> joint en PDF au même e-mail de livraison que votre code, avec des exemples pratiques pour Word, Excel et PowerPoint.",
+    "de": "<strong>Copilot-Leitfaden gratis inklusive:</strong> als PDF derselben E-Mail mit Ihrem Code beigefügt, mit praktischen Beispielen für Word, Excel und PowerPoint.",
+    "es": "<strong>Guía de Copilot incluida gratis:</strong> adjunta en PDF al mismo correo de entrega de tu código, con ejemplos prácticos para Word, Excel y PowerPoint.",
+}
+
+
+# Chip "costo per persona" (piani multi-utente, es. M365 Family): valore
+# calcolato dal prezzo di vendita reale (entry()), non un literal — segue il
+# prezzo a catalogo come le altre cifre della pagina.
+PER_SEAT_LABEL = {
+    "it": {"label": "Costo per persona", "text": "€ {price} / anno su {n} account", "aria": "Dettagli licenza"},
+    "en": {"label": "Cost per person", "text": "€ {price} / year across {n} accounts", "aria": "Licence details"},
+    "fr": {"label": "Coût par personne", "text": "€ {price} / an sur {n} comptes", "aria": "Détails de la licence"},
+    "de": {"label": "Kosten pro Person", "text": "€ {price} / Jahr auf {n} Konten", "aria": "Lizenzdetails"},
+    "es": {"label": "Coste por persona", "text": "€ {price} / año en {n} cuentas", "aria": "Detalles de la licencia"},
+}
+
+
+def _render_seat_cost_chip(seats_count, sku, lang):
+    if not seats_count:
+        return ""
+    l = PER_SEAT_LABEL.get(lang, PER_SEAT_LABEL["en"])
+    per_seat = eur_fmt(round(entry(sku)["unitAmountMinor"] / seats_count))
+    text = l["text"].format(price=per_seat, n=seats_count)
+    return f"""
+                <p class="pdp-price-meta" role="group" aria-label="{l['aria']}">
+                    <span class="pdp-meta-chip"><strong>{l['label']}</strong> {text}</span>
+                </p>"""
+
+
+def _render_copilot_bonus(flag, lang):
+    # La guida allegata via email e' solo in italiano (GUIDE_LOCALES in
+    # functions/api/_lib/guide.js limita l'invio agli ordini lang == 'it'):
+    # promettere il bonus anche su EN/FR/DE/ES sarebbe scorretto, non solo
+    # non tradotto — la funzione semplicemente non lo allega.
+    if not flag or lang != "it":
+        return ""
+    text = COPILOT_BONUS_NOTE.get(lang, COPILOT_BONUS_NOTE["en"])
+    return f"""
+                <p class="pdp-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>{text}</span>
+                </p>"""
+
 # Suffisso del badge sconto ("−17% SCONTO" nel mockup di riferimento): micro-
 # etichetta di interfaccia, non testo di un cliente — tradurla per lingua e'
 # la stessa cosa che si fa per qualunque altra label dell'interfaccia.
@@ -1368,7 +1428,7 @@ def _render_activation_modal(ui, content, lang):
     )
 
     trigger = f"""                        <p class="pdp-guide-link">
-                            <a href="#pdp-steps-title" data-pdp-guide>{g['open']}</a>
+                            <a href="#pdp-steps-title" data-pdp-guide>{GUIDE_ICON}{g['open']}</a>
                         </p>
 """
 
@@ -1383,6 +1443,23 @@ def _render_activation_modal(ui, content, lang):
     </dialog>
 """
     return trigger, dialog
+
+
+def _render_table_foot(foot):
+    """c['foot'] e' di solito una stringa (una riga), ma su M365 Personal/
+    Family serve anche la riga di calcolo onesto sotto ("6 licenze Personal
+    separate costerebbero...") — qui accetta anche una lista/tupla e stampa
+    un <p class="pdp-table-foot"> per riga, senza rompere i chiamanti che
+    passano ancora una stringa sola."""
+    lines = [foot] if isinstance(foot, str) else list(foot)
+    return "".join(f'            <p class="pdp-table-foot">{line}</p>\n' for line in lines)
+
+
+def _fmt_foot(foot, fmt_vars):
+    """Interpola i placeholder di prezzo (es. {price0_x6}) nelle righe del
+    foot, se presenti. Testo senza placeholder passa invariato."""
+    lines = [foot] if isinstance(foot, str) else list(foot)
+    return [line.format(**fmt_vars) if "{" in line else line for line in lines]
 
 
 def _render_compare(compare, lang):
@@ -1413,8 +1490,20 @@ def _render_compare(compare, lang):
         return value
 
     rows = list(c["rows"])
+    price_fmt_vars = {}
+    if c.get("skus"):
+        minors = [entry(s)["unitAmountMinor"] for s in c["skus"]]
+        for i, m in enumerate(minors):
+            price_fmt_vars[f"price{i}"] = eur_fmt(m)
+            price_fmt_vars[f"price{i}_x6"] = eur_fmt(m * 6)
+        if len(minors) == 2:
+            # Risparmio "6 licenze singole vs 1 condivisa" — calcolato dal
+            # catalogo (entry()), non un literal: se il prezzo cambia, il
+            # testo del foot resta corretto senza bisogno di toccarlo a mano.
+            price_fmt_vars["savings_6x0_vs_1"] = eur_fmt(minors[0] * 6 - minors[1])
+            price_fmt_vars["price1_minus_price0"] = eur_fmt(minors[1] - minors[0])
     if c.get("price_row") and c.get("skus"):
-        prices = tuple(f"€ {eur_fmt(entry(s)['unitAmountMinor'])}" for s in c["skus"])
+        prices = tuple(f"€ {price_fmt_vars[f'price{i}']}" for i in range(len(c["skus"])))
         rows.append((c["price_row"],) + prices)
 
     body = "\n".join(
@@ -1448,8 +1537,7 @@ def _render_compare(compare, lang):
                     </tbody>
                 </table>
             </div>
-            <p class="pdp-table-foot">{c['foot']}</p>
-        </section>
+{_render_table_foot(_fmt_foot(c['foot'], price_fmt_vars))}        </section>
 """
 
 
@@ -1821,6 +1909,26 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         if steps_note
         else ""
     )
+    # content['hide_steps_section']: la sezione statica "Tre passi" duplica
+    # esattamente il contenuto della modale attivata da guide_trigger (stesso
+    # content['steps']) — su M365 Personal/Family il cliente ha scelto di
+    # tenere solo la modale per non allungare la pagina. Resta opt-in: tutti
+    # gli altri prodotti continuano a mostrare entrambe (il link e' anche il
+    # fallback per chi non ha <dialog>/JS, quindi qui si toglie di proposito,
+    # non per svista).
+    if content.get("hide_steps_section"):
+        steps_section_html = ""
+    else:
+        steps_section_html = f"""        <hr class="pdp-divider">
+
+        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
+            <p class="pdp-sec__eyebrow">{ui['how_eyebrow']}</p>
+            <h2 id="pdp-steps-title" class="pdp-sec__title">{steps_title}</h2>
+            <ol class="pdp-steps">
+{_render_steps_v3(ui, content, lang)}
+            </ol>
+{steps_note_html}        </section>
+"""
     overview_block = _render_overview(content, lang)
 
     # Sezioni condizionali: compaiono solo se il prodotto fornisce i dati.
@@ -1872,6 +1980,8 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     stats_block = _render_stats(content.get("stats"), lang)
     specs_table_block = _render_specs_table(content.get("specs_table"), lang, sku)
     roles_block = _render_roles(content.get("roles"), lang)
+    copilot_bonus_html = _render_copilot_bonus(content.get("copilot_bonus"), lang)
+    seat_cost_html = _render_seat_cost_chip(content.get("seats_count"), sku, lang)
 
     # FAQ per argomento se il prodotto le fornisce (M365 Family), altrimenti
     # la lista piatta a due colonne di sempre — nessun cambiamento per tutti
@@ -1998,6 +2108,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                     {msrp_html}
                 </div>
 {save_html}                <p class="pdp-price-note">{labels['tax']}</p>
+{seat_cost_html}
 {_stock_block_html(lang, sku)}
                 <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/{lang}/checkout">
                     {CART_ICON}
@@ -2007,6 +2118,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 <ul class="pdp-assur">
 {_render_assur(v3, ASSUR_KEYS[:2])}
                 </ul>
+{copilot_bonus_html}
             </div>
         </div>
     </section>
@@ -2015,16 +2127,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 
 {overview_block}{features_block}
-{stats_block}{specs_table_block}{roles_block}{apps_block}{seats_block}{compare_block}{lifestyle_block}        <hr class="pdp-divider">
-
-        <section class="pdp-sec" aria-labelledby="pdp-steps-title">
-            <p class="pdp-sec__eyebrow">{ui['how_eyebrow']}</p>
-            <h2 id="pdp-steps-title" class="pdp-sec__title">{steps_title}</h2>
-            <ol class="pdp-steps">
-{_render_steps_v3(ui, content, lang)}
-            </ol>
-{steps_note_html}        </section>
-{_render_reviews(v3, lang)}
+{stats_block}{apps_block}{lifestyle_block}{seats_block}{compare_block}{specs_table_block}{roles_block}{steps_section_html}{_render_reviews(v3, lang)}
         <hr class="pdp-divider">
 
         <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">

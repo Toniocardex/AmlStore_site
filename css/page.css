@@ -296,20 +296,25 @@ main {
 .home-faq-list {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0;
     width: 100%;
     max-width: min(40rem, 100%);
     margin-inline: auto;
+    border-top: 1px solid var(--page-border);
 }
 
+/* Lista con separatori, non card: un solo stile di accordion su tutto il
+   sito (homepage + ogni pagina prodotto, FAQ e Requisiti inclusi) invece di
+   varianti diverse per sezione. */
 .home-faq-item {
     min-width: 0;
     overflow: hidden;
-    border: 1px solid var(--page-border);
-    border-radius: var(--aml-radius-sm);
-    background: var(--aml-surface);
-    box-shadow: var(--aml-shadow-md);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    border-bottom: 1px solid var(--page-border);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    transition: background-color 0.2s ease;
 }
 
 .home-faq-item summary {
@@ -362,12 +367,12 @@ main {
 }
 
 .home-faq-item:hover {
-    border-color: color-mix(in srgb, var(--page-accent) 45%, var(--page-border));
+    background: var(--aml-paper-2);
 }
 
 .home-faq-list .home-faq-item[open] {
-    border-color: var(--page-accent);
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--page-accent) 14%, transparent);
+    border-color: var(--page-border);
+    box-shadow: none;
 }
 
 .home-faq-body {
