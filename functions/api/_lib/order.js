@@ -145,6 +145,26 @@ export async function setPaypalOrderId(db, orderId, paypalOrderId) {
 }
 
 /**
+ * Valorizza i dati cliente di un ordine PayPal Express con l'identità del
+ * payer restituita da PayPal (nessun form nostro è stato compilato).
+ * Chiamata solo quando i campi cliente sono ancora il placeholder ('') creato
+ * da createOrder in fase di express-create — no-op per gli ordini del
+ * checkout tradizionale, dove il cliente è già valorizzato dal form.
+ */
+export async function setPaypalCustomerFromPayer(db, orderId, { email, firstName, lastName }) {
+    await db.prepare(`
+        UPDATE orders
+        SET customer_email = ?, customer_first_name = ?, customer_last_name = ?, updated_at = ?
+        WHERE id = ?
+    `).bind(
+        email || '',
+        firstName || '',
+        lastName || '',
+        now(), orderId
+    ).run();
+}
+
+/**
  * Marca la email di conferma ordine come inviata (idempotenza).
  * @param {string} eventSrc — es. 'webhook_stripe', 'worker_capture', ecc.
  */

@@ -8,11 +8,14 @@
  *   POST /api/webhooks/stripe
  *   POST /api/paypal-create-order
  *   POST /api/paypal-capture-order
+ *   POST /api/paypal-express-create-order
+ *   POST /api/webhooks/paypal
  *   POST /api/bank-transfer-order
  *   GET  /api/order-status
  *   GET  /api/stock
  *   POST /api/consultation-request
  *   POST /api/cart/sync
+ *   POST /api/track
  *
  * Routes admin (protette da Cloudflare Access + verifica JWT):
  *   GET  /api/admin/orders
@@ -30,10 +33,12 @@ import { generateToken, verifyToken }                    from './_lib/token.js';
 import { createOrder, getOrderById, getOrderByStripeSession,
          getOrderByPaypalOrderId, setStripeSession,
          setPaypalOrderId, markPaidStripe, markPaidPaypal,
+         setPaypalCustomerFromPayer,
          toPublicOrder }                                  from './_lib/order.js';
 import { createCheckoutSession, verifyStripeWebhook }    from './_lib/stripe.js';
 import { getAccessToken, createPaypalOrder,
-         capturePaypalOrder }                            from './_lib/paypal.js';
+         capturePaypalOrder, getPaypalOrder,
+         verifyPaypalWebhookSignature }                  from './_lib/paypal.js';
 import { sendConfirmationOnce,
          sendInternalOrderNotificationOnce,
          sendConsultationRequest }                       from './_lib/email.js';
@@ -44,11 +49,12 @@ import { resolveAndValidateItems, itemsRequireShipping } from './_lib/catalog.js
 import { assertCartStock, deductStockForPaidOrder, getStockQty,
          listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
 import { safeParseJSON }                                 from './_lib/utils.js';
-import { checkCheckoutEmailRateLimit }                   from './_lib/checkout-rate-limit.js';
+import { checkCheckoutEmailRateLimit,
+         checkExpressCheckoutIpRateLimit }                from './_lib/checkout-rate-limit.js';
 import { upsertCartSession, markCartCheckoutStarted,
          checkCartSyncRateLimit, listCarts, getCartStats,
          normalizeHoursIdle, maybeRunCartRetention, deleteCart } from './_lib/cart.js';
-import { getAnalyticsSummary }                           from './_lib/analytics.js';
+import { getAnalyticsSummary, recordEvent, TRACKABLE_EVENTS } from './_lib/analytics.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -159,6 +165,15 @@ export async function onRequest(context) {
         }
         if (path === '/api/paypal-capture-order' && request.method === 'POST') {
             return await handlePaypalCaptureOrder(request, env);
+        }
+        if (path === '/api/paypal-express-create-order' && request.method === 'POST') {
+            return await handlePaypalExpressCreateOrder(request, env);
+        }
+        if (path === '/api/webhooks/paypal' && request.method === 'POST') {
+            return await handlePaypalWebhook(request, env);
+        }
+        if (path === '/api/track' && request.method === 'POST') {
+            return await handleTrack(request, env);
         }
         if (path === '/api/bank-transfer-order' && request.method === 'POST') {
             return await handleBankTransferOrder(request, env);
@@ -849,7 +864,7 @@ async function handlePaypalCaptureOrder(request, env) {
     const accessToken = await getAccessToken(
         env.PAYPAL_BASE_URL, env.PAYPAL_CLIENT_ID, env.PAYPAL_CLIENT_SECRET
     );
-    const { captureId, status, amountValue, currencyCode } = await capturePaypalOrder(
+    const { captureId, status, amountValue, currencyCode, payer } = await capturePaypalOrder(
         env.PAYPAL_BASE_URL, accessToken, paypalOrderId
     );
 
@@ -873,6 +888,13 @@ async function handlePaypalCaptureOrder(request, env) {
         return err('Importo PayPal non coerente con ordine', 409, request, env);
     }
 
+    // Express checkout: nessun form nostro è mai stato compilato, il cliente
+    // è ancora il placeholder ('') creato da handlePaypalExpressCreateOrder.
+    // L'unica fonte per nome/email è il payer restituito da PayPal qui.
+    if (!order.customer_email && payer?.email) {
+        await setPaypalCustomerFromPayer(env.DB, order.id, payer);
+    }
+
     // Aggiorna ordine D1
     await markPaidPaypal(env.DB, order.id, { paypalOrderId, paypalCaptureId: captureId });
 
@@ -889,11 +911,232 @@ async function handlePaypalCaptureOrder(request, env) {
         env.RESEND_API_KEY,
         'worker_capture'
     );
+    await recordEvent(env, request, { eventName: 'purchase', orderId: order.id });
 
     // Genera token thank-you
     const token = await generateToken(env.TOKEN_SECRET, order.id);
 
     return json({ oid: token.oid, exp: token.exp, t: token.t }, 200, request, env);
+}
+
+/* ─── POST /api/paypal-express-create-order ─────────────────────────────────── */
+// Bottone Express sulla PDP: crea l'ordine con cliente placeholder (nessun
+// form compilato) e l'ordine PayPal in un colpo solo. Il capture riusa
+// /api/paypal-capture-order sopra, che valorizza il cliente dal payer.
+
+async function handlePaypalExpressCreateOrder(request, env) {
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
+
+    const body = await request.json().catch(() => null);
+    if (!body) return err('Invalid JSON', 400, request, env);
+
+    let items;
+    try {
+        items = resolveAndValidateItems(body.items);
+    } catch (catalogErr) {
+        return err(catalogErr.message || 'Invalid catalog', 400, request, env);
+    }
+    if (itemsRequireShipping(items)) {
+        return err('PayPal Express non disponibile per articoli con spedizione fisica', 400, request, env);
+    }
+
+    const rawLang = String(body.lang || 'it').toLowerCase();
+    const lang = ALLOWED_LOCALES.has(rawLang) ? rawLang : 'it';
+    const idempotencyKey = normalizeIdempotencyKey(body.idempotencyKey);
+
+    // Riuso ordine esistente su retry della stessa idempotency_key, altrimenti
+    // limite per IP: niente email disponibile a questo punto del flusso.
+    const existing = await env.DB
+        .prepare('SELECT id FROM orders WHERE idempotency_key = ?')
+        .bind(idempotencyKey).first();
+    if (!existing?.id) {
+        const rateGate = await checkExpressCheckoutIpRateLimit(env, request);
+        if (rateGate) return rateLimitResponse(rateGate, request, env);
+    }
+
+    let orderId;
+    try {
+        orderId = await createOrder(env.DB, {
+            idempotencyKey,
+            customerEmail:     '',
+            customerFirstName: '',
+            customerLastName:  '',
+            customerCompany:   null,
+            customerType:      'private',
+            customerPhone:     null,
+            customerPiva:      null,
+            customerSdi:       null,
+            customerPec:       null,
+            locale:            lang,
+            lineItems:         items,
+            totalMinor:        totalMinorFromItems(items),
+            currency:          items[0].currency,
+            paymentMethod:     'paypal',
+            requiresShipping:  false,
+            shipping:          null,
+        });
+    } catch (dbErr) {
+        if (String(dbErr).includes('UNIQUE')) {
+            const row = await env.DB
+                .prepare('SELECT id FROM orders WHERE idempotency_key = ?')
+                .bind(idempotencyKey).first();
+            orderId = row?.id;
+            if (!orderId) throw dbErr;
+        } else {
+            throw dbErr;
+        }
+    }
+    await linkCartCheckoutStarted(env, body, orderId);
+
+    const accessToken = await getAccessToken(
+        env.PAYPAL_BASE_URL, env.PAYPAL_CLIENT_ID, env.PAYPAL_CLIENT_SECRET
+    );
+
+    const totalStr = (totalMinorFromItems(items) / 100).toFixed(2);
+    const paypalOrderId = await createPaypalOrder(env.PAYPAL_BASE_URL, accessToken, {
+        orderId,
+        totalMinorStr: totalStr,
+        currency:      items[0].currency,
+        lineItems:     items,
+    });
+
+    await setPaypalOrderId(env.DB, orderId, paypalOrderId);
+    await recordEvent(env, request, {
+        eventName: 'paypal_express_click',
+        orderId,
+        sku: items[0]?.sku,
+    });
+
+    return json({ orderID: paypalOrderId, amlOrderId: orderId }, 200, request, env);
+}
+
+/* ─── POST /api/webhooks/paypal ─────────────────────────────────────────────── */
+// Rete di sicurezza per il capture client-side (sia checkout tradizionale sia
+// Express): se il redirect dopo l'approvazione fallisce, il webhook riconcilia
+// comunque l'ordine. Idempotente sullo stesso pattern del webhook Stripe.
+
+async function handlePaypalWebhook(request, env) {
+    const rawBody = await request.text();
+
+    const headers = {};
+    for (const [k, v] of request.headers.entries()) headers[k.toLowerCase()] = v;
+
+    let accessToken;
+    try {
+        accessToken = await getAccessToken(
+            env.PAYPAL_BASE_URL, env.PAYPAL_CLIENT_ID, env.PAYPAL_CLIENT_SECRET
+        );
+    } catch (e) {
+        console.error('[webhook/paypal] Impossibile ottenere access token:', e?.message || e);
+        return new Response('Service unavailable', { status: 503 });
+    }
+
+    let verified = false;
+    try {
+        verified = await verifyPaypalWebhookSignature(
+            env.PAYPAL_BASE_URL, accessToken, headers, env.PAYPAL_WEBHOOK_ID, rawBody
+        );
+    } catch (e) {
+        console.error('[webhook/paypal] Verifica firma fallita:', e?.message || e);
+    }
+    if (!verified) {
+        console.error('[webhook/paypal] Firma non valida o webhook non configurato');
+        return new Response('Unauthorized', { status: 401 });
+    }
+
+    const event = safeParseJSON(rawBody, null);
+    if (!event) return new Response('Invalid JSON', { status: 400 });
+
+    if (event.event_type === 'PAYMENT.CAPTURE.COMPLETED') {
+        const resource = event.resource || {};
+        const paypalOrderId = resource?.supplementary_data?.related_ids?.order_id;
+        if (!paypalOrderId) {
+            console.warn('[webhook/paypal] Nessun order_id nella risorsa capture');
+            return new Response('OK', { status: 200 });
+        }
+
+        const order = await getOrderByPaypalOrderId(env.DB, paypalOrderId);
+        if (!order) {
+            console.warn('[webhook/paypal] Ordine non trovato per PayPal order:', paypalOrderId);
+            return new Response('OK', { status: 200 }); // Ack comunque a PayPal
+        }
+
+        if (order.status !== 'paid') {
+            const captureId = resource.id || null;
+            const amountValue = resource.amount?.value || '';
+            const currencyCode = resource.amount?.currency_code || '';
+            const capturedMinor = Math.round(Number(amountValue) * 100);
+
+            if (
+                !Number.isFinite(capturedMinor) ||
+                capturedMinor !== Number(order.total_minor) ||
+                String(currencyCode || '').toUpperCase() !== String(order.currency || 'EUR').toUpperCase()
+            ) {
+                console.error('[webhook/paypal] Importo o valuta non coerenti:', {
+                    paypalOrderId, capturedMinor, currencyCode,
+                    expectedMinor: order.total_minor, expectedCurrency: order.currency,
+                });
+                return new Response('OK', { status: 200 }); // Ack: non fulfillare, ma non far ritentare PayPal all'infinito
+            }
+
+            // Express checkout mai completato lato client: recupera il payer
+            // dall'Order (la risorsa Capture del webhook non lo include).
+            if (!order.customer_email) {
+                try {
+                    const { payer } = await getPaypalOrder(env.PAYPAL_BASE_URL, accessToken, paypalOrderId);
+                    if (payer?.email) await setPaypalCustomerFromPayer(env.DB, order.id, payer);
+                } catch (e) {
+                    console.warn('[webhook/paypal] Recupero payer fallito:', e?.message || e);
+                }
+            }
+
+            await markPaidPaypal(env.DB, order.id, { paypalOrderId, paypalCaptureId: captureId });
+        }
+
+        // Stock: sempre (idempotente via stock_deductions), anche su retry webhook.
+        const updatedOrder = await getOrderById(env.DB, order.id);
+        await deductStockForOrderRow(env.DB, updatedOrder || order);
+        if (order.status !== 'paid') {
+            await sendConfirmationOnce(
+                env.DB, updatedOrder,
+                env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
+                'webhook_paypal', env.GUIDES
+            );
+            await sendInternalOrderNotificationOnce(
+                env.DB, updatedOrder,
+                env.RESEND_API_KEY,
+                'webhook_paypal'
+            );
+            await recordEvent(env, request, { eventName: 'purchase', orderId: order.id });
+        }
+    }
+
+    return new Response('OK', { status: 200 });
+}
+
+/* ─── POST /api/track ────────────────────────────────────────────────────────── */
+// Eventi CRO lato client (click PayPal Express, esiti, buy-now). Fail-open e
+// permissivo di proposito, come le pageview: un tracking rotto non deve mai
+// bloccare o rallentare l'utente. 'purchase' non è accettato qui — è scritto
+// solo server-side dagli handler di capture/webhook.
+
+async function handleTrack(request, env) {
+    try {
+        if (!isJsonContentType(request)) return new Response(null, { status: 204 });
+        if (requestBodyTooLarge(request)) return new Response(null, { status: 204 });
+
+        const body = await request.json().catch(() => null);
+        const eventName = String(body?.event || '');
+        if (!TRACKABLE_EVENTS.has(eventName)) return new Response(null, { status: 204 });
+
+        const orderId = body?.orderId ? cleanString(body.orderId, 40) : undefined;
+        const sku     = body?.sku ? cleanString(body.sku, 64) : undefined;
+        await recordEvent(env, request, { eventName, orderId, sku });
+    } catch (e) {
+        console.warn('[track] fallito (fail-open):', e?.message || e);
+    }
+    return new Response(null, { status: 204 });
 }
 
 /* ─── POST /api/bank-transfer-order ─────────────────────────────────────────── */

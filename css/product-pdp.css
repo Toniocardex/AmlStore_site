@@ -2122,6 +2122,50 @@ body { background: var(--page-bg); }
     color: var(--aml-ok);
 }
 
+/* PayPal Express: terzo percorso sotto le due CTA, separato da un filetto
+   semplice (niente "oppure" — vedi report UX/CRO PayPal Express Checkout). */
+.pdp-paypal-sep {
+    margin: 16px 0 14px;
+    border: none;
+    border-top: 1px solid var(--pdp-border);
+}
+
+.pdp-paypal-express__buttons {
+    min-height: 45px;
+}
+
+.pdp-paypal-express__loading {
+    margin: 8px 0 0;
+    font-size: var(--aml-text-sm);
+    color: var(--pdp-muted);
+    text-align: center;
+}
+
+.pdp-paypal-express__error {
+    margin: 8px 0 0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: var(--aml-danger-bg);
+    color: var(--aml-danger);
+    font-size: var(--aml-text-sm);
+    font-weight: 600;
+    text-align: center;
+}
+
+.pdp-paypal-express__error[hidden],
+.pdp-paypal-express__loading[hidden] {
+    display: none;
+}
+
+/* Discreta di proposito: spiega il bottone, non deve competere con le CTA. */
+.pdp-paypal-express__microcopy {
+    margin: 8px 0 0;
+    font-size: var(--aml-text-xs);
+    font-weight: 400;
+    color: var(--pdp-muted);
+    text-align: center;
+}
+
 /* Il pannello tiene solo le due garanzie principali: niente colonne, sono due
    righe che devono leggersi come chiusura della card. */
 .pdp-buy .pdp-assur {

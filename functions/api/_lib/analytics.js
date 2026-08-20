@@ -173,6 +173,55 @@ export async function recordPageView(context) {
     }
 }
 
+/* ─── Eventi CRO (click PayPal Express, buy-now, purchase, ecc.) ──────────────── */
+// Stessa impostazione privacy delle pageview: nessun cookie, visitor_hash HMAC
+// che ruota ogni giorno, fail-open (mai nel path critico di un acquisto).
+// 'purchase' è scritto solo server-side dagli handler di capture/webhook, mai
+// dal client via /api/track, per restare un dato attendibile e non spoofabile.
+
+export const TRACKABLE_EVENTS = new Set([
+    'add_to_cart',
+    'buy_now_click',
+    'paypal_express_click',
+    'paypal_opened',
+    'paypal_approved',
+    'paypal_captured',
+    'paypal_cancelled',
+    'paypal_failed',
+]);
+
+/**
+ * Registra un evento CRO. Va chiamata con `await` (nessun waitUntil qui: gli
+ * handler ordini/tracking non hanno un `context`, solo request/env) ma è
+ * fail-open al suo interno — un suo errore non deve mai bloccare la risposta.
+ * @param {object} env
+ * @param {Request} request
+ * @param {{eventName: string, orderId?: string, sku?: string}} params
+ */
+export async function recordEvent(env, request, { eventName, orderId, sku }) {
+    const secret = env.FRAUD_HASH_SECRET;
+    if (!secret || !env.DB) return;
+    if (!TRACKABLE_EVENTS.has(eventName) && eventName !== 'purchase') return;
+
+    try {
+        const ua  = request.headers.get('User-Agent') || '';
+        const ip  = request.headers.get('CF-Connecting-IP') || '';
+        const ts  = now();
+        const day = ts.slice(0, 10);
+
+        const visitorHash = ip
+            ? await hmacIdentifier(secret, `ev-${day}`, `${ip}|${ua}`)
+            : await hmacIdentifier(secret, `ev-${day}`, `anon|${ua}`);
+
+        await env.DB.prepare(`
+            INSERT INTO analytics_events (id, event_name, order_id, sku, visitor_hash, created_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+        `).bind(crypto.randomUUID(), eventName, orderId || null, sku || null, visitorHash, ts).run();
+    } catch (e) {
+        console.warn('[analytics] recordEvent fallita:', e?.message || e);
+    }
+}
+
 /* ─── Aggregati (vista admin) ─────────────────────────────────────────────────── */
 
 const EPOCH_ISO = '1970-01-01';

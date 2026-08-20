@@ -18,6 +18,20 @@
     const CART_SYNC_DEBOUNCE_MS = 1500;
     var cartSyncTimer = null;
 
+    const TRACK_URL = '/api/track';
+
+    /** Evento CRO fire-and-forget (vedi TRACKABLE_EVENTS in functions/api/_lib/analytics.js). */
+    function trackEvent(eventName, extra) {
+        try {
+            fetch(TRACK_URL, {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                keepalive: true,
+                body: JSON.stringify(Object.assign({ event: eventName }, extra || {})),
+            }).catch(() => {});
+        } catch (_) { /* fetch non disponibile */ }
+    }
+
     /* ─── Storage ──────────────────────────────────────────────────────────────── */
 
     function readLines() {
@@ -555,9 +569,11 @@
                 // pagamento, niente toast/flash che tanto non fa in tempo a vedersi.
                 const redirect = btn.getAttribute('data-cart-checkout-redirect');
                 if (redirect) {
+                    trackEvent('buy_now_click', { sku: line.sku });
                     global.location.href = redirect;
                     return;
                 }
+                trackEvent('add_to_cart', { sku: line.sku });
                 // Il toast ha role="status": annuncia già ai lettori di schermo.
                 // announceCartAdded() resta per le pagine senza body (fallback).
                 if (document.body) showCartToast(line);

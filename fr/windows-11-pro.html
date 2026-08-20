@@ -149,7 +149,7 @@
     <link rel="stylesheet" href="../css/header.css?v=89452832bc">
     <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=d929f84eaa">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=6282dac7a0">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body class="pdp-page">
@@ -490,6 +490,7 @@
                 <p class="pdp-price-save">Vous économisez <strong>€ 50,00</strong> par rapport au prix catalogue (€ 149,00).</p>
                 <p class="pdp-price-note">Taxes incluses. Pas de frais de port.</p>
 
+
                 <p class="pdp-meta-row" role="group" aria-label="Détails de la licence">
                     <span class="pdp-meta-chip"><strong>Zone d'activation</strong> Union européenne / EEE</span>
                 </p>
@@ -503,10 +504,21 @@
                     Ajouter au panier
                 </button>
 
+                <hr class="pdp-paypal-sep" aria-hidden="true">
+                <div id="pdp-paypal-express" class="pdp-paypal-express">
+                    <div class="pdp-paypal-express__buttons" id="pdp-paypal-express-buttons"></div>
+                    <p class="pdp-paypal-express__loading" id="pdp-paypal-express-loading" hidden>Chargement de PayPal…</p>
+                    <p class="pdp-paypal-express__error" id="pdp-paypal-express-error" role="alert" hidden
+                        data-msg-error="Impossible de charger PayPal. Réessayez ou utilisez Acheter maintenant."
+                        data-msg-cancelled="Paiement annulé."
+                        data-msg-capture-error="Erreur lors de la confirmation du paiement PayPal. Contactez le support."></p>
+                    <p class="pdp-paypal-express__microcopy">Paiement express</p>
+                </div>
                 <ul class="pdp-assur">
                             <li>Activation sur les portails officiels</li>
                             <li>Livraison numérique, rien à expédier</li>
                 </ul>
+
             </div>
         </div>
     </section>
@@ -758,11 +770,12 @@
                 </footer>
             </ecommerce-footer>
     <script src="../js/locale-path.js?v=e47f0483f7"></script>
-    <script src="../js/cart.js?v=9faf437bac" defer></script>
+    <script src="../js/cart.js?v=33805a2a33" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
     <script src="../js/product-v3.js?v=cc997542a2" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
+    <script src="../js/pdp-paypal-express.js?v=bc9c9cbdb5" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script><script src="../components/lang-suggest.js?v=74d7b5f03c" defer></script>
     <script src="../components/header.js?v=766d52658b" defer></script>

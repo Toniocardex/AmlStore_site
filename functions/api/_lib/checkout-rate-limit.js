@@ -113,3 +113,45 @@ export async function checkCheckoutEmailRateLimit(env, customerEmail) {
 
     return null;
 }
+
+/** Finestra e soglia per l'IP sull'express-create: nessuna email disponibile
+ *  a questo punto del flusso (PayPal la fornisce solo alla cattura), quindi
+ *  l'unico freno possibile prima di chiamare l'API PayPal è per IP. */
+const EXPRESS_IP_WINDOW_MS = 10 * 60 * 1000;
+const EXPRESS_IP_MAX_ATTEMPTS = 10;
+
+/**
+ * Rate limit per IP sulla creazione di un ordine PayPal Express (nuovo
+ * checkout, non riuso di idempotency_key). Fail-open: un errore qui non deve
+ * mai impedire un acquisto legittimo.
+ *
+ * @param {object} env
+ * @param {Request} request
+ * @returns {Promise<null | { limited: true, retryAfter: number, message: string, code: string, status: number }>}
+ */
+export async function checkExpressCheckoutIpRateLimit(env, request) {
+    const secret = env.FRAUD_HASH_SECRET;
+    if (!secret || !env.DB) return null;
+
+    const ip = request.headers.get('CF-Connecting-IP') || '';
+    if (!ip) return null;
+
+    try {
+        const ipHash = await hmacIdentifier(secret, 'pp-express-ip', ip);
+        const bucketKey = `pp-express:${ipHash}`;
+        const windowId = `10m:${windowSlot(EXPRESS_IP_WINDOW_MS)}`;
+        const count = await bumpBucket(env.DB, bucketKey, windowId);
+        if (count > EXPRESS_IP_MAX_ATTEMPTS) {
+            return {
+                limited: true,
+                retryAfter: retryAfterForWindow(EXPRESS_IP_WINDOW_MS),
+                message: 'Too many checkout attempts. Please try again later.',
+                code: 'CHECKOUT_RATE_LIMITED',
+                status: 429,
+            };
+        }
+    } catch (e) {
+        console.warn('[rate-limit] express IP check failed (fail-open):', e?.message || e);
+    }
+    return null;
+}

@@ -140,7 +140,7 @@
     <link rel="stylesheet" href="../css/header.css?v=89452832bc">
     <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=d929f84eaa">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=6282dac7a0">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body class="pdp-page">
@@ -461,7 +461,7 @@
                         </ul>
 
                         <p class="pdp-guide-link">
-                            <a href="#pdp-steps-title" data-pdp-guide>¿Cómo funciona la activación?</a>
+                            <a href="#pdp-steps-title" data-pdp-guide><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>¿Cómo funciona la activación?</a>
                         </p>
             </div>
 
@@ -484,6 +484,7 @@
                 <p class="pdp-price-save">Ahorras <strong>€ 526,99</strong> respecto al precio de lista (€ 679,99).</p>
                 <p class="pdp-price-note">Impuestos incluidos. Sin gastos de envío.</p>
 
+
                 <p class="pdp-meta-row" role="group" aria-label="Detalles de la licencia">
                     <span class="pdp-meta-chip"><strong>Región de activación</strong> Unión Europea / EEE</span>
                 </p>
@@ -497,10 +498,21 @@
                     Añadir al carrito
                 </button>
 
+                <hr class="pdp-paypal-sep" aria-hidden="true">
+                <div id="pdp-paypal-express" class="pdp-paypal-express">
+                    <div class="pdp-paypal-express__buttons" id="pdp-paypal-express-buttons"></div>
+                    <p class="pdp-paypal-express__loading" id="pdp-paypal-express-loading" hidden>Cargando PayPal…</p>
+                    <p class="pdp-paypal-express__error" id="pdp-paypal-express-error" role="alert" hidden
+                        data-msg-error="No se pudo cargar PayPal. Inténtalo de nuevo o usa Comprar ahora."
+                        data-msg-cancelled="Pago cancelado."
+                        data-msg-capture-error="Error al confirmar el pago de PayPal. Contacta con soporte."></p>
+                    <p class="pdp-paypal-express__microcopy">Pago exprés</p>
+                </div>
                 <ul class="pdp-assur">
                             <li>Activación en portales oficiales</li>
                             <li>Entrega digital, sin envío</li>
                 </ul>
+
             </div>
         </div>
     </section>
@@ -752,11 +764,12 @@
                 </footer>
             </ecommerce-footer>
     <script src="../js/locale-path.js?v=e47f0483f7"></script>
-    <script src="../js/cart.js?v=9faf437bac" defer></script>
+    <script src="../js/cart.js?v=33805a2a33" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
     <script src="../js/product-v3.js?v=cc997542a2" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
+    <script src="../js/pdp-paypal-express.js?v=bc9c9cbdb5" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script><script src="../components/lang-suggest.js?v=74d7b5f03c" defer></script>
     <script src="../components/header.js?v=766d52658b" defer></script>

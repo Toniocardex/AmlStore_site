@@ -105,7 +105,7 @@ export async function createPaypalOrder(baseUrl, accessToken, {
  * @param {string} baseUrl
  * @param {string} accessToken
  * @param {string} paypalOrderId — ID ordine PayPal (dal frontend)
- * @returns {Promise<{ captureId: string, status: string, amountValue: string, currencyCode: string }>}
+ * @returns {Promise<{ captureId: string, status: string, amountValue: string, currencyCode: string, payer: {email: string, firstName: string, lastName: string} }>}
  */
 export async function capturePaypalOrder(baseUrl, accessToken, paypalOrderId) {
     const res = await fetch(`${baseUrl}/v2/checkout/orders/${paypalOrderId}/capture`, {
@@ -125,10 +125,98 @@ export async function capturePaypalOrder(baseUrl, accessToken, paypalOrderId) {
     // Estrai capture ID dalla prima purchase_unit
     const capture = data?.purchase_units?.[0]?.payments?.captures?.[0] || {};
     const captureId = capture.id || null;
+    // Identità del payer restituita da PayPal (l'Express checkout non passa mai
+    // da un form nostro: è l'unica fonte per nome/email del cliente).
+    const payer = {
+        email:     data?.payer?.email_address || '',
+        firstName: data?.payer?.name?.given_name || '',
+        lastName:  data?.payer?.name?.surname || '',
+    };
     return {
         captureId,
         status: data.status,
         amountValue: capture.amount?.value || '',
         currencyCode: capture.amount?.currency_code || '',
+        payer,
     };
+}
+
+/**
+ * Recupera i dettagli di un ordine PayPal (incluso il payer) senza catturarlo.
+ * Usato dal webhook per riconciliare ordini il cui capture client-side non è
+ * mai arrivato: la risorsa PAYMENT.CAPTURE.COMPLETED del webhook non include
+ * il payer (sta solo sull'Order), quindi va richiesto a parte.
+ *
+ * @param {string} baseUrl
+ * @param {string} accessToken
+ * @param {string} paypalOrderId
+ * @returns {Promise<{ status: string, payer: {email: string, firstName: string, lastName: string} }>}
+ */
+export async function getPaypalOrder(baseUrl, accessToken, paypalOrderId) {
+    const res = await fetch(`${baseUrl}/v2/checkout/orders/${paypalOrderId}`, {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${accessToken}` },
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(`PayPal get order error ${res.status}: ${JSON.stringify(data)}`);
+    }
+    return {
+        status: data.status,
+        payer: {
+            email:     data?.payer?.email_address || '',
+            firstName: data?.payer?.name?.given_name || '',
+            lastName:  data?.payer?.name?.surname || '',
+        },
+    };
+}
+
+/**
+ * Verifica la firma di un webhook PayPal chiamando l'endpoint ufficiale
+ * v1/notifications/verify-webhook-signature (PayPal non usa un HMAC locale
+ * come Stripe: la verifica va fatta lato loro).
+ *
+ * @param {string} baseUrl
+ * @param {string} accessToken
+ * @param {object} headers  — header HTTP della richiesta webhook (oggetto piatto, chiavi lowercase)
+ * @param {string} webhookId — env var PAYPAL_WEBHOOK_ID (configurato nel dashboard PayPal)
+ * @param {string} rawBody   — corpo grezzo della richiesta webhook (stringa)
+ * @returns {Promise<boolean>}
+ */
+export async function verifyPaypalWebhookSignature(baseUrl, accessToken, headers, webhookId, rawBody) {
+    if (!webhookId) return false;
+
+    let event;
+    try {
+        event = JSON.parse(rawBody);
+    } catch (_) {
+        return false;
+    }
+
+    const body = {
+        transmission_id:   headers['paypal-transmission-id'],
+        transmission_time: headers['paypal-transmission-time'],
+        cert_url:           headers['paypal-cert-url'],
+        auth_algo:           headers['paypal-auth-algo'],
+        transmission_sig:   headers['paypal-transmission-sig'],
+        webhook_id:          webhookId,
+        webhook_event:       event,
+    };
+
+    if (!body.transmission_id || !body.transmission_time || !body.cert_url ||
+        !body.auth_algo || !body.transmission_sig) {
+        return false;
+    }
+
+    const res = await fetch(`${baseUrl}/v1/notifications/verify-webhook-signature`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type':  'application/json',
+        },
+        body: JSON.stringify(body),
+    });
+
+    const data = await res.json().catch(() => null);
+    return Boolean(res.ok && data?.verification_status === 'SUCCESS');
 }

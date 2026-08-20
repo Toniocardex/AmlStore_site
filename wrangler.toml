@@ -51,5 +51,11 @@ ADMIN_ALLOW_DELETE_CARTS = "1"
 # PAYPAL_CLIENT_ID       — Client ID PayPal LIVE (esposto al frontend via
 #                          /api/paypal-config: è un dato pubblico)
 # PAYPAL_CLIENT_SECRET   — Client Secret PayPal LIVE (solo server-side)
+# PAYPAL_WEBHOOK_ID      — Webhook ID da PayPal Dashboard → Apps & Credentials →
+#                          [App] → Webhooks → aggiungi endpoint
+#                          https://aml-store.com/api/webhooks/paypal, evento
+#                          "Payment capture completed". Senza questo secret
+#                          /api/webhooks/paypal rifiuta ogni richiesta (401) —
+#                          va configurato DOPO il deploy, quando l'URL esiste.
 # Live credentials: Cloudflare Pages → Settings → Environment variables (Production).
 # Vedi GO-LIVE.md per la checklist completa di messa online.

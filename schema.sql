@@ -120,3 +120,18 @@ CREATE TABLE IF NOT EXISTS checkout_rate_buckets (
     PRIMARY KEY (bucket_key, window_id)
 );
 CREATE INDEX IF NOT EXISTS idx_rate_buckets_updated ON checkout_rate_buckets(updated_at);
+
+-- Eventi CRO (click PayPal Express, buy-now, purchase, ecc.) oltre alle sole
+-- pageview. Incluso anche in schema-analytics-events-migration.sql per
+-- aggiornare in sicurezza database creati prima di questa feature.
+CREATE TABLE IF NOT EXISTS analytics_events (
+    id            TEXT PRIMARY KEY,
+    event_name    TEXT NOT NULL,
+    order_id      TEXT,
+    sku           TEXT,
+    visitor_hash  TEXT NOT NULL,
+    created_at    TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_analytics_events_name_created ON analytics_events(event_name, created_at);
+CREATE INDEX IF NOT EXISTS idx_analytics_events_order        ON analytics_events(order_id);

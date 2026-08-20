@@ -89,6 +89,12 @@ def _stock_script_tag(sku):
     return '    <script src="../js/product-stock.js" defer></script>\n'
 
 
+def _paypal_express_script_tag(sku):
+    if is_physical_sku(sku):
+        return ""
+    return '    <script src="../js/pdp-paypal-express.js" defer></script>\n'
+
+
 TRUSTPILOT_LOCALE = {
     "it": ("it-IT", "https://it.trustpilot.com/review/aml-store.com"),
     "en": ("en-US", "https://www.trustpilot.com/review/aml-store.com"),
@@ -1258,6 +1264,55 @@ BUY_LABELS = {
            "sticky_delivery": "Entrega en 2 minutos por email"},
 }
 
+# Terzo percorso di conversione sotto "Acquista ora" / "Aggiungi al carrello":
+# bottone PayPal ufficiale, separato da un separatore semplice (niente
+# "oppure": aggiunge solo rumore, il separatore basta a comunicare il cambio
+# di modalità). Non sostituisce mai il checkout tradizionale — vedi report
+# UX/CRO "PayPal Express Checkout": la CTA primaria resta accessibile a chi
+# non usa PayPal.
+PAYPAL_EXPRESS_I18N = {
+    "it": {"microcopy": "Express checkout", "loading": "Caricamento PayPal…",
+           "error": "Impossibile caricare PayPal. Riprova o usa Acquista ora.",
+           "cancelled": "Pagamento annullato.",
+           "capture_error": "Errore nella conferma del pagamento PayPal. Contatta il supporto."},
+    "en": {"microcopy": "Express checkout", "loading": "Loading PayPal…",
+           "error": "Unable to load PayPal. Try again or use Buy now.",
+           "cancelled": "Payment cancelled.",
+           "capture_error": "Error confirming PayPal payment. Please contact support."},
+    "fr": {"microcopy": "Paiement express", "loading": "Chargement de PayPal…",
+           "error": "Impossible de charger PayPal. Réessayez ou utilisez Acheter maintenant.",
+           "cancelled": "Paiement annulé.",
+           "capture_error": "Erreur lors de la confirmation du paiement PayPal. Contactez le support."},
+    "de": {"microcopy": "Express-Checkout", "loading": "PayPal wird geladen…",
+           "error": "PayPal konnte nicht geladen werden. Versuchen Sie es erneut oder nutzen Sie Jetzt kaufen.",
+           "cancelled": "Zahlung abgebrochen.",
+           "capture_error": "Fehler bei der Bestätigung der PayPal-Zahlung. Bitte kontaktieren Sie den Support."},
+    "es": {"microcopy": "Pago exprés", "loading": "Cargando PayPal…",
+           "error": "No se pudo cargar PayPal. Inténtalo de nuevo o usa Comprar ahora.",
+           "cancelled": "Pago cancelado.",
+           "capture_error": "Error al confirmar el pago de PayPal. Contacta con soporte."},
+}
+
+
+def _render_paypal_express(lang):
+    """Bottone PayPal ufficiale sotto le due CTA principali, separato da <hr>.
+    Il JS (pdp-paypal-express.js) legge sku/variante correnti da #product-pricing
+    al click, come data-cart-add: nessuno sku fisso qui. Omesso in fase di
+    generazione per gli SKU fisici (vedi call site), l'articolo fisico
+    equivalente non richiede il gate qui perché e' gia' assente dal markup."""
+    t = PAYPAL_EXPRESS_I18N.get(lang, PAYPAL_EXPRESS_I18N["en"])
+    return f"""                <hr class="pdp-paypal-sep" aria-hidden="true">
+                <div id="pdp-paypal-express" class="pdp-paypal-express">
+                    <div class="pdp-paypal-express__buttons" id="pdp-paypal-express-buttons"></div>
+                    <p class="pdp-paypal-express__loading" id="pdp-paypal-express-loading" hidden>{t['loading']}</p>
+                    <p class="pdp-paypal-express__error" id="pdp-paypal-express-error" role="alert" hidden
+                        data-msg-error="{t['error']}"
+                        data-msg-cancelled="{t['cancelled']}"
+                        data-msg-capture-error="{t['capture_error']}"></p>
+                    <p class="pdp-paypal-express__microcopy">{t['microcopy']}</p>
+                </div>
+"""
+
 # Riga descrittiva del pannello dentro le tab app. Sono descrizioni di cosa fa
 # l'app Microsoft, non claim su Aml Store: nessun numero, nessuna promessa.
 # Le app non elencate qui ricadono sul solo nome, quindi la tabella puo'
@@ -2115,7 +2170,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                     {_buy_labels(lang)['checkout']}
                 </button>
 {_render_secondary_cta(labels['add'])}
-                <ul class="pdp-assur">
+{_render_paypal_express(lang) if not is_physical_sku(sku) else ""}                <ul class="pdp-assur">
 {_render_assur(v3, ASSUR_KEYS[:2])}
                 </ul>
 {copilot_bonus_html}
@@ -2155,7 +2210,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <script src="../js/product-page.js" defer></script>
     <script src="../js/product-v3.js" defer></script>
     <script src="../js/pdp-activation-modal.js" defer></script>
-{_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
+{_paypal_express_script_tag(sku)}{_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
 </body>
