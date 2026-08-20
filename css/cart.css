@@ -684,12 +684,15 @@
        di prezzo + rimuovi sotto i 640px senza essere schiacciato: l'overflow:hidden
        dello stepper azzera il suo min-width automatico da flex item, quindi il
        genitore lo comprimeva sotto la larghezza del contenuto tagliando il "+".
-       Gli diamo una riga tutta sua. */
+       flex-shrink:0 gli impedisce di essere schiacciato: non entrando piu'
+       accanto a prezzo + rimuovi va comunque a capo da solo, ma resta alla
+       sua larghezza naturale invece di stirarsi su tutta la riga (flex-basis
+       100% usato in precedenza forzava anche la larghezza, non solo l'a capo). */
     .cart-item__price { order: 1; }
     .aml-cart-remove { order: 2; }
     .aml-cart-qty-stepper {
         order: 3;
-        flex: 1 1 100%;
+        flex: 0 0 auto;
     }
 }
 
