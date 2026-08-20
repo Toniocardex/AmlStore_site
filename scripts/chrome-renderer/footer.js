@@ -36,6 +36,7 @@ const FOOTER_I18N = {
         emailLabel: 'Email',
         copyright: 'Aml Store. Tutti i diritti riservati.',
         vatLabel: 'P.IVA 11461870963',
+        trademarkDisclaimer: 'I nomi di prodotto, i loghi e i marchi citati appartengono ai rispettivi proprietari e sono usati a scopo identificativo/illustrativo. Aml Store non è affiliata né sponsorizzata dai titolari dei marchi.',
         paymentsLabel: 'Metodi di pagamento accettati',
     },
     en: {
@@ -72,6 +73,7 @@ const FOOTER_I18N = {
         emailLabel: 'Email',
         copyright: 'Aml Store. All rights reserved.',
         vatLabel: 'VAT 11461870963',
+        trademarkDisclaimer: 'Product names, logos and trademarks mentioned belong to their respective owners and are used for identification/illustrative purposes only. Aml Store is not affiliated with or sponsored by the trademark owners.',
         paymentsLabel: 'Accepted payment methods',
     },
     fr: {
@@ -108,6 +110,7 @@ const FOOTER_I18N = {
         emailLabel: 'E-mail',
         copyright: 'Aml Store. Tous droits réservés.',
         vatLabel: 'TVA 11461870963',
+        trademarkDisclaimer: 'Les noms de produits, logos et marques mentionnés appartiennent à leurs propriétaires respectifs et sont utilisés à des fins d’identification/illustration uniquement. Aml Store n’est affiliée ni sponsorisée par les titulaires des marques.',
         paymentsLabel: 'Moyens de paiement acceptés',
     },
     de: {
@@ -144,6 +147,7 @@ const FOOTER_I18N = {
         emailLabel: 'E-Mail',
         copyright: 'Aml Store. Alle Rechte vorbehalten.',
         vatLabel: 'USt-IdNr. 11461870963',
+        trademarkDisclaimer: 'Erwähnte Produktnamen, Logos und Marken sind Eigentum ihrer jeweiligen Inhaber und dienen nur zu Identifikations-/Illustrationszwecken. Aml Store ist weder mit den Markeninhabern verbunden noch von ihnen gesponsert.',
         paymentsLabel: 'Akzeptierte Zahlungsmethoden',
     },
     es: {
@@ -180,6 +184,7 @@ const FOOTER_I18N = {
         emailLabel: 'Email',
         copyright: 'Aml Store. Todos los derechos reservados.',
         vatLabel: 'NIF 11461870963',
+        trademarkDisclaimer: 'Los nombres de producto, logotipos y marcas mencionados pertenecen a sus respectivos propietarios y se usan solo con fines identificativos/ilustrativos. Aml Store no está afiliada ni patrocinada por los titulares de las marcas.',
         paymentsLabel: 'Métodos de pago aceptados',
     },
 };
@@ -596,6 +601,7 @@ class EcommerceFooter extends HTMLElement {
                             <p class="copyright">
                                 &copy; ${new Date().getFullYear()} ${esc(t.copyright)}
                                 <span class="copyright-legal">${esc(t.legalName)} · ${esc(t.legalAddress)} · ${esc(t.vatLabel)}</span>
+                                <span class="copyright-legal">${esc(t.trademarkDisclaimer)}</span>
                             </p>
                             <nav class="legal-links" aria-label="${esc(t.legalNavAria)}">
                                 <a href="${esc(pageHref('privacy-policy'))}">${esc(t.supportPrivacy)}</a>

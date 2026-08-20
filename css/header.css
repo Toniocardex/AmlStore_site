@@ -145,10 +145,11 @@ ecommerce-header .nav-links {
 }
 
 ecommerce-header .nav-links a {
-    color: var(--text-secondary);
+    color: var(--text-primary);
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    letter-spacing: 0.01em;
     transition: color 0.2s ease;
     position: relative;
     padding-bottom: 4px;
@@ -198,11 +199,21 @@ ecommerce-header .nav-win-inner {
     align-items: center;
     gap: 0.15rem;
 }
+ecommerce-header .nav-root-icon {
+    width: 17px;
+    height: 17px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
 ecommerce-header .nav-win-root {
-    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--text-primary);
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    letter-spacing: 0.01em;
     transition: color 0.2s ease;
     position: relative;
     padding-bottom: 4px;
@@ -358,10 +369,14 @@ ecommerce-header .nav-m365-inner {
     gap: 0.15rem;
 }
 ecommerce-header .nav-m365-root {
-    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--text-primary);
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    letter-spacing: 0.01em;
     transition: color 0.2s ease;
     position: relative;
     padding-bottom: 4px;
@@ -509,10 +524,14 @@ ecommerce-header .nav-av-inner {
 }
 ecommerce-header .nav-office-root,
 ecommerce-header .nav-av-root {
-    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--text-primary);
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    letter-spacing: 0.01em;
     transition: color 0.2s ease;
     position: relative;
     padding-bottom: 4px;
@@ -679,7 +698,7 @@ ecommerce-header .support-trigger {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    min-height: 36px;
+    min-height: 40px;
     padding: 0.5rem 0.65rem;
     border: 1px solid transparent;
     border-radius: var(--aml-radius-sm, 6px);
@@ -802,11 +821,13 @@ ecommerce-header .lang-wrapper { position: relative; }
 ecommerce-header .lang-selector {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    min-height: 40px;
     background: transparent;
     border: 1px solid transparent;
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 500;
     cursor: pointer;
     font-family: inherit;
@@ -1168,8 +1189,8 @@ ecommerce-header .search-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--aml-radius-md, 8px);
     border: none;
     background: transparent;
