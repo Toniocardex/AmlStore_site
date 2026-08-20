@@ -672,10 +672,24 @@
     .cart-item__controls {
         grid-area: controls;
         flex-direction: row;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
+        gap: 0.65rem;
         padding-top: 0.85rem;
         border-top: 1px solid var(--page-border);
+    }
+
+    /* Lo stepper (min. 132px tra pulsanti e input) non entra sulla stessa riga
+       di prezzo + rimuovi sotto i 640px senza essere schiacciato: l'overflow:hidden
+       dello stepper azzera il suo min-width automatico da flex item, quindi il
+       genitore lo comprimeva sotto la larghezza del contenuto tagliando il "+".
+       Gli diamo una riga tutta sua. */
+    .cart-item__price { order: 1; }
+    .aml-cart-remove { order: 2; }
+    .aml-cart-qty-stepper {
+        order: 3;
+        flex: 1 1 100%;
     }
 }
 

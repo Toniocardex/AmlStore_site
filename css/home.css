@@ -57,14 +57,6 @@
     width: auto;
     max-width: 120px;
     object-fit: contain;
-    filter: grayscale(1);
-    opacity: 0.55;
-    transition: opacity 0.2s ease, filter 0.2s ease;
-}
-
-.home-vendors__list img:hover {
-    filter: grayscale(0);
-    opacity: 1;
 }
 
 /* Il file Norton fornito e' un lockup verticale (icona sopra, wordmark
@@ -74,12 +66,6 @@
    con qualche px in piu' perche' senza testo serve piu' peso visivo. */
 .home-vendors__list img.home-vendors__logo--tall {
     height: 34px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .home-vendors__list img {
-        transition: none;
-    }
 }
 
 .home-hero {
@@ -1010,9 +996,16 @@
 
     .home-hero--consumer .home-hero-title,
     .home-hero--consumer .home-hero-subtitle,
-    .home-hero--consumer .home-hero-trust,
-    .home-hero--consumer .home-hero-trust__star {
+    .home-hero--consumer .home-hero-trust {
         color: #ffffff;
+    }
+
+    /* La stella resta arancio anche sul velo scuro, come da desktop: 700/800
+       sparirebbero sul fondo navy, quindi qui usiamo lo stesso gradino (300)
+       gia' validato sopra per l'accento del titolo (4,65:1 sul punto piu'
+       chiaro della foto). */
+    .home-hero--consumer .home-hero-trust__star {
+        color: var(--aml-orange-300);
     }
 
     /* Sul velo scuro i gradini 800/900 dell'arancione sparirebbero, ma anche
