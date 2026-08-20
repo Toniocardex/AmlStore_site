@@ -113,14 +113,21 @@
 
     var errorEl   = document.getElementById('pdp-paypal-express-error');
     var loadingEl = document.getElementById('pdp-paypal-express-loading');
+    var ERROR_AUTOHIDE_MS = 6000;
+    var _errorTimer = null;
 
+    /** Messaggio temporaneo: sparisce da solo, non deve restare li' per sempre
+     *  a bloccare la vista una volta che l'utente ha gia' letto "annullato". */
     function showError(msg) {
         if (!errorEl) return;
+        if (_errorTimer) { clearTimeout(_errorTimer); _errorTimer = null; }
         errorEl.textContent = msg;
         errorEl.hidden = false;
+        _errorTimer = setTimeout(hideError, ERROR_AUTOHIDE_MS);
     }
 
     function hideError() {
+        if (_errorTimer) { clearTimeout(_errorTimer); _errorTimer = null; }
         if (errorEl) errorEl.hidden = true;
     }
 
@@ -210,16 +217,17 @@
         });
     }
 
-    function init() {
-        var buttonsEl = document.getElementById('pdp-paypal-express-buttons');
-        if (!buttonsEl) return;
+    /**
+     * Monta (o rimonta) i bottoni nel contenitore. Serve anche dopo un
+     * annullamento: l'SDK PayPal a volte non ridisegna da solo il componente
+     * dopo la chiusura del popup, lasciando il contenitore vuoto finche' non
+     * lo si richiama esplicitamente — qui si pulisce e si rimonta, cosi'
+     * l'utente puo' riprovare subito senza dover ricaricare la pagina.
+     */
+    function mountButtons(buttonsEl) {
+        buttonsEl.innerHTML = '';
 
-        setLoading(true);
-        hideError();
-
-        loadPaypalSDK()
-            .then(function () {
-                return global.paypal.Buttons({
+        return global.paypal.Buttons({
                     style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal', height: 45 },
 
                     createOrder: function () {
@@ -293,9 +301,29 @@
                         _isSubmitting = false;
                         track('paypal_cancelled');
                         showError((errorEl && errorEl.getAttribute('data-msg-cancelled')) || 'Pagamento annullato.');
+                        // L'SDK a volte non ridisegna da solo il bottone dopo la chiusura
+                        // del popup: piccolo ritardo per lasciare che l'animazione di
+                        // chiusura finisca, poi si rimonta cosi' resta cliccabile.
+                        setTimeout(function () {
+                            mountButtons(buttonsEl).catch(function (remountErr) {
+                                console.error('[PayPal Express] Rimonta dopo annullamento fallita:', remountErr);
+                            });
+                        }, 400);
                     },
 
-                }).render('#pdp-paypal-express-buttons');
+                }).render(buttonsEl);
+    }
+
+    function init() {
+        var buttonsEl = document.getElementById('pdp-paypal-express-buttons');
+        if (!buttonsEl) return;
+
+        setLoading(true);
+        hideError();
+
+        loadPaypalSDK()
+            .then(function () {
+                return mountButtons(buttonsEl);
             })
             .then(function () {
                 setLoading(false);
