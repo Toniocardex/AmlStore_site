@@ -95,6 +95,32 @@ def _paypal_express_script_tag(sku):
     return '    <script src="../js/pdp-paypal-express.js" defer></script>\n'
 
 
+def _paypal_preconnect(sku):
+    """Prepara la connessione TLS verso l'SDK PayPal prima che serva: puro
+    resource hint, non scarica nulla, va raggruppato con gli altri preconnect
+    ma non ha requisiti di posizione (a differenza dello script sotto)."""
+    if is_physical_sku(sku):
+        return ""
+    return '    <link rel="preconnect" href="https://www.paypal.com">\n'
+
+
+def _paypal_express_config_preload(sku):
+    """Anticipa quello che pdp-paypal-express.js farebbe comunque dopo il
+    parsing (defer): la fetch di /api/paypal-config parte subito invece di
+    aspettare che tutta la pagina sia analizzata, cosi' il bottone non parte
+    con un intero round-trip di ritardo. Va DOPO il preload dell'immagine
+    hero (fetchpriority=high, e' l'elemento dell'LCP): e' uno script
+    bloccante il parser, anche se la sua esecuzione dura microsecondi (fetch
+    e' asincrona) — meglio non anteporlo comunque a nulla che conti per i
+    Core Web Vitals."""
+    if is_physical_sku(sku):
+        return ""
+    return (
+        '    <script>window.__amlPaypalConfig = fetch("/api/paypal-config")'
+        '.then(function(r){return r.json();}).catch(function(){return null;});</script>\n'
+    )
+
+
 TRUSTPILOT_LOCALE = {
     "it": ("it-IT", "https://it.trustpilot.com/review/aml-store.com"),
     "en": ("en-US", "https://www.trustpilot.com/review/aml-store.com"),
@@ -2088,14 +2114,14 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
          CLS accettato per allinearsi al mockup, non ancora ottimizzato. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+{_paypal_preconnect(sku)}    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/product.css">
     <link rel="stylesheet" href="../css/product-pdp.css">
     <script src="../js/theme-init.js"></script>
-</head>
+{_paypal_express_config_preload(sku)}</head>
 <body class="pdp-page">
     <a class="skip-link" href="#main">{labels['skip']}</a>
     <ecommerce-header translate="no" class="notranslate"></ecommerce-header>

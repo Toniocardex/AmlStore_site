@@ -137,11 +137,15 @@
 
     function fetchPaypalClientId() {
         if (_ppClientIdPromise) return _ppClientIdPromise;
-        _ppClientIdPromise = fetch(PAYPAL_CONFIG_URL)
-            .then(function (res) {
+        // window.__amlPaypalConfig: fetch partita da un <script> inline in <head>
+        // (vedi _paypal_express_preload in product_page_lib.py), prima ancora che
+        // questo file (defer) venga eseguito — risparmia un intero round-trip in
+        // sequenza sul percorso critico del bottone.
+        var prefetched = global.__amlPaypalConfig;
+        _ppClientIdPromise = (prefetched ? prefetched : fetch(PAYPAL_CONFIG_URL).then(function (res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.json();
-            })
+            }))
             .then(function (data) {
                 if (!data || !data.clientId) throw new Error('PayPal non configurato');
                 return data.clientId;

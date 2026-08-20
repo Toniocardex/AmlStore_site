@@ -144,6 +144,7 @@
          CLS accettato per allinearsi al mockup, non ancora ottimizzato. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.paypal.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/page.css?v=ca728ed0e3">
     <link rel="stylesheet" href="../css/header.css?v=89452832bc">
@@ -151,6 +152,7 @@
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
     <link rel="stylesheet" href="../css/product-pdp.css?v=6282dac7a0">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
+    <script>window.__amlPaypalConfig = fetch("/api/paypal-config").then(function(r){return r.json();}).catch(function(){return null;});</script>
 </head>
 <body class="pdp-page">
     <a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
@@ -775,7 +777,7 @@
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
     <script src="../js/product-v3.js?v=cc997542a2" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
-    <script src="../js/pdp-paypal-express.js?v=bc9c9cbdb5" defer></script>
+    <script src="../js/pdp-paypal-express.js?v=c0ba34f3ac" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script><script src="../components/lang-suggest.js?v=74d7b5f03c" defer></script>
     <script src="../components/header.js?v=766d52658b" defer></script>
