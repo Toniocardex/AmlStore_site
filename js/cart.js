@@ -275,6 +275,12 @@
         return v2 ? v2.textContent.replace(/\s+/g, ' ').trim() : '';
     }
 
+    /** Specifiche reali (durata/dispositivi/tipo licenza) dal badge già scritto su ogni PDP — mai inventate. */
+    function productSpecsFromPage() {
+        const el = document.querySelector('.pdp-badges .pdp-badge:not(.pdp-badge--alt)');
+        return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
+    }
+
     function lineFromProductContext(root) {
         const sku = normalizeSku(root);
         if (!sku) return null;
@@ -285,7 +291,8 @@
         const imgEl = document.querySelector('.product-cover-img');
         const image = normalizeImageSrc(imgEl && imgEl.getAttribute('src'));
         const productPath = global.location.pathname || '';
-        return { sku, name, currency, unitAmount, quantity: 1, image, productPath, physical: isPhysical(root) };
+        const specs = productSpecsFromPage();
+        return { sku, name, currency, unitAmount, quantity: 1, image, productPath, physical: isPhysical(root), specs };
     }
 
     /** Blocco prezzi / card catalogo da cui leggere SKU e importo */
@@ -481,7 +488,9 @@
                 productPath = link.getAttribute('href');
             }
         }
-        return { sku, name, currency, unitAmount, quantity: 1, image, productPath, physical: isPhysical(root) };
+        const blurbEl = root.querySelector('.product-card-blurb');
+        const specs = blurbEl ? blurbEl.textContent.replace(/\s+/g, ' ').trim() : '';
+        return { sku, name, currency, unitAmount, quantity: 1, image, productPath, physical: isPhysical(root), specs };
     }
 
     /* ─── Mutazioni carrello ───────────────────────────────────────────────────── */
@@ -499,6 +508,7 @@
             next[idx].unitAmount = line.unitAmount;
             if (line.image) next[idx].image = line.image;
             if (line.productPath) next[idx].productPath = line.productPath;
+            if (line.specs) next[idx].specs = line.specs;
             next[idx].physical = Boolean(line.physical);
             return next;
         }
@@ -511,6 +521,7 @@
             image: line.image || '',
             productPath: line.productPath || '',
             physical: Boolean(line.physical),
+            specs: line.specs || '',
         });
         return next;
     }
@@ -592,16 +603,28 @@
 
         const emptyEl = document.getElementById('aml-cart-empty');
         const filledEl = document.getElementById('aml-cart-filled');
-        const tbody = document.getElementById('aml-cart-lines');
+        const itemsEl = document.getElementById('aml-cart-lines');
         const totalEl = document.getElementById('aml-cart-total');
+        const subtotalEl = document.getElementById('aml-cart-subtotal');
+        const countEl = document.getElementById('aml-cart-count');
+        const deliveryNoteEl = document.getElementById('aml-cart-delivery-note');
         const removeLabel = mount.getAttribute('data-label-remove') || 'Remove';
         const qtyAria = mount.getAttribute('data-qty-aria') || 'Quantity';
         const qtyMinusAria = mount.getAttribute('data-label-qty-minus') || 'Decrease quantity for';
         const qtyPlusAria = mount.getAttribute('data-label-qty-plus') || 'Increase quantity for';
-        // Etichette di colonna riusate come data-label sui <td> per il layout a card sotto i 640px
-        // (vedi cart.css): senza thead visibile, ogni cella mostra la propria etichetta inline.
-        const colQtyLabel = mount.getAttribute('data-label-qty') || 'Qty';
-        const colSubtotalLabel = mount.getAttribute('data-label-subtotal') || 'Subtotal';
+        const itemSingular = mount.getAttribute('data-label-item-singular') || 'item';
+        const itemPlural = mount.getAttribute('data-label-item-plural') || 'items';
+        const deliveryDigital = mount.getAttribute('data-label-delivery-digital') || 'Digital delivery by email';
+        const deliveryPhysical = mount.getAttribute('data-label-delivery-physical') || 'Physical shipping';
+        const shippingDigital = mount.getAttribute('data-label-shipping-digital') || 'Immediate digital delivery';
+        const shippingMixed = mount.getAttribute('data-label-shipping-mixed') || 'Shipping';
+
+        function buildChip(text, modifier) {
+            const chip = document.createElement('span');
+            chip.className = 'cart-item__chip' + (modifier ? ' cart-item__chip--' + modifier : '');
+            chip.textContent = text;
+            return chip;
+        }
 
         function render() {
             const lines = readLines();
@@ -609,40 +632,77 @@
             const minor = totalMinor(lines);
             const currency = (lines[0] && lines[0].currency) || 'eur';
 
-            if (!tbody || !emptyEl || !filledEl) return;
+            if (!itemsEl || !emptyEl || !filledEl) return;
 
             if (qty === 0) {
                 emptyEl.hidden = false;
                 filledEl.hidden = true;
-                tbody.textContent = '';
+                itemsEl.textContent = '';
+                if (countEl) countEl.textContent = '';
                 return;
             }
 
             emptyEl.hidden = true;
             filledEl.hidden = false;
-            tbody.textContent = '';
+            itemsEl.textContent = '';
+
+            if (countEl) countEl.textContent = qty + ' ' + (qty === 1 ? itemSingular : itemPlural);
+            if (deliveryNoteEl) {
+                const allDigital = lines.every((l) => !l.physical);
+                deliveryNoteEl.textContent = allDigital ? shippingDigital : shippingMixed;
+            }
 
             lines.forEach((l) => {
-                const tr = document.createElement('tr');
                 const q = Number(l.quantity) || 0;
                 const lineMinor = Math.round(Number(l.unitAmount) || 0) * q;
                 const path = l.productPath || '';
                 const label = lineDisplayName(l);
 
-                const tdName = document.createElement('td');
-                tdName.className = 'aml-cart-col-name';
+                const item = document.createElement('div');
+                item.className = 'cart-item';
+
+                const media = document.createElement('div');
+                media.className = 'cart-item__media';
+                const img = document.createElement('img');
+                img.src = l.image || '../asset/media/product-cover-fallback.webp';
+                img.alt = '';
+                img.loading = 'lazy';
+                img.decoding = 'async';
+                media.appendChild(img);
+
+                const body = document.createElement('div');
+                body.className = 'cart-item__body';
+
+                const nameEl = document.createElement('h3');
+                nameEl.className = 'cart-item__name';
                 if (path) {
                     const a = document.createElement('a');
                     a.href = path;
                     a.textContent = label;
-                    tdName.appendChild(a);
+                    nameEl.appendChild(a);
                 } else {
-                    tdName.textContent = label;
+                    nameEl.textContent = label;
                 }
+                body.appendChild(nameEl);
 
-                const tdQty = document.createElement('td');
-                tdQty.className = 'aml-cart-col-qty';
-                tdQty.setAttribute('data-label', colQtyLabel);
+                const chips = document.createElement('div');
+                chips.className = 'cart-item__chips';
+                String(l.specs || '')
+                    .split('·')
+                    .map((s) => s.trim())
+                    .filter(Boolean)
+                    .forEach((s) => chips.appendChild(buildChip(s)));
+                chips.appendChild(buildChip(l.physical ? deliveryPhysical : deliveryDigital, 'delivery'));
+                body.appendChild(chips);
+
+                const controls = document.createElement('div');
+                controls.className = 'cart-item__controls';
+
+                const price = document.createElement('div');
+                price.className = 'cart-item__price';
+                price.textContent = formatMoney(lineMinor, l.currency);
+                controls.appendChild(price);
+
                 const stepper = document.createElement('div');
                 stepper.className = 'aml-cart-qty-stepper';
 
@@ -652,7 +712,7 @@
                 btnMinus.setAttribute('data-sku-qty', l.sku);
                 btnMinus.setAttribute('aria-label', qtyMinusAria + ' ' + label);
                 btnMinus.disabled = q <= 1;
-                btnMinus.appendChild(document.createTextNode('\u2212'));
+                btnMinus.appendChild(document.createTextNode('−'));
 
                 const inp = document.createElement('input');
                 inp.type = 'number';
@@ -676,39 +736,32 @@
                 stepper.appendChild(btnMinus);
                 stepper.appendChild(inp);
                 stepper.appendChild(btnPlus);
-                tdQty.appendChild(stepper);
+                controls.appendChild(stepper);
 
-                const tdPrice = document.createElement('td');
-                tdPrice.className = 'aml-cart-col-price';
-                tdPrice.setAttribute('data-label', colSubtotalLabel);
-                tdPrice.textContent = formatMoney(lineMinor, l.currency);
-
-                const tdRm = document.createElement('td');
-                tdRm.className = 'aml-cart-col-remove';
                 const rm = document.createElement('button');
                 rm.type = 'button';
                 rm.className = 'aml-cart-remove';
                 rm.setAttribute('data-sku-remove', l.sku);
                 rm.textContent = removeLabel;
-                tdRm.appendChild(rm);
+                controls.appendChild(rm);
 
-                tr.appendChild(tdName);
-                tr.appendChild(tdQty);
-                tr.appendChild(tdPrice);
-                tr.appendChild(tdRm);
-                tbody.appendChild(tr);
+                item.appendChild(media);
+                item.appendChild(body);
+                item.appendChild(controls);
+                itemsEl.appendChild(item);
             });
 
             if (totalEl) totalEl.textContent = formatMoney(minor, currency);
+            if (subtotalEl) subtotalEl.textContent = formatMoney(minor, currency);
         }
 
-        if (tbody && !tbody.dataset.amlCartDelegated) {
-            tbody.dataset.amlCartDelegated = '1';
+        if (itemsEl && !itemsEl.dataset.amlCartDelegated) {
+            itemsEl.dataset.amlCartDelegated = '1';
 
             // `change` per mouse/Enter; `input` + debounce per mobile (alcuni browser
             // non emettono `change` finché il campo non perde il focus).
             var qtyInputTimer = null;
-            tbody.addEventListener('input', function (e) {
+            itemsEl.addEventListener('input', function (e) {
                 const t = e.target;
                 if (!t || !t.classList || !t.classList.contains('aml-cart-qty')) return;
                 clearTimeout(qtyInputTimer);
@@ -718,7 +771,7 @@
                 }, 600);
             });
 
-            tbody.addEventListener('change', function (e) {
+            itemsEl.addEventListener('change', function (e) {
                 const t = e.target;
                 if (!t || !t.classList || !t.classList.contains('aml-cart-qty')) return;
                 // Cancella il debounce pendente e aggiorna subito
@@ -728,7 +781,7 @@
             });
 
             // Enter sul campo qty: conferma immediata
-            tbody.addEventListener('keydown', function (e) {
+            itemsEl.addEventListener('keydown', function (e) {
                 if (e.key !== 'Enter') return;
                 const t = e.target;
                 if (!t || !t.classList || !t.classList.contains('aml-cart-qty')) return;
@@ -738,7 +791,7 @@
                 t.blur();
             });
 
-            tbody.addEventListener('click', function (e) {
+            itemsEl.addEventListener('click', function (e) {
                 const t = e.target;
                 if (!t || !t.closest) return;
                 const rm = t.closest('[data-sku-remove]');

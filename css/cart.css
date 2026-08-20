@@ -2,7 +2,7 @@
  * Pagina carrello — token da page.css.
  */
 .cart-page {
-    max-width: 52rem;
+    max-width: var(--aml-maxw);
 }
 
 .cart-page .cart-breadcrumbs {
@@ -31,14 +31,36 @@
     user-select: none;
 }
 
-.cart-page h1 {
-    margin-bottom: 1.5rem;
+.cart-page-head {
+    margin: 1.75rem 0 1.5rem;
+}
+
+.cart-page-head h1 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.cart-page-head__count {
+    font-size: var(--aml-text-sm);
+    font-weight: var(--aml-weight-strong);
+    color: var(--page-text-secondary);
+    background: var(--aml-paper);
+    border: 1px solid var(--page-border);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+}
+
+.cart-page-head__count:empty {
+    display: none;
 }
 
 .cart-page .cart-lead {
     color: var(--page-text-secondary);
     line-height: 1.65;
-    margin: 0 0 1.5rem;
+    margin: 0.4rem 0 0;
     font-size: 0.95rem;
 }
 
@@ -70,59 +92,396 @@
     color: var(--page-text);
 }
 
-/* `hidden` + display:flex: la regola author vince sulla UA; forziamo lo stato nascosto. */
+/* `hidden` + display:flex/grid: la regola author vince sulla UA; forziamo lo stato nascosto. */
 .cart-page .cart-empty-panel[hidden],
 .cart-page .cart-filled[hidden] {
     display: none !important;
 }
 
-.cart-page .cart-table-wrap {
+/* ── Layout a due colonne: lista + garanzie a sinistra, riepilogo sticky a destra ── */
+.cart-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    align-items: start;
+}
+
+@media (min-width: 960px) {
+    .cart-layout {
+        grid-template-columns: minmax(0, 7fr) minmax(19rem, 5fr);
+        gap: 2rem;
+    }
+}
+
+.cart-col-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+}
+
+/* ── Card prodotti ─────────────────────────────────────────────────────── */
+.cart-items-card {
     border: 1px solid var(--page-border);
-    border-radius: var(--aml-radius-md);
-    overflow: hidden;
+    border-radius: var(--aml-radius-lg);
     background: var(--aml-surface);
     box-shadow: var(--aml-shadow-sm);
+    overflow: hidden;
 }
 
-.cart-page table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
+.cart-items-card__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--aml-paper-2);
+    border-bottom: 1px solid var(--page-border);
 }
 
-.cart-page thead th {
-    text-align: left;
-    padding: 0.85rem 1rem;
-    background: var(--aml-paper);
-    color: var(--page-text-secondary);
-    font-weight: 700;
-    font-size: 0.75rem;
+.cart-items-card__label {
+    font-size: var(--aml-text-xs);
+    font-weight: var(--aml-weight-strong);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    color: var(--page-text-secondary);
 }
 
-.cart-page tbody td {
-    padding: 1rem;
+.cart-items-card__delivery {
+    font-size: var(--aml-text-xs);
+    font-weight: var(--aml-weight-strong);
+    color: var(--aml-trust-ink);
+    background: var(--aml-trust-soft);
+    border: 1px solid color-mix(in srgb, var(--aml-trust-ink) 25%, transparent);
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+}
+
+.cart-items-card__delivery:empty {
+    display: none;
+}
+
+.cart-items-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.1rem;
+    align-items: center;
+    padding: 1.1rem 1.25rem;
     border-top: 1px solid var(--page-border);
-    vertical-align: middle;
+}
+
+.cart-items-list .cart-item:first-child {
+    border-top: none;
+}
+
+.cart-item__media {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: var(--aml-radius-md);
+    border: 1px solid var(--page-border);
+    background: var(--aml-paper-2);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.cart-item__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.cart-item__body {
+    min-width: 0;
+}
+
+.cart-item__name {
+    margin: 0 0 0.4rem;
+    font-size: var(--aml-text-lg);
+    font-weight: var(--aml-weight-display);
+    line-height: 1.3;
     color: var(--page-text);
 }
 
-.cart-page .aml-cart-col-name a {
-    color: var(--page-accent);
-    font-weight: 600;
+.cart-item__name a {
+    color: inherit;
     text-decoration: none;
 }
 
-.cart-page .aml-cart-col-name a:hover {
+.cart-item__name a:hover {
+    color: var(--page-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
-.cart-page .aml-cart-col-qty {
+.cart-item__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.cart-item__chip {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--aml-text-xs);
+    font-weight: var(--aml-weight-strong);
+    color: var(--page-text-secondary);
+    background: var(--aml-paper);
+    border: 1px solid var(--page-border);
+    padding: 0.28rem 0.6rem;
+    border-radius: var(--aml-radius-sm);
+}
+
+.cart-item__chip--delivery {
+    color: var(--aml-trust-ink);
+    background: var(--aml-trust-soft);
+    border-color: color-mix(in srgb, var(--aml-trust-ink) 25%, transparent);
+}
+
+.cart-item__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.65rem;
+}
+
+.cart-item__price {
+    font-size: var(--aml-text-lg);
+    font-weight: var(--aml-weight-price);
+    color: var(--page-text);
     white-space: nowrap;
 }
 
+/* ── Card garanzie ─────────────────────────────────────────────────────── */
+.cart-trust-card {
+    border: 1px solid var(--page-border);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
+    padding: 1.5rem;
+}
+
+.cart-trust-card__title {
+    margin: 0 0 1.1rem;
+    font-size: var(--aml-text-base);
+    font-weight: var(--aml-weight-display);
+    color: var(--page-text);
+}
+
+.cart-trust-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+}
+
+@media (min-width: 560px) {
+    .cart-trust-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.cart-trust-tile {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem;
+    border-radius: var(--aml-radius-md);
+    background: var(--aml-paper-2);
+    border: 1px solid var(--page-border);
+}
+
+.cart-trust-tile__icon {
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-surface);
+    border: 1px solid var(--page-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--aml-navy);
+}
+
+.cart-trust-tile__icon svg {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.cart-trust-tile h3 {
+    margin: 0 0 0.2rem;
+    font-size: var(--aml-text-sm);
+    font-weight: var(--aml-weight-strong);
+    color: var(--page-text);
+}
+
+.cart-trust-tile p {
+    margin: 0;
+    font-size: var(--aml-text-xs);
+    line-height: 1.55;
+    color: var(--page-text-secondary);
+}
+
+/* ── Riepilogo ordine (colonna destra, sticky) ────────────────────────── */
+.cart-summary {
+    border: 1px solid var(--page-border);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+@media (min-width: 960px) {
+    .cart-summary {
+        position: sticky;
+        top: calc(2rem + var(--aml-header-offset, 0px));
+    }
+}
+
+.cart-summary__title {
+    margin: 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--page-border);
+    font-size: var(--aml-text-lg);
+    font-weight: var(--aml-weight-display);
+    color: var(--page-text);
+}
+
+.cart-summary__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: var(--aml-text-sm);
+}
+
+.cart-summary__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--page-text-secondary);
+}
+
+.cart-summary__free {
+    font-weight: var(--aml-weight-strong);
+    text-transform: uppercase;
+    font-size: var(--aml-text-xs);
+    color: var(--aml-trust-ink);
+    background: var(--aml-trust-soft);
+    border: 1px solid color-mix(in srgb, var(--aml-trust-ink) 25%, transparent);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--aml-radius-sm);
+}
+
+.cart-summary__total {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--page-border);
+}
+
+.cart-summary__total-label {
+    font-weight: var(--aml-weight-strong);
+    color: var(--page-text);
+}
+
+.cart-summary__total-note {
+    font-size: var(--aml-text-xs);
+    color: var(--page-text-muted);
+    margin-top: 0.15rem;
+}
+
+.cart-summary__total strong {
+    font-size: 1.6rem;
+    font-weight: var(--aml-weight-price);
+    color: var(--page-accent);
+    white-space: nowrap;
+}
+
+.cart-summary__payments {
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--page-border);
+    text-align: center;
+}
+
+.cart-summary__payments-label {
+    display: block;
+    font-size: var(--aml-text-xs);
+    font-weight: var(--aml-weight-strong);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--page-text-muted);
+    margin-bottom: 0.6rem;
+}
+
+.cart-summary__payments-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.cart-summary__payment-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.75rem;
+    width: 2.5rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--aml-radius-sm);
+    border: 1px solid var(--page-border);
+    background: var(--aml-paper-2);
+}
+
+.cart-summary__payment-logo[data-brand='PayPal'] {
+    width: 3.1rem;
+}
+
+.cart-summary__payment-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cart-summary__trust {
+    text-align: center;
+}
+
+.cart-summary__trust .product-trustpilot__fallback {
+    margin: 0;
+    font-size: var(--aml-text-xs);
+    line-height: 1.5;
+    color: var(--page-text-secondary);
+}
+
+.cart-summary__trust .product-trustpilot__fallback a {
+    color: var(--page-text);
+    font-weight: var(--aml-weight-strong);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.cart-summary__trust .trustpilot-widget {
+    min-height: 40px;
+    width: 100%;
+}
+
+.cart-summary__trust .trustpilot-widget:not(.trustpilot-widget--active) {
+    display: none;
+}
+
+/* ── Stepper quantità e rimozione (condivisi tra layout tabella e card) ─── */
 .cart-page .aml-cart-qty-stepper {
     display: inline-flex;
     align-items: stretch;
@@ -212,22 +571,23 @@
 }
 
 .cart-page .aml-cart-remove {
-    min-height: 44px;
-    padding: 0.4rem 0.85rem;
+    min-height: 36px;
+    padding: 0.35rem 0.75rem;
     border-radius: 6px;
     border: 1px solid var(--page-border);
     background: transparent;
     color: var(--page-text-secondary);
     font-family: inherit;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .cart-page .aml-cart-remove:hover {
-    background: var(--aml-paper);
-    color: var(--page-text);
+    background: var(--aml-danger-bg);
+    color: var(--aml-danger);
+    border-color: color-mix(in srgb, var(--aml-danger) 30%, transparent);
 }
 
 .cart-page .aml-cart-remove:focus-visible {
@@ -235,39 +595,14 @@
     outline-offset: 2px;
 }
 
-.cart-page .cart-total-row {
-    margin: 1.25rem 0 0;
-    font-size: 1.1rem;
-    color: var(--page-text);
-}
-
-.cart-page .cart-total-row strong {
-    font-weight: 800;
-}
-
-.cart-page .cart-note {
-    margin: 1rem 0 0;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--page-text-secondary);
-}
-
-.cart-page .cart-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem 1rem;
-    margin-top: 1.75rem;
-    align-items: center;
-    justify-content: flex-end;
-}
-
+/* ── CTA ───────────────────────────────────────────────────────────────── */
 .cart-page .cart-btn {
+    box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 44px;
     padding: 0.65rem 1.35rem;
-    /* Stessa forma dei CTA prodotto (.btn-primary in product.css) */
     border-radius: 6px;
     font-weight: 700;
     font-size: 0.9rem;
@@ -284,106 +619,53 @@
 }
 
 .cart-page .cart-btn-primary {
-    background: var(--page-accent);
-    color: #ffffff;
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--page-accent) 22%, transparent);
+    background: var(--aml-cta-bg);
+    color: var(--aml-cta-ink);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--aml-cta-bg) 28%, transparent);
 }
 
 .cart-page .cart-btn-primary:hover {
     transform: translateY(-2px);
-    filter: brightness(1.08);
-    box-shadow: 0 6px 18px color-mix(in srgb, var(--page-accent) 28%, transparent);
+    background: var(--aml-cta-bg-hover);
+    box-shadow: 0 6px 18px color-mix(in srgb, var(--aml-cta-bg) 34%, transparent);
 }
 
 .cart-page .cart-btn-primary:focus-visible {
-    outline: 2px solid #ffffff;
+    outline: 2px solid var(--aml-cta-ink);
     outline-offset: 2px;
     box-shadow:
-        0 0 0 4px var(--page-accent),
-        0 4px 14px color-mix(in srgb, var(--page-accent) 22%, transparent);
+        0 0 0 4px var(--aml-cta-bg),
+        0 4px 14px color-mix(in srgb, var(--aml-cta-bg) 28%, transparent);
 }
 
-/* Sotto i 640px la tabella non scorre lateralmente (il pulsante "Rimuovi"
-   finirebbe fuori schermo senza indizio visivo): ogni riga diventa una card
-   verticale, con l'etichetta di colonna (data-label, da cart.js) davanti
-   al valore. Vedi js/cart.js per i data-label-qty / data-label-subtotal. */
+.cart-summary__cta {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.85rem 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* ── Sotto i 640px: righe articolo impilate verticalmente ─────────────── */
 @media (max-width: 640px) {
-    .cart-page table,
-    .cart-page thead,
-    .cart-page tbody,
-    .cart-page tr,
-    .cart-page th,
-    .cart-page td {
-        display: block;
-    }
-    .cart-page thead tr {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-    }
-    .cart-page tbody tr {
-        padding: 1rem;
-        border-top: 1px solid var(--page-border);
-    }
-    .cart-page tbody tr:first-child {
-        border-top: none;
-    }
-    .cart-page tbody td {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 0.4rem 0;
-        border-top: none;
-    }
-    .cart-page tbody td::before {
-        content: attr(data-label);
-        flex-shrink: 0;
-        font-weight: 700;
-        font-size: 0.72rem;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        color: var(--page-text-secondary);
-    }
-    .cart-page .aml-cart-col-name {
-        padding-bottom: 0.6rem;
-        margin-bottom: 0.4rem;
-        border-bottom: 1px solid var(--page-border);
-        font-size: 1rem;
-        font-weight: 700;
-    }
-    .cart-page .aml-cart-col-name::before {
-        content: none;
-    }
-    .cart-page .aml-cart-col-remove {
-        justify-content: flex-end;
-        padding-top: 0.6rem;
-        margin-top: 0.2rem;
-        border-top: 1px solid var(--page-border);
-    }
-    .cart-page .aml-cart-remove {
-        width: 100%;
-        text-align: center;
+    .cart-item {
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "media body"
+            "controls controls";
+        row-gap: 0.85rem;
     }
 
-    /* Totale allineato a destra e CTA a piena larghezza: stesso trattamento
-       del pulsante "Rimuovi" nelle card sopra — target di tocco ampio per
-       l'azione principale della pagina, invece di un pulsante piccolo e
-       disallineato rispetto al totale. */
-    .cart-page .cart-total-row {
-        text-align: right;
-    }
-    .cart-page .cart-actions {
-        justify-content: stretch;
-    }
-    .cart-page .cart-actions .cart-btn {
-        width: 100%;
+    .cart-item__media { grid-area: media; }
+    .cart-item__body { grid-area: body; }
+
+    .cart-item__controls {
+        grid-area: controls;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 0.85rem;
+        border-top: 1px solid var(--page-border);
     }
 }
 
@@ -396,4 +678,3 @@
         transition: none;
     }
 }
-
