@@ -650,10 +650,22 @@
 
 .cart-summary__cta {
     width: 100%;
-    font-size: 1rem;
+    /* Scala col viewport invece di andare a capo: la freccia non deve mai
+       finire su una riga propria. Il minimo (0.78rem) resta leggibile ed e'
+       tarato sulle stringhe piu' lunghe (IT/EN) alla larghezza piu' stretta
+       supportata (320px). */
+    font-size: clamp(0.78rem, 0.42rem + 2vw, 1rem);
     padding: 0.85rem 1.25rem;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+@media (max-width: 400px) {
+    .cart-summary__cta {
+        padding-inline: 0.85rem;
+        letter-spacing: 0.01em;
+    }
 }
 
 /* ── Sotto i 640px: righe articolo impilate verticalmente ─────────────── */
