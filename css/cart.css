@@ -98,26 +98,33 @@
     display: none !important;
 }
 
-/* ── Layout a due colonne: lista + garanzie a sinistra, riepilogo sticky a destra ── */
+/* ── Layout a due colonne: lista + garanzie a sinistra, riepilogo sticky a destra.
+   Aree nominate (invece di due wrapper .cart-col-*) per poter riordinare il
+   riepilogo/CTA sopra le garanzie sotto i 960px senza duplicare il markup:
+   su mobile il CTA finiva troppo in fondo dopo la card garanzie. ── */
 .cart-layout {
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-areas:
+        "items"
+        "summary"
+        "trust";
     gap: 1.75rem;
     align-items: start;
 }
 
+.cart-items-card { grid-area: items; min-width: 0; }
+.cart-trust-card { grid-area: trust; min-width: 0; }
+.cart-summary { grid-area: summary; }
+
 @media (min-width: 960px) {
     .cart-layout {
         grid-template-columns: minmax(0, 7fr) minmax(19rem, 5fr);
+        grid-template-areas:
+            "items summary"
+            "trust summary";
         gap: 2rem;
     }
-}
-
-.cart-col-main {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    min-width: 0;
 }
 
 /* ── Card prodotti ─────────────────────────────────────────────────────── */
