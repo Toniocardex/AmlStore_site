@@ -20,9 +20,9 @@
     <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/checkout">
 
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
-    <link rel="stylesheet" href="../css/page.css?v=ca728ed0e3">
-    <link rel="stylesheet" href="../css/header.css?v=a6e055a60c">
-    <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
+    <link rel="stylesheet" href="../css/page.css?v=bbec166f1a">
+    <link rel="stylesheet" href="../css/header.css?v=89556dc54e">
+    <link rel="stylesheet" href="../css/footer.css?v=31dc97e061">
     <link rel="stylesheet" href="../css/checkout.css?v=3a85635b4c">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
@@ -149,28 +149,37 @@
                         </div>
 
                         <div class="lang-wrapper">
-                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-label="Seleccionar idioma">
+                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-controls="header-lang-dropdown" aria-label="Seleccionar idioma">
                                 <img class="flag-icon" src="/images/flags/es.svg?v=3b261cecdc" alt="" decoding="async">
                                 <span>ES</span>
-                                <svg class="chevron-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
+                                <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
                             </button>
-                            <div class="lang-dropdown" role="menu">
+                            <div id="header-lang-dropdown" class="lang-dropdown" role="menu" aria-label="Seleccionar idioma">
                                 
                                 <a href="/it/cart" class="lang-option" role="menuitem" hreflang="it">
                                     <img class="flag-icon" src="/images/flags/it.svg?v=7bbc73a46f" alt="" decoding="async">
-                                    IT
+                                    <span>IT</span>
+                                    
                                 </a>
                                 <a href="/en/cart" class="lang-option" role="menuitem" hreflang="en">
                                     <img class="flag-icon" src="/images/flags/gb.svg?v=639d2928f3" alt="" decoding="async">
-                                    EN
+                                    <span>EN</span>
+                                    
                                 </a>
                                 <a href="/fr/cart" class="lang-option" role="menuitem" hreflang="fr">
                                     <img class="flag-icon" src="/images/flags/fr.svg?v=8b4c9afc91" alt="" decoding="async">
-                                    FR
+                                    <span>FR</span>
+                                    
                                 </a>
                                 <a href="/de/cart" class="lang-option" role="menuitem" hreflang="de">
                                     <img class="flag-icon" src="/images/flags/de.svg?v=ae5c2f2cf6" alt="" decoding="async">
-                                    DE
+                                    <span>DE</span>
+                                    
+                                </a>
+                                <a href="/es/cart" class="lang-option active" role="menuitem" hreflang="es" aria-current="true">
+                                    <img class="flag-icon" src="/images/flags/es.svg?v=3b261cecdc" alt="" decoding="async">
+                                    <span>ES</span>
+                                    <svg class="lang-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg>
                                 </a>
                             </div>
                         </div>
@@ -256,31 +265,6 @@
                         </div>
                     </nav>
                     
-                    <div class="drawer-section-title">Seleccionar idioma</div>
-                    <div class="drawer-langs">
-                        
-                        <a href="/it/cart" class="drawer-lang-link" hreflang="it">
-                            <img class="flag-icon" src="/images/flags/it.svg?v=7bbc73a46f" alt="" decoding="async">
-                            IT
-                        </a>
-                        <a href="/en/cart" class="drawer-lang-link" hreflang="en">
-                            <img class="flag-icon" src="/images/flags/gb.svg?v=639d2928f3" alt="" decoding="async">
-                            EN
-                        </a>
-                        <a href="/fr/cart" class="drawer-lang-link" hreflang="fr">
-                            <img class="flag-icon" src="/images/flags/fr.svg?v=8b4c9afc91" alt="" decoding="async">
-                            FR
-                        </a>
-                        <a href="/de/cart" class="drawer-lang-link" hreflang="de">
-                            <img class="flag-icon" src="/images/flags/de.svg?v=ae5c2f2cf6" alt="" decoding="async">
-                            DE
-                        </a>
-                        <a href="/es/cart" class="drawer-lang-link active" hreflang="es">
-                            <img class="flag-icon" src="/images/flags/es.svg?v=3b261cecdc" alt="" decoding="async">
-                            ES
-                        </a>
-                    </div>
-                    
                     <div class="drawer-footer">
                         <p class="drawer-support-title">Soporte</p>
                         <a class="drawer-support-link" href="mailto:info@amlstore.it">info@amlstore.it</a>
@@ -317,7 +301,7 @@
             <div class="checkout-empty-icon" aria-hidden="true">🛒</div>
             <h2>Tu carrito está vacío</h2>
             <p>Añade productos a tu carrito antes de proceder al pago.</p>
-            <a class="btn-back-shop" href="/es/#soluzioni">Volver al catálogo</a>
+            <a class="btn-back-shop" href="/es/#piu-venduti">Volver al catálogo</a>
         </div>
 
         <div id="checkout-content" hidden>
@@ -665,7 +649,7 @@
     <script src="../js/cart.js?v=8eddb4fe5c" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/lang-suggest.js?v=74d7b5f03c" defer></script>
-    <script src="../components/header.js?v=766d52658b" defer></script>
+    <script src="../components/header.js?v=737a68f11e" defer></script>
     <script src="../components/footer.js?v=a9b6a8315d" defer></script>
     <script src="../js/checkout.js?v=dd6df2b289" defer></script>
 

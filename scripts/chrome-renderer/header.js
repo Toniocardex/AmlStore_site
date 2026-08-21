@@ -1342,46 +1342,54 @@
 
                     .lang-wrapper { position: relative; }
                     .lang-selector {
-                        display: flex;
+                        display: inline-flex;
                         align-items: center;
                         justify-content: center;
-                        gap: 0.5rem;
-                        min-height: 40px;
-                        background: transparent;
-                        border: 1px solid transparent;
-                        color: var(--text-secondary);
-                        font-size: 0.875rem;
-                        font-weight: 500;
+                        gap: 0.45rem;
+                        height: 38px;
+                        background: var(--aml-surface, #ffffff);
+                        border: 1px solid var(--border-color, #E2E8F0);
+                        color: var(--text-primary, #0F172A);
+                        font-size: 0.85rem;
+                        font-weight: 600;
                         cursor: pointer;
                         font-family: inherit;
-                        padding: 0.5rem;
-                        border-radius: var(--aml-radius-sm, 6px);
-                        transition: color 0.3s ease, background 0.3s ease, border 0.3s ease;
+                        padding: 0 0.65rem;
+                        border-radius: var(--aml-radius-sm, 8px);
+                        transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+                        user-select: none;
+                        -webkit-tap-highlight-color: transparent;
                     }
                     .lang-selector:hover, .lang-wrapper.open .lang-selector {
-                        color: var(--text-primary);
-                        background: color-mix(in srgb, var(--accent) 6%, transparent);
-                        border-color: var(--border-color);
+                        color: var(--text-primary, #0F172A);
+                        background: color-mix(in srgb, var(--accent) 6%, #ffffff);
+                        border-color: color-mix(in srgb, var(--accent) 30%, var(--border-color, #E2E8F0));
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
                     }
                     .lang-selector:focus-visible {
                         outline: 2px solid var(--accent);
-                        outline-offset: 3px;
+                        outline-offset: 2px;
+                        border-color: var(--accent);
                     }
-                    /* Sostituto visivo per l'anteprima se non c'è l'immagine della flag */
-                    .lang-selector img {
+                    .lang-selector img.flag-icon {
                         width: 20px;
                         height: 20px;
                         border-radius: 50%;
                         object-fit: cover;
-                        background: color-mix(in srgb, var(--accent) 10%, transparent);
-                        color: transparent;
-                        border: 1px solid var(--border-color);
+                        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+                        flex-shrink: 0;
                     }
                     .chevron-down {
                         width: 14px;
                         height: 14px;
                         fill: currentColor;
-                        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        opacity: 0.65;
+                        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+                        flex-shrink: 0;
+                    }
+                    .lang-selector:hover .chevron-down,
+                    .lang-wrapper.open .chevron-down {
+                        opacity: 1;
                     }
                     .lang-wrapper.open .chevron-down {
                         transform: rotate(180deg);
@@ -1389,57 +1397,71 @@
 
                     .lang-dropdown {
                         position: absolute;
-                        top: calc(100% + 0.75rem);
+                        top: calc(100% + 0.5rem);
                         right: 0;
-                        background: var(--bg-surface);
-                        backdrop-filter: blur(16px);
-                        -webkit-backdrop-filter: blur(16px);
-                        border: 1px solid var(--border-color);
-                        border-radius: var(--aml-radius-md, 8px);
-                        padding: 0.5rem;
-                        min-width: 140px;
-                        box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
-                        /* Stato chiuso: invisibile ma nel flusso — permette transizione in uscita */
+                        background: var(--aml-surface, #ffffff);
+                        border: 1px solid var(--border-color, #E2E8F0);
+                        border-radius: var(--aml-radius-md, 10px);
+                        padding: 0.35rem;
+                        min-width: 150px;
+                        box-shadow: 0 10px 28px -4px rgba(16, 24, 40, 0.12), 0 4px 10px -2px rgba(16, 24, 40, 0.06);
                         opacity: 0;
                         visibility: hidden;
                         pointer-events: none;
                         transform: translateY(-6px) scale(0.98);
                         transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+                        z-index: 100;
                     }
                     .lang-wrapper.open .lang-dropdown {
                         opacity: 1;
                         visibility: visible;
                         pointer-events: auto;
                         transform: translateY(0) scale(1);
-                        transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                                    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                                    visibility 0.25s;
+                        transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                                    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                                    visibility 0.22s;
                     }
 
                     .lang-option {
                         display: flex;
                         align-items: center;
-                        gap: 0.75rem;
-                        padding: 0.6rem 0.75rem;
-                        color: var(--text-secondary);
+                        gap: 0.65rem;
+                        padding: 0.55rem 0.65rem;
+                        color: var(--text-secondary, #475569);
                         text-decoration: none;
                         font-size: 0.85rem;
                         font-weight: 500;
                         border-radius: var(--aml-radius-sm, 6px);
-                        transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+                        transition: background 0.18s ease, color 0.18s ease;
                     }
                     .lang-option:hover {
                         background: color-mix(in srgb, var(--accent) 8%, transparent);
-                        color: var(--text-primary);
-                        transform: translateX(2px);
+                        color: var(--text-primary, #0F172A);
                     }
-                    .lang-option img {
+                    .lang-option:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: -2px;
+                        background: color-mix(in srgb, var(--accent) 8%, transparent);
+                    }
+                    .lang-option.active {
+                        background: color-mix(in srgb, var(--accent) 10%, transparent);
+                        color: var(--accent, #0066FF);
+                        font-weight: 600;
+                    }
+                    .lang-option img.flag-icon {
                         width: 18px;
                         height: 18px;
                         border-radius: 50%;
                         object-fit: cover;
-                        background: color-mix(in srgb, var(--accent) 10%, transparent);
-                        color: transparent;
+                        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+                        flex-shrink: 0;
+                    }
+                    .lang-check {
+                        width: 15px;
+                        height: 15px;
+                        fill: currentColor;
+                        margin-left: auto;
+                        flex-shrink: 0;
                     }
 
                     /* Il carrello e' l'unico elemento della barra tenuto nel colore
@@ -1662,7 +1684,6 @@
                         .nav-links { display: none; }
                         .mobile-toggle { display: inline-flex; }
                         .header-brand { flex: 1 1 auto; min-width: 0; }
-                        .lang-wrapper { display: none; }
                         .support-wrap { display: none; }
                     }
 
@@ -2268,17 +2289,21 @@
                         </div>
 
                         <div class="lang-wrapper">
-                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t.selectLanguage)}">
+                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-controls="header-lang-dropdown" aria-label="${esc(t.selectLanguage)}">
                                 <img class="flag-icon" src="${esc(flagSrc(activeLang.flag))}" alt="" decoding="async">
                                 <span>${activeLang.label}</span>
-                                <svg class="chevron-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                             </button>
-                            <div class="lang-dropdown" role="menu">
-                                ${otherLangs.map(l => `
-                                <a href="${esc(hrefForLang(l.code))}" class="lang-option" role="menuitem" hreflang="${l.code}">
+                            <div id="header-lang-dropdown" class="lang-dropdown" role="menu" aria-label="${esc(t.selectLanguage)}">
+                                ${LANGS.map(l => {
+                                    const isActive = l.code === activeLang.code;
+                                    return `
+                                <a href="${esc(hrefForLang(l.code))}" class="lang-option${isActive ? ' active' : ''}" role="menuitem" hreflang="${l.code}"${isActive ? ' aria-current="true"' : ''}>
                                     <img class="flag-icon" src="${esc(flagSrc(l.flag))}" alt="" decoding="async">
-                                    ${l.label}
-                                </a>`).join('')}
+                                    <span>${l.label}</span>
+                                    ${isActive ? '<svg class="lang-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>' : ''}
+                                </a>`;
+                                }).join('')}
                             </div>
                         </div>
 
@@ -2362,15 +2387,6 @@
                             <a href="${esc(hrefOffice2019PP)}"${isOffice2019PP ? ' class="active"' : ''}>${esc(t.navOffice2019PP)}</a>
                         </div>
                     </nav>
-                    
-                    <div class="drawer-section-title">${esc(t.selectLanguage)}</div>
-                    <div class="drawer-langs">
-                        ${LANGS.map(l => `
-                        <a href="${esc(hrefForLang(l.code))}" class="drawer-lang-link${l.code === activeLang.code ? ' active' : ''}" hreflang="${l.code}">
-                            <img class="flag-icon" src="${esc(flagSrc(l.flag))}" alt="" decoding="async">
-                            ${l.label}
-                        </a>`).join('')}
-                    </div>
                     
                     <div class="drawer-footer">
                         <p class="drawer-support-title">${esc(t.supportSectionTitle)}</p>
@@ -2611,14 +2627,32 @@
                 });
             }
 
-            const toggleLangMenu = (e) => {
-                if (e) e.stopPropagation();
+            const langDropdown = this.shadowRoot.querySelector('#header-lang-dropdown') || this.shadowRoot.querySelector('.lang-dropdown');
+
+            const closeLangMenu = ({ restoreFocus = false } = {}) => {
+                if (!langWrapper || !langSelector) return;
+                langWrapper.classList.remove('open');
+                langSelector.setAttribute('aria-expanded', 'false');
+                if (restoreFocus) langSelector.focus();
+            };
+
+            const openLangMenu = () => {
+                if (!langWrapper || !langSelector) return;
                 closeNavSubmenus();
                 closeSupport({ restoreFocus: false });
                 closeSearch({ returnFocus: false });
+                langWrapper.classList.add('open');
+                langSelector.setAttribute('aria-expanded', 'true');
+            };
+
+            const toggleLangMenu = (e) => {
+                if (e) e.stopPropagation();
                 if (!langWrapper || !langSelector) return;
-                const isOpen = langWrapper.classList.toggle('open');
-                langSelector.setAttribute('aria-expanded', isOpen);
+                if (langWrapper.classList.contains('open')) {
+                    closeLangMenu();
+                } else {
+                    openLangMenu();
+                }
             };
 
             if (langSelector && langWrapper) {
@@ -2627,10 +2661,39 @@
                     toggleLangMenu(e);
                 });
                 langSelector.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
                         e.preventDefault();
                         e.stopPropagation();
-                        toggleLangMenu(e);
+                        if (!langWrapper.classList.contains('open')) {
+                            openLangMenu();
+                        }
+                        const target = langDropdown?.querySelector('.lang-option.active') || langDropdown?.querySelector('.lang-option');
+                        if (target) target.focus();
+                    }
+                });
+            }
+
+            if (langDropdown) {
+                langDropdown.addEventListener('keydown', (e) => {
+                    const options = Array.from(langDropdown.querySelectorAll('.lang-option'));
+                    const activeIdx = options.indexOf(this.shadowRoot.activeElement);
+                    if (activeIdx === -1) return;
+
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const next = options[activeIdx + 1] || options[0];
+                        next.focus();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (activeIdx === 0) {
+                            closeLangMenu({ restoreFocus: true });
+                        } else {
+                            const prev = options[activeIdx - 1];
+                            prev.focus();
+                        }
+                    } else if (e.key === 'Escape') {
+                        e.preventDefault();
+                        closeLangMenu({ restoreFocus: true });
                     }
                 });
             }

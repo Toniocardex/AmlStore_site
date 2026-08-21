@@ -442,16 +442,15 @@ def patch_index(lang):
         )
 
     # Drop legacy closing CTA and any previous recommended block (idempotent).
+    # NOTA: la sezione "Prodotti consigliati" e' temporaneamente disattivata in
+    # home (vedi apply-security-first-phase2.py). recommended_section() resta
+    # disponibile per il ripristino, ma qui non viene piu' reinserita.
     text = CLOSING_RE.sub("\n", text)
     text = RECOMMENDED_SECTION_RE.sub("\n", text)
 
-    rec = recommended_section(lang)
     social = social_proof_section(lang)
     if SOCIAL_PROOF_RE.search(text):
         text = SOCIAL_PROOF_RE.sub(social, text, count=1)
-        text = SOCIAL_PROOF_RE.sub(lambda m: m.group(0).rstrip() + "\n" + rec, text, count=1)
-    else:
-        text = text.replace("</main>", rec + "</main>", 1)
 
     path.write_text(text, encoding="utf-8")
     print("updated", path.relative_to(ROOT))

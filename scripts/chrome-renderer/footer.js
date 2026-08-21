@@ -338,22 +338,14 @@ class EcommerceFooter extends HTMLElement {
 
                     .brand-support span { display: block; }
 
-                    /* Stesso linguaggio visivo del blocco pagamenti in PDP (.pdp-pay__logo
-                       in css/product-pdp.css: stessa opacita', proporzioni), ma piu'
-                       piccolo e senza wrap. La colonna brand e' larga 260-310px (vedi
-                       .footer-main sopra): a dimensione PDP il sesto logo andava a capo
-                       e la forma "a pillola" si rompeva, quindi i 6 loghi vanno tenuti
-                       su una riga sola. */
+                    /* Badge metodi di pagamento — micro-card bianche responsive e pulite */
                     .footer-pay {
-                        display: inline-flex;
+                        display: flex;
                         align-items: center;
-                        flex-wrap: nowrap;
+                        flex-wrap: wrap;
                         gap: 6px;
-                        margin-top: 1.2rem;
-                        padding: 8px 10px;
-                        background: #ffffff;
-                        border-radius: 999px;
-                        box-shadow: var(--aml-shadow-sm, 0 1px 2px rgba(16, 24, 40, 0.04));
+                        margin-top: 1.25rem;
+                        max-width: 100%;
                     }
 
                     .footer-pay__logo {
@@ -361,16 +353,23 @@ class EcommerceFooter extends HTMLElement {
                         align-items: center;
                         justify-content: center;
                         flex-shrink: 0;
-                        width: 30px;
-                        height: 14px;
-                        opacity: 0.75;
+                        height: 26px;
+                        padding: 3px 7px;
+                        background: #ffffff;
+                        border-radius: 5px;
+                        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+                        transition: transform 0.15s ease, box-shadow 0.15s ease;
                     }
 
-                    .footer-pay__logo[data-brand='PayPal'] { width: 40px; }
+                    .footer-pay__logo:hover {
+                        transform: translateY(-1px);
+                        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+                    }
 
                     .footer-pay__logo img {
-                        width: 100%;
-                        height: 100%;
+                        height: 14px;
+                        width: auto;
+                        max-width: 38px;
                         object-fit: contain;
                         display: block;
                     }

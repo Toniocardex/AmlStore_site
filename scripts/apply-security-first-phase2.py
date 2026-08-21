@@ -66,27 +66,27 @@ SEO = {
 HERO = {
     "it": {
         "h1_a": "Protezione originale",
-        "h1_b": "consegna in 5–15 minuti.",
+        "h1_b": "consegna in 2–15 minuti.",
         "sub": "Antivirus e abbonamenti digitali originali. Attivazione sui portali ufficiali, assistenza in italiano, fattura disponibile.",
     },
     "en": {
         "h1_a": "Genuine protection",
-        "h1_b": "delivered in 5–15 minutes.",
+        "h1_b": "delivered in 2–15 minutes.",
         "sub": "Original antivirus and digital subscriptions. Official-portal activation, human support, invoices available.",
     },
     "fr": {
         "h1_a": "Protection originale",
-        "h1_b": "livrée en 5–15 minutes.",
+        "h1_b": "livrée en 2–15 minutes.",
         "sub": "Antivirus et abonnements numériques originaux. Activation sur les portails officiels, assistance humaine, facture disponible.",
     },
     "de": {
         "h1_a": "Originaler Schutz",
-        "h1_b": "in 5–15 Minuten geliefert.",
+        "h1_b": "in 2–15 Minuten geliefert.",
         "sub": "Originales Antivirus und digitale Abos. Aktivierung auf offiziellen Portalen, persönlicher Support, Rechnung verfügbar.",
     },
     "es": {
         "h1_a": "Protección original",
-        "h1_b": "entrega en 5–15 minutos.",
+        "h1_b": "entrega en 2–15 minutos.",
         "sub": "Antivirus y suscripciones digitales originales. Activación en portales oficiales, asistencia humana, factura disponible.",
     },
 }
@@ -98,6 +98,9 @@ COPY = {
         "chip": "{n} dispositiv{sfx}",
         "m365_title": "Microsoft 365",
         "m365_lede": "Abbonamenti annuali per casa e famiglia, complementari alla protezione.",
+        "m365_hero_badge": "Microsoft 365",
+        "m365_hero_title": "Tutte le tue app e la sicurezza in un unico piano",
+        "m365_hero_sub": "Word, Excel, PowerPoint, Outlook, Teams, OneDrive e Copilot per casa e lavoro.",
         "m365_personal": "Microsoft 365 Personal",
         "m365_family": "Microsoft 365 Family",
         "m365_cta": "Soluzioni Microsoft 365 per aziende",
@@ -128,6 +131,9 @@ COPY = {
         "chip": "{n} device{sfx}",
         "m365_title": "Microsoft 365",
         "m365_lede": "Yearly subscriptions for home and family, alongside security.",
+        "m365_hero_badge": "Microsoft 365",
+        "m365_hero_title": "All your apps and security in one single plan",
+        "m365_hero_sub": "Word, Excel, PowerPoint, Outlook, Teams, OneDrive and Copilot for home and work.",
         "m365_personal": "Microsoft 365 Personal",
         "m365_family": "Microsoft 365 Family",
         "m365_cta": "Microsoft 365 solutions for business",
@@ -158,6 +164,9 @@ COPY = {
         "chip": "{n} appareil{sfx}",
         "m365_title": "Microsoft 365",
         "m365_lede": "Abonnements annuels pour la maison et la famille, en complément de la sécurité.",
+        "m365_hero_badge": "Microsoft 365",
+        "m365_hero_title": "Toutes vos applications et votre sécurité en un seul abonnement",
+        "m365_hero_sub": "Word, Excel, PowerPoint, Outlook, Teams, OneDrive et Copilot pour la maison et le travail.",
         "m365_personal": "Microsoft 365 Personnel",
         "m365_family": "Microsoft 365 Famille",
         "m365_cta": "Solutions Microsoft 365 pour les entreprises",
@@ -188,6 +197,9 @@ COPY = {
         "chip": "{n} Gerät{sfx}",
         "m365_title": "Microsoft 365",
         "m365_lede": "Jahresabos für Zuhause und Familie, ergänzend zur Sicherheit.",
+        "m365_hero_badge": "Microsoft 365",
+        "m365_hero_title": "Alle Ihre Apps und Sicherheit in einem Paket",
+        "m365_hero_sub": "Word, Excel, PowerPoint, Outlook, Teams, OneDrive und Copilot für Zuhause und Beruf.",
         "m365_personal": "Microsoft 365 Personal",
         "m365_family": "Microsoft 365 Family",
         "m365_cta": "Microsoft-365-Lösungen für Unternehmen",
@@ -218,6 +230,9 @@ COPY = {
         "chip": "{n} dispositivo{sfx}",
         "m365_title": "Microsoft 365",
         "m365_lede": "Suscripciones anuales para casa y familia, junto a la seguridad.",
+        "m365_hero_badge": "Microsoft 365",
+        "m365_hero_title": "Todas tus aplicaciones y seguridad en un solo plan",
+        "m365_hero_sub": "Word, Excel, PowerPoint, Outlook, Teams, OneDrive y Copilot para el hogar y el trabajo.",
         "m365_personal": "Microsoft 365 Personal",
         "m365_family": "Microsoft 365 Familia",
         "m365_cta": "Soluciones Microsoft 365 para empresas",
@@ -1145,10 +1160,8 @@ def protect_section(lang: str) -> str:
         devices_panel_html(lang, "mcafee"),
         devices_panel_html(lang, "bitdefender"),
     ])
-    # Il numero di dispositivi si sceglie SOLO dentro ogni card (pill fissa o,
-    # per Kaspersky Premium, il suo <select>) — nessun selettore dispositivi
-    # esterno: fuori dalle card resta solo il tab brand.
     return f"""        <section class="home-protect" aria-labelledby="home-protect-title" data-home-protect>
+            <div class="home-protect__bg" aria-hidden="true"></div>
             <div class="home-protect__inner">
                 <h2 id="home-protect-title" class="home-section-title">{c['protect_title']}</h2>
                 <p class="home-catalog-lede">{c['protect_lede']}</p>
@@ -1188,25 +1201,43 @@ def m365_section(lang: str) -> str:
         )
     return f"""        <section class="home-m365-band" aria-labelledby="home-m365-title">
             <div class="home-m365-band__inner">
-                <h2 id="home-m365-title" class="home-section-title">{c['m365_title']}</h2>
-                <p class="home-catalog-lede">{c['m365_lede']}</p>
-                <ul class="m365-grid">
+                <div class="home-m365-hero">
+                    <div class="home-m365-hero__content">
+                        <span class="home-m365-hero__badge">{c['m365_hero_badge']}</span>
+                        <p class="home-m365-hero__title">{c['m365_hero_title']}</p>
+                        <p class="home-m365-hero__sub">{c['m365_hero_sub']}</p>
+                    </div>
+                    <div class="home-m365-hero__media" aria-hidden="true"></div>
+                </div>
+                <div class="home-m365-band__label">
+                    <h2 id="home-m365-title" class="home-section-title">{c['m365_title']}</h2>
+                    <p class="home-catalog-lede">{c['m365_lede']}</p>
+                </div>
+                <div class="home-m365-band__content">
+                    <ul class="m365-grid">
 {chr(10).join(cards)}
-                </ul>
-                <a class="home-m365-band__cta" href="microsoft-365-solutions">{c['m365_cta']}</a>
+                    </ul>
+                    <a class="home-m365-band__cta" href="microsoft-365-solutions">{c['m365_cta']}</a>
+                </div>
             </div>
         </section>
 """
 
 
 def business_section(lang: str) -> str:
+    """Sezione "Per aziende" — temporaneamente disattivata in home.
+
+    Non viene piu' chiamata da patch_home(): resta qui per il ripristino.
+    """
     c = COPY[lang]
     consult = CONSULT[lang]
     return f"""
         <section class="home-business" aria-labelledby="home-business-title">
             <div class="home-business__inner">
-                <h2 id="home-business-title" class="home-section-title">{c['biz_title']}</h2>
-                <p class="home-catalog-lede">{c['biz_lede']}</p>
+                <div class="home-business__copy">
+                    <h2 id="home-business-title" class="home-section-title">{c['biz_title']}</h2>
+                    <p class="home-catalog-lede">{c['biz_lede']}</p>
+                </div>
                 <ul class="home-business__grid">
                     <li><a class="home-business__card" href="microsoft-365-business-standard">{c['biz_m365']}</a></li>
                     <li><a class="home-business__card" href="windows-server">{c['biz_server']}</a></li>
@@ -1219,6 +1250,11 @@ def business_section(lang: str) -> str:
 
 
 def categories_section(lang: str) -> str:
+    """Sezione "Altre soluzioni" — temporaneamente disattivata in home.
+
+    Non viene piu' chiamata da patch_home(): resta qui per il ripristino.
+    Nota: conteneva l'ancora #soluzioni, ora sostituita da #piu-venduti nei CTA.
+    """
     c = COPY[lang]
     names = {
         "it": ("Windows", "Office"),
@@ -1328,6 +1364,19 @@ def reorder_guide_cats(block: str) -> str:
     return re.sub(r"(<div class=\"home-guide__options home-guide__options--inline\">\s*).*(</div>)", rf"\1{inner}\n                        \2", block, count=1, flags=re.DOTALL)
 
 
+def collapse_blank_lines_in_main(html: str) -> str:
+    """Riduce a una sola le righe vuote consecutive dentro <main>.
+
+    Le sostituzioni di sezione lasciano righe vuote residue che si sommano a
+    ogni run: qui vengono normalizzate, senza toccare head/header/footer.
+    """
+    m = re.search(r"<main\b[\s\S]*?</main>", html)
+    if not m:
+        return html
+    body = re.sub(r"\n(?:[ \t]*\n){2,}", "\n\n", m.group(0))
+    return html[: m.start()] + body + html[m.end() :]
+
+
 def patch_home(lang: str) -> None:
     path = ROOT / lang / "index.html"
     html = path.read_text(encoding="utf-8")
@@ -1350,26 +1399,35 @@ def patch_home(lang: str) -> None:
 
     extras_protect = protect_section(lang)
     extras_m365 = m365_section(lang)
+    # I pattern consumano indentazione e newline attorno alla sezione: le
+    # stringhe di rimpiazzo li reintroducono gia' loro, altrimenti a ogni run
+    # si accumulano 8 spazi di rientro e una riga vuota in piu'.
     if re.search(r'<section class="home-protect"', html):
         html = re.sub(
-            r'<section class="home-protect"[\s\S]*?</section>',
-            extras_protect,
+            r'[ \t]*<section class="home-protect"[\s\S]*?</section>\n?',
+            lambda _m: extras_protect,
             html,
             count=1,
         )
         html = re.sub(
-            r'<section class="home-m365-band"[\s\S]*?</section>',
-            extras_m365,
+            r'[ \t]*<section class="home-m365-band"[\s\S]*?</section>\n?',
+            lambda _m: extras_m365,
             html,
             count=1,
         )
     else:
         html = re.sub(
-            r'<section id="soluzioni" class="home-categories"[\s\S]*?</section>',
-            extras_protect + extras_m365 + categories_section(lang) + business_section(lang),
+            r'[ \t]*<section id="soluzioni" class="home-categories"[\s\S]*?</section>\n?',
+            lambda _m: extras_protect + extras_m365,
             html,
             count=1,
         )
+
+    # Temporaneamente rimossi: 'Altre soluzioni' (.home-categories) e 'Per aziende' (.home-business)
+    html = re.sub(r'\n?[ \t]*<section id="soluzioni" class="home-categories"[\s\S]*?</section>', '', html)
+    html = re.sub(r'\n?[ \t]*<section class="home-categories"[\s\S]*?</section>', '', html)
+    html = re.sub(r'\n?[ \t]*<section class="home-business"[\s\S]*?</section>', '', html)
+
     if "home-protect.js" not in html:
         html = re.sub(
             r'(<script src="../js/home-guide\.js[^"]*" defer></script>)',
@@ -1379,11 +1437,11 @@ def patch_home(lang: str) -> None:
         )
     html = patch_guide(html, lang)
 
-    rec = rhf.recommended_section(lang)
-    if 'id="prodotti-consigliati"' in html:
-        html = rhf.RECOMMENDED_SECTION_RE.sub(rec, html, count=1)
-    else:
-        html = html.replace("</main>", rec + "</main>", 1)
+    # Temporaneamente rimossi: 'Prodotti consigliati' (.home-recommended / #prodotti-consigliati)
+    html = re.sub(r'\n?[ \t]*<section id="prodotti-consigliati"[\s\S]*?</section>', '', html)
+    html = re.sub(r'\n?[ \t]*<section class="home-recommended"[\s\S]*?</section>', '', html)
+
+    html = collapse_blank_lines_in_main(html)
 
     path.write_text(html, encoding="utf-8", newline="\n")
     print("home", lang)

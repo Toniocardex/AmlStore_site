@@ -819,48 +819,55 @@ ecommerce-header .nav-av-wrap.open::after {
 
 ecommerce-header .lang-wrapper { position: relative; }
 ecommerce-header .lang-selector {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    min-height: 40px;
-    background: transparent;
-    border: 1px solid transparent;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    font-weight: 500;
+    gap: 0.45rem;
+    height: 38px;
+    background: var(--aml-surface, #ffffff);
+    border: 1px solid var(--border-color, #E2E8F0);
+    color: var(--text-primary, #0F172A);
+    font-size: 0.85rem;
+    font-weight: 600;
     cursor: pointer;
     font-family: inherit;
-    padding: 0.5rem;
-    border-radius: var(--aml-radius-sm, 6px);
-    transition: color 0.3s ease, background 0.3s ease, border 0.3s ease;
+    padding: 0 0.65rem;
+    border-radius: var(--aml-radius-sm, 8px);
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 ecommerce-header .lang-selector:hover,
 ecommerce-header .lang-wrapper.open .lang-selector {
-    color: var(--text-primary);
-    background: color-mix(in srgb, var(--accent) 6%, transparent);
-    border-color: var(--border-color);
+    color: var(--text-primary, #0F172A);
+    background: color-mix(in srgb, var(--accent) 6%, #ffffff);
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--border-color, #E2E8F0));
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 ecommerce-header .lang-selector:focus-visible {
     outline: 2px solid var(--accent);
-    outline-offset: 3px;
+    outline-offset: 2px;
+    border-color: var(--accent);
 }
-/* Sostituto visivo per l'anteprima se non c'è l'immagine della flag */
-
-ecommerce-header .lang-selector img {
+ecommerce-header .lang-selector img.flag-icon {
     width: 20px;
     height: 20px;
     border-radius: 50%;
     object-fit: cover;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    color: transparent;
-    border: 1px solid var(--border-color);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+    flex-shrink: 0;
 }
 ecommerce-header .chevron-down {
     width: 14px;
     height: 14px;
     fill: currentColor;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.65;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    flex-shrink: 0;
+}
+ecommerce-header .lang-selector:hover .chevron-down,
+ecommerce-header .lang-wrapper.open .chevron-down {
+    opacity: 1;
 }
 ecommerce-header .lang-wrapper.open .chevron-down {
     transform: rotate(180deg);
@@ -868,57 +875,71 @@ ecommerce-header .lang-wrapper.open .chevron-down {
 
 ecommerce-header .lang-dropdown {
     position: absolute;
-    top: calc(100% + 0.75rem);
+    top: calc(100% + 0.5rem);
     right: 0;
-    background: var(--bg-surface);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border-color);
-    border-radius: var(--aml-radius-md, 8px);
-    padding: 0.5rem;
-    min-width: 140px;
-    box-shadow: var(--aml-shadow-lg, 0 12px 32px rgba(16, 24, 40, 0.10));
-    /* Stato chiuso: invisibile ma nel flusso — permette transizione in uscita */
+    background: var(--aml-surface, #ffffff);
+    border: 1px solid var(--border-color, #E2E8F0);
+    border-radius: var(--aml-radius-md, 10px);
+    padding: 0.35rem;
+    min-width: 150px;
+    box-shadow: 0 10px 28px -4px rgba(16, 24, 40, 0.12), 0 4px 10px -2px rgba(16, 24, 40, 0.06);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transform: translateY(-6px) scale(0.98);
     transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 100;
 }
 ecommerce-header .lang-wrapper.open .lang-dropdown {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
     transform: translateY(0) scale(1);
-    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0.25s;
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.22s;
 }
 
 ecommerce-header .lang-option {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.6rem 0.75rem;
-    color: var(--text-secondary);
+    gap: 0.65rem;
+    padding: 0.55rem 0.65rem;
+    color: var(--text-secondary, #475569);
     text-decoration: none;
     font-size: 0.85rem;
     font-weight: 500;
     border-radius: var(--aml-radius-sm, 6px);
-    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition: background 0.18s ease, color 0.18s ease;
 }
 ecommerce-header .lang-option:hover {
     background: color-mix(in srgb, var(--accent) 8%, transparent);
-    color: var(--text-primary);
-    transform: translateX(2px);
+    color: var(--text-primary, #0F172A);
 }
-ecommerce-header .lang-option img {
+ecommerce-header .lang-option:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+ecommerce-header .lang-option.active {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent, #0066FF);
+    font-weight: 600;
+}
+ecommerce-header .lang-option img.flag-icon {
     width: 18px;
     height: 18px;
     border-radius: 50%;
     object-fit: cover;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    color: transparent;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+ecommerce-header .lang-check {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    margin-left: auto;
+    flex-shrink: 0;
 }
 
 /* Il carrello e' l'unico elemento della barra tenuto nel colore
@@ -1151,7 +1172,6 @@ ecommerce-header .right-section { gap: 0.75rem; }
 ecommerce-header .nav-links { display: none; }
     ecommerce-header .mobile-toggle { display: inline-flex; }
     ecommerce-header .header-brand { flex: 1 1 auto; min-width: 0; }
-    ecommerce-header .lang-wrapper { display: none; }
     ecommerce-header .support-wrap { display: none; }
 }
 

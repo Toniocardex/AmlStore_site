@@ -87,40 +87,50 @@
         }
 
         connectedCallback() {
-            if (this.__headerUiInit) return;
-            this.__headerUiInit = true;
+            /* locale-path.js e il markup pre-renderizzato possono arrivare dopo
+               l'upgrade del custom element: si riprova per ~2s, poi si smette
+               segnalando la causa invece di lasciare un timer che gira a vuoto. */
+            let attemptsLeft = 40;
+            const initHeader = () => {
+                if (this.__headerUiInit) return;
+                const S = window.AmlSite;
+                const hasMarkup = Boolean(this.querySelector('.header-container'));
+                if (!S || !hasMarkup) {
+                    if (attemptsLeft-- <= 0) {
+                        if (!S) {
+                            console.error('ecommerce-header: includere ../js/locale-path.js prima di questo script.');
+                        }
+                        if (!hasMarkup) {
+                            console.error(
+                                'ecommerce-header: markup assente nella pagina. ' +
+                                'Rigenerarlo con: node scripts/build-inline-chrome.mjs'
+                            );
+                        }
+                        return;
+                    }
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', () => initHeader(), { once: true });
+                    } else {
+                        setTimeout(() => initHeader(), 50);
+                    }
+                    return;
+                }
+                this.__headerUiInit = true;
 
-            this.setAttribute('translate', 'no');
-            this.classList.add('notranslate');
+                this.setAttribute('translate', 'no');
+                this.classList.add('notranslate');
 
-            const S = window.AmlSite;
-            if (!S) {
-                console.error('ecommerce-header: includere ../js/locale-path.js prima di questo script.');
-                return;
-            }
-            const parsed = S.parseLocalePath(window.location.pathname);
-            const activeLang = parsed.activeLang;
-            const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
-            const staticRoot = S.staticRootFromScriptPath('/components/header.js');
+                const parsed = S.parseLocalePath(window.location.pathname);
+                const activeLang = parsed.activeLang;
+                const t = HEADER_I18N[activeLang.code] || HEADER_I18N.it;
+                const staticRoot = S.staticRootFromScriptPath('/components/header.js');
 
-            const cartAriaForCount = (n) => {
-                const c = Number(n) || 0;
-                if (c <= 0) return t.cartAriaEmpty;
-                if (c === 1) return t.cartAriaOne;
-                return String(t.cartAriaMany).replace('{{n}}', String(c));
-            };
-
-            /* Il markup non viene piu' costruito qui: lo scrive nella pagina
-               scripts/build-inline-chrome.mjs, cosi' e' presente nell'HTML servito
-               (crawlabile, e nessuno spostamento di layout all'arrivo del JS).
-               Qui resta solo l'aggancio del comportamento. */
-            if (!this.querySelector('.header-container')) {
-                console.error(
-                    'ecommerce-header: markup assente nella pagina. ' +
-                    'Rigenerarlo con: node scripts/build-inline-chrome.mjs'
-                );
-                return;
-            }
+                const cartAriaForCount = (n) => {
+                    const c = Number(n) || 0;
+                    if (c <= 0) return t.cartAriaEmpty;
+                    if (c === 1) return t.cartAriaOne;
+                    return String(t.cartAriaMany).replace('{{n}}', String(c));
+                };
 
 
             const toggle = this.querySelector('.mobile-toggle');
@@ -353,14 +363,32 @@
                 });
             }
 
-            const toggleLangMenu = (e) => {
-                if (e) e.stopPropagation();
+            const langDropdown = this.querySelector('#header-lang-dropdown') || this.querySelector('.lang-dropdown');
+
+            const closeLangMenu = ({ restoreFocus = false } = {}) => {
+                if (!langWrapper || !langSelector) return;
+                langWrapper.classList.remove('open');
+                langSelector.setAttribute('aria-expanded', 'false');
+                if (restoreFocus) langSelector.focus();
+            };
+
+            const openLangMenu = () => {
+                if (!langWrapper || !langSelector) return;
                 closeNavSubmenus();
                 closeSupport({ restoreFocus: false });
                 closeSearch({ returnFocus: false });
+                langWrapper.classList.add('open');
+                langSelector.setAttribute('aria-expanded', 'true');
+            };
+
+            const toggleLangMenu = (e) => {
+                if (e) e.stopPropagation();
                 if (!langWrapper || !langSelector) return;
-                const isOpen = langWrapper.classList.toggle('open');
-                langSelector.setAttribute('aria-expanded', isOpen);
+                if (langWrapper.classList.contains('open')) {
+                    closeLangMenu();
+                } else {
+                    openLangMenu();
+                }
             };
 
             if (langSelector && langWrapper) {
@@ -369,10 +397,39 @@
                     toggleLangMenu(e);
                 });
                 langSelector.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
                         e.preventDefault();
                         e.stopPropagation();
-                        toggleLangMenu(e);
+                        if (!langWrapper.classList.contains('open')) {
+                            openLangMenu();
+                        }
+                        const target = langDropdown?.querySelector('.lang-option.active') || langDropdown?.querySelector('.lang-option');
+                        if (target) target.focus();
+                    }
+                });
+            }
+
+            if (langDropdown) {
+                langDropdown.addEventListener('keydown', (e) => {
+                    const options = Array.from(langDropdown.querySelectorAll('.lang-option'));
+                    const activeIdx = options.indexOf(document.activeElement);
+                    if (activeIdx === -1) return;
+
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const next = options[activeIdx + 1] || options[0];
+                        next.focus();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (activeIdx === 0) {
+                            closeLangMenu({ restoreFocus: true });
+                        } else {
+                            const prev = options[activeIdx - 1];
+                            prev.focus();
+                        }
+                    } else if (e.key === 'Escape') {
+                        e.preventDefault();
+                        closeLangMenu({ restoreFocus: true });
                     }
                 });
             }
@@ -671,6 +728,9 @@
             syncCartChrome();
             this.__syncCartChrome = syncCartChrome;
             document.addEventListener('aml-cart-changed', syncCartChrome);
+            };
+
+            initHeader();
         }
 
         disconnectedCallback() {

@@ -38,10 +38,10 @@
 
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <link rel="stylesheet" href="../fonts/source-serif.css?v=332697df42">
-    <link rel="stylesheet" href="../css/page.css?v=ca728ed0e3">
-    <link rel="stylesheet" href="../css/header.css?v=a6e055a60c">
-    <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
-    <link rel="stylesheet" href="../css/home.css?v=766bb0617c">
+    <link rel="stylesheet" href="../css/page.css?v=bbec166f1a">
+    <link rel="stylesheet" href="../css/header.css?v=89556dc54e">
+    <link rel="stylesheet" href="../css/footer.css?v=31dc97e061">
+    <link rel="stylesheet" href="../css/home.css?v=1c84c9effb">
 <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","logo":{"@type":"ImageObject","url":"https://aml-store.com/logo/logo-header-400.webp"},"email":"Info@amlstore.it","legalName":"Licensoft di Cardelli Antonino","vatID":"IT11461870963","address":{"@type":"PostalAddress","streetAddress":"Via Trento 5/A","postalCode":"20015","addressLocality":"Parabiago","addressRegion":"MI","addressCountry":"IT"},"telephone":"+39 392 558 0413"},{"@type":"WebSite","@id":"https://aml-store.com/#website","url":"https://aml-store.com/","name":"Aml Store","inLanguage":["it","en","fr","de","es"],"publisher":{"@id":"https://aml-store.com/#organization"}},{"@type":"WebPage","@id":"https://aml-store.com/fr/#webpage","url":"https://aml-store.com/fr/","name":"Antivirus original et licences numériques | Aml Store","description":"Antivirus et logiciels originaux, livraison numérique, activation sur les portails officiels, facture et assistance humaine.","isPartOf":{"@id":"https://aml-store.com/#website"},"inLanguage":"fr"},{"@type":"FAQPage","inLanguage":"fr","url":"https://aml-store.com/fr/","mainEntity":[{"@type":"Question","name":"Que recevrai-je exactement après l'achat ?","acceptedAnswer":{"@type":"Answer","text":"Vous recevez un e-mail de livraison numérique avec ce dont vous avez besoin pour utiliser la licence (en général un code et/ou des instructions pratiques, plus les références utiles à la preuve d'achat, selon le contenu réel du message envoyé). La livraison est uniquement numérique : conservez l'e-mail et vérifiez aussi les courriers indésirables / spam si rien n'apparaît dans votre boîte de réception."}},{"@type":"Question","name":"Combien de temps entre le paiement et l'e-mail avec la licence ?","acceptedAnswer":{"@type":"Answer","text":"En règle générale, l'e-mail arrive juste après la confirmation du paiement ; dans de rares cas, il peut falloir quelques minutes de plus pour les vérifications de paiement. Si dans les 30 minutes vous n'avez toujours rien reçu, vérifiez le spam et écrivez à Info@amlstore.it avec le produit acheté et l'e-mail utilisé pour la commande, afin que nous puissions vérifier l'envoi."}},{"@type":"Question","name":"Je n'ai jamais acheté de licence numérique : comment cela fonctionne-t-il du début à la fin ?","acceptedAnswer":{"@type":"Answer","text":"Choisissez le produit, finalisez la commande et le paiement au checkout avec les moyens disponibles — carte, PayPal et portefeuilles numériques (Apple Pay, Google Pay, lorsque activés). Le traitement est assuré en toute sécurité via Stripe. Une fois le paiement confirmé, vous recevez la livraison par e-mail ; pour utiliser la licence, suivez l'e-mail et la fiche produit sur notre site, où vous trouverez les références correspondant à ce titre."}},{"@type":"Question","name":"Le prix est plus bas qu'ailleurs : la licence est-elle conforme ? Pourquoi coûte-t-elle moins cher ?","acceptedAnswer":{"@type":"Answer","text":"Nous vendons des licences numériques décrites sur les fiches produit, avec des prix clairs et des conditions consultables dans les Conditions générales et la Politique de confidentialité avant l'achat. Si vous souhaitez un retour externe, vous pouvez lire les avis publics sur Trustpilot (https://it.trustpilot.com/review/aml-store.com). Pour toute question opérationnelle, écrivez à Info@amlstore.it."}},{"@type":"Question","name":"Où saisir le code et comment installer le logiciel ?","acceptedAnswer":{"@type":"Answer","text":"L'activation et l'installation se font sur les sites et portails officiels de l'éditeur, selon les règles de ce produit. Après l'achat, utilisez les instructions reçues par e-mail et, pour le détail pas à pas, la fiche produit sur notre site. Si quelque chose ne fonctionne pas, écrivez à Info@amlstore.it avec le produit et l'e-mail de commande."}},{"@type":"Question","name":"Comment vous contacter pour un problème de commande, de paiement ou d'activation ?","acceptedAnswer":{"@type":"Answer","text":"Écrivez à Info@amlstore.it : c'est le canal principal indiqué aussi dans le pied de page du site. Dans le message, indiquez le produit, l'e-mail utilisé pour la commande et une brève description du problème ; pour la confidentialité, les conditions et les retours, utilisez les liens du pied de page (Politique de confidentialité, Conditions générales, Retours et remboursements)."}}]}]}
@@ -171,28 +171,37 @@
                         </div>
 
                         <div class="lang-wrapper">
-                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-label="Choisir la langue">
+                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-controls="header-lang-dropdown" aria-label="Choisir la langue">
                                 <img class="flag-icon" src="/images/flags/fr.svg?v=8b4c9afc91" alt="" decoding="async">
                                 <span>FR</span>
-                                <svg class="chevron-down" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
+                                <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
                             </button>
-                            <div class="lang-dropdown" role="menu">
+                            <div id="header-lang-dropdown" class="lang-dropdown" role="menu" aria-label="Choisir la langue">
                                 
                                 <a href="/it/" class="lang-option" role="menuitem" hreflang="it">
                                     <img class="flag-icon" src="/images/flags/it.svg?v=7bbc73a46f" alt="" decoding="async">
-                                    IT
+                                    <span>IT</span>
+                                    
                                 </a>
                                 <a href="/en/" class="lang-option" role="menuitem" hreflang="en">
                                     <img class="flag-icon" src="/images/flags/gb.svg?v=639d2928f3" alt="" decoding="async">
-                                    EN
+                                    <span>EN</span>
+                                    
+                                </a>
+                                <a href="/fr/" class="lang-option active" role="menuitem" hreflang="fr" aria-current="true">
+                                    <img class="flag-icon" src="/images/flags/fr.svg?v=8b4c9afc91" alt="" decoding="async">
+                                    <span>FR</span>
+                                    <svg class="lang-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg>
                                 </a>
                                 <a href="/de/" class="lang-option" role="menuitem" hreflang="de">
                                     <img class="flag-icon" src="/images/flags/de.svg?v=ae5c2f2cf6" alt="" decoding="async">
-                                    DE
+                                    <span>DE</span>
+                                    
                                 </a>
                                 <a href="/es/" class="lang-option" role="menuitem" hreflang="es">
                                     <img class="flag-icon" src="/images/flags/es.svg?v=3b261cecdc" alt="" decoding="async">
-                                    ES
+                                    <span>ES</span>
+                                    
                                 </a>
                             </div>
                         </div>
@@ -278,31 +287,6 @@
                         </div>
                     </nav>
                     
-                    <div class="drawer-section-title">Choisir la langue</div>
-                    <div class="drawer-langs">
-                        
-                        <a href="/it/" class="drawer-lang-link" hreflang="it">
-                            <img class="flag-icon" src="/images/flags/it.svg?v=7bbc73a46f" alt="" decoding="async">
-                            IT
-                        </a>
-                        <a href="/en/" class="drawer-lang-link" hreflang="en">
-                            <img class="flag-icon" src="/images/flags/gb.svg?v=639d2928f3" alt="" decoding="async">
-                            EN
-                        </a>
-                        <a href="/fr/" class="drawer-lang-link active" hreflang="fr">
-                            <img class="flag-icon" src="/images/flags/fr.svg?v=8b4c9afc91" alt="" decoding="async">
-                            FR
-                        </a>
-                        <a href="/de/" class="drawer-lang-link" hreflang="de">
-                            <img class="flag-icon" src="/images/flags/de.svg?v=ae5c2f2cf6" alt="" decoding="async">
-                            DE
-                        </a>
-                        <a href="/es/" class="drawer-lang-link" hreflang="es">
-                            <img class="flag-icon" src="/images/flags/es.svg?v=3b261cecdc" alt="" decoding="async">
-                            ES
-                        </a>
-                    </div>
-                    
                     <div class="drawer-footer">
                         <p class="drawer-support-title">Assistance</p>
                         <a class="drawer-support-link" href="mailto:info@amlstore.it">info@amlstore.it</a>
@@ -321,7 +305,7 @@
             </picture>
             <div class="home-hero-inner">
                 <div class="home-hero-content">
-                    <h1 id="home-hero-title" class="home-hero-title">Protection originale<br><span class="home-hero__accent">livrée en 5–15 minutes.</span></h1>
+                    <h1 id="home-hero-title" class="home-hero-title">Protection originale<br><span class="home-hero__accent">livrée en 2–15 minutes.</span></h1>
                     <p class="home-hero-subtitle">Antivirus et abonnements numériques originaux. Activation sur les portails officiels, assistance humaine, facture disponible.</p>
                     <ul class="home-hero-trust">
                         <li><span class="home-hero-trust__star" aria-hidden="true">&#9733;</span>Not&eacute; Excellent sur Trustpilot</li>
@@ -507,8 +491,8 @@
             </div>
         </section>
 
-        
-                                                                                                                        <section class="home-protect" aria-labelledby="home-protect-title" data-home-protect>
+        <section class="home-protect" aria-labelledby="home-protect-title" data-home-protect>
+            <div class="home-protect__bg" aria-hidden="true"></div>
             <div class="home-protect__inner">
                 <h2 id="home-protect-title" class="home-section-title">Trouver la protection adaptée</h2>
                 <p class="home-catalog-lede">Choisissez le nombre d'appareils, puis comparez les offres.</p>
@@ -884,25 +868,22 @@
             </div>
         </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                                        <section class="home-m365-band" aria-labelledby="home-m365-title">
+        <section class="home-m365-band" aria-labelledby="home-m365-title">
             <div class="home-m365-band__inner">
-                <h2 id="home-m365-title" class="home-section-title">Microsoft 365</h2>
-                <p class="home-catalog-lede">Abonnements annuels pour la maison et la famille, en complément de la sécurité.</p>
-                <ul class="m365-grid">
+                <div class="home-m365-hero">
+                    <div class="home-m365-hero__content">
+                        <span class="home-m365-hero__badge">Microsoft 365</span>
+                        <p class="home-m365-hero__title">Toutes vos applications et votre sécurité en un seul abonnement</p>
+                        <p class="home-m365-hero__sub">Word, Excel, PowerPoint, Outlook, Teams, OneDrive et Copilot pour la maison et le travail.</p>
+                    </div>
+                    <div class="home-m365-hero__media" aria-hidden="true"></div>
+                </div>
+                <div class="home-m365-band__label">
+                    <h2 id="home-m365-title" class="home-section-title">Microsoft 365</h2>
+                    <p class="home-catalog-lede">Abonnements annuels pour la maison et la famille, en complément de la sécurité.</p>
+                </div>
+                <div class="home-m365-band__content">
+                    <ul class="m365-grid">
                     <li>
                         <article class="m365-card" data-stripe-currency="eur" data-stripe-unit-amount="8400" data-stripe-compare-at-amount="9900" data-stripe-product-sku="QQ2-00012" data-discount-percent="15" data-cart-image="../asset/media/products/microsoft-365-personal.webp">
                             <img class="m365-card__icon" src="../asset/icon/img-aml-store_Microsoft-Icon.svg?v=906d511fb1" alt="" width="28" height="28" loading="lazy">
@@ -959,82 +940,11 @@
                             <a class="m365-card__more" href="bundle-m365-personal-mcafee">En savoir plus</a>
                         </article>
                     </li>
-                </ul>
-                <a class="home-m365-band__cta" href="microsoft-365-solutions">Solutions Microsoft 365 pour les entreprises</a>
+                    </ul>
+                    <a class="home-m365-band__cta" href="microsoft-365-solutions">Solutions Microsoft 365 pour les entreprises</a>
+                </div>
             </div>
         </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <section id="soluzioni" class="home-categories" aria-labelledby="home-categories-title">
-            <h2 id="home-categories-title" class="home-section-title">Autres solutions</h2>
-            <ul class="home-categories-grid">
-                <li>
-                    <a href="antivirus" class="home-category-tile">
-                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span>
-                        <span class="home-category-copy">
-                            <span class="home-category-name">Antivirus et sécurité</span>
-                            <span class="home-category-desc">Norton, Kaspersky, Bitdefender, ESET, McAfee</span>
-                        </span>
-                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="microsoft-365-solutions" class="home-category-tile">
-                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 50 50" fill="currentColor"><path d="M20.13,32.5c-2.79-1.69-4.53-4.77-4.53-8.04V8.9c0-1.63,0.39-3.19,1.11-4.57L7.54,9.88C4.74,11.57,3,14.65,3,17.92v14.15c0,1.59,0.42,3.14,1.16,4.5c0.69,1.12,1.67,2.06,2.88,2.74c2.53,1.42,5.51,1.36,7.98-0.15l8.02-4.9L20.13,32.5z M42.84,27.14l-8.44-5.05v2.29c0,3.25-1.72,6.33-4.49,8.02l-13.84,8.47c-1.52,0.93-3.19,1.42-4.87,1.46l8.93,5.41c1.5,0.91,3.19,1.36,4.87,1.36s3.37-0.45,4.87-1.36l9.08-5.5l3.52-2.13c0.27-0.16,0.53-0.34,0.78-0.54c0.08-0.05,0.16-0.11,0.23-0.16c0.65-0.53,1.23-1.13,1.71-1.79c0.02-0.03,0.04-0.06,0.06-0.09c0.77-1.19,1.2-2.59,1.19-4.06C46.43,30.85,45.09,28.48,42.84,27.14z M42.46,9.88l-9.57-5.79l-3.02-1.83C29.45,2,29.01,1.79,28.56,1.61c-0.49-0.21-1-0.37-1.51-0.47c-1.84-0.38-3.76-0.08-5.46,0.89c-2.5,1.43-3.99,3.99-3.99,6.87v9.6l2.8-1.65c2.84-1.67,6.36-1.66,9.19,0.03l14.28,8.54c1.29,0.78,2.35,1.81,3.12,3.02L47,17.92C47,14.65,45.26,11.57,42.46,9.88z"></path></svg></span>
-                        <span class="home-category-copy">
-                            <span class="home-category-name">Microsoft 365</span>
-                            <span class="home-category-desc">Personnel, Famille et Business</span>
-                        </span>
-                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="sistemi-operativi" class="home-category-tile">
-                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 14 14" fill="currentColor"><path d="m 5.91827,7.331731 v 4.694712 L 1,11.348557 V 7.331731 h 4.91827 z m 0,-5.358174 V 6.725962 H 1 V 2.651443 z M 13,7.331731 V 13 L 6.45913,12.098557 V 7.331731 H 13 z M 13,1 V 6.725962 H 6.45913 V 1.901443 z"></path></svg></span>
-                        <span class="home-category-copy">
-                            <span class="home-category-name">Windows</span>
-                            <span class="home-category-desc">Windows 10 et 11, Home et Pro</span>
-                        </span>
-                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="suite-office" class="home-category-tile">
-                        <span class="home-category-icon" aria-hidden="true"><svg viewBox="0 0 50 50" fill="currentColor"><path d="M43 11.11v27.6c0 2.54-1.73 4.77-4.21 5.43l-8.63 2.41c.5-.94.78-2.02.78-3.16V5.65c0-.86-.19-1.68-.53-2.42l8.45 2.47C41.29 6.37 43 8.6 43 11.11zM28.94 37v6.39c0 1.99-1.19 3.72-2.96 4.33-.43.1-.87.15-1.31.15-1 0-2-.26-2.92-.76L13.45 42c-1.04-.64-1.52-1.86-1.19-3.04.33-1.17 1.38-1.96 2.6-1.96H28.94zM28.94 5.65v5.72l-10.28 3.64c-.99.36-1.66 1.3-1.66 2.36v13.36c0 1.09-.59 2.1-1.54 2.62l-4.07 2.27C10.94 35.88 10.44 36 9.95 36c-.51 0-1.03-.14-1.49-.41C7.54 35.05 7 34.1 7 33.05V14.83c0-1.93 1.04-3.72 2.72-4.68L22.8 2.71c1.08-.61 2.28-.83 3.45-.65.07.06.16.11.26.14C27.72 2.6 28.94 3.82 28.94 5.65z"></path></svg></span>
-                        <span class="home-category-copy">
-                            <span class="home-category-name">Office</span>
-                            <span class="home-category-desc">D'Office 2019 à Office 2024</span>
-                        </span>
-                        <span class="home-category-arrow" aria-hidden="true">&rarr;</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        <section class="home-business" aria-labelledby="home-business-title">
-            <div class="home-business__inner">
-                <h2 id="home-business-title" class="home-section-title">Pour les entreprises</h2>
-                <p class="home-catalog-lede">Licensing spécialisé, multi-postes et devis.</p>
-                <ul class="home-business__grid">
-                    <li><a class="home-business__card" href="microsoft-365-business-standard">Microsoft 365 Business</a></li>
-                    <li><a class="home-business__card" href="windows-server">Windows Server et SQL</a></li>
-                    <li><a class="home-business__card" href="strumenti">Project et Visio</a></li>
-                </ul>
-                <a class="home-business__cta" href="consultation">Demander un devis</a>
-            </div>
-        </section>
-
 
         <section class="home-guide" aria-labelledby="home-guide-title" data-home-guide>
             <div class="home-guide__figure" aria-hidden="true"></div>
@@ -1158,176 +1068,129 @@
         </section>
 
         <section class="home-guarantee" aria-labelledby="home-guarantee-title">
-            <p class="home-section-eyebrow">Garantie et sécurité</p>
-            <h2 id="home-guarantee-title" class="home-section-title">Achetez en toute tranquillité</h2>
-            <p class="home-guarantee__lede">Nous vous accompagnons pas à pas jusqu'à l'activation complète de la licence.</p>
-            <ul class="home-guarantee__grid">
-                <li class="home-guarantee__item">
-                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 8h-3v10h-5v-6h-2v6H6V11H3l9-8z"></path></svg></span>
-                    <div>
-                        <h3>Entreprise italienne</h3>
-                        <p>Siège social et numéro de TVA en Italie.</p>
+            <svg class="home-guarantee__watermark" viewBox="0 0 300 300" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path d="M150 20 L250 60 V150 C250 220 150 270 150 270 C150 270 50 220 50 150 V60 Z" opacity="0.08"/>
+                <path d="M110 145 L135 170 L190 115" opacity="0.08" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="60" cy="220" r="25" opacity="0.06"/>
+                <path d="M50 215 L57 225 L72 210" opacity="0.06"/>
+                <rect x="220" y="30" width="30" height="35" rx="4" opacity="0.06"/>
+            </svg>
+            <div class="home-guarantee__inner">
+                <div class="home-guarantee__intro">
+                    <p class="home-section-eyebrow">Garantie et sécurité</p>
+                    <h2 id="home-guarantee-title" class="home-section-title">Achetez en toute sécurité, de la commande à l'activation</h2>
+                    <p class="home-guarantee__lede">Licences numériques, paiements protégés et assistance en italien avant et après l'achat.</p>
+                    <hr class="home-guarantee__divider" />
+                    <div class="home-guarantee__tp">
+                        <div class="home-guarantee__tp-stars" aria-hidden="true">
+                            <svg viewBox="0 0 120 24" width="100" height="20">
+                                <g fill="#00b67a">
+                                    <rect x="0" y="2" width="20" height="20" rx="2"/>
+                                    <rect x="24" y="2" width="20" height="20" rx="2"/>
+                                    <rect x="48" y="2" width="20" height="20" rx="2"/>
+                                    <rect x="72" y="2" width="20" height="20" rx="2"/>
+                                    <rect x="96" y="2" width="20" height="20" rx="2"/>
+                                </g>
+                                <g fill="#ffffff">
+                                    <path d="M10 5.5l1.54 3.12 3.44.5-2.49 2.43.59 3.43L10 13.36l-3.08 1.62.59-3.43-2.49-2.43 3.44-.5z"/>
+                                    <path d="M34 5.5l1.54 3.12 3.44.5-2.49 2.43.59 3.43L34 13.36l-3.08 1.62.59-3.43-2.49-2.43 3.44-.5z"/>
+                                    <path d="M58 5.5l1.54 3.12 3.44.5-2.49 2.43.59 3.43L58 13.36l-3.08 1.62.59-3.43-2.49-2.43 3.44-.5z"/>
+                                    <path d="M82 5.5l1.54 3.12 3.44.5-2.49 2.43.59 3.43L82 13.36l-3.08 1.62.59-3.43-2.49-2.43 3.44-.5z"/>
+                                    <path d="M106 5.5l1.54 3.12 3.44.5-2.49 2.43.59 3.43L106 13.36l-3.08 1.62.59-3.43-2.49-2.43 3.44-.5z"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <span class="home-guarantee__tp-score">4,8/5 sur Trustpilot</span>
+                        <span class="home-guarantee__tp-count">94 avis</span>
                     </div>
-                </li>
-                <li class="home-guarantee__item">
-                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l6 6v14H6V2zm7 1.5V9h5.5L13 3.5zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"></path></svg></span>
-                    <div>
-                        <h3>Facture électronique</h3>
-                        <p>Disponible pour les particuliers et les entreprises.</p>
+                    <div class="home-guarantee__mini-trust">
+                    <div class="home-guarantee__mini-item">
+                        <span class="home-guarantee__mini-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><g clip-path="url(#italy-flag-clip)"><circle cx="16" cy="16" r="16" fill="#ffffff"/><path d="M0 0h10.67v32H0z" fill="#009246"/><path d="M21.33 0H32v32H21.33z" fill="#ce2b37"/></g><defs><clipPath id="italy-flag-clip"><circle cx="16" cy="16" r="16"/></clipPath></defs></svg></span>
+                        <div>
+                            <strong>Entreprise italienne</strong>
+                            <small>Siège et TVA en Italie</small>
+                        </div>
                     </div>
-                </li>
-                <li class="home-guarantee__item">
-                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 00-9 9v4a3 3 0 003 3h2v-8H5v1a7 7 0 1114 0v-1h-3v8h3a3 3 0 003-3v-4a9 9 0 00-9-9z"></path></svg></span>
-                    <div>
-                        <h3>Assistance en italien</h3>
-                        <p>Support après-vente par e-mail et WhatsApp.</p>
+                    <div class="home-guarantee__mini-item">
+                        <span class="home-guarantee__mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>
+                        <div>
+                            <strong>Paiements sécurisés</strong>
+                            <small>Stripe et PayPal</small>
+                        </div>
                     </div>
-                </li>
-                <li class="home-guarantee__item">
-                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 015 5v3h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2h1V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v3h6V7a3 3 0 00-3-3z"></path></svg></span>
-                    <div>
-                        <h3>Paiements protégés</h3>
-                        <p>Traités via Stripe et PayPal.</p>
                     </div>
+                    <a href="/fr/qui-sommes-nous" class="home-guarantee__about-link">Qui sommes-nous <span aria-hidden="true">&rarr;</span></a>
+                </div>
+                <ul class="home-guarantee__grid">
+                <li class="home-guarantee__card">
+                    <div class="home-guarantee__card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg></div>
+                    <h3 class="home-guarantee__card-title">Assistance en italien</h3>
+                    <p class="home-guarantee__card-body">Support après-vente par e-mail et WhatsApp.</p>
                 </li>
-                <li class="home-guarantee__item">
-                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" style="fill:none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg></span>
-                    <div>
-                        <h3>Droit de rétractation de 14 jours</h3>
-                        <p>Droit de rétractation pour les consommateurs de l'UE.</p>
-                    </div>
+                <li class="home-guarantee__card">
+                    <div class="home-guarantee__card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 13V6a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h9"/><path d="M22 6l-10 7L2 6"/><path d="M17 19h5"/><path d="M19 16l3 3-3 3"/></svg></div>
+                    <h3 class="home-guarantee__card-title">Livraison en 2-15 minutes</h3>
+                    <p class="home-guarantee__card-body">La licence arrive par e-mail immédiatement après le paiement.</p>
                 </li>
-                <li class="home-guarantee__item">
-                    <span class="home-guarantee__icon" aria-hidden="true"><svg viewBox="0 0 24 24" style="fill:none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="14" height="11" rx="1.5"></rect><path d="M1 7.5l7 5 7-5"></path><path d="M18 10h4M18 13h4M18 16h3"></path></svg></span>
-                    <div>
-                        <h3>Livraison en 2 à 15 minutes</h3>
-                        <p>Votre licence arrive par e-mail juste après le paiement.</p>
-                    </div>
+                <li class="home-guarantee__card">
+                    <div class="home-guarantee__card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                    <h3 class="home-guarantee__card-title">Paiements protégés</h3>
+                    <p class="home-guarantee__card-body">Transactions sécurisées avec Stripe et PayPal.</p>
                 </li>
-            </ul>
+                <li class="home-guarantee__card">
+                    <div class="home-guarantee__card-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><g clip-path="url(#italy-flag-clip)"><circle cx="16" cy="16" r="16" fill="#ffffff"/><path d="M0 0h10.67v32H0z" fill="#009246"/><path d="M21.33 0H32v32H21.33z" fill="#ce2b37"/></g><defs><clipPath id="italy-flag-clip"><circle cx="16" cy="16" r="16"/></clipPath></defs></svg></div>
+                    <h3 class="home-guarantee__card-title">Entreprise italienne</h3>
+                    <p class="home-guarantee__card-body">Siège et numéro de TVA en Italie. Transparence maximale.</p>
+                </li>
+                <li class="home-guarantee__card">
+                    <div class="home-guarantee__card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
+                    <h3 class="home-guarantee__card-title">Facture électronique</h3>
+                    <p class="home-guarantee__card-body">Facture disponible pour particuliers et entreprises.</p>
+                </li>
+                <li class="home-guarantee__card">
+                    <div class="home-guarantee__card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 2v6h-5M21.34 15.57a10 10 0 11-.57-8.38l5.67-5.67"/></svg></div>
+                    <h3 class="home-guarantee__card-title">14 jours de rétractation</h3>
+                    <p class="home-guarantee__card-body">Droit de rétractation pour les consommateurs UE.</p>
+                </li>
+                </ul>
+            </div>
         </section>
 
         <section class="home-reviews" aria-labelledby="home-reviews-title">
-            <div class="home-reviews__head">
-                <div>
-                    <p class="home-reviews__rating">
-                        <span class="home-reviews__tp">★ Trustpilot</span>
-                        <span class="home-reviews__stars" aria-hidden="true">★★★★★</span>
-                        <span class="home-reviews__count">(4,8/5 sur 94 avis)</span>
-                    </p>
+            <div class="home-reviews__inner">
+                <div class="home-reviews__intro">
                     <h2 id="home-reviews-title" class="home-section-title">Ce que disent nos clients</h2>
+                    <a class="home-reviews__cta" href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Lire tous les avis <span aria-hidden="true">&rarr;</span></a>
                 </div>
-                <a class="home-reviews__cta" href="https://fr.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Lire tous les avis</a>
-            </div>
-            <ul class="home-reviews__grid">
-                <li>
-                    <span class="home-reviews__name">Roberto Galoppini</span>
-                    <span class="home-reviews__stars" aria-hidden="true">★★★★★</span>
-                    <p>«Je viens d'acheter une copie de Microsoft 365, le code est arrivé 2 minutes après le paiement, j'ai pu renouveler mon compte pour 1 an, entreprise excellente !!»</p>
-                </li>
-                <li>
-                    <span class="home-reviews__name">Laura Ceccacci</span>
-                    <span class="home-reviews__stars" aria-hidden="true">★★★★★</span>
-                    <p>«Le produit est arrivé en temps réel, le support du fournisseur est exceptionnel, vraiment un distributeur sérieux à garder en tête pour l'avenir.»</p>
-                </li>
-                <li>
-                    <span class="home-reviews__name">Mario</span>
-                    <span class="home-reviews__stars" aria-hidden="true">★★★★★</span>
-                    <p>«Meilleur prix du web pour le produit original, assistance rapide et compétente, livraison immédiate par e-mail et aucun problème d'activation.»</p>
-                </li>
-            </ul>
-        </section>
-        <section id="prodotti-consigliati" class="home-recommended" aria-labelledby="prodotti-consigliati-title">
-            <div class="home-recommended__inner">
-                <header class="home-recommended__intro">
-                    <h2 id="prodotti-consigliati-title" class="home-section-title">Produits recommandés</h2>
-                    <p class="home-catalog-lede">Une sélection de solutions pour la productivité, le travail et la sécurité.</p>
-                </header>
-                <div class="product-grid home-recommended__grid">
-                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="3295"
-                    data-stripe-compare-at-amount="5499"
-                    data-stripe-product-sku="KASP_PLUS_1D_1A"
-                    data-discount-percent="40"
-                >
-                    <a href="kaspersky-plus" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/products/kaspersky-plus.webp?v=8aa0d15603" width="400" height="400" alt="Kaspersky Plus" decoding="async" loading="lazy" fetchpriority="low" class="product-card-img" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
+                <ul class="home-reviews__grid">
+                    <li class="home-reviews__card">
+                        <div class="home-reviews__card-head">
+                            <span class="home-reviews__name">Roberto Galoppini</span>
+                            <span class="home-reviews__quote-icon" aria-hidden="true">“</span>
                         </div>
-                        <p class="product-card-name">Kaspersky Plus</p>
-                        <p class="product-card-blurb">Abonnement 12 mois · 1 appareil · licence numérique</p>
-                    </a>
-                    <p class="product-card-price">€ 32,95</p>
-                    <div class="product-card-foot">
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
-                    </div>
-                </div>
-                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="2059"
-                    data-stripe-compare-at-amount="3999"
-                    data-stripe-product-sku="NORT_360DEL_3D_1A"
-                    data-discount-percent="49"
-                >
-                    <a href="norton-360-deluxe" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/products/norton-360-deluxe.webp?v=6cb83b581a" width="400" height="400" alt="Norton 360 Deluxe" decoding="async" loading="lazy" fetchpriority="low" class="product-card-img" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
+                        <span class="home-reviews__stars-amber" aria-hidden="true">★★★★★</span>
+                        <p>«Je viens d'acheter une copie de Microsoft 365, le code est arrivé 2 minutes après le paiement, j'ai pu renouveler mon compte pour 1 an, entreprise excellente !!»</p>
+                    </li>
+                    <li class="home-reviews__card">
+                        <div class="home-reviews__card-head">
+                            <span class="home-reviews__name">Laura Ceccacci</span>
+                            <span class="home-reviews__quote-icon" aria-hidden="true">“</span>
                         </div>
-                        <p class="product-card-name">Norton 360 Deluxe</p>
-                        <p class="product-card-blurb">Abonnement 12 mois · 3 appareils · licence numérique</p>
-                    </a>
-                    <p class="product-card-price">€ 20,59</p>
-                    <div class="product-card-foot">
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
-                    </div>
-                </div>
-                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="1544"
-                    data-stripe-compare-at-amount="3995"
-                    data-stripe-product-sku="1108923"
-                    data-discount-percent="61"
-                >
-                    <a href="mcafee-total-protection-5-devices" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/products/mcafee-total-protection-5-devices.webp?v=01afa8bd28" width="400" height="400" alt="McAfee Total Protection — 5 appareils" decoding="async" loading="lazy" fetchpriority="low" class="product-card-img" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
+                        <span class="home-reviews__stars-amber" aria-hidden="true">★★★★★</span>
+                        <p>«Le produit est arrivé en temps réel, le support du fournisseur est exceptionnel, vraiment un distributeur sérieux à garder en tête pour l'avenir.»</p>
+                    </li>
+                    <li class="home-reviews__card">
+                        <div class="home-reviews__card-head">
+                            <span class="home-reviews__name">Mario</span>
+                            <span class="home-reviews__quote-icon" aria-hidden="true">“</span>
                         </div>
-                        <p class="product-card-name">McAfee Total Protection — 5 appareils</p>
-                        <p class="product-card-blurb">Abonnement 12 mois · 5 appareils · licence numérique</p>
-                    </a>
-                    <p class="product-card-price">€ 15,44</p>
-                    <div class="product-card-foot">
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
-                    </div>
-                </div>
-                <div
-                    class="product-card"
-                    data-stripe-currency="eur"
-                    data-stripe-unit-amount="20900"
-                    data-stripe-compare-at-amount="29900"
-                    data-stripe-product-sku="EP2-06606"
-                    data-discount-percent="30"
-                >
-                    <a href="office-2024-home-business" class="product-card-body product-card--link">
-                        <div class="product-card-media">
-                            <img src="../asset/media/products/office-2024-home-business.webp?v=5e6a123f8c" width="400" height="400" alt="Office 2024 Home & Business" decoding="async" loading="lazy" fetchpriority="low" class="product-card-img" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
-                        </div>
-                        <p class="product-card-name">Office 2024 Home & Business</p>
-                        <p class="product-card-blurb">Licence perpétuelle · Word, Excel, PowerPoint, Outlook · PC/Mac</p>
-                    </a>
-                    <p class="product-card-price">€ 209,00</p>
-                    <div class="product-card-foot">
-                        <button type="button" class="btn-cta-primary product-card-add" data-cart-add>Ajouter au panier</button>
-                    </div>
-                </div>
-                </div>
-                <a class="home-catalog-more" href="#soluzioni">Découvrir toutes les solutions →</a>
+                        <span class="home-reviews__stars-amber" aria-hidden="true">★★★★★</span>
+                        <p>«Meilleur prix du web pour le produit original, assistance rapide et compétente, livraison immédiate par e-mail et aucun problème d'activation.»</p>
+                    </li>
+                </ul>
             </div>
         </section>
+
 </main>
 
     <aml-cookie-banner></aml-cookie-banner>
@@ -1416,7 +1279,7 @@
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script>
     <script src="../components/lang-suggest.js?v=74d7b5f03c" defer></script>
-    <script src="../components/header.js?v=766d52658b" defer></script>
+    <script src="../components/header.js?v=737a68f11e" defer></script>
     <script src="../components/footer.js?v=a9b6a8315d" defer></script>
 
         <script src="../js/home-protect.js?v=6c75c1d232" defer></script>

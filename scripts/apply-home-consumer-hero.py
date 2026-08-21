@@ -35,27 +35,27 @@ LANGS = ("it", "en", "fr", "de", "es")
 
 COPY = {
     "it": {
-        "h1_a": "Protezione originale", "h1_b": "consegna in 5–15 minuti.",
+        "h1_a": "Protezione originale", "h1_b": "consegna in 2–15 minuti.",
         "sub": "Antivirus e abbonamenti digitali originali. Attivazione sui portali ufficiali, assistenza in italiano, fattura disponibile.",
         "cta1": "Vedi l'antivirus",
     },
     "en": {
-        "h1_a": "Genuine protection", "h1_b": "delivered in 5–15 minutes.",
+        "h1_a": "Genuine protection", "h1_b": "delivered in 2–15 minutes.",
         "sub": "Original antivirus and digital subscriptions. Official-portal activation, human support, invoices available.",
         "cta1": "See antivirus",
     },
     "fr": {
-        "h1_a": "Protection originale", "h1_b": "livrée en 5–15 minutes.",
+        "h1_a": "Protection originale", "h1_b": "livrée en 2–15 minutes.",
         "sub": "Antivirus et abonnements numériques originaux. Activation sur les portails officiels, assistance humaine, facture disponible.",
         "cta1": "Voir l'antivirus",
     },
     "de": {
-        "h1_a": "Originaler Schutz", "h1_b": "in 5–15 Minuten geliefert.",
+        "h1_a": "Originaler Schutz", "h1_b": "in 2–15 Minuten geliefert.",
         "sub": "Originales Antivirus und digitale Abos. Aktivierung auf offiziellen Portalen, persönlicher Support, Rechnung verfügbar.",
         "cta1": "Antivirus ansehen",
     },
     "es": {
-        "h1_a": "Protección original", "h1_b": "entrega en 5–15 minutos.",
+        "h1_a": "Protección original", "h1_b": "entrega en 2–15 minutos.",
         "sub": "Antivirus y suscripciones digitales originales. Activación en portales oficiales, asistencia humana, factura disponible.",
         "cta1": "Ver antivirus",
     },
