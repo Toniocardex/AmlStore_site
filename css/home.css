@@ -1714,10 +1714,16 @@
 .m365-grid {
     display: grid;
     grid-template-columns: 1fr;
+    align-items: stretch;
     gap: 0.9rem;
     margin: 1.35rem 0 0;
     padding: 0;
     list-style: none;
+}
+
+.m365-grid > li {
+    display: flex;
+    flex-direction: column;
 }
 
 @media (min-width: 700px) {
@@ -1734,6 +1740,7 @@
 
 .m365-card {
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     min-width: 0;
     padding: 1.1rem 1.05rem 1rem;
