@@ -35,39 +35,34 @@ LANGS = ("it", "en", "fr", "de", "es")
 
 COPY = {
     "it": {
-        "h1_a": "Il tuo software", "h1_b": "pronto in 2–15 minuti.",
-        "sub": "Licenze digitali 100% originali per la tua casa, lo studio e la famiglia. "
-               "Attivazione immediata, nessun rinnovo automatico nascosto.",
-        "cta1": "Scopri Microsoft 365 Personal",
+        "h1_a": "Protezione originale", "h1_b": "consegna in 5–15 minuti.",
+        "sub": "Antivirus e abbonamenti digitali originali. Attivazione sui portali ufficiali, assistenza in italiano, fattura disponibile.",
+        "cta1": "Vedi l'antivirus",
     },
     "en": {
-        "h1_a": "Your software", "h1_b": "ready in 2–15 minutes.",
-        "sub": "100% genuine digital licences for your home, your studies and your family. "
-               "Instant activation, no hidden auto-renewal.",
-        "cta1": "Discover Microsoft 365 Personal",
+        "h1_a": "Genuine protection", "h1_b": "delivered in 5–15 minutes.",
+        "sub": "Original antivirus and digital subscriptions. Official-portal activation, human support, invoices available.",
+        "cta1": "See antivirus",
     },
     "fr": {
-        "h1_a": "Votre logiciel", "h1_b": "prêt en 2–15 minutes.",
-        "sub": "Des licences numériques 100 % originales pour votre maison, vos études et votre famille. "
-               "Activation immédiate, sans renouvellement automatique caché.",
-        "cta1": "Découvrir Microsoft 365 Personnel",
+        "h1_a": "Protection originale", "h1_b": "livrée en 5–15 minutes.",
+        "sub": "Antivirus et abonnements numériques originaux. Activation sur les portails officiels, assistance humaine, facture disponible.",
+        "cta1": "Voir l'antivirus",
     },
     "de": {
-        "h1_a": "Ihre Software", "h1_b": "in 2–15 Minuten bereit.",
-        "sub": "Zu 100 % originale digitale Lizenzen für Zuhause, Studium und Familie. "
-               "Sofortige Aktivierung, keine versteckte automatische Verlängerung.",
-        "cta1": "Microsoft 365 Personal entdecken",
+        "h1_a": "Originaler Schutz", "h1_b": "in 5–15 Minuten geliefert.",
+        "sub": "Originales Antivirus und digitale Abos. Aktivierung auf offiziellen Portalen, persönlicher Support, Rechnung verfügbar.",
+        "cta1": "Antivirus ansehen",
     },
     "es": {
-        "h1_a": "Tu software", "h1_b": "listo en 2–15 minutos.",
-        "sub": "Licencias digitales 100 % originales para tu casa, tus estudios y tu familia. "
-               "Activación inmediata, sin renovación automática oculta.",
-        "cta1": "Descubre Microsoft 365 Personal",
+        "h1_a": "Protección original", "h1_b": "entrega en 5–15 minutos.",
+        "sub": "Antivirus y suscripciones digitales originales. Activación en portales oficiales, asistencia humana, factura disponible.",
+        "cta1": "Ver antivirus",
     },
 }
 
-# Slug della scheda M365 Personal per lingua (le altre lingue usano lo stesso).
-PERSONAL = "microsoft-365-personal"
+# Slug della scheda antivirus.
+PERSONAL = "antivirus"
 
 
 def build(lang: str) -> str:

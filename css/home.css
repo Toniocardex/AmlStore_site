@@ -386,7 +386,7 @@
    affidarsi alla parita' nth-of-type e' fragile, ogni sezione aggiunta prima
    di lei ne cambia la parita' e la fa sbandierare a tutta pagina disallineata
    a sinistra, come successo aggiungendo .home-vendors. */
-.home-page > section:nth-of-type(even):not(.home-hero):not(.home-guide):not(.home-guarantee) {
+.home-page > section:nth-of-type(even):not(.home-hero):not(.home-guide):not(.home-guarantee):not(.home-protect):not(.home-m365-band):not(.home-business) {
     background: var(--aml-paper);
     margin-inline: calc(50% - 50vw);
     width: 100vw;
@@ -1314,4 +1314,586 @@
     .home-guide__option {
         transition: none;
     }
+}
+
+/* Security First — finder, M365 band, business band */
+.home-protect,
+.home-m365-band,
+.home-business {
+    padding: 2.5rem var(--aml-gutter, 1.25rem) 2.75rem;
+}
+
+.home-protect__inner,
+.home-m365-band__inner,
+.home-business__inner {
+    max-width: var(--aml-maxw, 1180px);
+    margin: 0 auto;
+}
+
+.home-business__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.home-business__card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.7rem 1.1rem;
+    border: 1px solid var(--aml-line);
+    border-radius: 999px;
+    background: var(--aml-surface);
+    color: var(--aml-ink);
+    font-weight: 650;
+    font-size: var(--aml-text-sm);
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.home-business__card:hover {
+    border-color: var(--aml-brand);
+    color: var(--aml-brand);
+}
+
+.home-business__card:focus-visible {
+    outline: 2px solid var(--aml-brand);
+    outline-offset: 2px;
+}
+
+.plan-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0 0;
+    align-items: stretch;
+}
+
+@media (min-width: 900px) {
+    .plan-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.15rem;
+        align-items: stretch;
+    }
+
+    .plan-grid.plan-grid--count-2 {
+        grid-template-columns: repeat(2, minmax(0, 280px));
+        justify-content: center;
+    }
+}
+
+.plan-card {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-width: 0;
+    padding: 1.35rem 1.25rem 1.2rem;
+    border: 1px solid var(--aml-line);
+    border-top: 3px solid var(--aml-slate-400);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.plan-card--plus {
+    border-top-color: var(--aml-brand);
+}
+
+.plan-card--premium {
+    border-top-color: var(--aml-navy);
+}
+
+/* Accento sottile per brand (solo il filo superiore, mai lo sfondo intero:
+   il sito deve restare Aml Store, non un mini-sito del produttore). */
+.plan-card--brand-norton {
+    border-top-color: #E8A400;
+}
+
+.plan-card--brand-eset {
+    border-top-color: #2B6CB0;
+}
+
+.plan-card--brand-mcafee {
+    border-top-color: #CC2936;
+}
+
+.plan-card--brand-bitdefender {
+    border-top-color: #E24329;
+}
+
+.plan-card.is-featured {
+    border-color: var(--aml-brand);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--aml-brand) 18%, transparent), var(--aml-shadow-sm);
+}
+
+@media (min-width: 900px) {
+    .plan-card.is-featured {
+        transform: translateY(-6px);
+    }
+}
+
+@media (min-width: 900px) {
+    .plan-card:not(.is-featured):hover {
+        transform: translateY(-3px);
+        border-color: color-mix(in srgb, var(--aml-ink) 14%, var(--aml-line));
+        box-shadow: var(--aml-shadow-md);
+    }
+
+    .plan-card.is-featured:hover {
+        box-shadow: 0 12px 30px color-mix(in srgb, var(--aml-brand) 24%, transparent), var(--aml-shadow-sm);
+    }
+}
+
+.plan-card__badge {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--aml-cta-bg);
+    color: var(--aml-cta-ink);
+    font-size: var(--aml-text-xs);
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: var(--aml-shadow-sm);
+}
+
+.plan-card__badge .plan-card__badge-icon {
+    margin-right: 0.3rem;
+}
+
+.plan-card.is-featured .plan-card__badge {
+    display: inline-flex;
+    align-items: center;
+}
+
+.plan-card__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.plan-card__brand-icon {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--aml-radius-sm);
+}
+
+.plan-card__brand-icon--wordmark {
+    width: auto;
+    max-width: 110px;
+    height: 24px;
+    border-radius: 0;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.plan-card__brand-text {
+    min-width: 0;
+}
+
+.plan-card__role {
+    margin: 0;
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--aml-ink-2);
+}
+
+.plan-card__name {
+    margin: 0.15rem 0 0;
+    font-size: 1.2rem;
+    font-weight: 750;
+    color: var(--aml-ink);
+    line-height: 1.25;
+}
+
+.plan-card__sub {
+    margin: 0.4rem 0 0;
+    font-size: var(--aml-text-sm);
+    line-height: 1.45;
+    color: var(--aml-ink-2);
+}
+
+.plan-card__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.3rem 0.5rem;
+    margin: 1rem 0 0;
+}
+
+.plan-card__price-sale {
+    font-size: var(--aml-text-price);
+    font-weight: var(--aml-weight-price);
+    letter-spacing: -0.02em;
+    color: var(--aml-ink);
+    line-height: 1;
+}
+
+.plan-card__price-msrp {
+    font-size: var(--aml-text-base);
+    font-weight: 600;
+    color: var(--aml-ink-2);
+    text-decoration: line-through;
+}
+
+.plan-card__price-period {
+    margin: 0.2rem 0 0;
+    font-size: var(--aml-text-xs);
+    font-weight: 600;
+    color: var(--aml-ink-2);
+}
+
+.plan-card__features {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    flex: 1 1 auto;
+}
+
+.plan-card__features li {
+    position: relative;
+    padding: 0.28rem 0 0.28rem 1.35rem;
+    font-size: var(--aml-text-sm);
+    line-height: 1.4;
+    color: var(--aml-ink);
+}
+
+.plan-card__features li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    width: 0.55rem;
+    height: 0.3rem;
+    border-left: 2px solid var(--aml-ok);
+    border-bottom: 2px solid var(--aml-ok);
+    transform: rotate(-45deg);
+}
+
+.plan-card__ideal {
+    margin: 0.85rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--aml-line);
+    font-size: var(--aml-text-sm);
+    color: var(--aml-ink-2);
+}
+
+.plan-card__ideal strong {
+    font-weight: 700;
+    color: var(--aml-ink);
+}
+
+.plan-card__devices {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin: 0.9rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--aml-line);
+}
+
+.plan-card__devices-label {
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--aml-ink-2);
+}
+
+.plan-card__devices-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 0.4rem 0.65rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-surface);
+    font-size: var(--aml-text-sm);
+    font-weight: 650;
+    color: var(--aml-ink);
+}
+
+.plan-card__devices-select {
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 0.4rem 0.65rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-surface);
+    color: var(--aml-ink);
+    font-family: inherit;
+    font-size: var(--aml-text-sm);
+    font-weight: 650;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.plan-card__devices-select:hover {
+    border-color: var(--aml-brand);
+}
+
+.plan-card__devices-select:focus-visible {
+    outline: 2px solid var(--aml-brand);
+    outline-offset: 2px;
+}
+
+.plan-card .btn-cta-primary {
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.plan-card__more {
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 0.55rem;
+    font-size: var(--aml-text-sm);
+    font-weight: 650;
+    color: var(--aml-brand);
+    text-decoration: none;
+}
+
+.plan-card__more:hover {
+    text-decoration: underline;
+}
+
+.plan-card__more:focus-visible {
+    outline: 2px solid var(--aml-brand);
+    outline-offset: 2px;
+}
+
+.home-protect__trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    margin: 1.35rem 0 0;
+    text-align: center;
+    font-size: var(--aml-text-sm);
+    color: var(--aml-ink-2);
+}
+
+.home-protect__trust::before {
+    content: "";
+    flex: 0 0 auto;
+    width: 0.55rem;
+    height: 0.3rem;
+    border-left: 2px solid var(--aml-ok);
+    border-bottom: 2px solid var(--aml-ok);
+    transform: rotate(-45deg);
+}
+
+.home-protect__all {
+    display: block;
+    margin: 0.5rem 0 0;
+    text-align: center;
+    font-weight: 650;
+    color: var(--aml-brand);
+}
+
+.m365-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    margin: 1.35rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+@media (min-width: 700px) {
+    .m365-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .m365-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.m365-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.1rem 1.05rem 1rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+@media (min-width: 700px) {
+    .m365-card:hover {
+        transform: translateY(-3px);
+        border-color: color-mix(in srgb, var(--aml-ink) 14%, var(--aml-line));
+        box-shadow: var(--aml-shadow-md);
+    }
+}
+
+.m365-card__name {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 750;
+    color: var(--aml-ink);
+}
+
+.m365-card__payoff {
+    margin: 0.35rem 0 0;
+    font-size: var(--aml-text-sm);
+    color: var(--aml-ink-2);
+}
+
+.m365-card__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.45rem;
+    margin: 0.85rem 0 0;
+}
+
+.m365-card__price-sale {
+    font-size: 1.5rem;
+    font-weight: var(--aml-weight-price);
+    letter-spacing: -0.02em;
+    color: var(--aml-ink);
+    line-height: 1;
+}
+
+.m365-card__price-msrp {
+    font-size: var(--aml-text-sm);
+    font-weight: 600;
+    color: var(--aml-ink-2);
+    text-decoration: line-through;
+}
+
+.m365-card__price-period {
+    margin: 0.15rem 0 0;
+    font-size: var(--aml-text-xs);
+    font-weight: 600;
+    color: var(--aml-ink-2);
+}
+
+.m365-card .btn-cta-primary {
+    width: 100%;
+    margin-top: auto;
+    justify-content: center;
+}
+
+.m365-card__more {
+    display: inline-flex;
+    justify-content: center;
+    margin-top: 0.45rem;
+    font-size: var(--aml-text-sm);
+    font-weight: 650;
+    color: var(--aml-brand);
+    text-decoration: none;
+}
+
+.m365-card__more:hover,
+.home-protect__all:hover,
+.home-m365-band__cta:hover {
+    text-decoration: underline;
+}
+
+.m365-card__more:focus-visible,
+.home-protect__all:focus-visible,
+.home-m365-band__cta:focus-visible {
+    outline: 2px solid var(--aml-brand);
+    outline-offset: 2px;
+}
+
+.home-m365-band__cta,
+.home-business__cta {
+    display: inline-flex;
+    margin-top: 1.1rem;
+    font-weight: 650;
+    color: var(--aml-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .plan-card.is-featured,
+    .plan-card:hover,
+    .m365-card:hover {
+        transform: none;
+    }
+}
+
+.av-filters,
+.protect-brand-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0 0 1.25rem;
+}
+
+.protect-brand-tabs {
+    justify-content: center;
+    margin: 1.5rem 0 1.25rem;
+}
+
+/* Stesso stile del menu select/pill dispositivi dentro le card (radius, bordo,
+   superficie), non il chip arancione pieno: qui sono controlli-tab, non CTA. */
+.av-filters [data-av-filter],
+.protect-brand-tabs button {
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--aml-line);
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-surface);
+    color: var(--aml-ink);
+    font-weight: 650;
+    font-size: var(--aml-text-sm);
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.av-filters [data-av-filter]:hover,
+.protect-brand-tabs button:hover {
+    border-color: var(--aml-brand);
+}
+
+.av-filters [data-av-filter].is-selected,
+.protect-brand-tabs button.is-selected {
+    border-color: var(--aml-brand);
+    background: color-mix(in srgb, var(--aml-brand) 10%, var(--aml-surface));
+    color: var(--aml-ink);
+    font-weight: 700;
+}
+
+.av-filters [data-av-filter]:focus-visible,
+.protect-brand-tabs button:focus-visible {
+    outline: 2px solid var(--aml-brand);
+    outline-offset: 2px;
+}
+
+.product-grid .product-card[hidden] {
+    display: none;
+}
+
+.plan-grid[hidden] {
+    display: none;
 }

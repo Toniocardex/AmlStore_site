@@ -302,7 +302,24 @@
         if (cl.contains('product-card')) return true;
         if (cl.contains('pricing-card')) return true;
         if (cl.contains('v2-pricing-card')) return true;
+        if (cl.contains('plan-card')) return true;
+        if (cl.contains('m365-card')) return true;
         return Boolean(normalizeSku(el));
+    }
+
+    /**
+     * Card "a griglia" (più prodotti diversi sulla stessa pagina): nome/immagine/link
+     * vanno letti dal DOM della card stessa, mai dal contesto di pagina (h1/immagine
+     * globale), che appartiene invece alla singola PDP mono-prodotto.
+     */
+    function isGridCard(el) {
+        if (!el || !el.classList) return false;
+        const cl = el.classList;
+        return cl.contains('product-card')
+            || cl.contains('plan-card')
+            || cl.contains('m365-card')
+            || cl.contains('pricing-card')
+            || cl.contains('v2-pricing-card');
     }
 
     function resolveLineRoot(btn) {
@@ -470,16 +487,25 @@
         }, 2200);
     }
 
-    function lineFromProductCard(root) {
+    /**
+     * Riga carrello per una card a griglia (product-card, plan-card, m365-card, ...):
+     * nome/immagine/link letti SEMPRE dalla card stessa (mai dal contesto pagina),
+     * cosi' più card con SKU diversi sulla stessa pagina non si "rubano" a vicenda i
+     * dati. data-cart-image è la fonte primaria dell'immagine (stessa convenzione
+     * slug->products/<slug>.webp usata ovunque); .product-card-img resta come
+     * fallback per le card che mostrano già una foto prodotto inline.
+     */
+    function lineFromCard(root) {
         const sku = normalizeSku(root);
         if (!sku) return null;
-        const nameEl = root.querySelector('.product-card-name');
+        const nameEl = root.querySelector('.product-card-name, .plan-card__name, .m365-card__name');
         const name = (nameEl && nameEl.textContent.trim()) || displayNameFromSku(sku);
         const currency = normalizeCurrency(root);
         const unitAmount = parseMinorAmount(root);
+        const cartImage = root.dataset.cartImage || root.getAttribute('data-cart-image') || '';
         const imgEl = root.querySelector('.product-card-img');
-        const image = normalizeImageSrc(imgEl && imgEl.getAttribute('src'));
-        const link = root.querySelector('a.product-card-body');
+        const image = normalizeImageSrc(cartImage || (imgEl && imgEl.getAttribute('src')));
+        const link = root.querySelector('a.product-card-body, .plan-card__more, .m365-card__more');
         let productPath = '';
         if (link && link.getAttribute('href')) {
             try {
@@ -569,8 +595,8 @@
             if (!btn) return;
             const lineRoot = resolveLineRoot(btn);
             if (!lineRoot) return;
-            const line = lineRoot.classList.contains('product-card')
-                ? lineFromProductCard(lineRoot)
+            const line = isGridCard(lineRoot)
+                ? lineFromCard(lineRoot)
                 : lineFromProductContext(lineRoot);
             if (!line) return;
             const next = mergeAdd(readLines(), line);

@@ -2159,6 +2159,41 @@
                         </a>
                     </div>
                     <nav class="header-nav nav-links" aria-label="Primary">
+                            <div class="nav-av-wrap">
+                                <div class="nav-av-inner">
+                                    <a href="${esc(hrefAntivirus)}" class="nav-av-root${isAvNavActive ? ' active' : ''}"><svg class="nav-root-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><span>${esc(t.navAntivirus)}</span></a>
+                                    <button type="button" class="nav-av-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navAvOpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-av-dropdown" role="menu">
+                                    <a href="${esc(hrefAntivirus)}" class="nav-av-dropdown__overview" role="menuitem"${isAvOverview ? ' aria-current="page"' : ''}>${esc(t.navAvOverview)}</a>
+                                    <a href="${esc(hrefAvMcafee)}" role="menuitem"${isAvMcafee ? ' aria-current="page"' : ''}>${esc(t.navAvMcafee)}</a>
+                                    <a href="${esc(hrefAvNorton)}" role="menuitem"${isAvNorton ? ' aria-current="page"' : ''}>${esc(t.navAvNorton)}</a>
+                                    <a href="${esc(hrefAvEset)}" role="menuitem"${isAvEset ? ' aria-current="page"' : ''}>${esc(t.navAvEset)}</a>
+                                    <a href="${esc(hrefAvBitdefender)}" role="menuitem"${isAvBitdefender ? ' aria-current="page"' : ''}>${esc(t.navAvBitdefender)}</a>
+                                    <a href="${esc(hrefAvKaspersky)}" role="menuitem"${isAvKaspersky ? ' aria-current="page"' : ''}>${esc(t.navAvKaspersky)}</a>
+                                    <a href="${esc(hrefStrumenti)}" role="menuitem"${isStrumentiOverview ? ' aria-current="page"' : ''}>${esc(t.navStrumenti)}</a>
+                                </div>
+                            </div>
+                            <div class="nav-m365-wrap">
+                                <div class="nav-m365-inner">
+                                    <a href="${esc(hrefM365Solutions)}" class="nav-m365-root${isM365NavActive ? ' active' : ''}"><svg class="nav-root-icon" viewBox="0 0 50 50" aria-hidden="true"><path d="M20.13,32.5c-2.79-1.69-4.53-4.77-4.53-8.04V8.9c0-1.63,0.39-3.19,1.11-4.57L7.54,9.88C4.74,11.57,3,14.65,3,17.92v14.15c0,1.59,0.42,3.14,1.16,4.5c0.69,1.12,1.67,2.06,2.88,2.74c2.53,1.42,5.51,1.36,7.98-0.15l8.02-4.9L20.13,32.5z M42.84,27.14l-8.44-5.05v2.29c0,3.25-1.72,6.33-4.49,8.02l-13.84,8.47c-1.52,0.93-3.19,1.42-4.87,1.46l8.93,5.41c1.5,0.91,3.19,1.36,4.87,1.36s3.37-0.45,4.87-1.36l9.08-5.5l3.52-2.13c0.27-0.16,0.53-0.34,0.78-0.54c0.08-0.05,0.16-0.11,0.23-0.16c0.65-0.53,1.23-1.13,1.71-1.79c0.02-0.03,0.04-0.06,0.06-0.09c0.77-1.19,1.2-2.59,1.19-4.06C46.43,30.85,45.09,28.48,42.84,27.14z M42.46,9.88l-9.57-5.79l-3.02-1.83C29.45,2,29.01,1.79,28.56,1.61c-0.49-0.21-1-0.37-1.51-0.47c-1.84-0.38-3.76-0.08-5.46,0.89c-2.5,1.43-3.99,3.99-3.99,6.87v9.6l2.8-1.65c2.84-1.67,6.36-1.66,9.19,0.03l14.28,8.54c1.29,0.78,2.35,1.81,3.12,3.02L47,17.92C47,14.65,45.26,11.57,42.46,9.88z"/></svg><span>${esc(t.navM365)}</span></a>
+                                    <button type="button" class="nav-m365-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navM365OpenSubmenu)}">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-m365-dropdown" role="menu">
+                                    <a href="${esc(hrefM365Solutions)}" class="nav-m365-dropdown__overview" role="menuitem">${esc(t.navM365Overview)}</a>
+                                    <a href="${esc(hrefM365Personal)}" role="menuitem">${esc(t.navM365Personal)}</a>
+                                    <a href="${esc(hrefM365Family)}" role="menuitem">${esc(t.navM365Family)}</a>
+                                    <a href="${esc(hrefM365Business)}" role="menuitem"${isM365Business ? ' aria-current="page"' : ''}>${esc(t.navM365Business)}</a>
+                                    <a href="${esc(hrefPacchetti)}" role="menuitem"${isPacchettiOverview ? ' aria-current="page"' : ''}>${esc(t.navPacchetti)}</a>
+                                    <a href="${esc(hrefBundleWinM365)}" role="menuitem"${isBundleWinM365 ? ' aria-current="page"' : ''}>${esc(t.navBundleWinM365)}</a>
+                                    <a href="${esc(hrefBundleM365Mcafee)}" role="menuitem"${isBundleM365Mcafee ? ' aria-current="page"' : ''}>${esc(t.navBundleM365Mcafee)}</a>
+                                    <a href="${esc(hrefBundleM365Kaspersky)}" role="menuitem"${isBundleM365Kaspersky ? ' aria-current="page"' : ''}>${esc(t.navBundleM365Kaspersky)}</a>
+                                </div>
+                            </div>
                             <div class="nav-win-wrap">
                                 <div class="nav-win-inner">
                                     <a href="${esc(hrefWinOverview)}" class="nav-win-root${isWinNavActive ? ' active' : ''}"><svg class="nav-root-icon" viewBox="0 0 14 14" aria-hidden="true"><path d="m 5.91827,7.331731 v 4.694712 L 1,11.348557 V 7.331731 h 4.91827 z m 0,-5.358174 V 6.725962 H 1 V 2.651443 z M 13,7.331731 V 13 L 6.45913,12.098557 V 7.331731 H 13 z M 13,1 V 6.725962 H 6.45913 V 1.901443 z"/></svg><span>${esc(t.navWindows)}</span></a>
@@ -2202,41 +2237,6 @@
                                     <a href="${esc(hrefProjectPro2024)}" role="menuitem"${isProjectPro2024 ? ' aria-current="page"' : ''}>${esc(t.navProjectPro2024)}</a>
                                     <a href="${esc(hrefVisioStd2024)}" role="menuitem"${isVisioStd2024 ? ' aria-current="page"' : ''}>${esc(t.navVisioStd2024)}</a>
                                     <a href="${esc(hrefVisioPro2024)}" role="menuitem"${isVisioPro2024 ? ' aria-current="page"' : ''}>${esc(t.navVisioPro2024)}</a>
-                                </div>
-                            </div>
-                            <div class="nav-m365-wrap">
-                                <div class="nav-m365-inner">
-                                    <a href="${esc(hrefM365Solutions)}" class="nav-m365-root${isM365NavActive ? ' active' : ''}"><svg class="nav-root-icon" viewBox="0 0 50 50" aria-hidden="true"><path d="M20.13,32.5c-2.79-1.69-4.53-4.77-4.53-8.04V8.9c0-1.63,0.39-3.19,1.11-4.57L7.54,9.88C4.74,11.57,3,14.65,3,17.92v14.15c0,1.59,0.42,3.14,1.16,4.5c0.69,1.12,1.67,2.06,2.88,2.74c2.53,1.42,5.51,1.36,7.98-0.15l8.02-4.9L20.13,32.5z M42.84,27.14l-8.44-5.05v2.29c0,3.25-1.72,6.33-4.49,8.02l-13.84,8.47c-1.52,0.93-3.19,1.42-4.87,1.46l8.93,5.41c1.5,0.91,3.19,1.36,4.87,1.36s3.37-0.45,4.87-1.36l9.08-5.5l3.52-2.13c0.27-0.16,0.53-0.34,0.78-0.54c0.08-0.05,0.16-0.11,0.23-0.16c0.65-0.53,1.23-1.13,1.71-1.79c0.02-0.03,0.04-0.06,0.06-0.09c0.77-1.19,1.2-2.59,1.19-4.06C46.43,30.85,45.09,28.48,42.84,27.14z M42.46,9.88l-9.57-5.79l-3.02-1.83C29.45,2,29.01,1.79,28.56,1.61c-0.49-0.21-1-0.37-1.51-0.47c-1.84-0.38-3.76-0.08-5.46,0.89c-2.5,1.43-3.99,3.99-3.99,6.87v9.6l2.8-1.65c2.84-1.67,6.36-1.66,9.19,0.03l14.28,8.54c1.29,0.78,2.35,1.81,3.12,3.02L47,17.92C47,14.65,45.26,11.57,42.46,9.88z"/></svg><span>${esc(t.navM365)}</span></a>
-                                    <button type="button" class="nav-m365-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navM365OpenSubmenu)}">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-m365-dropdown" role="menu">
-                                    <a href="${esc(hrefM365Solutions)}" class="nav-m365-dropdown__overview" role="menuitem">${esc(t.navM365Overview)}</a>
-                                    <a href="${esc(hrefM365Personal)}" role="menuitem">${esc(t.navM365Personal)}</a>
-                                    <a href="${esc(hrefM365Family)}" role="menuitem">${esc(t.navM365Family)}</a>
-                                    <a href="${esc(hrefM365Business)}" role="menuitem"${isM365Business ? ' aria-current="page"' : ''}>${esc(t.navM365Business)}</a>
-                                    <a href="${esc(hrefPacchetti)}" role="menuitem"${isPacchettiOverview ? ' aria-current="page"' : ''}>${esc(t.navPacchetti)}</a>
-                                    <a href="${esc(hrefBundleWinM365)}" role="menuitem"${isBundleWinM365 ? ' aria-current="page"' : ''}>${esc(t.navBundleWinM365)}</a>
-                                    <a href="${esc(hrefBundleM365Mcafee)}" role="menuitem"${isBundleM365Mcafee ? ' aria-current="page"' : ''}>${esc(t.navBundleM365Mcafee)}</a>
-                                    <a href="${esc(hrefBundleM365Kaspersky)}" role="menuitem"${isBundleM365Kaspersky ? ' aria-current="page"' : ''}>${esc(t.navBundleM365Kaspersky)}</a>
-                                </div>
-                            </div>
-                            <div class="nav-av-wrap">
-                                <div class="nav-av-inner">
-                                    <a href="${esc(hrefAntivirus)}" class="nav-av-root${isAvNavActive ? ' active' : ''}"><svg class="nav-root-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><span>${esc(t.navAntivirus)}</span></a>
-                                    <button type="button" class="nav-av-caret" aria-expanded="false" aria-haspopup="true" aria-label="${esc(t.navAvOpenSubmenu)}">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-av-dropdown" role="menu">
-                                    <a href="${esc(hrefAntivirus)}" class="nav-av-dropdown__overview" role="menuitem"${isAvOverview ? ' aria-current="page"' : ''}>${esc(t.navAvOverview)}</a>
-                                    <a href="${esc(hrefAvMcafee)}" role="menuitem"${isAvMcafee ? ' aria-current="page"' : ''}>${esc(t.navAvMcafee)}</a>
-                                    <a href="${esc(hrefAvNorton)}" role="menuitem"${isAvNorton ? ' aria-current="page"' : ''}>${esc(t.navAvNorton)}</a>
-                                    <a href="${esc(hrefAvEset)}" role="menuitem"${isAvEset ? ' aria-current="page"' : ''}>${esc(t.navAvEset)}</a>
-                                    <a href="${esc(hrefAvBitdefender)}" role="menuitem"${isAvBitdefender ? ' aria-current="page"' : ''}>${esc(t.navAvBitdefender)}</a>
-                                    <a href="${esc(hrefAvKaspersky)}" role="menuitem"${isAvKaspersky ? ' aria-current="page"' : ''}>${esc(t.navAvKaspersky)}</a>
-                                    <a href="${esc(hrefStrumenti)}" role="menuitem"${isStrumentiOverview ? ' aria-current="page"' : ''}>${esc(t.navStrumenti)}</a>
                                 </div>
                             </div>
                     </nav>
@@ -2317,6 +2317,30 @@
                     </div>
                     
                     <nav class="drawer-nav">
+                        <div class="drawer-av-block">
+                            <div class="drawer-av-heading">${esc(t.navAntivirus)}</div>
+                            <a href="${esc(hrefAntivirus)}"${isAvOverview ? ' class="active"' : ''}>${esc(t.navAvOverview)}</a>
+                            <a href="${esc(hrefAvMcafee)}"${isAvMcafee ? ' class="active"' : ''}>${esc(t.navAvMcafee)}</a>
+                            <a href="${esc(hrefAvNorton)}"${isAvNorton ? ' class="active"' : ''}>${esc(t.navAvNorton)}</a>
+                            <a href="${esc(hrefAvEset)}"${isAvEset ? ' class="active"' : ''}>${esc(t.navAvEset)}</a>
+                            <a href="${esc(hrefAvBitdefender)}"${isAvBitdefender ? ' class="active"' : ''}>${esc(t.navAvBitdefender)}</a>
+                            <a href="${esc(hrefAvKaspersky)}"${isAvKaspersky ? ' class="active"' : ''}>${esc(t.navAvKaspersky)}</a>
+                            <a href="${esc(hrefStrumenti)}"${isStrumentiOverview ? ' class="active"' : ''}>${esc(t.navStrumenti)}</a>
+                        </div>
+                        <div class="drawer-m365-block">
+                            <div class="drawer-m365-heading">${esc(t.navM365)}</div>
+                            <a href="${esc(hrefM365Solutions)}"${isM365Solutions ? ' class="active"' : ''}>${esc(t.navM365Overview)}</a>
+                            <a href="${esc(hrefM365Personal)}"${isM365Personal ? ' class="active"' : ''}>${esc(t.navM365Personal)}</a>
+                            <a href="${esc(hrefM365Family)}"${isM365Family ? ' class="active"' : ''}>${esc(t.navM365Family)}</a>
+                            <a href="${esc(hrefM365Business)}"${isM365Business ? ' class="active"' : ''}>${esc(t.navM365Business)}</a>
+                        </div>
+                        <div class="drawer-bundle-block">
+                            <div class="drawer-bundle-heading">${esc(t.navPacchetti)}</div>
+                            <a href="${esc(hrefPacchetti)}"${isPacchettiOverview ? ' class="active"' : ''}>${esc(t.navPacchetti)}</a>
+                            <a href="${esc(hrefBundleWinM365)}"${isBundleWinM365 ? ' class="active"' : ''}>${esc(t.navBundleWinM365)}</a>
+                            <a href="${esc(hrefBundleM365Mcafee)}"${isBundleM365Mcafee ? ' class="active"' : ''}>${esc(t.navBundleM365Mcafee)}</a>
+                            <a href="${esc(hrefBundleM365Kaspersky)}"${isBundleM365Kaspersky ? ' class="active"' : ''}>${esc(t.navBundleM365Kaspersky)}</a>
+                        </div>
                         <div class="drawer-win-block">
                             <div class="drawer-win-heading">${esc(t.navWindows)}</div>
                             <a href="${esc(hrefWinOverview)}"${isWinOverview ? ' class="active"' : ''}>${esc(t.navWindowsOverview)}</a>
@@ -2336,30 +2360,6 @@
                             <a href="${esc(hrefOffice2021HS)}"${isOffice2021HS ? ' class="active"' : ''}>${esc(t.navOffice2021HS)}</a>
                             <a href="${esc(hrefOffice2021PP)}"${isOffice2021PP ? ' class="active"' : ''}>${esc(t.navOffice2021PP)}</a>
                             <a href="${esc(hrefOffice2019PP)}"${isOffice2019PP ? ' class="active"' : ''}>${esc(t.navOffice2019PP)}</a>
-                        </div>
-                        <div class="drawer-m365-block">
-                            <div class="drawer-m365-heading">${esc(t.navM365)}</div>
-                            <a href="${esc(hrefM365Solutions)}"${isM365Solutions ? ' class="active"' : ''}>${esc(t.navM365Overview)}</a>
-                            <a href="${esc(hrefM365Personal)}"${isM365Personal ? ' class="active"' : ''}>${esc(t.navM365Personal)}</a>
-                            <a href="${esc(hrefM365Family)}"${isM365Family ? ' class="active"' : ''}>${esc(t.navM365Family)}</a>
-                            <a href="${esc(hrefM365Business)}"${isM365Business ? ' class="active"' : ''}>${esc(t.navM365Business)}</a>
-                        </div>
-                        <div class="drawer-bundle-block">
-                            <div class="drawer-bundle-heading">${esc(t.navPacchetti)}</div>
-                            <a href="${esc(hrefPacchetti)}"${isPacchettiOverview ? ' class="active"' : ''}>${esc(t.navPacchetti)}</a>
-                            <a href="${esc(hrefBundleWinM365)}"${isBundleWinM365 ? ' class="active"' : ''}>${esc(t.navBundleWinM365)}</a>
-                            <a href="${esc(hrefBundleM365Mcafee)}"${isBundleM365Mcafee ? ' class="active"' : ''}>${esc(t.navBundleM365Mcafee)}</a>
-                            <a href="${esc(hrefBundleM365Kaspersky)}"${isBundleM365Kaspersky ? ' class="active"' : ''}>${esc(t.navBundleM365Kaspersky)}</a>
-                        </div>
-                        <div class="drawer-av-block">
-                            <div class="drawer-av-heading">${esc(t.navAntivirus)}</div>
-                            <a href="${esc(hrefAntivirus)}"${isAvOverview ? ' class="active"' : ''}>${esc(t.navAvOverview)}</a>
-                            <a href="${esc(hrefAvMcafee)}"${isAvMcafee ? ' class="active"' : ''}>${esc(t.navAvMcafee)}</a>
-                            <a href="${esc(hrefAvNorton)}"${isAvNorton ? ' class="active"' : ''}>${esc(t.navAvNorton)}</a>
-                            <a href="${esc(hrefAvEset)}"${isAvEset ? ' class="active"' : ''}>${esc(t.navAvEset)}</a>
-                            <a href="${esc(hrefAvBitdefender)}"${isAvBitdefender ? ' class="active"' : ''}>${esc(t.navAvBitdefender)}</a>
-                            <a href="${esc(hrefAvKaspersky)}"${isAvKaspersky ? ' class="active"' : ''}>${esc(t.navAvKaspersky)}</a>
-                            <a href="${esc(hrefStrumenti)}"${isStrumentiOverview ? ' class="active"' : ''}>${esc(t.navStrumenti)}</a>
                         </div>
                     </nav>
                     

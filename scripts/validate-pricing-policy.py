@@ -35,7 +35,10 @@ META_PRICE_RE = re.compile(r'product:price:amount"\s+content="(\d+\.\d{2})"')
 JSONLD_PRICE_RE = re.compile(r'"price":\s*"(\d+\.\d{2})"')
 VISIBLE_PRICE_RE = re.compile(
     r'class="[^"]*(?:price-sale|product-card-price|sticky-cta__sale|pdp-final__price)[^"]*"'
-    r'[^>]*>\s*€\s*([\d.]+(?:,\d{2})?)'
+    # Alcune card (plan-card/m365-card) avvolgono la cifra in uno <span data-plan-price>
+    # separato dal simbolo € per poterla aggiornare via JS senza toccare il resto del nodo:
+    # il simbolo resta comunque adiacente e visibile, quindi va accettato un tag intermedio.
+    r'[^>]*>\s*€\s*(?:<[^>]+>\s*)?([\d.]+(?:,\d{2})?)'
 )
 
 errors = []

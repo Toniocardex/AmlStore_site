@@ -566,10 +566,10 @@ class EcommerceFooter extends HTMLElement {
                             <section class="nav-col" aria-labelledby="footer-catalog-${esc(activeLang.code)}">
                                 <h2 id="footer-catalog-${esc(activeLang.code)}" class="col-title">${esc(t.headingCatalog)}</h2>
                                 <ul class="link-list">
+                                    <li><a href="${esc(pageHref('antivirus'))}">${esc(t.prodAntivirus)}</a></li>
+                                    <li><a href="${esc(pageHref('microsoft-365-solutions'))}">${esc(t.prodM365)}</a></li>
                                     <li><a href="${esc(pageHref('sistemi-operativi'))}">${esc(t.prodOs)}</a></li>
                                     <li><a href="${esc(pageHref('suite-office'))}">${esc(t.prodOffice)}</a></li>
-                                    <li><a href="${esc(pageHref('microsoft-365-solutions'))}">${esc(t.prodM365)}</a></li>
-                                    <li><a href="${esc(pageHref('antivirus'))}">${esc(t.prodAntivirus)}</a></li>
                                 </ul>
                             </section>
 

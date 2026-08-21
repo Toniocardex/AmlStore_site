@@ -106,6 +106,48 @@ RECOMMENDED_COPY = {
 
 FEATURED = [
     {
+        "sku": "EAVH-N1-A2",
+        "slug": "eset-nod32-2-devices",
+        "template": "antivirus",
+        "image": "eset-nod32-2-devices.webp",
+        "image_src": "../asset/media/products/eset-nod32-2-devices.webp?v=6b73ff4288",
+        "card_name": {
+            "it": "ESET NOD32 — 2 dispositivi",
+            "en": "ESET NOD32 — 2 devices",
+            "fr": "ESET NOD32 — 2 appareils",
+            "de": "ESET NOD32 — 2 Geräte",
+            "es": "ESET NOD32 — 2 dispositivos",
+        },
+        "blurb": {
+            "it": "Abbonamento 12 mesi · 2 dispositivi · licenza digitale",
+            "en": "12-month subscription · 2 devices · digital licence",
+            "fr": "Abonnement 12 mois · 2 appareils · licence numérique",
+            "de": "12-Monats-Abo · 2 Geräte · digitale Lizenz",
+            "es": "Suscripción 12 meses · 2 dispositivos · licencia digital",
+        },
+    },
+    {
+        "sku": "KL1047TDAFS",
+        "slug": "kaspersky-premium-1-device",
+        "template": "antivirus",
+        "image": "kaspersky-premium-1-device.webp",
+        "image_src": "../asset/media/products/kaspersky-premium-1-device.webp?v=cd395b5601",
+        "card_name": {
+            "it": "Kaspersky Premium — 1 dispositivo",
+            "en": "Kaspersky Premium — 1 device",
+            "fr": "Kaspersky Premium — 1 appareil",
+            "de": "Kaspersky Premium — 1 Gerät",
+            "es": "Kaspersky Premium — 1 dispositivo",
+        },
+        "blurb": {
+            "it": "Abbonamento 12 mesi · 1 dispositivo · licenza digitale",
+            "en": "12-month subscription · 1 device · digital licence",
+            "fr": "Abonnement 12 mois · 1 appareil · licence numérique",
+            "de": "12-Monats-Abo · 1 Gerät · digitale Lizenz",
+            "es": "Suscripción 12 meses · 1 dispositivo · licencia digital",
+        },
+    },
+    {
         "sku": "6GQ-00092",
         "slug": "microsoft-365-family",
         "template": "m365",
@@ -157,22 +199,6 @@ FEATURED = [
         },
     },
     {
-        "sku": "FQC-10528",
-        "slug": "windows-11-pro",
-        "template": "windows",
-        "image": "microsoft-windows-11-home.webp",
-        "image_src": "../asset/media/products/windows-11-pro.webp?v=9f7915ebb5",
-        "card_name": "Windows 11 Pro",
-        "blurb": {
-            "it": "Licenza perpetua · BitLocker e Desktop remoto · ESD",
-            "en": "Perpetual licence · BitLocker and Remote Desktop · ESD",
-            "fr": "Licence perpétuelle · BitLocker et Bureau à distance · ESD",
-            "de": "Dauerlizenz · BitLocker und Remote Desktop · ESD",
-            "es": "Licencia perpetua · BitLocker y Escritorio remoto · ESD",
-        },
-        "lazy": True,
-    },
-    {
         "sku": "EP2-06798",
         "slug": "office-2024-home",
         "template": "office",
@@ -188,73 +214,9 @@ FEATURED = [
         },
         "lazy": True,
     },
-    {
-        "sku": "79G-05412",
-        "slug": "office-2021-home-student",
-        "template": "office",
-        "image": "microsoft-365-personal.webp",
-        "image_src": "../asset/media/products/office-2021-home-student.webp?v=0ccb66f48c",
-        "card_name": "Office 2021 Home & Student",
-        "blurb": {
-            "it": "Licenza perpetua · per studio e casa · Windows o Mac",
-            "en": "Perpetual licence · for home and study · Windows or Mac",
-            "fr": "Licence perpétuelle · maison et études · Windows ou Mac",
-            "de": "Dauerlizenz · für Zuhause und Studium · Windows oder Mac",
-            "es": "Licencia perpetua · hogar y estudio · Windows o Mac",
-        },
-        "lazy": True,
-    },
 ]
 
 RECOMMENDED = [
-    {
-        "sku": "EP2-06606",
-        "slug": "office-2024-home-business",
-        "template": "office",
-        "image": "office-2024-home-business.webp",
-        "card_name": "Office 2024 Home & Business",
-        "blurb": {
-            "it": "Licenza perpetua · Word, Excel, PowerPoint, Outlook · PC/Mac",
-            "en": "Perpetual licence · Word, Excel, PowerPoint, Outlook · PC/Mac",
-            "fr": "Licence perpétuelle · Word, Excel, PowerPoint, Outlook · PC/Mac",
-            "de": "Dauerlizenz · Word, Excel, PowerPoint, Outlook · PC/Mac",
-            "es": "Licencia perpetua · Word, Excel, PowerPoint, Outlook · PC/Mac",
-        },
-        "lazy": True,
-        "fetchpriority": "low",
-    },
-    {
-        "sku": "EP2-07001",
-        "slug": "project-professional-2024",
-        "template": "office",
-        "image": "project-professional-2024.webp",
-        "card_name": "Project Professional 2024",
-        "blurb": {
-            "it": "Licenza perpetua · pianificazione progetti · Windows",
-            "en": "Perpetual licence · project planning · Windows",
-            "fr": "Licence perpétuelle · planification de projets · Windows",
-            "de": "Dauerlizenz · Projektplanung · Windows",
-            "es": "Licencia perpetua · planificación de proyectos · Windows",
-        },
-        "lazy": True,
-        "fetchpriority": "low",
-    },
-    {
-        "sku": "P73-08328",
-        "slug": "windows-server-2022",
-        "template": "server",
-        "image": "windows-server-2022.webp",
-        "card_name": "Windows Server 2022 Standard",
-        "blurb": {
-            "it": "Licenza server · Standard · attivazione Microsoft",
-            "en": "Server licence · Standard · Microsoft activation",
-            "fr": "Licence serveur · Standard · activation Microsoft",
-            "de": "Serverlizenz · Standard · Microsoft-Aktivierung",
-            "es": "Licencia de servidor · Standard · activación Microsoft",
-        },
-        "lazy": True,
-        "fetchpriority": "low",
-    },
     {
         "sku": "KASP_PLUS_1D_1A",
         "slug": "kaspersky-plus",
@@ -267,6 +229,60 @@ RECOMMENDED = [
             "fr": "Abonnement 12 mois · 1 appareil · licence numérique",
             "de": "12-Monats-Abo · 1 Gerät · digitale Lizenz",
             "es": "Suscripción 12 meses · 1 dispositivo · licencia digital",
+        },
+        "lazy": True,
+        "fetchpriority": "low",
+    },
+    {
+        "sku": "NORT_360DEL_3D_1A",
+        "slug": "norton-360-deluxe",
+        "template": "antivirus",
+        "image": "norton-360-deluxe.webp",
+        "card_name": "Norton 360 Deluxe",
+        "blurb": {
+            "it": "Abbonamento 12 mesi · 3 dispositivi · licenza digitale",
+            "en": "12-month subscription · 3 devices · digital licence",
+            "fr": "Abonnement 12 mois · 3 appareils · licence numérique",
+            "de": "12-Monats-Abo · 3 Geräte · digitale Lizenz",
+            "es": "Suscripción 12 meses · 3 dispositivos · licencia digital",
+        },
+        "lazy": True,
+        "fetchpriority": "low",
+    },
+    {
+        "sku": "1108923",
+        "slug": "mcafee-total-protection-5-devices",
+        "template": "antivirus",
+        "image": "mcafee-total-protection-5-devices.webp",
+        "card_name": {
+            "it": "McAfee Total Protection — 5 dispositivi",
+            "en": "McAfee Total Protection — 5 devices",
+            "fr": "McAfee Total Protection — 5 appareils",
+            "de": "McAfee Total Protection — 5 Geräte",
+            "es": "McAfee Total Protection — 5 dispositivos",
+        },
+        "blurb": {
+            "it": "Abbonamento 12 mesi · 5 dispositivi · licenza digitale",
+            "en": "12-month subscription · 5 devices · digital licence",
+            "fr": "Abonnement 12 mois · 5 appareils · licence numérique",
+            "de": "12-Monats-Abo · 5 Geräte · digitale Lizenz",
+            "es": "Suscripción 12 meses · 5 dispositivos · licencia digital",
+        },
+        "lazy": True,
+        "fetchpriority": "low",
+    },
+    {
+        "sku": "EP2-06606",
+        "slug": "office-2024-home-business",
+        "template": "office",
+        "image": "office-2024-home-business.webp",
+        "card_name": "Office 2024 Home & Business",
+        "blurb": {
+            "it": "Licenza perpetua · Word, Excel, PowerPoint, Outlook · PC/Mac",
+            "en": "Perpetual licence · Word, Excel, PowerPoint, Outlook · PC/Mac",
+            "fr": "Licence perpétuelle · Word, Excel, PowerPoint, Outlook · PC/Mac",
+            "de": "Dauerlizenz · Word, Excel, PowerPoint, Outlook · PC/Mac",
+            "es": "Licencia perpetua · Word, Excel, PowerPoint, Outlook · PC/Mac",
         },
         "lazy": True,
         "fetchpriority": "low",
@@ -403,7 +419,7 @@ def patch_index(lang):
     text = PAYMENTS_STRIP_RE.sub("\n", text)
 
     cards = "".join(
-        product_card(lang, featured_prod(lang, p), labels, clean_price=True) for p in FEATURED
+        product_card(lang, featured_prod(lang, p), labels, clean_price=False) for p in FEATURED
     )
 
     if not CATALOG_SECTION_RE.search(text):
@@ -418,27 +434,24 @@ def patch_index(lang):
         </section>"""
     text = CATALOG_SECTION_RE.sub(catalog_section, text, count=1)
 
-    if not HERO_CATALOG_CTA_RE.search(text):
-        raise RuntimeError(f"hero catalog CTA not found in {path}")
-    text = HERO_CATALOG_CTA_RE.sub(
-        rf"\g<1>{copy['hero_catalog_cta']}\g<2>",
-        text,
-        count=1,
-    )
+    if HERO_CATALOG_CTA_RE.search(text):
+        text = HERO_CATALOG_CTA_RE.sub(
+            rf"\g<1>{copy['hero_catalog_cta']}\g<2>",
+            text,
+            count=1,
+        )
 
     # Drop legacy closing CTA and any previous recommended block (idempotent).
     text = CLOSING_RE.sub("\n", text)
     text = RECOMMENDED_SECTION_RE.sub("\n", text)
 
+    rec = recommended_section(lang)
     social = social_proof_section(lang)
     if SOCIAL_PROOF_RE.search(text):
         text = SOCIAL_PROOF_RE.sub(social, text, count=1)
+        text = SOCIAL_PROOF_RE.sub(lambda m: m.group(0).rstrip() + "\n" + rec, text, count=1)
     else:
-        raise RuntimeError(f"social proof section not found in {path}")
-
-    rec = recommended_section(lang)
-    # Insert recommended immediately after social proof (exactly once).
-    text = SOCIAL_PROOF_RE.sub(lambda m: m.group(0).rstrip() + "\n" + rec, text, count=1)
+        text = text.replace("</main>", rec + "</main>", 1)
 
     path.write_text(text, encoding="utf-8")
     print("updated", path.relative_to(ROOT))

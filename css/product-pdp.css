@@ -684,6 +684,20 @@ body { background: var(--page-bg); }
     color: var(--aml-ink);
 }
 
+.pdp-cross {
+    margin: 0 0 12px;
+    font-size: var(--aml-text-sm);
+}
+
+.pdp-cross a {
+    color: var(--aml-brand);
+    font-weight: 650;
+}
+
+.pdp-cross a:hover {
+    text-decoration: underline;
+}
+
 .pdp-btn-primary {
     display: inline-flex;
     align-items: center;

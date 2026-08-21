@@ -149,7 +149,7 @@
     <link rel="stylesheet" href="../css/header.css?v=a6e055a60c">
     <link rel="stylesheet" href="../css/footer.css?v=f621c4a6c3">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=6282dac7a0">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=d3517df88f">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script>window.__amlPaypalConfig = fetch("/api/paypal-config").then(function(r){return r.json();}).catch(function(){return null;});</script>
 </head>
@@ -173,6 +173,41 @@
                         </a>
                     </div>
                     <nav class="header-nav nav-links" aria-label="Primary">
+                            <div class="nav-av-wrap">
+                                <div class="nav-av-inner">
+                                    <a href="/fr/antivirus" class="nav-av-root active"><svg class="nav-root-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path></svg><span>Antivirus</span></a>
+                                    <button type="button" class="nav-av-caret" aria-expanded="false" aria-haspopup="true" aria-label="Ouvrir le sous-menu Antivirus">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-av-dropdown" role="menu">
+                                    <a href="/fr/antivirus" class="nav-av-dropdown__overview" role="menuitem">Catalogue antivirus</a>
+                                    <a href="/fr/mcafee-total-protection-1-device" role="menuitem">McAfee Total Protection</a>
+                                    <a href="/fr/norton-360-standard" role="menuitem" aria-current="page">Norton 360 Standard</a>
+                                    <a href="/fr/eset-nod32-1-device" role="menuitem">ESET NOD32</a>
+                                    <a href="/fr/bitdefender-plus-1-device" role="menuitem">Bitdefender Plus</a>
+                                    <a href="/fr/kaspersky-standard" role="menuitem">Kaspersky Standard</a>
+                                    <a href="/fr/strumenti" role="menuitem">Outils et plus</a>
+                                </div>
+                            </div>
+                            <div class="nav-m365-wrap">
+                                <div class="nav-m365-inner">
+                                    <a href="/fr/microsoft-365-solutions" class="nav-m365-root"><svg class="nav-root-icon" viewBox="0 0 50 50" aria-hidden="true"><path d="M20.13,32.5c-2.79-1.69-4.53-4.77-4.53-8.04V8.9c0-1.63,0.39-3.19,1.11-4.57L7.54,9.88C4.74,11.57,3,14.65,3,17.92v14.15c0,1.59,0.42,3.14,1.16,4.5c0.69,1.12,1.67,2.06,2.88,2.74c2.53,1.42,5.51,1.36,7.98-0.15l8.02-4.9L20.13,32.5z M42.84,27.14l-8.44-5.05v2.29c0,3.25-1.72,6.33-4.49,8.02l-13.84,8.47c-1.52,0.93-3.19,1.42-4.87,1.46l8.93,5.41c1.5,0.91,3.19,1.36,4.87,1.36s3.37-0.45,4.87-1.36l9.08-5.5l3.52-2.13c0.27-0.16,0.53-0.34,0.78-0.54c0.08-0.05,0.16-0.11,0.23-0.16c0.65-0.53,1.23-1.13,1.71-1.79c0.02-0.03,0.04-0.06,0.06-0.09c0.77-1.19,1.2-2.59,1.19-4.06C46.43,30.85,45.09,28.48,42.84,27.14z M42.46,9.88l-9.57-5.79l-3.02-1.83C29.45,2,29.01,1.79,28.56,1.61c-0.49-0.21-1-0.37-1.51-0.47c-1.84-0.38-3.76-0.08-5.46,0.89c-2.5,1.43-3.99,3.99-3.99,6.87v9.6l2.8-1.65c2.84-1.67,6.36-1.66,9.19,0.03l14.28,8.54c1.29,0.78,2.35,1.81,3.12,3.02L47,17.92C47,14.65,45.26,11.57,42.46,9.88z"></path></svg><span>Microsoft 365</span></a>
+                                    <button type="button" class="nav-m365-caret" aria-expanded="false" aria-haspopup="true" aria-label="Ouvrir le sous-menu Microsoft 365">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
+                                    </button>
+                                </div>
+                                <div class="nav-m365-dropdown" role="menu">
+                                    <a href="/fr/microsoft-365-solutions" class="nav-m365-dropdown__overview" role="menuitem">Vue d’ensemble de la suite</a>
+                                    <a href="/fr/microsoft-365-personal" role="menuitem">Microsoft 365 Personnel</a>
+                                    <a href="/fr/microsoft-365-family" role="menuitem">Microsoft 365 Famille</a>
+                                    <a href="/fr/microsoft-365-business-standard" role="menuitem">Microsoft 365 Business Standard</a>
+                                    <a href="/fr/pacchetti" role="menuitem">Packs</a>
+                                    <a href="/fr/bundle-windows-11-home-m365-personal" role="menuitem">Win11 + M365 Personal</a>
+                                    <a href="/fr/bundle-m365-personal-mcafee" role="menuitem">M365 + McAfee</a>
+                                    <a href="/fr/bundle-m365-personal-kaspersky" role="menuitem">M365 + Kaspersky</a>
+                                </div>
+                            </div>
                             <div class="nav-win-wrap">
                                 <div class="nav-win-inner">
                                     <a href="/fr/sistemi-operativi" class="nav-win-root"><svg class="nav-root-icon" viewBox="0 0 14 14" aria-hidden="true"><path d="m 5.91827,7.331731 v 4.694712 L 1,11.348557 V 7.331731 h 4.91827 z m 0,-5.358174 V 6.725962 H 1 V 2.651443 z M 13,7.331731 V 13 L 6.45913,12.098557 V 7.331731 H 13 z M 13,1 V 6.725962 H 6.45913 V 1.901443 z"></path></svg><span>Windows</span></a>
@@ -216,41 +251,6 @@
                                     <a href="/fr/project-professional-2024" role="menuitem">Project Professional 2024</a>
                                     <a href="/fr/visio-standard-2024" role="menuitem">Visio Standard 2024</a>
                                     <a href="/fr/visio-professional-2024" role="menuitem">Visio Professional 2024</a>
-                                </div>
-                            </div>
-                            <div class="nav-m365-wrap">
-                                <div class="nav-m365-inner">
-                                    <a href="/fr/microsoft-365-solutions" class="nav-m365-root"><svg class="nav-root-icon" viewBox="0 0 50 50" aria-hidden="true"><path d="M20.13,32.5c-2.79-1.69-4.53-4.77-4.53-8.04V8.9c0-1.63,0.39-3.19,1.11-4.57L7.54,9.88C4.74,11.57,3,14.65,3,17.92v14.15c0,1.59,0.42,3.14,1.16,4.5c0.69,1.12,1.67,2.06,2.88,2.74c2.53,1.42,5.51,1.36,7.98-0.15l8.02-4.9L20.13,32.5z M42.84,27.14l-8.44-5.05v2.29c0,3.25-1.72,6.33-4.49,8.02l-13.84,8.47c-1.52,0.93-3.19,1.42-4.87,1.46l8.93,5.41c1.5,0.91,3.19,1.36,4.87,1.36s3.37-0.45,4.87-1.36l9.08-5.5l3.52-2.13c0.27-0.16,0.53-0.34,0.78-0.54c0.08-0.05,0.16-0.11,0.23-0.16c0.65-0.53,1.23-1.13,1.71-1.79c0.02-0.03,0.04-0.06,0.06-0.09c0.77-1.19,1.2-2.59,1.19-4.06C46.43,30.85,45.09,28.48,42.84,27.14z M42.46,9.88l-9.57-5.79l-3.02-1.83C29.45,2,29.01,1.79,28.56,1.61c-0.49-0.21-1-0.37-1.51-0.47c-1.84-0.38-3.76-0.08-5.46,0.89c-2.5,1.43-3.99,3.99-3.99,6.87v9.6l2.8-1.65c2.84-1.67,6.36-1.66,9.19,0.03l14.28,8.54c1.29,0.78,2.35,1.81,3.12,3.02L47,17.92C47,14.65,45.26,11.57,42.46,9.88z"></path></svg><span>Microsoft 365</span></a>
-                                    <button type="button" class="nav-m365-caret" aria-expanded="false" aria-haspopup="true" aria-label="Ouvrir le sous-menu Microsoft 365">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-m365-dropdown" role="menu">
-                                    <a href="/fr/microsoft-365-solutions" class="nav-m365-dropdown__overview" role="menuitem">Vue d’ensemble de la suite</a>
-                                    <a href="/fr/microsoft-365-personal" role="menuitem">Microsoft 365 Personnel</a>
-                                    <a href="/fr/microsoft-365-family" role="menuitem">Microsoft 365 Famille</a>
-                                    <a href="/fr/microsoft-365-business-standard" role="menuitem">Microsoft 365 Business Standard</a>
-                                    <a href="/fr/pacchetti" role="menuitem">Packs</a>
-                                    <a href="/fr/bundle-windows-11-home-m365-personal" role="menuitem">Win11 + M365 Personal</a>
-                                    <a href="/fr/bundle-m365-personal-mcafee" role="menuitem">M365 + McAfee</a>
-                                    <a href="/fr/bundle-m365-personal-kaspersky" role="menuitem">M365 + Kaspersky</a>
-                                </div>
-                            </div>
-                            <div class="nav-av-wrap">
-                                <div class="nav-av-inner">
-                                    <a href="/fr/antivirus" class="nav-av-root active"><svg class="nav-root-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path></svg><span>Antivirus</span></a>
-                                    <button type="button" class="nav-av-caret" aria-expanded="false" aria-haspopup="true" aria-label="Ouvrir le sous-menu Antivirus">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-av-dropdown" role="menu">
-                                    <a href="/fr/antivirus" class="nav-av-dropdown__overview" role="menuitem">Catalogue antivirus</a>
-                                    <a href="/fr/mcafee-total-protection-1-device" role="menuitem">McAfee Total Protection</a>
-                                    <a href="/fr/norton-360-standard" role="menuitem" aria-current="page">Norton 360 Standard</a>
-                                    <a href="/fr/eset-nod32-1-device" role="menuitem">ESET NOD32</a>
-                                    <a href="/fr/bitdefender-plus-1-device" role="menuitem">Bitdefender Plus</a>
-                                    <a href="/fr/kaspersky-standard" role="menuitem">Kaspersky Standard</a>
-                                    <a href="/fr/strumenti" role="menuitem">Outils et plus</a>
                                 </div>
                             </div>
                     </nav>
@@ -336,6 +336,30 @@
                     </div>
                     
                     <nav class="drawer-nav">
+                        <div class="drawer-av-block">
+                            <div class="drawer-av-heading">Antivirus</div>
+                            <a href="/fr/antivirus">Catalogue antivirus</a>
+                            <a href="/fr/mcafee-total-protection-1-device">McAfee Total Protection</a>
+                            <a href="/fr/norton-360-standard" class="active">Norton 360 Standard</a>
+                            <a href="/fr/eset-nod32-1-device">ESET NOD32</a>
+                            <a href="/fr/bitdefender-plus-1-device">Bitdefender Plus</a>
+                            <a href="/fr/kaspersky-standard">Kaspersky Standard</a>
+                            <a href="/fr/strumenti">Outils et plus</a>
+                        </div>
+                        <div class="drawer-m365-block">
+                            <div class="drawer-m365-heading">Microsoft 365</div>
+                            <a href="/fr/microsoft-365-solutions">Vue d’ensemble de la suite</a>
+                            <a href="/fr/microsoft-365-personal">Microsoft 365 Personnel</a>
+                            <a href="/fr/microsoft-365-family">Microsoft 365 Famille</a>
+                            <a href="/fr/microsoft-365-business-standard">Microsoft 365 Business Standard</a>
+                        </div>
+                        <div class="drawer-bundle-block">
+                            <div class="drawer-bundle-heading">Packs</div>
+                            <a href="/fr/pacchetti">Packs</a>
+                            <a href="/fr/bundle-windows-11-home-m365-personal">Win11 + M365 Personal</a>
+                            <a href="/fr/bundle-m365-personal-mcafee">M365 + McAfee</a>
+                            <a href="/fr/bundle-m365-personal-kaspersky">M365 + Kaspersky</a>
+                        </div>
                         <div class="drawer-win-block">
                             <div class="drawer-win-heading">Windows</div>
                             <a href="/fr/sistemi-operativi">Systèmes d'exploitation</a>
@@ -355,30 +379,6 @@
                             <a href="/fr/office-2021-home-student">Office 2021 Home &amp; Student</a>
                             <a href="/fr/office-2021-professional-plus">Office 2021 Pro Plus</a>
                             <a href="/fr/office-2019-professional-plus">Office 2019 Pro Plus</a>
-                        </div>
-                        <div class="drawer-m365-block">
-                            <div class="drawer-m365-heading">Microsoft 365</div>
-                            <a href="/fr/microsoft-365-solutions">Vue d’ensemble de la suite</a>
-                            <a href="/fr/microsoft-365-personal">Microsoft 365 Personnel</a>
-                            <a href="/fr/microsoft-365-family">Microsoft 365 Famille</a>
-                            <a href="/fr/microsoft-365-business-standard">Microsoft 365 Business Standard</a>
-                        </div>
-                        <div class="drawer-bundle-block">
-                            <div class="drawer-bundle-heading">Packs</div>
-                            <a href="/fr/pacchetti">Packs</a>
-                            <a href="/fr/bundle-windows-11-home-m365-personal">Win11 + M365 Personal</a>
-                            <a href="/fr/bundle-m365-personal-mcafee">M365 + McAfee</a>
-                            <a href="/fr/bundle-m365-personal-kaspersky">M365 + Kaspersky</a>
-                        </div>
-                        <div class="drawer-av-block">
-                            <div class="drawer-av-heading">Antivirus</div>
-                            <a href="/fr/antivirus">Catalogue antivirus</a>
-                            <a href="/fr/mcafee-total-protection-1-device">McAfee Total Protection</a>
-                            <a href="/fr/norton-360-standard" class="active">Norton 360 Standard</a>
-                            <a href="/fr/eset-nod32-1-device">ESET NOD32</a>
-                            <a href="/fr/bitdefender-plus-1-device">Bitdefender Plus</a>
-                            <a href="/fr/kaspersky-standard">Kaspersky Standard</a>
-                            <a href="/fr/strumenti">Outils et plus</a>
                         </div>
                     </nav>
                     
@@ -482,6 +482,11 @@
                     <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>Disponible · livraison immédiate</span>
                     <span class="pdp-avail__eta">E-mail en 2–15 min</span>
                 </p>
+                                <p class="pdp-plans__label" id="pdp-plans-label">Choisissez la version</p>
+                <div class="pdp-plans" role="group" aria-labelledby="pdp-plans-label">
+                    <span class="pdp-plan is-current" aria-current="true"><b>Standard</b><span>avec renouvellement · € 15,44</span></span>
+                    <a class="pdp-plan" href="/fr/norton-360-standard-no-sub"><b>Standard</b><span>sans renouvellement auto · € 19,56</span></a>
+                </div>
                 <p class="pdp-buy__label">Prix AML Store<span class="pdp-price-badge" aria-label="−49%">−49% REMISE</span></p>
 
                 <div class="pdp-price-row" role="group" aria-label="Prix">
@@ -496,6 +501,7 @@
                     <span class="pdp-meta-chip"><strong>Zone d'activation</strong> Union européenne / EEE</span>
                 </p>
 
+                                <p class="pdp-cross"><a href="/fr/norton-360-deluxe">Voir Norton 360 Deluxe (3 appareils)</a></p>
                 <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/fr/checkout">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Acheter maintenant
@@ -724,10 +730,10 @@
                             <section class="nav-col" aria-labelledby="footer-catalog-fr">
                                 <h2 id="footer-catalog-fr" class="col-title">Catalogue</h2>
                                 <ul class="link-list">
+                                    <li><a href="/fr/antivirus">Antivirus</a></li>
+                                    <li><a href="/fr/microsoft-365-solutions">Microsoft 365</a></li>
                                     <li><a href="/fr/sistemi-operativi">Windows</a></li>
                                     <li><a href="/fr/suite-office">Office</a></li>
-                                    <li><a href="/fr/microsoft-365-solutions">Microsoft 365</a></li>
-                                    <li><a href="/fr/antivirus">Antivirus</a></li>
                                 </ul>
                             </section>
 
@@ -772,7 +778,7 @@
                 </footer>
             </ecommerce-footer>
     <script src="../js/locale-path.js?v=e47f0483f7"></script>
-    <script src="../js/cart.js?v=84a09d6241" defer></script>
+    <script src="../js/cart.js?v=8eddb4fe5c" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
     <script src="../js/product-v3.js?v=cc997542a2" defer></script>

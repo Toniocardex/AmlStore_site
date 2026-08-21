@@ -1628,6 +1628,16 @@ def _render_compare(compare, lang):
 # e dati strutturati: il controllo ha lo stesso aspetto ma naviga, così non si
 # tocca né il carrello né la SEO. Se lo SKU non appartiene a un gruppo, lo
 # switcher non viene emesso e l'hero resta invariato.
+def _dev_sub(n):
+    return {
+        "it": f"{n} dispositiv{'o' if n == 1 else 'i'}",
+        "en": f"{n} device{'s' if n != 1 else ''}",
+        "de": f"{n} Gerät{'e' if n != 1 else ''}",
+        "fr": f"{n} appareil{'s' if n != 1 else ''}",
+        "es": f"{n} dispositivo{'s' if n != 1 else ''}",
+    }
+
+
 VARIANT_SETS = {
     "m365-consumer": [
         {"sku": "QQ2-00012", "slug": "microsoft-365-personal", "label": "Personal",
@@ -1637,7 +1647,142 @@ VARIANT_SETS = {
          "sub": {"it": "fino a 6 utenti", "en": "up to 6 users", "de": "bis zu 6 Nutzer",
                  "fr": "jusqu'à 6 utilisateurs", "es": "hasta 6 usuarios"}},
     ],
+    "kaspersky-premium": [
+        {"sku": "KL1047TDAFS", "slug": "kaspersky-premium-1-device", "label": "1",
+         "sub": _dev_sub(1)},
+        {"sku": "KL1047GDCFS1", "slug": "kaspersky-premium-3-devices", "label": "3",
+         "sub": _dev_sub(3)},
+        {"sku": "KL1047GDEFS", "slug": "kaspersky-premium-5-devices", "label": "5",
+         "sub": _dev_sub(5)},
+        {"sku": "KL1047GDKFS", "slug": "kaspersky-premium-10-devices", "label": "10",
+         "sub": _dev_sub(10)},
+    ],
+    "eset-nod32": [
+        {"sku": "EAVH-N1-A1", "slug": "eset-nod32-1-device", "label": "1", "sub": _dev_sub(1)},
+        {"sku": "EAVH-N1-A2", "slug": "eset-nod32-2-devices", "label": "2", "sub": _dev_sub(2)},
+        {"sku": "EAVH-N1-A3", "slug": "eset-nod32-3-devices", "label": "3", "sub": _dev_sub(3)},
+        {"sku": "EAVH-N1-A5", "slug": "eset-nod32-5-devices", "label": "5", "sub": _dev_sub(5)},
+        {"sku": "EAVH-N1-A10", "slug": "eset-nod32-10-devices", "label": "10", "sub": _dev_sub(10)},
+    ],
+    "bitdefender-plus": [
+        {"sku": "7470A", "slug": "bitdefender-plus-1-device", "label": "1", "sub": _dev_sub(1)},
+        {"sku": "TL11012001-EN", "slug": "bitdefender-plus-3-devices", "label": "3", "sub": _dev_sub(3)},
+        {"sku": "TL11012001-EN-5D", "slug": "bitdefender-plus-5-devices", "label": "5", "sub": _dev_sub(5)},
+        {"sku": "TL11011010-DE", "slug": "bitdefender-plus-10-devices", "label": "10", "sub": _dev_sub(10)},
+    ],
+    "mcafee-total": [
+        {"sku": "1108921", "slug": "mcafee-total-protection-1-device", "label": "1", "sub": _dev_sub(1)},
+        {"sku": "1108923", "slug": "mcafee-total-protection-5-devices", "label": "5", "sub": _dev_sub(5)},
+        {"sku": "MTP00MNRXRAAD", "slug": "mcafee-total-protection-10-devices", "label": "10", "sub": _dev_sub(10)},
+    ],
+    "norton-standard": [
+        {"sku": "21395096E7", "slug": "norton-360-standard", "label": "Standard",
+         "sub": {"it": "con rinnovo", "en": "with renewal", "de": "mit Verlängerung",
+                 "fr": "avec renouvellement", "es": "con renovación"}},
+        {"sku": "P1433901", "slug": "norton-360-standard-no-sub", "label": "Standard",
+         "sub": {"it": "senza rinnovo automatico", "en": "no auto-renewal", "de": "ohne Auto-Verlängerung",
+                 "fr": "sans renouvellement auto", "es": "sin renovación automática"}},
+    ],
+    "norton-deluxe": [
+        {"sku": "NORT_360DEL_3D_1A", "slug": "norton-360-deluxe", "label": "Deluxe",
+         "sub": {"it": "3 dispositivi · con rinnovo", "en": "3 devices · with renewal",
+                 "de": "3 Geräte · mit Verlängerung", "fr": "3 appareils · avec renouvellement",
+                 "es": "3 dispositivos · con renovación"}},
+        {"sku": "NORT_360DEL_3D_1A-NOABB", "slug": "norton-360-deluxe-no-sub", "label": "Deluxe",
+         "sub": {"it": "3 dispositivi · senza rinnovo automatico", "en": "3 devices · no auto-renewal",
+                 "de": "3 Geräte · ohne Auto-Verlängerung", "fr": "3 appareils · sans renouvellement auto",
+                 "es": "3 dispositivos · sin renovación automática"}},
+    ],
 }
+
+KASPERSKY_SKUS = {
+    "KASP_STD_1D_1A", "KASP_PLUS_1D_1A",
+    "KL1047TDAFS", "KL1047GDCFS1", "KL1047GDEFS", "KL1047GDKFS",
+}
+
+KASPERSKY_PARTNER = {
+    "it": {"label": "Rivenditore autorizzato Kaspersky",
+           "text": "Licenze originali con attivazione sul portale ufficiale."},
+    "en": {"label": "Authorised Kaspersky reseller",
+           "text": "Genuine licences, activated on the official portal."},
+    "fr": {"label": "Revendeur agréé Kaspersky",
+           "text": "Licences originales, activation sur le portail officiel."},
+    "de": {"label": "Autorisierter Kaspersky-Fachhändler",
+           "text": "Originallizenzen, Aktivierung über das offizielle Portal."},
+    "es": {"label": "Revendedor autorizado Kaspersky",
+           "text": "Licencias originales con activación en el portal oficial."},
+}
+
+NORTON_CROSS = {
+    "21395096E7": ("norton-360-deluxe", {
+        "it": "Passa a Norton 360 Deluxe (3 dispositivi)",
+        "en": "See Norton 360 Deluxe (3 devices)",
+        "fr": "Voir Norton 360 Deluxe (3 appareils)",
+        "de": "Zu Norton 360 Deluxe (3 Geräte)",
+        "es": "Ver Norton 360 Deluxe (3 dispositivos)",
+    }),
+    "P1433901": ("norton-360-deluxe-no-sub", {
+        "it": "Passa a Norton 360 Deluxe senza rinnovo automatico",
+        "en": "See Norton 360 Deluxe with no auto-renewal",
+        "fr": "Voir Norton 360 Deluxe sans renouvellement auto",
+        "de": "Zu Norton 360 Deluxe ohne Auto-Verlängerung",
+        "es": "Ver Norton 360 Deluxe sin renovación automática",
+    }),
+    "NORT_360DEL_3D_1A": ("norton-360-standard", {
+        "it": "Preferisci Norton 360 Standard (1 dispositivo)",
+        "en": "Prefer Norton 360 Standard (1 device)",
+        "fr": "Préférer Norton 360 Standard (1 appareil)",
+        "de": "Lieber Norton 360 Standard (1 Gerät)",
+        "es": "Prefieres Norton 360 Standard (1 dispositivo)",
+    }),
+    "NORT_360DEL_3D_1A-NOABB": ("norton-360-standard-no-sub", {
+        "it": "Preferisci Norton 360 Standard senza rinnovo automatico",
+        "en": "Prefer Norton 360 Standard with no auto-renewal",
+        "fr": "Préférer Norton 360 Standard sans renouvellement auto",
+        "de": "Lieber Norton 360 Standard ohne Auto-Verlängerung",
+        "es": "Prefieres Norton 360 Standard sin renovación automática",
+    }),
+}
+
+KASPERSKY_CROSS = {
+    "KASP_STD_1D_1A": ("kaspersky-plus", {
+        "it": "Confronta Kaspersky Plus",
+        "en": "Compare Kaspersky Plus",
+        "fr": "Comparer Kaspersky Plus",
+        "de": "Kaspersky Plus vergleichen",
+        "es": "Comparar Kaspersky Plus",
+    }),
+    "KASP_PLUS_1D_1A": ("kaspersky-standard", {
+        "it": "Confronta Kaspersky Standard",
+        "en": "Compare Kaspersky Standard",
+        "fr": "Comparer Kaspersky Standard",
+        "de": "Kaspersky Standard vergleichen",
+        "es": "Comparar Kaspersky Standard",
+    }),
+}
+
+
+def _render_kaspersky_partner(sku, lang):
+    if sku not in KASPERSKY_SKUS:
+        return ""
+    t = KASPERSKY_PARTNER[lang]
+    return (
+        f'                <p class="pdp-meta-row pdp-meta-row--partner" role="group" '
+        f'aria-label="{t["label"]}">\n'
+        f'                    <span class="pdp-meta-chip"><strong>{t["label"]}</strong> {t["text"]}</span>\n'
+        f'                </p>\n'
+    )
+
+
+def _render_cross_sell(sku, lang):
+    spec = NORTON_CROSS.get(sku) or KASPERSKY_CROSS.get(sku)
+    if not spec:
+        return ""
+    slug, labels = spec
+    label = labels.get(lang) or labels["en"]
+    return (
+        f'                <p class="pdp-cross"><a href="/{lang}/{slug}">{label}</a></p>\n'
+    )
 
 VARIANT_OF = {
     v["sku"]: name for name, variants in VARIANT_SETS.items() for v in variants
@@ -2182,7 +2327,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                 data-stripe-compare-at-amount="{compare}"
                 data-stripe-product-sku="{sku}"
                 data-discount-percent="{disc}"{_physical_attr(sku)}>
-{_render_avail_banner(lang, sku)}{plan_switcher_html}                <p class="pdp-buy__label">{labels['price_label']}{badge_html}</p>
+{_render_avail_banner(lang, sku)}{plan_switcher_html}{_render_kaspersky_partner(sku, lang)}{_render_cross_sell(sku, lang)}                <p class="pdp-buy__label">{labels['price_label']}{badge_html}</p>
 
                 <div class="pdp-price-row" role="group" aria-label="{ui['prices_aria']}">
                     <span class="pdp-price-sale">€ {eur_fmt(sale)}</span>

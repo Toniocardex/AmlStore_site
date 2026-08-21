@@ -48,7 +48,7 @@ export const CATALOG = {
   "EP2-07001": { name: "Microsoft Project Professional 2024 | Licenza ESD Perpetua", unitAmountMinor: 71100, compareAtMinor: 165900, currency: 'EUR', type: "perpetual", category: "suite office" },
   "KASP_STD_1D_1A": { name: "Kaspersky Standard | Antivirus 2025", unitAmountMinor: 1956, compareAtMinor: 3499, currency: 'EUR', type: "subscription", category: "antivirus" },
   "KASP_PLUS_1D_1A": { name: "Kaspersky Plus | Internet Security 2025", unitAmountMinor: 3295, compareAtMinor: 5499, currency: 'EUR', type: "subscription", category: "antivirus" },
-  "KL1047TDAFS": { name: "Kaspersky Premium | 1 Dispositivo | 1 Anno", unitAmountMinor: 3089, compareAtMinor: 7999, currency: 'EUR', type: "subscription", category: "antivirus" },
+  "KL1047TDAFS": { name: "Kaspersky Premium | 1 Dispositivo | 1 Anno", unitAmountMinor: 3799, compareAtMinor: 7999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "NORT_360DEL_3D_1A-NOABB": { name: "Norton 360 Deluxe 25GB Cloud | 3 Dispositivi | 1 Anno - NO ABBONAMENTO", unitAmountMinor: 1956, compareAtMinor: 3999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "AD_STD_2D-1A": { name: "Adobe Acrobat Standard | 2 Dispositivi | 1 Anno - PC/Mac", unitAmountMinor: 18600, compareAtMinor: 19020, currency: 'EUR', type: "subscription", category: "tool ufficio" },
   "SC916509": { name: "Adobe Acrobat Professional | 2 Dispositivi | 1 Anno - PC/Mac", unitAmountMinor: 24800, compareAtMinor: 29119, currency: 'EUR', type: "subscription", category: "tool ufficio" },
