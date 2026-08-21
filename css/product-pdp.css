@@ -963,7 +963,7 @@ body { background: var(--page-bg); }
     grid-template-columns: 24px 1fr;
     column-gap: 16px;
     row-gap: 6px;
-    padding: 26px 0;
+    padding: 24px 0;
     border: none;
     border-bottom: 1px solid var(--pdp-border);
     border-radius: 0;
@@ -985,13 +985,14 @@ body { background: var(--page-bg); }
 /* Icona vettoriale pura senza box o quadrati di sfondo */
 .pdp-card__icon {
     display: inline-flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     grid-row: 1;
     grid-column: 1;
     width: 24px;
     height: 24px;
-    margin-top: 2px;
+    align-self: center;
+    margin: 0;
     background: transparent !important;
     border-radius: 0;
     color: #007a87; /* Ottanio brand ESET / clean dark teal */
@@ -1001,8 +1002,8 @@ body { background: var(--page-bg); }
 }
 
 .pdp-card__icon svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     display: block;
 }
 

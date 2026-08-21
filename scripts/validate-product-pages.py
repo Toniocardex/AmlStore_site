@@ -13,6 +13,8 @@ SKIP = {
     "privacy-policy", "cookie-policy", "terms-and-conditions",
     "returns-and-refunds", "microsoft-365-solutions",
     "contacts",
+    "404", "chi-siamo", "about-us", "qui-sommes-nous", "ueber-uns", "quienes-somos",
+    "consulenza", "consultation", "beratung", "consultoria",
     "suite-office", "sistemi-operativi", "pacchetti",
     "antivirus", "windows-server", "strumenti",
 }

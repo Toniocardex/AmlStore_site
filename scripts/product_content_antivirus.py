@@ -75,40 +75,43 @@ for lg, ov in _AV_OVERRIDES.items():
 
 
 ICON_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
-ICON_LIGHTNING = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>'
+ICON_LAPTOP = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>'
 ICON_EMAIL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'
 ICON_CHECK_CIRCLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>'
+ICON_LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
+ICON_GLOBE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>'
+ICON_CLOUD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>'
 
 
 def _eset_feats():
     return {
         "it": [
             (ICON_SHIELD, "blue", "Sicurezza", "Protezione antivirus proattiva", "Difesa multilivello avanzata contro virus, ransomware, phishing e minacce zero-day senza interruzioni."),
-            (ICON_LIGHTNING, "teal", "Prestazioni", "Impatto minimo sul sistema", "Massima reattività ed efficienza hardware: scansioni rapide e fluide, ideale anche per gaming e lavoro."),
+            (ICON_LAPTOP, "teal", "Prestazioni", "Impatto minimo sul sistema", "Massima reattività ed efficienza hardware: scansioni rapide e fluide, ideale anche per gaming e lavoro."),
             (ICON_EMAIL, "purple", "Consegna", "Invio istantaneo via email", "Codice licenza originale e guida passo-passo inviati subito via email dopo la conferma del pagamento."),
             (ICON_CHECK_CIRCLE, "dark", "Attivazione", "Portale ufficiale ESET", "Attivazione autentica e sicura tramite account ufficiale ESET HOME con aggiornamenti costanti inclusi."),
         ],
         "en": [
             (ICON_SHIELD, "blue", "Security", "Proactive antivirus protection", "Advanced multi-layered defence against viruses, ransomware, phishing, and zero-day threats."),
-            (ICON_LIGHTNING, "teal", "Performance", "Minimal system impact", "High efficiency and low footprint: fast, smooth scanning, perfect for gaming and multitasking."),
+            (ICON_LAPTOP, "teal", "Performance", "Minimal system impact", "High efficiency and low footprint: fast, smooth scanning, perfect for gaming and multitasking."),
             (ICON_EMAIL, "purple", "Delivery", "Instant email delivery", "Genuine licence key and step-by-step instructions sent directly to your inbox after purchase."),
             (ICON_CHECK_CIRCLE, "dark", "Activation", "Official ESET portal", "Authentic, secure activation via official ESET HOME account with regular protection updates."),
         ],
         "fr": [
             (ICON_SHIELD, "blue", "Sécurité", "Protection antivirus proactive", "Défense multicouche avancée contre les virus, ransomwares, phishing et menaces en ligne."),
-            (ICON_LIGHTNING, "teal", "Performance", "Impact minimal sur le système", "Faible empreinte et fluidité maximale : analyses rapides, idéal pour le travail et le jeu."),
+            (ICON_LAPTOP, "teal", "Performance", "Impact minimal sur le système", "Faible empreinte et fluidité maximale : analyses rapides, idéal pour le travail et le jeu."),
             (ICON_EMAIL, "purple", "Livraison", "Envoi instantané par e-mail", "Clé de licence authentique et guide d'installation envoyés par e-mail dès validation."),
             (ICON_CHECK_CIRCLE, "dark", "Activation", "Portail officiel ESET", "Activation officielle et sécurisée sur ESET HOME avec mises à jour de sécurité incluses."),
         ],
         "de": [
             (ICON_SHIELD, "blue", "Sicherheit", "Proaktiver Virenschutz", "Mehrschichtige Abwehr vor Viren, Ransomware, Phishing und neuesten Bedrohungen."),
-            (ICON_LIGHTNING, "teal", "Leistung", "Geringe Systembelastung", "Minimaler Ressourcenverbrauch: schnelle, unauffällige Scans, ideal für Arbeit und Gaming."),
+            (ICON_LAPTOP, "teal", "Leistung", "Geringe Systembelastung", "Minimaler Ressourcenverbrauch: schnelle, unauffällige Scans, ideal für Arbeit und Gaming."),
             (ICON_EMAIL, "purple", "Lieferung", "Sofortige E-Mail-Zustellung", "Originaler Lizenzschlüssel und Schritt-für-Schritt-Anleitung direkt nach dem Kauf per E-Mail."),
             (ICON_CHECK_CIRCLE, "dark", "Aktivierung", "Offizielles ESET-Portal", "Sichere Aktivierung über das offizielle ESET HOME Portal mit fortlaufenden Updates."),
         ],
         "es": [
             (ICON_SHIELD, "blue", "Seguridad", "Protección antivirus proactiva", "Defensa multicapa avanzada contra virus, ransomware, phishing y amenazas web."),
-            (ICON_LIGHTNING, "teal", "Rendimiento", "Impacto mínimo en el sistema", "Máxima eficiencia y bajo consumo de recursos: análisis rápidos, ideal para trabajo y juegos."),
+            (ICON_LAPTOP, "teal", "Rendimiento", "Impacto mínimo en el sistema", "Máxima eficiencia y bajo consumo de recursos: análisis rápidos, ideal para trabajo y juegos."),
             (ICON_EMAIL, "purple", "Entrega", "Envío inmediato por email", "Clave de licencia original e instrucciones claras enviadas por email tras el pago."),
             (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial de ESET", "Activación oficial y segura en ESET HOME con actualizaciones automáticas incluidas."),
         ],
@@ -337,138 +340,488 @@ def _av_page(
     return res
 
 
-def _line_feats(brand, line_it, line_en, focus_it, focus_en, focus_fr, focus_de, focus_es, tip_it, tip_en):
+# Helper for specs tables across antivirus products
+def _specs_table_helper(product_title, rows_by_lang):
+    return {
+        "it": {
+            "eyebrow": "Requisiti di sistema",
+            "title": "Requisiti di sistema e compatibilità",
+            "sub": "Valori orientativi; verifica sempre i requisiti aggiornati sul sito ufficiale del produttore prima dell'installazione.",
+            "caption": f"Requisiti di sistema per {product_title}",
+            "col_req": "Requisito",
+            "col_det": "Dettaglio Tecnico",
+            "rows": rows_by_lang["it"],
+        },
+        "en": {
+            "eyebrow": "System requirements",
+            "title": "System requirements and compatibility",
+            "sub": "Indicative values; always check the vendor’s latest requirements before installing.",
+            "caption": f"System requirements for {product_title}",
+            "col_req": "Requirement",
+            "col_det": "Technical Details",
+            "rows": rows_by_lang["en"],
+        },
+        "fr": {
+            "eyebrow": "Configuration requise",
+            "title": "Configuration requise et compatibilité",
+            "sub": "Valeurs indicatives ; vérifiez toujours les exigences à jour de l'éditeur.",
+            "caption": f"Configuration requise pour {product_title}",
+            "col_req": "Exigence",
+            "col_det": "Détail technique",
+            "rows": rows_by_lang["fr"],
+        },
+        "de": {
+            "eyebrow": "Systemanforderungen",
+            "title": "Systemanforderungen und Kompatibilität",
+            "sub": "Richtwerte; stets aktuelle Herstelleranforderungen prüfen.",
+            "caption": f"Systemanforderungen für {product_title}",
+            "col_req": "Anforderung",
+            "col_det": "Technische Details",
+            "rows": rows_by_lang["de"],
+        },
+        "es": {
+            "eyebrow": "Requisitos del sistema",
+            "title": "Requisitos del sistema y compatibilidad",
+            "sub": "Valores orientativos; comprueba siempre los requisitos actualizados del fabricante.",
+            "caption": f"Requisitos del sistema para {product_title}",
+            "col_req": "Requisito",
+            "col_det": "Detalle técnico",
+            "rows": rows_by_lang["es"],
+        },
+    }
+
+
+SPECS_TABLE_NORTON = _specs_table_helper("Norton 360", {
+    "it": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1, macOS (versione attuale e 2 prec.), Android 8.0+, iOS"),
+        ("Processore", "1 GHz minimo (x86 / x64)"),
+        ("Memoria RAM", "512 MB (32-bit) / 1 GB (64-bit), 2 GB su macOS"),
+        ("Spazio su disco", "300 MB di spazio libero"),
+    ],
+    "en": [
+        ("Operating system", "Windows 11 / 10 / 8.1, macOS (current and 2 prior), Android 8.0+, iOS"),
+        ("Processor", "1 GHz minimum (x86 / x64)"),
+        ("RAM memory", "512 MB (32-bit) / 1 GB (64-bit), 2 GB for macOS"),
+        ("Disk space", "300 MB free space"),
+    ],
+    "fr": [
+        ("Système d'exploitation", "Windows 11 / 10 / 8.1, macOS (actuel + 2 préc.), Android 8.0+, iOS"),
+        ("Processeur", "1 GHz minimum (x86 / x64)"),
+        ("Mémoire RAM", "512 Mo (32 bits) / 1 Go (64 bits), 2 Go sur macOS"),
+        ("Espace disque", "300 Mo libres"),
+    ],
+    "de": [
+        ("Betriebssystem", "Windows 11 / 10 / 8.1, macOS (aktuelle + 2 Vorversionen), Android 8.0+, iOS"),
+        ("Prozessor", "1 GHz mindestens (x86 / x64)"),
+        ("Arbeitsspeicher", "512 MB (32-Bit) / 1 GB (64-Bit), 2 GB für macOS"),
+        ("Festplattenspeicher", "300 MB freier Speicher"),
+    ],
+    "es": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1, macOS (actual y 2 anteriores), Android 8.0+, iOS"),
+        ("Procesador", "1 GHz mínimo (x86 / x64)"),
+        ("Memoria RAM", "512 MB (32 bits) / 1 GB (64 bits), 2 GB en macOS"),
+        ("Espacio en disco", "300 MB libres"),
+    ],
+})
+
+SPECS_TABLE_BITDEFENDER = _specs_table_helper("Bitdefender Antivirus Plus", {
+    "it": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1 / 7 con Service Pack 1"),
+        ("Processore", "Intel Core 2 Duo (2 GHz) o processore equivalente"),
+        ("Memoria RAM", "2 GB minimo"),
+        ("Spazio su disco", "2.5 GB di spazio libero"),
+    ],
+    "en": [
+        ("Operating system", "Windows 11 / 10 / 8.1 / 7 with Service Pack 1"),
+        ("Processor", "Intel Core 2 Duo (2 GHz) or equivalent"),
+        ("RAM memory", "2 GB minimum"),
+        ("Disk space", "2.5 GB free space"),
+    ],
+    "fr": [
+        ("Système d'exploitation", "Windows 11 / 10 / 8.1 / 7 avec Service Pack 1"),
+        ("Processeur", "Intel Core 2 Duo (2 GHz) ou équivalent"),
+        ("Mémoire RAM", "2 Go minimum"),
+        ("Espace disque", "2,5 Go libres"),
+    ],
+    "de": [
+        ("Betriebssystem", "Windows 11 / 10 / 8.1 / 7 mit Service Pack 1"),
+        ("Prozessor", "Intel Core 2 Duo (2 GHz) oder gleichwertig"),
+        ("Arbeitsspeicher", "2 GB mindestens"),
+        ("Festplattenspeicher", "2,5 GB freier Speicher"),
+    ],
+    "es": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1 / 7 con Service Pack 1"),
+        ("Procesador", "Intel Core 2 Duo (2 GHz) o equivalente"),
+        ("Memoria RAM", "2 GB mínimo"),
+        ("Espacio en disco", "2.5 GB libres"),
+    ],
+})
+
+SPECS_TABLE_KASPERSKY = _specs_table_helper("Kaspersky Security", {
+    "it": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1 / 7 SP1, macOS 11+, Android 8.0+, iOS"),
+        ("Processore", "1 GHz a 32-bit (x86) o 64-bit (x64)"),
+        ("Memoria RAM", "1 GB (32-bit) o 2 GB (64-bit)"),
+        ("Spazio su disco", "1.5 GB di spazio libero"),
+    ],
+    "en": [
+        ("Operating system", "Windows 11 / 10 / 8.1 / 7 SP1, macOS 11+, Android 8.0+, iOS"),
+        ("Processor", "1 GHz 32-bit (x86) or 64-bit (x64)"),
+        ("RAM memory", "1 GB (32-bit) or 2 GB (64-bit)"),
+        ("Disk space", "1.5 GB free space"),
+    ],
+    "fr": [
+        ("Système d'exploitation", "Windows 11 / 10 / 8.1 / 7 SP1, macOS 11+, Android 8.0+, iOS"),
+        ("Processeur", "1 GHz 32 bits (x86) ou 64 bits (x64)"),
+        ("Mémoire RAM", "1 Go (32 bits) ou 2 Go (64 bits)"),
+        ("Espace disque", "1,5 Go libres"),
+    ],
+    "de": [
+        ("Betriebssystem", "Windows 11 / 10 / 8.1 / 7 SP1, macOS 11+, Android 8.0+, iOS"),
+        ("Prozessor", "1 GHz 32-Bit (x86) oder 64-Bit (x64)"),
+        ("Arbeitsspeicher", "1 GB (32-Bit) oder 2 GB (64-Bit)"),
+        ("Festplattenspeicher", "1,5 GB freier Speicher"),
+    ],
+    "es": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1 / 7 SP1, macOS 11+, Android 8.0+, iOS"),
+        ("Procesador", "1 GHz de 32 bits (x86) o 64 bits (x64)"),
+        ("Memoria RAM", "1 GB (32 bits) o 2 GB (64 bits)"),
+        ("Espacio en disco", "1.5 GB libres"),
+    ],
+})
+
+SPECS_TABLE_MCAFEE = _specs_table_helper("McAfee Total Protection", {
+    "it": [
+        ("Sistema operativo", "Windows 11 / 10 (64-bit), macOS 11+, Android 9.0+, iOS 15+"),
+        ("Processore", "1 GHz a 64-bit (x64) o superiore"),
+        ("Memoria RAM", "2 GB minimo"),
+        ("Spazio su disco", "1.3 GB di spazio libero"),
+    ],
+    "en": [
+        ("Operating system", "Windows 11 / 10 (64-bit), macOS 11+, Android 9.0+, iOS 15+"),
+        ("Processor", "1 GHz 64-bit (x64) or higher"),
+        ("RAM memory", "2 GB minimum"),
+        ("Disk space", "1.3 GB free space"),
+    ],
+    "fr": [
+        ("Système d'exploitation", "Windows 11 / 10 (64 bits), macOS 11+, Android 9.0+, iOS 15+"),
+        ("Processeur", "1 GHz 64 bits (x64) ou supérieur"),
+        ("Mémoire RAM", "2 Go minimum"),
+        ("Espace disque", "1,3 Go libres"),
+    ],
+    "de": [
+        ("Betriebssystem", "Windows 11 / 10 (64-Bit), macOS 11+, Android 9.0+, iOS 15+"),
+        ("Prozessor", "1 GHz 64-Bit (x64) oder höher"),
+        ("Arbeitsspeicher", "2 GB mindestens"),
+        ("Festplattenspeicher", "1,3 GB freier Speicher"),
+    ],
+    "es": [
+        ("Sistema operativo", "Windows 11 / 10 (64 bits), macOS 11+, Android 9.0+, iOS 15+"),
+        ("Procesador", "1 GHz de 64 bits (x64) o superior"),
+        ("Memoria RAM", "2 GB mínimo"),
+        ("Espacio en disco", "1.3 GB libres"),
+    ],
+})
+
+
+def _norton_feats(edition, cloud):
     return {
         "it": [
-            ("c8", "blue", "Protezione", line_it, f"Licenza digitale {brand}: protezione per i dispositivi indicati in scheda, con attivazione sul portale ufficiale del produttore."),
-            ("c4", "teal", None, focus_it, "Funzioni di sicurezza del piano acquistato, come descritte dal produttore."),
-            ("c4", "purple", "Consegna", "Via email", "Ricevi codice/licenza e istruzioni dopo il pagamento, senza spedizione fisica del software."),
-            ("c4", None, "Attivazione", "Portale ufficiale", f"Attivi su {brand} con il codice ricevuto e installi il client ufficiale."),
-            ("c4", None, "Dispositivi", "Come da scheda", "Il numero di dispositivi e la durata sono quelli indicati nel titolo prodotto."),
-            ("c4", "dark", "Nota", tip_it, tip_en if False else tip_it),
+            (ICON_SHIELD, "blue", "Sicurezza", "Protezione in tempo reale multilivello", "Difesa proattiva continua contro virus, malware, ransomware e minacce di hacking su tutti i tuoi dispositivi."),
+            (ICON_LOCK, "teal", "Privacy", "Secure VPN e crittografia avanzata", "Naviga in totale anonimato su reti Wi-Fi pubbliche e proteggi password e informazioni bancarie da occhi indiscreti."),
+            (ICON_CLOUD, "purple", "Backup", f"Backup cloud sicuro per PC ({cloud})", f"Spazio cloud protetto da {cloud} per salvare automaticamente file importanti e documenti contro guasti hardware o ransomware."),
+            (ICON_CHECK_CIRCLE, "dark", "Attivazione", "Portale ufficiale My Norton", "Attivazione sicura con licenza autentica gestita tramite account ufficiale Norton con aggiornamenti continui inclusi."),
         ],
         "en": [
-            ("c8", "blue", "Protection", line_en, f"Digital {brand} licence: protection for the devices listed on this page, activated on the official vendor portal."),
-            ("c4", "teal", None, focus_en, "Security features of the purchased plan, as described by the vendor."),
-            ("c4", "purple", "Delivery", "By email", "Receive the licence/key and instructions after payment—no physical software shipment."),
-            ("c4", None, "Activation", "Official portal", f"Activate with {brand} using the received code and install the official client."),
-            ("c4", None, "Devices", "As listed", "Device count and term are those shown in the product title."),
-            ("c4", "dark", "Note", tip_en, tip_en),
+            (ICON_SHIELD, "blue", "Security", "Real-time multi-layered protection", "Continuous proactive defence against viruses, malware, ransomware, and hacking threats across all your devices."),
+            (ICON_LOCK, "teal", "Privacy", "Secure VPN and advanced encryption", "Browse anonymously on public Wi-Fi networks and protect your passwords and banking data from prying eyes."),
+            (ICON_CLOUD, "purple", "Backup", f"Secure PC cloud backup ({cloud})", f"{cloud} dedicated secure cloud storage to automatically back up critical files against hardware failure or ransomware."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Official My Norton portal", "Authentic activation managed via official Norton account with continuous security updates included."),
         ],
         "fr": [
-            ("c8", "blue", "Protection", line_en, f"Licence numérique {brand} : protection pour les appareils indiqués, activation sur le portail officiel."),
-            ("c4", "teal", None, focus_fr, "Fonctions de sécurité du plan acheté, selon l'éditeur."),
-            ("c4", "purple", "Livraison", "Par e-mail", "Licence/clé et instructions après paiement."),
-            ("c4", None, "Activation", "Portail officiel", f"Activation chez {brand} avec le code reçu."),
-            ("c4", None, "Appareils", "Selon la fiche", "Nombre d'appareils et durée comme dans le titre."),
-            ("c4", "dark", "Note", tip_en, tip_en),
+            (ICON_SHIELD, "blue", "Sécurité", "Protection multicouche en temps réel", "Défense proactive continue contre les virus, malwares, ransomwares et tentatives de piratage sur tous vos appareils."),
+            (ICON_LOCK, "teal", "Confidentialité", "Secure VPN et chiffrement avancé", "Naviguez en toute confidentialité sur les réseaux Wi-Fi publics et protégez vos mots de passe et données bancaires."),
+            (ICON_CLOUD, "purple", "Sauvegarde", f"Sauvegarde cloud pour PC ({cloud})", f"Espace cloud sécurisé de {cloud} pour sauvegarder vos documents essentiels contre les pannes ou ransomwares."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Portail officiel My Norton", "Activation sécurisée et gestion de licence via votre compte officiel Norton avec mises à jour incluses."),
         ],
         "de": [
-            ("c8", "blue", "Schutz", line_en, f"Digitale {brand}-Lizenz: Schutz für die angegebenen Geräte, Aktivierung im offiziellen Portal."),
-            ("c4", "teal", None, focus_de, "Sicherheitsfunktionen des gekauften Plans laut Hersteller."),
-            ("c4", "purple", "Lieferung", "Per E-Mail", "Lizenz/Key und Anleitung nach der Zahlung."),
-            ("c4", None, "Aktivierung", "Offizielles Portal", f"Aktivierung bei {brand} mit dem erhaltenen Code."),
-            ("c4", None, "Geräte", "Laut Seite", "Gerätezahl und Laufzeit wie im Produkttitel."),
-            ("c4", "dark", "Hinweis", tip_en, tip_en),
+            (ICON_SHIELD, "blue", "Sicherheit", "Mehrschichtiger Echtzeitschutz", "Fortlaufende proaktive Abwehr vor Viren, Malware, Ransomware und Hacking-Angriffen auf all Ihren Geräten."),
+            (ICON_LOCK, "teal", "Privatsphäre", "Secure VPN und starke Verschlüsselung", "Surfen Sie anonym in öffentlichen WLAN-Netzen und schützen Sie Passwörter sowie Bankdaten vor fremdem Zugriff."),
+            (ICON_CLOUD, "purple", "Backup", f"Sicheres PC-Cloud-Backup ({cloud})", f"{cloud} geschützter Cloud-Speicher zur automatischen Sicherung wichtiger Daten vor Hardware-Defekten oder Ransomware."),
+            (ICON_CHECK_CIRCLE, "dark", "Aktivierung", "Offizielles My Norton Portal", "Sichere Aktivierung über das offizielle Norton-Konto mit zentraler Verwaltung und regelmäßigen Updates."),
         ],
         "es": [
-            ("c8", "blue", "Protección", line_en, f"Licencia digital {brand}: protección para los dispositivos de la ficha, activación en el portal oficial."),
-            ("c4", "teal", None, focus_es, "Funciones de seguridad del plan comprado, según el fabricante."),
-            ("c4", "purple", "Entrega", "Por email", "Licencia/clave e instrucciones tras el pago."),
-            ("c4", None, "Activación", "Portal oficial", f"Activa en {brand} con el código recibido."),
-            ("c4", None, "Dispositivos", "Según ficha", "Número de dispositivos y duración como en el título."),
-            ("c4", "dark", "Nota", tip_en, tip_en),
+            (ICON_SHIELD, "blue", "Seguridad", "Protección multicapa en tiempo real", "Defensa proactiva continua contra virus, malware, ransomware e intentos de hackeo en todos tus dispositivos."),
+            (ICON_LOCK, "teal", "Privacidad", "Secure VPN y cifrado avanzado", "Navega con total privacidad en redes Wi-Fi públicas y protege tus contraseñas y datos bancarios de accesos no autorizados."),
+            (ICON_CLOUD, "purple", "Copia de seguridad", f"Copia de seguridad en la nube ({cloud})", f"Espacio en la nube de {cloud} para respaldar automáticamente archivos clave ante fallos de disco o ransomware."),
+            (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial My Norton", "Activación segura gestionada en tu cuenta oficial de Norton con actualizaciones automáticas incluidas."),
         ],
     }
 
 
-# Fix Italian tip cell - the dark cell used tip_it wrongly for EN in it block. Rebuild feats more carefully per product family.
+def _norton_keypoints(edition, devices, cloud):
+    d_label_it = "1 dispositivo" if devices == 1 else f"{devices} dispositivi"
+    d_label_en = "1 device" if devices == 1 else f"{devices} devices"
+    d_label_fr = "1 appareil" if devices == 1 else f"{devices} appareils"
+    d_label_de = "1 Gerät" if devices == 1 else f"{devices} Geräte"
+    d_label_es = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
+    return {
+        "it": [
+            f"Protezione completa da virus, malware e ransomware ({d_label_it})",
+            "Secure VPN illimitata per privacy e sicurezza delle connessioni",
+            f"Backup cloud sicuro per PC ({cloud}) contro la perdita di file",
+            "Attivazione ufficiale e gestione account su My Norton",
+        ],
+        "en": [
+            f"Complete virus, malware, and ransomware protection ({d_label_en})",
+            "Unlimited Secure VPN for privacy and connection safety",
+            f"Secure PC cloud backup ({cloud}) against data loss",
+            "Official activation and account management on My Norton",
+        ],
+        "fr": [
+            f"Protection complète contre virus, malwares et ransomwares ({d_label_fr})",
+            "Secure VPN illimité pour la confidentialité de vos connexions",
+            f"Sauvegarde cloud sécurisée pour PC ({cloud}) contre la perte de données",
+            "Activation officielle et gestion sur My Norton",
+        ],
+        "de": [
+            f"Kompletter Schutz vor Viren, Malware und Ransomware ({d_label_de})",
+            "Unbegrenztes Secure VPN für Privatsphäre und sichere Verbindungen",
+            f"Sicheres PC-Cloud-Backup ({cloud}) gegen Datenverlust",
+            "Offizielle Aktivierung und Kontoverwaltung auf My Norton",
+        ],
+        "es": [
+            f"Protección completa contra virus, malware y ransomware ({d_label_es})",
+            "Secure VPN ilimitada para privacidad y conexiones seguras",
+            f"Copia de seguridad en la nube ({cloud}) contra pérdida de datos",
+            "Activación oficial y gestión de cuenta en My Norton",
+        ],
+    }
 
-def _feats(brand, line, focus, tip):
-    """features dict with proper i18n for all 6 bento cells."""
-    out = {}
-    for lg in LANGS:
-        out[lg] = [
-            (
-                "c8",
-                "blue",
-                {"it": "Protezione", "en": "Protection", "fr": "Protection", "de": "Schutz", "es": "Protección"}[lg],
-                line[lg],
-                {
-                    "it": f"Licenza digitale {brand}: protezione per i dispositivi indicati in scheda, con attivazione sul portale ufficiale del produttore.",
-                    "en": f"Digital {brand} licence: protection for the devices listed on this page, activated on the official vendor portal.",
-                    "fr": f"Licence numérique {brand} : protection pour les appareils indiqués, activation sur le portail officiel.",
-                    "de": f"Digitale {brand}-Lizenz: Schutz für die angegebenen Geräte, Aktivierung im offiziellen Portal.",
-                    "es": f"Licencia digital {brand}: protección para los dispositivos de la ficha, activación en el portal oficial.",
-                }[lg],
-            ),
-            (
-                "c4",
-                "teal",
-                None,
-                focus[lg],
-                {
-                    "it": "Funzioni di sicurezza del piano acquistato, come descritte dal produttore.",
-                    "en": "Security features of the purchased plan, as described by the vendor.",
-                    "fr": "Fonctions de sécurité du plan acheté, selon l'éditeur.",
-                    "de": "Sicherheitsfunktionen des gekauften Plans laut Hersteller.",
-                    "es": "Funciones de seguridad del plan comprado, según el fabricante.",
-                }[lg],
-            ),
-            (
-                "c4",
-                "purple",
-                {"it": "Consegna", "en": "Delivery", "fr": "Livraison", "de": "Lieferung", "es": "Entrega"}[lg],
-                {"it": "Via email", "en": "By email", "fr": "Par e-mail", "de": "Per E-Mail", "es": "Por email"}[lg],
-                {
-                    "it": "Ricevi codice/licenza e istruzioni dopo il pagamento, senza spedizione fisica del software.",
-                    "en": "Receive the licence/key and instructions after payment—no physical software shipment.",
-                    "fr": "Licence/clé et instructions après paiement, sans envoi physique du logiciel.",
-                    "de": "Lizenz/Key und Anleitung nach der Zahlung — ohne physischen Software-Versand.",
-                    "es": "Licencia/clave e instrucciones tras el pago, sin envío físico del software.",
-                }[lg],
-            ),
-            (
-                "c4",
-                None,
-                {"it": "Attivazione", "en": "Activation", "fr": "Activation", "de": "Aktivierung", "es": "Activación"}[lg],
-                {"it": "Portale ufficiale", "en": "Official portal", "fr": "Portail officiel", "de": "Offizielles Portal", "es": "Portal oficial"}[lg],
-                {
-                    "it": f"Attivi su {brand} con il codice ricevuto e installi il client ufficiale.",
-                    "en": f"Activate with {brand} using the received code and install the official client.",
-                    "fr": f"Activation chez {brand} avec le code reçu et installation du client officiel.",
-                    "de": f"Aktivierung bei {brand} mit dem erhaltenen Code und Installation des offiziellen Clients.",
-                    "es": f"Activa en {brand} con el código recibido e instala el cliente oficial.",
-                }[lg],
-            ),
-            (
-                "c4",
-                None,
-                {"it": "Dispositivi", "en": "Devices", "fr": "Appareils", "de": "Geräte", "es": "Dispositivos"}[lg],
-                {"it": "Come da scheda", "en": "As listed", "fr": "Selon la fiche", "de": "Laut Seite", "es": "Según ficha"}[lg],
-                {
-                    "it": "Il numero di dispositivi e la durata sono quelli indicati nel titolo prodotto.",
-                    "en": "Device count and term are those shown in the product title.",
-                    "fr": "Nombre d'appareils et durée comme dans le titre produit.",
-                    "de": "Gerätezahl und Laufzeit wie im Produkttitel.",
-                    "es": "Número de dispositivos y duración como en el título del producto.",
-                }[lg],
-            ),
-            (
-                "c4",
-                "dark",
-                {"it": "Nota", "en": "Note", "fr": "Note", "de": "Hinweis", "es": "Nota"}[lg],
-                tip[lg],
-                {
-                    "it": "Niente stelle o recensioni inventate: per esperienze reali vedi Trustpilot e il sito del produttore.",
-                    "en": "No invented star ratings: for real experiences see Trustpilot and the vendor’s site.",
-                    "fr": "Pas d'avis inventés : pour des retours réels, voyez Trustpilot et le site de l'éditeur.",
-                    "de": "Keine erfundenen Sterne: echte Erfahrungen auf Trustpilot und der Herstellerseite.",
-                    "es": "Sin valoraciones inventadas: experiencias reales en Trustpilot y el sitio del fabricante.",
-                }[lg],
-            ),
-        ]
-    return out
+
+def _bitdefender_feats():
+    return {
+        "it": [
+            (ICON_SHIELD, "blue", "Sicurezza", "Protezione anti-malware pluripremiata", "Difesa proattiva continua contro qualsiasi minaccia informatica: virus, trojan, ransomware e attacchi zero-day."),
+            (ICON_LAPTOP, "teal", "Prestazioni", "Tecnologia Bitdefender Photon", "Adatta l'uso delle risorse all'hardware del computer, garantendo la massima velocità senza alcun rallentamento."),
+            (ICON_GLOBE, "purple", "Web", "Navigazione sicura e anti-phishing", "Filtro web avanzato che blocca siti fraudolenti, tentativi di truffa finanziaria e download pericolosi in tempo reale."),
+            (ICON_CHECK_CIRCLE, "dark", "Attivazione", "Portale ufficiale Bitdefender Central", "Gestione centralizzata dei dispositivi e installazione rapida tramite account ufficiale Bitdefender con aggiornamenti inclusi."),
+        ],
+        "en": [
+            (ICON_SHIELD, "blue", "Security", "Award-winning anti-malware protection", "Continuous proactive defence against all digital threats: viruses, trojans, ransomware, and zero-day exploits."),
+            (ICON_LAPTOP, "teal", "Performance", "Bitdefender Photon technology", "Adapts to your hardware configuration to save system resources and deliver peak computing speed."),
+            (ICON_GLOBE, "purple", "Web", "Safe browsing and anti-phishing", "Advanced web filter blocking fraudulent websites, financial scam attempts, and unsafe downloads in real time."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Official Bitdefender Central portal", "Centralized device management and fast setup via official Bitdefender account with continuous updates."),
+        ],
+        "fr": [
+            (ICON_SHIELD, "blue", "Sécurité", "Protection anti-malware primée", "Défense proactive contre toutes les menaces numériques : virus, chevaux de Troie, ransomwares et attaques zero-day."),
+            (ICON_LAPTOP, "teal", "Performance", "Technologie Bitdefender Photon", "S'adapte à la configuration de votre matériel pour préserver les ressources et maintenir une fluidité maximale."),
+            (ICON_GLOBE, "purple", "Web", "Navigation sécurisée et anti-phishing", "Filtrage web avancé bloquant les sites frauduleux, les tentatives d'escroquerie et les téléchargements suspects."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Portail officiel Bitdefender Central", "Gestion centralisée de vos appareils et installation guidée via le compte officiel Bitdefender avec mises à jour."),
+        ],
+        "de": [
+            (ICON_SHIELD, "blue", "Sicherheit", "Prämierter Anti-Malware-Schutz", "Proaktive Abwehr aller digitalen Bedrohungen: Viren, Trojaner, Ransomware und Zero-Day-Schwachstellen."),
+            (ICON_LAPTOP, "teal", "Leistung", "Bitdefender Photon Technologie", "Passt sich der Hardware an, um Systemressourcen zu schonen und höchste Arbeits- und Gaming-Geschwindigkeit zu sichern."),
+            (ICON_GLOBE, "purple", "Web", "Sicheres Surfen und Anti-Phishing", "Fortschrittlicher Webfilter zum Blockieren betrügerischer Seiten, Phishing-Versuche und gefährlicher Downloads."),
+            (ICON_CHECK_CIRCLE, "dark", "Aktivierung", "Offizielles Bitdefender Central Portal", "Zentrale Geräteverwaltung und schnelle Installation über das offizielle Bitdefender-Konto mit laufenden Updates."),
+        ],
+        "es": [
+            (ICON_SHIELD, "blue", "Seguridad", "Protección anti-malware premiada", "Defensa proactiva contra todas las amenazas digitales: virus, troyanos, ransomware y ataques de día cero."),
+            (ICON_LAPTOP, "teal", "Rendimiento", "Tecnología Bitdefender Photon", "Se adapta al hardware de tu equipo para optimizar el rendimiento y garantizar la máxima rapidez sin bloqueos."),
+            (ICON_GLOBE, "purple", "Web", "Navegación segura y anti-phishing", "Filtro web avanzado que bloquea sitios fraudulentos, estafas financieras y descargas peligrosas en tiempo real."),
+            (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial Bitdefender Central", "Gestión centralizada de dispositivos e instalación sencilla mediante cuenta oficial de Bitdefender con actualizaciones."),
+        ],
+    }
+
+
+def _bitdefender_keypoints(devices):
+    d_label_it = "1 dispositivo" if devices == 1 else f"{devices} dispositivi"
+    d_label_en = "1 device" if devices == 1 else f"{devices} devices"
+    d_label_fr = "1 appareil" if devices == 1 else f"{devices} appareils"
+    d_label_de = "1 Gerät" if devices == 1 else f"{devices} Geräte"
+    d_label_es = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
+    return {
+        "it": [
+            f"Protezione anti-malware in tempo reale ({d_label_it})",
+            "Tecnologia Photon per scansioni veloci a zero rallentamenti",
+            "Filtro web proattivo contro phishing, truffe e siti malevoli",
+            "Gestione e attivazione ufficiale su Bitdefender Central",
+        ],
+        "en": [
+            f"Real-time anti-malware protection ({d_label_en})",
+            "Photon technology for fast scans with zero slowdowns",
+            "Proactive web shield against phishing and malicious websites",
+            "Official device management and activation on Bitdefender Central",
+        ],
+        "fr": [
+            f"Protection anti-malware en temps réel ({d_label_fr})",
+            "Technologie Photon pour des analyses rapides sans ralentissement",
+            "Filtre web proactif contre le phishing et les sites malveillants",
+            "Gestion et activation officielle sur Bitdefender Central",
+        ],
+        "de": [
+            f"Echtzeit-Schutz vor Malware ({d_label_de})",
+            "Photon-Technologie für schnelle Scans ohne Systembremsen",
+            "Proaktiver Webfilter gegen Phishing und betrügerische Seiten",
+            "Offizielle Verwaltung und Aktivierung im Bitdefender Central Portal",
+        ],
+        "es": [
+            f"Protección anti-malware en tiempo real ({d_label_es})",
+            "Tecnologia Photon per analisi veloces sin ralentizaciones",
+            "Filtro web proactivo contra phishing y páginas maliciosas",
+            "Gestión y activación oficial en Bitdefender Central",
+        ],
+    }
+
+
+def _kaspersky_feats(tier):
+    return {
+        "it": [
+            (ICON_SHIELD, "blue", "Sicurezza", "Protezione in tempo reale multilivello", "Rilevamento istantaneo e blocco di virus, malware, ransomware e attacchi hacker prima che danneggino i dispositivi."),
+            (ICON_LOCK, "teal", "Privacy", "Protezione pagamenti e privacy online", "Strumenti dedicati per schermare le transazioni bancarie, bloccare il tracciamento pubblicitario e prevenire furti d'identità."),
+            (ICON_LAPTOP, "purple", "Prestazioni", "Ottimizzazione e pulizia del PC", "Pulizia automatica dello spazio su disco e gestione intelligente dei processi in background per un sistema sempre reattivo."),
+            (ICON_CHECK_CIRCLE, "dark", "Attivazione", "Portale ufficiale My Kaspersky", "Attivazione ufficiale e sicura tramite account My Kaspersky con sincronizzazione immediata delle licenze e aggiornamenti inclusi."),
+        ],
+        "en": [
+            (ICON_SHIELD, "blue", "Security", "Real-time multi-layered protection", "Instant detection and blocking of viruses, malware, ransomware, and hacking attacks before they harm your system."),
+            (ICON_LOCK, "teal", "Privacy", "Payment protection and online privacy", "Dedicated tools to shield financial transactions, block advertising trackers, and prevent identity theft."),
+            (ICON_LAPTOP, "purple", "Performance", "PC performance and cleanup tools", "Automatic disk space cleanup and smart background process management to keep your device running fast."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Official My Kaspersky portal", "Authentic activation via official My Kaspersky account with instant licence synchronization and regular updates."),
+        ],
+        "fr": [
+            (ICON_SHIELD, "blue", "Sécurité", "Protection multicouche en temps réel", "Détection instantanée et blocage des virus, malwares, ransomwares et tentatives d'intrusion."),
+            (ICON_LOCK, "teal", "Confidentialité", "Protection des paiements et vie privée", "Outils dédiés pour sécuriser les transactions bancaires, bloquer les traceurs et prévenir l'usurpation d'identité."),
+            (ICON_LAPTOP, "purple", "Performance", "Outils d'optimisation et nettoyage", "Nettoyage automatique du disque et gestion intelligente des ressources pour préserver la réactivité du PC."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Portail officiel My Kaspersky", "Activation officielle et gestion sécurisée sur My Kaspersky avec synchronisation de licence et mises à jour."),
+        ],
+        "de": [
+            (ICON_SHIELD, "blue", "Sicherheit", "Mehrschichtiger Echtzeitschutz", "Sofortige Erkennung und Abwehr von Viren, Malware, Ransomware und Hackerangriffen auf Ihren Geräten."),
+            (ICON_LOCK, "teal", "Privatsphäre", "Zahlungsschutz und Privatsphäre", "Spezielle Sicherheitsfunktionen zum Schutz von Online-Banking, Blockieren von Trackern und Verhinderung von Identitätsdiebstahl."),
+            (ICON_LAPTOP, "purple", "Leistung", "PC-Optimierung und Bereinigung", "Automatische Bereinigung von Speicherplatz und intelligente Ressourcensteuerung für ein schnelles System."),
+            (ICON_CHECK_CIRCLE, "dark", "Aktivierung", "Offizielles My Kaspersky Portal", "Sichere Aktivierung über das My Kaspersky Konto mit synchronisiertem Lizenzstatus und regelmäßigen Updates."),
+        ],
+        "es": [
+            (ICON_SHIELD, "blue", "Seguridad", "Protección multicapa en tiempo real", "Detección y bloqueo instantáneo de virus, malware, ransomware e intentos de hackeo en todos tus equipos."),
+            (ICON_LOCK, "teal", "Privacidad", "Protección de pagos y privacidad online", "Herramientas especializadas para blindar operaciones bancarias, frenar rastreadores y prevenir el robo de identidad."),
+            (ICON_LAPTOP, "purple", "Rendimiento", "Optimización y limpieza del equipo", "Limpieza automática de archivos innecesarios y gestión de procesos en segundo plano para máxima velocidad."),
+            (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial My Kaspersky", "Activación oficial mediante cuenta My Kaspersky con sincronización automática de licencias y actualizaciones."),
+        ],
+    }
+
+
+def _kaspersky_keypoints(tier, devices):
+    d_label_it = "1 dispositivo" if devices == 1 else f"{devices} dispositivi"
+    d_label_en = "1 device" if devices == 1 else f"{devices} devices"
+    d_label_fr = "1 appareil" if devices == 1 else f"{devices} appareils"
+    d_label_de = "1 Gerät" if devices == 1 else f"{devices} Geräte"
+    d_label_es = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
+    return {
+        "it": [
+            f"Protezione avanzata da virus, malware e ransomware ({d_label_it})",
+            "Navigazione protetta e difesa dei dati bancari durante gli acquisti",
+            "Strumenti di ottimizzazione per mantenere il PC veloce e pulito",
+            "Attivazione ufficiale e download autentico da My Kaspersky",
+        ],
+        "en": [
+            f"Advanced protection against viruses, malware, and ransomware ({d_label_en})",
+            "Secure browsing and banking data protection during online shopping",
+            "Optimization tools to keep your PC fast and clean",
+            "Official activation and authentic downloads from My Kaspersky",
+        ],
+        "fr": [
+            f"Protection avancée contre virus, malwares et ransomwares ({d_label_fr})",
+            "Navigation sécurisée et protection des données bancaires",
+            "Outils d'optimisation pour un PC rapide et nettoyé",
+            "Activation officielle et téléchargement sécurisé sur My Kaspersky",
+        ],
+        "de": [
+            f"Fortschrittlicher Schutz vor Viren, Malware und Ransomware ({d_label_de})",
+            "Sicheres Surfen und Schutz von Bankdaten beim Online-Einkauf",
+            "Optimierungstools für ein schnelles und sauberes System",
+            "Offizielle Aktivierung und Download über My Kaspersky",
+        ],
+        "es": [
+            f"Protección avanzada contra virus, malware y ransomware ({d_label_es})",
+            "Navegación protegida y defensa de datos bancarios en compras",
+            "Herramientas de optimización para mantener el equipo rápido y limpio",
+            "Activación oficial y descarga auténtica desde My Kaspersky",
+        ],
+    }
+
+
+def _mcafee_feats():
+    return {
+        "it": [
+            (ICON_SHIELD, "blue", "Sicurezza", "Difesa completa contro le minacce", "Protezione continua e intelligente da virus, malware, spyware e ransomware con aggiornamenti costanti in tempo reale."),
+            (ICON_GLOBE, "teal", "Web", "Protezione web McAfee WebAdvisor", "Navigazione serena con avvisi preventivi su siti pericolosi, collegamenti ingannevoli e download a rischio."),
+            (ICON_LAPTOP, "purple", "Prestazioni", "Ottimizzazione del sistema e velocità", "Strumenti dedicati per velocizzare l'avvio delle applicazioni, liberare memoria e mantenere alte le prestazioni del dispositivo."),
+            (ICON_CHECK_CIRCLE, "dark", "Attivazione", "Portale ufficiale McAfee My Account", "Attivazione autentica della licenza con gestione centralizzata dei dispositivi sul portale ufficiale McAfee."),
+        ],
+        "en": [
+            (ICON_SHIELD, "blue", "Security", "Comprehensive threat defence", "Continuous smart protection against viruses, malware, spyware, and ransomware with real-time updates."),
+            (ICON_GLOBE, "teal", "Web", "McAfee WebAdvisor web protection", "Safe browsing with proactive warnings against dangerous websites, deceptive links, and risky downloads."),
+            (ICON_LAPTOP, "purple", "Performance", "System optimization and speed", "Built-in tools to accelerate application startup, free up memory, and maintain peak device performance."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Official McAfee My Account portal", "Authentic licence activation with centralized device management directly via official McAfee portal."),
+        ],
+        "fr": [
+            (ICON_SHIELD, "blue", "Sécurité", "Défense complète contre les menaces", "Protection intelligente continue contre les virus, malwares, spywares et ransomwares avec mises à jour en temps réel."),
+            (ICON_GLOBE, "teal", "Web", "Protection web McAfee WebAdvisor", "Navigation sécurisée avec alertes proactives sur les sites dangereux, liens trompeurs et téléchargements suspects."),
+            (ICON_LAPTOP, "purple", "Performance", "Optimisation du système et rapidité", "Outils dédiés pour accélérer le lancement des applications, libérer de la mémoire et préserver la fluidité."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Portail officiel McAfee My Account", "Activation officielle avec gestion centralisée de vos appareils sur le portail officiel McAfee."),
+        ],
+        "de": [
+            (ICON_SHIELD, "blue", "Sicherheit", "Umfassender Schutz vor Bedrohungen", "Fortlaufender intelligenter Schutz vor Viren, Malware, Spyware und Ransomware mit Echtzeit-Aktualisierungen."),
+            (ICON_GLOBE, "teal", "Web", "McAfee WebAdvisor Web-Schutz", "Sicheres Surfen mit proaktiven Warnungen vor gefährlichen Webseiten, betrügerischen Links und verdächtigen Downloads."),
+            (ICON_LAPTOP, "purple", "Leistung", "Systemoptimierung und Schnelligkeit", "Integrierte Tools zur Beschleunigung von Apps, Freigabe von Arbeitsspeicher und Erhaltung der Höchstleistung."),
+            (ICON_CHECK_CIRCLE, "dark", "Aktivierung", "Offizielles McAfee My Account Portal", "Offizielle Lizenzaktivierung mit zentraler Geräteverwaltung über das offizielle McAfee-Portal."),
+        ],
+        "es": [
+            (ICON_SHIELD, "blue", "Seguridad", "Defensa completa contra amenazas", "Protección continua e inteligente contra virus, malware, spyware y ransomware con actualizaciones en tiempo real."),
+            (ICON_GLOBE, "teal", "Web", "Protección web McAfee WebAdvisor", "Navegación protegida con advertencias proactivas ante sitios web peligrosos, enlaces engañosos y descargas dudosas."),
+            (ICON_LAPTOP, "purple", "Rendimiento", "Optimización del equipo y fluidez", "Herramientas integradas para acelerar el inicio de aplicaciones, liberar memoria y asegurar un rendimiento óptimo."),
+            (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial McAfee My Account", "Activación oficial y gestión centralizada de tus dispositivos en el portal oficial de McAfee."),
+        ],
+    }
+
+
+def _mcafee_keypoints(devices):
+    d_label_it = "1 dispositivo" if devices == 1 else f"{devices} dispositivi"
+    d_label_en = "1 device" if devices == 1 else f"{devices} devices"
+    d_label_fr = "1 appareil" if devices == 1 else f"{devices} appareils"
+    d_label_de = "1 Gerät" if devices == 1 else f"{devices} Geräte"
+    d_label_es = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
+    return {
+        "it": [
+            f"Protezione completa e continua da virus e malware ({d_label_it})",
+            "Tecnologia McAfee WebAdvisor per bloccare siti e link pericolosi",
+            "Strumenti di ottimizzazione per velocizzare app e memoria",
+            "Attivazione sicura e gestione ufficiale su McAfee My Account",
+        ],
+        "en": [
+            f"Complete continuous virus and malware protection ({d_label_en})",
+            "McAfee WebAdvisor technology to block malicious sites and links",
+            "Optimization tools to accelerate applications and free up memory",
+            "Secure activation and official management on McAfee My Account",
+        ],
+        "fr": [
+            f"Protection complète et continue contre virus et malwares ({d_label_fr})",
+            "Technologie McAfee WebAdvisor pour bloquer les sites et liens dangereux",
+            "Outils d'optimisation pour accélérer les applications et la mémoire",
+            "Activation sécurisée et gestion officielle sur McAfee My Account",
+        ],
+        "de": [
+            f"Umfassender und fortlaufender Schutz vor Viren und Malware ({d_label_de})",
+            "McAfee WebAdvisor-Technologie zum Blockieren gefährlicher Webseiten und Links",
+            "Optimierungstools zur Beschleunigung von Apps und Arbeitsspeicher",
+            "Sichere Aktivierung und offizielle Verwaltung im McAfee My Account Portal",
+        ],
+        "es": [
+            f"Protección completa y continua contra virus y malware ({d_label_es})",
+            "Tecnologia McAfee WebAdvisor para bloquear páginas y enlaces peligrosos",
+            "Herramientas de optimización para acelerar aplicaciones y memoria",
+            "Activación segura y gestión oficial en McAfee My Account",
+        ],
+    }
 
 
 def _faq_av(brand, devices_note=True):
@@ -528,9 +881,10 @@ def _name(brand, line, devices, years=1, no_sub=False):
     y = _year(years)
     out = {}
     for lg in LANGS:
-        base = f"{brand} {line} — {d[lg]}"
+        prefix = f"{brand} {line}".strip() if line else brand
+        base = f"{prefix} — {d[lg]}"
         if years != 1:
-            base = f"{brand} {line} — {d[lg]} · {y[lg]}"
+            base = f"{prefix} — {d[lg]} · {y[lg]}"
         if no_sub:
             suffix = {
                 "it": " (no abbonamento)",
@@ -629,21 +983,21 @@ def _add_norton(slug, edition, devices, no_sub=False):
     cloud = "10 GB" if "Standard" in edition else "25 GB"
     PRODUCTS[slug] = _av_page(
         brand="Norton",
-        line=edition,
+        line=f"360 {edition}",
         title_span=span,
         devices=devices,
         years=1,
         name=_name(f"Norton 360 {edition}", "", devices, 1, no_sub),
         desc=L(
-            it=f"Norton 360 {edition} per {_devices(devices)['it']}: protezione online con licenza digitale e consegna via email. Attivazione sul portale ufficiale Norton."
-            + (" Variante senza rinnovo automatico, come indicato in scheda." if no_sub else ""),
-            en=f"Norton 360 {edition} for {_devices(devices)['en']}: online protection with a digital licence and email delivery. Activate on the official Norton portal."
-            + (" No auto-renewal variant, as labelled on this page." if no_sub else ""),
-            fr=f"Norton 360 {edition} pour {_devices(devices)['fr']} : protection en ligne, licence numérique, e-mail. Activation sur le portail Norton."
+            it=f"Norton 360 {edition} per {_devices(devices)['it']}: protezione online completa con licenza digitale e consegna istantanea via email. Attivazione sicura sul portale ufficiale My Norton."
+            + (" Variante senza rinnovo automatico." if no_sub else ""),
+            en=f"Norton 360 {edition} for {_devices(devices)['en']}: complete online protection with a digital licence and instant email delivery. Official activation via My Norton."
+            + (" No auto-renewal variant." if no_sub else ""),
+            fr=f"Norton 360 {edition} pour {_devices(devices)['fr']} : protection en ligne complète, licence numérique et livraison par e-mail. Activation sur le portail officiel My Norton."
             + (" Variante sans renouvellement automatique." if no_sub else ""),
-            de=f"Norton 360 {edition} für {_devices(devices)['de']}: Online-Schutz mit digitaler Lizenz und E-Mail. Aktivierung im Norton-Portal."
-            + (" Variante ohne Auto-Verlängerung." if no_sub else ""),
-            es=f"Norton 360 {edition} para {_devices(devices)['es']}: protección online con licencia digital y email. Activación en el portal Norton."
+            de=f"Norton 360 {edition} für {_devices(devices)['de']}: Rundum-Online-Schutz mit digitaler Lizenz und sofortiger E-Mail-Zustellung. Offizielle Aktivierung im My Norton Portal."
+            + (" Variante ohne automatische Verlängerung." if no_sub else ""),
+            es=f"Norton 360 {edition} para {_devices(devices)['es']}: protección online completa con licencia digital y entrega inmediata por email. Activación segura en My Norton."
             + (" Variante sin renovación automática." if no_sub else ""),
         ),
         pills=_pills(
@@ -655,30 +1009,15 @@ def _add_norton(slug, edition, devices, no_sub=False):
             else None,
         ),
         features_title=L(
-            it=f"Norton 360 {edition}",
-            en=f"Norton 360 {edition}",
-            fr=f"Norton 360 {edition}",
-            de=f"Norton 360 {edition}",
-            es=f"Norton 360 {edition}",
+            it=f"Perché scegliere Norton 360 {edition}",
+            en=f"Why choose Norton 360 {edition}",
+            fr=f"Pourquoi choisir Norton 360 {edition}",
+            de=f"Warum Norton 360 {edition} wählen",
+            es=f"Por qué elegir Norton 360 {edition}",
         ),
-        features=_feats(
-            "Norton",
-            L(it=f"360 {edition}", en=f"360 {edition}", fr=f"360 {edition}", de=f"360 {edition}", es=f"360 {edition}"),
-            L(
-                it="VPN / cloud come da piano",
-                en="VPN / cloud as per plan",
-                fr="VPN / cloud selon l'offre",
-                de="VPN / Cloud laut Plan",
-                es="VPN / cloud según el plan",
-            ),
-            L(
-                it="No auto-rinnovo" if no_sub else "Licenza digitale",
-                en="No auto-renewal" if no_sub else "Digital licence",
-                fr="Sans renouvellement auto" if no_sub else "Licence numérique",
-                de="Ohne Auto-Verlängerung" if no_sub else "Digitale Lizenz",
-                es="Sin renovación auto" if no_sub else "Licencia digital",
-            ),
-        ),
+        features=_norton_feats(edition, cloud),
+        keypoints=_norton_keypoints(edition, devices, cloud),
+        specs_table=SPECS_TABLE_NORTON,
         steps=_steps_for_brand({
             "it": "portale ufficiale Norton (My Norton)",
             "en": "official Norton portal (My Norton)",
@@ -710,28 +1049,25 @@ def _add_bitdefender(slug, devices):
         ),
         devices=devices,
         years=1,
-        name=_name("Bitdefender Plus", "", devices),
+        name=_name("Bitdefender Antivirus Plus", "", devices),
         desc=L(
-            it=f"Bitdefender Antivirus Plus per {_devices(devices)['it']}: protezione digitale con consegna del codice via email e attivazione sul portale ufficiale Bitdefender.",
-            en=f"Bitdefender Antivirus Plus for {_devices(devices)['en']}: digital protection with email key delivery and activation on the official Bitdefender portal.",
-            fr=f"Bitdefender Antivirus Plus pour {_devices(devices)['fr']} : protection numérique, code par e-mail, activation sur le portail Bitdefender.",
-            de=f"Bitdefender Antivirus Plus für {_devices(devices)['de']}: digitaler Schutz mit Key per E-Mail und Aktivierung im Bitdefender-Portal.",
+            it=f"Bitdefender Antivirus Plus per {_devices(devices)['it']}: protezione anti-malware proattiva e leggera con licenza originale e consegna immediata via email. Attivazione su Bitdefender Central.",
+            en=f"Bitdefender Antivirus Plus for {_devices(devices)['en']}: proactive, lightweight anti-malware protection with genuine digital key and instant email delivery. Activate on Bitdefender Central.",
+            fr=f"Bitdefender Antivirus Plus pour {_devices(devices)['fr']} : protection anti-malware proactive et légère, clé numérique authentique livrée par e-mail. Activation sur Bitdefender Central.",
+            de=f"Bitdefender Antivirus Plus für {_devices(devices)['de']}: proaktiver, ressourcenschonender Schutz vor Malware mit digitalem Key per E-Mail. Aktivierung im Bitdefender Central Portal.",
             es=f"Bitdefender Antivirus Plus para {_devices(devices)['es']}: protección digital con clave por email y activación en el portal Bitdefender.",
         ),
         pills=_pills("Bitdefender", devices),
         features_title=L(
-            it="Bitdefender Antivirus Plus",
-            en="Bitdefender Antivirus Plus",
-            fr="Bitdefender Antivirus Plus",
-            de="Bitdefender Antivirus Plus",
-            es="Bitdefender Antivirus Plus",
+            it="Perché scegliere Bitdefender Antivirus Plus",
+            en="Why choose Bitdefender Antivirus Plus",
+            fr="Pourquoi choisir Bitdefender Antivirus Plus",
+            de="Warum Bitdefender Antivirus Plus wählen",
+            es="Por qué elegir Bitdefender Antivirus Plus",
         ),
-        features=_feats(
-            "Bitdefender",
-            L(it="Antivirus Plus", en="Antivirus Plus", fr="Antivirus Plus", de="Antivirus Plus", es="Antivirus Plus"),
-            L(it="Protezione web", en="Web protection", fr="Protection web", de="Web-Schutz", es="Protección web"),
-            L(it="Licenza digitale", en="Digital licence", fr="Licence numérique", de="Digitale Lizenz", es="Licencia digital"),
-        ),
+        features=_bitdefender_feats(),
+        keypoints=_bitdefender_keypoints(devices),
+        specs_table=SPECS_TABLE_BITDEFENDER,
         steps=_steps_for_brand({
             "it": "portale ufficiale Bitdefender (Bitdefender Central)",
             "en": "official Bitdefender portal (Bitdefender Central)",
@@ -767,32 +1103,23 @@ def _add_kaspersky(slug, tier, devices):
         years=1,
         name=_name(f"Kaspersky {tier}", "", devices),
         desc=L(
-            it=f"Kaspersky {tier} per {_devices(devices)['it']}: licenza digitale con consegna via email. Attivazione sul portale ufficiale Kaspersky.",
-            en=f"Kaspersky {tier} for {_devices(devices)['en']}: digital licence with email delivery. Activate on the official Kaspersky portal.",
-            fr=f"Kaspersky {tier} pour {_devices(devices)['fr']} : licence numérique, livraison par e-mail. Activation sur le portail Kaspersky.",
-            de=f"Kaspersky {tier} für {_devices(devices)['de']}: digitale Lizenz mit E-Mail-Zustellung. Aktivierung im Kaspersky-Portal.",
-            es=f"Kaspersky {tier} para {_devices(devices)['es']}: licencia digital con entrega por email. Activación en el portal Kaspersky.",
+            it=f"Kaspersky {tier} per {_devices(devices)['it']}: suite di sicurezza avanzata con protezione in tempo reale, licenza originale e invio immediato via email. Attivazione sicura su My Kaspersky.",
+            en=f"Kaspersky {tier} for {_devices(devices)['en']}: advanced security suite with real-time defence, genuine digital licence, and instant email delivery. Official activation on My Kaspersky.",
+            fr=f"Kaspersky {tier} pour {_devices(devices)['fr']} : suite de sécurité avancée avec protection en temps réel, licence numérique authentique et envoi rapide par e-mail. Activation sur My Kaspersky.",
+            de=f"Kaspersky {tier} für {_devices(devices)['de']}: moderne Sicherheits-Suite mit Echtzeitschutz, digitaler Original-Lizenz und schneller E-Mail-Zustellung. Aktivierung im My Kaspersky Portal.",
+            es=f"Kaspersky {tier} para {_devices(devices)['es']}: suite de seguridad avanzada con protección en tiempo real, licencia digital oficial y entrega inmediata por email. Activación en My Kaspersky.",
         ),
         pills=_pills("Kaspersky", devices, extra=L(it=tier, en=tier, fr=tier, de=tier, es=tier)),
         features_title=L(
-            it=f"Kaspersky {tier}",
-            en=f"Kaspersky {tier}",
-            fr=f"Kaspersky {tier}",
-            de=f"Kaspersky {tier}",
-            es=f"Kaspersky {tier}",
+            it=f"Perché scegliere Kaspersky {tier}",
+            en=f"Why choose Kaspersky {tier}",
+            fr=f"Pourquoi choisir Kaspersky {tier}",
+            de=f"Warum Kaspersky {tier} wählen",
+            es=f"Por qué elegir Kaspersky {tier}",
         ),
-        features=_feats(
-            "Kaspersky",
-            L(it=tier, en=tier, fr=tier, de=tier, es=tier),
-            L(
-                it="VPN / password come da piano" if tier != "Standard" else "Protezione essenziale",
-                en="VPN / passwords as per plan" if tier != "Standard" else "Essential protection",
-                fr="VPN / mots de passe selon l'offre" if tier != "Standard" else "Protection essentielle",
-                de="VPN / Passwörter laut Plan" if tier != "Standard" else "Wesentlicher Schutz",
-                es="VPN / contraseñas según el plan" if tier != "Standard" else "Protección esencial",
-            ),
-            L(it="Licenza digitale", en="Digital licence", fr="Licence numérique", de="Digitale Lizenz", es="Licencia digital"),
-        ),
+        features=_kaspersky_feats(tier),
+        keypoints=_kaspersky_keypoints(tier, devices),
+        specs_table=SPECS_TABLE_KASPERSKY,
         steps=_steps_for_brand({
             "it": "portale ufficiale Kaspersky (My Kaspersky)",
             "en": "official Kaspersky portal (My Kaspersky)",
@@ -827,38 +1154,23 @@ def _add_mcafee(slug, devices):
         years=1,
         name=_name("McAfee Total Protection", "", devices),
         desc=L(
-            it=f"McAfee Total Protection per {_devices(devices)['it']}: licenza digitale con consegna via email e attivazione sul portale ufficiale McAfee.",
-            en=f"McAfee Total Protection for {_devices(devices)['en']}: digital licence with email delivery and activation on the official McAfee portal.",
-            fr=f"McAfee Total Protection pour {_devices(devices)['fr']} : licence numérique, e-mail, activation sur le portail McAfee.",
-            de=f"McAfee Total Protection für {_devices(devices)['de']}: digitale Lizenz mit E-Mail und Aktivierung im McAfee-Portal.",
-            es=f"McAfee Total Protection para {_devices(devices)['es']}: licencia digital con email y activación en el portal McAfee.",
+            it=f"McAfee Total Protection per {_devices(devices)['it']}: difesa multi-dispositivo completa con protezione web avanzata, licenza digitale originale e consegna immediata via email. Attivazione su McAfee My Account.",
+            en=f"McAfee Total Protection for {_devices(devices)['en']}: complete multi-device protection with advanced web security, genuine licence, and instant email delivery. Official activation via McAfee My Account.",
+            fr=f"McAfee Total Protection pour {_devices(devices)['fr']} : protection multi-appareils complète avec sécurité web avancée, licence authentique et livraison par e-mail. Activation sur McAfee My Account.",
+            de=f"McAfee Total Protection für {_devices(devices)['de']}: umfassender Mehrgeräteschutz mit fortschrittlicher Websicherheit, digitaler Original-Lizenz und E-Mail-Zustellung. Aktivierung im McAfee-Portal.",
+            es=f"McAfee Total Protection para {_devices(devices)['es']}: protección integral multidispositivo con seguridad web avanzada, licencia digital oficial y entrega inmediata por email. Activación en McAfee My Account.",
         ),
         pills=_pills("McAfee", devices),
         features_title=L(
-            it="McAfee Total Protection",
-            en="McAfee Total Protection",
-            fr="McAfee Total Protection",
-            de="McAfee Total Protection",
-            es="McAfee Total Protection",
+            it="Perché scegliere McAfee Total Protection",
+            en="Why choose McAfee Total Protection",
+            fr="Pourquoi choisir McAfee Total Protection",
+            de="Warum McAfee Total Protection wählen",
+            es="Por qué elegir McAfee Total Protection",
         ),
-        features=_feats(
-            "McAfee",
-            L(
-                it="Total Protection",
-                en="Total Protection",
-                fr="Total Protection",
-                de="Total Protection",
-                es="Total Protection",
-            ),
-            L(
-                it="Sicurezza multi-device",
-                en="Multi-device security",
-                fr="Sécurité multi-appareils",
-                de="Multi-Geräte-Schutz",
-                es="Seguridad multi-dispositivo",
-            ),
-            L(it="Licenza digitale", en="Digital licence", fr="Licence numérique", de="Digitale Lizenz", es="Licencia digital"),
-        ),
+        features=_mcafee_feats(),
+        keypoints=_mcafee_keypoints(devices),
+        specs_table=SPECS_TABLE_MCAFEE,
         steps=_steps_for_brand({
             "it": "portale ufficiale McAfee (McAfee My Account)",
             "en": "official McAfee portal (McAfee My Account)",
