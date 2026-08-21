@@ -596,10 +596,10 @@ BRAND_META = {
     "bitdefender": {
         "mode": "devices",
         "label": "Bitdefender",
-        "logo_src": "../asset/vendor_logo/img-aml-store_Bitdefender_logo.svg",
-        "logo_kind": "wordmark",
-        "logo_w": 108,
-        "logo_h": 16,
+        "logo_src": "../asset/icon/img-aml-store_Bitdefender-Icon.png",
+        "logo_kind": "icon",
+        "logo_w": 36,
+        "logo_h": 36,
     },
 }
 
