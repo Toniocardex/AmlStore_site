@@ -137,11 +137,11 @@
   ]
 }
     </script>
-    <script src="../js/consent-init.js?v=1014bf53bc"></script>
-    <link rel="icon" href="../favicon/favicon.png?v=3bfa4181d2" type="image/png">
-    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=998f6e4af4">
-    <link rel="preload" as="image" href="../asset/media/products/bundle-m365-personal-kaspersky.webp?v=fd31f7c6a3" fetchpriority="high" type="image/webp">
-    <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
+    <script src="../js/consent-init.js"></script>
+    <link rel="icon" href="../favicon/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
+    <link rel="preload" as="image" href="../asset/media/products/bundle-m365-personal-kaspersky.webp" fetchpriority="high" type="image/webp">
+    <link rel="stylesheet" href="../fonts/montserrat.css">
     <!-- Font del mockup di riferimento (Plus Jakarta Sans + Inter), scopato alla
          sola PDP tramite --font-sans su .pdp-page — non tocca header/footer,
          che leggono --aml-font-sans direttamente (restano su Montserrat).
@@ -153,263 +153,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.paypal.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/page.css?v=bbec166f1a">
-    <link rel="stylesheet" href="../css/header.css?v=89556dc54e">
-    <link rel="stylesheet" href="../css/footer.css?v=31dc97e061">
-    <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=d3517df88f">
-    <script src="../js/theme-init.js?v=d487584e0d"></script>
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/product.css">
+    <link rel="stylesheet" href="../css/product-pdp.css">
+    <script src="../js/theme-init.js"></script>
     <script>window.__amlPaypalConfig = fetch("/api/paypal-config").then(function(r){return r.json();}).catch(function(){return null;});</script>
 </head>
 <body class="pdp-page">
     <a class="skip-link" href="#main">Ir al contenido principal</a>
-    <aml-lang-suggest></aml-lang-suggest>
-<ecommerce-header translate="no" class="notranslate">
-<div class="header-utility">
-                    <div class="header-utility__inner">
-                        <span class="header-utility__rating">★ 4,8/5 en Trustpilot</span>
-                        <span class="header-utility__claim">Distribuidor de software europeo</span>
-                        <span class="header-utility__claim header-utility__claim--persistent">Factura con IVA disponible</span>
-                        <span class="header-utility__claim">Soporte por email y WhatsApp</span>
-                    </div>
-                </div>
-
-                <div class="header-container">
-                    <div class="header-brand">
-                        <a href="/es/" class="logo">
-                            <img src="/logo/logo-header-400.webp?v=1ff82d0830" width="280" height="56" alt="Aml Store">
-                        </a>
-                    </div>
-                    <nav class="header-nav nav-links" aria-label="Primary">
-                            <div class="nav-av-wrap">
-                                <div class="nav-av-inner">
-                                    <a href="/es/antivirus" class="nav-av-root"><svg class="nav-root-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path></svg><span>Antivirus</span></a>
-                                    <button type="button" class="nav-av-caret" aria-expanded="false" aria-haspopup="true" aria-label="Abrir submenú Antivirus">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-av-dropdown" role="menu">
-                                    <a href="/es/antivirus" class="nav-av-dropdown__overview" role="menuitem">Catálogo antivirus</a>
-                                    <a href="/es/mcafee-total-protection-1-device" role="menuitem">McAfee Total Protection</a>
-                                    <a href="/es/norton-360-standard" role="menuitem">Norton 360 Standard</a>
-                                    <a href="/es/eset-nod32-1-device" role="menuitem">ESET NOD32</a>
-                                    <a href="/es/bitdefender-plus-1-device" role="menuitem">Bitdefender Plus</a>
-                                    <a href="/es/kaspersky-standard" role="menuitem">Kaspersky Standard</a>
-                                    <a href="/es/strumenti" role="menuitem">Herramientas y más</a>
-                                </div>
-                            </div>
-                            <div class="nav-m365-wrap">
-                                <div class="nav-m365-inner">
-                                    <a href="/es/microsoft-365-solutions" class="nav-m365-root active"><svg class="nav-root-icon" viewBox="0 0 50 50" aria-hidden="true"><path d="M20.13,32.5c-2.79-1.69-4.53-4.77-4.53-8.04V8.9c0-1.63,0.39-3.19,1.11-4.57L7.54,9.88C4.74,11.57,3,14.65,3,17.92v14.15c0,1.59,0.42,3.14,1.16,4.5c0.69,1.12,1.67,2.06,2.88,2.74c2.53,1.42,5.51,1.36,7.98-0.15l8.02-4.9L20.13,32.5z M42.84,27.14l-8.44-5.05v2.29c0,3.25-1.72,6.33-4.49,8.02l-13.84,8.47c-1.52,0.93-3.19,1.42-4.87,1.46l8.93,5.41c1.5,0.91,3.19,1.36,4.87,1.36s3.37-0.45,4.87-1.36l9.08-5.5l3.52-2.13c0.27-0.16,0.53-0.34,0.78-0.54c0.08-0.05,0.16-0.11,0.23-0.16c0.65-0.53,1.23-1.13,1.71-1.79c0.02-0.03,0.04-0.06,0.06-0.09c0.77-1.19,1.2-2.59,1.19-4.06C46.43,30.85,45.09,28.48,42.84,27.14z M42.46,9.88l-9.57-5.79l-3.02-1.83C29.45,2,29.01,1.79,28.56,1.61c-0.49-0.21-1-0.37-1.51-0.47c-1.84-0.38-3.76-0.08-5.46,0.89c-2.5,1.43-3.99,3.99-3.99,6.87v9.6l2.8-1.65c2.84-1.67,6.36-1.66,9.19,0.03l14.28,8.54c1.29,0.78,2.35,1.81,3.12,3.02L47,17.92C47,14.65,45.26,11.57,42.46,9.88z"></path></svg><span>Microsoft 365</span></a>
-                                    <button type="button" class="nav-m365-caret" aria-expanded="false" aria-haspopup="true" aria-label="Abrir submenú Microsoft 365">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-m365-dropdown" role="menu">
-                                    <a href="/es/microsoft-365-solutions" class="nav-m365-dropdown__overview" role="menuitem">Panorama de la suite</a>
-                                    <a href="/es/microsoft-365-personal" role="menuitem">Microsoft 365 Personal</a>
-                                    <a href="/es/microsoft-365-family" role="menuitem">Microsoft 365 Familia</a>
-                                    <a href="/es/microsoft-365-business-standard" role="menuitem">Microsoft 365 Business Standard</a>
-                                    <a href="/es/pacchetti" role="menuitem">Packs</a>
-                                    <a href="/es/bundle-windows-11-home-m365-personal" role="menuitem">Win11 + M365 Personal</a>
-                                    <a href="/es/bundle-m365-personal-mcafee" role="menuitem">M365 + McAfee</a>
-                                    <a href="/es/bundle-m365-personal-kaspersky" role="menuitem" aria-current="page">M365 + Kaspersky</a>
-                                </div>
-                            </div>
-                            <div class="nav-win-wrap">
-                                <div class="nav-win-inner">
-                                    <a href="/es/sistemi-operativi" class="nav-win-root"><svg class="nav-root-icon" viewBox="0 0 14 14" aria-hidden="true"><path d="m 5.91827,7.331731 v 4.694712 L 1,11.348557 V 7.331731 h 4.91827 z m 0,-5.358174 V 6.725962 H 1 V 2.651443 z M 13,7.331731 V 13 L 6.45913,12.098557 V 7.331731 H 13 z M 13,1 V 6.725962 H 6.45913 V 1.901443 z"></path></svg><span>Windows</span></a>
-                                    <button type="button" class="nav-win-caret" aria-expanded="false" aria-haspopup="true" aria-label="Abrir submenú Windows">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-win-dropdown" role="menu">
-                                    <a href="/es/sistemi-operativi" class="nav-win-dropdown__overview" role="menuitem">Sistemas operativos</a>
-                                    <a href="/es/windows-11-home" role="menuitem">Windows 11 Home</a>
-                                    <a href="/es/windows-11-pro" role="menuitem">Windows 11 Pro</a>
-                                    <a href="/es/windows-11-pro-oem-dvd" role="menuitem">Windows 11 Pro OEM DVD</a>
-                                    <a href="/es/windows-11-pro-coa" role="menuitem">Windows 11 Pro COA</a>
-                                    <a href="/es/windows-10-home" role="menuitem">Windows 10 Home</a>
-                                    <a href="/es/windows-10-pro" role="menuitem">Windows 10 Pro</a>
-                                    <a href="/es/windows-server" class="nav-win-dropdown__overview" role="menuitem">Windows Server y SQL</a>
-                                </div>
-                            </div>
-                            <div class="nav-office-wrap">
-                                <div class="nav-office-inner">
-                                    <a href="/es/suite-office" class="nav-office-root"><svg class="nav-root-icon" viewBox="0 0 50 50" aria-hidden="true"><path d="M43 11.11v27.6c0 2.54-1.73 4.77-4.21 5.43l-8.63 2.41c.5-.94.78-2.02.78-3.16V5.65c0-.86-.19-1.68-.53-2.42l8.45 2.47C41.29 6.37 43 8.6 43 11.11zM28.94 37v6.39c0 1.99-1.19 3.72-2.96 4.33-.43.1-.87.15-1.31.15-1 0-2-.26-2.92-.76L13.45 42c-1.04-.64-1.52-1.86-1.19-3.04.33-1.17 1.38-1.96 2.6-1.96H28.94zM28.94 5.65v5.72l-10.28 3.64c-.99.36-1.66 1.3-1.66 2.36v13.36c0 1.09-.59 2.1-1.54 2.62l-4.07 2.27C10.94 35.88 10.44 36 9.95 36c-.51 0-1.03-.14-1.49-.41C7.54 35.05 7 34.1 7 33.05V14.83c0-1.93 1.04-3.72 2.72-4.68L22.8 2.71c1.08-.61 2.28-.83 3.45-.65.07.06.16.11.26.14C27.72 2.6 28.94 3.82 28.94 5.65z"></path></svg><span>Office</span></a>
-                                    <button type="button" class="nav-office-caret" aria-expanded="false" aria-haspopup="true" aria-label="Abrir submenú Office">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-office-dropdown" role="menu">
-                                    <a href="/es/suite-office" class="nav-office-dropdown__overview" role="menuitem">Suite Office</a>
-                                    <a href="/es/office-2024-home" role="menuitem">Office 2024 Home</a>
-                                    <a href="/es/office-2024-home-business" role="menuitem">Office 2024 Home &amp; Business</a>
-                                    <a href="/es/office-2021-home-student" role="menuitem">Office 2021 Home &amp; Student</a>
-                                    <a href="/es/office-2021-professional-plus" role="menuitem">Office 2021 Pro Plus</a>
-                                    <a href="/es/office-2019-professional-plus" role="menuitem">Office 2019 Pro Plus</a>
-                                    <a href="/es/office-2021-home-business" role="menuitem">Office 2021 Home &amp; Business</a>
-                                    <a href="/es/office-2021-home-business-mac" role="menuitem">Office 2021 Home &amp; Business Mac</a>
-                                    <a href="/es/office-2019-home-student" role="menuitem">Office 2019 Home &amp; Student</a>
-                                    <a href="/es/word-2024" role="menuitem">Word 2024</a>
-                                    <a href="/es/excel-2024" role="menuitem">Excel 2024</a>
-                                    <a href="/es/powerpoint-2024" role="menuitem">PowerPoint 2024</a>
-                                    <a href="/es/outlook-2024" role="menuitem">Outlook 2024</a>
-                                    <a href="/es/project-standard-2024" role="menuitem">Project Standard 2024</a>
-                                    <a href="/es/project-professional-2024" role="menuitem">Project Professional 2024</a>
-                                    <a href="/es/visio-standard-2024" role="menuitem">Visio Standard 2024</a>
-                                    <a href="/es/visio-professional-2024" role="menuitem">Visio Professional 2024</a>
-                                </div>
-                            </div>
-                    </nav>
-                    
-                    <div class="header-actions right-section">
-                        <button type="button" class="search-toggle" aria-label="Buscar productos" aria-haspopup="true" aria-expanded="false">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"></path></svg>
-                        </button>
-
-                        <div class="support-wrap">
-                            <button type="button" class="support-trigger" aria-expanded="false" aria-controls="header-support-panel" aria-haspopup="true" aria-label="Soporte">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"></path></svg>
-                                <span class="support-trigger__label">Soporte</span>
-                                <svg class="support-trigger__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                            </button>
-                            <div id="header-support-panel" class="support-panel" hidden="">
-                                <p class="support-panel__heading">Soporte escrito</p>
-                                <a class="support-panel__link" href="mailto:info@amlstore.it">info@amlstore.it</a>
-                                <a class="support-panel__link" href="https://wa.me/393925580413" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                                <p class="support-panel__hours">Lun–Vie · 09:00–19:00 CET/CEST</p>
-                            </div>
-                        </div>
-
-                        <div class="lang-wrapper">
-                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-controls="header-lang-dropdown" aria-label="Seleccionar idioma">
-                                <img class="flag-icon" src="/images/flags/es.svg?v=3b261cecdc" alt="" decoding="async">
-                                <span>ES</span>
-                                <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                            </button>
-                            <div id="header-lang-dropdown" class="lang-dropdown" role="menu" aria-label="Seleccionar idioma">
-                                
-                                <a href="/it/bundle-m365-personal-kaspersky" class="lang-option" role="menuitem" hreflang="it">
-                                    <img class="flag-icon" src="/images/flags/it.svg?v=7bbc73a46f" alt="" decoding="async">
-                                    <span>IT</span>
-                                    
-                                </a>
-                                <a href="/en/bundle-m365-personal-kaspersky" class="lang-option" role="menuitem" hreflang="en">
-                                    <img class="flag-icon" src="/images/flags/gb.svg?v=639d2928f3" alt="" decoding="async">
-                                    <span>EN</span>
-                                    
-                                </a>
-                                <a href="/fr/bundle-m365-personal-kaspersky" class="lang-option" role="menuitem" hreflang="fr">
-                                    <img class="flag-icon" src="/images/flags/fr.svg?v=8b4c9afc91" alt="" decoding="async">
-                                    <span>FR</span>
-                                    
-                                </a>
-                                <a href="/de/bundle-m365-personal-kaspersky" class="lang-option" role="menuitem" hreflang="de">
-                                    <img class="flag-icon" src="/images/flags/de.svg?v=ae5c2f2cf6" alt="" decoding="async">
-                                    <span>DE</span>
-                                    
-                                </a>
-                                <a href="/es/bundle-m365-personal-kaspersky" class="lang-option active" role="menuitem" hreflang="es" aria-current="true">
-                                    <img class="flag-icon" src="/images/flags/es.svg?v=3b261cecdc" alt="" decoding="async">
-                                    <span>ES</span>
-                                    <svg class="lang-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg>
-                                </a>
-                            </div>
-                        </div>
-
-                        <a href="/es/cart" class="cart-wrapper" aria-label="Carrito vacío">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"></path></svg>
-                            <span class="cart-badge" aria-hidden="true">0</span>
-                        </a>
-
-                        <button type="button" class="mobile-toggle" aria-label="Abrir menú de navegación">
-                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="search-backdrop"></div>
-                <div class="search-panel" role="dialog" aria-modal="true" aria-label="Buscar productos">
-                    <div class="search-panel-row">
-                        <svg class="search-input-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"></path></svg>
-                        <input type="search" class="search-input" placeholder="Buscar un producto…" aria-label="Buscar un producto…" autocomplete="off">
-                        <button type="button" class="search-close" aria-label="Cerrar búsqueda">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-                        </button>
-                    </div>
-                    <div class="search-results" role="region" aria-live="polite" aria-atomic="true"></div>
-                </div>
-
-                <div class="overlay"></div>
-                <div class="mobile-drawer">
-                    <div class="drawer-header">
-                        <a href="/es/" class="logo">
-                            <img src="/logo/logo-header-400.webp?v=1ff82d0830" width="260" height="52" alt="Aml Store">
-                        </a>
-                        <button type="button" class="close-drawer" aria-label="Cerrar menú">
-                            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-                        </button>
-                    </div>
-                    
-                    <nav class="drawer-nav">
-                        <div class="drawer-av-block">
-                            <div class="drawer-av-heading">Antivirus</div>
-                            <a href="/es/antivirus">Catálogo antivirus</a>
-                            <a href="/es/mcafee-total-protection-1-device">McAfee Total Protection</a>
-                            <a href="/es/norton-360-standard">Norton 360 Standard</a>
-                            <a href="/es/eset-nod32-1-device">ESET NOD32</a>
-                            <a href="/es/bitdefender-plus-1-device">Bitdefender Plus</a>
-                            <a href="/es/kaspersky-standard">Kaspersky Standard</a>
-                            <a href="/es/strumenti">Herramientas y más</a>
-                        </div>
-                        <div class="drawer-m365-block">
-                            <div class="drawer-m365-heading">Microsoft 365</div>
-                            <a href="/es/microsoft-365-solutions">Panorama de la suite</a>
-                            <a href="/es/microsoft-365-personal">Microsoft 365 Personal</a>
-                            <a href="/es/microsoft-365-family">Microsoft 365 Familia</a>
-                            <a href="/es/microsoft-365-business-standard">Microsoft 365 Business Standard</a>
-                        </div>
-                        <div class="drawer-bundle-block">
-                            <div class="drawer-bundle-heading">Packs</div>
-                            <a href="/es/pacchetti">Packs</a>
-                            <a href="/es/bundle-windows-11-home-m365-personal">Win11 + M365 Personal</a>
-                            <a href="/es/bundle-m365-personal-mcafee">M365 + McAfee</a>
-                            <a href="/es/bundle-m365-personal-kaspersky" class="active">M365 + Kaspersky</a>
-                        </div>
-                        <div class="drawer-win-block">
-                            <div class="drawer-win-heading">Windows</div>
-                            <a href="/es/sistemi-operativi">Sistemas operativos</a>
-                            <a href="/es/windows-11-home">Windows 11 Home</a>
-                            <a href="/es/windows-11-pro">Windows 11 Pro</a>
-                            <a href="/es/windows-11-pro-oem-dvd">Windows 11 Pro OEM DVD</a>
-                            <a href="/es/windows-11-pro-coa">Windows 11 Pro COA</a>
-                            <a href="/es/windows-10-home">Windows 10 Home</a>
-                            <a href="/es/windows-10-pro">Windows 10 Pro</a>
-                            <a href="/es/windows-server">Windows Server y SQL</a>
-                        </div>
-                        <div class="drawer-office-block">
-                            <div class="drawer-office-heading">Office</div>
-                            <a href="/es/suite-office">Suite Office</a>
-                            <a href="/es/office-2024-home">Office 2024 Home</a>
-                            <a href="/es/office-2024-home-business">Office 2024 Home &amp; Business</a>
-                            <a href="/es/office-2021-home-student">Office 2021 Home &amp; Student</a>
-                            <a href="/es/office-2021-professional-plus">Office 2021 Pro Plus</a>
-                            <a href="/es/office-2019-professional-plus">Office 2019 Pro Plus</a>
-                        </div>
-                    </nav>
-                    
-                    <div class="drawer-footer">
-                        <p class="drawer-support-title">Soporte</p>
-                        <a class="drawer-support-link" href="mailto:info@amlstore.it">info@amlstore.it</a>
-                        <a class="drawer-support-link" href="https://wa.me/393925580413" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                        <p class="drawer-support-hours">Lun–Vie · 09:00–19:00 CET/CEST</p>
-                    </div>
-                </div>
-            </ecommerce-header>
+    <ecommerce-header translate="no" class="notranslate"></ecommerce-header>
     <div id="product-sticky-cta" class="product-sticky-cta" role="region" aria-label="Compra rápida" aria-hidden="true">
         <div class="product-sticky-cta__inner">
-            <img class="product-sticky-cta__thumb" src="../asset/media/products/bundle-m365-personal-kaspersky.webp?v=fd31f7c6a3" width="40" height="40" alt="" loading="lazy" decoding="async">
+            <img class="product-sticky-cta__thumb" src="../asset/media/products/bundle-m365-personal-kaspersky.webp" width="40" height="40" alt="" loading="lazy" decoding="async">
             <div class="product-sticky-cta__name">
                 <span class="product-sticky-cta__title">M365 Personal + Kaspersky</span>
                 <span class="product-sticky-cta__eta">Entrega en 2 minutos por email</span>
@@ -447,7 +204,7 @@
                 <p class="v2-hero__desc">Suscripción a Microsoft 365 Personal más Kaspersky Premium en un solo pedido: apps Office siempre actualizadas y Kaspersky Premium en hasta 5 dispositivos. Dos códigos por email tras la compra.</p>
 
                 <figure class="pdp-media">
-                    <img class="pdp-media__img product-cover-img" src="../asset/media/products/bundle-m365-personal-kaspersky.webp?v=fd31f7c6a3" width="400" height="400" alt="M365 Personal + Kaspersky" fetchpriority="high" decoding="async">
+                    <img class="pdp-media__img product-cover-img" src="../asset/media/products/bundle-m365-personal-kaspersky.webp" width="400" height="400" alt="M365 Personal + Kaspersky" fetchpriority="high" decoding="async">
                 </figure>
 
                 <div class="pdp-apptabs-block">
@@ -485,10 +242,6 @@
                 <p class="pdp-price-save">Ahorras <strong>€ 55,98</strong> respecto al precio de lista (€ 178,98).</p>
                 <p class="pdp-price-note">Impuestos incluidos. Sin gastos de envío.</p>
 
-
-                <p class="pdp-meta-row" role="group" aria-label="Detalles de la licencia">
-                    <span class="pdp-meta-chip"><strong>Región de activación</strong> Unión Europea / EEE</span>
-                </p>
 
                 <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/es/checkout">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
@@ -546,17 +299,17 @@
             <h2 id="pdp-features-title" class="pdp-sec__title">Productividad y seguridad, juntas</h2>
             <ul class="pdp-cards">
                 <li class="pdp-card">
-                    <span class="pdp-card__icon pdp-card__icon--a" aria-hidden="true">&#10003;</span>
+                    <span class="pdp-card__icon pdp-card__icon--blue" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Microsoft 365 Personal incluido</h3>
                     <p class="pdp-card__body">Word, Excel, PowerPoint y Outlook siempre actualizados, con 1 TB de OneDrive y Copilot integrado, para 1 usuario.</p>
                 </li>
                 <li class="pdp-card">
-                    <span class="pdp-card__icon pdp-card__icon--b" aria-hidden="true">&#10003;</span>
+                    <span class="pdp-card__icon pdp-card__icon--teal" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Kaspersky Premium</h3>
                     <p class="pdp-card__body">Protección en tiempo real, VPN y herramientas antiphishing en hasta 5 dispositivos.</p>
                 </li>
                 <li class="pdp-card">
-                    <span class="pdp-card__icon pdp-card__icon--a" aria-hidden="true">&#10003;</span>
+                    <span class="pdp-card__icon pdp-card__icon--purple" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Un solo pedido, un solo precio</h3>
                     <p class="pdp-card__body">Compra ambas licencias en un único pago, a un precio mejor que por separado.</p>
                 </li>
@@ -571,14 +324,50 @@
                     <p class="pdp-card__body">Activa Microsoft 365 en tu cuenta Microsoft y la protección en el portal del fabricante del antivirus.</p>
                 </li>
                 <li class="pdp-card">
-                    <span class="pdp-card__icon pdp-card__icon--b" aria-hidden="true">&#10003;</span>
+                    <span class="pdp-card__icon pdp-card__icon--dark" aria-hidden="true">&#10003;</span>
                     <h3 class="pdp-card__title">Hasta 5 dispositivos protegidos</h3>
                     <p class="pdp-card__body">La protección antivirus cubre varios dispositivos del hogar; Microsoft 365 Personal sigue siendo para 1 usuario.</p>
                 </li>
             </ul>
         </section>
 
+        <hr class="pdp-divider">
 
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">Requisitos del sistema</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilidad y requisitos técnicos</h2>
+            <p class="pdp-sec__sub">Valores orientativos según documentación Microsoft; comprueba siempre los requisitos actualizados antes de instalar.</p>
+            <div class="home-faq-list">
+                <div class="pf-faq-col">
+                <details class="home-faq-item">
+                    <summary>Microsoft 365</summary>
+                    <div class="home-faq-body">
+                        <p>Windows 10/11, macOS, web y app móvil; 1 usuario, 1 TB de OneDrive.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Antivirus</summary>
+                    <div class="home-faq-body">
+                        <p>Kaspersky Premium: hasta 5 dispositivos Windows, macOS, Android o iOS según el plan.</p>
+                    </div>
+                </details>
+                </div>
+                <div class="pf-faq-col">
+                <details class="home-faq-item">
+                    <summary>Conexión</summary>
+                    <div class="home-faq-body">
+                        <p>Internet necesario para la activación, las actualizaciones y las funciones en la nube de ambos productos.</p>
+                    </div>
+                </details>
+                <details class="home-faq-item">
+                    <summary>Vigencia</summary>
+                    <div class="home-faq-body">
+                        <p>La duración de cada suscripción se indica en la ficha del producto y en el email de entrega.</p>
+                    </div>
+                </details>
+                </div>
+            </div>
+        </section>
         <hr class="pdp-divider">
 
         <section class="pdp-sec" aria-labelledby="pdp-steps-title">
@@ -654,44 +443,6 @@
                 </div>
             </div>
         </section>
-
-        <hr class="pdp-divider">
-
-        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
-            <p class="pdp-sec__eyebrow">Requisitos del sistema</p>
-            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">Compatibilidad y requisitos técnicos</h2>
-            <p class="pdp-sec__sub">Valores orientativos según documentación Microsoft; comprueba siempre los requisitos actualizados antes de instalar.</p>
-            <div class="home-faq-list">
-                <div class="pf-faq-col">
-                <details class="home-faq-item">
-                    <summary>Microsoft 365</summary>
-                    <div class="home-faq-body">
-                        <p>Windows 10/11, macOS, web y app móvil; 1 usuario, 1 TB de OneDrive.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>Antivirus</summary>
-                    <div class="home-faq-body">
-                        <p>Kaspersky Premium: hasta 5 dispositivos Windows, macOS, Android o iOS según el plan.</p>
-                    </div>
-                </details>
-                </div>
-                <div class="pf-faq-col">
-                <details class="home-faq-item">
-                    <summary>Conexión</summary>
-                    <div class="home-faq-body">
-                        <p>Internet necesario para la activación, las actualizaciones y las funciones en la nube de ambos productos.</p>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>Vigencia</summary>
-                    <div class="home-faq-body">
-                        <p>La duración de cada suscripción se indica en la ficha del producto y en el email de entrega.</p>
-                    </div>
-                </details>
-                </div>
-            </div>
-        </section>
     </main>
     <dialog id="pdp-activation" class="pdp-dialog" aria-labelledby="pdp-activation-title">
         <h2 id="pdp-activation-title" class="pdp-dialog__title">Tres pasos para empezar</h2>
@@ -705,93 +456,17 @@
         </div>
     </dialog>
     <aml-cookie-banner></aml-cookie-banner>
-    <ecommerce-footer translate="no" class="notranslate">
-<footer class="site-footer">
-                    <div class="container footer-main">
-                        <div class="brand-col">
-                            <a href="/es/" class="footer-logo">
-                                <img src="/logo/logo-header-400-light.webp?v=a2ede92031" width="400" height="96" alt="Aml Store">
-                            </a>
-                            <p class="brand-desc">Software original, facturación italiana y asistencia humana. Soluciones para particulares, profesionales y empresas.</p>
-                            <div class="brand-contacts">
-                                <a href="tel:+393925580413" aria-label="Teléfono: +39 392 558 0413">+39 392 558 0413</a>
-                                <a href="mailto:Info@amlstore.it" aria-label="Email: Info@amlstore.it">Info@amlstore.it</a>
-                            </div>
-                            <p class="brand-support">
-                                <span>Lun–Vie · 09:00–19:00 (hora de Italia)</span>
-                                <span>Asistencia en inglés</span>
-                            </p>
-                            <div class="footer-pay" role="group" aria-label="Métodos de pago aceptados">
-                                <span class="footer-pay__logo" data-brand="Visa"><img src="/asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" width="30" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="Mastercard"><img src="/asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" width="30" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="PayPal"><img src="/asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" alt="PayPal" width="40" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="Apple Pay"><img src="/asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" alt="Apple Pay" width="30" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="Google Pay"><img src="/asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" width="30" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="Stripe"><img src="/asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" width="30" height="14" loading="lazy" decoding="async"></span>
-                            </div>
-                        </div>
-
-                        <nav class="footer-nav" aria-label="Navegación del pie de página">
-                            <section class="nav-col" aria-labelledby="footer-catalog-es">
-                                <h2 id="footer-catalog-es" class="col-title">Catálogo</h2>
-                                <ul class="link-list">
-                                    <li><a href="/es/antivirus">Antivirus</a></li>
-                                    <li><a href="/es/microsoft-365-solutions">Microsoft 365</a></li>
-                                    <li><a href="/es/sistemi-operativi">Windows</a></li>
-                                    <li><a href="/es/suite-office">Office</a></li>
-                                </ul>
-                            </section>
-
-                            <section class="nav-col" aria-labelledby="footer-company-es">
-                                <h2 id="footer-company-es" class="col-title">Empresa</h2>
-                                <ul class="link-list">
-                                    <li><a href="/es/quienes-somos">Quiénes somos</a></li>
-                                    <li><a href="/es/consultoria">Asesoramiento de software</a></li>
-                                    <li><a href="/es/windows-server">Soluciones empresariales</a></li>
-                                    <li><a href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Reseñas</a></li>
-                                    <li><a href="/es/contacts">Contacto</a></li>
-                                </ul>
-                            </section>
-
-                            <section class="nav-col" aria-labelledby="footer-support-es">
-                                <h2 id="footer-support-es" class="col-title">Soporte</h2>
-                                <ul class="link-list">
-                                    <li><a href="/es/#come-funziona">Cómo funciona</a></li>
-                                    <li><a href="https://wa.me/393925580413" target="_blank" rel="noopener noreferrer">Atención al cliente</a></li>
-                                    <li><a href="/es/terms-and-conditions">Términos y condiciones</a></li>
-                                    <li><a href="/es/returns-and-refunds">Devoluciones y reembolsos</a></li>
-                                </ul>
-                            </section>
-                        </nav>
-                    </div>
-
-                    <div class="footer-bottom">
-                        <div class="container footer-bottom-inner">
-                            <p class="copyright">
-                                © 2026 Aml Store. Todos los derechos reservados.
-                                <span class="copyright-legal">Licensoft di Cardelli Antonino · Via Trento 5/A, 20015 Parabiago (MI), Italia · NIF 11461870963</span>
-                                <span class="copyright-legal">Los nombres de producto, logotipos y marcas mencionados pertenecen a sus respectivos propietarios y se usan solo con fines identificativos/ilustrativos. Aml Store no está afiliada ni patrocinada por los titulares de las marcas.</span>
-                            </p>
-                            <nav class="legal-links" aria-label="Información legal">
-                                <a href="/es/privacy-policy">Privacidad</a>
-                                <a href="/es/cookie-policy">Cookies</a>
-                                <a href="/es/terms-and-conditions">Términos y condiciones</a>
-                                <button type="button" data-aml-cookie-settings="">Gestionar preferencias de cookies</button>
-                            </nav>
-                        </div>
-                    </div>
-                </footer>
-            </ecommerce-footer>
-    <script src="../js/locale-path.js?v=e47f0483f7"></script>
-    <script src="../js/cart.js?v=8eddb4fe5c" defer></script>
-    <script src="../js/faq.js?v=cadbe81664" defer></script>
-    <script src="../js/product-page.js?v=eaccc91630" defer></script>
-    <script src="../js/product-v3.js?v=cc997542a2" defer></script>
-    <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
-    <script src="../js/pdp-paypal-express.js?v=2ca232e8c1" defer></script>
-    <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
-    <script src="../components/cookie-banner.js?v=a5b2ea08dd" defer></script><script src="../components/lang-suggest.js?v=74d7b5f03c" defer></script>
-    <script src="../components/header.js?v=737a68f11e" defer></script>
-    <script src="../components/footer.js?v=a9b6a8315d" defer></script>
+    <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
+    <script src="../js/locale-path.js"></script>
+    <script src="../js/cart.js" defer></script>
+    <script src="../js/faq.js" defer></script>
+    <script src="../js/product-page.js" defer></script>
+    <script src="../js/product-v3.js" defer></script>
+    <script src="../js/pdp-activation-modal.js" defer></script>
+    <script src="../js/pdp-paypal-express.js" defer></script>
+    <script src="../js/trustpilot-widget.js" defer></script>
+    <script src="../components/cookie-banner.js" defer></script>
+    <script src="../components/header.js" defer></script>
+    <script src="../components/footer.js" defer></script>
 </body>
 </html>

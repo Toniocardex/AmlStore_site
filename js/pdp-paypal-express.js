@@ -228,7 +228,7 @@
         buttonsEl.innerHTML = '';
 
         return global.paypal.Buttons({
-                    style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'paypal', height: 45 },
+                    style: { layout: 'horizontal', color: 'gold', shape: 'rect', label: 'paypal', tagline: false, height: 38 },
 
                     createOrder: function () {
                         if (_isSubmitting) throw new Error('aml-busy');
@@ -329,13 +329,15 @@
                 setLoading(false);
             })
             .catch(function (sdkErr) {
-                console.error('[PayPal Express] Impossibile caricare SDK:', sdkErr);
+                console.warn('[PayPal Express] SDK non caricato, componente nascosto:', sdkErr);
                 setLoading(false);
-                // Niente bottone da mostrare: lo spazio riservato (min-height, pensato
-                // per evitare un salto di layout mentre l'SDK carica) resterebbe vuoto
-                // sopra il messaggio d'errore. Lo si nasconde solo in questo caso.
-                buttonsEl.hidden = true;
-                showError((errorEl && errorEl.getAttribute('data-msg-error')) || 'PayPal non disponibile.');
+                if (CONTAINER) {
+                    CONTAINER.hidden = true;
+                    var sep = CONTAINER.previousElementSibling;
+                    if (sep && sep.classList && sep.classList.contains('pdp-paypal-sep')) {
+                        sep.hidden = true;
+                    }
+                }
             });
     }
 

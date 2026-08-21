@@ -905,21 +905,19 @@ TRUSTPILOT_COUNT_IT = "94 recensioni"
 
 def _render_reviews(v3, lang):
     """
-    Recensioni Trustpilot reali (vedi REVIEWS_IT sopra). Struttura del mockup
-    di riferimento — intestazione con voto+conteggio, 3 card piatte — ma dati
-    veri: il mockup aveva 3 citazioni scritte a mano con badge "Acquisto
-    Verificato" fittizio, non riproducibili (vedi memoria guest-checkout /
-    fedelta-mockup). Solo IT finche' non ci sono recensioni vere in altre
-    lingue da mostrare.
+    Recensioni Trustpilot reali (vedi REVIEWS_IT sopra) con badge acquisto verificato.
     """
     if lang != "it" or not REVIEWS_IT:
         return ""
     stars = "★★★★★"
     items = "\n".join(
-        f"""                <li>
-                    <span class="pdp-reviews__name">{name}</span>
+        f"""                <li class="pdp-reviews__card">
+                    <div class="pdp-reviews__meta">
+                        <span class="pdp-reviews__name">{name}</span>
+                        <span class="pdp-reviews__badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Acquisto verificato</span>
+                    </div>
                     <span class="pdp-reviews__stars" aria-hidden="true">{stars}</span>
-                    <p>«{quote}»</p>
+                    <p class="pdp-reviews__quote">«{quote}»</p>
                 </li>"""
         for name, quote in REVIEWS_IT
     )
@@ -994,6 +992,16 @@ def _render_specs_table(specs_table, lang, sku):
     t = specs_table.get(lang) or specs_table.get("it")
     if not t:
         return ""
+    col_req = t.get("col_req")
+    col_det = t.get("col_det")
+    thead_html = ""
+    if col_req and col_det:
+        thead_html = (
+            f"                    <thead>\n"
+            f"                        <tr><th scope=\"col\">{col_req}</th><th scope=\"col\">{col_det}</th></tr>\n"
+            f"                    </thead>\n"
+        )
+    sub_html = f'            <p class="pdp-sec__sub">{t["sub"]}</p>\n' if t.get("sub") else ""
     rows = "\n".join(
         f'                        <tr><th scope="row">{k}</th>'
         f'<td>{sku if v == "@sku" else v}</td></tr>'
@@ -1004,10 +1012,10 @@ def _render_specs_table(specs_table, lang, sku):
         <section class="pdp-sec pdp-sec--tight" aria-labelledby="pdp-specs2-title">
             <p class="pdp-sec__eyebrow">{t['eyebrow']}</p>
             <h2 id="pdp-specs2-title" class="pdp-sec__title">{t['title']}</h2>
-            <div class="pdp-tablewrap">
+{sub_html}            <div class="pdp-tablewrap pdp-tablewrap--open">
                 <table class="pdp-table pdp-table--specs">
                     <caption class="visually-hidden">{t['caption']}</caption>
-                    <tbody>
+{thead_html}                    <tbody>
 {rows}
                     </tbody>
                 </table>
@@ -1113,19 +1121,22 @@ def _render_keypoints(content, lang):
 
 
 def _render_cards(features):
-    """features: (span, tone, label, title, body) — span, tone e label (testo)
-    del vecchio bento non servono piu': l'etichetta per-card e' stata sostituita
-    da un'icona decorativa a cerchio colorato (mockup di riferimento), le due
-    tonalita' alternate restano dentro la palette a tre ruoli gia' approvata
-    (arancione brand / verde fiducia), senza introdurre un terzo colore."""
+    """features: (icon_or_span, tone, label, title, body) — supporta icone SVG personalizzate o checkmark classico."""
     ICON_TONES = ("a", "b")
     parts = []
     for i, item in enumerate(features):
+        icon_raw = item[0] if len(item) > 0 else None
+        tone_raw = item[1] if len(item) > 1 and item[1] else ICON_TONES[i % len(ICON_TONES)]
         title, body = item[3], item[4]
-        tone = ICON_TONES[i % len(ICON_TONES)]
+        if isinstance(icon_raw, str) and icon_raw.strip().startswith("<svg"):
+            icon_html = icon_raw
+            icon_cls = f"pdp-card__icon pdp-card__icon--custom pdp-card__icon--{tone_raw}"
+        else:
+            icon_html = "&#10003;"
+            icon_cls = f"pdp-card__icon pdp-card__icon--{tone_raw}"
         parts.append(
             f"""                <li class="pdp-card">
-                    <span class="pdp-card__icon pdp-card__icon--{tone}" aria-hidden="true">&#10003;</span>
+                    <span class="{icon_cls}" aria-hidden="true">{icon_html}</span>
                     <h3 class="pdp-card__title">{title}</h3>
                     <p class="pdp-card__body">{body}</p>
                 </li>"""
@@ -2205,6 +2216,19 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     compare_block = _render_compare(content.get("compare"), lang)
     stats_block = _render_stats(content.get("stats"), lang)
     specs_table_block = _render_specs_table(content.get("specs_table"), lang, sku)
+    if specs_table_block:
+        specs_block = specs_table_block
+    else:
+        specs_block = f"""        <hr class="pdp-divider">
+
+        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
+            <p class="pdp-sec__eyebrow">{ui['specs_eyebrow']}</p>
+            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">{v3['specs_title']}</h2>
+            <p class="pdp-sec__sub">{specs_note}</p>
+            <div class="home-faq-list">
+{_render_specs_v3(ui, content, lang)}
+            </div>
+        </section>"""
     roles_block = _render_roles(content.get("roles"), lang)
     copilot_bonus_html = _render_copilot_bonus(content.get("copilot_bonus"), lang)
     seat_cost_html = _render_seat_cost_chip(content.get("seats_count"), sku, lang)
@@ -2352,25 +2376,14 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <main id="main" class="product-page" data-cart-added-msg="{ui['cart_added']}">
         <div id="product-cart-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 
-{overview_block}{features_block}
-{stats_block}{apps_block}{lifestyle_block}{seats_block}{compare_block}{specs_table_block}{roles_block}{steps_section_html}{_render_reviews(v3, lang)}
+{overview_block}{features_block}{specs_block}
+{stats_block}{apps_block}{lifestyle_block}{seats_block}{compare_block}{roles_block}{steps_section_html}{_render_reviews(v3, lang)}
         <hr class="pdp-divider">
 
         <section id="faq" class="pdp-sec home-faq" aria-labelledby="pdp-faq-title">
             <p class="pdp-sec__eyebrow">{ui['faq_eyebrow']}</p>
             <h2 id="pdp-faq-title" class="pdp-sec__title pdp-faq__title">{v3['faq_title']}</h2>
 {faq_body_html}
-        </section>
-
-        <hr class="pdp-divider">
-
-        <section class="pdp-sec pdp-sec--tight pdp-acc home-faq" aria-labelledby="pdp-specs-title">
-            <p class="pdp-sec__eyebrow">{ui['specs_eyebrow']}</p>
-            <h2 id="pdp-specs-title" class="pdp-sec__title pdp-faq__title">{v3['specs_title']}</h2>
-            <p class="pdp-sec__sub">{specs_note}</p>
-            <div class="home-faq-list">
-{_render_specs_v3(ui, content, lang)}
-            </div>
         </section>
     </main>
 {guide_dialog}    <aml-cookie-banner></aml-cookie-banner>

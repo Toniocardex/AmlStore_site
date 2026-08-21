@@ -22,7 +22,7 @@ _AV_OVERRIDES = {
     "it": {
         "apps_eyebrow": "In evidenza",
         "step2_body": "Ti inviamo la <strong>licenza / codice</strong> e le istruzioni via email, di solito entro pochi minuti dall'approvazione del pagamento.",
-        "step3_body": "Attiva sul <strong>portale ufficiale del produttore</strong> (Norton, Kaspersky, Bitdefender, ESET o McAfee) con il codice ricevuto e segui le istruzioni nell'email.",
+        "step3_body": "Attiva sul <strong>portale ufficiale del produttore</strong> con il codice ricevuto e segui le istruzioni nell'email.",
         "spec_cpu_body": "PC o dispositivi supportati dal produttore; verifica i requisiti aggiornati sulla scheda ufficiale del software.",
         "spec_os_body": "Windows, macOS, Android o iOS secondo le piattaforme supportate dal prodotto acquistato.",
         "spec_ram_body": "Requisiti tipici da pochi GB di RAM; consulta la documentazione del produttore per il titolo specifico.",
@@ -32,7 +32,7 @@ _AV_OVERRIDES = {
     "en": {
         "apps_eyebrow": "Highlights",
         "step2_body": "We email the <strong>licence / key</strong> and instructions, usually within minutes after payment approval.",
-        "step3_body": "Activate on the <strong>official vendor portal</strong> (Norton, Kaspersky, Bitdefender, ESET or McAfee) with the code received and follow the email instructions.",
+        "step3_body": "Activate on the <strong>official vendor portal</strong> with the code received and follow the email instructions.",
         "spec_cpu_body": "PCs or devices supported by the vendor; check the latest requirements on the official product page.",
         "spec_os_body": "Windows, macOS, Android or iOS depending on platforms supported by the purchased product.",
         "spec_ram_body": "Typical requirements are a few GB of RAM; see vendor documentation for the specific title.",
@@ -42,7 +42,7 @@ _AV_OVERRIDES = {
     "fr": {
         "apps_eyebrow": "Points clés",
         "step2_body": "Nous envoyons la <strong>licence / clé</strong> et les instructions par e-mail, en général quelques minutes après validation du paiement.",
-        "step3_body": "Activez sur le <strong>portail officiel de l'éditeur</strong> (Norton, Kaspersky, Bitdefender, ESET ou McAfee) avec le code reçu et suivez l'e-mail.",
+        "step3_body": "Activez sur le <strong>portail officiel de l'éditeur</strong> avec le code reçu et suivez l'e-mail.",
         "spec_cpu_body": "PC ou appareils pris en charge par l'éditeur ; vérifiez la fiche officielle.",
         "spec_os_body": "Windows, macOS, Android ou iOS selon les plateformes supportées.",
         "spec_ram_body": "Quelques Go de RAM typiquement ; voir la doc de l'éditeur.",
@@ -52,7 +52,7 @@ _AV_OVERRIDES = {
     "de": {
         "apps_eyebrow": "Highlights",
         "step2_body": "Wir senden <strong>Lizenz / Key</strong> und Anleitung per E-Mail, in der Regel wenige Minuten nach Zahlungsfreigabe.",
-        "step3_body": "Aktivieren Sie im <strong>offiziellen Herstellerportal</strong> (Norton, Kaspersky, Bitdefender, ESET oder McAfee) mit dem erhaltenen Code und folgen Sie der E-Mail.",
+        "step3_body": "Aktivieren Sie im <strong>offiziellen Herstellerportal</strong> mit dem erhaltenen Code und folgen Sie der E-Mail.",
         "spec_cpu_body": "Vom Hersteller unterstützte PCs/Geräte; aktuelle Anforderungen auf der Produktseite prüfen.",
         "spec_os_body": "Windows, macOS, Android oder iOS je nach unterstützten Plattformen.",
         "spec_ram_body": "Typisch einige GB RAM; Herstellerdokumentation prüfen.",
@@ -62,7 +62,7 @@ _AV_OVERRIDES = {
     "es": {
         "apps_eyebrow": "Destacados",
         "step2_body": "Enviamos la <strong>licencia / clave</strong> e instrucciones por email, normalmente en minutos tras aprobar el pago.",
-        "step3_body": "Activa en el <strong>portal oficial del fabricante</strong> (Norton, Kaspersky, Bitdefender, ESET o McAfee) con el código recibido y sigue el email.",
+        "step3_body": "Activa en el <strong>portal oficial del fabricante</strong> con el código recibido y sigue el email.",
         "spec_cpu_body": "PCs o dispositivos admitidos por el fabricante; consulta los requisitos oficiales.",
         "spec_os_body": "Windows, macOS, Android o iOS según las plataformas del producto.",
         "spec_ram_body": "Normalmente unos pocos GB de RAM; consulta la documentación del fabricante.",
@@ -72,6 +72,186 @@ _AV_OVERRIDES = {
 }
 for lg, ov in _AV_OVERRIDES.items():
     UI[lg].update(ov)
+
+
+ICON_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+ICON_LIGHTNING = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>'
+ICON_EMAIL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'
+ICON_CHECK_CIRCLE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>'
+
+
+def _eset_feats():
+    return {
+        "it": [
+            (ICON_SHIELD, "blue", "Sicurezza", "Protezione antivirus proattiva", "Difesa multilivello avanzata contro virus, ransomware, phishing e minacce zero-day senza interruzioni."),
+            (ICON_LIGHTNING, "teal", "Prestazioni", "Impatto minimo sul sistema", "Massima reattività ed efficienza hardware: scansioni rapide e fluide, ideale anche per gaming e lavoro."),
+            (ICON_EMAIL, "purple", "Consegna", "Invio istantaneo via email", "Codice licenza originale e guida passo-passo inviati subito via email dopo la conferma del pagamento."),
+            (ICON_CHECK_CIRCLE, "dark", "Attivazione", "Portale ufficiale ESET", "Attivazione autentica e sicura tramite account ufficiale ESET HOME con aggiornamenti costanti inclusi."),
+        ],
+        "en": [
+            (ICON_SHIELD, "blue", "Security", "Proactive antivirus protection", "Advanced multi-layered defence against viruses, ransomware, phishing, and zero-day threats."),
+            (ICON_LIGHTNING, "teal", "Performance", "Minimal system impact", "High efficiency and low footprint: fast, smooth scanning, perfect for gaming and multitasking."),
+            (ICON_EMAIL, "purple", "Delivery", "Instant email delivery", "Genuine licence key and step-by-step instructions sent directly to your inbox after purchase."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Official ESET portal", "Authentic, secure activation via official ESET HOME account with regular protection updates."),
+        ],
+        "fr": [
+            (ICON_SHIELD, "blue", "Sécurité", "Protection antivirus proactive", "Défense multicouche avancée contre les virus, ransomwares, phishing et menaces en ligne."),
+            (ICON_LIGHTNING, "teal", "Performance", "Impact minimal sur le système", "Faible empreinte et fluidité maximale : analyses rapides, idéal pour le travail et le jeu."),
+            (ICON_EMAIL, "purple", "Livraison", "Envoi instantané par e-mail", "Clé de licence authentique et guide d'installation envoyés par e-mail dès validation."),
+            (ICON_CHECK_CIRCLE, "dark", "Activation", "Portail officiel ESET", "Activation officielle et sécurisée sur ESET HOME avec mises à jour de sécurité incluses."),
+        ],
+        "de": [
+            (ICON_SHIELD, "blue", "Sicherheit", "Proaktiver Virenschutz", "Mehrschichtige Abwehr vor Viren, Ransomware, Phishing und neuesten Bedrohungen."),
+            (ICON_LIGHTNING, "teal", "Leistung", "Geringe Systembelastung", "Minimaler Ressourcenverbrauch: schnelle, unauffällige Scans, ideal für Arbeit und Gaming."),
+            (ICON_EMAIL, "purple", "Lieferung", "Sofortige E-Mail-Zustellung", "Originaler Lizenzschlüssel und Schritt-für-Schritt-Anleitung direkt nach dem Kauf per E-Mail."),
+            (ICON_CHECK_CIRCLE, "dark", "Aktivierung", "Offizielles ESET-Portal", "Sichere Aktivierung über das offizielle ESET HOME Portal mit fortlaufenden Updates."),
+        ],
+        "es": [
+            (ICON_SHIELD, "blue", "Seguridad", "Protección antivirus proactiva", "Defensa multicapa avanzada contra virus, ransomware, phishing y amenazas web."),
+            (ICON_LIGHTNING, "teal", "Rendimiento", "Impacto mínimo en el sistema", "Máxima eficiencia y bajo consumo de recursos: análisis rápidos, ideal para trabajo y juegos."),
+            (ICON_EMAIL, "purple", "Entrega", "Envío inmediato por email", "Clave de licencia original e instrucciones claras enviadas por email tras el pago."),
+            (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial de ESET", "Activación oficial y segura en ESET HOME con actualizaciones automáticas incluidas."),
+        ],
+    }
+
+
+def _eset_keypoints():
+    return {
+        "it": [
+            "Protezione proattiva contro virus, malware e ransomware",
+            "Scansioni ultra-rapide a basso impatto sulle risorse",
+            "Codice licenza originale e guida inviati via email",
+            "Attivazione ufficiale e download da portale ESET",
+        ],
+        "en": [
+            "Proactive protection against viruses, malware, and ransomware",
+            "Ultra-fast scans with minimal system impact",
+            "Genuine license key and guide delivered by email",
+            "Official activation and downloads via ESET portal",
+        ],
+        "fr": [
+            "Protection proactive contre virus, malwares et ransomwares",
+            "Analyses ultra-rapides à faible impact système",
+            "Clé de licence originale et guide envoyés par e-mail",
+            "Activation officielle et téléchargement sur le portail ESET",
+        ],
+        "de": [
+            "Proaktiver Schutz vor Viren, Malware und Ransomware",
+            "Ultraschnelle Scans mit minimaler Systembelastung",
+            "Originaler Lizenzschlüssel und Anleitung per E-Mail",
+            "Offizielle Aktivierung und Download über das ESET-Portal",
+        ],
+        "es": [
+            "Protección proactiva contra virus, malware y ransomware",
+            "Análisis ultrarrápidos con mínimo impacto en el sistema",
+            "Clave de licencia original y guía enviadas por email",
+            "Activación oficial y descarga desde el portal ESET",
+        ],
+    }
+
+
+SPECS_TABLE_ESET = {
+    "it": {
+        "eyebrow": "Requisiti di sistema",
+        "title": "Requisiti di sistema e compatibilità",
+        "sub": "Valori orientativi; verifica sempre i requisiti aggiornati sul sito ufficiale del produttore prima dell'installazione.",
+        "caption": "Requisiti di sistema per ESET NOD32 Antivirus",
+        "col_req": "Requisito",
+        "col_det": "Dettaglio Tecnico",
+        "rows": [
+            ("Sistema operativo", "Windows 10 / 11, macOS 11+, Android 8.0+"),
+            ("Processore", "1 GHz a 32-bit (x86) / 64-bit (x64)"),
+            ("Memoria RAM", "1 GB minimo"),
+            ("Spazio su disco", "320 MB liberi"),
+        ],
+    },
+    "en": {
+        "eyebrow": "System requirements",
+        "title": "System requirements and compatibility",
+        "sub": "Indicative values; always check the vendor’s latest requirements before installing.",
+        "caption": "System requirements for ESET NOD32 Antivirus",
+        "col_req": "Requirement",
+        "col_det": "Technical Details",
+        "rows": [
+            ("Operating system", "Windows 10 / 11, macOS 11+, Android 8.0+"),
+            ("Processor", "1 GHz 32-bit (x86) / 64-bit (x64)"),
+            ("RAM memory", "1 GB minimum"),
+            ("Disk space", "320 MB free space"),
+        ],
+    },
+    "fr": {
+        "eyebrow": "Configuration requise",
+        "title": "Configuration requise et compatibilité",
+        "sub": "Valeurs indicatives ; vérifiez toujours les exigences à jour de l'éditeur.",
+        "caption": "Configuration requise pour ESET NOD32 Antivirus",
+        "col_req": "Exigence",
+        "col_det": "Détail technique",
+        "rows": [
+            ("Système d'exploitation", "Windows 10 / 11, macOS 11+, Android 8.0+"),
+            ("Processeur", "1 GHz 32 bits (x86) / 64 bits (x64)"),
+            ("Mémoire RAM", "1 Go minimum"),
+            ("Espace disque", "320 Mo libres"),
+        ],
+    },
+    "de": {
+        "eyebrow": "Systemanforderungen",
+        "title": "Systemanforderungen und Kompatibilität",
+        "sub": "Richtwerte; stets aktuelle Herstelleranforderungen prüfen.",
+        "caption": "Systemanforderungen für ESET NOD32 Antivirus",
+        "col_req": "Anforderung",
+        "col_det": "Technische Details",
+        "rows": [
+            ("Betriebssystem", "Windows 10 / 11, macOS 11+, Android 8.0+"),
+            ("Prozessor", "1 GHz 32-Bit (x86) / 64-Bit (x64)"),
+            ("Arbeitsspeicher", "1 GB mindestens"),
+            ("Festplattenspeicher", "320 MB freier Speicher"),
+        ],
+    },
+    "es": {
+        "eyebrow": "Requisitos del sistema",
+        "title": "Requisitos del sistema y compatibilidad",
+        "sub": "Valores orientativos; comprueba siempre los requisitos actualizados del fabricante.",
+        "caption": "Requisitos del sistema para ESET NOD32 Antivirus",
+        "col_req": "Requisito",
+        "col_det": "Detalle técnico",
+        "rows": [
+            ("Sistema operativo", "Windows 10 / 11, macOS 11+, Android 8.0+"),
+            ("Procesador", "1 GHz de 32 bits (x86) / 64 bits (x64)"),
+            ("Memoria RAM", "1 GB mínimo"),
+            ("Espacio en disco", "320 MB libres"),
+        ],
+    },
+}
+
+
+def _steps_for_brand(portal):
+    return {
+        "it": [
+            ("Completa l'ordine", "Scegli il piano e procedi con il pagamento sicuro tramite carta o PayPal."),
+            ("Ricevi la licenza via email", "Ti inviamo il codice licenza originale e la guida di installazione via email in pochi minuti."),
+            ("Attiva sul portale ufficiale", f"Attiva sul <strong>{portal['it']}</strong> con il codice ricevuto e installa il software ufficiale in tutta sicurezza."),
+        ],
+        "en": [
+            ("Complete your order", "Select your plan and complete the secure payment by card or PayPal."),
+            ("Receive licence by email", "We email your genuine licence key and setup instructions within minutes."),
+            ("Activate on official portal", f"Activate on the <strong>{portal['en']}</strong> with your received key and download the official client safely."),
+        ],
+        "fr": [
+            ("Finalisez la commande", "Choisissez votre offre et réglez en toute sécurité par carte bancaire ou PayPal."),
+            ("Recevez la clé par e-mail", "Nous vous envoyons votre clé de licence officielle et le guide d'installation par e-mail en quelques minutes."),
+            ("Activez sur le portail officiel", f"Activez sur le <strong>{portal['fr']}</strong> avec votre clé et installez l'antivirus officiel."),
+        ],
+        "de": [
+            ("Bestellung abschließen", "Wählen Sie Ihren Plan und zahlen Sie sicher per Karte oder PayPal."),
+            ("Lizenz per E-Mail erhalten", "Wir senden Ihren originalen Lizenzschlüssel und die Anleitung innerhalb weniger Minuten per E-Mail."),
+            ("Im offiziellen Portal aktivieren", f"Aktivieren Sie im <strong>{portal['de']}</strong> mit Ihrem Key und installieren Sie die offizielle Software."),
+        ],
+        "es": [
+            ("Completa el pedido", "Elige tu plan y realiza el pago seguro con tarjeta o PayPal."),
+            ("Recibe la clave por email", "Te enviamos la clave de licencia original e instrucciones claras por email en pocos minutos."),
+            ("Activa en el portal oficial", f"Activa en el <strong>{portal['es']}</strong> con tu código e instala el software oficial de forma segura."),
+        ],
+    }
 
 
 def _devices(n):
@@ -107,6 +287,9 @@ def _av_page(
     features_title,
     features,
     faq,
+    specs_table=None,
+    steps=None,
+    keypoints=None,
     no_sub=False,
 ):
     """Build one rich antivirus content dict (sample-page shape)."""
@@ -127,7 +310,7 @@ def _av_page(
             )
         eyebrow[lg] = " · ".join(parts)
 
-    return {
+    res = {
         "apps": [],
         "name": name,
         "title_html": L(
@@ -145,6 +328,13 @@ def _av_page(
         "apps_title": L(it="", en="", fr="", de="", es=""),
         "faq": faq,
     }
+    if specs_table is not None:
+        res["specs_table"] = specs_table
+    if steps is not None:
+        res["steps"] = steps
+    if keypoints is not None:
+        res["keypoints"] = keypoints
+    return res
 
 
 def _line_feats(brand, line_it, line_en, focus_it, focus_en, focus_fr, focus_de, focus_es, tip_it, tip_en):
@@ -358,43 +548,61 @@ PRODUCTS = {}
 
 
 def _add_eset(slug, devices, years=1):
+    dev_str = {
+        "it": f"{devices} Dispositivo" if devices == 1 else f"{devices} Dispositivi",
+        "en": f"{devices} Device" if devices == 1 else f"{devices} Devices",
+        "fr": f"{devices} Appareil" if devices == 1 else f"{devices} Appareils",
+        "de": f"{devices} Gerät" if devices == 1 else f"{devices} Geräte",
+        "es": f"{devices} Dispositivo" if devices == 1 else f"{devices} Dispositivos",
+    }
+    yr_str = {
+        "it": f"{years} Anno" if years == 1 else f"{years} Anni",
+        "en": f"{years} Year" if years == 1 else f"{years} Years",
+        "fr": f"{years} An" if years == 1 else f"{years} Ans",
+        "de": f"{years} Jahr" if years == 1 else f"{years} Jahre",
+        "es": f"{years} Año" if years == 1 else f"{years} Años",
+    }
     span = {
-        "it": f"NOD32 · {devices} disp." + (f" · {years} anni" if years > 1 else ""),
-        "en": f"NOD32 · {devices} dev." + (f" · {years} yr" if years > 1 else ""),
-        "fr": f"NOD32 · {devices} app." + (f" · {years} ans" if years > 1 else ""),
-        "de": f"NOD32 · {devices} Ger." + (f" · {years} J." if years > 1 else ""),
-        "es": f"NOD32 · {devices} disp." + (f" · {years} años" if years > 1 else ""),
+        "it": f"NOD32 Antivirus – {dev_str['it']} ({yr_str['it']})",
+        "en": f"NOD32 Antivirus – {dev_str['en']} ({yr_str['en']})",
+        "fr": f"NOD32 Antivirus – {dev_str['fr']} ({yr_str['fr']})",
+        "de": f"NOD32 Antivirus – {dev_str['de']} ({yr_str['de']})",
+        "es": f"NOD32 Antivirus – {dev_str['es']} ({yr_str['es']})",
     }
     PRODUCTS[slug] = _av_page(
         brand="ESET",
-        line="NOD32",
+        line="NOD32 Antivirus",
         title_span=span,
         devices=devices,
         years=years,
-        name=_name("ESET NOD32", "", devices, years) if False else L(
-            **{lg: f"ESET NOD32 — {_devices(devices)[lg]}" + (f" · {_year(years)[lg]}" if years > 1 else "") for lg in LANGS}
+        name=L(
+            **{lg: f"ESET NOD32 Antivirus – {dev_str[lg]} ({yr_str[lg]})" for lg in LANGS}
         ),
         desc=L(
-            it=f"ESET NOD32 per {_devices(devices)['it']}: protezione antivirus leggera con licenza digitale e consegna via email. Attivazione sul portale ufficiale ESET.",
-            en=f"ESET NOD32 for {_devices(devices)['en']}: lightweight antivirus protection with a digital licence and email delivery. Activate on the official ESET portal.",
-            fr=f"ESET NOD32 pour {_devices(devices)['fr']} : antivirus léger, licence numérique et livraison par e-mail. Activation sur le portail ESET.",
-            de=f"ESET NOD32 für {_devices(devices)['de']}: schlanker Antivirus-Schutz mit digitaler Lizenz und E-Mail-Zustellung. Aktivierung im ESET-Portal.",
-            es=f"ESET NOD32 para {_devices(devices)['es']}: protección antivirus ligera con licencia digital y entrega por email. Activación en el portal ESET.",
+            it=f"ESET NOD32 Antivirus per {dev_str['it']}: protezione leggera e reattiva con licenza originale e consegna immediata via email. Attivazione sicura sul portale ufficiale ESET HOME.",
+            en=f"ESET NOD32 Antivirus for {dev_str['en']}: lightweight, fast protection with a genuine digital licence and instant email delivery. Official activation via ESET HOME.",
+            fr=f"ESET NOD32 Antivirus pour {dev_str['fr']} : protection légère et réactive, licence numérique authentique et envoi rapide par e-mail. Activation sur ESET HOME.",
+            de=f"ESET NOD32 Antivirus für {dev_str['de']}: schlanker, schneller Schutz mit originaler digitaler Lizenz und sofortiger E-Mail-Zustellung. Offizielle Aktivierung im ESET HOME Portal.",
+            es=f"ESET NOD32 Antivirus para {dev_str['es']}: protección ligera y eficiente con licencia digital oficial y entrega inmediata por email. Activación segura en ESET HOME.",
         ),
         pills=_pills("ESET", devices, years),
         features_title=L(
-            it="Protezione ESET NOD32",
-            en="ESET NOD32 protection",
-            fr="Protection ESET NOD32",
-            de="ESET NOD32 Schutz",
-            es="Protección ESET NOD32",
+            it="Perché scegliere ESET NOD32 Antivirus",
+            en="Why choose ESET NOD32 Antivirus",
+            fr="Pourquoi choisir ESET NOD32 Antivirus",
+            de="Warum ESET NOD32 Antivirus wählen",
+            es="Por qué elegir ESET NOD32 Antivirus",
         ),
-        features=_feats(
-            "ESET",
-            L(it="NOD32 Antivirus", en="NOD32 Antivirus", fr="NOD32 Antivirus", de="NOD32 Antivirus", es="NOD32 Antivirus"),
-            L(it="Leggero e rapido", en="Light and fast", fr="Léger et rapide", de="Leicht und schnell", es="Ligero y rápido"),
-            L(it="Licenza digitale", en="Digital licence", fr="Licence numérique", de="Digitale Lizenz", es="Licencia digital"),
-        ),
+        features=_eset_feats(),
+        keypoints=_eset_keypoints(),
+        specs_table=SPECS_TABLE_ESET,
+        steps=_steps_for_brand({
+            "it": "portale ufficiale ESET (ESET HOME)",
+            "en": "official ESET portal (ESET HOME)",
+            "fr": "portail officiel ESET (ESET HOME)",
+            "de": "offiziellen ESET-Portal (ESET HOME)",
+            "es": "portal oficial de ESET (ESET HOME)",
+        }),
         faq=_faq_av("ESET"),
     )
 
@@ -471,6 +679,13 @@ def _add_norton(slug, edition, devices, no_sub=False):
                 es="Sin renovación auto" if no_sub else "Licencia digital",
             ),
         ),
+        steps=_steps_for_brand({
+            "it": "portale ufficiale Norton (My Norton)",
+            "en": "official Norton portal (My Norton)",
+            "fr": "portail officiel Norton (My Norton)",
+            "de": "offiziellen Norton-Portal (My Norton)",
+            "es": "portal oficial de Norton (My Norton)",
+        }),
         faq=_faq_av("Norton"),
         no_sub=no_sub,
     )
@@ -517,6 +732,13 @@ def _add_bitdefender(slug, devices):
             L(it="Protezione web", en="Web protection", fr="Protection web", de="Web-Schutz", es="Protección web"),
             L(it="Licenza digitale", en="Digital licence", fr="Licence numérique", de="Digitale Lizenz", es="Licencia digital"),
         ),
+        steps=_steps_for_brand({
+            "it": "portale ufficiale Bitdefender (Bitdefender Central)",
+            "en": "official Bitdefender portal (Bitdefender Central)",
+            "fr": "portail officiel Bitdefender (Bitdefender Central)",
+            "de": "offiziellen Bitdefender-Portal (Bitdefender Central)",
+            "es": "portal oficial de Bitdefender (Bitdefender Central)",
+        }),
         faq=_faq_av("Bitdefender"),
     )
 
@@ -571,6 +793,13 @@ def _add_kaspersky(slug, tier, devices):
             ),
             L(it="Licenza digitale", en="Digital licence", fr="Licence numérique", de="Digitale Lizenz", es="Licencia digital"),
         ),
+        steps=_steps_for_brand({
+            "it": "portale ufficiale Kaspersky (My Kaspersky)",
+            "en": "official Kaspersky portal (My Kaspersky)",
+            "fr": "portail officiel Kaspersky (My Kaspersky)",
+            "de": "offiziellen Kaspersky-Portal (My Kaspersky)",
+            "es": "portal oficial de Kaspersky (My Kaspersky)",
+        }),
         faq=_faq_av("Kaspersky"),
     )
 
@@ -630,6 +859,13 @@ def _add_mcafee(slug, devices):
             ),
             L(it="Licenza digitale", en="Digital licence", fr="Licence numérique", de="Digitale Lizenz", es="Licencia digital"),
         ),
+        steps=_steps_for_brand({
+            "it": "portale ufficiale McAfee (McAfee My Account)",
+            "en": "official McAfee portal (McAfee My Account)",
+            "fr": "portail officiel McAfee (McAfee My Account)",
+            "de": "offiziellen McAfee-Portal (McAfee My Account)",
+            "es": "portal oficial de McAfee (McAfee My Account)",
+        }),
         faq=_faq_av("McAfee"),
     )
 
@@ -640,24 +876,6 @@ for slug, n in [
     ("mcafee-total-protection-10-devices", 10),
 ]:
     _add_mcafee(slug, n)
-
-
-# Fix ESET names (cleaner)
-for slug, n, years in [
-    ("eset-nod32-1-device", 1, 1),
-    ("eset-nod32-2-devices", 2, 1),
-    ("eset-nod32-3-devices", 3, 1),
-    ("eset-nod32-5-devices", 5, 1),
-    ("eset-nod32-10-devices", 10, 1),
-    ("eset-nod32-1-device-2y", 1, 2),
-]:
-    PRODUCTS[slug]["name"] = L(
-        **{
-            lg: f"ESET NOD32 — {_devices(n)[lg]}"
-            + (f" · {_year(years)[lg]}" if years > 1 else "")
-            for lg in LANGS
-        }
-    )
 
 
 def get_antivirus_content(slug):
