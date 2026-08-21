@@ -566,8 +566,8 @@ BRAND_META = {
         "label": "Kaspersky",
         "logo_src": "../asset/icon/img-aml-store_Kaspersky-Icon.png",
         "logo_kind": "icon",
-        "logo_w": 36,
-        "logo_h": 36,
+        "logo_w": 28,
+        "logo_h": 28,
     },
     "norton": {
         "mode": "tier-fixed",
@@ -598,8 +598,8 @@ BRAND_META = {
         "label": "Bitdefender",
         "logo_src": "../asset/icon/img-aml-store_Bitdefender-Icon.png",
         "logo_kind": "icon",
-        "logo_w": 36,
-        "logo_h": 36,
+        "logo_w": 28,
+        "logo_h": 28,
     },
 }
 

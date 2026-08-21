@@ -1489,8 +1489,8 @@
 
 .plan-card__brand-icon {
     flex: 0 0 auto;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     border-radius: var(--aml-radius-sm);
 }
 
