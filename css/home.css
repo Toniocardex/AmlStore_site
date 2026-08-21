@@ -1744,6 +1744,14 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
+.m365-card__icon {
+    flex: 0 0 auto;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0.6rem;
+    border-radius: var(--aml-radius-sm);
+}
+
 @media (min-width: 700px) {
     .m365-card:hover {
         transform: translateY(-3px);

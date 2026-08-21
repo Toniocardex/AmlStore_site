@@ -1173,6 +1173,7 @@ def m365_section(lang: str) -> str:
         cards.append(
             f"""                    <li>
                         <article class="m365-card" {stripe_attrs(offer)}>
+                            <img class="m365-card__icon" src="../asset/icon/img-aml-store_Microsoft-Icon.svg" alt="" width="28" height="28" loading="lazy">
                             <h3 class="m365-card__name">{name}</h3>
                             <p class="m365-card__payoff">{payoff}</p>
                             <div class="m365-card__price">
