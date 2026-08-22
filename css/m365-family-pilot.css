@@ -349,11 +349,11 @@ body.pf-page .pdp-split__media { border-color: var(--pf-line); }
 body.pf-page .pdp-split__body h2 { color: var(--pf-ink); }
 
 body.pf-page .pdp-note {
-    border-color: color-mix(in srgb, var(--pf-brand) 30%, transparent);
-    background: color-mix(in srgb, var(--pf-brand) 6%, transparent);
+    border-color: color-mix(in srgb, var(--aml-ok, var(--pf-ok)) 28%, transparent);
+    background: var(--aml-ok-bg, var(--pf-ok-soft));
     color: var(--pf-ink);
 }
-body.pf-page .pdp-note svg { color: var(--pf-brand); }
+body.pf-page .pdp-note svg { color: var(--aml-ok, var(--pf-ok)); }
 
 body.pf-page .pdp-reviews {
     background: var(--pf-surface);

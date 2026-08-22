@@ -19,8 +19,8 @@ ecommerce-header {
     --text-primary: var(--aml-ink, #152033);
     --text-secondary: var(--aml-ink-2, #5F6B7A);
     --text-muted: var(--aml-ink-2, #5F6B7A);
-    --accent: var(--aml-brand, #C2410C);
-    --accent-hover: var(--aml-brand-hover, #9A3412);
+    --accent: var(--aml-brand, #C74104);
+    --accent-hover: var(--aml-brand-hover, #9E3203);
 
     background-color: var(--bg-base);
     backdrop-filter: none;

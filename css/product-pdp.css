@@ -1441,14 +1441,14 @@ body { background: var(--page-bg); }
     margin: 16px 0 0;
     padding: 14px 16px;
     border-radius: var(--pdp-radius);
-    border: 1px solid color-mix(in srgb, var(--page-accent) 30%, transparent);
-    background: color-mix(in srgb, var(--page-accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--aml-ok) 28%, transparent);
+    background: var(--aml-ok-bg);
     font-size: var(--aml-text-sm);
     line-height: 1.55;
     color: var(--page-text);
 }
 
-.pdp-note svg { width: 20px; height: 20px; color: var(--page-accent); }
+.pdp-note svg { width: 20px; height: 20px; color: var(--aml-ok); }
 
 .pdp-note strong { font-weight: 800; }
 

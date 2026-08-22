@@ -24,6 +24,10 @@
     "6GQ-00092": {
       "mode": "preserve-cents",
       "note": "104,95 EUR e' un prezzo commerciale deliberato (commit 56936b4a), verificato end-to-end su carrello/checkout in tutte le lingue; non un residuo di conversione da arrotondare."
+    },
+    "QQ2-00012": {
+      "mode": "preserve-cents",
+      "note": "84,79 EUR e' un prezzo commerciale deliberato, verificato end-to-end su carrello/checkout in tutte le lingue."
     }
   }
 }

@@ -21,17 +21,17 @@
        elemento che non è una CTA, l'errore si vede leggendo il codice:
        è quell'attrito il motivo per cui i ruoli esistono. */
 
-    /* ── Scala Arancione Brand (dal mockup Tailwind) ─────────────────── */
+    /* ── Scala Arancione Brand (Warm Sunset Palette) ─────────────────── */
     --aml-orange-50: #FFF7ED;
-    --aml-orange-100: #FFEDD5;
-    --aml-orange-200: #FED7AA;
-    --aml-orange-300: #FDBA74;
-    --aml-orange-400: #FB923C;
-    --aml-orange-500: #F97316;
-    --aml-orange-600: #EA580C;
-    --aml-orange-700: #C2410C;
-    --aml-orange-800: #9A3412;
-    --aml-orange-900: #7C2D12;
+    --aml-orange-100: #FFE8D6;
+    --aml-orange-200: #FFD1B3;
+    --aml-orange-300: #FFAA7A;
+    --aml-orange-400: #FF8442;
+    --aml-orange-500: #FF7024;
+    --aml-orange-600: #F05A10;
+    --aml-orange-700: #C74104;
+    --aml-orange-800: #9E3203;
+    --aml-orange-900: #7E2702;
 
     /* ── Scala Slate / Neutrali Scuro ─────────────────────────────────── */
     --aml-slate-50: #F8FAFC;
