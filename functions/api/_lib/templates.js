@@ -19,6 +19,10 @@ const AMBER_BG     = '#FCF3D9';
 const AMBER_BORDER = '#f3ce6b';
 const AMBER_TEXT   = '#92400E';
 const AMBER_TEXT_SOFT = '#78350f';
+const GOLD         = '#8C6423';
+const GOLD_SOFT    = '#F5EEDD';
+const GOLD_BORDER  = '#E4D3AC';
+const TEXT_FAINT   = '#8B95A3';
 const HEADING_FONT = "'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
 const BODY_FONT    = "-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
 
@@ -27,6 +31,7 @@ const i18n = {
     it: {
         subject_paid:     'Ordine #{orderId} confermato — Aml Store',
         subject_pending:  'Ordine #{orderId} ricevuto — Aml Store',
+        order_eyebrow:    'Riepilogo ordine',
         greeting:         'Grazie per il tuo ordine!',
         greeting_pending: 'Ordine ricevuto!',
         intro:            'Il tuo ordine è stato confermato e la email di consegna sarà inviata a breve.',
@@ -55,15 +60,19 @@ const i18n = {
         guide_attached:   'In allegato trovi in omaggio la Guida Copilot per Microsoft 365 (PDF).',
         footer_tagline:   'Licenze digitali originali · aml-store.com',
         license_subject:  'La tua licenza — ordine #{orderId} — Aml Store',
+        license_eyebrow:  'Licenza digitale',
         license_greeting: 'Ecco la tua licenza, {name}!',
         license_intro:    'Grazie per il tuo acquisto. Qui sotto trovi la chiave del tuo prodotto, pronta per l\'attivazione.',
         license_key_label: 'Chiave prodotto',
+        license_copy_hint: 'Tocca per selezionare e copiare',
+        activation_eyebrow: 'Come attivare',
         license_note:     'Conserva questa email: la chiave è personale ed è associata al tuo ordine.',
         license_help:     'Hai bisogno di assistenza con l\'attivazione? Scrivici:',
     },
     en: {
         subject_paid:     'Order #{orderId} confirmed — Aml Store',
         subject_pending:  'Order #{orderId} received — Aml Store',
+        order_eyebrow:    'Order summary',
         greeting:         'Thank you for your order!',
         greeting_pending: 'Order received!',
         intro:            'Your order has been confirmed. Your digital product will be delivered shortly.',
@@ -92,15 +101,19 @@ const i18n = {
         guide_attached:   'Attached you\'ll find our free Copilot for Microsoft 365 guide (PDF).',
         footer_tagline:   'Genuine digital licences · aml-store.com',
         license_subject:  'Your licence — order #{orderId} — Aml Store',
+        license_eyebrow:  'Digital licence',
         license_greeting: 'Here is your licence, {name}!',
         license_intro:    'Thank you for your purchase. Below is your product key, ready to activate.',
         license_key_label: 'Product key',
+        license_copy_hint: 'Tap to select and copy',
+        activation_eyebrow: 'How to activate',
         license_note:     'Keep this email: the key is personal and tied to your order.',
         license_help:     'Need help activating it? Contact us:',
     },
     fr: {
         subject_paid:     'Commande #{orderId} confirmée — Aml Store',
         subject_pending:  'Commande #{orderId} reçue — Aml Store',
+        order_eyebrow:    'Récapitulatif de commande',
         greeting:         'Merci pour votre commande !',
         greeting_pending: 'Commande reçue !',
         intro:            'Votre commande a été confirmée. La livraison sera effectuée sous peu.',
@@ -129,15 +142,19 @@ const i18n = {
         guide_attached:   'Vous trouverez en pièce jointe notre guide gratuit Copilot pour Microsoft 365 (PDF).',
         footer_tagline:   'Licences numériques originales · aml-store.com',
         license_subject:  'Votre licence — commande #{orderId} — Aml Store',
+        license_eyebrow:  'Licence numérique',
         license_greeting: 'Voici votre licence, {name} !',
         license_intro:    'Merci pour votre achat. Vous trouverez ci-dessous la clé de votre produit, prête à activer.',
         license_key_label: 'Clé produit',
+        license_copy_hint: 'Appuyez pour sélectionner et copier',
+        activation_eyebrow: 'Comment activer',
         license_note:     'Conservez cet e-mail : la clé est personnelle et liée à votre commande.',
         license_help:     'Besoin d\'aide pour l\'activation ? Contactez-nous :',
     },
     de: {
         subject_paid:     'Bestellung #{orderId} bestätigt — Aml Store',
         subject_pending:  'Bestellung #{orderId} eingegangen — Aml Store',
+        order_eyebrow:    'Bestellübersicht',
         greeting:         'Vielen Dank für Ihre Bestellung!',
         greeting_pending: 'Bestellung eingegangen!',
         intro:            'Ihre Bestellung wurde bestätigt. Die Lieferung erfolgt in Kürze.',
@@ -166,15 +183,19 @@ const i18n = {
         guide_attached:   'Im Anhang finden Sie unseren kostenlosen Copilot-Leitfaden für Microsoft 365 (PDF).',
         footer_tagline:   'Originale digitale Lizenzen · aml-store.com',
         license_subject:  'Ihre Lizenz — Bestellung #{orderId} — Aml Store',
+        license_eyebrow:  'Digitale Lizenz',
         license_greeting: 'Hier ist Ihre Lizenz, {name}!',
         license_intro:    'Vielen Dank für Ihren Kauf. Unten finden Sie Ihren Produktschlüssel, bereit zur Aktivierung.',
         license_key_label: 'Produktschlüssel',
+        license_copy_hint: 'Zum Markieren und Kopieren tippen',
+        activation_eyebrow: 'So aktivieren Sie',
         license_note:     'Bewahren Sie diese E-Mail auf: Der Schlüssel ist persönlich und Ihrer Bestellung zugeordnet.',
         license_help:     'Brauchen Sie Hilfe bei der Aktivierung? Kontaktieren Sie uns:',
     },
     es: {
         subject_paid:     'Pedido #{orderId} confirmado — Aml Store',
         subject_pending:  'Pedido #{orderId} recibido — Aml Store',
+        order_eyebrow:    'Resumen del pedido',
         greeting:         '¡Gracias por su pedido!',
         greeting_pending: '¡Pedido recibido!',
         intro:            'Su pedido ha sido confirmado. La entrega se realizará en breve.',
@@ -203,9 +224,12 @@ const i18n = {
         guide_attached:   'Adjuntamos nuestra guía gratuita de Copilot para Microsoft 365 (PDF).',
         footer_tagline:   'Licencias digitales originales · aml-store.com',
         license_subject:  'Su licencia — pedido #{orderId} — Aml Store',
+        license_eyebrow:  'Licencia digital',
         license_greeting: '¡Aquí tiene su licencia, {name}!',
         license_intro:    'Gracias por su compra. A continuación encontrará la clave de su producto, lista para activar.',
         license_key_label: 'Clave de producto',
+        license_copy_hint: 'Toca para seleccionar y copiar',
+        activation_eyebrow: 'Cómo activar',
         license_note:     'Conserve este correo: la clave es personal y está asociada a su pedido.',
         license_help:     '¿Necesita ayuda con la activación? Contáctenos:',
     },
@@ -305,7 +329,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 
     // Sezione bonifico (solo se pending + bank_transfer)
     const transferSection = (!isPaid && order.payment_method === 'bank_transfer') ? `
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;background:${AMBER_BG};border:1px solid ${AMBER_BORDER};border-radius:10px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;background:${AMBER_BG};border:1px solid ${AMBER_BORDER};border-radius:12px">
       <tr><td style="padding:18px 22px">
         <p style="margin:0 0 14px;font-size:14px;font-weight:700;color:${AMBER_TEXT};text-transform:uppercase;letter-spacing:.4px">🏦 ${t.transfer_title}</p>
         ${bankRow(t.transfer_iban,    BANK.iban)}
@@ -318,7 +342,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 
     // Indirizzo di spedizione (solo articoli fisici: DVD/COA)
     const shippingSection = (order.requiresShipping && order.shipping) ? `
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${BG};border-radius:10px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${BG};border-radius:12px">
       <tr><td style="padding:16px 20px">
         <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.5px">${t.shipping_title}</p>
         <p style="margin:0;font-size:14px;color:${TEXT};line-height:1.6">
@@ -372,7 +396,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(0,49,130,0.1)">
 
   <!-- Logo header -->
-  <tr><td style="background:${ACCENT_DARK};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
+  <tr><td style="background:${ACCENT_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
         <img src="https://aml-store.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
@@ -383,6 +407,8 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 
   <!-- Body card -->
   <tr><td style="background:${CARD_BG};padding:36px 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER}">
+
+    <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:1.1px">${t.order_eyebrow} · Aml Store</p>
 
     <table cellpadding="0" cellspacing="0" style="margin-bottom:22px">
       <tr>
@@ -395,7 +421,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
     </table>
 
     <!-- Info ordine -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="background:${CARD_BG};border:1px solid ${BORDER};border-left:4px solid ${ACCENT_DARK};border-radius:10px;margin-bottom:22px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${CARD_BG};border:1px solid ${BORDER};border-left:4px solid ${ACCENT_DARK};border-radius:12px;margin-bottom:22px">
       <tr><td style="padding:18px 22px">
         <p style="margin:0 0 5px;font-size:11.5px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.order_id}</p>
         <p style="margin:0 0 14px;font-size:21px;font-weight:800;color:${ACCENT_DARK};font-family:'SFMono-Regular',Consolas,monospace">${escHtml(order.orderId)}</p>
@@ -406,7 +432,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
     </table>
 
     <!-- Righe prodotto -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid ${BORDER};border-radius:10px;overflow:hidden;margin-bottom:4px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid ${BORDER};border-radius:12px;overflow:hidden;margin-bottom:4px">
       <thead>
         <tr style="background:${ACCENT_SOFT}">
           <th style="padding:11px 14px;font-size:11.5px;color:${ACCENT_DARK};text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:.5px">${t.product}</th>
@@ -429,7 +455,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
     ${shippingSection}
     ${transferSection}
     ${guideAttached ? `
-    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;background:${ACCENT_SOFT};border:1px solid ${ACCENT_SOFT_BORDER};border-radius:10px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;background:${ACCENT_SOFT};border:1px solid ${ACCENT_SOFT_BORDER};border-radius:12px">
       <tr>
         <td width="44" valign="middle" style="padding:16px 0 16px 18px;font-size:20px">🎁</td>
         <td valign="middle" style="padding:16px 18px 16px 10px;font-size:14px;color:${ACCENT_DARK};line-height:1.5">${t.guide_attached}</td>
@@ -532,6 +558,98 @@ export function emailText(order, isPaid, guideAttached = false) {
 }
 
 /**
+ * Istruzioni/pulsante di attivazione per tipo di prodotto, da allegare sotto
+ * la chiave nell'email di consegna licenza. Le voci "button" rimandano al
+ * portale ufficiale del produttore; le voci "text" restano informative
+ * quando l'attivazione avviene lato sistema operativo (nessun link esterno).
+ * Fonti: catalog.json (categorie prodotto) e le pagine prodotto in
+ * it/en/fr/de/es (sezione "Come si attiva?" / step "Attivazione").
+ */
+function activationLabels(portal) {
+    return {
+        it: `Attiva su ${portal} →`,
+        en: `Activate on ${portal} →`,
+        fr: `Activer sur ${portal} →`,
+        de: `Aktivieren auf ${portal} →`,
+        es: `Activar en ${portal} →`,
+    };
+}
+
+const ACTIVATION = {
+    windows: {
+        kind: 'text',
+        text: {
+            it: 'Impostazioni → Sistema → Attivazione con il codice sopra. Usa i canali ufficiali Microsoft.',
+            en: 'Settings → System → Activation using the code above. Use official Microsoft channels.',
+            fr: 'Paramètres → Système → Activation avec le code ci-dessus. Utilisez les canaux officiels Microsoft.',
+            de: 'Einstellungen → System → Aktivierung mit dem obigen Code. Nutzen Sie die offiziellen Microsoft-Kanäle.',
+            es: 'Configuración → Sistema → Activación con el código anterior. Use los canales oficiales de Microsoft.',
+        },
+    },
+    windows_server: {
+        kind: 'text',
+        text: {
+            it: 'Installa il sistema e attiva la licenza con il codice sopra tramite i canali ufficiali Microsoft.',
+            en: 'Install the system and activate the licence with the code above via official Microsoft channels.',
+            fr: 'Installez le système et activez la licence avec le code ci-dessus via les canaux officiels Microsoft.',
+            de: 'Installieren Sie das System und aktivieren Sie die Lizenz mit dem obigen Code über die offiziellen Microsoft-Kanäle.',
+            es: 'Instale el sistema y active la licencia con el código anterior a través de los canales oficiales de Microsoft.',
+        },
+    },
+    office: {
+        kind: 'button',
+        url: 'https://setup.office.com/Home',
+        label: activationLabels('setup.office.com'),
+        note: {
+            it: 'Poi installa le app da office.com.',
+            en: 'Then install the apps from office.com.',
+            fr: 'Puis installez les applications depuis office.com.',
+            de: 'Installieren Sie dann die Apps von office.com.',
+            es: 'Luego instale las aplicaciones desde office.com.',
+        },
+    },
+    kaspersky: { kind: 'button', url: 'https://my.kaspersky.com',           label: activationLabels('My Kaspersky') },
+    norton:    { kind: 'button', url: 'https://my.norton.com',              label: activationLabels('My Norton') },
+    mcafee:    { kind: 'button', url: 'https://www.mcafee.com/my-account/', label: activationLabels('McAfee My Account') },
+    eset:      { kind: 'button', url: 'https://home.eset.com',              label: activationLabels('ESET HOME') },
+    adobe:     { kind: 'button', url: 'https://account.adobe.com',          label: activationLabels('account Adobe') },
+    acronis:   { kind: 'button', url: 'https://account.acronis.com',        label: activationLabels('account Acronis') },
+    corel:     { kind: 'button', url: 'https://www.coreldraw.com',          label: activationLabels('account Corel') },
+};
+
+/**
+ * Genera il blocco HTML di attivazione (pulsante o box informativo) da
+ * inserire sotto la chiave prodotto in una card licenseEmailHtml.
+ * @param {string} [key] — chiave in ACTIVATION, es. 'windows', 'office', 'kaspersky'
+ * @param {string} locale
+ * @param {string} eyebrow — etichetta localizzata "Come attivare"
+ * @returns {string}
+ */
+function activationBlock(key, locale, eyebrow) {
+    const a = ACTIVATION[key];
+    if (!a) return '';
+    if (a.kind === 'button') {
+        const label = a.label[locale] || a.label.it;
+        const note  = a.note ? (a.note[locale] || a.note.it) : '';
+        return `
+        <table cellpadding="0" cellspacing="0" style="margin-top:16px">
+          <tr><td>
+            <a href="${a.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:${GOLD};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 22px;border-radius:8px;letter-spacing:.1px">${escHtml(label)}</a>
+          </td></tr>
+        </table>
+        ${note ? `<p style="margin:9px 0 0;font-size:12px;color:${TEXT_MUTED}">${escHtml(note)}</p>` : ''}`;
+    }
+    const text = a.text[locale] || a.text.it;
+    return `
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${GOLD_SOFT};border:1px solid ${GOLD_BORDER};border-radius:8px">
+          <tr><td style="padding:12px 14px">
+            <p style="margin:0 0 3px;font-size:10.5px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:.6px">${escHtml(eyebrow)}</p>
+            <p style="margin:0;font-size:12.5px;color:#6b5530;line-height:1.55">${escHtml(text)}</p>
+          </td></tr>
+        </table>`;
+}
+
+/**
  * Soggetto email di consegna licenza (evasione manuale).
  * @param {string} locale
  * @param {string} orderId
@@ -551,7 +669,9 @@ export function licenseSubject(locale, orderId) {
  * @param {string} data.locale
  * @param {string} data.orderId
  * @param {string} data.name — nome del cliente
- * @param {Array<{productName:string, sku?:string, key:string}>} data.items
+ * @param {Array<{productName:string, sku?:string, key:string, activation?:string}>} data.items
+ *   — `activation` è opzionale: chiave in ACTIVATION (es. 'windows', 'office',
+ *   'kaspersky') per aggiungere un pulsante o un box di istruzioni sotto la chiave.
  * @returns {string} HTML
  */
 export function licenseEmailHtml({ locale, orderId, name, items }) {
@@ -560,18 +680,33 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
     const year = new Date().getFullYear();
 
     const greeting = t.license_greeting.replace('{name}', escHtml(name || ''));
+    const list  = items || [];
+    const multi = list.length > 1;
 
-    const cards = (items || []).map(item => `
-    <table width="100%" cellpadding="0" cellspacing="0" style="background:${CARD_BG};border:1px solid ${BORDER};border-left:4px solid ${ACCENT_DARK};border-radius:10px;margin-bottom:16px">
-      <tr><td style="padding:18px 22px">
-        <p style="margin:0 0 3px;font-size:15px;font-weight:700;color:${TEXT}">${escHtml(item.productName || '')}</p>
-        ${item.sku ? `<p style="margin:0 0 14px;font-size:12px;color:${TEXT_MUTED}">${escHtml(item.sku)}</p>` : '<div style="height:14px"></div>'}
-        <p style="margin:0 0 6px;font-size:11.5px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.license_key_label}</p>
-        <table cellpadding="0" cellspacing="0" style="background:${BG};border:1px solid ${BORDER};border-radius:8px">
-          <tr><td style="padding:12px 16px">
-            <span style="font-family:'SFMono-Regular',Consolas,monospace;font-size:17px;font-weight:700;color:${ACCENT_DARK};letter-spacing:.5px;word-break:break-all">${escHtml(item.key || '')}</span>
+    const cards = list.map((item, i) => `
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${CARD_BG};border:1px solid ${BORDER};border-radius:12px;margin-bottom:14px">
+      <tr><td style="padding:20px 22px">
+        <table cellpadding="0" cellspacing="0" style="width:100%;margin-bottom:14px">
+          <tr>
+            ${multi ? `<td width="26" valign="top" style="padding-right:10px;padding-top:1px">
+              <table cellpadding="0" cellspacing="0"><tr><td width="22" height="22" align="center" valign="middle" style="background:${ACCENT_DARK};border-radius:50%;font-family:${HEADING_FONT};font-size:11px;font-weight:700;color:#fff">${i + 1}</td></tr></table>
+            </td>` : ''}
+            <td valign="top">
+              <p style="margin:0 0 2px;font-size:15.5px;font-weight:700;color:${TEXT}">${escHtml(item.productName || '')}</p>
+              ${item.sku ? `<p style="margin:0;font-size:11.5px;color:${TEXT_FAINT};font-family:'SFMono-Regular',Consolas,monospace;letter-spacing:.2px">${escHtml(item.sku)}</p>` : ''}
+            </td>
+          </tr>
+        </table>
+
+        <p style="margin:0 0 6px;font-size:11px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.license_key_label}</p>
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};border:1px solid ${BORDER};border-radius:9px">
+          <tr><td style="padding:13px 16px">
+            <span style="font-family:'SFMono-Regular',Consolas,monospace;font-size:17px;font-weight:700;color:${ACCENT_DARK};letter-spacing:.6px;word-break:break-all">${escHtml(item.key || '')}</span>
           </td></tr>
         </table>
+        <p style="margin:6px 2px 0;font-size:11px;color:${TEXT_FAINT};font-style:italic">${t.license_copy_hint}</p>
+
+        ${activationBlock(item.activation, locale, t.activation_eyebrow)}
       </td></tr>
     </table>`).join('');
 
@@ -592,7 +727,7 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(20,36,58,0.12)">
 
   <!-- Logo header -->
-  <tr><td style="background:${ACCENT_DARK};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
+  <tr><td style="background:${ACCENT_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
         <img src="https://aml-store.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
@@ -604,7 +739,9 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
   <!-- Body card -->
   <tr><td style="background:${CARD_BG};padding:36px 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER}">
 
-    <table cellpadding="0" cellspacing="0" style="margin-bottom:22px">
+    <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:1.1px">${t.license_eyebrow} · Aml Store</p>
+
+    <table cellpadding="0" cellspacing="0" style="margin-bottom:24px">
       <tr>
         <td width="40" valign="top" style="padding-right:12px">
           <table cellpadding="0" cellspacing="0"><tr><td width="36" height="36" align="center" valign="middle" style="background:${SUCCESS_SOFT};border-radius:50%;font-size:18px;color:${SUCCESS}">🔑</td></tr></table>
@@ -616,12 +753,18 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
       </tr>
     </table>
 
-    <p style="margin:0 0 5px;font-size:11.5px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.order_id}</p>
-    <p style="margin:0 0 20px;font-size:16px;font-weight:800;color:${ACCENT_DARK};font-family:'SFMono-Regular',Consolas,monospace">${escHtml(orderId)}</p>
+    <table cellpadding="0" cellspacing="0" style="width:100%;margin-bottom:24px;padding-bottom:20px;border-bottom:1px dashed ${BORDER}">
+      <tr>
+        <td>
+          <p style="margin:0 0 5px;font-size:11px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.order_id}</p>
+          <p style="margin:0;font-size:17px;font-weight:800;color:${ACCENT_DARK};font-family:'SFMono-Regular',Consolas,monospace;letter-spacing:.2px">${escHtml(orderId)}</p>
+        </td>
+      </tr>
+    </table>
 
     ${cards}
 
-    <p style="margin:20px 0 0;padding-top:16px;border-top:1px solid ${BORDER};font-size:12px;color:${TEXT_MUTED};line-height:1.5">${t.license_note}</p>
+    <p style="margin:20px 0 0;font-size:12px;color:${TEXT_MUTED};line-height:1.5">🔒&nbsp; ${t.license_note}</p>
 
   </td></tr>
 
@@ -661,6 +804,16 @@ export function licenseEmailText({ locale, orderId, name, items }) {
     (items || []).forEach(item => {
         lines.push(`${item.productName}${item.sku ? ' (' + item.sku + ')' : ''}`);
         lines.push(`${t.license_key_label}: ${item.key}`);
+        const a = ACTIVATION[item.activation];
+        if (a) {
+            if (a.kind === 'button') {
+                const label = a.label[locale] || a.label.it;
+                lines.push(`${label} ${a.url}`);
+                if (a.note) lines.push(a.note[locale] || a.note.it);
+            } else {
+                lines.push(`${t.activation_eyebrow}: ${a.text[locale] || a.text.it}`);
+            }
+        }
         lines.push(``);
     });
 
