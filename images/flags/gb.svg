@@ -1,7 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true">
-<rect width="60" height="30" fill="#012169"/>
-<path stroke="#fff" stroke-width="10" d="M0,0 60,30M60,0 0,30"/>
-<path stroke="#c8102e" stroke-width="6" d="M0,0 60,30M60,0 0,30"/>
-<path stroke="#fff" stroke-width="12" d="M30,0v30M0,15h60"/>
-<path stroke="#c8102e" stroke-width="8" d="M30,0v30M0,15h60"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" aria-hidden="true"><!-- I quattro triangoli ritagliano meta' di ogni braccio della croce di
+     Sant'Andrea: e' quello che produce il contrappunto del rosso. Vanno
+     scritti con comandi relativi (h-30, non H30) o uno degenera. --><clipPath id="gb-c"><path d="M30 15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0 60 30M60 0 0 30"/><path stroke="#c8102e" stroke-width="4" clip-path="url(#gb-c)" d="M0 0 60 30M60 0 0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#c8102e" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
