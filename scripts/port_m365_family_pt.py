@@ -7,6 +7,7 @@ so it never touches the already-live it/en/fr/de/es pages.
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -468,9 +469,28 @@ def leftover_italian(html: str) -> list[str]:
     return hits
 
 
+COPILOT_NOTE_RE = re.compile(
+    r'\n*\s*<p class="pdp-note">\s*<svg[^>]*>.*?</svg>\s*<span><strong>[^<]*Copilot[^<]*</strong>.*?</span>\s*</p>',
+    re.S,
+)
+
+
+def strip_copilot_bonus(html: str) -> str:
+    """Toglie la nota "guida Copilot in omaggio", che e' solo italiana.
+
+    Il PDF viene allegato all'email solo per gli ordini it (GUIDE_LOCALES in
+    functions/api/_lib/guide.js), e _render_copilot_bonus in product_page_lib
+    la emette solo per lang == "it". Questa pagina non e' generata ma portata
+    dall'italiano, quindi la nota va tolta qui: altrimenti il portoghese
+    promette un allegato che non arrivera' mai.
+    """
+    return COPILOT_NOTE_RE.sub("", html)
+
+
 def main() -> None:
     src = SRC.read_text(encoding="utf-8")
     out = localize(src, "pt", "pt_PT", "pt.trustpilot.com", "pt-PT", PT)
+    out = strip_copilot_bonus(out)
     path = ROOT / "pt" / "microsoft-365-family.html"
     path.write_text(out, encoding="utf-8", newline="\n")
     left = leftover_italian(out)
