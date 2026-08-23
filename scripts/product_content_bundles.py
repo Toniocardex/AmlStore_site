@@ -4,14 +4,20 @@ Premium, McAfee Total Protection). Stesso approccio di product_content_tools.py:
 `steps`/`specs` propri, il chrome UI condiviso arriva da product_content_windows.UI.
 """
 
-LANGS = ("it", "en", "fr", "de", "es")
+from nl_translations import nl_text
+
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 
 def L(**kwargs):
+    if "pt" not in kwargs:
+        kwargs["pt"] = kwargs.get("es") or kwargs.get("en")
+    if "nl" not in kwargs:
+        kwargs["nl"] = kwargs.get("en")
     return {k: kwargs[k] for k in LANGS}
 
 
-def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_feature_de, av_feature_es):
+def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_feature_de, av_feature_es, av_feature_pt, av_feature_nl=None):
     return {
         # Bundle con M365 Personal: idoneo alla guida Copilot omaggio (solo IT,
         # vedi functions/api/_lib/guide.js M365_SKUS/GUIDE_LOCALES).
@@ -22,6 +28,8 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
             fr=f'Microsoft 365 Personal <span>+ {av_short}</span>',
             de=f'Microsoft 365 Personal <span>+ {av_short}</span>',
             es=f'Microsoft 365 Personal <span>+ {av_short}</span>',
+            pt=f'Microsoft 365 Personal <span>+ {av_short}</span>',
+            nl=f'Microsoft 365 Personal <span>+ {av_short}</span>',
         ),
         "eyebrow": L(
             it="Pacchetto digitale · Office + sicurezza in un ordine",
@@ -29,6 +37,8 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
             fr="Pack numérique · Office + sécurité en une commande",
             de="Digitales Paket · Office + Sicherheit in einer Bestellung",
             es="Pack digital · Office + seguridad en un solo pedido",
+            pt="Pacote digital · Office + segurança num só pedido",
+            nl="Digitaal pakket · Office + beveiliging in één bestelling",
         ),
         "desc": L(
             it=f"Microsoft 365 Personal in abbonamento più {av_name} in un unico ordine: le app Office sempre aggiornate e {av_short} su fino a 5 dispositivi. Due codici via email dopo l'acquisto.",
@@ -36,6 +46,8 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
             fr=f"Abonnement Microsoft 365 Personal plus {av_name} en une seule commande : applications Office toujours à jour et {av_short} sur jusqu'à 5 appareils. Deux codes par e-mail après l'achat.",
             de=f"Microsoft-365-Personal-Abo plus {av_name} in einer Bestellung: stets aktuelle Office-Apps und {av_short} auf bis zu 5 Geräten. Zwei Codes per E-Mail nach dem Kauf.",
             es=f"Suscripción a Microsoft 365 Personal más {av_name} en un solo pedido: apps Office siempre actualizadas y {av_short} en hasta 5 dispositivos. Dos códigos por email tras la compra.",
+            pt=f"Subscrição Microsoft 365 Personal mais {av_name} num único pedido: apps Office sempre atualizadas e {av_short} em até 5 dispositivos. Dois códigos por email após a compra.",
+            nl=f"Microsoft 365 Personal-abonnement plus {av_name} in één bestelling: altijd actuele Office-apps en {av_short} op maximaal 5 apparaten. Twee codes per e-mail na aankoop.",
         ),
         "features_title": L(
             it="Produttività e sicurezza, insieme",
@@ -43,6 +55,8 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
             fr="Productivité et sécurité, ensemble",
             de="Produktivität und Sicherheit vereint",
             es="Productividad y seguridad, juntas",
+            pt="Produtividade e segurança, juntas",
+            nl="Productiviteit en beveiliging, samen",
         ),
         "keypoints": L(
             it=["Word, Excel, PowerPoint sempre aggiornati", "1 TB di spazio OneDrive", f"{av_short} su fino a 5 dispositivi", "Due licenze, un solo checkout"],
@@ -50,6 +64,8 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
             fr=["Word, Excel, PowerPoint toujours à jour", "1 To d'espace OneDrive", f"{av_short} sur jusqu'à 5 appareils", "Deux licences, un seul paiement"],
             de=["Word, Excel, PowerPoint stets aktuell", "1 TB OneDrive-Speicher", f"{av_short} auf bis zu 5 Geräten", "Zwei Lizenzen, ein Checkout"],
             es=["Word, Excel, PowerPoint siempre actualizados", "1 TB de espacio OneDrive", f"{av_short} en hasta 5 dispositivos", "Dos licencias, un solo pago"],
+            pt=["Word, Excel, PowerPoint sempre atualizados", "1 TB de espaço OneDrive", f"{av_short} em até 5 dispositivos", "Duas licenças, um só checkout"],
+            nl=["Word, Excel, PowerPoint altijd actueel", "1 TB OneDrive-opslag", f"{av_short} op maximaal 5 apparaten", "Twee licenties, één checkout"],
         ),
         "features": {
             "it": [
@@ -92,6 +108,22 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
                 ("c4", None, "Activación", "Dos cuentas oficiales", "Activa Microsoft 365 en tu cuenta Microsoft y la protección en el portal del fabricante del antivirus."),
                 ("c4", "dark", "Cobertura", "Hasta 5 dispositivos protegidos", "La protección antivirus cubre varios dispositivos del hogar; Microsoft 365 Personal sigue siendo para 1 usuario."),
             ],
+            "pt": [
+                ("c8", "blue", "Office", "Microsoft 365 Personal incluído", "Word, Excel, PowerPoint e Outlook sempre atualizados, com 1 TB de OneDrive e Copilot integrado, para 1 utilizador."),
+                ("c4", "teal", "Segurança", av_short, av_feature_pt),
+                ("c4", "purple", "Poupança", "Um só pedido, um só preço", "Compra ambas as licenças num único checkout, a um preço mais vantajoso do que em separado."),
+                ("c4", None, "Entrega", "Dois códigos por email", "Recebe os códigos de ativação do Office e do antivírus no mesmo email de confirmação."),
+                ("c4", None, "Ativação", "Duas contas oficiais", "Ativa o Microsoft 365 na tua conta Microsoft e a proteção no portal do fabricante do antivírus."),
+                ("c4", "dark", "Cobertura", "Até 5 dispositivos protegidos", "A proteção antivírus cobre vários dispositivos da família; o Microsoft 365 Personal continua para 1 utilizador."),
+            ],
+            "nl": [
+                ("c8", "blue", "Office", "Microsoft 365 Personal inbegrepen", "Word, Excel, PowerPoint en Outlook altijd actueel, met 1 TB OneDrive en geïntegreerde Copilot, voor 1 gebruiker."),
+                ("c4", "teal", "Beveiliging", av_short, av_feature_nl or av_feature_en),
+                ("c4", "purple", "Voordeel", "Eén bestelling, één prijs", "Koop beide licenties in één checkout, voordeliger dan afzonderlijk."),
+                ("c4", None, "Levering", "Twee codes per e-mail", "U ontvangt de activeringscodes van Office en de antivirus in dezelfde bevestigingsmail."),
+                ("c4", None, "Activering", "Twee officiële accounts", "Activeer Microsoft 365 op uw Microsoft-account en de beveiliging op het portaal van de antivirusuitgever."),
+                ("c4", "dark", "Dekking", "Maximaal 5 beveiligde apparaten", "De antivirusdekking geldt voor meerdere apparaten in huis; Microsoft 365 Personal blijft voor 1 gebruiker."),
+            ],
         },
         "steps": {
             "it": [
@@ -118,6 +150,11 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
                 ("Pedido y pago", "Añade el pack al carrito y completa el pago con los métodos disponibles."),
                 ("Entrega digital", "Recibes ambos códigos —Microsoft 365 y antivirus— normalmente en pocos minutos."),
                 ("Doble activación", "Vincula el código de Microsoft 365 a tu cuenta Microsoft e instala el antivirus con su propio código en el portal del fabricante."),
+            ],
+            "pt": [
+                ("Pedido e pagamento", "Adiciona o pacote ao carrinho e conclui o pagamento com os métodos disponíveis."),
+                ("Entrega digital", "Recebes por email ambos os códigos — Microsoft 365 e antivírus — normalmente em poucos minutos após o pagamento."),
+                ("Dupla ativação", "Associa o código Microsoft 365 à tua conta Microsoft e instala o antivírus com o seu próprio código no portal do fabricante."),
             ],
         },
         "specs": {
@@ -150,6 +187,12 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
                 ("Antivirus", f"{av_short}: hasta 5 dispositivos Windows, macOS, Android o iOS según el plan."),
                 ("Conexión", "Internet necesario para la activación, las actualizaciones y las funciones en la nube de ambos productos."),
                 ("Vigencia", "La duración de cada suscripción se indica en la ficha del producto y en el email de entrega."),
+            ],
+            "pt": [
+                ("Microsoft 365", "Windows 10/11, macOS, web e app móvel; 1 utilizador, 1 TB OneDrive."),
+                ("Antivírus", f"{av_short}: até 5 dispositivos Windows, macOS, Android ou iOS de acordo com o plano."),
+                ("Ligação", "Internet necessária para ativação, atualizações e funções na nuvem de ambos os produtos."),
+                ("Validade", "A duração de cada subscrição está indicada na ficha do produto e no email de entrega."),
             ],
         },
         "faq": {
@@ -193,28 +236,40 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
                 ("¿Qué pasa al renovar?", "Cada suscripción se renueva según sus propias condiciones; puedes gestionar las renovaciones por separado desde las dos cuentas."),
                 ("¿Es más barato que comprarlos por separado?", "Sí, el precio del pack está pensado para costar menos que la suma de los dos productos comprados por separado."),
             ],
+            "pt": [
+                ("Recebo duas licenças separadas?", "Sim: um código para Microsoft 365 Personal e outro para o antivírus, ambos no mesmo email."),
+                ("Os dois produtos cobrem o mesmo número de dispositivos?", "Não: o Microsoft 365 Personal é para 1 utilizador, o antivírus cobre mais dispositivos (até 5) de acordo com o plano."),
+                ("Já tenho Microsoft 365: posso comprar só o antivírus?", "Esta ficha é para o pacote; se precisares apenas do antivírus, procura-o em separado no catálogo."),
+                ("Como se ativam as duas licenças?", "O Microsoft 365 associa-se à tua conta Microsoft; o antivírus instala-se e ativa-se no portal do fabricante com o seu próprio código."),
+                ("O que acontece na renovação?", "Cada subscrição renova-se de acordo com os seus próprios termos; podes gerir as renovações separadamente a partir das duas contas."),
+                ("É mais vantajoso do que comprar em separado?", "Sim, o preço do pacote foi pensado para custar menos do que a soma dos dois produtos comprados separadamente."),
+            ],
         },
     }
 
 
 PRODUCTS = {
     "bundle-m365-personal-kaspersky": _bundle(
-        av_name={"it": "Kaspersky Premium", "en": "Kaspersky Premium", "fr": "Kaspersky Premium", "de": "Kaspersky Premium", "es": "Kaspersky Premium"}["it"],
+        av_name={"it": "Kaspersky Premium", "en": "Kaspersky Premium", "fr": "Kaspersky Premium", "de": "Kaspersky Premium", "es": "Kaspersky Premium", "pt": "Kaspersky Premium"}["it"],
         av_short="Kaspersky Premium",
         av_feature_it="Protezione in tempo reale, VPN e strumenti anti-phishing su fino a 5 dispositivi.",
         av_feature_en="Real-time protection, VPN and anti-phishing tools on up to 5 devices.",
         av_feature_fr="Protection en temps réel, VPN et outils anti-hameçonnage sur jusqu'à 5 appareils.",
         av_feature_de="Echtzeitschutz, VPN und Anti-Phishing-Tools auf bis zu 5 Geräten.",
         av_feature_es="Protección en tiempo real, VPN y herramientas antiphishing en hasta 5 dispositivos.",
+        av_feature_pt="Proteção em tempo real, VPN e ferramentas antiphishing em até 5 dispositivos.",
+        av_feature_nl="Realtimebescherming, VPN en anti-phishingtools op maximaal 5 apparaten.",
     ),
     "bundle-m365-personal-mcafee": _bundle(
-        av_name={"it": "McAfee Total Protection", "en": "McAfee Total Protection", "fr": "McAfee Total Protection", "de": "McAfee Total Protection", "es": "McAfee Total Protection"}["it"],
+        av_name={"it": "McAfee Total Protection", "en": "McAfee Total Protection", "fr": "McAfee Total Protection", "de": "McAfee Total Protection", "es": "McAfee Total Protection", "pt": "McAfee Total Protection"}["it"],
         av_short="McAfee Total Protection",
         av_feature_it="Antivirus, firewall, VPN e monitoraggio dell'identità su fino a 5 dispositivi.",
         av_feature_en="Antivirus, firewall, VPN and identity monitoring on up to 5 devices.",
         av_feature_fr="Antivirus, pare-feu, VPN et surveillance d'identité sur jusqu'à 5 appareils.",
         av_feature_de="Virenschutz, Firewall, VPN und Identitätsüberwachung auf bis zu 5 Geräten.",
         av_feature_es="Antivirus, cortafuegos, VPN y supervisión de identidad en hasta 5 dispositivos.",
+        av_feature_pt="Antivírus, firewall, VPN e monitorização de identidade em até 5 dispositivos.",
+        av_feature_nl="Antivirus, firewall, VPN en identiteitsbewaking op maximaal 5 apparaten.",
     ),
     "bundle-windows-11-home-m365-personal": {
         # Idoneo alla guida Copilot omaggio (solo IT, vedi guide.js M365_SKUS).
@@ -225,6 +280,8 @@ PRODUCTS = {
             fr='Windows 11 Home <span>+ M365 Personal</span>',
             de='Windows 11 Home <span>+ M365 Personal</span>',
             es='Windows 11 Home <span>+ M365 Personal</span>',
+            pt='Windows 11 Home <span>+ M365 Personal</span>',
+            nl='Windows 11 Home <span>+ M365 Personal</span>',
         ),
         "eyebrow": L(
             it="Pacchetto digitale · Licenza a vita + abbonamento 12 mesi",
@@ -232,6 +289,8 @@ PRODUCTS = {
             fr="Pack numérique · Licence à vie + abonnement 12 mois",
             de="Digitales Paket · Dauerlizenz + 12-Monats-Abo",
             es="Pack digital · Licencia de por vida + suscripción de 12 meses",
+            pt="Pacote digital · Licença vitalícia + subscrição de 12 meses",
+            nl="Digitaal pakket · permanente licentie + 12 maanden abonnement",
         ),
         "desc": L(
             it="Windows 11 Home in licenza digitale a vita più l'abbonamento Microsoft 365 Personal di 12 mesi: app Office sempre aggiornate, 1 TB OneDrive, Copilot AI e consegna via email in pochi minuti.",
@@ -239,6 +298,8 @@ PRODUCTS = {
             fr="Windows 11 Home en licence numérique à vie plus l'abonnement Microsoft 365 Personal de 12 mois : applications Office toujours à jour, 1 To de OneDrive, Copilot IA et livraison par e-mail en quelques minutes.",
             de="Windows 11 Home als digitale Dauerlizenz plus ein 12-monatiges Microsoft-365-Personal-Abo: stets aktuelle Office-Apps, 1 TB OneDrive, Copilot KI und Lieferung per E-Mail in wenigen Minuten.",
             es="Windows 11 Home en licencia digital de por vida más la suscripción de 12 meses a Microsoft 365 Personal: apps Office siempre actualizadas, 1 TB de OneDrive, Copilot IA y entrega por email en minutos.",
+            pt="Windows 11 Home em licença digital vitalícia mais a subscrição de 12 meses do Microsoft 365 Personal: apps Office sempre atualizadas, 1 TB OneDrive, Copilot IA e entrega por email em poucos minutos.",
+            nl="Windows 11 Home als permanente digitale licentie plus 12 maanden Microsoft 365 Personal: altijd actuele Office-apps, 1 TB OneDrive, Copilot AI en levering per e-mail binnen enkele minuten.",
         ),
         "features_title": L(
             it="Due prodotti Microsoft, un solo acquisto",
@@ -246,6 +307,8 @@ PRODUCTS = {
             fr="Deux produits Microsoft, un seul achat",
             de="Zwei Microsoft-Produkte, ein Kauf",
             es="Dos productos Microsoft, una sola compra",
+            pt="Dois produtos Microsoft, uma só compra",
+            nl="Twee Microsoft-producten, één aankoop",
         ),
         "keypoints": L(
             it=["Windows 11 Home, licenza a vita", "M365 Personal, 12 mesi inclusi", "App Office + Copilot integrato", "Due licenze, attivazione guidata"],
@@ -253,6 +316,8 @@ PRODUCTS = {
             fr=["Windows 11 Home, licence à vie", "M365 Personal, 12 mois inclus", "Apps Office + Copilot intégré", "Deux licences, activation guidée"],
             de=["Windows 11 Home, Dauerlizenz", "M365 Personal, 12 Monate inklusive", "Office-Apps + integriertes Copilot", "Zwei Lizenzen, geführte Aktivierung"],
             es=["Windows 11 Home, licencia de por vida", "M365 Personal, 12 meses incluidos", "Apps Office + Copilot integrado", "Dos licencias, activación guiada"],
+            pt=["Windows 11 Home, licença vitalícia", "M365 Personal, 12 meses incluídos", "Apps Office + Copilot integrado", "Duas licenças, ativação guiada"],
+            nl=["Windows 11 Home, permanente licentie", "M365 Personal, 12 maanden inbegrepen", "Office-apps + geïntegreerde Copilot", "Twee licenties, begeleide activering"],
         ),
         "features": {
             "it": [
@@ -285,6 +350,12 @@ PRODUCTS = {
                 ("c6", None, "Activación", "Dos licencias independientes", "Windows 11 y Microsoft 365 Personal se activan con dos códigos distintos, cada uno en el portal oficial de Microsoft."),
                 ("c6", None, "Comodidad", "Un solo pago", "Pide, paga y recibe ambos códigos en un único proceso de compra, sin gestionar dos pedidos separados."),
             ],
+            "pt": [
+                ("c6", None, "Sistema operativo", "Windows 11 Home incluído", "Licença digital vitalícia para ativar ou atualizar um PC compatível: sem prazo de validade, sem mensalidade pelo sistema operativo."),
+                ("c6", None, "Produtividade", "Microsoft 365 Personal incluído", "Subscrição de 12 meses com apps Office premium, 1 TB de OneDrive e Copilot IA integrado, de acordo com os limites do plano Personal da Microsoft."),
+                ("c6", None, "Ativação", "Duas licenças independentes", "Windows 11 e Microsoft 365 Personal ativam-se com dois códigos distintos, cada um no portal oficial da Microsoft."),
+                ("c6", None, "Comodidade", "Um só checkout", "Pedes, pagas e recebes ambos os códigos num único processo de compra, sem gerir dois pedidos separados."),
+            ],
         },
         "apps": ["word", "excel", "powerpoint", "outlook", "onedrive", "teams", "defender", "copilot", "onenote", "designer", "clipchamp"],
         "apps_title": L(
@@ -293,6 +364,8 @@ PRODUCTS = {
             fr="La suite Office du pack",
             de="Die Office-Suite des Pakets",
             es="La suite Office del pack",
+            pt="A suite Office do pacote",
+            nl="De Office-suite van het pakket",
         ),
         "steps": {
             "it": [
@@ -320,6 +393,11 @@ PRODUCTS = {
                 ("Dos códigos por email", "Te enviamos la <strong>clave de producto</strong> de Windows 11 Home y el código de Microsoft 365 Personal, con sus instrucciones, normalmente en pocos minutos tras la aprobación del pago."),
                 ("Doble activación", 'Activa Windows 11 Home durante la instalación o desde la configuración del sistema, luego canjea el código de Microsoft 365 en <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> e instala las apps desde <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.'),
             ],
+            "pt": [
+                ("Pedido e pagamento", "Adiciona o pacote ao carrinho e conclui o pagamento seguro com os métodos disponíveis. Recebes a confirmação do pedido de acordo com as condições apresentadas no checkout."),
+                ("Dois códigos por email", "Enviamos-te a <strong>chave de produto</strong> do Windows 11 Home e o código do Microsoft 365 Personal, com as respetivas instruções, normalmente em poucos minutos após a aprovação do pagamento."),
+                ("Ativação separada", 'Ativa o Windows 11 Home durante a instalação ou nas definições do sistema, depois resgata o código do Microsoft 365 em <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> e instala as apps a partir de <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.'),
+            ],
         },
         "specs_note": L(
             it="Requisiti hardware minimi per Windows 11 Home da documentazione Microsoft; verifica sempre i valori aggiornati prima dell'installazione.",
@@ -327,6 +405,8 @@ PRODUCTS = {
             fr="Configuration matérielle minimale pour Windows 11 Home d'après la documentation Microsoft ; vérifiez toujours les valeurs à jour avant l'installation.",
             de="Mindest-Hardwareanforderungen für Windows 11 Home laut Microsoft-Dokumentation; prüfen Sie vor der Installation immer die aktuellen Werte.",
             es="Requisitos mínimos de hardware para Windows 11 Home según la documentación de Microsoft; comprueba siempre los valores actualizados antes de instalar.",
+            pt="Requisitos mínimos de hardware para o Windows 11 Home segundo a documentação da Microsoft; verifica sempre os valores atualizados antes de instalar.",
+            nl="Minimale hardwarevereisten voor Windows 11 Home volgens de Microsoft-documentatie; controleer altijd de actuele waarden vóór de installatie.",
         ),
         "specs": {
             "it": [
@@ -358,6 +438,12 @@ PRODUCTS = {
                 ("RAM", "4 GB o superior."),
                 ("Almacenamiento", "64 GB o superior."),
                 ("Seguridad", "UEFI, compatible con Secure Boot, con <strong>TPM 2.0</strong>."),
+            ],
+            "pt": [
+                ("Processador", "1 GHz ou superior com 2 ou mais núcleos (64 bits)."),
+                ("RAM", "4 GB ou superior."),
+                ("Armazenamento", "64 GB ou superior."),
+                ("Segurança", "UEFI, compatível com Secure Boot, com <strong>TPM 2.0</strong>."),
             ],
         },
         "faq": {
@@ -396,9 +482,20 @@ PRODUCTS = {
                 ("¿El Microsoft 365 Personal incluido en este pack es igual a la versión individual?", "Sí: mismas condiciones que el plan Personal de Microsoft, un usuario con cuenta Microsoft, apps Office premium, 1 TB de OneDrive y Copilot integrado en las apps donde lo prevea el plan."),
                 ("¿La licencia de Windows 11 y la suscripción de Microsoft 365 se renuevan juntas?", "No: la licencia de Windows 11 Home es de por vida (perpetua) para el dispositivo activado y no requiere renovación. La suscripción de Microsoft 365 Personal, en cambio, se renueva anualmente, según las condiciones de Microsoft mostradas al pedir."),
             ],
+            "pt": [
+                ("O que inclui exatamente este pacote?", "O pacote inclui uma licença digital de Windows 11 Home para ativar o sistema operativo e uma subscrição de 12 meses do Microsoft 365 Personal, com apps Office, 1 TB de OneDrive e Copilot integrado de acordo com a oferta Microsoft. Recebes dois códigos por email, cada um com as suas próprias instruções de ativação."),
+                ("As duas licenças ativam-se juntas ou separadamente?", "Ativam-se separadamente: a chave de produto do Windows 11 Home introduz-se durante a instalação do sistema ou nas definições de ativação; o código do Microsoft 365 Personal resgata-se em setup.office.com com a tua conta Microsoft."),
+                ("O código do Windows 11 Home serve para uma instalação limpa ou só para atualizar?", "A chave de produto permite tanto uma instalação limpa do Windows 11 como, se o teu PC cumprir os requisitos mínimos de hardware da Microsoft, uma atualização a partir de uma versão compatível do Windows 10."),
+                ("O Microsoft 365 Personal incluído neste pacote é igual à versão individual?", "Sim: mesmas condições do plano Personal da Microsoft, um utilizador com conta Microsoft, apps Office premium, 1 TB de OneDrive e Copilot integrado nas apps onde o plano o preveja."),
+                ("A licença do Windows 11 e a subscrição do Microsoft 365 renovam-se juntas?", "Não: a licença do Windows 11 Home é vitalícia (perpétua) para o dispositivo ativado e não requer renovação. A subscrição do Microsoft 365 Personal, por sua vez, renova-se anualmente, de acordo com as condições Microsoft mostradas no momento do pedido."),
+            ],
         },
     },
 }
+
+from lang_backfill import backfill_lang
+backfill_lang(PRODUCTS)
+backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
 
 
 def get_bundle_content(slug):

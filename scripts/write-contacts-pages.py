@@ -10,10 +10,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
+LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "nl": "nl_NL"}
 
 # slug of the pre-sale "software consultation" page per locale (see components/footer.js)
-CONSULTATION_SLUG = {"it": "consulenza", "en": "consultation", "fr": "consultation", "de": "beratung", "es": "consultoria"}
+CONSULTATION_SLUG = {"it": "consulenza", "en": "consultation", "fr": "consultation", "de": "beratung", "es": "consultoria", "pt": "consultoria", "nl": "consultatie"}
 
 COPY = {
     "it": {
@@ -161,6 +161,64 @@ COPY = {
         "before_returns": "Devoluciones y reembolsos",
         "before_consultation": "Asesoramiento de software",
     },
+    "pt": {
+        "skip": "Ir para o conteúdo principal",
+        "title": "Contactos — Aml Store",
+        "description": "Contacta a Aml Store para assistência sobre encomendas e ativação de licenças por email, telefone ou WhatsApp, de segunda a sexta, 09:00–19:00 hora de Itália.",
+        "home": "Início",
+        "breadcrumb": "Contactos",
+        "eyebrow": "Apoio ao cliente",
+        "h1": "Contactos",
+        "lede": "Para dúvidas sobre encomendas, entrega digital ou ativação de licenças, a nossa equipa está disponível através dos canais abaixo.",
+        "meta_hours": "Seg–Sex, 09:00–19:00 (hora de Itália)",
+        "meta_lang": "Apoio em inglês",
+        "h_channels": "Canais de apoio",
+        "email_label": "Email",
+        "email_cta": "Enviar um email",
+        "phone_label": "Telefone",
+        "phone_cta": "Ligar para o apoio",
+        "wa_label": "WhatsApp",
+        "wa_cta": "Abrir conversa",
+        "h_company": "Dados da empresa",
+        "company_html": "<strong>Aml Store</strong>, marca de Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Itália<br>NIF IT11461870963",
+        "h_hours": "Horário e idioma",
+        "hours_row1_label": "Segunda – Sexta",
+        "hours_row1_value": "09:00 – 19:00 (hora de Itália)",
+        "hours_row2_label": "Idioma de apoio",
+        "hours_row2_value": "Inglês",
+        "h_before": "Antes de nos escreveres",
+        "before_returns": "Devoluções e reembolsos",
+        "before_consultation": "Consultoria de software",
+    },
+    "nl": {
+        "skip": "Naar de hoofdinhoud",
+        "title": "Contact — Aml Store",
+        "description": "Neem contact op met Aml Store voor hulp bij bestellingen en licentieactivering via e-mail, telefoon of WhatsApp, maandag tot en met vrijdag, 09:00–19:00 Italiaanse tijd.",
+        "home": "Home",
+        "breadcrumb": "Contact",
+        "eyebrow": "Klantenservice",
+        "h1": "Contact",
+        "lede": "Voor vragen over bestellingen, digitale levering of licentieactivering is ons team bereikbaar via de onderstaande kanalen.",
+        "meta_hours": "Ma–vr, 09:00–19:00 (Italiaanse tijd)",
+        "meta_lang": "Ondersteuning in het Engels",
+        "h_channels": "Ondersteuningskanalen",
+        "email_label": "E-mail",
+        "email_cta": "E-mail versturen",
+        "phone_label": "Telefoon",
+        "phone_cta": "Bellen met support",
+        "wa_label": "WhatsApp",
+        "wa_cta": "Chat openen",
+        "h_company": "Bedrijfsgegevens",
+        "company_html": "<strong>Aml Store</strong>, merk van Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italië<br>BTW IT11461870963",
+        "h_hours": "Openingstijden en taal",
+        "hours_row1_label": "Maandag – vrijdag",
+        "hours_row1_value": "09:00 – 19:00 (Italiaanse tijd)",
+        "hours_row2_label": "Ondersteuningstaal",
+        "hours_row2_value": "Engels",
+        "h_before": "Voordat u ons schrijft",
+        "before_returns": "Retourneren en terugbetalingen",
+        "before_consultation": "Softwareadvies",
+    },
 }
 
 ICON_EMAIL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>'
@@ -221,7 +279,7 @@ def page(lang: str) -> str:
                 "@id": "https://aml-store.com/#website",
                 "url": "https://aml-store.com/",
                 "name": "Aml Store",
-                "inLanguage": ["it", "en", "fr", "de", "es"],
+                "inLanguage": ["it", "en", "fr", "de", "es", "pt", "nl"],
                 "publisher": {"@id": "https://aml-store.com/#organization"},
             },
             {
@@ -238,7 +296,7 @@ def page(lang: str) -> str:
     }
     hreflang = "\n".join(
         f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/contacts">'
-        for lg in ("it", "en", "fr", "de", "es")
+        for lg in ("it", "en", "fr", "de", "es", "pt", "nl")
     )
     hreflang += '\n    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/contacts">'
 

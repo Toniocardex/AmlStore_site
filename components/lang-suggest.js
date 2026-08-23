@@ -11,8 +11,8 @@
     var DISMISSED_KEY = 'aml-lang-suggest-dismissed';
     var SESSION_SEEN_KEY = 'aml-lang-suggest-seen';
 
-    var ENDONYMS = { it: 'Italiano', en: 'English', fr: 'Français', de: 'Deutsch', es: 'Español' };
-    var FLAG_CODES = { it: 'it', en: 'gb', fr: 'fr', de: 'de', es: 'es' };
+    var ENDONYMS = { it: 'Italiano', en: 'English', fr: 'Français', de: 'Deutsch', es: 'Español', pt: 'Português', nl: 'Nederlands' };
+    var FLAG_CODES = { it: 'it', en: 'gb', fr: 'fr', de: 'de', es: 'es', pt: 'pt', nl: 'nl' };
 
     var BAR_I18N = {
         it: {
@@ -39,6 +39,16 @@
             message: 'Esta página también está disponible en tu idioma.',
             switchCta: '{{lang}}',
             dismissAria: 'Cerrar sugerencia de idioma',
+        },
+        pt: {
+            message: 'Esta página também está disponível no seu idioma.',
+            switchCta: '{{lang}}',
+            dismissAria: 'Fechar sugestão de idioma',
+        },
+        nl: {
+            message: 'Deze pagina is ook beschikbaar in uw taal.',
+            switchCta: '{{lang}}',
+            dismissAria: 'Taalsuggestie sluiten',
         },
     };
 

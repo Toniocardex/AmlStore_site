@@ -2,12 +2,18 @@
 """Rich content for Office 2021 perpetual SKUs (all 5 locales)."""
 
 from product_content_office import APPS_HOME, APPS_HOME_BUSINESS, APPS_PRO_PLUS
+from lang_backfill import backfill_lang
+from nl_translations import nl_text
 
-LANGS = ("it", "en", "fr", "de", "es")
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 
 def L(**kwargs):
-    """Build {lang: text} from keyword args it/en/fr/de/es."""
+    """Build {lang: text} from keyword args it/en/fr/de/es/pt/nl."""
+    if "pt" not in kwargs:
+        kwargs["pt"] = kwargs.get("es") or kwargs.get("en")
+    if "nl" not in kwargs:
+        kwargs["nl"] = kwargs.get("en")
     return {k: kwargs[k] for k in LANGS}
 
 
@@ -40,6 +46,8 @@ PRODUCTS = {
             fr='Office 2021 <span>Home &amp; Student</span>',
             de='Office 2021 <span>Home &amp; Student</span>',
             es='Office 2021 <span>Home &amp; Student</span>',
+            pt='Office 2021 <span>Home &amp; Student</span>',
+            nl='Office 2021 <span>Home &amp; Student</span>',
         ),
         "eyebrow": L(
             it="Licenza perpetua · Windows o Mac",
@@ -47,6 +55,8 @@ PRODUCTS = {
             fr="Licence perpétuelle · Windows ou Mac",
             de="Dauerlizenz · Windows oder Mac",
             es="Licencia perpetua · Windows o Mac",
+            pt="Licença perpétua · Windows ou Mac",
+            nl="Permanente licentie · Windows of Mac",
         ),
         "desc": L(
             it="Office 2021 Home & Student: Word, Excel e PowerPoint per casa e studio su Windows o Mac. Licenza digitale originale con consegna del codice via email.",
@@ -54,6 +64,8 @@ PRODUCTS = {
             fr="Office 2021 Home & Student : Word, Excel et PowerPoint pour la maison et les études sur Windows ou Mac. Licence numérique originale, code par e-mail.",
             de="Office 2021 Home & Student: Word, Excel und PowerPoint für Zuhause und Studium unter Windows oder Mac. Originale digitale Lizenz mit Key per E-Mail.",
             es="Office 2021 Home & Student: Word, Excel y PowerPoint para hogar y estudio en Windows o Mac. Licencia digital original con clave por email.",
+            pt="Office 2021 Home & Student: Word, Excel e PowerPoint para casa e estudo em Windows ou Mac. Licença digital original com entrega do código por email.",
+            nl="Office 2021 Home & Student: Word, Excel en PowerPoint voor thuis en studie op Windows of Mac. Originele digitale licentie met levering van de code per e-mail.",
         ),
         "pills": pills_home(),
         "features_title": L(
@@ -62,6 +74,8 @@ PRODUCTS = {
             fr="Office 2021 essentiel, sans abonnement",
             de="Office 2021 Essential — ohne Abo",
             es="Office 2021 esencial, sin suscripción",
+            pt="Office 2021 essencial, sem subscrição",
+            nl="Essentiële Office 2021, zonder abonnement",
         ),
         "features": {
             "it": [
@@ -104,6 +118,14 @@ PRODUCTS = {
                 ("c4", None, "Activación", "setup.office.com", "Activa en el portal Microsoft e instala las apps 2021."),
                 ("c4", "dark", "Nota", "Versión 2021", "Suite perpetua 2021: no incluye actualizaciones continuas de Microsoft 365."),
             ],
+            "pt": [
+                ("c8", "blue", "Licença", "Home & Student 2021", "Licença perpétua ESD para uso doméstico e escolar: Word, Excel e PowerPoint segundo as condições Microsoft 2021."),
+                ("c4", "teal", None, "3 apps de computador", "Documentos, folhas de cálculo e apresentações com as apps clássicas do Office."),
+                ("c4", "purple", "Plataforma", "Windows ou Mac", "Edição para Windows e macOS suportados pelo Office 2021."),
+                ("c4", None, "Entrega", "Digital por email", "Código e instruções após o pagamento."),
+                ("c4", None, "Ativação", "setup.office.com", "Ativas no portal Microsoft e instalas as apps 2021."),
+                ("c4", "dark", "Nota", "Versão 2021", "Suite perpétua 2021: não inclui as atualizações contínuas do Microsoft 365."),
+            ],
         },
         "apps_title": L(
             it="App in Home & Student 2021",
@@ -111,6 +133,8 @@ PRODUCTS = {
             fr="Apps Home & Student 2021",
             de="Apps in Home & Student 2021",
             es="Apps en Home & Student 2021",
+            pt="Apps no Home & Student 2021",
+            nl="Apps in Home & Student 2021",
         ),
         "faq": {
             "it": [
@@ -148,6 +172,13 @@ PRODUCTS = {
                 ("¿Cómo se activa?", "Con la clave del email en setup.office.com e instalación desde office.com."),
                 ("¿Diferencia con 2024?", "2024 es más reciente. Elige 2021 si necesitas esa generación o esta oferta."),
             ],
+            "pt": [
+                ("Que apps inclui?", "Word, Excel e PowerPoint. O Outlook não faz parte do Home & Student."),
+                ("É uma subscrição?", "Não: licença perpétua 2021, não Microsoft 365."),
+                ("Windows ou Mac?", "Sim, onde indicado na ficha; segue os requisitos e o processo Microsoft para a plataforma escolhida."),
+                ("Como se ativa?", "Com o código por email em setup.office.com e instalação a partir de office.com."),
+                ("Diferença com o Office 2024?", "O 2024 é mais recente. Escolhe o 2021 se precisares dessa geração ou das condições desta ficha."),
+            ],
         },
     },
     "office-2021-home-business": {
@@ -158,6 +189,8 @@ PRODUCTS = {
             fr='Office 2021 <span>Home &amp; Business</span>',
             de='Office 2021 <span>Home &amp; Business</span>',
             es='Office 2021 <span>Home &amp; Business</span>',
+            pt='Office 2021 <span>Home &amp; Business</span>',
+            nl='Office 2021 <span>Home &amp; Business</span>',
         ),
         "eyebrow": L(
             it="Licenza perpetua · PC / Mac",
@@ -165,6 +198,8 @@ PRODUCTS = {
             fr="Licence perpétuelle · PC / Mac",
             de="Dauerlizenz · PC / Mac",
             es="Licencia perpetua · PC / Mac",
+            pt="Licença perpétua · PC / Mac",
+            nl="Permanente licentie · pc / Mac",
         ),
         "desc": L(
             it="Office 2021 Home & Business: Word, Excel, PowerPoint e Outlook su PC o Mac. Licenza digitale ESD senza abbonamento, codice via email.",
@@ -172,6 +207,8 @@ PRODUCTS = {
             fr="Office 2021 Home & Business : Word, Excel, PowerPoint et Outlook sur PC ou Mac. Licence ESD sans abonnement, code par e-mail.",
             de="Office 2021 Home & Business: Word, Excel, PowerPoint und Outlook auf PC oder Mac. ESD-Lizenz ohne Abo, Key per E-Mail.",
             es="Office 2021 Home & Business: Word, Excel, PowerPoint y Outlook en PC o Mac. Licencia ESD sin suscripción, clave por email.",
+            pt="Office 2021 Home & Business: Word, Excel, PowerPoint e Outlook em PC ou Mac. Licença digital ESD sem subscrição, código por email.",
+            nl="Office 2021 Home & Business: Word, Excel, PowerPoint en Outlook op pc of Mac. Digitale ESD-licentie zonder abonnement, code per e-mail.",
         ),
         "pills": pills_hb(),
         "features_title": L(
@@ -180,6 +217,8 @@ PRODUCTS = {
             fr="Maison et travail avec Outlook 2021",
             de="Zuhause und Arbeit mit Outlook 2021",
             es="Hogar y trabajo con Outlook 2021",
+            pt="Casa e trabalho com o Outlook 2021",
+            nl="Thuis en werk met Outlook 2021",
         ),
         "features": {
             "it": [
@@ -222,6 +261,14 @@ PRODUCTS = {
                 ("c4", None, "Activación", "Portal Microsoft", "Activa en setup.office.com e instala desde office.com."),
                 ("c4", "dark", "Ideal para", "Profesionales", "Cuando necesitas Outlook sin pasar a Microsoft 365."),
             ],
+            "pt": [
+                ("c8", "blue", "Licença", "Home & Business 2021", "Licença perpétua ESD para um PC ou Mac, com Outlook além de Word, Excel e PowerPoint."),
+                ("c4", "teal", None, "Outlook incluído", "Email, calendário e contactos com o Outlook de computador."),
+                ("c4", "purple", "Plataforma", "PC ou Mac", "Edição compatível com Windows e macOS suportados pelo Office 2021."),
+                ("c4", None, "Entrega", "Email em minutos", "Código e instruções após o pagamento."),
+                ("c4", None, "Ativação", "Portal Microsoft", "Ativas em setup.office.com e instalas a partir de office.com."),
+                ("c4", "dark", "Ideal para", "Profissionais", "Quando precisas do Outlook sem passar para o Microsoft 365."),
+            ],
         },
         "apps_title": L(
             it="App in Home & Business 2021",
@@ -229,6 +276,8 @@ PRODUCTS = {
             fr="Apps Home & Business 2021",
             de="Apps in Home & Business 2021",
             es="Apps en Home & Business 2021",
+            pt="Apps no Home & Business 2021",
+            nl="Apps in Home & Business 2021",
         ),
         "faq": {
             "it": [
@@ -266,6 +315,13 @@ PRODUCTS = {
                 ("¿Cómo se activa?", "setup.office.com con la clave del email, luego office.com."),
                 ("¿Incluye 1 TB OneDrive?", "No en esta edición perpetua. Para cloud valora Microsoft 365."),
             ],
+            "pt": [
+                ("Qual a diferença com o Home & Student?", "O Home & Business adiciona o Outlook às três apps principais."),
+                ("É perpétua?", "Sim: licença ESD única, não uma subscrição Microsoft 365."),
+                ("PC e Mac?", "Esta ficha cobre PC/Mac conforme o título do produto; segue as instruções Microsoft para a plataforma."),
+                ("Como se ativa?", "setup.office.com com o código do email, depois instalação a partir de office.com."),
+                ("Inclui 1 TB de OneDrive?", "Não nesta edição perpétua. Para cloud e atualizações contínuas considera o Microsoft 365."),
+            ],
         },
     },
     "office-2021-home-business-mac": {
@@ -276,6 +332,8 @@ PRODUCTS = {
             fr='Office 2021 Home &amp; Business <span>Mac</span>',
             de='Office 2021 Home &amp; Business <span>Mac</span>',
             es='Office 2021 Home &amp; Business <span>Mac</span>',
+            pt='Office 2021 Home &amp; Business <span>Mac</span>',
+            nl='Office 2021 Home &amp; Business <span>Mac</span>',
         ),
         "eyebrow": L(
             it="Licenza perpetua · solo Mac",
@@ -283,6 +341,8 @@ PRODUCTS = {
             fr="Licence perpétuelle · Mac uniquement",
             de="Dauerlizenz · nur Mac",
             es="Licencia perpetua · solo Mac",
+            pt="Licença perpétua · apenas Mac",
+            nl="Permanente licentie · alleen Mac",
         ),
         "desc": L(
             it="Office 2021 Home & Business per Mac: Word, Excel, PowerPoint e Outlook. Licenza digitale ESD con consegna del codice via email.",
@@ -290,6 +350,8 @@ PRODUCTS = {
             fr="Office 2021 Home & Business pour Mac : Word, Excel, PowerPoint et Outlook. Licence ESD originale, code par e-mail.",
             de="Office 2021 Home & Business für Mac: Word, Excel, PowerPoint und Outlook. Originale ESD-Lizenz mit Key per E-Mail.",
             es="Office 2021 Home & Business para Mac: Word, Excel, PowerPoint y Outlook. Licencia ESD original con clave por email.",
+            pt="Office 2021 Home & Business para Mac: Word, Excel, PowerPoint e Outlook. Licença digital ESD com entrega do código por email.",
+            nl="Office 2021 Home & Business voor Mac: Word, Excel, PowerPoint en Outlook. Digitale ESD-licentie met levering van de code per e-mail.",
         ),
         "pills": pills_mac(),
         "features_title": L(
@@ -298,6 +360,8 @@ PRODUCTS = {
             fr="Home & Business 2021 pour Mac",
             de="Home & Business 2021 für den Mac",
             es="Home & Business 2021 pensado para Mac",
+            pt="Home & Business 2021 pensado para Mac",
+            nl="Home & Business 2021 voor Mac",
         ),
         "features": {
             "it": [
@@ -340,6 +404,14 @@ PRODUCTS = {
                 ("c4", None, "Activación", "Cuenta Microsoft", "Activa en el portal oficial e instala las apps Mac."),
                 ("c4", "dark", "Nota", "Solo Mac", "No es la variante Windows: comprueba compatibilidad con Office 2021."),
             ],
+            "pt": [
+                ("c8", "blue", "Plataforma", "Edição Mac", "Licença perpétua ESD Home & Business 2021 destinada a Mac, segundo as condições Microsoft."),
+                ("c4", "teal", None, "Outlook incluído", "Email e calendário Outlook além de Word, Excel e PowerPoint."),
+                ("c4", "purple", "Modelo", "Sem subscrição", "Compra única da suite 2021, não Microsoft 365."),
+                ("c4", None, "Entrega", "Digital", "Código e instruções por email após o pagamento."),
+                ("c4", None, "Ativação", "Conta Microsoft", "Ativas no portal oficial e instalas as apps Mac da Microsoft."),
+                ("c4", "dark", "Nota", "Apenas Mac", "Não é a variante Windows: confirma que tens um Mac compatível com o Office 2021."),
+            ],
         },
         "apps_title": L(
             it="App Mac in Home & Business 2021",
@@ -347,6 +419,8 @@ PRODUCTS = {
             fr="Apps Mac Home & Business 2021",
             de="Mac-Apps in Home & Business 2021",
             es="Apps Mac en Home & Business 2021",
+            pt="Apps Mac no Home & Business 2021",
+            nl="Mac-apps in Home & Business 2021",
         ),
         "faq": {
             "it": [
@@ -384,6 +458,13 @@ PRODUCTS = {
                 ("¿Cómo se activa?", "Con la clave del email en el portal Microsoft e instalación de las apps Mac."),
                 ("¿Sirve en Windows?", "No: elige la ficha PC/Mac o Windows correspondiente."),
             ],
+            "pt": [
+                ("É apenas para Mac?", "Sim: esta ficha é a edição Home & Business 2021 para Mac."),
+                ("Inclui o Outlook?", "Sim, juntamente com Word, Excel e PowerPoint."),
+                ("É uma subscrição?", "Não: licença perpétua ESD 2021."),
+                ("Como se ativa?", "Com o código recebido por email no portal Microsoft e instalação das apps Mac."),
+                ("Posso usá-la no Windows?", "Não: para Windows escolhe a ficha Home & Business PC/Mac ou Windows dedicada."),
+            ],
         },
     },
     "office-2021-professional-plus": {
@@ -394,6 +475,8 @@ PRODUCTS = {
             fr='Office 2021 <span>Professional Plus</span>',
             de='Office 2021 <span>Professional Plus</span>',
             es='Office 2021 <span>Professional Plus</span>',
+            pt='Office 2021 <span>Professional Plus</span>',
+            nl='Office 2021 <span>Professional Plus</span>',
         ),
         "eyebrow": L(
             it="Licenza perpetua · Professional Plus · Windows",
@@ -401,6 +484,8 @@ PRODUCTS = {
             fr="Licence perpétuelle · Professional Plus · Windows",
             de="Dauerlizenz · Professional Plus · Windows",
             es="Licencia perpetua · Professional Plus · Windows",
+            pt="Licença perpétua · Professional Plus · Windows",
+            nl="Permanente licentie · Professional Plus · Windows",
         ),
         "desc": L(
             it="Office 2021 Professional Plus: suite desktop completa per Windows con licenza digitale ESD. Codice e istruzioni via email dopo l'acquisto.",
@@ -408,6 +493,8 @@ PRODUCTS = {
             fr="Office 2021 Professional Plus : suite de bureau complète pour Windows, licence ESD originale. Code et instructions par e-mail.",
             de="Office 2021 Professional Plus: vollständige Desktop-Suite für Windows als ESD-Lizenz. Key und Anleitung per E-Mail.",
             es="Office 2021 Professional Plus: suite de escritorio completa para Windows con licencia ESD. Clave e instrucciones por email.",
+            pt="Office 2021 Professional Plus: suite de secretária completa para Windows com licença digital ESD. Código e instruções por email após a compra.",
+            nl="Office 2021 Professional Plus: volledige desktop-suite voor Windows met digitale ESD-licentie. Code en instructies per e-mail na aankoop.",
         ),
         "pills": pills_hb(),
         "features_title": L(
@@ -416,6 +503,8 @@ PRODUCTS = {
             fr="Professional Plus 2021 sans abonnement",
             de="Professional Plus 2021 — ohne Abo",
             es="Professional Plus 2021 sin suscripción",
+            pt="Professional Plus 2021 sem subscrição",
+            nl="Professional Plus 2021 zonder abonnement",
         ),
         "features": {
             "it": [
@@ -458,6 +547,14 @@ PRODUCTS = {
                 ("c4", None, "Activación", "Canales Microsoft", "Activación e instalación por portales oficiales."),
                 ("c4", "dark", "Nota", "Windows", "Ficha orientada a Windows; comprueba requisitos de Office 2021."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Professional Plus", "Edição profissional completa do Office 2021 com licença perpétua ESD para Windows."),
+                ("c4", "teal", None, "Suite ampla", "Word, Excel, PowerPoint, Outlook e OneNote entre as apps típicas do Pro Plus."),
+                ("c4", "purple", "Modelo", "Compra única", "Sem renovação anual típica do Microsoft 365."),
+                ("c4", None, "Entrega", "Digital", "Chave e instruções por email após o pagamento."),
+                ("c4", None, "Ativação", "Canais Microsoft", "Ativação e instalação através dos portais oficiais Microsoft."),
+                ("c4", "dark", "Nota", "Windows", "Ficha orientada para Windows; verifica os requisitos Microsoft para o Office 2021."),
+            ],
         },
         "apps_title": L(
             it="App in Professional Plus 2021",
@@ -465,6 +562,8 @@ PRODUCTS = {
             fr="Apps Professional Plus 2021",
             de="Apps in Professional Plus 2021",
             es="Apps en Professional Plus 2021",
+            pt="Apps no Professional Plus 2021",
+            nl="Apps in Professional Plus 2021",
         ),
         "faq": {
             "it": [
@@ -502,9 +601,20 @@ PRODUCTS = {
                 ("¿Cómo se activa?", "Con la clave del email en los portales Microsoft (p. ej. setup.office.com)."),
                 ("¿Por qué 2021?", "Si necesitas esa generación o esta oferta. Para funciones más nuevas: 2024 o Microsoft 365."),
             ],
+            "pt": [
+                ("O que significa Professional Plus?", "Edição profissional completa da linha Office 2021, normalmente com Outlook e mais apps do que Home & Student."),
+                ("É uma subscrição?", "Não: licença perpétua ESD 2021."),
+                ("Inclui Access ou Publisher?", "Depende da oferta Microsoft para a licença. Na ficha indicamos as apps principais."),
+                ("Como se ativa?", "Com o código por email nos portais Microsoft (ex. setup.office.com)."),
+                ("Porquê 2021 e não 2024?", "Se precisares da geração 2021 ou das condições desta ficha. Para funcionalidades mais recentes considera o 2024 ou o Microsoft 365."),
+            ],
         },
     },
 }
+
+
+backfill_lang(PRODUCTS)
+backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
 
 
 def get_office_2021_content(slug):

@@ -13,12 +13,12 @@ SKIP = {
     "privacy-policy", "cookie-policy", "terms-and-conditions",
     "returns-and-refunds", "microsoft-365-solutions",
     "contacts",
-    "404", "chi-siamo", "about-us", "qui-sommes-nous", "ueber-uns", "quienes-somos",
-    "consulenza", "consultation", "beratung", "consultoria",
+    "404", "chi-siamo", "about-us", "qui-sommes-nous", "ueber-uns", "quienes-somos", "sobre-nos", "over-ons",
+    "consulenza", "consultation", "beratung", "consultoria", "consultatie",
     "suite-office", "sistemi-operativi", "pacchetti",
     "antivirus", "windows-server", "strumenti",
 }
-LANGS = ("it", "en", "fr", "de", "es")
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 INTERNAL_SKUS = {
     "SC_W11HOME_M365PERS",
     "SC_M365P_MTOTPROT_5Device",

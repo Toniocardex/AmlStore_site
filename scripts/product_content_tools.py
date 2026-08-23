@@ -7,10 +7,17 @@ riusa product_content_windows.UI: i default step/specs di quel dizionario
 prodotto qui fornisce sempre `steps` e `specs` propri.
 """
 
-LANGS = ("it", "en", "fr", "de", "es")
+from lang_backfill import backfill_lang
+from nl_translations import nl_text
+
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 
 def L(**kwargs):
+    if "pt" not in kwargs:
+        kwargs["pt"] = kwargs.get("es") or kwargs.get("en")
+    if "nl" not in kwargs:
+        kwargs["nl"] = kwargs.get("en")
     return {k: kwargs[k] for k in LANGS}
 
 
@@ -22,6 +29,8 @@ PRODUCTS = {
             fr='Adobe Acrobat <span>Pro</span>',
             de='Adobe Acrobat <span>Pro</span>',
             es='Adobe Acrobat <span>Pro</span>',
+            pt='Adobe Acrobat <span>Pro</span>',
+            nl='Adobe Acrobat <span>Pro</span>',
         ),
         "eyebrow": L(
             it="Abbonamento · editing, firma e conversione PDF",
@@ -29,6 +38,8 @@ PRODUCTS = {
             fr="Abonnement · édition, signature et conversion PDF",
             de="Abonnement · PDF bearbeiten, signieren, konvertieren",
             es="Suscripción · edición, firma y conversión de PDF",
+            pt="Subscrição · edição, assinatura e conversão de PDF",
+            nl="Abonnement · PDF bewerken, ondertekenen en converteren",
         ),
         "desc": L(
             it="Licenza digitale originale di Adobe Acrobat Pro: modifica, converti, firma elettronicamente e proteggi i tuoi PDF da desktop, web e mobile. Codice e istruzioni via email dopo l'acquisto.",
@@ -36,6 +47,8 @@ PRODUCTS = {
             fr="Licence numérique originale d'Adobe Acrobat Pro : modifiez, convertissez, signez électroniquement et protégez vos PDF depuis le bureau, le web et le mobile. Code et instructions par e-mail après l'achat.",
             de="Originale digitale Lizenz für Adobe Acrobat Pro: PDFs bearbeiten, konvertieren, elektronisch signieren und schützen — am Desktop, im Web und mobil. Code und Anleitung per E-Mail nach dem Kauf.",
             es="Licencia digital original de Adobe Acrobat Pro: edita, convierte, firma electrónicamente y protege tus PDF desde el escritorio, la web y el móvil. Código e instrucciones por email tras la compra.",
+            pt="Licença digital original do Adobe Acrobat Pro: edita, converte, assina eletronicamente e protege os teus PDF a partir do computador, da web e do telemóvel. Código e instruções por email após a compra.",
+            nl="Originele digitale licentie van Adobe Acrobat Pro: bewerk, converteer, onderteken elektronisch en beveilig uw PDF’s vanaf de computer, het web en de telefoon. Code en instructies per e-mail na aankoop.",
         ),
         "features_title": L(
             it="Tutto il PDF, in un solo strumento",
@@ -43,6 +56,8 @@ PRODUCTS = {
             fr="Tout le PDF, dans un seul outil",
             de="Alles rund um PDF in einem Werkzeug",
             es="Todo el PDF, en una sola herramienta",
+            pt="Tudo o que precisas em PDF, numa só ferramenta",
+            nl="Alles wat u nodig hebt voor PDF, in één tool",
         ),
         "keypoints": L(
             it=["Modifica testo e immagini nel PDF", "Firma elettronica inclusa (Acrobat Sign)", "Converti da/verso Word, Excel, PowerPoint", "Windows, Mac, web e app mobile"],
@@ -50,6 +65,8 @@ PRODUCTS = {
             fr=["Modifiez texte et images dans le PDF", "Signature électronique incluse (Acrobat Sign)", "Convertissez vers/depuis Word, Excel, PowerPoint", "Windows, Mac, web et app mobile"],
             de=["Text und Bilder im PDF bearbeiten", "E-Signatur inklusive (Acrobat Sign)", "Konvertierung zu/von Word, Excel, PowerPoint", "Windows, Mac, Web und Mobil-App"],
             es=["Edita texto e imágenes en el PDF", "Firma electrónica incluida (Acrobat Sign)", "Convierte desde/hacia Word, Excel, PowerPoint", "Windows, Mac, web y app móvil"],
+            pt=["Edita texto e imagens no PDF", "Assinatura eletrónica incluída (Acrobat Sign)", "Converte de/para Word, Excel, PowerPoint", "Windows, Mac, web e app móvel"],
+            nl=["Tekst en afbeeldingen in de PDF bewerken", "Elektronische ondertekening inbegrepen (Acrobat Sign)", "Converteren van/naar Word, Excel, PowerPoint", "Windows, Mac, web en mobiele app"],
         ),
         "features": {
             "it": [
@@ -92,6 +109,14 @@ PRODUCTS = {
                 ("c4", None, "Protección", "Contraseñas y redacción", "Protege los archivos con contraseña y elimina de forma permanente la información sensible antes de compartir."),
                 ("c4", "dark", "Dispositivos", "Trabaja donde quieras", "App de escritorio Windows/Mac, editor web y app móvil: el documento se mantiene sincronizado entre dispositivos."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Edita o PDF como um documento", "Altera texto, imagens e paginação diretamente no ficheiro PDF, sem teres de recriar o documento do zero."),
+                ("c4", "teal", "Assinatura", "Assinatura eletrónica incluída", "Envia, assina e faz assinar documentos com o Acrobat Sign, incluído na subscrição."),
+                ("c4", "purple", "Conversão", "De e para o Office", "Converte PDF em Word, Excel ou PowerPoint mantendo a paginação original, e vice-versa."),
+                ("c4", None, "OCR", "Texto a partir de digitalizações", "Reconhecimento ótico de caracteres: torna editáveis e pesquisáveis também os PDF digitalizados."),
+                ("c4", None, "Proteção", "Palavra-passe e redação", "Protege os ficheiros com palavra-passe e remove de forma permanente informações sensíveis antes de os partilhares."),
+                ("c4", "dark", "Dispositivos", "Onde quer que trabalhes", "App de computador Windows/Mac, editor web e app móvel: o documento mantém-se sincronizado entre dispositivos."),
+            ],
         },
         "steps": {
             "it": [
@@ -118,6 +143,11 @@ PRODUCTS = {
                 ("Pedido y pago", "Añade el producto al carrito y completa el pago con los métodos disponibles."),
                 ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en pocos minutos."),
                 ("Activación", "Canjea el código en tu cuenta Adobe e instala Acrobat desde adobe.com o directamente desde la app."),
+            ],
+            "pt": [
+                ("Encomenda e pagamento", "Adiciona o produto ao carrinho e conclui o pagamento com os métodos disponíveis."),
+                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em poucos minutos após o pagamento."),
+                ("Ativação", "Resgata o código na tua conta Adobe e instala o Acrobat a partir de adobe.com ou diretamente da app."),
             ],
         },
         "specs": {
@@ -150,6 +180,12 @@ PRODUCTS = {
                 ("Conexión", "Internet necesario para la activación y las funciones de nube/firma."),
                 ("Cuenta", "Una cuenta Adobe gratuita para canjear el código y sincronizar documentos."),
                 ("Compatibilidad", "Importación/exportación entre PDF y los formatos Word, Excel, PowerPoint e imagen más comunes."),
+            ],
+            "pt": [
+                ("Sistema operativo", "Windows 10/11 ou macOS em versão suportada pela Adobe."),
+                ("Ligação", "Internet necessária para a ativação e para as funções cloud/assinatura."),
+                ("Conta", "Uma conta Adobe (gratuita) para resgatar o código e sincronizar os documentos."),
+                ("Compatibilidade", "Importação/exportação entre PDF e os formatos Word, Excel, PowerPoint e imagem mais comuns."),
             ],
         },
         "faq": {
@@ -188,6 +224,13 @@ PRODUCTS = {
                 ("¿Cómo recibo y activo la licencia?", "Recibirás el código por email: lo canjeas en tu cuenta Adobe e instalas la app desde adobe.com."),
                 ("¿Puedo editar PDF escaneados?", "Sí, el reconocimiento óptico (OCR) convierte el texto escaneado en texto editable y buscable."),
             ],
+            "pt": [
+                ("É uma subscrição ou uma licença perpétua?", "O Adobe Acrobat Pro é vendido por subscrição; a duração está indicada na ficha do produto."),
+                ("Funciona em Mac além de Windows?", "Sim, além da app de computador Windows/Mac podes trabalhar a partir do editor web e da app móvel."),
+                ("A assinatura eletrónica está incluída no preço?", "Sim, o Acrobat Sign para enviar e recolher assinaturas está incluído na subscrição Pro."),
+                ("Como recebo e ativo a licença?", "Vais receber o código por email: resgata-o na tua conta Adobe e instala a app a partir de adobe.com."),
+                ("Posso editar PDF digitalizados?", "Sim, o reconhecimento ótico de caracteres (OCR) converte o texto digitalizado em texto editável e pesquisável."),
+            ],
         },
     },
     "adobe-acrobat-standard": {
@@ -197,6 +240,8 @@ PRODUCTS = {
             fr='Adobe Acrobat <span>Standard</span>',
             de='Adobe Acrobat <span>Standard</span>',
             es='Adobe Acrobat <span>Standard</span>',
+            pt='Adobe Acrobat <span>Standard</span>',
+            nl='Adobe Acrobat <span>Standard</span>',
         ),
         "eyebrow": L(
             it="Abbonamento · editing e firma PDF",
@@ -204,6 +249,8 @@ PRODUCTS = {
             fr="Abonnement · édition et signature PDF",
             de="Abonnement · PDF bearbeiten und signieren",
             es="Suscripción · edición y firma de PDF",
+            pt="Subscrição · edição e assinatura de PDF",
+            nl="Abonnement · PDF bewerken en ondertekenen",
         ),
         "desc": L(
             it="Licenza digitale originale di Adobe Acrobat Standard: modifica, organizza, converti e firma i tuoi PDF con lo strumento ufficiale Adobe. Codice e istruzioni via email dopo l'acquisto.",
@@ -211,6 +258,8 @@ PRODUCTS = {
             fr="Licence numérique originale d'Adobe Acrobat Standard : modifiez, organisez, convertissez et signez vos PDF avec l'outil officiel Adobe. Code et instructions par e-mail après l'achat.",
             de="Originale digitale Lizenz für Adobe Acrobat Standard: PDFs mit dem offiziellen Adobe-Tool bearbeiten, organisieren, konvertieren und signieren. Code und Anleitung per E-Mail nach dem Kauf.",
             es="Licencia digital original de Adobe Acrobat Standard: edita, organiza, convierte y firma tus PDF con la herramienta oficial de Adobe. Código e instrucciones por email tras la compra.",
+            pt="Licença digital original do Adobe Acrobat Standard: edita, organiza, converte e assina os teus PDF com a ferramenta oficial da Adobe. Código e instruções por email após a compra.",
+            nl="Originele digitale licentie van Adobe Acrobat Standard: bewerk, organiseer, converteer en onderteken uw PDF’s met de officiële Adobe-tool. Code en instructies per e-mail na aankoop.",
         ),
         "features_title": L(
             it="Le funzioni PDF essenziali, senza complicazioni",
@@ -218,6 +267,8 @@ PRODUCTS = {
             fr="Les fonctions PDF essentielles, sans complications",
             de="Die wichtigsten PDF-Funktionen, ganz unkompliziert",
             es="Las funciones esenciales de PDF, sin complicaciones",
+            pt="As funções essenciais de PDF, sem complicações",
+            nl="De essentiële PDF-functies, zonder extra’s",
         ),
         "keypoints": L(
             it=["Modifica testo e organizza le pagine", "Firma elettronica inclusa", "Converti PDF da e verso Office", "Licenza digitale originale Adobe"],
@@ -225,6 +276,8 @@ PRODUCTS = {
             fr=["Modifiez le texte et organisez les pages", "Signature électronique incluse", "Convertissez le PDF vers/depuis Office", "Licence numérique Adobe originale"],
             de=["Text bearbeiten und Seiten organisieren", "E-Signatur inklusive", "PDF zu/von Office konvertieren", "Originale digitale Adobe-Lizenz"],
             es=["Edita texto y organiza páginas", "Firma electrónica incluida", "Convierte PDF hacia y desde Office", "Licencia digital original de Adobe"],
+            pt=["Edita texto e organiza páginas", "Assinatura eletrónica incluída", "Converte PDF de e para Office", "Licença digital original Adobe"],
+            nl=["Tekst bewerken en pagina’s organiseren", "Elektronische ondertekening inbegrepen", "PDF van en naar Office converteren", "Originele digitale Adobe-licentie"],
         ),
         "features": {
             "it": [
@@ -267,6 +320,14 @@ PRODUCTS = {
                 ("c4", None, "Formularios", "Rellena y firma", "Rellena formularios PDF en pantalla y exporta los datos recogidos."),
                 ("c4", "dark", "Licencia", "Original, mediante cuenta Adobe", "Activación oficial en tu cuenta Adobe, con actualizaciones incluidas."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Edita e organiza PDF", "Corrige o texto, reordena, roda e elimina páginas diretamente no ficheiro PDF."),
+                ("c4", "teal", "Assinatura", "Assinatura eletrónica incluída", "Envia e assina documentos em poucos cliques, sem imprimir nem digitalizar."),
+                ("c4", "purple", "Conversão", "De e para o Office", "Transforma um PDF num Word ou Excel editável, e vice-versa, mantendo a paginação."),
+                ("c4", None, "Criação", "Cria PDF a partir de qualquer ficheiro", "Gera PDF a partir de documentos Office, imagens ou páginas web com um clique."),
+                ("c4", None, "Formulários", "Preenche e assina formulários", "Preenche formulários PDF no ecrã e exporta os dados recolhidos."),
+                ("c4", "dark", "Licença", "Original, via conta Adobe", "Ativação oficial na tua conta Adobe, com atualizações incluídas."),
+            ],
         },
         "steps": {
             "it": [
@@ -293,6 +354,11 @@ PRODUCTS = {
                 ("Pedido y pago", "Añade el producto al carrito y completa el pago con los métodos disponibles."),
                 ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en pocos minutos."),
                 ("Activación", "Canjea el código en tu cuenta Adobe e instala Acrobat desde adobe.com."),
+            ],
+            "pt": [
+                ("Encomenda e pagamento", "Adiciona o produto ao carrinho e conclui o pagamento com os métodos disponíveis."),
+                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em poucos minutos após o pagamento."),
+                ("Ativação", "Resgata o código na tua conta Adobe e instala o Acrobat a partir de adobe.com."),
             ],
         },
         "specs": {
@@ -325,6 +391,12 @@ PRODUCTS = {
                 ("Conexión", "Internet necesario para la activación y las funciones de nube/firma."),
                 ("Cuenta", "Una cuenta Adobe gratuita para canjear el código y sincronizar documentos."),
                 ("Compatibilidad", "Importación/exportación entre PDF y los formatos Word, Excel, PowerPoint e imagen más comunes."),
+            ],
+            "pt": [
+                ("Sistema operativo", "Windows 10/11 numa versão suportada pela Adobe."),
+                ("Ligação", "Internet necessária para a ativação e para as funções cloud/assinatura."),
+                ("Conta", "Uma conta Adobe (gratuita) para resgatar o código e sincronizar os documentos."),
+                ("Compatibilidade", "Importação/exportação entre PDF e os formatos Word, Excel, PowerPoint e imagem mais comuns."),
             ],
         },
         "faq": {
@@ -363,6 +435,13 @@ PRODUCTS = {
                 ("¿Cómo recibo y activo la licencia?", "Recibirás el código por email: lo canjeas en tu cuenta Adobe e instalas la app desde adobe.com."),
                 ("¿Puedo convertir un PDF a Word?", "Sí, la conversión a Word, Excel y PowerPoint (y viceversa) está incluida."),
             ],
+            "pt": [
+                ("Qual é a diferença em relação ao Acrobat Pro?", "O Standard cobre edição, organização, conversão e assinatura; o Pro adiciona ferramentas avançadas como redação e comparação de documentos."),
+                ("É uma subscrição?", "Sim, a duração da subscrição está indicada na ficha do produto."),
+                ("A assinatura eletrónica está incluída?", "Sim, podes enviar e assinar documentos diretamente pela app."),
+                ("Como recebo e ativo a licença?", "Vais receber o código por email: resgata-o na tua conta Adobe e instala a app a partir de adobe.com."),
+                ("Posso converter um PDF para Word?", "Sim, a conversão para Word, Excel e PowerPoint (e vice-versa) está incluída."),
+            ],
         },
     },
     "coreldraw-2024": {
@@ -372,6 +451,8 @@ PRODUCTS = {
             fr='CorelDRAW <span>Graphics Suite 2024</span>',
             de='CorelDRAW <span>Graphics Suite 2024</span>',
             es='CorelDRAW <span>Graphics Suite 2024</span>',
+            pt='CorelDRAW <span>Graphics Suite 2024</span>',
+            nl='CorelDRAW <span>Graphics Suite 2024</span>',
         ),
         "eyebrow": L(
             it="Licenza · illustrazione vettoriale e grafica",
@@ -379,6 +460,8 @@ PRODUCTS = {
             fr="Licence · illustration vectorielle et design graphique",
             de="Lizenz · Vektorillustration und Grafikdesign",
             es="Licencia · ilustración vectorial y diseño gráfico",
+            pt="Licença · ilustração vetorial e design gráfico",
+            nl="Licentie · vectorillustratie en grafisch ontwerp",
         ),
         "desc": L(
             it="Licenza digitale originale di CorelDRAW Graphics Suite 2024: illustrazione vettoriale, editing fotografico e impaginazione in un'unica suite per Windows e Mac. Codice e istruzioni via email dopo l'acquisto.",
@@ -386,6 +469,8 @@ PRODUCTS = {
             fr="Licence numérique originale de CorelDRAW Graphics Suite 2024 : illustration vectorielle, retouche photo et mise en page dans une seule suite pour Windows et Mac. Code et instructions par e-mail après l'achat.",
             de="Originale digitale Lizenz für CorelDRAW Graphics Suite 2024: Vektorillustration, Fotobearbeitung und Layout in einer Suite für Windows und Mac. Code und Anleitung per E-Mail nach dem Kauf.",
             es="Licencia digital original de CorelDRAW Graphics Suite 2024: ilustración vectorial, edición fotográfica y maquetación en una sola suite para Windows y Mac. Código e instrucciones por email tras la compra.",
+            pt="Licença digital original do CorelDRAW Graphics Suite 2024: ilustração vetorial, edição fotográfica e paginação numa única suite para Windows e Mac. Código e instruções por email após a compra.",
+            nl="Originele digitale licentie van CorelDRAW Graphics Suite 2024: vectorillustratie, fotobewerking en opmaak in één suite voor Windows en Mac. Code en instructies per e-mail na aankoop.",
         ),
         "features_title": L(
             it="Illustrazione, foto e impaginazione insieme",
@@ -393,6 +478,8 @@ PRODUCTS = {
             fr="Illustration, photo et mise en page réunies",
             de="Illustration, Foto und Layout in einem",
             es="Ilustración, foto y maquetación juntas",
+            pt="Ilustração, foto e paginação juntas",
+            nl="Illustratie, foto en opmaak samen",
         ),
         "keypoints": L(
             it=["Illustrazione vettoriale CorelDRAW", "Editing fotografico con Corel PHOTO-PAINT", "Compatibile Windows e Mac", "Import/export AI, PSD, PDF e altri formati"],
@@ -400,6 +487,8 @@ PRODUCTS = {
             fr=["Illustration vectorielle avec CorelDRAW", "Retouche photo avec Corel PHOTO-PAINT", "Compatible Windows et Mac", "Import/export AI, PSD, PDF et plus"],
             de=["Vektorillustration mit CorelDRAW", "Fotobearbeitung mit Corel PHOTO-PAINT", "Kompatibel mit Windows und Mac", "Import/Export AI, PSD, PDF und mehr"],
             es=["Ilustración vectorial con CorelDRAW", "Edición fotográfica con Corel PHOTO-PAINT", "Compatible con Windows y Mac", "Importa/exporta AI, PSD, PDF y más"],
+            pt=["Ilustração vetorial com CorelDRAW", "Edição fotográfica com Corel PHOTO-PAINT", "Compatível com Windows e Mac", "Importa/exporta AI, PSD, PDF e mais"],
+            nl=["Vectorillustratie met CorelDRAW", "Fotobewerking met Corel PHOTO-PAINT", "Compatibel met Windows en Mac", "Importeren/exporteren van AI, PSD, PDF en meer"],
         ),
         "features": {
             "it": [
@@ -442,6 +531,14 @@ PRODUCTS = {
                 ("c4", None, "Plataforma", "Windows y Mac", "La misma suite, con la misma interfaz, en ambos sistemas operativos."),
                 ("c4", "dark", "Tipografía", "Gestión de fuentes incluida", "Un gestor de fuentes para organizar, previsualizar y activar las tipografías del proyecto."),
             ],
+            "pt": [
+                ("c8", "blue", "Vetorial", "Ilustração profissional", "Logótipos, ícones e ilustrações com as ferramentas vetoriais do CorelDRAW."),
+                ("c4", "teal", "Foto", "Edição com PHOTO-PAINT", "Retoque e composição fotográfica incluídos na mesma suite, sem outros programas."),
+                ("c4", "purple", "Paginação", "Layout multipágina", "Brochuras, folhetos e documentos multipágina com controlo tipográfico avançado."),
+                ("c4", None, "Formatos", "Compatibilidade ampla", "Importa e exporta ficheiros AI, PSD, PDF e os formatos gráficos mais comuns."),
+                ("c4", None, "Plataforma", "Windows e Mac", "A mesma suite, com a mesma interface, em ambos os sistemas operativos."),
+                ("c4", "dark", "Fontes", "Gestão de fontes incluída", "Gestor de fontes para organizar, pré-visualizar e ativar os tipos de letra do projeto."),
+            ],
         },
         "steps": {
             "it": [
@@ -468,6 +565,11 @@ PRODUCTS = {
                 ("Pedido y pago", "Añade el producto al carrito y completa el pago con los métodos disponibles."),
                 ("Entrega digital", "Recibes el código de serie y las instrucciones por email, normalmente en pocos minutos."),
                 ("Activación", "Descarga el instalador desde tu cuenta Corel y activa la suite con el código recibido."),
+            ],
+            "pt": [
+                ("Encomenda e pagamento", "Adiciona o produto ao carrinho e conclui o pagamento com os métodos disponíveis."),
+                ("Entrega digital", "Recebes por email o código de série e as instruções, normalmente em poucos minutos após o pagamento."),
+                ("Ativação", "Descarrega o instalador na tua conta Corel e ativa a suite com o código recebido."),
             ],
         },
         "specs": {
@@ -500,6 +602,12 @@ PRODUCTS = {
                 ("Memoria (RAM)", "Al menos 4 GB, se recomiendan 8 GB o más para archivos complejos."),
                 ("Espacio en disco", "Unos 2-3 GB libres para la instalación, según los componentes elegidos."),
                 ("Conexión", "Internet necesario para la descarga, la activación y las actualizaciones."),
+            ],
+            "pt": [
+                ("Sistema operativo", "Windows 10/11 (64-bit) ou macOS em versão suportada pela Corel."),
+                ("Memória (RAM)", "No mínimo 4 GB, recomendados 8 GB ou mais para ficheiros complexos."),
+                ("Espaço em disco", "Cerca de 2-3 GB livres para a instalação, segundo os componentes escolhidos."),
+                ("Ligação", "Internet necessária para download, ativação e atualizações."),
             ],
         },
         "faq": {
@@ -538,6 +646,13 @@ PRODUCTS = {
                 ("¿Con qué formatos es compatible?", "Importa y exporta AI, PSD, PDF y los principales formatos gráficos profesionales."),
                 ("¿Cómo recibo y activo la licencia?", "Recibes el código de serie por email y lo usas para descargar y activar la suite desde tu cuenta Corel."),
             ],
+            "pt": [
+                ("É uma licença perpétua ou uma subscrição?", "A licença descrita nesta ficha é a indicada no título e no preço do produto."),
+                ("Funciona em Mac além de Windows?", "Sim, o CorelDRAW Graphics Suite 2024 está disponível para ambos os sistemas operativos."),
+                ("A edição de fotos está incluída?", "Sim, o Corel PHOTO-PAINT para retoque fotográfico faz parte da mesma suite."),
+                ("Com que formatos é compatível?", "Importa e exporta AI, PSD, PDF e os principais formatos gráficos usados profissionalmente."),
+                ("Como recebo e ativo a licença?", "Recebes o código de série por email e usa-lo para descarregar e ativar a suite a partir da tua conta Corel."),
+            ],
         },
     },
     "acronis-true-image-advanced": {
@@ -547,6 +662,8 @@ PRODUCTS = {
             fr='Acronis True Image <span>Advanced</span>',
             de='Acronis True Image <span>Advanced</span>',
             es='Acronis True Image <span>Advanced</span>',
+            pt='Acronis True Image <span>Advanced</span>',
+            nl='Acronis True Image <span>Advanced</span>',
         ),
         "eyebrow": L(
             it="Abbonamento · backup e protezione anti-ransomware",
@@ -554,6 +671,8 @@ PRODUCTS = {
             fr="Abonnement · sauvegarde et protection anti-rançongiciel",
             de="Abonnement · Backup und Ransomware-Schutz",
             es="Suscripción · copia de seguridad y protección antirransomware",
+            pt="Subscrição · cópia de segurança e proteção anti-ransomware",
+            nl="Abonnement · back-up en bescherming tegen ransomware",
         ),
         "desc": L(
             it="Licenza digitale originale di Acronis True Image Advanced: backup completo del PC con spazio cloud incluso e protezione attiva contro ransomware e malware. Codice e istruzioni via email dopo l'acquisto.",
@@ -561,6 +680,8 @@ PRODUCTS = {
             fr="Licence numérique originale d'Acronis True Image Advanced : sauvegarde complète du PC avec espace cloud inclus et protection active contre les rançongiciels et logiciels malveillants. Code et instructions par e-mail après l'achat.",
             de="Originale digitale Lizenz für Acronis True Image Advanced: vollständiges PC-Backup mit inkludiertem Cloud-Speicher und aktivem Schutz vor Ransomware und Malware. Code und Anleitung per E-Mail nach dem Kauf.",
             es="Licencia digital original de Acronis True Image Advanced: copia de seguridad completa del PC con almacenamiento en la nube incluido y protección activa contra ransomware y malware. Código e instrucciones por email tras la compra.",
+            pt="Licença digital original do Acronis True Image Advanced: cópia de segurança completa do PC com espaço na nuvem incluído e proteção ativa contra ransomware e malware. Código e instruções por email após a compra.",
+            nl="Originele digitale licentie van Acronis True Image Advanced: volledige pc-back-up met inbegrepen cloudopslag en actieve bescherming tegen ransomware en malware. Code en instructies per e-mail na aankoop.",
         ),
         "features_title": L(
             it="I tuoi dati, al sicuro ovunque",
@@ -568,6 +689,8 @@ PRODUCTS = {
             fr="Vos données, en sécurité partout",
             de="Ihre Daten, überall sicher",
             es="Tus datos, seguros en todas partes",
+            pt="Os teus dados, seguros em todo o lado",
+            nl="Uw gegevens, overal beveiligd",
         ),
         "keypoints": L(
             it=["Backup completo del disco (immagine)", "Spazio di archiviazione cloud incluso", "Protezione attiva anti-ransomware", "Ripristino rapido su nuovo hardware"],
@@ -575,6 +698,8 @@ PRODUCTS = {
             fr=["Sauvegarde complète du disque (image)", "Espace de stockage cloud inclus", "Protection active anti-rançongiciel", "Restauration rapide sur un nouveau matériel"],
             de=["Vollständiges Festplatten-Image-Backup", "Cloud-Speicherplatz inklusive", "Aktiver Ransomware-Schutz", "Schnelle Wiederherstellung auf neuer Hardware"],
             es=["Copia de seguridad completa del disco (imagen)", "Espacio de almacenamiento en la nube incluido", "Protección activa antirransomware", "Recuperación rápida en hardware nuevo"],
+            pt=["Cópia de segurança completa do disco (imagem)", "Espaço de armazenamento na cloud incluído", "Proteção ativa anti-ransomware", "Recuperação rápida em hardware novo"],
+            nl=["Volledige schijfback-up (image)", "Cloudopslag inbegrepen", "Actieve bescherming tegen ransomware", "Snelle herstel op nieuwe hardware"],
         ),
         "features": {
             "it": [
@@ -617,6 +742,14 @@ PRODUCTS = {
                 ("c4", None, "Recuperación", "Clona o restaura en pocos clics", "Recupera archivos individuales o todo el sistema, incluso en un PC nuevo."),
                 ("c4", "dark", "Dispositivos", "1 dispositivo, Windows o Mac", "Licencia para un dispositivo; elige cuál proteger durante la instalación."),
             ],
+            "pt": [
+                ("c8", "blue", "Backup", "Imagem completa do PC", "Copia o disco inteiro — sistema, programas e ficheiros — e restaura-o em caso de avaria ou roubo."),
+                ("c4", "teal", "Cloud", "Espaço de armazenamento incluído", "Backup também fora do local, seguro mesmo que o computador seja roubado ou danificado."),
+                ("c4", "purple", "Segurança", "Proteção ativa anti-ransomware", "Deteta e bloqueia em tempo real tentativas suspeitas de encriptação dos teus ficheiros."),
+                ("c4", None, "Agendamento", "Backups automáticos", "Configura backups recorrentes e esquece-te deles: continuam a correr em segundo plano."),
+                ("c4", None, "Recuperação", "Clona ou restaura em poucos cliques", "Recupera ficheiros individuais ou todo o sistema, mesmo num PC novo."),
+                ("c4", "dark", "Dispositivos", "1 dispositivo, Windows ou Mac", "Licença para um dispositivo; escolhe qual proteger durante a instalação."),
+            ],
         },
         "steps": {
             "it": [
@@ -643,6 +776,11 @@ PRODUCTS = {
                 ("Pedido y pago", "Añade el producto al carrito y completa el pago con los métodos disponibles."),
                 ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en pocos minutos."),
                 ("Activación", "Crea o accede a tu cuenta Acronis, instala el software y activa la licencia con el código recibido."),
+            ],
+            "pt": [
+                ("Encomenda e pagamento", "Adiciona o produto ao carrinho e conclui o pagamento com os métodos disponíveis."),
+                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em poucos minutos após o pagamento."),
+                ("Ativação", "Cria ou acede à tua conta Acronis, instala o software e ativa a licença com o código recebido."),
             ],
         },
         "specs": {
@@ -675,6 +813,12 @@ PRODUCTS = {
                 ("Conexión", "Internet necesario para la activación y la copia en la nube."),
                 ("Espacio en disco", "Espacio libre suficiente para la imagen de copia local, según los datos a guardar."),
                 ("Dispositivos cubiertos", "1 dispositivo por licencia; la duración de la suscripción se indica en la ficha del producto."),
+            ],
+            "pt": [
+                ("Sistema operativo", "Windows 10/11 ou macOS em versão suportada pela Acronis."),
+                ("Ligação", "Internet necessária para a ativação e para o backup na cloud."),
+                ("Espaço em disco", "Espaço livre suficiente para a imagem de backup local, segundo os dados a guardar."),
+                ("Dispositivos cobertos", "1 dispositivo por licença; a duração da subscrição está indicada na ficha do produto."),
             ],
         },
         "faq": {
@@ -713,9 +857,19 @@ PRODUCTS = {
                 ("¿Cómo recibo y activo la licencia?", "Recibes el código por email y lo usas para activar la suscripción en tu cuenta Acronis tras instalar el software."),
                 ("¿Funciona también en Mac?", "Sí, Acronis True Image está disponible tanto para Windows como para macOS."),
             ],
+            "pt": [
+                ("Quanto espaço na nuvem está incluído?", "O espaço incluído depende do plano indicado nesta ficha; podes verificá-lo nos detalhes da tua conta Acronis após a ativação."),
+                ("Protege mesmo contra ransomware?", "Sim, a proteção ativa monitoriza em tempo real tentativas suspeitas de encriptação e bloqueia-as."),
+                ("Em quantos dispositivos posso usá-lo?", "A licença cobre 1 dispositivo; escolhe qual proteger durante a instalação."),
+                ("Como recebo e ativo a licença?", "Recebes o código por email e usa-lo para ativar a subscrição na tua conta Acronis depois de instalar o software."),
+                ("Funciona também em Mac?", "Sim, o Acronis True Image está disponível tanto para Windows como para macOS."),
+            ],
         },
     },
 }
+
+backfill_lang(PRODUCTS)
+backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
 
 
 def get_tools_content(slug):

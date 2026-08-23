@@ -1,14 +1,23 @@
 #!/usr/bin/env python3
 """Rich content for Office standalone apps, Project and Visio 2024."""
 
-LANGS = ("it", "en", "fr", "de", "es")
+from lang_backfill import backfill_lang
+from nl_translations import nl_text
+
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 
 def L(**kwargs):
+    if "pt" not in kwargs:
+        kwargs["pt"] = kwargs.get("es") or kwargs.get("en")
+    if "nl" not in kwargs:
+        kwargs["nl"] = kwargs.get("en")
     return {k: kwargs[k] for k in LANGS}
 
 
-def _standalone(slug, app_key, app_name, title_span, focus_it, focus_en, focus_fr, focus_de, focus_es):
+def _standalone(slug, app_key, app_name, title_span, focus_it, focus_en, focus_fr, focus_de, focus_es, focus_pt=None, focus_nl=None):
+    focus_pt = focus_pt or focus_es
+    focus_nl = focus_nl or focus_en
     apps = [app_key]
     return {
         "apps": apps,
@@ -25,6 +34,8 @@ def _standalone(slug, app_key, app_name, title_span, focus_it, focus_en, focus_f
             fr="Licence perpétuelle · app autonome · ESD",
             de="Dauerlizenz · Einzel-App · ESD",
             es="Licencia perpetua · app independiente · ESD",
+            pt="Licença perpétua · app autónoma · ESD",
+            nl="Permanente licentie · losse app · ESD",
         ),
         "desc": L(
             it=f"{app_name} 2024 standalone: licenza digitale originale per usare solo {app_name}, senza abbonamento. Codice e istruzioni via email dopo l'acquisto.",
@@ -32,6 +43,8 @@ def _standalone(slug, app_key, app_name, title_span, focus_it, focus_en, focus_f
             fr=f"{app_name} 2024 autonome : licence numérique originale pour utiliser uniquement {app_name}, sans abonnement. Code par e-mail après l'achat.",
             de=f"{app_name} 2024 Standalone: originale digitale Lizenz nur für {app_name}, ohne Abo. Key und Anleitung per E-Mail nach dem Kauf.",
             es=f"{app_name} 2024 independiente: licencia digital original para usar solo {app_name}, sin suscripción. Clave e instrucciones por email.",
+            pt=f"{app_name} 2024 autónomo: licença digital original para usar apenas o {app_name}, sem subscrição. Código e instruções por email após a compra.",
+            nl=f"{app_name} 2024 standalone: originele digitale licentie om alleen {app_name} te gebruiken, zonder abonnement. Code en instructies per e-mail na aankoop.",
         ),
         "pills": {
             lg: [(app_key, app_name), (None, "2024"), (None, "ESD")]
@@ -43,6 +56,8 @@ def _standalone(slug, app_key, app_name, title_span, focus_it, focus_en, focus_f
             fr=f"Uniquement {app_name}, sans toute la suite",
             de=f"Nur {app_name} — ohne die volle Suite",
             es=f"Solo {app_name}, sin toda la suite",
+            pt=f"Só o {app_name}, sem a suite completa",
+            nl=f"Alleen {app_name}, zonder de volledige suite",
         ),
         "features": {
             "it": [
@@ -85,6 +100,22 @@ def _standalone(slug, app_key, app_name, title_span, focus_it, focus_en, focus_f
                 ("c4", None, "Activación", "setup.office.com", "Activa en el portal Microsoft e instala la app oficial."),
                 ("c4", "dark", "Alternativa", "Suite completa", "Si necesitas varias apps, valora Office 2024 Home o Home & Business."),
             ],
+            "pt": [
+                ("c8", "blue", "Autónomo", f"{app_name} 2024", f"Licença perpétua ESD dedicada ao {app_name}: ideal se não precisas da suite Office completa."),
+                ("c4", "teal", None, focus_pt, f"Pensada para quem trabalha sobretudo com o {app_name}."),
+                ("c4", "purple", "Modelo", "Sem subscrição", "Compra única da licença descrita, não Microsoft 365."),
+                ("c4", None, "Entrega", "Digital por email", "Product key e instruções após o pagamento."),
+                ("c4", None, "Ativação", "setup.office.com", "Ativas no portal Microsoft e instalas a app oficial."),
+                ("c4", "dark", "Alternativa", "Suite completa", "Se precisares de várias apps juntas, considera o Office 2024 Home ou Home & Business."),
+            ],
+            "nl": [
+                ("c8", "blue", "Standalone", f"{app_name} 2024", f"Permanente ESD-licentie alleen voor {app_name}: geschikt als u de volledige Office-suite niet nodig hebt."),
+                ("c4", "teal", None, focus_nl, f"Bedoeld voor wie vooral met {app_name} werkt."),
+                ("c4", "purple", "Model", "Geen abonnement", "Eenmalige aankoop van de beschreven licentie, geen Microsoft 365."),
+                ("c4", None, "Levering", "Digitaal per e-mail", "Productsleutel en instructies na betaling."),
+                ("c4", None, "Activering", "setup.office.com", "U activeert via het Microsoft-portaal en installeert de officiële app."),
+                ("c4", "dark", "Alternatief", "Volledige suite", "Als u meerdere apps samen nodig hebt, overweeg Office 2024 Home of Home & Business."),
+            ],
         },
         "apps_title": L(
             it=f"App inclusa: {app_name}",
@@ -92,6 +123,8 @@ def _standalone(slug, app_key, app_name, title_span, focus_it, focus_en, focus_f
             fr=f"App incluse : {app_name}",
             de=f"Enthaltene App: {app_name}",
             es=f"App incluida: {app_name}",
+            pt=f"App incluída: {app_name}",
+            nl=f"Inbegrepen app: {app_name}",
         ),
         "faq": {
             "it": [
@@ -129,6 +162,13 @@ def _standalone(slug, app_key, app_name, title_span, focus_it, focus_en, focus_f
                 ("¿Independiente o suite?", "Independiente si solo usas esta app; suite si necesitas Word, Excel y PowerPoint juntos."),
                 ("¿Funciona sin conexión?", "Sí con la app de escritorio, según las reglas Microsoft."),
             ],
+            "pt": [
+                (f"Inclui outras apps além de {app_name}?", f"Não: é uma licença autónoma para {app_name} 2024."),
+                ("É uma subscrição?", "Não: licença perpétua ESD de compra única."),
+                ("Como se ativa?", "Com o código por email em setup.office.com e instalação da app oficial."),
+                ("Melhor autónoma ou suite?", "Escolhe a autónoma se usas apenas esta app; a suite compensa se precisares de Word, Excel e PowerPoint juntos."),
+                ("Funciona offline?", "Sim, com a app de secretária instalada, dentro das regras Microsoft de verificação de licença."),
+            ],
         },
     }
 
@@ -149,6 +189,8 @@ def _project_or_visio(slug, name, edition_span, win_only, focus):
             fr="Licence perpétuelle · Windows · ESD" if win_only else "Licence perpétuelle · ESD",
             de="Dauerlizenz · Windows · ESD" if win_only else "Dauerlizenz · ESD",
             es="Licencia perpetua · Windows · ESD" if win_only else "Licencia perpetua · ESD",
+            pt="Licença perpétua · Windows · ESD" if win_only else "Licença perpétua · ESD",
+            nl="Permanente licentie · Windows · ESD" if win_only else "Permanente licentie · ESD",
         ),
         "desc": L(
             it=f"{name} {edition_span}: licenza digitale originale per pianificazione e diagrammi professionali (secondo Microsoft). Codice via email dopo l'acquisto.",
@@ -156,6 +198,8 @@ def _project_or_visio(slug, name, edition_span, win_only, focus):
             fr=f"{name} {edition_span} : licence numérique originale pour planification et diagrammes pro (selon Microsoft). Code par e-mail.",
             de=f"{name} {edition_span}: originale digitale Lizenz für professionelle Planung und Diagramme (laut Microsoft). Key per E-Mail.",
             es=f"{name} {edition_span}: licencia digital original para planificación y diagramas profesionales (según Microsoft). Clave por email.",
+            pt=f"{name} {edition_span}: licença digital original para planeamento e diagramas profissionais (segundo a Microsoft). Código por email após a compra.",
+            nl=f"{name} {edition_span}: originele digitale licentie voor professionele planning en diagrammen (volgens Microsoft). Code per e-mail na aankoop.",
         ),
         "pills": {
             lg: [(None, name), (None, edition_span), (None, "Windows" if win_only else "ESD")]
@@ -185,18 +229,26 @@ PRODUCTS = {
     "word-2024": _standalone(
         "word-2024", "word", "Word", "2024",
         "Documenti", "Documents", "Documents", "Dokumente", "Documentos",
+        focus_pt="Documentos",
+        focus_nl="Documenten",
     ),
     "excel-2024": _standalone(
         "excel-2024", "excel", "Excel", "2024",
         "Fogli di calcolo", "Spreadsheets", "Tableurs", "Tabellen", "Hojas de cálculo",
+        focus_pt="Folhas de cálculo",
+        focus_nl="Spreadsheets",
     ),
     "powerpoint-2024": _standalone(
         "powerpoint-2024", "powerpoint", "PowerPoint", "2024",
         "Presentazioni", "Presentations", "Présentations", "Präsentationen", "Presentaciones",
+        focus_pt="Apresentações",
+        focus_nl="Presentaties",
     ),
     "outlook-2024": _standalone(
         "outlook-2024", "outlook", "Outlook", "2024",
         "Posta e calendario", "Mail & calendar", "Messagerie", "E-Mail & Kalender", "Correo y calendario",
+        focus_pt="Correio e calendário",
+        focus_nl="E-mail en agenda",
     ),
 }
 
@@ -241,6 +293,14 @@ PRODUCTS["word-2024"]["overview"] = {
             "Esta edición se suministra como licencia perpetua independiente: compras Word 2024 sin suscripción y sin las demás aplicaciones de la suite Office. Después del pago recibirás por email la clave de producto y las instrucciones de activación mediante los canales oficiales de Microsoft.",
         ],
     },
+    "pt": {
+        "eyebrow": "Descrição",
+        "title": "Cria documentos claros e profissionais com o Word 2024",
+        "paragraphs": [
+            "O Microsoft Word 2024 é a aplicação de computador dedicada à criação, edição e formatação de documentos. Podes usá-lo para cartas, relatórios, currículos, materiais didáticos e documentos empresariais, organizando texto, imagens, tabelas e paginação num único ambiente de trabalho.",
+            "Esta edição é fornecida como licença perpétua standalone: adquires o Word 2024 sem subscrição e sem as outras aplicações da suite Office. Depois do pagamento recebes por email a product key e as instruções de ativação através dos canais oficiais Microsoft.",
+        ],
+    },
 }
 
 PRODUCTS["project-standard-2024"] = _project_or_visio(
@@ -255,6 +315,8 @@ PRODUCTS["project-standard-2024"] = _project_or_visio(
             fr="Project Standard 2024 pour Windows",
             de="Project Standard 2024 für Windows",
             es="Project Standard 2024 para Windows",
+            pt="Project Standard 2024 para Windows",
+            nl="Project Standard 2024 voor Windows",
         ),
         "features": {
             "it": [
@@ -297,6 +359,14 @@ PRODUCTS["project-standard-2024"] = _project_or_visio(
                 ("c4", None, "Activación", "Canales Microsoft", "Activa e instala con email y portales oficiales."),
                 ("c4", "dark", "Alternativa", "Professional", "Para funciones avanzadas, Project Professional 2024."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Standard", "Microsoft Project Standard 2024: planeamento de projetos em licença perpétua ESD para Windows."),
+                ("c4", "teal", None, "Gestão de projetos", "Planeia tarefas, recursos e prazos dentro das capacidades Standard do Project."),
+                ("c4", "purple", "Plataforma", "Windows", "Edição de computador para Windows, segundo a oferta Microsoft."),
+                ("c4", None, "Entrega", "Digital", "Product key por email após o pagamento."),
+                ("c4", None, "Ativação", "Canais Microsoft", "Ativa e instala seguindo as instruções por email e os portais oficiais."),
+                ("c4", "dark", "Alternativa", "Professional", "Para funções avançadas considera o Project Professional 2024."),
+            ],
         },
         "faq": {
             "it": [
@@ -334,6 +404,13 @@ PRODUCTS["project-standard-2024"] = _project_or_visio(
                 ("¿Cómo se activa?", "Con la clave del email en canales Microsoft."),
                 ("¿Incluye Visio u Office?", "No: es la licencia Project indicada, no la suite Office."),
             ],
+            "pt": [
+                ("Qual a diferença em relação ao Project Professional?", "O Professional inclui funções mais avançadas; o Standard cobre o planeamento típico. Compara as fichas Microsoft em caso de dúvida."),
+                ("É uma subscrição?", "Não: licença perpétua ESD."),
+                ("Apenas Windows?", "Sim, conforme indicado na ficha do produto."),
+                ("Como se ativa?", "Com o código recebido por email nos canais Microsoft."),
+                ("Inclui Visio ou Office?", "Não: é a licença Project indicada, não a suite Office completa."),
+            ],
         },
     },
 )
@@ -350,6 +427,8 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
             fr="Project Professional 2024",
             de="Project Professional 2024",
             es="Project Professional 2024",
+            pt="Project Professional 2024",
+            nl="Project Professional 2024",
         ),
         "seo_title": L(
             it="Project Professional 2024 — licenza perpetua ESD | Aml Store",
@@ -357,6 +436,8 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
             fr="Project Professional 2024 — licence ESD perpétuelle | Aml Store",
             de="Project Professional 2024 — ESD-Dauerlizenz | Aml Store",
             es="Project Professional 2024 — licencia ESD perpetua | Aml Store",
+            pt="Project Professional 2024 — licença perpétua ESD | Aml Store",
+            nl="Project Professional 2024 — permanente ESD-licentie | Aml Store",
         ),
         "desc": L(
             it="Project Professional 2024: software on-premise di project management (1 PC). Licenza perpetua ESD con pianificazione avanzata, sincronizzazione con Project Online/Server e supporto LTSC (secondo Microsoft). Codice via email dopo l'acquisto.",
@@ -364,6 +445,8 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
             fr="Project Professional 2024 : logiciel de gestion de projet local (1 PC). Licence ESD perpétuelle avec planification avancée, sync Project Online/Server et support LTSC (selon Microsoft). Code par e-mail.",
             de="Project Professional 2024: lokale Projektmanagement-Software (1 PC). ESD-Dauerlizenz mit erweiterter Planung, Sync mit Project Online/Server und LTSC-Support (laut Microsoft). Key per E-Mail.",
             es="Project Professional 2024: software local de gestión de proyectos (1 PC). Licencia ESD perpetua con planificación avanzada, sync con Project Online/Server y soporte LTSC (según Microsoft). Clave por email.",
+            pt="Project Professional 2024: software on-premises de gestão de projetos (1 PC). Licença perpétua ESD com planeamento avançado, sincronização com Project Online/Server e suporte LTSC (segundo a Microsoft). Código por email após a compra.",
+            nl="Project Professional 2024: on-premises projectbeheersoftware (1 pc). Permanente ESD-licentie met geavanceerde planning, synchronisatie met Project Online/Server en LTSC-ondersteuning (volgens Microsoft). Code per e-mail na aankoop.",
         ),
         "keypoints": {
             "it": [
@@ -396,6 +479,12 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
                 "Sync con Project Online / Server",
                 "Compatible LTSC y Office 2024",
             ],
+            "pt": [
+                "Licença para 1 PC (perpétua)",
+                "Planeamento e recursos avançados",
+                "Sincronização com Project Online / Server",
+                "Compatível com LTSC e Office 2024",
+            ],
         },
         "features_title": L(
             it="Cosa offre Project Professional 2024",
@@ -403,6 +492,8 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
             fr="Ce que propose Project Professional 2024",
             de="Was Project Professional 2024 bietet",
             es="Qué ofrece Project Professional 2024",
+            pt="O que oferece o Project Professional 2024",
+            nl="Wat Project Professional 2024 biedt",
         ),
         "features": {
             "it": [
@@ -445,6 +536,14 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
                 ("c4", None, "Entrega", "ESD por email", "Clave e instrucciones tras el pago; activación por canales Microsoft."),
                 ("c4", "dark", "Nota", "No es Project Plan 3", "Professional es perpetua tras la activación. Los planes en la nube (p. ej. Plan 3) son suscripciones siempre actualizadas."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Professional · 1 PC", "Licença perpétua on-premises para um PC Windows. Suporta LTSC e é compatível com Office LTSC e Office 2024 (segundo a Microsoft)."),
+                ("c4", "teal", None, "Programação automática", "Datas de início/fim a partir de dependências, cenários what-if e várias linhas do tempo para calendarizações complexas."),
+                ("c4", "purple", None, "Recursos e equipas", "Gere atribuições, folhas de horas e colaboração (ex. presença do Teams onde previsto pela Microsoft)."),
+                ("c4", None, None, "Relatórios e Gantt", "Relatórios predefinidos (ex. burn-down, recursos) e destaque do caminho crítico nos diagramas de Gantt."),
+                ("c4", None, "Entrega", "ESD por email", "Product key e instruções após o pagamento; ativação nos canais Microsoft."),
+                ("c4", "dark", "Nota", "Não é o Project Plano 3", "O Professional é perpétuo e não expira após a ativação. Os planos cloud (ex. Plano 3) são subscrições sempre atualizadas."),
+            ],
         },
         "specs": {
             "it": [
@@ -477,6 +576,12 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
                 ("Memoria", "4 GB de RAM (2 GB en 32 bits)"),
                 ("Espacio en disco", "4 GB disponibles"),
             ],
+            "pt": [
+                ("Processador", "1,6 GHz ou superior, dual core (segundo a Microsoft)"),
+                ("Sistema operativo", "Windows 11, Windows 10 ou Windows Server 2019"),
+                ("Memória", "4 GB de RAM (2 GB em sistemas de 32 bits)"),
+                ("Espaço em disco", "4 GB de espaço disponível"),
+            ],
         },
         "specs_note": L(
             it="Requisiti indicativi da documentazione Microsoft. Verifica sempre la compatibilità del dispositivo prima dell'acquisto.",
@@ -484,6 +589,8 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
             fr="Exigences indicatives selon Microsoft. Vérifiez toujours la compatibilité avant l'achat.",
             de="Richtwerte laut Microsoft-Dokumentation. Gerätekompatibilität vor dem Kauf prüfen.",
             es="Requisitos indicativos según Microsoft. Comprueba siempre la compatibilidad antes de comprar.",
+            pt="Requisitos indicativos da documentação Microsoft. Verifica sempre a compatibilidade do dispositivo antes da compra.",
+            nl="Richtwaarden uit de Microsoft-documentatie. Controleer altijd de compatibiliteit van het apparaat vóór aankoop.",
         ),
         "faq": {
             "it": [
@@ -521,6 +628,13 @@ PRODUCTS["project-professional-2024"] = _project_or_visio(
                 ("¿Qué versiones de Windows?", "Windows 11, Windows 10 o Windows Server 2019 según Microsoft."),
                 ("¿Cómo se activa?", "Clave por email y portales/instrucciones Microsoft (p. ej. setup.office.com)."),
             ],
+            "pt": [
+                ("Qual a diferença em relação ao Project Standard 2024?", "O Professional é a edição mais completa (recursos avançados, sincronização com Project Online/Server, cenários e relatórios mais ricos). Para planeamento típico considera o Standard."),
+                ("Qual a diferença em relação ao Project Plano 3 (subscrição)?", "As funções básicas são semelhantes na compra, mas o Plano 3 mantém-se sempre atualizado com subscrição. O Professional é uma licença perpétua e não expira após a ativação (segundo a Microsoft)."),
+                ("Em quantos PC posso instalar?", "Licenciado para 1 PC, conforme a ficha da Microsoft Store."),
+                ("É preciso Windows? Que versões?", "Sim: Windows 11, Windows 10 ou Windows Server 2019, segundo os requisitos Microsoft indicados na ficha."),
+                ("Como se ativa?", "Recebes o código por email e segues os portais/instruções Microsoft (ex. setup.office.com)."),
+            ],
         },
     },
 )
@@ -537,6 +651,8 @@ PRODUCTS["visio-standard-2024"] = _project_or_visio(
             fr="Visio Standard 2024",
             de="Visio Standard 2024",
             es="Visio Standard 2024",
+            pt="Visio Standard 2024",
+            nl="Visio Standard 2024",
         ),
         "features": {
             "it": [
@@ -579,6 +695,14 @@ PRODUCTS["visio-standard-2024"] = _project_or_visio(
                 ("c4", None, "Activación", "Microsoft", "Activa con la clave recibida."),
                 ("c4", "dark", "Alternativa", "Professional", "Para más funciones, Visio Professional 2024."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Standard", "Microsoft Visio Standard 2024: diagramas e fluxos em licença perpétua ESD para Windows."),
+                ("c4", "teal", None, "Diagramas", "Cria esquemas e fluxogramas dentro das capacidades Standard do Visio."),
+                ("c4", "purple", "Plataforma", "Windows", "Edição de computador Windows."),
+                ("c4", None, "Entrega", "Digital", "Product key por email."),
+                ("c4", None, "Ativação", "Microsoft", "Ativas com o código recebido."),
+                ("c4", "dark", "Alternativa", "Professional", "Para funções mais avançadas considera o Visio Professional 2024."),
+            ],
         },
         "faq": {
             "it": [
@@ -616,6 +740,13 @@ PRODUCTS["visio-standard-2024"] = _project_or_visio(
                 ("¿Cómo se activa?", "Clave del email vía Microsoft."),
                 ("¿Va con Office?", "Visio es un producto aparte, no incluido automáticamente en Home."),
             ],
+            "pt": [
+                ("Standard ou Professional?", "O Professional oferece funções mais avançadas; o Standard é adequado para diagramas típicos."),
+                ("É perpétua?", "Sim: licença ESD."),
+                ("Apenas Windows?", "Sim."),
+                ("Como se ativa?", "Código por email nos canais Microsoft."),
+                ("Faz parte do Office?", "É um produto Visio separado, não incluído automaticamente nas suites Home."),
+            ],
         },
     },
 )
@@ -632,6 +763,8 @@ PRODUCTS["visio-professional-2024"] = _project_or_visio(
             fr="Visio Professional 2024",
             de="Visio Professional 2024",
             es="Visio Professional 2024",
+            pt="Visio Professional 2024",
+            nl="Visio Professional 2024",
         ),
         "features": {
             "it": [
@@ -674,6 +807,14 @@ PRODUCTS["visio-professional-2024"] = _project_or_visio(
                 ("c4", None, "Activación", "Oficial", "Activa por canales Microsoft."),
                 ("c4", "dark", "Nota", "Licencia de escritorio", "No es un plan Visio de Microsoft 365."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Professional", "Microsoft Visio Professional 2024 em licença perpétua ESD para Windows, para diagramas avançados."),
+                ("c4", "teal", None, "Funções Pro", "Capacidades Professional em relação ao Standard, segundo a Microsoft."),
+                ("c4", "purple", "Plataforma", "Windows", "Edição de computador Windows."),
+                ("c4", None, "Entrega", "ESD email", "Código após o pagamento."),
+                ("c4", None, "Ativação", "Oficial", "Ativação nos canais Microsoft."),
+                ("c4", "dark", "Nota", "Licença de secretária", "Não é um plano Visio em subscrição do Microsoft 365."),
+            ],
         },
         "faq": {
             "it": [
@@ -711,6 +852,13 @@ PRODUCTS["visio-professional-2024"] = _project_or_visio(
                 ("¿Cómo se activa?", "Clave del email vía Microsoft."),
                 ("¿Es Visio de Microsoft 365?", "No: es la licencia de escritorio perpetua descrita."),
             ],
+            "pt": [
+                ("Qual a diferença em relação ao Visio Standard?", "O Professional oferece funções mais avançadas para diagramas e modelos."),
+                ("É perpétua?", "Sim: licença ESD."),
+                ("Apenas Windows?", "Sim."),
+                ("Como se ativa?", "Código por email nos canais Microsoft."),
+                ("É o Visio do Microsoft 365?", "Não: é a licença de secretária perpétua descrita na ficha."),
+            ],
         },
     },
 )
@@ -724,6 +872,8 @@ PRODUCTS["microsoft-365-business-standard"] = {
         fr='Microsoft 365 <span>Business Standard</span>',
         de='Microsoft 365 <span>Business Standard</span>',
         es='Microsoft 365 <span>Business Standard</span>',
+        pt='Microsoft 365 <span>Business Standard</span>',
+        nl='Microsoft 365 <span>Business Standard</span>',
     ),
     "eyebrow": L(
         it="Abbonamento Microsoft 365 · Business",
@@ -731,6 +881,8 @@ PRODUCTS["microsoft-365-business-standard"] = {
         fr="Abonnement Microsoft 365 · Business",
         de="Microsoft-365-Abonnement · Business",
         es="Suscripción Microsoft 365 · Business",
+        pt="Subscrição Microsoft 365 · Business",
+        nl="Microsoft 365-abonnement · Business",
     ),
     "desc": L(
         it="Microsoft 365 Business Standard: app Office premium per le aziende, con servizi cloud secondo l'offerta Microsoft del piano. Consegna del codice via email dopo l'acquisto.",
@@ -738,6 +890,8 @@ PRODUCTS["microsoft-365-business-standard"] = {
         fr="Microsoft 365 Business Standard : apps Office premium pour les entreprises, services cloud selon l'offre Microsoft. Code par e-mail après l'achat.",
         de="Microsoft 365 Business Standard: Premium-Office-Apps für Unternehmen mit Cloud-Diensten laut Microsoft-Plan. Key per E-Mail nach dem Kauf.",
         es="Microsoft 365 Business Standard: apps Office premium para empresas, con servicios cloud según el plan Microsoft. Clave por email tras la compra.",
+        pt="Microsoft 365 Business Standard: apps Office premium para empresas, com serviços cloud segundo a oferta Microsoft do plano. Entrega do código por email após a compra.",
+        nl="Microsoft 365 Business Standard: premium Office-apps voor bedrijven, met clouddiensten volgens het Microsoft-aanbod van het plan. Levering van de code per e-mail na aankoop.",
     ),
     "pills": {
         lg: [("outlook", "Business"), ("word", "Apps desktop"), (None, "Cloud")]
@@ -749,6 +903,8 @@ PRODUCTS["microsoft-365-business-standard"] = {
         fr="Business Standard pour équipes et TPE/PME",
         de="Business Standard für Teams und KMU",
         es="Business Standard para equipos y pymes",
+        pt="Business Standard para equipas e PME",
+        nl="Business Standard voor teams en kmo’s",
     ),
     "features": {
         "it": [
@@ -791,6 +947,14 @@ PRODUCTS["microsoft-365-business-standard"] = {
             ("c4", None, "Activación", "Cuenta Microsoft", "Activa en el portal oficial."),
             ("c4", "dark", "Nota", "No es perpetua", "A diferencia de Office 2024/2021, es una suscripción."),
         ],
+        "pt": [
+            ("c8", "blue", "Plano", "Business Standard", "Subscrição Microsoft 365 pensada para uso empresarial, com apps de computador e serviços cloud segundo as condições Microsoft do plano."),
+            ("c4", "teal", None, "Apps Office", "Word, Excel, PowerPoint, Outlook e outras apps incluídas no plano, quando previstas pela Microsoft."),
+            ("c4", "purple", "Cloud", "Serviços online", "Funções cloud e colaboração típicas do Microsoft 365 Business, segundo a oferta oficial."),
+            ("c4", None, "Entrega", "Digital", "Código e instruções por email após o pagamento."),
+            ("c4", None, "Ativação", "Conta Microsoft", "Ativas no portal oficial e associas a subscrição à conta empresarial."),
+            ("c4", "dark", "Nota", "Não é perpétua", "Ao contrário do Office 2024/2021, é uma subscrição: duração e renovação seguem as condições da encomenda e da Microsoft."),
+        ],
     },
     "apps_title": L(
         it="App tipiche del piano",
@@ -798,6 +962,8 @@ PRODUCTS["microsoft-365-business-standard"] = {
         fr="Apps typiques du plan",
         de="Typische Apps im Plan",
         es="Apps típicas del plan",
+        pt="Apps típicas do plano",
+        nl="Typische apps van het plan",
     ),
     "faq": {
         "it": [
@@ -835,8 +1001,18 @@ PRODUCTS["microsoft-365-business-standard"] = {
             ("¿Cómo se activa?", "Con la clave e instrucciones del email en el portal Microsoft."),
             ("¿Incluye Teams?", "Depende de la oferta Microsoft del plan en el momento de la compra."),
         ],
+        "pt": [
+            ("É uma subscrição ou uma licença perpétua?", "É uma subscrição Microsoft 365 Business Standard, não uma licença Office perpétua."),
+            ("Qual a diferença em relação ao Microsoft 365 Personal?", "O Business Standard é pensado para uso empresarial; o Personal é para uso individual. Compara as fichas e as condições Microsoft."),
+            ("Quantos utilizadores/dispositivos?", "Segue as condições Microsoft do plano Business Standard indicadas na ficha (ex. referências a utilizador/dispositivos)."),
+            ("Como se ativa?", "Com o código e as instruções por email no portal oficial Microsoft."),
+            ("Inclui o Teams?", "As apps e os serviços incluídos dependem da oferta Microsoft do plano no momento da compra; verifica o email e a documentação oficial."),
+        ],
     },
 }
+
+backfill_lang(PRODUCTS)
+backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
 
 
 def get_office_apps_content(slug):

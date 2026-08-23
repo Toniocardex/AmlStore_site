@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Rich product-page content for Office 2024 and Office 2019 (perpetual ESD)."""
 
+from lang_backfill import backfill_lang
+from nl_translations import nl_text
+
 # Icon filenames under /asset/icon/
 ICON = {
     "word": "img-aml-store_Word-Icon-FY26.svg",
@@ -190,6 +193,72 @@ UI = {
         "spec_disk": "Espacio en disco",
         "spec_disk_body": "Normalmente al menos 4 GB libres para la instalación; consulta la ficha oficial de Microsoft.",
     },
+    "pt": {
+        "breadcrumb_nav": "Navegação estrutural",
+        "hero_aria": "Produto e compra",
+        "prices_aria": "Preços",
+        "payments_aria": "Métodos de pagamento aceites",
+        "save_prefix": "Poupas",
+        "save_vs": "em relação ao preço de tabela",
+        "features_eyebrow": "Porque escolher",
+        "apps_eyebrow": "Apps incluídas",
+        "how_eyebrow": "Como funciona",
+        "how_title": "Três passos para começar",
+        "specs_eyebrow": "Requisitos do sistema",
+        "specs_title": "Especificações indicativas",
+        "specs_note": "Valores indicativos da documentação Microsoft; verifica sempre os requisitos atualizados antes de instalar.",
+        "faq_eyebrow": "Perguntas frequentes",
+        "faq_title": "Perguntas frequentes",
+        "cart_added": "Produto adicionado ao carrinho.",
+        "sticky_add": "Adicionar",
+        "step1_title": "Pedido e pagamento",
+        "step1_body": "Adiciona o produto ao carrinho e completa o pagamento seguro com os métodos disponíveis. Recebes a confirmação do pedido de acordo com as condições apresentadas no checkout.",
+        "step2_title": "Entrega digital",
+        "step2_body": "Enviamos-te a <strong>chave de produto</strong> e as instruções por email, normalmente em poucos minutos após a aprovação do pagamento.",
+        "step3_title": "Ativação",
+        "step3_body": 'Resgata o código em <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a>, associa a licença à tua conta Microsoft e instala as apps a partir de <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.',
+        "spec_cpu": "Processador",
+        "spec_cpu_body": "Windows: pelo menos 1,6 GHz dual-core. Mac: Intel ou Apple Silicon compatível com um macOS suportado (onde a ficha indica PC/Mac).",
+        "spec_os": "Sistema operativo",
+        "spec_os_body": "Windows 10/11; versões de macOS suportadas pela Microsoft para a suite indicada.",
+        "spec_ram": "Memória (RAM)",
+        "spec_ram_body": "Pelo menos 4 GB recomendados para apps de secretária; mais para ficheiros grandes ou funções avançadas.",
+        "spec_disk": "Espaço em disco",
+        "spec_disk_body": "Normalmente pelo menos 4 GB livres para a instalação; consulta a ficha oficial da Microsoft.",
+    },
+    "nl": {
+        "breadcrumb_nav": "Kruimelpad",
+        "hero_aria": "Product en aankoop",
+        "prices_aria": "Prijzen",
+        "payments_aria": "Geaccepteerde betaalmethoden",
+        "save_prefix": "U bespaart",
+        "save_vs": "ten opzichte van de catalogusprijs",
+        "features_eyebrow": "Waarom dit product",
+        "apps_eyebrow": "Inbegrepen apps",
+        "how_eyebrow": "Hoe het werkt",
+        "how_title": "Drie stappen om te beginnen",
+        "specs_eyebrow": "Systeemvereisten",
+        "specs_title": "Indicatieve specificaties",
+        "specs_note": "Richtwaarden uit de Microsoft-documentatie; controleer altijd de actuele vereisten vóór de installatie.",
+        "faq_eyebrow": "Veelgestelde vragen",
+        "faq_title": "Veelgestelde vragen",
+        "cart_added": "Product toegevoegd aan de winkelwagen.",
+        "sticky_add": "Toevoegen",
+        "step1_title": "Bestelling en betaling",
+        "step1_body": "Voeg het product toe aan uw winkelwagen en rond de veilige betaling af met de beschikbare methoden. U ontvangt een orderbevestiging volgens de voorwaarden in de checkout.",
+        "step2_title": "Digitale levering",
+        "step2_body": "Wij sturen u de <strong>productsleutel</strong> en de instructies per e-mail, meestal binnen enkele minuten na goedkeuring van de betaling.",
+        "step3_title": "Activering",
+        "step3_body": 'Wissel de code in op <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a>, koppel de licentie aan uw Microsoft-account en installeer de apps via <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.',
+        "spec_cpu": "Processor",
+        "spec_cpu_body": "Windows: minstens 1,6 GHz dual-core. Mac: Intel of Apple Silicon compatibel met een ondersteunde macOS (waar de fiche PC/Mac vermeldt).",
+        "spec_os": "Besturingssysteem",
+        "spec_os_body": "Windows 10/11; macOS-versies die Microsoft ondersteunt voor de genoemde suite.",
+        "spec_ram": "Geheugen (RAM)",
+        "spec_ram_body": "Minstens 4 GB aanbevolen voor desktop-apps; meer voor grote bestanden of geavanceerde functies.",
+        "spec_disk": "Schijfruimte",
+        "spec_disk_body": "Doorgaans minstens 4 GB vrij voor de desktopinstallatie; raadpleeg de officiële Microsoft-fiche.",
+    },
 }
 
 # Per-product rich copy. Keys: slug → fields with lang maps or shared lists.
@@ -202,6 +271,8 @@ PRODUCTS = {
             "fr": 'Office 2024 <span>Home</span>',
             "de": 'Office 2024 <span>Home</span>',
             "es": 'Office 2024 <span>Home</span>',
+            "pt": 'Office 2024 <span>Home</span>',
+            "nl": 'Office 2024 <span>Home</span>',
         },
         "eyebrow": {
             "it": "Licenza perpetua · PC o Mac",
@@ -209,6 +280,8 @@ PRODUCTS = {
             "fr": "Licence perpétuelle · PC ou Mac",
             "de": "Dauerlizenz · PC oder Mac",
             "es": "Licencia perpetua · PC o Mac",
+            "pt": "Licença perpétua · PC ou Mac",
+            "nl": "Permanente licentie · pc of Mac",
         },
         "desc": {
             "it": "Suite Office 2024 per uso domestico: Word, Excel e PowerPoint su PC o Mac, licenza digitale originale e consegna del codice via email in pochi minuti.",
@@ -216,6 +289,8 @@ PRODUCTS = {
             "fr": "Suite Office 2024 pour un usage domestique : Word, Excel et PowerPoint sur PC ou Mac, licence numérique originale et livraison du code par e-mail en quelques minutes.",
             "de": "Office-2024-Suite für den Heimgebrauch: Word, Excel und PowerPoint auf PC oder Mac, originale digitale Lizenz und Key-Zustellung per E-Mail in wenigen Minuten.",
             "es": "Suite Office 2024 para uso doméstico: Word, Excel y PowerPoint en PC o Mac, licencia digital original y entrega de la clave por email en minutos.",
+            "pt": "Suite Office 2024 para uso doméstico: Word, Excel e PowerPoint em PC ou Mac, licença digital original e entrega do código por email em poucos minutos.",
+            "nl": "Office 2024-suite voor thuisgebruik: Word, Excel en PowerPoint op pc of Mac, originele digitale licentie en levering van de code per e-mail binnen enkele minuten.",
         },
         "pills": {
             "it": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
@@ -223,6 +298,7 @@ PRODUCTS = {
             "fr": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
             "de": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
             "es": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
+            "pt": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
         },
         "features_title": {
             "it": "Produttività essenziale, senza abbonamento",
@@ -230,6 +306,8 @@ PRODUCTS = {
             "fr": "Productivité essentielle, sans abonnement",
             "de": "Wesentliche Produktivität ohne Abo",
             "es": "Productividad esencial, sin suscripción",
+            "pt": "Produtividade essencial, sem subscrição",
+            "nl": "Essentiële productiviteit, zonder abonnement",
         },
         "features": {
             "it": [
@@ -272,6 +350,22 @@ PRODUCTS = {
                 ("c4", None, "Activación", "setup.office.com", "Activas en el portal oficial Microsoft e instalas desde el sitio de Office."),
                 ("c4", "dark", "Ideal para", "Hogar y estudio", "Uso personal; para Outlook y negocio valora Home & Business."),
             ],
+            "pt": [
+                ("c8", "blue", "Licença", "Compra única", "Licença perpétua ESD: pagas uma vez e usas as apps de secretária segundo as condições Microsoft da edição Home 2024."),
+                ("c4", "teal", None, "3 apps de secretária", "Word, Excel e PowerPoint para documentos, folhas de cálculo e apresentações no teu PC ou Mac."),
+                ("c4", "purple", "Plataforma", "PC ou Mac", "Edição pensada para Windows e macOS, dentro dos limites e requisitos atualizados da Microsoft."),
+                ("c4", None, "Entrega", "Digital por email", "Recebes o código e as instruções após o pagamento, sem envio físico."),
+                ("c4", None, "Ativação", "setup.office.com", "Ativas no portal oficial Microsoft e instalas as apps a partir do site Office."),
+                ("c4", "dark", "Ideal para", "Casa e estudo", "Indicada para uso pessoal e doméstico; para Outlook e cenários empresariais considera o Home & Business."),
+            ],
+            "nl": [
+                ("c8", "blue", "Licentie", "Eenmalige aankoop", "Permanente ESD-licentie: u betaalt eenmaal en gebruikt de desktop-apps volgens de voorwaarden van Microsoft Home 2024."),
+                ("c4", "teal", None, "3 desktop-apps", "Word, Excel en PowerPoint voor documenten, rekenbladen en presentaties op uw pc of Mac."),
+                ("c4", "purple", "Platform", "pc of Mac", "Editie bedoeld voor Windows en macOS, binnen de actuele limieten en eisen van Microsoft."),
+                ("c4", None, "Levering", "Digitaal per e-mail", "U ontvangt sleutel en instructies na betaling — geen fysieke verzending."),
+                ("c4", None, "Activering", "setup.office.com", "Activeer via het officiële Microsoft-portaal en installeer de apps via de Office-site."),
+                ("c4", "dark", "Ideaal voor", "Thuis en studie", "Geschikt voor persoonlijk en huishoudelijk gebruik; voor Outlook en zakelijke scenario’s overweeg Home & Business."),
+            ],
         },
         "apps_title": {
             "it": "App nella edizione Home",
@@ -279,6 +373,8 @@ PRODUCTS = {
             "fr": "Apps de l'édition Home",
             "de": "Apps in der Home-Edition",
             "es": "Apps de la edición Home",
+            "pt": "Apps na edição Home",
+            "nl": "Apps in de Home-editie",
         },
         "faq": {
             "it": [
@@ -316,6 +412,20 @@ PRODUCTS = {
                 ("¿Cómo se activa tras la compra?", "Ve a setup.office.com, inicia sesión, introduce la clave del email e instala desde office.com."),
                 ("¿Para quién es Office 2024 Home?", "Uso doméstico y personal. Si necesitas Outlook o un uso más profesional, valora Home & Business."),
             ],
+            "pt": [
+                ("É uma subscrição ou uma licença perpétua?", "É uma licença perpétua (compra única) para a edição Office 2024 Home, não uma subscrição Microsoft 365. Continuam válidas as condições Microsoft sobre ativação, dispositivos e atualizações."),
+                ("Que apps estão incluídas?", "Word, Excel e PowerPoint para PC ou Mac, segundo a oferta Microsoft para Home 2024. Outlook e outras apps de negócio não fazem parte desta edição."),
+                ("Posso usá-lo offline?", "Sim, com as apps de secretária instaladas podes trabalhar offline; podem ser necessárias ligação e verificações periódicas da licença segundo as regras Microsoft."),
+                ("Como se ativa após a compra?", "Abre setup.office.com, inicia sessão com a conta Microsoft, introduz o código recebido por email e segue o processo. Depois instala as apps a partir de office.com."),
+                ("Para quem é pensado o Office 2024 Home?", "Para uso doméstico e pessoal. Se precisas do Outlook ou de um uso mais profissional, considera o Office 2024 Home & Business."),
+            ],
+            "nl": [
+                ("Is dit een abonnement of een permanente licentie?", "Het is een permanente (eenmalige) licentie voor Office 2024 Home, geen Microsoft 365-abonnement. De voorwaarden van Microsoft over activering, apparaten en updates blijven van toepassing."),
+                ("Welke apps zijn inbegrepen?", "Word, Excel en PowerPoint voor pc of Mac, volgens het Home 2024-aanbod van Microsoft. Outlook en andere zakelijke apps horen niet bij deze editie."),
+                ("Kan ik het offline gebruiken?", "Ja: met geïnstalleerde desktop-apps kunt u offline werken; periodieke verbinding en licentiecontroles kunnen nog gelden volgens de regels van Microsoft."),
+                ("Hoe activeer ik na aankoop?", "Ga naar setup.office.com, meld u aan met uw Microsoft-account, voer de per e-mail ontvangen code in en volg de wizard. Installeer daarna de apps via office.com."),
+                ("Voor wie is Office 2024 Home?", "Voor thuis- en persoonlijk gebruik. Als u Outlook of een professionelere inzet nodig hebt, overweeg Office 2024 Home & Business."),
+            ],
         },
     },
     "office-2024-home-business": {
@@ -326,6 +436,7 @@ PRODUCTS = {
             "fr": "Office 2024 Home & Business",
             "de": "Office 2024 Home & Business",
             "es": "Office 2024 Home & Business",
+            "pt": "Office 2024 Home & Business",
         },
         "title_html": {
             "it": 'Office Home &amp;<br><span>Business 2024</span>',
@@ -333,6 +444,8 @@ PRODUCTS = {
             "fr": 'Office Home &amp;<br><span>Business 2024</span>',
             "de": 'Office Home &amp;<br><span>Business 2024</span>',
             "es": 'Office Home &amp;<br><span>Business 2024</span>',
+            "pt": 'Office Home &amp;<br><span>Business 2024</span>',
+            "nl": 'Office Home &amp;<br><span>Business 2024</span>',
         },
         "eyebrow": {
             "it": "Acquisto unico · 1 PC o Mac · nessun abbonamento",
@@ -340,6 +453,8 @@ PRODUCTS = {
             "fr": "Achat unique · 1 PC ou Mac · sans abonnement",
             "de": "Einmalkauf · 1 PC oder Mac · kein Abo",
             "es": "Compra única · 1 PC o Mac · sin suscripción",
+            "pt": "Compra única · 1 PC ou Mac · sem subscrição",
+            "nl": "Eenmalige aankoop · 1 pc of Mac · geen abonnement",
         },
         "desc": {
             "it": "Le app Office classiche per casa e lavoro: Word, Excel, PowerPoint, Outlook e OneNote su 1 PC o Mac. Licenza digitale ESD perpetua, codice via email.",
@@ -347,6 +462,8 @@ PRODUCTS = {
             "fr": "Apps Office classiques maison/travail : Word, Excel, PowerPoint, Outlook et OneNote sur 1 PC ou Mac. Licence ESD perpétuelle, code par e-mail.",
             "de": "Klassische Office-Apps für Zuhause und Arbeit: Word, Excel, PowerPoint, Outlook und OneNote auf 1 PC oder Mac. ESD-Dauerlizenz, Key per E-Mail.",
             "es": "Apps Office clásicas para hogar y trabajo: Word, Excel, PowerPoint, Outlook y OneNote en 1 PC o Mac. Licencia ESD perpetua, clave por email.",
+            "pt": "As apps Office clássicas para casa e trabalho: Word, Excel, PowerPoint, Outlook e OneNote em 1 PC ou Mac. Licença digital ESD perpétua, código por email.",
+            "nl": "De klassieke Office-apps voor thuis en werk: Word, Excel, PowerPoint, Outlook en OneNote op 1 pc of Mac. Permanente digitale ESD-licentie, code per e-mail.",
         },
         "pills": {
             "it": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook"), ("onenote", "OneNote")],
@@ -354,6 +471,7 @@ PRODUCTS = {
             "fr": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook"), ("onenote", "OneNote")],
             "de": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook"), ("onenote", "OneNote")],
             "es": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook"), ("onenote", "OneNote")],
+            "pt": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook"), ("onenote", "OneNote")],
         },
         "features_title": {
             "it": "Perché scegliere Home & Business",
@@ -361,6 +479,8 @@ PRODUCTS = {
             "fr": "Pourquoi choisir Home & Business",
             "de": "Warum Home & Business",
             "es": "Por qué elegir Home & Business",
+            "pt": "Porque escolher Home & Business",
+            "nl": "Waarom Home & Business kiezen",
         },
         "features": {
             "it": [
@@ -403,6 +523,22 @@ PRODUCTS = {
                 ("c4", None, "Activación", "setup.office.com", "Canjea la clave, cuenta Microsoft e instalación desde office.com."),
                 ("c4", "dark", "Ideal para", "Autónomos y pymes", "Apps de escritorio más Outlook sin suscripción a Microsoft 365."),
             ],
+            "pt": [
+                ("c8", "blue", "Licença", "Pagas uma vez · perpétua", "Licença ESD permanente para 1 PC ou Mac segundo as condições Microsoft Home & Business 2024: sem renovação anual obrigatória."),
+                ("c4", "teal", None, "5 apps incluídas", "Word, Excel, PowerPoint, Outlook e OneNote — as versões clássicas 2024 para casa e trabalho."),
+                ("c4", "purple", "Plataforma", "Windows ou Mac", "Compatível com Windows 10/11 e macOS suportados (incluindo Apple Silicon quando previsto pela Microsoft)."),
+                ("c4", None, "Entrega", "Email em minutos", "Chave original e instruções digitais após o pagamento aprovado."),
+                ("c4", None, "Ativação", "setup.office.com", "Resgata o código, associa a conta Microsoft e instala a partir de office.com."),
+                ("c4", "dark", "Ideal para", "Profissionais e PME", "Quando precisas das apps de secretária mais o Outlook, sem passar para a subscrição Microsoft 365."),
+            ],
+            "nl": [
+                ("c8", "blue", "Licentie", "Eenmalig betalen · permanent", "Permanente ESD-licentie voor 1 pc of Mac volgens de voorwaarden van Microsoft Home & Business 2024 — geen verplichte jaarlijkse verlenging."),
+                ("c4", "teal", None, "5 apps inbegrepen", "Word, Excel, PowerPoint, Outlook en OneNote — de klassieke 2024-apps voor thuis en werk."),
+                ("c4", "purple", "Platform", "Windows of Mac", "Voor Windows 10/11 en ondersteunde macOS (inclusief Apple Silicon waar Microsoft dat voorziet)."),
+                ("c4", None, "Levering", "E-mail binnen minuten", "Originele sleutel en digitale instructies na goedgekeurde betaling."),
+                ("c4", None, "Activering", "setup.office.com", "Wissel de sleutel in, koppel uw Microsoft-account en installeer via office.com."),
+                ("c4", "dark", "Ideaal voor", "Professionals en mkb", "Desktop-apps plus Outlook zonder over te stappen op een Microsoft 365-abonnement."),
+            ],
         },
         "apps_title": {
             "it": "App incluse nel pacchetto",
@@ -410,6 +546,8 @@ PRODUCTS = {
             "fr": "Apps incluses dans le pack",
             "de": "Apps im Paket",
             "es": "Apps incluidas en el pack",
+            "pt": "Apps incluídas no pacote",
+            "nl": "Apps in dit pakket",
         },
         # Full-bleed lifestyle band (after bento, before apps). Reuses Win11 gallery CWV pattern.
         "lifestyle": {
@@ -423,6 +561,7 @@ PRODUCTS = {
                 "fr": "Bureau à domicile avec ordinateur portable pour le travail et Office au quotidien.",
                 "de": "Home-Office-Schreibtisch mit Laptop für Arbeit und Office im Alltag.",
                 "es": "Escritorio de casa con portátil para trabajo y uso diario de Office.",
+                "pt": "Secretária de casa com portátil para trabalho e uso diário do Office.",
             },
             "kicker": {
                 "it": "Casa e lavoro",
@@ -430,6 +569,7 @@ PRODUCTS = {
                 "fr": "Maison et travail",
                 "de": "Zuhause und Arbeit",
                 "es": "Hogar y trabajo",
+                "pt": "Casa e trabalho",
             },
             "title": {
                 "it": "Outlook incluso, senza abbonamento",
@@ -437,6 +577,7 @@ PRODUCTS = {
                 "fr": "Outlook inclus, sans abonnement",
                 "de": "Outlook inklusive — ohne Abo",
                 "es": "Outlook incluido, sin suscripción",
+                "pt": "Outlook incluído, sem subscrição",
             },
             "body": {
                 "it": "Word, Excel, PowerPoint, Outlook e OneNote su 1 PC o Mac: produttività quotidiana con licenza perpetua ESD.",
@@ -444,6 +585,7 @@ PRODUCTS = {
                 "fr": "Word, Excel, PowerPoint, Outlook et OneNote sur 1 PC ou Mac : productivité quotidienne en licence ESD perpétuelle.",
                 "de": "Word, Excel, PowerPoint, Outlook und OneNote auf 1 PC oder Mac — Alltag produktiv mit ESD-Dauerlizenz.",
                 "es": "Word, Excel, PowerPoint, Outlook y OneNote en 1 PC o Mac: productividad diaria con licencia ESD perpetua.",
+                "pt": "Word, Excel, PowerPoint, Outlook e OneNote em 1 PC ou Mac: produtividade diária com licença perpétua ESD.",
             },
         },
         "faq": {
@@ -482,6 +624,20 @@ PRODUCTS = {
                 ("¿Diferencia con Office 2024 Home?", "Home & Business añade Outlook (y OneNote) para uso profesional ligero."),
                 ("¿Cómo se activa?", "setup.office.com con la clave del email, cuenta Microsoft e instalación desde office.com."),
             ],
+            "pt": [
+                ("Qual a diferença entre o Office 2024 e o Microsoft 365?", "O Office 2024 Home & Business é uma compra única com licença permanente para 1 PC ou Mac, sem renovações. Não inclui OneDrive 1 TB, Copilot AI ou Defender típicos do Microsoft 365, que é uma subscrição com apps atualizadas, cloud e IA."),
+                ("A licença do Office 2024 expira?", "Não. É uma licença perpétua ESD: pagas uma vez e as apps permanecem no dispositivo onde as instalaste, segundo as condições Microsoft."),
+                ("Posso instalar em vários dispositivos?", "Não: em geral é válida para apenas 1 PC ou Mac. Para mais dispositivos considera o Microsoft 365 Personal ou Family."),
+                ("Qual a diferença em relação ao Office 2024 Home?", "O Home & Business adiciona o Outlook (e o OneNote) às apps de produtividade e é pensado também para uso profissional ligeiro, sempre como licença perpétua."),
+                ("Como se ativa?", "Usa setup.office.com com o código recebido por email, associa a conta Microsoft e instala a partir de office.com."),
+            ],
+            "nl": [
+                ("Wat is het verschil tussen Office 2024 en Microsoft 365?", "Office 2024 Home & Business is een eenmalige permanente licentie voor 1 pc of Mac. Typische Microsoft 365-extra’s (1 TB OneDrive, Copilot, Defender) zitten er niet bij. Microsoft 365 is een abonnement met doorlopende updates, cloud en AI."),
+                ("Verloopt de Office 2024-licentie?", "Nee: het is een permanente ESD-licentie. U betaalt eenmaal en houdt de apps op het apparaat waarop u ze hebt geïnstalleerd, volgens de voorwaarden van Microsoft."),
+                ("Kan ik het op meerdere apparaten installeren?", "Nee: doorgaans geldig voor 1 pc of Mac. Voor meer apparaten overweeg Microsoft 365 Personal of Family."),
+                ("Hoe verschilt het van Office 2024 Home?", "Home & Business voegt Outlook (en OneNote) toe voor licht professioneel gebruik, nog steeds als permanente licentie."),
+                ("Hoe activeer ik?", "Gebruik setup.office.com met de per e-mail ontvangen sleutel, koppel uw Microsoft-account en installeer via office.com."),
+            ],
         },
     },
     "office-2019-home-student": {
@@ -492,6 +648,8 @@ PRODUCTS = {
             "fr": 'Office 2019 <span>Home &amp; Student</span>',
             "de": 'Office 2019 <span>Home &amp; Student</span>',
             "es": 'Office 2019 <span>Home &amp; Student</span>',
+            "pt": 'Office 2019 <span>Home &amp; Student</span>',
+            "nl": 'Office 2019 <span>Home &amp; Student</span>',
         },
         "eyebrow": {
             "it": "Licenza perpetua · PC o Mac",
@@ -499,6 +657,8 @@ PRODUCTS = {
             "fr": "Licence perpétuelle · PC ou Mac",
             "de": "Dauerlizenz · PC oder Mac",
             "es": "Licencia perpetua · PC o Mac",
+            "pt": "Licença perpétua · PC ou Mac",
+            "nl": "Permanente licentie · pc of Mac",
         },
         "desc": {
             "it": "Office 2019 Home & Student: Word, Excel e PowerPoint per casa e studio su PC o Mac. Licenza digitale originale con consegna via email.",
@@ -506,6 +666,8 @@ PRODUCTS = {
             "fr": "Office 2019 Home & Student : Word, Excel et PowerPoint pour la maison et les études sur PC ou Mac. Licence numérique originale, livraison par e-mail.",
             "de": "Office 2019 Home & Student: Word, Excel und PowerPoint für Zuhause und Studium auf PC oder Mac. Originale digitale Lizenz mit E-Mail-Zustellung.",
             "es": "Office 2019 Home & Student: Word, Excel y PowerPoint para hogar y estudio en PC o Mac. Licencia digital original con entrega por email.",
+            "pt": "Office 2019 Home & Student: Word, Excel e PowerPoint para casa e estudo em PC ou Mac. Licença digital original com entrega por email.",
+            "nl": "Office 2019 Home & Student: Word, Excel en PowerPoint voor thuis en studie op pc of Mac. Originele digitale licentie met levering per e-mail.",
         },
         "pills": {
             "it": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
@@ -513,6 +675,7 @@ PRODUCTS = {
             "fr": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
             "de": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
             "es": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
+            "pt": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), (None, "PC / Mac")],
         },
         "features_title": {
             "it": "Office essenziale 2019, senza abbonamento",
@@ -520,6 +683,8 @@ PRODUCTS = {
             "fr": "Office 2019 essentiel, sans abonnement",
             "de": "Office 2019 Essential — ohne Abo",
             "es": "Office 2019 esencial, sin suscripción",
+            "pt": "Office 2019 essencial, sem subscrição",
+            "nl": "Essentiële Office 2019, zonder abonnement",
         },
         "features": {
             "it": [
@@ -562,6 +727,22 @@ PRODUCTS = {
                 ("c4", None, "Activación", "setup.office.com", "Activa en el portal Microsoft e instala la suite 2019."),
                 ("c4", "dark", "Nota", "Versión 2019", "No incluye actualizaciones de funciones tipo Microsoft 365; es la suite perpetua 2019."),
             ],
+            "pt": [
+                ("c8", "blue", "Licença", "Home & Student 2019", "Licença perpétua ESD para uso doméstico e escolar: Word, Excel e PowerPoint segundo as condições Microsoft 2019."),
+                ("c4", "teal", None, "3 apps clássicas", "As apps fundamentais para documentos, folhas de cálculo e apresentações."),
+                ("c4", "purple", "Plataforma", "PC ou Mac", "Edição disponível para Windows e macOS suportados pelo Office 2019."),
+                ("c4", None, "Entrega", "Email digital", "Código e instruções após o pagamento, sem envio físico."),
+                ("c4", None, "Ativação", "setup.office.com", "Ativas no portal Microsoft e instalas as apps da suite 2019."),
+                ("c4", "dark", "Nota", "Versão 2019", "Não inclui as atualizações de funcionalidades típicas do Microsoft 365; é a suite perpétua 2019."),
+            ],
+            "nl": [
+                ("c8", "blue", "Licentie", "Home & Student 2019", "Permanente ESD-licentie voor thuis- en schoolgebruik: Word, Excel en PowerPoint volgens de Microsoft-voorwaarden van 2019."),
+                ("c4", "teal", None, "3 klassieke apps", "De kernapps voor documenten, rekenbladen en presentaties."),
+                ("c4", "purple", "Platform", "pc of Mac", "Editie beschikbaar voor Windows en macOS die door Office 2019 worden ondersteund."),
+                ("c4", None, "Levering", "Digitale e-mail", "Code en instructies na betaling, zonder fysieke verzending."),
+                ("c4", None, "Activering", "setup.office.com", "Activeer via het Microsoft-portaal en installeer de apps van de 2019-suite."),
+                ("c4", "dark", "Let op", "Versie 2019", "Bevat niet de doorlopende functie-updates van Microsoft 365; het is de permanente suite 2019."),
+            ],
         },
         "apps_title": {
             "it": "App in Home & Student 2019",
@@ -569,6 +750,8 @@ PRODUCTS = {
             "fr": "Apps Home & Student 2019",
             "de": "Apps in Home & Student 2019",
             "es": "Apps en Home & Student 2019",
+            "pt": "Apps no Home & Student 2019",
+            "nl": "Apps in Home & Student 2019",
         },
         "faq": {
             "it": [
@@ -606,6 +789,20 @@ PRODUCTS = {
                 ("¿Cómo se activa?", "Con la clave del email en setup.office.com e instalación desde office.com."),
                 ("¿2019 o 2024?", "2024 es más reciente. Elige 2019 si necesitas esa generación o esta oferta."),
             ],
+            "pt": [
+                ("Que apps inclui?", "Word, Excel e PowerPoint. O Outlook não faz parte do Home & Student."),
+                ("É uma subscrição?", "Não: licença perpétua 2019. Não recebes as atualizações de funcionalidades contínuas do Microsoft 365."),
+                ("PC e Mac?", "Sim, onde a ficha indica PC/Mac; segue os requisitos e o processo Microsoft para a plataforma escolhida."),
+                ("Como se ativa?", "Com o código por email em setup.office.com e instalação a partir de office.com / canais Microsoft."),
+                ("Melhor 2019 ou 2024?", "O 2024 é mais recente. Escolhe o 2019 se precisares especificamente dessa geração ou do preço/condições desta ficha."),
+            ],
+            "nl": [
+                ("Welke apps zijn inbegrepen?", "Word, Excel en PowerPoint. Outlook hoort niet bij Home & Student."),
+                ("Is het een abonnement?", "Nee: permanente licentie 2019. U krijgt geen doorlopende functie-updates van Microsoft 365."),
+                ("pc en Mac?", "Ja waar de pagina pc/Mac vermeldt; volg de eisen van Microsoft voor uw platform."),
+                ("Hoe activeer ik?", "Met de per e-mail ontvangen sleutel op setup.office.com en installatie via office.com / Microsoft-kanalen."),
+                ("2019 of 2024?", "2024 is nieuwer. Kies 2019 als u specifiek die generatie of dit aanbod nodig hebt."),
+            ],
         },
     },
     "office-2019-professional-plus": {
@@ -616,6 +813,8 @@ PRODUCTS = {
             "fr": 'Office 2019 <span>Professional Plus</span>',
             "de": 'Office 2019 <span>Professional Plus</span>',
             "es": 'Office 2019 <span>Professional Plus</span>',
+            "pt": 'Office 2019 <span>Professional Plus</span>',
+            "nl": 'Office 2019 <span>Professional Plus</span>',
         },
         "eyebrow": {
             "it": "Licenza perpetua · Professional Plus",
@@ -623,6 +822,8 @@ PRODUCTS = {
             "fr": "Licence perpétuelle · Professional Plus",
             "de": "Dauerlizenz · Professional Plus",
             "es": "Licencia perpetua · Professional Plus",
+            "pt": "Licença perpétua · Professional Plus",
+            "nl": "Permanente licentie · Professional Plus",
         },
         "desc": {
             "it": "Office 2019 Professional Plus: suite desktop completa per uso professionale con licenza digitale ESD. Consegna del codice via email dopo l'acquisto.",
@@ -630,6 +831,8 @@ PRODUCTS = {
             "fr": "Office 2019 Professional Plus : suite de bureau complète pour usage pro, licence ESD originale. Code livré par e-mail après l'achat.",
             "de": "Office 2019 Professional Plus: vollständige Desktop-Suite für den professionellen Einsatz als ESD-Lizenz. Key per E-Mail nach dem Kauf.",
             "es": "Office 2019 Professional Plus: suite de escritorio completa para uso profesional con licencia ESD. Clave por email tras la compra.",
+            "pt": "Office 2019 Professional Plus: suite de secretária completa para uso profissional com licença digital ESD. Entrega do código por email após a compra.",
+            "nl": "Office 2019 Professional Plus: volledige desktop-suite voor professioneel gebruik met digitale ESD-licentie. Levering van de code per e-mail na aankoop.",
         },
         "pills": {
             "it": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook")],
@@ -637,6 +840,7 @@ PRODUCTS = {
             "fr": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook")],
             "de": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook")],
             "es": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook")],
+            "pt": [("word", "Word"), ("excel", "Excel"), ("powerpoint", "PowerPoint"), ("outlook", "Outlook")],
         },
         "features_title": {
             "it": "Professional Plus 2019, senza abbonamento",
@@ -644,6 +848,8 @@ PRODUCTS = {
             "fr": "Professional Plus 2019, sans abonnement",
             "de": "Professional Plus 2019 — ohne Abo",
             "es": "Professional Plus 2019, sin suscripción",
+            "pt": "Professional Plus 2019, sem subscrição",
+            "nl": "Professional Plus 2019, zonder abonnement",
         },
         "features": {
             "it": [
@@ -686,6 +892,22 @@ PRODUCTS = {
                 ("c4", None, "Activación", "Canales Microsoft", "Activación e instalación por portales oficiales Microsoft."),
                 ("c4", "dark", "Nota", "Generación 2019", "Suite perpetua 2019: no incluye actualizaciones continuas de Microsoft 365."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Professional Plus", "Edição Professional Plus do Office 2019 com licença perpétua ESD, pensada para cenários profissionais segundo a Microsoft."),
+                ("c4", "teal", None, "Suite ampla", "Word, Excel, PowerPoint, Outlook e OneNote entre as apps típicas da linha Pro Plus."),
+                ("c4", "purple", "Modelo", "Compra única", "Licença conforme descrita na ficha, sem renovação anual típica do Microsoft 365."),
+                ("c4", None, "Entrega", "Digital", "Chave e instruções por email após o pagamento."),
+                ("c4", None, "Ativação", "Canais Microsoft", "Ativação e instalação através dos portais oficiais Microsoft."),
+                ("c4", "dark", "Nota", "Geração 2019", "Suite perpétua 2019: não inclui as atualizações contínuas do Microsoft 365."),
+            ],
+            "nl": [
+                ("c8", "blue", "Editie", "Professional Plus", "Office 2019 Professional Plus met een permanente ESD-licentie voor professionele scenario’s volgens de voorwaarden van Microsoft."),
+                ("c4", "teal", None, "Brede suite", "Word, Excel, PowerPoint, Outlook en OneNote behoren tot de typische Pro Plus-apps."),
+                ("c4", "purple", "Model", "Eenmalige aankoop", "Licentie zoals op deze pagina beschreven — geen jaarlijkse verlenging zoals bij Microsoft 365."),
+                ("c4", None, "Levering", "Digitaal", "Sleutel en instructies per e-mail na betaling."),
+                ("c4", None, "Activering", "Microsoft-kanalen", "Activeer en installeer via de officiële Microsoft-portalen."),
+                ("c4", "dark", "Let op", "Generatie 2019", "Permanente suite 2019 — geen doorlopende functie-updates van Microsoft 365."),
+            ],
         },
         "apps_title": {
             "it": "App in Professional Plus 2019",
@@ -693,6 +915,8 @@ PRODUCTS = {
             "fr": "Apps Professional Plus 2019",
             "de": "Apps in Professional Plus 2019",
             "es": "Apps en Professional Plus 2019",
+            "pt": "Apps no Professional Plus 2019",
+            "nl": "Apps in Professional Plus 2019",
         },
         "faq": {
             "it": [
@@ -730,9 +954,28 @@ PRODUCTS = {
                 ("¿Cómo se activa?", "Con la clave del email en los portales Microsoft (p. ej. setup.office.com)."),
                 ("¿Por qué 2019?", "Si necesitas esa generación o esta oferta. Para funciones más nuevas, valora Office 2024 o Microsoft 365."),
             ],
+            "pt": [
+                ("O que significa Professional Plus?", "É a edição profissional completa da linha Office 2019, normalmente com Outlook e mais apps de secretária do que Home & Student."),
+                ("É uma subscrição?", "Não: licença perpétua ESD 2019."),
+                ("Inclui Access ou Publisher?", "Depende da oferta Microsoft para a licença específica. Aqui listamos as apps principais; verifica o email e a documentação oficial."),
+                ("Como se ativa?", "Com o código recebido por email nos portais Microsoft (ex. setup.office.com)."),
+                ("Porque escolher o 2019?", "Se precisares especificamente dessa geração ou das condições desta ficha. Para funcionalidades mais recentes considera o Office 2024 ou o Microsoft 365."),
+            ],
+            "nl": [
+                ("Wat betekent Professional Plus?", "Het is de volledige professionele editie van de Office 2019-lijn, doorgaans met Outlook en meer desktop-apps dan Home & Student."),
+                ("Is het een abonnement?", "Nee: permanente ESD-licentie 2019."),
+                ("Bevat het Access of Publisher?", "Dat hangt af van het Microsoft-aanbod voor de specifieke licentie. Hier vermelden we de hoofdapps; controleer e-mail en officiële documentatie."),
+                ("Hoe activeer ik?", "Met de per e-mail ontvangen sleutel op de Microsoft-portalen (bijv. setup.office.com)."),
+                ("Waarom 2019 kiezen?", "Als u specifiek de generatie 2019 of dit aanbod nodig hebt. Voor nieuwere functies overweeg Office 2024 of Microsoft 365."),
+            ],
         },
     },
 }
+
+
+backfill_lang(PRODUCTS)
+backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
+backfill_lang(UI, target="nl", source="en", translate=nl_text)
 
 
 def get_office_content(slug):

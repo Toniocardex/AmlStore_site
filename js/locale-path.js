@@ -8,6 +8,8 @@
         { code: 'fr', label: 'FR', flag: 'fr' },
         { code: 'de', label: 'DE', flag: 'de' },
         { code: 'es', label: 'ES', flag: 'es' },
+        { code: 'pt', label: 'PT', flag: 'pt' },
+        { code: 'nl', label: 'NL', flag: 'nl' },
     ];
 
     // Gruppi di slug localizzati che devono mantenere la stessa destinazione
@@ -19,6 +21,8 @@
             fr: 'consultation',
             de: 'beratung',
             es: 'consultoria',
+            pt: 'consultoria',
+            nl: 'consultatie',
         },
         {
             it: 'chi-siamo',
@@ -26,6 +30,8 @@
             fr: 'qui-sommes-nous',
             de: 'ueber-uns',
             es: 'quienes-somos',
+            pt: 'sobre-nos',
+            nl: 'over-ons',
         },
     ];
 

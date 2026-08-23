@@ -4,11 +4,21 @@
 from copy import deepcopy
 
 from product_content_office import UI as OFFICE_UI
+from lang_backfill import backfill_lang
+from nl_translations import nl_text
 
-LANGS = ("it", "en", "fr", "de", "es")
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 
 def L(**kwargs):
+    # "pt" e' opzionale nelle call site esistenti: se assente, eredita il
+    # valore "es" (lingua piu' vicina) invece di far esplodere il generatore.
+    # I campi che meritano una vera traduzione portoghese la passano
+    # esplicitamente (pt=...) e questo fallback non scatta.
+    if "pt" not in kwargs:
+        kwargs["pt"] = kwargs.get("es") or kwargs.get("en")
+    if "nl" not in kwargs:
+        kwargs["nl"] = kwargs.get("en")
     return {k: kwargs[k] for k in LANGS}
 
 
@@ -60,7 +70,26 @@ _WIN_OVERRIDES = {
         "spec_ram_body": "Windows 10: normalmente al menos 2–4 GB. Windows 11: al menos 4 GB según Microsoft.",
         "spec_disk_body": "Espacio libre suficiente para instalar según la documentación Microsoft.",
     },
+    "pt": {
+        "apps_eyebrow": "Destaques",
+        "step2_body": "Enviamos-te a <strong>chave de produto</strong> (e as instruções) por email, normalmente em poucos minutos após a aprovação do pagamento. Para edições com suporte físico (DVD/COA), segue também as indicações no email.",
+        "step3_body": "Ativa o Windows com o código recebido: Definições → Sistema → Ativação (ou o procedimento descrito no email). Usa os canais oficiais da Microsoft.",
+        "spec_cpu_body": "Processador compatível com os requisitos Microsoft da versão Windows indicada (para o Windows 11, normalmente CPU na lista oficial suportada).",
+        "spec_os_body": "Esta ficha refere-se à licença do sistema operativo indicado. Verifica hardware e TPM/Secure Boot quando necessário (ex. Windows 11).",
+        "spec_ram_body": "Windows 10: normalmente pelo menos 2–4 GB. Windows 11: pelo menos 4 GB segundo os requisitos Microsoft atualizados.",
+        "spec_disk_body": "Espaço livre suficiente para a instalação/atualização segundo a documentação Microsoft (frequentemente dezenas de GB para uma instalação completa).",
+    },
+    "nl": {
+        "apps_eyebrow": "Hoogtepunten",
+        "step2_body": "Wij sturen u de <strong>productsleutel</strong> (en de instructies) per e-mail, meestal binnen enkele minuten na goedkeuring van de betaling. Voor edities met fysieke media (dvd/COA) volgt u ook de aanwijzingen in de e-mail.",
+        "step3_body": "Activeer Windows met de ontvangen code: Instellingen → Systeem → Activering (of de procedure in de e-mail). Gebruik de officiële Microsoft-kanalen.",
+        "spec_cpu_body": "Een processor die voldoet aan de Microsoft-vereisten voor de aangegeven Windows-versie (voor Windows 11 doorgaans een CPU op de officiële ondersteuningslijst).",
+        "spec_os_body": "Deze fiche betreft de licentie van het aangegeven besturingssysteem. Controleer hardware en TPM/Secure Boot waar vereist (bijv. Windows 11).",
+        "spec_ram_body": "Windows 10: doorgaans minstens 2–4 GB. Windows 11: minstens 4 GB volgens de actuele Microsoft-vereisten.",
+        "spec_disk_body": "Voldoende vrije ruimte voor installatie/upgrade volgens de Microsoft-documentatie (vaak tientallen GB voor een volledige installatie).",
+    },
 }
+backfill_lang(_WIN_OVERRIDES, target="nl", source="en", translate=nl_text)
 for lg, ov in _WIN_OVERRIDES.items():
     UI[lg].update(ov)
 
@@ -82,6 +111,8 @@ PRODUCTS = {
             fr='Windows 11 <span>Pro</span>',
             de='Windows 11 <span>Pro</span>',
             es='Windows 11 <span>Pro</span>',
+            pt='Windows 11 <span>Pro</span>',
+            nl='Windows 11 <span>Pro</span>',
         ),
         "eyebrow": L(
             it="Sistema operativo · licenza ESD",
@@ -89,6 +120,8 @@ PRODUCTS = {
             fr="Système d'exploitation · licence ESD",
             de="Betriebssystem · ESD-Lizenz",
             es="Sistema operativo · licencia ESD",
+            pt="Sistema operativo · licença ESD",
+            nl="Besturingssysteem · ESD-licentie",
         ),
         "desc": L(
             it="Windows 11 Pro: licenza digitale originale con funzioni professionali (es. BitLocker e Desktop remoto, secondo Microsoft). Codice via email dopo l'acquisto.",
@@ -96,6 +129,8 @@ PRODUCTS = {
             fr="Windows 11 Pro : licence numérique originale avec fonctions pro (ex. BitLocker et Bureau à distance, selon Microsoft). Code par e-mail.",
             de="Windows 11 Pro: originale digitale Lizenz mit Pro-Funktionen (z. B. BitLocker und Remotedesktop laut Microsoft). Key per E-Mail.",
             es="Windows 11 Pro: licencia digital original con funciones profesionales (p. ej. BitLocker y Escritorio remoto según Microsoft). Clave por email.",
+            pt="Windows 11 Pro: licença digital original com funções profissionais (ex. BitLocker e Área de Trabalho Remota, segundo a Microsoft). Código por email após a compra.",
+            nl="Windows 11 Pro: originele digitale licentie met professionele functies (bijv. BitLocker en Extern bureaublad, volgens Microsoft). Code per e-mail na aankoop.",
         ),
         "pills": {
             "it": [(None, "Windows 11 Pro"), (None, "ESD"), (None, "BitLocker / RDP")],
@@ -103,6 +138,7 @@ PRODUCTS = {
             "fr": [(None, "Windows 11 Pro"), (None, "ESD"), (None, "BitLocker / RDP")],
             "de": [(None, "Windows 11 Pro"), (None, "ESD"), (None, "BitLocker / RDP")],
             "es": [(None, "Windows 11 Pro"), (None, "ESD"), (None, "BitLocker / RDP")],
+            "pt": [(None, "Windows 11 Pro"), (None, "ESD"), (None, "BitLocker / RDP")],
         },
         "features_title": L(
             it="Pro per lavoro e produttività",
@@ -110,6 +146,8 @@ PRODUCTS = {
             fr="Pro pour le travail",
             de="Pro für Arbeit und Produktivität",
             es="Pro para trabajo y productividad",
+            pt="Pro para trabalho e produtividade",
+            nl="Pro voor werk en productiviteit",
         ),
         "features": {
             "it": [
@@ -152,8 +190,16 @@ PRODUCTS = {
                 ("c4", None, "Activación", "Microsoft oficial", "Activa desde Configuración de Windows."),
                 ("c4", "dark", "Requisitos", "Hardware Windows 11", "Comprueba CPU, TPM 2.0 y Secure Boot."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Windows 11 Pro", "Licença Pro com ferramentas para profissionais e PME, segundo as funcionalidades Microsoft da edição."),
+                ("c4", "teal", None, "Segurança Pro", "Funções como o BitLocker onde suportadas pelo hardware e pela edição."),
+                ("c4", "purple", "Remoto", "Área de Trabalho Remota", "Acesso remoto como anfitrião segundo as capacidades Pro do Windows 11."),
+                ("c4", None, "Entrega", "ESD digital", "Product key por email após o pagamento."),
+                ("c4", None, "Ativação", "Microsoft oficial", "Ativa em Definições do Windows com o código recebido."),
+                ("c4", "dark", "Requisitos", "Hardware Windows 11", "Verifica CPU, TPM 2.0 e Secure Boot antes da atualização/instalação."),
+            ],
         },
-        "apps_title": L(it="", en="", fr="", de="", es=""),
+        "apps_title": L(it="", en="", fr="", de="", es="", pt="", nl=""),
         "faq": {
             "it": [
                 ("Differenza con Windows 11 Home?", "Pro aggiunge funzioni orientate al lavoro (es. BitLocker, Desktop remoto come host) rispetto a Home, secondo Microsoft."),
@@ -190,6 +236,13 @@ PRODUCTS = {
                 ("¿Cómo se activa?", "Configuración → Sistema → Activación con la clave del email."),
                 ("¿Hay que reinstalar?", "Depende de actualización o instalación limpia; sigue el email y Microsoft."),
             ],
+            "pt": [
+                ("Qual a diferença em relação ao Windows 11 Home?", "O Pro adiciona funções orientadas ao trabalho (ex. BitLocker, Área de Trabalho Remota como anfitrião) em relação ao Home, segundo a Microsoft."),
+                ("É uma licença perpétua?", "Sim: licença digital ESD conforme descrito na ficha, não uma subscrição."),
+                ("O meu PC é compatível com o Windows 11?", "Verifica os requisitos Microsoft (CPU, TPM 2.0, Secure Boot, RAM e armazenamento) antes de instalar."),
+                ("Como se ativa?", "Definições → Sistema → Ativação com o código recebido por email."),
+                ("É necessário reinstalar o Windows?", "Depende do teu caso (atualização ou instalação limpa). Segue as instruções do email e a documentação Microsoft."),
+            ],
         },
     },
     "windows-10-home": {
@@ -200,6 +253,8 @@ PRODUCTS = {
             fr='Windows 10 <span>Home</span>',
             de='Windows 10 <span>Home</span>',
             es='Windows 10 <span>Home</span>',
+            pt='Windows 10 <span>Home</span>',
+            nl='Windows 10 <span>Home</span>',
         ),
         "eyebrow": L(
             it="Sistema operativo · 32/64-bit · ESD",
@@ -207,6 +262,8 @@ PRODUCTS = {
             fr="Système d'exploitation · 32/64 bits · ESD",
             de="Betriebssystem · 32/64-Bit · ESD",
             es="Sistema operativo · 32/64 bits · ESD",
+            pt="Sistema operativo · 32/64-bit · ESD",
+            nl="Besturingssysteem · 32/64-bit · ESD",
         ),
         "desc": L(
             it="Windows 10 Home: licenza digitale originale 32/64-bit con consegna del codice via email. Ideale per uso domestico secondo le condizioni Microsoft.",
@@ -214,6 +271,8 @@ PRODUCTS = {
             fr="Windows 10 Home : licence numérique originale 32/64 bits, code par e-mail. Usage domestique selon Microsoft.",
             de="Windows 10 Home: originale 32/64-Bit-Lizenz mit Key per E-Mail. Für den Heimgebrauch gemäß Microsoft.",
             es="Windows 10 Home: licencia digital original 32/64 bits con clave por email. Uso doméstico según Microsoft.",
+            pt="Windows 10 Home: licença digital original 32/64-bit com entrega do código por email. Ideal para uso doméstico segundo as condições Microsoft.",
+            nl="Windows 10 Home: originele digitale 32/64-bit-licentie met levering van de code per e-mail. Geschikt voor thuisgebruik volgens de Microsoft-voorwaarden.",
         ),
         "pills": _pills_win10(),
         "features_title": L(
@@ -222,6 +281,8 @@ PRODUCTS = {
             fr="Windows 10 Home, licence numérique",
             de="Windows 10 Home — digitale Lizenz",
             es="Windows 10 Home, licencia digital",
+            pt="Windows 10 Home, licença digital",
+            nl="Windows 10 Home, digitale licentie",
         ),
         "features": {
             "it": [
@@ -264,8 +325,16 @@ PRODUCTS = {
                 ("c4", None, "Activación", "Configuración Windows", "Activa con la clave recibida."),
                 ("c4", "dark", "Nota", "Fin de soporte", "Microsoft ha definido el fin de soporte de Windows 10: valora si te conviene Windows 11."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Home", "Edição Home do Windows 10 para uso pessoal e doméstico, com licença ESD digital."),
+                ("c4", "teal", None, "32/64-bit", "Suporte às arquiteturas típicas do produto Windows 10 Home."),
+                ("c4", "purple", "Modelo", "Sem subscrição", "Licença conforme descrita na ficha, não um plano Microsoft 365."),
+                ("c4", None, "Entrega", "Email", "Product key após o pagamento."),
+                ("c4", None, "Ativação", "Definições do Windows", "Ativa com o código recebido pelos canais Microsoft."),
+                ("c4", "dark", "Nota", "Fim do suporte", "A Microsoft definiu o fim do suporte para o Windows 10: avalia se ainda precisas desta versão ou do Windows 11."),
+            ],
         },
-        "apps_title": L(it="", en="", fr="", de="", es=""),
+        "apps_title": L(it="", en="", fr="", de="", es="", pt="", nl=""),
         "faq": {
             "it": [
                 ("È Windows 10 Home o Pro?", "Questa scheda è Home. Per BitLocker/RDP host valuta Windows 10 Pro."),
@@ -302,6 +371,13 @@ PRODUCTS = {
                 ("¿Pasar a Windows 11 luego?", "Solo si el hardware es compatible según Microsoft."),
                 ("¿Fin de soporte?", "Consulta las fechas Microsoft antes de comprar."),
             ],
+            "pt": [
+                ("É Windows 10 Home ou Pro?", "Esta ficha é Home. Para BitLocker/RDP anfitrião considera o Windows 10 Pro."),
+                ("32 ou 64-bit?", "O produto indica 32/64-bit: segue as instruções e a arquitetura do teu PC."),
+                ("Como se ativa?", "Definições → Atualização e segurança / Sistema → Ativação com o código do email."),
+                ("Posso passar para o Windows 11 depois?", "Só se o hardware for compatível e segundo as regras de atualização da Microsoft."),
+                ("Fim de suporte Microsoft?", "Informa-te sobre as datas de fim de suporte do Windows 10 no site da Microsoft antes de comprar."),
+            ],
         },
     },
     "windows-10-pro": {
@@ -312,6 +388,8 @@ PRODUCTS = {
             fr='Windows 10 <span>Pro</span>',
             de='Windows 10 <span>Pro</span>',
             es='Windows 10 <span>Pro</span>',
+            pt='Windows 10 <span>Pro</span>',
+            nl='Windows 10 <span>Pro</span>',
         ),
         "eyebrow": L(
             it="Sistema operativo · 32/64-bit · ESD",
@@ -319,6 +397,8 @@ PRODUCTS = {
             fr="Système d'exploitation · 32/64 bits · ESD",
             de="Betriebssystem · 32/64-Bit · ESD",
             es="Sistema operativo · 32/64 bits · ESD",
+            pt="Sistema operativo · 32/64-bit · ESD",
+            nl="Besturingssysteem · 32/64-bit · ESD",
         ),
         "desc": L(
             it="Windows 10 Pro: licenza digitale originale 32/64-bit con funzioni professionali (BitLocker, Desktop remoto e altro secondo Microsoft). Codice via email.",
@@ -326,6 +406,8 @@ PRODUCTS = {
             fr="Windows 10 Pro : licence numérique 32/64 bits avec fonctions pro (BitLocker, Bureau à distance… selon Microsoft). Code par e-mail.",
             de="Windows 10 Pro: originale 32/64-Bit-Lizenz mit Pro-Funktionen (BitLocker, Remotedesktop u. a. laut Microsoft). Key per E-Mail.",
             es="Windows 10 Pro: licencia digital 32/64 bits con funciones profesionales (BitLocker, Escritorio remoto… según Microsoft). Clave por email.",
+            pt="Windows 10 Pro: licença digital 32/64-bit com funções profissionais (BitLocker, Área de Trabalho Remota e mais, segundo a Microsoft). Código por email.",
+            nl="Windows 10 Pro: digitale 32/64-bit-licentie met professionele functies (BitLocker, Extern bureaublad en meer, volgens Microsoft). Code per e-mail.",
         ),
         "pills": {
             lg: [(None, "Windows 10 Pro"), (None, "32/64-bit"), (None, "ESD")]
@@ -337,6 +419,8 @@ PRODUCTS = {
             fr="Windows 10 Pro pour le travail",
             de="Windows 10 Pro für die Arbeit",
             es="Windows 10 Pro para el trabajo",
+            pt="Windows 10 Pro para o trabalho",
+            nl="Windows 10 Pro voor werk",
         ),
         "features": {
             "it": [
@@ -379,8 +463,16 @@ PRODUCTS = {
                 ("c4", None, "Activación", "Oficial", "Activa desde Configuración de Windows."),
                 ("c4", "dark", "Nota", "Soporte Windows 10", "Consulta las fechas de fin de soporte Microsoft."),
             ],
+            "pt": [
+                ("c8", "blue", "Edição", "Pro", "Licença Pro com ferramentas para profissionais e PME em relação ao Home, segundo a Microsoft."),
+                ("c4", "teal", None, "BitLocker", "Encriptação de unidade onde suportada pelo hardware e pela edição."),
+                ("c4", "purple", "Remoto", "Área de Trabalho Remota", "Anfitrião de Remote Desktop típico das edições Pro."),
+                ("c4", None, "Entrega", "ESD email", "Product key após o pagamento."),
+                ("c4", None, "Ativação", "Oficial", "Ativa em Definições do Windows."),
+                ("c4", "dark", "Nota", "Suporte Windows 10", "Verifica as datas de fim de suporte Microsoft se planeias um uso a longo prazo."),
+            ],
         },
-        "apps_title": L(it="", en="", fr="", de="", es=""),
+        "apps_title": L(it="", en="", fr="", de="", es="", pt="", nl=""),
         "faq": {
             "it": [
                 ("Differenza con Windows 10 Home?", "Pro include funzioni professionali aggiuntive (es. BitLocker, Desktop remoto host) rispetto a Home."),
@@ -417,6 +509,13 @@ PRODUCTS = {
                 ("¿32/64 bits?", "Sigue las instrucciones y la arquitectura del PC."),
                 ("¿Pasar a Windows 11?", "Solo con hardware compatible según Microsoft."),
             ],
+            "pt": [
+                ("Qual a diferença em relação ao Windows 10 Home?", "O Pro inclui funções profissionais adicionais (ex. BitLocker, Área de Trabalho Remota anfitrião) em relação ao Home."),
+                ("É perpétua?", "Sim: licença ESD digital conforme descrito na ficha."),
+                ("Como se ativa?", "Definições do Windows → Ativação com o código do email."),
+                ("32/64-bit?", "Segue as instruções e a arquitetura do PC."),
+                ("Posso passar para o Windows 11?", "Só com hardware compatível e segundo as regras da Microsoft."),
+            ],
         },
     },
     "windows-11-pro-oem-dvd": {
@@ -427,6 +526,8 @@ PRODUCTS = {
             fr="Windows 11 Pro OEM DVD (anglais)",
             de="Windows 11 Pro OEM DVD (Englisch)",
             es="Windows 11 Pro OEM DVD (inglés)",
+            pt="Windows 11 Pro OEM DVD (inglês)",
+            nl="Windows 11 Pro OEM-dvd (Engels)",
         ),
         "seo_title": L(
             it="Windows 11 Pro OEM DVD Italiano | Licenza Originale",
@@ -434,6 +535,8 @@ PRODUCTS = {
             fr="Windows 11 Pro OEM DVD (anglais) | Licence originale",
             de="Windows 11 Pro OEM DVD (Englisch) | Original-Lizenz",
             es="Windows 11 Pro OEM DVD (inglés) | Licencia original",
+            pt="Windows 11 Pro OEM DVD (inglês) | Licença original",
+            nl="Windows 11 Pro OEM-dvd (Engels) | Originele licentie",
         ),
         "title_html": L(
             it='Windows 11 Pro <span>OEM DVD</span>',
@@ -441,6 +544,8 @@ PRODUCTS = {
             fr='Windows 11 Pro <span>OEM DVD</span>',
             de='Windows 11 Pro <span>OEM DVD</span>',
             es='Windows 11 Pro <span>OEM DVD</span>',
+            pt='Windows 11 Pro <span>OEM DVD</span>',
+            nl='Windows 11 Pro <span>OEM-dvd</span>',
         ),
         "eyebrow": L(
             it="Licenza OEM · DVD italiano · COA",
@@ -448,6 +553,8 @@ PRODUCTS = {
             fr="Licence OEM · DVD anglais · COA",
             de="OEM-Lizenz · englische DVD · COA",
             es="Licencia OEM · DVD en inglés · COA",
+            pt="Licença OEM · DVD em inglês · COA",
+            nl="OEM-licentie · dvd in het Engels · COA",
         ),
         "desc": L(
             it="Microsoft Windows 11 Pro OEM in confezione fisica con supporto DVD in italiano e COA (Certificate of Authenticity) con Product Key. Spedizione gratuita: affidamento al corriere entro 24 ore lavorative. Non è una licenza ESD solo digitale.",
@@ -455,6 +562,8 @@ PRODUCTS = {
             fr="Microsoft Windows 11 Pro OEM en boîte physique avec DVD en anglais et sticker COA avec Product Key. Livraison gratuite : remise au transporteur sous 24 heures ouvrées. Ce n'est pas une licence ESD uniquement numérique.",
             de="Microsoft Windows 11 Pro OEM in physischer Verpackung mit englischer DVD und COA-Sticker inkl. Product Key. Kostenloser Versand: Übergabe an den Versanddienst innerhalb von 24 Werktagsstunden. Keine reine ESD-Lizenz.",
             es="Microsoft Windows 11 Pro OEM en caja física con DVD en inglés y sticker COA con Product Key. Envío gratuito: entrega al transportista en 24 horas laborables. No es una licencia ESD solo digital.",
+            pt="Microsoft Windows 11 Pro OEM em caixa física com DVD em inglês e sticker COA (Certificate of Authenticity) com Product Key. Envio gratuito: entrega ao transportador em 24 horas úteis. Não é uma licença apenas digital ESD.",
+            nl="Microsoft Windows 11 Pro OEM in fysieke verpakking met dvd in het Engels en COA-sticker (Certificate of Authenticity) met productsleutel. Gratis verzending: overdracht aan de koerier binnen 24 werkuren. Dit is geen uitsluitend digitale ESD-licentie.",
         ),
         "pills": {
             "it": [(None, "Windows 11 Pro"), (None, "OEM"), (None, "DVD italiano"), (None, "COA")],
@@ -462,6 +571,7 @@ PRODUCTS = {
             "fr": [(None, "Windows 11 Pro"), (None, "OEM"), (None, "DVD anglais"), (None, "COA")],
             "de": [(None, "Windows 11 Pro"), (None, "OEM"), (None, "Englische DVD"), (None, "COA")],
             "es": [(None, "Windows 11 Pro"), (None, "OEM"), (None, "DVD en inglés"), (None, "COA")],
+            "pt": [(None, "Windows 11 Pro"), (None, "OEM"), (None, "DVD em inglês"), (None, "COA")],
         },
         "features_title": L(
             it="Cosa ricevi e perché sceglierlo",
@@ -469,6 +579,8 @@ PRODUCTS = {
             fr="Contenu et avantages",
             de="Lieferumfang und Vorteile",
             es="Qué recibes y por qué elegirlo",
+            pt="O que recebes e porque escolhê-lo",
+            nl="Wat u ontvangt en waarom dit product",
         ),
         "features": {
             "it": [
@@ -506,6 +618,13 @@ PRODUCTS = {
                 ("c6", None, "Licencia", "Un dispositivo", "Licencia OEM para instalar y usar Windows 11 Pro en un dispositivo a la vez. Transferencias o reactivaciones según condiciones Microsoft y la normativa aplicable."),
                 ("c6", "dark", "Idioma del soporte", "DVD en inglés", "Fuera de Italia enviamos el DVD en inglés. La tienda italiana comercializa el DVD en italiano."),
             ],
+            "pt": [
+                ("c12", "blue", "O que recebes", "DVD + COA", "Embalagem física Microsoft Windows 11 Pro OEM: DVD em inglês, autocolante COA com o Product Key e documentação incluída. Confirmação da encomenda por email. Não é uma licença ESD apenas digital."),
+                ("c6", "purple", "Envio", "Grátis · 24h úteis", "Entrega ao transportador dentro de 24 horas úteis após o pagamento. Recebes depois os dados de tracking por email quando disponíveis. Os prazos até casa dependem do transportador."),
+                ("c6", None, "Edição Pro", "Funções profissionais", "BitLocker, Área de Trabalho Remota, entrada num domínio ou Microsoft Entra ID, e ferramentas avançadas de segurança e gestão — segundo a edição Windows 11 Pro."),
+                ("c6", None, "Licença", "Um dispositivo", "Licença OEM para instalar e usar o Windows 11 Pro num dispositivo de cada vez. Transferências ou reativações seguem as condições Microsoft na embalagem e a lei aplicável."),
+                ("c6", "dark", "Idioma do suporte físico", "DVD em inglês", "Fora de Itália enviamos a edição com DVD em inglês. As outras versões linguísticas do site vendem o mesmo media em inglês."),
+            ],
         },
         "lifestyle": {
             "image": "windows-11-pro-oem-dvd.webp",
@@ -517,6 +636,8 @@ PRODUCTS = {
                 fr="Boîtier Windows 11 Pro OEM avec DVD et COA.",
                 de="Windows 11 Pro OEM-Verpackung mit DVD und COA.",
                 es="Packaging Windows 11 Pro OEM con DVD y COA.",
+                pt="Embalagem Windows 11 Pro OEM com DVD e COA.",
+                nl="Windows 11 Pro OEM-verpakking met dvd en COA.",
             ),
             "kicker": L(
                 it="Prodotto fisico",
@@ -524,6 +645,8 @@ PRODUCTS = {
                 fr="Produit physique",
                 de="Physisches Produkt",
                 es="Producto físico",
+                pt="Produto físico",
+                nl="Fysiek product",
             ),
             "title": L(
                 it="DVD + COA, non solo codice email",
@@ -531,6 +654,8 @@ PRODUCTS = {
                 fr="DVD + COA, pas seulement un code e-mail",
                 de="DVD + COA — nicht nur E-Mail-Key",
                 es="DVD + COA, no solo código por email",
+                pt="DVD + COA, não só um código por email",
+                nl="Dvd + COA, niet alleen een code per e-mail",
             ),
             "body": L(
                 it="Ricevi la confezione con DVD italiano e COA (Product Key sull'etichetta COA), più conferma d'ordine via email. Attivazione tramite i servizi Microsoft.",
@@ -538,6 +663,8 @@ PRODUCTS = {
                 fr="Vous recevez la boîte avec DVD anglais et COA (Product Key sur le COA), plus confirmation par e-mail. Activation via les services Microsoft.",
                 de="Sie erhalten die Box mit englischer DVD und COA (Product Key auf dem COA) sowie Bestellbestätigung per E-Mail. Aktivierung über Microsoft-Dienste.",
                 es="Recibes la caja con DVD en inglés y COA (Product Key en el COA), más confirmación por email. Activación vía servicios Microsoft.",
+                pt="Recebes a embalagem com DVD em inglês e COA (Product Key na etiqueta COA), mais confirmação de encomenda por email. Ativação através dos serviços Microsoft.",
+                nl="U ontvangt de verpakking met dvd in het Engels en COA (productsleutel op het COA-label), plus een orderbevestiging per e-mail. Activering via de Microsoft-diensten.",
             ),
         },
         "steps_title": L(
@@ -546,6 +673,8 @@ PRODUCTS = {
             fr="Installation et activation",
             de="Installation und Aktivierung",
             es="Instalación y activación",
+            pt="Instalação e ativação",
+            nl="Installatie en activering",
         ),
         "steps": {
             "it": [
@@ -573,6 +702,11 @@ PRODUCTS = {
                 ("Instalar Windows 11 Pro", "Inserta el DVD en inglés e inicia la instalación. Sin unidad DVD, crea un USB con las herramientas oficiales Microsoft y usa el Product Key del COA."),
                 ("Activar Windows", "Después: Configuración → Sistema → Activación → Cambiar clave de producto. Introduce la clave del COA y completa la activación con Microsoft."),
             ],
+            "pt": [
+                ("Verifica a compatibilidade", "Antes de comprar, confirma que o PC cumpre os requisitos de hardware do Windows 11 (CPU, RAM, TPM 2.0, UEFI com Arranque seguro)."),
+                ("Instala o Windows 11 Pro", "Insere o DVD em inglês e inicia a instalação. Sem unidade de DVD, cria um suporte USB gratuitamente com as ferramentas oficiais Microsoft e usa depois o Product Key do COA."),
+                ("Ativa o Windows", "No final: Definições → Sistema → Ativação → Alterar chave de produto. Introduz o código do COA e conclui a ativação com os serviços Microsoft."),
+            ],
         },
         "specs_note": L(
             it="Requisiti minimi indicativi da documentazione Microsoft. Possono essere aggiornati: verifica sempre la compatibilità del dispositivo prima dell'acquisto.",
@@ -580,6 +714,8 @@ PRODUCTS = {
             fr="Exigences minimales indicatives (documentation Microsoft). Elles peuvent évoluer — vérifiez toujours la compatibilité avant l'achat.",
             de="Orientierende Mindestanforderungen laut Microsoft-Dokumentation. Änderungen möglich — Kompatibilität vor dem Kauf prüfen.",
             es="Requisitos mínimos orientativos de la documentación Microsoft. Pueden actualizarse: verifica siempre la compatibilidad antes de comprar.",
+            pt="Requisitos mínimos indicativos da documentação Microsoft. Podem ser atualizados: verifica sempre a compatibilidade do dispositivo antes da compra.",
+            nl="Indicatieve minimumvereisten uit de Microsoft-documentatie. Ze kunnen worden bijgewerkt: controleer altijd de compatibiliteit van het apparaat vóór aankoop.",
         ),
         "specs": {
             "it": [
@@ -612,8 +748,14 @@ PRODUCTS = {
                 ("Firmware y seguridad", "UEFI con Arranque seguro; TPM versión 2.0."),
                 ("Gráficos y pantalla", "GPU DirectX 12 con controlador WDDM 2.0; pantalla al menos 9\" HD 720p. Internet necesario para algunos pasos y actualizaciones."),
             ],
+            "pt": [
+                ("Processador", "Pelo menos 1 GHz, 2 ou mais núcleos, compatível com 64 bits."),
+                ("Memória e armazenamento", "Pelo menos 4 GB de RAM e 64 GB de armazenamento."),
+                ("Firmware e segurança", "UEFI com Arranque Seguro; TPM versão 2.0."),
+                ("Gráficos e ecrã", "GPU DirectX 12 com controlador WDDM 2.0; ecrã de pelo menos 9\" HD 720p. Ligação à Internet necessária para algumas fases da configuração e atualizações."),
+            ],
         },
-        "apps_title": L(it="", en="", fr="", de="", es=""),
+        "apps_title": L(it="", en="", fr="", de="", es="", pt="", nl=""),
         "faq": {
             "it": [
                 ("Il prodotto viene consegnato via email?", "No. È un prodotto fisico con DVD e COA, spedito all'indirizzo indicato. Ricevi via email la conferma d'ordine e le comunicazioni di spedizione/tracking."),
@@ -655,6 +797,14 @@ PRODUCTS = {
                 ("¿Actualizar desde Windows 11 Home?", "Depende de la configuración del PC. Verifica compatibilidad e instala Windows 11 Pro."),
                 ("¿Activación garantizada?", "La clave debe usarse según la licencia y la edición correcta. Ante problemas, contacta con el soporte de Aml Store."),
             ],
+            "pt": [
+                ("O produto é entregue por email?", "Não. É um produto físico com DVD e COA, enviado para o endereço indicado. Recebes por email a confirmação do pedido e as comunicações de envio/tracking."),
+                ("Qual a diferença em relação à versão ESD?", "A ESD é apenas digital por email. Esta ficha inclui DVD físico (em inglês) e COA com Product Key, enviados por transportadora."),
+                ("Posso instalar em vários computadores?", "Não. É necessária uma licença distinta para cada dispositivo onde instales e uses o Windows."),
+                ("Posso instalar sem leitor de DVD?", "Sim. Podes criar um USB de instalação com as ferramentas oficiais da Microsoft e ativar com o Product Key no COA."),
+                ("Posso usar para atualizar do Windows 11 Home?", "Depende da configuração do PC. Verifica a compatibilidade e que seja instalada a edição Windows 11 Pro."),
+                ("A ativação é garantida?", "O código deve ser usado segundo as condições de licença e na edição correta. Em caso de dificuldades na instalação ou ativação, contacta o apoio da Aml Store."),
+            ],
         },
     },
     "windows-11-pro-coa": {
@@ -665,6 +815,8 @@ PRODUCTS = {
             fr='Windows 11 Pro <span>COA</span>',
             de='Windows 11 Pro <span>COA</span>',
             es='Windows 11 Pro <span>COA</span>',
+            pt='Windows 11 Pro <span>COA</span>',
+            nl='Windows 11 Pro <span>COA</span>',
         ),
         "eyebrow": L(
             it="Licenza OEM · sticker COA",
@@ -672,6 +824,8 @@ PRODUCTS = {
             fr="Licence OEM · sticker COA",
             de="OEM-Lizenz · COA-Sticker",
             es="Licencia OEM · pegatina COA",
+            pt="Licença OEM · autocolante COA",
+            nl="OEM-licentie · COA-sticker",
         ),
         "desc": L(
             it="Windows 11 Pro COA: licenza OEM con sticker Certificate of Authenticity. Dopo l'ordine ricevi le istruzioni via email e segui le indicazioni Microsoft.",
@@ -679,6 +833,8 @@ PRODUCTS = {
             fr="Windows 11 Pro COA : licence OEM avec sticker Certificate of Authenticity. Instructions par e-mail après commande.",
             de="Windows 11 Pro COA: OEM-Lizenz mit Certificate-of-Authenticity-Sticker. Anleitung per E-Mail nach der Bestellung.",
             es="Windows 11 Pro COA: licencia OEM con pegatina Certificate of Authenticity. Instrucciones por email tras el pedido.",
+            pt="Windows 11 Pro COA: licença OEM com autocolante Certificate of Authenticity. Após o pedido recebes as instruções por email e segues as indicações da Microsoft.",
+            nl="Windows 11 Pro COA: OEM-licentie met Certificate of Authenticity-sticker. Na de bestelling ontvangt u de instructies per e-mail en volgt u de aanwijzingen van Microsoft.",
         ),
         "pills": {
             lg: [(None, "Windows 11 Pro"), (None, "OEM"), (None, "COA")]
@@ -690,6 +846,8 @@ PRODUCTS = {
             fr="Pro OEM avec sticker COA",
             de="Pro OEM mit COA-Sticker",
             es="Pro OEM con pegatina COA",
+            pt="Pro OEM com autocolante COA",
+            nl="Pro OEM met COA-sticker",
         ),
         "features": {
             "it": [
@@ -727,6 +885,13 @@ PRODUCTS = {
                 ("c6", None, "Hardware", "Requisitos Win11", "Comprueba CPU, TPM y Secure Boot."),
                 ("c6", "dark", "Nota OEM", "Dispositivo", "Las OEM suelen ir ligadas al dispositivo: lee términos y email."),
             ],
+            "pt": [
+                ("c12", "blue", "Formato", "OEM COA", "Windows 11 Pro OEM com autocolante Certificate of Authenticity — não é a variante apenas ESD digital."),
+                ("c6", "purple", "Entrega", "Envio gratuito", "Artigo físico: entregue ao transportador dentro de 24 horas úteis após o pagamento. Confirmação da encomenda por email."),
+                ("c6", None, "Ativação", "Código COA", "Usa o código no autocolante e/ou as instruções recebidas nos canais Microsoft."),
+                ("c6", None, "Hardware", "Requisitos Win11", "Verifica CPU, TPM e Secure Boot antes da instalação."),
+                ("c6", "dark", "Nota OEM", "Vínculo ao dispositivo", "As OEM ficam muitas vezes vinculadas ao dispositivo: lê os termos e o email da encomenda."),
+            ],
         },
         "lifestyle": {
             "image": "windows-11-pro-coa.webp",
@@ -739,6 +904,8 @@ PRODUCTS = {
                 fr="Sticker COA Windows 11 Pro OEM.",
                 de="Windows 11 Pro OEM COA-Sticker.",
                 es="Pegatina COA Windows 11 Pro OEM.",
+                pt="Autocolante COA Windows 11 Pro OEM.",
+                nl="Windows 11 Pro OEM COA-sticker.",
             ),
             "kicker": L(
                 it="Certificate of Authenticity",
@@ -746,6 +913,8 @@ PRODUCTS = {
                 fr="Certificate of Authenticity",
                 de="Certificate of Authenticity",
                 es="Certificate of Authenticity",
+                pt="Certificate of Authenticity",
+                nl="Certificate of Authenticity",
             ),
             "title": L(
                 it="Sticker COA fisico, regole OEM",
@@ -753,6 +922,8 @@ PRODUCTS = {
                 fr="Sticker COA physique, règles OEM",
                 de="Physischer COA-Sticker, OEM-Regeln",
                 es="Pegatina COA física, reglas OEM",
+                pt="Autocolante COA físico, regras OEM",
+                nl="Fysieke COA-sticker, OEM-regels",
             ),
             "body": L(
                 it="Istruzioni via email e spedizione dello sticker secondo il checkout. Attivazione con codice COA sui canali Microsoft.",
@@ -760,9 +931,11 @@ PRODUCTS = {
                 fr="Instructions par e-mail et expédition du sticker selon le checkout. Activation avec la clé COA via Microsoft.",
                 de="Anleitung per E-Mail und Sticker-Versand laut Checkout. Aktivierung mit COA-Key über Microsoft.",
                 es="Instrucciones por email y envío de la pegatina según el checkout. Activación con clave COA vía Microsoft.",
+                pt="Instruções por email e envio do autocolante conforme o checkout. Ativação com o código COA nos canais Microsoft.",
+                nl="Instructies per e-mail en verzending van de sticker volgens de checkout. Activering met de COA-code via de Microsoft-kanalen.",
             ),
         },
-        "apps_title": L(it="", en="", fr="", de="", es=""),
+        "apps_title": L(it="", en="", fr="", de="", es="", pt="", nl=""),
         "faq": {
             "it": [
                 ("Cos'è il COA?", "Certificate of Authenticity: sticker fisico OEM spedito a domicilio (spedizione gratuita, affidamento al corriere entro 24 ore lavorative), con conferma ordine via email."),
@@ -799,9 +972,19 @@ PRODUCTS = {
                 ("¿Necesito DVD?", "Esta ficha es pegatina COA, no la variante DVD OEM."),
                 ("¿Transferencia?", "Las OEM tienen límites: consulta Microsoft y los términos del pedido."),
             ],
+            "pt": [
+                ("O que é o COA?", "Certificate of Authenticity: autocolante OEM físico enviado ao domicílio (envio gratuito, entrega ao transportador em 24 horas úteis), com confirmação do pedido por email."),
+                ("Diferença em relação à Pro ESD?", "COA/OEM é um artigo físico com autocolante; a Pro ESD é apenas digital por email."),
+                ("Como se ativa?", "Com o código no autocolante, nos canais Microsoft."),
+                ("É preciso o DVD?", "Esta ficha é o autocolante COA, não a variante DVD OEM."),
+                ("Transferência?", "As OEM têm limites: consulta a Microsoft e os termos do pedido."),
+            ],
         },
     },
 }
+
+backfill_lang(PRODUCTS)
+backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
 
 
 def get_windows_content(slug):

@@ -4,10 +4,13 @@ import html as html_module
 import json
 from pathlib import Path
 
+from lang_backfill import backfill_lang
+from nl_translations import nl_text
+
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
-LANGS = ("it", "en", "fr", "de", "es")
-LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
+LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "nl": "nl_NL"}
 
 # Neutro brand (non usare cover di un altro SKU come placeholder).
 PRODUCT_COVER_FALLBACK = "product-cover-fallback.webp"
@@ -55,6 +58,18 @@ STOCK_I18N = {
         "low": "Últimas {n} unidades",
         "out": "No disponible",
         "error": "Disponibilidad por confirmar",
+    },
+    "pt": {
+        "available": "Disponibilidade: {n}",
+        "low": "Últimas {n} unidades",
+        "out": "Não disponível",
+        "error": "Disponibilidade a confirmar",
+    },
+    "nl": {
+        "available": "Beschikbaarheid: {n}",
+        "low": "Laatste {n} stuks",
+        "out": "Niet beschikbaar",
+        "error": "Beschikbaarheid nader te bevestigen",
     },
 }
 
@@ -127,6 +142,8 @@ TRUSTPILOT_LOCALE = {
     "fr": ("fr-FR", "https://fr.trustpilot.com/review/aml-store.com"),
     "de": ("de-DE", "https://de.trustpilot.com/review/aml-store.com"),
     "es": ("es-ES", "https://es.trustpilot.com/review/aml-store.com"),
+    "pt": ("pt-PT", "https://pt.trustpilot.com/review/aml-store.com"),
+    "nl": ("nl-NL", "https://nl.trustpilot.com/review/aml-store.com"),
 }
 
 TRUSTPILOT_FALLBACK_LEAD = {
@@ -135,6 +152,8 @@ TRUSTPILOT_FALLBACK_LEAD = {
     "fr": "Expériences réelles partagées sur",
     "de": "Echte Erfahrungen von Kunden auf",
     "es": "Experiencias reales compartidas en",
+    "pt": "Experiências reais partilhadas por clientes em",
+    "nl": "Echte ervaringen van klanten op",
 }
 
 TRUSTPILOT_BUSINESS_UNIT = "61c44c912f493a1a7cd810fa"
@@ -212,6 +231,20 @@ PHYSICAL_LABELS = {
         "step_email_desc": "Entrega al transportista en 24 horas laborables; confirmación del pedido por email",
         "desc_suffix": "Artículo físico con envío gratuito: entrega al transportista en 24 horas laborables. Confirmación del pedido por email.",
     },
+    "pt": {
+        "tax": "Impostos incluídos. Artigo físico com envio gratuito (não é entrega apenas digital). Entrega à transportadora em 24 horas úteis após o pagamento.",
+        "steps_title": "Pedido, envio e ativação",
+        "step_email": "Envio do suporte",
+        "step_email_desc": "Entrega à transportadora em 24 horas úteis; confirmação do pedido por email",
+        "desc_suffix": "Artigo físico com envio gratuito: entrega à transportadora em 24 horas úteis. Confirmação do pedido por email.",
+    },
+    "nl": {
+        "tax": "Inclusief belastingen. Fysiek artikel met gratis verzending (geen uitsluitend digitale levering). Overdracht aan de koerier binnen 24 werkuren na betaling.",
+        "steps_title": "Bestelling, verzending en activering",
+        "step_email": "Verzending van de drager",
+        "step_email_desc": "Overdracht aan de koerier binnen 24 werkuren; orderbevestiging per e-mail",
+        "desc_suffix": "Fysiek artikel met gratis verzending: overdracht aan de koerier binnen 24 werkuren. Orderbevestiging per e-mail.",
+    },
 }
 
 PHYSICAL_UI = {
@@ -244,6 +277,18 @@ PHYSICAL_UI = {
         "step2_body": "Enviamos el <strong>soporte físico</strong> con <strong>envío gratuito</strong>: entrega al transportista en <strong>24 horas laborables</strong> tras el pago — no es una entrega solo digital. También recibes la <strong>confirmación del pedido</strong> por email (con tracking cuando esté disponible).",
         "step3_title": "Activación",
         "step3_body": "Activa Windows con la licencia/clave del pedido: Configuración → Sistema → Activación (o el procedimiento indicado). Usa canales oficiales Microsoft.",
+    },
+    "pt": {
+        "step2_title": "Envio do suporte",
+        "step2_body": "Enviamos o <strong>suporte físico</strong> com <strong>envio gratuito</strong>: entrega à transportadora em <strong>24 horas úteis</strong> após o pagamento — não é uma entrega apenas digital. Também recebe a <strong>confirmação do pedido</strong> por email (com tracking quando disponível).",
+        "step3_title": "Ativação",
+        "step3_body": "Ative o Windows com a licença/chave do pedido: Definições → Sistema → Ativação (ou o procedimento indicado). Use os canais oficiais da Microsoft.",
+    },
+    "nl": {
+        "step2_title": "Verzending van de drager",
+        "step2_body": "Wij verzenden de <strong>fysieke drager</strong> met <strong>gratis verzending</strong>: overdracht aan de koerier binnen <strong>24 werkuren</strong> na betaling — dit is geen uitsluitend digitale levering. U ontvangt ook een <strong>orderbevestiging</strong> per e-mail (met tracking indien beschikbaar).",
+        "step3_title": "Activering",
+        "step3_body": "Activeer Windows met de licentie/sleutel van uw bestelling: Instellingen → Systeem → Activering (of de aangegeven procedure). Gebruik de officiële Microsoft-kanalen.",
     },
 }
 
@@ -363,6 +408,50 @@ V3_UI = {
         "trust_3_t": "Soporte por escrito", "trust_3_d": "Email y WhatsApp",
         "trust_4_t": "Pagos seguros", "trust_4_d": "A través de Stripe y PayPal",
     },
+    "pt": {
+        "assur_1": "Ativação em portais oficiais",
+        "assur_2": "Entrega digital, sem envio",
+        "assur_3": "Apoio após a compra",
+        "assur_4": "Pagamentos processados por Stripe e PayPal",
+        "assur_5": "Fatura disponível",
+        "receive_eyebrow": "O que recebe",
+        "apps_more": "Ver todas as apps incluídas",
+        "apps_scroll_prev": "Deslocar para trás",
+        "apps_scroll_next": "Deslocar para a frente",
+        "reviews_title": "O que dizem os clientes",
+        "reviews_lead": "As avaliações são publicadas e verificadas pela Trustpilot: lê-as diretamente na plataforma, sem filtros da nossa parte.",
+        "reviews_cta": "Ler todas as avaliações",
+        "specs_title": "Compatibilidade e requisitos técnicos",
+        "faq_title": "Respostas antes de comprar",
+        "sticky_buy": "Comprar agora",
+        "payments_aria": "Métodos de pagamento aceites",
+        "trust_1_t": "Distribuidor europeu", "trust_1_d": "Sede em Itália",
+        "trust_2_t": "Fatura disponível", "trust_2_d": "IVA para empresas",
+        "trust_3_t": "Suporte por escrito", "trust_3_d": "Email e WhatsApp",
+        "trust_4_t": "Pagamentos seguros", "trust_4_d": "Via Stripe e PayPal",
+    },
+    "nl": {
+        "assur_1": "Activering via officiële portalen",
+        "assur_2": "Digitale levering, geen verzending",
+        "assur_3": "Ondersteuning na aankoop",
+        "assur_4": "Betalingen via Stripe en PayPal",
+        "assur_5": "Factuur beschikbaar",
+        "receive_eyebrow": "Wat u ontvangt",
+        "apps_more": "Alle inbegrepen apps bekijken",
+        "apps_scroll_prev": "Terug scrollen",
+        "apps_scroll_next": "Verder scrollen",
+        "reviews_title": "Wat klanten zeggen",
+        "reviews_lead": "Beoordelingen worden gepubliceerd en gecontroleerd door Trustpilot: u leest ze rechtstreeks op het platform, zonder filtering van onze kant.",
+        "reviews_cta": "Alle beoordelingen lezen",
+        "specs_title": "Compatibiliteit en technische vereisten",
+        "faq_title": "Antwoorden vóór u koopt",
+        "sticky_buy": "Nu kopen",
+        "payments_aria": "Geaccepteerde betaalmethoden",
+        "trust_1_t": "Europese verkoper", "trust_1_d": "Gevestigd in Italië",
+        "trust_2_t": "Factuur beschikbaar", "trust_2_d": "Btw-factuur voor bedrijven",
+        "trust_3_t": "Schriftelijke ondersteuning", "trust_3_d": "E-mail en WhatsApp",
+        "trust_4_t": "Veilige betalingen", "trust_4_d": "Via Stripe en PayPal",
+    },
 }
 
 # SKU fisici (DVD/COA): niente "codice via email", si spedisce un supporto.
@@ -372,6 +461,8 @@ V3_PHYSICAL_UI = {
     "fr": {"assur_2": "Support physique expédié, pas seulement numérique"},
     "de": {"assur_2": "Physisches Medium wird versendet, nicht nur digital"},
     "es": {"assur_2": "Soporte físico enviado, no solo digital"},
+    "pt": {"assur_2": "Suporte físico enviado, não apenas digital"},
+    "nl": {"assur_2": "Fysieke drager verzonden, niet alleen digitaal"},
 }
 
 
@@ -478,6 +569,38 @@ BASE_LABELS = {
         "step_act": "Activación",
         "desc_suffix": "Licencia digital original, entrega por email en minutos.",
     },
+    "pt": {
+        "skip": "Ir para o conteúdo principal",
+        "product_code": "Código do produto",
+        "add": "Adicionar ao carrinho",
+        "detail": "Ver produto",
+        "price_label": "Preço AML Store",
+        "tax": "Impostos incluídos. Sem custos de envio.",
+        "sticky": "Compra rápida",
+        "steps_title": "Entrega e ativação",
+        "step_order": "Pedido",
+        "step_checkout": "Checkout seguro",
+        "step_email": "Email",
+        "step_email_desc": "Código e instruções em poucos minutos",
+        "step_act": "Ativação",
+        "desc_suffix": "Licença digital original, entrega por email em poucos minutos.",
+    },
+    "nl": {
+        "skip": "Naar de hoofdinhoud",
+        "product_code": "Artikelcode",
+        "add": "In winkelwagen",
+        "detail": "Product bekijken",
+        "price_label": "AML Store-prijs",
+        "tax": "Inclusief belastingen. Geen verzendkosten.",
+        "sticky": "Snel kopen",
+        "steps_title": "Levering en activering",
+        "step_order": "Bestelling",
+        "step_checkout": "Veilig afrekenen",
+        "step_email": "E-mail",
+        "step_email_desc": "Code en instructies binnen enkele minuten",
+        "step_act": "Activering",
+        "desc_suffix": "Originele digitale licentie, levering per e-mail binnen enkele minuten.",
+    },
 }
 
 CATALOG_META = {
@@ -487,6 +610,8 @@ CATALOG_META = {
         "fr": ("Suite Office", "Office perpétuel, applications autonomes et outils Microsoft."),
         "de": ("Office-Suite", "Office-Dauerlizenzen, Einzelapps und Microsoft-Produktivität."),
         "es": ("Suite Office", "Office perpetuo, apps independientes y productividad Microsoft."),
+        "pt": ("Suite Office", "Office perpétuo, apps standalone e produtividade Microsoft."),
+        "nl": ("Office-suite", "Permanente Office-licenties, losse apps en Microsoft-productiviteitstools."),
     },
     "sistemi-operativi": {
         "it": ("Sistemi Operativi", "Licenze Windows originali con consegna digitale rapida."),
@@ -494,6 +619,8 @@ CATALOG_META = {
         "fr": ("Systèmes d'exploitation", "Licences Windows officielles, livraison numérique rapide."),
         "de": ("Betriebssysteme", "Originale Windows-Lizenzen mit schneller digitaler Lieferung."),
         "es": ("Sistemas operativos", "Licencias Windows originales con entrega digital rápida."),
+        "pt": ("Sistemas operativos", "Licenças Windows originais com entrega digital rápida."),
+        "nl": ("Besturingssystemen", "Originele Windows-licenties met snelle digitale levering."),
     },
     "pacchetti": {
         "it": ("Pacchetti", "Bundle digitali Windows, Microsoft 365 e sicurezza."),
@@ -501,6 +628,8 @@ CATALOG_META = {
         "fr": ("Packs", "Packs numériques Windows, Microsoft 365 et sécurité."),
         "de": ("Pakete", "Digitale Pakete: Windows, Microsoft 365 und Sicherheit."),
         "es": ("Packs", "Packs digitales Windows, Microsoft 365 y seguridad."),
+        "pt": ("Pacotes", "Pacotes digitais Windows, Microsoft 365 e segurança."),
+        "nl": ("Pakketten", "Digitale pakketten: Windows, Microsoft 365 en beveiliging."),
     },
     "antivirus": {
         "it": ("Antivirus", "Protezione per PC e dispositivi: licenze digitali originali."),
@@ -508,6 +637,8 @@ CATALOG_META = {
         "fr": ("Antivirus", "Protection PC et appareils : licences numériques officielles."),
         "de": ("Antivirus", "Schutz für PC und Geräte: originale digitale Lizenzen."),
         "es": ("Antivirus", "Protección para PC y dispositivos: licencias digitales originales."),
+        "pt": ("Antivírus", "Proteção para PC e dispositivos: licenças digitais originais."),
+        "nl": ("Antivirus", "Bescherming voor pc’s en apparaten: originele digitale licenties."),
     },
     "windows-server": {
         "it": ("Windows Server e SQL", "Licenze server e database Microsoft per infrastrutture."),
@@ -515,6 +646,8 @@ CATALOG_META = {
         "fr": ("Windows Server et SQL", "Licences serveur et base de données Microsoft."),
         "de": ("Windows Server & SQL", "Microsoft-Server- und Datenbanklizenzen."),
         "es": ("Windows Server y SQL", "Licencias de servidor y base de datos Microsoft."),
+        "pt": ("Windows Server e SQL", "Licenças de servidor e base de dados Microsoft."),
+        "nl": ("Windows Server en SQL", "Microsoft-server- en databaselicenties voor infrastructuur."),
     },
     "strumenti": {
         "it": ("Strumenti e altro", "Adobe, backup cloud, formazione e software specializzato."),
@@ -522,81 +655,83 @@ CATALOG_META = {
         "fr": ("Outils et plus", "Adobe, sauvegarde cloud, formation et logiciels spécialisés."),
         "de": ("Tools & mehr", "Adobe, Cloud-Backup, Schulung und Spezialsoftware."),
         "es": ("Herramientas y más", "Adobe, backup en la nube, formación y software especializado."),
+        "pt": ("Ferramentas e mais", "Adobe, backup na nuvem, formação e software especializado."),
+        "nl": ("Tools en meer", "Adobe, cloudback-up, training en gespecialiseerde software."),
     },
 }
 
 TEMPLATE_META = {
     "office": {
         "listing": "suite-office",
-        "cat_label": {"it": "Suite Office", "en": "Office suite", "fr": "Suite Office", "de": "Office-Suite", "es": "Suite Office"},
-        "eyebrow": {"it": "Licenza perpetua", "en": "Perpetual licence", "fr": "Licence perpétuelle", "de": "Dauerlizenz", "es": "Licencia perpetua"},
-        "activation": {"it": "Portale setup.office.com", "en": "Official setup.office.com portal", "fr": "Portail setup.office.com", "de": "setup.office.com-Portal", "es": "Portal setup.office.com"},
+        "cat_label": {"it": "Suite Office", "en": "Office suite", "fr": "Suite Office", "de": "Office-Suite", "es": "Suite Office", "pt": "Suite Office", "nl": "Office-suite"},
+        "eyebrow": {"it": "Licenza perpetua", "en": "Perpetual licence", "fr": "Licence perpétuelle", "de": "Dauerlizenz", "es": "Licencia perpetua", "pt": "Licença perpétua", "nl": "Permanente licentie"},
+        "activation": {"it": "Portale setup.office.com", "en": "Official setup.office.com portal", "fr": "Portail setup.office.com", "de": "setup.office.com-Portal", "es": "Portal setup.office.com", "pt": "Portal setup.office.com", "nl": "Officieel setup.office.com-portaal"},
         "brand": "Microsoft",
-        "blurb": {"it": "Licenza ESD · setup.office.com", "en": "ESD licence · setup.office.com", "fr": "Licence ESD · setup.office.com", "de": "ESD-Lizenz · setup.office.com", "es": "Licencia ESD · setup.office.com"},
+        "blurb": {"it": "Licenza ESD · setup.office.com", "en": "ESD licence · setup.office.com", "fr": "Licence ESD · setup.office.com", "de": "ESD-Lizenz · setup.office.com", "es": "Licencia ESD · setup.office.com", "pt": "Licença ESD · setup.office.com", "nl": "ESD-licentie · setup.office.com"},
     },
     "m365": {
         "listing": "suite-office",
-        "cat_label": {"it": "Suite Office", "en": "Office suite", "fr": "Suite Office", "de": "Office-Suite", "es": "Suite Office"},
-        "eyebrow": {"it": "Abbonamento Microsoft 365", "en": "Microsoft 365 subscription", "fr": "Abonnement Microsoft 365", "de": "Microsoft-365-Abonnement", "es": "Suscripción Microsoft 365"},
-        "activation": {"it": "Account Microsoft ufficiale", "en": "Official Microsoft account", "fr": "Compte Microsoft officiel", "de": "Offizielles Microsoft-Konto", "es": "Cuenta Microsoft oficial"},
+        "cat_label": {"it": "Suite Office", "en": "Office suite", "fr": "Suite Office", "de": "Office-Suite", "es": "Suite Office", "pt": "Suite Office", "nl": "Office-suite"},
+        "eyebrow": {"it": "Abbonamento Microsoft 365", "en": "Microsoft 365 subscription", "fr": "Abonnement Microsoft 365", "de": "Microsoft-365-Abonnement", "es": "Suscripción Microsoft 365", "pt": "Subscrição Microsoft 365", "nl": "Microsoft 365-abonnement"},
+        "activation": {"it": "Account Microsoft ufficiale", "en": "Official Microsoft account", "fr": "Compte Microsoft officiel", "de": "Offizielles Microsoft-Konto", "es": "Cuenta Microsoft oficial", "pt": "Conta Microsoft oficial", "nl": "Officieel Microsoft-account"},
         "brand": "Microsoft",
-        "blurb": {"it": "Abbonamento · attivazione account Microsoft", "en": "Subscription · Microsoft account activation", "fr": "Abonnement · compte Microsoft", "de": "Abonnement · Microsoft-Konto", "es": "Suscripción · cuenta Microsoft"},
+        "blurb": {"it": "Abbonamento · attivazione account Microsoft", "en": "Subscription · Microsoft account activation", "fr": "Abonnement · compte Microsoft", "de": "Abonnement · Microsoft-Konto", "es": "Suscripción · cuenta Microsoft", "pt": "Subscrição · conta Microsoft", "nl": "Abonnement · activering via Microsoft-account"},
     },
     "windows": {
         "listing": "sistemi-operativi",
-        "cat_label": {"it": "Sistemi Operativi", "en": "Operating systems", "fr": "Systèmes d'exploitation", "de": "Betriebssysteme", "es": "Sistemas operativos"},
-        "eyebrow": {"it": "Sistema operativo", "en": "Operating system", "fr": "Système d'exploitation", "de": "Betriebssystem", "es": "Sistema operativo"},
-        "activation": {"it": "Attivazione ufficiale Microsoft", "en": "Official Microsoft activation", "fr": "Activation Microsoft officielle", "de": "Offizielle Microsoft-Aktivierung", "es": "Activación oficial Microsoft"},
+        "cat_label": {"it": "Sistemi Operativi", "en": "Operating systems", "fr": "Systèmes d'exploitation", "de": "Betriebssysteme", "es": "Sistemas operativos", "pt": "Sistemas operativos", "nl": "Besturingssystemen"},
+        "eyebrow": {"it": "Sistema operativo", "en": "Operating system", "fr": "Système d'exploitation", "de": "Betriebssystem", "es": "Sistema operativo", "pt": "Sistema operativo", "nl": "Besturingssysteem"},
+        "activation": {"it": "Attivazione ufficiale Microsoft", "en": "Official Microsoft activation", "fr": "Activation Microsoft officielle", "de": "Offizielle Microsoft-Aktivierung", "es": "Activación oficial Microsoft", "pt": "Ativação oficial Microsoft", "nl": "Officiële Microsoft-activering"},
         "brand": "Microsoft",
-        "blurb": {"it": "ESD · Attivazione immediata", "en": "ESD · Instant activation", "fr": "ESD · Activation immédiate", "de": "ESD · Sofortige Aktivierung", "es": "ESD · Activación inmediata"},
+        "blurb": {"it": "ESD · Attivazione immediata", "en": "ESD · Instant activation", "fr": "ESD · Activation immédiate", "de": "ESD · Sofortige Aktivierung", "es": "ESD · Activación inmediata", "pt": "ESD · Ativação imediata", "nl": "ESD · Directe activering"},
     },
     "bundle": {
         "listing": "pacchetti",
-        "cat_label": {"it": "Pacchetti", "en": "Bundles", "fr": "Packs", "de": "Pakete", "es": "Packs"},
-        "eyebrow": {"it": "Pacchetto digitale", "en": "Digital bundle", "fr": "Pack numérique", "de": "Digitales Paket", "es": "Pack digital"},
-        "activation": {"it": "Email con codici e istruzioni", "en": "Email with codes and instructions", "fr": "E-mail avec codes et instructions", "de": "E-Mail mit Codes und Anleitung", "es": "Email con códigos e instrucciones"},
+        "cat_label": {"it": "Pacchetti", "en": "Bundles", "fr": "Packs", "de": "Pakete", "es": "Packs", "pt": "Pacotes", "nl": "Pakketten"},
+        "eyebrow": {"it": "Pacchetto digitale", "en": "Digital bundle", "fr": "Pack numérique", "de": "Digitales Paket", "es": "Pack digital", "pt": "Pacote digital", "nl": "Digitaal pakket"},
+        "activation": {"it": "Email con codici e istruzioni", "en": "Email with codes and instructions", "fr": "E-mail avec codes et instructions", "de": "E-Mail mit Codes und Anleitung", "es": "Email con códigos e instrucciones", "pt": "Email com códigos e instruções", "nl": "E-mail met codes en instructies"},
         "brand": "Microsoft",
-        "blurb": {"it": "Bundle · consegna digitale", "en": "Bundle · digital delivery", "fr": "Pack · livraison numérique", "de": "Paket · digitale Lieferung", "es": "Pack · entrega digital"},
+        "blurb": {"it": "Bundle · consegna digitale", "en": "Bundle · digital delivery", "fr": "Pack · livraison numérique", "de": "Paket · digitale Lieferung", "es": "Pack · entrega digital", "pt": "Pacote · entrega digital", "nl": "Pakket · digitale levering"},
     },
     "antivirus": {
         "listing": "antivirus",
-        "cat_label": {"it": "Antivirus", "en": "Antivirus", "fr": "Antivirus", "de": "Antivirus", "es": "Antivirus"},
-        "eyebrow": {"it": "Antivirus", "en": "Antivirus", "fr": "Antivirus", "de": "Antivirus", "es": "Antivirus"},
-        "activation": {"it": "Portale ufficiale del produttore", "en": "Official vendor portal", "fr": "Portail officiel de l'éditeur", "de": "Offizielles Herstellerportal", "es": "Portal oficial del fabricante"},
+        "cat_label": {"it": "Antivirus", "en": "Antivirus", "fr": "Antivirus", "de": "Antivirus", "es": "Antivirus", "pt": "Antivírus", "nl": "Antivirus"},
+        "eyebrow": {"it": "Antivirus", "en": "Antivirus", "fr": "Antivirus", "de": "Antivirus", "es": "Antivirus", "pt": "Antivírus", "nl": "Antivirus"},
+        "activation": {"it": "Portale ufficiale del produttore", "en": "Official vendor portal", "fr": "Portail officiel de l'éditeur", "de": "Offizielles Herstellerportal", "es": "Portal oficial del fabricante", "pt": "Portal oficial do fabricante", "nl": "Officieel portaal van de uitgever"},
         "brand": None,
-        "blurb": {"it": "Abbonamento · licenza digitale", "en": "Subscription · digital licence", "fr": "Abonnement · licence numérique", "de": "Abonnement · digitale Lizenz", "es": "Suscripción · licencia digital"},
+        "blurb": {"it": "Abbonamento · licenza digitale", "en": "Subscription · digital licence", "fr": "Abonnement · licence numérique", "de": "Abonnement · digitale Lizenz", "es": "Suscripción · licencia digital", "pt": "Subscrição · licença digital", "nl": "Abonnement · digitale licentie"},
     },
     "server": {
         "listing": "windows-server",
-        "cat_label": {"it": "Windows Server e SQL", "en": "Windows Server & SQL", "fr": "Windows Server et SQL", "de": "Windows Server & SQL", "es": "Windows Server y SQL"},
-        "eyebrow": {"it": "Server / database", "en": "Server / database", "fr": "Serveur / base de données", "de": "Server / Datenbank", "es": "Servidor / base de datos"},
-        "activation": {"it": "Attivazione ufficiale Microsoft", "en": "Official Microsoft activation", "fr": "Activation Microsoft officielle", "de": "Offizielle Microsoft-Aktivierung", "es": "Activación oficial Microsoft"},
+        "cat_label": {"it": "Windows Server e SQL", "en": "Windows Server & SQL", "fr": "Windows Server et SQL", "de": "Windows Server & SQL", "es": "Windows Server y SQL", "pt": "Windows Server e SQL", "nl": "Windows Server en SQL"},
+        "eyebrow": {"it": "Server / database", "en": "Server / database", "fr": "Serveur / base de données", "de": "Server / Datenbank", "es": "Servidor / base de datos", "pt": "Servidor / base de dados", "nl": "Server / database"},
+        "activation": {"it": "Attivazione ufficiale Microsoft", "en": "Official Microsoft activation", "fr": "Activation Microsoft officielle", "de": "Offizielle Microsoft-Aktivierung", "es": "Activación oficial Microsoft", "pt": "Ativação oficial Microsoft", "nl": "Officiële Microsoft-activering"},
         "brand": "Microsoft",
-        "blurb": {"it": "Licenza ESD · server/database", "en": "ESD licence · server/database", "fr": "Licence ESD · serveur/BD", "de": "ESD · Server/Datenbank", "es": "Licencia ESD · servidor/BD"},
+        "blurb": {"it": "Licenza ESD · server/database", "en": "ESD licence · server/database", "fr": "Licence ESD · serveur/BD", "de": "ESD · Server/Datenbank", "es": "Licencia ESD · servidor/BD", "pt": "Licença ESD · servidor/BD", "nl": "ESD-licentie · server/database"},
     },
     "tool": {
         "listing": "strumenti",
-        "cat_label": {"it": "Strumenti e altro", "en": "Tools & more", "fr": "Outils et plus", "de": "Tools & mehr", "es": "Herramientas y más"},
-        "eyebrow": {"it": "Software professionale", "en": "Professional software", "fr": "Logiciel professionnel", "de": "Professionelle Software", "es": "Software profesional"},
-        "activation": {"it": "Portale ufficiale del produttore", "en": "Official vendor portal", "fr": "Portail officiel de l'éditeur", "de": "Offizielles Herstellerportal", "es": "Portal oficial del fabricante"},
+        "cat_label": {"it": "Strumenti e altro", "en": "Tools & more", "fr": "Outils et plus", "de": "Tools & mehr", "es": "Herramientas y más", "pt": "Ferramentas e mais", "nl": "Tools en meer"},
+        "eyebrow": {"it": "Software professionale", "en": "Professional software", "fr": "Logiciel professionnel", "de": "Professionelle Software", "es": "Software profesional", "pt": "Software profissional", "nl": "Professionele software"},
+        "activation": {"it": "Portale ufficiale del produttore", "en": "Official vendor portal", "fr": "Portail officiel de l'éditeur", "de": "Offizielles Herstellerportal", "es": "Portal oficial del fabricante", "pt": "Portal oficial do fabricante", "nl": "Officieel portaal van de uitgever"},
         "brand": None,
-        "blurb": {"it": "Licenza digitale · consegna email", "en": "Digital licence · email delivery", "fr": "Licence numérique · e-mail", "de": "Digitale Lizenz · E-Mail", "es": "Licencia digital · email"},
+        "blurb": {"it": "Licenza digitale · consegna email", "en": "Digital licence · email delivery", "fr": "Licence numérique · e-mail", "de": "Digitale Lizenz · E-Mail", "es": "Licencia digital · email", "pt": "Licença digital · email", "nl": "Digitale licentie · levering per e-mail"},
     },
     "backup": {
         "listing": "strumenti",
-        "cat_label": {"it": "Strumenti e altro", "en": "Tools & more", "fr": "Outils et plus", "de": "Tools & mehr", "es": "Herramientas y más"},
-        "eyebrow": {"it": "Backup cloud", "en": "Cloud backup", "fr": "Sauvegarde cloud", "de": "Cloud-Backup", "es": "Backup en la nube"},
-        "activation": {"it": "Portale ufficiale Acronis", "en": "Official Acronis portal", "fr": "Portail Acronis officiel", "de": "Offizielles Acronis-Portal", "es": "Portal oficial Acronis"},
+        "cat_label": {"it": "Strumenti e altro", "en": "Tools & more", "fr": "Outils et plus", "de": "Tools & mehr", "es": "Herramientas y más", "pt": "Ferramentas e mais", "nl": "Tools en meer"},
+        "eyebrow": {"it": "Backup cloud", "en": "Cloud backup", "fr": "Sauvegarde cloud", "de": "Cloud-Backup", "es": "Backup en la nube", "pt": "Backup na nuvem", "nl": "Cloudback-up"},
+        "activation": {"it": "Portale ufficiale Acronis", "en": "Official Acronis portal", "fr": "Portail Acronis officiel", "de": "Offizielles Acronis-Portal", "es": "Portal oficial Acronis", "pt": "Portal oficial Acronis", "nl": "Officieel Acronis-portaal"},
         "brand": "Acronis",
-        "blurb": {"it": "Backup · storage cloud incluso", "en": "Backup · cloud storage included", "fr": "Sauvegarde · cloud inclus", "de": "Backup · Cloud-Speicher", "es": "Backup · almacenamiento cloud"},
+        "blurb": {"it": "Backup · storage cloud incluso", "en": "Backup · cloud storage included", "fr": "Sauvegarde · cloud inclus", "de": "Backup · Cloud-Speicher", "es": "Backup · almacenamiento cloud", "pt": "Backup · armazenamento cloud", "nl": "Back-up · cloudopslag inbegrepen"},
     },
     "training": {
         "listing": "strumenti",
-        "cat_label": {"it": "Strumenti e altro", "en": "Tools & more", "fr": "Outils et plus", "de": "Tools & mehr", "es": "Herramientas y más"},
-        "eyebrow": {"it": "Formazione", "en": "Training", "fr": "Formation", "de": "Schulung", "es": "Formación"},
-        "activation": {"it": "Download digitale via email", "en": "Digital download via email", "fr": "Téléchargement par e-mail", "de": "Digitaler Download per E-Mail", "es": "Descarga digital por email"},
+        "cat_label": {"it": "Strumenti e altro", "en": "Tools & more", "fr": "Outils et plus", "de": "Tools & mehr", "es": "Herramientas y más", "pt": "Ferramentas e mais", "nl": "Tools en meer"},
+        "eyebrow": {"it": "Formazione", "en": "Training", "fr": "Formation", "de": "Schulung", "es": "Formación", "pt": "Formação", "nl": "Training"},
+        "activation": {"it": "Download digitale via email", "en": "Digital download via email", "fr": "Téléchargement par e-mail", "de": "Digitaler Download per E-Mail", "es": "Descarga digital por email", "pt": "Download digital por email", "nl": "Digitale download per e-mail"},
         "brand": "Microsoft",
-        "blurb": {"it": "Guida PDF · consegna immediata", "en": "PDF guide · instant delivery", "fr": "Guide PDF · livraison immédiate", "de": "PDF-Guide · sofortige Lieferung", "es": "Guía PDF · entrega inmediata"},
+        "blurb": {"it": "Guida PDF · consegna immediata", "en": "PDF guide · instant delivery", "fr": "Guide PDF · livraison immédiate", "de": "PDF-Guide · sofortige Lieferung", "es": "Guía PDF · entrega inmediata", "pt": "Guia PDF · entrega imediata", "nl": "PDF-gids · directe levering"},
     },
 }
 
@@ -1299,6 +1434,12 @@ BUY_LABELS = {
     "es": {"avail": "Disponible · entrega inmediata", "eta": "Email en 2–15 min",
            "plan": "Selecciona la versión", "checkout": "Comprar ahora",
            "sticky_delivery": "Entrega en 2 minutos por email"},
+    "pt": {"avail": "Disponível · entrega imediata", "eta": "Email em 2–15 min",
+           "plan": "Escolha a versão", "checkout": "Comprar agora",
+           "sticky_delivery": "Entrega em 2 minutos por email"},
+    "nl": {"avail": "Beschikbaar · directe levering", "eta": "E-mail in 2–15 min",
+           "plan": "Kies uw editie", "checkout": "Nu kopen",
+           "sticky_delivery": "Levering in 2 minuten per e-mail"},
 }
 
 # Terzo percorso di conversione sotto "Acquista ora" / "Aggiungi al carrello":
@@ -1328,6 +1469,14 @@ PAYPAL_EXPRESS_I18N = {
            "error": "No se pudo cargar PayPal. Inténtalo de nuevo o usa Comprar ahora.",
            "cancelled": "Pago cancelado.",
            "capture_error": "Error al confirmar el pago de PayPal. Contacta con soporte."},
+    "pt": {"microcopy": "Checkout expresso", "loading": "A carregar o PayPal…",
+           "error": "Não foi possível carregar o PayPal. Tente novamente ou use Comprar agora.",
+           "cancelled": "Pagamento cancelado.",
+           "capture_error": "Erro ao confirmar o pagamento PayPal. Contacte o suporte."},
+    "nl": {"microcopy": "Express checkout", "loading": "PayPal wordt geladen…",
+           "error": "PayPal kon niet worden geladen. Probeer het opnieuw of gebruik Nu kopen.",
+           "cancelled": "Betaling geannuleerd.",
+           "capture_error": "Fout bij het bevestigen van de PayPal-betaling. Neem contact op met support."},
 }
 
 
@@ -1361,6 +1510,8 @@ APP_DEMOS = {
         "fr": "Documents, lettres et mémoires avec correction et mise en forme automatiques.",
         "de": "Dokumente, Briefe und Arbeiten mit automatischer Korrektur und Formatierung.",
         "es": "Documentos, cartas y trabajos con corrección y formato automáticos.",
+        "pt": "Documentos, cartas e teses com correção e formatação automáticas.",
+        "nl": "Documenten, brieven en scripties met automatische spellingcontrole en opmaak.",
     },
     "excel": {
         "it": "Fogli di calcolo, budget e grafici con formule e tabelle pivot.",
@@ -1368,6 +1519,8 @@ APP_DEMOS = {
         "fr": "Feuilles de calcul, budgets et graphiques avec formules et tableaux croisés.",
         "de": "Tabellen, Budgets und Diagramme mit Formeln und Pivot-Tabellen.",
         "es": "Hojas de cálculo, presupuestos y gráficos con fórmulas y tablas dinámicas.",
+        "pt": "Folhas de cálculo, orçamentos e gráficos com fórmulas e tabelas dinâmicas.",
+        "nl": "Spreadsheets, budgetten en grafieken met formules en draaitabellen.",
     },
     "powerpoint": {
         "it": "Presentazioni con layout, transizioni e note per il relatore.",
@@ -1375,6 +1528,8 @@ APP_DEMOS = {
         "fr": "Présentations avec mises en page, transitions et notes du présentateur.",
         "de": "Präsentationen mit Layouts, Übergängen und Sprechernotizen.",
         "es": "Presentaciones con diseños, transiciones y notas del orador.",
+        "pt": "Apresentações com layouts, transições e notas do orador.",
+        "nl": "Presentaties met lay-outs, overgangen en sprekersnotities.",
     },
     "outlook": {
         "it": "Posta, calendario e contatti in un'unica applicazione.",
@@ -1382,6 +1537,8 @@ APP_DEMOS = {
         "fr": "Messagerie, calendrier et contacts dans une seule application.",
         "de": "E-Mail, Kalender und Kontakte in einer Anwendung.",
         "es": "Correo, calendario y contactos en una sola aplicación.",
+        "pt": "Correio, calendário e contactos numa única aplicação.",
+        "nl": "E-mail, agenda en contacten in één toepassing.",
     },
     "onedrive": {
         "it": "Spazio cloud per file e foto, sincronizzati su tutti i dispositivi.",
@@ -1389,6 +1546,8 @@ APP_DEMOS = {
         "fr": "Stockage cloud pour fichiers et photos, synchronisé sur vos appareils.",
         "de": "Cloud-Speicher für Dateien und Fotos, auf allen Geräten synchronisiert.",
         "es": "Almacenamiento en la nube para archivos y fotos, sincronizado en tus dispositivos.",
+        "pt": "Armazenamento na nuvem para ficheiros e fotos, sincronizado em todos os dispositivos.",
+        "nl": "Cloudopslag voor bestanden en foto’s, gesynchroniseerd op al uw apparaten.",
     },
     "teams": {
         "it": "Chat, chiamate e riunioni video con condivisione dello schermo.",
@@ -1396,6 +1555,8 @@ APP_DEMOS = {
         "fr": "Chat, appels et réunions vidéo avec partage d'écran.",
         "de": "Chat, Anrufe und Videobesprechungen mit Bildschirmfreigabe.",
         "es": "Chat, llamadas y reuniones de vídeo con pantalla compartida.",
+        "pt": "Chat, chamadas e reuniões de vídeo com partilha de ecrã.",
+        "nl": "Chat, gesprekken en videovergaderingen met schermdeling.",
     },
 }
 
@@ -1435,6 +1596,8 @@ GUIDE_LABELS = {
     "fr": {"open": "Comment fonctionne l'activation ?", "close": "J'ai compris, fermer"},
     "de": {"open": "Wie funktioniert die Aktivierung?", "close": "Verstanden, schließen"},
     "es": {"open": "¿Cómo funciona la activación?", "close": "Entendido, cerrar"},
+    "pt": {"open": "Como funciona a ativação após a compra?", "close": "Entendi, fechar"},
+    "nl": {"open": "Hoe werkt activering na aankoop?", "close": "Begrepen, sluiten"},
 }
 
 # Icona informativa davanti al trigger della modale "come si attiva": prima
@@ -1456,6 +1619,7 @@ COPILOT_BONUS_NOTE = {
     "fr": "<strong>Guide Copilot inclus gratuitement :</strong> joint en PDF au même e-mail de livraison que votre code, avec des exemples pratiques pour Word, Excel et PowerPoint.",
     "de": "<strong>Copilot-Leitfaden gratis inklusive:</strong> als PDF derselben E-Mail mit Ihrem Code beigefügt, mit praktischen Beispielen für Word, Excel und PowerPoint.",
     "es": "<strong>Guía de Copilot incluida gratis:</strong> adjunta en PDF al mismo correo de entrega de tu código, con ejemplos prácticos para Word, Excel y PowerPoint.",
+    "nl": "<strong>Copilot-gids gratis inbegrepen:</strong> als PDF bij dezelfde leveringsmail als uw code, met praktische voorbeelden voor Word, Excel en PowerPoint.",
 }
 
 
@@ -1468,6 +1632,8 @@ PER_SEAT_LABEL = {
     "fr": {"label": "Coût par personne", "text": "€ {price} / an sur {n} comptes", "aria": "Détails de la licence"},
     "de": {"label": "Kosten pro Person", "text": "€ {price} / Jahr auf {n} Konten", "aria": "Lizenzdetails"},
     "es": {"label": "Coste por persona", "text": "€ {price} / año en {n} cuentas", "aria": "Detalles de la licencia"},
+    "pt": {"label": "Custo por pessoa", "text": "€ {price} / ano em {n} contas", "aria": "Detalhes da licença"},
+    "nl": {"label": "Kosten per persoon", "text": "€ {price} / jaar over {n} accounts", "aria": "Licentiegegevens"},
 }
 
 
@@ -1500,7 +1666,7 @@ def _render_copilot_bonus(flag, lang):
 # Suffisso del badge sconto ("−17% SCONTO" nel mockup di riferimento): micro-
 # etichetta di interfaccia, non testo di un cliente — tradurla per lingua e'
 # la stessa cosa che si fa per qualunque altra label dell'interfaccia.
-DISCOUNT_SUFFIX = {"it": "SCONTO", "en": "OFF", "fr": "REMISE", "de": "RABATT", "es": "DTO"}
+DISCOUNT_SUFFIX = {"it": "SCONTO", "en": "OFF", "fr": "REMISE", "de": "RABATT", "es": "DTO", "pt": "DESC", "nl": "KORTING"}
 
 
 def _render_activation_modal(ui, content, lang):
@@ -1646,6 +1812,8 @@ def _dev_sub(n):
         "de": f"{n} Gerät{'e' if n != 1 else ''}",
         "fr": f"{n} appareil{'s' if n != 1 else ''}",
         "es": f"{n} dispositivo{'s' if n != 1 else ''}",
+        "pt": f"{n} dispositivo{'s' if n != 1 else ''}",
+        "nl": f"{n} apparaat" if n == 1 else f"{n} apparaten",
     }
 
 
@@ -1653,10 +1821,10 @@ VARIANT_SETS = {
     "m365-consumer": [
         {"sku": "QQ2-00012", "slug": "microsoft-365-personal", "label": "Personal",
          "sub": {"it": "1 utente", "en": "1 user", "de": "1 Nutzer",
-                 "fr": "1 utilisateur", "es": "1 usuario"}},
+                 "fr": "1 utilisateur", "es": "1 usuario", "pt": "1 utilizador", "nl": "1 gebruiker"}},
         {"sku": "6GQ-00092", "slug": "microsoft-365-family", "label": "Family",
          "sub": {"it": "fino a 6 utenti", "en": "up to 6 users", "de": "bis zu 6 Nutzer",
-                 "fr": "jusqu'à 6 utilisateurs", "es": "hasta 6 usuarios"}},
+                 "fr": "jusqu'à 6 utilisateurs", "es": "hasta 6 usuarios", "pt": "até 6 utilizadores", "nl": "tot 6 gebruikers"}},
     ],
     "kaspersky-premium": [
         {"sku": "KL1047TDAFS", "slug": "kaspersky-premium-1-device", "label": "1",
@@ -1689,20 +1857,20 @@ VARIANT_SETS = {
     "norton-standard": [
         {"sku": "21395096E7", "slug": "norton-360-standard", "label": "Standard",
          "sub": {"it": "con rinnovo", "en": "with renewal", "de": "mit Verlängerung",
-                 "fr": "avec renouvellement", "es": "con renovación"}},
+                 "fr": "avec renouvellement", "es": "con renovación", "pt": "com renovação", "nl": "met verlenging"}},
         {"sku": "P1433901", "slug": "norton-360-standard-no-sub", "label": "Standard",
          "sub": {"it": "senza rinnovo automatico", "en": "no auto-renewal", "de": "ohne Auto-Verlängerung",
-                 "fr": "sans renouvellement auto", "es": "sin renovación automática"}},
+                 "fr": "sans renouvellement auto", "es": "sin renovación automática", "pt": "sem renovação automática", "nl": "zonder automatische verlenging"}},
     ],
     "norton-deluxe": [
         {"sku": "NORT_360DEL_3D_1A", "slug": "norton-360-deluxe", "label": "Deluxe",
          "sub": {"it": "3 dispositivi · con rinnovo", "en": "3 devices · with renewal",
                  "de": "3 Geräte · mit Verlängerung", "fr": "3 appareils · avec renouvellement",
-                 "es": "3 dispositivos · con renovación"}},
+                 "es": "3 dispositivos · con renovación", "pt": "3 dispositivos · com renovação", "nl": "3 apparaten · met verlenging"}},
         {"sku": "NORT_360DEL_3D_1A-NOABB", "slug": "norton-360-deluxe-no-sub", "label": "Deluxe",
          "sub": {"it": "3 dispositivi · senza rinnovo automatico", "en": "3 devices · no auto-renewal",
                  "de": "3 Geräte · ohne Auto-Verlängerung", "fr": "3 appareils · sans renouvellement auto",
-                 "es": "3 dispositivos · sin renovación automática"}},
+                 "es": "3 dispositivos · sin renovación automática", "pt": "3 dispositivos · sem renovação automática", "nl": "3 apparaten · zonder automatische verlenging"}},
     ],
 }
 
@@ -1722,6 +1890,10 @@ KASPERSKY_PARTNER = {
            "text": "Originallizenzen, Aktivierung über das offizielle Portal."},
     "es": {"label": "Revendedor autorizado Kaspersky",
            "text": "Licencias originales con activación en el portal oficial."},
+    "pt": {"label": "Revendedor autorizado Kaspersky",
+           "text": "Licenças originais com ativação no portal oficial."},
+    "nl": {"label": "Geautoriseerde Kaspersky-wederverkoper",
+           "text": "Originele licenties, activering via het officiële portaal."},
 }
 
 NORTON_CROSS = {
@@ -1731,6 +1903,8 @@ NORTON_CROSS = {
         "fr": "Voir Norton 360 Deluxe (3 appareils)",
         "de": "Zu Norton 360 Deluxe (3 Geräte)",
         "es": "Ver Norton 360 Deluxe (3 dispositivos)",
+        "pt": "Ver Norton 360 Deluxe (3 dispositivos)",
+        "nl": "Bekijk Norton 360 Deluxe (3 apparaten)",
     }),
     "P1433901": ("norton-360-deluxe-no-sub", {
         "it": "Passa a Norton 360 Deluxe senza rinnovo automatico",
@@ -1738,6 +1912,8 @@ NORTON_CROSS = {
         "fr": "Voir Norton 360 Deluxe sans renouvellement auto",
         "de": "Zu Norton 360 Deluxe ohne Auto-Verlängerung",
         "es": "Ver Norton 360 Deluxe sin renovación automática",
+        "pt": "Ver Norton 360 Deluxe sem renovação automática",
+        "nl": "Bekijk Norton 360 Deluxe zonder automatische verlenging",
     }),
     "NORT_360DEL_3D_1A": ("norton-360-standard", {
         "it": "Preferisci Norton 360 Standard (1 dispositivo)",
@@ -1745,6 +1921,8 @@ NORTON_CROSS = {
         "fr": "Préférer Norton 360 Standard (1 appareil)",
         "de": "Lieber Norton 360 Standard (1 Gerät)",
         "es": "Prefieres Norton 360 Standard (1 dispositivo)",
+        "pt": "Prefere Norton 360 Standard (1 dispositivo)",
+        "nl": "Liever Norton 360 Standard (1 apparaat)",
     }),
     "NORT_360DEL_3D_1A-NOABB": ("norton-360-standard-no-sub", {
         "it": "Preferisci Norton 360 Standard senza rinnovo automatico",
@@ -1752,6 +1930,8 @@ NORTON_CROSS = {
         "fr": "Préférer Norton 360 Standard sans renouvellement auto",
         "de": "Lieber Norton 360 Standard ohne Auto-Verlängerung",
         "es": "Prefieres Norton 360 Standard sin renovación automática",
+        "pt": "Prefere Norton 360 Standard sem renovação automática",
+        "nl": "Liever Norton 360 Standard zonder automatische verlenging",
     }),
 }
 
@@ -1762,6 +1942,8 @@ KASPERSKY_CROSS = {
         "fr": "Comparer Kaspersky Plus",
         "de": "Kaspersky Plus vergleichen",
         "es": "Comparar Kaspersky Plus",
+        "pt": "Comparar Kaspersky Plus",
+        "nl": "Vergelijk Kaspersky Plus",
     }),
     "KASP_PLUS_1D_1A": ("kaspersky-standard", {
         "it": "Confronta Kaspersky Standard",
@@ -1769,6 +1951,8 @@ KASPERSKY_CROSS = {
         "fr": "Comparer Kaspersky Standard",
         "de": "Kaspersky Standard vergleichen",
         "es": "Comparar Kaspersky Standard",
+        "pt": "Comparar Kaspersky Standard",
+        "nl": "Vergelijk Kaspersky Standard",
     }),
 }
 
@@ -1798,6 +1982,30 @@ def _render_cross_sell(sku, lang):
 VARIANT_OF = {
     v["sku"]: name for name, variants in VARIANT_SETS.items() for v in variants
 }
+
+for _obj in (
+    STOCK_I18N,
+    TRUSTPILOT_LOCALE,
+    TRUSTPILOT_FALLBACK_LEAD,
+    PHYSICAL_LABELS,
+    PHYSICAL_UI,
+    V3_UI,
+    V3_PHYSICAL_UI,
+    BASE_LABELS,
+    CATALOG_META,
+    TEMPLATE_META,
+    BUY_LABELS,
+    PAYPAL_EXPRESS_I18N,
+    APP_DEMOS,
+    GUIDE_LABELS,
+    COPILOT_BONUS_NOTE,
+    PER_SEAT_LABEL,
+    DISCOUNT_SUFFIX,
+    KASPERSKY_PARTNER,
+    NORTON_CROSS,
+    KASPERSKY_CROSS,
+):
+    backfill_lang(_obj, target="nl", source="en", translate=nl_text)
 
 
 def _render_plan_switcher(sku, lang, ui):

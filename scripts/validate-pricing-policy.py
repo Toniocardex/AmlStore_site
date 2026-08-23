@@ -25,7 +25,7 @@ from commercial_pricing import (  # noqa: E402
 
 CATALOG = {e["sku"]: e for e in json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))}
 POLICY = load_policy()
-LANGS = ("it", "en", "fr", "de", "es")
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 CLUSTER_START_RE = re.compile(r'data-stripe-currency="eur"')
 SKU_ATTR_RE = re.compile(r'data-stripe-product-sku="([^"]+)"')

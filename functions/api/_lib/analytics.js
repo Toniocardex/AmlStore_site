@@ -23,7 +23,7 @@
 import { now }                                       from './utils.js';
 import { hmacIdentifier, bumpBucket, windowSlot }    from './rate-limit.js';
 
-const ALLOWED_LOCALES = new Set(['it', 'en', 'fr', 'de', 'es']);
+const ALLOWED_LOCALES = new Set(['it', 'en', 'fr', 'de', 'es', 'pt', 'nl']);
 
 const STATIC_EXT_RE = /\.(css|js|mjs|json|png|jpe?g|webp|avif|gif|svg|ico|woff2?|ttf|eot|mp4|webm|pdf|xml|txt|map)$/i;
 

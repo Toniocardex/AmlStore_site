@@ -5,11 +5,15 @@
   <url><loc>https://aml-store.com/fr/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/de/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/contacts</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/en/contacts</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/fr/contacts</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/de/contacts</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/contacts</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/contacts</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/contacts</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/acronis-true-image-advanced</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/adobe-acrobat-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/adobe-acrobat-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -360,4 +364,144 @@
   <url><loc>https://aml-store.com/es/windows-server-2025</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/windows-server</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/word-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/acronis-true-image-advanced</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/adobe-acrobat-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/adobe-acrobat-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/antivirus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/bitdefender-plus-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/bitdefender-plus-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/bitdefender-plus-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/bitdefender-plus-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/bundle-m365-personal-kaspersky</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/bundle-m365-personal-mcafee</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/bundle-windows-11-home-m365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/consultoria</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/coreldraw-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/eset-nod32-1-device-2y</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/eset-nod32-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/eset-nod32-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/eset-nod32-2-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/eset-nod32-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/eset-nod32-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/excel-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/kaspersky-plus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/kaspersky-premium-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/kaspersky-premium-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/kaspersky-premium-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/kaspersky-premium-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/kaspersky-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/norton-360-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/office-2019-home-student</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/office-2019-professional-plus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/office-2021-home-business-mac</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/office-2021-home-business</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/office-2021-home-student</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/office-2021-professional-plus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/office-2024-home-business</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/office-2024-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/outlook-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/pacchetti</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/powerpoint-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/project-professional-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/project-standard-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/sistemi-operativi</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/sobre-nos</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/sql-server-2022-enterprise</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/sql-server-2022-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/strumenti</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/suite-office</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/visio-professional-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/visio-standard-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-10-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-10-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-11-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-11-pro-coa</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-11-pro-oem-dvd</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-11-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-server-2019-esd</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-server-2019</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-server-2022</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-server-2025-dvd</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-server-2025</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/windows-server</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/word-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/acronis-true-image-advanced</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/adobe-acrobat-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/adobe-acrobat-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/antivirus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/bitdefender-plus-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/bitdefender-plus-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/bitdefender-plus-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/bitdefender-plus-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/bundle-m365-personal-kaspersky</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/bundle-m365-personal-mcafee</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/bundle-windows-11-home-m365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/consultatie</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/coreldraw-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/eset-nod32-1-device-2y</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/eset-nod32-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/eset-nod32-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/eset-nod32-2-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/eset-nod32-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/eset-nod32-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/excel-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/kaspersky-plus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/kaspersky-premium-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/kaspersky-premium-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/kaspersky-premium-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/kaspersky-premium-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/kaspersky-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/norton-360-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/office-2019-home-student</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/office-2019-professional-plus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/office-2021-home-business-mac</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/office-2021-home-business</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/office-2021-home-student</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/office-2021-professional-plus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/office-2024-home-business</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/office-2024-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/outlook-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/over-ons</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/pacchetti</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/powerpoint-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/project-professional-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/project-standard-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/sistemi-operativi</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/sql-server-2022-enterprise</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/sql-server-2022-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/strumenti</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/suite-office</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/visio-professional-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/visio-standard-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-10-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-10-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-11-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-11-pro-coa</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-11-pro-oem-dvd</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-11-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-server-2019-esd</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-server-2019</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-server-2022</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-server-2025-dvd</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-server-2025</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/windows-server</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/word-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
 </urlset>

@@ -348,6 +348,8 @@
         fr: { added: 'Ajouté au panier', view: 'Voir le panier' },
         de: { added: 'Zum Warenkorb hinzugefügt', view: 'Warenkorb ansehen' },
         es: { added: 'Añadido al carrito', view: 'Ver carrito' },
+        pt: { added: 'Adicionado ao carrinho', view: 'Ver carrinho' },
+        nl: { added: 'Toegevoegd aan winkelwagen', view: 'Bekijk winkelwagen' },
     };
     var toastHideTimer = null;
 

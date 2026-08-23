@@ -14,12 +14,12 @@
     const PAYPAL_CONFIG_URL      = '/api/paypal-config';
 
     const PAYPAL_LOCALE_MAP = {
-        it: 'it_IT', en: 'en_US', fr: 'fr_FR', de: 'de_DE', es: 'es_ES',
+        it: 'it_IT', en: 'en_US', fr: 'fr_FR', de: 'de_DE', es: 'es_ES', pt: 'pt_PT', nl: 'nl_NL',
     };
 
     const CART_PATHS = {
         it: '/it/cart', en: '/en/cart', fr: '/fr/cart',
-        de: '/de/cart', es: '/es/cart',
+        de: '/de/cart', es: '/es/cart', pt: '/pt/cart', nl: '/nl/cart',
     };
 
     /* ─── Stato PayPal SDK ─────────────────────────────────────────────────── */

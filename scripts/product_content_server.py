@@ -14,7 +14,9 @@ Due fatti che governano il contenuto:
 - SQL Server con licenza per core: le CAL non servono affatto.
 """
 
-LANGS = ("it", "en", "fr", "de", "es")
+from nl_translations import nl_text
+
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 # slug -> versione, core, supporto ("dvd" = fisico in inglese, "esd" = digitale)
 WINDOWS_SERVER = {
@@ -36,12 +38,16 @@ WS_RAM = {
              "en": "1 GB for Server Core, 2 GB with Desktop Experience.",
              "fr": "1 Go pour Server Core, 2 Go avec Desktop Experience.",
              "de": "1 GB für Server Core, 2 GB mit Desktop Experience.",
-             "es": "1 GB para Server Core, 2 GB con Desktop Experience."},
+             "es": "1 GB para Server Core, 2 GB con Desktop Experience.",
+             "pt": "1 GB para Server Core, 2 GB com Desktop Experience.",
+             "nl": "1 GB voor Server Core, 2 GB met Desktop Experience."},
     "2025": {"it": "2 GB per Server Core e 2 GB con Desktop Experience, 4 GB consigliati.",
              "en": "2 GB for Server Core and 2 GB with Desktop Experience, 4 GB recommended.",
              "fr": "2 Go pour Server Core et 2 Go avec Desktop Experience, 4 Go recommandés.",
              "de": "2 GB für Server Core und 2 GB mit Desktop Experience, 4 GB empfohlen.",
-             "es": "2 GB para Server Core y 2 GB con Desktop Experience, 4 GB recomendados."},
+             "es": "2 GB para Server Core y 2 GB con Desktop Experience, 4 GB recomendados.",
+             "pt": "2 GB para Server Core e 2 GB com Desktop Experience, 4 GB recomendados.",
+             "nl": "2 GB voor Server Core en 2 GB met Desktop Experience, 4 GB aanbevolen."},
 }
 WS_RAM["2022"] = WS_RAM["2019"]
 
@@ -50,12 +56,16 @@ WS_CPU = {
              "en": "64-bit processor at 1.4 GHz or faster, x64-compatible with NX, DEP and SLAT.",
              "fr": "Processeur 64 bits à 1,4 GHz minimum, compatible x64 avec NX, DEP et SLAT.",
              "de": "64-Bit-Prozessor ab 1,4 GHz, x64-kompatibel mit NX, DEP und SLAT.",
-             "es": "Procesador de 64 bits desde 1,4 GHz, compatible x64 con NX, DEP y SLAT."},
+             "es": "Procesador de 64 bits desde 1,4 GHz, compatible x64 con NX, DEP y SLAT.",
+             "pt": "Processador de 64 bits a partir de 1,4 GHz, compatível x64 com NX, DEP e SLAT.",
+             "nl": "64-bit processor vanaf 1,4 GHz, x64-compatibel met NX, DEP en SLAT."},
     "2025": {"it": "Processore 64 bit da almeno 1,4 GHz. La versione 2025 richiede in più le istruzioni SSE4.2 e POPCNT: verifica la CPU prima di acquistare.",
              "en": "64-bit processor at 1.4 GHz or faster. The 2025 release also requires SSE4.2 and POPCNT instructions: check your CPU before buying.",
              "fr": "Processeur 64 bits à 1,4 GHz minimum. La version 2025 exige en plus les instructions SSE4.2 et POPCNT : vérifiez le processeur avant l'achat.",
              "de": "64-Bit-Prozessor ab 1,4 GHz. Version 2025 benötigt zusätzlich SSE4.2 und POPCNT: CPU vor dem Kauf prüfen.",
-             "es": "Procesador de 64 bits desde 1,4 GHz. La versión 2025 exige además las instrucciones SSE4.2 y POPCNT: comprueba la CPU antes de comprar."},
+             "es": "Procesador de 64 bits desde 1,4 GHz. La versión 2025 exige además las instrucciones SSE4.2 y POPCNT: comprueba la CPU antes de comprar.",
+             "pt": "Processador de 64 bits a partir de 1,4 GHz. A versão 2025 exige também as instruções SSE4.2 e POPCNT: verifica o processador antes de comprar.",
+             "nl": "64-bit processor vanaf 1,4 GHz. Versie 2025 vereist ook de instructies SSE4.2 en POPCNT: controleer de processor vóór aankoop."},
 }
 WS_CPU["2022"] = WS_CPU["2019"]
 
@@ -433,6 +443,157 @@ T["es"] = dict(T["it"], **{
     "faq_sqlmin_q": "¿Hay un mínimo de núcleos a licenciar?",
     "faq_sqlmin_a": "Sí: Microsoft exige al menos cuatro núcleos licenciados por cada servidor físico o máquina virtual con SQL Server.",
 })
+
+T["pt"] = dict(T["it"], **{
+    "ws_eyebrow": "Licença perpétua · {cores} núcleos",
+    "ws_name": "Windows Server {anno} Standard",
+    "ws_seo": "Windows Server {anno} Standard {cores} núcleos — Aml Store",
+    "ws_desc": ("Windows Server {anno} Standard de 64 bits com licença perpétua para {cores} núcleos. "
+                "{consegna} As CAL de acesso de cliente não estão incluídas: compram-se em separado para "
+                "cada utilizador ou dispositivo que vá usar o servidor."),
+    "ws_feat_title": "O que esta licença cobre",
+    "ws_f1": ("Licença por núcleo", "Cobre {cores} núcleos",
+              "A licença cobre um servidor com um máximo de {cores} núcleos físicos. Se o teu servidor tiver mais, precisas de licenças adicionais para os cobrir todos."),
+    "ws_f2": ("Bom saber", "As CAL não estão incluídas",
+              "O Windows Server exige uma CAL para cada utilizador ou dispositivo que acede ao servidor. Não estão incluídas nesta licença e compram-se em separado."),
+    "ws_f3": ("Virtualização", "Até 2 ambientes de servidor",
+              "A edição Standard dá direito a dois ambientes de sistema operativo, ou contentores Windows com isolamento Hyper-V, quando todos os núcleos físicos estão licenciados."),
+    "ws_f4": ("Funções", "Active Directory, Hyper-V, ficheiros e web",
+              "Inclui as funções do Windows Server Standard: serviços de domínio Active Directory, Hyper-V, servidor de ficheiros e impressão, e IIS."),
+    "ws_f5_dvd": ("Suporte", "DVD OEM em inglês",
+                  "Recebes o suporte físico OEM. A interface do sistema operativo está em inglês: tem isso em conta se precisares de português."),
+    "ws_f5_esd": ("Entrega", "Licença digital por email",
+                  "Código e instruções chegam por email após a confirmação do pagamento: nada para esperar pelo correio."),
+    "ws_f6_2025": ("Novidades 2025", "Atualizações sem reiniciar",
+                   "O Windows Server 2025 introduz o hotpatching através do Azure Arc, que reduz os reinícios planeados, além de um Active Directory reforçado e suporte NVMe nativo."),
+    "sql_eyebrow": "Licença perpétua · {cores} núcleos",
+    "sql_name": "SQL Server 2022 {ed}",
+    "sql_seo": "SQL Server 2022 {ed} {cores} núcleos — Aml Store",
+    "sql_desc": ("SQL Server 2022 {ed} com licença perpétua por núcleo ({cores} núcleos). "
+                 "Com o modelo por núcleo não são necessárias CAL: o número de utilizadores que acedem à base de dados é ilimitado. "
+                 "Suporte físico incluído, interface em inglês."),
+    "sql_feat_title": "O que a licença inclui",
+    "sql_f1": ("Modelo de licenciamento", "Sem CAL para comprar",
+               "A licença por núcleo não exige licenças de acesso de cliente: qualquer número de utilizadores ou aplicações pode usar a base de dados sem custo por posto."),
+    "sql_f2": ("Capacidade", "Licença para {cores} núcleos",
+               "Cobre {cores} núcleos. A Microsoft exige um mínimo de quatro núcleos licenciados por servidor ou máquina virtual."),
+    "sql_f3_std": ("Limites de edição", "Até 24 núcleos",
+                   "A edição Standard usa no máximo o menor entre 4 sockets e 24 núcleos: esta licença de 16 núcleos fica bem dentro do limite."),
+    "sql_f3_ent": ("Limites de edição", "Sem limite de núcleos",
+                   "A edição Enterprise não tem limite de núcleos com a licença por núcleo, e desbloqueia as funções avançadas de alta disponibilidade e análise."),
+    "sql_f4": ("Compatibilidade", "Windows Server 2016 ou posterior",
+               "Instala-se em Windows Server 2016 e versões posteriores, incluindo Server Core. Requer .NET Framework 4.7.2."),
+    "consegna_dvd": "Recebes o DVD OEM original com envio gratuito; a interface está em inglês.",
+    "consegna_esd": "Código e instruções chegam por email após a confirmação do pagamento.",
+    "spec_cpu": "Processador", "spec_ram": "Memória", "spec_disk": "Espaço em disco", "spec_net": "Rede",
+    "ws_disk": "Pelo menos 32 GB livres na partição do sistema. Servidores com mais de 16 GB de RAM precisam de espaço adicional para paginação e ficheiros de despejo.",
+    "ws_net": "Adaptador Ethernet com um débito de pelo menos 1 Gbit/s, conforme as especificações PCI Express.",
+    "sql_cpu": "Processador x64 a partir de 1,4 GHz, recomenda-se 2,0 GHz ou superior. A instalação só é suportada em processadores x64.",
+    "sql_ram": "Pelo menos 1 GB de RAM, recomendando-se 4 GB ou mais e aumentando com o crescimento da base de dados.",
+    "sql_disk": "Pelo menos 6 GB livres. A instalação completa de todas as funcionalidades requer cerca de 8 GB.",
+    "sql_os": "Sistema operativo",
+    "sql_os_body": "Windows Server 2016 ou posterior, ou Windows 10 versão 1607 ou posterior. Requer .NET Framework 4.7.2.",
+    "specs_note": "Valores indicativos da documentação da Microsoft. Verifica sempre os requisitos atualizados antes de instalar.",
+    "steps_title": "Encomenda, entrega e ativação",
+    "step1": ("Conclui a encomenda", "Paga com um dos métodos disponíveis no checkout: cartão, PayPal ou carteiras digitais."),
+    "step2_dvd": ("Recebe o suporte", "Enviamos o DVD original com envio gratuito: entregue à transportadora até 24 horas úteis após o pagamento."),
+    "step2_esd": ("Recebe o código", "O código do produto e as instruções chegam por email após a confirmação do pagamento."),
+    "step3": ("Instala e ativa", "Instala o sistema e ativa a licença através dos canais oficiais da Microsoft, seguindo as instruções recebidas."),
+    "faq_cal_q": "As CAL estão incluídas no preço?",
+    "faq_cal_a": "Não. O Windows Server exige uma licença de acesso de cliente (CAL) para cada utilizador ou dispositivo que usa o servidor, e não está incluída nesta licença. As CAL compram-se em separado e valem para todo o ambiente, não para um único servidor.",
+    "faq_core_q": "O que acontece se o meu servidor tiver mais de {cores} núcleos?",
+    "faq_core_a": "A licença cobre {cores} núcleos. Se o servidor tiver mais, tens de licenciar todos os núcleos físicos, comprando licenças adicionais. A Microsoft exige um mínimo de {cores} núcleos licenciados por servidor.",
+    "faq_virt_q": "Quantas máquinas virtuais posso executar?",
+    "faq_virt_a": "A edição Standard dá direito a dois ambientes de sistema operativo (ou contentores Windows com isolamento Hyper-V) quando todos os núcleos físicos do servidor estão licenciados. Além deste limite são necessárias licenças adicionais.",
+    "faq_lang_q": "Em que idioma está o sistema operativo?",
+    "faq_lang_a": "O suporte OEM está em inglês: a interface e a instalação são em inglês. Verifica isto antes de comprar se precisares de português.",
+    "faq_media_q": "O que recebo exatamente?",
+    "faq_media_a": "Recebes o código de licença e as instruções por email após a confirmação do pagamento. A entrega é apenas digital: não é enviado nenhum suporte físico.",
+    "faq_sqlcal_q": "É preciso CAL para o SQL Server?",
+    "faq_sqlcal_a": "Não. Com a licença por núcleo não são exigidas licenças de acesso de cliente: podem usar a base de dados quantos utilizadores ou aplicações quiseres, sem custo por posto.",
+    "faq_sqlos_q": "Em que sistemas operativos se instala?",
+    "faq_sqlos_a": "Em Windows Server 2016 e versões posteriores, incluindo instalações Server Core, ou em Windows 10 versão 1607 e posteriores. Requer .NET Framework 4.7.2.",
+    "faq_sqlmin_q": "Há um mínimo de núcleos a licenciar?",
+    "faq_sqlmin_a": "Sim: a Microsoft exige pelo menos quatro núcleos licenciados para cada servidor físico ou máquina virtual que execute o SQL Server.",
+})
+
+# Le chiavi non elencate qui sotto ereditano l'inglese passando da nl_text():
+# cosi' la traduzione olandese vive in scripts/nl_translations.py come per gli
+# altri moduli, invece di restare inglese silenziosamente.
+T["nl"] = dict({k: nl_text(v) for k, v in T["en"].items()}, **{
+    "ws_eyebrow": "Permanente licentie · {cores} cores",
+    "ws_name": "Windows Server {anno} Standard",
+    "ws_seo": "Windows Server {anno} Standard {cores} cores — Aml Store",
+    "ws_desc": ("Windows Server {anno} Standard 64-bit met een permanente licentie voor {cores} cores. "
+                "{consegna} Client Access Licenses zijn niet inbegrepen: die koopt u apart voor "
+                "elke gebruiker of elk apparaat dat de server gebruikt."),
+    "ws_feat_title": "Wat deze licentie dekt",
+    "ws_f1": ("Core-licenties", "Dekt {cores} cores",
+              "De licentie dekt een server met maximaal {cores} fysieke cores. Heeft uw server er meer, dan hebt u extra licenties nodig om ze allemaal te dekken."),
+    "ws_f2": ("Goed om te weten", "CAL’s zijn niet inbegrepen",
+              "Windows Server vereist een CAL voor elke gebruiker of elk apparaat dat toegang heeft tot de server. Die zitten niet in deze licentie en worden apart gekocht."),
+    "ws_f3": ("Virtualisatie", "Maximaal 2 serveromgevingen",
+              "De Standard-editie geeft recht op twee besturingssysteemomgevingen, of Windows-containers met Hyper-V-isolatie, zodra elke fysieke core is gelicentieerd."),
+    "ws_f4": ("Rollen", "Active Directory, Hyper-V, bestanden en web",
+              "Bevat de rollen van Windows Server Standard: Active Directory Domain Services, Hyper-V, bestands- en printserver, en IIS."),
+    "ws_f5_dvd": ("Media", "OEM-dvd in het Engels",
+                  "U ontvangt de fysieke OEM-media. De interface van het besturingssysteem is Engels — controleer dit als u een andere taal nodig hebt."),
+    "ws_f5_esd": ("Levering", "Digitale licentie per e-mail",
+                  "Sleutel en instructies komen per e-mail na bevestiging van de betaling: niets om per post af te wachten."),
+    "ws_f6_2025": ("Nieuw in 2025", "Updates zonder herstart",
+                   "Windows Server 2025 voegt hotpatching via Azure Arc toe, wat geplande herstarts vermindert, plus een versterkte Active Directory en native NVMe-ondersteuning."),
+    "sql_eyebrow": "Permanente licentie · {cores} cores",
+    "sql_name": "SQL Server 2022 {ed}",
+    "sql_seo": "SQL Server 2022 {ed} {cores} cores — Aml Store",
+    "sql_desc": ("SQL Server 2022 {ed} met een permanente per-core-licentie ({cores} cores). "
+                 "Per-core-licenties vereisen geen CAL’s: elk aantal gebruikers kan de database gebruiken. "
+                 "Fysieke media inbegrepen, Engelse interface."),
+    "sql_feat_title": "Wat de licentie omvat",
+    "sql_f1": ("Licentiemodel", "Geen CAL’s te kopen",
+               "Per-core-licenties vereisen geen client access licenses: elk aantal gebruikers of toepassingen kan de database gebruiken zonder extra kosten per werkplek."),
+    "sql_f2": ("Capaciteit", "Licentie voor {cores} cores",
+               "Dekt {cores} cores. Microsoft vereist minimaal vier gelicentieerde cores per server of virtuele machine."),
+    "sql_f3_std": ("Editielimieten", "Maximaal 24 cores",
+                   "De Standard-editie gebruikt hoogstens het kleinste van 4 sockets of 24 cores: deze 16-core-licentie valt ruim binnen die limiet."),
+    "sql_f3_ent": ("Editielimieten", "Geen core-limiet",
+                   "De Enterprise-editie heeft geen core-limiet bij per-core-licenties en ontgrendelt de geavanceerde high-availability- en analyticsfuncties."),
+    "consegna_dvd": "U ontvangt de originele OEM-dvd met gratis verzending; de interface is in het Engels.",
+    "consegna_esd": "Code en instructies komen per e-mail na bevestiging van de betaling.",
+    "spec_cpu": "Processor", "spec_ram": "Geheugen", "spec_disk": "Schijfruimte", "spec_net": "Netwerk",
+    "steps_title": "Bestelling, levering en activering",
+    "step1": ("Rond uw bestelling af", "Betaal met een van de methoden in de checkout: kaart, PayPal of digitale wallets."),
+    "step2_dvd": ("Ontvang de media", "Wij verzenden de originele dvd met gratis verzending: overdracht aan de koerier binnen 24 werkuren na betaling."),
+    "step2_esd": ("Ontvang de sleutel", "Productsleutel en instructies komen per e-mail na bevestiging van de betaling."),
+    "step3": ("Installeren en activeren", "Installeer het systeem en activeer de licentie via de officiële Microsoft-kanalen, volgens de ontvangen instructies."),
+    "faq_cal_q": "Zijn CAL’s bij de prijs inbegrepen?",
+    "faq_cal_a": "Nee. Windows Server vereist een Client Access License voor elke gebruiker of elk apparaat dat de server gebruikt, en die zit niet in deze licentie. CAL’s koopt u apart; ze dekken uw hele omgeving, niet één server.",
+    "faq_core_q": "Wat als mijn server meer dan {cores} cores heeft?",
+    "faq_core_a": "De licentie dekt {cores} cores. Heeft uw server er meer, dan moet elke fysieke core worden gelicentieerd, dus koopt u extra licenties. Microsoft vereist minimaal {cores} gelicentieerde cores per server.",
+    "faq_virt_q": "Hoeveel virtuele machines kan ik draaien?",
+    "faq_virt_a": "De Standard-editie geeft recht op twee besturingssysteemomgevingen (of Windows-containers met Hyper-V-isolatie) zodra elke fysieke core van de server is gelicentieerd. Daarboven hebt u extra licenties nodig.",
+    "faq_lang_q": "In welke taal is het besturingssysteem?",
+    "faq_lang_a": "De OEM-media zijn in het Engels: interface en installatie zijn Engels. Controleer dit vóór aankoop als u een andere taal nodig hebt.",
+    "faq_media_q": "Wat ontvang ik precies?",
+    "faq_media_a": "U ontvangt de licentiecode en instructies per e-mail na bevestiging van de betaling. Levering is alleen digitaal: er wordt geen fysieke media meegestuurd.",
+    "faq_sqlcal_q": "Heb ik CAL’s nodig voor SQL Server?",
+    "faq_sqlcal_a": "Nee. Per-core-licenties vereisen geen client access licenses: zoveel gebruikers of toepassingen als u wilt kunnen de database gebruiken, zonder kosten per werkplek.",
+    "faq_sqlos_q": "Op welke besturingssystemen kan ik het installeren?",
+    "faq_sqlos_a": "Windows Server 2016 en later, inclusief Server Core-installaties, of Windows 10 versie 1607 en later. Vereist .NET Framework 4.7.2.",
+    "faq_sqlmin_q": "Is er een minimumaantal cores om te licentiëren?",
+    "faq_sqlmin_a": "Ja: Microsoft vereist minstens vier gelicentieerde cores voor elke fysieke server of virtuele machine die SQL Server uitvoert.",
+    "ws_disk": "Minstens 32 GB vrij op de systeempartitie. Servers met meer dan 16 GB RAM hebben extra ruimte nodig voor paging- en dumpbestanden.",
+    "ws_net": "Ethernet-adapter met minstens 1 Gbps, conform de PCI Express-specificatie.",
+    "sql_cpu": "x64-processor van 1,4 GHz of sneller, 2,0 GHz of hoger aanbevolen. Installatie wordt alleen ondersteund op x64-processors.",
+    "sql_ram": "Minstens 1 GB RAM, 4 GB of meer aanbevolen en oplopend naarmate de database groeit.",
+    "sql_disk": "Minstens 6 GB vrij. Een volledige installatie van alle functies vraagt ongeveer 8 GB.",
+    "sql_os": "Besturingssysteem",
+    "sql_os_body": "Windows Server 2016 of later, of Windows 10 versie 1607 of later. Vereist .NET Framework 4.7.2.",
+    "specs_note": "Indicatieve cijfers uit de Microsoft-documentatie. Controleer altijd de actuele eisen vóór installatie.",
+})
+
+from lang_backfill import backfill_lang
+backfill_lang(WS_RAM, target="nl", source="en", translate=nl_text)
+backfill_lang(WS_CPU, target="nl", source="en", translate=nl_text)
 
 
 def _ws(slug, cfg):

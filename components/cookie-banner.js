@@ -92,6 +92,34 @@
             catFunc: 'Funcionalidad y personalización (functionality_storage, personalization_storage)',
             policyHref: 'cookie-policy',
         },
+        pt: {
+            title: 'Cookies e preferências de privacidade',
+            body:
+                'Usamos cookies e tecnologias semelhantes para funções essenciais do site, medição de audiência e, apenas com o seu consentimento, marketing e personalização. Pode alterar as suas escolhas em qualquer momento.',
+            policyLink: 'Política de cookies',
+            reject: 'Rejeitar não essenciais',
+            customize: 'Personalizar',
+            accept: 'Aceitar tudo',
+            save: 'Guardar preferências',
+            catAnalytics: 'Medição e estatísticas (analytics_storage)',
+            catAds: 'Marketing e publicidade (ad_storage, ad_user_data, ad_personalization)',
+            catFunc: 'Funcionalidade e personalização (functionality_storage, personalization_storage)',
+            policyHref: 'cookie-policy',
+        },
+        nl: {
+            title: 'Cookies en privacyvoorkeuren',
+            body:
+                'We gebruiken cookies en vergelijkbare technologieën voor essentiële sitelfuncties, bezoekersmeting en — alleen met uw toestemming — marketing en personalisatie. U kunt uw keuzes op elk moment wijzigen.',
+            policyLink: 'Cookiebeleid',
+            reject: 'Niet-essentiële weigeren',
+            customize: 'Aanpassen',
+            accept: 'Alles accepteren',
+            save: 'Voorkeuren opslaan',
+            catAnalytics: 'Meting en statistieken (analytics_storage)',
+            catAds: 'Marketing en advertenties (ad_storage, ad_user_data, ad_personalization)',
+            catFunc: 'Functionaliteit en personalisatie (functionality_storage, personalization_storage)',
+            policyHref: 'cookie-policy',
+        },
     };
 
     function langCode() {

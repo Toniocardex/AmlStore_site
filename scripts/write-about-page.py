@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES"}
+LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "nl": "nl_NL"}
 
 SLUG = {
     "it": "chi-siamo",
@@ -19,6 +19,8 @@ SLUG = {
     "fr": "qui-sommes-nous",
     "de": "ueber-uns",
     "es": "quienes-somos",
+    "pt": "sobre-nos",
+    "nl": "over-ons",
 }
 
 COPY = {
@@ -192,10 +194,78 @@ COPY = {
         "cta_contact": "Contactarme",
         "cta_consultation": "Solicitar asesoramiento",
     },
+    "pt": {
+        "skip": "Ir para o conteúdo principal",
+        "title": "Sobre nós — Aml Store",
+        "description": "A Aml Store é gerida por Antonino Cardelli desde 2020: licenças sempre originais, um único interlocutor real, mais de 1000 encomendas concluídas. Microsoft Partner.",
+        "home": "Início",
+        "breadcrumb": "Sobre nós",
+        "eyebrow": "Sobre nós",
+        "h1": "Software original, acompanhado pessoalmente.",
+        "lede": "A Aml Store é um projeto que levo sozinho desde 2020: vendo licenças originais para combater o software pirateado, com uma única pessoa real por detrás de cada encomenda.",
+        "h_story": "A minha história",
+        "story_p1": "Comecei a Aml Store com um objetivo claro: combater a difusão de software pirateado, muitas vezes instável, sem atualizações e sem qualquer garantia. Vendo exclusivamente <strong>licenças originais</strong>, com todas as funcionalidades, atualizações e garantias previstas pelo fabricante, a preços que continuam acessíveis.",
+        "story_p2": "Sou <strong>Antonino Cardelli</strong> e gero a Aml Store sozinho: quando escreves, não falas com uma central de atendimento ou um ticket anónimo, mas com a pessoa que acompanha mesmo a tua encomenda.",
+        "stat1_value": "Desde 2020",
+        "stat1_label": "Em atividade",
+        "stat2_value": "1000+",
+        "stat2_label": "Encomendas reais concluídas",
+        "stat3_value": "Microsoft Partner",
+        "stat3_label": "Certificação oficial",
+        "stat4_value": "UE · EUA · Canadá · África · Japão",
+        "stat4_label": "Clientes servidos em todo o mundo",
+        "h_values": "Porque escolher a Aml Store",
+        "value1_title": "Apenas software original",
+        "value1_text": "Cada licença é autêntica, com atualizações e garantias diretas do fabricante — nunca cópias pirateadas ou modificadas.",
+        "value2_title": "Um único interlocutor",
+        "value2_text": "Sem central de atendimento, nada subcontratado: respondo eu a cada pedido, desde a encomenda até à ativação.",
+        "value3_title": "Preços honestos",
+        "value3_text": "Margens razoáveis sobre licenças digitais autênticas, não descontos falsos sobre preços inflacionados.",
+        "value4_title": "Alcance internacional",
+        "value4_text": "Encomendas geridas na Europa, Estados Unidos, Canadá, África e, ocasionalmente, até ao Japão.",
+        "h_cta": "Tens dúvidas antes de comprar?",
+        "cta_text": "Escreve-me ou pede uma consulta gratuita: respondo eu, pessoalmente.",
+        "cta_contact": "Contactar",
+        "cta_consultation": "Pedir uma consulta",
+    },
+    "nl": {
+        "skip": "Naar de hoofdinhoud",
+        "title": "Over ons — Aml Store",
+        "description": "Aml Store wordt sinds 2020 gerund door Antonino Cardelli: altijd originele softwarelicenties, één echt aanspreekpunt, 1.000+ afgehandelde bestellingen. Microsoft Partner.",
+        "home": "Home",
+        "breadcrumb": "Over ons",
+        "eyebrow": "Over ons",
+        "h1": "Originele software, persoonlijk begeleid.",
+        "lede": "Aml Store is sinds 2020 een eenmansproject: ik verkoop originele licenties tegen gekraakte software, met één echt persoon achter elke bestelling.",
+        "h_story": "Mijn verhaal",
+        "story_p1": "Ik ben Aml Store gestart met een duidelijk doel: de verspreiding van gekraakte software tegengaan — vaak instabiel, zonder updates en zonder garantie. Ik verkoop uitsluitend <strong>originele licenties</strong>, met alle functies, updates en garanties van de fabrikant, tegen prijzen die redelijk blijven.",
+        "story_p2": "Ik ben <strong>Antonino Cardelli</strong> en run Aml Store in mijn eentje: als u schrijft, praat u niet met een callcenter of een anoniem ticket, maar met de persoon die uw bestelling daadwerkelijk behandelt.",
+        "stat1_value": "Sinds 2020",
+        "stat1_label": "Actief",
+        "stat2_value": "1.000+",
+        "stat2_label": "Echte afgehandelde bestellingen",
+        "stat3_value": "Microsoft Partner",
+        "stat3_label": "Officiële certificering",
+        "stat4_value": "EU · VS · Canada · Afrika · Japan",
+        "stat4_label": "Klanten wereldwijd bediend",
+        "h_values": "Waarom Aml Store",
+        "value1_title": "Alleen originele software",
+        "value1_text": "Elke licentie is authentiek, met updates en garanties van de fabrikant — nooit gekraakte of gewijzigde kopieën.",
+        "value2_title": "Eén aanspreekpunt",
+        "value2_text": "Geen callcenter, niets uitbesteed: ik beantwoord elk verzoek zelf, van bestelling tot activering.",
+        "value3_title": "Eerlijke prijzen",
+        "value3_text": "Redelijke marges op authentieke digitale licenties, geen nep-kortingen op opgeblazen prijzen.",
+        "value4_title": "Internationale dekking",
+        "value4_text": "Bestellingen in Europa, de VS, Canada, Afrika en af en toe tot in Japan.",
+        "h_cta": "Vragen voor u koopt?",
+        "cta_text": "Schrijf mij of vraag een gratis consultatie: ik antwoord persoonlijk.",
+        "cta_contact": "Contact",
+        "cta_consultation": "Consultatie aanvragen",
+    },
 }
 
 # slug of the pre-sale "software consultation" page per locale (see components/footer.js)
-CONSULTATION_SLUG = {"it": "consulenza", "en": "consultation", "fr": "consultation", "de": "beratung", "es": "consultoria"}
+CONSULTATION_SLUG = {"it": "consulenza", "en": "consultation", "fr": "consultation", "de": "beratung", "es": "consultoria", "pt": "consultoria", "nl": "consultatie"}
 
 ICON_SHIELD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>'
 ICON_PERSON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21v-1a8 8 0 0 1 16 0v1"></path></svg>'
@@ -240,7 +310,7 @@ def page(lang: str) -> str:
                 "@id": "https://aml-store.com/#website",
                 "url": "https://aml-store.com/",
                 "name": "Aml Store",
-                "inLanguage": ["it", "en", "fr", "de", "es"],
+                "inLanguage": ["it", "en", "fr", "de", "es", "pt", "nl"],
                 "publisher": {"@id": "https://aml-store.com/#organization"},
             },
             {
@@ -258,7 +328,7 @@ def page(lang: str) -> str:
     }
     hreflang = "\n".join(
         f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{SLUG[lg]}">'
-        for lg in ("it", "en", "fr", "de", "es")
+        for lg in ("it", "en", "fr", "de", "es", "pt", "nl")
     )
     hreflang += '\n    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/chi-siamo">'
 

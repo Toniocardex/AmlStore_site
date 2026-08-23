@@ -64,7 +64,7 @@ const ALLOWED_ORIGINS = [
     'http://localhost:8788',
     'http://127.0.0.1:8788',
 ];
-const ALLOWED_LOCALES = new Set(['it', 'en', 'fr', 'de', 'es']);
+const ALLOWED_LOCALES = new Set(['it', 'en', 'fr', 'de', 'es', 'pt', 'nl']);
 const MAX_JSON_BODY_BYTES = 32 * 1024;
 const MAX_ADMIN_JSON_BODY_BYTES = 4 * 1024;
 

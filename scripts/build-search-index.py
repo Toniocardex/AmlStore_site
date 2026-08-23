@@ -16,15 +16,15 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-LANGS = ("it", "en", "fr", "de", "es")
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 # Pagine utility (nessun prodotto) — stesso set di validate-product-pages.py
 SKIP_UTILITY = {
     "index", "cart", "checkout", "checkout-success", "account",
     "privacy-policy", "cookie-policy", "terms-and-conditions",
     "returns-and-refunds", "microsoft-365-solutions",
-    "404", "chi-siamo", "about-us", "qui-sommes-nous", "ueber-uns", "quienes-somos",
-    "consulenza", "consultation", "beratung", "consultoria", "contacts",
+    "404", "chi-siamo", "about-us", "qui-sommes-nous", "ueber-uns", "quienes-somos", "sobre-nos", "over-ons",
+    "consulenza", "consultation", "beratung", "consultoria", "consultatie", "contacts",
 }
 # Pagine categoria/listino (elencano prodotti, non sono un prodotto)
 SKIP_CATEGORY = {

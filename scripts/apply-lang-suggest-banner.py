@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-LANGS = ["it", "en", "fr", "de", "es"]
+LANGS = ["it", "en", "fr", "de", "es", "pt", "nl"]
 
 # Skip-link e apertura header: di norma su righe separate, ma alcune pagine
 # (es. de/beratung.html) hanno il chrome compattato su una riga sola.

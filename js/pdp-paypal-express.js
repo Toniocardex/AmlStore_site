@@ -22,7 +22,7 @@
     var TRACK_URL          = '/api/track';
 
     var PAYPAL_LOCALE_MAP = {
-        it: 'it_IT', en: 'en_US', fr: 'fr_FR', de: 'de_DE', es: 'es_ES',
+        it: 'it_IT', en: 'en_US', fr: 'fr_FR', de: 'de_DE', es: 'es_ES', pt: 'pt_PT', nl: 'nl_NL',
     };
 
     function getLang() {

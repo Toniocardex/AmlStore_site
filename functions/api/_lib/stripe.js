@@ -124,6 +124,6 @@ export async function verifyStripeWebhook(rawBody, signatureHeader, webhookSecre
  * @returns {string}
  */
 function stripeLocale(lang) {
-    const map = { it: 'it', en: 'en', fr: 'fr', de: 'de', es: 'es' };
+    const map = { it: 'it', en: 'en', fr: 'fr', de: 'de', es: 'es', pt: 'pt', nl: 'nl' };
     return map[lang] || 'it';
 }

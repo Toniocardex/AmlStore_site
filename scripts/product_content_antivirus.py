@@ -8,11 +8,19 @@ floating pricing card, bento features, steps, specs, FAQ — no invented reviews
 from copy import deepcopy
 
 from product_content_office import UI as OFFICE_UI
+from lang_backfill import backfill_lang
+from nl_translations import nl_text
 
-LANGS = ("it", "en", "fr", "de", "es")
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 
 def L(**kwargs):
+    # "pt" e' opzionale nelle call site esistenti: se assente, eredita il
+    # valore "es" (lingua piu' vicina) invece di far esplodere il generatore.
+    if "pt" not in kwargs:
+        kwargs["pt"] = kwargs.get("es") or kwargs.get("en")
+    if "nl" not in kwargs:
+        kwargs["nl"] = kwargs.get("en")
     return {k: kwargs[k] for k in LANGS}
 
 
@@ -69,6 +77,26 @@ _AV_OVERRIDES = {
         "spec_disk_body": "Espacio libre suficiente para el cliente de seguridad.",
         "specs_note": "Valores orientativos; comprueba siempre los requisitos actualizados del fabricante.",
     },
+    "pt": {
+        "apps_eyebrow": "Destaques",
+        "step2_body": "Enviamos-te a <strong>licença / código</strong> e as instruções por email, normalmente em poucos minutos após a aprovação do pagamento.",
+        "step3_body": "Ativa no <strong>portal oficial do fabricante</strong> com o código recebido e segue as instruções no email.",
+        "spec_cpu_body": "PC ou dispositivos suportados pelo fabricante; verifica os requisitos atualizados na ficha oficial do software.",
+        "spec_os_body": "Windows, macOS, Android ou iOS segundo as plataformas suportadas pelo produto adquirido.",
+        "spec_ram_body": "Requisitos típicos a partir de poucos GB de RAM; consulta a documentação do fabricante para o produto específico.",
+        "spec_disk_body": "Espaço livre suficiente para a instalação do cliente de segurança, segundo os requisitos do fabricante.",
+        "specs_note": "Valores indicativos; verifica sempre os requisitos atualizados no site oficial do fabricante antes de instalar.",
+    },
+    "nl": {
+        "apps_eyebrow": "Hoogtepunten",
+        "step2_body": "Wij sturen u de <strong>licentie / code</strong> en de instructies per e-mail, meestal binnen enkele minuten na goedkeuring van de betaling.",
+        "step3_body": "Activeer op het <strong>officiële portaal van de uitgever</strong> met de ontvangen code en volg de instructies in de e-mail.",
+        "spec_cpu_body": "Pc of apparaten die de uitgever ondersteunt; controleer de actuele vereisten op de officiële productfiche.",
+        "spec_os_body": "Windows, macOS, Android of iOS volgens de platforms van het gekochte product.",
+        "spec_ram_body": "Typische vereisten vanaf enkele GB RAM; raadpleeg de documentatie van de uitgever voor het specifieke product.",
+        "spec_disk_body": "Voldoende vrije ruimte voor de beveiligingsclient, volgens de vereisten van de uitgever.",
+        "specs_note": "Richtwaarden; controleer altijd de actuele vereisten op de officiële site van de uitgever vóór de installatie.",
+    },
 }
 for lg, ov in _AV_OVERRIDES.items():
     UI[lg].update(ov)
@@ -115,6 +143,12 @@ def _eset_feats():
             (ICON_EMAIL, "purple", "Entrega", "Envío inmediato por email", "Clave de licencia original e instrucciones claras enviadas por email tras el pago."),
             (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial de ESET", "Activación oficial y segura en ESET HOME con actualizaciones automáticas incluidas."),
         ],
+        "pt": [
+            (ICON_SHIELD, "blue", "Segurança", "Proteção antivírus proativa", "Defesa avançada em várias camadas contra vírus, ransomware, phishing e ameaças de dia zero sem interrupções."),
+            (ICON_LAPTOP, "teal", "Desempenho", "Impacto mínimo no sistema", "Máxima eficiência e baixo consumo de recursos: análises rápidas e fluidas, ideal também para jogos e trabalho."),
+            (ICON_EMAIL, "purple", "Entrega", "Envio instantâneo por email", "Código de licença original e guia passo a passo enviados de imediato por email após a confirmação do pagamento."),
+            (ICON_CHECK_CIRCLE, "dark", "Ativação", "Portal oficial ESET", "Ativação autêntica e segura através da conta oficial ESET HOME com atualizações constantes incluídas."),
+        ],
     }
 
 
@@ -149,6 +183,12 @@ def _eset_keypoints():
             "Análisis ultrarrápidos con mínimo impacto en el sistema",
             "Clave de licencia original y guía enviadas por email",
             "Activación oficial y descarga desde el portal ESET",
+        ],
+        "pt": [
+            "Proteção proativa contra vírus, malware e ransomware",
+            "Análises ultrarrápidas com mínimo impacto no sistema",
+            "Código de licença original e guia enviados por email",
+            "Ativação oficial e download a partir do portal ESET",
         ],
     }
 
@@ -224,6 +264,34 @@ SPECS_TABLE_ESET = {
             ("Espacio en disco", "320 MB libres"),
         ],
     },
+    "pt": {
+        "eyebrow": "Requisitos do sistema",
+        "title": "Requisitos do sistema e compatibilidade",
+        "sub": "Valores indicativos; verifica sempre os requisitos atualizados do fabricante.",
+        "caption": "Requisitos do sistema para ESET NOD32 Antivirus",
+        "col_req": "Requisito",
+        "col_det": "Detalhe técnico",
+        "rows": [
+            ("Sistema operativo", "Windows 10 / 11, macOS 11+, Android 8.0+"),
+            ("Processador", "1 GHz a 32 bits (x86) / 64 bits (x64)"),
+            ("Memória RAM", "1 GB mínimo"),
+            ("Espaço em disco", "320 MB livres"),
+        ],
+    },
+    "nl": {
+        "eyebrow": "Systeemvereisten",
+        "title": "Systeemvereisten en compatibiliteit",
+        "sub": "Richtwaarden; controleer altijd de actuele vereisten van de uitgever.",
+        "caption": "Systeemvereisten voor ESET NOD32 Antivirus",
+        "col_req": "Vereiste",
+        "col_det": "Technisch detail",
+        "rows": [
+            ("Besturingssysteem", "Windows 10 / 11, macOS 11+, Android 8.0+"),
+            ("Processor", "1 GHz 32-bit (x86) / 64-bit (x64)"),
+            ("RAM-geheugen", "Minimaal 1 GB"),
+            ("Schijfruimte", "320 MB vrij"),
+        ],
+    },
 }
 
 
@@ -254,6 +322,16 @@ def _steps_for_brand(portal):
             ("Recibe la clave por email", "Te enviamos la clave de licencia original e instrucciones claras por email en pocos minutos."),
             ("Activa en el portal oficial", f"Activa en el <strong>{portal['es']}</strong> con tu código e instala el software oficial de forma segura."),
         ],
+        "pt": [
+            ("Completa a encomenda", "Escolhe o plano e conclui o pagamento seguro com cartão ou PayPal."),
+            ("Recebe a licença por email", "Enviamos-te o código de licença original e o guia de instalação por email em poucos minutos."),
+            ("Ativa no portal oficial", f"Ativa no <strong>{portal['pt']}</strong> com o código recebido e instala o software oficial com toda a segurança."),
+        ],
+        "nl": [
+            ("Rond de bestelling af", "Kies het plan en rond de veilige betaling af met kaart of PayPal."),
+            ("Ontvang de licentie per e-mail", "Wij sturen u de originele licentiecode en de installatiegids binnen enkele minuten per e-mail."),
+            ("Activeer op het officiële portaal", f"Activeer op het <strong>{portal['nl']}</strong> met de ontvangen code en installeer de officiële software veilig."),
+        ],
     }
 
 
@@ -264,6 +342,8 @@ def _devices(n):
         fr=f"{n} appareil" if n == 1 else f"{n} appareils",
         de=f"{n} Gerät" if n == 1 else f"{n} Geräte",
         es=f"{n} dispositivo" if n == 1 else f"{n} dispositivos",
+        pt=f"{n} dispositivo" if n == 1 else f"{n} dispositivos",
+        nl=f"{n} apparaat" if n == 1 else f"{n} apparaten",
     )
 
 
@@ -274,6 +354,8 @@ def _year(years=1):
         fr="1 an" if years == 1 else f"{years} ans",
         de="1 Jahr" if years == 1 else f"{years} Jahre",
         es="1 año" if years == 1 else f"{years} años",
+        pt="1 ano" if years == 1 else f"{years} anos",
+        nl="1 jaar" if years == 1 else f"{years} jaar",
     )
 
 
@@ -309,6 +391,8 @@ def _av_page(
                     "fr": "sans renouvellement auto",
                     "de": "ohne Auto-Verlängerung",
                     "es": "sin renovación automática",
+                    "pt": "sem renovação automática",
+                    "nl": "zonder automatische verlenging",
                 }[lg]
             )
         eyebrow[lg] = " · ".join(parts)
@@ -322,6 +406,8 @@ def _av_page(
             fr=f"{brand} <span>{title_span['fr']}</span>",
             de=f"{brand} <span>{title_span['de']}</span>",
             es=f"{brand} <span>{title_span['es']}</span>",
+            pt=f"{brand} <span>{title_span.get('pt', title_span['es'])}</span>",
+            nl=f"{brand} <span>{title_span.get('nl', title_span['en'])}</span>",
         ),
         "eyebrow": eyebrow,
         "desc": desc,
@@ -388,6 +474,26 @@ def _specs_table_helper(product_title, rows_by_lang):
             "col_det": "Detalle técnico",
             "rows": rows_by_lang["es"],
         },
+        "pt": {
+            "eyebrow": "Requisitos do sistema",
+            "title": "Requisitos do sistema e compatibilidade",
+            "sub": "Valores indicativos; verifica sempre os requisitos atualizados do fabricante.",
+            "caption": f"Requisitos do sistema para {product_title}",
+            "col_req": "Requisito",
+            "col_det": "Detalhe técnico",
+            "rows": rows_by_lang.get("pt", rows_by_lang["es"]),
+        },
+        "nl": {
+            "eyebrow": "Systeemvereisten",
+            "title": "Systeemvereisten en compatibiliteit",
+            "sub": "Indicatieve waarden; controleer altijd de actuele eisen van de fabrikant voor installatie.",
+            "caption": f"Systeemvereisten voor {product_title}",
+            "col_req": "Vereiste",
+            "col_det": "Technische details",
+            # Le righe non fornite in olandese passano da nl_text(), che
+            # traduce ricorsivamente le tuple (etichetta, dettaglio).
+            "rows": nl_text(rows_by_lang.get("nl", rows_by_lang["en"])),
+        },
     }
 
 
@@ -422,6 +528,12 @@ SPECS_TABLE_NORTON = _specs_table_helper("Norton 360", {
         ("Memoria RAM", "512 MB (32 bits) / 1 GB (64 bits), 2 GB en macOS"),
         ("Espacio en disco", "300 MB libres"),
     ],
+    "pt": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1, macOS (atual e 2 anteriores), Android 8.0+, iOS"),
+        ("Processador", "1 GHz mínimo (x86 / x64)"),
+        ("Memória RAM", "512 MB (32 bits) / 1 GB (64 bits), 2 GB em macOS"),
+        ("Espaço em disco", "300 MB livres"),
+    ],
 })
 
 SPECS_TABLE_BITDEFENDER = _specs_table_helper("Bitdefender Antivirus Plus", {
@@ -454,6 +566,12 @@ SPECS_TABLE_BITDEFENDER = _specs_table_helper("Bitdefender Antivirus Plus", {
         ("Procesador", "Intel Core 2 Duo (2 GHz) o equivalente"),
         ("Memoria RAM", "2 GB mínimo"),
         ("Espacio en disco", "2.5 GB libres"),
+    ],
+    "pt": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1 / 7 com Service Pack 1"),
+        ("Processador", "Intel Core 2 Duo (2 GHz) ou equivalente"),
+        ("Memória RAM", "2 GB mínimo"),
+        ("Espaço em disco", "2,5 GB livres"),
     ],
 })
 
@@ -488,6 +606,12 @@ SPECS_TABLE_KASPERSKY = _specs_table_helper("Kaspersky Security", {
         ("Memoria RAM", "1 GB (32 bits) o 2 GB (64 bits)"),
         ("Espacio en disco", "1.5 GB libres"),
     ],
+    "pt": [
+        ("Sistema operativo", "Windows 11 / 10 / 8.1 / 7 SP1, macOS 11+, Android 8.0+, iOS"),
+        ("Processador", "1 GHz a 32 bits (x86) ou 64 bits (x64)"),
+        ("Memória RAM", "1 GB (32 bits) ou 2 GB (64 bits)"),
+        ("Espaço em disco", "1,5 GB livres"),
+    ],
 })
 
 SPECS_TABLE_MCAFEE = _specs_table_helper("McAfee Total Protection", {
@@ -520,6 +644,12 @@ SPECS_TABLE_MCAFEE = _specs_table_helper("McAfee Total Protection", {
         ("Procesador", "1 GHz de 64 bits (x64) o superior"),
         ("Memoria RAM", "2 GB mínimo"),
         ("Espacio en disco", "1.3 GB libres"),
+    ],
+    "pt": [
+        ("Sistema operativo", "Windows 11 / 10 (64 bits), macOS 11+, Android 9.0+, iOS 15+"),
+        ("Processador", "1 GHz a 64 bits (x64) ou superior"),
+        ("Memória RAM", "2 GB mínimo"),
+        ("Espaço em disco", "1,3 GB livres"),
     ],
 })
 
@@ -556,6 +686,12 @@ def _norton_feats(edition, cloud):
             (ICON_CLOUD, "purple", "Copia de seguridad", f"Copia de seguridad en la nube ({cloud})", f"Espacio en la nube de {cloud} para respaldar automáticamente archivos clave ante fallos de disco o ransomware."),
             (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial My Norton", "Activación segura gestionada en tu cuenta oficial de Norton con actualizaciones automáticas incluidas."),
         ],
+        "pt": [
+            (ICON_SHIELD, "blue", "Segurança", "Proteção multicamada em tempo real", "Defesa proativa contínua contra vírus, malware, ransomware e tentativas de hacking em todos os teus dispositivos."),
+            (ICON_LOCK, "teal", "Privacidade", "Secure VPN e encriptação avançada", "Navega com total anonimato em redes Wi-Fi públicas e protege as tuas palavras-passe e dados bancários de acessos não autorizados."),
+            (ICON_CLOUD, "purple", "Cópia de segurança", f"Cópia de segurança na cloud ({cloud})", f"Espaço na cloud de {cloud} para guardar automaticamente ficheiros importantes contra falhas de disco ou ransomware."),
+            (ICON_CHECK_CIRCLE, "dark", "Ativação", "Portal oficial My Norton", "Ativação segura gerida na tua conta oficial da Norton com atualizações automáticas incluídas."),
+        ],
     }
 
 
@@ -565,6 +701,7 @@ def _norton_keypoints(edition, devices, cloud):
     d_label_fr = "1 appareil" if devices == 1 else f"{devices} appareils"
     d_label_de = "1 Gerät" if devices == 1 else f"{devices} Geräte"
     d_label_es = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
+    d_label_pt = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
     return {
         "it": [
             f"Protezione completa da virus, malware e ransomware ({d_label_it})",
@@ -595,6 +732,12 @@ def _norton_keypoints(edition, devices, cloud):
             "Secure VPN ilimitada para privacidad y conexiones seguras",
             f"Copia de seguridad en la nube ({cloud}) contra pérdida de datos",
             "Activación oficial y gestión de cuenta en My Norton",
+        ],
+        "pt": [
+            f"Proteção completa contra vírus, malware e ransomware ({d_label_pt})",
+            "Secure VPN ilimitada para privacidade e segurança das ligações",
+            f"Cópia de segurança na cloud ({cloud}) contra a perda de ficheiros",
+            "Ativação oficial e gestão de conta em My Norton",
         ],
     }
 
@@ -631,6 +774,12 @@ def _bitdefender_feats():
             (ICON_GLOBE, "purple", "Web", "Navegación segura y anti-phishing", "Filtro web avanzado que bloquea sitios fraudulentos, estafas financieras y descargas peligrosas en tiempo real."),
             (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial Bitdefender Central", "Gestión centralizada de dispositivos e instalación sencilla mediante cuenta oficial de Bitdefender con actualizaciones."),
         ],
+        "pt": [
+            (ICON_SHIELD, "blue", "Segurança", "Proteção antimalware premiada", "Defesa proativa contínua contra todas as ameaças digitais: vírus, trojans, ransomware e ataques de dia zero."),
+            (ICON_LAPTOP, "teal", "Desempenho", "Tecnologia Bitdefender Photon", "Adapta o uso de recursos ao hardware do computador, garantindo a máxima velocidade sem qualquer lentidão."),
+            (ICON_GLOBE, "purple", "Web", "Navegação segura e anti-phishing", "Filtro web avançado que bloqueia sites fraudulentos, tentativas de fraude financeira e downloads perigosos em tempo real."),
+            (ICON_CHECK_CIRCLE, "dark", "Ativação", "Portal oficial Bitdefender Central", "Gestão centralizada dos dispositivos e instalação rápida através da conta oficial Bitdefender com atualizações incluídas."),
+        ],
     }
 
 
@@ -640,6 +789,7 @@ def _bitdefender_keypoints(devices):
     d_label_fr = "1 appareil" if devices == 1 else f"{devices} appareils"
     d_label_de = "1 Gerät" if devices == 1 else f"{devices} Geräte"
     d_label_es = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
+    d_label_pt = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
     return {
         "it": [
             f"Protezione anti-malware in tempo reale ({d_label_it})",
@@ -667,9 +817,15 @@ def _bitdefender_keypoints(devices):
         ],
         "es": [
             f"Protección anti-malware en tiempo real ({d_label_es})",
-            "Tecnologia Photon per analisi veloces sin ralentizaciones",
+            "Tecnología Photon para análisis rápidos sin ralentizaciones",
             "Filtro web proactivo contra phishing y páginas maliciosas",
             "Gestión y activación oficial en Bitdefender Central",
+        ],
+        "pt": [
+            f"Proteção antimalware em tempo real ({d_label_pt})",
+            "Tecnologia Photon para análises rápidas sem qualquer lentidão",
+            "Filtro web proativo contra phishing e sites maliciosos",
+            "Gestão e ativação oficial em Bitdefender Central",
         ],
     }
 
@@ -706,6 +862,12 @@ def _kaspersky_feats(tier):
             (ICON_LAPTOP, "purple", "Rendimiento", "Optimización y limpieza del equipo", "Limpieza automática de archivos innecesarios y gestión de procesos en segundo plano para máxima velocidad."),
             (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial My Kaspersky", "Activación oficial mediante cuenta My Kaspersky con sincronización automática de licencias y actualizaciones."),
         ],
+        "pt": [
+            (ICON_SHIELD, "blue", "Segurança", "Proteção multicamada em tempo real", "Deteção instantânea e bloqueio de vírus, malware, ransomware e ataques de hackers antes que danifiquem os dispositivos."),
+            (ICON_LOCK, "teal", "Privacidade", "Proteção de pagamentos e privacidade online", "Ferramentas dedicadas para proteger transações bancárias, bloquear rastreadores publicitários e prevenir o roubo de identidade."),
+            (ICON_LAPTOP, "purple", "Desempenho", "Otimização e limpeza do PC", "Limpeza automática do espaço em disco e gestão inteligente dos processos em segundo plano para um sistema sempre rápido."),
+            (ICON_CHECK_CIRCLE, "dark", "Ativação", "Portal oficial My Kaspersky", "Ativação oficial e segura através da conta My Kaspersky com sincronização imediata das licenças e atualizações incluídas."),
+        ],
     }
 
 
@@ -715,6 +877,7 @@ def _kaspersky_keypoints(tier, devices):
     d_label_fr = "1 appareil" if devices == 1 else f"{devices} appareils"
     d_label_de = "1 Gerät" if devices == 1 else f"{devices} Geräte"
     d_label_es = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
+    d_label_pt = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
     return {
         "it": [
             f"Protezione avanzata da virus, malware e ransomware ({d_label_it})",
@@ -745,6 +908,12 @@ def _kaspersky_keypoints(tier, devices):
             "Navegación protegida y defensa de datos bancarios en compras",
             "Herramientas de optimización para mantener el equipo rápido y limpio",
             "Activación oficial y descarga auténtica desde My Kaspersky",
+        ],
+        "pt": [
+            f"Proteção avançada contra vírus, malware e ransomware ({d_label_pt})",
+            "Navegação protegida e defesa dos dados bancários durante as compras",
+            "Ferramentas de otimização para manter o PC rápido e limpo",
+            "Ativação oficial e download autêntico a partir de My Kaspersky",
         ],
     }
 
@@ -781,6 +950,12 @@ def _mcafee_feats():
             (ICON_LAPTOP, "purple", "Rendimiento", "Optimización del equipo y fluidez", "Herramientas integradas para acelerar el inicio de aplicaciones, liberar memoria y asegurar un rendimiento óptimo."),
             (ICON_CHECK_CIRCLE, "dark", "Activación", "Portal oficial McAfee My Account", "Activación oficial y gestión centralizada de tus dispositivos en el portal oficial de McAfee."),
         ],
+        "pt": [
+            (ICON_SHIELD, "blue", "Segurança", "Defesa completa contra ameaças", "Proteção contínua e inteligente contra vírus, malware, spyware e ransomware com atualizações constantes em tempo real."),
+            (ICON_GLOBE, "teal", "Web", "Proteção web McAfee WebAdvisor", "Navegação tranquila com avisos preventivos sobre sites perigosos, links enganosos e downloads de risco."),
+            (ICON_LAPTOP, "purple", "Desempenho", "Otimização do sistema e velocidade", "Ferramentas dedicadas para acelerar o arranque das aplicações, libertar memória e manter o desempenho do dispositivo."),
+            (ICON_CHECK_CIRCLE, "dark", "Ativação", "Portal oficial McAfee My Account", "Ativação autêntica da licença com gestão centralizada dos dispositivos no portal oficial McAfee."),
+        ],
     }
 
 
@@ -790,6 +965,7 @@ def _mcafee_keypoints(devices):
     d_label_fr = "1 appareil" if devices == 1 else f"{devices} appareils"
     d_label_de = "1 Gerät" if devices == 1 else f"{devices} Geräte"
     d_label_es = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
+    d_label_pt = "1 dispositivo" if devices == 1 else f"{devices} dispositivos"
     return {
         "it": [
             f"Protezione completa e continua da virus e malware ({d_label_it})",
@@ -820,6 +996,12 @@ def _mcafee_keypoints(devices):
             "Tecnologia McAfee WebAdvisor para bloquear páginas y enlaces peligrosos",
             "Herramientas de optimización para acelerar aplicaciones y memoria",
             "Activación segura y gestión oficial en McAfee My Account",
+        ],
+        "pt": [
+            f"Proteção completa e contínua contra vírus e malware ({d_label_pt})",
+            "Tecnologia McAfee WebAdvisor para bloquear sites e links perigosos",
+            "Ferramentas de otimização para acelerar apps e libertar memória",
+            "Ativação segura e gestão oficial em McAfee My Account",
         ],
     }
 
@@ -861,6 +1043,13 @@ def _faq_av(brand, devices_note=True):
             ("¿Cómo se activa?", f"Usa el código en el portal oficial de {brand}."),
             ("¿Mac/Android?", "Si el fabricante lo admite para ese producto."),
         ],
+        "pt": [
+            ("O que recebo após a compra?", "Um email com a licença/código e instruções para ativar no portal oficial do fabricante."),
+            ("É uma subscrição?", "Depende do produto: muitas edições são subscrições anuais; as variantes «sem subscrição» / sem renovação automática estão indicadas na ficha."),
+            ("Em quantos dispositivos?", "O número é o que consta no título (ex. 1, 3, 5 ou 10 dispositivos), segundo as condições do fabricante."),
+            ("Como se ativa?", f"Usa o código recebido no portal oficial {brand} e segue as instruções do email."),
+            ("Funciona em Mac/Android?", "Se o fabricante o previr para esse produto. Verifica as plataformas suportadas na documentação oficial."),
+        ],
     }
 
 
@@ -892,6 +1081,8 @@ def _name(brand, line, devices, years=1, no_sub=False):
                 "fr": " (sans abonnement)",
                 "de": " (kein Abo)",
                 "es": " (sin suscripción)",
+                "pt": " (sem subscrição)",
+                "nl": " (geen abonnement)",
             }[lg]
             base += suffix
         out[lg] = base
@@ -908,6 +1099,8 @@ def _add_eset(slug, devices, years=1):
         "fr": f"{devices} Appareil" if devices == 1 else f"{devices} Appareils",
         "de": f"{devices} Gerät" if devices == 1 else f"{devices} Geräte",
         "es": f"{devices} Dispositivo" if devices == 1 else f"{devices} Dispositivos",
+        "pt": f"{devices} Dispositivo" if devices == 1 else f"{devices} Dispositivos",
+        "nl": f"{devices} apparaat" if devices == 1 else f"{devices} apparaten",
     }
     yr_str = {
         "it": f"{years} Anno" if years == 1 else f"{years} Anni",
@@ -915,6 +1108,8 @@ def _add_eset(slug, devices, years=1):
         "fr": f"{years} An" if years == 1 else f"{years} Ans",
         "de": f"{years} Jahr" if years == 1 else f"{years} Jahre",
         "es": f"{years} Año" if years == 1 else f"{years} Años",
+        "pt": f"{years} Ano" if years == 1 else f"{years} Anos",
+        "nl": f"{years} jaar" if years == 1 else f"{years} jaar",
     }
     span = {
         "it": f"NOD32 Antivirus – {dev_str['it']} ({yr_str['it']})",
@@ -922,6 +1117,8 @@ def _add_eset(slug, devices, years=1):
         "fr": f"NOD32 Antivirus – {dev_str['fr']} ({yr_str['fr']})",
         "de": f"NOD32 Antivirus – {dev_str['de']} ({yr_str['de']})",
         "es": f"NOD32 Antivirus – {dev_str['es']} ({yr_str['es']})",
+        "pt": f"NOD32 Antivirus – {dev_str['pt']} ({yr_str['pt']})",
+        "nl": f"NOD32 Antivirus – {dev_str['nl']} ({yr_str['nl']})",
     }
     PRODUCTS[slug] = _av_page(
         brand="ESET",
@@ -938,6 +1135,8 @@ def _add_eset(slug, devices, years=1):
             fr=f"ESET NOD32 Antivirus pour {dev_str['fr']} : protection légère et réactive, licence numérique authentique et envoi rapide par e-mail. Activation sur ESET HOME.",
             de=f"ESET NOD32 Antivirus für {dev_str['de']}: schlanker, schneller Schutz mit originaler digitaler Lizenz und sofortiger E-Mail-Zustellung. Offizielle Aktivierung im ESET HOME Portal.",
             es=f"ESET NOD32 Antivirus para {dev_str['es']}: protección ligera y eficiente con licencia digital oficial y entrega inmediata por email. Activación segura en ESET HOME.",
+            pt=f"ESET NOD32 Antivirus para {dev_str['pt']}: proteção leve e eficiente com licença digital original e entrega imediata por email. Ativação segura no ESET HOME.",
+            nl=f"ESET NOD32 Antivirus voor {dev_str['nl']}: lichte, efficiënte bescherming met een originele digitale licentie en directe levering per e-mail. Veilige activering via ESET HOME.",
         ),
         pills=_pills("ESET", devices, years),
         features_title=L(
@@ -946,6 +1145,8 @@ def _add_eset(slug, devices, years=1):
             fr="Pourquoi choisir ESET NOD32 Antivirus",
             de="Warum ESET NOD32 Antivirus wählen",
             es="Por qué elegir ESET NOD32 Antivirus",
+            pt="Porque escolher o ESET NOD32 Antivirus",
+            nl="Waarom ESET NOD32 Antivirus kiezen",
         ),
         features=_eset_feats(),
         keypoints=_eset_keypoints(),
@@ -956,6 +1157,8 @@ def _add_eset(slug, devices, years=1):
             "fr": "portail officiel ESET (ESET HOME)",
             "de": "offiziellen ESET-Portal (ESET HOME)",
             "es": "portal oficial de ESET (ESET HOME)",
+            "pt": "portal oficial ESET (ESET HOME)",
+            "nl": "officiële ESET-portaal (ESET HOME)",
         }),
         faq=_faq_av("ESET"),
     )
@@ -979,6 +1182,8 @@ def _add_norton(slug, edition, devices, no_sub=False):
         "fr": edition + (" · sans abo" if no_sub else ""),
         "de": edition + (" · kein Abo" if no_sub else ""),
         "es": edition + (" · sin sub" if no_sub else ""),
+        "pt": edition + (" · sem sub" if no_sub else ""),
+        "nl": edition + (" · geen abo" if no_sub else ""),
     }
     cloud = "10 GB" if "Standard" in edition else "25 GB"
     PRODUCTS[slug] = _av_page(
@@ -999,12 +1204,16 @@ def _add_norton(slug, edition, devices, no_sub=False):
             + (" Variante ohne automatische Verlängerung." if no_sub else ""),
             es=f"Norton 360 {edition} para {_devices(devices)['es']}: protección online completa con licencia digital y entrega inmediata por email. Activación segura en My Norton."
             + (" Variante sin renovación automática." if no_sub else ""),
+            pt=f"Norton 360 {edition} para {_devices(devices)['pt']}: proteção online completa com licença digital e entrega imediata por email. Ativação segura no My Norton."
+            + (" Variante sem renovação automática." if no_sub else ""),
+            nl=f"Norton 360 {edition} voor {_devices(devices)['nl']}: complete onlinebescherming met een digitale licentie en directe levering per e-mail. Veilige activering via My Norton."
+            + (" Variant zonder automatische verlenging." if no_sub else ""),
         ),
         pills=_pills(
             "Norton",
             devices,
             1,
-            extra=L(it=f"Cloud {cloud}", en=f"{cloud} cloud", fr=f"Cloud {cloud}", de=f"{cloud} Cloud", es=f"Cloud {cloud}")
+            extra=L(it=f"Cloud {cloud}", en=f"{cloud} cloud", fr=f"Cloud {cloud}", de=f"{cloud} Cloud", es=f"Cloud {cloud}", pt=f"Cloud {cloud}", nl=f"{cloud} cloud")
             if "Deluxe" in edition or "Standard" in edition
             else None,
         ),
@@ -1014,6 +1223,8 @@ def _add_norton(slug, edition, devices, no_sub=False):
             fr=f"Pourquoi choisir Norton 360 {edition}",
             de=f"Warum Norton 360 {edition} wählen",
             es=f"Por qué elegir Norton 360 {edition}",
+            pt=f"Porque escolher o Norton 360 {edition}",
+            nl=f"Waarom Norton 360 {edition} kiezen",
         ),
         features=_norton_feats(edition, cloud),
         keypoints=_norton_keypoints(edition, devices, cloud),
@@ -1024,6 +1235,8 @@ def _add_norton(slug, edition, devices, no_sub=False):
             "fr": "portail officiel Norton (My Norton)",
             "de": "offiziellen Norton-Portal (My Norton)",
             "es": "portal oficial de Norton (My Norton)",
+            "pt": "portal oficial Norton (My Norton)",
+            "nl": "officiële Norton-portaal (My Norton)",
         }),
         faq=_faq_av("Norton"),
         no_sub=no_sub,
@@ -1046,6 +1259,8 @@ def _add_bitdefender(slug, devices):
             fr=f"Plus · {_devices(devices)['fr']}",
             de=f"Plus · {_devices(devices)['de']}",
             es=f"Plus · {_devices(devices)['es']}",
+            pt=f"Plus · {_devices(devices)['pt']}",
+            nl=f"Plus · {_devices(devices)['nl']}",
         ),
         devices=devices,
         years=1,
@@ -1056,6 +1271,8 @@ def _add_bitdefender(slug, devices):
             fr=f"Bitdefender Antivirus Plus pour {_devices(devices)['fr']} : protection anti-malware proactive et légère, clé numérique authentique livrée par e-mail. Activation sur Bitdefender Central.",
             de=f"Bitdefender Antivirus Plus für {_devices(devices)['de']}: proaktiver, ressourcenschonender Schutz vor Malware mit digitalem Key per E-Mail. Aktivierung im Bitdefender Central Portal.",
             es=f"Bitdefender Antivirus Plus para {_devices(devices)['es']}: protección digital con clave por email y activación en el portal Bitdefender.",
+            pt=f"Bitdefender Antivirus Plus para {_devices(devices)['pt']}: proteção antimalware proativa e leve com chave digital original e entrega imediata por email. Ativação no Bitdefender Central.",
+            nl=f"Bitdefender Antivirus Plus voor {_devices(devices)['nl']}: proactieve, lichte antimalwarebescherming met een originele digitale sleutel en directe levering per e-mail. Activering via Bitdefender Central.",
         ),
         pills=_pills("Bitdefender", devices),
         features_title=L(
@@ -1064,6 +1281,8 @@ def _add_bitdefender(slug, devices):
             fr="Pourquoi choisir Bitdefender Antivirus Plus",
             de="Warum Bitdefender Antivirus Plus wählen",
             es="Por qué elegir Bitdefender Antivirus Plus",
+            pt="Porque escolher o Bitdefender Antivirus Plus",
+            nl="Waarom Bitdefender Antivirus Plus kiezen",
         ),
         features=_bitdefender_feats(),
         keypoints=_bitdefender_keypoints(devices),
@@ -1074,6 +1293,8 @@ def _add_bitdefender(slug, devices):
             "fr": "portail officiel Bitdefender (Bitdefender Central)",
             "de": "offiziellen Bitdefender-Portal (Bitdefender Central)",
             "es": "portal oficial de Bitdefender (Bitdefender Central)",
+            "pt": "portal oficial Bitdefender (Bitdefender Central)",
+            "nl": "officiële Bitdefender-portaal (Bitdefender Central)",
         }),
         faq=_faq_av("Bitdefender"),
     )
@@ -1098,6 +1319,8 @@ def _add_kaspersky(slug, tier, devices):
             fr=f"{tier} · {_devices(devices)['fr']}",
             de=f"{tier} · {_devices(devices)['de']}",
             es=f"{tier} · {_devices(devices)['es']}",
+            pt=f"{tier} · {_devices(devices)['pt']}",
+            nl=f"{tier} · {_devices(devices)['nl']}",
         ),
         devices=devices,
         years=1,
@@ -1108,14 +1331,18 @@ def _add_kaspersky(slug, tier, devices):
             fr=f"Kaspersky {tier} pour {_devices(devices)['fr']} : suite de sécurité avancée avec protection en temps réel, licence numérique authentique et envoi rapide par e-mail. Activation sur My Kaspersky.",
             de=f"Kaspersky {tier} für {_devices(devices)['de']}: moderne Sicherheits-Suite mit Echtzeitschutz, digitaler Original-Lizenz und schneller E-Mail-Zustellung. Aktivierung im My Kaspersky Portal.",
             es=f"Kaspersky {tier} para {_devices(devices)['es']}: suite de seguridad avanzada con protección en tiempo real, licencia digital oficial y entrega inmediata por email. Activación en My Kaspersky.",
+            pt=f"Kaspersky {tier} para {_devices(devices)['pt']}: suite de segurança avançada com proteção em tempo real, licença digital original e envio imediato por email. Ativação segura no My Kaspersky.",
+            nl=f"Kaspersky {tier} voor {_devices(devices)['nl']}: geavanceerde beveiligingssuite met realtimebescherming, een originele digitale licentie en directe verzending per e-mail. Veilige activering via My Kaspersky.",
         ),
-        pills=_pills("Kaspersky", devices, extra=L(it=tier, en=tier, fr=tier, de=tier, es=tier)),
+        pills=_pills("Kaspersky", devices, extra=L(it=tier, en=tier, fr=tier, de=tier, es=tier, pt=tier, nl=tier)),
         features_title=L(
             it=f"Perché scegliere Kaspersky {tier}",
             en=f"Why choose Kaspersky {tier}",
             fr=f"Pourquoi choisir Kaspersky {tier}",
             de=f"Warum Kaspersky {tier} wählen",
             es=f"Por qué elegir Kaspersky {tier}",
+            pt=f"Porque escolher o Kaspersky {tier}",
+            nl=f"Waarom Kaspersky {tier} kiezen",
         ),
         features=_kaspersky_feats(tier),
         keypoints=_kaspersky_keypoints(tier, devices),
@@ -1126,6 +1353,8 @@ def _add_kaspersky(slug, tier, devices):
             "fr": "portail officiel Kaspersky (My Kaspersky)",
             "de": "offiziellen Kaspersky-Portal (My Kaspersky)",
             "es": "portal oficial de Kaspersky (My Kaspersky)",
+            "pt": "portal oficial Kaspersky (My Kaspersky)",
+            "nl": "officiële Kaspersky-portaal (My Kaspersky)",
         }),
         faq=_faq_av("Kaspersky"),
     )
@@ -1149,6 +1378,8 @@ def _add_mcafee(slug, devices):
             fr=f"Total Protection · {_devices(devices)['fr']}",
             de=f"Total Protection · {_devices(devices)['de']}",
             es=f"Total Protection · {_devices(devices)['es']}",
+            pt=f"Total Protection · {_devices(devices)['pt']}",
+            nl=f"Total Protection · {_devices(devices)['nl']}",
         ),
         devices=devices,
         years=1,
@@ -1159,6 +1390,8 @@ def _add_mcafee(slug, devices):
             fr=f"McAfee Total Protection pour {_devices(devices)['fr']} : protection multi-appareils complète avec sécurité web avancée, licence authentique et livraison par e-mail. Activation sur McAfee My Account.",
             de=f"McAfee Total Protection für {_devices(devices)['de']}: umfassender Mehrgeräteschutz mit fortschrittlicher Websicherheit, digitaler Original-Lizenz und E-Mail-Zustellung. Aktivierung im McAfee-Portal.",
             es=f"McAfee Total Protection para {_devices(devices)['es']}: protección integral multidispositivo con seguridad web avanzada, licencia digital oficial y entrega inmediata por email. Activación en McAfee My Account.",
+            pt=f"McAfee Total Protection para {_devices(devices)['pt']}: defesa multi-dispositivo completa com proteção web avançada, licença digital original e entrega imediata por email. Ativação na McAfee My Account.",
+            nl=f"McAfee Total Protection voor {_devices(devices)['nl']}: complete bescherming voor meerdere apparaten met geavanceerde webbeveiliging, een originele digitale licentie en directe levering per e-mail. Activering via McAfee My Account.",
         ),
         pills=_pills("McAfee", devices),
         features_title=L(
@@ -1167,6 +1400,8 @@ def _add_mcafee(slug, devices):
             fr="Pourquoi choisir McAfee Total Protection",
             de="Warum McAfee Total Protection wählen",
             es="Por qué elegir McAfee Total Protection",
+            pt="Porque escolher o McAfee Total Protection",
+            nl="Waarom McAfee Total Protection kiezen",
         ),
         features=_mcafee_feats(),
         keypoints=_mcafee_keypoints(devices),
@@ -1177,6 +1412,8 @@ def _add_mcafee(slug, devices):
             "fr": "portail officiel McAfee (McAfee My Account)",
             "de": "offiziellen McAfee-Portal (McAfee My Account)",
             "es": "portal oficial de McAfee (McAfee My Account)",
+            "pt": "portal oficial McAfee (McAfee My Account)",
+            "nl": "officiële McAfee-portaal (McAfee My Account)",
         }),
         faq=_faq_av("McAfee"),
     )
@@ -1188,6 +1425,9 @@ for slug, n in [
     ("mcafee-total-protection-10-devices", 10),
 ]:
     _add_mcafee(slug, n)
+
+backfill_lang(PRODUCTS)
+backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
 
 
 def get_antivirus_content(slug):

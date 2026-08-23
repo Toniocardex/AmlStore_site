@@ -75,6 +75,20 @@
             searchHint: 'Empieza a escribir para buscar',
             searchNoResults: 'Sin resultados para "{{q}}"',
         },
+        pt: {
+            cartAriaEmpty: 'Carrinho vazio',
+            cartAriaOne: 'Carrinho, 1 artigo',
+            cartAriaMany: 'Carrinho, {{n}} artigos',
+            searchHint: 'Comece a escrever para pesquisar',
+            searchNoResults: 'Sem resultados para "{{q}}"',
+        },
+        nl: {
+            cartAriaEmpty: 'Winkelwagen leeg',
+            cartAriaOne: 'Winkelwagen, 1 artikel',
+            cartAriaMany: 'Winkelwagen, {{n}} artikelen',
+            searchHint: 'Begin met typen om te zoeken',
+            searchNoResults: 'Geen resultaten voor "{{q}}"',
+        },
     };
 
     const SUPPORT_EMAIL = 'info@amlstore.it';

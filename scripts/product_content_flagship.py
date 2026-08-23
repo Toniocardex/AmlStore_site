@@ -2,18 +2,25 @@
 Rigenerato via pprint — vedi scripts/build-m365-family-content.py per il pattern.
 """
 
+from lang_backfill import backfill_lang
+from nl_translations import nl_text
+
 PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                             'hide_steps_section': True,
                             'name': {'it': 'Microsoft 365 Personal',
                                      'en': 'Microsoft 365 Personal',
                                      'fr': 'Microsoft 365 Personnel',
                                      'de': 'Microsoft 365 Personal',
-                                     'es': 'Microsoft 365 Personal'},
+                                     'es': 'Microsoft 365 Personal',
+                                     'pt': 'Microsoft 365 Personal',
+                                     'nl': 'Microsoft 365 Personal'},
                             'seo_title': {'it': 'Microsoft 365 Personal — Aml Store',
                                           'en': 'Microsoft 365 Personal — Aml Store',
                                           'fr': 'Microsoft 365 Personnel — Aml Store',
                                           'de': 'Microsoft 365 Personal — Aml Store',
-                                          'es': 'Microsoft 365 Personal — Aml Store'},
+                                          'es': 'Microsoft 365 Personal — Aml Store',
+                                          'pt': 'Microsoft 365 Personal — Aml Store',
+                                          'nl': 'Microsoft 365 Personal — Aml Store'},
                             'desc': {'it': "L'abbonamento completo per uso personale: app Office "
                                            'premium sempre aggiornate, 1 TB OneDrive dedicato, '
                                            'Copilot AI integrato in tutte le app e consegna del '
@@ -36,27 +43,43 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'aplicaciones Office premium siempre actualizadas, 1 TB '
                                            'de almacenamiento OneDrive dedicado, Copilot IA '
                                            'integrado en todas las aplicaciones y entrega del '
-                                           'código por email en 2-15 minutos.'},
+                                           'código por email en 2-15 minutos.',
+                                     'pt': 'A subscrição completa para uso pessoal: apps Office '
+                                           'premium sempre atualizadas, 1 TB de armazenamento '
+                                           'OneDrive dedicado, Copilot IA integrado em todas as '
+                                           'apps e entrega do código por email em 2-15 minutos.',
+                                     'nl': 'Het complete abonnement voor persoonlijk gebruik: '
+                                           'premium Office-apps altijd actueel, 1 TB toegewijde '
+                                           'OneDrive-opslag, Copilot AI in elke app, en de code '
+                                           'per e-mail binnen 2-15 minuten.'},
                             'eyebrow': {'it': 'Abbonamento premium · 12 mesi',
                                         'en': 'Premium subscription · 12 months',
                                         'fr': 'Abonnement premium · 12 mois',
                                         'de': 'Premium-Abo · 12 Monate',
-                                        'es': 'Suscripción premium · 12 meses'},
+                                        'es': 'Suscripción premium · 12 meses',
+                                        'pt': 'Subscrição premium · 12 meses',
+                                        'nl': 'Premiumabonnement · 12 maanden'},
                             'title_html': {'it': 'Microsoft 365 <span>Personal</span>',
                                            'en': 'Microsoft 365 <span>Personal</span>',
                                            'fr': 'Microsoft 365 <span>Personnel</span>',
                                            'de': 'Microsoft 365 <span>Personal</span>',
-                                           'es': 'Microsoft 365 <span>Personal</span>'},
+                                           'es': 'Microsoft 365 <span>Personal</span>',
+                                           'pt': 'Microsoft 365 <span>Personal</span>',
+                                           'nl': 'Microsoft 365 <span>Personal</span>'},
                             'features_title': {'it': 'Il tuo spazio di lavoro, sempre con te',
                                                'en': 'Your workspace, everywhere',
                                                'fr': 'Tout ce dont vous avez besoin',
                                                'de': 'Ihr Arbeitsplatz, überall',
-                                               'es': 'Todo lo que necesitas'},
+                                               'es': 'Todo lo que necesitas',
+                                               'pt': 'O teu espaço de trabalho, sempre contigo',
+                                               'nl': 'Uw werkruimte, overal'},
                             'apps_title': {'it': 'Piano Microsoft 365 Personal',
                                            'en': 'Microsoft 365 Personal plan',
                                            'fr': 'Plan Microsoft 365 Personnel',
                                            'de': 'Microsoft 365 Personal-Plan',
-                                           'es': 'Plan Microsoft 365 Personal'},
+                                           'es': 'Plan Microsoft 365 Personal',
+                                           'pt': 'Plano Microsoft 365 Personal',
+                                           'nl': 'Abonnement Microsoft 365 Personal'},
                             'pills': {'it': [('teams', '1 utente'),
                                              ('onedrive', '1 TB OneDrive'),
                                              ('copilot', 'Include Copilot'),
@@ -76,7 +99,11 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                       'es': [('teams', '1 usuario'),
                                              ('onedrive', '1 TB OneDrive'),
                                              ('copilot', 'Incluye Copilot'),
-                                             ('defender', 'Defender incluido')]},
+                                             ('defender', 'Defender incluido')],
+                                      'pt': [('teams', '1 utilizador'),
+                                             ('onedrive', '1 TB OneDrive'),
+                                             ('copilot', 'Inclui o Copilot'),
+                                             ('defender', 'Defender incluído')]},
                             'features': {'it': [('c8',
                                                  'blue',
                                                  'Il tuo account',
@@ -292,7 +319,52 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                  'Multi-dispositivo',
                                                  'PC, Mac, tablet y smartphone',
                                                  'Las apps funcionan en Windows, macOS, iOS y '
-                                                 'Android según los requisitos de Microsoft.')]},
+                                                 'Android según los requisitos de Microsoft.')],
+                                         'pt': [('c8',
+                                                 'blue',
+                                                 'A tua conta',
+                                                 'Um utilizador, plano completo',
+                                                 'O plano Personal é para um único utilizador: com '
+                                                 'a mesma conta Microsoft podes usar as apps Office '
+                                                 'em até cinco dispositivos ao mesmo tempo (PC, '
+                                                 'Mac, tablet e smartphone), além do 1 TB de '
+                                                 'OneDrive incluído, segundo os limites Microsoft '
+                                                 'do plano.'),
+                                                ('c4',
+                                                 'teal',
+                                                 '',
+                                                 'Armazenamento cloud',
+                                                 'Espaço OneDrive incluído no plano para '
+                                                 'documentos, fotos e cópias de segurança, '
+                                                 'partilhável apenas nas formas previstas pela '
+                                                 'Microsoft para o Personal.'),
+                                                ('c4',
+                                                 'purple',
+                                                 'Segurança',
+                                                 'Microsoft Defender incluído',
+                                                 'Proteção avançada nos dispositivos suportados '
+                                                 'associados à tua conta, segundo a oferta '
+                                                 'Microsoft para o plano Personal.'),
+                                                ('c4',
+                                                 '',
+                                                 'Atualizações',
+                                                 'Apps sempre atualizadas',
+                                                 'Word, Excel, PowerPoint, Outlook e todas as '
+                                                 'outras apps recebem atualizações contínuas sem '
+                                                 'custos extra.'),
+                                                ('c4',
+                                                 '',
+                                                 'IA',
+                                                 'Microsoft Copilot',
+                                                 'Assistente de IA integrado nas apps onde o '
+                                                 'Copilot está incluído no plano, para acelerar '
+                                                 'documentos, email e apresentações.'),
+                                                ('c4',
+                                                 'dark',
+                                                 'Multi-dispositivo',
+                                                 'PC, Mac, tablet e smartphone',
+                                                 'As apps funcionam em Windows, macOS, iOS e '
+                                                 'Android segundo os requisitos Microsoft.')]},
                             'steps': {'it': [('Ordine e pagamento',
                                               'Aggiungi il prodotto al carrello e completa il '
                                               'pagamento sicuro con i metodi disponibili. Ricevi '
@@ -383,6 +455,24 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                               'licencia a tu cuenta Microsoft e instala las apps '
                                               'desde <a href="https://www.office.com" '
                                               'target="_blank" rel="noopener '
+                                              'noreferrer">office.com</a>.')],
+                                      'pt': [('Pedido e pagamento',
+                                              'Adiciona o produto ao carrinho e conclui o '
+                                              'pagamento seguro com um dos métodos disponíveis. '
+                                              'Recebes a confirmação da encomenda de acordo com '
+                                              'as condições mostradas no checkout.'),
+                                             ('Entrega digital',
+                                              'Enviamos-te a <strong>product key</strong> e as '
+                                              'instruções por email, normalmente em poucos '
+                                              'minutos após a aprovação do pagamento.'),
+                                             ('Ativação',
+                                              'Resgata o código em <a '
+                                              'href="https://setup.office.com/Home" '
+                                              'target="_blank" rel="noopener '
+                                              'noreferrer">setup.office.com</a>, associa a '
+                                              'licença à tua conta Microsoft e instala as apps a '
+                                              'partir de <a href="https://www.office.com" '
+                                              'target="_blank" rel="noopener '
                                               'noreferrer">office.com</a>.')]},
                             'specs': {'it': [('Processore',
                                               'Windows: almeno 1,6 GHz dual‑core. Mac: Intel o '
@@ -462,7 +552,23 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                              ('Espacio en disco',
                                               'Al menos 4 GB libres (PC) o más en Mac, según la '
                                               'suite instalada. Consulta la página oficial de '
-                                              'Microsoft.')]},
+                                              'Microsoft.')],
+                                      'pt': [('Processador',
+                                              'Windows: pelo menos 1,6 GHz dual-core. Mac: Intel '
+                                              'ou Apple Silicon compatível com uma versão '
+                                              'suportada de macOS.'),
+                                             ('Sistema operativo',
+                                              'Windows 10/11; as últimas três versões do macOS; '
+                                              'iOS e Android segundo as versões suportadas pela '
+                                              'Microsoft.'),
+                                             ('Memória (RAM)',
+                                              'Pelo menos 4 GB recomendados para as apps de '
+                                              'computador; pode ser necessário mais para funções '
+                                              'avançadas ou ficheiros grandes.'),
+                                             ('Espaço em disco',
+                                              'Pelo menos 4 GB livres (PC) ou mais no Mac, '
+                                              'dependendo da suite instalada. Verifica a página '
+                                              'oficial Microsoft.')]},
                             'specs_note': {'it': 'Valori orientativi da documentazione Microsoft; '
                                                  'verifica sempre i requisiti aggiornati prima '
                                                  "dell'installazione.",
@@ -477,7 +583,10 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                  'der Installation.',
                                            'es': 'Valores orientativos de la documentación de '
                                                  'Microsoft; comprueba siempre los requisitos '
-                                                 'actualizados antes de la instalación.'},
+                                                 'actualizados antes de la instalación.',
+                                           'pt': 'Valores indicativos da documentação Microsoft; '
+                                                 'verifica sempre os requisitos atualizados antes '
+                                                 'da instalação.'},
                             'faq': {'it': [('Per chi è pensato Microsoft 365 Personal?',
                                             'Personal copre un solo utente con account Microsoft, '
                                             'app Office premium e 1 TB di OneDrive, secondo le '
@@ -587,7 +696,50 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'requiere conexión a internet e inicio de sesión '
                                             'periódicos para la verificación de la licencia, las '
                                             'actualizaciones y los servicios en la nube como '
-                                            'OneDrive.')]},
+                                            'OneDrive.')],
+                                    'pt': [('Para quem é indicado o Microsoft 365 Personal?',
+                                            'O Personal cobre uma conta Microsoft com apps Office '
+                                            'premium e 1 TB de OneDrive, segundo as condições da '
+                                            'Microsoft. Para partilhar com várias pessoas em '
+                                            'contas separadas, considera o Microsoft 365 Family.'),
+                                           ('Posso usar o Personal em vários dispositivos?',
+                                            'Sim, dentro dos limites do plano Microsoft: instala '
+                                            'as apps em PC, Mac, tablets e smartphones suportados '
+                                            'ligados à tua conta, como descrito na documentação '
+                                            'oficial.'),
+                                           ('É uma subscrição ou uma compra única?',
+                                            'É uma subscrição com renovação anual (12 meses '
+                                            'comprados nesta página). A duração, a renovação e o '
+                                            'preço de renovação dependem da Microsoft e das '
+                                            'condições mostradas no processo de encomenda.'),
+                                           ('As apps do Office podem ser usadas offline?',
+                                            'Sim: com as apps de computador instaladas podes '
+                                            'trabalhar offline; ainda assim é necessária ligação '
+                                            'à internet e início de sessão periódicos para a '
+                                            'verificação da licença, atualizações e serviços na '
+                                            'nuvem como o OneDrive.')],
+                                    'nl': [('Voor wie is Microsoft 365 Personal bedoeld?',
+                                            'Personal dekt één Microsoft-account met premium '
+                                            'Office-apps en 1 TB OneDrive, volgens de voorwaarden '
+                                            'van Microsoft. Om te delen met meerdere personen op '
+                                            'aparte accounts, overweeg Microsoft 365 Family.'),
+                                           ('Kan ik Personal op meerdere apparaten gebruiken?',
+                                            'Ja, binnen de limieten van het Microsoft-abonnement: '
+                                            'installeer de apps op ondersteunde pc’s, Macs, '
+                                            'tablets en smartphones die aan uw account zijn '
+                                            'gekoppeld, zoals beschreven in de officiële '
+                                            'documentatie.'),
+                                           ('Is dit een abonnement of een eenmalige aankoop?',
+                                            'Het is een abonnement met jaarlijkse verlenging '
+                                            '(12 maanden gekocht op deze pagina). Looptijd, '
+                                            'verlenging en verlengingsprijs hangen af van '
+                                            'Microsoft en de voorwaarden die tijdens de bestelling '
+                                            'worden getoond.'),
+                                           ('Kunnen de Office-apps offline worden gebruikt?',
+                                            'Ja: met geïnstalleerde desktop-apps kunt u offline '
+                                            'werken; periodieke internetverbinding en aanmelding '
+                                            'blijven nodig voor licentiecontrole, updates en '
+                                            'clouddiensten zoals OneDrive.')]},
                             'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
                                                     'title': 'Scheda tecnica',
                                                     'caption': 'Specifiche tecniche e commerciali '
@@ -713,7 +865,33 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                               'Unión Europea / EEE'),
                                                              ('Facturación',
                                                               'IVA incluido, factura '
-                                                              'disponible')]}},
+                                                              'disponible')]},
+                                             'pt': {'eyebrow': 'Especificações do produto',
+                                                    'title': 'Ficha técnica',
+                                                    'caption': 'Especificações técnicas e '
+                                                               'comerciais do Microsoft 365 '
+                                                               'Personal',
+                                                    'rows': [('Produto', 'Microsoft 365 Personal'),
+                                                             ('Duração', '12 meses'),
+                                                             ('Utilizadores', '1 pessoa'),
+                                                             ('Armazenamento', '1 TB OneDrive'),
+                                                             ('Dispositivos',
+                                                              'Até 5 em simultâneo'),
+                                                             ('Copilot', 'Incluído'),
+                                                             ('Entrega',
+                                                              'Código digital por email'),
+                                                             ('Ativação',
+                                                              'Conta Microsoft, em '
+                                                              'setup.office.com'),
+                                                             ('Renovação',
+                                                              'Nova ativação ou extensão '
+                                                              'segundo as regras Microsoft'),
+                                                             ('Código do produto', '@sku'),
+                                                             ('Região de ativação',
+                                                              'União Europeia / EEE'),
+                                                             ('Faturação',
+                                                              'IVA incluído, fatura eletrónica '
+                                                              'disponível')]}},
                             'compare': {'it': {'eyebrow': 'Quale scegliere',
                                                 'title': 'Confronta i piani Microsoft 365',
                                                 'sub': 'La differenza non è la potenza delle app: '
@@ -905,7 +1083,45 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                         'incluir 5 personas más, cada una con su '
                                                         'propia cuenta y 1 TB — mucho menos que '
                                                         'comprar una segunda licencia Personal '
-                                                        'aparte.']}},
+                                                        'aparte.']},
+                                        'pt': {'eyebrow': 'Qual escolher',
+                                               'title': 'Compara os planos Microsoft 365',
+                                               'sub': 'A diferença não é a potência das apps: é '
+                                                      'quantas pessoas vão realmente usar o '
+                                                      'plano.',
+                                               'caption': 'Comparação entre o Microsoft 365 '
+                                                          'Personal e o Microsoft 365 Family',
+                                               'cols': ['Microsoft 365 Personal',
+                                                        'Microsoft 365 Family'],
+                                               'rows': [('Pessoas', '1', 'Até 6'),
+                                                        ('Armazenamento OneDrive',
+                                                         '1 TB',
+                                                         '1 TB por pessoa'),
+                                                        ('Conta separada por utilizador',
+                                                         'no',
+                                                         'yes'),
+                                                        ('Funções do Copilot',
+                                                         'Titular',
+                                                         'Apenas o titular'),
+                                                        ('Ideal para',
+                                                         'Quem usa o Office a solo',
+                                                         'Duas ou mais pessoas')],
+                                               'yes_label': 'Incluído',
+                                               'no_label': 'Não aplicável',
+                                               'price_row': 'Preço na AML Store',
+                                               'skus': ['QQ2-00012', '6GQ-00092'],
+                                               'foot': ['Escolhe o Personal se fores a única '
+                                                        'pessoa a usar de facto as apps ou o '
+                                                        'armazenamento OneDrive. Se mais tarde '
+                                                        'quiseres partilhá-lo com outros, '
+                                                        'considera já o Microsoft 365 Family.',
+                                                        'Passar para o Family custa apenas '
+                                                        '<strong>€ {price1_minus_price0} '
+                                                        'mais</strong> (€ {price1} em vez de € '
+                                                        '{price0}) para incluir mais 5 pessoas, '
+                                                        'cada uma com a sua própria conta e 1 TB '
+                                                        '— muito menos do que comprar uma segunda '
+                                                        'licença Personal em separado.']}},
                             'apps': ['word',
                                      'excel',
                                      'powerpoint',
@@ -926,7 +1142,17 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                  'aggiuntivi.',
                                                  '<strong>Nessun Rinnovo Automatico:</strong> '
                                                  "Decidi tu in totale libertà se rinnovare l'anno "
-                                                 'prossimo.']},
+                                                 'prossimo.'],
+                                          'pt': ['<strong>Usa em 5 Dispositivos:</strong> PC, Mac, '
+                                                 'iPad, iPhone e Android em simultâneo.',
+                                                 '<strong>1.000 GB na Cloud:</strong> Guarda fotos '
+                                                 'e ficheiros sem ocupar espaço no dispositivo.',
+                                                 '<strong>Sempre Atualizado:</strong> Recebes '
+                                                 'sempre as funcionalidades mais recentes sem '
+                                                 'custos adicionais.',
+                                                 '<strong>Sem Renovação Automática:</strong> '
+                                                 'Decides tu, com total liberdade, se renovas no '
+                                                 'próximo ano.']},
                             'lifestyle': {'image': 'microsoft-365-personal-lifestyle.webp',
                                           'image_640': 'microsoft-365-personal-lifestyle-640.webp',
                                           'width': 1024,
@@ -941,12 +1167,15 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                   'de': 'Lächelnde Frau arbeitet am Laptop an '
                                                         'einem Schreibtisch zu Hause.',
                                                   'es': 'Mujer sonriente trabajando con su '
-                                                        'portátil en un escritorio en casa.'},
+                                                        'portátil en un escritorio en casa.',
+                                                  'pt': 'Mulher sorridente a trabalhar com o '
+                                                        'portátil numa zona de estudo em casa.'},
                                           'kicker': {'it': 'Smart Working & Studio',
                                                      'en': 'Smart Working & Study',
                                                      'fr': 'Télétravail & Études',
                                                      'de': 'Homeoffice & Studium',
-                                                     'es': 'Teletrabajo y Estudio'},
+                                                     'es': 'Teletrabajo y Estudio',
+                                                     'pt': 'Teletrabalho e Estudo'},
                                           'title': {'it': 'Lavora e studia ovunque, tutto '
                                                           'sincronizzato',
                                                     'en': 'Work and study anywhere, everything in '
@@ -956,6 +1185,8 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                     'de': 'Arbeiten und lernen überall, alles '
                                                           'synchron',
                                                     'es': 'Trabaja y estudia donde quieras, todo '
+                                                          'sincronizado',
+                                                    'pt': 'Trabalha e estuda onde quiseres, tudo '
                                                           'sincronizado'},
                                           'body': {'it': 'La libertà di lavorare, studiare e '
                                                          'creare da qualsiasi stanza di casa, con '
@@ -975,7 +1206,11 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                    'es': 'La libertad de trabajar, estudiar y '
                                                          'crear desde cualquier rincón de casa, '
                                                          'con tus archivos siempre sincronizados '
-                                                         'en OneDrive.'}},
+                                                         'en OneDrive.',
+                                                   'pt': 'A liberdade de trabalhar, estudar e '
+                                                         'criar em qualquer sala de casa, com os '
+                                                         'teus ficheiros sempre sincronizados no '
+                                                         'OneDrive.'}},
                             'app_tabs_featured': ['word',
                                                   'excel',
                                                   'powerpoint',
@@ -987,12 +1222,14 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                     'en': 'Cover_Letter_and_Resume_2026.docx',
                                                                     'fr': 'Lettre_de_motivation_et_CV_2026.docx',
                                                                     'de': 'Anschreiben_und_Lebenslauf_2026.docx',
-                                                                    'es': 'Carta_de_presentacion_y_CV_2026.docx'},
+                                                                    'es': 'Carta_de_presentacion_y_CV_2026.docx',
+                                                                    'pt': 'Carta_de_apresentacao_e_CV_2026.docx'},
                                                        'tag': {'it': '✨ Copilot AI Attivo',
                                                                'en': '✨ Copilot AI Active',
                                                                'fr': '✨ Copilot IA actif',
                                                                'de': '✨ Copilot KI aktiv',
-                                                               'es': '✨ Copilot IA activo'},
+                                                               'es': '✨ Copilot IA activo',
+                                                               'pt': '✨ Copilot IA ativo'},
                                                        'quote': {'it': 'Crea documenti di testo '
                                                                        'impeccabili, tesine, '
                                                                        'relazioni e lettere di '
@@ -1025,7 +1262,13 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                        'presentación con '
                                                                        'corrección automática y '
                                                                        'ayuda de escritura '
-                                                                       'guiada.'},
+                                                                       'guiada.',
+                                                                 'pt': 'Cria documentos de texto '
+                                                                       'impecáveis, trabalhos, '
+                                                                       'relatórios e cartas de '
+                                                                       'apresentação com correção '
+                                                                       'automática e apoio à '
+                                                                       'escrita guiada.'},
                                                        'callout_label': {'it': 'Suggerimento '
                                                                                'Copilot:',
                                                                          'en': 'Copilot '
@@ -1034,6 +1277,8 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                                ':',
                                                                          'de': 'Copilot-Vorschlag:',
                                                                          'es': 'Sugerencia de '
+                                                                               'Copilot:',
+                                                                         'pt': 'Sugestão do '
                                                                                'Copilot:'},
                                                        'callout_text': {'it': 'Ho rivisto il testo '
                                                                               'rendendolo più '
@@ -1058,18 +1303,25 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                               'texto para hacerlo '
                                                                               'más fluido, claro y '
                                                                               'sin errores '
-                                                                              'tipográficos.'}},
+                                                                              'tipográficos.',
+                                                                        'pt': 'Revi o texto '
+                                                                              'tornando-o mais '
+                                                                              'fluido, claro e '
+                                                                              'sem erros de '
+                                                                              'digitação.'}},
                                               'excel': {'type': 'stats',
                                                         'filename': {'it': 'Bilancio_Familiare_Spese.xlsx',
                                                                      'en': 'Household_Budget.xlsx',
                                                                      'fr': 'Budget_Familial.xlsx',
                                                                      'de': 'Haushaltsbudget.xlsx',
-                                                                     'es': 'Presupuesto_Familiar.xlsx'},
+                                                                     'es': 'Presupuesto_Familiar.xlsx',
+                                                                     'pt': 'Orcamento_Familiar.xlsx'},
                                                         'tag': {'it': 'Controllo Automatico',
                                                                 'en': 'Automatic Tracking',
                                                                 'fr': 'Suivi automatique',
                                                                 'de': 'Automatische Kontrolle',
-                                                                'es': 'Control automático'},
+                                                                'es': 'Control automático',
+                                                                'pt': 'Controlo automático'},
                                                         'stats': {'it': [('Casa & Utenze',
                                                                           '€ 420,00',
                                                                           False),
@@ -1114,23 +1366,35 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                           False),
                                                                          ('Ahorro del mes',
                                                                           '280,00 €',
+                                                                          True)],
+                                                                  'pt': [('Casa e Utilidades',
+                                                                          '420,00 €',
+                                                                          False),
+                                                                         ('Compras e Comida',
+                                                                          '310,00 €',
+                                                                          False),
+                                                                         ('Poupança do Mês',
+                                                                          '280,00 €',
                                                                           True)]}},
                                               'powerpoint': {'type': 'slide',
                                                              'filename': {'it': 'Presentazione_Progetto_Esame.pptx',
                                                                           'en': 'Exam_Project_Presentation.pptx',
                                                                           'fr': 'Presentation_Projet_Examen.pptx',
                                                                           'de': 'Praesentation_Pruefungsprojekt.pptx',
-                                                                          'es': 'Presentacion_Proyecto_Examen.pptx'},
+                                                                          'es': 'Presentacion_Proyecto_Examen.pptx',
+                                                                          'pt': 'Apresentacao_Projeto_Exame.pptx'},
                                                              'tag': {'it': 'Designer Automatico',
                                                                      'en': 'Automatic Designer',
                                                                      'fr': 'Concepteur automatique',
                                                                      'de': 'Automatisches Design',
-                                                                     'es': 'Diseñador automático'},
+                                                                     'es': 'Diseñador automático',
+                                                                     'pt': 'Designer automático'},
                                                              'slide_num': {'it': 'Slide 01',
                                                                            'en': 'Slide 01',
                                                                            'fr': 'Diapositive 01',
                                                                            'de': 'Folie 01',
-                                                                           'es': 'Diapositiva 01'},
+                                                                           'es': 'Diapositiva 01',
+                                                                           'pt': 'Diapositivo 01'},
                                                              'slide_title': {'it': 'Vacanze e '
                                                                                    'Itinerario '
                                                                                    '2026',
@@ -1142,7 +1406,9 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                                    'Reiseplan 2026',
                                                                              'es': 'Itinerario de '
                                                                                    'vacaciones '
-                                                                                   '2026'},
+                                                                                   '2026',
+                                                                             'pt': 'Itinerário de '
+                                                                                   'Férias 2026'},
                                                              'slide_desc': {'it': 'Layout, colori '
                                                                                   'e immagini '
                                                                                   'impaginati '
@@ -1171,7 +1437,13 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                                   'organizados '
                                                                                   'automáticamente '
                                                                                   'con un solo '
-                                                                                  'clic.'}},
+                                                                                  'clic.',
+                                                                            'pt': 'Layout, cores e '
+                                                                                  'imagens '
+                                                                                  'organizados '
+                                                                                  'automaticamente '
+                                                                                  'com um único '
+                                                                                  'clique.'}},
                                               'onedrive': {'type': 'cloud',
                                                            'filename': {'it': 'Cassaforte Foto e '
                                                                               'Documenti',
@@ -1182,13 +1454,17 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                         'de': 'Foto- und '
                                                                               'Dokumententresor',
                                                                         'es': 'Caja fuerte de '
-                                                                              'fotos y documentos'},
+                                                                              'fotos y documentos',
+                                                                        'pt': 'Cofre de Fotos e '
+                                                                              'Documentos'},
                                                            'tag': {'it': '1 TB Cloud Protetto',
                                                                    'en': '1 TB Protected Cloud',
                                                                    'fr': '1 To Cloud protégé',
                                                                    'de': '1 TB geschützte Cloud',
                                                                    'es': '1 TB en la nube '
-                                                                         'protegido'},
+                                                                         'protegido',
+                                                                   'pt': '1 TB de Cloud '
+                                                                         'Protegido'},
                                                            'used_label': {'it': 'Foto e Video di '
                                                                                 'Famiglia: 342 GB '
                                                                                 'usati',
@@ -1203,12 +1479,16 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                                 'genutzt',
                                                                           'es': 'Fotos y vídeos '
                                                                                 'familiares: 342 '
+                                                                                'GB usados',
+                                                                          'pt': 'Fotos e Vídeos '
+                                                                                'de Família: 342 '
                                                                                 'GB usados'},
                                                            'free_label': {'it': '658 GB liberi',
                                                                           'en': '658 GB free',
                                                                           'fr': '658 Go libres',
                                                                           'de': '658 GB frei',
-                                                                          'es': '658 GB libres'},
+                                                                          'es': '658 GB libres',
+                                                                          'pt': '658 GB livres'},
                                                            'percent': 34},
                                               'outlook': {'type': 'simple',
                                                           'text': {'it': 'Posta, calendario e '
@@ -1233,7 +1513,12 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                          'contactos en una sola '
                                                                          'aplicación, '
                                                                          'sincronizados con tu '
-                                                                         'cuenta de Microsoft.'}},
+                                                                         'cuenta de Microsoft.',
+                                                                   'pt': 'Email, calendário e '
+                                                                         'contactos numa única '
+                                                                         'aplicação, '
+                                                                         'sincronizados com a tua '
+                                                                         'conta Microsoft.'}},
                                               'copilot': {'type': 'simple',
                                                           'text': {'it': 'Assistente IA integrato '
                                                                          'in Word, Excel e '
@@ -1259,17 +1544,26 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                                          'integrado en Word, Excel '
                                                                          'y PowerPoint para '
                                                                          'escribir, calcular y '
-                                                                         'diseñar más rápido.'}}}},
+                                                                         'diseñar más rápido.',
+                                                                   'pt': 'Assistente de IA '
+                                                                         'integrado no Word, '
+                                                                         'Excel e PowerPoint para '
+                                                                         'escrever, calcular e '
+                                                                         'criar mais rápido.'}}}},
  'windows-11-home': {'name': {'it': 'Windows 11 Home',
                               'en': 'Windows 11 Home',
                               'fr': 'Windows 11 Home',
                               'de': 'Windows 11 Home',
-                              'es': 'Windows 11 Home'},
+                              'es': 'Windows 11 Home',
+                              'pt': 'Windows 11 Home',
+                              'nl': 'Windows 11 Home'},
                      'seo_title': {'it': 'Windows 11 Home — Aml Store',
                                    'en': 'Windows 11 Home — Aml Store',
                                    'fr': 'Windows 11 Home — Aml Store',
                                    'de': 'Windows 11 Home — Aml Store',
-                                   'es': 'Windows 11 Home — Aml Store'},
+                                   'es': 'Windows 11 Home — Aml Store',
+                                   'pt': 'Windows 11 Home — Aml Store',
+                                   'nl': 'Windows 11 Home — Aml Store'},
                      'desc': {'it': 'Porta la tua esperienza digitale al livello successivo con '
                                     "Windows 11 Home. L'equilibrio perfetto tra produttività "
                                     "basata sull'IA e prestazioni gaming senza compromessi.",
@@ -1286,23 +1580,35 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                     'Gaming-Leistung.',
                               'es': 'Lleva tu experiencia digital al siguiente nivel con Windows '
                                     '11 Home. El equilibrio perfecto entre productividad basada en '
-                                    'IA y un rendimiento de juego sin concesiones.'},
+                                    'IA y un rendimiento de juego sin concesiones.',
+                              'pt': 'Leva a tua experiência digital ao nível seguinte com o '
+                                    'Windows 11 Home. O equilíbrio perfeito entre produtividade '
+                                    'baseada em IA e desempenho de jogo sem compromissos.',
+                              'nl': 'Breng uw digitale ervaring naar een hoger niveau met '
+                                    'Windows 11 Home. De balans tussen AI-gedreven productiviteit '
+                                    'en gamingprestaties zonder concessies.'},
                      'eyebrow': {'it': 'Sistema Operativo',
                                  'en': 'Operating system',
                                  'fr': "Système d'exploitation",
                                  'de': 'Betriebssystem',
-                                 'es': 'Sistema operativo'},
+                                 'es': 'Sistema operativo',
+                                 'pt': 'Sistema operativo',
+                                 'nl': 'Besturingssysteem'},
                      'title_html': {'it': 'Windows 11 <span>Home</span>',
                                     'en': 'Windows 11 <span>Home</span>',
                                     'fr': 'Windows 11 <span>Home</span>',
                                     'de': 'Windows 11 <span>Home</span>',
-                                    'es': 'Windows 11 <span>Home</span>'},
+                                    'es': 'Windows 11 <span>Home</span>',
+                                    'pt': 'Windows 11 <span>Home</span>',
+                                    'nl': 'Windows 11 <span>Home</span>'},
                      'features_title': {'it': 'Casa, gaming e IA in un solo sistema',
                                                'en': 'Home, gaming and AI in one system',
                                                'fr': 'Maison, jeu et IA dans un seul système',
                                                'de': 'Zuhause, Gaming und KI in einem System',
-                                               'es': 'Hogar, juego e IA en un solo sistema'},
-                     'apps_title': {'it': None, 'en': None, 'fr': None, 'de': None, 'es': None},
+                                               'es': 'Hogar, juego e IA en un solo sistema',
+                                               'pt': 'Casa, jogos e IA num só sistema',
+                                               'nl': 'Thuis, games en AI in één systeem'},
+                     'apps_title': {'it': None, 'en': None, 'fr': None, 'de': None, 'es': None, 'pt': None},
                      'pills': {'it': [(None, 'Layout Snap'),
                                       (None, 'Sicurezza integrata'),
                                       (None, 'Windows Defender')],
@@ -1317,6 +1623,9 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                       (None, 'Windows Defender')],
                                'es': [(None, 'Diseños Snap'),
                                       (None, 'Seguridad integrada'),
+                                      (None, 'Windows Defender')],
+                               'pt': [(None, 'Layouts Snap'),
+                                      (None, 'Segurança integrada'),
                                       (None, 'Windows Defender')]},
                      'features': {'it': [('c6',
                                           '',
@@ -1436,7 +1745,31 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                           '',
                                           'Multitarea Snap',
                                           'Organiza el escritorio con diseños inteligentes para '
-                                          'trabajar mejor y más rápido.')]},
+                                          'trabajar mejor y más rápido.')],
+                                  'pt': [('c6',
+                                          '',
+                                          '',
+                                          'Copilot Integrado',
+                                          'A inteligência artificial ao teu serviço para '
+                                          'simplificar todas as tarefas diárias.'),
+                                         ('c6',
+                                          '',
+                                          '',
+                                          'Jogos em HDR',
+                                          'Cores mais vivas e carregamentos instantâneos para '
+                                          'uma experiência de jogo imersiva.'),
+                                         ('c6',
+                                          '',
+                                          '',
+                                          'Segurança Máxima',
+                                          'Proteção de firewall e internet contra as ameaças '
+                                          'informáticas mais recentes.'),
+                                         ('c6',
+                                          '',
+                                          '',
+                                          'Multitarefa Snap',
+                                          'Organiza o ambiente de trabalho com layouts '
+                                          'inteligentes para trabalhar melhor e mais rápido.')]},
                      'steps': {'it': [('Ordine e pagamento',
                                        'Aggiungi il prodotto al carrello e completa il pagamento '
                                        'sicuro con i metodi disponibili. Ricevi la conferma '
@@ -1492,7 +1825,19 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                        'la aprobación del pago.'),
                                       ('Descarga y activación',
                                        'Descarga Windows 11 directamente desde Microsoft o usa el '
-                                       'código para activar un PC existente.')]},
+                                       'código para activar un PC existente.')],
+                               'pt': [('Pedido e pagamento',
+                                       'Adiciona o produto ao carrinho e conclui o pagamento '
+                                       'seguro com os métodos disponíveis. Recebes a confirmação '
+                                       'da encomenda de acordo com as condições mostradas no '
+                                       'checkout.'),
+                                      ('Entrega digital',
+                                       'Enviamos-te a <strong>product key</strong> e as '
+                                       'instruções por email, normalmente dentro de minutos '
+                                       'após a aprovação do pagamento.'),
+                                      ('Download e ativação',
+                                       'Faz o download do Windows 11 diretamente da Microsoft ou '
+                                       'usa o código para ativar um PC existente.')]},
                      'specs': {'it': [('Processore',
                                        '1 GHz o superiore con 2 o più core (64-bit).'),
                                       ('RAM', '4 GB o superiore.'),
@@ -1525,8 +1870,15 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                       ('Almacenamiento', '64 GB o superior.'),
                                       ('Seguridad',
                                        'UEFI, compatible con arranque seguro y <strong>TPM '
+                                       '2.0</strong>.')],
+                               'pt': [('Processador',
+                                       '1 GHz ou superior com 2 ou mais núcleos (64 bits).'),
+                                      ('RAM', '4 GB ou superior.'),
+                                      ('Armazenamento', '64 GB ou superior.'),
+                                      ('Segurança',
+                                       'UEFI, compatível com Arranque seguro e <strong>TPM '
                                        '2.0</strong>.')]},
-                     'specs_note': {'it': None, 'en': None, 'fr': None, 'de': None, 'es': None},
+                     'specs_note': {'it': None, 'en': None, 'fr': None, 'de': None, 'es': None, 'pt': None},
                      'faq': {'it': [('La licenza è valida per sempre o a scadenza?',
                                      'La licenza è a vita (perpetua) per il dispositivo su cui '
                                      'viene attivata. Non ha scadenza né richiede rinnovi.'),
@@ -1588,7 +1940,32 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                     ('¿Puede esta licencia actualizar desde Windows 10?',
                                      'Sí. Si tu PC cumple los requisitos mínimos de hardware de '
                                      'Microsoft, puedes usar la clave de producto para actualizar '
-                                     'una instalación compatible de Windows 10 a Windows 11.')]},
+                                     'una instalación compatible de Windows 10 a Windows 11.')],
+                             'pt': [('A licença é válida para sempre ou tem prazo?',
+                                     'A licença é perpétua (para toda a vida) para o dispositivo '
+                                     'em que é ativada. Não tem prazo de validade nem exige '
+                                     'renovações.'),
+                                    ('Como ativo a licença do Windows 11?',
+                                     'Introduz o código de produto recebido por email durante a '
+                                     'instalação do sistema operativo, ou em Configurações &gt; '
+                                     'Ativação se o Windows 11 já estiver instalado.'),
+                                    ('Esta licença pode atualizar a partir do Windows 10?',
+                                     'Sim. Se o teu PC cumprir os requisitos mínimos de hardware '
+                                     'da Microsoft, podes usar o código de produto para atualizar '
+                                     'uma instalação compatível do Windows 10 para o Windows 11.')],
+                             'nl': [('Is de licentie permanent of heeft ze een einddatum?',
+                                     'De licentie is permanent (levenslang) voor het apparaat '
+                                     'waarop ze wordt geactiveerd. Ze verloopt niet en vereist '
+                                     'geen verlengingen.'),
+                                    ('Hoe activeer ik de Windows 11-licentie?',
+                                     'Voer de per e-mail ontvangen productsleutel in tijdens de '
+                                     'installatie van het besturingssysteem, of via Instellingen '
+                                     '&gt; Activering als Windows 11 al is geïnstalleerd.'),
+                                    ('Kan deze licentie upgraden vanaf Windows 10?',
+                                     'Ja. Als uw pc voldoet aan de minimale hardware-eisen van '
+                                     'Microsoft, kunt u de productsleutel gebruiken om een '
+                                     'compatibele Windows 10-installatie naar Windows 11 te '
+                                     'upgraden.')]},
                      'apps': [],
                      'lifestyle': {'image': 'windows-11-start-1024x640.jpg',
                                    'image_root': '',
@@ -1603,18 +1980,23 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'de': 'Windows 11 Oberfläche mit dem neuen zentrierten '
                                                  'Startmenü.',
                                            'es': 'Interfaz de Windows 11 con el nuevo menú Inicio '
+                                                 'centrado.',
+                                           'pt': 'Interface do Windows 11 com o novo menu Iniciar '
                                                  'centrado.'},
                                    'kicker': {'it': 'Interfaccia',
                                               'en': 'Interface',
                                               'fr': 'Interface',
                                               'de': 'Oberfläche',
-                                              'es': 'Interfaz'},
+                                              'es': 'Interfaz',
+                                              'pt': 'Interface'},
                                    'title': {'it': 'Un desktop pulito, tutto a portata di clic',
                                              'en': 'A clean desktop, everything a click away',
                                              'fr': 'Un bureau épuré, tout à portée de clic',
                                              'de': 'Ein aufgeräumter Desktop, alles einen Klick '
                                                    'entfernt',
-                                             'es': 'Un escritorio limpio, todo a un clic'},
+                                             'es': 'Un escritorio limpio, todo a un clic',
+                                             'pt': 'Um ambiente de trabalho limpo, tudo a um '
+                                                   'clique'},
                                    'body': {'it': "L'interfaccia ridisegnata di Windows 11 ti "
                                                   'permette di accedere rapidamente alle tue app '
                                                   'preferite e ai file recenti in un ambiente '
@@ -1633,7 +2015,11 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'es': 'La interfaz rediseñada de Windows 11 te permite '
                                                   'acceder rápidamente a tus aplicaciones '
                                                   'favoritas y archivos recientes en un entorno '
-                                                  'limpio, fluido y moderno.'}}},
+                                                  'limpio, fluido y moderno.',
+                                            'pt': 'A interface reformulada do Windows 11 permite-te '
+                                                  'acesso rápido às tuas apps preferidas e aos '
+                                                  'ficheiros recentes num ambiente limpo, fluido '
+                                                  'e moderno.'}}},
  'microsoft-365-family': {'copilot_bonus': True,
                           'hide_steps_section': True,
                           'seats_count': 6,
@@ -1641,12 +2027,16 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                    'en': 'Microsoft 365 Family',
                                    'fr': 'Microsoft 365 Family',
                                    'de': 'Microsoft 365 Family',
-                                   'es': 'Microsoft 365 Family'},
+                                   'es': 'Microsoft 365 Family',
+                                   'pt': 'Microsoft 365 Family',
+                                   'nl': 'Microsoft 365 Family'},
                           'seo_title': {'it': 'Microsoft 365 Family — Aml Store',
                                         'en': 'Microsoft 365 Family — Aml Store',
                                         'fr': 'Microsoft 365 Family — Aml Store',
                                         'de': 'Microsoft 365 Family — Aml Store',
-                                        'es': 'Microsoft 365 Family — Aml Store'},
+                                        'es': 'Microsoft 365 Family — Aml Store',
+                                        'pt': 'Microsoft 365 Family — Aml Store',
+                                        'nl': 'Microsoft 365 Family — Aml Store'},
                           'desc': {'it': 'Microsoft 365 per te e altre cinque persone, con app '
                                          'complete e 1 TB di OneDrive personale per ciascun '
                                          'membro. Copilot è incluso per il titolare '
@@ -1665,17 +2055,27 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                    'es': 'Microsoft 365 para ti y otras cinco personas, con apps '
                                          'completas y 1 TB de OneDrive personal para cada miembro. '
                                          'Copilot está incluido para el titular de la '
-                                         'suscripción.'},
+                                         'suscripción.',
+                                   'pt': 'Microsoft 365 para ti e outras cinco pessoas, com apps '
+                                         'completas e 1 TB de OneDrive pessoal para cada membro. '
+                                         'O Copilot está incluído para o titular da subscrição.',
+                                   'nl': 'Microsoft 365 voor u en vijf andere personen, met '
+                                         'volledige apps en 1 TB persoonlijke OneDrive per lid. '
+                                         'Copilot is inbegrepen voor de abonnementhouder.'},
                           'eyebrow': {'it': 'Abbonamento digitale · 12 mesi',
                                       'en': 'Digital subscription · 12 months',
                                       'fr': 'Abonnement numérique · 12 mois',
                                       'de': 'Digitales Abo · 12 Monate',
-                                      'es': 'Suscripción digital · 12 meses'},
+                                      'es': 'Suscripción digital · 12 meses',
+                                      'pt': 'Subscrição digital · 12 meses',
+                                      'nl': 'Digitaal abonnement · 12 maanden'},
                           'title_html': {'it': 'Microsoft 365 <span>Family</span>',
                                          'en': 'Microsoft 365 <span>Family</span>',
                                          'fr': 'Microsoft 365 <span>Family</span>',
                                          'de': 'Microsoft 365 <span>Family</span>',
-                                         'es': 'Microsoft 365 <span>Family</span>'},
+                                         'es': 'Microsoft 365 <span>Family</span>',
+                                         'pt': 'Microsoft 365 <span>Family</span>',
+                                         'nl': 'Microsoft 365 <span>Family</span>'},
                           'apps': ['word',
                                    'excel',
                                    'powerpoint',
@@ -1726,7 +2126,15 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                'Apps de escritorio siempre actualizadas en PC, '
                                                'Mac, tablet y móvil',
                                                'Copilot para el titular <em>— no se comparte con '
-                                               'los demás miembros</em>']},
+                                               'los demás miembros</em>'],
+                                        'pt': ['Até 6 pessoas, cada uma com a sua própria conta '
+                                               'Microsoft',
+                                               '1 TB de OneDrive por pessoa, ficheiros e '
+                                               'configurações separados',
+                                               'Apps de computador sempre atualizadas em PC, Mac, '
+                                               'tablet e telemóvel',
+                                               'Copilot para o titular <em>— não partilhado com '
+                                               'os restantes membros</em>']},
                           'steps': {'it': [("Completa l'ordine",
                                             'Paga con uno dei metodi disponibili al checkout: '
                                             'carta, PayPal o wallet digitali.'),
@@ -1794,7 +2202,21 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'rel="noopener noreferrer">setup.office.com</a>; '
                                             'después instala las apps desde <a '
                                             'href="https://www.office.com" target="_blank" '
-                                            'rel="noopener noreferrer">office.com</a>.')]},
+                                            'rel="noopener noreferrer">office.com</a>.')],
+                                    'pt': [('Conclui a encomenda',
+                                            'Paga com um dos métodos disponíveis no checkout: '
+                                            'cartão, PayPal ou carteiras digitais.'),
+                                           ('Recebe o código',
+                                            'A product key e as instruções chegam por email em '
+                                            '2–15 minutos após a confirmação do pagamento.'),
+                                           ('Ativa na Microsoft',
+                                            'Inicia sessão com a tua conta e resgata o código em '
+                                            '<a href="https://setup.office.com/Home" '
+                                            'target="_blank" rel="noopener '
+                                            'noreferrer">setup.office.com</a>, depois instala as '
+                                            'apps a partir de <a href="https://www.office.com" '
+                                            'target="_blank" rel="noopener '
+                                            'noreferrer">office.com</a>.')]},
                           'steps_note': {'it': "<strong>Controlla di usare l'account Microsoft "
                                                'corretto:</strong> la licenza viene associata '
                                                "all'account scelto durante il riscatto e non può "
@@ -1814,7 +2236,11 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                          'es': '<strong>Asegúrate de usar la cuenta Microsoft '
                                                'correcta:</strong> la licencia queda vinculada a '
                                                'la cuenta elegida en el canje y no se puede mover '
-                                               'después.'},
+                                               'después.',
+                                         'pt': '<strong>Confirma que usas a conta Microsoft '
+                                               'correta:</strong> a licença fica associada à '
+                                               'conta escolhida no resgate e não pode ser movida '
+                                               'depois.'},
                           'specs_note': {'it': 'Valori indicativi da documentazione Microsoft. '
                                                'Verifica sempre i requisiti aggiornati sulla '
                                                'scheda ufficiale Microsoft prima '
@@ -1833,7 +2259,11 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                          'es': 'Valores orientativos de la documentación de '
                                                'Microsoft. Comprueba siempre los requisitos '
                                                'actualizados en la página oficial del producto '
-                                               'Microsoft antes de instalar.'},
+                                               'Microsoft antes de instalar.',
+                                         'pt': 'Valores indicativos da documentação Microsoft. '
+                                               'Verifica sempre os requisitos atualizados na '
+                                               'página oficial da Microsoft antes da '
+                                               'instalação.'},
                           'specs': {'it': [('Sistemi operativi supportati',
                                             'Windows 10 o versioni successive; le tre versioni più '
                                             'recenti di macOS; iOS e Android nelle versioni '
@@ -1927,7 +2357,27 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                             'actualizaciones y los servicios en la nube. Las apps '
                                             'de escritorio instaladas también funcionan sin '
                                             'conexión, con comprobaciones periódicas de la '
-                                            'licencia.')]},
+                                            'licencia.')],
+                                    'pt': [('Sistemas operativos suportados',
+                                            'Windows 10 ou versões posteriores; as três versões '
+                                            'mais recentes do macOS; iOS e Android nas versões '
+                                            'suportadas pela Microsoft.'),
+                                           ('Processador e memória',
+                                            ['Windows: processador de 1,6 GHz ou superior, dois '
+                                             'núcleos. Mac: processador Intel ou Apple Silicon '
+                                             'compatível com a versão de macOS suportada.',
+                                             'Memória: 4 GB de RAM para versões de 64 bits, 2 GB '
+                                             'para versões de 32 bits.']),
+                                           ('Espaço em disco',
+                                            'Cerca de 4 GB de espaço disponível no Windows e '
+                                            'cerca de 10 GB no macOS, dependendo das apps '
+                                            'instaladas.'),
+                                           ('Ligação e conta Microsoft',
+                                            'São necessárias uma conta Microsoft e uma ligação à '
+                                            'internet para resgate, ativação, atualizações e '
+                                            'serviços na cloud. As apps de computador instaladas '
+                                            'funcionam também offline, com verificações '
+                                            'periódicas da licença.')]},
                           'faq': {'it': [('Quando ricevo il codice dopo il pagamento?',
                                           ["L'email di consegna parte dopo la conferma del "
                                            'pagamento, di norma entro 2–15 minuti; in rari casi '
@@ -2242,6 +2692,136 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'habituales de gestión.',
                                            'Soporte: <a '
                                            'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           '+39 392 558 0413.'])],
+                                  'pt': [('Quando recebo o código depois do pagamento?',
+                                          ['O email de entrega é enviado após a confirmação do '
+                                           'pagamento, normalmente dentro de 2–15 minutos; em '
+                                           'casos raros são necessários mais alguns minutos para '
+                                           'as verificações do pagamento.',
+                                           'Se depois de <strong>30 minutos</strong> não '
+                                           'receberes nada, verifica também o spam/lixo '
+                                           'eletrónico e escreve para <a '
+                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'indicando o produto comprado e o email usado na '
+                                           'encomenda.']),
+                                         ('O que recebo exatamente no email?',
+                                          ['Recebes a <strong>product key</strong> do Microsoft '
+                                           '365 Family e as instruções para a resgatares nos '
+                                           'portais oficiais Microsoft.',
+                                           'A entrega é apenas digital: não é enviado nenhum '
+                                           'suporte físico e não há custos de envio.']),
+                                         ('Que métodos de pagamento posso usar?',
+                                          'No checkout estão disponíveis cartão, PayPal e '
+                                          'carteiras digitais como Apple Pay e Google Pay quando '
+                                          'ativadas. O processamento do pagamento é feito de '
+                                          'forma segura através da <strong>Stripe</strong>.'),
+                                         ('Posso ter fatura eletrónica?',
+                                          ['Sim. No checkout escolhe o perfil '
+                                           '<strong>Empresa</strong> e introduz o NIF e os dados '
+                                           'de faturação: a fatura eletrónica é emitida com esses '
+                                           'dados.',
+                                           'Se precisares depois da encomenda, escreve para <a '
+                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'indicando o email usado na encomenda e o número de '
+                                           'encomenda.']),
+                                         ('Posso resgatar o código numa conta que já tem o '
+                                          'Microsoft 365 ativo?',
+                                          ['Sim: o resgate é feito em setup.office.com com a tua '
+                                           'conta Microsoft, mesmo que já tenha uma subscrição '
+                                           'Microsoft 365 Family ativa. A forma como é aplicado — '
+                                           'extensão da duração atual, início de um novo período '
+                                           'ou conversão do plano — segue as regras Microsoft '
+                                           'mostradas no momento do resgate; não é algo que '
+                                           'decidamos nós como revendedor.',
+                                           '<strong>Escolhe a conta com atenção:</strong> a '
+                                           'licença fica associada à conta usada no momento do '
+                                           'resgate.']),
+                                         ('Os ficheiros são partilhados automaticamente entre os '
+                                          'membros?',
+                                          'Não. Cada pessoa usa a sua própria conta Microsoft, '
+                                          'com documentos, email, configurações e espaço OneDrive '
+                                          'separados. A partilha de ficheiros ou pastas '
+                                          'individuais continua a ser uma escolha voluntária de '
+                                          'quem os possui.'),
+                                         ('O código renova-se automaticamente depois de 12 '
+                                          'meses?',
+                                          'Não. O código ativa o Microsoft 365 Family por 12 '
+                                          'meses com um pagamento único: a AML Store não cobra '
+                                          'nada automaticamente na expiração. Eventuais opções de '
+                                          'renovação são geridas separadamente, diretamente na '
+                                          'conta Microsoft.'),
+                                         ('O que acontece se o código não funcionar?',
+                                          ['Escreve-nos indicando o número de encomenda e a '
+                                           'eventual mensagem de erro. Analisamos o caso e, se se '
+                                           'confirmar um defeito imputável a nós ou ao fornecedor '
+                                           'da chave, propomos substituição ou reembolso nos '
+                                           'prazos habituais de processamento.',
+                                           'Assistência: <a '
+                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           '+39 392 558 0413.'])],
+                                  'nl': [('Wanneer ontvang ik de code na betaling?',
+                                          ['De leverings-e-mail wordt verstuurd na bevestiging van '
+                                           'de betaling, meestal binnen 2–15 minuten; in zeldzame '
+                                           'gevallen zijn extra minuten nodig voor de '
+                                           'betalingscontroles.',
+                                           'Als u na <strong>30 minuten</strong> niets hebt '
+                                           'ontvangen, controleer dan ook spam/ongewenste e-mail '
+                                           'en schrijf naar <a '
+                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'met het gekochte product en het e-mailadres van de '
+                                           'bestelling.']),
+                                         ('Wat ontvang ik precies in de e-mail?',
+                                          ['U ontvangt de <strong>productsleutel</strong> van '
+                                           'Microsoft 365 Family en de instructies om die in te '
+                                           'wisselen op de officiële Microsoft-portalen.',
+                                           'Levering is alleen digitaal: er wordt geen fysieke '
+                                           'media meegestuurd en er zijn geen verzendkosten.']),
+                                         ('Welke betaalmethoden kan ik gebruiken?',
+                                          'In de checkout kunt u betalen met kaart, PayPal en '
+                                           'digitale wallets zoals Apple Pay en Google Pay waar '
+                                           'die zijn ingeschakeld. De betaling wordt veilig '
+                                           'verwerkt via <strong>Stripe</strong>.'),
+                                         ('Kan ik een factuur met btw krijgen?',
+                                          ['Ja. Kies in de checkout het profiel '
+                                           '<strong>Bedrijf</strong> en vul uw btw-gegevens in: '
+                                           'wij stellen de factuur met btw op die gegevens op.',
+                                           'Als u die na de bestelling nodig hebt, mail dan <a '
+                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'met het e-mailadres van de bestelling en het '
+                                           'ordernummer.']),
+                                         ('Kan ik de code inwisselen op een account dat al '
+                                          'Microsoft 365 actief heeft?',
+                                          ['Ja: het inwisselen gebeurt op setup.office.com met uw '
+                                           'Microsoft-account, ook als daar al een actief '
+                                           'Microsoft 365 Family-abonnement op staat. Hoe het '
+                                           'wordt toegepast — verlenging van de huidige periode, '
+                                           'start van een nieuwe periode of conversie van het '
+                                           'plan — volgt de regels van Microsoft die bij het '
+                                           'inwisselen worden getoond; dat beslissen wij niet als '
+                                           'wederverkoper.',
+                                           '<strong>Kies het account zorgvuldig:</strong> de '
+                                           'licentie blijft gekoppeld aan het account dat bij het '
+                                           'inwisselen is gebruikt.']),
+                                         ('Worden bestanden automatisch gedeeld tussen leden?',
+                                          'Nee. Elke persoon gebruikt een eigen Microsoft-account, '
+                                           'met aparte documenten, e-mail, instellingen en '
+                                           'OneDrive-ruimte. Bestanden of mappen delen blijft een '
+                                           'vrijwillige keuze van de eigenaar.'),
+                                         ('Wordt de code na 12 maanden automatisch verlengd?',
+                                          'Nee. De code activeert Microsoft 365 Family voor 12 '
+                                           'maanden met een eenmalige betaling: AML Store '
+                                           'schrijft bij het verstrijken niets automatisch af. '
+                                           'Eventuele verlenging beheert u apart in uw '
+                                           'Microsoft-account.'),
+                                         ('Wat als de code niet werkt?',
+                                          ['Neem contact met ons op met uw ordernummer en een '
+                                           'eventuele foutmelding. Wij bekijken de zaak en, als '
+                                           'een gebrek dat aan ons of de sleutelleverancier te '
+                                           'wijten is wordt bevestigd, bieden we vervanging of '
+                                           'terugbetaling binnen de gebruikelijke '
+                                           'verwerkingstijden.',
+                                           'Ondersteuning: <a '
+                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
                                            '+39 392 558 0413.'])]},
                           'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
                                                  'title': 'Scheda tecnica',
@@ -2373,7 +2953,34 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                            'Unión Europea / EEE'),
                                                           ('Facturación',
                                                            'Impuestos incluidos, factura con IVA '
-                                                           'disponible')]}},
+                                                           'disponible')]},
+                                          'pt': {'eyebrow': 'Especificações do produto',
+                                                 'title': 'Ficha técnica',
+                                                 'caption': 'Especificações técnicas e comerciais '
+                                                            'do Microsoft 365 Family',
+                                                 'rows': [('Produto', 'Microsoft 365 Family'),
+                                                          ('Duração', '12 meses'),
+                                                          ('Utilizadores', 'Até 6 pessoas'),
+                                                          ('Armazenamento',
+                                                           '1 TB OneDrive por pessoa'),
+                                                          ('Dispositivos',
+                                                           'Até 5 simultâneos por pessoa'),
+                                                          ('Copilot',
+                                                           'Incluído para o titular da '
+                                                           'subscrição'),
+                                                          ('Entrega', 'Código digital por email'),
+                                                          ('Ativação',
+                                                           'Conta Microsoft, em '
+                                                           'setup.office.com'),
+                                                          ('Renovação',
+                                                           'Nova ativação ou prorrogação segundo '
+                                                           'as regras Microsoft'),
+                                                          ('Código do produto', '@sku'),
+                                                          ('Região de ativação',
+                                                           'União Europeia / EEE'),
+                                                          ('Faturação',
+                                                           'Impostos incluídos, fatura com IVA '
+                                                           'disponível')]}},
                           'seats': {'it': {'eyebrow': 'Condivisione',
                                            'title': 'Un piano, account separati',
                                            'sub': 'Inviti fino a cinque persone dal tuo account '
@@ -2467,7 +3074,25 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                     ('Miembro 6', '1 TB', False)],
                                            'media_src': '../asset/media/m365-family-lifestyle-bridge.webp',
                                            'media_alt': 'Familia usando portátiles y dispositivos '
-                                                        'juntos en un hogar luminoso y moderno.'}},
+                                                        'juntos en un hogar luminoso y moderno.'},
+                                    'pt': {'eyebrow': 'Partilha',
+                                           'title': 'Um plano, contas separadas',
+                                           'sub': 'Convida até cinco pessoas a partir da tua conta '
+                                                  'Microsoft. Cada uma recebe o seu próprio '
+                                                  'espaço cloud, apps e configurações: ninguém vê '
+                                                  'os documentos dos outros.',
+                                           'list_aria': 'Os seis lugares do plano',
+                                           'foot': 'Todos recebem as mesmas apps. Só o Copilot '
+                                                   'muda — fica com o titular.',
+                                           'rows': [('Titular', '1 TB <b>+ Copilot</b>', True),
+                                                    ('Membro 2', '1 TB', False),
+                                                    ('Membro 3', '1 TB', False),
+                                                    ('Membro 4', '1 TB', False),
+                                                    ('Membro 5', '1 TB', False),
+                                                    ('Membro 6', '1 TB', False)],
+                                           'media_src': '../asset/media/m365-family-lifestyle-bridge.webp',
+                                           'media_alt': 'Família a usar portáteis e dispositivos '
+                                                        'juntos numa casa luminosa e moderna.'}},
                           'compare': {'it': {'eyebrow': 'Quale scegliere',
                                              'title': 'Confronta i piani Microsoft 365',
                                              'sub': 'La differenza non è la potenza delle app: è '
@@ -2635,7 +3260,45 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                       'Store costarían € {price0_x6} (6 × € '
                                                       '{price0}). Con Family pagas € {price1} por '
                                                       'las mismas seis personas: <strong>€ '
+                                                      '{savings_6x0_vs_1} menos</strong>.']},
+                                      'pt': {'eyebrow': 'Qual escolher',
+                                             'title': 'Compara os planos Microsoft 365',
+                                             'sub': 'A diferença não é a potência das apps: é '
+                                                    'quantas pessoas vão realmente usar o plano.',
+                                             'caption': 'Comparação entre Microsoft 365 Personal '
+                                                        'e Microsoft 365 Family',
+                                             'cols': ['Microsoft 365 Personal',
+                                                      'Microsoft 365 Family'],
+                                             'rows': [('Pessoas', '1', 'Até 6'),
+                                                      ('Espaço OneDrive',
+                                                       '1 TB',
+                                                       '1 TB por pessoa'),
+                                                      ('Conta separada por utilizador',
+                                                       'no',
+                                                       'yes'),
+                                                      ('Funcionalidades Copilot',
+                                                       'Titular',
+                                                       'Só o titular'),
+                                                      ('Ideal para',
+                                                       'Quem usa o Office a solo',
+                                                       'Duas ou mais pessoas')],
+                                             'yes_label': 'Incluído',
+                                             'no_label': 'Não aplicável',
+                                             'price_row': 'Preço na AML Store',
+                                             'skus': ['QQ2-00012', '6GQ-00092'],
+                                             'foot': ['Escolhe Family se pelo menos duas pessoas '
+                                                      'forem realmente usar as apps ou o espaço '
+                                                      'OneDrive. Caso contrário, considera <a '
+                                                      'href="/pt/microsoft-365-personal">Microsoft '
+                                                      '365 Personal</a>.',
+                                                      'Seis licenças Personal separadas na AML '
+                                                      'Store custariam € {price0_x6} (6 × € '
+                                                      '{price0}). Com Family pagas € {price1} pelas '
+                                                      'mesmas seis pessoas: <strong>€ '
                                                       '{savings_6x0_vs_1} menos</strong>.']}}}}
+
+backfill_lang(PRODUCTS)
+backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
 
 
 def get_flagship_content(slug):

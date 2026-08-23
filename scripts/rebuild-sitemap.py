@@ -15,7 +15,7 @@ SKIP = {
     "returns-and-refunds",
     "microsoft-365-solutions",
 }
-LANGS = ("it", "en", "fr", "de", "es")
+LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 urls = []
 for lang in LANGS:

@@ -30,7 +30,7 @@ import { chromium } from 'playwright';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = process.env.AML_DEV_ORIGIN || 'http://localhost:8788';
-const LANGS = ['it', 'en', 'fr', 'de', 'es'];
+const LANGS = ['it', 'en', 'fr', 'de', 'es', 'pt', 'nl'];
 const CHECK_ONLY = process.argv.includes('--check');
 
 /* I fogli di stile estratti dai componenti, da agganciare in <head>. Il

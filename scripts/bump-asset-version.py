@@ -12,7 +12,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LANG_DIRS = ["it", "en", "fr", "de", "es"]
+LANG_DIRS = ["it", "en", "fr", "de", "es", "pt", "nl"]
 os.chdir(ROOT)
 
 # Un asset dentro srcset: stessa forma dei riferimenti href/src, ma la lista e'
