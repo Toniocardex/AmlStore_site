@@ -2,7 +2,7 @@
 
 Dominio pubblico: **https://aml-store.com**
 
-Struttura URL: ogni lingua ha la propria sottocartella (`/it/`, `/en/`, `/fr/`, `/de/`, `/es/`).
+Struttura URL: ogni lingua ha la propria sottocartella (`/it/`, `/en/`, `/fr/`, `/de/`, `/es/`, `/pt/`, `/nl/`).
 La root `/` reindirizza a `/it/` tramite la regola `/ /it/ 301` in `_redirects`.
 
 Flusso: **GitHub** (questo repo) → integrazione **Cloudflare Pages** → **deploy automatico** a ogni push sul branch collegato (`main`).
@@ -34,7 +34,7 @@ Il sito **non usa WooCommerce**: è solo HTML/CSS/JS statico + **Pages Functions
 ├── _redirects          # Redirect Cloudflare Pages (root → /it/, vecchi slug, ecc.)
 ├── _headers            # Cache-Control e security headers per Cloudflare Pages
 ├── robots.txt          # Sitemap: https://aml-store.com/sitemap.xml
-├── sitemap.xml         # Tutte le URL indicizzabili (5 lingue × pagine)
+├── sitemap.xml         # Tutte le URL indicizzabili (7 lingue × pagine)
 ├── components/         # Web Components (header, footer, cookie-banner)
 ├── css/                # Un foglio per tipo di pagina, sopra la base page.css
 │                       # header.css e footer.css sono generati, non modificarli a mano
@@ -48,7 +48,9 @@ Il sito **non usa WooCommerce**: è solo HTML/CSS/JS statico + **Pages Functions
 ├── en/                 # Pagine in inglese
 ├── fr/                 # Pagine in francese
 ├── de/                 # Pagine in tedesco
-└── es/                 # Pagine in spagnolo
+├── es/                 # Pagine in spagnolo
+├── pt/                 # Pagine in portoghese
+└── nl/                 # Pagine in olandese
 ```
 
 ## Fogli di stile
@@ -82,10 +84,10 @@ risalendo l'albero delle cartelle. Da qui la divisione:
 
 | file | risponde a | ha header e footer |
 |---|---|---|
-| `it/404.html`, `en/…`, `fr/…`, `de/…`, `es/…` | i miss dentro quella lingua (`/it/qualsiasi/cosa`) | sì, pre-renderizzati come ogni altra pagina |
+| `it/404.html`, `en/…`, `fr/…`, `de/…`, `es/…`, `pt/…`, `nl/…` | i miss dentro quella lingua (`/it/qualsiasi/cosa`) | sì, pre-renderizzati come ogni altra pagina |
 | `404.html` in root | solo gli URL fuori da ogni cartella lingua (`/vecchio-slug`) | no: lì la lingua non è nota, la pagina la fa scegliere |
 
-Le cinque pagine per lingua sono pagine normali del sito: `build-inline-chrome.mjs`
+Le sette pagine per lingua sono pagine normali del sito: `build-inline-chrome.mjs`
 le prende da sé, quindi dopo averle toccate va rilanciato come per le altre.
 
 Due vincoli, se le si modifica:
