@@ -36,8 +36,13 @@ Non riutilizzare mai database ID o secret production nei file preview. I file ve
 (dettaglio in `docs/adr/ADR-CHAT-001-implementation-plan.md` §0.2: D1 migrato,
 secret e VAPID impostati — valori distinti tra preview e produzione — Worker e
 Pages deployati). Suite di sicurezza automatica e device matrix Chrome/Edge
-desktop e Chrome Android chiuse con esito positivo (dettaglio in §0.3); resta
-Safari iPhone e la conferma Push reale da un desktop fuori da questa rete di
+desktop e Chrome Android chiuse con esito positivo (dettaglio in §0.3). Il
+load test sintetico ha scoperto un blocco reale del D1 locale sotto scrittura
+concorrente (`SQLITE_BUSY`, poi connessione bloccata fino a riavvio) — non
+ancora verificato se riproducibile sul D1 di produzione o specifico del
+simulatore locale. Il test di retention/purge su dati sintetici non è stato
+completato (interrotto dallo stesso blocco). Restano aperti anche Safari
+iPhone e la conferma Push reale da un desktop fuori da questa rete di
 sviluppo. `CHAT_ENABLED` resta `0` ovunque: il passo 7 non è ancora iniziato.
 
 Ordine obbligatorio:

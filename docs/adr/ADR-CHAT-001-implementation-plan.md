@@ -195,11 +195,46 @@ Contro il gate «prima di `CHAT_ENABLED=1`» del runbook:
   Worker/VAPID: sulla rete mobile reale la sottoscrizione e la consegna
   funzionano. Questo chiude la clausola «almeno... uno smartphone
   installato» del gate Push del runbook.
+- **Load test sintetico (2026-08-24):** 30 guest concorrenti (arrivo
+  scaglionato su 0–3s, ciascuno: creazione conversazione REST + 2 messaggi
+  di follow-up via WebSocket), più un osservatore admin sul fan-out
+  SupportHub, eseguito contro il Worker/Pages dev locali (stesso codice di
+  preview/produzione). 25/30 completate senza errori con latenze buone
+  (creazione REST p50 691ms/p95 2,7s; invio WS p50 268ms/p95 762ms; fan-out
+  verso admin p50 13ms). 1 richiesta respinta con 429 correttamente — i 30
+  guest condividevano lo stesso IP locale, quindi hanno urtato il limite di
+  30 creazioni/10min per IP (limitatore anti-abuso che funziona come
+  previsto). **4 richieste fallite con 500**, causa isolata nei log via
+  l'API di osservabilità locale di Wrangler: `D1_ERROR: database is locked:
+  SQLITE_BUSY` sulla scrittura concorrente del contatore di rate-limit
+  condiviso (`chat_rate_buckets`). Il retry dell'outbox ha comunque
+  recuperato tutto il resto: le 25 conversazioni riuscite hanno
+  `last_seq`/`projection_version` coerenti su D1, nessun dato perso o
+  proiezione incompleta. **Effetto collaterale non recuperato da solo:**
+  dopo il burst il binding D1 del server dev condiviso è rimasto bloccato
+  (`Network connection lost` su ogni creazione successiva), richiedendo un
+  riavvio dei processi `wrangler dev` per sbloccarsi — riavvio non ancora
+  eseguito su decisione esplicita dell'utente (sessione 2026-08-24: "no, va
+  bene così"), quindi il recupero non è stato confermato.
+  **Non verificato:** se questa contesa/blocco si riproduce sul D1 reale di
+  Cloudflare in edge (servizio distribuito) o è specifica del simulatore
+  SQLite locale di Miniflare condiviso da due processi `wrangler dev`
+  separati (Pages + Worker) sullo stesso file — scenario esplicitamente
+  locale per disegno (vedi runbook, sezione «Sviluppo locale»). Da trattare
+  come rischio aperto finché non si ripete il test contro un D1 di preview
+  reale.
+- **Test retention/purge su dati sintetici: non completato.** Il piano
+  prevedeva chiudere una conversazione reale, retrodatare `archive_at` e
+  `purge_at` su D1 per simulare il tempo trascorso, e verificare l'intera
+  pipeline PENDING→GATED→DO_DELETED→COMPLETE contro il Worker locale. Il
+  test è stato interrotto dal blocco D1 sopra descritto prima di poter
+  eseguire anche solo la creazione della conversazione di prova; non è
+  stato ancora rieseguito.
 - **Non ancora fatto:** Safari iPhone come Home Screen Web App (nessun
   dispositivo/emulatore macOS disponibile in questa sessione); conferma
   della sottoscrizione Push reale da un desktop **non** vincolato dalla
-  rete/policy di questa macchina di sviluppo; load test sui pattern
-  realistici (§10, M7).
+  rete/policy di questa macchina di sviluppo; riesecuzione del load test e
+  del test di retention/purge dopo il riavvio dei dev server.
 
 ## 1. Obiettivo
 
