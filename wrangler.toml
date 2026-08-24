@@ -26,26 +26,20 @@ binding     = "GUIDES"
 bucket_name = "aml-store-guides"
 
 # ── Support realtime: Durable Objects in external Worker ────────────────────
-# NON ancora riattivato per la produzione: Cloudflare valida l'esistenza dello
-# script referenziato al momento della pubblicazione della Pages Function,
-# a prescindere da CHAT_ENABLED — un binding verso uno script non deployato fa
-# fallire l'intera build ("Error 8000109: Script aml-support-realtime not
-# found", osservato il 2026-08-24). Solo il Worker preview
-# (aml-support-realtime-preview, vedi [env.preview] piu' sotto) e' stato
-# deployato finora. Riattivare qui SOLO dopo aver deployato il Worker di
-# produzione con `wrangler deploy` da workers/support-realtime (secret e VAPID
-# dedicati, mai gli stessi del preview) — vedi
-# docs/adr/ADR-CHAT-001-runbook.md, sezione Deploy.
-#
-# [[durable_objects.bindings]]
-# name        = "CHAT_CONVERSATIONS"
-# class_name  = "ConversationDurableObject"
-# script_name = "aml-support-realtime"
-#
-# [[durable_objects.bindings]]
-# name        = "SUPPORT_HUB"
-# class_name  = "SupportHubDurableObject"
-# script_name = "aml-support-realtime"
+# Il Worker di produzione aml-support-realtime e' stato deployato il
+# 2026-08-24 (secret e VAPID dedicati, mai condivisi col preview) — vedi
+# docs/adr/ADR-CHAT-001-runbook.md. CHAT_ENABLED resta "0": il binding qui
+# sotto rende l'infrastruttura raggiungibile, non la accende. Vedi la nota
+# accanto a CHAT_ENABLED piu' in basso prima di impostarlo a "1".
+[[durable_objects.bindings]]
+name        = "CHAT_CONVERSATIONS"
+class_name  = "ConversationDurableObject"
+script_name = "aml-support-realtime"
+
+[[durable_objects.bindings]]
+name        = "SUPPORT_HUB"
+class_name  = "SupportHubDurableObject"
+script_name = "aml-support-realtime"
 
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
@@ -63,7 +57,10 @@ ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
 ADMIN_ALLOW_DELETE_ORDERS = "1"
 ADMIN_ALLOW_DELETE_CARTS = "1"
 
-# Support chat — disabilitata fino al completamento del rollout.
+# Support chat — infrastruttura pronta, disabilitata fino al completamento
+# del rollout (device matrix, security test, load test: vedi
+# docs/adr/ADR-CHAT-001-implementation-plan.md §0.1). Non passare a "1" prima
+# che quella checklist sia chiusa.
 CHAT_ENABLED = "0"
 CHAT_GUEST_SESSION_DAYS = "180"
 CHAT_GUEST_COOKIE_NAME = "__Host-aml_chat_guest"
@@ -74,7 +71,7 @@ CHAT_DELETE_GRACE_DAYS = "0"
 CHAT_TOMBSTONE_RETENTION_DAYS = "30"
 CHAT_RETENTION_BATCH_SIZE = "100"
 CHAT_MAX_MESSAGE_LENGTH = "4000"
-VAPID_PUBLIC_KEY = ""
+VAPID_PUBLIC_KEY = "BKq6sMBIln64cs9iXYVRChYg1sm-LhsX4hQSOzQMdSDe-gUX413p-o5J-zd5SlpE45buo2SswgWlHltudciH52Y"
 VAPID_SUBJECT = "mailto:Info@amlstore.it"
 
 # ── Segreti (MAI committare — impostare con `wrangler secret put <NAME>`) ────

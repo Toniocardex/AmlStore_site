@@ -36,7 +36,7 @@ CHAT_TOMBSTONE_RETENTION_DAYS = "30"
 CHAT_RETENTION_BATCH_SIZE = "100"
 CHAT_MAX_MESSAGE_LENGTH = "4000"
 SITE_ORIGIN = "https://aml-store.com"
-VAPID_PUBLIC_KEY = ""
+VAPID_PUBLIC_KEY = "BKq6sMBIln64cs9iXYVRChYg1sm-LhsX4hQSOzQMdSDe-gUX413p-o5J-zd5SlpE45buo2SswgWlHltudciH52Y"
 VAPID_SUBJECT = "mailto:Info@amlstore.it"
 
 # ── Ambiente preview ──────────────────────────────────────────────────────
