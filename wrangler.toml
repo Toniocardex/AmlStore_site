@@ -26,16 +26,26 @@ binding     = "GUIDES"
 bucket_name = "aml-store-guides"
 
 # ── Support realtime: Durable Objects in external Worker ────────────────────
-# Il Worker `aml-support-realtime` deve essere avviato/deployato separatamente.
-[[durable_objects.bindings]]
-name        = "CHAT_CONVERSATIONS"
-class_name  = "ConversationDurableObject"
-script_name = "aml-support-realtime"
-
-[[durable_objects.bindings]]
-name        = "SUPPORT_HUB"
-class_name  = "SupportHubDurableObject"
-script_name = "aml-support-realtime"
+# NON ancora riattivato per la produzione: Cloudflare valida l'esistenza dello
+# script referenziato al momento della pubblicazione della Pages Function,
+# a prescindere da CHAT_ENABLED — un binding verso uno script non deployato fa
+# fallire l'intera build ("Error 8000109: Script aml-support-realtime not
+# found", osservato il 2026-08-24). Solo il Worker preview
+# (aml-support-realtime-preview, vedi [env.preview] piu' sotto) e' stato
+# deployato finora. Riattivare qui SOLO dopo aver deployato il Worker di
+# produzione con `wrangler deploy` da workers/support-realtime (secret e VAPID
+# dedicati, mai gli stessi del preview) — vedi
+# docs/adr/ADR-CHAT-001-runbook.md, sezione Deploy.
+#
+# [[durable_objects.bindings]]
+# name        = "CHAT_CONVERSATIONS"
+# class_name  = "ConversationDurableObject"
+# script_name = "aml-support-realtime"
+#
+# [[durable_objects.bindings]]
+# name        = "SUPPORT_HUB"
+# class_name  = "SupportHubDurableObject"
+# script_name = "aml-support-realtime"
 
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
