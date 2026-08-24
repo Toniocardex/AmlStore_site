@@ -148,3 +148,117 @@ describe('sicurezza — corpo del messaggio: nessuna interpretazione, solo stora
         expect(rows).toBeNull();
     });
 });
+
+function waitForMessage(ws: WebSocket, timeoutMs = 2000): Promise<Record<string, unknown>> {
+    return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error('timeout waiting for websocket message')), timeoutMs);
+        ws.addEventListener('message', (event: MessageEvent) => {
+            clearTimeout(timer);
+            resolve(JSON.parse(event.data as string));
+        }, { once: true });
+    });
+}
+
+describe('sicurezza — WebSocket: handshake malformato', () => {
+    it('rifiuta un upgrade senza header Upgrade: websocket', async () => {
+        const conversationId = createId('conversation');
+        const visitorId = createId('visitor');
+        const stub = env.CHAT_CONVERSATIONS.get(
+            env.CHAT_CONVERSATIONS.idFromName(`conversation:${conversationId}`),
+        );
+        await stub.fetch('https://internal/internal/conversations/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(createPayload(conversationId, visitorId, createId('message'))),
+        });
+        // Nessun header Upgrade: una richiesta GET normale non deve poter
+        // agganciare il canale realtime.
+        const response = await stub.fetch(
+            `https://internal/internal/conversations/ws?conversationId=${conversationId}`
+                + `&visitorId=${visitorId}&lastKnownSeq=0`,
+        );
+        expect(response.status).toBe(426);
+    });
+});
+
+describe('sicurezza — fuzzing dei payload sul WebSocket', () => {
+    async function openSocket() {
+        const conversationId = createId('conversation');
+        const visitorId = createId('visitor');
+        const stub = env.CHAT_CONVERSATIONS.get(
+            env.CHAT_CONVERSATIONS.idFromName(`conversation:${conversationId}`),
+        );
+        await stub.fetch('https://internal/internal/conversations/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(createPayload(conversationId, visitorId, createId('message'))),
+        });
+        // lastKnownSeq=1: il primo messaggio (da createPayload) e' gia' noto,
+        // quindi non c'e' catch-up da riprodurre. Resta comunque un evento di
+        // bootstrap (conversation.updated) che il DO invia sempre appena
+        // aperta la socket: va drenato qui, altrimenti i test lo scambiano
+        // per la risposta al payload di fuzzing inviato dopo.
+        const upgraded = await stub.fetch(
+            `https://internal/internal/conversations/ws?conversationId=${conversationId}`
+                + `&visitorId=${visitorId}&lastKnownSeq=1`,
+            { headers: { Upgrade: 'websocket' } },
+        );
+        const ws = upgraded.webSocket as WebSocket;
+        ws.accept();
+        await waitForMessage(ws); // drena il bootstrap conversation.updated
+        return { ws, conversationId, visitorId, stub };
+    }
+
+    it('un frame binario restituisce un errore invece di far cadere la connessione', async () => {
+        const { ws } = await openSocket();
+        ws.send(new Uint8Array([0x00, 0x01, 0x02, 0xff, 0xfe]).buffer);
+        const error = await waitForMessage(ws);
+        expect(error).toMatchObject({ type: 'error', error: { code: 'INVALID_PAYLOAD' } });
+        expect(ws.readyState).toBe(WebSocket.OPEN);
+        ws.close(1000, 'test complete');
+    });
+
+    it('testo non-JSON restituisce un errore invece di far cadere la connessione', async () => {
+        const { ws } = await openSocket();
+        ws.send('questo non e\' json {{{');
+        const error = await waitForMessage(ws);
+        expect(error).toMatchObject({ type: 'error', error: { code: 'INVALID_PAYLOAD' } });
+        expect(ws.readyState).toBe(WebSocket.OPEN);
+        ws.close(1000, 'test complete');
+    });
+
+    it('un comando JSON valido ma di tipo sconosciuto viene rifiutato senza effetti collaterali', async () => {
+        const { ws, conversationId } = await openSocket();
+        ws.send(JSON.stringify({
+            v: 1,
+            type: 'admin.deleteEverything',
+            requestId: createId('request'),
+            conversationId,
+            payload: { anything: 'goes here' },
+        }));
+        const error = await waitForMessage(ws);
+        expect(error).toMatchObject({ type: 'error', error: { code: 'INVALID_PAYLOAD' } });
+        ws.close(1000, 'test complete');
+        // Nessun effetto collaterale: la conversazione non ha guadagnato
+        // messaggi ne' cambiato stato per via del comando sconosciuto.
+        const detail = await env.CHAT_DB.prepare(
+            'SELECT last_seq, status FROM chat_conversations WHERE id = ?',
+        ).bind(conversationId).first<{ last_seq: number; status: string }>();
+        expect(detail).toMatchObject({ last_seq: 1, status: 'OPEN' });
+    });
+
+    it('un conversationId nel comando diverso da quello della connessione viene rifiutato', async () => {
+        const { ws } = await openSocket();
+        const otherConversationId = createId('conversation');
+        ws.send(JSON.stringify({
+            v: 1,
+            type: 'message.send',
+            requestId: createId('request'),
+            conversationId: otherConversationId,
+            payload: { clientMessageId: createId('message'), body: 'cross-conversation attempt' },
+        }));
+        const error = await waitForMessage(ws);
+        expect(error).toMatchObject({ type: 'error', error: { code: 'NOT_FOUND' } });
+        ws.close(1000, 'test complete');
+    });
+});
