@@ -1,0 +1,40 @@
+name = "aml-support-realtime"
+main = "src/index.ts"
+compatibility_date = "2026-08-23"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = false
+
+[[d1_databases]]
+binding = "CHAT_DB"
+database_name = "aml-orders"
+database_id = "72e06b2b-7366-4298-8fd9-ccbb4540ad79"
+
+[[durable_objects.bindings]]
+name = "CHAT_CONVERSATIONS"
+class_name = "ConversationDurableObject"
+
+[[durable_objects.bindings]]
+name = "SUPPORT_HUB"
+class_name = "SupportHubDurableObject"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ConversationDurableObject", "SupportHubDurableObject"]
+
+[triggers]
+crons = ["*/15 * * * *"]
+
+[vars]
+CHAT_ENABLED = "0"
+CHAT_GUEST_SESSION_DAYS = "180"
+CHAT_GUEST_COOKIE_NAME = "__Host-aml_chat_guest"
+CHAT_ARCHIVE_AFTER_DAYS = "30"
+CHAT_RETENTION_DAYS = "180"
+CHAT_SPAM_RETENTION_DAYS = "14"
+CHAT_DELETE_GRACE_DAYS = "0"
+CHAT_TOMBSTONE_RETENTION_DAYS = "30"
+CHAT_RETENTION_BATCH_SIZE = "100"
+CHAT_MAX_MESSAGE_LENGTH = "4000"
+SITE_ORIGIN = "https://aml-store.com"
+VAPID_PUBLIC_KEY = ""
+VAPID_SUBJECT = "mailto:Info@amlstore.it"

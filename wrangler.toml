@@ -25,6 +25,18 @@ database_id   = "72e06b2b-7366-4298-8fd9-ccbb4540ad79"
 binding     = "GUIDES"
 bucket_name = "aml-store-guides"
 
+# ── Support realtime: Durable Objects in external Worker ────────────────────
+# Il Worker `aml-support-realtime` deve essere avviato/deployato separatamente.
+[[durable_objects.bindings]]
+name        = "CHAT_CONVERSATIONS"
+class_name  = "ConversationDurableObject"
+script_name = "aml-support-realtime"
+
+[[durable_objects.bindings]]
+name        = "SUPPORT_HUB"
+class_name  = "SupportHubDurableObject"
+script_name = "aml-support-realtime"
+
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
 SITE_ORIGIN     = "https://aml-store.com"
@@ -40,6 +52,20 @@ CF_ACCESS_TEAM_DOMAIN = "amlstore.cloudflareaccess.com"
 ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
 ADMIN_ALLOW_DELETE_ORDERS = "1"
 ADMIN_ALLOW_DELETE_CARTS = "1"
+
+# Support chat — disabilitata fino al completamento del rollout.
+CHAT_ENABLED = "0"
+CHAT_GUEST_SESSION_DAYS = "180"
+CHAT_GUEST_COOKIE_NAME = "__Host-aml_chat_guest"
+CHAT_ARCHIVE_AFTER_DAYS = "30"
+CHAT_RETENTION_DAYS = "180"
+CHAT_SPAM_RETENTION_DAYS = "14"
+CHAT_DELETE_GRACE_DAYS = "0"
+CHAT_TOMBSTONE_RETENTION_DAYS = "30"
+CHAT_RETENTION_BATCH_SIZE = "100"
+CHAT_MAX_MESSAGE_LENGTH = "4000"
+VAPID_PUBLIC_KEY = ""
+VAPID_SUBJECT = "mailto:Info@amlstore.it"
 
 # ── Segreti (MAI committare — impostare con `wrangler secret put <NAME>`) ────
 # TOKEN_SECRET           — stringa random ≥32 caratteri per HMAC token thank-you
@@ -59,3 +85,7 @@ ADMIN_ALLOW_DELETE_CARTS = "1"
 #                          va configurato DOPO il deploy, quando l'URL esiste.
 # Live credentials: Cloudflare Pages → Settings → Environment variables (Production).
 # Vedi GO-LIVE.md per la checklist completa di messa online.
+# CHAT_GUEST_SESSION_SECRET  — HMAC secret guest cookie, random >=32 caratteri
+# CHAT_CONTACT_LOOKUP_SECRET — HMAC secret lookup email, random >=32 caratteri
+# VAPID_PRIVATE_KEY          — private key Web Push (fase Push)
+# VAPID_SUBJECT              — mailto: o URL identificativo VAPID

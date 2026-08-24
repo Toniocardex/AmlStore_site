@@ -4,12 +4,16 @@
   "description": "Dominio pubblico: **https://aml-store.com**",
   "main": "index.js",
   "scripts": {
-    "dev": "wrangler pages dev . --port 8788 --d1=DB --persist-to .wrangler/state",
-    "dev:alt": "wrangler pages dev . --port 8789 --d1=DB --persist-to .wrangler/state",
+    "dev": "wrangler pages dev . --port 8788 --persist-to .wrangler/state-chat",
+    "dev:alt": "wrangler pages dev . --port 8789 --persist-to .wrangler/state-chat",
+    "dev:support": "wrangler dev --config workers/support-realtime/wrangler.toml --persist-to .wrangler/state-chat",
     "dev:db": "python scripts/dev-d1-init.py",
     "pricing:normalize": "python scripts/normalize-commercial-prices.py",
     "test:pricing": "python scripts/test-commercial-pricing.py",
-    "test": "python scripts/test-commercial-pricing.py"
+    "test:chat": "vitest run --config vitest.chat.config.mts",
+    "test:pwa": "vitest run --config vitest.pwa.config.mts",
+    "typecheck:chat": "tsc -p tsconfig.chat.json",
+    "test": "python scripts/test-commercial-pricing.py && npm run typecheck:chat && npm run test:chat && npm run test:pwa"
   },
   "repository": {
     "type": "git",
@@ -24,6 +28,15 @@
   },
   "homepage": "https://github.com/Toniocardex/AmlStore_site#readme",
   "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.0.0",
+    "@cloudflare/workers-types": "^5.20260823.1",
+    "@types/node": "^26.2.0",
+    "@types/web-push": "^3.6.4",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11",
     "wrangler": "^4.106.0"
+  },
+  "dependencies": {
+    "web-push": "^3.6.7"
   }
 }
