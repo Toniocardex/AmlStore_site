@@ -95,7 +95,7 @@
         let script = document.querySelector('script[data-aml-support-chat]');
         if (!script) {
             script = document.createElement('script');
-            script.src = '/components/support-chat.js?v=20260824';
+            script.src = '/components/support-chat.js?v=c2bc56f8bf';
             script.defer = true;
             script.dataset.amlSupportChat = '';
             document.head.appendChild(script);
