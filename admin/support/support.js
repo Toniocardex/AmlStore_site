@@ -155,7 +155,17 @@
             updateBadge(data.unreadConversationCount);
             $('load-more').hidden = !state.cursor;
             renderInbox(append);
-        } catch (error) { toast('Inbox: ' + error.message); }
+        } catch (error) {
+            toast('Inbox: ' + error.message);
+            if (!append) {
+                const list = $('conversation-list');
+                list.textContent = '';
+                const notice = document.createElement('p');
+                notice.className = 'sup-placeholder';
+                notice.textContent = 'Impossibile caricare le conversazioni.';
+                list.appendChild(notice);
+            }
+        }
     }
 
     function renderMessages(messages) {
