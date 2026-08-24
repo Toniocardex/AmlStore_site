@@ -32,6 +32,12 @@ Non riutilizzare mai database ID o secret production nei file preview. I file ve
 
 ## Deploy
 
+**Stato 2026-08-24:** passi 1–5 completati sia in preview sia in produzione
+(dettaglio in `docs/adr/ADR-CHAT-001-implementation-plan.md` §0.2: D1 migrato,
+secret e VAPID impostati — valori distinti tra preview e produzione — Worker e
+Pages deployati). `CHAT_ENABLED` resta `0` ovunque: il passo 7 non è ancora
+iniziato, in attesa della checklist di sicurezza/dispositivo/carico.
+
 Ordine obbligatorio:
 
 1. eseguire migration D1 additive;

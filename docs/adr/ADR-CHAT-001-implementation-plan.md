@@ -1,6 +1,8 @@
 # ADR-CHAT-001 rev1.2 — Piano di implementazione
 
-**Stato:** M0–M7 implementate e verificate localmente; rollout remoto e device gate pendenti  
+**Stato:** M0–M7 implementate; merged su `main`; infrastruttura di produzione e
+preview deployata e isolata; `CHAT_ENABLED=0` ovunque — device matrix, security
+test e load test restano il gate esplicito prima dell'attivazione  
 **Data:** 2026-08-24  
 **Specifica normativa:** `ADR-CHAT-001 — Integrated Realtime Support Chat, Admin PWA and Cloudflare Infrastructure — rev1.2`  
 **Repository target:** AmlStore_site  
@@ -35,8 +37,10 @@
   availability override, test automatici e runbook operativo. I gate device,
   preview/canary e load test su infrastruttura reale restano attività di rollout.
 
-La feature resta disabilitata per default (`CHAT_ENABLED=0`) e nessuna risorsa
-Cloudflare è stata deployata o modificata da questa implementazione locale.
+La feature resta disabilitata per default (`CHAT_ENABLED=0`). Aggiornamento
+2026-08-24: non è più vero che nessuna risorsa Cloudflare sia stata toccata —
+vedi §0.2 per l'infrastruttura di rollout effettivamente deployata da questa
+sessione.
 
 ### 0.1 Correzioni post-review (2026-08-24)
 
@@ -71,6 +75,90 @@ Copertura aggiunta: transizione `PENDING` in andata e ritorno, scadenze purge
 ancorate a `closed_at` attraverso l'archiviazione, anti-resurrection lato
 gateway. Il comportamento del punto 3 va esercitato nella failure simulation
 prevista dal rollout (D1 indisponibile dopo il commit nel DO).
+
+Corretti anche due difetti trovati collaudando il widget dal vivo, non dalla
+review statica: la riconnessione della socket non ripartiva riaprendo il
+pannello dopo averlo chiuso, e il cron di retention girava sul D1 configurato
+a prescindere da `CHAT_ENABLED`, quindi in produzione avrebbe interrogato
+`aml-orders` ogni 15 minuti anche a feature spenta.
+
+### 0.2 Infrastruttura di rollout deployata (2026-08-24)
+
+Merge di `chat/adr-chat-001` su `main` (conflitti solo sull'hash `?v=` di
+`header.js` nelle pagine HTML — il branch non tocca mai il contenuto reale,
+risolti tenendo `main` e rigenerando gli hash). Da qui in poi non è più
+un'implementazione solo locale: sono state create ed esercitate risorse
+Cloudflare reali, sia in preview sia in produzione.
+
+**Widget storefront corretto prima del deploy.** Il widget si iniettava su
+ogni pagina indipendentemente da `CHAT_ENABLED`: un pulsante "Chat"
+permanentemente inerte sarebbe comparso a ogni visitatore del sito dal primo
+minuto del merge. `ensureSupportChat()` ora interroga
+`/api/chat/availability` (lo stesso endpoint pubblico usato dal widget per lo
+stato online/offline, nessuna sessione richiesta) e monta lo script solo se
+`enabled` è vero; un fallimento di rete non mostra il widget (fail closed).
+Verificato con Playwright su dev server isolati per entrambi gli scenari.
+
+**Ambiente preview** (branch, mai promosso a produzione):
+- D1 `aml-store-preview` (id `07947b6c-2b3a-418e-8c33-2d745bbccfda`), fisicamente
+  separato da `aml-orders`: schema commerce completo + `migrations/0002_chat_core.sql`,
+  zero dati reali;
+- Worker `aml-support-realtime-preview` deployato (`wrangler deploy --env
+  preview` da `workers/support-realtime`), `CHAT_ENABLED=1` **solo qui**,
+  cron attivo sul D1 preview;
+- secret dedicati sul Worker (`CHAT_GUEST_SESSION_SECRET`,
+  `CHAT_CONTACT_LOOKUP_SECRET`, `VAPID_PRIVATE_KEY`) e sul progetto Pages
+  ambiente preview (stessi due HMAC + `TOKEN_SECRET` di test, mai il valore
+  reale);
+- `wrangler.toml` root, sezione `[env.preview]`: binding D1/DO/R2 e vars
+  ridichiarati per intero (le sezioni `[env.x]` di Wrangler non ereditano dal
+  top-level — verificato sulla documentazione Cloudflare prima di scrivere,
+  non assunto), `SITE_ORIGIN` sull'alias di branch
+  `chat-adr-chat-001.amlstore-site.pages.dev`, `PAYPAL_BASE_URL` sandbox
+  (mai LIVE su una build di preview).
+- **Non ancora fatto:** nessuna build di preview è mai stata generata (il
+  merge è andato direttamente su `main`, non è stato pushato il branch);
+  Cloudflare Access non copre l'hostname `.pages.dev` (l'app esistente è
+  scoped su `aml-store.com`), quindi `/admin/support` su un'eventuale
+  preview risponderebbe 401 finché non si aggiunge un'app Access dedicata
+  dalla dashboard.
+
+**Ambiente produzione:**
+- Worker `aml-support-realtime` deployato (non solo dichiarato: il binding
+  `script_name` nel `wrangler.toml` root era scritto da settimane ma puntava
+  a uno script inesistente — il primo push del merge ha fatto fallire la
+  build con `Error 8000109: Script aml-support-realtime not found`.
+  Cloudflare non ha promosso il deployment fallito, il sito ha continuato a
+  servire l'ultima build buona, zero downtime reale. Il binding è stato
+  temporaneamente rimosso per sbloccare il deploy, poi il Worker è stato
+  effettivamente deployato e il binding riattivato in un commit successivo,
+  build verificata `success` via API);
+- `CHAT_DB` del Worker di produzione punta al D1 reale `aml-orders`, come da
+  disegno ADR §4.8 (stesso fisico dell'e-commerce, non un secondo database);
+- **`migrations/0002_chat_core.sql` applicata a `aml-orders`** in questa
+  sessione (era stata applicata solo al D1 preview e a quello locale — gap
+  scoperto mentre si documentava questo stato, non prima). Additiva,
+  verificata: le 8 tabelle `chat_*` sono state create, `orders` resta
+  intatta (le righe reali non sono state toccate);
+- secret di produzione impostati, **valori diversi da quelli preview**:
+  `CHAT_GUEST_SESSION_SECRET`, `CHAT_CONTACT_LOOKUP_SECRET`,
+  `VAPID_PRIVATE_KEY` sul Worker; gli stessi due HMAC sulle secret Pages
+  produzione; `TOKEN_SECRET` invece riusa di proposito il valore già
+  esistente (firma gli stessi ordini, per disegno);
+- `VAPID_PUBLIC_KEY` di produzione nel `wrangler.toml` root;
+- `CHAT_ENABLED` resta `"0"` in produzione. **Decisione esplicita
+  2026-08-24:** proposto di attivarlo, l'utente ha scelto di completare
+  prima la checklist di sicurezza/dispositivo/carico. Il flag non va a `"1"`
+  finché quella checklist non è chiusa — vedi il commento accanto alla
+  variabile nel `wrangler.toml` e §11 più sotto.
+
+Rispetto alla sequenza di deploy in §13: i passi 1–4 e 7–8 sono completi (D1
+migrato, Worker distribuito sia preview sia produzione, binding Pages
+configurato per entrambi, produzione deployata con feature disabilitata). I
+passi 5, 6, 9, 10 (smoke test admin interno, abilitazione in preview,
+abilitazione solo admin/internal, rollout progressivo storefront) restano
+da fare, in quest'ordine, e nessuno di essi implica accendere il flag in
+produzione prima che la checklist di §11 sia chiusa.
 
 ## 1. Obiettivo
 
