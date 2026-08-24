@@ -3297,6 +3297,3006 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                       'mesmas seis pessoas: <strong>€ '
                                                       '{savings_6x0_vs_1} menos</strong>.']}}}}
 
+
+PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Business Standard',
+          'en': 'Microsoft 365 Business Standard',
+          'fr': 'Microsoft 365 Business Standard',
+          'de': 'Microsoft 365 Business Standard',
+          'es': 'Microsoft 365 Business Standard',
+          'pt': 'Microsoft 365 Business Standard',
+          'nl': 'Microsoft 365 Business Standard'},
+ 'seo_title': {'it': 'Microsoft 365 Business Standard 1 Anno | Licenza Originale — Aml Store',
+               'en': 'Microsoft 365 Business Standard 1 Year | Genuine Licence — Aml Store',
+               'fr': 'Microsoft 365 Business Standard 1 An | Licence Officielle — Aml Store',
+               'de': 'Microsoft 365 Business Standard 1 Jahr | Offizielle Lizenz — Aml Store',
+               'es': 'Microsoft 365 Business Standard 1 Año | Licencia Oficial — Aml Store',
+               'pt': 'Microsoft 365 Business Standard 1 Ano | Licença Oficial — Aml Store',
+               'nl': 'Microsoft 365 Business Standard 1 Jaar | Officiële Licentie — Aml Store'},
+ 'eyebrow': {'it': 'Abbonamento 12 mesi · 1 Utente Business',
+             'en': '12-Month Subscription · 1 Business User',
+             'fr': 'Abonnement 12 mois · 1 Utilisateur Business',
+             'de': '12-Monate-Abonnement · 1 Business-Nutzer',
+             'es': 'Suscripción 12 meses · 1 Usuario Business',
+             'pt': 'Subscrição 12 meses · 1 Utilizador Business',
+             'nl': '12-maandenabonnement · 1 zakelijke gebruiker'},
+ 'title_html': {'it': 'Microsoft 365 <span>Business Standard</span>',
+                'en': 'Microsoft 365 <span>Business Standard</span>',
+                'fr': 'Microsoft 365 <span>Business Standard</span>',
+                'de': 'Microsoft 365 <span>Business Standard</span>',
+                'es': 'Microsoft 365 <span>Business Standard</span>',
+                'pt': 'Microsoft 365 <span>Business Standard</span>',
+                'nl': 'Microsoft 365 <span>Business Standard</span>'},
+ 'desc': {'it': 'Microsoft 365 Business Standard: app Office desktop complete (Word, Excel, '
+                'PowerPoint, Outlook), posta aziendale Exchange da 50 GB con dominio '
+                'personalizzato, Teams per riunioni fino a 300 partecipanti e 1 TB OneDrive. '
+                'Licenza per 1 utente su 5 PC/Mac + 5 dispositivi mobili, attivazione ufficiale e '
+                'fattura elettronica con P.IVA.',
+          'en': 'Microsoft 365 Business Standard: complete desktop Office apps (Word, Excel, '
+                'PowerPoint, Outlook), 50 GB Exchange business email with custom domain, Teams for '
+                'meetings up to 300 attendees, and 1 TB OneDrive cloud. 1 user licence for 5 '
+                'PCs/Macs + 5 mobile devices, official activation, and VAT invoice.',
+          'fr': 'Microsoft 365 Business Standard : applications Office de bureau complètes (Word, '
+                'Excel, PowerPoint, Outlook), messagerie Exchange 50 Go avec domaine personnalisé, '
+                "Teams jusqu'à 300 participants et 1 To OneDrive. Licence 1 utilisateur pour 5 "
+                'PC/Mac + 5 mobiles, activation officielle et facture avec TVA.',
+          'de': 'Microsoft 365 Business Standard: vollständige Desktop-Office-Apps (Word, Excel, '
+                'PowerPoint, Outlook), 50 GB Exchange-Geschäfts-E-Mail mit eigener Domain, Teams '
+                'für Meetings bis 300 Teilnehmer und 1 TB OneDrive. 1-Nutzer-Lizenz für 5 PCs/Macs '
+                '+ 5 Mobilgeräte, offizielle Aktivierung und MwSt.-Rechnung.',
+          'es': 'Microsoft 365 Business Standard: aplicaciones de escritorio completas de Office '
+                '(Word, Excel, PowerPoint, Outlook), correo Exchange de 50 GB con dominio '
+                'personalizado, Teams para reuniones de hasta 300 asistentes y 1 TB OneDrive. '
+                'Licencia de 1 usuario para 5 PC/Mac + 5 móviles, activación oficial y factura con '
+                'IVA.',
+          'pt': 'Microsoft 365 Business Standard: aplicações Office de computador completas (Word, '
+                'Excel, PowerPoint, Outlook), email empresarial Exchange de 50 GB com domínio '
+                'próprio, Teams até 300 participantes e 1 TB OneDrive. Licença de 1 utilizador '
+                'para 5 PC/Mac + 5 dispositivos móveis, ativação oficial e fatura com IVA.',
+          'nl': 'Microsoft 365 Business Standard: complete desktop Office-apps (Word, Excel, '
+                'PowerPoint, Outlook), 50 GB Exchange zakelijke e-mail met eigen domein, Teams '
+                'voor vergaderingen tot 300 deelnemers en 1 TB OneDrive. Licentie voor 1 gebruiker '
+                "op 5 pc's/Macs + 5 mobiele apparaten, officiële activering en btw-factuur."},
+ 'apps': ['word',
+          'excel',
+          'powerpoint',
+          'outlook',
+          'teams',
+          'onedrive',
+          'onenote',
+          'designer',
+          'clipchamp'],
+ 'pills': {'it': [('teams', 'Teams 300 persone'),
+                  ('onedrive', '1 TB Cloud Business'),
+                  ('outlook', '50 GB Posta Exchange'),
+                  ('word', '5 PC/Mac per Utente')],
+           'en': [('teams', 'Teams 300 attendees'),
+                  ('onedrive', '1 TB Business Cloud'),
+                  ('outlook', '50 GB Exchange Mail'),
+                  ('word', '5 PCs/Macs per User')],
+           'fr': [('teams', 'Teams 300 participants'),
+                  ('onedrive', '1 To Cloud Business'),
+                  ('outlook', '50 Go Messagerie Exchange'),
+                  ('word', '5 PC/Mac par utilisateur')],
+           'de': [('teams', 'Teams 300 Teilnehmer'),
+                  ('onedrive', '1 TB Business-Cloud'),
+                  ('outlook', '50 GB Exchange-Mail'),
+                  ('word', '5 PCs/Macs pro Nutzer')],
+           'es': [('teams', 'Teams 300 asistentes'),
+                  ('onedrive', '1 TB Cloud Business'),
+                  ('outlook', '50 GB Correo Exchange'),
+                  ('word', '5 PC/Mac por usuario')],
+           'pt': [('teams', 'Teams 300 participantes'),
+                  ('onedrive', '1 TB Cloud Business'),
+                  ('outlook', '50 GB Email Exchange'),
+                  ('word', '5 PC/Mac por utilizador')],
+           'nl': [('teams', 'Teams 300 deelnemers'),
+                  ('onedrive', '1 TB Business Cloud'),
+                  ('outlook', '50 GB Exchange Mail'),
+                  ('word', "5 pc's/Macs per gebruiker")]},
+ 'keypoints': {'it': ['<strong>5 PC/Mac + 5 Dispositivi Mobili:</strong> Installa le app Office '
+                      'complete su tutti i tuoi dispositivi aziendali.',
+                      '<strong>Posta Aziendale da 50 GB:</strong> Email professionale su tuo '
+                      'dominio (es. nome@azienda.it) con Exchange Online.',
+                      '<strong>Microsoft Teams & Cloud 1 TB:</strong> Videoconferenze fino a 300 '
+                      'persone, registrazione meeting e 1.000 GB OneDrive.',
+                      '<strong>Fattura Elettronica con P.IVA:</strong> Disponibile per '
+                      'aziende, studi professionali e partite IVA.'],
+               'en': ['<strong>5 PCs/Macs + 5 Mobile Devices:</strong> Install full Office apps '
+                      'across all your business workstations.',
+                      '<strong>50 GB Business Email:</strong> Professional email on your custom '
+                      'domain with Exchange Online and antispam.',
+                      '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD video meetings up to 300 '
+                      'people, recording, and 1,000 GB OneDrive.',
+                      '<strong>VAT Invoice Included:</strong> Official Italian e-invoice '
+                      'provided for businesses and VAT-registered buyers.'],
+               'fr': ['<strong>5 PC/Mac + 5 Appareils Mobiles :</strong> Installez les '
+                      'applications Office complètes sur tous vos postes professionnels.',
+                      '<strong>Messagerie Pro 50 Go :</strong> E-mail professionnel sur votre '
+                      'propre domaine avec Exchange Online.',
+                      "<strong>Microsoft Teams & Cloud 1 To :</strong> Visioconférences jusqu'à "
+                      '300 personnes, enregistrement et 1 000 Go OneDrive.',
+                      '<strong>Facture avec TVA :</strong> Facture électronique italienne '
+                      'officielle, disponible pour les entreprises et professionnels.'],
+               'de': ['<strong>5 PCs/Macs + 5 Mobilgeräte:</strong> Vollständige Office-Apps auf '
+                      'allen geschäftlichen Arbeitsplätzen installieren.',
+                      '<strong>50 GB Geschäfts-E-Mail:</strong> Professionelle E-Mail mit eigener '
+                      'Domain über Exchange Online.',
+                      '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD-Videokonferenzen bis 300 '
+                      'Personen, Aufzeichnung und 1.000 GB OneDrive.',
+                      '<strong>Rechnung mit MwSt.:</strong> Offizielle italienische E-Rechnung '
+                      'für Unternehmen und Selbstständige.'],
+               'es': ['<strong>5 PC/Mac + 5 Dispositivos Móviles:</strong> Instala las '
+                      'aplicaciones completas de Office en todos tus equipos de trabajo.',
+                      '<strong>Correo Profesional de 50 GB:</strong> Email empresarial con tu '
+                      'propio dominio a través de Exchange Online.',
+                      '<strong>Microsoft Teams y 1 TB en la Nube:</strong> Videoconferencias de '
+                      'hasta 300 personas, grabación y 1.000 GB OneDrive.',
+                      '<strong>Factura con IVA:</strong> Factura electrónica italiana oficial, '
+                      'disponible para empresas y autónomos.'],
+               'pt': ['<strong>5 PC/Mac + 5 Dispositivos Móveis:</strong> Instala as aplicações '
+                      'Office completas em todos os teus postos de trabalho.',
+                      '<strong>Email Profissional de 50 GB:</strong> Correio empresarial com o teu '
+                      'próprio domínio através do Exchange Online.',
+                      '<strong>Microsoft Teams e 1 TB Cloud:</strong> Videoconferências até 300 '
+                      'pessoas, gravação e 1.000 GB OneDrive.',
+                      '<strong>Fatura com IVA:</strong> Fatura eletrónica italiana oficial, '
+                      'disponível para empresas e profissionais liberais.'],
+               'nl': ["<strong>5 pc's/Macs + 5 mobiele apparaten:</strong> Installeer complete "
+                      'Office-apps op al uw zakelijke werkplekken.',
+                      '<strong>50 GB zakelijke e-mail:</strong> Professionele e-mail op uw eigen '
+                      'domein via Exchange Online.',
+                      '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD-videovergaderingen tot '
+                      '300 personen, opname en 1.000 GB OneDrive.',
+                      '<strong>Btw-factuur inbegrepen:</strong> Officiële Italiaanse e-factuur, '
+                      'beschikbaar voor bedrijven en zelfstandigen.']},
+ 'app_demo_rich': {'word': {'type': 'richtext',
+                            'filename': {'it': 'Contratto_Fornitura_Servizi_2026.docx',
+                                         'en': 'Service_Supply_Agreement_2026.docx',
+                                         'fr': 'Contrat_Prestation_Services_2026.docx',
+                                         'de': 'Dienstleistungsvertrag_2026.docx',
+                                         'es': 'Contrato_Prestacion_Servicios_2026.docx',
+                                         'pt': 'Contrato_Prestacao_Servicos_2026.docx',
+                                         'nl': 'Dienstverleningsovereenkomst_2026.docx'},
+                            'tag': {'it': 'Revisione e Collaborazione',
+                                    'en': 'Review & Collaboration',
+                                    'fr': 'Révision et Collaboration',
+                                    'de': 'Prüfung & Zusammenarbeit',
+                                    'es': 'Revisión y Colaboración',
+                                    'pt': 'Revisão e Colaboração',
+                                    'nl': 'Revisie & Samenwerking'},
+                            'quote': {'it': 'Redigi contratti, preventivi, relazioni commerciali e '
+                                            'documentazione societaria con modelli professionali, '
+                                            'cronologia revisioni in tempo reale e correzione '
+                                            'ortografica avanzata.',
+                                      'en': 'Draft contracts, proposals, business reports and '
+                                            'corporate documentation with professional templates, '
+                                            'real-time revision history and advanced proofreading.',
+                                      'fr': 'Rédigez des contrats, devis, rapports commerciaux et '
+                                            "documents d'entreprise avec des modèles "
+                                            'professionnels, historique des versions et relecture '
+                                            'avancée.',
+                                      'de': 'Erstellen Sie Verträge, Angebote, Geschäftsberichte '
+                                            'und Unternehmensunterlagen mit professionellen '
+                                            'Vorlagen, Versionsverlauf in Echtzeit und erweiterter '
+                                            'Rechtschreibprüfung.',
+                                      'es': 'Redacta contratos, presupuestos, informes comerciales '
+                                            'y documentos corporativos con plantillas '
+                                            'profesionales, historial de versiones en tiempo real '
+                                            'y corrección avanzada.',
+                                      'pt': 'Elabora contratos, orçamentos, relatórios comerciais '
+                                            'e documentos empresariais com modelos profissionais, '
+                                            'histórico de versões em tempo real e correção '
+                                            'avançada.',
+                                      'nl': 'Stel contracten, offertes, bedrijfsrapporten en '
+                                            'bedrijfsdocumentatie op met professionele sjablonen, '
+                                            'realtime revisiegeschiedenis en geavanceerde '
+                                            'spellingcontrole.'},
+                            'callout_label': {'it': 'Assistenza alla scrittura:',
+                                              'en': 'Writing Assistant:',
+                                              'fr': 'Aide à la rédaction :',
+                                              'de': 'Schreibassistent:',
+                                              'es': 'Asistente de escritura:',
+                                              'pt': 'Assistente de escrita:',
+                                              'nl': 'Schrijfassistent:'},
+                            'callout_text': {'it': 'Tutti i commenti dei colleghi sono '
+                                                   'sincronizzati e il documento rispetta gli '
+                                                   'standard aziendali.',
+                                             'en': 'All colleague comments are synchronized and '
+                                                   'the document meets corporate standards.',
+                                             'fr': 'Tous les commentaires des collègues sont '
+                                                   'synchronisés et le document respecte les '
+                                                   "normes de l'entreprise.",
+                                             'de': 'Alle Kommentare der Kollegen sind '
+                                                   'synchronisiert und das Dokument entspricht den '
+                                                   'Unternehmensstandards.',
+                                             'es': 'Todos los comentarios de los compañeros están '
+                                                   'sincronizados y el documento cumple con los '
+                                                   'estándares corporativos.',
+                                             'pt': 'Todos os comentários dos colegas estão '
+                                                   'sincronizados e o documento cumpre as normas '
+                                                   'da empresa.',
+                                             'nl': "Alle opmerkingen van collega's zijn "
+                                                   'gesynchroniseerd en het document voldoet aan '
+                                                   'de bedrijfsnormen.'}},
+                   'excel': {'type': 'stats',
+                             'filename': {'it': 'Budget_e_Previsione_Q3_Q4.xlsx',
+                                          'en': 'Budget_and_Forecast_Q3_Q4.xlsx',
+                                          'fr': 'Budget_et_Previsions_T3_T4.xlsx',
+                                          'de': 'Budget_und_Prognose_Q3_Q4.xlsx',
+                                          'es': 'Presupuesto_y_Prevision_Q3_Q4.xlsx',
+                                          'pt': 'Orcamento_e_Previsao_Q3_Q4.xlsx',
+                                          'nl': 'Begroting_en_Prognose_K3_K4.xlsx'},
+                             'tag': {'it': 'Analisi Finanziaria',
+                                     'en': 'Financial Analysis',
+                                     'fr': 'Analyse Financière',
+                                     'de': 'Finanzanalyse',
+                                     'es': 'Análisis Financiero',
+                                     'pt': 'Análise Financeira',
+                                     'nl': 'Financiële Analyse'},
+                             'stats': {'it': [('Fatturato Previsto', '€ 128.500', False),
+                                              ('Costi Operativi', '€ 43.200', False),
+                                              ('Margine Operativo', '+66,4%', True)],
+                                       'en': [('Expected Revenue', '€ 128,500', False),
+                                              ('Operating Costs', '€ 43,200', False),
+                                              ('Operating Margin', '+66.4%', True)],
+                                       'fr': [("Chiffre d'affaires prévu", '128 500 €', False),
+                                              ("Coûts d'exploitation", '43 200 €', False),
+                                              ("Marge d'exploitation", '+66,4 %', True)],
+                                       'de': [('Erwarteter Umsatz', '128.500 €', False),
+                                              ('Betriebskosten', '43.200 €', False),
+                                              ('Betriebsmarge', '+66,4 %', True)],
+                                       'es': [('Facturación Prevista', '128.500 €', False),
+                                              ('Costes Operativos', '43.200 €', False),
+                                              ('Margen Operativo', '+66,4 %', True)],
+                                       'pt': [('Faturação Prevista', '128.500 €', False),
+                                              ('Custos Operacionais', '43.200 €', False),
+                                              ('Margem Operacional', '+66,4 %', True)],
+                                       'nl': [('Verwachte Omzet', '€ 128.500', False),
+                                              ('Operationele Kosten', '€ 43.200', False),
+                                              ('Operationele Marge', '+66,4%', True)]}},
+                   'powerpoint': {'type': 'slide',
+                                  'filename': {'it': 'Presentazione_Commerciale_Clienti.pptx',
+                                               'en': 'Client_Sales_Pitch_2026.pptx',
+                                               'fr': 'Presentation_Commerciale_Clients.pptx',
+                                               'de': 'Kundenpraesentation_2026.pptx',
+                                               'es': 'Presentacion_Comercial_Clientes.pptx',
+                                               'pt': 'Apresentacao_Comercial_Clientes.pptx',
+                                               'nl': 'Klantpresentatie_2026.pptx'},
+                                  'tag': {'it': 'Designer Intelligente',
+                                          'en': 'Smart Designer',
+                                          'fr': 'Concepteur Intelligent',
+                                          'de': 'Intelligenter Designer',
+                                          'es': 'Diseñador Inteligente',
+                                          'pt': 'Designer Inteligente',
+                                          'nl': 'Slimme Designer'},
+                                  'slide_num': {'it': 'Slide 01',
+                                                'en': 'Slide 01',
+                                                'fr': 'Slide 01',
+                                                'de': 'Folie 01',
+                                                'es': 'Diapositiva 01',
+                                                'pt': 'Slide 01',
+                                                'nl': 'Dia 01'},
+                                  'slide_title': {'it': 'Proposta Strategica e Offerta 2026',
+                                                  'en': 'Strategic Proposal & 2026 Offer',
+                                                  'fr': 'Proposition Stratégique & Offre 2026',
+                                                  'de': 'Strategischer Vorschlag & Angebot 2026',
+                                                  'es': 'Propuesta Estratégica y Oferta 2026',
+                                                  'pt': 'Proposta Estratégica e Oferta 2026',
+                                                  'nl': 'Strategisch Voorstel & Aanbod 2026'},
+                                  'slide_desc': {'it': 'Layout grafici moderni, transizioni fluide '
+                                                       'e supporto per presentazioni remote su '
+                                                       'Microsoft Teams.',
+                                                 'en': 'Modern layouts, smooth transitions and '
+                                                       'support for remote presentations on '
+                                                       'Microsoft Teams.',
+                                                 'fr': 'Mises en page modernes, transitions '
+                                                       'fluides et prise en charge des '
+                                                       'présentations à distance sur Teams.',
+                                                 'de': 'Moderne Layouts, flüssige Übergänge und '
+                                                       'Unterstützung für Remote-Präsentationen in '
+                                                       'Microsoft Teams.',
+                                                 'es': 'Diseños modernos, transiciones fluidas y '
+                                                       'soporte para presentaciones remotas en '
+                                                       'Microsoft Teams.',
+                                                 'pt': 'Layouts modernos, transições fluidas e '
+                                                       'suporte para apresentações remotas no '
+                                                       'Microsoft Teams.',
+                                                 'nl': 'Moderne lay-outs, soepele overgangen en '
+                                                       'ondersteuning voor presentaties op afstand '
+                                                       'in Microsoft Teams.'}},
+                   'outlook': {'text': {'it': 'Gestisci la posta aziendale da 50 GB con il tuo '
+                                              'dominio personalizzato, sincronizza i calendari del '
+                                              'team, prenota sale riunioni e organizza i contatti '
+                                              'con filtri antispam di livello enterprise.',
+                                        'en': 'Manage 50 GB business email on your custom domain, '
+                                              'sync team calendars, book meeting rooms and '
+                                              'organize contacts with enterprise-grade antispam '
+                                              'filters.',
+                                        'fr': 'Gérez la messagerie pro de 50 Go avec votre nom de '
+                                              'domaine personnalisé, synchronisez les calendriers '
+                                              "d'équipe et réservez des salles avec des filtres "
+                                              'antispam de pointe.',
+                                        'de': 'Verwalten Sie 50 GB Geschäfts-E-Mails mit Ihrer '
+                                              'eigenen Domain, synchronisieren Sie Teamkalender '
+                                              'und organisieren Sie Kontakte mit '
+                                              'Enterprise-Spamschutz.',
+                                        'es': 'Gestiona el correo profesional de 50 GB con tu '
+                                              'dominio personalizado, sincroniza los calendarios '
+                                              'del equipo y organiza los contactos con filtros '
+                                              'antispam avanzados.',
+                                        'pt': 'Gere o email empresarial de 50 GB com o teu domínio '
+                                              'personalizado, sincroniza os calendários da equipa '
+                                              'e organiza contactos com filtros antispam de nível '
+                                              'empresarial.',
+                                        'nl': 'Beheer 50 GB zakelijke e-mail op uw eigen domein, '
+                                              "synchroniseer teamagenda's en organiseer contacten "
+                                              'met hoogwaardige antispamfilters.'}},
+                   'teams': {'text': {'it': 'Riunioni video in alta definizione fino a 300 '
+                                            'partecipanti, registrazione meeting, trascrizione '
+                                            'automatica, chat di gruppo, canali tematici per '
+                                            'progetti e lavagna condivisa Microsoft Whiteboard.',
+                                      'en': 'HD video meetings up to 300 attendees, meeting '
+                                            'recording, automated transcription, group chat, '
+                                            'project channels and interactive Microsoft '
+                                            'Whiteboard.',
+                                      'fr': "Réunions vidéo HD jusqu'à 300 participants, "
+                                            'enregistrement, transcription automatique, '
+                                            'conversation de groupe, canaux de projets et tableau '
+                                            'blanc Microsoft Whiteboard.',
+                                      'de': 'HD-Videokonferenzen bis 300 Teilnehmer, '
+                                            'Meeting-Aufzeichnung, automatische Transkription, '
+                                            'Gruppenchats, Projektkanäle und interaktives '
+                                            'Microsoft Whiteboard.',
+                                      'es': 'Reuniones de vídeo en HD de hasta 300 asistentes, '
+                                            'grabación, transcripción automática, chat grupal, '
+                                            'canales de proyectos y pizarra digital Microsoft '
+                                            'Whiteboard.',
+                                      'pt': 'Reuniões de vídeo HD até 300 participantes, gravação, '
+                                            'transcrição automática, chat de grupo, canais de '
+                                            'projetos e quadro interativo Microsoft Whiteboard.',
+                                      'nl': 'HD-videovergaderingen tot 300 deelnemers, opname, '
+                                            'automatische transcriptie, groepschat, projectkanalen '
+                                            'en interactief Microsoft Whiteboard.'}},
+                   'onedrive': {'type': 'cloud',
+                                'filename': {'it': 'Archivio Cloud Aziendale Protetto',
+                                             'en': 'Secure Business Cloud Storage',
+                                             'fr': 'Stockage Cloud Entreprise Sécurisé',
+                                             'de': 'Sicherer Unternehmens-Cloudspeicher',
+                                             'es': 'Almacenamiento Cloud Empresarial',
+                                             'pt': 'Armazenamento Cloud Empresarial',
+                                             'nl': 'Beveiligde Zakelijke Cloudopslag'},
+                                'tag': {'it': '1 TB (1.000 GB) per Utente',
+                                        'en': '1 TB (1,000 GB) per User',
+                                        'fr': '1 To (1 000 Go) par utilisateur',
+                                        'de': '1 TB (1.000 GB) pro Nutzer',
+                                        'es': '1 TB (1.000 GB) por usuario',
+                                        'pt': '1 TB (1.000 GB) por utilizador',
+                                        'nl': '1 TB (1.000 GB) per gebruiker'},
+                                'used_label': {'it': 'Documenti e Progetti: 240 GB usati',
+                                               'en': 'Docs and Projects: 240 GB used',
+                                               'fr': 'Documents et Projets : 240 Go utilisés',
+                                               'de': 'Dokumente und Projekte: 240 GB belegt',
+                                               'es': 'Documentos y Proyectos: 240 GB usados',
+                                               'pt': 'Documentos e Projetos: 240 GB usados',
+                                               'nl': 'Documenten en Projecten: 240 GB gebruikt'},
+                                'free_label': {'it': '760 GB liberi',
+                                               'en': '760 GB free',
+                                               'fr': '760 Go libres',
+                                               'de': '760 GB frei',
+                                               'es': '760 GB libres',
+                                               'pt': '760 GB livres',
+                                               'nl': '760 GB vrij'},
+                                'percent': 24}},
+ 'overview': {'it': {'eyebrow': 'La suite completa per la produttività aziendale',
+                     'title': 'Tutto ciò che serve alla tua azienda per collaborare, comunicare e '
+                              'crescere',
+                     'paragraphs': ['Microsoft 365 Business Standard è la soluzione all-in-one di '
+                                    'produttività e collaborazione cloud progettata specificamente '
+                                    'per piccole e medie imprese, studi professionali, consulenti '
+                                    'e team aziendali in espansione. Riunisce in un unico '
+                                    'abbonamento annuale le versioni desktop complete delle '
+                                    'applicazioni Office più diffuse (Word, Excel, PowerPoint, '
+                                    'Outlook, OneNote, oltre ad Access e Publisher per PC) e una '
+                                    'robusta infrastruttura di servizi cloud di livello enterprise '
+                                    'per la gestione della posta, delle videoconferenze e dei file '
+                                    'aziendali.',
+                                    'Con la posta elettronica aziendale basata su Exchange Online, '
+                                    'ogni utente dispone di una casella postale dedicata da 50 GB '
+                                    'con il proprio dominio personalizzato (es. nome@azienda.it), '
+                                    'integrata con calendari condivisi, pianificazione degli '
+                                    'appuntamenti con i clienti tramite Microsoft Bookings e '
+                                    'protezione avanzata contro spam, phishing e malware (Exchange '
+                                    'Online Protection).',
+                                    'Microsoft Teams trasforma la collaborazione aziendale: '
+                                    'organizza riunioni e webinar fino a 300 partecipanti in alta '
+                                    'definizione, con condivisione dello schermo, registrazione su '
+                                    'cloud, breakout room e canali di discussione dedicati per '
+                                    'ogni progetto. Grazie a 1 TB (1.000 GB) di spazio cloud '
+                                    'sicuro su OneDrive for Business e SharePoint, i dati '
+                                    'aziendali sono sempre sincronizzati in tempo reale, protetti '
+                                    'da crittografia avanzata e cronologia delle versioni con '
+                                    'ripristino istantaneo da attacchi ransomware.',
+                                    "Ogni singola licenza consente all'utente di installare le "
+                                    'applicazioni Office su un massimo di 5 PC o Mac, 5 tablet e 5 '
+                                    'smartphone contemporaneamente. La gestione degli account, '
+                                    'delle licenze e dei criteri di sicurezza aziendali avviene '
+                                    'tramite il Microsoft 365 Admin Center, con autenticazione a '
+                                    'due fattori (MFA) e conformità agli standard europei di '
+                                    'protezione dei dati (GDPR).',
+                                    'Acquistando su AML Store ricevi la licenza digitale originale '
+                                    '(Product Key ESD) via email entro 2–15 minuti, pronta per '
+                                    "l'attivazione sul portale ufficiale Microsoft, con fattura "
+                                    'elettronica italiana con IVA esposta e supporto tecnico umano '
+                                    'dedicato in italiano via email e WhatsApp.']},
+              'en': {'eyebrow': 'The complete business productivity suite',
+                     'title': 'Everything your business needs to collaborate, communicate and '
+                              'scale',
+                     'paragraphs': ['Microsoft 365 Business Standard is the all-in-one cloud '
+                                    'productivity and collaboration solution designed specifically '
+                                    'for small and medium-sized businesses, professional studios, '
+                                    'consultants, and growing teams. It combines the complete '
+                                    'desktop versions of Office applications (Word, Excel, '
+                                    'PowerPoint, Outlook, OneNote, plus Access and Publisher on '
+                                    'PC) with enterprise-grade cloud services for email, '
+                                    'videoconferencing, and secure file sharing.',
+                                    'With business-class email powered by Exchange Online, every '
+                                    'user gets a dedicated 50 GB mailbox with their own custom '
+                                    'domain name (e.g. name@company.com), integrated with shared '
+                                    'team calendars, Microsoft Bookings appointment scheduling, '
+                                    'and advanced protection against spam and phishing threats.',
+                                    'Microsoft Teams elevates communication with HD '
+                                    'videoconferencing for up to 300 participants, cloud meeting '
+                                    'recording, automated transcription, breakout rooms, and '
+                                    'project-specific channels. Backed by 1 TB (1,000 GB) of '
+                                    'secure cloud storage on OneDrive for Business and SharePoint, '
+                                    'company files are synchronized in real time with version '
+                                    'history and ransomware recovery.',
+                                    'Each licence allows one user to install Office applications '
+                                    'on up to 5 PCs or Macs, 5 tablets, and 5 smartphones '
+                                    'simultaneously. Centralized user administration and security '
+                                    'policies are managed via the Microsoft 365 Admin Center with '
+                                    'multi-factor authentication (MFA) and GDPR compliance.',
+                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'licence (ESD Key) delivered by email within 2-15 minutes, '
+                                    'official activation on Microsoft portals, an official VAT '
+                                    'invoice, and dedicated technical support in Italian and '
+                                    'English.']}},
+ 'features_title': {'it': 'Perché scegliere Microsoft 365 Business Standard',
+                    'en': 'Why choose Microsoft 365 Business Standard',
+                    'fr': 'Pourquoi choisir Microsoft 365 Business Standard',
+                    'de': 'Warum Microsoft 365 Business Standard wählen',
+                    'es': 'Por qué elegir Microsoft 365 Business Standard',
+                    'pt': 'Por que escolher o Microsoft 365 Business Standard',
+                    'nl': 'Waarom kiezen voor Microsoft 365 Business Standard'},
+ 'features': {'it': [('c8',
+                      'blue',
+                      'App Desktop',
+                      'Suite Office Desktop Completa',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, oltre ad Access e Publisher '
+                      '(solo PC), sempre aggiornati alle ultime novità e utilizzabili sia online '
+                      'che offline.'),
+                     ('c4',
+                      'teal',
+                      'Posta',
+                      'Exchange 50 GB & Dominio Aziendale',
+                      'Casella email professionale da 50 GB con il tuo dominio personalizzato '
+                      '(nome@azienda.it), calendari sincronizzati e filtri anti-phishing di '
+                      'livello enterprise.'),
+                     ('c4',
+                      'purple',
+                      'Riunioni',
+                      'Microsoft Teams fino a 300 Partecipanti',
+                      'Videoconferenze HD, webinar, registrazione meeting, chat interna di gruppo '
+                      'e canali tematici per la massima collaborazione tra colleghi e clienti.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1.000 GB di archiviazione protetta nel cloud per utente, condivisione '
+                      'controllata, cronologia versioni e protezione avanzata contro attacchi '
+                      'ransomware.'),
+                     ('c4',
+                      '',
+                      'Sicurezza',
+                      'Gestione Centralizzata e Conformità GDPR',
+                      'Pannello Microsoft 365 Admin Center per gestire utenti e autorizzazioni, '
+                      'autenticazione a due fattori (MFA) e dati ospitati in data center europei '
+                      'conformi al GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licenza',
+                      '5 Dispositivi per Utente e Fattura P.IVA',
+                      'Ogni utente può usare le app su 5 PC/Mac, 5 tablet e 5 smartphone '
+                      'contemporaneamente. Consegna email in 2–15 minuti e fattura elettronica '
+                      'con P.IVA.')],
+              'en': [('c8',
+                      'blue',
+                      'Desktop Apps',
+                      'Full Desktop Office Suite',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, plus Access and Publisher (PC '
+                      'only), always up to date and usable both online and offline.'),
+                     ('c4',
+                      'teal',
+                      'Email',
+                      '50 GB Exchange & Custom Domain',
+                      'Professional 50 GB mailbox with your company domain (name@company.com), '
+                      'synchronized calendars, and enterprise-grade anti-phishing protection.'),
+                     ('c4',
+                      'purple',
+                      'Meetings',
+                      'Microsoft Teams up to 300 People',
+                      'HD video calls, webinars, meeting recording, team group chats, and project '
+                      'channels for seamless internal and external collaboration.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1,000 GB of secure cloud storage per user, granular sharing permissions, '
+                      'version history, and advanced ransomware protection.'),
+                     ('c4',
+                      '',
+                      'Security',
+                      'Centralized Admin & GDPR Compliance',
+                      'Microsoft 365 Admin Center for user management, multi-factor authentication '
+                      '(MFA), and EU data center hosting compliant with GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licence',
+                      '5 Devices per User & VAT Invoice',
+                      'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
+                      'at once. Fast email delivery with an official VAT invoice.')]},
+ 'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
+                        'title': 'Scheda tecnica e dettagli licenza',
+                        'caption': 'Specifiche tecniche, commerciali e requisiti di Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Prodotto', 'Microsoft 365 Business Standard'),
+                                 ('Tipo licenza', 'Abbonamento 12 mesi (ESD digitale)'),
+                                 ('Destinatari',
+                                  'Aziende, PMI, studi professionali, liberi professionisti (fino '
+                                  'a 300 utenti per tenant)'),
+                                 ('Utenti per licenza', '1 utente aziendale'),
+                                 ('Dispositivi per utente',
+                                  'Fino a 5 PC/Mac + 5 tablet + 5 smartphone contemporanei'),
+                                 ('Casella di posta',
+                                  '50 GB Exchange Online con supporto dominio personalizzato'),
+                                 ('Spazio cloud',
+                                  '1 TB (1.000 GB) OneDrive for Business per utente + SharePoint'),
+                                 ('Riunioni Teams',
+                                  'Fino a 300 partecipanti con registrazione e chat'),
+                                 ('App desktop incluse',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('App e servizi cloud',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Sistemi operativi',
+                                  'Windows 11, Windows 10, ultime 3 versioni di macOS, iOS, '
+                                  'Android'),
+                                 ('Consegna', 'Codice Product Key ESD via email in 2–15 minuti'),
+                                 ('Attivazione',
+                                  'Ufficiale su microsoft365.com / admin.microsoft.com'),
+                                 ('Rinnovo',
+                                  'Nessun vincolo automatico: rinnovo annuale a scelta del '
+                                  'cliente'),
+                                 ('Codice articolo', '@sku'),
+                                 ('Regione di attivazione', 'Unione Europea / SEE'),
+                                 ('Fatturazione',
+                                  'IVA inclusa, fattura elettronica italiana con P.IVA')]},
+                 'en': {'eyebrow': 'Product specifications',
+                        'title': 'Technical sheet and licence details',
+                        'caption': 'Technical and commercial specifications of Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Product', 'Microsoft 365 Business Standard'),
+                                 ('Licence type', '12-month subscription (digital ESD)'),
+                                 ('Target audience',
+                                  'Businesses, SMBs, professional studios, freelancers (up to 300 '
+                                  'users per tenant)'),
+                                 ('Users per licence', '1 business user'),
+                                 ('Devices per user',
+                                  'Up to 5 PCs/Macs + 5 tablets + 5 smartphones simultaneously'),
+                                 ('Mailbox', '50 GB Exchange Online with custom domain support'),
+                                 ('Cloud storage',
+                                  '1 TB (1,000 GB) OneDrive for Business per user + SharePoint'),
+                                 ('Teams meetings',
+                                  'Up to 300 participants with cloud recording and chat'),
+                                 ('Desktop apps included',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('Cloud apps & services',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Operating systems',
+                                  'Windows 11, Windows 10, latest 3 versions of macOS, iOS, '
+                                  'Android'),
+                                 ('Delivery',
+                                  'Digital ESD Product Key by email within 2-15 minutes'),
+                                 ('Activation',
+                                  'Official activation on microsoft365.com / admin.microsoft.com'),
+                                 ('Renewal',
+                                  'No automatic lock-in: annual renewal at customer choice'),
+                                 ('Product code', '@sku'),
+                                 ('Activation region', 'European Union / EEA'),
+                                 ('Billing',
+                                  'VAT included, official electronic invoice')]}},
+ 'compare': {'it': {'eyebrow': 'Guida alla scelta',
+                    'title': 'Confronto tra le soluzioni Microsoft Business e Consumer',
+                    'sub': 'Confronta le differenze chiave tra i piani aziendali e le licenze '
+                           'perpetue per scegliere la soluzione ideale per la tua attività.',
+                    'caption': 'Confronto dettagliato tra Microsoft 365 Business Standard, '
+                               'Business Basic, Personal e Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [("Destinazione d'uso",
+                              'Aziendale / PMI',
+                              'Aziendale / PMI',
+                              'Privato / Singolo',
+                              'Aziendale / Privato'),
+                             ('App Office Desktop (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('Posta aziendale 50 GB (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Dominio email personalizzato', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 partecipanti)', 'yes', 'yes', 'no', 'no'),
+                             ('Spazio Cloud OneDrive',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Installazione multidispositivo',
+                              '5 PC/Mac + 5 Mobile',
+                              'Solo Web/Mobile',
+                              '5 Dispositivi',
+                              '1 solo PC o Mac'),
+                             ('Gestione Admin Center & Criteri', 'yes', 'yes', 'no', 'no'),
+                             ('Modello di licenza',
+                              'Abbonamento 1 anno',
+                              'Abbonamento 1 anno',
+                              'Abbonamento 1 anno',
+                              'Licenza a vita (perpetua)'),
+                             ('Fattura elettronica con P.IVA', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Incluso',
+                    'no_label': 'Non incluso',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> è la scelta '
+                             'ottimale se ti servono le potenti applicazioni Office installate su '
+                             'PC e Mac combinate con posta elettronica aziendale, Teams e '
+                             'archiviazione cloud protetta.',
+                             'Se necessiti unicamente delle app desktop su una sola postazione '
+                             'fissa senza servizi cloud ricorrenti, puoi valutare anche <a '
+                             'href="/it/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']},
+             'en': {'eyebrow': 'Plan comparison',
+                    'title': 'Compare Microsoft Business and Consumer solutions',
+                    'sub': 'Compare the key differences between business subscriptions and '
+                           'perpetual licences to choose the right fit for your organization.',
+                    'caption': 'Detailed comparison between Microsoft 365 Business Standard, '
+                               'Business Basic, Personal, and Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [('Primary usage',
+                              'Business / SMB',
+                              'Business / SMB',
+                              'Personal / Individual',
+                              'Business / Home'),
+                             ('Desktop Office Apps (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('50 GB Business Email (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Custom email domain', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 attendees)', 'yes', 'yes', 'no', 'no'),
+                             ('OneDrive Cloud Storage',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Multi-device installation',
+                              '5 PCs/Macs + 5 Mobile',
+                              'Web & Mobile only',
+                              '5 Devices',
+                              '1 PC or Mac only'),
+                             ('Admin Center & Policy Management', 'yes', 'yes', 'no', 'no'),
+                             ('Licensing model',
+                              '1-year subscription',
+                              '1-year subscription',
+                              '1-year subscription',
+                              'Perpetual licence'),
+                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Included',
+                    'no_label': 'Not included',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
+                             'choice for organizations needing full desktop Office apps combined '
+                             'with business email, Teams collaboration, and secure cloud storage.',
+                             'If you only need standalone desktop apps on a single computer '
+                             'without ongoing cloud services, explore <a '
+                             'href="/en/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']}},
+ 'steps': {'it': [('Ordine e pagamento sicuro',
+                   "Aggiungi Microsoft 365 Business Standard al carrello e completa l'acquisto "
+                   'protetto con carta, PayPal, Apple Pay o Google Pay. Ricevi la conferma '
+                   "d'ordine istantanea."),
+                  ('Consegna digitale immediata',
+                   'Entro 2–15 minuti ti inviamo via email il codice Product Key originale da 25 '
+                   'caratteri, la guida di attivazione e la fattura fiscale con Partita IVA.'),
+                  ('Attivazione su portale Microsoft',
+                   'Riscatta la licenza sul portale ufficiale Microsoft (setup.office.com o '
+                   "admin.microsoft.com), assegna l'utenza e scarica le applicazioni desktop su "
+                   'PC, Mac e dispositivi mobili.')],
+           'en': [('Secure order and checkout',
+                   'Add Microsoft 365 Business Standard to your cart and complete payment via '
+                   'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
+                  ('Instant digital delivery',
+                   'Within 2-15 minutes we send you the genuine 25-character Product Key, '
+                   'activation guide, and official VAT invoice by email.'),
+                  ('Official Microsoft activation',
+                   'Redeem the licence on the official Microsoft portal (setup.office.com or '
+                   'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
+                   'devices.')]},
+ 'specs': {'it': [('Processore',
+                   'Windows: processore a 1,6 GHz o superiore, 2 core. Mac: processore Intel o '
+                   'chip Apple Silicon compatibile.'),
+                  ('Sistema operativo',
+                   'Windows 11, Windows 10; macOS nelle ultime tre versioni supportate da Apple; '
+                   'iOS e Android nelle versioni correnti.'),
+                  ('Memoria (RAM)',
+                   'Almeno 4 GB di RAM consigliati per PC e Mac per garantire prestazioni ottimali '
+                   'con file complessi.'),
+                  ('Spazio su disco',
+                   'Almeno 4 GB di spazio libero su disco per Windows; 10 GB su macOS con formato '
+                   'disco compatibile.'),
+                  ('Connettività e browser',
+                   'Connessione Internet richiesta per installazione, aggiornamenti periodici e '
+                   'servizi cloud. Compatibile con Edge, Chrome, Safari, Firefox.')],
+           'en': [('Processor',
+                   'Windows: 1.6 GHz or faster, 2-core processor. Mac: Intel processor or Apple '
+                   'Silicon chip supported.'),
+                  ('Operating system',
+                   'Windows 11, Windows 10; macOS in the latest three supported versions; iOS and '
+                   'Android latest versions.'),
+                  ('Memory (RAM)',
+                   'At least 4 GB RAM recommended for PC and Mac for optimal performance with '
+                   'large business files.'),
+                  ('Disk space', 'At least 4 GB free disk space on Windows; 10 GB on macOS.'),
+                  ('Connectivity & browser',
+                   'Internet access required for installation, licence validation, and cloud '
+                   'services. Supports Edge, Chrome, Safari, Firefox.')]},
+ 'specs_note': {'it': 'Requisiti hardware e software orientativi da documentazione ufficiale '
+                      'Microsoft; verifica sempre la compatibilità specifica dei tuoi dispositivi.',
+                'en': 'Indicative system requirements from official Microsoft documentation; '
+                      'verify specific device compatibility before installation.'},
+ 'faq': {'it': [("Che cos'è Microsoft 365 Business Standard e cosa include?",
+                 'Microsoft 365 Business Standard (ex Office 365 Business Premium) è la suite di '
+                 'produttività e collaborazione aziendale più completa di Microsoft per le piccole '
+                 'e medie imprese. Include: (1) le applicazioni desktop complete e sempre '
+                 'aggiornate per PC e Mac di Word, Excel, PowerPoint, Outlook, OneNote, oltre ad '
+                 'Access e Publisher solo per PC; (2) la posta elettronica professionale Exchange '
+                 'Online con casella da 50 GB e supporto per dominio personalizzato (es. '
+                 'info@azienda.it); (3) Microsoft Teams per videoconferenze HD fino a 300 '
+                 'partecipanti, chat e canali di team; (4) 1 TB (1.000 GB) di archiviazione sicura '
+                 'nel cloud con OneDrive for Business e SharePoint; (5) strumenti di business '
+                 'intelligence e pianificazione come Microsoft Bookings, Planner, Forms, Loop e '
+                 'Clipchamp.'),
+                ('Qual è la differenza tra Microsoft 365 Business Standard e Microsoft 365 '
+                 'Personal o Family?',
+                 "Microsoft 365 Personal e Family sono piani destinati esclusivamente all'uso "
+                 'privato e domestico, associati a un account Microsoft consumer (es. '
+                 '@outlook.com) e privi di funzionalità aziendali. Business Standard è invece una '
+                 'soluzione aziendale: permette di configurare account con il proprio dominio di '
+                 'posta aziendale (nome@azienda.it), fornisce posta Exchange da 50 GB con filtri '
+                 'antispam e antimalware avanzati, include Teams con capacità fino a 300 persone '
+                 '(rispetto alle limitazioni della versione consumer), SharePoint per intranet '
+                 'aziendali e il portale Microsoft 365 Admin Center per gestire centralmente '
+                 'licenze, sicurezza e permessi dei dipendenti.'),
+                ('Qual è la differenza tra Microsoft 365 Business Standard e Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business è una licenza perpetua (una tantum) legata a 1 solo '
+                 'PC o Mac: include le versioni classiche 2024 di Word, Excel, PowerPoint, Outlook '
+                 'e OneNote, ma non riceve aggiornamenti di nuove funzionalità future, non include '
+                 'la posta Exchange da 50 GB, non include Teams aziendale e non include lo spazio '
+                 'cloud da 1 TB su OneDrive for Business. Microsoft 365 Business Standard è invece '
+                 "un abbonamento annuale che garantisce app desktop sempre aggiornate all'ultima "
+                 'versione, installazione su un massimo di 5 PC/Mac più 5 dispositivi mobili per '
+                 "utente e l'intero ecosistema di servizi cloud aziendali."),
+                ('Su quanti dispositivi posso installare le applicazioni con 1 licenza Business '
+                 'Standard?',
+                 'Ogni singola licenza utente di Microsoft 365 Business Standard consente '
+                 "l'installazione e l'utilizzo contemporaneo delle applicazioni su un massimo di 5 "
+                 'computer (PC Windows o Mac), 5 tablet (iPad, Android, Windows) e 5 smartphone '
+                 '(iPhone, Android), per un totale di 15 dispositivi associati al medesimo account '
+                 'utente.'),
+                ('Include la posta elettronica aziendale con il mio dominio personalizzato?',
+                 'Sì, include il servizio di posta professionale Exchange Online con casella di 50 '
+                 'GB per ogni utente. Puoi collegare facilmente il dominio internet della tua '
+                 'azienda (es. mario.rossi@tuodominio.it) e usufruire di calendari condivisi, '
+                 'rubrica aziendale globale, gestione degli appuntamenti con Microsoft Bookings e '
+                 'protezione avanzata contro phishing e malware (Exchange Online Protection).'),
+                ('Come funziona Microsoft Teams in questo piano e quante persone possono '
+                 'partecipare?',
+                 'In Microsoft 365 Business Standard, Microsoft Teams è incluso nella versione '
+                 'aziendale completa: supporta riunioni online e videoconferenze in alta '
+                 'definizione fino a 300 partecipanti per sessione, registrazione delle riunioni '
+                 'con trascrizione automatica, breakout room (stanze virtuali), condivisione '
+                 'schermo e lavagna interattiva Microsoft Whiteboard. I partecipanti esterni '
+                 '(clienti, fornitori) possono unirsi alle riunioni via browser senza dover '
+                 'possedere una licenza a pagamento.'),
+                ("Come si attiva la licenza dopo l'acquisto su AML Store?",
+                 'Riceverai il codice Product Key da 25 caratteri e le istruzioni dettagliate via '
+                 "email entro 2–15 minuti dall'acquisto. Se disponi già di un tenant aziendale "
+                 'Microsoft 365, puoi inserire il codice nel portale di amministrazione '
+                 '(admin.microsoft.com) per aggiungere la licenza o rinnovare quella esistente. Se '
+                 'è la prima volta, puoi riscattare il codice su setup.office.com o '
+                 'microsoft365.com/setupbusiness per creare in pochi passaggi il tuo nuovo account '
+                 'aziendale e iniziare subito a scaricare le applicazioni.'),
+                ('Posso acquistare più licenze per i collaboratori della mia azienda?',
+                 'Assolutamente sì. Puoi acquistare il numero di licenze pari al numero di '
+                 'collaboratori o dipendenti che necessitano della suite (fino a un massimo di 300 '
+                 'licenze Business Standard per tenant aziendale). Tramite il Microsoft 365 Admin '
+                 'Center potrai assegnare, revocare o riassegnare le licenze in qualsiasi momento '
+                 'con un semplice clic.'),
+                ('Viene emessa la fattura elettronica italiana con Partita IVA?',
+                 "Sì. AML Store è un'azienda con sede legale e fiscale in Italia (P.IVA "
+                 '11461870963). In fase di checkout è possibile inserire i dati di fatturazione '
+                 'aziendale, Partita IVA, Codice Fiscale e Codice SDI/PEC. La fattura elettronica '
+                 "viene inviata regolarmente tramite il Sistema di Interscambio (SDI) dell'Agenzia "
+                 'delle Entrate.'),
+                ('Come sono protetti i dati e come viene garantita la conformità al GDPR?',
+                 'Microsoft 365 rispetta i più elevati standard internazionali di sicurezza '
+                 'informatica e la conformità al regolamento europeo GDPR. I dati risiedono nei '
+                 "data center Microsoft situati all'interno dell'Unione Europea, con crittografia "
+                 'sia durante il trasferimento che a riposo (BitLocker, TLS). Il piano include '
+                 "inoltre l'autenticazione a due fattori (MFA), criteri di password avanzati e "
+                 'strumenti per la prevenzione della perdita dei dati (DLP) e il ripristino da '
+                 'attacchi ransomware.')],
+         'en': [('What is Microsoft 365 Business Standard and what does it include?',
+                 'Microsoft 365 Business Standard (formerly Office 365 Business Premium) is '
+                 "Microsoft's complete business productivity and collaboration suite for SMBs. It "
+                 'includes: (1) fully installed desktop apps for PC and Mac (Word, Excel, '
+                 'PowerPoint, Outlook, OneNote, plus Access & Publisher on PC); (2) 50 GB Exchange '
+                 'Online business email with custom domain support; (3) Microsoft Teams for video '
+                 'meetings up to 300 attendees, recording, and channels; (4) 1 TB OneDrive for '
+                 'Business cloud storage per user with SharePoint; (5) business productivity apps '
+                 'such as Microsoft Bookings, Planner, Forms, Loop, and Clipchamp.'),
+                ('What is the difference between Business Standard and Microsoft 365 '
+                 'Personal/Family?',
+                 'Microsoft 365 Personal and Family are strictly consumer plans tied to personal '
+                 'Microsoft accounts (@outlook.com) without business infrastructure. Business '
+                 'Standard is a corporate platform allowing custom business email domains '
+                 '(name@company.com), 50 GB Exchange mailboxes, Teams meetings for up to 300 '
+                 'participants, SharePoint team intranets, and centralized user/security '
+                 'management via the Microsoft 365 Admin Center.'),
+                ('What is the difference between Business Standard and Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business is a one-time perpetual purchase for 1 PC or Mac '
+                 'only, containing classic 2024 apps without feature updates, without 50 GB '
+                 'Exchange email, without corporate Teams, and without 1 TB OneDrive cloud '
+                 'storage. Microsoft 365 Business Standard is an annual subscription providing '
+                 'always-updated desktop apps on up to 5 PCs/Macs + 5 mobile devices per user, '
+                 'combined with complete business cloud services.'),
+                ('How many devices can I install the apps on with 1 licence?',
+                 'Each single user licence of Microsoft 365 Business Standard allows simultaneous '
+                 'installation and use of Office apps on up to 5 PCs or Macs, 5 tablets (iPad, '
+                 'Android, Windows), and 5 smartphones (iPhone, Android), totaling up to 15 '
+                 'devices per user account.'),
+                ('Does it include business email with my custom company domain?',
+                 'Yes, it includes business-class Exchange Online email with a 50 GB mailbox per '
+                 'user. You can easily connect your company domain name (e.g. '
+                 'name@yourcompany.com) with shared team calendars, global contact lists, '
+                 'Microsoft Bookings scheduling, and enterprise spam/phishing filtering.'),
+                ('How does Microsoft Teams work in this plan and how many attendees can join?',
+                 'Microsoft Teams is included in its full business edition, supporting HD '
+                 'videoconferencing and webinars for up to 300 participants per meeting, cloud '
+                 'recording with automated transcription, breakout rooms, screen sharing, and '
+                 'interactive Microsoft Whiteboard. External guests can join meetings via browser '
+                 'without needing a paid licence.'),
+                ('How do I activate the licence after purchasing from AML Store?',
+                 'You will receive your 25-character Product Key and step-by-step instructions by '
+                 'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
+                 'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
+                 'If you are setting up a new organization, you can redeem the code on '
+                 'setup.office.com or microsoft365.com/setupbusiness.'),
+                ('Can I purchase multiple licences for my team members and employees?',
+                 'Yes. You can purchase the exact number of licences needed for your team (up to '
+                 '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
+                 'Center, you can assign, reassign, or revoke user licences anytime with a single '
+                 'click.'),
+                ('Is a VAT invoice provided for businesses?',
+                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'checkout you can provide your business details, VAT number, Tax Code, and '
+                 'SDI/PEC for official electronic invoicing.'),
+                ('How is data protected and is it GDPR compliant?',
+                 'Microsoft 365 adheres to the highest cybersecurity and data privacy standards '
+                 'including GDPR compliance. Data is stored in European Microsoft data centers '
+                 'with BitLocker and TLS encryption at rest and in transit, multi-factor '
+                 'authentication (MFA), and advanced ransomware recovery.')]}}
+
+
+PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Business Standard',
+          'en': 'Microsoft 365 Business Standard',
+          'fr': 'Microsoft 365 Business Standard',
+          'de': 'Microsoft 365 Business Standard',
+          'es': 'Microsoft 365 Business Standard',
+          'pt': 'Microsoft 365 Business Standard',
+          'nl': 'Microsoft 365 Business Standard'},
+ 'seo_title': {'it': 'Microsoft 365 Business Standard 1 Anno | Licenza Originale — Aml Store',
+               'en': 'Microsoft 365 Business Standard 1 Year | Genuine Licence — Aml Store',
+               'fr': 'Microsoft 365 Business Standard 1 An | Licence Officielle — Aml Store',
+               'de': 'Microsoft 365 Business Standard 1 Jahr | Offizielle Lizenz — Aml Store',
+               'es': 'Microsoft 365 Business Standard 1 Año | Licencia Oficial — Aml Store',
+               'pt': 'Microsoft 365 Business Standard 1 Ano | Licença Oficial — Aml Store',
+               'nl': 'Microsoft 365 Business Standard 1 Jaar | Officiële Licentie — Aml Store'},
+ 'eyebrow': {'it': 'Abbonamento 12 mesi · 1 Utente Business',
+             'en': '12-Month Subscription · 1 Business User',
+             'fr': 'Abonnement 12 mois · 1 Utilisateur Business',
+             'de': '12-Monate-Abonnement · 1 Business-Nutzer',
+             'es': 'Suscripción 12 meses · 1 Usuario Business',
+             'pt': 'Subscrição 12 meses · 1 Utilizador Business',
+             'nl': '12-maandenabonnement · 1 zakelijke gebruiker'},
+ 'title_html': {'it': 'Microsoft 365 <span>Business Standard</span>',
+                'en': 'Microsoft 365 <span>Business Standard</span>',
+                'fr': 'Microsoft 365 <span>Business Standard</span>',
+                'de': 'Microsoft 365 <span>Business Standard</span>',
+                'es': 'Microsoft 365 <span>Business Standard</span>',
+                'pt': 'Microsoft 365 <span>Business Standard</span>',
+                'nl': 'Microsoft 365 <span>Business Standard</span>'},
+ 'desc': {'it': 'Microsoft 365 Business Standard: app Office desktop complete (Word, Excel, '
+                'PowerPoint, Outlook), posta aziendale Exchange da 50 GB con dominio '
+                'personalizzato, Teams per riunioni fino a 300 partecipanti e 1 TB OneDrive. '
+                'Licenza per 1 utente su 5 PC/Mac + 5 dispositivi mobili, attivazione ufficiale e '
+                'fattura elettronica con P.IVA.',
+          'en': 'Microsoft 365 Business Standard: complete desktop Office apps (Word, Excel, '
+                'PowerPoint, Outlook), 50 GB Exchange business email with custom domain, Teams for '
+                'meetings up to 300 attendees, and 1 TB OneDrive cloud. 1 user licence for 5 '
+                'PCs/Macs + 5 mobile devices, official activation, and VAT invoice.',
+          'fr': 'Microsoft 365 Business Standard : applications Office de bureau complètes (Word, '
+                'Excel, PowerPoint, Outlook), messagerie Exchange 50 Go avec domaine personnalisé, '
+                "Teams jusqu'à 300 participants et 1 To OneDrive. Licence 1 utilisateur pour 5 "
+                'PC/Mac + 5 mobiles, activation officielle et facture avec TVA.',
+          'de': 'Microsoft 365 Business Standard: vollständige Desktop-Office-Apps (Word, Excel, '
+                'PowerPoint, Outlook), 50 GB Exchange-Geschäfts-E-Mail mit eigener Domain, Teams '
+                'für Meetings bis 300 Teilnehmer und 1 TB OneDrive. 1-Nutzer-Lizenz für 5 PCs/Macs '
+                '+ 5 Mobilgeräte, offizielle Aktivierung und MwSt.-Rechnung.',
+          'es': 'Microsoft 365 Business Standard: aplicaciones de escritorio completas de Office '
+                '(Word, Excel, PowerPoint, Outlook), correo Exchange de 50 GB con dominio '
+                'personalizado, Teams para reuniones de hasta 300 asistentes y 1 TB OneDrive. '
+                'Licencia de 1 usuario para 5 PC/Mac + 5 móviles, activación oficial y factura con '
+                'IVA.',
+          'pt': 'Microsoft 365 Business Standard: aplicações Office de computador completas (Word, '
+                'Excel, PowerPoint, Outlook), email empresarial Exchange de 50 GB com domínio '
+                'próprio, Teams até 300 participantes e 1 TB OneDrive. Licença de 1 utilizador '
+                'para 5 PC/Mac + 5 dispositivos móveis, ativação oficial e fatura com IVA.',
+          'nl': 'Microsoft 365 Business Standard: complete desktop Office-apps (Word, Excel, '
+                'PowerPoint, Outlook), 50 GB Exchange zakelijke e-mail met eigen domein, Teams '
+                'voor vergaderingen tot 300 deelnemers en 1 TB OneDrive. Licentie voor 1 gebruiker '
+                "op 5 pc's/Macs + 5 mobiele apparaten, officiële activering en btw-factuur."},
+ 'apps': ['word',
+          'excel',
+          'powerpoint',
+          'outlook',
+          'teams',
+          'onedrive',
+          'onenote',
+          'designer',
+          'clipchamp'],
+ 'pills': {'it': [('teams', 'Teams 300 persone'),
+                  ('onedrive', '1 TB Cloud Business'),
+                  ('outlook', '50 GB Posta Exchange'),
+                  ('word', '5 PC/Mac per Utente')],
+           'en': [('teams', 'Teams 300 attendees'),
+                  ('onedrive', '1 TB Business Cloud'),
+                  ('outlook', '50 GB Exchange Mail'),
+                  ('word', '5 PCs/Macs per User')],
+           'fr': [('teams', 'Teams 300 participants'),
+                  ('onedrive', '1 To Cloud Business'),
+                  ('outlook', '50 Go Messagerie Exchange'),
+                  ('word', '5 PC/Mac par utilisateur')],
+           'de': [('teams', 'Teams 300 Teilnehmer'),
+                  ('onedrive', '1 TB Business-Cloud'),
+                  ('outlook', '50 GB Exchange-Mail'),
+                  ('word', '5 PCs/Macs pro Nutzer')],
+           'es': [('teams', 'Teams 300 asistentes'),
+                  ('onedrive', '1 TB Cloud Business'),
+                  ('outlook', '50 GB Correo Exchange'),
+                  ('word', '5 PC/Mac por usuario')],
+           'pt': [('teams', 'Teams 300 participantes'),
+                  ('onedrive', '1 TB Cloud Business'),
+                  ('outlook', '50 GB Email Exchange'),
+                  ('word', '5 PC/Mac por utilizador')],
+           'nl': [('teams', 'Teams 300 deelnemers'),
+                  ('onedrive', '1 TB Business Cloud'),
+                  ('outlook', '50 GB Exchange Mail'),
+                  ('word', "5 pc's/Macs per gebruiker")]},
+ 'keypoints': {'it': ['<strong>5 PC/Mac + 5 Dispositivi Mobili:</strong> Installa le app Office '
+                      'complete su tutti i tuoi dispositivi aziendali.',
+                      '<strong>Posta Aziendale da 50 GB:</strong> Email professionale su tuo '
+                      'dominio (es. nome@azienda.it) con Exchange Online.',
+                      '<strong>Microsoft Teams & Cloud 1 TB:</strong> Videoconferenze fino a 300 '
+                      'persone, registrazione meeting e 1.000 GB OneDrive.',
+                      '<strong>Fattura Elettronica con P.IVA:</strong> Disponibile per '
+                      'aziende, studi professionali e partite IVA.'],
+               'en': ['<strong>5 PCs/Macs + 5 Mobile Devices:</strong> Install full Office apps '
+                      'across all your business workstations.',
+                      '<strong>50 GB Business Email:</strong> Professional email on your custom '
+                      'domain with Exchange Online and antispam.',
+                      '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD video meetings up to 300 '
+                      'people, recording, and 1,000 GB OneDrive.',
+                      '<strong>VAT Invoice Included:</strong> Official Italian e-invoice '
+                      'provided for businesses and VAT-registered buyers.'],
+               'fr': ['<strong>5 PC/Mac + 5 Appareils Mobiles :</strong> Installez les '
+                      'applications Office complètes sur tous vos postes professionnels.',
+                      '<strong>Messagerie Pro 50 Go :</strong> E-mail professionnel sur votre '
+                      'propre domaine avec Exchange Online.',
+                      "<strong>Microsoft Teams & Cloud 1 To :</strong> Visioconférences jusqu'à "
+                      '300 personnes, enregistrement et 1 000 Go OneDrive.',
+                      '<strong>Facture avec TVA :</strong> Facture électronique italienne '
+                      'officielle, disponible pour les entreprises et professionnels.'],
+               'de': ['<strong>5 PCs/Macs + 5 Mobilgeräte:</strong> Vollständige Office-Apps auf '
+                      'allen geschäftlichen Arbeitsplätzen installieren.',
+                      '<strong>50 GB Geschäfts-E-Mail:</strong> Professionelle E-Mail mit eigener '
+                      'Domain über Exchange Online.',
+                      '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD-Videokonferenzen bis 300 '
+                      'Personen, Aufzeichnung und 1.000 GB OneDrive.',
+                      '<strong>Rechnung mit MwSt.:</strong> Offizielle italienische E-Rechnung '
+                      'für Unternehmen und Selbstständige.'],
+               'es': ['<strong>5 PC/Mac + 5 Dispositivos Móviles:</strong> Instala las '
+                      'aplicaciones completas de Office en todos tus equipos de trabajo.',
+                      '<strong>Correo Profesional de 50 GB:</strong> Email empresarial con tu '
+                      'propio dominio a través de Exchange Online.',
+                      '<strong>Microsoft Teams y 1 TB en la Nube:</strong> Videoconferencias de '
+                      'hasta 300 personas, grabación y 1.000 GB OneDrive.',
+                      '<strong>Factura con IVA:</strong> Factura electrónica italiana oficial, '
+                      'disponible para empresas y autónomos.'],
+               'pt': ['<strong>5 PC/Mac + 5 Dispositivos Móveis:</strong> Instala as aplicações '
+                      'Office completas em todos os teus postos de trabalho.',
+                      '<strong>Email Profissional de 50 GB:</strong> Correio empresarial com o teu '
+                      'próprio domínio através do Exchange Online.',
+                      '<strong>Microsoft Teams e 1 TB Cloud:</strong> Videoconferências até 300 '
+                      'pessoas, gravação e 1.000 GB OneDrive.',
+                      '<strong>Fatura com IVA:</strong> Fatura eletrónica italiana oficial, '
+                      'disponível para empresas e profissionais liberais.'],
+               'nl': ["<strong>5 pc's/Macs + 5 mobiele apparaten:</strong> Installeer complete "
+                      'Office-apps op al uw zakelijke werkplekken.',
+                      '<strong>50 GB zakelijke e-mail:</strong> Professionele e-mail op uw eigen '
+                      'domein via Exchange Online.',
+                      '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD-videovergaderingen tot '
+                      '300 personen, opname en 1.000 GB OneDrive.',
+                      '<strong>Btw-factuur inbegrepen:</strong> Officiële Italiaanse e-factuur, '
+                      'beschikbaar voor bedrijven en zelfstandigen.']},
+ 'app_demo_rich': {'word': {'type': 'richtext',
+                            'filename': {'it': 'Contratto_Fornitura_Servizi_2026.docx',
+                                         'en': 'Service_Supply_Agreement_2026.docx',
+                                         'fr': 'Contrat_Prestation_Services_2026.docx',
+                                         'de': 'Dienstleistungsvertrag_2026.docx',
+                                         'es': 'Contrato_Prestacion_Servicios_2026.docx',
+                                         'pt': 'Contrato_Prestacao_Servicos_2026.docx',
+                                         'nl': 'Dienstverleningsovereenkomst_2026.docx'},
+                            'tag': {'it': 'Revisione e Collaborazione',
+                                    'en': 'Review & Collaboration',
+                                    'fr': 'Révision et Collaboration',
+                                    'de': 'Prüfung & Zusammenarbeit',
+                                    'es': 'Revisión y Colaboración',
+                                    'pt': 'Revisão e Colaboração',
+                                    'nl': 'Revisie & Samenwerking'},
+                            'quote': {'it': 'Redigi contratti, preventivi, relazioni commerciali e '
+                                            'documentazione societaria con modelli professionali, '
+                                            'cronologia revisioni in tempo reale e correzione '
+                                            'ortografica avanzata.',
+                                      'en': 'Draft contracts, proposals, business reports and '
+                                            'corporate documentation with professional templates, '
+                                            'real-time revision history and advanced proofreading.',
+                                      'fr': 'Rédigez des contrats, devis, rapports commerciaux et '
+                                            "documents d'entreprise avec des modèles "
+                                            'professionnels, historique des versions et relecture '
+                                            'avancée.',
+                                      'de': 'Erstellen Sie Verträge, Angebote, Geschäftsberichte '
+                                            'und Unternehmensunterlagen mit professionellen '
+                                            'Vorlagen, Versionsverlauf in Echtzeit und erweiterter '
+                                            'Rechtschreibprüfung.',
+                                      'es': 'Redacta contratos, presupuestos, informes comerciales '
+                                            'y documentos corporativos con plantillas '
+                                            'profesionales, historial de versiones en tiempo real '
+                                            'y corrección avanzada.',
+                                      'pt': 'Elabora contratos, orçamentos, relatórios comerciais '
+                                            'e documentos empresariais com modelos profissionais, '
+                                            'histórico de versões em tempo real e correção '
+                                            'avançada.',
+                                      'nl': 'Stel contracten, offertes, bedrijfsrapporten en '
+                                            'bedrijfsdocumentatie op met professionele sjablonen, '
+                                            'realtime revisiegeschiedenis en geavanceerde '
+                                            'spellingcontrole.'},
+                            'callout_label': {'it': 'Assistenza alla scrittura:',
+                                              'en': 'Writing Assistant:',
+                                              'fr': 'Aide à la rédaction :',
+                                              'de': 'Schreibassistent:',
+                                              'es': 'Asistente de escritura:',
+                                              'pt': 'Assistente de escrita:',
+                                              'nl': 'Schrijfassistent:'},
+                            'callout_text': {'it': 'Tutti i commenti dei colleghi sono '
+                                                   'sincronizzati e il documento rispetta gli '
+                                                   'standard aziendali.',
+                                             'en': 'All colleague comments are synchronized and '
+                                                   'the document meets corporate standards.',
+                                             'fr': 'Tous les commentaires des collègues sont '
+                                                   'synchronisés et le document respecte les '
+                                                   "normes de l'entreprise.",
+                                             'de': 'Alle Kommentare der Kollegen sind '
+                                                   'synchronisiert und das Dokument entspricht den '
+                                                   'Unternehmensstandards.',
+                                             'es': 'Todos los comentarios de los compañeros están '
+                                                   'sincronizados y el documento cumple con los '
+                                                   'estándares corporativos.',
+                                             'pt': 'Todos os comentários dos colegas estão '
+                                                   'sincronizados e o documento cumpre as normas '
+                                                   'da empresa.',
+                                             'nl': "Alle opmerkingen van collega's zijn "
+                                                   'gesynchroniseerd en het document voldoet aan '
+                                                   'de bedrijfsnormen.'}},
+                   'excel': {'type': 'stats',
+                             'filename': {'it': 'Budget_e_Previsione_Q3_Q4.xlsx',
+                                          'en': 'Budget_and_Forecast_Q3_Q4.xlsx',
+                                          'fr': 'Budget_et_Previsions_T3_T4.xlsx',
+                                          'de': 'Budget_und_Prognose_Q3_Q4.xlsx',
+                                          'es': 'Presupuesto_y_Prevision_Q3_Q4.xlsx',
+                                          'pt': 'Orcamento_e_Previsao_Q3_Q4.xlsx',
+                                          'nl': 'Begroting_en_Prognose_K3_K4.xlsx'},
+                             'tag': {'it': 'Analisi Finanziaria',
+                                     'en': 'Financial Analysis',
+                                     'fr': 'Analyse Financière',
+                                     'de': 'Finanzanalyse',
+                                     'es': 'Análisis Financiero',
+                                     'pt': 'Análise Financeira',
+                                     'nl': 'Financiële Analyse'},
+                             'stats': {'it': [('Fatturato Previsto', '€ 128.500', False),
+                                              ('Costi Operativi', '€ 43.200', False),
+                                              ('Margine Operativo', '+66,4%', True)],
+                                       'en': [('Expected Revenue', '€ 128,500', False),
+                                              ('Operating Costs', '€ 43,200', False),
+                                              ('Operating Margin', '+66.4%', True)],
+                                       'fr': [("Chiffre d'affaires prévu", '128 500 €', False),
+                                              ("Coûts d'exploitation", '43 200 €', False),
+                                              ("Marge d'exploitation", '+66,4 %', True)],
+                                       'de': [('Erwarteter Umsatz', '128.500 €', False),
+                                              ('Betriebskosten', '43.200 €', False),
+                                              ('Betriebsmarge', '+66,4 %', True)],
+                                       'es': [('Facturación Prevista', '128.500 €', False),
+                                              ('Costes Operativos', '43.200 €', False),
+                                              ('Margen Operativo', '+66,4 %', True)],
+                                       'pt': [('Faturação Prevista', '128.500 €', False),
+                                              ('Custos Operacionais', '43.200 €', False),
+                                              ('Margem Operacional', '+66,4 %', True)],
+                                       'nl': [('Verwachte Omzet', '€ 128.500', False),
+                                              ('Operationele Kosten', '€ 43.200', False),
+                                              ('Operationele Marge', '+66,4%', True)]}},
+                   'powerpoint': {'type': 'slide',
+                                  'filename': {'it': 'Presentazione_Commerciale_Clienti.pptx',
+                                               'en': 'Client_Sales_Pitch_2026.pptx',
+                                               'fr': 'Presentation_Commerciale_Clients.pptx',
+                                               'de': 'Kundenpraesentation_2026.pptx',
+                                               'es': 'Presentacion_Comercial_Clientes.pptx',
+                                               'pt': 'Apresentacao_Comercial_Clientes.pptx',
+                                               'nl': 'Klantpresentatie_2026.pptx'},
+                                  'tag': {'it': 'Designer Intelligente',
+                                          'en': 'Smart Designer',
+                                          'fr': 'Concepteur Intelligent',
+                                          'de': 'Intelligenter Designer',
+                                          'es': 'Diseñador Inteligente',
+                                          'pt': 'Designer Inteligente',
+                                          'nl': 'Slimme Designer'},
+                                  'slide_num': {'it': 'Slide 01',
+                                                'en': 'Slide 01',
+                                                'fr': 'Slide 01',
+                                                'de': 'Folie 01',
+                                                'es': 'Diapositiva 01',
+                                                'pt': 'Slide 01',
+                                                'nl': 'Dia 01'},
+                                  'slide_title': {'it': 'Proposta Strategica e Offerta 2026',
+                                                  'en': 'Strategic Proposal & 2026 Offer',
+                                                  'fr': 'Proposition Stratégique & Offre 2026',
+                                                  'de': 'Strategischer Vorschlag & Angebot 2026',
+                                                  'es': 'Propuesta Estratégica y Oferta 2026',
+                                                  'pt': 'Proposta Estratégica e Oferta 2026',
+                                                  'nl': 'Strategisch Voorstel & Aanbod 2026'},
+                                  'slide_desc': {'it': 'Layout grafici moderni, transizioni fluide '
+                                                       'e supporto per presentazioni remote su '
+                                                       'Microsoft Teams.',
+                                                 'en': 'Modern layouts, smooth transitions and '
+                                                       'support for remote presentations on '
+                                                       'Microsoft Teams.',
+                                                 'fr': 'Mises en page modernes, transitions '
+                                                       'fluides et prise en charge des '
+                                                       'présentations à distance sur Teams.',
+                                                 'de': 'Moderne Layouts, flüssige Übergänge und '
+                                                       'Unterstützung für Remote-Präsentationen in '
+                                                       'Microsoft Teams.',
+                                                 'es': 'Diseños modernos, transiciones fluidas y '
+                                                       'soporte para presentaciones remotas en '
+                                                       'Microsoft Teams.',
+                                                 'pt': 'Layouts modernos, transições fluidas e '
+                                                       'suporte para apresentações remotas no '
+                                                       'Microsoft Teams.',
+                                                 'nl': 'Moderne lay-outs, soepele overgangen en '
+                                                       'ondersteuning voor presentaties op afstand '
+                                                       'in Microsoft Teams.'}},
+                   'outlook': {'text': {'it': 'Gestisci la posta aziendale da 50 GB con il tuo '
+                                              'dominio personalizzato, sincronizza i calendari del '
+                                              'team, prenota sale riunioni e organizza i contatti '
+                                              'con filtri antispam di livello enterprise.',
+                                        'en': 'Manage 50 GB business email on your custom domain, '
+                                              'sync team calendars, book meeting rooms and '
+                                              'organize contacts with enterprise-grade antispam '
+                                              'filters.',
+                                        'fr': 'Gérez la messagerie pro de 50 Go avec votre nom de '
+                                              'domaine personnalisé, synchronisez les calendriers '
+                                              "d'équipe et réservez des salles avec des filtres "
+                                              'antispam de pointe.',
+                                        'de': 'Verwalten Sie 50 GB Geschäfts-E-Mails mit Ihrer '
+                                              'eigenen Domain, synchronisieren Sie Teamkalender '
+                                              'und organisieren Sie Kontakte mit '
+                                              'Enterprise-Spamschutz.',
+                                        'es': 'Gestiona el correo profesional de 50 GB con tu '
+                                              'dominio personalizado, sincroniza los calendarios '
+                                              'del equipo y organiza los contactos con filtros '
+                                              'antispam avanzados.',
+                                        'pt': 'Gere o email empresarial de 50 GB com o teu domínio '
+                                              'personalizado, sincroniza os calendários da equipa '
+                                              'e organiza contactos com filtros antispam de nível '
+                                              'empresarial.',
+                                        'nl': 'Beheer 50 GB zakelijke e-mail op uw eigen domein, '
+                                              "synchroniseer teamagenda's en organiseer contacten "
+                                              'met hoogwaardige antispamfilters.'}},
+                   'teams': {'text': {'it': 'Riunioni video in alta definizione fino a 300 '
+                                            'partecipanti, registrazione meeting, trascrizione '
+                                            'automatica, chat di gruppo, canali tematici per '
+                                            'progetti e lavagna condivisa Microsoft Whiteboard.',
+                                      'en': 'HD video meetings up to 300 attendees, meeting '
+                                            'recording, automated transcription, group chat, '
+                                            'project channels and interactive Microsoft '
+                                            'Whiteboard.',
+                                      'fr': "Réunions vidéo HD jusqu'à 300 participants, "
+                                            'enregistrement, transcription automatique, '
+                                            'conversation de groupe, canaux de projets et tableau '
+                                            'blanc Microsoft Whiteboard.',
+                                      'de': 'HD-Videokonferenzen bis 300 Teilnehmer, '
+                                            'Meeting-Aufzeichnung, automatische Transkription, '
+                                            'Gruppenchats, Projektkanäle und interaktives '
+                                            'Microsoft Whiteboard.',
+                                      'es': 'Reuniones de vídeo en HD de hasta 300 asistentes, '
+                                            'grabación, transcripción automática, chat grupal, '
+                                            'canales de proyectos y pizarra digital Microsoft '
+                                            'Whiteboard.',
+                                      'pt': 'Reuniões de vídeo HD até 300 participantes, gravação, '
+                                            'transcrição automática, chat de grupo, canais de '
+                                            'projetos e quadro interativo Microsoft Whiteboard.',
+                                      'nl': 'HD-videovergaderingen tot 300 deelnemers, opname, '
+                                            'automatische transcriptie, groepschat, projectkanalen '
+                                            'en interactief Microsoft Whiteboard.'}},
+                   'onedrive': {'type': 'cloud',
+                                'filename': {'it': 'Archivio Cloud Aziendale Protetto',
+                                             'en': 'Secure Business Cloud Storage',
+                                             'fr': 'Stockage Cloud Entreprise Sécurisé',
+                                             'de': 'Sicherer Unternehmens-Cloudspeicher',
+                                             'es': 'Almacenamiento Cloud Empresarial',
+                                             'pt': 'Armazenamento Cloud Empresarial',
+                                             'nl': 'Beveiligde Zakelijke Cloudopslag'},
+                                'tag': {'it': '1 TB (1.000 GB) per Utente',
+                                        'en': '1 TB (1,000 GB) per User',
+                                        'fr': '1 To (1 000 Go) par utilisateur',
+                                        'de': '1 TB (1.000 GB) pro Nutzer',
+                                        'es': '1 TB (1.000 GB) por usuario',
+                                        'pt': '1 TB (1.000 GB) por utilizador',
+                                        'nl': '1 TB (1.000 GB) per gebruiker'},
+                                'used_label': {'it': 'Documenti e Progetti: 240 GB usati',
+                                               'en': 'Docs and Projects: 240 GB used',
+                                               'fr': 'Documents et Projets : 240 Go utilisés',
+                                               'de': 'Dokumente und Projekte: 240 GB belegt',
+                                               'es': 'Documentos y Proyectos: 240 GB usados',
+                                               'pt': 'Documentos e Projetos: 240 GB usados',
+                                               'nl': 'Documenten en Projecten: 240 GB gebruikt'},
+                                'free_label': {'it': '760 GB liberi',
+                                               'en': '760 GB free',
+                                               'fr': '760 Go libres',
+                                               'de': '760 GB frei',
+                                               'es': '760 GB libres',
+                                               'pt': '760 GB livres',
+                                               'nl': '760 GB vrij'},
+                                'percent': 24}},
+ 'overview': {'it': {'eyebrow': 'La suite completa per la produttività aziendale',
+                     'title': 'Tutto ciò che serve alla tua azienda per collaborare, comunicare e '
+                              'crescere',
+                     'paragraphs': ['Microsoft 365 Business Standard è la soluzione all-in-one di '
+                                    'produttività e collaborazione cloud progettata specificamente '
+                                    'per piccole e medie imprese, studi professionali, consulenti '
+                                    'e team aziendali in espansione. Riunisce in un unico '
+                                    'abbonamento annuale le versioni desktop complete delle '
+                                    'applicazioni Office più diffuse (Word, Excel, PowerPoint, '
+                                    'Outlook, OneNote, oltre ad Access e Publisher per PC) e una '
+                                    'robusta infrastruttura di servizi cloud di livello enterprise '
+                                    'per la gestione della posta, delle videoconferenze e dei file '
+                                    'aziendali.',
+                                    'Con la posta elettronica aziendale basata su Exchange Online, '
+                                    'ogni utente dispone di una casella postale dedicata da 50 GB '
+                                    'con il proprio dominio personalizzato (es. nome@azienda.it), '
+                                    'integrata con calendari condivisi, pianificazione degli '
+                                    'appuntamenti con i clienti tramite Microsoft Bookings e '
+                                    'protezione avanzata contro spam, phishing e malware (Exchange '
+                                    'Online Protection).',
+                                    'Microsoft Teams trasforma la collaborazione aziendale: '
+                                    'organizza riunioni e webinar fino a 300 partecipanti in alta '
+                                    'definizione, con condivisione dello schermo, registrazione su '
+                                    'cloud, breakout room e canali di discussione dedicati per '
+                                    'ogni progetto. Grazie a 1 TB (1.000 GB) di spazio cloud '
+                                    'sicuro su OneDrive for Business e SharePoint, i dati '
+                                    'aziendali sono sempre sincronizzati in tempo reale, protetti '
+                                    'da crittografia avanzata e cronologia delle versioni con '
+                                    'ripristino istantaneo da attacchi ransomware.',
+                                    "Ogni singola licenza consente all'utente di installare le "
+                                    'applicazioni Office su un massimo di 5 PC o Mac, 5 tablet e 5 '
+                                    'smartphone contemporaneamente. La gestione degli account, '
+                                    'delle licenze e dei criteri di sicurezza aziendali avviene '
+                                    'tramite il Microsoft 365 Admin Center, con autenticazione a '
+                                    'due fattori (MFA) e conformità agli standard europei di '
+                                    'protezione dei dati (GDPR).',
+                                    'Acquistando su AML Store ricevi la licenza digitale originale '
+                                    '(Product Key ESD) via email entro 2–15 minuti, pronta per '
+                                    "l'attivazione sul portale ufficiale Microsoft, con fattura "
+                                    'elettronica italiana con IVA esposta e supporto tecnico umano '
+                                    'dedicato in italiano via email e WhatsApp.']},
+              'en': {'eyebrow': 'The complete business productivity suite',
+                     'title': 'Everything your business needs to collaborate, communicate and '
+                              'scale',
+                     'paragraphs': ['Microsoft 365 Business Standard is the all-in-one cloud '
+                                    'productivity and collaboration solution designed specifically '
+                                    'for small and medium-sized businesses, professional studios, '
+                                    'consultants, and growing teams. It combines the complete '
+                                    'desktop versions of Office applications (Word, Excel, '
+                                    'PowerPoint, Outlook, OneNote, plus Access and Publisher on '
+                                    'PC) with enterprise-grade cloud services for email, '
+                                    'videoconferencing, and secure file sharing.',
+                                    'With business-class email powered by Exchange Online, every '
+                                    'user gets a dedicated 50 GB mailbox with their own custom '
+                                    'domain name (e.g. name@company.com), integrated with shared '
+                                    'team calendars, Microsoft Bookings appointment scheduling, '
+                                    'and advanced protection against spam and phishing threats.',
+                                    'Microsoft Teams elevates communication with HD '
+                                    'videoconferencing for up to 300 participants, cloud meeting '
+                                    'recording, automated transcription, breakout rooms, and '
+                                    'project-specific channels. Backed by 1 TB (1,000 GB) of '
+                                    'secure cloud storage on OneDrive for Business and SharePoint, '
+                                    'company files are synchronized in real time with version '
+                                    'history and ransomware recovery.',
+                                    'Each licence allows one user to install Office applications '
+                                    'on up to 5 PCs or Macs, 5 tablets, and 5 smartphones '
+                                    'simultaneously. Centralized user administration and security '
+                                    'policies are managed via the Microsoft 365 Admin Center with '
+                                    'multi-factor authentication (MFA) and GDPR compliance.',
+                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'licence (ESD Key) delivered by email within 2-15 minutes, '
+                                    'official activation on Microsoft portals, an official VAT '
+                                    'invoice, and dedicated technical support in Italian and '
+                                    'English.']},
+              'fr': {'eyebrow': 'The complete business productivity suite',
+                     'title': 'Everything your business needs to collaborate, communicate and '
+                              'scale',
+                     'paragraphs': ['Microsoft 365 Business Standard is the all-in-one cloud '
+                                    'productivity and collaboration solution designed specifically '
+                                    'for small and medium-sized businesses, professional studios, '
+                                    'consultants, and growing teams. It combines the complete '
+                                    'desktop versions of Office applications (Word, Excel, '
+                                    'PowerPoint, Outlook, OneNote, plus Access and Publisher on '
+                                    'PC) with enterprise-grade cloud services for email, '
+                                    'videoconferencing, and secure file sharing.',
+                                    'With business-class email powered by Exchange Online, every '
+                                    'user gets a dedicated 50 GB mailbox with their own custom '
+                                    'domain name (e.g. name@company.com), integrated with shared '
+                                    'team calendars, Microsoft Bookings appointment scheduling, '
+                                    'and advanced protection against spam and phishing threats.',
+                                    'Microsoft Teams elevates communication with HD '
+                                    'videoconferencing for up to 300 participants, cloud meeting '
+                                    'recording, automated transcription, breakout rooms, and '
+                                    'project-specific channels. Backed by 1 TB (1,000 GB) of '
+                                    'secure cloud storage on OneDrive for Business and SharePoint, '
+                                    'company files are synchronized in real time with version '
+                                    'history and ransomware recovery.',
+                                    'Each licence allows one user to install Office applications '
+                                    'on up to 5 PCs or Macs, 5 tablets, and 5 smartphones '
+                                    'simultaneously. Centralized user administration and security '
+                                    'policies are managed via the Microsoft 365 Admin Center with '
+                                    'multi-factor authentication (MFA) and GDPR compliance.',
+                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'licence (ESD Key) delivered by email within 2-15 minutes, '
+                                    'official activation on Microsoft portals, an official VAT '
+                                    'invoice, and dedicated technical support in Italian and '
+                                    'English.']},
+              'de': {'eyebrow': 'The complete business productivity suite',
+                     'title': 'Everything your business needs to collaborate, communicate and '
+                              'scale',
+                     'paragraphs': ['Microsoft 365 Business Standard is the all-in-one cloud '
+                                    'productivity and collaboration solution designed specifically '
+                                    'for small and medium-sized businesses, professional studios, '
+                                    'consultants, and growing teams. It combines the complete '
+                                    'desktop versions of Office applications (Word, Excel, '
+                                    'PowerPoint, Outlook, OneNote, plus Access and Publisher on '
+                                    'PC) with enterprise-grade cloud services for email, '
+                                    'videoconferencing, and secure file sharing.',
+                                    'With business-class email powered by Exchange Online, every '
+                                    'user gets a dedicated 50 GB mailbox with their own custom '
+                                    'domain name (e.g. name@company.com), integrated with shared '
+                                    'team calendars, Microsoft Bookings appointment scheduling, '
+                                    'and advanced protection against spam and phishing threats.',
+                                    'Microsoft Teams elevates communication with HD '
+                                    'videoconferencing for up to 300 participants, cloud meeting '
+                                    'recording, automated transcription, breakout rooms, and '
+                                    'project-specific channels. Backed by 1 TB (1,000 GB) of '
+                                    'secure cloud storage on OneDrive for Business and SharePoint, '
+                                    'company files are synchronized in real time with version '
+                                    'history and ransomware recovery.',
+                                    'Each licence allows one user to install Office applications '
+                                    'on up to 5 PCs or Macs, 5 tablets, and 5 smartphones '
+                                    'simultaneously. Centralized user administration and security '
+                                    'policies are managed via the Microsoft 365 Admin Center with '
+                                    'multi-factor authentication (MFA) and GDPR compliance.',
+                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'licence (ESD Key) delivered by email within 2-15 minutes, '
+                                    'official activation on Microsoft portals, an official VAT '
+                                    'invoice, and dedicated technical support in Italian and '
+                                    'English.']},
+              'es': {'eyebrow': 'The complete business productivity suite',
+                     'title': 'Everything your business needs to collaborate, communicate and '
+                              'scale',
+                     'paragraphs': ['Microsoft 365 Business Standard is the all-in-one cloud '
+                                    'productivity and collaboration solution designed specifically '
+                                    'for small and medium-sized businesses, professional studios, '
+                                    'consultants, and growing teams. It combines the complete '
+                                    'desktop versions of Office applications (Word, Excel, '
+                                    'PowerPoint, Outlook, OneNote, plus Access and Publisher on '
+                                    'PC) with enterprise-grade cloud services for email, '
+                                    'videoconferencing, and secure file sharing.',
+                                    'With business-class email powered by Exchange Online, every '
+                                    'user gets a dedicated 50 GB mailbox with their own custom '
+                                    'domain name (e.g. name@company.com), integrated with shared '
+                                    'team calendars, Microsoft Bookings appointment scheduling, '
+                                    'and advanced protection against spam and phishing threats.',
+                                    'Microsoft Teams elevates communication with HD '
+                                    'videoconferencing for up to 300 participants, cloud meeting '
+                                    'recording, automated transcription, breakout rooms, and '
+                                    'project-specific channels. Backed by 1 TB (1,000 GB) of '
+                                    'secure cloud storage on OneDrive for Business and SharePoint, '
+                                    'company files are synchronized in real time with version '
+                                    'history and ransomware recovery.',
+                                    'Each licence allows one user to install Office applications '
+                                    'on up to 5 PCs or Macs, 5 tablets, and 5 smartphones '
+                                    'simultaneously. Centralized user administration and security '
+                                    'policies are managed via the Microsoft 365 Admin Center with '
+                                    'multi-factor authentication (MFA) and GDPR compliance.',
+                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'licence (ESD Key) delivered by email within 2-15 minutes, '
+                                    'official activation on Microsoft portals, an official VAT '
+                                    'invoice, and dedicated technical support in Italian and '
+                                    'English.']},
+              'pt': {'eyebrow': 'The complete business productivity suite',
+                     'title': 'Everything your business needs to collaborate, communicate and '
+                              'scale',
+                     'paragraphs': ['Microsoft 365 Business Standard is the all-in-one cloud '
+                                    'productivity and collaboration solution designed specifically '
+                                    'for small and medium-sized businesses, professional studios, '
+                                    'consultants, and growing teams. It combines the complete '
+                                    'desktop versions of Office applications (Word, Excel, '
+                                    'PowerPoint, Outlook, OneNote, plus Access and Publisher on '
+                                    'PC) with enterprise-grade cloud services for email, '
+                                    'videoconferencing, and secure file sharing.',
+                                    'With business-class email powered by Exchange Online, every '
+                                    'user gets a dedicated 50 GB mailbox with their own custom '
+                                    'domain name (e.g. name@company.com), integrated with shared '
+                                    'team calendars, Microsoft Bookings appointment scheduling, '
+                                    'and advanced protection against spam and phishing threats.',
+                                    'Microsoft Teams elevates communication with HD '
+                                    'videoconferencing for up to 300 participants, cloud meeting '
+                                    'recording, automated transcription, breakout rooms, and '
+                                    'project-specific channels. Backed by 1 TB (1,000 GB) of '
+                                    'secure cloud storage on OneDrive for Business and SharePoint, '
+                                    'company files are synchronized in real time with version '
+                                    'history and ransomware recovery.',
+                                    'Each licence allows one user to install Office applications '
+                                    'on up to 5 PCs or Macs, 5 tablets, and 5 smartphones '
+                                    'simultaneously. Centralized user administration and security '
+                                    'policies are managed via the Microsoft 365 Admin Center with '
+                                    'multi-factor authentication (MFA) and GDPR compliance.',
+                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'licence (ESD Key) delivered by email within 2-15 minutes, '
+                                    'official activation on Microsoft portals, an official VAT '
+                                    'invoice, and dedicated technical support in Italian and '
+                                    'English.']},
+              'nl': {'eyebrow': 'The complete business productivity suite',
+                     'title': 'Everything your business needs to collaborate, communicate and '
+                              'scale',
+                     'paragraphs': ['Microsoft 365 Business Standard is the all-in-one cloud '
+                                    'productivity and collaboration solution designed specifically '
+                                    'for small and medium-sized businesses, professional studios, '
+                                    'consultants, and growing teams. It combines the complete '
+                                    'desktop versions of Office applications (Word, Excel, '
+                                    'PowerPoint, Outlook, OneNote, plus Access and Publisher on '
+                                    'PC) with enterprise-grade cloud services for email, '
+                                    'videoconferencing, and secure file sharing.',
+                                    'With business-class email powered by Exchange Online, every '
+                                    'user gets a dedicated 50 GB mailbox with their own custom '
+                                    'domain name (e.g. name@company.com), integrated with shared '
+                                    'team calendars, Microsoft Bookings appointment scheduling, '
+                                    'and advanced protection against spam and phishing threats.',
+                                    'Microsoft Teams elevates communication with HD '
+                                    'videoconferencing for up to 300 participants, cloud meeting '
+                                    'recording, automated transcription, breakout rooms, and '
+                                    'project-specific channels. Backed by 1 TB (1,000 GB) of '
+                                    'secure cloud storage on OneDrive for Business and SharePoint, '
+                                    'company files are synchronized in real time with version '
+                                    'history and ransomware recovery.',
+                                    'Each licence allows one user to install Office applications '
+                                    'on up to 5 PCs or Macs, 5 tablets, and 5 smartphones '
+                                    'simultaneously. Centralized user administration and security '
+                                    'policies are managed via the Microsoft 365 Admin Center with '
+                                    'multi-factor authentication (MFA) and GDPR compliance.',
+                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'licence (ESD Key) delivered by email within 2-15 minutes, '
+                                    'official activation on Microsoft portals, an official VAT '
+                                    'invoice, and dedicated technical support in Italian and '
+                                    'English.']}},
+ 'features_title': {'it': 'Perché scegliere Microsoft 365 Business Standard',
+                    'en': 'Why choose Microsoft 365 Business Standard',
+                    'fr': 'Pourquoi choisir Microsoft 365 Business Standard',
+                    'de': 'Warum Microsoft 365 Business Standard wählen',
+                    'es': 'Por qué elegir Microsoft 365 Business Standard',
+                    'pt': 'Por que escolher o Microsoft 365 Business Standard',
+                    'nl': 'Waarom kiezen voor Microsoft 365 Business Standard'},
+ 'features': {'it': [('c8',
+                      'blue',
+                      'App Desktop',
+                      'Suite Office Desktop Completa',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, oltre ad Access e Publisher '
+                      '(solo PC), sempre aggiornati alle ultime novità e utilizzabili sia online '
+                      'che offline.'),
+                     ('c4',
+                      'teal',
+                      'Posta',
+                      'Exchange 50 GB & Dominio Aziendale',
+                      'Casella email professionale da 50 GB con il tuo dominio personalizzato '
+                      '(nome@azienda.it), calendari sincronizzati e filtri anti-phishing di '
+                      'livello enterprise.'),
+                     ('c4',
+                      'purple',
+                      'Riunioni',
+                      'Microsoft Teams fino a 300 Partecipanti',
+                      'Videoconferenze HD, webinar, registrazione meeting, chat interna di gruppo '
+                      'e canali tematici per la massima collaborazione tra colleghi e clienti.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1.000 GB di archiviazione protetta nel cloud per utente, condivisione '
+                      'controllata, cronologia versioni e protezione avanzata contro attacchi '
+                      'ransomware.'),
+                     ('c4',
+                      '',
+                      'Sicurezza',
+                      'Gestione Centralizzata e Conformità GDPR',
+                      'Pannello Microsoft 365 Admin Center per gestire utenti e autorizzazioni, '
+                      'autenticazione a due fattori (MFA) e dati ospitati in data center europei '
+                      'conformi al GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licenza',
+                      '5 Dispositivi per Utente e Fattura P.IVA',
+                      'Ogni utente può usare le app su 5 PC/Mac, 5 tablet e 5 smartphone '
+                      'contemporaneamente. Consegna email in 2–15 minuti e fattura elettronica '
+                      'con P.IVA.')],
+              'en': [('c8',
+                      'blue',
+                      'Desktop Apps',
+                      'Full Desktop Office Suite',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, plus Access and Publisher (PC '
+                      'only), always up to date and usable both online and offline.'),
+                     ('c4',
+                      'teal',
+                      'Email',
+                      '50 GB Exchange & Custom Domain',
+                      'Professional 50 GB mailbox with your company domain (name@company.com), '
+                      'synchronized calendars, and enterprise-grade anti-phishing protection.'),
+                     ('c4',
+                      'purple',
+                      'Meetings',
+                      'Microsoft Teams up to 300 People',
+                      'HD video calls, webinars, meeting recording, team group chats, and project '
+                      'channels for seamless internal and external collaboration.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1,000 GB of secure cloud storage per user, granular sharing permissions, '
+                      'version history, and advanced ransomware protection.'),
+                     ('c4',
+                      '',
+                      'Security',
+                      'Centralized Admin & GDPR Compliance',
+                      'Microsoft 365 Admin Center for user management, multi-factor authentication '
+                      '(MFA), and EU data center hosting compliant with GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licence',
+                      '5 Devices per User & VAT Invoice',
+                      'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
+                      'at once. Fast email delivery with an official VAT invoice.')],
+              'fr': [('c8',
+                      'blue',
+                      'Desktop Apps',
+                      'Full Desktop Office Suite',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, plus Access and Publisher (PC '
+                      'only), always up to date and usable both online and offline.'),
+                     ('c4',
+                      'teal',
+                      'Email',
+                      '50 GB Exchange & Custom Domain',
+                      'Professional 50 GB mailbox with your company domain (name@company.com), '
+                      'synchronized calendars, and enterprise-grade anti-phishing protection.'),
+                     ('c4',
+                      'purple',
+                      'Meetings',
+                      'Microsoft Teams up to 300 People',
+                      'HD video calls, webinars, meeting recording, team group chats, and project '
+                      'channels for seamless internal and external collaboration.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1,000 GB of secure cloud storage per user, granular sharing permissions, '
+                      'version history, and advanced ransomware protection.'),
+                     ('c4',
+                      '',
+                      'Security',
+                      'Centralized Admin & GDPR Compliance',
+                      'Microsoft 365 Admin Center for user management, multi-factor authentication '
+                      '(MFA), and EU data center hosting compliant with GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licence',
+                      '5 Devices per User & VAT Invoice',
+                      'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
+                      'at once. Fast email delivery with an official VAT invoice.')],
+              'de': [('c8',
+                      'blue',
+                      'Desktop Apps',
+                      'Full Desktop Office Suite',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, plus Access and Publisher (PC '
+                      'only), always up to date and usable both online and offline.'),
+                     ('c4',
+                      'teal',
+                      'Email',
+                      '50 GB Exchange & Custom Domain',
+                      'Professional 50 GB mailbox with your company domain (name@company.com), '
+                      'synchronized calendars, and enterprise-grade anti-phishing protection.'),
+                     ('c4',
+                      'purple',
+                      'Meetings',
+                      'Microsoft Teams up to 300 People',
+                      'HD video calls, webinars, meeting recording, team group chats, and project '
+                      'channels for seamless internal and external collaboration.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1,000 GB of secure cloud storage per user, granular sharing permissions, '
+                      'version history, and advanced ransomware protection.'),
+                     ('c4',
+                      '',
+                      'Security',
+                      'Centralized Admin & GDPR Compliance',
+                      'Microsoft 365 Admin Center for user management, multi-factor authentication '
+                      '(MFA), and EU data center hosting compliant with GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licence',
+                      '5 Devices per User & VAT Invoice',
+                      'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
+                      'at once. Fast email delivery with an official VAT invoice.')],
+              'es': [('c8',
+                      'blue',
+                      'Desktop Apps',
+                      'Full Desktop Office Suite',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, plus Access and Publisher (PC '
+                      'only), always up to date and usable both online and offline.'),
+                     ('c4',
+                      'teal',
+                      'Email',
+                      '50 GB Exchange & Custom Domain',
+                      'Professional 50 GB mailbox with your company domain (name@company.com), '
+                      'synchronized calendars, and enterprise-grade anti-phishing protection.'),
+                     ('c4',
+                      'purple',
+                      'Meetings',
+                      'Microsoft Teams up to 300 People',
+                      'HD video calls, webinars, meeting recording, team group chats, and project '
+                      'channels for seamless internal and external collaboration.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1,000 GB of secure cloud storage per user, granular sharing permissions, '
+                      'version history, and advanced ransomware protection.'),
+                     ('c4',
+                      '',
+                      'Security',
+                      'Centralized Admin & GDPR Compliance',
+                      'Microsoft 365 Admin Center for user management, multi-factor authentication '
+                      '(MFA), and EU data center hosting compliant with GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licence',
+                      '5 Devices per User & VAT Invoice',
+                      'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
+                      'at once. Fast email delivery with an official VAT invoice.')],
+              'pt': [('c8',
+                      'blue',
+                      'Desktop Apps',
+                      'Full Desktop Office Suite',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, plus Access and Publisher (PC '
+                      'only), always up to date and usable both online and offline.'),
+                     ('c4',
+                      'teal',
+                      'Email',
+                      '50 GB Exchange & Custom Domain',
+                      'Professional 50 GB mailbox with your company domain (name@company.com), '
+                      'synchronized calendars, and enterprise-grade anti-phishing protection.'),
+                     ('c4',
+                      'purple',
+                      'Meetings',
+                      'Microsoft Teams up to 300 People',
+                      'HD video calls, webinars, meeting recording, team group chats, and project '
+                      'channels for seamless internal and external collaboration.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1,000 GB of secure cloud storage per user, granular sharing permissions, '
+                      'version history, and advanced ransomware protection.'),
+                     ('c4',
+                      '',
+                      'Security',
+                      'Centralized Admin & GDPR Compliance',
+                      'Microsoft 365 Admin Center for user management, multi-factor authentication '
+                      '(MFA), and EU data center hosting compliant with GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licence',
+                      '5 Devices per User & VAT Invoice',
+                      'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
+                      'at once. Fast email delivery with an official VAT invoice.')],
+              'nl': [('c8',
+                      'blue',
+                      'Desktop Apps',
+                      'Full Desktop Office Suite',
+                      'Word, Excel, PowerPoint, Outlook, OneNote, plus Access and Publisher (PC '
+                      'only), always up to date and usable both online and offline.'),
+                     ('c4',
+                      'teal',
+                      'Email',
+                      '50 GB Exchange & Custom Domain',
+                      'Professional 50 GB mailbox with your company domain (name@company.com), '
+                      'synchronized calendars, and enterprise-grade anti-phishing protection.'),
+                     ('c4',
+                      'purple',
+                      'Meetings',
+                      'Microsoft Teams up to 300 People',
+                      'HD video calls, webinars, meeting recording, team group chats, and project '
+                      'channels for seamless internal and external collaboration.'),
+                     ('c4',
+                      '',
+                      'Cloud',
+                      '1 TB OneDrive for Business & SharePoint',
+                      '1,000 GB of secure cloud storage per user, granular sharing permissions, '
+                      'version history, and advanced ransomware protection.'),
+                     ('c4',
+                      '',
+                      'Security',
+                      'Centralized Admin & GDPR Compliance',
+                      'Microsoft 365 Admin Center for user management, multi-factor authentication '
+                      '(MFA), and EU data center hosting compliant with GDPR.'),
+                     ('c4',
+                      'dark',
+                      'Licence',
+                      '5 Devices per User & VAT Invoice',
+                      'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
+                      'at once. Fast email delivery with an official VAT invoice.')]},
+ 'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
+                        'title': 'Scheda tecnica e dettagli licenza',
+                        'caption': 'Specifiche tecniche, commerciali e requisiti di Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Prodotto', 'Microsoft 365 Business Standard'),
+                                 ('Tipo licenza', 'Abbonamento 12 mesi (ESD digitale)'),
+                                 ('Destinatari',
+                                  'Aziende, PMI, studi professionali, liberi professionisti (fino '
+                                  'a 300 utenti per tenant)'),
+                                 ('Utenti per licenza', '1 utente aziendale'),
+                                 ('Dispositivi per utente',
+                                  'Fino a 5 PC/Mac + 5 tablet + 5 smartphone contemporanei'),
+                                 ('Casella di posta',
+                                  '50 GB Exchange Online con supporto dominio personalizzato'),
+                                 ('Spazio cloud',
+                                  '1 TB (1.000 GB) OneDrive for Business per utente + SharePoint'),
+                                 ('Riunioni Teams',
+                                  'Fino a 300 partecipanti con registrazione e chat'),
+                                 ('App desktop incluse',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('App e servizi cloud',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Sistemi operativi',
+                                  'Windows 11, Windows 10, ultime 3 versioni di macOS, iOS, '
+                                  'Android'),
+                                 ('Consegna', 'Codice Product Key ESD via email in 2–15 minuti'),
+                                 ('Attivazione',
+                                  'Ufficiale su microsoft365.com / admin.microsoft.com'),
+                                 ('Rinnovo',
+                                  'Nessun vincolo automatico: rinnovo annuale a scelta del '
+                                  'cliente'),
+                                 ('Codice articolo', '@sku'),
+                                 ('Regione di attivazione', 'Unione Europea / SEE'),
+                                 ('Fatturazione',
+                                  'IVA inclusa, fattura elettronica italiana con P.IVA')]},
+                 'en': {'eyebrow': 'Product specifications',
+                        'title': 'Technical sheet and licence details',
+                        'caption': 'Technical and commercial specifications of Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Product', 'Microsoft 365 Business Standard'),
+                                 ('Licence type', '12-month subscription (digital ESD)'),
+                                 ('Target audience',
+                                  'Businesses, SMBs, professional studios, freelancers (up to 300 '
+                                  'users per tenant)'),
+                                 ('Users per licence', '1 business user'),
+                                 ('Devices per user',
+                                  'Up to 5 PCs/Macs + 5 tablets + 5 smartphones simultaneously'),
+                                 ('Mailbox', '50 GB Exchange Online with custom domain support'),
+                                 ('Cloud storage',
+                                  '1 TB (1,000 GB) OneDrive for Business per user + SharePoint'),
+                                 ('Teams meetings',
+                                  'Up to 300 participants with cloud recording and chat'),
+                                 ('Desktop apps included',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('Cloud apps & services',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Operating systems',
+                                  'Windows 11, Windows 10, latest 3 versions of macOS, iOS, '
+                                  'Android'),
+                                 ('Delivery',
+                                  'Digital ESD Product Key by email within 2-15 minutes'),
+                                 ('Activation',
+                                  'Official activation on microsoft365.com / admin.microsoft.com'),
+                                 ('Renewal',
+                                  'No automatic lock-in: annual renewal at customer choice'),
+                                 ('Product code', '@sku'),
+                                 ('Activation region', 'European Union / EEA'),
+                                 ('Billing',
+                                  'VAT included, official electronic invoice')]},
+                 'fr': {'eyebrow': 'Product specifications',
+                        'title': 'Technical sheet and licence details',
+                        'caption': 'Technical and commercial specifications of Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Product', 'Microsoft 365 Business Standard'),
+                                 ('Licence type', '12-month subscription (digital ESD)'),
+                                 ('Target audience',
+                                  'Businesses, SMBs, professional studios, freelancers (up to 300 '
+                                  'users per tenant)'),
+                                 ('Users per licence', '1 business user'),
+                                 ('Devices per user',
+                                  'Up to 5 PCs/Macs + 5 tablets + 5 smartphones simultaneously'),
+                                 ('Mailbox', '50 GB Exchange Online with custom domain support'),
+                                 ('Cloud storage',
+                                  '1 TB (1,000 GB) OneDrive for Business per user + SharePoint'),
+                                 ('Teams meetings',
+                                  'Up to 300 participants with cloud recording and chat'),
+                                 ('Desktop apps included',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('Cloud apps & services',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Operating systems',
+                                  'Windows 11, Windows 10, latest 3 versions of macOS, iOS, '
+                                  'Android'),
+                                 ('Delivery',
+                                  'Digital ESD Product Key by email within 2-15 minutes'),
+                                 ('Activation',
+                                  'Official activation on microsoft365.com / admin.microsoft.com'),
+                                 ('Renewal',
+                                  'No automatic lock-in: annual renewal at customer choice'),
+                                 ('Product code', '@sku'),
+                                 ('Activation region', 'European Union / EEA'),
+                                 ('Billing',
+                                  'VAT included, official electronic invoice')]},
+                 'de': {'eyebrow': 'Product specifications',
+                        'title': 'Technical sheet and licence details',
+                        'caption': 'Technical and commercial specifications of Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Product', 'Microsoft 365 Business Standard'),
+                                 ('Licence type', '12-month subscription (digital ESD)'),
+                                 ('Target audience',
+                                  'Businesses, SMBs, professional studios, freelancers (up to 300 '
+                                  'users per tenant)'),
+                                 ('Users per licence', '1 business user'),
+                                 ('Devices per user',
+                                  'Up to 5 PCs/Macs + 5 tablets + 5 smartphones simultaneously'),
+                                 ('Mailbox', '50 GB Exchange Online with custom domain support'),
+                                 ('Cloud storage',
+                                  '1 TB (1,000 GB) OneDrive for Business per user + SharePoint'),
+                                 ('Teams meetings',
+                                  'Up to 300 participants with cloud recording and chat'),
+                                 ('Desktop apps included',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('Cloud apps & services',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Operating systems',
+                                  'Windows 11, Windows 10, latest 3 versions of macOS, iOS, '
+                                  'Android'),
+                                 ('Delivery',
+                                  'Digital ESD Product Key by email within 2-15 minutes'),
+                                 ('Activation',
+                                  'Official activation on microsoft365.com / admin.microsoft.com'),
+                                 ('Renewal',
+                                  'No automatic lock-in: annual renewal at customer choice'),
+                                 ('Product code', '@sku'),
+                                 ('Activation region', 'European Union / EEA'),
+                                 ('Billing',
+                                  'VAT included, official electronic invoice')]},
+                 'es': {'eyebrow': 'Product specifications',
+                        'title': 'Technical sheet and licence details',
+                        'caption': 'Technical and commercial specifications of Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Product', 'Microsoft 365 Business Standard'),
+                                 ('Licence type', '12-month subscription (digital ESD)'),
+                                 ('Target audience',
+                                  'Businesses, SMBs, professional studios, freelancers (up to 300 '
+                                  'users per tenant)'),
+                                 ('Users per licence', '1 business user'),
+                                 ('Devices per user',
+                                  'Up to 5 PCs/Macs + 5 tablets + 5 smartphones simultaneously'),
+                                 ('Mailbox', '50 GB Exchange Online with custom domain support'),
+                                 ('Cloud storage',
+                                  '1 TB (1,000 GB) OneDrive for Business per user + SharePoint'),
+                                 ('Teams meetings',
+                                  'Up to 300 participants with cloud recording and chat'),
+                                 ('Desktop apps included',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('Cloud apps & services',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Operating systems',
+                                  'Windows 11, Windows 10, latest 3 versions of macOS, iOS, '
+                                  'Android'),
+                                 ('Delivery',
+                                  'Digital ESD Product Key by email within 2-15 minutes'),
+                                 ('Activation',
+                                  'Official activation on microsoft365.com / admin.microsoft.com'),
+                                 ('Renewal',
+                                  'No automatic lock-in: annual renewal at customer choice'),
+                                 ('Product code', '@sku'),
+                                 ('Activation region', 'European Union / EEA'),
+                                 ('Billing',
+                                  'VAT included, official electronic invoice')]},
+                 'pt': {'eyebrow': 'Product specifications',
+                        'title': 'Technical sheet and licence details',
+                        'caption': 'Technical and commercial specifications of Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Product', 'Microsoft 365 Business Standard'),
+                                 ('Licence type', '12-month subscription (digital ESD)'),
+                                 ('Target audience',
+                                  'Businesses, SMBs, professional studios, freelancers (up to 300 '
+                                  'users per tenant)'),
+                                 ('Users per licence', '1 business user'),
+                                 ('Devices per user',
+                                  'Up to 5 PCs/Macs + 5 tablets + 5 smartphones simultaneously'),
+                                 ('Mailbox', '50 GB Exchange Online with custom domain support'),
+                                 ('Cloud storage',
+                                  '1 TB (1,000 GB) OneDrive for Business per user + SharePoint'),
+                                 ('Teams meetings',
+                                  'Up to 300 participants with cloud recording and chat'),
+                                 ('Desktop apps included',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('Cloud apps & services',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Operating systems',
+                                  'Windows 11, Windows 10, latest 3 versions of macOS, iOS, '
+                                  'Android'),
+                                 ('Delivery',
+                                  'Digital ESD Product Key by email within 2-15 minutes'),
+                                 ('Activation',
+                                  'Official activation on microsoft365.com / admin.microsoft.com'),
+                                 ('Renewal',
+                                  'No automatic lock-in: annual renewal at customer choice'),
+                                 ('Product code', '@sku'),
+                                 ('Activation region', 'European Union / EEA'),
+                                 ('Billing',
+                                  'VAT included, official electronic invoice')]},
+                 'nl': {'eyebrow': 'Product specifications',
+                        'title': 'Technical sheet and licence details',
+                        'caption': 'Technical and commercial specifications of Microsoft 365 '
+                                   'Business Standard',
+                        'rows': [('Product', 'Microsoft 365 Business Standard'),
+                                 ('Licence type', '12-month subscription (digital ESD)'),
+                                 ('Target audience',
+                                  'Businesses, SMBs, professional studios, freelancers (up to 300 '
+                                  'users per tenant)'),
+                                 ('Users per licence', '1 business user'),
+                                 ('Devices per user',
+                                  'Up to 5 PCs/Macs + 5 tablets + 5 smartphones simultaneously'),
+                                 ('Mailbox', '50 GB Exchange Online with custom domain support'),
+                                 ('Cloud storage',
+                                  '1 TB (1,000 GB) OneDrive for Business per user + SharePoint'),
+                                 ('Teams meetings',
+                                  'Up to 300 participants with cloud recording and chat'),
+                                 ('Desktop apps included',
+                                  'Word, Excel, PowerPoint, Outlook, OneNote, Access (PC), '
+                                  'Publisher (PC)'),
+                                 ('Cloud apps & services',
+                                  'Teams, Exchange, OneDrive, SharePoint, Bookings, Planner, '
+                                  'Forms, Loop, Clipchamp'),
+                                 ('Operating systems',
+                                  'Windows 11, Windows 10, latest 3 versions of macOS, iOS, '
+                                  'Android'),
+                                 ('Delivery',
+                                  'Digital ESD Product Key by email within 2-15 minutes'),
+                                 ('Activation',
+                                  'Official activation on microsoft365.com / admin.microsoft.com'),
+                                 ('Renewal',
+                                  'No automatic lock-in: annual renewal at customer choice'),
+                                 ('Product code', '@sku'),
+                                 ('Activation region', 'European Union / EEA'),
+                                 ('Billing',
+                                  'VAT included, official electronic invoice')]}},
+ 'compare': {'it': {'eyebrow': 'Guida alla scelta',
+                    'title': 'Confronto tra le soluzioni Microsoft Business e Consumer',
+                    'sub': 'Confronta le differenze chiave tra i piani aziendali e le licenze '
+                           'perpetue per scegliere la soluzione ideale per la tua attività.',
+                    'caption': 'Confronto dettagliato tra Microsoft 365 Business Standard, '
+                               'Business Basic, Personal e Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [("Destinazione d'uso",
+                              'Aziendale / PMI',
+                              'Aziendale / PMI',
+                              'Privato / Singolo',
+                              'Aziendale / Privato'),
+                             ('App Office Desktop (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('Posta aziendale 50 GB (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Dominio email personalizzato', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 partecipanti)', 'yes', 'yes', 'no', 'no'),
+                             ('Spazio Cloud OneDrive',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Installazione multidispositivo',
+                              '5 PC/Mac + 5 Mobile',
+                              'Solo Web/Mobile',
+                              '5 Dispositivi',
+                              '1 solo PC o Mac'),
+                             ('Gestione Admin Center & Criteri', 'yes', 'yes', 'no', 'no'),
+                             ('Modello di licenza',
+                              'Abbonamento 1 anno',
+                              'Abbonamento 1 anno',
+                              'Abbonamento 1 anno',
+                              'Licenza a vita (perpetua)'),
+                             ('Fattura elettronica con P.IVA', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Incluso',
+                    'no_label': 'Non incluso',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> è la scelta '
+                             'ottimale se ti servono le potenti applicazioni Office installate su '
+                             'PC e Mac combinate con posta elettronica aziendale, Teams e '
+                             'archiviazione cloud protetta.',
+                             'Se necessiti unicamente delle app desktop su una sola postazione '
+                             'fissa senza servizi cloud ricorrenti, puoi valutare anche <a '
+                             'href="/it/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']},
+             'en': {'eyebrow': 'Plan comparison',
+                    'title': 'Compare Microsoft Business and Consumer solutions',
+                    'sub': 'Compare the key differences between business subscriptions and '
+                           'perpetual licences to choose the right fit for your organization.',
+                    'caption': 'Detailed comparison between Microsoft 365 Business Standard, '
+                               'Business Basic, Personal, and Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [('Primary usage',
+                              'Business / SMB',
+                              'Business / SMB',
+                              'Personal / Individual',
+                              'Business / Home'),
+                             ('Desktop Office Apps (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('50 GB Business Email (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Custom email domain', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 attendees)', 'yes', 'yes', 'no', 'no'),
+                             ('OneDrive Cloud Storage',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Multi-device installation',
+                              '5 PCs/Macs + 5 Mobile',
+                              'Web & Mobile only',
+                              '5 Devices',
+                              '1 PC or Mac only'),
+                             ('Admin Center & Policy Management', 'yes', 'yes', 'no', 'no'),
+                             ('Licensing model',
+                              '1-year subscription',
+                              '1-year subscription',
+                              '1-year subscription',
+                              'Perpetual licence'),
+                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Included',
+                    'no_label': 'Not included',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
+                             'choice for organizations needing full desktop Office apps combined '
+                             'with business email, Teams collaboration, and secure cloud storage.',
+                             'If you only need standalone desktop apps on a single computer '
+                             'without ongoing cloud services, explore <a '
+                             'href="/en/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']},
+             'fr': {'eyebrow': 'Plan comparison',
+                    'title': 'Compare Microsoft Business and Consumer solutions',
+                    'sub': 'Compare the key differences between business subscriptions and '
+                           'perpetual licences to choose the right fit for your organization.',
+                    'caption': 'Detailed comparison between Microsoft 365 Business Standard, '
+                               'Business Basic, Personal, and Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [('Primary usage',
+                              'Business / SMB',
+                              'Business / SMB',
+                              'Personal / Individual',
+                              'Business / Home'),
+                             ('Desktop Office Apps (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('50 GB Business Email (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Custom email domain', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 attendees)', 'yes', 'yes', 'no', 'no'),
+                             ('OneDrive Cloud Storage',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Multi-device installation',
+                              '5 PCs/Macs + 5 Mobile',
+                              'Web & Mobile only',
+                              '5 Devices',
+                              '1 PC or Mac only'),
+                             ('Admin Center & Policy Management', 'yes', 'yes', 'no', 'no'),
+                             ('Licensing model',
+                              '1-year subscription',
+                              '1-year subscription',
+                              '1-year subscription',
+                              'Perpetual licence'),
+                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Included',
+                    'no_label': 'Not included',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
+                             'choice for organizations needing full desktop Office apps combined '
+                             'with business email, Teams collaboration, and secure cloud storage.',
+                             'If you only need standalone desktop apps on a single computer '
+                             'without ongoing cloud services, explore <a '
+                             'href="/en/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']},
+             'de': {'eyebrow': 'Plan comparison',
+                    'title': 'Compare Microsoft Business and Consumer solutions',
+                    'sub': 'Compare the key differences between business subscriptions and '
+                           'perpetual licences to choose the right fit for your organization.',
+                    'caption': 'Detailed comparison between Microsoft 365 Business Standard, '
+                               'Business Basic, Personal, and Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [('Primary usage',
+                              'Business / SMB',
+                              'Business / SMB',
+                              'Personal / Individual',
+                              'Business / Home'),
+                             ('Desktop Office Apps (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('50 GB Business Email (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Custom email domain', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 attendees)', 'yes', 'yes', 'no', 'no'),
+                             ('OneDrive Cloud Storage',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Multi-device installation',
+                              '5 PCs/Macs + 5 Mobile',
+                              'Web & Mobile only',
+                              '5 Devices',
+                              '1 PC or Mac only'),
+                             ('Admin Center & Policy Management', 'yes', 'yes', 'no', 'no'),
+                             ('Licensing model',
+                              '1-year subscription',
+                              '1-year subscription',
+                              '1-year subscription',
+                              'Perpetual licence'),
+                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Included',
+                    'no_label': 'Not included',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
+                             'choice for organizations needing full desktop Office apps combined '
+                             'with business email, Teams collaboration, and secure cloud storage.',
+                             'If you only need standalone desktop apps on a single computer '
+                             'without ongoing cloud services, explore <a '
+                             'href="/en/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']},
+             'es': {'eyebrow': 'Plan comparison',
+                    'title': 'Compare Microsoft Business and Consumer solutions',
+                    'sub': 'Compare the key differences between business subscriptions and '
+                           'perpetual licences to choose the right fit for your organization.',
+                    'caption': 'Detailed comparison between Microsoft 365 Business Standard, '
+                               'Business Basic, Personal, and Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [('Primary usage',
+                              'Business / SMB',
+                              'Business / SMB',
+                              'Personal / Individual',
+                              'Business / Home'),
+                             ('Desktop Office Apps (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('50 GB Business Email (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Custom email domain', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 attendees)', 'yes', 'yes', 'no', 'no'),
+                             ('OneDrive Cloud Storage',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Multi-device installation',
+                              '5 PCs/Macs + 5 Mobile',
+                              'Web & Mobile only',
+                              '5 Devices',
+                              '1 PC or Mac only'),
+                             ('Admin Center & Policy Management', 'yes', 'yes', 'no', 'no'),
+                             ('Licensing model',
+                              '1-year subscription',
+                              '1-year subscription',
+                              '1-year subscription',
+                              'Perpetual licence'),
+                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Included',
+                    'no_label': 'Not included',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
+                             'choice for organizations needing full desktop Office apps combined '
+                             'with business email, Teams collaboration, and secure cloud storage.',
+                             'If you only need standalone desktop apps on a single computer '
+                             'without ongoing cloud services, explore <a '
+                             'href="/en/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']},
+             'pt': {'eyebrow': 'Plan comparison',
+                    'title': 'Compare Microsoft Business and Consumer solutions',
+                    'sub': 'Compare the key differences between business subscriptions and '
+                           'perpetual licences to choose the right fit for your organization.',
+                    'caption': 'Detailed comparison between Microsoft 365 Business Standard, '
+                               'Business Basic, Personal, and Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [('Primary usage',
+                              'Business / SMB',
+                              'Business / SMB',
+                              'Personal / Individual',
+                              'Business / Home'),
+                             ('Desktop Office Apps (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('50 GB Business Email (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Custom email domain', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 attendees)', 'yes', 'yes', 'no', 'no'),
+                             ('OneDrive Cloud Storage',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Multi-device installation',
+                              '5 PCs/Macs + 5 Mobile',
+                              'Web & Mobile only',
+                              '5 Devices',
+                              '1 PC or Mac only'),
+                             ('Admin Center & Policy Management', 'yes', 'yes', 'no', 'no'),
+                             ('Licensing model',
+                              '1-year subscription',
+                              '1-year subscription',
+                              '1-year subscription',
+                              'Perpetual licence'),
+                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Included',
+                    'no_label': 'Not included',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
+                             'choice for organizations needing full desktop Office apps combined '
+                             'with business email, Teams collaboration, and secure cloud storage.',
+                             'If you only need standalone desktop apps on a single computer '
+                             'without ongoing cloud services, explore <a '
+                             'href="/en/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']},
+             'nl': {'eyebrow': 'Plan comparison',
+                    'title': 'Compare Microsoft Business and Consumer solutions',
+                    'sub': 'Compare the key differences between business subscriptions and '
+                           'perpetual licences to choose the right fit for your organization.',
+                    'caption': 'Detailed comparison between Microsoft 365 Business Standard, '
+                               'Business Basic, Personal, and Office 2024 Home & Business',
+                    'cols': ['M365 Business Standard',
+                             'M365 Business Basic',
+                             'M365 Personal',
+                             'Office 2024 Home & Business'],
+                    'rows': [('Primary usage',
+                              'Business / SMB',
+                              'Business / SMB',
+                              'Personal / Individual',
+                              'Business / Home'),
+                             ('Desktop Office Apps (PC/Mac)', 'yes', 'no', 'yes', 'yes'),
+                             ('50 GB Business Email (Exchange)', 'yes', 'yes', 'no', 'no'),
+                             ('Custom email domain', 'yes', 'yes', 'no', 'no'),
+                             ('Microsoft Teams (300 attendees)', 'yes', 'yes', 'no', 'no'),
+                             ('OneDrive Cloud Storage',
+                              '1 TB Business',
+                              '1 TB Business',
+                              '1 TB Consumer',
+                              'no'),
+                             ('Multi-device installation',
+                              '5 PCs/Macs + 5 Mobile',
+                              'Web & Mobile only',
+                              '5 Devices',
+                              '1 PC or Mac only'),
+                             ('Admin Center & Policy Management', 'yes', 'yes', 'no', 'no'),
+                             ('Licensing model',
+                              '1-year subscription',
+                              '1-year subscription',
+                              '1-year subscription',
+                              'Perpetual licence'),
+                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                    'yes_label': 'Included',
+                    'no_label': 'Not included',
+                    'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
+                             'choice for organizations needing full desktop Office apps combined '
+                             'with business email, Teams collaboration, and secure cloud storage.',
+                             'If you only need standalone desktop apps on a single computer '
+                             'without ongoing cloud services, explore <a '
+                             'href="/en/office-2024-home-business">Office 2024 Home & '
+                             'Business</a>.']}},
+ 'steps': {'it': [('Ordine e pagamento sicuro',
+                   "Aggiungi Microsoft 365 Business Standard al carrello e completa l'acquisto "
+                   'protetto con carta, PayPal, Apple Pay o Google Pay. Ricevi la conferma '
+                   "d'ordine istantanea."),
+                  ('Consegna digitale immediata',
+                   'Entro 2–15 minuti ti inviamo via email il codice Product Key originale da 25 '
+                   'caratteri, la guida di attivazione e la fattura fiscale con Partita IVA.'),
+                  ('Attivazione su portale Microsoft',
+                   'Riscatta la licenza sul portale ufficiale Microsoft (setup.office.com o '
+                   "admin.microsoft.com), assegna l'utenza e scarica le applicazioni desktop su "
+                   'PC, Mac e dispositivi mobili.')],
+           'en': [('Secure order and checkout',
+                   'Add Microsoft 365 Business Standard to your cart and complete payment via '
+                   'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
+                  ('Instant digital delivery',
+                   'Within 2-15 minutes we send you the genuine 25-character Product Key, '
+                   'activation guide, and official VAT invoice by email.'),
+                  ('Official Microsoft activation',
+                   'Redeem the licence on the official Microsoft portal (setup.office.com or '
+                   'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
+                   'devices.')],
+           'fr': [('Secure order and checkout',
+                   'Add Microsoft 365 Business Standard to your cart and complete payment via '
+                   'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
+                  ('Instant digital delivery',
+                   'Within 2-15 minutes we send you the genuine 25-character Product Key, '
+                   'activation guide, and official VAT invoice by email.'),
+                  ('Official Microsoft activation',
+                   'Redeem the licence on the official Microsoft portal (setup.office.com or '
+                   'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
+                   'devices.')],
+           'de': [('Secure order and checkout',
+                   'Add Microsoft 365 Business Standard to your cart and complete payment via '
+                   'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
+                  ('Instant digital delivery',
+                   'Within 2-15 minutes we send you the genuine 25-character Product Key, '
+                   'activation guide, and official VAT invoice by email.'),
+                  ('Official Microsoft activation',
+                   'Redeem the licence on the official Microsoft portal (setup.office.com or '
+                   'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
+                   'devices.')],
+           'es': [('Secure order and checkout',
+                   'Add Microsoft 365 Business Standard to your cart and complete payment via '
+                   'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
+                  ('Instant digital delivery',
+                   'Within 2-15 minutes we send you the genuine 25-character Product Key, '
+                   'activation guide, and official VAT invoice by email.'),
+                  ('Official Microsoft activation',
+                   'Redeem the licence on the official Microsoft portal (setup.office.com or '
+                   'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
+                   'devices.')],
+           'pt': [('Secure order and checkout',
+                   'Add Microsoft 365 Business Standard to your cart and complete payment via '
+                   'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
+                  ('Instant digital delivery',
+                   'Within 2-15 minutes we send you the genuine 25-character Product Key, '
+                   'activation guide, and official VAT invoice by email.'),
+                  ('Official Microsoft activation',
+                   'Redeem the licence on the official Microsoft portal (setup.office.com or '
+                   'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
+                   'devices.')],
+           'nl': [('Secure order and checkout',
+                   'Add Microsoft 365 Business Standard to your cart and complete payment via '
+                   'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
+                  ('Instant digital delivery',
+                   'Within 2-15 minutes we send you the genuine 25-character Product Key, '
+                   'activation guide, and official VAT invoice by email.'),
+                  ('Official Microsoft activation',
+                   'Redeem the licence on the official Microsoft portal (setup.office.com or '
+                   'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
+                   'devices.')]},
+ 'specs': {'it': [('Processore',
+                   'Windows: processore a 1,6 GHz o superiore, 2 core. Mac: processore Intel o '
+                   'chip Apple Silicon compatibile.'),
+                  ('Sistema operativo',
+                   'Windows 11, Windows 10; macOS nelle ultime tre versioni supportate da Apple; '
+                   'iOS e Android nelle versioni correnti.'),
+                  ('Memoria (RAM)',
+                   'Almeno 4 GB di RAM consigliati per PC e Mac per garantire prestazioni ottimali '
+                   'con file complessi.'),
+                  ('Spazio su disco',
+                   'Almeno 4 GB di spazio libero su disco per Windows; 10 GB su macOS con formato '
+                   'disco compatibile.'),
+                  ('Connettività e browser',
+                   'Connessione Internet richiesta per installazione, aggiornamenti periodici e '
+                   'servizi cloud. Compatibile con Edge, Chrome, Safari, Firefox.')],
+           'en': [('Processor',
+                   'Windows: 1.6 GHz or faster, 2-core processor. Mac: Intel processor or Apple '
+                   'Silicon chip supported.'),
+                  ('Operating system',
+                   'Windows 11, Windows 10; macOS in the latest three supported versions; iOS and '
+                   'Android latest versions.'),
+                  ('Memory (RAM)',
+                   'At least 4 GB RAM recommended for PC and Mac for optimal performance with '
+                   'large business files.'),
+                  ('Disk space', 'At least 4 GB free disk space on Windows; 10 GB on macOS.'),
+                  ('Connectivity & browser',
+                   'Internet access required for installation, licence validation, and cloud '
+                   'services. Supports Edge, Chrome, Safari, Firefox.')],
+           'fr': [('Processor',
+                   'Windows: 1.6 GHz or faster, 2-core processor. Mac: Intel processor or Apple '
+                   'Silicon chip supported.'),
+                  ('Operating system',
+                   'Windows 11, Windows 10; macOS in the latest three supported versions; iOS and '
+                   'Android latest versions.'),
+                  ('Memory (RAM)',
+                   'At least 4 GB RAM recommended for PC and Mac for optimal performance with '
+                   'large business files.'),
+                  ('Disk space', 'At least 4 GB free disk space on Windows; 10 GB on macOS.'),
+                  ('Connectivity & browser',
+                   'Internet access required for installation, licence validation, and cloud '
+                   'services. Supports Edge, Chrome, Safari, Firefox.')],
+           'de': [('Processor',
+                   'Windows: 1.6 GHz or faster, 2-core processor. Mac: Intel processor or Apple '
+                   'Silicon chip supported.'),
+                  ('Operating system',
+                   'Windows 11, Windows 10; macOS in the latest three supported versions; iOS and '
+                   'Android latest versions.'),
+                  ('Memory (RAM)',
+                   'At least 4 GB RAM recommended for PC and Mac for optimal performance with '
+                   'large business files.'),
+                  ('Disk space', 'At least 4 GB free disk space on Windows; 10 GB on macOS.'),
+                  ('Connectivity & browser',
+                   'Internet access required for installation, licence validation, and cloud '
+                   'services. Supports Edge, Chrome, Safari, Firefox.')],
+           'es': [('Processor',
+                   'Windows: 1.6 GHz or faster, 2-core processor. Mac: Intel processor or Apple '
+                   'Silicon chip supported.'),
+                  ('Operating system',
+                   'Windows 11, Windows 10; macOS in the latest three supported versions; iOS and '
+                   'Android latest versions.'),
+                  ('Memory (RAM)',
+                   'At least 4 GB RAM recommended for PC and Mac for optimal performance with '
+                   'large business files.'),
+                  ('Disk space', 'At least 4 GB free disk space on Windows; 10 GB on macOS.'),
+                  ('Connectivity & browser',
+                   'Internet access required for installation, licence validation, and cloud '
+                   'services. Supports Edge, Chrome, Safari, Firefox.')],
+           'pt': [('Processor',
+                   'Windows: 1.6 GHz or faster, 2-core processor. Mac: Intel processor or Apple '
+                   'Silicon chip supported.'),
+                  ('Operating system',
+                   'Windows 11, Windows 10; macOS in the latest three supported versions; iOS and '
+                   'Android latest versions.'),
+                  ('Memory (RAM)',
+                   'At least 4 GB RAM recommended for PC and Mac for optimal performance with '
+                   'large business files.'),
+                  ('Disk space', 'At least 4 GB free disk space on Windows; 10 GB on macOS.'),
+                  ('Connectivity & browser',
+                   'Internet access required for installation, licence validation, and cloud '
+                   'services. Supports Edge, Chrome, Safari, Firefox.')],
+           'nl': [('Processor',
+                   'Windows: 1.6 GHz or faster, 2-core processor. Mac: Intel processor or Apple '
+                   'Silicon chip supported.'),
+                  ('Operating system',
+                   'Windows 11, Windows 10; macOS in the latest three supported versions; iOS and '
+                   'Android latest versions.'),
+                  ('Memory (RAM)',
+                   'At least 4 GB RAM recommended for PC and Mac for optimal performance with '
+                   'large business files.'),
+                  ('Disk space', 'At least 4 GB free disk space on Windows; 10 GB on macOS.'),
+                  ('Connectivity & browser',
+                   'Internet access required for installation, licence validation, and cloud '
+                   'services. Supports Edge, Chrome, Safari, Firefox.')]},
+ 'specs_note': {'it': 'Requisiti hardware e software orientativi da documentazione ufficiale '
+                      'Microsoft; verifica sempre la compatibilità specifica dei tuoi dispositivi.',
+                'en': 'Indicative system requirements from official Microsoft documentation; '
+                      'verify specific device compatibility before installation.',
+                'fr': 'Indicative system requirements from official Microsoft documentation; '
+                      'verify specific device compatibility before installation.',
+                'de': 'Indicative system requirements from official Microsoft documentation; '
+                      'verify specific device compatibility before installation.',
+                'es': 'Indicative system requirements from official Microsoft documentation; '
+                      'verify specific device compatibility before installation.',
+                'pt': 'Indicative system requirements from official Microsoft documentation; '
+                      'verify specific device compatibility before installation.',
+                'nl': 'Indicative system requirements from official Microsoft documentation; '
+                      'verify specific device compatibility before installation.'},
+ 'faq': {'it': [("Che cos'è Microsoft 365 Business Standard e cosa include?",
+                 'Microsoft 365 Business Standard (ex Office 365 Business Premium) è la suite di '
+                 'produttività e collaborazione aziendale più completa di Microsoft per le piccole '
+                 'e medie imprese. Include: (1) le applicazioni desktop complete e sempre '
+                 'aggiornate per PC e Mac di Word, Excel, PowerPoint, Outlook, OneNote, oltre ad '
+                 'Access e Publisher solo per PC; (2) la posta elettronica professionale Exchange '
+                 'Online con casella da 50 GB e supporto per dominio personalizzato (es. '
+                 'info@azienda.it); (3) Microsoft Teams per videoconferenze HD fino a 300 '
+                 'partecipanti, chat e canali di team; (4) 1 TB (1.000 GB) di archiviazione sicura '
+                 'nel cloud con OneDrive for Business e SharePoint; (5) strumenti di business '
+                 'intelligence e pianificazione come Microsoft Bookings, Planner, Forms, Loop e '
+                 'Clipchamp.'),
+                ('Qual è la differenza tra Microsoft 365 Business Standard e Microsoft 365 '
+                 'Personal o Family?',
+                 "Microsoft 365 Personal e Family sono piani destinati esclusivamente all'uso "
+                 'privato e domestico, associati a un account Microsoft consumer (es. '
+                 '@outlook.com) e privi di funzionalità aziendali. Business Standard è invece una '
+                 'soluzione aziendale: permette di configurare account con il proprio dominio di '
+                 'posta aziendale (nome@azienda.it), fornisce posta Exchange da 50 GB con filtri '
+                 'antispam e antimalware avanzati, include Teams con capacità fino a 300 persone '
+                 '(rispetto alle limitazioni della versione consumer), SharePoint per intranet '
+                 'aziendali e il portale Microsoft 365 Admin Center per gestire centralmente '
+                 'licenze, sicurezza e permessi dei dipendenti.'),
+                ('Qual è la differenza tra Microsoft 365 Business Standard e Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business è una licenza perpetua (una tantum) legata a 1 solo '
+                 'PC o Mac: include le versioni classiche 2024 di Word, Excel, PowerPoint, Outlook '
+                 'e OneNote, ma non riceve aggiornamenti di nuove funzionalità future, non include '
+                 'la posta Exchange da 50 GB, non include Teams aziendale e non include lo spazio '
+                 'cloud da 1 TB su OneDrive for Business. Microsoft 365 Business Standard è invece '
+                 "un abbonamento annuale che garantisce app desktop sempre aggiornate all'ultima "
+                 'versione, installazione su un massimo di 5 PC/Mac più 5 dispositivi mobili per '
+                 "utente e l'intero ecosistema di servizi cloud aziendali."),
+                ('Su quanti dispositivi posso installare le applicazioni con 1 licenza Business '
+                 'Standard?',
+                 'Ogni singola licenza utente di Microsoft 365 Business Standard consente '
+                 "l'installazione e l'utilizzo contemporaneo delle applicazioni su un massimo di 5 "
+                 'computer (PC Windows o Mac), 5 tablet (iPad, Android, Windows) e 5 smartphone '
+                 '(iPhone, Android), per un totale di 15 dispositivi associati al medesimo account '
+                 'utente.'),
+                ('Include la posta elettronica aziendale con il mio dominio personalizzato?',
+                 'Sì, include il servizio di posta professionale Exchange Online con casella di 50 '
+                 'GB per ogni utente. Puoi collegare facilmente il dominio internet della tua '
+                 'azienda (es. mario.rossi@tuodominio.it) e usufruire di calendari condivisi, '
+                 'rubrica aziendale globale, gestione degli appuntamenti con Microsoft Bookings e '
+                 'protezione avanzata contro phishing e malware (Exchange Online Protection).'),
+                ('Come funziona Microsoft Teams in questo piano e quante persone possono '
+                 'partecipare?',
+                 'In Microsoft 365 Business Standard, Microsoft Teams è incluso nella versione '
+                 'aziendale completa: supporta riunioni online e videoconferenze in alta '
+                 'definizione fino a 300 partecipanti per sessione, registrazione delle riunioni '
+                 'con trascrizione automatica, breakout room (stanze virtuali), condivisione '
+                 'schermo e lavagna interattiva Microsoft Whiteboard. I partecipanti esterni '
+                 '(clienti, fornitori) possono unirsi alle riunioni via browser senza dover '
+                 'possedere una licenza a pagamento.'),
+                ("Come si attiva la licenza dopo l'acquisto su AML Store?",
+                 'Riceverai il codice Product Key da 25 caratteri e le istruzioni dettagliate via '
+                 "email entro 2–15 minuti dall'acquisto. Se disponi già di un tenant aziendale "
+                 'Microsoft 365, puoi inserire il codice nel portale di amministrazione '
+                 '(admin.microsoft.com) per aggiungere la licenza o rinnovare quella esistente. Se '
+                 'è la prima volta, puoi riscattare il codice su setup.office.com o '
+                 'microsoft365.com/setupbusiness per creare in pochi passaggi il tuo nuovo account '
+                 'aziendale e iniziare subito a scaricare le applicazioni.'),
+                ('Posso acquistare più licenze per i collaboratori della mia azienda?',
+                 'Assolutamente sì. Puoi acquistare il numero di licenze pari al numero di '
+                 'collaboratori o dipendenti che necessitano della suite (fino a un massimo di 300 '
+                 'licenze Business Standard per tenant aziendale). Tramite il Microsoft 365 Admin '
+                 'Center potrai assegnare, revocare o riassegnare le licenze in qualsiasi momento '
+                 'con un semplice clic.'),
+                ('Viene emessa la fattura elettronica italiana con Partita IVA?',
+                 "Sì. AML Store è un'azienda con sede legale e fiscale in Italia (P.IVA "
+                 '11461870963). In fase di checkout è possibile inserire i dati di fatturazione '
+                 'aziendale, Partita IVA, Codice Fiscale e Codice SDI/PEC. La fattura elettronica '
+                 "viene inviata regolarmente tramite il Sistema di Interscambio (SDI) dell'Agenzia "
+                 'delle Entrate.'),
+                ('Come sono protetti i dati e come viene garantita la conformità al GDPR?',
+                 'Microsoft 365 rispetta i più elevati standard internazionali di sicurezza '
+                 'informatica e la conformità al regolamento europeo GDPR. I dati risiedono nei '
+                 "data center Microsoft situati all'interno dell'Unione Europea, con crittografia "
+                 'sia durante il trasferimento che a riposo (BitLocker, TLS). Il piano include '
+                 "inoltre l'autenticazione a due fattori (MFA), criteri di password avanzati e "
+                 'strumenti per la prevenzione della perdita dei dati (DLP) e il ripristino da '
+                 'attacchi ransomware.')],
+         'en': [('What is Microsoft 365 Business Standard and what does it include?',
+                 'Microsoft 365 Business Standard (formerly Office 365 Business Premium) is '
+                 "Microsoft's complete business productivity and collaboration suite for SMBs. It "
+                 'includes: (1) fully installed desktop apps for PC and Mac (Word, Excel, '
+                 'PowerPoint, Outlook, OneNote, plus Access & Publisher on PC); (2) 50 GB Exchange '
+                 'Online business email with custom domain support; (3) Microsoft Teams for video '
+                 'meetings up to 300 attendees, recording, and channels; (4) 1 TB OneDrive for '
+                 'Business cloud storage per user with SharePoint; (5) business productivity apps '
+                 'such as Microsoft Bookings, Planner, Forms, Loop, and Clipchamp.'),
+                ('What is the difference between Business Standard and Microsoft 365 '
+                 'Personal/Family?',
+                 'Microsoft 365 Personal and Family are strictly consumer plans tied to personal '
+                 'Microsoft accounts (@outlook.com) without business infrastructure. Business '
+                 'Standard is a corporate platform allowing custom business email domains '
+                 '(name@company.com), 50 GB Exchange mailboxes, Teams meetings for up to 300 '
+                 'participants, SharePoint team intranets, and centralized user/security '
+                 'management via the Microsoft 365 Admin Center.'),
+                ('What is the difference between Business Standard and Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business is a one-time perpetual purchase for 1 PC or Mac '
+                 'only, containing classic 2024 apps without feature updates, without 50 GB '
+                 'Exchange email, without corporate Teams, and without 1 TB OneDrive cloud '
+                 'storage. Microsoft 365 Business Standard is an annual subscription providing '
+                 'always-updated desktop apps on up to 5 PCs/Macs + 5 mobile devices per user, '
+                 'combined with complete business cloud services.'),
+                ('How many devices can I install the apps on with 1 licence?',
+                 'Each single user licence of Microsoft 365 Business Standard allows simultaneous '
+                 'installation and use of Office apps on up to 5 PCs or Macs, 5 tablets (iPad, '
+                 'Android, Windows), and 5 smartphones (iPhone, Android), totaling up to 15 '
+                 'devices per user account.'),
+                ('Does it include business email with my custom company domain?',
+                 'Yes, it includes business-class Exchange Online email with a 50 GB mailbox per '
+                 'user. You can easily connect your company domain name (e.g. '
+                 'name@yourcompany.com) with shared team calendars, global contact lists, '
+                 'Microsoft Bookings scheduling, and enterprise spam/phishing filtering.'),
+                ('How does Microsoft Teams work in this plan and how many attendees can join?',
+                 'Microsoft Teams is included in its full business edition, supporting HD '
+                 'videoconferencing and webinars for up to 300 participants per meeting, cloud '
+                 'recording with automated transcription, breakout rooms, screen sharing, and '
+                 'interactive Microsoft Whiteboard. External guests can join meetings via browser '
+                 'without needing a paid licence.'),
+                ('How do I activate the licence after purchasing from AML Store?',
+                 'You will receive your 25-character Product Key and step-by-step instructions by '
+                 'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
+                 'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
+                 'If you are setting up a new organization, you can redeem the code on '
+                 'setup.office.com or microsoft365.com/setupbusiness.'),
+                ('Can I purchase multiple licences for my team members and employees?',
+                 'Yes. You can purchase the exact number of licences needed for your team (up to '
+                 '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
+                 'Center, you can assign, reassign, or revoke user licences anytime with a single '
+                 'click.'),
+                ('Is a VAT invoice provided for businesses?',
+                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'checkout you can provide your business details, VAT number, Tax Code, and '
+                 'SDI/PEC for official electronic invoicing.'),
+                ('How is data protected and is it GDPR compliant?',
+                 'Microsoft 365 adheres to the highest cybersecurity and data privacy standards '
+                 'including GDPR compliance. Data is stored in European Microsoft data centers '
+                 'with BitLocker and TLS encryption at rest and in transit, multi-factor '
+                 'authentication (MFA), and advanced ransomware recovery.')],
+         'fr': [('What is Microsoft 365 Business Standard and what does it include?',
+                 'Microsoft 365 Business Standard (formerly Office 365 Business Premium) is '
+                 "Microsoft's complete business productivity and collaboration suite for SMBs. It "
+                 'includes: (1) fully installed desktop apps for PC and Mac (Word, Excel, '
+                 'PowerPoint, Outlook, OneNote, plus Access & Publisher on PC); (2) 50 GB Exchange '
+                 'Online business email with custom domain support; (3) Microsoft Teams for video '
+                 'meetings up to 300 attendees, recording, and channels; (4) 1 TB OneDrive for '
+                 'Business cloud storage per user with SharePoint; (5) business productivity apps '
+                 'such as Microsoft Bookings, Planner, Forms, Loop, and Clipchamp.'),
+                ('What is the difference between Business Standard and Microsoft 365 '
+                 'Personal/Family?',
+                 'Microsoft 365 Personal and Family are strictly consumer plans tied to personal '
+                 'Microsoft accounts (@outlook.com) without business infrastructure. Business '
+                 'Standard is a corporate platform allowing custom business email domains '
+                 '(name@company.com), 50 GB Exchange mailboxes, Teams meetings for up to 300 '
+                 'participants, SharePoint team intranets, and centralized user/security '
+                 'management via the Microsoft 365 Admin Center.'),
+                ('What is the difference between Business Standard and Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business is a one-time perpetual purchase for 1 PC or Mac '
+                 'only, containing classic 2024 apps without feature updates, without 50 GB '
+                 'Exchange email, without corporate Teams, and without 1 TB OneDrive cloud '
+                 'storage. Microsoft 365 Business Standard is an annual subscription providing '
+                 'always-updated desktop apps on up to 5 PCs/Macs + 5 mobile devices per user, '
+                 'combined with complete business cloud services.'),
+                ('How many devices can I install the apps on with 1 licence?',
+                 'Each single user licence of Microsoft 365 Business Standard allows simultaneous '
+                 'installation and use of Office apps on up to 5 PCs or Macs, 5 tablets (iPad, '
+                 'Android, Windows), and 5 smartphones (iPhone, Android), totaling up to 15 '
+                 'devices per user account.'),
+                ('Does it include business email with my custom company domain?',
+                 'Yes, it includes business-class Exchange Online email with a 50 GB mailbox per '
+                 'user. You can easily connect your company domain name (e.g. '
+                 'name@yourcompany.com) with shared team calendars, global contact lists, '
+                 'Microsoft Bookings scheduling, and enterprise spam/phishing filtering.'),
+                ('How does Microsoft Teams work in this plan and how many attendees can join?',
+                 'Microsoft Teams is included in its full business edition, supporting HD '
+                 'videoconferencing and webinars for up to 300 participants per meeting, cloud '
+                 'recording with automated transcription, breakout rooms, screen sharing, and '
+                 'interactive Microsoft Whiteboard. External guests can join meetings via browser '
+                 'without needing a paid licence.'),
+                ('How do I activate the licence after purchasing from AML Store?',
+                 'You will receive your 25-character Product Key and step-by-step instructions by '
+                 'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
+                 'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
+                 'If you are setting up a new organization, you can redeem the code on '
+                 'setup.office.com or microsoft365.com/setupbusiness.'),
+                ('Can I purchase multiple licences for my team members and employees?',
+                 'Yes. You can purchase the exact number of licences needed for your team (up to '
+                 '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
+                 'Center, you can assign, reassign, or revoke user licences anytime with a single '
+                 'click.'),
+                ('Is a VAT invoice provided for businesses?',
+                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'checkout you can provide your business details, VAT number, Tax Code, and '
+                 'SDI/PEC for official electronic invoicing.'),
+                ('How is data protected and is it GDPR compliant?',
+                 'Microsoft 365 adheres to the highest cybersecurity and data privacy standards '
+                 'including GDPR compliance. Data is stored in European Microsoft data centers '
+                 'with BitLocker and TLS encryption at rest and in transit, multi-factor '
+                 'authentication (MFA), and advanced ransomware recovery.')],
+         'de': [('What is Microsoft 365 Business Standard and what does it include?',
+                 'Microsoft 365 Business Standard (formerly Office 365 Business Premium) is '
+                 "Microsoft's complete business productivity and collaboration suite for SMBs. It "
+                 'includes: (1) fully installed desktop apps for PC and Mac (Word, Excel, '
+                 'PowerPoint, Outlook, OneNote, plus Access & Publisher on PC); (2) 50 GB Exchange '
+                 'Online business email with custom domain support; (3) Microsoft Teams for video '
+                 'meetings up to 300 attendees, recording, and channels; (4) 1 TB OneDrive for '
+                 'Business cloud storage per user with SharePoint; (5) business productivity apps '
+                 'such as Microsoft Bookings, Planner, Forms, Loop, and Clipchamp.'),
+                ('What is the difference between Business Standard and Microsoft 365 '
+                 'Personal/Family?',
+                 'Microsoft 365 Personal and Family are strictly consumer plans tied to personal '
+                 'Microsoft accounts (@outlook.com) without business infrastructure. Business '
+                 'Standard is a corporate platform allowing custom business email domains '
+                 '(name@company.com), 50 GB Exchange mailboxes, Teams meetings for up to 300 '
+                 'participants, SharePoint team intranets, and centralized user/security '
+                 'management via the Microsoft 365 Admin Center.'),
+                ('What is the difference between Business Standard and Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business is a one-time perpetual purchase for 1 PC or Mac '
+                 'only, containing classic 2024 apps without feature updates, without 50 GB '
+                 'Exchange email, without corporate Teams, and without 1 TB OneDrive cloud '
+                 'storage. Microsoft 365 Business Standard is an annual subscription providing '
+                 'always-updated desktop apps on up to 5 PCs/Macs + 5 mobile devices per user, '
+                 'combined with complete business cloud services.'),
+                ('How many devices can I install the apps on with 1 licence?',
+                 'Each single user licence of Microsoft 365 Business Standard allows simultaneous '
+                 'installation and use of Office apps on up to 5 PCs or Macs, 5 tablets (iPad, '
+                 'Android, Windows), and 5 smartphones (iPhone, Android), totaling up to 15 '
+                 'devices per user account.'),
+                ('Does it include business email with my custom company domain?',
+                 'Yes, it includes business-class Exchange Online email with a 50 GB mailbox per '
+                 'user. You can easily connect your company domain name (e.g. '
+                 'name@yourcompany.com) with shared team calendars, global contact lists, '
+                 'Microsoft Bookings scheduling, and enterprise spam/phishing filtering.'),
+                ('How does Microsoft Teams work in this plan and how many attendees can join?',
+                 'Microsoft Teams is included in its full business edition, supporting HD '
+                 'videoconferencing and webinars for up to 300 participants per meeting, cloud '
+                 'recording with automated transcription, breakout rooms, screen sharing, and '
+                 'interactive Microsoft Whiteboard. External guests can join meetings via browser '
+                 'without needing a paid licence.'),
+                ('How do I activate the licence after purchasing from AML Store?',
+                 'You will receive your 25-character Product Key and step-by-step instructions by '
+                 'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
+                 'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
+                 'If you are setting up a new organization, you can redeem the code on '
+                 'setup.office.com or microsoft365.com/setupbusiness.'),
+                ('Can I purchase multiple licences for my team members and employees?',
+                 'Yes. You can purchase the exact number of licences needed for your team (up to '
+                 '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
+                 'Center, you can assign, reassign, or revoke user licences anytime with a single '
+                 'click.'),
+                ('Is a VAT invoice provided for businesses?',
+                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'checkout you can provide your business details, VAT number, Tax Code, and '
+                 'SDI/PEC for official electronic invoicing.'),
+                ('How is data protected and is it GDPR compliant?',
+                 'Microsoft 365 adheres to the highest cybersecurity and data privacy standards '
+                 'including GDPR compliance. Data is stored in European Microsoft data centers '
+                 'with BitLocker and TLS encryption at rest and in transit, multi-factor '
+                 'authentication (MFA), and advanced ransomware recovery.')],
+         'es': [('What is Microsoft 365 Business Standard and what does it include?',
+                 'Microsoft 365 Business Standard (formerly Office 365 Business Premium) is '
+                 "Microsoft's complete business productivity and collaboration suite for SMBs. It "
+                 'includes: (1) fully installed desktop apps for PC and Mac (Word, Excel, '
+                 'PowerPoint, Outlook, OneNote, plus Access & Publisher on PC); (2) 50 GB Exchange '
+                 'Online business email with custom domain support; (3) Microsoft Teams for video '
+                 'meetings up to 300 attendees, recording, and channels; (4) 1 TB OneDrive for '
+                 'Business cloud storage per user with SharePoint; (5) business productivity apps '
+                 'such as Microsoft Bookings, Planner, Forms, Loop, and Clipchamp.'),
+                ('What is the difference between Business Standard and Microsoft 365 '
+                 'Personal/Family?',
+                 'Microsoft 365 Personal and Family are strictly consumer plans tied to personal '
+                 'Microsoft accounts (@outlook.com) without business infrastructure. Business '
+                 'Standard is a corporate platform allowing custom business email domains '
+                 '(name@company.com), 50 GB Exchange mailboxes, Teams meetings for up to 300 '
+                 'participants, SharePoint team intranets, and centralized user/security '
+                 'management via the Microsoft 365 Admin Center.'),
+                ('What is the difference between Business Standard and Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business is a one-time perpetual purchase for 1 PC or Mac '
+                 'only, containing classic 2024 apps without feature updates, without 50 GB '
+                 'Exchange email, without corporate Teams, and without 1 TB OneDrive cloud '
+                 'storage. Microsoft 365 Business Standard is an annual subscription providing '
+                 'always-updated desktop apps on up to 5 PCs/Macs + 5 mobile devices per user, '
+                 'combined with complete business cloud services.'),
+                ('How many devices can I install the apps on with 1 licence?',
+                 'Each single user licence of Microsoft 365 Business Standard allows simultaneous '
+                 'installation and use of Office apps on up to 5 PCs or Macs, 5 tablets (iPad, '
+                 'Android, Windows), and 5 smartphones (iPhone, Android), totaling up to 15 '
+                 'devices per user account.'),
+                ('Does it include business email with my custom company domain?',
+                 'Yes, it includes business-class Exchange Online email with a 50 GB mailbox per '
+                 'user. You can easily connect your company domain name (e.g. '
+                 'name@yourcompany.com) with shared team calendars, global contact lists, '
+                 'Microsoft Bookings scheduling, and enterprise spam/phishing filtering.'),
+                ('How does Microsoft Teams work in this plan and how many attendees can join?',
+                 'Microsoft Teams is included in its full business edition, supporting HD '
+                 'videoconferencing and webinars for up to 300 participants per meeting, cloud '
+                 'recording with automated transcription, breakout rooms, screen sharing, and '
+                 'interactive Microsoft Whiteboard. External guests can join meetings via browser '
+                 'without needing a paid licence.'),
+                ('How do I activate the licence after purchasing from AML Store?',
+                 'You will receive your 25-character Product Key and step-by-step instructions by '
+                 'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
+                 'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
+                 'If you are setting up a new organization, you can redeem the code on '
+                 'setup.office.com or microsoft365.com/setupbusiness.'),
+                ('Can I purchase multiple licences for my team members and employees?',
+                 'Yes. You can purchase the exact number of licences needed for your team (up to '
+                 '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
+                 'Center, you can assign, reassign, or revoke user licences anytime with a single '
+                 'click.'),
+                ('Is a VAT invoice provided for businesses?',
+                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'checkout you can provide your business details, VAT number, Tax Code, and '
+                 'SDI/PEC for official electronic invoicing.'),
+                ('How is data protected and is it GDPR compliant?',
+                 'Microsoft 365 adheres to the highest cybersecurity and data privacy standards '
+                 'including GDPR compliance. Data is stored in European Microsoft data centers '
+                 'with BitLocker and TLS encryption at rest and in transit, multi-factor '
+                 'authentication (MFA), and advanced ransomware recovery.')],
+         'pt': [('What is Microsoft 365 Business Standard and what does it include?',
+                 'Microsoft 365 Business Standard (formerly Office 365 Business Premium) is '
+                 "Microsoft's complete business productivity and collaboration suite for SMBs. It "
+                 'includes: (1) fully installed desktop apps for PC and Mac (Word, Excel, '
+                 'PowerPoint, Outlook, OneNote, plus Access & Publisher on PC); (2) 50 GB Exchange '
+                 'Online business email with custom domain support; (3) Microsoft Teams for video '
+                 'meetings up to 300 attendees, recording, and channels; (4) 1 TB OneDrive for '
+                 'Business cloud storage per user with SharePoint; (5) business productivity apps '
+                 'such as Microsoft Bookings, Planner, Forms, Loop, and Clipchamp.'),
+                ('What is the difference between Business Standard and Microsoft 365 '
+                 'Personal/Family?',
+                 'Microsoft 365 Personal and Family are strictly consumer plans tied to personal '
+                 'Microsoft accounts (@outlook.com) without business infrastructure. Business '
+                 'Standard is a corporate platform allowing custom business email domains '
+                 '(name@company.com), 50 GB Exchange mailboxes, Teams meetings for up to 300 '
+                 'participants, SharePoint team intranets, and centralized user/security '
+                 'management via the Microsoft 365 Admin Center.'),
+                ('What is the difference between Business Standard and Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business is a one-time perpetual purchase for 1 PC or Mac '
+                 'only, containing classic 2024 apps without feature updates, without 50 GB '
+                 'Exchange email, without corporate Teams, and without 1 TB OneDrive cloud '
+                 'storage. Microsoft 365 Business Standard is an annual subscription providing '
+                 'always-updated desktop apps on up to 5 PCs/Macs + 5 mobile devices per user, '
+                 'combined with complete business cloud services.'),
+                ('How many devices can I install the apps on with 1 licence?',
+                 'Each single user licence of Microsoft 365 Business Standard allows simultaneous '
+                 'installation and use of Office apps on up to 5 PCs or Macs, 5 tablets (iPad, '
+                 'Android, Windows), and 5 smartphones (iPhone, Android), totaling up to 15 '
+                 'devices per user account.'),
+                ('Does it include business email with my custom company domain?',
+                 'Yes, it includes business-class Exchange Online email with a 50 GB mailbox per '
+                 'user. You can easily connect your company domain name (e.g. '
+                 'name@yourcompany.com) with shared team calendars, global contact lists, '
+                 'Microsoft Bookings scheduling, and enterprise spam/phishing filtering.'),
+                ('How does Microsoft Teams work in this plan and how many attendees can join?',
+                 'Microsoft Teams is included in its full business edition, supporting HD '
+                 'videoconferencing and webinars for up to 300 participants per meeting, cloud '
+                 'recording with automated transcription, breakout rooms, screen sharing, and '
+                 'interactive Microsoft Whiteboard. External guests can join meetings via browser '
+                 'without needing a paid licence.'),
+                ('How do I activate the licence after purchasing from AML Store?',
+                 'You will receive your 25-character Product Key and step-by-step instructions by '
+                 'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
+                 'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
+                 'If you are setting up a new organization, you can redeem the code on '
+                 'setup.office.com or microsoft365.com/setupbusiness.'),
+                ('Can I purchase multiple licences for my team members and employees?',
+                 'Yes. You can purchase the exact number of licences needed for your team (up to '
+                 '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
+                 'Center, you can assign, reassign, or revoke user licences anytime with a single '
+                 'click.'),
+                ('Is a VAT invoice provided for businesses?',
+                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'checkout you can provide your business details, VAT number, Tax Code, and '
+                 'SDI/PEC for official electronic invoicing.'),
+                ('How is data protected and is it GDPR compliant?',
+                 'Microsoft 365 adheres to the highest cybersecurity and data privacy standards '
+                 'including GDPR compliance. Data is stored in European Microsoft data centers '
+                 'with BitLocker and TLS encryption at rest and in transit, multi-factor '
+                 'authentication (MFA), and advanced ransomware recovery.')],
+         'nl': [('What is Microsoft 365 Business Standard and what does it include?',
+                 'Microsoft 365 Business Standard (formerly Office 365 Business Premium) is '
+                 "Microsoft's complete business productivity and collaboration suite for SMBs. It "
+                 'includes: (1) fully installed desktop apps for PC and Mac (Word, Excel, '
+                 'PowerPoint, Outlook, OneNote, plus Access & Publisher on PC); (2) 50 GB Exchange '
+                 'Online business email with custom domain support; (3) Microsoft Teams for video '
+                 'meetings up to 300 attendees, recording, and channels; (4) 1 TB OneDrive for '
+                 'Business cloud storage per user with SharePoint; (5) business productivity apps '
+                 'such as Microsoft Bookings, Planner, Forms, Loop, and Clipchamp.'),
+                ('What is the difference between Business Standard and Microsoft 365 '
+                 'Personal/Family?',
+                 'Microsoft 365 Personal and Family are strictly consumer plans tied to personal '
+                 'Microsoft accounts (@outlook.com) without business infrastructure. Business '
+                 'Standard is a corporate platform allowing custom business email domains '
+                 '(name@company.com), 50 GB Exchange mailboxes, Teams meetings for up to 300 '
+                 'participants, SharePoint team intranets, and centralized user/security '
+                 'management via the Microsoft 365 Admin Center.'),
+                ('What is the difference between Business Standard and Office 2024 Home & '
+                 'Business?',
+                 'Office 2024 Home & Business is a one-time perpetual purchase for 1 PC or Mac '
+                 'only, containing classic 2024 apps without feature updates, without 50 GB '
+                 'Exchange email, without corporate Teams, and without 1 TB OneDrive cloud '
+                 'storage. Microsoft 365 Business Standard is an annual subscription providing '
+                 'always-updated desktop apps on up to 5 PCs/Macs + 5 mobile devices per user, '
+                 'combined with complete business cloud services.'),
+                ('How many devices can I install the apps on with 1 licence?',
+                 'Each single user licence of Microsoft 365 Business Standard allows simultaneous '
+                 'installation and use of Office apps on up to 5 PCs or Macs, 5 tablets (iPad, '
+                 'Android, Windows), and 5 smartphones (iPhone, Android), totaling up to 15 '
+                 'devices per user account.'),
+                ('Does it include business email with my custom company domain?',
+                 'Yes, it includes business-class Exchange Online email with a 50 GB mailbox per '
+                 'user. You can easily connect your company domain name (e.g. '
+                 'name@yourcompany.com) with shared team calendars, global contact lists, '
+                 'Microsoft Bookings scheduling, and enterprise spam/phishing filtering.'),
+                ('How does Microsoft Teams work in this plan and how many attendees can join?',
+                 'Microsoft Teams is included in its full business edition, supporting HD '
+                 'videoconferencing and webinars for up to 300 participants per meeting, cloud '
+                 'recording with automated transcription, breakout rooms, screen sharing, and '
+                 'interactive Microsoft Whiteboard. External guests can join meetings via browser '
+                 'without needing a paid licence.'),
+                ('How do I activate the licence after purchasing from AML Store?',
+                 'You will receive your 25-character Product Key and step-by-step instructions by '
+                 'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
+                 'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
+                 'If you are setting up a new organization, you can redeem the code on '
+                 'setup.office.com or microsoft365.com/setupbusiness.'),
+                ('Can I purchase multiple licences for my team members and employees?',
+                 'Yes. You can purchase the exact number of licences needed for your team (up to '
+                 '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
+                 'Center, you can assign, reassign, or revoke user licences anytime with a single '
+                 'click.'),
+                ('Is a VAT invoice provided for businesses?',
+                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'checkout you can provide your business details, VAT number, Tax Code, and '
+                 'SDI/PEC for official electronic invoicing.'),
+                ('How is data protected and is it GDPR compliant?',
+                 'Microsoft 365 adheres to the highest cybersecurity and data privacy standards '
+                 'including GDPR compliance. Data is stored in European Microsoft data centers '
+                 'with BitLocker and TLS encryption at rest and in transit, multi-factor '
+                 'authentication (MFA), and advanced ransomware recovery.')]}}
+
 backfill_lang(PRODUCTS)
 backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)
 
