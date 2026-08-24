@@ -99,7 +99,9 @@
     const SUPPORT_EMAIL = 'info@amlstore.it';
     const SUPPORT_WHATSAPP_URL = 'https://wa.me/393925580413';
 
-    function ensureSupportChat() {
+    let supportChatRequested = false;
+
+    function mountSupportChat() {
         if (document.querySelector('support-chat')) return;
         const mount = () => {
             if (document.querySelector('support-chat')) return;
@@ -115,6 +117,22 @@
             document.head.appendChild(script);
         }
         script.addEventListener('load', mount, { once: true });
+    }
+
+    function ensureSupportChat() {
+        if (supportChatRequested) return;
+        supportChatRequested = true;
+        /* Il pulsante deve comparire solo quando il backend e' davvero attivo:
+           senza questo controllo il widget si iniettava su ogni pagina anche a
+           CHAT_ENABLED=0, mostrando a tutti i visitatori un pulsante "Chat"
+           permanentemente inerte. L'endpoint non richiede sessione ed e' lo
+           stesso che il widget interroga per lo stato pubblico (ADR §45). */
+        fetch('/api/chat/availability', { credentials: 'same-origin' })
+            .then((response) => (response.ok ? response.json() : null))
+            .then((data) => {
+                if (data && data.enabled) mountSupportChat();
+            })
+            .catch(() => { /* rete assente o endpoint irraggiungibile: nessun widget, fail closed */ });
     }
 
 
