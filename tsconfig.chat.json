@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "WebWorker"],
+    "types": [
+      "@cloudflare/workers-types",
+      "@cloudflare/vitest-plugin/types",
+      "vitest/globals",
+      "node"
+    ],
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "support/**/*.ts",
+    "workers/support-realtime/**/*.ts",
+    "functions/_lib/chat/**/*.ts",
+    "functions/api/chat/**/*.ts",
+    "functions/admin/api/support/**/*.ts",
+    "functions/admin/support/**/*.ts",
+    "vitest.chat.config.mts"
+  ]
+}

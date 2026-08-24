@@ -24,6 +24,23 @@ PAYPAL_CLIENT_SECRET=<client-secret-sandbox>
 # Non impostare in produzione.
 CONSULTATION_DRY_RUN=1
 
+# Support chat locale (nessun account cliente: guest-only)
+CHAT_ENABLED=1
+CHAT_GUEST_SESSION_SECRET=dev-chat-guest-secret-change-me-32-chars-minimum
+CHAT_CONTACT_LOOKUP_SECRET=dev-chat-contact-secret-change-me-32-chars-minimum
+CHAT_GUEST_SESSION_DAYS=180
+CHAT_GUEST_COOKIE_NAME=aml_chat_guest_dev
+CHAT_ARCHIVE_AFTER_DAYS=30
+CHAT_RETENTION_DAYS=180
+CHAT_SPAM_RETENTION_DAYS=14
+CHAT_DELETE_GRACE_DAYS=0
+CHAT_TOMBSTONE_RETENTION_DAYS=30
+CHAT_RETENTION_BATCH_SIZE=100
+CHAT_MAX_MESSAGE_LENGTH=4000
+VAPID_PUBLIC_KEY=<chiave-pubblica-generata-con-npx-web-push-generate-vapid-keys>
+VAPID_PRIVATE_KEY=<chiave-privata-locale-non-committare>
+VAPID_SUBJECT=mailto:Info@amlstore.it
+
 # Conservazione dei carrelli tracciati (analytics). Facoltative: senza di esse
 # valgono i default indicati. La pulizia gira da sola, in coda alle richieste,
 # al massimo una volta all'ora.

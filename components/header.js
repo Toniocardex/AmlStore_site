@@ -46,6 +46,7 @@
             cartAriaMany: 'Carrello, {{n}} articoli',
             searchHint: 'Inizia a digitare per cercare',
             searchNoResults: 'Nessun risultato per "{{q}}"',
+            supportChat: 'Chat con assistenza',
         },
         en: {
             cartAriaEmpty: 'Shopping cart, empty',
@@ -53,6 +54,7 @@
             cartAriaMany: 'Shopping cart, {{n}} items',
             searchHint: 'Start typing to search',
             searchNoResults: 'No results for "{{q}}"',
+            supportChat: 'Chat with support',
         },
         fr: {
             cartAriaEmpty: 'Panier vide',
@@ -60,6 +62,7 @@
             cartAriaMany: 'Panier, {{n}} articles',
             searchHint: 'Commencez à taper pour rechercher',
             searchNoResults: 'Aucun résultat pour « {{q}} »',
+            supportChat: 'Chat avec le support',
         },
         de: {
             cartAriaEmpty: 'Warenkorb leer',
@@ -67,6 +70,7 @@
             cartAriaMany: 'Warenkorb, {{n}} Artikel',
             searchHint: 'Tippen Sie, um zu suchen',
             searchNoResults: 'Keine Ergebnisse für „{{q}}"',
+            supportChat: 'Support-Chat',
         },
         es: {
             cartAriaEmpty: 'Carrito vacío',
@@ -74,6 +78,7 @@
             cartAriaMany: 'Carrito, {{n}} artículos',
             searchHint: 'Empieza a escribir para buscar',
             searchNoResults: 'Sin resultados para "{{q}}"',
+            supportChat: 'Chat con soporte',
         },
         pt: {
             cartAriaEmpty: 'Carrinho vazio',
@@ -94,6 +99,24 @@
     const SUPPORT_EMAIL = 'info@amlstore.it';
     const SUPPORT_WHATSAPP_URL = 'https://wa.me/393925580413';
 
+    function ensureSupportChat() {
+        if (document.querySelector('support-chat')) return;
+        const mount = () => {
+            if (document.querySelector('support-chat')) return;
+            document.body.appendChild(document.createElement('support-chat'));
+        };
+        if (customElements.get('support-chat')) { mount(); return; }
+        let script = document.querySelector('script[data-aml-support-chat]');
+        if (!script) {
+            script = document.createElement('script');
+            script.src = '/components/support-chat.js?v=49e0adb9f3';
+            script.defer = true;
+            script.dataset.amlSupportChat = '';
+            document.head.appendChild(script);
+        }
+        script.addEventListener('load', mount, { once: true });
+    }
+
 
     class EcommerceHeader extends HTMLElement {
         constructor() {
@@ -101,6 +124,7 @@
         }
 
         connectedCallback() {
+            ensureSupportChat();
             /* locale-path.js e il markup pre-renderizzato possono arrivare dopo
                l'upgrade del custom element: si riprova per ~2s, poi si smette
                segnalando la causa invece di lasciare un timer che gira a vuoto. */
@@ -155,7 +179,26 @@
             const langSelector = this.querySelector('.lang-selector');
             const supportWrap = this.querySelector('.support-wrap');
             const supportTrigger = this.querySelector('.support-trigger');
-            const supportPanel = this.querySelector('#header-support-panel');
+                const supportPanel = this.querySelector('#header-support-panel');
+
+            const addChatEntry = (container, className, before) => {
+                if (!container || container.querySelector('[data-open-support-chat]')) return;
+                const link = document.createElement('a');
+                link.href = '#support-chat';
+                link.className = className;
+                link.dataset.openSupportChat = '';
+                link.textContent = t.supportChat;
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    window.dispatchEvent(new Event('aml-support-open'));
+                    closeSupport({ restoreFocus: false });
+                    closeMenu();
+                });
+                container.insertBefore(link, before || null);
+            };
+            addChatEntry(supportPanel, 'support-panel__link', supportPanel?.querySelector('.support-panel__hours'));
+            const drawerSupport = this.querySelector('.drawer-support-title')?.parentElement;
+            addChatEntry(drawerSupport, 'drawer-support-link', drawerSupport?.querySelector('.drawer-support-hours'));
 
             const isSupportOpen = () => Boolean(supportWrap && supportWrap.classList.contains('open'));
 

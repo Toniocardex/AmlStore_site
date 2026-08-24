@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="theme-color" content="#123d37">
+    <title>Supporto — Aml Store Admin</title>
+    <link rel="icon" href="/favicon/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/admin/support/manifest.webmanifest">
+    <link rel="stylesheet" href="/admin/support/support.css">
+    <link rel="stylesheet" href="/admin/support/support-settings.css">
+</head>
+<body>
+    <header class="sup-header">
+        <a href="/admin/" class="sup-brand">Aml Store <span>Supporto</span></a>
+        <div class="sup-presence"><i></i><span id="connection-state">Connessione…</span></div>
+        <button id="install-app" class="sup-header-action" type="button" hidden>Installa</button>
+        <button id="open-settings" class="sup-header-action" type="button">Profilo</button>
+        <a href="https://amlstore.cloudflareaccess.com/cdn-cgi/access/logout" class="sup-logout">Esci</a>
+    </header>
+    <main class="sup-shell">
+        <section class="sup-inbox" aria-label="Inbox supporto">
+            <div class="sup-toolbar">
+                <h1>Conversazioni</h1>
+                <select id="status-filter" aria-label="Filtra per stato">
+                    <option value="">Attive</option><option value="OPEN">Aperte</option>
+                    <option value="PENDING">In attesa</option><option value="CLOSED">Chiuse</option>
+                    <option value="ARCHIVED">Archiviate</option><option value="SPAM">Spam</option>
+                    <option value="PURGE_PENDING">Eliminazione programmata</option>
+                </select>
+            </div>
+            <div id="conversation-list" class="sup-list" role="list"></div>
+            <button id="load-more" class="sup-more" type="button" hidden>Carica altre</button>
+        </section>
+        <section class="sup-conversation" aria-label="Conversazione" data-empty="true">
+            <div class="sup-conversation-head">
+                <button class="sup-back" id="back-inbox" type="button" aria-label="Torna all’inbox">←</button>
+                <div><strong id="conversation-title">Seleziona una conversazione</strong><small id="conversation-status"></small></div>
+                <div class="sup-actions">
+                    <button id="assign-me" type="button">Assegna a me</button>
+                    <button id="open-details" class="sup-mobile-only" type="button">Dettagli</button>
+                    <button id="toggle-status" type="button">Chiudi</button>
+                    <button id="archive" type="button">Archivia</button>
+                    <button id="spam" type="button">Spam</button>
+                    <button id="export" type="button">Esporta</button>
+                    <button id="delete-chat" type="button">Elimina</button>
+                </div>
+            </div>
+            <div id="message-list" class="sup-messages" aria-live="polite"><p class="sup-placeholder">Scegli una conversazione dall’inbox.</p></div>
+            <form id="reply-form" class="sup-reply">
+                <textarea id="reply-body" maxlength="4000" required placeholder="Scrivi una risposta…"></textarea>
+                <button type="submit">Invia</button>
+            </form>
+        </section>
+        <aside class="sup-details" aria-label="Dettagli guest">
+            <h2>Guest</h2><dl id="guest-details"><dt>Identità</dt><dd>Nessuna conversazione selezionata</dd></dl>
+            <h2>Risposte rapide</h2>
+            <div class="sup-quick">
+                <button type="button" data-quick="Ciao, grazie per averci contattato. Come possiamo aiutarti?">Saluto</button>
+                <button type="button" data-quick="Stiamo verificando e ti aggiorniamo appena possibile.">Verifica in corso</button>
+                <button type="button" data-quick="Grazie, il problema risulta risolto. Restiamo a disposizione.">Risolto</button>
+            </div>
+        </aside>
+    </main>
+    <dialog id="support-settings" class="sup-settings">
+        <form method="dialog" id="settings-form">
+            <header><h2>Profilo e notifiche</h2><button value="cancel" aria-label="Chiudi">×</button></header>
+            <label>Stato operatore<select id="operator-availability"><option>ONLINE</option><option>BUSY</option><option>OFFLINE</option></select></label>
+            <label>Disponibilità pubblica<select id="public-availability"><option value="AUTO">Automatica</option><option value="ONLINE">Online</option><option value="OFFLINE">Offline</option></select></label>
+            <fieldset><legend>Preferenze</legend>
+                <label><input id="pref-new" type="checkbox"> Nuove conversazioni</label>
+                <label><input id="pref-message" type="checkbox"> Nuovi messaggi guest</label>
+                <label><input id="pref-assigned" type="checkbox"> Conversazioni assegnate</label>
+                <label><input id="pref-sound" type="checkbox"> Suono in-app</label>
+                <label><input id="pref-preview" type="checkbox"> Anteprima messaggio nella Push</label>
+            </fieldset>
+            <div class="sup-settings-actions">
+                <button id="toggle-push" type="button">Attiva notifiche</button>
+                <button id="test-push" type="button">Prova Push</button>
+                <button id="save-settings" type="button">Salva</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="guest-dialog" class="sup-settings sup-guest-dialog">
+        <section>
+            <header><h2>Dettagli guest</h2><button id="close-details" type="button" aria-label="Chiudi">×</button></header>
+            <dl id="guest-details-mobile"></dl>
+        </section>
+    </dialog>
+    <div id="sup-toast" role="status" aria-live="polite"></div>
+    <script src="/admin/support/support.js" defer></script>
+</body>
+</html>

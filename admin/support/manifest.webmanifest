@@ -1,0 +1,26 @@
+{
+  "id": "/admin/support/",
+  "name": "Aml Store Support Admin",
+  "short_name": "Support",
+  "description": "Console operatore Aml Store per l'assistenza guest realtime.",
+  "start_url": "/admin/support/",
+  "scope": "/admin/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#123d37",
+  "background_color": "#eef2f1",
+  "icons": [
+    {
+      "src": "/admin/support/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon/favicon.png",
+      "sizes": "200x200",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

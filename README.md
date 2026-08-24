@@ -18,6 +18,40 @@ Flusso: **GitHub** (questo repo) → integrazione **Cloudflare Pages** → **dep
 
 Il deploy pubblica file statici dalla root; le **Pages Functions** in `functions/api/` gestiscono checkout e ordini (D1).
 
+### Support chat realtime (implementazione locale completata)
+
+La piattaforma guest-only descritta in `docs/adr/ADR-CHAT-001-implementation-plan.md`
+usa un Worker separato con Durable Objects. Non crea account cliente: la
+continuità guest deriva esclusivamente da un cookie HttpOnly firmato.
+
+Sviluppo locale, in due terminali:
+
+```text
+npm run dev:support
+npm run dev
+```
+
+I due runtime usano la directory Miniflare dedicata `state-chat`: in questo
+modo il Worker e Pages condividono lo stesso D1 locale, mentre Wrangler collega
+i Durable Object esterni tramite il registry di sviluppo.
+
+Prima del primo avvio copiare le sole variabili chat di `.dev.vars.example` in
+`.dev.vars`, generando secret locali differenti. Inizializzare D1 con:
+
+```text
+npm run dev:db
+```
+
+Verifica del dominio chat:
+
+```text
+npm test
+```
+
+La PWA operatore è disponibile in `/admin/support/`. Configurazione ambienti,
+ordine di deploy, rollback, rotazione VAPID e gestione dei purge incompleti sono
+documentati in `docs/adr/ADR-CHAT-001-runbook.md`.
+
 ### Catalogo prezzi
 
 Il sito **non usa WooCommerce**: è solo HTML/CSS/JS statico + **Pages Functions** (`functions/api/`) per checkout (Stripe, PayPal, bonifico) e ordini su **D1**.
