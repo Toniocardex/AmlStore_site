@@ -64,6 +64,7 @@
                 if (event.key === 'Tab') this.trapFocus(event, panel);
             });
             this.watchConsentBanner();
+            this.watchStickyCart();
         }
 
         // Il pannello e' un dialog ARIA, non un <dialog> nativo: il browser non
@@ -100,6 +101,24 @@
             window.addEventListener('load', sync, { once: true });
         }
 
+        /* Sulla PDP mobile la barra "Aggiungi al carrello" e' fixed in basso
+           quanto il launcher: senza questo scarto il launcher finisce sopra il
+           pulsante d'acquisto principale. Su desktop la barra sticky sta in alto,
+           quindi lo scarto si applica solo sotto i 768px. */
+        watchStickyCart() {
+            const bar = document.getElementById('product-sticky-cta');
+            if (!bar) return;
+            const mobileQuery = window.matchMedia('(max-width: 768px)');
+            const sync = () => {
+                const overlap = mobileQuery.matches && bar.classList.contains('product-sticky-cta--visible');
+                this.style.setProperty('--sc-cart-offset', overlap ? bar.getBoundingClientRect().height + 'px' : '0px');
+            };
+            sync();
+            new MutationObserver(sync).observe(bar, { attributes: true, attributeFilter: ['class'] });
+            mobileQuery.addEventListener('change', sync);
+            window.addEventListener('resize', sync, { passive: true });
+        }
+
         render() {
             const bubbleIcon = '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" '
                 + 'stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'
@@ -123,9 +142,10 @@
                     color: var(--sc-ink);
                     position: fixed;
                     right: clamp(12px, 2.5vw, 20px);
-                    bottom: calc(clamp(12px, 2.5vw, 20px) + env(safe-area-inset-bottom, 0px));
+                    bottom: calc(clamp(12px, 2.5vw, 20px) + env(safe-area-inset-bottom, 0px) + var(--sc-cart-offset, 0px));
                     /* Sotto aml-cookie-banner (10050): il consenso deve restare cliccabile. */
                     z-index: 10040;
+                    transition: bottom .2s ease;
                 }
                 *{box-sizing:border-box}
                 button,input,textarea{font:inherit;color:inherit}
