@@ -2,11 +2,11 @@
     'use strict';
 
     const COPY = {
-        it: { launcher: 'Chat', title: 'Assistenza Aml Store', intro: 'Come possiamo aiutarti?', name: 'Nome (facoltativo)', email: 'Email (facoltativa)', placeholder: 'Scrivi un messaggio…', sendHint: 'Premi Invio per inviare, Maiuscolo+Invio per andare a capo.', send: 'Invia', loading: 'Connessione…', offline: 'Chat non disponibile. Scrivici a info@amlstore.it', retry: 'Riconnessione…', error: 'Messaggio non inviato. Riprova.', close: 'Chiudi chat', open: 'Apri la chat di assistenza', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Connessione…', stReconnecting: 'Riconnessione…', stError: 'Non disponibile', noticeOnline: 'Assistenza online. Di solito rispondiamo in pochi minuti.', noticeOffline: 'Siamo offline. Lascia un messaggio, ti rispondiamo appena possibile.' },
-        en: { launcher: 'Chat', title: 'Aml Store support', intro: 'How can we help?', name: 'Name (optional)', email: 'Email (optional)', placeholder: 'Write a message…', sendHint: 'Press Enter to send, Shift+Enter for a new line.', send: 'Send', loading: 'Connecting…', offline: 'Chat unavailable. Email info@amlstore.it', retry: 'Reconnecting…', error: 'Message not sent. Please retry.', close: 'Close chat', open: 'Open the support chat', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Connecting…', stReconnecting: 'Reconnecting…', stError: 'Unavailable', noticeOnline: 'Support is online. We usually reply within minutes.', noticeOffline: 'We are offline. Leave a message and we will reply as soon as we can.' },
-        fr: { launcher: 'Chat', title: 'Assistance Aml Store', intro: 'Comment pouvons-nous vous aider ?', name: 'Nom (facultatif)', email: 'E-mail (facultatif)', placeholder: 'Écrivez un message…', sendHint: 'Appuyez sur Entrée pour envoyer, Maj+Entrée pour un retour à la ligne.', send: 'Envoyer', loading: 'Connexion…', offline: 'Chat indisponible. Écrivez à info@amlstore.it', retry: 'Reconnexion…', error: 'Message non envoyé. Réessayez.', close: 'Fermer le chat', open: 'Ouvrir le chat d’assistance', stOnline: 'En ligne', stOffline: 'Hors ligne', stConnecting: 'Connexion…', stReconnecting: 'Reconnexion…', stError: 'Indisponible', noticeOnline: 'Assistance en ligne. Nous répondons en quelques minutes.', noticeOffline: 'Nous sommes hors ligne. Laissez un message, nous répondrons dès que possible.' },
-        de: { launcher: 'Chat', title: 'Aml Store Support', intro: 'Wie können wir helfen?', name: 'Name (optional)', email: 'E-Mail (optional)', placeholder: 'Nachricht schreiben…', sendHint: 'Eingabetaste zum Senden, Umschalt+Eingabetaste für einen Zeilenumbruch.', send: 'Senden', loading: 'Verbindung…', offline: 'Chat nicht verfügbar. E-Mail: info@amlstore.it', retry: 'Verbindung wird wiederhergestellt…', error: 'Nachricht nicht gesendet. Erneut versuchen.', close: 'Chat schließen', open: 'Support-Chat öffnen', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Verbindung…', stReconnecting: 'Neuverbindung…', stError: 'Nicht verfügbar', noticeOnline: 'Support ist online. Wir antworten meist in wenigen Minuten.', noticeOffline: 'Wir sind offline. Hinterlassen Sie eine Nachricht, wir melden uns schnellstmöglich.' },
-        es: { launcher: 'Chat', title: 'Soporte Aml Store', intro: '¿Cómo podemos ayudarte?', name: 'Nombre (opcional)', email: 'Email (opcional)', placeholder: 'Escribe un mensaje…', sendHint: 'Pulsa Intro para enviar, Mayús+Intro para un salto de línea.', send: 'Enviar', loading: 'Conectando…', offline: 'Chat no disponible. Escribe a info@amlstore.it', retry: 'Reconectando…', error: 'Mensaje no enviado. Inténtalo de nuevo.', close: 'Cerrar chat', open: 'Abrir el chat de soporte', stOnline: 'En línea', stOffline: 'Sin conexión', stConnecting: 'Conectando…', stReconnecting: 'Reconectando…', stError: 'No disponible', noticeOnline: 'Soporte en línea. Solemos responder en pocos minutos.', noticeOffline: 'Estamos sin conexión. Deja un mensaje y te responderemos lo antes posible.' },
+        it: { launcher: 'Chat', title: 'Assistenza Aml Store', intro: 'Come possiamo aiutarti?', name: 'Nome (facoltativo)', email: 'Email (facoltativa)', nameRequired: 'Nome', emailRequired: 'Email (per ricontattarti)', placeholder: 'Scrivi un messaggio…', sendHint: 'Premi Invio per inviare, Maiuscolo+Invio per andare a capo.', send: 'Invia', loading: 'Connessione…', offline: 'Chat non disponibile. Scrivici a info@amlstore.it', retry: 'Riconnessione…', error: 'Messaggio non inviato. Riprova.', close: 'Chiudi chat', open: 'Apri la chat di assistenza', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Connessione…', stReconnecting: 'Riconnessione…', stError: 'Non disponibile', noticeOnline: 'Assistenza online. Di solito rispondiamo in pochi minuti.', noticeOffline: 'Siamo offline. Lascia nome, email e un messaggio: ti ricontattiamo appena possibile.' },
+        en: { launcher: 'Chat', title: 'Aml Store support', intro: 'How can we help?', name: 'Name (optional)', email: 'Email (optional)', nameRequired: 'Name', emailRequired: 'Email (so we can reply)', placeholder: 'Write a message…', sendHint: 'Press Enter to send, Shift+Enter for a new line.', send: 'Send', loading: 'Connecting…', offline: 'Chat unavailable. Email info@amlstore.it', retry: 'Reconnecting…', error: 'Message not sent. Please retry.', close: 'Close chat', open: 'Open the support chat', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Connecting…', stReconnecting: 'Reconnecting…', stError: 'Unavailable', noticeOnline: 'Support is online. We usually reply within minutes.', noticeOffline: 'We are offline. Leave your name, email and a message: we will get back to you.' },
+        fr: { launcher: 'Chat', title: 'Assistance Aml Store', intro: 'Comment pouvons-nous vous aider ?', name: 'Nom (facultatif)', email: 'E-mail (facultatif)', nameRequired: 'Nom', emailRequired: 'E-mail (pour vous répondre)', placeholder: 'Écrivez un message…', sendHint: 'Appuyez sur Entrée pour envoyer, Maj+Entrée pour un retour à la ligne.', send: 'Envoyer', loading: 'Connexion…', offline: 'Chat indisponible. Écrivez à info@amlstore.it', retry: 'Reconnexion…', error: 'Message non envoyé. Réessayez.', close: 'Fermer le chat', open: 'Ouvrir le chat d’assistance', stOnline: 'En ligne', stOffline: 'Hors ligne', stConnecting: 'Connexion…', stReconnecting: 'Reconnexion…', stError: 'Indisponible', noticeOnline: 'Assistance en ligne. Nous répondons en quelques minutes.', noticeOffline: 'Nous sommes hors ligne. Laissez nom, e-mail et un message : nous vous recontacterons.' },
+        de: { launcher: 'Chat', title: 'Aml Store Support', intro: 'Wie können wir helfen?', name: 'Name (optional)', email: 'E-Mail (optional)', nameRequired: 'Name', emailRequired: 'E-Mail (für die Antwort)', placeholder: 'Nachricht schreiben…', sendHint: 'Eingabetaste zum Senden, Umschalt+Eingabetaste für einen Zeilenumbruch.', send: 'Senden', loading: 'Verbindung…', offline: 'Chat nicht verfügbar. E-Mail: info@amlstore.it', retry: 'Verbindung wird wiederhergestellt…', error: 'Nachricht nicht gesendet. Erneut versuchen.', close: 'Chat schließen', open: 'Support-Chat öffnen', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Verbindung…', stReconnecting: 'Neuverbindung…', stError: 'Nicht verfügbar', noticeOnline: 'Support ist online. Wir antworten meist in wenigen Minuten.', noticeOffline: 'Wir sind offline. Hinterlassen Sie Name, E-Mail und eine Nachricht, wir melden uns.' },
+        es: { launcher: 'Chat', title: 'Soporte Aml Store', intro: '¿Cómo podemos ayudarte?', name: 'Nombre (opcional)', email: 'Email (opcional)', nameRequired: 'Nombre', emailRequired: 'Email (para responderte)', placeholder: 'Escribe un mensaje…', sendHint: 'Pulsa Intro para enviar, Mayús+Intro para un salto de línea.', send: 'Enviar', loading: 'Conectando…', offline: 'Chat no disponible. Escribe a info@amlstore.it', retry: 'Reconectando…', error: 'Mensaje no enviado. Inténtalo de nuevo.', close: 'Cerrar chat', open: 'Abrir el chat de soporte', stOnline: 'En línea', stOffline: 'Sin conexión', stConnecting: 'Conectando…', stReconnecting: 'Reconectando…', stError: 'No disponible', noticeOnline: 'Soporte en línea. Solemos responder en pocos minutos.', noticeOffline: 'Estamos sin conexión. Deja tu nombre, email y un mensaje: te responderemos.' },
     };
 
     const id = (prefix) => prefix + '_' + crypto.randomUUID();
@@ -276,11 +276,15 @@
                    della socket (ADR §45), ed e' quello che il badge deve mostrare. */
                 const status = await this.api('/api/chat/availability').catch(() => null);
                 this.availability = status && status.availability === 'ONLINE' ? 'ONLINE' : 'OFFLINE';
+                this.updateContactRequirement();
                 const data = await this.api('/api/chat/conversations');
                 const latest = (data.conversations || [])[0];
                 if (latest) {
                     this.conversationId = latest.id;
                     this.lastSeq = Number(latest.lastSeq || 0);
+                    // Nome/email hanno senso solo per il primo messaggio: una
+                    // conversazione gia' esistente ha gia' un'identita' associata.
+                    this.shadowRoot.querySelector('.contact').hidden = true;
                     await this.loadHistory();
                     this.connectSocket();
                 } else {
@@ -337,6 +341,26 @@
 
         availabilityNotice() {
             return this.availability === 'ONLINE' ? this.t.noticeOnline : this.t.noticeOffline;
+        }
+
+        // Offline nessuno legge il messaggio in tempo reale: senza un modo per
+        // ricontattarlo il primo messaggio del visitatore rischia di restare senza
+        // risposta. Online la richiesta resta facoltativa, la conversazione prosegue
+        // gia' in chat.
+        updateContactRequirement() {
+            const offline = this.availability === 'OFFLINE';
+            const nameInput = this.shadowRoot.querySelector('#sc-name');
+            const emailInput = this.shadowRoot.querySelector('#sc-email');
+            const nameLabel = this.shadowRoot.querySelector('label[for="sc-name"]');
+            const emailLabel = this.shadowRoot.querySelector('label[for="sc-email"]');
+            const nameText = offline ? this.t.nameRequired : this.t.name;
+            const emailText = offline ? this.t.emailRequired : this.t.email;
+            nameInput.required = offline;
+            emailInput.required = offline;
+            nameInput.placeholder = nameText;
+            emailInput.placeholder = emailText;
+            nameLabel.textContent = nameText;
+            emailLabel.textContent = emailText;
         }
 
         setState(state, notice) {
