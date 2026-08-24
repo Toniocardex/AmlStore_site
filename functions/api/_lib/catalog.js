@@ -9,7 +9,7 @@
 /** @type {Record<string, CatalogEntry>} */
 export const CATALOG = {
   "QQ2-00012": { name: "Microsoft 365 Personal | 12 Mesi | Copilot AI + 1TB Cloud", unitAmountMinor: 8479, compareAtMinor: 9900, currency: 'EUR', type: "subscription", category: "suite office > microsoft 365" },
-  "EP2-06798": { name: "Microsoft Office 2024 Home | PC/Mac", unitAmountMinor: 13900, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
+  "EP2-06798": { name: "Microsoft Office 2024 Home | PC/Mac", unitAmountMinor: 13400, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
   "EP2-07219": { name: "Microsoft Word 2024  (Standalone) | Licenza ESD Originale", unitAmountMinor: 8200, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
   "065-09748": { name: "Microsoft Excel 2024 (Standalone) | Licenza ESD Originale", unitAmountMinor: 8200, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office" },
   "065-09804": { name: "Microsoft PowerPoint 2024 (Standalone) | Licenza ESD Originale", unitAmountMinor: 8200, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
