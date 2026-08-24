@@ -1,8 +1,10 @@
 # ADR-CHAT-001 rev1.2 — Piano di implementazione
 
 **Stato:** M0–M7 implementate; merged su `main`; infrastruttura di produzione e
-preview deployata e isolata; `CHAT_ENABLED=0` ovunque — device matrix, security
-test e load test restano il gate esplicito prima dell'attivazione  
+preview deployata e isolata; **`CHAT_ENABLED=1` in produzione dal 2026-08-24**
+(attivata su decisione esplicita dell'utente per test reali, con Safari
+iPhone, conferma Push da desktop esterno e test di retention/purge ancora
+aperti — vedi §0.3)  
 **Data:** 2026-08-24  
 **Specifica normativa:** `ADR-CHAT-001 — Integrated Realtime Support Chat, Admin PWA and Cloudflare Infrastructure — rev1.2`  
 **Repository target:** AmlStore_site  
@@ -241,6 +243,30 @@ Contro il gate «prima di `CHAT_ENABLED=1`» del runbook:
   della sottoscrizione Push reale da un desktop **non** vincolato dalla
   rete/policy di questa macchina di sviluppo; riesecuzione del load test e
   del test di retention/purge dopo il riavvio dei dev server.
+
+### 0.4 Attivazione in produzione (2026-08-24)
+
+`CHAT_ENABLED` passato a `"1"` sia nel Worker `aml-support-realtime`
+(deployato) sia nel progetto Pages (`wrangler.toml` root, commit `840d0341`,
+deploy Pages `c01708ff` su `main`), su richiesta esplicita dell'utente dopo
+aver valutato i gap residui (§0.3) come accettabili per iniziare test reali.
+Verificato subito dopo il deploy:
+
+- `/api/chat/availability` in produzione risponde `enabled:true`;
+- il widget compare sull'homepage reale dopo la chiusura del banner cookie
+  (nascosto correttamente finché il banner è aperto);
+- un messaggio guest reale inviato dal widget produce `POST
+  /api/chat/conversations → 201`, nessun errore di rete;
+- la conversazione di test è visibile su D1 di produzione (query `--remote`)
+  ed è stata effettivamente **ricevuta e risposta da un operatore** tramite
+  il pannello admin nello stesso arco di tempo — primo giro completo
+  guest→admin confermato su infrastruttura reale, non solo in locale.
+
+Restano da chiudere, ora con priorità più bassa rispetto a un blocco
+pre-attivazione ma comunque aperti: Safari iPhone, conferma Push da desktop
+esterno a questa rete, test di retention/purge, e la domanda se il blocco D1
+sotto scrittura concorrente osservato nel load test locale (§0.3) possa
+presentarsi in produzione anche a bassa concorrenza.
 
 ## 1. Obiettivo
 

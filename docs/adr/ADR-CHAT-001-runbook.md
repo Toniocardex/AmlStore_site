@@ -43,7 +43,9 @@ ancora verificato se riproducibile sul D1 di produzione o specifico del
 simulatore locale. Il test di retention/purge su dati sintetici non è stato
 completato (interrotto dallo stesso blocco). Restano aperti anche Safari
 iPhone e la conferma Push reale da un desktop fuori da questa rete di
-sviluppo. `CHAT_ENABLED` resta `0` ovunque: il passo 7 non è ancora iniziato.
+sviluppo. **`CHAT_ENABLED=1` in produzione dal 2026-08-24** (passo 7
+avviato su richiesta esplicita dell'utente, con quei gap ancora aperti):
+primo giro guest→admin reale verificato subito dopo il deploy.
 
 Ordine obbligatorio:
 
