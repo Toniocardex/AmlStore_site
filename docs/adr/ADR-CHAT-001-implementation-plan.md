@@ -220,9 +220,15 @@ Contro il gate «prima di `CHAT_ENABLED=1`» del runbook:
   Cloudflare in edge (servizio distribuito) o è specifica del simulatore
   SQLite locale di Miniflare condiviso da due processi `wrangler dev`
   separati (Pages + Worker) sullo stesso file — scenario esplicitamente
-  locale per disegno (vedi runbook, sezione «Sviluppo locale»). Da trattare
-  come rischio aperto finché non si ripete il test contro un D1 di preview
-  reale.
+  locale per disegno (vedi runbook, sezione «Sviluppo locale»).
+  **Valutazione del rischio (2026-08-24):** l'utente giudica lo scenario di
+  30 creazioni concorrenti nello stesso istante non rappresentativo del
+  traffico reale del negozio, e non lo considera bloccante per l'attivazione.
+  Resta comunque non verificato se un blocco della connessione D1 analogo
+  possa presentarsi anche a concorrenza molto più bassa (es. 2-3 conversazioni
+  aperte nello stesso secondo, o un guest che scrive mentre gira il cron di
+  retention) — non testato a quella scala né confermato contro un D1 di
+  preview reale.
 - **Test retention/purge su dati sintetici: non completato.** Il piano
   prevedeva chiudere una conversazione reale, retrodatare `archive_at` e
   `purge_at` su D1 per simulare il tempo trascorso, e verificare l'intera
