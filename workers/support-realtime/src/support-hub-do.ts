@@ -1,4 +1,6 @@
 import type { SupportRealtimeEnv } from './env';
+import { isWithinBusinessHours } from '../../../support/shared/business-hours';
+import { readChatConfig } from '../../../support/shared/config';
 import { ChatProtocolError } from '../../../support/shared/errors';
 import { isPrefixedId } from '../../../support/shared/ids';
 import { dispatchVisitorPush } from './push';
@@ -30,11 +32,12 @@ export class SupportHubDurableObject {
                 SELECT public_availability_override FROM chat_support_settings WHERE settings_key = 'default'
             `).first<{ public_availability_override: 'AUTO' | 'ONLINE' | 'OFFLINE' }>();
             const override = settings?.public_availability_override || 'AUTO';
-            const operatorOnline = this.ctx.getWebSockets('operator').some((socket) => {
-                const attachment = socket.deserializeAttachment() as OperatorAttachment | null;
-                return attachment?.operatorState === 'ONLINE';
-            });
-            const availability = override === 'AUTO' ? (operatorOnline ? 'ONLINE' : 'OFFLINE') : override;
+            // ADR §45: "AUTO" segue l'orario del negozio (vedi support/shared/business-hours.ts),
+            // non la connessione WS dell'operatore — l'attivita' e' gestita da una sola persona
+            // che non tiene il pannello admin aperto tutto il giorno.
+            const config = readChatConfig(this.env as unknown as Record<string, string | undefined>);
+            const scheduleOnline = isWithinBusinessHours(config.businessHours);
+            const availability = override === 'AUTO' ? (scheduleOnline ? 'ONLINE' : 'OFFLINE') : override;
             return Response.json({ availability, override, operatorConnected: this.ctx.getWebSockets('operator').length > 0 });
         }
         if (request.method === 'POST' && url.pathname === '/internal/events') {

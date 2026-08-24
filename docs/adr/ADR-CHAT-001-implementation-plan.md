@@ -268,6 +268,22 @@ esterno a questa rete, test di retention/purge, e la domanda se il blocco D1
 sotto scrittura concorrente osservato nel load test locale (§0.3) possa
 presentarsi in produzione anche a bassa concorrenza.
 
+### 0.5 Disponibilità pubblica automatica per orario (2026-08-24)
+
+L'opzione "Automatica" della disponibilità pubblica (`chat_support_settings.
+public_availability_override`, già `AUTO` in produzione) seguiva la presenza
+WS dell'operatore: con un solo operatore che non tiene il pannello admin
+aperto tutto il giorno, in pratica non risultava mai online. Sostituita con
+una policy oraria (`support/shared/business-hours.ts`, coperta da 6 unit
+test), calcolata con `Intl.DateTimeFormat` per restare corretta attraverso il
+cambio ora legale/solare — non con l'orologio del Worker, quasi sempre UTC.
+Default: 08:00–19:00, lunedì–sabato, `Europe/Rome`, configurabile via
+`CHAT_BUSINESS_HOURS_START` / `_END` / `_DAYS` (lista di interi 0=domenica…
+6=sabato) / `_TIMEZONE`. Gli override manuali "Online"/"Offline" restano
+prioritari sulla schedulazione. Nessuna azione richiesta per attivarla:
+essendo già `AUTO`, il nuovo comportamento vale dal prossimo deploy del
+Worker `aml-support-realtime`.
+
 ## 1. Obiettivo
 
 Implementare, per incrementi verificabili, la piattaforma di supporto prevista

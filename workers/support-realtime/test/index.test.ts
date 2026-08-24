@@ -9,11 +9,13 @@ beforeEach(async () => {
 
 describe('scheduled retention gate', () => {
     it('does not touch D1 when CHAT_ENABLED is 0', async () => {
-        expect(env.CHAT_ENABLED).toBe('0');
+        // Non fare affidamento sul valore ambientale di wrangler.toml (in
+        // produzione CHAT_ENABLED e' "1"): il gate va provato esplicitamente.
+        const disabledEnv = { ...env, CHAT_ENABLED: '0' };
         const ctx = createExecutionContext();
         await worker.scheduled(
             { cron: '*/15 * * * *' } as ScheduledController,
-            env,
+            disabledEnv,
             ctx,
         );
         await waitOnExecutionContext(ctx);
