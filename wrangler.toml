@@ -89,3 +89,80 @@ VAPID_SUBJECT = "mailto:Info@amlstore.it"
 # CHAT_CONTACT_LOOKUP_SECRET — HMAC secret lookup email, random >=32 caratteri
 # VAPID_PRIVATE_KEY          — private key Web Push (fase Push)
 # VAPID_SUBJECT              — mailto: o URL identificativo VAPID
+
+# ══════════════════════════════════════════════════════════════════════════
+# Ambiente preview (branch chat/adr-chat-001 → build automatica Cloudflare
+# Pages su ogni push, alias di branch: chat-adr-chat-001.amlstore-site.pages.dev)
+#
+# ATTENZIONE — i binding non sono ereditabili: appena una sezione [env.preview]
+# sovrascrive UN SOLO binding (qui i D1/DO), Cloudflare Pages smette di
+# applicare ANCHE gli altri binding top-level a quell'ambiente (R2, e i [vars]
+# in blocco) finché non vengono ridichiarati qui sotto. Aggiungere in futuro
+# una var/binding SOLO in cima al file, senza toccare anche [env.preview],
+# la renderebbe silenziosamente assente in preview.
+# Fonte: https://developers.cloudflare.com/pages/functions/wrangler-configuration/
+# ══════════════════════════════════════════════════════════════════════════
+[env.preview]
+
+[[env.preview.d1_databases]]
+binding       = "DB"
+# D1 fisicamente separato da aml-orders (ADR-CHAT-001 §83): stesso schema
+# (schema.sql + schema-stock-migration.sql + migrations/0002_chat_core.sql),
+# zero dati reali di clienti/ordini.
+database_name = "aml-store-preview"
+database_id   = "07947b6c-2b3a-418e-8c33-2d745bbccfda"
+
+[[env.preview.r2_buckets]]
+binding     = "GUIDES"
+bucket_name = "aml-store-guides"
+
+[[env.preview.durable_objects.bindings]]
+name        = "CHAT_CONVERSATIONS"
+class_name  = "ConversationDurableObject"
+script_name = "aml-support-realtime-preview"
+
+[[env.preview.durable_objects.bindings]]
+name        = "SUPPORT_HUB"
+class_name  = "SupportHubDurableObject"
+script_name = "aml-support-realtime-preview"
+
+[env.preview.vars]
+SITE_ORIGIN     = "https://chat-adr-chat-001.amlstore-site.pages.dev"
+# Sandbox, mai LIVE: una build di preview non deve poter processare un
+# pagamento reale. PAYPAL_CLIENT_ID/SECRET sandbox non sono ancora impostati
+# come secret Pages preview — finché mancano, il checkout PayPal fallisce
+# chiuso (nessun rischio), non silenziosamente verso l'account LIVE.
+PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"
+
+# Stessa Access app di produzione: e' scoped sull'hostname aml-store.com, non
+# copre questo hostname .pages.dev, quindi qui resta un valore innocuo finché
+# non si aggiunge (dalla dashboard Zero Trust) un'applicazione Access anche per
+# questo host — nel frattempo /admin/support su preview risponde 401 di suo.
+CF_ACCESS_AUD         = "61bb5d94ba4477a21b272c98ef419414d508f3a3f5378f949c87b5bce2d403c1"
+CF_ACCESS_TEAM_DOMAIN = "amlstore.cloudflareaccess.com"
+ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
+ADMIN_ALLOW_DELETE_ORDERS = "1"
+ADMIN_ALLOW_DELETE_CARTS = "1"
+
+CHAT_ENABLED = "1"
+CHAT_GUEST_SESSION_DAYS = "180"
+CHAT_GUEST_COOKIE_NAME = "aml_chat_guest_preview"
+CHAT_ARCHIVE_AFTER_DAYS = "30"
+CHAT_RETENTION_DAYS = "180"
+CHAT_SPAM_RETENTION_DAYS = "14"
+CHAT_DELETE_GRACE_DAYS = "0"
+CHAT_TOMBSTONE_RETENTION_DAYS = "30"
+CHAT_RETENTION_BATCH_SIZE = "100"
+CHAT_MAX_MESSAGE_LENGTH = "4000"
+VAPID_PUBLIC_KEY = "BPB7Rwy0hl22PwYciLbqAFlBDq_bISkX67Dc-8mySZHHMZQ8l6Jsq0D4dVQJHmZrrMBAggeWB-RoHNOKFQ0ikLU"
+VAPID_SUBJECT = "mailto:Info@amlstore.it"
+
+# Secret preview (già impostati con `wrangler pages secret put <NAME>
+# --project-name=amlstore-site --env=preview`):
+#   CHAT_GUEST_SESSION_SECRET, CHAT_CONTACT_LOOKUP_SECRET, TOKEN_SECRET
+#   (TOKEN_SECRET preview è un valore dedicato, diverso da quello reale di
+#   produzione che firma i link "grazie per l'ordine").
+# Non impostati per preview (checkout/email restano inerti, senza rischio):
+#   PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_WEBHOOK_ID,
+#   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY,
+#   FRAUD_HASH_SECRET, TRUSTPILOT_BCC
