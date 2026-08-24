@@ -57,11 +57,12 @@ ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
 ADMIN_ALLOW_DELETE_ORDERS = "1"
 ADMIN_ALLOW_DELETE_CARTS = "1"
 
-# Support chat — infrastruttura pronta, disabilitata fino al completamento
-# del rollout (device matrix, security test, load test: vedi
-# docs/adr/ADR-CHAT-001-implementation-plan.md §0.1). Non passare a "1" prima
-# che quella checklist sia chiusa.
-CHAT_ENABLED = "0"
+# Support chat — attivata il 2026-08-24 per test reali in produzione, con
+# alcune voci della checklist ancora aperte per scelta esplicita dell'utente
+# (Safari iPhone non testato, Push reale da desktop non confermata fuori
+# dalla rete di sviluppo, test di retention/purge non completato): vedi
+# docs/adr/ADR-CHAT-001-implementation-plan.md §0.3. Rollback: CHAT_ENABLED=0.
+CHAT_ENABLED = "1"
 CHAT_GUEST_SESSION_DAYS = "180"
 CHAT_GUEST_COOKIE_NAME = "__Host-aml_chat_guest"
 CHAT_ARCHIVE_AFTER_DAYS = "30"

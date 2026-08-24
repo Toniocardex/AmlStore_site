@@ -25,7 +25,7 @@ new_sqlite_classes = ["ConversationDurableObject", "SupportHubDurableObject"]
 crons = ["*/15 * * * *"]
 
 [vars]
-CHAT_ENABLED = "0"
+CHAT_ENABLED = "1"
 CHAT_GUEST_SESSION_DAYS = "180"
 CHAT_GUEST_COOKIE_NAME = "__Host-aml_chat_guest"
 CHAT_ARCHIVE_AFTER_DAYS = "30"
