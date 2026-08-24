@@ -2,11 +2,11 @@
     'use strict';
 
     const COPY = {
-        it: { launcher: 'Chat', title: 'Assistenza Aml Store', intro: 'Come possiamo aiutarti?', name: 'Nome (facoltativo)', email: 'Email (facoltativa)', placeholder: 'Scrivi un messaggio…', send: 'Invia', loading: 'Connessione…', offline: 'Chat non disponibile. Scrivici a info@amlstore.it', retry: 'Riconnessione…', error: 'Messaggio non inviato. Riprova.', close: 'Chiudi chat', open: 'Apri la chat di assistenza', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Connessione…', stReconnecting: 'Riconnessione…', stError: 'Non disponibile', noticeOnline: 'Assistenza online. Di solito rispondiamo in pochi minuti.', noticeOffline: 'Siamo offline. Lascia un messaggio, ti rispondiamo appena possibile.' },
-        en: { launcher: 'Chat', title: 'Aml Store support', intro: 'How can we help?', name: 'Name (optional)', email: 'Email (optional)', placeholder: 'Write a message…', send: 'Send', loading: 'Connecting…', offline: 'Chat unavailable. Email info@amlstore.it', retry: 'Reconnecting…', error: 'Message not sent. Please retry.', close: 'Close chat', open: 'Open the support chat', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Connecting…', stReconnecting: 'Reconnecting…', stError: 'Unavailable', noticeOnline: 'Support is online. We usually reply within minutes.', noticeOffline: 'We are offline. Leave a message and we will reply as soon as we can.' },
-        fr: { launcher: 'Chat', title: 'Assistance Aml Store', intro: 'Comment pouvons-nous vous aider ?', name: 'Nom (facultatif)', email: 'E-mail (facultatif)', placeholder: 'Écrivez un message…', send: 'Envoyer', loading: 'Connexion…', offline: 'Chat indisponible. Écrivez à info@amlstore.it', retry: 'Reconnexion…', error: 'Message non envoyé. Réessayez.', close: 'Fermer le chat', open: 'Ouvrir le chat d’assistance', stOnline: 'En ligne', stOffline: 'Hors ligne', stConnecting: 'Connexion…', stReconnecting: 'Reconnexion…', stError: 'Indisponible', noticeOnline: 'Assistance en ligne. Nous répondons en quelques minutes.', noticeOffline: 'Nous sommes hors ligne. Laissez un message, nous répondrons dès que possible.' },
-        de: { launcher: 'Chat', title: 'Aml Store Support', intro: 'Wie können wir helfen?', name: 'Name (optional)', email: 'E-Mail (optional)', placeholder: 'Nachricht schreiben…', send: 'Senden', loading: 'Verbindung…', offline: 'Chat nicht verfügbar. E-Mail: info@amlstore.it', retry: 'Verbindung wird wiederhergestellt…', error: 'Nachricht nicht gesendet. Erneut versuchen.', close: 'Chat schließen', open: 'Support-Chat öffnen', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Verbindung…', stReconnecting: 'Neuverbindung…', stError: 'Nicht verfügbar', noticeOnline: 'Support ist online. Wir antworten meist in wenigen Minuten.', noticeOffline: 'Wir sind offline. Hinterlassen Sie eine Nachricht, wir melden uns schnellstmöglich.' },
-        es: { launcher: 'Chat', title: 'Soporte Aml Store', intro: '¿Cómo podemos ayudarte?', name: 'Nombre (opcional)', email: 'Email (opcional)', placeholder: 'Escribe un mensaje…', send: 'Enviar', loading: 'Conectando…', offline: 'Chat no disponible. Escribe a info@amlstore.it', retry: 'Reconectando…', error: 'Mensaje no enviado. Inténtalo de nuevo.', close: 'Cerrar chat', open: 'Abrir el chat de soporte', stOnline: 'En línea', stOffline: 'Sin conexión', stConnecting: 'Conectando…', stReconnecting: 'Reconectando…', stError: 'No disponible', noticeOnline: 'Soporte en línea. Solemos responder en pocos minutos.', noticeOffline: 'Estamos sin conexión. Deja un mensaje y te responderemos lo antes posible.' },
+        it: { launcher: 'Chat', title: 'Assistenza Aml Store', intro: 'Come possiamo aiutarti?', name: 'Nome (facoltativo)', email: 'Email (facoltativa)', placeholder: 'Scrivi un messaggio…', sendHint: 'Premi Invio per inviare, Maiuscolo+Invio per andare a capo.', send: 'Invia', loading: 'Connessione…', offline: 'Chat non disponibile. Scrivici a info@amlstore.it', retry: 'Riconnessione…', error: 'Messaggio non inviato. Riprova.', close: 'Chiudi chat', open: 'Apri la chat di assistenza', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Connessione…', stReconnecting: 'Riconnessione…', stError: 'Non disponibile', noticeOnline: 'Assistenza online. Di solito rispondiamo in pochi minuti.', noticeOffline: 'Siamo offline. Lascia un messaggio, ti rispondiamo appena possibile.' },
+        en: { launcher: 'Chat', title: 'Aml Store support', intro: 'How can we help?', name: 'Name (optional)', email: 'Email (optional)', placeholder: 'Write a message…', sendHint: 'Press Enter to send, Shift+Enter for a new line.', send: 'Send', loading: 'Connecting…', offline: 'Chat unavailable. Email info@amlstore.it', retry: 'Reconnecting…', error: 'Message not sent. Please retry.', close: 'Close chat', open: 'Open the support chat', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Connecting…', stReconnecting: 'Reconnecting…', stError: 'Unavailable', noticeOnline: 'Support is online. We usually reply within minutes.', noticeOffline: 'We are offline. Leave a message and we will reply as soon as we can.' },
+        fr: { launcher: 'Chat', title: 'Assistance Aml Store', intro: 'Comment pouvons-nous vous aider ?', name: 'Nom (facultatif)', email: 'E-mail (facultatif)', placeholder: 'Écrivez un message…', sendHint: 'Appuyez sur Entrée pour envoyer, Maj+Entrée pour un retour à la ligne.', send: 'Envoyer', loading: 'Connexion…', offline: 'Chat indisponible. Écrivez à info@amlstore.it', retry: 'Reconnexion…', error: 'Message non envoyé. Réessayez.', close: 'Fermer le chat', open: 'Ouvrir le chat d’assistance', stOnline: 'En ligne', stOffline: 'Hors ligne', stConnecting: 'Connexion…', stReconnecting: 'Reconnexion…', stError: 'Indisponible', noticeOnline: 'Assistance en ligne. Nous répondons en quelques minutes.', noticeOffline: 'Nous sommes hors ligne. Laissez un message, nous répondrons dès que possible.' },
+        de: { launcher: 'Chat', title: 'Aml Store Support', intro: 'Wie können wir helfen?', name: 'Name (optional)', email: 'E-Mail (optional)', placeholder: 'Nachricht schreiben…', sendHint: 'Eingabetaste zum Senden, Umschalt+Eingabetaste für einen Zeilenumbruch.', send: 'Senden', loading: 'Verbindung…', offline: 'Chat nicht verfügbar. E-Mail: info@amlstore.it', retry: 'Verbindung wird wiederhergestellt…', error: 'Nachricht nicht gesendet. Erneut versuchen.', close: 'Chat schließen', open: 'Support-Chat öffnen', stOnline: 'Online', stOffline: 'Offline', stConnecting: 'Verbindung…', stReconnecting: 'Neuverbindung…', stError: 'Nicht verfügbar', noticeOnline: 'Support ist online. Wir antworten meist in wenigen Minuten.', noticeOffline: 'Wir sind offline. Hinterlassen Sie eine Nachricht, wir melden uns schnellstmöglich.' },
+        es: { launcher: 'Chat', title: 'Soporte Aml Store', intro: '¿Cómo podemos ayudarte?', name: 'Nombre (opcional)', email: 'Email (opcional)', placeholder: 'Escribe un mensaje…', sendHint: 'Pulsa Intro para enviar, Mayús+Intro para un salto de línea.', send: 'Enviar', loading: 'Conectando…', offline: 'Chat no disponible. Escribe a info@amlstore.it', retry: 'Reconectando…', error: 'Mensaje no enviado. Inténtalo de nuevo.', close: 'Cerrar chat', open: 'Abrir el chat de soporte', stOnline: 'En línea', stOffline: 'Sin conexión', stConnecting: 'Conectando…', stReconnecting: 'Reconectando…', stError: 'No disponible', noticeOnline: 'Soporte en línea. Solemos responder en pocos minutos.', noticeOffline: 'Estamos sin conexión. Deja un mensaje y te responderemos lo antes posible.' },
     };
 
     const id = (prefix) => prefix + '_' + crypto.randomUUID();
@@ -42,6 +42,15 @@
             input.addEventListener('input', () => {
                 try { localStorage.setItem(draftKey, input.value); } catch (_) { /* storage optional */ }
             });
+            // Invio invia il messaggio, Maiuscolo+Invio va a capo (come nei client di
+            // chat piu' comuni). isComposing esclude la conferma di un candidato IME
+            // (cinese/giapponese/coreano), che non deve inviare il messaggio.
+            input.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
+                    event.preventDefault();
+                    this.shadowRoot.querySelector('form').requestSubmit();
+                }
+            });
             document.addEventListener('visibilitychange', () => {
                 if (!document.hidden && this.conversationId && (!this.socket || this.socket.readyState > 1)) {
                     this.connectSocket();
@@ -49,9 +58,31 @@
             });
             window.addEventListener('aml-support-open', () => this.open());
             this.shadowRoot.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && !this.shadowRoot.querySelector('.panel').hidden) this.close();
+                const panel = this.shadowRoot.querySelector('.panel');
+                if (panel.hidden) return;
+                if (event.key === 'Escape') { this.close(); return; }
+                if (event.key === 'Tab') this.trapFocus(event, panel);
             });
             this.watchConsentBanner();
+        }
+
+        // Il pannello e' un dialog ARIA, non un <dialog> nativo: il browser non
+        // intrappola da solo il focus dentro, quindi Tab dall'ultimo elemento
+        // (Invia) uscirebbe sul resto della pagina dietro al widget.
+        trapFocus(event, panel) {
+            const focusable = Array.from(panel.querySelectorAll('button, input, textarea'))
+                .filter((el) => !el.disabled && el.offsetParent !== null);
+            if (!focusable.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            const active = this.shadowRoot.activeElement;
+            if (event.shiftKey && active === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && active === last) {
+                event.preventDefault();
+                first.focus();
+            }
         }
 
         /* Il banner cookie e' fixed in basso e copre l'angolo del launcher: finche'
@@ -214,7 +245,8 @@
                 @media(prefers-reduced-motion:reduce){
                     .launcher,.close,.sendrow button,input,textarea{transition:none}
                 }
-            </style><button class="launcher" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="${this.t.open}">${bubbleIcon}<span class="launcher-label">${this.t.launcher}</span></button><section class="panel" role="dialog" aria-label="${this.t.title}" hidden><header><span class="avatar" aria-hidden="true">${bubbleIcon}</span><span class="head-text"><strong>${this.t.title}</strong><span class="state"><i aria-hidden="true"></i><span class="state-label">${this.t.stOffline}</span></span></span><button class="close" type="button" aria-label="${this.t.close}"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header><p class="notice">${this.t.intro}</p><div class="messages" role="log" aria-live="polite"><p class="empty">${this.t.intro}</p></div><form><div class="contact"><input name="name" maxlength="100" autocomplete="name" placeholder="${this.t.name}" aria-label="${this.t.name}"><input name="email" maxlength="254" type="email" autocomplete="email" placeholder="${this.t.email}" aria-label="${this.t.email}"></div><div class="sendrow"><textarea maxlength="4000" required placeholder="${this.t.placeholder}" aria-label="${this.t.placeholder}"></textarea><button type="submit"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21.5 2.5L11 13M21.5 2.5l-6.8 19-3.7-8.5L2.5 9.3z"/></svg>${this.t.send}</button></div></form></section>`;
+                .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+            </style><button class="launcher" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="${this.t.open}">${bubbleIcon}<span class="launcher-label">${this.t.launcher}</span></button><section class="panel" role="dialog" aria-modal="true" aria-label="${this.t.title}" hidden><header><span class="avatar" aria-hidden="true">${bubbleIcon}</span><span class="head-text"><strong>${this.t.title}</strong><span class="state" role="status" aria-atomic="true"><i aria-hidden="true"></i><span class="state-label">${this.t.stOffline}</span></span></span><button class="close" type="button" aria-label="${this.t.close}"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header><p class="notice" role="status" aria-atomic="true">${this.t.intro}</p><div class="messages" role="log" aria-live="polite"><p class="empty">${this.t.intro}</p></div><form><div class="contact"><label class="sr-only" for="sc-name">${this.t.name}</label><input id="sc-name" name="name" maxlength="100" autocomplete="name" placeholder="${this.t.name}"><label class="sr-only" for="sc-email">${this.t.email}</label><input id="sc-email" name="email" maxlength="254" type="email" autocomplete="email" placeholder="${this.t.email}"></div><div class="sendrow"><label class="sr-only" for="sc-body">${this.t.placeholder}</label><textarea id="sc-body" maxlength="4000" required placeholder="${this.t.placeholder}" aria-describedby="sc-send-hint"></textarea><span id="sc-send-hint" class="sr-only">${this.t.sendHint}</span><button type="submit"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21.5 2.5L11 13M21.5 2.5l-6.8 19-3.7-8.5L2.5 9.3z"/></svg>${this.t.send}</button></div></form></section>`;
         }
 
         async open() {
