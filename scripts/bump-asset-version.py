@@ -22,6 +22,7 @@ import hashlib
 import os
 import re
 import sys
+import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LANG_DIRS = ["it", "en", "fr", "de", "es"]
@@ -58,6 +59,31 @@ MAX_JS_PASSES = 5
 def short_hash(path):
     with open(path, "rb") as fh:
         return hashlib.sha256(fh.read()).hexdigest()[:10]
+
+def write_atomic(path, text):
+    """Scrive su file temporaneo e sostituisce, ritentando qualche volta.
+
+    Su Windows il file puo' essere tenuto aperto per pochi millisecondi da
+    OneDrive, dall'antivirus o dal dev server che guarda la cartella: con
+    open(path, "w") diretto quel lock arriva DOPO il troncamento e lascia la
+    pagina vuota. Qui l'originale resta intatto finche' il replace non riesce.
+    """
+    tmp = path + ".tmp-bump"
+    last_error = None
+    for attempt in range(5):
+        try:
+            with open(tmp, "w", encoding="utf-8", newline="\n") as fh:
+                fh.write(text)
+            os.replace(tmp, path)
+            return
+        except OSError as error:
+            last_error = error
+            time.sleep(0.15 * (attempt + 1))
+    try:
+        os.remove(tmp)
+    except OSError:
+        pass
+    raise last_error
 
 hashes = {}
 resolved = set()
@@ -105,7 +131,7 @@ def bump_js_refs():
             src = open(path, encoding="utf-8").read()
             out = JS_REF.sub(sub, src)
             if out != src:
-                open(path, "w", encoding="utf-8", newline="\n").write(out)
+                write_atomic(path, out)
                 updated.add(path)
                 stable = False
         if stable:
@@ -142,7 +168,7 @@ for page in pages:
 
     out = SRCSET_ATTR.sub(sub_srcset, REF.sub(sub, src))
     if out != src:
-        open(page, "w", encoding="utf-8", newline="\n").write(out)
+        write_atomic(page, out)
         touched += 1
 
 print(
