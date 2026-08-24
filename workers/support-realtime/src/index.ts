@@ -17,6 +17,13 @@ export default {
         env: SupportRealtimeEnv,
         ctx: ExecutionContext,
     ): Promise<void> {
+        // Il Cron Trigger e' registrato a livello di Worker, non di feature flag:
+        // senza questa guardia la retention interroga il D1 configurato in
+        // wrangler.toml (oggi quello di produzione) ogni 15 minuti anche mentre
+        // CHAT_ENABLED=0, comprese le finestre in cui la migration 0002 non e'
+        // ancora stata applicata.
+        const config = readChatConfig(env as unknown as Record<string, string | undefined>);
+        if (!config.enabled) return;
         ctx.waitUntil(runRetention(env));
     },
 };
