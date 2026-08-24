@@ -160,6 +160,47 @@ abilitazione solo admin/internal, rollout progressivo storefront) restano
 da fare, in quest'ordine, e nessuno di essi implica accendere il flag in
 produzione prima che la checklist di §11 sia chiusa.
 
+### 0.3 Checklist di sicurezza e dispositivi (2026-08-24)
+
+Contro il gate «prima di `CHAT_ENABLED=1`» del runbook:
+
+- **Suite di sicurezza automatica** (`8c7babaa`, estesa in `5120ed21`):
+  origin validation, sessione guest obbligatoria (REST e WS), rifiuto
+  visitorId iniettato, enumerazione conversazioni (404 identico per
+  conversazione altrui vs inesistente), Access 401 senza JWT e con JWT
+  scaduto (incluso bypass dev fuori localhost), rate limit sia a livello DO
+  (20 msg/min/conversazione) sia a livello gateway D1 (burst distribuito su
+  più conversazioni), invariante `customer_id` sempre `NULL`, corpo del
+  messaggio mai interpretato/alterato lato server (difesa reale contro XSS è
+  solo client-side, verificata sia isolata sia end-to-end guest→admin reale:
+  mai `.innerHTML`, solo `.textContent`), idempotenza `clientMessageId` sotto
+  50 richieste concorrenti, handshake WebSocket malformato (426) e fuzzing
+  payload WS (frame binari, JSON invalido, tipo comando sconosciuto,
+  conversationId incoerente) senza side-effect né caduta della connessione.
+- **Device matrix desktop:** Chrome ed Edge reali (non emulati) verificati:
+  installazione PWA, sessione Access, Cache Storage priva di API/messaggi,
+  reconnect. La sola sottoscrizione Push reale (`pushManager.subscribe()`)
+  fallisce con `AbortError` su entrambi i browser in questa macchina di
+  sviluppo — diagnosticato come blocco di rete/policy locale verso il
+  servizio push di Google, non un difetto del prodotto (corretta anche
+  un'assunzione errata della review iniziale: il blocco è dato dalla
+  modalità **headless**, non dall'incognito, che invece funziona).
+- **Device matrix Android:** checklist completa a 10 passi (installazione,
+  Access, permesso Push da gesto esplicito, ricezione Push reale, badge,
+  deep link dalla notifica, reconnect Wi-Fi, sessione scaduta, notifica a
+  schermo bloccato, notifica ad app terminata) eseguita dall'utente su
+  dispositivo Android reale — **esito: tutti i passi verificati senza
+  problemi**. La ricezione Push reale qui conferma che il blocco osservato
+  su desktop è specifico di questa macchina/rete di sviluppo e non del
+  Worker/VAPID: sulla rete mobile reale la sottoscrizione e la consegna
+  funzionano. Questo chiude la clausola «almeno... uno smartphone
+  installato» del gate Push del runbook.
+- **Non ancora fatto:** Safari iPhone come Home Screen Web App (nessun
+  dispositivo/emulatore macOS disponibile in questa sessione); conferma
+  della sottoscrizione Push reale da un desktop **non** vincolato dalla
+  rete/policy di questa macchina di sviluppo; load test sui pattern
+  realistici (§10, M7).
+
 ## 1. Obiettivo
 
 Implementare, per incrementi verificabili, la piattaforma di supporto prevista

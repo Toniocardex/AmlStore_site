@@ -35,8 +35,10 @@ Non riutilizzare mai database ID o secret production nei file preview. I file ve
 **Stato 2026-08-24:** passi 1–5 completati sia in preview sia in produzione
 (dettaglio in `docs/adr/ADR-CHAT-001-implementation-plan.md` §0.2: D1 migrato,
 secret e VAPID impostati — valori distinti tra preview e produzione — Worker e
-Pages deployati). `CHAT_ENABLED` resta `0` ovunque: il passo 7 non è ancora
-iniziato, in attesa della checklist di sicurezza/dispositivo/carico.
+Pages deployati). Suite di sicurezza automatica e device matrix Chrome/Edge
+desktop e Chrome Android chiuse con esito positivo (dettaglio in §0.3); resta
+Safari iPhone e la conferma Push reale da un desktop fuori da questa rete di
+sviluppo. `CHAT_ENABLED` resta `0` ovunque: il passo 7 non è ancora iniziato.
 
 Ordine obbligatorio:
 
@@ -101,8 +103,8 @@ I log strutturati `[chat-metric]` espongono i contatori e le latenze normative d
 
 Prima del rollout production verificare manualmente:
 
-- Chrome e Edge desktop Windows;
-- Chrome Android;
-- Safari iPhone come Home Screen Web App.
+- [x] Chrome e Edge desktop Windows — verificato 2026-08-24 (Push reale bloccata solo dalla rete/policy della macchina di sviluppo, non dal prodotto: vedi §0.3 del piano);
+- [x] Chrome Android — verificato 2026-08-24, tutti i passi superati inclusa la ricezione Push reale;
+- [ ] Safari iPhone come Home Screen Web App — non ancora verificato, nessun dispositivo/emulatore disponibile.
 
 Per ogni dispositivo: installazione, sessione Access, permesso Push da gesto esplicito, ricezione, badge, click/deep link, reconnect, sessione scaduta, screen lock e app terminata.
