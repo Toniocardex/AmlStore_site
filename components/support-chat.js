@@ -224,7 +224,18 @@
             launcher.hidden = true;
             launcher.setAttribute('aria-expanded', 'true');
             this.shadowRoot.querySelector('textarea').focus();
-            if (this.initialized) return;
+            if (this.initialized) {
+                // Il listener 'close' della socket smette di ritentare mentre il
+                // pannello e' hidden (per non tenere una connessione aperta a vuoto),
+                // quindi riaprire non riprendeva mai la riconnessione da solo: restava
+                // "OFFLINE"/stantio finche' non arrivava un visibilitychange casuale
+                // della TAB, che e' un evento diverso dal riaprire il pannello.
+                if (this.conversationId && (!this.socket || this.socket.readyState > 1)) {
+                    this.reconnectAttempt = 0;
+                    this.connectSocket();
+                }
+                return;
+            }
             this.initialized = true;
             this.setState('CONNECTING', this.t.loading);
             try {
