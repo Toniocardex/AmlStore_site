@@ -85,7 +85,7 @@ def hero_html(t: dict[str, str]) -> str:
                         <img src="../asset/media/products/office-2024-home-business.webp" width="400" height="400" alt="{t['p2_alt']}" fetchpriority="low">
                     </a>
                     <a class="home-hero-product home-hero-product--front" href="microsoft-365-business-standard">
-                        <img src="../asset/media/products/microsoft-365-business-standard-240.webp" srcset="../asset/media/products/microsoft-365-business-standard-240.webp 240w, ../asset/media/products/microsoft-365-business-standard-320.webp 320w, ../asset/media/products/microsoft-365-business-standard.webp 400w" sizes="(max-width: 899px) 140px, 168px" width="400" height="400" alt="{t['p1_alt']}" fetchpriority="high">
+                        <img src="../asset/media/products/microsoft-365-business-standard.webp" width="400" height="400" alt="{t['p1_alt']}" fetchpriority="high">
                     </a>
                 </div>
             </div>
