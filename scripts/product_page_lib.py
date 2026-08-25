@@ -4,6 +4,7 @@ import html as html_module
 import json
 from pathlib import Path
 
+from catalog_hub_content import get_hub_content
 from lang_backfill import backfill_lang
 from nl_translations import nl_text
 
@@ -2887,6 +2888,18 @@ def build_catalog_page(lang, catalog_slug, products):
         first = products[0]
         rel = _product_image_src(first["slug"], first.get("image"))
         og_image = "https://aml-store.com/" + rel.lstrip("./").replace("../", "", 1)
+    hub_extra = get_hub_content(catalog_slug, lang) or ""
+    hub_css = '\n    <link rel="stylesheet" href="../css/product-pdp.css">' if hub_extra else ""
+    # Voto reale letto da Trustpilot (it.trustpilot.com/review/aml-store.com) il
+    # 2026-08-25: 4,8 su 94 recensioni. Solo sugli hub arricchiti per ora — non
+    # un dato per singolo SKU, e' un segnale a livello Organization.
+    org_schema = (
+        ',{"@type":"Organization","@id":"https://aml-store.com/#organization",'
+        '"name":"Aml Store","url":"https://aml-store.com/",'
+        '"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8",'
+        '"reviewCount":"94","bestRating":"5","worstRating":"1"}}'
+        if hub_extra else ""
+    )
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
 <head>
@@ -2908,10 +2921,10 @@ def build_catalog_page(lang, catalog_slug, products):
     <meta property="og:image" content="{og_image}">
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/home.css">{hub_css}
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
-    {{"@context":"https://schema.org","@type":"CollectionPage","name":"{title}","description":"{lede}","url":"https://aml-store.com/{lang}/{catalog_slug}","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://aml-store.com/"}}}}
+    {{"@context":"https://schema.org","@graph":[{{"@type":"CollectionPage","name":"{title}","description":"{lede}","url":"https://aml-store.com/{lang}/{catalog_slug}","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://aml-store.com/"}}}}{org_schema}]}}
     </script>
 </head>
 <body>
@@ -2928,7 +2941,7 @@ def build_catalog_page(lang, catalog_slug, products):
 {cards}
             </div>
         </section>
-    </main>
+{hub_extra}    </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate"></ecommerce-footer>
     <script src="../js/locale-path.js"></script>

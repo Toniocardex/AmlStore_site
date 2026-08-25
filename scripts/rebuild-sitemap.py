@@ -13,7 +13,6 @@ SKIP = {
     "cookie-policy",
     "terms-and-conditions",
     "returns-and-refunds",
-    "microsoft-365-solutions",
 }
 LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 

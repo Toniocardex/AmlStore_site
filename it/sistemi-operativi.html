@@ -29,16 +29,17 @@
     <link rel="stylesheet" href="../css/header.css?v=99f0f9e298">
     <link rel="stylesheet" href="../css/footer.css?v=31dc97e061">
     <link rel="stylesheet" href="../css/home.css?v=dc3b9be06d">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=8837be8eed">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"CollectionPage","name":"Sistemi Operativi","description":"Licenze Windows originali con consegna digitale rapida.","url":"https://aml-store.com/it/sistemi-operativi","inLanguage":"it","isPartOf":{"@type":"WebSite","name":"Aml Store","url":"https://aml-store.com/"}}
+    {"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Sistemi Operativi","description":"Licenze Windows originali con consegna digitale rapida.","url":"https://aml-store.com/it/sistemi-operativi","inLanguage":"it","isPartOf":{"@type":"WebSite","name":"Aml Store","url":"https://aml-store.com/"}},{"@type":"Organization","@id":"https://aml-store.com/#organization","name":"Aml Store","url":"https://aml-store.com/","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"94","bestRating":"5","worstRating":"1"}}]}
     </script>
 </head>
 <body>
     <div class="scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Vai al contenuto principale</a>
     <aml-lang-suggest></aml-lang-suggest>
-    <ecommerce-header translate="no" class="notranslate">
+<ecommerce-header translate="no" class="notranslate">
 <div class="header-utility">
                     <div class="header-utility__inner">
                         <span class="header-utility__rating">★ 4,8/5 su Trustpilot</span>
@@ -457,6 +458,62 @@
 
             </div>
         </section>
+
+        <section class="hub-guide pdp-page" aria-labelledby="hub-guide-title">
+            <div class="hub-guide__inner">
+                <p class="pdp-sec__eyebrow">Quale scegliere</p>
+                <h2 id="hub-guide-title" class="pdp-sec__title">Home, Pro o Server: la licenza giusta in base all'uso</h2>
+                <p class="pdp-sec__sub">Windows 11 Home copre l'uso privato. Pro aggiunge le funzioni orientate al lavoro. Server è un sistema operativo diverso, pensato per macchine che erogano servizi di rete.</p>
+
+                <div class="cmp-table-wrap">
+                    <table class="cmp-table">
+                        <caption>Confronto rapido, prezzo licenza singola</caption>
+                        <thead>
+                            <tr><th scope="col">Edizione</th><th scope="col">Da</th><th scope="col">In più rispetto a Home</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">Windows 11 Home</th><td>€ 61,00</td><td>—</td></tr>
+                            <tr><th scope="row">Windows 11 Pro</th><td>€ 99,00</td><td>BitLocker, Desktop remoto come host, secondo Microsoft</td></tr>
+                            <tr><th scope="row">Windows 10 Home / Pro</th><td>€ 39,13 / € 60,00</td><td>Stessa differenza Home→Pro, generazione precedente</td></tr>
+                            <tr><th scope="row">Windows Server</th><td>vedi <a href="windows-server">Windows Server e SQL</a></td><td>Sistema operativo per server, non per postazione singola</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="hub-guide__links">
+                    <a class="hub-guide__link-card" href="windows-11-home-vs-pro">
+                        <strong>Windows 11 Home vs Pro →</strong>
+                        <span>Cosa cambia davvero e chi ha bisogno di Pro.</span>
+                    </a>
+                </div>
+
+                <div class="pdp-sec pdp-sec--tight pdp-faq" style="padding-inline:0;">
+                    <h3 id="hub-win-faq-title" class="pdp-sec__title pdp-faq__title" style="font-size:var(--aml-text-lg);">Domande frequenti</h3>
+                    <div class="home-faq-list">
+                        <div class="pf-faq-col">
+                            <details class="home-faq-item">
+                                <summary>Che differenza c'è tra licenza OEM, ESD e COA?</summary>
+                                <div class="home-faq-body"><p>ESD è la licenza digitale via email; OEM DVD include il supporto fisico; COA è l'adesivo con il codice originale. Il sistema operativo attivato è lo stesso — cambia solo il formato di consegna.</p></div>
+                            </details>
+                            <details class="home-faq-item">
+                                <summary>Conviene passare da Windows 10 a Windows 11?</summary>
+                                <div class="home-faq-body"><p>Dipende dai requisiti hardware Microsoft (CPU compatibile, TPM 2.0, Secure Boot): vanno verificati prima di installare, come indicato in ogni scheda Windows 11.</p></div>
+                            </details>
+                        </div>
+                        <div class="pf-faq-col">
+                            <details class="home-faq-item">
+                                <summary>Windows 11 Pro serve anche per un uso privato avanzato?</summary>
+                                <div class="home-faq-body"><p>Sì, se usi BitLocker per criptare il disco o il Desktop remoto come host verso il tuo PC — funzioni non presenti in Home secondo Microsoft.</p></div>
+                            </details>
+                            <details class="home-faq-item">
+                                <summary>Come ricevo la licenza dopo l'acquisto?</summary>
+                                <div class="home-faq-body"><p>Codice e istruzioni di attivazione via email, tipicamente entro pochi minuti dal pagamento.</p></div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <aml-cookie-banner></aml-cookie-banner>
     <ecommerce-footer translate="no" class="notranslate">
@@ -538,8 +595,7 @@
             </ecommerce-footer>
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=c34e932f9b" defer></script>
-    <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../components/lang-suggest.js?v=910b04817f" defer></script>
+    <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script><script src="../components/lang-suggest.js?v=910b04817f" defer></script>
     <script src="../components/header.js?v=9eb7f487b3" defer></script>
     <script src="../components/footer.js?v=ec43331bd6" defer></script>
 </body>

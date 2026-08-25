@@ -41,16 +41,20 @@
   <url><loc>https://aml-store.com/it/kaspersky-premium-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/kaspersky-premium-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/kaspersky-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/kaspersky-vs-eset-nod32</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/microsoft-365-family-vs-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/microsoft-365-solutions</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/norton-360-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/norton-vs-bitdefender</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/office-2019-home-student</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/office-2019-professional-plus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/office-2021-home-business-mac</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -59,6 +63,7 @@
   <url><loc>https://aml-store.com/it/office-2021-professional-plus</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/office-2024-home-business</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/office-2024-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/office-2024-vs-microsoft-365</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/outlook-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/pacchetti</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/powerpoint-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -73,6 +78,7 @@
   <url><loc>https://aml-store.com/it/visio-standard-2024</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/windows-10-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/windows-10-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/it/windows-11-home-vs-pro</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/windows-11-home</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/windows-11-pro-coa</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/it/windows-11-pro-oem-dvd</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -117,6 +123,7 @@
   <url><loc>https://aml-store.com/en/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/en/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/en/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/en/microsoft-365-solutions</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/en/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/en/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/en/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -186,6 +193,7 @@
   <url><loc>https://aml-store.com/fr/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/fr/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/fr/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/fr/microsoft-365-solutions</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/fr/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/fr/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/fr/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -256,6 +264,7 @@
   <url><loc>https://aml-store.com/de/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/de/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/de/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/de/microsoft-365-solutions</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/de/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/de/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/de/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -326,6 +335,7 @@
   <url><loc>https://aml-store.com/es/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/es/microsoft-365-solutions</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/es/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -396,6 +406,7 @@
   <url><loc>https://aml-store.com/pt/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/pt/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/pt/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/pt/microsoft-365-solutions</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/pt/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/pt/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/pt/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -466,6 +477,7 @@
   <url><loc>https://aml-store.com/nl/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/nl/microsoft-365-family</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/nl/microsoft-365-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://aml-store.com/nl/microsoft-365-solutions</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/nl/norton-360-deluxe-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/nl/norton-360-deluxe</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://aml-store.com/nl/norton-360-standard-no-sub</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
