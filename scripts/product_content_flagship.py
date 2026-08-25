@@ -3330,32 +3330,31 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                 'PowerPoint, Outlook), posta aziendale Exchange da 50 GB con dominio '
                 'personalizzato, Teams per riunioni fino a 300 partecipanti e 1 TB OneDrive. '
                 'Licenza per 1 utente su 5 PC/Mac + 5 dispositivi mobili, attivazione ufficiale e '
-                'fattura elettronica con P.IVA.',
+                'fattura elettronica.',
           'en': 'Microsoft 365 Business Standard: complete desktop Office apps (Word, Excel, '
                 'PowerPoint, Outlook), 50 GB Exchange business email with custom domain, Teams for '
                 'meetings up to 300 attendees, and 1 TB OneDrive cloud. 1 user licence for 5 '
-                'PCs/Macs + 5 mobile devices, official activation, and VAT invoice.',
+                'PCs/Macs + 5 mobile devices, official activation, and electronic invoice.',
           'fr': 'Microsoft 365 Business Standard : applications Office de bureau complètes (Word, '
                 'Excel, PowerPoint, Outlook), messagerie Exchange 50 Go avec domaine personnalisé, '
                 "Teams jusqu'à 300 participants et 1 To OneDrive. Licence 1 utilisateur pour 5 "
-                'PC/Mac + 5 mobiles, activation officielle et facture avec TVA.',
+                'PC/Mac + 5 mobiles, activation officielle et facture électronique.',
           'de': 'Microsoft 365 Business Standard: vollständige Desktop-Office-Apps (Word, Excel, '
                 'PowerPoint, Outlook), 50 GB Exchange-Geschäfts-E-Mail mit eigener Domain, Teams '
                 'für Meetings bis 300 Teilnehmer und 1 TB OneDrive. 1-Nutzer-Lizenz für 5 PCs/Macs '
-                '+ 5 Mobilgeräte, offizielle Aktivierung und MwSt.-Rechnung.',
+                '+ 5 Mobilgeräte, offizielle Aktivierung und elektronische Rechnung.',
           'es': 'Microsoft 365 Business Standard: aplicaciones de escritorio completas de Office '
                 '(Word, Excel, PowerPoint, Outlook), correo Exchange de 50 GB con dominio '
                 'personalizado, Teams para reuniones de hasta 300 asistentes y 1 TB OneDrive. '
-                'Licencia de 1 usuario para 5 PC/Mac + 5 móviles, activación oficial y factura con '
-                'IVA.',
+                'Licencia de 1 usuario para 5 PC/Mac + 5 móviles, activación oficial y factura electrónica.',
           'pt': 'Microsoft 365 Business Standard: aplicações Office de computador completas (Word, '
                 'Excel, PowerPoint, Outlook), email empresarial Exchange de 50 GB com domínio '
                 'próprio, Teams até 300 participantes e 1 TB OneDrive. Licença de 1 utilizador '
-                'para 5 PC/Mac + 5 dispositivos móveis, ativação oficial e fatura com IVA.',
+                'para 5 PC/Mac + 5 dispositivos móveis, ativação oficial e fatura eletrónica.',
           'nl': 'Microsoft 365 Business Standard: complete desktop Office-apps (Word, Excel, '
                 'PowerPoint, Outlook), 50 GB Exchange zakelijke e-mail met eigen domein, Teams '
                 'voor vergaderingen tot 300 deelnemers en 1 TB OneDrive. Licentie voor 1 gebruiker '
-                "op 5 pc's/Macs + 5 mobiele apparaten, officiële activering en btw-factuur."},
+                "op 5 pc's/Macs + 5 mobiele apparaten, officiële activering en elektronische factuur."},
  'apps': ['word',
           'excel',
           'powerpoint',
@@ -3407,7 +3406,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'domain with Exchange Online and antispam.',
                       '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD video meetings up to 300 '
                       'people, recording, and 1,000 GB OneDrive.',
-                      '<strong>VAT Invoice Included:</strong> Official Italian e-invoice '
+                      '<strong>Electronic Invoice:</strong> Official Italian e-invoice '
                       'provided for businesses and VAT-registered buyers.'],
                'fr': ['<strong>5 PC/Mac + 5 Appareils Mobiles :</strong> Installez les '
                       'applications Office complètes sur tous vos postes professionnels.',
@@ -3415,7 +3414,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'propre domaine avec Exchange Online.',
                       "<strong>Microsoft Teams & Cloud 1 To :</strong> Visioconférences jusqu'à "
                       '300 personnes, enregistrement et 1 000 Go OneDrive.',
-                      '<strong>Facture avec TVA :</strong> Facture électronique italienne '
+                      '<strong>Facture électronique :</strong> Facture électronique italienne '
                       'officielle, disponible pour les entreprises et professionnels.'],
                'de': ['<strong>5 PCs/Macs + 5 Mobilgeräte:</strong> Vollständige Office-Apps auf '
                       'allen geschäftlichen Arbeitsplätzen installieren.',
@@ -3423,7 +3422,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'Domain über Exchange Online.',
                       '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD-Videokonferenzen bis 300 '
                       'Personen, Aufzeichnung und 1.000 GB OneDrive.',
-                      '<strong>Rechnung mit MwSt.:</strong> Offizielle italienische E-Rechnung '
+                      '<strong>Elektronische Rechnung:</strong> Offizielle italienische E-Rechnung '
                       'für Unternehmen und Selbstständige.'],
                'es': ['<strong>5 PC/Mac + 5 Dispositivos Móviles:</strong> Instala las '
                       'aplicaciones completas de Office en todos tus equipos de trabajo.',
@@ -3431,7 +3430,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'propio dominio a través de Exchange Online.',
                       '<strong>Microsoft Teams y 1 TB en la Nube:</strong> Videoconferencias de '
                       'hasta 300 personas, grabación y 1.000 GB OneDrive.',
-                      '<strong>Factura con IVA:</strong> Factura electrónica italiana oficial, '
+                      '<strong>Factura electrónica:</strong> Factura electrónica italiana oficial, '
                       'disponible para empresas y autónomos.'],
                'pt': ['<strong>5 PC/Mac + 5 Dispositivos Móveis:</strong> Instala as aplicações '
                       'Office completas em todos os teus postos de trabalho.',
@@ -3439,7 +3438,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'próprio domínio através do Exchange Online.',
                       '<strong>Microsoft Teams e 1 TB Cloud:</strong> Videoconferências até 300 '
                       'pessoas, gravação e 1.000 GB OneDrive.',
-                      '<strong>Fatura com IVA:</strong> Fatura eletrónica italiana oficial, '
+                      '<strong>Fatura eletrónica:</strong> Fatura eletrónica italiana oficial, '
                       'disponível para empresas e profissionais liberais.'],
                'nl': ["<strong>5 pc's/Macs + 5 mobiele apparaten:</strong> Installeer complete "
                       'Office-apps op al uw zakelijke werkplekken.',
@@ -3447,7 +3446,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'domein via Exchange Online.',
                       '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD-videovergaderingen tot '
                       '300 personen, opname en 1.000 GB OneDrive.',
-                      '<strong>Btw-factuur inbegrepen:</strong> Officiële Italiaanse e-factuur, '
+                      '<strong>Elektronische factuur:</strong> Officiële Italiaanse e-factuur, '
                       'beschikbaar voor bedrijven en zelfstandigen.']},
  'app_demo_rich': {'word': {'type': 'richtext',
                             'filename': {'it': 'Contratto_Fornitura_Servizi_2026.docx',
@@ -3726,7 +3725,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'Acquistando su AML Store ricevi la licenza digitale originale '
                                     '(Product Key ESD) via email entro 2–15 minuti, pronta per '
                                     "l'attivazione sul portale ufficiale Microsoft, con fattura "
-                                    'elettronica italiana con IVA esposta e supporto tecnico umano '
+                                    'elettronica italiana e supporto tecnico umano '
                                     'dedicato in italiano via email e WhatsApp.']},
               'en': {'eyebrow': 'The complete business productivity suite',
                      'title': 'Everything your business needs to collaborate, communicate and '
@@ -3758,7 +3757,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'multi-factor authentication (MFA) and GDPR compliance.',
                                     'Purchasing from AML Store ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
-                                    'official activation on Microsoft portals, an official VAT '
+                                    'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
                                     'English.']}},
  'features_title': {'it': 'Perché scegliere Microsoft 365 Business Standard',
@@ -3842,9 +3841,9 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                      ('c4',
                       'dark',
                       'Licence',
-                      '5 Devices per User & VAT Invoice',
+                      '5 Devices per User & Electronic Invoice',
                       'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
-                      'at once. Fast email delivery with an official VAT invoice.')]},
+                      'at once. Fast email delivery with an official electronic invoice.')]},
  'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
                         'title': 'Scheda tecnica e dettagli licenza',
                         'caption': 'Specifiche tecniche, commerciali e requisiti di Microsoft 365 '
@@ -3881,7 +3880,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Codice articolo', '@sku'),
                                  ('Regione di attivazione', 'Unione Europea / SEE'),
                                  ('Fatturazione',
-                                  'IVA inclusa, fattura elettronica italiana con P.IVA')]},
+                                  'Fattura elettronica italiana')]},
                  'en': {'eyebrow': 'Product specifications',
                         'title': 'Technical sheet and licence details',
                         'caption': 'Technical and commercial specifications of Microsoft 365 '
@@ -3917,7 +3916,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Product code', '@sku'),
                                  ('Activation region', 'European Union / EEA'),
                                  ('Billing',
-                                  'VAT included, official electronic invoice')]}},
+                                  'Official electronic invoice')]}},
  'compare': {'it': {'eyebrow': 'Guida alla scelta',
                     'title': 'Confronto tra le soluzioni Microsoft Business e Consumer',
                     'sub': 'Confronta le differenze chiave tra i piani aziendali e le licenze '
@@ -3999,7 +3998,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                               '1-year subscription',
                               '1-year subscription',
                               'Perpetual licence'),
-                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                             ('Electronic invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
                     'yes_label': 'Included',
                     'no_label': 'Not included',
                     'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
@@ -4025,7 +4024,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                    'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
                   ('Instant digital delivery',
                    'Within 2-15 minutes we send you the genuine 25-character Product Key, '
-                   'activation guide, and official VAT invoice by email.'),
+                   'activation guide, and official electronic invoice by email.'),
                   ('Official Microsoft activation',
                    'Redeem the licence on the official Microsoft portal (setup.office.com or '
                    'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
@@ -4197,7 +4196,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
-                ('Is a VAT invoice provided for businesses?',
+                ('Is an electronic invoice provided for businesses?',
                  'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
@@ -4240,32 +4239,31 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                 'PowerPoint, Outlook), posta aziendale Exchange da 50 GB con dominio '
                 'personalizzato, Teams per riunioni fino a 300 partecipanti e 1 TB OneDrive. '
                 'Licenza per 1 utente su 5 PC/Mac + 5 dispositivi mobili, attivazione ufficiale e '
-                'fattura elettronica con P.IVA.',
+                'fattura elettronica.',
           'en': 'Microsoft 365 Business Standard: complete desktop Office apps (Word, Excel, '
                 'PowerPoint, Outlook), 50 GB Exchange business email with custom domain, Teams for '
                 'meetings up to 300 attendees, and 1 TB OneDrive cloud. 1 user licence for 5 '
-                'PCs/Macs + 5 mobile devices, official activation, and VAT invoice.',
+                'PCs/Macs + 5 mobile devices, official activation, and electronic invoice.',
           'fr': 'Microsoft 365 Business Standard : applications Office de bureau complètes (Word, '
                 'Excel, PowerPoint, Outlook), messagerie Exchange 50 Go avec domaine personnalisé, '
                 "Teams jusqu'à 300 participants et 1 To OneDrive. Licence 1 utilisateur pour 5 "
-                'PC/Mac + 5 mobiles, activation officielle et facture avec TVA.',
+                'PC/Mac + 5 mobiles, activation officielle et facture électronique.',
           'de': 'Microsoft 365 Business Standard: vollständige Desktop-Office-Apps (Word, Excel, '
                 'PowerPoint, Outlook), 50 GB Exchange-Geschäfts-E-Mail mit eigener Domain, Teams '
                 'für Meetings bis 300 Teilnehmer und 1 TB OneDrive. 1-Nutzer-Lizenz für 5 PCs/Macs '
-                '+ 5 Mobilgeräte, offizielle Aktivierung und MwSt.-Rechnung.',
+                '+ 5 Mobilgeräte, offizielle Aktivierung und elektronische Rechnung.',
           'es': 'Microsoft 365 Business Standard: aplicaciones de escritorio completas de Office '
                 '(Word, Excel, PowerPoint, Outlook), correo Exchange de 50 GB con dominio '
                 'personalizado, Teams para reuniones de hasta 300 asistentes y 1 TB OneDrive. '
-                'Licencia de 1 usuario para 5 PC/Mac + 5 móviles, activación oficial y factura con '
-                'IVA.',
+                'Licencia de 1 usuario para 5 PC/Mac + 5 móviles, activación oficial y factura electrónica.',
           'pt': 'Microsoft 365 Business Standard: aplicações Office de computador completas (Word, '
                 'Excel, PowerPoint, Outlook), email empresarial Exchange de 50 GB com domínio '
                 'próprio, Teams até 300 participantes e 1 TB OneDrive. Licença de 1 utilizador '
-                'para 5 PC/Mac + 5 dispositivos móveis, ativação oficial e fatura com IVA.',
+                'para 5 PC/Mac + 5 dispositivos móveis, ativação oficial e fatura eletrónica.',
           'nl': 'Microsoft 365 Business Standard: complete desktop Office-apps (Word, Excel, '
                 'PowerPoint, Outlook), 50 GB Exchange zakelijke e-mail met eigen domein, Teams '
                 'voor vergaderingen tot 300 deelnemers en 1 TB OneDrive. Licentie voor 1 gebruiker '
-                "op 5 pc's/Macs + 5 mobiele apparaten, officiële activering en btw-factuur."},
+                "op 5 pc's/Macs + 5 mobiele apparaten, officiële activering en elektronische factuur."},
  'apps': ['word',
           'excel',
           'powerpoint',
@@ -4317,7 +4315,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'domain with Exchange Online and antispam.',
                       '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD video meetings up to 300 '
                       'people, recording, and 1,000 GB OneDrive.',
-                      '<strong>VAT Invoice Included:</strong> Official Italian e-invoice '
+                      '<strong>Electronic Invoice:</strong> Official Italian e-invoice '
                       'provided for businesses and VAT-registered buyers.'],
                'fr': ['<strong>5 PC/Mac + 5 Appareils Mobiles :</strong> Installez les '
                       'applications Office complètes sur tous vos postes professionnels.',
@@ -4325,7 +4323,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'propre domaine avec Exchange Online.',
                       "<strong>Microsoft Teams & Cloud 1 To :</strong> Visioconférences jusqu'à "
                       '300 personnes, enregistrement et 1 000 Go OneDrive.',
-                      '<strong>Facture avec TVA :</strong> Facture électronique italienne '
+                      '<strong>Facture électronique :</strong> Facture électronique italienne '
                       'officielle, disponible pour les entreprises et professionnels.'],
                'de': ['<strong>5 PCs/Macs + 5 Mobilgeräte:</strong> Vollständige Office-Apps auf '
                       'allen geschäftlichen Arbeitsplätzen installieren.',
@@ -4333,7 +4331,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'Domain über Exchange Online.',
                       '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD-Videokonferenzen bis 300 '
                       'Personen, Aufzeichnung und 1.000 GB OneDrive.',
-                      '<strong>Rechnung mit MwSt.:</strong> Offizielle italienische E-Rechnung '
+                      '<strong>Elektronische Rechnung:</strong> Offizielle italienische E-Rechnung '
                       'für Unternehmen und Selbstständige.'],
                'es': ['<strong>5 PC/Mac + 5 Dispositivos Móviles:</strong> Instala las '
                       'aplicaciones completas de Office en todos tus equipos de trabajo.',
@@ -4341,7 +4339,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'propio dominio a través de Exchange Online.',
                       '<strong>Microsoft Teams y 1 TB en la Nube:</strong> Videoconferencias de '
                       'hasta 300 personas, grabación y 1.000 GB OneDrive.',
-                      '<strong>Factura con IVA:</strong> Factura electrónica italiana oficial, '
+                      '<strong>Factura electrónica:</strong> Factura electrónica italiana oficial, '
                       'disponible para empresas y autónomos.'],
                'pt': ['<strong>5 PC/Mac + 5 Dispositivos Móveis:</strong> Instala as aplicações '
                       'Office completas em todos os teus postos de trabalho.',
@@ -4349,7 +4347,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'próprio domínio através do Exchange Online.',
                       '<strong>Microsoft Teams e 1 TB Cloud:</strong> Videoconferências até 300 '
                       'pessoas, gravação e 1.000 GB OneDrive.',
-                      '<strong>Fatura com IVA:</strong> Fatura eletrónica italiana oficial, '
+                      '<strong>Fatura eletrónica:</strong> Fatura eletrónica italiana oficial, '
                       'disponível para empresas e profissionais liberais.'],
                'nl': ["<strong>5 pc's/Macs + 5 mobiele apparaten:</strong> Installeer complete "
                       'Office-apps op al uw zakelijke werkplekken.',
@@ -4357,7 +4355,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                       'domein via Exchange Online.',
                       '<strong>Microsoft Teams & 1 TB Cloud:</strong> HD-videovergaderingen tot '
                       '300 personen, opname en 1.000 GB OneDrive.',
-                      '<strong>Btw-factuur inbegrepen:</strong> Officiële Italiaanse e-factuur, '
+                      '<strong>Elektronische factuur:</strong> Officiële Italiaanse e-factuur, '
                       'beschikbaar voor bedrijven en zelfstandigen.']},
  'app_demo_rich': {'word': {'type': 'richtext',
                             'filename': {'it': 'Contratto_Fornitura_Servizi_2026.docx',
@@ -4636,7 +4634,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'Acquistando su AML Store ricevi la licenza digitale originale '
                                     '(Product Key ESD) via email entro 2–15 minuti, pronta per '
                                     "l'attivazione sul portale ufficiale Microsoft, con fattura "
-                                    'elettronica italiana con IVA esposta e supporto tecnico umano '
+                                    'elettronica italiana e supporto tecnico umano '
                                     'dedicato in italiano via email e WhatsApp.']},
               'en': {'eyebrow': 'The complete business productivity suite',
                      'title': 'Everything your business needs to collaborate, communicate and '
@@ -4668,7 +4666,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'multi-factor authentication (MFA) and GDPR compliance.',
                                     'Purchasing from AML Store ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
-                                    'official activation on Microsoft portals, an official VAT '
+                                    'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
                                     'English.']},
               'fr': {'eyebrow': 'The complete business productivity suite',
@@ -4701,7 +4699,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'multi-factor authentication (MFA) and GDPR compliance.',
                                     'Purchasing from AML Store ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
-                                    'official activation on Microsoft portals, an official VAT '
+                                    'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
                                     'English.']},
               'de': {'eyebrow': 'The complete business productivity suite',
@@ -4734,7 +4732,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'multi-factor authentication (MFA) and GDPR compliance.',
                                     'Purchasing from AML Store ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
-                                    'official activation on Microsoft portals, an official VAT '
+                                    'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
                                     'English.']},
               'es': {'eyebrow': 'The complete business productivity suite',
@@ -4767,7 +4765,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'multi-factor authentication (MFA) and GDPR compliance.',
                                     'Purchasing from AML Store ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
-                                    'official activation on Microsoft portals, an official VAT '
+                                    'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
                                     'English.']},
               'pt': {'eyebrow': 'The complete business productivity suite',
@@ -4800,7 +4798,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'multi-factor authentication (MFA) and GDPR compliance.',
                                     'Purchasing from AML Store ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
-                                    'official activation on Microsoft portals, an official VAT '
+                                    'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
                                     'English.']},
               'nl': {'eyebrow': 'The complete business productivity suite',
@@ -4833,7 +4831,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'multi-factor authentication (MFA) and GDPR compliance.',
                                     'Purchasing from AML Store ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
-                                    'official activation on Microsoft portals, an official VAT '
+                                    'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
                                     'English.']}},
  'features_title': {'it': 'Perché scegliere Microsoft 365 Business Standard',
@@ -4917,9 +4915,9 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                      ('c4',
                       'dark',
                       'Licence',
-                      '5 Devices per User & VAT Invoice',
+                      '5 Devices per User & Electronic Invoice',
                       'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
-                      'at once. Fast email delivery with an official VAT invoice.')],
+                      'at once. Fast email delivery with an official electronic invoice.')],
               'fr': [('c8',
                       'blue',
                       'Desktop Apps',
@@ -4953,9 +4951,9 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                      ('c4',
                       'dark',
                       'Licence',
-                      '5 Devices per User & VAT Invoice',
+                      '5 Devices per User & Electronic Invoice',
                       'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
-                      'at once. Fast email delivery with an official VAT invoice.')],
+                      'at once. Fast email delivery with an official electronic invoice.')],
               'de': [('c8',
                       'blue',
                       'Desktop Apps',
@@ -4989,9 +4987,9 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                      ('c4',
                       'dark',
                       'Licence',
-                      '5 Devices per User & VAT Invoice',
+                      '5 Devices per User & Electronic Invoice',
                       'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
-                      'at once. Fast email delivery with an official VAT invoice.')],
+                      'at once. Fast email delivery with an official electronic invoice.')],
               'es': [('c8',
                       'blue',
                       'Desktop Apps',
@@ -5025,9 +5023,9 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                      ('c4',
                       'dark',
                       'Licence',
-                      '5 Devices per User & VAT Invoice',
+                      '5 Devices per User & Electronic Invoice',
                       'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
-                      'at once. Fast email delivery with an official VAT invoice.')],
+                      'at once. Fast email delivery with an official electronic invoice.')],
               'pt': [('c8',
                       'blue',
                       'Desktop Apps',
@@ -5061,9 +5059,9 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                      ('c4',
                       'dark',
                       'Licence',
-                      '5 Devices per User & VAT Invoice',
+                      '5 Devices per User & Electronic Invoice',
                       'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
-                      'at once. Fast email delivery with an official VAT invoice.')],
+                      'at once. Fast email delivery with an official electronic invoice.')],
               'nl': [('c8',
                       'blue',
                       'Desktop Apps',
@@ -5097,9 +5095,9 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                      ('c4',
                       'dark',
                       'Licence',
-                      '5 Devices per User & VAT Invoice',
+                      '5 Devices per User & Electronic Invoice',
                       'Each user can run Office apps on 5 PCs/Macs, 5 tablets, and 5 smartphones '
-                      'at once. Fast email delivery with an official VAT invoice.')]},
+                      'at once. Fast email delivery with an official electronic invoice.')]},
  'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
                         'title': 'Scheda tecnica e dettagli licenza',
                         'caption': 'Specifiche tecniche, commerciali e requisiti di Microsoft 365 '
@@ -5136,7 +5134,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Codice articolo', '@sku'),
                                  ('Regione di attivazione', 'Unione Europea / SEE'),
                                  ('Fatturazione',
-                                  'IVA inclusa, fattura elettronica italiana con P.IVA')]},
+                                  'Fattura elettronica italiana')]},
                  'en': {'eyebrow': 'Product specifications',
                         'title': 'Technical sheet and licence details',
                         'caption': 'Technical and commercial specifications of Microsoft 365 '
@@ -5172,7 +5170,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Product code', '@sku'),
                                  ('Activation region', 'European Union / EEA'),
                                  ('Billing',
-                                  'VAT included, official electronic invoice')]},
+                                  'Official electronic invoice')]},
                  'fr': {'eyebrow': 'Product specifications',
                         'title': 'Technical sheet and licence details',
                         'caption': 'Technical and commercial specifications of Microsoft 365 '
@@ -5208,7 +5206,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Product code', '@sku'),
                                  ('Activation region', 'European Union / EEA'),
                                  ('Billing',
-                                  'VAT included, official electronic invoice')]},
+                                  'Official electronic invoice')]},
                  'de': {'eyebrow': 'Product specifications',
                         'title': 'Technical sheet and licence details',
                         'caption': 'Technical and commercial specifications of Microsoft 365 '
@@ -5244,7 +5242,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Product code', '@sku'),
                                  ('Activation region', 'European Union / EEA'),
                                  ('Billing',
-                                  'VAT included, official electronic invoice')]},
+                                  'Official electronic invoice')]},
                  'es': {'eyebrow': 'Product specifications',
                         'title': 'Technical sheet and licence details',
                         'caption': 'Technical and commercial specifications of Microsoft 365 '
@@ -5280,7 +5278,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Product code', '@sku'),
                                  ('Activation region', 'European Union / EEA'),
                                  ('Billing',
-                                  'VAT included, official electronic invoice')]},
+                                  'Official electronic invoice')]},
                  'pt': {'eyebrow': 'Product specifications',
                         'title': 'Technical sheet and licence details',
                         'caption': 'Technical and commercial specifications of Microsoft 365 '
@@ -5316,7 +5314,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Product code', '@sku'),
                                  ('Activation region', 'European Union / EEA'),
                                  ('Billing',
-                                  'VAT included, official electronic invoice')]},
+                                  'Official electronic invoice')]},
                  'nl': {'eyebrow': 'Product specifications',
                         'title': 'Technical sheet and licence details',
                         'caption': 'Technical and commercial specifications of Microsoft 365 '
@@ -5352,7 +5350,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                  ('Product code', '@sku'),
                                  ('Activation region', 'European Union / EEA'),
                                  ('Billing',
-                                  'VAT included, official electronic invoice')]}},
+                                  'Official electronic invoice')]}},
  'compare': {'it': {'eyebrow': 'Guida alla scelta',
                     'title': 'Confronto tra le soluzioni Microsoft Business e Consumer',
                     'sub': 'Confronta le differenze chiave tra i piani aziendali e le licenze '
@@ -5434,7 +5432,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                               '1-year subscription',
                               '1-year subscription',
                               'Perpetual licence'),
-                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                             ('Electronic invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
                     'yes_label': 'Included',
                     'no_label': 'Not included',
                     'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
@@ -5479,7 +5477,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                               '1-year subscription',
                               '1-year subscription',
                               'Perpetual licence'),
-                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                             ('Electronic invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
                     'yes_label': 'Included',
                     'no_label': 'Not included',
                     'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
@@ -5524,7 +5522,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                               '1-year subscription',
                               '1-year subscription',
                               'Perpetual licence'),
-                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                             ('Electronic invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
                     'yes_label': 'Included',
                     'no_label': 'Not included',
                     'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
@@ -5569,7 +5567,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                               '1-year subscription',
                               '1-year subscription',
                               'Perpetual licence'),
-                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                             ('Electronic invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
                     'yes_label': 'Included',
                     'no_label': 'Not included',
                     'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
@@ -5614,7 +5612,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                               '1-year subscription',
                               '1-year subscription',
                               'Perpetual licence'),
-                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                             ('Electronic invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
                     'yes_label': 'Included',
                     'no_label': 'Not included',
                     'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
@@ -5659,7 +5657,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                               '1-year subscription',
                               '1-year subscription',
                               'Perpetual licence'),
-                             ('VAT invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
+                             ('Electronic invoice with company tax ID', 'yes', 'yes', 'yes', 'yes')],
                     'yes_label': 'Included',
                     'no_label': 'Not included',
                     'foot': ['<strong>Microsoft 365 Business Standard</strong> is the premier '
@@ -5685,7 +5683,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                    'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
                   ('Instant digital delivery',
                    'Within 2-15 minutes we send you the genuine 25-character Product Key, '
-                   'activation guide, and official VAT invoice by email.'),
+                   'activation guide, and official electronic invoice by email.'),
                   ('Official Microsoft activation',
                    'Redeem the licence on the official Microsoft portal (setup.office.com or '
                    'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
@@ -5695,7 +5693,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                    'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
                   ('Instant digital delivery',
                    'Within 2-15 minutes we send you the genuine 25-character Product Key, '
-                   'activation guide, and official VAT invoice by email.'),
+                   'activation guide, and official electronic invoice by email.'),
                   ('Official Microsoft activation',
                    'Redeem the licence on the official Microsoft portal (setup.office.com or '
                    'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
@@ -5705,7 +5703,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                    'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
                   ('Instant digital delivery',
                    'Within 2-15 minutes we send you the genuine 25-character Product Key, '
-                   'activation guide, and official VAT invoice by email.'),
+                   'activation guide, and official electronic invoice by email.'),
                   ('Official Microsoft activation',
                    'Redeem the licence on the official Microsoft portal (setup.office.com or '
                    'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
@@ -5715,7 +5713,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                    'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
                   ('Instant digital delivery',
                    'Within 2-15 minutes we send you the genuine 25-character Product Key, '
-                   'activation guide, and official VAT invoice by email.'),
+                   'activation guide, and official electronic invoice by email.'),
                   ('Official Microsoft activation',
                    'Redeem the licence on the official Microsoft portal (setup.office.com or '
                    'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
@@ -5725,7 +5723,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                    'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
                   ('Instant digital delivery',
                    'Within 2-15 minutes we send you the genuine 25-character Product Key, '
-                   'activation guide, and official VAT invoice by email.'),
+                   'activation guide, and official electronic invoice by email.'),
                   ('Official Microsoft activation',
                    'Redeem the licence on the official Microsoft portal (setup.office.com or '
                    'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
@@ -5735,7 +5733,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                    'credit card, PayPal, Apple Pay, or Google Pay. Receive instant confirmation.'),
                   ('Instant digital delivery',
                    'Within 2-15 minutes we send you the genuine 25-character Product Key, '
-                   'activation guide, and official VAT invoice by email.'),
+                   'activation guide, and official electronic invoice by email.'),
                   ('Official Microsoft activation',
                    'Redeem the licence on the official Microsoft portal (setup.office.com or '
                    'admin.microsoft.com), assign users, and download apps on PC, Mac, and mobile '
@@ -5982,7 +5980,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
-                ('Is a VAT invoice provided for businesses?',
+                ('Is an electronic invoice provided for businesses?',
                  'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
@@ -6043,7 +6041,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
-                ('Is a VAT invoice provided for businesses?',
+                ('Is an electronic invoice provided for businesses?',
                  'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
@@ -6104,7 +6102,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
-                ('Is a VAT invoice provided for businesses?',
+                ('Is an electronic invoice provided for businesses?',
                  'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
@@ -6165,7 +6163,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
-                ('Is a VAT invoice provided for businesses?',
+                ('Is an electronic invoice provided for businesses?',
                  'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
@@ -6226,7 +6224,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
-                ('Is a VAT invoice provided for businesses?',
+                ('Is an electronic invoice provided for businesses?',
                  'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
@@ -6287,7 +6285,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  '300 Business Standard licences per tenant). Through the Microsoft 365 Admin '
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
-                ('Is a VAT invoice provided for businesses?',
+                ('Is an electronic invoice provided for businesses?',
                  'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
