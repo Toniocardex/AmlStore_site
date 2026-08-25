@@ -28,6 +28,10 @@
     "QQ2-00012": {
       "mode": "preserve-cents",
       "note": "84,79 EUR e' un prezzo commerciale deliberato, verificato end-to-end su carrello/checkout in tutte le lingue."
+    },
+    "KLQ-00388": {
+      "mode": "preserve-cents",
+      "note": "144,90 EUR e' un prezzo commerciale deliberato richiesto esplicitamente dall'utente il 2026-08-25, verificato end-to-end su carrello/checkout in tutte le lingue."
     }
   }
 }

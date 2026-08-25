@@ -28,7 +28,7 @@ export const CATALOG = {
   "EAVH-N1-A3": { name: "Eset Nod32 Antivirus | 1 Anno | 3 Dispositivo/i", unitAmountMinor: 3604, compareAtMinor: 4998, currency: 'EUR', type: "subscription", category: "antivirus" },
   "EAVH-N1-A5": { name: "Eset Nod32 Antivirus | 1 Anno | 5 Dispositivo/i", unitAmountMinor: 4427, compareAtMinor: 5999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "EAVH-N1-A10": { name: "Eset Nod32 Antivirus | 1 Anno | 10 Dispositivo/i", unitAmountMinor: 7300, compareAtMinor: 8499, currency: 'EUR', type: "subscription", category: "antivirus" },
-  "KLQ-00388": { name: "Microsoft 365 Business Standard | 1 Utente | 15 Dispositivi", unitAmountMinor: 14500, compareAtMinor: 17100, currency: 'EUR', type: "perpetual", category: "suite office > microsoft 365" },
+  "KLQ-00388": { name: "Microsoft 365 Business Standard | 1 Utente | 15 Dispositivi", unitAmountMinor: 14490, compareAtMinor: 17100, currency: 'EUR', type: "perpetual", category: "suite office > microsoft 365" },
   "21395096E7": { name: "Norton 360 Standard 10GB Cloud | 1 Anno | 1 Dispositivo", unitAmountMinor: 1544, compareAtMinor: 2999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "269-17068": { name: "Microsoft Office 2019 Professional Plus", unitAmountMinor: 18100, compareAtMinor: 20899, currency: 'EUR', type: "perpetual", category: "suite office" },
   "7470A": { name: "Bitdefender Antivirus Plus | 1 Anno | 1 Dispositivo", unitAmountMinor: 2059, compareAtMinor: 2299, currency: 'EUR', type: "subscription", category: "antivirus" },

@@ -19,11 +19,11 @@
       "productId": "EP2-06798",
       "sku": "EP2-06798",
       "name": "Microsoft Office 2024 Home | PC/Mac",
-      "currentPriceMinor": 13900,
-      "rawCalculatedPriceMinor": 13900,
+      "currentPriceMinor": 13400,
+      "rawCalculatedPriceMinor": 13400,
       "proposedPublicPriceMinor": 13400,
-      "deltaAbsoluteMinor": -500,
-      "deltaPercent": -3.5971,
+      "deltaAbsoluteMinor": 0,
+      "deltaPercent": 0.0,
       "manualOverridePresent": true,
       "pricingMode": "manual"
     },
@@ -249,11 +249,11 @@
       "name": "Microsoft 365 Business Standard | 1 Utente | 15 Dispositivi",
       "currentPriceMinor": 14500,
       "rawCalculatedPriceMinor": 14500,
-      "proposedPublicPriceMinor": 14500,
-      "deltaAbsoluteMinor": 0,
-      "deltaPercent": 0.0,
-      "manualOverridePresent": false,
-      "pricingMode": "automatic"
+      "proposedPublicPriceMinor": 14490,
+      "deltaAbsoluteMinor": -10,
+      "deltaPercent": -0.069,
+      "manualOverridePresent": true,
+      "pricingMode": "manual"
     },
     {
       "productId": "21395096E7",
@@ -749,25 +749,15 @@
     }
   ],
   "changedHtmlFiles": [
-    "it\\404.html",
-    "it\\index.html",
-    "it\\office-2024-home.html",
+    "it\\microsoft-365-business-standard.html",
     "it\\suite-office.html",
-    "en\\404.html",
-    "en\\index.html",
-    "en\\office-2024-home.html",
+    "en\\microsoft-365-business-standard.html",
     "en\\suite-office.html",
-    "fr\\404.html",
-    "fr\\index.html",
-    "fr\\office-2024-home.html",
+    "fr\\microsoft-365-business-standard.html",
     "fr\\suite-office.html",
-    "de\\404.html",
-    "de\\index.html",
-    "de\\office-2024-home.html",
+    "de\\microsoft-365-business-standard.html",
     "de\\suite-office.html",
-    "es\\404.html",
-    "es\\index.html",
-    "es\\office-2024-home.html",
+    "es\\microsoft-365-business-standard.html",
     "es\\suite-office.html"
   ]
 }
