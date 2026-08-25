@@ -2811,7 +2811,7 @@ body { background: var(--page-bg); }
     display: block;
     font-size: var(--aml-text-xs);
     font-weight: 700;
-    color: var(--aml-brand);
+    color: var(--page-text);
     margin-bottom: 14px;
 }
 
