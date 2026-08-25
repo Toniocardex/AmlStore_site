@@ -301,9 +301,18 @@ body.m365sol main.product-page.m365sol-main {
     text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
     .m365sol-apps-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 6 tessere: dai 900px in su stanno tutte su una riga, cosi' non resta mai
+   un avanzo orfano di 2 (com'era con 4 colonne fisse). */
+@media (min-width: 900px) {
+    .m365sol-apps-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 0.75rem;
     }
 }
 
@@ -314,6 +323,10 @@ body.m365sol main.product-page.m365sol-main {
     background: var(--aml-paper, #f5f7fa);
     border: 1px solid var(--page-border);
     transition: transform 0.2s, box-shadow 0.2s;
+}
+
+@media (min-width: 900px) {
+    .m365sol-app-tile { padding: 16px 12px; }
 }
 
 .m365sol-app-tile:hover {
@@ -335,6 +348,10 @@ body.m365sol main.product-page.m365sol-main {
     box-shadow: var(--aml-shadow-sm);
     padding: 10px;
     box-sizing: border-box;
+}
+
+@media (min-width: 900px) {
+    .m365sol-app-icon { width: 3.5rem; height: 3.5rem; margin-bottom: 0.75rem; }
 }
 
 .m365sol-app-icon img {
@@ -359,6 +376,11 @@ body.m365sol main.product-page.m365sol-main {
     font-size: 0.85rem;
     color: var(--page-text-secondary);
     margin: 0.35rem 0 0;
+}
+
+@media (min-width: 900px) {
+    .m365sol-app-tile h3 { font-size: 0.9rem; }
+    .m365sol-app-tile p { font-size: 0.78rem; }
 }
 
 /* ── Bande feature (Copilot, OneDrive, Defender, Outlook) ── */
