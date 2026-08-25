@@ -338,6 +338,11 @@ body { background: var(--page-bg); }
     contain: layout paint;
 }
 
+/* Sugli hub/confronti (.cmp-hero dentro .pdp-hero) il divider separava la
+   hero dalla riga di card subito sotto senza un vero cambio di sezione —
+   qui non serve. */
+.pdp-hero:has(.cmp-hero) { border-bottom: none; }
+
 .pdp-breadcrumb {
     position: relative;
     z-index: 2;

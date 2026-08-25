@@ -103,7 +103,7 @@ def verdict_html(v):
                 <h3>{v['name']}</h3>
                 <p>{v['blurb']}</p>
                 <span class="cmp-verdict__price">{v['price']}</span>
-                <a class="pdp-btn-ghost" href="{v['href']}">{v['cta']}</a>
+                <a class="pdp-btn-primary" href="{v['href']}">{v['cta']}</a>
             </div>
 """
 
