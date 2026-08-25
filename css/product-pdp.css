@@ -2868,6 +2868,12 @@ body { background: var(--page-bg); }
     color: var(--pdp-muted);
 }
 
+.cmp-verdict--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 900px) {
+    .cmp-verdict--3 { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 720px) {
     .cmp-verdict { grid-template-columns: 1fr; }
 }
