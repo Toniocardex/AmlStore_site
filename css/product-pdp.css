@@ -2785,6 +2785,14 @@ body { background: var(--page-bg); }
     border: 1px solid var(--pdp-border);
 }
 
+.cmp-verdict__img {
+    display: block;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 14px;
+}
+
 .cmp-verdict__card h3 {
     margin: 0 0 8px;
     font-size: var(--aml-text-lg);
