@@ -17,7 +17,7 @@ import { consultationInternalEmail,
          consultationConfirmationEmail }                from './consultation-email-templates.js';
 
 const RESEND_API = 'https://api.resend.com/emails';
-const FROM       = 'Eurolicenze <ordini@aml-store.com>';
+const FROM       = 'Eurolicenze <ordini@eurolicenze.com>';
 const REPLY_TO   = 'Desk@eurolicenze.com';
 const INTERNAL_RECIPIENTS = ['Desk@eurolicenze.com', 'Antonino.cardelli@outlook.it'];
 
