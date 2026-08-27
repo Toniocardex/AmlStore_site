@@ -32,29 +32,29 @@ EN_NL = [
     (">Up to 6<", ">Tot 6<"),
     ("Support:", "Ondersteuning:"),
     ("Skip to main content", "Naar de hoofdinhoud"),
-    ("Complete your purchase securely at Aml Store.", "Rond uw aankoop veilig af bij Aml Store."),
-    ("Your order has been received. Thank you for shopping at Aml Store.", "Uw bestelling is ontvangen. Bedankt voor uw aankoop bij Aml Store."),
-    ("Shopping cart — Aml Store", "Winkelwagen — Aml Store"),
-    ("Order confirmed — Aml Store", "Bestelling bevestigd — Aml Store"),
-    ("Page not found — Aml Store", "Pagina niet gevonden — Aml Store"),
-    ("The page you are looking for does not exist or has moved. Search for a product, browse the categories or go back to the Aml Store home page.",
-     "De pagina die u zoekt bestaat niet of is verplaatst. Zoek een product, bekijk de categorieën of ga terug naar de homepage van Aml Store."),
-    ("Privacy policy — Aml Store", "Privacybeleid — Aml Store"),
-    ("Aml Store privacy policy: data controller, purposes, your rights under the GDPR, and contact details.",
-     "Privacybeleid van Aml Store: verwerkingsverantwoordelijke, doeleinden, uw rechten onder de AVG en contactgegevens."),
-    ("Cookie policy — Aml Store", "Cookiebeleid — Aml Store"),
-    ("Terms and conditions — Aml Store", "Algemene voorwaarden — Aml Store"),
-    ("Returns and refunds — Aml Store", "Retourneren en terugbetalingen — Aml Store"),
-    ("Software consultation — Aml Store", "Softwareadvies — Aml Store"),
-    ("Tell us about your software needs. Aml Store helps individuals, professionals and businesses identify suitable licences and solutions.",
-     "Vertel ons wat u nodig hebt. Aml Store helpt particulieren, professionals en bedrijven bij het kiezen van geschikte licenties en oplossingen."),
+    ("Complete your purchase securely at Eurolicenze.", "Rond uw aankoop veilig af bij Eurolicenze."),
+    ("Your order has been received. Thank you for shopping at Eurolicenze.", "Uw bestelling is ontvangen. Bedankt voor uw aankoop bij Eurolicenze."),
+    ("Shopping cart — Eurolicenze", "Winkelwagen — Eurolicenze"),
+    ("Order confirmed — Eurolicenze", "Bestelling bevestigd — Eurolicenze"),
+    ("Page not found — Eurolicenze", "Pagina niet gevonden — Eurolicenze"),
+    ("The page you are looking for does not exist or has moved. Search for a product, browse the categories or go back to the Eurolicenze home page.",
+     "De pagina die u zoekt bestaat niet of is verplaatst. Zoek een product, bekijk de categorieën of ga terug naar de homepage van Eurolicenze."),
+    ("Privacy policy — Eurolicenze", "Privacybeleid — Eurolicenze"),
+    ("Eurolicenze privacy policy: data controller, purposes, your rights under the GDPR, and contact details.",
+     "Privacybeleid van Eurolicenze: verwerkingsverantwoordelijke, doeleinden, uw rechten onder de AVG en contactgegevens."),
+    ("Cookie policy — Eurolicenze", "Cookiebeleid — Eurolicenze"),
+    ("Terms and conditions — Eurolicenze", "Algemene voorwaarden — Eurolicenze"),
+    ("Returns and refunds — Eurolicenze", "Retourneren en terugbetalingen — Eurolicenze"),
+    ("Software consultation — Eurolicenze", "Softwareadvies — Eurolicenze"),
+    ("Tell us about your software needs. Eurolicenze helps individuals, professionals and businesses identify suitable licences and solutions.",
+     "Vertel ons wat u nodig hebt. Eurolicenze helpt particulieren, professionals en bedrijven bij het kiezen van geschikte licenties en oplossingen."),
     ("Your Cart", "Uw winkelwagen"),
     ("Review your software before the licences are sent instantly by email.",
      "Controleer uw software voordat de licenties per e-mail worden verzonden."),
     ("Your cart is empty.", "Uw winkelwagen is leeg."),
     ("Back to catalogue", "Terug naar de catalogus"),
     ("Software licence details", "Gegevens van de softwarelicentie"),
-    ("Why buy from Aml Store with confidence", "Waarom u met vertrouwen bij Aml Store koopt"),
+    ("Why buy from Eurolicenze with confidence", "Waarom u met vertrouwen bij Eurolicenze koopt"),
     ("Fast email delivery", "Snelle levering per e-mail"),
     ("Receive your official licence code and instructions within minutes of purchase.",
      "Ontvang uw officiële licentiecode en instructies binnen enkele minuten na aankoop."),
@@ -124,22 +124,22 @@ def remap(html: str, slug: str) -> str:
         '["it","en","fr","de","es","pt"]',
         '["it","en","fr","de","es","pt","nl"]',
     )
-    dest = f"https://aml-store.com/nl/{slug}" if slug else "https://aml-store.com/nl/"
+    dest = f"https://eurolicenze.com/nl/{slug}" if slug else "https://eurolicenze.com/nl/"
     if 'hreflang="nl"' not in html:
         html = re.sub(
-            r'(<link rel="alternate" hreflang="pt" href="https://aml-store\.com/pt/[^"]*">)\s*'
+            r'(<link rel="alternate" hreflang="pt" href="https://eurolicenze\.com/pt/[^"]*">)\s*'
             r'(<link rel="alternate" hreflang="x-default")',
             rf'\1\n    <link rel="alternate" hreflang="nl" href="{dest}">\n    \2',
             html,
             count=1,
         )
     html = re.sub(
-        r'(<link rel="canonical" href=")https://aml-store\.com/en/[^"]*(")',
+        r'(<link rel="canonical" href=")https://eurolicenze\.com/en/[^"]*(")',
         rf"\1{dest}\2",
         html,
         count=1,
     )
-    html = html.replace("https://aml-store.com/en/" + (slug or ""), dest)
+    html = html.replace("https://eurolicenze.com/en/" + (slug or ""), dest)
     html = html.replace('href="/en/', 'href="/nl/')
     html = html.replace("/nl/about-us", "/nl/over-ons")
     html = html.replace("/nl/consultation", "/nl/consultatie")

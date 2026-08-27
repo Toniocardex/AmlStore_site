@@ -15,7 +15,7 @@ const CONFIRMATION_COPY = {
     it: {
         subject: 'Abbiamo ricevuto la tua richiesta di consulenza',
         heading: 'Richiesta ricevuta',
-        intro: 'Grazie per aver contattato Aml Store. Abbiamo ricevuto la tua richiesta e il nostro team ti risponderà via email.',
+        intro: 'Grazie per aver contattato Eurolicenze. Abbiamo ricevuto la tua richiesta e il nostro team ti risponderà via email.',
         support: 'L’assistenza per l’Italia è fornita in italiano.',
         reference: 'Riferimento richiesta',
         footer: 'Per aggiungere informazioni puoi rispondere direttamente a questa email.',
@@ -23,7 +23,7 @@ const CONFIRMATION_COPY = {
     en: {
         subject: 'We received your consultation request',
         heading: 'Request received',
-        intro: 'Thank you for contacting Aml Store. We received your request and our team will reply by email.',
+        intro: 'Thank you for contacting Eurolicenze. We received your request and our team will reply by email.',
         support: 'Support outside Italy is provided in English.',
         reference: 'Request reference',
         footer: 'You can reply directly to this email if you need to add information.',
@@ -31,7 +31,7 @@ const CONFIRMATION_COPY = {
     fr: {
         subject: 'Nous avons reçu votre demande de consultation',
         heading: 'Demande reçue',
-        intro: 'Merci d’avoir contacté Aml Store. Nous avons reçu votre demande et notre équipe vous répondra par e-mail.',
+        intro: 'Merci d’avoir contacté Eurolicenze. Nous avons reçu votre demande et notre équipe vous répondra par e-mail.',
         support: 'La réponse de notre équipe d’assistance sera fournie en anglais.',
         reference: 'Référence de la demande',
         footer: 'Vous pouvez répondre directement à cet e-mail pour ajouter des informations.',
@@ -39,7 +39,7 @@ const CONFIRMATION_COPY = {
     de: {
         subject: 'Wir haben Ihre Beratungsanfrage erhalten',
         heading: 'Anfrage erhalten',
-        intro: 'Vielen Dank für Ihre Nachricht an Aml Store. Wir haben Ihre Anfrage erhalten und unser Team antwortet Ihnen per E-Mail.',
+        intro: 'Vielen Dank für Ihre Nachricht an Eurolicenze. Wir haben Ihre Anfrage erhalten und unser Team antwortet Ihnen per E-Mail.',
         support: 'Die Antwort unseres Support-Teams erfolgt auf Englisch.',
         reference: 'Anfragereferenz',
         footer: 'Sie können direkt auf diese E-Mail antworten, um weitere Informationen hinzuzufügen.',
@@ -47,7 +47,7 @@ const CONFIRMATION_COPY = {
     es: {
         subject: 'Hemos recibido tu solicitud de asesoramiento',
         heading: 'Solicitud recibida',
-        intro: 'Gracias por contactar con Aml Store. Hemos recibido tu solicitud y nuestro equipo responderá por correo electrónico.',
+        intro: 'Gracias por contactar con Eurolicenze. Hemos recibido tu solicitud y nuestro equipo responderá por correo electrónico.',
         support: 'La respuesta de nuestro equipo de asistencia se proporcionará en inglés.',
         reference: 'Referencia de la solicitud',
         footer: 'Puedes responder directamente a este correo para añadir información.',
@@ -77,7 +77,7 @@ function infoRow(label, value) {
 
 export function consultationInternalEmail(lead) {
     const reference = String(lead.id || '').slice(0, 8).toUpperCase();
-    const subject = `[Aml Store] Nuova richiesta di consulenza ${reference}`;
+    const subject = `[Eurolicenze] Nuova richiesta di consulenza ${reference}`;
     const fullName = `${lead.firstName || ''} ${lead.lastName || ''}`.trim();
     const topic = TOPIC_LABELS_IT[lead.topic] || lead.topic;
     const received = new Date(lead.receivedAt).toLocaleString('it-IT', { timeZone: 'Europe/Rome' });
@@ -89,7 +89,7 @@ export function consultationInternalEmail(lead) {
     <tr><td align="center">
       <table width="680" cellpadding="0" cellspacing="0" style="width:100%;max-width:680px;background:#fff;border:1px solid #dce3ea;border-radius:10px;overflow:hidden">
         <tr><td style="padding:22px 26px;background:#14243a;color:#fff">
-          <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#b9cbe1">Aml Store</p>
+          <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#b9cbe1">Eurolicenze</p>
           <h1 style="margin:0;font-size:22px">Nuova richiesta di consulenza</h1>
         </td></tr>
         <tr><td style="padding:24px 26px">
@@ -115,7 +115,7 @@ export function consultationInternalEmail(lead) {
 </body></html>`;
 
     const text = [
-        'Nuova richiesta di consulenza Aml Store',
+        'Nuova richiesta di consulenza Eurolicenze',
         '',
         `Riferimento: ${reference}`,
         `Ricevuta il: ${received}`,
@@ -146,7 +146,7 @@ export function consultationConfirmationEmail(lead) {
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:24px;background:#f4f6f8">
     <tr><td align="center">
       <table width="620" cellpadding="0" cellspacing="0" style="width:100%;max-width:620px;background:#fff;border:1px solid #dce3ea;border-radius:10px;overflow:hidden">
-        <tr><td style="padding:22px 26px;background:#14243a;color:#fff"><strong style="font-size:18px">Aml Store</strong></td></tr>
+        <tr><td style="padding:22px 26px;background:#14243a;color:#fff"><strong style="font-size:18px">Eurolicenze</strong></td></tr>
         <tr><td style="padding:28px 26px">
           <h1 style="margin:0 0 14px;font-size:24px">${esc(copy.heading)}</h1>
           <p style="margin:0 0 16px;line-height:1.65">${esc(copy.intro)}</p>

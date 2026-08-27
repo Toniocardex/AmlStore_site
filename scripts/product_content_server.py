@@ -74,7 +74,7 @@ T = {
         "ws_eyebrow": "Licenza perpetua · {cores} core",
         "ws_title": 'Windows Server <span>{anno} Standard</span>',
         "ws_name": "Windows Server {anno} Standard",
-        "ws_seo": "Windows Server {anno} Standard {cores} core — Aml Store",
+        "ws_seo": "Windows Server {anno} Standard {cores} core — Eurolicenze",
         "ws_desc": ("Windows Server {anno} Standard a 64 bit con licenza perpetua per {cores} core. "
                     "{consegna} Le CAL di accesso client non sono incluse: vanno acquistate a parte "
                     "per ogni utente o dispositivo che userà il server."),
@@ -96,7 +96,7 @@ T = {
         "sql_eyebrow": "Licenza perpetua · {cores} core",
         "sql_title": 'SQL Server <span>2022 {ed}</span>',
         "sql_name": "SQL Server 2022 {ed}",
-        "sql_seo": "SQL Server 2022 {ed} {cores} core — Aml Store",
+        "sql_seo": "SQL Server 2022 {ed} {cores} core — Eurolicenze",
         "sql_desc": ("SQL Server 2022 {ed} con licenza perpetua per core ({cores} core). "
                      "Con il modello per core non servono CAL: il numero di utenti che accedono al database è illimitato. "
                      "Supporto fisico incluso, interfaccia in inglese."),
@@ -155,7 +155,7 @@ T["en"] = dict(T["it"], **{
     "ws_eyebrow": "Perpetual licence · {cores} cores",
     "ws_title": 'Windows Server <span>{anno} Standard</span>',
     "ws_name": "Windows Server {anno} Standard",
-    "ws_seo": "Windows Server {anno} Standard {cores} cores — Aml Store",
+    "ws_seo": "Windows Server {anno} Standard {cores} cores — Eurolicenze",
     "ws_desc": ("Windows Server {anno} Standard 64-bit with a perpetual licence for {cores} cores. "
                 "{consegna} Client Access Licences are not included: you buy them separately for every "
                 "user or device that will use the server."),
@@ -176,7 +176,7 @@ T["en"] = dict(T["it"], **{
                    "Windows Server 2025 adds hotpatching through Azure Arc, cutting planned reboots, alongside a hardened Active Directory and native NVMe support."),
     "sql_eyebrow": "Perpetual licence · {cores} cores",
     "sql_name": "SQL Server 2022 {ed}",
-    "sql_seo": "SQL Server 2022 {ed} {cores} cores — Aml Store",
+    "sql_seo": "SQL Server 2022 {ed} {cores} cores — Eurolicenze",
     "sql_desc": ("SQL Server 2022 {ed} with a perpetual per-core licence ({cores} cores). "
                  "Per-core licensing needs no CALs: any number of users can reach the database. "
                  "Physical media included, English interface."),
@@ -228,7 +228,7 @@ T["en"] = dict(T["it"], **{
 T["fr"] = dict(T["it"], **{
     "ws_eyebrow": "Licence perpétuelle · {cores} cœurs",
     "ws_name": "Windows Server {anno} Standard",
-    "ws_seo": "Windows Server {anno} Standard {cores} cœurs — Aml Store",
+    "ws_seo": "Windows Server {anno} Standard {cores} cœurs — Eurolicenze",
     "ws_desc": ("Windows Server {anno} Standard 64 bits avec licence perpétuelle pour {cores} cœurs. "
                 "{consegna} Les licences d'accès client ne sont pas incluses : elles s'achètent à part "
                 "pour chaque utilisateur ou appareil qui utilisera le serveur."),
@@ -249,7 +249,7 @@ T["fr"] = dict(T["it"], **{
                    "Windows Server 2025 apporte le hotpatching via Azure Arc, qui réduit les redémarrages planifiés, ainsi qu'un Active Directory renforcé et la prise en charge native NVMe."),
     "sql_eyebrow": "Licence perpétuelle · {cores} cœurs",
     "sql_name": "SQL Server 2022 {ed}",
-    "sql_seo": "SQL Server 2022 {ed} {cores} cœurs — Aml Store",
+    "sql_seo": "SQL Server 2022 {ed} {cores} cœurs — Eurolicenze",
     "sql_desc": ("SQL Server 2022 {ed} avec licence perpétuelle par cœur ({cores} cœurs). "
                  "Le modèle par cœur ne nécessite aucune CAL : le nombre d'utilisateurs accédant à la base est illimité. "
                  "Support physique inclus, interface en anglais."),
@@ -301,7 +301,7 @@ T["fr"] = dict(T["it"], **{
 T["de"] = dict(T["it"], **{
     "ws_eyebrow": "Dauerlizenz · {cores} Kerne",
     "ws_name": "Windows Server {anno} Standard",
-    "ws_seo": "Windows Server {anno} Standard {cores} Kerne — Aml Store",
+    "ws_seo": "Windows Server {anno} Standard {cores} Kerne — Eurolicenze",
     "ws_desc": ("Windows Server {anno} Standard 64-Bit mit Dauerlizenz für {cores} Kerne. "
                 "{consegna} Clientzugriffslizenzen sind nicht enthalten: Sie kaufst du separat für "
                 "jeden Benutzer oder jedes Gerät, das den Server nutzt."),
@@ -322,7 +322,7 @@ T["de"] = dict(T["it"], **{
                    "Windows Server 2025 bringt Hotpatching über Azure Arc, was geplante Neustarts reduziert, dazu ein gehärtetes Active Directory und native NVMe-Unterstützung."),
     "sql_eyebrow": "Dauerlizenz · {cores} Kerne",
     "sql_name": "SQL Server 2022 {ed}",
-    "sql_seo": "SQL Server 2022 {ed} {cores} Kerne — Aml Store",
+    "sql_seo": "SQL Server 2022 {ed} {cores} Kerne — Eurolicenze",
     "sql_desc": ("SQL Server 2022 {ed} mit Dauerlizenz pro Kern ({cores} Kerne). "
                  "Beim Kernmodell sind keine CALs nötig: beliebig viele Benutzer können auf die Datenbank zugreifen. "
                  "Physisches Medium enthalten, englische Oberfläche."),
@@ -374,7 +374,7 @@ T["de"] = dict(T["it"], **{
 T["es"] = dict(T["it"], **{
     "ws_eyebrow": "Licencia perpetua · {cores} núcleos",
     "ws_name": "Windows Server {anno} Standard",
-    "ws_seo": "Windows Server {anno} Standard {cores} núcleos — Aml Store",
+    "ws_seo": "Windows Server {anno} Standard {cores} núcleos — Eurolicenze",
     "ws_desc": ("Windows Server {anno} Standard de 64 bits con licencia perpetua para {cores} núcleos. "
                 "{consegna} Las CAL de acceso de cliente no están incluidas: se compran aparte para "
                 "cada usuario o dispositivo que vaya a usar el servidor."),
@@ -395,7 +395,7 @@ T["es"] = dict(T["it"], **{
                    "Windows Server 2025 incorpora hotpatching mediante Azure Arc, que reduce los reinicios planificados, junto a un Active Directory reforzado y soporte NVMe nativo."),
     "sql_eyebrow": "Licencia perpetua · {cores} núcleos",
     "sql_name": "SQL Server 2022 {ed}",
-    "sql_seo": "SQL Server 2022 {ed} {cores} núcleos — Aml Store",
+    "sql_seo": "SQL Server 2022 {ed} {cores} núcleos — Eurolicenze",
     "sql_desc": ("SQL Server 2022 {ed} con licencia perpetua por núcleo ({cores} núcleos). "
                  "Con el modelo por núcleo no hacen falta CAL: el número de usuarios que acceden a la base de datos es ilimitado. "
                  "Soporte físico incluido, interfaz en inglés."),
@@ -447,7 +447,7 @@ T["es"] = dict(T["it"], **{
 T["pt"] = dict(T["it"], **{
     "ws_eyebrow": "Licença perpétua · {cores} núcleos",
     "ws_name": "Windows Server {anno} Standard",
-    "ws_seo": "Windows Server {anno} Standard {cores} núcleos — Aml Store",
+    "ws_seo": "Windows Server {anno} Standard {cores} núcleos — Eurolicenze",
     "ws_desc": ("Windows Server {anno} Standard de 64 bits com licença perpétua para {cores} núcleos. "
                 "{consegna} As CAL de acesso de cliente não estão incluídas: compram-se em separado para "
                 "cada utilizador ou dispositivo que vá usar o servidor."),
@@ -468,7 +468,7 @@ T["pt"] = dict(T["it"], **{
                    "O Windows Server 2025 introduz o hotpatching através do Azure Arc, que reduz os reinícios planeados, além de um Active Directory reforçado e suporte NVMe nativo."),
     "sql_eyebrow": "Licença perpétua · {cores} núcleos",
     "sql_name": "SQL Server 2022 {ed}",
-    "sql_seo": "SQL Server 2022 {ed} {cores} núcleos — Aml Store",
+    "sql_seo": "SQL Server 2022 {ed} {cores} núcleos — Eurolicenze",
     "sql_desc": ("SQL Server 2022 {ed} com licença perpétua por núcleo ({cores} núcleos). "
                  "Com o modelo por núcleo não são necessárias CAL: o número de utilizadores que acedem à base de dados é ilimitado. "
                  "Suporte físico incluído, interface em inglês."),
@@ -523,7 +523,7 @@ T["pt"] = dict(T["it"], **{
 T["nl"] = dict({k: nl_text(v) for k, v in T["en"].items()}, **{
     "ws_eyebrow": "Permanente licentie · {cores} cores",
     "ws_name": "Windows Server {anno} Standard",
-    "ws_seo": "Windows Server {anno} Standard {cores} cores — Aml Store",
+    "ws_seo": "Windows Server {anno} Standard {cores} cores — Eurolicenze",
     "ws_desc": ("Windows Server {anno} Standard 64-bit met een permanente licentie voor {cores} cores. "
                 "{consegna} Client Access Licenses zijn niet inbegrepen: die koopt u apart voor "
                 "elke gebruiker of elk apparaat dat de server gebruikt."),
@@ -544,7 +544,7 @@ T["nl"] = dict({k: nl_text(v) for k, v in T["en"].items()}, **{
                    "Windows Server 2025 voegt hotpatching via Azure Arc toe, wat geplande herstarts vermindert, plus een versterkte Active Directory en native NVMe-ondersteuning."),
     "sql_eyebrow": "Permanente licentie · {cores} cores",
     "sql_name": "SQL Server 2022 {ed}",
-    "sql_seo": "SQL Server 2022 {ed} {cores} cores — Aml Store",
+    "sql_seo": "SQL Server 2022 {ed} {cores} cores — Eurolicenze",
     "sql_desc": ("SQL Server 2022 {ed} met een permanente per-core-licentie ({cores} cores). "
                  "Per-core-licenties vereisen geen CAL’s: elk aantal gebruikers kan de database gebruiken. "
                  "Fysieke media inbegrepen, Engelse interface."),

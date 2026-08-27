@@ -14,7 +14,7 @@ import { createGuestSession, encodeGuestSession } from './guest-session';
 import { consumeGlobalRateLimit } from './rate-limit';
 import { onRequest as adminOnRequest } from '../../admin/api/support/[[path]]';
 
-const SITE_ORIGIN = 'https://aml-store.com';
+const SITE_ORIGIN = 'https://eurolicenze.com';
 
 const gatewayEnv = {
     DB: env.CHAT_DB,
@@ -189,7 +189,7 @@ describe('sicurezza — endpoint admin senza autenticazione', () => {
         expect(body.error.code).toBe('UNAUTHORIZED');
     });
 
-    it('non concede accesso spacciandosi per un dominio diverso da aml-store.com', async () => {
+    it('non concede accesso spacciandosi per un dominio diverso da eurolicenze.com', async () => {
         // Il bypass locale e' scoped a localhost/127.0.0.1: un host di
         // produzione non deve poterlo attivare nemmeno con ADMIN_DEV_BYPASS=1
         // impostato per errore.

@@ -30,7 +30,7 @@ ES_LEAK = re.compile(
 
 
 def slug_from_href(href: str) -> str:
-    path = href.replace("https://aml-store.com/", "").strip("/")
+    path = href.replace("https://eurolicenze.com/", "").strip("/")
     parts = path.split("/", 1)
     return parts[1] if len(parts) == 2 else ""
 
@@ -63,9 +63,9 @@ def check_page(path: Path, expect_pt_href: str | None = None) -> list[str]:
 def expected_pt(path: Path) -> str:
     stem = path.stem
     if stem == "index":
-        return "https://aml-store.com/pt/"
+        return "https://eurolicenze.com/pt/"
     slug = LOCALIZED_TO_PT.get(stem, stem)
-    return f"https://aml-store.com/pt/{slug}"
+    return f"https://eurolicenze.com/pt/{slug}"
 
 
 def main() -> int:
@@ -99,9 +99,9 @@ def main() -> int:
     if not (ROOT / "asset/search-index/pt.json").exists():
         problems.append("manca asset/search-index/pt.json")
     sm = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
-    if "https://aml-store.com/pt/" not in sm:
+    if "https://eurolicenze.com/pt/" not in sm:
         problems.append("sitemap senza home pt")
-    if "https://aml-store.com/pt/sobre-nos" not in sm:
+    if "https://eurolicenze.com/pt/sobre-nos" not in sm:
         problems.append("sitemap senza sobre-nos")
     print(f"pagine per lingua: {counts}")
     print(f"problemi: {len(problems)}")

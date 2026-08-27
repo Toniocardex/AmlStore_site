@@ -19,7 +19,7 @@ def require(label, condition):
         errors.append(label)
 
 
-require("internal recipient Info@amlstore.it missing", "Info@amlstore.it" in EMAIL)
+require("internal recipient Desk@eurolicenze.com missing", "Desk@eurolicenze.com" in EMAIL)
 require("internal recipient Outlook missing", "Antonino.cardelli@outlook.it" in EMAIL)
 require("sendInternalOrderNotificationOnce missing", "sendInternalOrderNotificationOnce" in EMAIL)
 require("internal notification idempotency check missing", "internal_notification_sent_at" in EMAIL)

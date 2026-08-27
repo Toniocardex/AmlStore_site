@@ -26,16 +26,16 @@ SLUG = {
 COPY = {
     "it": {
         "skip": "Vai al contenuto principale",
-        "title": "Chi siamo — Aml Store",
-        "description": "Aml Store è gestito da Antonino Cardelli dal 2020: licenze software sempre originali, un solo interlocutore reale, oltre 1000 ordini evasi. Microsoft Partner.",
+        "title": "Chi siamo — Eurolicenze",
+        "description": "Eurolicenze è gestito da Antonino Cardelli dal 2020: licenze software sempre originali, un solo interlocutore reale, oltre 1000 ordini evasi. Microsoft Partner.",
         "home": "Home",
         "breadcrumb": "Chi siamo",
         "eyebrow": "Chi siamo",
         "h1": "Software originale, seguito di persona.",
-        "lede": "Aml Store è un progetto che porto avanti da solo dal 2020: vendo licenze originali per combattere il software craccato, con un solo interlocutore reale dietro ogni ordine.",
+        "lede": "Eurolicenze è un progetto che porto avanti da solo dal 2020: vendo licenze originali per combattere il software craccato, con un solo interlocutore reale dietro ogni ordine.",
         "h_story": "La mia storia",
-        "story_p1": "Ho iniziato Aml Store con un obiettivo preciso: contrastare la diffusione di software craccato, spesso instabile, privo di aggiornamenti e di qualsiasi garanzia. Vendo esclusivamente <strong>licenze originali</strong>, con tutte le funzionalità, gli aggiornamenti e le garanzie previste dal produttore — a prezzi che restano accessibili.",
-        "story_p2": "Sono <strong>Antonino Cardelli</strong> e gestisco Aml Store da solo: quando scrivi, non parli con un centralino o un ticket anonimo, ma con la persona che segue davvero il tuo ordine.",
+        "story_p1": "Ho iniziato Eurolicenze con un obiettivo preciso: contrastare la diffusione di software craccato, spesso instabile, privo di aggiornamenti e di qualsiasi garanzia. Vendo esclusivamente <strong>licenze originali</strong>, con tutte le funzionalità, gli aggiornamenti e le garanzie previste dal produttore — a prezzi che restano accessibili.",
+        "story_p2": "Sono <strong>Antonino Cardelli</strong> e gestisco Eurolicenze da solo: quando scrivi, non parli con un centralino o un ticket anonimo, ma con la persona che segue davvero il tuo ordine.",
         "stat1_value": "Dal 2020",
         "stat1_label": "In attività",
         "stat2_value": "1000+",
@@ -44,7 +44,7 @@ COPY = {
         "stat3_label": "Certificazione ufficiale",
         "stat4_value": "EU · USA · Canada · Africa · Giappone",
         "stat4_label": "Clienti serviti nel mondo",
-        "h_values": "Perché scegliere Aml Store",
+        "h_values": "Perché scegliere Eurolicenze",
         "value1_title": "Solo software originale",
         "value1_text": "Ogni licenza è autentica, con aggiornamenti e garanzie dirette del produttore — mai copie craccate o modificate.",
         "value2_title": "Un solo interlocutore",
@@ -60,16 +60,16 @@ COPY = {
     },
     "en": {
         "skip": "Skip to main content",
-        "title": "About us — Aml Store",
-        "description": "Aml Store has been run by Antonino Cardelli since 2020: always genuine software licences, one real point of contact, 1,000+ orders fulfilled. Microsoft Partner.",
+        "title": "About us — Eurolicenze",
+        "description": "Eurolicenze has been run by Antonino Cardelli since 2020: always genuine software licences, one real point of contact, 1,000+ orders fulfilled. Microsoft Partner.",
         "home": "Home",
         "breadcrumb": "About us",
         "eyebrow": "About us",
         "h1": "Genuine software, handled personally.",
-        "lede": "Aml Store has been a one-person project since 2020: I sell genuine software licences to fight cracked software, and there's one real person behind every order.",
+        "lede": "Eurolicenze has been a one-person project since 2020: I sell genuine software licences to fight cracked software, and there's one real person behind every order.",
         "h_story": "My story",
-        "story_p1": "I started Aml Store with a clear goal: to push back against cracked software — often unstable, unpatched and unsupported. I sell exclusively <strong>genuine licences</strong>, with the full features, updates and warranties the manufacturer provides, at prices that stay reasonable.",
-        "story_p2": "I'm <strong>Antonino Cardelli</strong>, and I run Aml Store on my own: when you write in, you're not talking to a call centre or an anonymous ticket queue — you're talking to the person actually handling your order.",
+        "story_p1": "I started Eurolicenze with a clear goal: to push back against cracked software — often unstable, unpatched and unsupported. I sell exclusively <strong>genuine licences</strong>, with the full features, updates and warranties the manufacturer provides, at prices that stay reasonable.",
+        "story_p2": "I'm <strong>Antonino Cardelli</strong>, and I run Eurolicenze on my own: when you write in, you're not talking to a call centre or an anonymous ticket queue — you're talking to the person actually handling your order.",
         "stat1_value": "Since 2020",
         "stat1_label": "In business",
         "stat2_value": "1,000+",
@@ -78,7 +78,7 @@ COPY = {
         "stat3_label": "Official certification",
         "stat4_value": "EU · US · Canada · Africa · Japan",
         "stat4_label": "Customers served worldwide",
-        "h_values": "Why choose Aml Store",
+        "h_values": "Why choose Eurolicenze",
         "value1_title": "Genuine software only",
         "value1_text": "Every licence is authentic, with the manufacturer's own updates and warranties — never cracked or modified copies.",
         "value2_title": "One point of contact",
@@ -94,16 +94,16 @@ COPY = {
     },
     "fr": {
         "skip": "Aller au contenu principal",
-        "title": "Qui sommes-nous — Aml Store",
-        "description": "Aml Store est géré par Antonino Cardelli depuis 2020 : des licences toujours authentiques, un seul interlocuteur réel, plus de 1000 commandes honorées. Microsoft Partner.",
+        "title": "Qui sommes-nous — Eurolicenze",
+        "description": "Eurolicenze est géré par Antonino Cardelli depuis 2020 : des licences toujours authentiques, un seul interlocuteur réel, plus de 1000 commandes honorées. Microsoft Partner.",
         "home": "Accueil",
         "breadcrumb": "Qui sommes-nous",
         "eyebrow": "Qui sommes-nous",
         "h1": "Des logiciels authentiques, suivis personnellement.",
-        "lede": "Aml Store est un projet que je gère seul depuis 2020 : je vends des licences authentiques pour lutter contre les logiciels piratés, avec une seule personne réelle derrière chaque commande.",
+        "lede": "Eurolicenze est un projet que je gère seul depuis 2020 : je vends des licences authentiques pour lutter contre les logiciels piratés, avec une seule personne réelle derrière chaque commande.",
         "h_story": "Mon histoire",
-        "story_p1": "J'ai créé Aml Store avec un objectif précis : lutter contre la diffusion de logiciels piratés, souvent instables, sans mises à jour ni garantie. Je vends exclusivement des <strong>licences authentiques</strong>, avec toutes les fonctionnalités, mises à jour et garanties prévues par l'éditeur, à des prix qui restent raisonnables.",
-        "story_p2": "Je suis <strong>Antonino Cardelli</strong> et je gère Aml Store seul : quand vous m'écrivez, vous ne parlez pas à un centre d'appels ou à un ticket anonyme, mais à la personne qui suit réellement votre commande.",
+        "story_p1": "J'ai créé Eurolicenze avec un objectif précis : lutter contre la diffusion de logiciels piratés, souvent instables, sans mises à jour ni garantie. Je vends exclusivement des <strong>licences authentiques</strong>, avec toutes les fonctionnalités, mises à jour et garanties prévues par l'éditeur, à des prix qui restent raisonnables.",
+        "story_p2": "Je suis <strong>Antonino Cardelli</strong> et je gère Eurolicenze seul : quand vous m'écrivez, vous ne parlez pas à un centre d'appels ou à un ticket anonyme, mais à la personne qui suit réellement votre commande.",
         "stat1_value": "Depuis 2020",
         "stat1_label": "En activité",
         "stat2_value": "Plus de 1000",
@@ -112,7 +112,7 @@ COPY = {
         "stat3_label": "Certification officielle",
         "stat4_value": "UE · États-Unis · Canada · Afrique · Japon",
         "stat4_label": "Clients servis dans le monde entier",
-        "h_values": "Pourquoi choisir Aml Store",
+        "h_values": "Pourquoi choisir Eurolicenze",
         "value1_title": "Uniquement des logiciels authentiques",
         "value1_text": "Chaque licence est authentique, avec les mises à jour et garanties directes de l'éditeur — jamais de copies piratées ou modifiées.",
         "value2_title": "Un seul interlocuteur",
@@ -128,16 +128,16 @@ COPY = {
     },
     "de": {
         "skip": "Zum Hauptinhalt springen",
-        "title": "Über uns — Aml Store",
-        "description": "Aml Store wird seit 2020 von Antonino Cardelli geführt: stets originale Softwarelizenzen, ein echter Ansprechpartner, über 1000 abgewickelte Bestellungen. Microsoft Partner.",
+        "title": "Über uns — Eurolicenze",
+        "description": "Eurolicenze wird seit 2020 von Antonino Cardelli geführt: stets originale Softwarelizenzen, ein echter Ansprechpartner, über 1000 abgewickelte Bestellungen. Microsoft Partner.",
         "home": "Startseite",
         "breadcrumb": "Über uns",
         "eyebrow": "Über uns",
         "h1": "Originalsoftware, persönlich betreut.",
-        "lede": "Aml Store ist seit 2020 ein Ein-Personen-Projekt: Ich verkaufe Originallizenzen im Kampf gegen gecrackte Software — mit einer echten Person hinter jeder Bestellung.",
+        "lede": "Eurolicenze ist seit 2020 ein Ein-Personen-Projekt: Ich verkaufe Originallizenzen im Kampf gegen gecrackte Software — mit einer echten Person hinter jeder Bestellung.",
         "h_story": "Meine Geschichte",
-        "story_p1": "Ich habe Aml Store mit einem klaren Ziel gegründet: gegen die Verbreitung gecrackter Software vorzugehen — oft instabil, ohne Updates und ohne jede Garantie. Ich verkaufe ausschließlich <strong>Originallizenzen</strong> mit allen Funktionen, Updates und Garantien des Herstellers, zu Preisen, die fair bleiben.",
-        "story_p2": "Ich bin <strong>Antonino Cardelli</strong> und führe Aml Store allein: Wenn Sie schreiben, sprechen Sie nicht mit einem Callcenter oder einem anonymen Ticket, sondern mit der Person, die Ihre Bestellung tatsächlich bearbeitet.",
+        "story_p1": "Ich habe Eurolicenze mit einem klaren Ziel gegründet: gegen die Verbreitung gecrackter Software vorzugehen — oft instabil, ohne Updates und ohne jede Garantie. Ich verkaufe ausschließlich <strong>Originallizenzen</strong> mit allen Funktionen, Updates und Garantien des Herstellers, zu Preisen, die fair bleiben.",
+        "story_p2": "Ich bin <strong>Antonino Cardelli</strong> und führe Eurolicenze allein: Wenn Sie schreiben, sprechen Sie nicht mit einem Callcenter oder einem anonymen Ticket, sondern mit der Person, die Ihre Bestellung tatsächlich bearbeitet.",
         "stat1_value": "Seit 2020",
         "stat1_label": "Am Markt",
         "stat2_value": "Über 1000",
@@ -146,7 +146,7 @@ COPY = {
         "stat3_label": "Offizielle Zertifizierung",
         "stat4_value": "EU · USA · Kanada · Afrika · Japan",
         "stat4_label": "Kunden weltweit betreut",
-        "h_values": "Warum Aml Store",
+        "h_values": "Warum Eurolicenze",
         "value1_title": "Nur Originalsoftware",
         "value1_text": "Jede Lizenz ist authentisch, mit Updates und Garantien direkt vom Hersteller — niemals gecrackte oder veränderte Kopien.",
         "value2_title": "Ein einziger Ansprechpartner",
@@ -162,16 +162,16 @@ COPY = {
     },
     "es": {
         "skip": "Ir al contenido principal",
-        "title": "Quiénes somos — Aml Store",
-        "description": "Aml Store lo gestiona Antonino Cardelli desde 2020: licencias siempre originales, un único interlocutor real, más de 1000 pedidos completados. Microsoft Partner.",
+        "title": "Quiénes somos — Eurolicenze",
+        "description": "Eurolicenze lo gestiona Antonino Cardelli desde 2020: licencias siempre originales, un único interlocutor real, más de 1000 pedidos completados. Microsoft Partner.",
         "home": "Inicio",
         "breadcrumb": "Quiénes somos",
         "eyebrow": "Quiénes somos",
         "h1": "Software original, gestionado en persona.",
-        "lede": "Aml Store es un proyecto que llevo yo solo desde 2020: vendo licencias originales para combatir el software pirateado, con una sola persona real detrás de cada pedido.",
+        "lede": "Eurolicenze es un proyecto que llevo yo solo desde 2020: vendo licencias originales para combatir el software pirateado, con una sola persona real detrás de cada pedido.",
         "h_story": "Mi historia",
-        "story_p1": "Empecé Aml Store con un objetivo claro: combatir la difusión de software pirateado, a menudo inestable, sin actualizaciones ni garantías. Vendo exclusivamente <strong>licencias originales</strong>, con todas las funciones, actualizaciones y garantías del fabricante, a precios que siguen siendo razonables.",
-        "story_p2": "Soy <strong>Antonino Cardelli</strong> y gestiono Aml Store yo solo: cuando escribes, no hablas con un centro de llamadas ni con un ticket anónimo, sino con la persona que realmente se ocupa de tu pedido.",
+        "story_p1": "Empecé Eurolicenze con un objetivo claro: combatir la difusión de software pirateado, a menudo inestable, sin actualizaciones ni garantías. Vendo exclusivamente <strong>licencias originales</strong>, con todas las funciones, actualizaciones y garantías del fabricante, a precios que siguen siendo razonables.",
+        "story_p2": "Soy <strong>Antonino Cardelli</strong> y gestiono Eurolicenze yo solo: cuando escribes, no hablas con un centro de llamadas ni con un ticket anónimo, sino con la persona que realmente se ocupa de tu pedido.",
         "stat1_value": "Desde 2020",
         "stat1_label": "En activo",
         "stat2_value": "Más de 1000",
@@ -180,7 +180,7 @@ COPY = {
         "stat3_label": "Certificación oficial",
         "stat4_value": "UE · EE. UU. · Canadá · África · Japón",
         "stat4_label": "Clientes atendidos en todo el mundo",
-        "h_values": "Por qué elegir Aml Store",
+        "h_values": "Por qué elegir Eurolicenze",
         "value1_title": "Solo software original",
         "value1_text": "Cada licencia es auténtica, con actualizaciones y garantías directas del fabricante — nunca copias pirateadas o modificadas.",
         "value2_title": "Un único interlocutor",
@@ -196,16 +196,16 @@ COPY = {
     },
     "pt": {
         "skip": "Ir para o conteúdo principal",
-        "title": "Sobre nós — Aml Store",
-        "description": "A Aml Store é gerida por Antonino Cardelli desde 2020: licenças sempre originais, um único interlocutor real, mais de 1000 encomendas concluídas. Microsoft Partner.",
+        "title": "Sobre nós — Eurolicenze",
+        "description": "A Eurolicenze é gerida por Antonino Cardelli desde 2020: licenças sempre originais, um único interlocutor real, mais de 1000 encomendas concluídas. Microsoft Partner.",
         "home": "Início",
         "breadcrumb": "Sobre nós",
         "eyebrow": "Sobre nós",
         "h1": "Software original, acompanhado pessoalmente.",
-        "lede": "A Aml Store é um projeto que levo sozinho desde 2020: vendo licenças originais para combater o software pirateado, com uma única pessoa real por detrás de cada encomenda.",
+        "lede": "A Eurolicenze é um projeto que levo sozinho desde 2020: vendo licenças originais para combater o software pirateado, com uma única pessoa real por detrás de cada encomenda.",
         "h_story": "A minha história",
-        "story_p1": "Comecei a Aml Store com um objetivo claro: combater a difusão de software pirateado, muitas vezes instável, sem atualizações e sem qualquer garantia. Vendo exclusivamente <strong>licenças originais</strong>, com todas as funcionalidades, atualizações e garantias previstas pelo fabricante, a preços que continuam acessíveis.",
-        "story_p2": "Sou <strong>Antonino Cardelli</strong> e gero a Aml Store sozinho: quando escreves, não falas com uma central de atendimento ou um ticket anónimo, mas com a pessoa que acompanha mesmo a tua encomenda.",
+        "story_p1": "Comecei a Eurolicenze com um objetivo claro: combater a difusão de software pirateado, muitas vezes instável, sem atualizações e sem qualquer garantia. Vendo exclusivamente <strong>licenças originais</strong>, com todas as funcionalidades, atualizações e garantias previstas pelo fabricante, a preços que continuam acessíveis.",
+        "story_p2": "Sou <strong>Antonino Cardelli</strong> e gero a Eurolicenze sozinho: quando escreves, não falas com uma central de atendimento ou um ticket anónimo, mas com a pessoa que acompanha mesmo a tua encomenda.",
         "stat1_value": "Desde 2020",
         "stat1_label": "Em atividade",
         "stat2_value": "1000+",
@@ -214,7 +214,7 @@ COPY = {
         "stat3_label": "Certificação oficial",
         "stat4_value": "UE · EUA · Canadá · África · Japão",
         "stat4_label": "Clientes servidos em todo o mundo",
-        "h_values": "Porque escolher a Aml Store",
+        "h_values": "Porque escolher a Eurolicenze",
         "value1_title": "Apenas software original",
         "value1_text": "Cada licença é autêntica, com atualizações e garantias diretas do fabricante — nunca cópias pirateadas ou modificadas.",
         "value2_title": "Um único interlocutor",
@@ -230,16 +230,16 @@ COPY = {
     },
     "nl": {
         "skip": "Naar de hoofdinhoud",
-        "title": "Over ons — Aml Store",
-        "description": "Aml Store wordt sinds 2020 gerund door Antonino Cardelli: altijd originele softwarelicenties, één echt aanspreekpunt, 1.000+ afgehandelde bestellingen. Microsoft Partner.",
+        "title": "Over ons — Eurolicenze",
+        "description": "Eurolicenze wordt sinds 2020 gerund door Antonino Cardelli: altijd originele softwarelicenties, één echt aanspreekpunt, 1.000+ afgehandelde bestellingen. Microsoft Partner.",
         "home": "Home",
         "breadcrumb": "Over ons",
         "eyebrow": "Over ons",
         "h1": "Originele software, persoonlijk begeleid.",
-        "lede": "Aml Store is sinds 2020 een eenmansproject: ik verkoop originele licenties tegen gekraakte software, met één echt persoon achter elke bestelling.",
+        "lede": "Eurolicenze is sinds 2020 een eenmansproject: ik verkoop originele licenties tegen gekraakte software, met één echt persoon achter elke bestelling.",
         "h_story": "Mijn verhaal",
-        "story_p1": "Ik ben Aml Store gestart met een duidelijk doel: de verspreiding van gekraakte software tegengaan — vaak instabiel, zonder updates en zonder garantie. Ik verkoop uitsluitend <strong>originele licenties</strong>, met alle functies, updates en garanties van de fabrikant, tegen prijzen die redelijk blijven.",
-        "story_p2": "Ik ben <strong>Antonino Cardelli</strong> en run Aml Store in mijn eentje: als u schrijft, praat u niet met een callcenter of een anoniem ticket, maar met de persoon die uw bestelling daadwerkelijk behandelt.",
+        "story_p1": "Ik ben Eurolicenze gestart met een duidelijk doel: de verspreiding van gekraakte software tegengaan — vaak instabiel, zonder updates en zonder garantie. Ik verkoop uitsluitend <strong>originele licenties</strong>, met alle functies, updates en garanties van de fabrikant, tegen prijzen die redelijk blijven.",
+        "story_p2": "Ik ben <strong>Antonino Cardelli</strong> en run Eurolicenze in mijn eentje: als u schrijft, praat u niet met een callcenter of een anoniem ticket, maar met de persoon die uw bestelling daadwerkelijk behandelt.",
         "stat1_value": "Sinds 2020",
         "stat1_label": "Actief",
         "stat2_value": "1.000+",
@@ -248,7 +248,7 @@ COPY = {
         "stat3_label": "Officiële certificering",
         "stat4_value": "EU · VS · Canada · Afrika · Japan",
         "stat4_label": "Klanten wereldwijd bediend",
-        "h_values": "Waarom Aml Store",
+        "h_values": "Waarom Eurolicenze",
         "value1_title": "Alleen originele software",
         "value1_text": "Elke licentie is authentiek, met updates en garanties van de fabrikant — nooit gekraakte of gewijzigde kopieën.",
         "value2_title": "Eén aanspreekpunt",
@@ -276,21 +276,21 @@ ICON_GLOBE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 def page(lang: str) -> str:
     t = COPY[lang]
     slug = SLUG[lang]
-    url = f"https://aml-store.com/{lang}/{slug}"
+    url = f"https://eurolicenze.com/{lang}/{slug}"
     consultation_url = CONSULTATION_SLUG[lang]
     ld = {
         "@context": "https://schema.org",
         "@graph": [
             {
                 "@type": "Organization",
-                "@id": "https://aml-store.com/#organization",
-                "name": "Aml Store",
-                "url": "https://aml-store.com/",
+                "@id": "https://eurolicenze.com/#organization",
+                "name": "Eurolicenze",
+                "url": "https://eurolicenze.com/",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://aml-store.com/logo/logo-header-400.webp",
+                    "url": "https://eurolicenze.com/logo/logo-header-400.webp",
                 },
-                "email": "Info@amlstore.it",
+                "email": "Desk@eurolicenze.com",
                 "telephone": "+39-392-558-0413",
                 "vatID": "IT11461870963",
                 "legalName": "Licensoft di Cardelli Antonino",
@@ -307,11 +307,11 @@ def page(lang: str) -> str:
             },
             {
                 "@type": "WebSite",
-                "@id": "https://aml-store.com/#website",
-                "url": "https://aml-store.com/",
-                "name": "Aml Store",
+                "@id": "https://eurolicenze.com/#website",
+                "url": "https://eurolicenze.com/",
+                "name": "Eurolicenze",
                 "inLanguage": ["it", "en", "fr", "de", "es", "pt", "nl"],
-                "publisher": {"@id": "https://aml-store.com/#organization"},
+                "publisher": {"@id": "https://eurolicenze.com/#organization"},
             },
             {
                 "@type": "AboutPage",
@@ -320,17 +320,17 @@ def page(lang: str) -> str:
                 "name": t["title"],
                 "description": t["description"],
                 "inLanguage": lang,
-                "isPartOf": {"@id": "https://aml-store.com/#website"},
-                "about": {"@id": "https://aml-store.com/#organization"},
-                "mainEntity": {"@id": "https://aml-store.com/#organization"},
+                "isPartOf": {"@id": "https://eurolicenze.com/#website"},
+                "about": {"@id": "https://eurolicenze.com/#organization"},
+                "mainEntity": {"@id": "https://eurolicenze.com/#organization"},
             },
         ],
     }
     hreflang = "\n".join(
-        f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{SLUG[lg]}">'
+        f'    <link rel="alternate" hreflang="{lg}" href="https://eurolicenze.com/{lg}/{SLUG[lg]}">'
         for lg in ("it", "en", "fr", "de", "es", "pt", "nl")
     )
-    hreflang += '\n    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/chi-siamo">'
+    hreflang += '\n    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/chi-siamo">'
 
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
@@ -347,12 +347,12 @@ def page(lang: str) -> str:
     <link rel="canonical" href="{url}">
 
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Aml Store">
+    <meta property="og:site_name" content="Eurolicenze">
     <meta property="og:title" content="{t['title']}">
     <meta property="og:description" content="{t['description']}">
     <meta property="og:url" content="{url}">
     <meta property="og:locale" content="{LOCALE[lang]}">
-    <meta property="og:image" content="https://aml-store.com/logo/logo-header-400.webp">
+    <meta property="og:image" content="https://eurolicenze.com/logo/logo-header-400.webp">
 
 {hreflang}
 

@@ -43,7 +43,7 @@ script_name = "aml-support-realtime"
 
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
-SITE_ORIGIN     = "https://aml-store.com"
+SITE_ORIGIN     = "https://eurolicenze.com"
 PAYPAL_BASE_URL = "https://api-m.paypal.com"
 # Produzione = PayPal LIVE. Per lo sviluppo locale, .dev.vars sovrascrive con
 # la sandbox (PAYPAL_BASE_URL + PAYPAL_CLIENT_ID/SECRET sandbox).
@@ -53,7 +53,7 @@ PAYPAL_BASE_URL = "https://api-m.paypal.com"
 # CF_ACCESS_TEAM_DOMAIN: Zero Trust → Settings → Custom Pages → team domain (es. "xyz.cloudflareaccess.com")
 CF_ACCESS_AUD         = "61bb5d94ba4477a21b272c98ef419414d508f3a3f5378f949c87b5bce2d403c1"
 CF_ACCESS_TEAM_DOMAIN = "amlstore.cloudflareaccess.com"
-ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
+ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Desk@eurolicenze.com,Antonino.cardelli@outlook.it"
 ADMIN_ALLOW_DELETE_ORDERS = "1"
 ADMIN_ALLOW_DELETE_CARTS = "1"
 
@@ -87,7 +87,7 @@ VAPID_SUBJECT = "mailto:Info@amlstore.it"
 # PAYPAL_CLIENT_SECRET   — Client Secret PayPal LIVE (solo server-side)
 # PAYPAL_WEBHOOK_ID      — Webhook ID da PayPal Dashboard → Apps & Credentials →
 #                          [App] → Webhooks → aggiungi endpoint
-#                          https://aml-store.com/api/webhooks/paypal, evento
+#                          https://eurolicenze.com/api/webhooks/paypal, evento
 #                          "Payment capture completed". Senza questo secret
 #                          /api/webhooks/paypal rifiuta ogni richiesta (401) —
 #                          va configurato DOPO il deploy, quando l'URL esiste.
@@ -148,7 +148,7 @@ PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"
 # questo host — nel frattempo /admin/support su preview risponde 401 di suo.
 CF_ACCESS_AUD         = "61bb5d94ba4477a21b272c98ef419414d508f3a3f5378f949c87b5bce2d403c1"
 CF_ACCESS_TEAM_DOMAIN = "amlstore.cloudflareaccess.com"
-ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
+ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Desk@eurolicenze.com,Antonino.cardelli@outlook.it"
 ADMIN_ALLOW_DELETE_ORDERS = "1"
 ADMIN_ALLOW_DELETE_CARTS = "1"
 

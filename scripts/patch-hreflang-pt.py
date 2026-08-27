@@ -25,7 +25,7 @@ LOCALIZED = {
 }
 
 HREFLANG_ES = re.compile(
-    r'(<link rel="alternate" hreflang="es"\s+href="https://aml-store\.com/es/([^"]*)">)\s*'
+    r'(<link rel="alternate" hreflang="es"\s+href="https://eurolicenze\.com/es/([^"]*)">)\s*'
     r'(<link rel="alternate" hreflang="x-default")',
 )
 INLANG_ARR = (
@@ -57,7 +57,7 @@ def patch_file(path: Path) -> bool:
     def repl(m: re.Match) -> str:
         es_tag, es_tail, xdef = m.group(1), m.group(2), m.group(3)
         slug = pt_slug(es_tail)
-        href = f"https://aml-store.com/pt/{slug}" if slug else "https://aml-store.com/pt/"
+        href = f"https://eurolicenze.com/pt/{slug}" if slug else "https://eurolicenze.com/pt/"
         sep = "\n    " if "\n" in m.group(0) else ""
         return f'{es_tag}{sep}<link rel="alternate" hreflang="pt" href="{href}">{sep}{xdef}'
 

@@ -96,7 +96,7 @@
         },
     };
 
-    const SUPPORT_EMAIL = 'info@amlstore.it';
+    const SUPPORT_EMAIL = 'Desk@eurolicenze.com';
     const SUPPORT_WHATSAPP_URL = 'https://wa.me/393925580413';
 
     let supportChatRequested = false;

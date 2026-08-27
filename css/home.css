@@ -96,7 +96,7 @@
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: #ffffff;
-    max-width: 18ch;
+    max-width: 23ch;
 }
 
 .home-hero-subtitle {
@@ -981,9 +981,12 @@
     );
 }
 
-/* La larghezza resta contenuta per non arrivare sulla persona. */
+/* Con la vecchia foto (una persona a destra) la colonna restava stretta per
+   non arrivarci sopra. La composizione attuale (collage prodotto, nessun
+   soggetto fisso) tollera una colonna piu' larga: qui serve anche a far
+   stare "Protezione originale," su una riga sola invece di spezzarsi. */
 .home-hero--consumer .home-hero-content {
-    max-width: 30rem;
+    max-width: 34rem;
 }
 
 .home-hero--consumer .home-hero-title {
@@ -1097,47 +1100,27 @@
         max-width: none;
     }
 
-    /* Il testo sta SOPRA la foto anche su mobile. Un passaggio precedente lo
-       aveva spostato sotto, in una banda separata: a piena larghezza la copy
-       finisce sul soggetto e sulla finestra, e per arrivare a 4,5:1 con
-       inchiostro scuro sarebbe servito un velo chiaro sopra 0,60 che sbiancava
-       la foto. La via d'uscita non e' rinunciare alla sovrapposizione ma
-       invertire il verso del velo: velo SCURO e testo bianco arrivano alla
-       stessa soglia lasciando la foto leggibile come ambiente. Il gradiente e'
-       verticale e cresce verso il basso, dove la scrivania e' piu' chiara. */
+    /* Il testo sta SOPRA la foto anche su mobile. Con la vecchia foto (scura,
+       una persona all'ambiente) serviva un velo scuro + testo bianco per
+       arrivare al contrasto. L'immagine attuale (collage prodotto: sfondo
+       chiaro pesca/grigio, box con il loro proprio testo leggibile) e'
+       l'opposto: un velo scuro spegneva anche il testo stampato sui box,
+       reso illeggibile proprio dove dovrebbe convincere. Qui usiamo lo
+       stesso verso del desktop — velo CHIARO, inchiostro scuro — ma
+       verticale e concentrato in alto, dove sta il titolo: si spegne
+       prima di arrivare ai box cosi' restano leggibili. */
     .home-hero--consumer {
-        background-color: var(--aml-slate-900);
+        background-color: var(--aml-paper);
     }
 
     .home-hero__bg::after {
         background: linear-gradient(
             180deg,
-            color-mix(in srgb, var(--aml-slate-900) 30%, transparent) 0%,
-            color-mix(in srgb, var(--aml-slate-900) 48%, transparent) 38%,
-            color-mix(in srgb, var(--aml-slate-900) 62%, transparent) 100%
+            color-mix(in srgb, var(--aml-paper) 78%, transparent) 0%,
+            color-mix(in srgb, var(--aml-paper) 55%, transparent) 24%,
+            color-mix(in srgb, var(--aml-paper) 18%, transparent) 40%,
+            transparent 55%
         );
-    }
-
-    .home-hero--consumer .home-hero-title,
-    .home-hero--consumer .home-hero-subtitle,
-    .home-hero--consumer .home-hero-trust {
-        color: #ffffff;
-    }
-
-    /* La stella resta arancio anche sul velo scuro, come da desktop: 700/800
-       sparirebbero sul fondo navy, quindi qui usiamo lo stesso gradino (300)
-       gia' validato sopra per l'accento del titolo (4,65:1 sul punto piu'
-       chiaro della foto). */
-    .home-hero--consumer .home-hero-trust__star {
-        color: var(--aml-orange-300);
-    }
-
-    /* Sul velo scuro i gradini 800/900 dell'arancione sparirebbero, ma anche
-       300/400 restano troppo bassi: la riga accento cade dove dietro c'e' la
-       finestra, il punto piu' chiaro della foto, e si fermava a 3,0:1. Con
-       200/300 arriva a 4,65:1 senza dover scurire ulteriormente l'immagine. */
-    .home-hero--consumer .home-hero-title .home-hero__accent {
-        background-image: linear-gradient(90deg, var(--aml-orange-200), var(--aml-orange-300) 55%, var(--aml-orange-200));
     }
 
     .home-hero--consumer .home-hero-inner {

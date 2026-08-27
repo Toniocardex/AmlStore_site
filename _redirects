@@ -6,6 +6,70 @@
 # ── Root → Italiano ──────────────────────────────────────────────────────────
 / /it/ 301
 
+# ── Migrazione dominio: vecchie pagine eurolicenze.com → equivalenti AmlStore ─
+# eurolicenze.com sostituisce aml-store.com come dominio del negozio; queste
+# pagine erano indicizzate su Google sotto il vecchio sito Eurolicenze e vanno
+# reindirizzate ai prodotti/hub equivalenti per non perdere SEO.
+/azienda /it/chi-siamo.html 301
+/azienda.html /it/chi-siamo.html 301
+/bitdefender-premium-security /it/antivirus.html 301
+/bitdefender-premium-security.html /it/antivirus.html 301
+/bitdefender-total-security /it/antivirus.html 301
+/bitdefender-total-security.html /it/antivirus.html 301
+/bitdefender-ultimate-security /it/antivirus.html 301
+/bitdefender-ultimate-security.html /it/antivirus.html 301
+/checkout-cancel /it/cart.html 301
+/checkout-cancel.html /it/cart.html 301
+/contatti /it/contacts.html 301
+/contatti.html /it/contacts.html 301
+/eset-home-security-essential /it/antivirus.html 301
+/eset-home-security-essential.html /it/antivirus.html 301
+/eset-home-security-premium /it/antivirus.html 301
+/eset-home-security-premium.html /it/antivirus.html 301
+/kaspersky-premium /it/kaspersky-premium-1-device.html 301
+/kaspersky-premium.html /it/kaspersky-premium-1-device.html 301
+/office-home-2024 /it/office-2024-home.html 301
+/office-home-2024.html /it/office-2024-home.html 301
+/office-home-business-2024 /it/office-2024-home-business.html 301
+/office-home-business-2024.html /it/office-2024-home-business.html 301
+/soluzioni-bitdefender /it/antivirus.html 301
+/soluzioni-bitdefender.html /it/antivirus.html 301
+/soluzioni-kaspersky /it/antivirus.html 301
+/soluzioni-kaspersky.html /it/antivirus.html 301
+/soluzioni-microsoft-365 /it/microsoft-365-solutions.html 301
+/soluzioni-microsoft-365.html /it/microsoft-365-solutions.html 301
+/soluzioni-office-2024 /it/suite-office.html 301
+/soluzioni-office-2024.html /it/suite-office.html 301
+/soluzioni-produttivita /it/suite-office.html 301
+/soluzioni-produttivita.html /it/suite-office.html 301
+/soluzioni-sicurezza /it/antivirus.html 301
+/soluzioni-sicurezza.html /it/antivirus.html 301
+/termini-condizioni /it/terms-and-conditions.html 301
+/termini-condizioni.html /it/terms-and-conditions.html 301
+
+# Pagine con slug identico (Eurolicenze le serve alla radice, AmlStore sotto /it/):
+# /checkout-success e' già coperto dallo shortcut più sotto (/checkout-success -> /it/checkout-success 302)
+/cookie-policy /it/cookie-policy.html 301
+/cookie-policy.html /it/cookie-policy.html 301
+/excel-2024 /it/excel-2024.html 301
+/excel-2024.html /it/excel-2024.html 301
+/kaspersky-plus /it/kaspersky-plus.html 301
+/kaspersky-plus.html /it/kaspersky-plus.html 301
+/kaspersky-standard /it/kaspersky-standard.html 301
+/kaspersky-standard.html /it/kaspersky-standard.html 301
+/microsoft-365-family /it/microsoft-365-family.html 301
+/microsoft-365-family.html /it/microsoft-365-family.html 301
+/microsoft-365-personal /it/microsoft-365-personal.html 301
+/microsoft-365-personal.html /it/microsoft-365-personal.html 301
+/outlook-2024 /it/outlook-2024.html 301
+/outlook-2024.html /it/outlook-2024.html 301
+/powerpoint-2024 /it/powerpoint-2024.html 301
+/powerpoint-2024.html /it/powerpoint-2024.html 301
+/privacy-policy /it/privacy-policy.html 301
+/privacy-policy.html /it/privacy-policy.html 301
+/word-2024 /it/word-2024.html 301
+/word-2024.html /it/word-2024.html 301
+
 # ── Shortcut carrello/checkout ───────────────────────────────────────────────
 /checkout         /it/checkout          302
 /cart             /it/cart              302
@@ -531,7 +595,7 @@
 # www → apex: DEVE precedere le altre regole splat, altrimenti una richiesta
 # su www che matcha anche una regola di path sotto (es. /it/sistema-operativo/*)
 # verrebbe riscritta restando su www invece di consolidare sull'apex.
-https://www.aml-store.com/* https://aml-store.com/:splat 301
+https://www.eurolicenze.com/* https://eurolicenze.com/:splat 301
 /scripts/* /it/ 302
 /it/sistema-operativo/* /it/sistemi-operativi 301
 /it/operating-system/* /it/sistemi-operativi 301

@@ -14,13 +14,13 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                      'es': 'Microsoft 365 Personal',
                                      'pt': 'Microsoft 365 Personal',
                                      'nl': 'Microsoft 365 Personal'},
-                            'seo_title': {'it': 'Microsoft 365 Personal — Aml Store',
-                                          'en': 'Microsoft 365 Personal — Aml Store',
-                                          'fr': 'Microsoft 365 Personnel — Aml Store',
-                                          'de': 'Microsoft 365 Personal — Aml Store',
-                                          'es': 'Microsoft 365 Personal — Aml Store',
-                                          'pt': 'Microsoft 365 Personal — Aml Store',
-                                          'nl': 'Microsoft 365 Personal — Aml Store'},
+                            'seo_title': {'it': 'Microsoft 365 Personal — Eurolicenze',
+                                          'en': 'Microsoft 365 Personal — Eurolicenze',
+                                          'fr': 'Microsoft 365 Personnel — Eurolicenze',
+                                          'de': 'Microsoft 365 Personal — Eurolicenze',
+                                          'es': 'Microsoft 365 Personal — Eurolicenze',
+                                          'pt': 'Microsoft 365 Personal — Eurolicenze',
+                                          'nl': 'Microsoft 365 Personal — Eurolicenze'},
                             'desc': {'it': "L'abbonamento completo per uso personale: app Office "
                                            'premium sempre aggiornate, 1 TB OneDrive dedicato, '
                                            'Copilot AI integrato in tutte le app e consegna del '
@@ -916,7 +916,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                           'Due o più persone')],
                                                 'yes_label': 'Incluso',
                                                 'no_label': 'Non previsto',
-                                                'price_row': 'Prezzo su AML Store',
+                                                'price_row': 'Prezzo su Eurolicenze',
                                                 'skus': ['QQ2-00012', '6GQ-00092'],
                                                 'foot': ['Scegli Personal se sei l\'unica persona '
                                                          'a usare davvero le app o lo spazio '
@@ -954,7 +954,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                          'Two or more people')],
                                                'yes_label': 'Included',
                                                'no_label': 'Not applicable',
-                                               'price_row': 'AML Store price',
+                                               'price_row': 'Eurolicenze price',
                                                'skus': ['QQ2-00012', '6GQ-00092'],
                                                'foot': ['Choose Personal if you are the only '
                                                         'person who will really use the apps or '
@@ -991,7 +991,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                          'Deux personnes ou plus')],
                                                'yes_label': 'Inclus',
                                                'no_label': 'Non applicable',
-                                               'price_row': 'Prix sur AML Store',
+                                               'price_row': 'Prix sur Eurolicenze',
                                                'skus': ['QQ2-00012', '6GQ-00092'],
                                                'foot': ['Choisissez Personal si vous êtes la '
                                                         'seule personne à vraiment utiliser les '
@@ -1031,7 +1031,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                          'Zwei oder mehr Personen')],
                                                'yes_label': 'Enthalten',
                                                'no_label': 'Nicht zutreffend',
-                                               'price_row': 'AML Store-Preis',
+                                               'price_row': 'Eurolicenze-Preis',
                                                'skus': ['QQ2-00012', '6GQ-00092'],
                                                'foot': ['Wählen Sie Personal, wenn Sie die '
                                                         'einzige Person sind, die die Apps oder '
@@ -1070,7 +1070,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                          'Dos o más personas')],
                                                'yes_label': 'Incluido',
                                                'no_label': 'No aplicable',
-                                               'price_row': 'Precio AML Store',
+                                               'price_row': 'Precio Eurolicenze',
                                                'skus': ['QQ2-00012', '6GQ-00092'],
                                                'foot': ['Elige Personal si eres la única persona '
                                                         'que va a usar de verdad las apps o el '
@@ -1108,7 +1108,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                          'Duas ou mais pessoas')],
                                                'yes_label': 'Incluído',
                                                'no_label': 'Não aplicável',
-                                               'price_row': 'Preço na AML Store',
+                                               'price_row': 'Preço na Eurolicenze',
                                                'skus': ['QQ2-00012', '6GQ-00092'],
                                                'foot': ['Escolhe o Personal se fores a única '
                                                         'pessoa a usar de facto as apps ou o '
@@ -1557,13 +1557,13 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                               'es': 'Windows 11 Home',
                               'pt': 'Windows 11 Home',
                               'nl': 'Windows 11 Home'},
-                     'seo_title': {'it': 'Windows 11 Home — Aml Store',
-                                   'en': 'Windows 11 Home — Aml Store',
-                                   'fr': 'Windows 11 Home — Aml Store',
-                                   'de': 'Windows 11 Home — Aml Store',
-                                   'es': 'Windows 11 Home — Aml Store',
-                                   'pt': 'Windows 11 Home — Aml Store',
-                                   'nl': 'Windows 11 Home — Aml Store'},
+                     'seo_title': {'it': 'Windows 11 Home — Eurolicenze',
+                                   'en': 'Windows 11 Home — Eurolicenze',
+                                   'fr': 'Windows 11 Home — Eurolicenze',
+                                   'de': 'Windows 11 Home — Eurolicenze',
+                                   'es': 'Windows 11 Home — Eurolicenze',
+                                   'pt': 'Windows 11 Home — Eurolicenze',
+                                   'nl': 'Windows 11 Home — Eurolicenze'},
                      'desc': {'it': 'Porta la tua esperienza digitale al livello successivo con '
                                     "Windows 11 Home. L'equilibrio perfetto tra produttività "
                                     "basata sull'IA e prestazioni gaming senza compromessi.",
@@ -2030,13 +2030,13 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                    'es': 'Microsoft 365 Family',
                                    'pt': 'Microsoft 365 Family',
                                    'nl': 'Microsoft 365 Family'},
-                          'seo_title': {'it': 'Microsoft 365 Family — Aml Store',
-                                        'en': 'Microsoft 365 Family — Aml Store',
-                                        'fr': 'Microsoft 365 Family — Aml Store',
-                                        'de': 'Microsoft 365 Family — Aml Store',
-                                        'es': 'Microsoft 365 Family — Aml Store',
-                                        'pt': 'Microsoft 365 Family — Aml Store',
-                                        'nl': 'Microsoft 365 Family — Aml Store'},
+                          'seo_title': {'it': 'Microsoft 365 Family — Eurolicenze',
+                                        'en': 'Microsoft 365 Family — Eurolicenze',
+                                        'fr': 'Microsoft 365 Family — Eurolicenze',
+                                        'de': 'Microsoft 365 Family — Eurolicenze',
+                                        'es': 'Microsoft 365 Family — Eurolicenze',
+                                        'pt': 'Microsoft 365 Family — Eurolicenze',
+                                        'nl': 'Microsoft 365 Family — Eurolicenze'},
                           'desc': {'it': 'Microsoft 365 per te e altre cinque persone, con app '
                                          'complete e 1 TB di OneDrive personale per ciascun '
                                          'membro. Copilot è incluso per il titolare '
@@ -2386,7 +2386,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Se dopo <strong>30 minuti</strong> non hai ricevuto '
                                            'nulla, controlla anche spam e posta indesiderata e '
                                            'scrivi a <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'indicando prodotto acquistato ed email usata per '
                                            "l'ordine."]),
                                          ("Cosa ricevo esattamente nell'email?",
@@ -2406,7 +2406,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Codice SDI oppure PEC: la fattura elettronica viene '
                                            'emessa su quei dati.',
                                            "Se ti serve dopo l'ordine, scrivi a <a "
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            "indicando l'email usata per l'ordine e il numero "
                                            "d'ordine."]),
                                          ('Posso riscattare il codice su un account che ha già '
@@ -2428,7 +2428,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                           'resta una scelta volontaria di chi li possiede.'),
                                          ('Il codice si rinnova automaticamente dopo 12 mesi?',
                                           'No. Il codice attiva Microsoft 365 Family per 12 mesi '
-                                          'con un pagamento una tantum: AML Store non addebita '
+                                          'con un pagamento una tantum: Eurolicenze non addebita '
                                           'nulla automaticamente alla scadenza. Eventuali opzioni '
                                           'di rinnovo si gestiscono separatamente, direttamente '
                                           "nell'account Microsoft."),
@@ -2439,7 +2439,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'della chiave, proponiamo sostituzione o rimborso nei '
                                            'tempi usuali di elaborazione.',
                                            'Assistenza: <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — '
                                            '+39 392 558 0413.'])],
                                   'en': [('When do I receive the code after payment?',
                                           ['The delivery email is sent after payment confirmation, '
@@ -2447,7 +2447,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'minutes are needed for payment checks.',
                                            'If after <strong>30 minutes</strong> you have received '
                                            'nothing, also check spam/junk and email <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'with the product purchased and the email used for the '
                                            'order.']),
                                          ('What exactly do I receive in the email?',
@@ -2466,7 +2466,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'profile and enter your VAT details: we issue a VAT '
                                            'invoice on those details.',
                                            'If you need it after the order, email <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'with the order email and order number.']),
                                          ('Can I redeem the code on an account that already has '
                                           'Microsoft 365 active?',
@@ -2486,7 +2486,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                           'choice by the owner.'),
                                          ('Does the code renew automatically after 12 months?',
                                           'No. The code activates Microsoft 365 Family for 12 '
-                                          'months with a one-time payment: AML Store does not '
+                                          'months with a one-time payment: Eurolicenze does not '
                                           'charge anything automatically at expiry. Any renewal '
                                           'options are managed separately in your Microsoft '
                                           'account.'),
@@ -2497,7 +2497,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'we offer a replacement or refund within usual '
                                            'processing times.',
                                            'Support: <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — '
                                            '+39 392 558 0413.'])],
                                   'fr': [('Quand vais-je recevoir le code après le paiement ?',
                                           ["L'e-mail de livraison part après confirmation du "
@@ -2506,7 +2506,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'nécessaires pour les vérifications.',
                                            "Si après <strong>30 minutes</strong> vous n'avez rien "
                                            'reçu, vérifiez aussi les indésirables et écrivez à <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> en '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> en '
                                            "indiquant le produit acheté et l'e-mail utilisé pour "
                                            'la commande.']),
                                          ("Que vais-je exactement recevoir dans l'e-mail ?",
@@ -2526,7 +2526,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            '<strong>Entreprise</strong> et saisissez vos données '
                                            'de TVA : la facture est émise sur ces informations.',
                                            'Si vous en avez besoin après la commande, écrivez à <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> en '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> en '
                                            "indiquant l'e-mail de commande et le numéro de "
                                            'commande.']),
                                          ('Puis-je activer le code sur un compte qui a déjà '
@@ -2551,7 +2551,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                          ('Le code se renouvelle-t-il automatiquement après 12 '
                                           'mois ?',
                                           'Non. Le code active Microsoft 365 Family pour 12 mois '
-                                          'avec un paiement unique : AML Store ne prélève rien '
+                                          'avec un paiement unique : Eurolicenze ne prélève rien '
                                           "automatiquement à l'échéance. Les options de "
                                           'renouvellement éventuelles se gèrent séparément dans le '
                                           'compte Microsoft.'),
@@ -2562,7 +2562,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'clé est confirmé, nous proposons un remplacement ou un '
                                            'remboursement dans les délais habituels.',
                                            'Assistance : <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — '
                                            '+39 392 558 0413.'])],
                                   'de': [('Wann erhalte ich den Code nach der Zahlung?',
                                           ['Die Liefer-E-Mail wird nach Zahlungsbestätigung '
@@ -2571,7 +2571,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Wenn Sie nach <strong>30 Minuten</strong> nichts '
                                            'erhalten haben, prüfen Sie auch Spam/Junk und '
                                            'schreiben Sie an <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'mit dem gekauften Produkt und der für die Bestellung '
                                            'verwendeten E-Mail-Adresse.']),
                                          ('Was genau erhalte ich in der E-Mail?',
@@ -2593,7 +2593,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'diese Daten aus.',
                                            'Wenn Sie sie nach der Bestellung benötigen, schreiben '
                                            'Sie an <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'mit der Bestell-E-Mail und der Bestellnummer.']),
                                          ('Kann ich den Code auf einem Konto einlösen, das bereits '
                                           'Microsoft 365 aktiv hat?',
@@ -2617,7 +2617,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                           'Besitzers.'),
                                          ('Verlängert sich der Code nach 12 Monaten automatisch?',
                                           'Nein. Der Code aktiviert Microsoft 365 Family für 12 '
-                                          'Monate mit einer einmaligen Zahlung: AML Store belastet '
+                                          'Monate mit einer einmaligen Zahlung: Eurolicenze belastet '
                                           'bei Ablauf nichts automatisch. Etwaige '
                                           'Verlängerungsoptionen verwalten Sie separat in Ihrem '
                                           'Microsoft-Konto.'),
@@ -2628,7 +2628,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'zurechenbaren Defekt Ersatz oder Erstattung innerhalb '
                                            'der üblichen Bearbeitungszeiten.',
                                            'Support: <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — '
                                            '+39 392 558 0413.'])],
                                   'es': [('¿Cuándo recibo el código después del pago?',
                                           ['El email de entrega se envía tras la confirmación del '
@@ -2638,7 +2638,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Si tras <strong>30 minutos</strong> no has recibido '
                                            'nada, revisa también spam/correo no deseado y escribe '
                                            'a <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'indicando el producto comprado y el email usado en el '
                                            'pedido.']),
                                          ('¿Qué recibo exactamente en el email?',
@@ -2658,7 +2658,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            '<strong>Empresa</strong> e introduce tus datos de IVA: '
                                            'emitimos la factura con IVA con esos datos.',
                                            'Si la necesitas después del pedido, escribe a <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'con el email del pedido y el número de pedido.']),
                                          ('¿Puedo canjear el código en una cuenta que ya tiene '
                                           'Microsoft 365 activo?',
@@ -2680,7 +2680,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                          ('¿El código se renueva automáticamente después de 12 '
                                           'meses?',
                                           'No. El código activa Microsoft 365 Family durante 12 '
-                                          'meses con un pago único: AML Store no cobra nada '
+                                          'meses con un pago único: Eurolicenze no cobra nada '
                                           'automáticamente al vencimiento. Cualquier opción de '
                                           'renovación se gestiona por separado en tu cuenta '
                                           'Microsoft.'),
@@ -2691,7 +2691,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'clave, ofrecemos sustitución o reembolso en los plazos '
                                            'habituales de gestión.',
                                            'Soporte: <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — '
                                            '+39 392 558 0413.'])],
                                   'pt': [('Quando recebo o código depois do pagamento?',
                                           ['O email de entrega é enviado após a confirmação do '
@@ -2701,7 +2701,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Se depois de <strong>30 minutos</strong> não '
                                            'receberes nada, verifica também o spam/lixo '
                                            'eletrónico e escreve para <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'indicando o produto comprado e o email usado na '
                                            'encomenda.']),
                                          ('O que recebo exatamente no email?',
@@ -2721,7 +2721,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'de faturação: a fatura eletrónica é emitida com esses '
                                            'dados.',
                                            'Se precisares depois da encomenda, escreve para <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'indicando o email usado na encomenda e o número de '
                                            'encomenda.']),
                                          ('Posso resgatar o código numa conta que já tem o '
@@ -2746,7 +2746,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                          ('O código renova-se automaticamente depois de 12 '
                                           'meses?',
                                           'Não. O código ativa o Microsoft 365 Family por 12 '
-                                          'meses com um pagamento único: a AML Store não cobra '
+                                          'meses com um pagamento único: a Eurolicenze não cobra '
                                           'nada automaticamente na expiração. Eventuais opções de '
                                           'renovação são geridas separadamente, diretamente na '
                                           'conta Microsoft.'),
@@ -2757,7 +2757,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'da chave, propomos substituição ou reembolso nos '
                                            'prazos habituais de processamento.',
                                            'Assistência: <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — '
                                            '+39 392 558 0413.'])],
                                   'nl': [('Wanneer ontvang ik de code na betaling?',
                                           ['De leverings-e-mail wordt verstuurd na bevestiging van '
@@ -2767,7 +2767,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'Als u na <strong>30 minuten</strong> niets hebt '
                                            'ontvangen, controleer dan ook spam/ongewenste e-mail '
                                            'en schrijf naar <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'met het gekochte product en het e-mailadres van de '
                                            'bestelling.']),
                                          ('Wat ontvang ik precies in de e-mail?',
@@ -2786,7 +2786,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            '<strong>Bedrijf</strong> en vul uw btw-gegevens in: '
                                            'wij stellen de factuur met btw op die gegevens op.',
                                            'Als u die na de bestelling nodig hebt, mail dan <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> '
                                            'met het e-mailadres van de bestelling en het '
                                            'ordernummer.']),
                                          ('Kan ik de code inwisselen op een account dat al '
@@ -2809,7 +2809,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'vrijwillige keuze van de eigenaar.'),
                                          ('Wordt de code na 12 maanden automatisch verlengd?',
                                           'Nee. De code activeert Microsoft 365 Family voor 12 '
-                                           'maanden met een eenmalige betaling: AML Store '
+                                           'maanden met een eenmalige betaling: Eurolicenze '
                                            'schrijft bij het verstrijken niets automatisch af. '
                                            'Eventuele verlenging beheert u apart in uw '
                                            'Microsoft-account.'),
@@ -2821,7 +2821,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                            'terugbetaling binnen de gebruikelijke '
                                            'verwerkingstijden.',
                                            'Ondersteuning: <a '
-                                           'href="mailto:Info@amlstore.it">Info@amlstore.it</a> — '
+                                           'href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — '
                                            '+39 392 558 0413.'])]},
                           'specs_table': {'it': {'eyebrow': 'Specifiche del prodotto',
                                                  'title': 'Scheda tecnica',
@@ -3114,14 +3114,14 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                        'Due o più persone')],
                                              'yes_label': 'Incluso',
                                              'no_label': 'Non previsto',
-                                             'price_row': 'Prezzo su AML Store',
+                                             'price_row': 'Prezzo su Eurolicenze',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
                                              'foot': ['Scegli Family se almeno due persone useranno '
                                                       'realmente le app o lo spazio OneDrive. '
                                                       'Altrimenti valuta <a '
                                                       'href="/it/microsoft-365-personal">Microsoft '
                                                       '365 Personal</a>.',
-                                                      'Sei licenze Personal separate su AML Store '
+                                                      'Sei licenze Personal separate su Eurolicenze '
                                                       'costerebbero € {price0_x6} (6 × € {price0}). '
                                                       'Con Family paghi € {price1} per le stesse sei '
                                                       'persone: <strong>€ {savings_6x0_vs_1} in '
@@ -3145,14 +3145,14 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                        'Two or more people')],
                                              'yes_label': 'Included',
                                              'no_label': 'Not applicable',
-                                             'price_row': 'AML Store price',
+                                             'price_row': 'Eurolicenze price',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
                                              'foot': ['Choose Family if at least two people will '
                                                       'really use the apps or OneDrive storage. '
                                                       'Otherwise consider <a '
                                                       'href="/en/microsoft-365-personal">Microsoft '
                                                       '365 Personal</a>.',
-                                                      'Six separate Personal licences on AML Store '
+                                                      'Six separate Personal licences on Eurolicenze '
                                                       'would cost € {price0_x6} (6 × € {price0}). '
                                                       'With Family you pay € {price1} for the same '
                                                       'six people: <strong>€ {savings_6x0_vs_1} '
@@ -3181,14 +3181,14 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                        'Deux personnes ou plus')],
                                              'yes_label': 'Inclus',
                                              'no_label': 'Non applicable',
-                                             'price_row': 'Prix sur AML Store',
+                                             'price_row': 'Prix sur Eurolicenze',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
                                              'foot': ['Choisissez Family si au moins deux personnes '
                                                       "utiliseront réellement les apps ou l'espace "
                                                       'OneDrive. Sinon, voyez <a '
                                                       'href="/fr/microsoft-365-personal">Microsoft '
                                                       '365 Personal</a>.',
-                                                      'Six licences Personal séparées sur AML Store '
+                                                      'Six licences Personal séparées sur Eurolicenze '
                                                       'coûteraient € {price0_x6} (6 × € {price0}). '
                                                       'Avec Family, vous payez € {price1} pour les '
                                                       'mêmes six personnes : <strong>€ '
@@ -3215,7 +3215,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                        'Zwei oder mehr Personen')],
                                              'yes_label': 'Enthalten',
                                              'no_label': 'Nicht zutreffend',
-                                             'price_row': 'AML Store-Preis',
+                                             'price_row': 'Eurolicenze-Preis',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
                                              'foot': ['Wählen Sie Family, wenn mindestens zwei '
                                                       'Personen die Apps oder den OneDrive-Speicher '
@@ -3249,7 +3249,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                        'Dos o más personas')],
                                              'yes_label': 'Incluido',
                                              'no_label': 'No aplicable',
-                                             'price_row': 'Precio AML Store',
+                                             'price_row': 'Precio Eurolicenze',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
                                              'foot': ['Elige Family si al menos dos personas van a '
                                                       'usar de verdad las apps o el almacenamiento '
@@ -3284,7 +3284,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                                        'Duas ou mais pessoas')],
                                              'yes_label': 'Incluído',
                                              'no_label': 'Não aplicável',
-                                             'price_row': 'Preço na AML Store',
+                                             'price_row': 'Preço na Eurolicenze',
                                              'skus': ['QQ2-00012', '6GQ-00092'],
                                              'foot': ['Escolhe Family se pelo menos duas pessoas '
                                                       'forem realmente usar as apps ou o espaço '
@@ -3305,13 +3305,13 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
           'es': 'Microsoft 365 Business Standard',
           'pt': 'Microsoft 365 Business Standard',
           'nl': 'Microsoft 365 Business Standard'},
- 'seo_title': {'it': 'Microsoft 365 Business Standard 1 Anno | Licenza Originale — Aml Store',
-               'en': 'Microsoft 365 Business Standard 1 Year | Genuine Licence — Aml Store',
-               'fr': 'Microsoft 365 Business Standard 1 An | Licence Officielle — Aml Store',
-               'de': 'Microsoft 365 Business Standard 1 Jahr | Offizielle Lizenz — Aml Store',
-               'es': 'Microsoft 365 Business Standard 1 Año | Licencia Oficial — Aml Store',
-               'pt': 'Microsoft 365 Business Standard 1 Ano | Licença Oficial — Aml Store',
-               'nl': 'Microsoft 365 Business Standard 1 Jaar | Officiële Licentie — Aml Store'},
+ 'seo_title': {'it': 'Microsoft 365 Business Standard 1 Anno | Licenza Originale — Eurolicenze',
+               'en': 'Microsoft 365 Business Standard 1 Year | Genuine Licence — Eurolicenze',
+               'fr': 'Microsoft 365 Business Standard 1 An | Licence Officielle — Eurolicenze',
+               'de': 'Microsoft 365 Business Standard 1 Jahr | Offizielle Lizenz — Eurolicenze',
+               'es': 'Microsoft 365 Business Standard 1 Año | Licencia Oficial — Eurolicenze',
+               'pt': 'Microsoft 365 Business Standard 1 Ano | Licença Oficial — Eurolicenze',
+               'nl': 'Microsoft 365 Business Standard 1 Jaar | Officiële Licentie — Eurolicenze'},
  'eyebrow': {'it': 'Abbonamento 12 mesi · 1 Utente Business',
              'en': '12-Month Subscription · 1 Business User',
              'fr': 'Abonnement 12 mois · 1 Utilisateur Business',
@@ -3722,7 +3722,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'tramite il Microsoft 365 Admin Center, con autenticazione a '
                                     'due fattori (MFA) e conformità agli standard europei di '
                                     'protezione dei dati (GDPR).',
-                                    'Acquistando su AML Store ricevi la licenza digitale originale '
+                                    'Acquistando su Eurolicenze ricevi la licenza digitale originale '
                                     '(Product Key ESD) via email entro 2–15 minuti, pronta per '
                                     "l'attivazione sul portale ufficiale Microsoft, con fattura "
                                     'elettronica italiana e supporto tecnico umano '
@@ -3755,7 +3755,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'simultaneously. Centralized user administration and security '
                                     'policies are managed via the Microsoft 365 Admin Center with '
                                     'multi-factor authentication (MFA) and GDPR compliance.',
-                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'Purchasing from Eurolicenze ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
                                     'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
@@ -4116,7 +4116,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'schermo e lavagna interattiva Microsoft Whiteboard. I partecipanti esterni '
                  '(clienti, fornitori) possono unirsi alle riunioni via browser senza dover '
                  'possedere una licenza a pagamento.'),
-                ("Come si attiva la licenza dopo l'acquisto su AML Store?",
+                ("Come si attiva la licenza dopo l'acquisto su Eurolicenze?",
                  'Riceverai il codice Product Key da 25 caratteri e le istruzioni dettagliate via '
                  "email entro 2–15 minuti dall'acquisto. Se disponi già di un tenant aziendale "
                  'Microsoft 365, puoi inserire il codice nel portale di amministrazione '
@@ -4131,7 +4131,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center potrai assegnare, revocare o riassegnare le licenze in qualsiasi momento '
                  'con un semplice clic.'),
                 ('Viene emessa la fattura elettronica italiana con Partita IVA?',
-                 "Sì. AML Store è un'azienda con sede legale e fiscale in Italia (P.IVA "
+                 "Sì. Eurolicenze è un'azienda con sede legale e fiscale in Italia (P.IVA "
                  '11461870963). In fase di checkout è possibile inserire i dati di fatturazione '
                  'aziendale, Partita IVA, Codice Fiscale e Codice SDI/PEC. La fattura elettronica '
                  "viene inviata regolarmente tramite il Sistema di Interscambio (SDI) dell'Agenzia "
@@ -4185,7 +4185,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'recording with automated transcription, breakout rooms, screen sharing, and '
                  'interactive Microsoft Whiteboard. External guests can join meetings via browser '
                  'without needing a paid licence.'),
-                ('How do I activate the licence after purchasing from AML Store?',
+                ('How do I activate the licence after purchasing from Eurolicenze?',
                  'You will receive your 25-character Product Key and step-by-step instructions by '
                  'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
                  'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
@@ -4197,7 +4197,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
                 ('Is an electronic invoice provided for businesses?',
-                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'Yes. Eurolicenze is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
                 ('How is data protected and is it GDPR compliant?',
@@ -4214,13 +4214,13 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
           'es': 'Microsoft 365 Business Standard',
           'pt': 'Microsoft 365 Business Standard',
           'nl': 'Microsoft 365 Business Standard'},
- 'seo_title': {'it': 'Microsoft 365 Business Standard 1 Anno | Licenza Originale — Aml Store',
-               'en': 'Microsoft 365 Business Standard 1 Year | Genuine Licence — Aml Store',
-               'fr': 'Microsoft 365 Business Standard 1 An | Licence Officielle — Aml Store',
-               'de': 'Microsoft 365 Business Standard 1 Jahr | Offizielle Lizenz — Aml Store',
-               'es': 'Microsoft 365 Business Standard 1 Año | Licencia Oficial — Aml Store',
-               'pt': 'Microsoft 365 Business Standard 1 Ano | Licença Oficial — Aml Store',
-               'nl': 'Microsoft 365 Business Standard 1 Jaar | Officiële Licentie — Aml Store'},
+ 'seo_title': {'it': 'Microsoft 365 Business Standard 1 Anno | Licenza Originale — Eurolicenze',
+               'en': 'Microsoft 365 Business Standard 1 Year | Genuine Licence — Eurolicenze',
+               'fr': 'Microsoft 365 Business Standard 1 An | Licence Officielle — Eurolicenze',
+               'de': 'Microsoft 365 Business Standard 1 Jahr | Offizielle Lizenz — Eurolicenze',
+               'es': 'Microsoft 365 Business Standard 1 Año | Licencia Oficial — Eurolicenze',
+               'pt': 'Microsoft 365 Business Standard 1 Ano | Licença Oficial — Eurolicenze',
+               'nl': 'Microsoft 365 Business Standard 1 Jaar | Officiële Licentie — Eurolicenze'},
  'eyebrow': {'it': 'Abbonamento 12 mesi · 1 Utente Business',
              'en': '12-Month Subscription · 1 Business User',
              'fr': 'Abonnement 12 mois · 1 Utilisateur Business',
@@ -4631,7 +4631,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'tramite il Microsoft 365 Admin Center, con autenticazione a '
                                     'due fattori (MFA) e conformità agli standard europei di '
                                     'protezione dei dati (GDPR).',
-                                    'Acquistando su AML Store ricevi la licenza digitale originale '
+                                    'Acquistando su Eurolicenze ricevi la licenza digitale originale '
                                     '(Product Key ESD) via email entro 2–15 minuti, pronta per '
                                     "l'attivazione sul portale ufficiale Microsoft, con fattura "
                                     'elettronica italiana e supporto tecnico umano '
@@ -4664,7 +4664,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'simultaneously. Centralized user administration and security '
                                     'policies are managed via the Microsoft 365 Admin Center with '
                                     'multi-factor authentication (MFA) and GDPR compliance.',
-                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'Purchasing from Eurolicenze ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
                                     'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
@@ -4697,7 +4697,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'simultaneously. Centralized user administration and security '
                                     'policies are managed via the Microsoft 365 Admin Center with '
                                     'multi-factor authentication (MFA) and GDPR compliance.',
-                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'Purchasing from Eurolicenze ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
                                     'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
@@ -4730,7 +4730,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'simultaneously. Centralized user administration and security '
                                     'policies are managed via the Microsoft 365 Admin Center with '
                                     'multi-factor authentication (MFA) and GDPR compliance.',
-                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'Purchasing from Eurolicenze ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
                                     'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
@@ -4763,7 +4763,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'simultaneously. Centralized user administration and security '
                                     'policies are managed via the Microsoft 365 Admin Center with '
                                     'multi-factor authentication (MFA) and GDPR compliance.',
-                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'Purchasing from Eurolicenze ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
                                     'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
@@ -4796,7 +4796,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'simultaneously. Centralized user administration and security '
                                     'policies are managed via the Microsoft 365 Admin Center with '
                                     'multi-factor authentication (MFA) and GDPR compliance.',
-                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'Purchasing from Eurolicenze ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
                                     'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
@@ -4829,7 +4829,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                                     'simultaneously. Centralized user administration and security '
                                     'policies are managed via the Microsoft 365 Admin Center with '
                                     'multi-factor authentication (MFA) and GDPR compliance.',
-                                    'Purchasing from AML Store ensures an authentic digital '
+                                    'Purchasing from Eurolicenze ensures an authentic digital '
                                     'licence (ESD Key) delivered by email within 2-15 minutes, '
                                     'official activation on Microsoft portals, an official electronic '
                                     'invoice, and dedicated technical support in Italian and '
@@ -5900,7 +5900,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'schermo e lavagna interattiva Microsoft Whiteboard. I partecipanti esterni '
                  '(clienti, fornitori) possono unirsi alle riunioni via browser senza dover '
                  'possedere una licenza a pagamento.'),
-                ("Come si attiva la licenza dopo l'acquisto su AML Store?",
+                ("Come si attiva la licenza dopo l'acquisto su Eurolicenze?",
                  'Riceverai il codice Product Key da 25 caratteri e le istruzioni dettagliate via '
                  "email entro 2–15 minuti dall'acquisto. Se disponi già di un tenant aziendale "
                  'Microsoft 365, puoi inserire il codice nel portale di amministrazione '
@@ -5915,7 +5915,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center potrai assegnare, revocare o riassegnare le licenze in qualsiasi momento '
                  'con un semplice clic.'),
                 ('Viene emessa la fattura elettronica italiana con Partita IVA?',
-                 "Sì. AML Store è un'azienda con sede legale e fiscale in Italia (P.IVA "
+                 "Sì. Eurolicenze è un'azienda con sede legale e fiscale in Italia (P.IVA "
                  '11461870963). In fase di checkout è possibile inserire i dati di fatturazione '
                  'aziendale, Partita IVA, Codice Fiscale e Codice SDI/PEC. La fattura elettronica '
                  "viene inviata regolarmente tramite il Sistema di Interscambio (SDI) dell'Agenzia "
@@ -5969,7 +5969,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'recording with automated transcription, breakout rooms, screen sharing, and '
                  'interactive Microsoft Whiteboard. External guests can join meetings via browser '
                  'without needing a paid licence.'),
-                ('How do I activate the licence after purchasing from AML Store?',
+                ('How do I activate the licence after purchasing from Eurolicenze?',
                  'You will receive your 25-character Product Key and step-by-step instructions by '
                  'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
                  'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
@@ -5981,7 +5981,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
                 ('Is an electronic invoice provided for businesses?',
-                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'Yes. Eurolicenze is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
                 ('How is data protected and is it GDPR compliant?',
@@ -6030,7 +6030,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'recording with automated transcription, breakout rooms, screen sharing, and '
                  'interactive Microsoft Whiteboard. External guests can join meetings via browser '
                  'without needing a paid licence.'),
-                ('How do I activate the licence after purchasing from AML Store?',
+                ('How do I activate the licence after purchasing from Eurolicenze?',
                  'You will receive your 25-character Product Key and step-by-step instructions by '
                  'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
                  'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
@@ -6042,7 +6042,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
                 ('Is an electronic invoice provided for businesses?',
-                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'Yes. Eurolicenze is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
                 ('How is data protected and is it GDPR compliant?',
@@ -6091,7 +6091,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'recording with automated transcription, breakout rooms, screen sharing, and '
                  'interactive Microsoft Whiteboard. External guests can join meetings via browser '
                  'without needing a paid licence.'),
-                ('How do I activate the licence after purchasing from AML Store?',
+                ('How do I activate the licence after purchasing from Eurolicenze?',
                  'You will receive your 25-character Product Key and step-by-step instructions by '
                  'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
                  'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
@@ -6103,7 +6103,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
                 ('Is an electronic invoice provided for businesses?',
-                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'Yes. Eurolicenze is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
                 ('How is data protected and is it GDPR compliant?',
@@ -6152,7 +6152,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'recording with automated transcription, breakout rooms, screen sharing, and '
                  'interactive Microsoft Whiteboard. External guests can join meetings via browser '
                  'without needing a paid licence.'),
-                ('How do I activate the licence after purchasing from AML Store?',
+                ('How do I activate the licence after purchasing from Eurolicenze?',
                  'You will receive your 25-character Product Key and step-by-step instructions by '
                  'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
                  'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
@@ -6164,7 +6164,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
                 ('Is an electronic invoice provided for businesses?',
-                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'Yes. Eurolicenze is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
                 ('How is data protected and is it GDPR compliant?',
@@ -6213,7 +6213,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'recording with automated transcription, breakout rooms, screen sharing, and '
                  'interactive Microsoft Whiteboard. External guests can join meetings via browser '
                  'without needing a paid licence.'),
-                ('How do I activate the licence after purchasing from AML Store?',
+                ('How do I activate the licence after purchasing from Eurolicenze?',
                  'You will receive your 25-character Product Key and step-by-step instructions by '
                  'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
                  'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
@@ -6225,7 +6225,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
                 ('Is an electronic invoice provided for businesses?',
-                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'Yes. Eurolicenze is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
                 ('How is data protected and is it GDPR compliant?',
@@ -6274,7 +6274,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'recording with automated transcription, breakout rooms, screen sharing, and '
                  'interactive Microsoft Whiteboard. External guests can join meetings via browser '
                  'without needing a paid licence.'),
-                ('How do I activate the licence after purchasing from AML Store?',
+                ('How do I activate the licence after purchasing from Eurolicenze?',
                  'You will receive your 25-character Product Key and step-by-step instructions by '
                  'email within 2-15 minutes. If you already have an existing Microsoft 365 tenant, '
                  'you can enter the code in your Microsoft 365 Admin Center (admin.microsoft.com). '
@@ -6286,7 +6286,7 @@ PRODUCTS['microsoft-365-business-standard'] = {'name': {'it': 'Microsoft 365 Bus
                  'Center, you can assign, reassign, or revoke user licences anytime with a single '
                  'click.'),
                 ('Is an electronic invoice provided for businesses?',
-                 'Yes. AML Store is a registered Italian company (VAT ID 11461870963). During '
+                 'Yes. Eurolicenze is a registered Italian company (VAT ID 11461870963). During '
                  'checkout you can provide your business details, VAT number, Tax Code, and '
                  'SDI/PEC for official electronic invoicing.'),
                 ('How is data protected and is it GDPR compliant?',

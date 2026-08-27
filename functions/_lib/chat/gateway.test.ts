@@ -8,7 +8,7 @@ import {
     encodeGuestSession,
 } from './guest-session';
 
-const SITE_ORIGIN = 'https://aml-store.com';
+const SITE_ORIGIN = 'https://eurolicenze.com';
 
 const gatewayEnv = {
     DB: env.CHAT_DB,

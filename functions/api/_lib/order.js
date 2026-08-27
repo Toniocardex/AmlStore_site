@@ -1,5 +1,5 @@
 /**
- * order.js — helper D1 per la gestione ordini Aml Store.
+ * order.js — helper D1 per la gestione ordini Eurolicenze.
  */
 
 import { now, safeParseJSON } from './utils.js';
@@ -31,11 +31,11 @@ export async function createOrder(db, {
     requiresShipping,
     shipping,
 }) {
-    // Genera ID breve leggibile: AML- + 8 caratteri uppercase alfanumerici
+    // Genera ID breve leggibile: EL- + 8 caratteri uppercase alfanumerici
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no I,O,0,1 (ambigui)
     const arr = new Uint8Array(8);
     crypto.getRandomValues(arr);
-    const id = 'AML-' + Array.from(arr).map(b => chars[b % chars.length]).join('');
+    const id = 'EL-' + Array.from(arr).map(b => chars[b % chars.length]).join('');
     const ts = now();
     const ship = shipping || {};
 

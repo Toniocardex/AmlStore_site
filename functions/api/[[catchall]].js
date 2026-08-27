@@ -59,8 +59,8 @@ import { getAnalyticsSummary, recordEvent, TRACKABLE_EVENTS } from './_lib/analy
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
 const ALLOWED_ORIGINS = [
-    'https://aml-store.com',
-    'https://www.aml-store.com',
+    'https://eurolicenze.com',
+    'https://www.eurolicenze.com',
     'http://localhost:8788',
     'http://127.0.0.1:8788',
 ];
@@ -697,7 +697,7 @@ async function handleStripeCreateSession(request, env) {
     }
     await linkCartCheckoutStarted(env, body, orderId);
 
-    const origin     = env.SITE_ORIGIN || 'https://aml-store.com';
+    const origin     = env.SITE_ORIGIN || 'https://eurolicenze.com';
     const lang       = params.locale || 'it';
     const successUrl = `${origin}/api/stripe-return?sid={CHECKOUT_SESSION_ID}&lang=${lang}`;
     const cancelUrl  = `${origin}/${lang}/checkout?cancelled=1`;
@@ -728,7 +728,7 @@ async function handleStripeReturn(request, env) {
     const rawLang = (url.searchParams.get('lang') || 'it').toLowerCase();
     const lang = ALLOWED_LOCALES.has(rawLang) ? rawLang : 'it';
 
-    const origin = env.SITE_ORIGIN || 'https://aml-store.com';
+    const origin = env.SITE_ORIGIN || 'https://eurolicenze.com';
 
     if (!sid) {
         return Response.redirect(`${origin}/${lang}/checkout?error=missing_sid`, 302);
@@ -1218,7 +1218,7 @@ async function handleAdminRoute(path, request, env, context) {
     const actorEmail = jwt.email;
 
     // Sotto-path dopo /api/admin
-    const sub = path.slice('/api/admin'.length); // es. '/orders' o '/orders/AML-xxx/mark-paid'
+    const sub = path.slice('/api/admin'.length); // es. '/orders' o '/orders/EL-xxx/mark-paid'
 
     // ── GET /api/admin/orders ─────────────────────────────────────────────────
     if (sub === '/orders' && request.method === 'GET') {

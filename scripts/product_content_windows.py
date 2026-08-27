@@ -763,7 +763,7 @@ PRODUCTS = {
                 ("Posso installarlo su più computer?", "No. Serve una licenza distinta per ogni dispositivo su cui installi e usi Windows."),
                 ("Posso installarlo senza lettore DVD?", "Sì. Puoi creare un USB di installazione con gli strumenti ufficiali Microsoft e attivare con il Product Key sul COA."),
                 ("Posso usarlo per aggiornare Windows 11 Home?", "Dipende dalla configurazione del PC. Verifica compatibilità e che venga installata l'edizione Windows 11 Pro."),
-                ("L'attivazione è garantita?", "Il codice va usato secondo le condizioni di licenza e sull'edizione corretta. Per difficoltà in installazione o attivazione, contatta l'assistenza Aml Store."),
+                ("L'attivazione è garantita?", "Il codice va usato secondo le condizioni di licenza e sull'edizione corretta. Per difficoltà in installazione o attivazione, contatta l'assistenza Eurolicenze."),
             ],
             "en": [
                 ("Is this delivered by email?", "No. It is a physical product with DVD and COA, shipped to your address. You receive order confirmation and shipping/tracking emails."),
@@ -771,7 +771,7 @@ PRODUCTS = {
                 ("Can I install it on multiple PCs?", "No. You need a separate licence for each device where Windows is installed and used."),
                 ("Can I install without a DVD drive?", "Yes. Create USB install media with official Microsoft tools and activate with the Product Key on the COA."),
                 ("Can I upgrade from Windows 11 Home?", "It depends on the PC configuration. Check compatibility and that Windows 11 Pro is installed."),
-                ("Is activation guaranteed?", "The key must be used under licence terms on the correct edition. For install or activation issues, contact Aml Store support."),
+                ("Is activation guaranteed?", "The key must be used under licence terms on the correct edition. For install or activation issues, contact Eurolicenze support."),
             ],
             "fr": [
                 ("Livraison par e-mail ?", "Non. Produit physique avec DVD et COA, expédié à votre adresse. Confirmation de commande et e-mails d'expédition/suivi."),
@@ -779,7 +779,7 @@ PRODUCTS = {
                 ("Plusieurs PC ?", "Non. Une licence distincte est requise pour chaque appareil."),
                 ("Sans lecteur DVD ?", "Oui. Créez une clé USB avec les outils Microsoft officiels et activez avec la clé du COA."),
                 ("Passer de Windows 11 Famille à Pro ?", "Selon la configuration du PC. Vérifiez la compatibilité et l'installation de Windows 11 Pro."),
-                ("Activation garantie ?", "La clé doit être utilisée selon la licence et la bonne édition. En cas de difficulté, contactez l'assistance Aml Store."),
+                ("Activation garantie ?", "La clé doit être utilisée selon la licence et la bonne édition. En cas de difficulté, contactez l'assistance Eurolicenze."),
             ],
             "de": [
                 ("Lieferung per E-Mail?", "Nein. Physisches Produkt mit DVD und COA an Ihre Adresse. Bestellbestätigung und Versand-/Tracking-E-Mails."),
@@ -795,7 +795,7 @@ PRODUCTS = {
                 ("¿Varios PC?", "No. Se necesita una licencia distinta por cada dispositivo."),
                 ("¿Sin unidad DVD?", "Sí. Crea un USB con las herramientas oficiales Microsoft y activa con la clave del COA."),
                 ("¿Actualizar desde Windows 11 Home?", "Depende de la configuración del PC. Verifica compatibilidad e instala Windows 11 Pro."),
-                ("¿Activación garantizada?", "La clave debe usarse según la licencia y la edición correcta. Ante problemas, contacta con el soporte de Aml Store."),
+                ("¿Activación garantizada?", "La clave debe usarse según la licencia y la edición correcta. Ante problemas, contacta con el soporte de Eurolicenze."),
             ],
             "pt": [
                 ("O produto é entregue por email?", "Não. É um produto físico com DVD e COA, enviado para o endereço indicado. Recebes por email a confirmação do pedido e as comunicações de envio/tracking."),
@@ -803,7 +803,7 @@ PRODUCTS = {
                 ("Posso instalar em vários computadores?", "Não. É necessária uma licença distinta para cada dispositivo onde instales e uses o Windows."),
                 ("Posso instalar sem leitor de DVD?", "Sim. Podes criar um USB de instalação com as ferramentas oficiais da Microsoft e ativar com o Product Key no COA."),
                 ("Posso usar para atualizar do Windows 11 Home?", "Depende da configuração do PC. Verifica a compatibilidade e que seja instalada a edição Windows 11 Pro."),
-                ("A ativação é garantida?", "O código deve ser usado segundo as condições de licença e na edição correta. Em caso de dificuldades na instalação ou ativação, contacta o apoio da Aml Store."),
+                ("A ativação é garantida?", "O código deve ser usado segundo as condições de licença e na edição correta. Em caso de dificuldades na instalação ou ativação, contacta o apoio da Eurolicenze."),
             ],
         },
     },

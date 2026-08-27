@@ -1,5 +1,5 @@
 /**
- * paypal.js — helper PayPal REST API per Aml Store Worker.
+ * paypal.js — helper PayPal REST API per Eurolicenze Worker.
  * Usa fetch nativo, zero dipendenze npm.
  * PAYPAL_BASE_URL in wrangler.toml: sandbox o live.
  */

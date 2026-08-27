@@ -3,7 +3,7 @@
 
 const FOOTER_I18N = {
     it: {
-        logoAlt: 'Aml Store',
+        logoAlt: 'Eurolicenze',
         brandDesc: 'Software originale, fatturazione italiana e supporto umano. Soluzioni per privati, professionisti e aziende.',
         legalName: 'Licensoft di Cardelli Antonino',
         legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italia',
@@ -34,13 +34,13 @@ const FOOTER_I18N = {
         cookieManage: 'Gestisci preferenze cookie',
         phoneLabel: 'Telefono',
         emailLabel: 'Email',
-        copyright: 'Aml Store. Tutti i diritti riservati.',
+        copyright: 'Eurolicenze. Tutti i diritti riservati.',
         vatLabel: 'P.IVA 11461870963',
-        trademarkDisclaimer: 'I nomi di prodotto, i loghi e i marchi citati appartengono ai rispettivi proprietari e sono usati a scopo identificativo/illustrativo. Aml Store non è affiliata né sponsorizzata dai titolari dei marchi.',
+        trademarkDisclaimer: 'I nomi di prodotto, i loghi e i marchi citati appartengono ai rispettivi proprietari e sono usati a scopo identificativo/illustrativo. Eurolicenze non è affiliata né sponsorizzata dai titolari dei marchi.',
         paymentsLabel: 'Metodi di pagamento accettati',
     },
     en: {
-        logoAlt: 'Aml Store',
+        logoAlt: 'Eurolicenze',
         brandDesc: 'Genuine software, Italian invoicing and human support. Solutions for individuals, professionals and businesses.',
         legalName: 'Licensoft di Cardelli Antonino',
         legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italy',
@@ -71,13 +71,13 @@ const FOOTER_I18N = {
         cookieManage: 'Manage cookie preferences',
         phoneLabel: 'Phone',
         emailLabel: 'Email',
-        copyright: 'Aml Store. All rights reserved.',
+        copyright: 'Eurolicenze. All rights reserved.',
         vatLabel: 'VAT 11461870963',
-        trademarkDisclaimer: 'Product names, logos and trademarks mentioned belong to their respective owners and are used for identification/illustrative purposes only. Aml Store is not affiliated with or sponsored by the trademark owners.',
+        trademarkDisclaimer: 'Product names, logos and trademarks mentioned belong to their respective owners and are used for identification/illustrative purposes only. Eurolicenze is not affiliated with or sponsored by the trademark owners.',
         paymentsLabel: 'Accepted payment methods',
     },
     fr: {
-        logoAlt: 'Aml Store',
+        logoAlt: 'Eurolicenze',
         brandDesc: "Logiciels authentiques, facturation italienne et assistance humaine. Des solutions pour particuliers, professionnels et entreprises.",
         legalName: 'Licensoft di Cardelli Antonino',
         legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italie',
@@ -108,13 +108,13 @@ const FOOTER_I18N = {
         cookieManage: 'Gérer les préférences cookies',
         phoneLabel: 'Téléphone',
         emailLabel: 'E-mail',
-        copyright: 'Aml Store. Tous droits réservés.',
+        copyright: 'Eurolicenze. Tous droits réservés.',
         vatLabel: 'TVA 11461870963',
-        trademarkDisclaimer: 'Les noms de produits, logos et marques mentionnés appartiennent à leurs propriétaires respectifs et sont utilisés à des fins d’identification/illustration uniquement. Aml Store n’est affiliée ni sponsorisée par les titulaires des marques.',
+        trademarkDisclaimer: 'Les noms de produits, logos et marques mentionnés appartiennent à leurs propriétaires respectifs et sont utilisés à des fins d’identification/illustration uniquement. Eurolicenze n’est affiliée ni sponsorisée par les titulaires des marques.',
         paymentsLabel: 'Moyens de paiement acceptés',
     },
     de: {
-        logoAlt: 'Aml Store',
+        logoAlt: 'Eurolicenze',
         brandDesc: 'Originalsoftware, italienische Rechnungsstellung und persönliche Unterstützung. Lösungen für Privatkunden, Fachleute und Unternehmen.',
         legalName: 'Licensoft di Cardelli Antonino',
         legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italien',
@@ -145,13 +145,13 @@ const FOOTER_I18N = {
         cookieManage: 'Cookie-Einstellungen',
         phoneLabel: 'Telefon',
         emailLabel: 'E-Mail',
-        copyright: 'Aml Store. Alle Rechte vorbehalten.',
+        copyright: 'Eurolicenze. Alle Rechte vorbehalten.',
         vatLabel: 'USt-IdNr. 11461870963',
-        trademarkDisclaimer: 'Erwähnte Produktnamen, Logos und Marken sind Eigentum ihrer jeweiligen Inhaber und dienen nur zu Identifikations-/Illustrationszwecken. Aml Store ist weder mit den Markeninhabern verbunden noch von ihnen gesponsert.',
+        trademarkDisclaimer: 'Erwähnte Produktnamen, Logos und Marken sind Eigentum ihrer jeweiligen Inhaber und dienen nur zu Identifikations-/Illustrationszwecken. Eurolicenze ist weder mit den Markeninhabern verbunden noch von ihnen gesponsert.',
         paymentsLabel: 'Akzeptierte Zahlungsmethoden',
     },
     es: {
-        logoAlt: 'Aml Store',
+        logoAlt: 'Eurolicenze',
         brandDesc: 'Software original, facturación italiana y asistencia humana. Soluciones para particulares, profesionales y empresas.',
         legalName: 'Licensoft di Cardelli Antonino',
         legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italia',
@@ -182,13 +182,13 @@ const FOOTER_I18N = {
         cookieManage: 'Gestionar preferencias de cookies',
         phoneLabel: 'Teléfono',
         emailLabel: 'Email',
-        copyright: 'Aml Store. Todos los derechos reservados.',
+        copyright: 'Eurolicenze. Todos los derechos reservados.',
         vatLabel: 'NIF 11461870963',
-        trademarkDisclaimer: 'Los nombres de producto, logotipos y marcas mencionados pertenecen a sus respectivos propietarios y se usan solo con fines identificativos/ilustrativos. Aml Store no está afiliada ni patrocinada por los titulares de las marcas.',
+        trademarkDisclaimer: 'Los nombres de producto, logotipos y marcas mencionados pertenecen a sus respectivos propietarios y se usan solo con fines identificativos/ilustrativos. Eurolicenze no está afiliada ni patrocinada por los titulares de las marcas.',
         paymentsLabel: 'Métodos de pago aceptados',
     },
     pt: {
-        logoAlt: 'Aml Store',
+        logoAlt: 'Eurolicenze',
         brandDesc: 'Software original, faturação italiana e suporte humano. Soluções para particulares, profissionais e empresas.',
         legalName: 'Licensoft di Cardelli Antonino',
         legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Itália',
@@ -219,13 +219,13 @@ const FOOTER_I18N = {
         cookieManage: 'Gerir preferências de cookies',
         phoneLabel: 'Telefone',
         emailLabel: 'Email',
-        copyright: 'Aml Store. Todos os direitos reservados.',
+        copyright: 'Eurolicenze. Todos os direitos reservados.',
         vatLabel: 'NIF 11461870963',
-        trademarkDisclaimer: 'Os nomes de produto, logótipos e marcas mencionados pertencem aos respetivos proprietários e são usados apenas para fins identificativos/ilustrativos. A Aml Store não é afiliada nem patrocinada pelos titulares das marcas.',
+        trademarkDisclaimer: 'Os nomes de produto, logótipos e marcas mencionados pertencem aos respetivos proprietários e são usados apenas para fins identificativos/ilustrativos. A Eurolicenze não é afiliada nem patrocinada pelos titulares das marcas.',
         paymentsLabel: 'Métodos de pagamento aceites',
     },
     nl: {
-        logoAlt: 'Aml Store',
+        logoAlt: 'Eurolicenze',
         brandDesc: 'Originele software, Italiaanse facturatie en menselijke ondersteuning. Oplossingen voor particulieren, professionals en bedrijven.',
         legalName: 'Licensoft di Cardelli Antonino',
         legalAddress: 'Via Trento 5/A, 20015 Parabiago (MI), Italië',
@@ -256,9 +256,9 @@ const FOOTER_I18N = {
         cookieManage: 'Cookievoorkeuren beheren',
         phoneLabel: 'Telefoon',
         emailLabel: 'E-mail',
-        copyright: 'Aml Store. Alle rechten voorbehouden.',
+        copyright: 'Eurolicenze. Alle rechten voorbehouden.',
         vatLabel: 'BTW 11461870963',
-        trademarkDisclaimer: 'De genoemde productnamen, logo’s en merken zijn eigendom van hun respectieve houders en worden alleen gebruikt ter identificatie/illustratie. Aml Store is niet gelieerd aan of gesponsord door de merkhouders.',
+        trademarkDisclaimer: 'De genoemde productnamen, logo’s en merken zijn eigendom van hun respectieve houders en worden alleen gebruikt ter identificatie/illustratie. Eurolicenze is niet gelieerd aan of gesponsord door de merkhouders.',
         paymentsLabel: 'Geaccepteerde betaalmethoden',
     },
 };
@@ -614,12 +614,12 @@ class EcommerceFooter extends HTMLElement {
                     <div class="container footer-main">
                         <div class="brand-col">
                             <a href="${esc(homeHref)}" class="footer-logo">
-                                <img src="${esc(logoSrc)}" width="400" height="96" alt="${esc(t.logoAlt)}">
+                                <img src="${esc(logoSrc)}" width="288" height="96" alt="${esc(t.logoAlt)}">
                             </a>
                             <p class="brand-desc">${esc(t.brandDesc)}</p>
                             <div class="brand-contacts">
                                 <a href="tel:+393925580413" aria-label="${esc(t.phoneLabel)}: +39 392 558 0413">+39 392 558 0413</a>
-                                <a href="mailto:Info@amlstore.it" aria-label="${esc(t.emailLabel)}: Info@amlstore.it">Info@amlstore.it</a>
+                                <a href="mailto:Desk@eurolicenze.com" aria-label="${esc(t.emailLabel)}: Desk@eurolicenze.com">Desk@eurolicenze.com</a>
                             </div>
                             <p class="brand-support">
                                 <span>${esc(t.supportHours)}</span>

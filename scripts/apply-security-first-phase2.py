@@ -42,23 +42,23 @@ CONSULT = {
 
 SEO = {
     "it": {
-        "title": "Antivirus originale e licenze digitali | Aml Store",
+        "title": "Antivirus originale e licenze digitali | Eurolicenze",
         "desc": "Antivirus e software originale con consegna digitale, attivazione sui portali ufficiali, fattura e assistenza in italiano.",
     },
     "en": {
-        "title": "Original antivirus and digital licences | Aml Store",
+        "title": "Original antivirus and digital licences | Eurolicenze",
         "desc": "Genuine antivirus and digital software with email delivery, official-portal activation, invoices and human support.",
     },
     "fr": {
-        "title": "Antivirus original et licences numériques | Aml Store",
+        "title": "Antivirus original et licences numériques | Eurolicenze",
         "desc": "Antivirus et logiciels originaux, livraison numérique, activation sur les portails officiels, facture et assistance humaine.",
     },
     "de": {
-        "title": "Original-Antivirus und digitale Lizenzen | Aml Store",
+        "title": "Original-Antivirus und digitale Lizenzen | Eurolicenze",
         "desc": "Originales Antivirus und digitale Software mit digitaler Lieferung, Aktivierung auf offiziellen Portalen, Rechnung und persönlichem Support.",
     },
     "es": {
-        "title": "Antivirus original y licencias digitales | Aml Store",
+        "title": "Antivirus original y licencias digitales | Eurolicenze",
         "desc": "Antivirus y software original con entrega digital, activación en portales oficiales, factura y asistencia humana.",
     },
 }
@@ -837,27 +837,27 @@ def patch_seo(html: str, lang: str) -> str:
     html = re.sub(r'<meta name="twitter:title" content="[^"]*">', f'<meta name="twitter:title" content="{s["title"]}">', html, count=1)
     html = re.sub(r'<meta name="twitter:description" content="[^"]*">', f'<meta name="twitter:description" content="{s["desc"]}">', html, count=1)
     html = html.replace(
-        '"name": "Software originale per privati e aziende | Aml Store"',
+        '"name": "Software originale per privati e aziende | Eurolicenze"',
         f'"name": "{s["title"]}"',
     )
     html = html.replace(
-        '"name": "Original software for individuals and businesses | Aml Store"',
+        '"name": "Original software for individuals and businesses | Eurolicenze"',
         f'"name": "{s["title"]}"',
     )
     html = re.sub(
-        r'("url":\s*"https://aml-store.com/' + lang + r'/",\s*"name":\s*")[^"]+(")',
+        r'("url":\s*"https://eurolicenze.com/' + lang + r'/",\s*"name":\s*")[^"]+(")',
         rf'\1{s["title"]}\2',
         html,
         count=1,
     )
     html = re.sub(
-        r'("#webpage","url":"https://aml-store.com/' + lang + r'/","name":")[^"]+(")',
+        r'("#webpage","url":"https://eurolicenze.com/' + lang + r'/","name":")[^"]+(")',
         rf'\1{s["title"]}\2',
         html,
         count=1,
     )
     html = re.sub(
-        r'("#webpage", "url": "https://aml-store.com/' + lang + r'/", "name": ")[^"]+(")',
+        r'("#webpage", "url": "https://eurolicenze.com/' + lang + r'/", "name": ")[^"]+(")',
         rf'\1{s["title"]}\2',
         html,
         count=1,

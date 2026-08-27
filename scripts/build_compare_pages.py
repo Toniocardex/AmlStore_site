@@ -73,16 +73,16 @@ CATEGORY_LABEL = {
                   "de": "Antivirus", "es": "Antivirus", "pt": "Antivírus", "nl": "Antivirus"},
 }
 
-ORG_JSON = ('{{ "@type": "Organization", "@id": "https://aml-store.com/#organization", '
-            '"name": "Aml Store", "url": "https://aml-store.com/", '
+ORG_JSON = ('{{ "@type": "Organization", "@id": "https://eurolicenze.com/#organization", '
+            '"name": "Eurolicenze", "url": "https://eurolicenze.com/", '
             '"aggregateRating": {{ "@type": "AggregateRating", "ratingValue": "4.8", '
             '"reviewCount": "94", "bestRating": "5", "worstRating": "1" }} }}')
 
 
 def hreflang_block(slug):
-    lines = [f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}">'
+    lines = [f'    <link rel="alternate" hreflang="{lg}" href="https://eurolicenze.com/{lg}/{slug}">'
              for lg in LANGS]
-    lines.append(f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}">')
+    lines.append(f'    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/{slug}">')
     return "\n".join(lines)
 
 
@@ -204,12 +204,12 @@ def render(page, lang):
     <script src="../js/consent-init.js"></script>
     <link rel="icon" href="../favicon/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}">
+    <link rel="canonical" href="https://eurolicenze.com/{lang}/{slug}">
 {hreflang}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="{og_desc}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}">
+    <meta property="og:url" content="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
     <meta property="og:image" content="{page['og_image']}">
     <link rel="stylesheet" href="../fonts/montserrat.css">
@@ -226,25 +226,25 @@ def render(page, lang):
     {ORG_JSON.format()},
     {{
       "@type": "WebPage",
-      "@id": "https://aml-store.com/{lang}/{slug}#webpage",
+      "@id": "https://eurolicenze.com/{lang}/{slug}#webpage",
       "name": "{schema_name}",
       "description": "{schema_desc}",
-      "url": "https://aml-store.com/{lang}/{slug}",
+      "url": "https://eurolicenze.com/{lang}/{slug}",
       "inLanguage": "{lang}",
-      "isPartOf": {{ "@type": "WebSite", "name": "Aml Store", "url": "https://aml-store.com/" }}
+      "isPartOf": {{ "@type": "WebSite", "name": "Eurolicenze", "url": "https://eurolicenze.com/" }}
     }},
     {{
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {{ "@type": "ListItem", "position": 1, "name": "{s['home']}", "item": "https://aml-store.com/{lang}/" }},
-        {{ "@type": "ListItem", "position": 2, "name": "{category_label}", "item": "https://aml-store.com/{lang}/{category_href}" }},
+        {{ "@type": "ListItem", "position": 1, "name": "{s['home']}", "item": "https://eurolicenze.com/{lang}/" }},
+        {{ "@type": "ListItem", "position": 2, "name": "{category_label}", "item": "https://eurolicenze.com/{lang}/{category_href}" }},
         {{ "@type": "ListItem", "position": 3, "name": "{breadcrumb_label}" }}
       ]
     }},
     {{
       "@type": "FAQPage",
       "inLanguage": "{lang}",
-      "url": "https://aml-store.com/{lang}/{slug}",
+      "url": "https://eurolicenze.com/{lang}/{slug}",
       "mainEntity": [
         {faq_ld}
       ]
@@ -323,15 +323,15 @@ PAGES = [
     {
         "slug": "windows-11-home-vs-pro",
         "category_href": "sistemi-operativi",
-        "og_image": "https://aml-store.com/asset/media/products/windows-11-pro.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/windows-11-pro.webp",
         "meta_title": _d(
-            "Windows 11 Home o Pro: quale scegliere | Aml Store",
-            "Windows 11 Home or Pro: which one to choose | Aml Store",
-            "Windows 11 Home ou Pro : lequel choisir | Aml Store",
-            "Windows 11 Home oder Pro: welche Wahl | Aml Store",
-            "Windows 11 Home o Pro: ¿cuál elegir? | Aml Store",
-            "Windows 11 Home ou Pro: qual escolher | Aml Store",
-            "Windows 11 Home of Pro: wat kies je | Aml Store",
+            "Windows 11 Home o Pro: quale scegliere | Eurolicenze",
+            "Windows 11 Home or Pro: which one to choose | Eurolicenze",
+            "Windows 11 Home ou Pro : lequel choisir | Eurolicenze",
+            "Windows 11 Home oder Pro: welche Wahl | Eurolicenze",
+            "Windows 11 Home o Pro: ¿cuál elegir? | Eurolicenze",
+            "Windows 11 Home ou Pro: qual escolher | Eurolicenze",
+            "Windows 11 Home of Pro: wat kies je | Eurolicenze",
         ),
         "meta_description": _d(
             "Windows 11 Home vs Pro: differenze reali (BitLocker, Desktop remoto, Hyper-V), prezzi e quale versione scegliere per uso privato o lavoro.",
@@ -452,7 +452,7 @@ PAGES = [
         ],
         "table_rows": [
             [
-                _d("Prezzo su Aml Store", "Price on Aml Store", "Prix sur Aml Store", "Preis bei Aml Store", "Precio en Aml Store", "Preço na Aml Store", "Prijs bij Aml Store"),
+                _d("Prezzo su Eurolicenze", "Price on Eurolicenze", "Prix sur Eurolicenze", "Preis bei Eurolicenze", "Precio en Eurolicenze", "Preço na Eurolicenze", "Prijs bij Eurolicenze"),
                 _d(*(["€ 61,00"] * 7)),
                 _d(*(["€ 99,00"] * 7)),
             ],
@@ -667,27 +667,27 @@ PAGES = [
             },
         ],
         "disclaimer": _d(
-            "Microsoft, Windows e i relativi marchi sono di Microsoft Corporation. Contenuto informativo Aml Store: funzionalità e requisiti seguono sempre la documentazione Microsoft aggiornata.",
-            "Microsoft, Windows and related marks are property of Microsoft Corporation. Informational content by Aml Store: features and requirements always follow current Microsoft documentation.",
-            "Microsoft, Windows et les marques associées appartiennent à Microsoft Corporation. Contenu informatif Aml Store : fonctionnalités et prérequis suivent toujours la documentation Microsoft à jour.",
-            "Microsoft, Windows und die zugehörigen Marken sind Eigentum der Microsoft Corporation. Informativer Inhalt von Aml Store: Funktionen und Voraussetzungen richten sich stets nach der aktuellen Microsoft-Dokumentation.",
-            "Microsoft, Windows y las marcas relacionadas son propiedad de Microsoft Corporation. Contenido informativo de Aml Store: las funciones y requisitos siguen siempre la documentación actual de Microsoft.",
-            "Microsoft, Windows e as marcas relacionadas são propriedade da Microsoft Corporation. Conteúdo informativo da Aml Store: funcionalidades e requisitos seguem sempre a documentação atual da Microsoft.",
-            "Microsoft, Windows en de bijbehorende merken zijn eigendom van Microsoft Corporation. Informatieve inhoud van Aml Store: functies en vereisten volgen altijd de actuele Microsoft-documentatie.",
+            "Microsoft, Windows e i relativi marchi sono di Microsoft Corporation. Contenuto informativo Eurolicenze: funzionalità e requisiti seguono sempre la documentazione Microsoft aggiornata.",
+            "Microsoft, Windows and related marks are property of Microsoft Corporation. Informational content by Eurolicenze: features and requirements always follow current Microsoft documentation.",
+            "Microsoft, Windows et les marques associées appartiennent à Microsoft Corporation. Contenu informatif Eurolicenze : fonctionnalités et prérequis suivent toujours la documentation Microsoft à jour.",
+            "Microsoft, Windows und die zugehörigen Marken sind Eigentum der Microsoft Corporation. Informativer Inhalt von Eurolicenze: Funktionen und Voraussetzungen richten sich stets nach der aktuellen Microsoft-Dokumentation.",
+            "Microsoft, Windows y las marcas relacionadas son propiedad de Microsoft Corporation. Contenido informativo de Eurolicenze: las funciones y requisitos siguen siempre la documentación actual de Microsoft.",
+            "Microsoft, Windows e as marcas relacionadas são propriedade da Microsoft Corporation. Conteúdo informativo da Eurolicenze: funcionalidades e requisitos seguem sempre a documentação atual da Microsoft.",
+            "Microsoft, Windows en de bijbehorende merken zijn eigendom van Microsoft Corporation. Informatieve inhoud van Eurolicenze: functies en vereisten volgen altijd de actuele Microsoft-documentatie.",
         ),
     },
     {
         "slug": "office-2024-vs-microsoft-365",
         "category_href": "suite-office",
-        "og_image": "https://aml-store.com/asset/media/products/microsoft-365-personal.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/microsoft-365-personal.webp",
         "meta_title": _d(
-            "Office 2024 o Microsoft 365: licenza o abbonamento | Aml Store",
-            "Office 2024 or Microsoft 365: licence or subscription | Aml Store",
-            "Office 2024 ou Microsoft 365 : licence ou abonnement | Aml Store",
-            "Office 2024 oder Microsoft 365: Lizenz oder Abo | Aml Store",
-            "Office 2024 o Microsoft 365: licencia o suscripción | Aml Store",
-            "Office 2024 ou Microsoft 365: licença ou subscrição | Aml Store",
-            "Office 2024 of Microsoft 365: licentie of abonnement | Aml Store",
+            "Office 2024 o Microsoft 365: licenza o abbonamento | Eurolicenze",
+            "Office 2024 or Microsoft 365: licence or subscription | Eurolicenze",
+            "Office 2024 ou Microsoft 365 : licence ou abonnement | Eurolicenze",
+            "Office 2024 oder Microsoft 365: Lizenz oder Abo | Eurolicenze",
+            "Office 2024 o Microsoft 365: licencia o suscripción | Eurolicenze",
+            "Office 2024 ou Microsoft 365: licença ou subscrição | Eurolicenze",
+            "Office 2024 of Microsoft 365: licentie of abonnement | Eurolicenze",
         ),
         "meta_description": _d(
             "Office 2024 vs Microsoft 365: differenza tra licenza perpetua e abbonamento, prezzi, Copilot AI e spazio cloud. Quale conviene in base a come lo usi.",
@@ -949,27 +949,27 @@ PAGES = [
             },
         ],
         "disclaimer": _d(
-            "Microsoft, Microsoft 365, Office, Copilot e i relativi marchi sono di Microsoft Corporation. Contenuto informativo Aml Store: funzionalità e condizioni seguono sempre il prodotto Microsoft acquistato.",
-            "Microsoft, Microsoft 365, Office, Copilot and related marks are property of Microsoft Corporation. Informational content by Aml Store: features and terms always follow the Microsoft product purchased.",
-            "Microsoft, Microsoft 365, Office, Copilot et les marques associées appartiennent à Microsoft Corporation. Contenu informatif Aml Store : fonctionnalités et conditions suivent toujours le produit Microsoft acheté.",
-            "Microsoft, Microsoft 365, Office, Copilot und die zugehörigen Marken sind Eigentum der Microsoft Corporation. Informativer Inhalt von Aml Store: Funktionen und Bedingungen richten sich stets nach dem gekauften Microsoft-Produkt.",
-            "Microsoft, Microsoft 365, Office, Copilot y las marcas relacionadas son propiedad de Microsoft Corporation. Contenido informativo de Aml Store: las funciones y condiciones siguen siempre el producto Microsoft adquirido.",
-            "Microsoft, Microsoft 365, Office, Copilot e as marcas relacionadas são propriedade da Microsoft Corporation. Conteúdo informativo da Aml Store: funcionalidades e condições seguem sempre o produto Microsoft adquirido.",
-            "Microsoft, Microsoft 365, Office, Copilot en de bijbehorende merken zijn eigendom van Microsoft Corporation. Informatieve inhoud van Aml Store: functies en voorwaarden volgen altijd het aangeschafte Microsoft-product.",
+            "Microsoft, Microsoft 365, Office, Copilot e i relativi marchi sono di Microsoft Corporation. Contenuto informativo Eurolicenze: funzionalità e condizioni seguono sempre il prodotto Microsoft acquistato.",
+            "Microsoft, Microsoft 365, Office, Copilot and related marks are property of Microsoft Corporation. Informational content by Eurolicenze: features and terms always follow the Microsoft product purchased.",
+            "Microsoft, Microsoft 365, Office, Copilot et les marques associées appartiennent à Microsoft Corporation. Contenu informatif Eurolicenze : fonctionnalités et conditions suivent toujours le produit Microsoft acheté.",
+            "Microsoft, Microsoft 365, Office, Copilot und die zugehörigen Marken sind Eigentum der Microsoft Corporation. Informativer Inhalt von Eurolicenze: Funktionen und Bedingungen richten sich stets nach dem gekauften Microsoft-Produkt.",
+            "Microsoft, Microsoft 365, Office, Copilot y las marcas relacionadas son propiedad de Microsoft Corporation. Contenido informativo de Eurolicenze: las funciones y condiciones siguen siempre el producto Microsoft adquirido.",
+            "Microsoft, Microsoft 365, Office, Copilot e as marcas relacionadas são propriedade da Microsoft Corporation. Conteúdo informativo da Eurolicenze: funcionalidades e condições seguem sempre o produto Microsoft adquirido.",
+            "Microsoft, Microsoft 365, Office, Copilot en de bijbehorende merken zijn eigendom van Microsoft Corporation. Informatieve inhoud van Eurolicenze: functies en voorwaarden volgen altijd het aangeschafte Microsoft-product.",
         ),
     },
     {
         "slug": "microsoft-365-family-vs-personal",
         "category_href": "microsoft-365-solutions",
-        "og_image": "https://aml-store.com/asset/media/products/microsoft-365-family.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/microsoft-365-family.webp",
         "meta_title": _d(
-            "Microsoft 365 Family o Personal: quale scegliere | Aml Store",
-            "Microsoft 365 Family or Personal: which one to choose | Aml Store",
-            "Microsoft 365 Family ou Personal : lequel choisir | Aml Store",
-            "Microsoft 365 Family oder Personal: welche Wahl | Aml Store",
-            "Microsoft 365 Family o Personal: cuál elegir | Aml Store",
-            "Microsoft 365 Family ou Personal: qual escolher | Aml Store",
-            "Microsoft 365 Family of Personal: wat kies je | Aml Store",
+            "Microsoft 365 Family o Personal: quale scegliere | Eurolicenze",
+            "Microsoft 365 Family or Personal: which one to choose | Eurolicenze",
+            "Microsoft 365 Family ou Personal : lequel choisir | Eurolicenze",
+            "Microsoft 365 Family oder Personal: welche Wahl | Eurolicenze",
+            "Microsoft 365 Family o Personal: cuál elegir | Eurolicenze",
+            "Microsoft 365 Family ou Personal: qual escolher | Eurolicenze",
+            "Microsoft 365 Family of Personal: wat kies je | Eurolicenze",
         ),
         "meta_description": _d(
             "Microsoft 365 Family vs Personal: quante persone possono usarlo, spazio cloud, Copilot AI e differenza di prezzo. Guida alla scelta.",
@@ -1244,27 +1244,27 @@ PAGES = [
             },
         ],
         "disclaimer": _d(
-            "Microsoft, Microsoft 365, Copilot, OneDrive e i relativi marchi sono di Microsoft Corporation. Contenuto informativo Aml Store: condizioni e limiti seguono sempre il prodotto Microsoft acquistato.",
-            "Microsoft, Microsoft 365, Copilot, OneDrive and related marks are property of Microsoft Corporation. Informational content by Aml Store: terms and limits always follow the Microsoft product purchased.",
-            "Microsoft, Microsoft 365, Copilot, OneDrive et les marques associées appartiennent à Microsoft Corporation. Contenu informatif Aml Store : conditions et limites suivent toujours le produit Microsoft acheté.",
-            "Microsoft, Microsoft 365, Copilot, OneDrive und die zugehörigen Marken sind Eigentum der Microsoft Corporation. Informativer Inhalt von Aml Store: Bedingungen und Grenzen richten sich stets nach dem gekauften Microsoft-Produkt.",
-            "Microsoft, Microsoft 365, Copilot, OneDrive y las marcas relacionadas son propiedad de Microsoft Corporation. Contenido informativo de Aml Store: condiciones y límites siguen siempre el producto Microsoft adquirido.",
-            "Microsoft, Microsoft 365, Copilot, OneDrive e as marcas relacionadas são propriedade da Microsoft Corporation. Conteúdo informativo da Aml Store: condições e limites seguem sempre o produto Microsoft adquirido.",
-            "Microsoft, Microsoft 365, Copilot, OneDrive en de bijbehorende merken zijn eigendom van Microsoft Corporation. Informatieve inhoud van Aml Store: voorwaarden en limieten volgen altijd het aangeschafte Microsoft-product.",
+            "Microsoft, Microsoft 365, Copilot, OneDrive e i relativi marchi sono di Microsoft Corporation. Contenuto informativo Eurolicenze: condizioni e limiti seguono sempre il prodotto Microsoft acquistato.",
+            "Microsoft, Microsoft 365, Copilot, OneDrive and related marks are property of Microsoft Corporation. Informational content by Eurolicenze: terms and limits always follow the Microsoft product purchased.",
+            "Microsoft, Microsoft 365, Copilot, OneDrive et les marques associées appartiennent à Microsoft Corporation. Contenu informatif Eurolicenze : conditions et limites suivent toujours le produit Microsoft acheté.",
+            "Microsoft, Microsoft 365, Copilot, OneDrive und die zugehörigen Marken sind Eigentum der Microsoft Corporation. Informativer Inhalt von Eurolicenze: Bedingungen und Grenzen richten sich stets nach dem gekauften Microsoft-Produkt.",
+            "Microsoft, Microsoft 365, Copilot, OneDrive y las marcas relacionadas son propiedad de Microsoft Corporation. Contenido informativo de Eurolicenze: condiciones y límites siguen siempre el producto Microsoft adquirido.",
+            "Microsoft, Microsoft 365, Copilot, OneDrive e as marcas relacionadas são propriedade da Microsoft Corporation. Conteúdo informativo da Eurolicenze: condições e limites seguem sempre o produto Microsoft adquirido.",
+            "Microsoft, Microsoft 365, Copilot, OneDrive en de bijbehorende merken zijn eigendom van Microsoft Corporation. Informatieve inhoud van Eurolicenze: voorwaarden en limieten volgen altijd het aangeschafte Microsoft-product.",
         ),
     },
     {
         "slug": "kaspersky-vs-eset-nod32",
         "category_href": "antivirus",
-        "og_image": "https://aml-store.com/asset/media/products/kaspersky-standard.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/kaspersky-standard.webp",
         "meta_title": _d(
-            "Kaspersky o ESET NOD32: quale antivirus scegliere | Aml Store",
-            "Kaspersky or ESET NOD32: which antivirus to choose | Aml Store",
-            "Kaspersky ou ESET NOD32 : quel antivirus choisir | Aml Store",
-            "Kaspersky oder ESET NOD32: welches Antivirenprogramm | Aml Store",
-            "Kaspersky o ESET NOD32: qué antivirus elegir | Aml Store",
-            "Kaspersky ou ESET NOD32: qual antivírus escolher | Aml Store",
-            "Kaspersky of ESET NOD32: welke antivirus kiezen | Aml Store",
+            "Kaspersky o ESET NOD32: quale antivirus scegliere | Eurolicenze",
+            "Kaspersky or ESET NOD32: which antivirus to choose | Eurolicenze",
+            "Kaspersky ou ESET NOD32 : quel antivirus choisir | Eurolicenze",
+            "Kaspersky oder ESET NOD32: welches Antivirenprogramm | Eurolicenze",
+            "Kaspersky o ESET NOD32: qué antivirus elegir | Eurolicenze",
+            "Kaspersky ou ESET NOD32: qual antivírus escolher | Eurolicenze",
+            "Kaspersky of ESET NOD32: welke antivirus kiezen | Eurolicenze",
         ),
         "meta_description": _d(
             "Kaspersky vs ESET NOD32: protezione bancaria e ottimizzazione PC contro un motore leggero a basso impatto. Prezzi e differenze per scegliere.",
@@ -1575,27 +1575,27 @@ PAGES = [
             },
         ],
         "disclaimer": _d(
-            "Kaspersky ed ESET sono marchi dei rispettivi produttori. Contenuto informativo Aml Store: funzionalità e condizioni seguono sempre il prodotto acquistato.",
-            "Kaspersky and ESET are trademarks of their respective makers. Informational content by Aml Store: features and terms always follow the product purchased.",
-            "Kaspersky et ESET sont des marques de leurs éditeurs respectifs. Contenu informatif Aml Store : fonctionnalités et conditions suivent toujours le produit acheté.",
-            "Kaspersky und ESET sind Marken ihrer jeweiligen Hersteller. Informativer Inhalt von Aml Store: Funktionen und Bedingungen richten sich stets nach dem gekauften Produkt.",
-            "Kaspersky y ESET son marcas de sus respectivos fabricantes. Contenido informativo de Aml Store: funciones y condiciones siguen siempre el producto adquirido.",
-            "Kaspersky e ESET são marcas dos respetivos fabricantes. Conteúdo informativo da Aml Store: funcionalidades e condições seguem sempre o produto adquirido.",
-            "Kaspersky en ESET zijn merken van hun respectieve fabrikanten. Informatieve inhoud van Aml Store: functies en voorwaarden volgen altijd het aangeschafte product.",
+            "Kaspersky ed ESET sono marchi dei rispettivi produttori. Contenuto informativo Eurolicenze: funzionalità e condizioni seguono sempre il prodotto acquistato.",
+            "Kaspersky and ESET are trademarks of their respective makers. Informational content by Eurolicenze: features and terms always follow the product purchased.",
+            "Kaspersky et ESET sont des marques de leurs éditeurs respectifs. Contenu informatif Eurolicenze : fonctionnalités et conditions suivent toujours le produit acheté.",
+            "Kaspersky und ESET sind Marken ihrer jeweiligen Hersteller. Informativer Inhalt von Eurolicenze: Funktionen und Bedingungen richten sich stets nach dem gekauften Produkt.",
+            "Kaspersky y ESET son marcas de sus respectivos fabricantes. Contenido informativo de Eurolicenze: funciones y condiciones siguen siempre el producto adquirido.",
+            "Kaspersky e ESET são marcas dos respetivos fabricantes. Conteúdo informativo da Eurolicenze: funcionalidades e condições seguem sempre o produto adquirido.",
+            "Kaspersky en ESET zijn merken van hun respectieve fabrikanten. Informatieve inhoud van Eurolicenze: functies en voorwaarden volgen altijd het aangeschafte product.",
         ),
     },
     {
         "slug": "norton-vs-bitdefender",
         "category_href": "antivirus",
-        "og_image": "https://aml-store.com/asset/media/products/norton-360-standard.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/norton-360-standard.webp",
         "meta_title": _d(
-            "Norton o Bitdefender: quale antivirus scegliere | Aml Store",
-            "Norton or Bitdefender: which antivirus to choose | Aml Store",
-            "Norton ou Bitdefender : quel antivirus choisir | Aml Store",
-            "Norton oder Bitdefender: welches Antivirenprogramm | Aml Store",
-            "Norton o Bitdefender: qué antivirus elegir | Aml Store",
-            "Norton ou Bitdefender: qual antivírus escolher | Aml Store",
-            "Norton of Bitdefender: welke antivirus kiezen | Aml Store",
+            "Norton o Bitdefender: quale antivirus scegliere | Eurolicenze",
+            "Norton or Bitdefender: which antivirus to choose | Eurolicenze",
+            "Norton ou Bitdefender : quel antivirus choisir | Eurolicenze",
+            "Norton oder Bitdefender: welches Antivirenprogramm | Eurolicenze",
+            "Norton o Bitdefender: qué antivirus elegir | Eurolicenze",
+            "Norton ou Bitdefender: qual antivírus escolher | Eurolicenze",
+            "Norton of Bitdefender: welke antivirus kiezen | Eurolicenze",
         ),
         "meta_description": _d(
             "Norton 360 vs Bitdefender Plus: VPN e backup cloud inclusi contro un motore leggero anti-phishing. Prezzi e differenze per scegliere.",
@@ -1915,13 +1915,13 @@ PAGES = [
             },
         ],
         "disclaimer": _d(
-            "Norton e Bitdefender sono marchi dei rispettivi produttori. Contenuto informativo Aml Store: funzionalità e condizioni seguono sempre il prodotto acquistato.",
-            "Norton and Bitdefender are trademarks of their respective makers. Informational content by Aml Store: features and terms always follow the product purchased.",
-            "Norton et Bitdefender sont des marques de leurs éditeurs respectifs. Contenu informatif Aml Store : fonctionnalités et conditions suivent toujours le produit acheté.",
-            "Norton und Bitdefender sind Marken ihrer jeweiligen Hersteller. Informativer Inhalt von Aml Store: Funktionen und Bedingungen richten sich stets nach dem gekauften Produkt.",
-            "Norton y Bitdefender son marcas de sus respectivos fabricantes. Contenido informativo de Aml Store: funciones y condiciones siguen siempre el producto adquirido.",
-            "Norton e Bitdefender são marcas dos respetivos fabricantes. Conteúdo informativo da Aml Store: funcionalidades e condições seguem sempre o produto adquirido.",
-            "Norton en Bitdefender zijn merken van hun respectieve fabrikanten. Informatieve inhoud van Aml Store: functies en voorwaarden volgen altijd het aangeschafte product.",
+            "Norton e Bitdefender sono marchi dei rispettivi produttori. Contenuto informativo Eurolicenze: funzionalità e condizioni seguono sempre il prodotto acquistato.",
+            "Norton and Bitdefender are trademarks of their respective makers. Informational content by Eurolicenze: features and terms always follow the product purchased.",
+            "Norton et Bitdefender sont des marques de leurs éditeurs respectifs. Contenu informatif Eurolicenze : fonctionnalités et conditions suivent toujours le produit acheté.",
+            "Norton und Bitdefender sind Marken ihrer jeweiligen Hersteller. Informativer Inhalt von Eurolicenze: Funktionen und Bedingungen richten sich stets nach dem gekauften Produkt.",
+            "Norton y Bitdefender son marcas de sus respectivos fabricantes. Contenido informativo de Eurolicenze: funciones y condiciones siguen siempre el producto adquirido.",
+            "Norton e Bitdefender são marcas dos respetivos fabricantes. Conteúdo informativo da Eurolicenze: funcionalidades e condições seguem sempre o produto adquirido.",
+            "Norton en Bitdefender zijn merken van hun respectieve fabrikanten. Informatieve inhoud van Eurolicenze: functies en voorwaarden volgen altijd het aangeschafte product.",
         ),
     },
 ]
