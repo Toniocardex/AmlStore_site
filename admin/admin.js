@@ -723,7 +723,7 @@
         var input = $('delete-confirm-input');
         if (input) {
             input.value = '';
-            input.placeholder = 'AML-XXXXXXXX';
+            input.placeholder = 'EL-XXXXXXXX';
         }
         $('delete-ok').disabled = true;
         $('delete-ok').textContent = 'Elimina definitivamente';

@@ -1218,7 +1218,7 @@ async function handleAdminRoute(path, request, env, context) {
     const actorEmail = jwt.email;
 
     // Sotto-path dopo /api/admin
-    const sub = path.slice('/api/admin'.length); // es. '/orders' o '/orders/AML-xxx/mark-paid'
+    const sub = path.slice('/api/admin'.length); // es. '/orders' o '/orders/EL-xxx/mark-paid'
 
     // ── GET /api/admin/orders ─────────────────────────────────────────────────
     if (sub === '/orders' && request.method === 'GET') {
