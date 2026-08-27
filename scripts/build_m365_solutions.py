@@ -57,13 +57,13 @@ BREADCRUMB_LABEL = _d(*(["Microsoft 365"] * 7))
 HERO_EYEBROW = BREADCRUMB_LABEL
 
 META_TITLE = _d(
-    "Quale Microsoft 365 scegliere | Aml Store",
-    "Which Microsoft 365 to choose | Aml Store",
-    "Quel Microsoft 365 choisir | Aml Store",
-    "Welches Microsoft 365 wählen | Aml Store",
-    "Qué Microsoft 365 elegir | Aml Store",
-    "Que Microsoft 365 escolher | Aml Store",
-    "Welke Microsoft 365 kiezen | Aml Store",
+    "Quale Microsoft 365 scegliere | Eurolicenze",
+    "Which Microsoft 365 to choose | Eurolicenze",
+    "Quel Microsoft 365 choisir | Eurolicenze",
+    "Welches Microsoft 365 wählen | Eurolicenze",
+    "Qué Microsoft 365 elegir | Eurolicenze",
+    "Que Microsoft 365 escolher | Eurolicenze",
+    "Welke Microsoft 365 kiezen | Eurolicenze",
 )
 META_DESCRIPTION = _d(
     "Microsoft 365 Personal, Family o Business Standard: confronto prezzi, persone coperte, spazio cloud e Copilot AI per scegliere il piano giusto.",
@@ -350,13 +350,13 @@ FAQ_ITEMS = [
                 "¿Puedo comprar varias licencias de Business Standard para mi equipo?", "Posso comprar várias licenças Business Standard para a minha equipa?",
                 "Kan ik meerdere Business Standard-licenties kopen voor mijn team?"),
         "a": _d(
-            'Sì, ogni licenza copre 1 utente su fino a 15 dispositivi; per volumi elevati o un preventivo su misura scrivi a <a href="mailto:info@amlstore.it">info@amlstore.it</a>.',
-            'Yes, each licence covers 1 user on up to 15 devices; for high volumes or a custom quote, email <a href="mailto:info@amlstore.it">info@amlstore.it</a>.',
-            'Oui, chaque licence couvre 1 utilisateur sur jusqu\'à 15 appareils ; pour des volumes importants ou un devis sur mesure, écrivez à <a href="mailto:info@amlstore.it">info@amlstore.it</a>.',
-            'Ja, jede Lizenz deckt 1 Nutzer auf bis zu 15 Geräten ab; für hohe Volumen oder ein individuelles Angebot schreiben Sie an <a href="mailto:info@amlstore.it">info@amlstore.it</a>.',
-            'Sí, cada licencia cubre 1 usuario en hasta 15 dispositivos; para volúmenes altos o un presupuesto a medida, escribe a <a href="mailto:info@amlstore.it">info@amlstore.it</a>.',
-            'Sim, cada licença cobre 1 utilizador em até 15 dispositivos; para volumes elevados ou um orçamento à medida, escreva para <a href="mailto:info@amlstore.it">info@amlstore.it</a>.',
-            'Ja, elke licentie dekt 1 gebruiker op tot 15 apparaten; voor grote volumes of een offerte op maat mail je naar <a href="mailto:info@amlstore.it">info@amlstore.it</a>.',
+            'Sì, ogni licenza copre 1 utente su fino a 15 dispositivi; per volumi elevati o un preventivo su misura scrivi a <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>.',
+            'Yes, each licence covers 1 user on up to 15 devices; for high volumes or a custom quote, email <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>.',
+            'Oui, chaque licence couvre 1 utilisateur sur jusqu\'à 15 appareils ; pour des volumes importants ou un devis sur mesure, écrivez à <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>.',
+            'Ja, jede Lizenz deckt 1 Nutzer auf bis zu 15 Geräten ab; für hohe Volumen oder ein individuelles Angebot schreiben Sie an <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>.',
+            'Sí, cada licencia cubre 1 usuario en hasta 15 dispositivos; para volúmenes altos o un presupuesto a medida, escribe a <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>.',
+            'Sim, cada licença cobre 1 utilizador em até 15 dispositivos; para volumes elevados ou um orçamento à medida, escreva para <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>.',
+            'Ja, elke licentie dekt 1 gebruiker op tot 15 apparaten; voor grote volumes of een offerte op maat mail je naar <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>.',
         ),
     },
     {
@@ -380,25 +380,25 @@ FAQ_ITEMS = [
                 "Necesito licencias para muchos puestos: ¿cómo funciona?", "Preciso de licenças para muitos postos: como funciona?",
                 "Ik heb licenties nodig voor veel werkplekken: hoe werkt dat?"),
         "a": _d(
-            'Scrivici a <a href="mailto:info@amlstore.it">info@amlstore.it</a> con il numero di postazioni e il piano che ti interessa: prepariamo un preventivo allineato alle offerte Microsoft per i volumi.',
-            'Email <a href="mailto:info@amlstore.it">info@amlstore.it</a> with the number of seats and the plan you\'re interested in: we\'ll prepare a quote aligned with Microsoft\'s volume offers.',
-            'Écrivez-nous à <a href="mailto:info@amlstore.it">info@amlstore.it</a> avec le nombre de postes et le plan qui vous intéresse : nous préparons un devis aligné sur les offres Microsoft pour les volumes.',
-            'Schreiben Sie uns an <a href="mailto:info@amlstore.it">info@amlstore.it</a> mit der Anzahl der Arbeitsplätze und dem gewünschten Plan: Wir erstellen ein Angebot passend zu den Microsoft-Volumenangeboten.',
-            'Escríbenos a <a href="mailto:info@amlstore.it">info@amlstore.it</a> con el número de puestos y el plan que te interesa: preparamos un presupuesto alineado con las ofertas de volumen de Microsoft.',
-            'Escreva-nos para <a href="mailto:info@amlstore.it">info@amlstore.it</a> com o número de postos e o plano que lhe interessa: preparamos um orçamento alinhado com as ofertas de volume da Microsoft.',
-            'Mail ons op <a href="mailto:info@amlstore.it">info@amlstore.it</a> met het aantal werkplekken en het gewenste plan: we maken een offerte op basis van de Microsoft-volumeaanbiedingen.',
+            'Scrivici a <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> con il numero di postazioni e il piano che ti interessa: prepariamo un preventivo allineato alle offerte Microsoft per i volumi.',
+            'Email <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> with the number of seats and the plan you\'re interested in: we\'ll prepare a quote aligned with Microsoft\'s volume offers.',
+            'Écrivez-nous à <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> avec le nombre de postes et le plan qui vous intéresse : nous préparons un devis aligné sur les offres Microsoft pour les volumes.',
+            'Schreiben Sie uns an <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> mit der Anzahl der Arbeitsplätze und dem gewünschten Plan: Wir erstellen ein Angebot passend zu den Microsoft-Volumenangeboten.',
+            'Escríbenos a <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> con el número de puestos y el plan que te interesa: preparamos un presupuesto alineado con las ofertas de volumen de Microsoft.',
+            'Escreva-nos para <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> com o número de postos e o plano que lhe interessa: preparamos um orçamento alinhado com as ofertas de volume da Microsoft.',
+            'Mail ons op <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> met het aantal werkplekken en het gewenste plan: we maken een offerte op basis van de Microsoft-volumeaanbiedingen.',
         ),
     },
 ]
 
 DISCLAIMER = _d(
-    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot e i relativi marchi sono di Microsoft Corporation. Contenuto informativo Aml Store: funzionalità, limiti e disponibilità seguono sempre il prodotto Microsoft acquistato.",
-    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot and related marks are property of Microsoft Corporation. Informational content by Aml Store: features, limits and availability always follow the Microsoft product purchased.",
-    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot et les marques associées appartiennent à Microsoft Corporation. Contenu informatif Aml Store : fonctionnalités, limites et disponibilité suivent toujours le produit Microsoft acheté.",
-    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot und die zugehörigen Marken sind Eigentum der Microsoft Corporation. Informativer Inhalt von Aml Store: Funktionen, Grenzen und Verfügbarkeit richten sich stets nach dem gekauften Microsoft-Produkt.",
-    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot y las marcas relacionadas son propiedad de Microsoft Corporation. Contenido informativo de Aml Store: funciones, límites y disponibilidad siguen siempre el producto Microsoft adquirido.",
-    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot e as marcas relacionadas são propriedade da Microsoft Corporation. Conteúdo informativo da Aml Store: funcionalidades, limites e disponibilidade seguem sempre o produto Microsoft adquirido.",
-    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot en de bijbehorende merken zijn eigendom van Microsoft Corporation. Informatieve inhoud van Aml Store: functies, limieten en beschikbaarheid volgen altijd het aangeschafte Microsoft-product.",
+    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot e i relativi marchi sono di Microsoft Corporation. Contenuto informativo Eurolicenze: funzionalità, limiti e disponibilità seguono sempre il prodotto Microsoft acquistato.",
+    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot and related marks are property of Microsoft Corporation. Informational content by Eurolicenze: features, limits and availability always follow the Microsoft product purchased.",
+    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot et les marques associées appartiennent à Microsoft Corporation. Contenu informatif Eurolicenze : fonctionnalités, limites et disponibilité suivent toujours le produit Microsoft acheté.",
+    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot und die zugehörigen Marken sind Eigentum der Microsoft Corporation. Informativer Inhalt von Eurolicenze: Funktionen, Grenzen und Verfügbarkeit richten sich stets nach dem gekauften Microsoft-Produkt.",
+    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot y las marcas relacionadas son propiedad de Microsoft Corporation. Contenido informativo de Eurolicenze: funciones, límites y disponibilidad siguen siempre el producto Microsoft adquirido.",
+    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot e as marcas relacionadas são propriedade da Microsoft Corporation. Conteúdo informativo da Eurolicenze: funcionalidades, limites e disponibilidade seguem sempre o produto Microsoft adquirido.",
+    "Microsoft, Microsoft 365, Office, Outlook, Teams, OneDrive, Copilot en de bijbehorende merken zijn eigendom van Microsoft Corporation. Informatieve inhoud van Eurolicenze: functies, limieten en beschikbaarheid volgen altijd het aangeschafte Microsoft-product.",
 )
 
 
@@ -497,7 +497,7 @@ def render(lang):
 {{
   "@context": "https://schema.org",
   "@graph": [
-    {{ "@type": "Organization", "@id": "https://eurolicenze.com/#organization", "name": "Aml Store", "url": "https://eurolicenze.com/", "aggregateRating": {{ "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "94", "bestRating": "5", "worstRating": "1" }} }},
+    {{ "@type": "Organization", "@id": "https://eurolicenze.com/#organization", "name": "Eurolicenze", "url": "https://eurolicenze.com/", "aggregateRating": {{ "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "94", "bestRating": "5", "worstRating": "1" }} }},
     {{
       "@type": "WebPage",
       "@id": "https://eurolicenze.com/{lang}/{slug}#webpage",
@@ -505,7 +505,7 @@ def render(lang):
       "description": "{SCHEMA_DESCRIPTION[lang]}",
       "url": "https://eurolicenze.com/{lang}/{slug}",
       "inLanguage": "{lang}",
-      "isPartOf": {{ "@type": "WebSite", "name": "Aml Store", "url": "https://eurolicenze.com/" }}
+      "isPartOf": {{ "@type": "WebSite", "name": "Eurolicenze", "url": "https://eurolicenze.com/" }}
     }},
     {{
       "@type": "BreadcrumbList",

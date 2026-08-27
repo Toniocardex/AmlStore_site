@@ -1,5 +1,5 @@
 /**
- * order.js — helper D1 per la gestione ordini Aml Store.
+ * order.js — helper D1 per la gestione ordini Eurolicenze.
  */
 
 import { now, safeParseJSON } from './utils.js';

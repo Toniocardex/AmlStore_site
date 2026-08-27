@@ -18,8 +18,8 @@ CONSULTATION_SLUG = {"it": "consulenza", "en": "consultation", "fr": "consultati
 COPY = {
     "it": {
         "skip": "Vai al contenuto principale",
-        "title": "Contatti — Aml Store",
-        "description": "Contatta Aml Store per assistenza su ordini e attivazione licenze via email, telefono o WhatsApp, dal lunedì al sabato, 08:00–19:00.",
+        "title": "Contatti — Eurolicenze",
+        "description": "Contatta Eurolicenze per assistenza su ordini e attivazione licenze via email, telefono o WhatsApp, dal lunedì al sabato, 08:00–19:00.",
         "home": "Home",
         "breadcrumb": "Contatti",
         "eyebrow": "Assistenza clienti",
@@ -35,7 +35,7 @@ COPY = {
         "wa_label": "WhatsApp",
         "wa_cta": "Apri la chat",
         "h_company": "Dati azienda",
-        "company_html": "<strong>Aml Store</strong>, marchio di Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italia<br>P.IVA 11461870963",
+        "company_html": "<strong>Eurolicenze</strong>, marchio di Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italia<br>P.IVA 11461870963",
         "h_hours": "Orari e lingua",
         "hours_row1_label": "Lunedì – Sabato",
         "hours_row1_value": "08:00 – 19:00",
@@ -47,8 +47,8 @@ COPY = {
     },
     "en": {
         "skip": "Skip to main content",
-        "title": "Contact — Aml Store",
-        "description": "Contact Aml Store for order and licence activation support by email, phone or WhatsApp, Monday to Saturday, 08:00–19:00 Italy time.",
+        "title": "Contact — Eurolicenze",
+        "description": "Contact Eurolicenze for order and licence activation support by email, phone or WhatsApp, Monday to Saturday, 08:00–19:00 Italy time.",
         "home": "Home",
         "breadcrumb": "Contact",
         "eyebrow": "Customer support",
@@ -64,7 +64,7 @@ COPY = {
         "wa_label": "WhatsApp",
         "wa_cta": "Open chat",
         "h_company": "Company details",
-        "company_html": "<strong>Aml Store</strong>, a brand of Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italy<br>VAT IT11461870963",
+        "company_html": "<strong>Eurolicenze</strong>, a brand of Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italy<br>VAT IT11461870963",
         "h_hours": "Hours & language",
         "hours_row1_label": "Monday – Saturday",
         "hours_row1_value": "08:00 – 19:00 (Italy time)",
@@ -76,8 +76,8 @@ COPY = {
     },
     "fr": {
         "skip": "Aller au contenu principal",
-        "title": "Contact — Aml Store",
-        "description": "Contactez Aml Store pour l'assistance commandes et activation de licences via email, téléphone ou WhatsApp, du lundi au samedi, 08:00–19:00 heure italienne.",
+        "title": "Contact — Eurolicenze",
+        "description": "Contactez Eurolicenze pour l'assistance commandes et activation de licences via email, téléphone ou WhatsApp, du lundi au samedi, 08:00–19:00 heure italienne.",
         "home": "Accueil",
         "breadcrumb": "Contact",
         "eyebrow": "Assistance client",
@@ -93,7 +93,7 @@ COPY = {
         "wa_label": "WhatsApp",
         "wa_cta": "Ouvrir la conversation",
         "h_company": "Informations société",
-        "company_html": "<strong>Aml Store</strong>, marque de Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italie<br>TVA IT11461870963",
+        "company_html": "<strong>Eurolicenze</strong>, marque de Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italie<br>TVA IT11461870963",
         "h_hours": "Horaires et langue",
         "hours_row1_label": "Lundi – Samedi",
         "hours_row1_value": "08:00 – 19:00 (heure italienne)",
@@ -105,8 +105,8 @@ COPY = {
     },
     "de": {
         "skip": "Zum Hauptinhalt springen",
-        "title": "Kontakt — Aml Store",
-        "description": "Kontaktieren Sie Aml Store zu Bestellungen und Lizenzaktivierung per E-Mail, Telefon oder WhatsApp, Montag bis Samstag, 08:00–19:00 Uhr italienischer Zeit.",
+        "title": "Kontakt — Eurolicenze",
+        "description": "Kontaktieren Sie Eurolicenze zu Bestellungen und Lizenzaktivierung per E-Mail, Telefon oder WhatsApp, Montag bis Samstag, 08:00–19:00 Uhr italienischer Zeit.",
         "home": "Startseite",
         "breadcrumb": "Kontakt",
         "eyebrow": "Kundensupport",
@@ -122,7 +122,7 @@ COPY = {
         "wa_label": "WhatsApp",
         "wa_cta": "Chat öffnen",
         "h_company": "Unternehmensdaten",
-        "company_html": "<strong>Aml Store</strong>, eine Marke von Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italien<br>USt-IdNr. IT11461870963",
+        "company_html": "<strong>Eurolicenze</strong>, eine Marke von Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italien<br>USt-IdNr. IT11461870963",
         "h_hours": "Öffnungszeiten & Sprache",
         "hours_row1_label": "Montag – Samstag",
         "hours_row1_value": "08:00 – 19:00 (italienische Zeit)",
@@ -134,8 +134,8 @@ COPY = {
     },
     "es": {
         "skip": "Ir al contenido principal",
-        "title": "Contacto — Aml Store",
-        "description": "Contacta con Aml Store para asistencia de pedidos y activación de licencias por email, teléfono o WhatsApp, de lunes a sábado, 08:00–19:00 hora de Italia.",
+        "title": "Contacto — Eurolicenze",
+        "description": "Contacta con Eurolicenze para asistencia de pedidos y activación de licencias por email, teléfono o WhatsApp, de lunes a sábado, 08:00–19:00 hora de Italia.",
         "home": "Inicio",
         "breadcrumb": "Contacto",
         "eyebrow": "Atención al cliente",
@@ -151,7 +151,7 @@ COPY = {
         "wa_label": "WhatsApp",
         "wa_cta": "Abrir chat",
         "h_company": "Datos de la empresa",
-        "company_html": "<strong>Aml Store</strong>, marca de Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italia<br>NIF-IVA IT11461870963",
+        "company_html": "<strong>Eurolicenze</strong>, marca de Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italia<br>NIF-IVA IT11461870963",
         "h_hours": "Horario e idioma",
         "hours_row1_label": "Lunes – Sábado",
         "hours_row1_value": "08:00 – 19:00 (hora de Italia)",
@@ -163,8 +163,8 @@ COPY = {
     },
     "pt": {
         "skip": "Ir para o conteúdo principal",
-        "title": "Contactos — Aml Store",
-        "description": "Contacta a Aml Store para assistência sobre encomendas e ativação de licenças por email, telefone ou WhatsApp, de segunda a sábado, 08:00–19:00 hora de Itália.",
+        "title": "Contactos — Eurolicenze",
+        "description": "Contacta a Eurolicenze para assistência sobre encomendas e ativação de licenças por email, telefone ou WhatsApp, de segunda a sábado, 08:00–19:00 hora de Itália.",
         "home": "Início",
         "breadcrumb": "Contactos",
         "eyebrow": "Apoio ao cliente",
@@ -180,7 +180,7 @@ COPY = {
         "wa_label": "WhatsApp",
         "wa_cta": "Abrir conversa",
         "h_company": "Dados da empresa",
-        "company_html": "<strong>Aml Store</strong>, marca de Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Itália<br>NIF IT11461870963",
+        "company_html": "<strong>Eurolicenze</strong>, marca de Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Itália<br>NIF IT11461870963",
         "h_hours": "Horário e idioma",
         "hours_row1_label": "Segunda – Sábado",
         "hours_row1_value": "08:00 – 19:00 (hora de Itália)",
@@ -192,8 +192,8 @@ COPY = {
     },
     "nl": {
         "skip": "Naar de hoofdinhoud",
-        "title": "Contact — Aml Store",
-        "description": "Neem contact op met Aml Store voor hulp bij bestellingen en licentieactivering via e-mail, telefoon of WhatsApp, maandag tot en met zaterdag, 08:00–19:00 Italiaanse tijd.",
+        "title": "Contact — Eurolicenze",
+        "description": "Neem contact op met Eurolicenze voor hulp bij bestellingen en licentieactivering via e-mail, telefoon of WhatsApp, maandag tot en met zaterdag, 08:00–19:00 Italiaanse tijd.",
         "home": "Home",
         "breadcrumb": "Contact",
         "eyebrow": "Klantenservice",
@@ -209,7 +209,7 @@ COPY = {
         "wa_label": "WhatsApp",
         "wa_cta": "Chat openen",
         "h_company": "Bedrijfsgegevens",
-        "company_html": "<strong>Aml Store</strong>, merk van Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italië<br>BTW IT11461870963",
+        "company_html": "<strong>Eurolicenze</strong>, merk van Licensoft di Cardelli Antonino<br>Via Trento 5/A, 20015 Parabiago (MI), Italië<br>BTW IT11461870963",
         "h_hours": "Openingstijden en taal",
         "hours_row1_label": "Maandag – zaterdag",
         "hours_row1_value": "08:00 – 19:00 (Italiaanse tijd)",
@@ -240,20 +240,20 @@ def page(lang: str) -> str:
             {
                 "@type": "Organization",
                 "@id": "https://eurolicenze.com/#organization",
-                "name": "Aml Store",
+                "name": "Eurolicenze",
                 "url": "https://eurolicenze.com/",
                 "logo": {
                     "@type": "ImageObject",
                     "url": "https://eurolicenze.com/logo/logo-header-400.webp",
                 },
-                "email": "Info@amlstore.it",
+                "email": "Desk@eurolicenze.com",
                 "telephone": "+39-392-558-0413",
                 "vatID": "IT11461870963",
                 "contactPoint": [
                     {
                         "@type": "ContactPoint",
                         "contactType": "customer support",
-                        "email": "Info@amlstore.it",
+                        "email": "Desk@eurolicenze.com",
                         "telephone": "+39-392-558-0413",
                         "availableLanguage": ["it", "en"],
                         "hoursAvailable": {
@@ -278,7 +278,7 @@ def page(lang: str) -> str:
                 "@type": "WebSite",
                 "@id": "https://eurolicenze.com/#website",
                 "url": "https://eurolicenze.com/",
-                "name": "Aml Store",
+                "name": "Eurolicenze",
                 "inLanguage": ["it", "en", "fr", "de", "es", "pt", "nl"],
                 "publisher": {"@id": "https://eurolicenze.com/#organization"},
             },
@@ -315,7 +315,7 @@ def page(lang: str) -> str:
     <link rel="canonical" href="{url}">
 
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Aml Store">
+    <meta property="og:site_name" content="Eurolicenze">
     <meta property="og:title" content="{t['title']}">
     <meta property="og:description" content="{t['description']}">
     <meta property="og:url" content="{url}">
@@ -359,8 +359,8 @@ def page(lang: str) -> str:
                 <div class="contacts-channel-card">
                     <span class="contacts-channel-card__icon">{ICON_EMAIL}</span>
                     <span class="contacts-channel-card__label">{t['email_label']}</span>
-                    <a class="contacts-channel-card__value" href="mailto:Info@amlstore.it">Info@amlstore.it</a>
-                    <a class="contacts-channel-card__hint" href="mailto:Info@amlstore.it">{t['email_cta']}</a>
+                    <a class="contacts-channel-card__value" href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>
+                    <a class="contacts-channel-card__hint" href="mailto:Desk@eurolicenze.com">{t['email_cta']}</a>
                 </div>
                 <div class="contacts-channel-card">
                     <span class="contacts-channel-card__icon">{ICON_PHONE}</span>

@@ -20,8 +20,8 @@ PT = [
     ),
     ("Microsoft 365 Family — 12 mesi", "Microsoft 365 Family — 12 meses"),
     (
-        "L'email di consegna parte dopo la conferma del pagamento, di norma entro 5–15 minuti; in rari casi servono alcuni minuti in più per le verifiche del pagamento. Se dopo 30 minuti non hai ricevuto nulla, controlla anche spam e posta indesiderata e scrivi a Info@amlstore.it indicando prodotto acquistato ed email usata per l'ordine.",
-        "O email de entrega é enviado após a confirmação do pagamento, normalmente dentro de 5–15 minutos; em casos raros são necessários mais alguns minutos para as verificações do pagamento. Se depois de 30 minutos não receberes nada, verifica também o spam/lixo eletrónico e escreve para Info@amlstore.it indicando o produto comprado e o email usado na encomenda.",
+        "L'email di consegna parte dopo la conferma del pagamento, di norma entro 5–15 minuti; in rari casi servono alcuni minuti in più per le verifiche del pagamento. Se dopo 30 minuti non hai ricevuto nulla, controlla anche spam e posta indesiderata e scrivi a Desk@eurolicenze.com indicando prodotto acquistato ed email usata per l'ordine.",
+        "O email de entrega é enviado após a confirmação do pagamento, normalmente dentro de 5–15 minutos; em casos raros são necessários mais alguns minutos para as verificações do pagamento. Se depois de 30 minutos não receberes nada, verifica também o spam/lixo eletrónico e escreve para Desk@eurolicenze.com indicando o produto comprado e o email usado na encomenda.",
     ),
     (
         "Ricevi la product key di Microsoft 365 Family e le istruzioni per riscattarla sui portali ufficiali Microsoft. La consegna è solo digitale: non viene spedito alcun supporto fisico e non ci sono costi di spedizione.",
@@ -32,8 +32,8 @@ PT = [
         "No checkout estão disponíveis cartão, PayPal e carteiras digitais como Apple Pay e Google Pay quando ativadas. O processamento do pagamento é feito de forma segura através da Stripe.",
     ),
     (
-        "Sì. Al checkout scegli il profilo Azienda e inserisci partita IVA e Codice SDI oppure PEC: la fattura elettronica viene emessa su quei dati. Se ti serve dopo l'ordine, scrivi a Info@amlstore.it indicando l'email usata per l'ordine e il numero d'ordine.",
-        "Sim. No checkout escolhe o perfil Empresa e introduz o NIF e os dados de faturação: a fatura eletrónica é emitida com esses dados. Se precisares depois da encomenda, escreve para Info@amlstore.it indicando o email usado na encomenda e o número de encomenda.",
+        "Sì. Al checkout scegli il profilo Azienda e inserisci partita IVA e Codice SDI oppure PEC: la fattura elettronica viene emessa su quei dati. Se ti serve dopo l'ordine, scrivi a Desk@eurolicenze.com indicando l'email usata per l'ordine e il numero d'ordine.",
+        "Sim. No checkout escolhe o perfil Empresa e introduz o NIF e os dados de faturação: a fatura eletrónica é emitida com esses dados. Se precisares depois da encomenda, escreve para Desk@eurolicenze.com indicando o email usado na encomenda e o número de encomenda.",
     ),
     (
         "Vai su setup.office.com/Home, accedi con il tuo account Microsoft, inserisci il codice ricevuto via email e segui la procedura guidata. Al termine installa le app da office.com.",
@@ -64,16 +64,16 @@ PT = [
         "O Family foi pensado para partilhar o plano com o teu grupo família Microsoft (até 6 pessoas), cada uma com conta e espaço OneDrive distintos. O Personal cobre um único utilizador com 1 TB, segundo as condições Microsoft atualizadas.",
     ),
     (
-        "No. Il codice attiva Microsoft 365 Family per 12 mesi con un pagamento una tantum: AML Store non addebita nulla automaticamente alla scadenza. Eventuali opzioni di rinnovo si gestiscono separatamente, direttamente nell'account Microsoft.",
-        "Não. O código ativa o Microsoft 365 Family por 12 meses com um pagamento único: a AML Store não cobra nada automaticamente na expiração. Eventuais opções de renovação são geridas separadamente, diretamente na conta Microsoft.",
+        "No. Il codice attiva Microsoft 365 Family per 12 mesi con un pagamento una tantum: Eurolicenze non addebita nulla automaticamente alla scadenza. Eventuali opzioni di rinnovo si gestiscono separatamente, direttamente nell'account Microsoft.",
+        "Não. O código ativa o Microsoft 365 Family por 12 meses com um pagamento único: a Eurolicenze não cobra nada automaticamente na expiração. Eventuais opções de renovação são geridas separadamente, diretamente na conta Microsoft.",
     ),
     (
         "Sì, puoi riscattarlo sullo stesso account che ha già Microsoft 365 Family attivo. Il modo in cui viene applicato (estensione della durata attuale o avvio di un nuovo periodo) segue le regole Microsoft mostrate al momento del riscatto su setup.office.com, non è qualcosa che decidiamo noi come rivenditore.",
         "Sim, podes resgatá-lo na mesma conta que já tem o Microsoft 365 Family ativo. A forma como é aplicado (extensão da duração atual ou início de um novo período) segue as regras Microsoft mostradas no momento do resgate em setup.office.com; não é algo que decidamos nós como revendedor.",
     ),
     (
-        "Scrivici indicando numero d'ordine ed eventuale messaggio di errore. Verifichiamo il caso e, se viene confermato un difetto imputabile a noi o al fornitore della chiave, proponiamo sostituzione o rimborso nei tempi usuali di elaborazione. Assistenza: Info@amlstore.it — +39 392 558 0413.",
-        "Escreve-nos indicando o número de encomenda e a eventual mensagem de erro. Analisamos o caso e, se se confirmar um defeito imputável a nós ou ao fornecedor da chave, propomos substituição ou reembolso nos prazos habituais de processamento. Assistência: Info@amlstore.it — +39 392 558 0413.",
+        "Scrivici indicando numero d'ordine ed eventuale messaggio di errore. Verifichiamo il caso e, se viene confermato un difetto imputabile a noi o al fornitore della chiave, proponiamo sostituzione o rimborso nei tempi usuali di elaborazione. Assistenza: Desk@eurolicenze.com — +39 392 558 0413.",
+        "Escreve-nos indicando o número de encomenda e a eventual mensagem de erro. Analisamos o caso e, se se confirmar um defeito imputável a nós ou ao fornecedor da chave, propomos substituição ou reembolso nos prazos habituais de processamento. Assistência: Desk@eurolicenze.com — +39 392 558 0413.",
     ),
     # UI chrome
     ("Vai al contenuto principale", "Ir para o conteúdo principal"),
@@ -97,7 +97,7 @@ PT = [
     ("1 TB di OneDrive a persona, file e impostazioni separati", "1 TB de OneDrive por pessoa, ficheiros e configurações separados"),
     ("App desktop sempre aggiornate su PC, Mac, tablet e telefono", "Apps de secretária sempre atualizadas em PC, Mac, tablet e telemóvel"),
     ("Copilot per il titolare <em>— non condiviso con gli altri membri</em>", "Copilot para o titular <em>— não partilhado com os restantes membros</em>"),
-    ("Prezzo AML Store", "Preço na AML Store"),
+    ("Prezzo Eurolicenze", "Preço na Eurolicenze"),
     ("Prezzi", "Preços"),
     ("Prezzo scontato 104,95 euro", "Preço com desconto 104,95 euros"),
     ("Prezzo originale 129 euro", "Preço original 129 euros"),
@@ -140,7 +140,7 @@ PT = [
     ("OneDrive a persona", "OneDrive por pessoa"),
     ("Fino a 6 TB complessivi sul piano, non condivisi automaticamente.", "Até 6 TB no total no plano, não partilhados automaticamente."),
     ("Durata", "Duração"),
-    ("Pagamento una tantum su AML Store, senza addebiti ricorrenti da parte nostra.", "Pagamento único na AML Store, sem cobranças recorrentes da nossa parte."),
+    ("Pagamento una tantum su Eurolicenze, senza addebiti ricorrenti da parte nostra.", "Pagamento único na Eurolicenze, sem cobranças recorrentes da nossa parte."),
     ("Dispositivi per persona", "Dispositivos por pessoa"),
     ("Accesso contemporaneo su PC, Mac, tablet e telefono, secondo le regole Microsoft.", "Acesso simultâneo em PC, Mac, tablet e telemóvel, segundo as regras Microsoft."),
     ("Specifiche del prodotto", "Especificações do produto"),
@@ -216,7 +216,7 @@ PT = [
     ("1 TB a persona", "1 TB por pessoa"),
     ("Account separati per ogni utente", "Conta separada por utilizador"),
     ("Non previsto", "Não aplicável"),
-    ("Prezzo su AML Store", "Preço na AML Store"),
+    ("Prezzo su Eurolicenze", "Preço na Eurolicenze"),
     ("Ideale per", "Ideal para"),
     ("Chi usa Office da solo", "Quem usa o Office a solo"),
     ("Due o più persone", "Duas ou mais pessoas"),
@@ -251,7 +251,7 @@ PT = [
     ("Leggi tutte le recensioni", "Lê todas as avaliações"),
     ("Acquista con maggiore tranquillità", "Compra com mais tranquilidade"),
     ("Rivenditore europeo", "Distribuidor europeu"),
-    ("AML Store ha sede legale in Italia", "A AML Store tem sede legal em Itália"),
+    ("Eurolicenze ha sede legale in Italia", "A Eurolicenze tem sede legal em Itália"),
     ("Fattura disponibile", "Fatura disponível"),
     ("Documentazione per privati e aziende", "Documentação para particulares e empresas"),
     ("Supporto scritto", "Apoio por escrito"),
@@ -266,23 +266,23 @@ PT = [
         "O email de entrega é enviado após a confirmação do pagamento, normalmente dentro de 5–15 minutos; em casos raros são necessários mais alguns minutos para as verificações do pagamento.",
     ),
     (
-        'Se dopo <strong>30 minuti</strong> non hai ricevuto nulla, controlla anche spam e posta indesiderata e scrivi a <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> indicando prodotto acquistato ed email usata per l\'ordine.',
-        'Se depois de <strong>30 minutos</strong> não receberes nada, verifica também o spam/lixo eletrónico e escreve para <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> indicando o produto comprado e o email usado na encomenda.',
+        'Se dopo <strong>30 minuti</strong> non hai ricevuto nulla, controlla anche spam e posta indesiderata e scrivi a <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> indicando prodotto acquistato ed email usata per l\'ordine.',
+        'Se depois de <strong>30 minutos</strong> não receberes nada, verifica também o spam/lixo eletrónico e escreve para <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> indicando o produto comprado e o email usado na encomenda.',
     ),
     # JSON-LD FAQPage text fields escape the href quotes with backslashes and
     # this particular answer keeps a "2-15" typo instead of "5-15": needs its
     # own pair, distinct from the visible-body FAQ answer above.
     (
-        'L\'email di consegna parte dopo la conferma del pagamento, di norma entro 2\u201315 minuti; in rari casi servono alcuni minuti in più per le verifiche del pagamento. Se dopo <strong>30 minuti</strong> non hai ricevuto nulla, controlla anche spam e posta indesiderata e scrivi a <a href=\\"mailto:Info@amlstore.it\\">Info@amlstore.it</a> indicando prodotto acquistato ed email usata per l\'ordine.',
-        'O email de entrega é enviado após a confirmação do pagamento, normalmente dentro de 2\u201315 minutos; em casos raros são necessários mais alguns minutos para as verificações do pagamento. Se depois de <strong>30 minutos</strong> não receberes nada, verifica também o spam/lixo eletrónico e escreve para <a href=\\"mailto:Info@amlstore.it\\">Info@amlstore.it</a> indicando o produto comprado e o email usado na encomenda.',
+        'L\'email di consegna parte dopo la conferma del pagamento, di norma entro 2\u201315 minuti; in rari casi servono alcuni minuti in più per le verifiche del pagamento. Se dopo <strong>30 minuti</strong> non hai ricevuto nulla, controlla anche spam e posta indesiderata e scrivi a <a href=\\"mailto:Desk@eurolicenze.com\\">Desk@eurolicenze.com</a> indicando prodotto acquistato ed email usata per l\'ordine.',
+        'O email de entrega é enviado após a confirmação do pagamento, normalmente dentro de 2\u201315 minutos; em casos raros são necessários mais alguns minutos para as verificações do pagamento. Se depois de <strong>30 minutos</strong> não receberes nada, verifica também o spam/lixo eletrónico e escreve para <a href=\\"mailto:Desk@eurolicenze.com\\">Desk@eurolicenze.com</a> indicando o produto comprado e o email usado na encomenda.',
     ),
     (
-        'Se ti serve dopo l\'ordine, scrivi a <a href=\\"mailto:Info@amlstore.it\\">Info@amlstore.it</a> indicando l\'email usata per l\'ordine e il numero d\'ordine.',
-        'Se precisares depois da encomenda, escreve para <a href=\\"mailto:Info@amlstore.it\\">Info@amlstore.it</a> indicando o email usado na encomenda e o número de encomenda.',
+        'Se ti serve dopo l\'ordine, scrivi a <a href=\\"mailto:Desk@eurolicenze.com\\">Desk@eurolicenze.com</a> indicando l\'email usata per l\'ordine e il numero d\'ordine.',
+        'Se precisares depois da encomenda, escreve para <a href=\\"mailto:Desk@eurolicenze.com\\">Desk@eurolicenze.com</a> indicando o email usado na encomenda e o número de encomenda.',
     ),
     (
-        'Assistenza: <a href=\\"mailto:Info@amlstore.it\\">Info@amlstore.it</a> — +39 392 558 0413.',
-        'Assistência: <a href=\\"mailto:Info@amlstore.it\\">Info@amlstore.it</a> — +39 392 558 0413.',
+        'Assistenza: <a href=\\"mailto:Desk@eurolicenze.com\\">Desk@eurolicenze.com</a> — +39 392 558 0413.',
+        'Assistência: <a href=\\"mailto:Desk@eurolicenze.com\\">Desk@eurolicenze.com</a> — +39 392 558 0413.',
     ),
     ("Posso riscattare il codice su un account che ha già Microsoft 365 attivo?", "Posso resgatar o código numa conta que já tem o Microsoft 365 ativo?"),
     (
@@ -309,8 +309,8 @@ PT = [
         "Sim. No checkout escolhe o perfil <strong>Empresa</strong> e introduz o NIF e os dados de faturação: a fatura eletrónica é emitida com esses dados.",
     ),
     (
-        'Se ti serve dopo l\'ordine, scrivi a <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> indicando l\'email usata per l\'ordine e il numero d\'ordine.',
-        'Se precisares depois da encomenda, escreve para <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> indicando o email usado na encomenda e o número de encomenda.',
+        'Se ti serve dopo l\'ordine, scrivi a <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> indicando l\'email usata per l\'ordine e il numero d\'ordine.',
+        'Se precisares depois da encomenda, escreve para <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> indicando o email usado na encomenda e o número de encomenda.',
     ),
     ("Attivazione e account", "Ativação e conta"),
     ("Come si attiva Microsoft 365 Family dopo l'acquisto?", "Como se ativa o Microsoft 365 Family depois da compra?"),
@@ -353,8 +353,8 @@ PT = [
         "Escreve-nos indicando o número de encomenda e a eventual mensagem de erro. Analisamos o caso e, se se confirmar um defeito imputável a nós ou ao fornecedor da chave, propomos substituição ou reembolso nos prazos habituais de processamento.",
     ),
     (
-        'Assistenza: <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> — +39 392 558 0413.',
-        'Assistência: <a href="mailto:Info@amlstore.it">Info@amlstore.it</a> — +39 392 558 0413.',
+        'Assistenza: <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — +39 392 558 0413.',
+        'Assistência: <a href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a> — +39 392 558 0413.',
     ),
     ("Requisiti di sistema", "Requisitos do sistema"),
     ("Compatibilità e requisiti tecnici", "Compatibilidade e requisitos técnicos"),

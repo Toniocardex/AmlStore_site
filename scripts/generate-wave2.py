@@ -268,13 +268,13 @@ def build_page(lang, prod):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{short} — Aml Store</title>
+    <title>{short} — Eurolicenze</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:type" content="product">
-    <meta property="og:site_name" content="Aml Store">
-    <meta property="og:title" content="{short} — Aml Store">
+    <meta property="og:site_name" content="Eurolicenze">
+    <meta property="og:title" content="{short} — Eurolicenze">
     <meta property="og:description" content="{desc}">
     <meta property="og:url" content="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
@@ -376,7 +376,7 @@ def build_suite_office(lang):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{labels['suite_title']} | Aml Store</title>
+    <title>{labels['suite_title']} | Eurolicenze</title>
     <meta name="description" content="{meta_desc}">
     <meta name="robots" content="index, follow">
     <script src="../js/consent-init.js"></script>
@@ -385,7 +385,7 @@ def build_suite_office(lang):
     <link rel="canonical" href="https://eurolicenze.com/{lang}/suite-office.html">
 {hreflang_block("suite-office")}
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{labels['suite_title']} | Aml Store">
+    <meta property="og:title" content="{labels['suite_title']} | Eurolicenze">
     <meta property="og:description" content="{meta_desc}">
     <meta property="og:url" content="https://eurolicenze.com/{lang}/suite-office.html">
     <meta property="og:locale" content="{LOCALE[lang]}">
@@ -395,7 +395,7 @@ def build_suite_office(lang):
     <link rel="stylesheet" href="../css/home.css">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
-    {{"@context":"https://schema.org","@type":"CollectionPage","name":"{labels['suite_title']}","description":"{meta_desc}","url":"https://eurolicenze.com/{lang}/suite-office.html","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://eurolicenze.com/"}}}}
+    {{"@context":"https://schema.org","@type":"CollectionPage","name":"{labels['suite_title']}","description":"{meta_desc}","url":"https://eurolicenze.com/{lang}/suite-office.html","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Eurolicenze","url":"https://eurolicenze.com/"}}}}
     </script>
 </head>
 <body>

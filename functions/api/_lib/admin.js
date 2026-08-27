@@ -1,5 +1,5 @@
 /**
- * admin.js — helper per il pannello amministrativo Aml Store.
+ * admin.js — helper per il pannello amministrativo Eurolicenze.
  *
  * Esporta:
  *   verifyAccessJwt(request, env)          — verifica JWT Cloudflare Access (RS256)

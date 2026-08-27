@@ -19,26 +19,26 @@ ES_PT = [
         "Antivírus e software original com entrega digital, ativação em portais oficiais, fatura e assistência humana.",
     ),
     (
-        "Antivirus original y licencias digitales | Aml Store",
-        "Antivírus original e licenças digitais | Aml Store",
+        "Antivirus original y licencias digitales | Eurolicenze",
+        "Antivírus original e licenças digitais | Eurolicenze",
     ),
     (
         "Antivirus y suscripciones digitales originales. Activación en portales oficiales, asistencia humana, factura disponible.",
         "Antivírus e subscrições digitais originais. Ativação em portais oficiais, assistência humana, fatura disponível.",
     ),
     (
-        "La página que buscas no existe o se ha movido. Busca un producto, explora las categorías o vuelve a la página de inicio de Aml Store.",
-        "A página que procura não existe ou foi movida. Pesquise um produto, explore as categorias ou volte à página inicial da Aml Store.",
+        "La página que buscas no existe o se ha movido. Busca un producto, explora las categorías o vuelve a la página de inicio de Eurolicenze.",
+        "A página que procura não existe ou foi movida. Pesquise um produto, explore as categorias ou volte à página inicial da Eurolicenze.",
     ),
     (
-        "Microsoft 365: Office, OneDrive, seguridad y Copilot en una suite que evoluciona. Licencias digitales para casa, equipos y volumen — encuentra tu plan en Aml Store.",
-        "Microsoft 365: Office, OneDrive, segurança e Copilot numa suite em evolução. Licenças digitais para casa, equipas e volume — encontre o seu plano na Aml Store.",
+        "Microsoft 365: Office, OneDrive, seguridad y Copilot en una suite que evoluciona. Licencias digitales para casa, equipos y volumen — encuentra tu plan en Eurolicenze.",
+        "Microsoft 365: Office, OneDrive, segurança e Copilot numa suite em evolução. Licenças digitais para casa, equipas e volume — encontre o seu plano na Eurolicenze.",
     ),
     (
-        "Crea, colabora y protege tu trabajo con Microsoft 365. Licencias digitales originales en Aml Store.",
-        "Crie, colabore e proteja o seu trabalho com Microsoft 365. Licenças digitais originais na Aml Store.",
+        "Crea, colabora y protege tu trabajo con Microsoft 365. Licencias digitales originales en Eurolicenze.",
+        "Crie, colabore e proteja o seu trabalho com Microsoft 365. Licenças digitais originais na Eurolicenze.",
     ),
-    ("Página no encontrada — Aml Store", "Página não encontrada — Aml Store"),
+    ("Página no encontrada — Eurolicenze", "Página não encontrada — Eurolicenze"),
     ("Ir al contenido principal", "Ir para o conteúdo principal"),
     ("Protección original", "Proteção original"),
     ("entrega en 2–15 minutos.", "entrega em 2–15 minutos."),
@@ -112,7 +112,7 @@ ES_PT = [
     ("Entre los más pedidos", "Entre os mais pedidos"),
     ("¿No encuentras lo que buscas? Escribe a", "Não encontra o que procura? Escreva para"),
     ("y te indicaremos la página correcta.", "e indicamos-lhe a página correta."),
-    ("Soluciones Microsoft 365 | Aml Store", "Soluções Microsoft 365 | Aml Store"),
+    ("Soluciones Microsoft 365 | Eurolicenze", "Soluções Microsoft 365 | Eurolicenze"),
     ("Tu trabajo,<br>", "O seu trabalho,<br>"),
     ("más rápido con IA.", "mais rápido com IA."),
     ("Una suscripción para crear, compartir y proteger: las apps Office que ya conoces, OneDrive en la nube y Copilot donde tu plan Microsoft lo incluye — menos herramientas que gestionar, más resultados.", "Uma subscrição para criar, partilhar e proteger: as apps Office que já conhece, OneDrive na nuvem e Copilot onde o seu plano Microsoft o inclui — menos ferramentas para gerir, mais resultados."),
@@ -189,24 +189,24 @@ ES_PT = [
         "Recebe um email de entrega digital com o necessário para usar a licença (normalmente um código e/ou instruções práticas, além de referências úteis para comprovar a compra, conforme o conteúdo real da mensagem enviada). A entrega é apenas digital: conserve o email e verifique também o spam/correio indesejado se não vir nada na caixa de entrada.",
     ),
     (
-        "Por lo general, el correo llega justo después de confirmar el pago; en casos puntuales pueden necesitarse unos minutos más por verificaciones del pago. Si en 30 minutos aún no has recibido nada, revisa spam/correo no deseado y escribe a Info@amlstore.it con el producto comprado y el correo usado en el pedido, para que podamos comprobar el envío.",
-        "Em regra, o email chega logo após a confirmação do pagamento; em casos pontuais podem ser precisos alguns minutos extra para verificações. Se em 30 minutos ainda não tiver recebido nada, verifique o spam/correio indesejado e escreva para Info@amlstore.it com o produto comprado e o email usado na encomenda, para verificarmos o envio.",
+        "Por lo general, el correo llega justo después de confirmar el pago; en casos puntuales pueden necesitarse unos minutos más por verificaciones del pago. Si en 30 minutos aún no has recibido nada, revisa spam/correo no deseado y escribe a Desk@eurolicenze.com con el producto comprado y el correo usado en el pedido, para que podamos comprobar el envío.",
+        "Em regra, o email chega logo após a confirmação do pagamento; em casos pontuais podem ser precisos alguns minutos extra para verificações. Se em 30 minutos ainda não tiver recebido nada, verifique o spam/correio indesejado e escreva para Desk@eurolicenze.com com o produto comprado e o email usado na encomenda, para verificarmos o envio.",
     ),
     (
         "Elige el producto, completa el pedido y el pago en el checkout con los métodos disponibles — tarjeta, PayPal y monederos digitales (Apple Pay, Google Pay, cuando estén activados). El procesamiento se realiza de forma segura con Stripe. Tras confirmar el pago recibes la entrega por correo; para usar la licencia sigue el correo y la ficha de producto en nuestro sitio, donde encontrarás referencias coherentes con ese título.",
         "Escolha o produto, conclua a encomenda e o pagamento no checkout com os métodos disponíveis — cartão, PayPal e carteiras digitais (Apple Pay, Google Pay, quando ativados). O processamento é feito de forma segura com o Stripe. Após confirmar o pagamento recebe a entrega por email; para usar a licença siga o email e a ficha de produto no nosso sítio, onde encontrará referências coerentes com esse título.",
     ),
     (
-        "Vendemos licencias digitales descritas en las fichas de producto, con precios claros y condiciones consultables en los Términos y condiciones y la Política de privacidad antes de comprar. Si quieres una referencia externa, puedes leer reseñas públicas en Trustpilot (https://it.trustpilot.com/review/aml-store.com). Para dudas operativas, escribe a Info@amlstore.it.",
-        "Vendemos licenças digitais descritas nas fichas de produto, com preços claros e condições consultáveis nos Termos e condições e na Política de privacidade antes de comprar. Se quiser uma referência externa, pode ler avaliações públicas no Trustpilot (https://it.trustpilot.com/review/aml-store.com). Para dúvidas operacionais, escreva para Info@amlstore.it.",
+        "Vendemos licencias digitales descritas en las fichas de producto, con precios claros y condiciones consultables en los Términos y condiciones y la Política de privacidad antes de comprar. Si quieres una referencia externa, puedes leer reseñas públicas en Trustpilot (https://it.trustpilot.com/review/aml-store.com). Para dudas operativas, escribe a Desk@eurolicenze.com.",
+        "Vendemos licenças digitais descritas nas fichas de produto, com preços claros e condições consultáveis nos Termos e condições e na Política de privacidade antes de comprar. Se quiser uma referência externa, pode ler avaliações públicas no Trustpilot (https://it.trustpilot.com/review/aml-store.com). Para dúvidas operacionais, escreva para Desk@eurolicenze.com.",
     ),
     (
-        "La activación y la instalación se realizan en los sitios y portales oficiales del fabricante, según las reglas de ese producto. Después de la compra usa las instrucciones del correo y, para el detalle paso a paso, la ficha de producto en nuestro sitio. Si algo no funciona, escribe a Info@amlstore.it con el producto y el correo del pedido.",
-        "A ativação e a instalação realizam-se nos sítios e portais oficiais do fabricante, segundo as regras desse produto. Após a compra use as instruções do email e, para o detalhe passo a passo, a ficha de produto no nosso sítio. Se algo não funcionar, escreva para Info@amlstore.it com o produto e o email da encomenda.",
+        "La activación y la instalación se realizan en los sitios y portales oficiales del fabricante, según las reglas de ese producto. Después de la compra usa las instrucciones del correo y, para el detalle paso a paso, la ficha de producto en nuestro sitio. Si algo no funciona, escribe a Desk@eurolicenze.com con el producto y el correo del pedido.",
+        "A ativação e a instalação realizam-se nos sítios e portais oficiais do fabricante, segundo as regras desse produto. Após a compra use as instruções do email e, para o detalhe passo a passo, a ficha de produto no nosso sítio. Se algo não funcionar, escreva para Desk@eurolicenze.com com o produto e o email da encomenda.",
     ),
     (
-        "Escribe a Info@amlstore.it: es el canal principal indicado también en el pie de página del sitio. Incluye producto, correo usado en el pedido y una breve descripción del problema; para privacidad, condiciones y devoluciones usa los enlaces del pie (Política de privacidad, Términos y condiciones, Devoluciones y reembolsos).",
-        "Escreva para Info@amlstore.it: é o canal principal indicado também no rodapé do sítio. Inclua produto, email usado na encomenda e uma breve descrição do problema; para privacidade, condições e devoluções use as ligações do rodapé (Política de privacidade, Termos e condições, Devoluções e reembolsos).",
+        "Escribe a Desk@eurolicenze.com: es el canal principal indicado también en el pie de página del sitio. Incluye producto, correo usado en el pedido y una breve descripción del problema; para privacidad, condiciones y devoluciones usa los enlaces del pie (Política de privacidad, Términos y condiciones, Devoluciones y reembolsos).",
+        "Escreva para Desk@eurolicenze.com: é o canal principal indicado também no rodapé do sítio. Inclua produto, email usado na encomenda e uma breve descrição do problema; para privacidade, condições e devoluções use as ligações do rodapé (Política de privacidade, Termos e condições, Devoluções e reembolsos).",
     ),
 ]
 

@@ -135,7 +135,7 @@ def js_string(s):
 def write_js(entries):
     lines = [
         "/**",
-        " * catalog.js — listino autoritativo Aml Store.",
+        " * catalog.js — listino autoritativo Eurolicenze.",
         " * Generato da scripts/build-catalog.py — sorgente: export CSV listino legacy (2026-05-25).",
         " * Prezzo vendita = price_1_special; listino barrato = price_1.",
         " */",

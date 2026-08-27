@@ -17,9 +17,9 @@ import { consultationInternalEmail,
          consultationConfirmationEmail }                from './consultation-email-templates.js';
 
 const RESEND_API = 'https://api.resend.com/emails';
-const FROM       = 'Aml Store <ordini@aml-store.com>';
-const REPLY_TO   = 'Info@amlstore.it';
-const INTERNAL_RECIPIENTS = ['Info@amlstore.it', 'Antonino.cardelli@outlook.it'];
+const FROM       = 'Eurolicenze <ordini@aml-store.com>';
+const REPLY_TO   = 'Desk@eurolicenze.com';
+const INTERNAL_RECIPIENTS = ['Desk@eurolicenze.com', 'Antonino.cardelli@outlook.it'];
 
 /* ─── Helpers interni ────────────────────────────────────────────────────────── */
 
@@ -92,7 +92,7 @@ function internalSubject(order) {
     const paid = order.status === 'paid';
     const prefix = paid ? 'Nuovo ordine pagato' : 'Nuovo ordine bonifico';
     const action = paid ? 'inviare licenza' : 'attendere pagamento';
-    return `[Aml Store] ${prefix} ${order.id} - ${action}`;
+    return `[Eurolicenze] ${prefix} ${order.id} - ${action}`;
 }
 
 function internalOrderHtml(order) {
@@ -135,7 +135,7 @@ function internalOrderHtml(order) {
     <tr><td align="center">
       <table width="760" cellpadding="0" cellspacing="0" style="width:100%;max-width:760px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
         <tr><td style="background:#111827;color:#fff;padding:18px 24px">
-          <h1 style="font-size:20px;margin:0">Nuovo ordine Aml Store</h1>
+          <h1 style="font-size:20px;margin:0">Nuovo ordine Eurolicenze</h1>
           <p style="margin:6px 0 0;color:#d1d5db">${esc(actionText)}</p>
         </td></tr>
         <tr><td style="padding:22px 24px">
@@ -183,7 +183,7 @@ function internalOrderText(order) {
         : 'BONIFICO IN ATTESA: non inviare la licenza finche il pagamento non risulta ricevuto.';
 
     const lines = [
-        'Nuovo ordine Aml Store',
+        'Nuovo ordine Eurolicenze',
         actionText,
         '',
         `Numero ordine: ${order.id}`,
@@ -310,7 +310,7 @@ export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBc
 
 /**
  * Invia una notifica operativa interna per evasione manuale licenza.
- * Destinatari fissi: Info@amlstore.it e Antonino.cardelli@outlook.it.
+ * Destinatari fissi: Desk@eurolicenze.com e Antonino.cardelli@outlook.it.
  */
 export async function sendInternalOrderNotificationOnce(db, order, resendApiKey, eventSrc) {
     if (order.internal_notification_sent_at) return { sent: false, skipped: true };

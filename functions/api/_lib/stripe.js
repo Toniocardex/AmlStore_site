@@ -1,5 +1,5 @@
 /**
- * stripe.js — helper Stripe per Aml Store Worker.
+ * stripe.js — helper Stripe per Eurolicenze Worker.
  * Usa fetch nativo (no Stripe SDK, zero dipendenze npm).
  */
 

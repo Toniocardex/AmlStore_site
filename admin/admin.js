@@ -1,5 +1,5 @@
 /**
- * admin.js — Aml Store Admin Panel (vanilla JS, no dipendenze)
+ * admin.js — Eurolicenze Admin Panel (vanilla JS, no dipendenze)
  *
  * Chiama le API /api/admin/* same-origin (protette da Cloudflare Access + JWT).
  * Il JWT viene inviato automaticamente dal browser come cookie CF_Authorization

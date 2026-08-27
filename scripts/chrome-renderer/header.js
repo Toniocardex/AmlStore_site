@@ -37,7 +37,7 @@
 
     const HEADER_I18N = {
         it: {
-            logoAlt: 'Aml Store',
+            logoAlt: 'Eurolicenze',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Apri sottomenu Windows',
             navWindowsOverview: 'Sistemi Operativi',
@@ -92,7 +92,7 @@
             utilityClaim3: 'Supporto via email e WhatsApp',
             supportLabel: 'Supporto',
             supportHeading: 'Supporto scritto',
-            supportEmailDisplay: 'info@amlstore.it',
+            supportEmailDisplay: 'Desk@eurolicenze.com',
             supportWhatsApp: 'WhatsApp',
             supportHours: 'Lun–Sab · 08:00–19:00',
             supportSectionTitle: 'Supporto',
@@ -109,7 +109,7 @@
             searchCloseLabel: 'Chiudi ricerca',
         },
         en: {
-            logoAlt: 'Aml Store',
+            logoAlt: 'Eurolicenze',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Open Windows submenu',
             navWindowsOverview: 'Operating Systems',
@@ -164,7 +164,7 @@
             utilityClaim3: 'Support via email and WhatsApp',
             supportLabel: 'Support',
             supportHeading: 'Written support',
-            supportEmailDisplay: 'info@amlstore.it',
+            supportEmailDisplay: 'Desk@eurolicenze.com',
             supportWhatsApp: 'WhatsApp',
             supportHours: 'Mon–Sat · 08:00–19:00 CET/CEST',
             supportSectionTitle: 'Support',
@@ -181,7 +181,7 @@
             searchCloseLabel: 'Close search',
         },
         fr: {
-            logoAlt: 'Aml Store',
+            logoAlt: 'Eurolicenze',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Ouvrir le sous-menu Windows',
             navWindowsOverview: "Systèmes d'exploitation",
@@ -236,7 +236,7 @@
             utilityClaim3: 'Assistance par e-mail et WhatsApp',
             supportLabel: 'Assistance',
             supportHeading: 'Assistance écrite',
-            supportEmailDisplay: 'info@amlstore.it',
+            supportEmailDisplay: 'Desk@eurolicenze.com',
             supportWhatsApp: 'WhatsApp',
             supportHours: 'Lun–Sam · 08:00–19:00 CET/CEST',
             supportSectionTitle: 'Assistance',
@@ -253,7 +253,7 @@
             searchCloseLabel: 'Fermer la recherche',
         },
         de: {
-            logoAlt: 'Aml Store',
+            logoAlt: 'Eurolicenze',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Windows-Untermenü öffnen',
             navWindowsOverview: 'Betriebssysteme',
@@ -308,7 +308,7 @@
             utilityClaim3: 'Support per E-Mail und WhatsApp',
             supportLabel: 'Support',
             supportHeading: 'Schriftlicher Support',
-            supportEmailDisplay: 'info@amlstore.it',
+            supportEmailDisplay: 'Desk@eurolicenze.com',
             supportWhatsApp: 'WhatsApp',
             supportHours: 'Mo–Sa · 08:00–19:00 Uhr CET/CEST',
             supportSectionTitle: 'Support',
@@ -325,7 +325,7 @@
             searchCloseLabel: 'Suche schließen',
         },
         es: {
-            logoAlt: 'Aml Store',
+            logoAlt: 'Eurolicenze',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Abrir submenú Windows',
             navWindowsOverview: 'Sistemas operativos',
@@ -380,7 +380,7 @@
             utilityClaim3: 'Soporte por email y WhatsApp',
             supportLabel: 'Soporte',
             supportHeading: 'Soporte escrito',
-            supportEmailDisplay: 'info@amlstore.it',
+            supportEmailDisplay: 'Desk@eurolicenze.com',
             supportWhatsApp: 'WhatsApp',
             supportHours: 'Lun–Sáb · 08:00–19:00 CET/CEST',
             supportSectionTitle: 'Soporte',
@@ -397,7 +397,7 @@
             searchCloseLabel: 'Cerrar búsqueda',
         },
         pt: {
-            logoAlt: 'Aml Store',
+            logoAlt: 'Eurolicenze',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Abrir submenu Windows',
             navWindowsOverview: 'Sistemas operativos',
@@ -452,7 +452,7 @@
             utilityClaim3: 'Suporte por email e WhatsApp',
             supportLabel: 'Suporte',
             supportHeading: 'Suporte escrito',
-            supportEmailDisplay: 'info@amlstore.it',
+            supportEmailDisplay: 'Desk@eurolicenze.com',
             supportWhatsApp: 'WhatsApp',
             supportHours: 'Seg–Sáb · 08:00–19:00 CET/CEST',
             supportSectionTitle: 'Suporte',
@@ -469,7 +469,7 @@
             searchCloseLabel: 'Fechar pesquisa',
         },
         nl: {
-            logoAlt: 'Aml Store',
+            logoAlt: 'Eurolicenze',
             navWindows: 'Windows',
             navWindowsOpenSubmenu: 'Windows-submenu openen',
             navWindowsOverview: 'Besturingssystemen',
@@ -524,7 +524,7 @@
             utilityClaim3: 'Ondersteuning via e-mail en WhatsApp',
             supportLabel: 'Ondersteuning',
             supportHeading: 'Schriftelijke ondersteuning',
-            supportEmailDisplay: 'info@amlstore.it',
+            supportEmailDisplay: 'Desk@eurolicenze.com',
             supportWhatsApp: 'WhatsApp',
             supportHours: 'Ma–za · 08:00–19:00 CET/CEST',
             supportSectionTitle: 'Ondersteuning',
@@ -542,7 +542,7 @@
         },
     };
 
-    const SUPPORT_EMAIL = 'info@amlstore.it';
+    const SUPPORT_EMAIL = 'Desk@eurolicenze.com';
     const SUPPORT_WHATSAPP_URL = 'https://wa.me/393925580413';
 
 

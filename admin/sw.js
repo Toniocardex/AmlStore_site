@@ -54,7 +54,7 @@ self.addEventListener('push', (event) => {
     const unreadCount = Number(payload.unreadCount || 0);
     const conversationId = typeof payload.conversationId === 'string' ? payload.conversationId : null;
     event.waitUntil(Promise.all([
-        self.registration.showNotification(payload.title || 'Aml Store Support', {
+        self.registration.showNotification(payload.title || 'Eurolicenze Support', {
             body: payload.body || 'Nuovo messaggio di assistenza',
             icon: '/admin/support/icon.svg',
             badge: '/favicon/favicon.png',

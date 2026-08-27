@@ -511,7 +511,7 @@ BASE_LABELS = {
         "product_code": "Product code",
         "add": "Add to cart",
         "detail": "View product",
-        "price_label": "AML Store price",
+        "price_label": "Eurolicenze price",
         "tax": "Tax included. No shipping fees.",
         "sticky": "Quick purchase",
         "steps_title": "Delivery and activation",
@@ -527,7 +527,7 @@ BASE_LABELS = {
         "product_code": "Référence produit",
         "add": "Ajouter au panier",
         "detail": "Voir le produit",
-        "price_label": "Prix AML Store",
+        "price_label": "Prix Eurolicenze",
         "tax": "Taxes incluses. Pas de frais de port.",
         "sticky": "Achat rapide",
         "steps_title": "Livraison et activation",
@@ -543,7 +543,7 @@ BASE_LABELS = {
         "product_code": "Artikelnummer",
         "add": "In den Warenkorb",
         "detail": "Produkt ansehen",
-        "price_label": "AML Store-Preis",
+        "price_label": "Eurolicenze-Preis",
         "tax": "Steuern inklusive. Keine Versandkosten.",
         "sticky": "Schnellkauf",
         "steps_title": "Lieferung und Aktivierung",
@@ -559,7 +559,7 @@ BASE_LABELS = {
         "product_code": "Código de producto",
         "add": "Añadir al carrito",
         "detail": "Ver producto",
-        "price_label": "Precio AML Store",
+        "price_label": "Precio Eurolicenze",
         "tax": "Impuestos incluidos. Sin gastos de envío.",
         "sticky": "Compra rápida",
         "steps_title": "Entrega y activación",
@@ -575,7 +575,7 @@ BASE_LABELS = {
         "product_code": "Código do produto",
         "add": "Adicionar ao carrinho",
         "detail": "Ver produto",
-        "price_label": "Preço AML Store",
+        "price_label": "Preço Eurolicenze",
         "tax": "Impostos incluídos. Sem custos de envio.",
         "sticky": "Compra rápida",
         "steps_title": "Entrega e ativação",
@@ -591,7 +591,7 @@ BASE_LABELS = {
         "product_code": "Artikelcode",
         "add": "In winkelwagen",
         "detail": "Product bekijken",
-        "price_label": "AML Store-prijs",
+        "price_label": "Eurolicenze-prijs",
         "tax": "Inclusief belastingen. Geen verzendkosten.",
         "sticky": "Snel kopen",
         "steps_title": "Levering en activering",
@@ -1501,7 +1501,7 @@ def _render_paypal_express(lang):
 """
 
 # Riga descrittiva del pannello dentro le tab app. Sono descrizioni di cosa fa
-# l'app Microsoft, non claim su Aml Store: nessun numero, nessuna promessa.
+# l'app Microsoft, non claim su Eurolicenze: nessun numero, nessuna promessa.
 # Le app non elencate qui ricadono sul solo nome, quindi la tabella puo'
 # restare corta senza rompere niente.
 APP_DEMOS = {
@@ -2223,7 +2223,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     ui = _ui_for(lang, sku, ui_map)
     meta = TEMPLATE_META[prod["template"]]
     short = (content.get("name") or {}).get(lang) or prod["card_name"]
-    seo_title = (content.get("seo_title") or {}).get(lang) or f"{short} — Aml Store"
+    seo_title = (content.get("seo_title") or {}).get(lang) or f"{short} — Eurolicenze"
     brand = prod.get("brand") or meta["brand"] or "Microsoft"
     cat_slug = meta["listing"]
     cat_name = meta["cat_label"][lang]
@@ -2283,7 +2283,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
             {
                 "@type": "Organization",
                 "@id": "https://eurolicenze.com/#organization",
-                "name": "Aml Store",
+                "name": "Eurolicenze",
                 "url": "https://eurolicenze.com/",
             },
             {
@@ -2466,7 +2466,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{page_url}">
     <meta property="og:type" content="product">
-    <meta property="og:site_name" content="Aml Store">
+    <meta property="og:site_name" content="Eurolicenze">
     <meta property="og:title" content="{seo_title_attr}">
     <meta property="og:description" content="{desc_attr}">
     <meta property="og:url" content="{page_url}">
@@ -2662,13 +2662,13 @@ def build_compact_product_page(lang, prod):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{short} — Aml Store</title>
+    <title>{short} — Eurolicenze</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:type" content="product">
-    <meta property="og:site_name" content="Aml Store">
-    <meta property="og:title" content="{short} — Aml Store">
+    <meta property="og:site_name" content="Eurolicenze">
+    <meta property="og:title" content="{short} — Eurolicenze">
     <meta property="og:description" content="{desc}">
     <meta property="og:url" content="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
@@ -2895,7 +2895,7 @@ def build_catalog_page(lang, catalog_slug, products):
     # un dato per singolo SKU, e' un segnale a livello Organization.
     org_schema = (
         ',{"@type":"Organization","@id":"https://eurolicenze.com/#organization",'
-        '"name":"Aml Store","url":"https://eurolicenze.com/",'
+        '"name":"Eurolicenze","url":"https://eurolicenze.com/",'
         '"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8",'
         '"reviewCount":"94","bestRating":"5","worstRating":"1"}}'
         if hub_extra else ""
@@ -2905,7 +2905,7 @@ def build_catalog_page(lang, catalog_slug, products):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} | Aml Store</title>
+    <title>{title} | Eurolicenze</title>
     <meta name="description" content="{lede}">
     <meta name="robots" content="index, follow">
     <script src="../js/consent-init.js"></script>
@@ -2914,7 +2914,7 @@ def build_catalog_page(lang, catalog_slug, products):
     <link rel="canonical" href="https://eurolicenze.com/{lang}/{catalog_slug}">
 {hreflang_block(catalog_slug)}
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{title} | Aml Store">
+    <meta property="og:title" content="{title} | Eurolicenze">
     <meta property="og:description" content="{lede}">
     <meta property="og:url" content="https://eurolicenze.com/{lang}/{catalog_slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
@@ -2924,7 +2924,7 @@ def build_catalog_page(lang, catalog_slug, products):
     <link rel="stylesheet" href="../css/home.css">{hub_css}
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
-    {{"@context":"https://schema.org","@graph":[{{"@type":"CollectionPage","name":"{title}","description":"{lede}","url":"https://eurolicenze.com/{lang}/{catalog_slug}","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://eurolicenze.com/"}}}}{org_schema}]}}
+    {{"@context":"https://schema.org","@graph":[{{"@type":"CollectionPage","name":"{title}","description":"{lede}","url":"https://eurolicenze.com/{lang}/{catalog_slug}","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Eurolicenze","url":"https://eurolicenze.com/"}}}}{org_schema}]}}
     </script>
 </head>
 <body>

@@ -1,5 +1,5 @@
 /**
- * checkout.js — logica pagina checkout Aml Store.
+ * checkout.js — logica pagina checkout Eurolicenze.
  * IIFE, 'use strict', ES6 vanilla, nessun framework.
  */
 (function (global) {

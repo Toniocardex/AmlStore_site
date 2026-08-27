@@ -1,5 +1,5 @@
 /**
- * checkout-success.js — logica thank-you page Aml Store.
+ * checkout-success.js — logica thank-you page Eurolicenze.
  *
  * Flusso:
  *   1. Legge ?oid, ?exp, ?t dall'URL.
@@ -37,7 +37,7 @@
             expired_title:  'Link scaduto',
             expired_msg:    'Questo link di conferma è scaduto (30 minuti). Controlla la tua email per i dettagli dell\'ordine.',
             error_title:    'Ordine non trovato',
-            error_msg:      'Non è stato possibile recuperare i dati dell\'ordine. Contatta il supporto: Info@amlstore.it',
+            error_msg:      'Non è stato possibile recuperare i dati dell\'ordine. Contatta il supporto: Desk@eurolicenze.com',
             shop_btn:       'Torna al negozio',
         },
         en: {
@@ -58,7 +58,7 @@
             expired_title:  'Link expired',
             expired_msg:    'This confirmation link has expired (30 minutes). Check your email for order details.',
             error_title:    'Order not found',
-            error_msg:      'We could not retrieve your order. Please contact support: Info@amlstore.it',
+            error_msg:      'We could not retrieve your order. Please contact support: Desk@eurolicenze.com',
             shop_btn:       'Back to store',
         },
         fr: {
@@ -79,7 +79,7 @@
             expired_title:  'Lien expiré',
             expired_msg:    'Ce lien de confirmation a expiré (30 minutes). Consultez votre email pour les détails.',
             error_title:    'Commande introuvable',
-            error_msg:      'Impossible de récupérer votre commande. Contactez le support : Info@amlstore.it',
+            error_msg:      'Impossible de récupérer votre commande. Contactez le support : Desk@eurolicenze.com',
             shop_btn:       'Retour à la boutique',
         },
         de: {
@@ -100,7 +100,7 @@
             expired_title:  'Link abgelaufen',
             expired_msg:    'Dieser Bestätigungslink ist abgelaufen (30 Minuten). Prüfen Sie Ihre E-Mail.',
             error_title:    'Bestellung nicht gefunden',
-            error_msg:      'Ihre Bestellung konnte nicht abgerufen werden. Kontaktieren Sie uns: Info@amlstore.it',
+            error_msg:      'Ihre Bestellung konnte nicht abgerufen werden. Kontaktieren Sie uns: Desk@eurolicenze.com',
             shop_btn:       'Zum Shop',
         },
         es: {
@@ -121,7 +121,7 @@
             expired_title:  'Enlace caducado',
             expired_msg:    'Este enlace de confirmación ha caducado (30 minutos). Consulte su correo para los detalles.',
             error_title:    'Pedido no encontrado',
-            error_msg:      'No se pudo recuperar su pedido. Contacte el soporte: Info@amlstore.it',
+            error_msg:      'No se pudo recuperar su pedido. Contacte el soporte: Desk@eurolicenze.com',
             shop_btn:       'Volver a la tienda',
         },
         pt: {
@@ -142,7 +142,7 @@
             expired_title:  'Ligação expirada',
             expired_msg:    'Esta ligação de confirmação expirou (30 minutos). Consulte o seu email para os detalhes do pedido.',
             error_title:    'Pedido não encontrado',
-            error_msg:      'Não foi possível recuperar o seu pedido. Contacte o suporte: Info@amlstore.it',
+            error_msg:      'Não foi possível recuperar o seu pedido. Contacte o suporte: Desk@eurolicenze.com',
             shop_btn:       'Voltar à loja',
         },
         nl: {
@@ -163,7 +163,7 @@
             expired_title:  'Link verlopen',
             expired_msg:    'Deze bevestigingslink is verlopen (30 minuten). Controleer uw e-mail voor de details.',
             error_title:    'Bestelling niet gevonden',
-            error_msg:      'Uw bestelling kon niet worden opgehaald. Neem contact op met support: Info@amlstore.it',
+            error_msg:      'Uw bestelling kon niet worden opgehaald. Neem contact op met support: Desk@eurolicenze.com',
             shop_btn:       'Terug naar de winkel',
         },
     };

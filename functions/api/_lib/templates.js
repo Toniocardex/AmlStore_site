@@ -1,5 +1,5 @@
 /**
- * templates.js — template email HTML + plain text per Aml Store.
+ * templates.js — template email HTML + plain text per Eurolicenze.
  * Inline styles obbligatori per compatibilità email client.
  * Palette istituzionale navy, allineata a --aml-* in css/page.css.
  */
@@ -29,8 +29,8 @@ const BODY_FONT    = "-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-ser
 /** Stringhe localizzate */
 const i18n = {
     it: {
-        subject_paid:     'Ordine #{orderId} confermato — Aml Store',
-        subject_pending:  'Ordine #{orderId} ricevuto — Aml Store',
+        subject_paid:     'Ordine #{orderId} confermato — Eurolicenze',
+        subject_pending:  'Ordine #{orderId} ricevuto — Eurolicenze',
         order_eyebrow:    'Riepilogo ordine',
         greeting:         'Grazie per il tuo ordine!',
         greeting_pending: 'Ordine ricevuto!',
@@ -59,7 +59,7 @@ const i18n = {
         shipping_title:   'Indirizzo di spedizione',
         guide_attached:   'In allegato trovi in omaggio la Guida Copilot per Microsoft 365 (PDF).',
         footer_tagline:   'Licenze digitali originali · aml-store.com',
-        license_subject:  'La tua licenza — ordine #{orderId} — Aml Store',
+        license_subject:  'La tua licenza — ordine #{orderId} — Eurolicenze',
         license_eyebrow:  'Licenza digitale',
         license_greeting: 'Ecco la tua licenza, {name}!',
         license_intro:    'Grazie per il tuo acquisto. Qui sotto trovi la chiave del tuo prodotto, pronta per l\'attivazione.',
@@ -70,8 +70,8 @@ const i18n = {
         license_help:     'Hai bisogno di assistenza con l\'attivazione? Scrivici:',
     },
     en: {
-        subject_paid:     'Order #{orderId} confirmed — Aml Store',
-        subject_pending:  'Order #{orderId} received — Aml Store',
+        subject_paid:     'Order #{orderId} confirmed — Eurolicenze',
+        subject_pending:  'Order #{orderId} received — Eurolicenze',
         order_eyebrow:    'Order summary',
         greeting:         'Thank you for your order!',
         greeting_pending: 'Order received!',
@@ -100,7 +100,7 @@ const i18n = {
         shipping_title:   'Shipping address',
         guide_attached:   'Attached you\'ll find our free Copilot for Microsoft 365 guide (PDF).',
         footer_tagline:   'Genuine digital licences · aml-store.com',
-        license_subject:  'Your licence — order #{orderId} — Aml Store',
+        license_subject:  'Your licence — order #{orderId} — Eurolicenze',
         license_eyebrow:  'Digital licence',
         license_greeting: 'Here is your licence, {name}!',
         license_intro:    'Thank you for your purchase. Below is your product key, ready to activate.',
@@ -111,8 +111,8 @@ const i18n = {
         license_help:     'Need help activating it? Contact us:',
     },
     fr: {
-        subject_paid:     'Commande #{orderId} confirmée — Aml Store',
-        subject_pending:  'Commande #{orderId} reçue — Aml Store',
+        subject_paid:     'Commande #{orderId} confirmée — Eurolicenze',
+        subject_pending:  'Commande #{orderId} reçue — Eurolicenze',
         order_eyebrow:    'Récapitulatif de commande',
         greeting:         'Merci pour votre commande !',
         greeting_pending: 'Commande reçue !',
@@ -141,7 +141,7 @@ const i18n = {
         shipping_title:   'Adresse de livraison',
         guide_attached:   'Vous trouverez en pièce jointe notre guide gratuit Copilot pour Microsoft 365 (PDF).',
         footer_tagline:   'Licences numériques originales · aml-store.com',
-        license_subject:  'Votre licence — commande #{orderId} — Aml Store',
+        license_subject:  'Votre licence — commande #{orderId} — Eurolicenze',
         license_eyebrow:  'Licence numérique',
         license_greeting: 'Voici votre licence, {name} !',
         license_intro:    'Merci pour votre achat. Vous trouverez ci-dessous la clé de votre produit, prête à activer.',
@@ -152,8 +152,8 @@ const i18n = {
         license_help:     'Besoin d\'aide pour l\'activation ? Contactez-nous :',
     },
     de: {
-        subject_paid:     'Bestellung #{orderId} bestätigt — Aml Store',
-        subject_pending:  'Bestellung #{orderId} eingegangen — Aml Store',
+        subject_paid:     'Bestellung #{orderId} bestätigt — Eurolicenze',
+        subject_pending:  'Bestellung #{orderId} eingegangen — Eurolicenze',
         order_eyebrow:    'Bestellübersicht',
         greeting:         'Vielen Dank für Ihre Bestellung!',
         greeting_pending: 'Bestellung eingegangen!',
@@ -182,7 +182,7 @@ const i18n = {
         shipping_title:   'Lieferadresse',
         guide_attached:   'Im Anhang finden Sie unseren kostenlosen Copilot-Leitfaden für Microsoft 365 (PDF).',
         footer_tagline:   'Originale digitale Lizenzen · aml-store.com',
-        license_subject:  'Ihre Lizenz — Bestellung #{orderId} — Aml Store',
+        license_subject:  'Ihre Lizenz — Bestellung #{orderId} — Eurolicenze',
         license_eyebrow:  'Digitale Lizenz',
         license_greeting: 'Hier ist Ihre Lizenz, {name}!',
         license_intro:    'Vielen Dank für Ihren Kauf. Unten finden Sie Ihren Produktschlüssel, bereit zur Aktivierung.',
@@ -193,8 +193,8 @@ const i18n = {
         license_help:     'Brauchen Sie Hilfe bei der Aktivierung? Kontaktieren Sie uns:',
     },
     es: {
-        subject_paid:     'Pedido #{orderId} confirmado — Aml Store',
-        subject_pending:  'Pedido #{orderId} recibido — Aml Store',
+        subject_paid:     'Pedido #{orderId} confirmado — Eurolicenze',
+        subject_pending:  'Pedido #{orderId} recibido — Eurolicenze',
         order_eyebrow:    'Resumen del pedido',
         greeting:         '¡Gracias por su pedido!',
         greeting_pending: '¡Pedido recibido!',
@@ -223,7 +223,7 @@ const i18n = {
         shipping_title:   'Dirección de envío',
         guide_attached:   'Adjuntamos nuestra guía gratuita de Copilot para Microsoft 365 (PDF).',
         footer_tagline:   'Licencias digitales originales · aml-store.com',
-        license_subject:  'Su licencia — pedido #{orderId} — Aml Store',
+        license_subject:  'Su licencia — pedido #{orderId} — Eurolicenze',
         license_eyebrow:  'Licencia digital',
         license_greeting: '¡Aquí tiene su licencia, {name}!',
         license_intro:    'Gracias por su compra. A continuación encontrará la clave de su producto, lista para activar.',
@@ -234,8 +234,8 @@ const i18n = {
         license_help:     '¿Necesita ayuda con la activación? Contáctenos:',
     },
     pt: {
-        subject_paid:     'Pedido #{orderId} confirmado — Aml Store',
-        subject_pending:  'Pedido #{orderId} recebido — Aml Store',
+        subject_paid:     'Pedido #{orderId} confirmado — Eurolicenze',
+        subject_pending:  'Pedido #{orderId} recebido — Eurolicenze',
         order_eyebrow:    'Resumo do pedido',
         greeting:         'Obrigado pelo seu pedido!',
         greeting_pending: 'Pedido recebido!',
@@ -264,7 +264,7 @@ const i18n = {
         shipping_title:   'Endereço de envio',
         guide_attached:   'Em anexo encontra, como oferta, o nosso guia Copilot para Microsoft 365 (PDF).',
         footer_tagline:   'Licenças digitais originais · aml-store.com',
-        license_subject:  'A sua licença — pedido #{orderId} — Aml Store',
+        license_subject:  'A sua licença — pedido #{orderId} — Eurolicenze',
         license_eyebrow:  'Licença digital',
         license_greeting: 'Aqui está a sua licença, {name}!',
         license_intro:    'Obrigado pela sua compra. Abaixo encontra a chave do seu produto, pronta para ativação.',
@@ -275,8 +275,8 @@ const i18n = {
         license_help:     'Precisa de ajuda com a ativação? Contacte-nos:',
     },
     nl: {
-        subject_paid:     'Bestelling #{orderId} bevestigd — Aml Store',
-        subject_pending:  'Bestelling #{orderId} ontvangen — Aml Store',
+        subject_paid:     'Bestelling #{orderId} bevestigd — Eurolicenze',
+        subject_pending:  'Bestelling #{orderId} ontvangen — Eurolicenze',
         order_eyebrow:    'Besteloverzicht',
         greeting:         'Bedankt voor uw bestelling!',
         greeting_pending: 'Bestelling ontvangen!',
@@ -305,7 +305,7 @@ const i18n = {
         shipping_title:   'Verzendadres',
         guide_attached:   'Als extraatje vindt u in de bijlage onze Copilot-gids voor Microsoft 365 (PDF).',
         footer_tagline:   'Originele digitale licenties · aml-store.com',
-        license_subject:  'Uw licentie — bestelling #{orderId} — Aml Store',
+        license_subject:  'Uw licentie — bestelling #{orderId} — Eurolicenze',
         license_eyebrow:  'Digitale licentie',
         license_greeting: 'Hier is uw licentie, {name}!',
         license_intro:    'Bedankt voor uw aankoop. Hieronder vindt u de productsleutel, klaar voor activering.',
@@ -481,7 +481,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
   <tr><td style="background:${ACCENT_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
-        <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
+        <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Eurolicenze" width="140" height="auto"
              style="display:block;max-width:140px">
       </td></tr>
     </table>
@@ -490,7 +490,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
   <!-- Body card -->
   <tr><td style="background:${CARD_BG};padding:36px 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER}">
 
-    <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:1.1px">${t.order_eyebrow} · Aml Store</p>
+    <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:1.1px">${t.order_eyebrow} · Eurolicenze</p>
 
     <table cellpadding="0" cellspacing="0" style="margin-bottom:22px">
       <tr>
@@ -554,7 +554,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 
   <!-- Footer -->
   <tr><td style="background:#f0f2f5;border-radius:0 0 10px 10px;padding:22px 32px;border:1px solid ${BORDER};border-top:none;text-align:center">
-    <p style="margin:0 0 8px;font-size:13px;color:${TEXT_MUTED}">${t.footer_help} <a href="mailto:Info@amlstore.it" style="color:${ACCENT_DARK};font-weight:600">Info@amlstore.it</a></p>
+    <p style="margin:0 0 8px;font-size:13px;color:${TEXT_MUTED}">${t.footer_help} <a href="mailto:Desk@eurolicenze.com" style="color:${ACCENT_DARK};font-weight:600">Desk@eurolicenze.com</a></p>
     <p style="margin:0 0 10px;font-size:11px;color:#9ca3af">${t.footer_copy.replace('{year}', year)}</p>
     <p style="margin:0;font-size:10.5px;color:#b0b5bd;letter-spacing:.3px">${t.footer_tagline}</p>
   </td></tr>
@@ -587,7 +587,7 @@ export function emailText(order, isPaid, guideAttached = false) {
     }[order.payment_method] || order.payment_method;
 
     let lines = [
-        `Aml Store`,
+        `Eurolicenze`,
         `${heading}`,
         ``,
         introTxt,
@@ -634,7 +634,7 @@ export function emailText(order, isPaid, guideAttached = false) {
         lines.push(``, `📎 ${t.guide_attached}`);
     }
 
-    lines.push(``, `${t.footer_help} Info@amlstore.it`, `https://eurolicenze.com/${locale}/`);
+    lines.push(``, `${t.footer_help} Desk@eurolicenze.com`, `https://eurolicenze.com/${locale}/`);
 
     return lines.join('\n');
 }
@@ -820,7 +820,7 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
   <tr><td style="background:${ACCENT_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
-        <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
+        <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Eurolicenze" width="140" height="auto"
              style="display:block;max-width:140px">
       </td></tr>
     </table>
@@ -829,7 +829,7 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
   <!-- Body card -->
   <tr><td style="background:${CARD_BG};padding:36px 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER}">
 
-    <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:1.1px">${t.license_eyebrow} · Aml Store</p>
+    <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:1.1px">${t.license_eyebrow} · Eurolicenze</p>
 
     <table cellpadding="0" cellspacing="0" style="margin-bottom:24px">
       <tr>
@@ -860,7 +860,7 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
 
   <!-- Footer -->
   <tr><td style="background:#f0f2f5;border-radius:0 0 10px 10px;padding:22px 32px;border:1px solid ${BORDER};border-top:none;text-align:center">
-    <p style="margin:0 0 8px;font-size:13px;color:${TEXT_MUTED}">${t.license_help} <a href="mailto:Info@amlstore.it" style="color:${ACCENT_DARK};font-weight:600">Info@amlstore.it</a></p>
+    <p style="margin:0 0 8px;font-size:13px;color:${TEXT_MUTED}">${t.license_help} <a href="mailto:Desk@eurolicenze.com" style="color:${ACCENT_DARK};font-weight:600">Desk@eurolicenze.com</a></p>
     <p style="margin:0 0 10px;font-size:11px;color:#9ca3af">${t.footer_copy.replace('{year}', year)}</p>
     <p style="margin:0;font-size:10.5px;color:#b0b5bd;letter-spacing:.3px">${t.footer_tagline}</p>
   </td></tr>
@@ -882,7 +882,7 @@ export function licenseEmailText({ locale, orderId, name, items }) {
     const t = i18n[locale] || i18n.it;
 
     const lines = [
-        `Aml Store`,
+        `Eurolicenze`,
         t.license_greeting.replace('{name}', name || ''),
         ``,
         t.license_intro,
@@ -907,7 +907,7 @@ export function licenseEmailText({ locale, orderId, name, items }) {
         lines.push(``);
     });
 
-    lines.push(t.license_note, ``, `${t.license_help} Info@amlstore.it`);
+    lines.push(t.license_note, ``, `${t.license_help} Desk@eurolicenze.com`);
 
     return lines.join('\n');
 }

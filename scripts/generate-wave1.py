@@ -204,13 +204,13 @@ def build_page(lang, prod):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{short} — Aml Store</title>
+    <title>{short} — Eurolicenze</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:type" content="product">
-    <meta property="og:site_name" content="Aml Store">
-    <meta property="og:title" content="{short} — Aml Store">
+    <meta property="og:site_name" content="Eurolicenze">
+    <meta property="og:title" content="{short} — Eurolicenze">
     <meta property="og:description" content="{desc}">
     <meta property="og:url" content="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
