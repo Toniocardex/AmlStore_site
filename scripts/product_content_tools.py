@@ -23,6 +23,15 @@ def L(**kwargs):
 
 PRODUCTS = {
     "adobe-acrobat-pro": {
+        "seo_title": L(
+            it="Adobe Acrobat Pro — 2 dispositivi — Eurolicenze",
+            en="Adobe Acrobat Pro — 2 devices — Eurolicenze",
+            fr="Adobe Acrobat Pro — 2 appareils — Eurolicenze",
+            de="Adobe Acrobat Pro — 2 Geräte — Eurolicenze",
+            es="Adobe Acrobat Pro — 2 dispositivos — Eurolicenze",
+            pt="Adobe Acrobat Pro — 2 dispositivos — Eurolicenze",
+            nl="Adobe Acrobat Pro — 2 apparaten — Eurolicenze",
+        ),
         "title_html": L(
             it='Adobe Acrobat <span>Pro</span>',
             en='Adobe Acrobat <span>Pro</span>',
@@ -234,6 +243,15 @@ PRODUCTS = {
         },
     },
     "adobe-acrobat-standard": {
+        "seo_title": L(
+            it="Adobe Acrobat Standard — 2 dispositivi — Eurolicenze",
+            en="Adobe Acrobat Standard — 2 devices — Eurolicenze",
+            fr="Adobe Acrobat Standard — 2 appareils — Eurolicenze",
+            de="Adobe Acrobat Standard — 2 Geräte — Eurolicenze",
+            es="Adobe Acrobat Standard — 2 dispositivos — Eurolicenze",
+            pt="Adobe Acrobat Standard — 2 dispositivos — Eurolicenze",
+            nl="Adobe Acrobat Standard — 2 apparaten — Eurolicenze",
+        ),
         "title_html": L(
             it='Adobe Acrobat <span>Standard</span>',
             en='Adobe Acrobat <span>Standard</span>',
@@ -656,6 +674,15 @@ PRODUCTS = {
         },
     },
     "acronis-true-image-advanced": {
+        "seo_title": L(
+            it="Acronis True Image Advanced — 1 dispositivo — Eurolicenze",
+            en="Acronis True Image Advanced — 1 device — Eurolicenze",
+            fr="Acronis True Image Advanced — 1 appareil — Eurolicenze",
+            de="Acronis True Image Advanced — 1 Gerät — Eurolicenze",
+            es="Acronis True Image Advanced — 1 dispositivo — Eurolicenze",
+            pt="Acronis True Image Advanced — 1 dispositivo — Eurolicenze",
+            nl="Acronis True Image Advanced — 1 apparaat — Eurolicenze",
+        ),
         "title_html": L(
             it='Acronis True Image <span>Advanced</span>',
             en='Acronis True Image <span>Advanced</span>',
