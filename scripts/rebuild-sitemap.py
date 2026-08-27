@@ -18,16 +18,16 @@ LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 
 urls = []
 for lang in LANGS:
-    urls.append(f"https://aml-store.com/{lang}/")
+    urls.append(f"https://eurolicenze.com/{lang}/")
 for lang in LANGS:
-    urls.append(f"https://aml-store.com/{lang}/contacts")
+    urls.append(f"https://eurolicenze.com/{lang}/contacts")
 for lang in LANGS:
     for html in sorted((ROOT / lang).glob("*.html")):
         if html.stem in SKIP or html.stem == "contacts":
             continue
         # Senza estensione: /foo.html risponde 308 verso /foo, quindi il .html
         # nel sitemap indicherebbe una tappa intermedia invece della pagina.
-        urls.append(f"https://aml-store.com/{lang}/{html.stem}")
+        urls.append(f"https://eurolicenze.com/{lang}/{html.stem}")
 
 urls = list(dict.fromkeys(urls))
 lines = [

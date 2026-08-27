@@ -124,7 +124,7 @@ def remap(html: str, slug: str) -> str:
         '["it","en","fr","de","es","pt"]',
         '["it","en","fr","de","es","pt","nl"]',
     )
-    dest = f"https://aml-store.com/nl/{slug}" if slug else "https://aml-store.com/nl/"
+    dest = f"https://eurolicenze.com/nl/{slug}" if slug else "https://eurolicenze.com/nl/"
     if 'hreflang="nl"' not in html:
         html = re.sub(
             r'(<link rel="alternate" hreflang="pt" href="https://aml-store\.com/pt/[^"]*">)\s*'
@@ -139,7 +139,7 @@ def remap(html: str, slug: str) -> str:
         html,
         count=1,
     )
-    html = html.replace("https://aml-store.com/en/" + (slug or ""), dest)
+    html = html.replace("https://eurolicenze.com/en/" + (slug or ""), dest)
     html = html.replace('href="/en/', 'href="/nl/')
     html = html.replace("/nl/about-us", "/nl/over-ons")
     html = html.replace("/nl/consultation", "/nl/consultatie")

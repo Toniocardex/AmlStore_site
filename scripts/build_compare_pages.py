@@ -73,16 +73,16 @@ CATEGORY_LABEL = {
                   "de": "Antivirus", "es": "Antivirus", "pt": "Antivírus", "nl": "Antivirus"},
 }
 
-ORG_JSON = ('{{ "@type": "Organization", "@id": "https://aml-store.com/#organization", '
-            '"name": "Aml Store", "url": "https://aml-store.com/", '
+ORG_JSON = ('{{ "@type": "Organization", "@id": "https://eurolicenze.com/#organization", '
+            '"name": "Aml Store", "url": "https://eurolicenze.com/", '
             '"aggregateRating": {{ "@type": "AggregateRating", "ratingValue": "4.8", '
             '"reviewCount": "94", "bestRating": "5", "worstRating": "1" }} }}')
 
 
 def hreflang_block(slug):
-    lines = [f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}">'
+    lines = [f'    <link rel="alternate" hreflang="{lg}" href="https://eurolicenze.com/{lg}/{slug}">'
              for lg in LANGS]
-    lines.append(f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}">')
+    lines.append(f'    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/{slug}">')
     return "\n".join(lines)
 
 
@@ -204,12 +204,12 @@ def render(page, lang):
     <script src="../js/consent-init.js"></script>
     <link rel="icon" href="../favicon/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}">
+    <link rel="canonical" href="https://eurolicenze.com/{lang}/{slug}">
 {hreflang}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="{og_desc}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}">
+    <meta property="og:url" content="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
     <meta property="og:image" content="{page['og_image']}">
     <link rel="stylesheet" href="../fonts/montserrat.css">
@@ -226,25 +226,25 @@ def render(page, lang):
     {ORG_JSON.format()},
     {{
       "@type": "WebPage",
-      "@id": "https://aml-store.com/{lang}/{slug}#webpage",
+      "@id": "https://eurolicenze.com/{lang}/{slug}#webpage",
       "name": "{schema_name}",
       "description": "{schema_desc}",
-      "url": "https://aml-store.com/{lang}/{slug}",
+      "url": "https://eurolicenze.com/{lang}/{slug}",
       "inLanguage": "{lang}",
-      "isPartOf": {{ "@type": "WebSite", "name": "Aml Store", "url": "https://aml-store.com/" }}
+      "isPartOf": {{ "@type": "WebSite", "name": "Aml Store", "url": "https://eurolicenze.com/" }}
     }},
     {{
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {{ "@type": "ListItem", "position": 1, "name": "{s['home']}", "item": "https://aml-store.com/{lang}/" }},
-        {{ "@type": "ListItem", "position": 2, "name": "{category_label}", "item": "https://aml-store.com/{lang}/{category_href}" }},
+        {{ "@type": "ListItem", "position": 1, "name": "{s['home']}", "item": "https://eurolicenze.com/{lang}/" }},
+        {{ "@type": "ListItem", "position": 2, "name": "{category_label}", "item": "https://eurolicenze.com/{lang}/{category_href}" }},
         {{ "@type": "ListItem", "position": 3, "name": "{breadcrumb_label}" }}
       ]
     }},
     {{
       "@type": "FAQPage",
       "inLanguage": "{lang}",
-      "url": "https://aml-store.com/{lang}/{slug}",
+      "url": "https://eurolicenze.com/{lang}/{slug}",
       "mainEntity": [
         {faq_ld}
       ]
@@ -323,7 +323,7 @@ PAGES = [
     {
         "slug": "windows-11-home-vs-pro",
         "category_href": "sistemi-operativi",
-        "og_image": "https://aml-store.com/asset/media/products/windows-11-pro.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/windows-11-pro.webp",
         "meta_title": _d(
             "Windows 11 Home o Pro: quale scegliere | Aml Store",
             "Windows 11 Home or Pro: which one to choose | Aml Store",
@@ -679,7 +679,7 @@ PAGES = [
     {
         "slug": "office-2024-vs-microsoft-365",
         "category_href": "suite-office",
-        "og_image": "https://aml-store.com/asset/media/products/microsoft-365-personal.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/microsoft-365-personal.webp",
         "meta_title": _d(
             "Office 2024 o Microsoft 365: licenza o abbonamento | Aml Store",
             "Office 2024 or Microsoft 365: licence or subscription | Aml Store",
@@ -961,7 +961,7 @@ PAGES = [
     {
         "slug": "microsoft-365-family-vs-personal",
         "category_href": "microsoft-365-solutions",
-        "og_image": "https://aml-store.com/asset/media/products/microsoft-365-family.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/microsoft-365-family.webp",
         "meta_title": _d(
             "Microsoft 365 Family o Personal: quale scegliere | Aml Store",
             "Microsoft 365 Family or Personal: which one to choose | Aml Store",
@@ -1256,7 +1256,7 @@ PAGES = [
     {
         "slug": "kaspersky-vs-eset-nod32",
         "category_href": "antivirus",
-        "og_image": "https://aml-store.com/asset/media/products/kaspersky-standard.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/kaspersky-standard.webp",
         "meta_title": _d(
             "Kaspersky o ESET NOD32: quale antivirus scegliere | Aml Store",
             "Kaspersky or ESET NOD32: which antivirus to choose | Aml Store",
@@ -1587,7 +1587,7 @@ PAGES = [
     {
         "slug": "norton-vs-bitdefender",
         "category_href": "antivirus",
-        "og_image": "https://aml-store.com/asset/media/products/norton-360-standard.webp",
+        "og_image": "https://eurolicenze.com/asset/media/products/norton-360-standard.webp",
         "meta_title": _d(
             "Norton o Bitdefender: quale antivirus scegliere | Aml Store",
             "Norton or Bitdefender: which antivirus to choose | Aml Store",

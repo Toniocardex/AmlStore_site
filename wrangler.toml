@@ -43,7 +43,7 @@ script_name = "aml-support-realtime"
 
 # ── Variabili non-segrete (ok in repo) ───────────────────────────────────────
 [vars]
-SITE_ORIGIN     = "https://aml-store.com"
+SITE_ORIGIN     = "https://eurolicenze.com"
 PAYPAL_BASE_URL = "https://api-m.paypal.com"
 # Produzione = PayPal LIVE. Per lo sviluppo locale, .dev.vars sovrascrive con
 # la sandbox (PAYPAL_BASE_URL + PAYPAL_CLIENT_ID/SECRET sandbox).
@@ -87,7 +87,7 @@ VAPID_SUBJECT = "mailto:Info@amlstore.it"
 # PAYPAL_CLIENT_SECRET   — Client Secret PayPal LIVE (solo server-side)
 # PAYPAL_WEBHOOK_ID      — Webhook ID da PayPal Dashboard → Apps & Credentials →
 #                          [App] → Webhooks → aggiungi endpoint
-#                          https://aml-store.com/api/webhooks/paypal, evento
+#                          https://eurolicenze.com/api/webhooks/paypal, evento
 #                          "Payment capture completed". Senza questo secret
 #                          /api/webhooks/paypal rifiuta ogni richiesta (401) —
 #                          va configurato DOPO il deploy, quando l'URL esiste.

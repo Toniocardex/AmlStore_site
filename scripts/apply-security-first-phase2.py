@@ -845,19 +845,19 @@ def patch_seo(html: str, lang: str) -> str:
         f'"name": "{s["title"]}"',
     )
     html = re.sub(
-        r'("url":\s*"https://aml-store.com/' + lang + r'/",\s*"name":\s*")[^"]+(")',
+        r'("url":\s*"https://eurolicenze.com/' + lang + r'/",\s*"name":\s*")[^"]+(")',
         rf'\1{s["title"]}\2',
         html,
         count=1,
     )
     html = re.sub(
-        r'("#webpage","url":"https://aml-store.com/' + lang + r'/","name":")[^"]+(")',
+        r'("#webpage","url":"https://eurolicenze.com/' + lang + r'/","name":")[^"]+(")',
         rf'\1{s["title"]}\2',
         html,
         count=1,
     )
     html = re.sub(
-        r'("#webpage", "url": "https://aml-store.com/' + lang + r'/", "name": ")[^"]+(")',
+        r'("#webpage", "url": "https://eurolicenze.com/' + lang + r'/", "name": ")[^"]+(")',
         rf'\1{s["title"]}\2',
         html,
         count=1,

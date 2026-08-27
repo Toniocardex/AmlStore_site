@@ -58,7 +58,7 @@ def patch_file(path: Path) -> bool:
     def repl(m: re.Match) -> str:
         pt_tag, pt_tail, xdef = m.group(1), m.group(2), m.group(3)
         slug = nl_slug(pt_tail)
-        href = f"https://aml-store.com/nl/{slug}" if slug else "https://aml-store.com/nl/"
+        href = f"https://eurolicenze.com/nl/{slug}" if slug else "https://eurolicenze.com/nl/"
         sep = "\n    " if "\n" in m.group(0) else ""
         return f'{pt_tag}{sep}<link rel="alternate" hreflang="nl" href="{href}">{sep}{xdef}'
 

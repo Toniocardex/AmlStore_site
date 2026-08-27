@@ -276,19 +276,19 @@ ICON_GLOBE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 def page(lang: str) -> str:
     t = COPY[lang]
     slug = SLUG[lang]
-    url = f"https://aml-store.com/{lang}/{slug}"
+    url = f"https://eurolicenze.com/{lang}/{slug}"
     consultation_url = CONSULTATION_SLUG[lang]
     ld = {
         "@context": "https://schema.org",
         "@graph": [
             {
                 "@type": "Organization",
-                "@id": "https://aml-store.com/#organization",
+                "@id": "https://eurolicenze.com/#organization",
                 "name": "Aml Store",
-                "url": "https://aml-store.com/",
+                "url": "https://eurolicenze.com/",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://aml-store.com/logo/logo-header-400.webp",
+                    "url": "https://eurolicenze.com/logo/logo-header-400.webp",
                 },
                 "email": "Info@amlstore.it",
                 "telephone": "+39-392-558-0413",
@@ -307,11 +307,11 @@ def page(lang: str) -> str:
             },
             {
                 "@type": "WebSite",
-                "@id": "https://aml-store.com/#website",
-                "url": "https://aml-store.com/",
+                "@id": "https://eurolicenze.com/#website",
+                "url": "https://eurolicenze.com/",
                 "name": "Aml Store",
                 "inLanguage": ["it", "en", "fr", "de", "es", "pt", "nl"],
-                "publisher": {"@id": "https://aml-store.com/#organization"},
+                "publisher": {"@id": "https://eurolicenze.com/#organization"},
             },
             {
                 "@type": "AboutPage",
@@ -320,17 +320,17 @@ def page(lang: str) -> str:
                 "name": t["title"],
                 "description": t["description"],
                 "inLanguage": lang,
-                "isPartOf": {"@id": "https://aml-store.com/#website"},
-                "about": {"@id": "https://aml-store.com/#organization"},
-                "mainEntity": {"@id": "https://aml-store.com/#organization"},
+                "isPartOf": {"@id": "https://eurolicenze.com/#website"},
+                "about": {"@id": "https://eurolicenze.com/#organization"},
+                "mainEntity": {"@id": "https://eurolicenze.com/#organization"},
             },
         ],
     }
     hreflang = "\n".join(
-        f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{SLUG[lg]}">'
+        f'    <link rel="alternate" hreflang="{lg}" href="https://eurolicenze.com/{lg}/{SLUG[lg]}">'
         for lg in ("it", "en", "fr", "de", "es", "pt", "nl")
     )
-    hreflang += '\n    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/chi-siamo">'
+    hreflang += '\n    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/chi-siamo">'
 
     return f"""<!DOCTYPE html>
 <html lang="{lang}">
@@ -352,7 +352,7 @@ def page(lang: str) -> str:
     <meta property="og:description" content="{t['description']}">
     <meta property="og:url" content="{url}">
     <meta property="og:locale" content="{LOCALE[lang]}">
-    <meta property="og:image" content="https://aml-store.com/logo/logo-header-400.webp">
+    <meta property="og:image" content="https://eurolicenze.com/logo/logo-header-400.webp">
 
 {hreflang}
 

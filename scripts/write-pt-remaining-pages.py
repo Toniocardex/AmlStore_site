@@ -241,7 +241,7 @@ def remap_locale(html: str, *, home: bool = False) -> str:
     if 'hreflang="pt"' not in html:
         html = html.replace(
             '<link rel="alternate" hreflang="x-default"',
-            '<link rel="alternate" hreflang="pt" href="https://aml-store.com/pt/PLACEHOLDER">\n    <link rel="alternate" hreflang="x-default"',
+            '<link rel="alternate" hreflang="pt" href="https://eurolicenze.com/pt/PLACEHOLDER">\n    <link rel="alternate" hreflang="x-default"',
         )
     html = html.replace("/es/", "/pt/")
     html = html.replace('"inLanguage":"es"', '"inLanguage":"pt"')
@@ -252,9 +252,9 @@ def remap_locale(html: str, *, home: bool = False) -> str:
 
 
 def fix_pt_hreflang(html: str, slug: str) -> str:
-    href = f"https://aml-store.com/pt/{slug}" if slug else "https://aml-store.com/pt/"
+    href = f"https://eurolicenze.com/pt/{slug}" if slug else "https://eurolicenze.com/pt/"
     return html.replace(
-        'hreflang="pt" href="https://aml-store.com/pt/PLACEHOLDER"',
+        'hreflang="pt" href="https://eurolicenze.com/pt/PLACEHOLDER"',
         f'hreflang="pt" href="{href}"',
     )
 

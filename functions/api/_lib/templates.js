@@ -468,8 +468,8 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${emailSubject(locale, order.orderId, isPaid)}</title>
 <style>
-  @font-face{font-family:'Montserrat';src:url('https://aml-store.com/fonts/montserrat-latin-700.woff2') format('woff2');font-weight:700}
-  @font-face{font-family:'Montserrat';src:url('https://aml-store.com/fonts/montserrat-latin-800.woff2') format('woff2');font-weight:800}
+  @font-face{font-family:'Montserrat';src:url('https://eurolicenze.com/fonts/montserrat-latin-700.woff2') format('woff2');font-weight:700}
+  @font-face{font-family:'Montserrat';src:url('https://eurolicenze.com/fonts/montserrat-latin-800.woff2') format('woff2');font-weight:800}
 </style>
 </head>
 <body style="margin:0;padding:0;background:${BG};font-family:${BODY_FONT}">
@@ -481,7 +481,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
   <tr><td style="background:${ACCENT_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
-        <img src="https://aml-store.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
+        <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
              style="display:block;max-width:140px">
       </td></tr>
     </table>
@@ -548,7 +548,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 
   <!-- CTA -->
   <tr><td style="background:${CARD_BG};padding:6px 32px 32px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER};text-align:center">
-    <a href="https://aml-store.com/${escHtml(locale)}/"
+    <a href="https://eurolicenze.com/${escHtml(locale)}/"
        style="display:inline-block;background:${ACCENT_DARK};color:#fff;font-size:14.5px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;box-shadow:0 6px 18px rgba(0,49,130,0.3)">${t.cta}</a>
   </td></tr>
 
@@ -634,7 +634,7 @@ export function emailText(order, isPaid, guideAttached = false) {
         lines.push(``, `📎 ${t.guide_attached}`);
     }
 
-    lines.push(``, `${t.footer_help} Info@amlstore.it`, `https://aml-store.com/${locale}/`);
+    lines.push(``, `${t.footer_help} Info@amlstore.it`, `https://eurolicenze.com/${locale}/`);
 
     return lines.join('\n');
 }
@@ -807,8 +807,8 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${licenseSubject(locale, orderId)}</title>
 <style>
-  @font-face{font-family:'Montserrat';src:url('https://aml-store.com/fonts/montserrat-latin-700.woff2') format('woff2');font-weight:700}
-  @font-face{font-family:'Montserrat';src:url('https://aml-store.com/fonts/montserrat-latin-800.woff2') format('woff2');font-weight:800}
+  @font-face{font-family:'Montserrat';src:url('https://eurolicenze.com/fonts/montserrat-latin-700.woff2') format('woff2');font-weight:700}
+  @font-face{font-family:'Montserrat';src:url('https://eurolicenze.com/fonts/montserrat-latin-800.woff2') format('woff2');font-weight:800}
 </style>
 </head>
 <body style="margin:0;padding:0;background:${BG};font-family:${BODY_FONT}">
@@ -820,7 +820,7 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
   <tr><td style="background:${ACCENT_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
-        <img src="https://aml-store.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
+        <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Aml Store" width="140" height="auto"
              style="display:block;max-width:140px">
       </td></tr>
     </table>

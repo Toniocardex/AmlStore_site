@@ -25,7 +25,7 @@ describe('signed guest session', () => {
         const cookie = await serializeGuestCookie(
             session,
             env,
-            new Request('https://aml-store.com/api/chat/session'),
+            new Request('https://eurolicenze.com/api/chat/session'),
         );
         expect(cookie).toContain('HttpOnly');
         expect(cookie).toContain('Secure');
@@ -43,7 +43,7 @@ describe('signed guest session', () => {
     });
 
     it('does not trust a raw visitor cookie', async () => {
-        const request = new Request('https://aml-store.com/api/chat/conversations', {
+        const request = new Request('https://eurolicenze.com/api/chat/conversations', {
             headers: { Cookie: `__Host-aml_chat_guest=${createId('visitor')}` },
         });
         await expect(readGuestSession(request, env)).resolves.toBeNull();

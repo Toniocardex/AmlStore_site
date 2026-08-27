@@ -207,10 +207,10 @@ def hreflang_block(slug):
     lines = []
     for lg in LANGS:
         lines.append(
-            f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}">'
+            f'    <link rel="alternate" hreflang="{lg}" href="https://eurolicenze.com/{lg}/{slug}">'
         )
     lines.append(
-        f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}">'
+        f'    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/{slug}">'
     )
     return "\n".join(lines)
 
@@ -243,17 +243,17 @@ def build_page(lang, prod):
         "@graph": [
             {
                 "@type": "Product",
-                "@id": f"https://aml-store.com/{lang}/{slug}#product",
+                "@id": f"https://eurolicenze.com/{lang}/{slug}#product",
                 "name": short,
                 "sku": sku,
                 "inLanguage": lang,
-                "url": f"https://aml-store.com/{lang}/{slug}",
-                "image": f"https://aml-store.com/asset/media/{prod['image']}",
+                "url": f"https://eurolicenze.com/{lang}/{slug}",
+                "image": f"https://eurolicenze.com/asset/media/{prod['image']}",
                 "description": desc,
                 "brand": {"@type": "Brand", "name": "Microsoft"},
                 "offers": {
                     "@type": "Offer",
-                    "url": f"https://aml-store.com/{lang}/{slug}",
+                    "url": f"https://eurolicenze.com/{lang}/{slug}",
                     "priceCurrency": "EUR",
                     "price": price_dec,
                     "availability": "https://schema.org/InStock",
@@ -271,14 +271,14 @@ def build_page(lang, prod):
     <title>{short} — Aml Store</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}">
+    <link rel="canonical" href="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
     <meta property="og:title" content="{short} — Aml Store">
     <meta property="og:description" content="{desc}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}">
+    <meta property="og:url" content="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
-    <meta property="og:image" content="https://aml-store.com/asset/media/{prod['image']}">
+    <meta property="og:image" content="https://eurolicenze.com/asset/media/{prod['image']}">
     <meta property="product:price:amount" content="{price_dec}">
     <meta property="product:price:currency" content="EUR">
 {hreflang_block(slug)}
@@ -382,20 +382,20 @@ def build_suite_office(lang):
     <script src="../js/consent-init.js"></script>
     <link rel="icon" href="../favicon/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
-    <link rel="canonical" href="https://aml-store.com/{lang}/suite-office.html">
+    <link rel="canonical" href="https://eurolicenze.com/{lang}/suite-office.html">
 {hreflang_block("suite-office")}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{labels['suite_title']} | Aml Store">
     <meta property="og:description" content="{meta_desc}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/suite-office.html">
+    <meta property="og:url" content="https://eurolicenze.com/{lang}/suite-office.html">
     <meta property="og:locale" content="{LOCALE[lang]}">
-    <meta property="og:image" content="https://aml-store.com/asset/media/microsoft-365-personal.webp">
+    <meta property="og:image" content="https://eurolicenze.com/asset/media/microsoft-365-personal.webp">
     <link rel="stylesheet" href="../fonts/montserrat.css">
     <link rel="stylesheet" href="../css/page.css">
     <link rel="stylesheet" href="../css/home.css">
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
-    {{"@context":"https://schema.org","@type":"CollectionPage","name":"{labels['suite_title']}","description":"{meta_desc}","url":"https://aml-store.com/{lang}/suite-office.html","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://aml-store.com/"}}}}
+    {{"@context":"https://schema.org","@type":"CollectionPage","name":"{labels['suite_title']}","description":"{meta_desc}","url":"https://eurolicenze.com/{lang}/suite-office.html","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://eurolicenze.com/"}}}}
     </script>
 </head>
 <body>
@@ -432,7 +432,7 @@ def append_sitemap():
     slugs = ["suite-office"] + [p["slug"] for p in WAVE2]
     for lang in LANGS:
         for slug in slugs:
-            url = f"https://aml-store.com/{lang}/{slug}"
+            url = f"https://eurolicenze.com/{lang}/{slug}"
             if url in text:
                 continue
             inserts.append(

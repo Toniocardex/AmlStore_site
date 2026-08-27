@@ -143,10 +143,10 @@ def hreflang_block(lang, slug):
     lines = []
     for lg in LANGS:
         lines.append(
-            f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}">'
+            f'    <link rel="alternate" hreflang="{lg}" href="https://eurolicenze.com/{lg}/{slug}">'
         )
     lines.append(
-        f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}">'
+        f'    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/{slug}">'
     )
     return "\n".join(lines)
 
@@ -179,17 +179,17 @@ def build_page(lang, prod):
         "@graph": [
             {
                 "@type": "Product",
-                "@id": f"https://aml-store.com/{lang}/{slug}#product",
+                "@id": f"https://eurolicenze.com/{lang}/{slug}#product",
                 "name": short,
                 "sku": sku,
                 "inLanguage": lang,
-                "url": f"https://aml-store.com/{lang}/{slug}",
-                "image": f"https://aml-store.com/asset/media/{prod['image']}",
+                "url": f"https://eurolicenze.com/{lang}/{slug}",
+                "image": f"https://eurolicenze.com/asset/media/{prod['image']}",
                 "description": desc,
                 "brand": {"@type": "Brand", "name": "Microsoft"},
                 "offers": {
                     "@type": "Offer",
-                    "url": f"https://aml-store.com/{lang}/{slug}",
+                    "url": f"https://eurolicenze.com/{lang}/{slug}",
                     "priceCurrency": "EUR",
                     "price": price_dec,
                     "availability": "https://schema.org/InStock",
@@ -207,14 +207,14 @@ def build_page(lang, prod):
     <title>{short} — Aml Store</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}">
+    <link rel="canonical" href="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
     <meta property="og:title" content="{short} — Aml Store">
     <meta property="og:description" content="{desc}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}">
+    <meta property="og:url" content="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
-    <meta property="og:image" content="https://aml-store.com/asset/media/{prod['image']}">
+    <meta property="og:image" content="https://eurolicenze.com/asset/media/{prod['image']}">
     <meta property="product:price:amount" content="{price_dec}">
     <meta property="product:price:currency" content="EUR">
 {hreflang_block(lang, slug)}
@@ -345,7 +345,7 @@ def append_sitemap():
     inserts = []
     for lang in LANGS:
         for p in WAVE1:
-            url = f"https://aml-store.com/{lang}/{p['slug']}.html"
+            url = f"https://eurolicenze.com/{lang}/{p['slug']}.html"
             if url in text:
                 continue
             inserts.append(

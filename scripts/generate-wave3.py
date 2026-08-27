@@ -164,7 +164,7 @@ def append_sitemap(slugs):
     inserts = []
     for lang in LANGS:
         for slug in slugs:
-            url = f"https://aml-store.com/{lang}/{slug}"
+            url = f"https://eurolicenze.com/{lang}/{slug}"
             if url in text:
                 continue
             inserts.append(

@@ -16,7 +16,7 @@ LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_
 # Neutro brand (non usare cover di un altro SKU come placeholder).
 PRODUCT_COVER_FALLBACK = "product-cover-fallback.webp"
 PRODUCT_COVER_FALLBACK_SRC = f"../asset/media/{PRODUCT_COVER_FALLBACK}"
-PRODUCT_COVER_FALLBACK_ABS = f"https://aml-store.com/asset/media/{PRODUCT_COVER_FALLBACK}"
+PRODUCT_COVER_FALLBACK_ABS = f"https://eurolicenze.com/asset/media/{PRODUCT_COVER_FALLBACK}"
 
 # Allineato a functions/api/_lib/catalog.js (physical: true)
 PHYSICAL_SKUS = frozenset({
@@ -767,10 +767,10 @@ def hreflang_block(slug):
     lines = []
     for lg in LANGS:
         lines.append(
-            f'    <link rel="alternate" hreflang="{lg}" href="https://aml-store.com/{lg}/{slug}">'
+            f'    <link rel="alternate" hreflang="{lg}" href="https://eurolicenze.com/{lg}/{slug}">'
         )
     lines.append(
-        f'    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/{slug}">'
+        f'    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/{slug}">'
     )
     return "\n".join(lines)
 
@@ -2235,11 +2235,11 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     price_dec = f"{sale / 100:.2f}"
     img_src = _product_image_src(slug, prod["image"])
     og_image_abs = (
-        f"https://aml-store.com/asset/media/products/{slug}.webp"
+        f"https://eurolicenze.com/asset/media/products/{slug}.webp"
         if (ROOT / "asset" / "media" / "products" / f"{slug}.webp").exists()
-        else f"https://aml-store.com/asset/media/{prod['image']}"
+        else f"https://eurolicenze.com/asset/media/{prod['image']}"
     )
-    page_url = f"https://aml-store.com/{lang}/{slug}"
+    page_url = f"https://eurolicenze.com/{lang}/{slug}"
     badge_html = (
         f'<span class="pdp-price-badge" aria-label="−{disc}%">−{disc}% '
         f'{DISCOUNT_SUFFIX.get(lang, DISCOUNT_SUFFIX["en"])}</span>'
@@ -2282,9 +2282,9 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
         "@graph": [
             {
                 "@type": "Organization",
-                "@id": "https://aml-store.com/#organization",
+                "@id": "https://eurolicenze.com/#organization",
                 "name": "Aml Store",
-                "url": "https://aml-store.com/",
+                "url": "https://eurolicenze.com/",
             },
             {
                 "@type": "Product",
@@ -2304,14 +2304,14 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                     "price": price_dec,
                     "availability": "https://schema.org/InStock",
                     "itemCondition": "https://schema.org/NewCondition",
-                    "seller": {"@id": "https://aml-store.com/#organization"},
+                    "seller": {"@id": "https://eurolicenze.com/#organization"},
                 },
             },
             {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
-                    {"@type": "ListItem", "position": 1, "name": "Home", "item": f"https://aml-store.com/{lang}/"},
-                    {"@type": "ListItem", "position": 2, "name": cat_name, "item": f"https://aml-store.com/{lang}/{cat_slug}"},
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": f"https://eurolicenze.com/{lang}/"},
+                    {"@type": "ListItem", "position": 2, "name": cat_name, "item": f"https://eurolicenze.com/{lang}/{cat_slug}"},
                     {"@type": "ListItem", "position": 3, "name": short},
                 ],
             },
@@ -2629,25 +2629,25 @@ def build_compact_product_page(lang, prod):
     desc = f"{short}. {labels['desc_suffix']}"
     price_dec = f"{sale / 100:.2f}"
     img_src = _product_image_src(slug, prod.get("image"))
-    og_image_abs = "https://aml-store.com/" + img_src.lstrip("./").replace("../", "", 1)
+    og_image_abs = "https://eurolicenze.com/" + img_src.lstrip("./").replace("../", "", 1)
 
     ld = {
         "@context": "https://schema.org",
         "@graph": [
             {
                 "@type": "Product",
-                "@id": f"https://aml-store.com/{lang}/{slug}#product",
+                "@id": f"https://eurolicenze.com/{lang}/{slug}#product",
                 "name": short,
                 "sku": sku,
                 **({"mpn": e["mpn"]} if e.get("mpn") else {}),
                 "inLanguage": lang,
-                "url": f"https://aml-store.com/{lang}/{slug}",
+                "url": f"https://eurolicenze.com/{lang}/{slug}",
                 "image": og_image_abs,
                 "description": desc,
                 "brand": {"@type": "Brand", "name": brand},
                 "offers": {
                     "@type": "Offer",
-                    "url": f"https://aml-store.com/{lang}/{slug}",
+                    "url": f"https://eurolicenze.com/{lang}/{slug}",
                     "priceCurrency": "EUR",
                     "price": price_dec,
                     "availability": "https://schema.org/InStock",
@@ -2665,12 +2665,12 @@ def build_compact_product_page(lang, prod):
     <title>{short} — Aml Store</title>
     <meta name="description" content="{desc}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{slug}">
+    <link rel="canonical" href="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aml Store">
     <meta property="og:title" content="{short} — Aml Store">
     <meta property="og:description" content="{desc}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{slug}">
+    <meta property="og:url" content="https://eurolicenze.com/{lang}/{slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
     <meta property="og:image" content="{og_image_abs}">
     <meta property="product:price:amount" content="{price_dec}">
@@ -2887,15 +2887,15 @@ def build_catalog_page(lang, catalog_slug, products):
     if products:
         first = products[0]
         rel = _product_image_src(first["slug"], first.get("image"))
-        og_image = "https://aml-store.com/" + rel.lstrip("./").replace("../", "", 1)
+        og_image = "https://eurolicenze.com/" + rel.lstrip("./").replace("../", "", 1)
     hub_extra = get_hub_content(catalog_slug, lang) or ""
     hub_css = '\n    <link rel="stylesheet" href="../css/product-pdp.css">' if hub_extra else ""
     # Voto reale letto da Trustpilot (it.trustpilot.com/review/aml-store.com) il
     # 2026-08-25: 4,8 su 94 recensioni. Solo sugli hub arricchiti per ora — non
     # un dato per singolo SKU, e' un segnale a livello Organization.
     org_schema = (
-        ',{"@type":"Organization","@id":"https://aml-store.com/#organization",'
-        '"name":"Aml Store","url":"https://aml-store.com/",'
+        ',{"@type":"Organization","@id":"https://eurolicenze.com/#organization",'
+        '"name":"Aml Store","url":"https://eurolicenze.com/",'
         '"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8",'
         '"reviewCount":"94","bestRating":"5","worstRating":"1"}}'
         if hub_extra else ""
@@ -2911,12 +2911,12 @@ def build_catalog_page(lang, catalog_slug, products):
     <script src="../js/consent-init.js"></script>
     <link rel="icon" href="../favicon/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png">
-    <link rel="canonical" href="https://aml-store.com/{lang}/{catalog_slug}">
+    <link rel="canonical" href="https://eurolicenze.com/{lang}/{catalog_slug}">
 {hreflang_block(catalog_slug)}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{title} | Aml Store">
     <meta property="og:description" content="{lede}">
-    <meta property="og:url" content="https://aml-store.com/{lang}/{catalog_slug}">
+    <meta property="og:url" content="https://eurolicenze.com/{lang}/{catalog_slug}">
     <meta property="og:locale" content="{LOCALE[lang]}">
     <meta property="og:image" content="{og_image}">
     <link rel="stylesheet" href="../fonts/montserrat.css">
@@ -2924,7 +2924,7 @@ def build_catalog_page(lang, catalog_slug, products):
     <link rel="stylesheet" href="../css/home.css">{hub_css}
     <script src="../js/theme-init.js"></script>
     <script type="application/ld+json">
-    {{"@context":"https://schema.org","@graph":[{{"@type":"CollectionPage","name":"{title}","description":"{lede}","url":"https://aml-store.com/{lang}/{catalog_slug}","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://aml-store.com/"}}}}{org_schema}]}}
+    {{"@context":"https://schema.org","@graph":[{{"@type":"CollectionPage","name":"{title}","description":"{lede}","url":"https://eurolicenze.com/{lang}/{catalog_slug}","inLanguage":"{lang}","isPartOf":{{"@type":"WebSite","name":"Aml Store","url":"https://eurolicenze.com/"}}}}{org_schema}]}}
     </script>
 </head>
 <body>

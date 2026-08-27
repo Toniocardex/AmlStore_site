@@ -414,12 +414,12 @@ def localize(html: str, lang: str, og: str, tp_host: str, tp_locale: str, pairs:
     # pointing at their own real page) before the generic /it/ -> /{lang}/ swap,
     # then patch only the canonical/og:url/product @id occurrences plus add pt.
     hreflang_block = (
-        '    <link rel="alternate" hreflang="it" href="https://aml-store.com/it/microsoft-365-family">\n'
-        '    <link rel="alternate" hreflang="en" href="https://aml-store.com/en/microsoft-365-family">\n'
-        '    <link rel="alternate" hreflang="fr" href="https://aml-store.com/fr/microsoft-365-family">\n'
-        '    <link rel="alternate" hreflang="de" href="https://aml-store.com/de/microsoft-365-family">\n'
-        '    <link rel="alternate" hreflang="es" href="https://aml-store.com/es/microsoft-365-family">\n'
-        '    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/microsoft-365-family">'
+        '    <link rel="alternate" hreflang="it" href="https://eurolicenze.com/it/microsoft-365-family">\n'
+        '    <link rel="alternate" hreflang="en" href="https://eurolicenze.com/en/microsoft-365-family">\n'
+        '    <link rel="alternate" hreflang="fr" href="https://eurolicenze.com/fr/microsoft-365-family">\n'
+        '    <link rel="alternate" hreflang="de" href="https://eurolicenze.com/de/microsoft-365-family">\n'
+        '    <link rel="alternate" hreflang="es" href="https://eurolicenze.com/es/microsoft-365-family">\n'
+        '    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/microsoft-365-family">'
     )
     hreflang_placeholder = "\x00HREFLANG_BLOCK\x00"
     assert hreflang_block in out, "hreflang block not found as expected"
@@ -433,14 +433,14 @@ def localize(html: str, lang: str, og: str, tp_host: str, tp_locale: str, pairs:
         if original in out:
             out = out.replace(original, switcher_placeholder, 1)
 
-    out = out.replace("https://aml-store.com/it/", f"https://aml-store.com/{lang}/")
+    out = out.replace("https://eurolicenze.com/it/", f"https://eurolicenze.com/{lang}/")
     out = out.replace('href="/it/', f'href="/{lang}/')
 
     new_hreflang_block = hreflang_block[:-len(
-        '    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/microsoft-365-family">'
+        '    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/microsoft-365-family">'
     )] + (
-        f'    <link rel="alternate" hreflang="{lang}" href="https://aml-store.com/{lang}/microsoft-365-family">\n'
-        '    <link rel="alternate" hreflang="x-default" href="https://aml-store.com/it/microsoft-365-family">'
+        f'    <link rel="alternate" hreflang="{lang}" href="https://eurolicenze.com/{lang}/microsoft-365-family">\n'
+        '    <link rel="alternate" hreflang="x-default" href="https://eurolicenze.com/it/microsoft-365-family">'
     )
     out = out.replace(hreflang_placeholder, new_hreflang_block, 1)
     out = out.replace(

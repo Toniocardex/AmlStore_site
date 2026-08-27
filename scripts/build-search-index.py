@@ -38,7 +38,7 @@ JSONLD_RE = re.compile(
     re.DOTALL,
 )
 
-SITE_PREFIX = "https://aml-store.com"
+SITE_PREFIX = "https://eurolicenze.com"
 
 
 def find_node(graph, type_name):

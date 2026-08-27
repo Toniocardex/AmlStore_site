@@ -747,11 +747,11 @@ def localize(html: str, lang: str, og: str, tp_host: str, tp_locale: str, pairs:
     out = out.replace('lang="it"', f'lang="{lang}"', 1)
     out = out.replace("og:locale\" content=\"it_IT\"", f"og:locale\" content=\"{og}\"")
     out = out.replace('"inLanguage": "it"', f'"inLanguage": "{lang}"')
-    out = out.replace("https://aml-store.com/it/", f"https://aml-store.com/{lang}/")
+    out = out.replace("https://eurolicenze.com/it/", f"https://eurolicenze.com/{lang}/")
     # Keep x-default on Italian after the path rewrite above
     out = out.replace(
-        f'hreflang="x-default" href="https://aml-store.com/{lang}/microsoft-365-family"',
-        'hreflang="x-default" href="https://aml-store.com/it/microsoft-365-family"',
+        f'hreflang="x-default" href="https://eurolicenze.com/{lang}/microsoft-365-family"',
+        'hreflang="x-default" href="https://eurolicenze.com/it/microsoft-365-family"',
     )
     out = out.replace('href="/it/', f'href="/{lang}/')
     out = out.replace("https://it.trustpilot.com/review/aml-store.com", f"https://{tp_host}/review/aml-store.com")

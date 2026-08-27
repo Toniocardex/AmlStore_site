@@ -4,8 +4,8 @@ export interface OriginEnv { SITE_ORIGIN?: string }
 
 export function allowedChatOrigins(env: OriginEnv): ReadonlySet<string> {
     const values = new Set([
-        'https://aml-store.com',
-        'https://www.aml-store.com',
+        'https://eurolicenze.com',
+        'https://www.eurolicenze.com',
         'http://localhost:8788',
         'http://127.0.0.1:8788',
     ]);
