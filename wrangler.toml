@@ -53,7 +53,7 @@ PAYPAL_BASE_URL = "https://api-m.paypal.com"
 # CF_ACCESS_TEAM_DOMAIN: Zero Trust → Settings → Custom Pages → team domain (es. "xyz.cloudflareaccess.com")
 CF_ACCESS_AUD         = "61bb5d94ba4477a21b272c98ef419414d508f3a3f5378f949c87b5bce2d403c1"
 CF_ACCESS_TEAM_DOMAIN = "amlstore.cloudflareaccess.com"
-ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
+ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Desk@eurolicenze.com,Antonino.cardelli@outlook.it"
 ADMIN_ALLOW_DELETE_ORDERS = "1"
 ADMIN_ALLOW_DELETE_CARTS = "1"
 
@@ -148,7 +148,7 @@ PAYPAL_BASE_URL = "https://api-m.sandbox.paypal.com"
 # questo host — nel frattempo /admin/support su preview risponde 401 di suo.
 CF_ACCESS_AUD         = "61bb5d94ba4477a21b272c98ef419414d508f3a3f5378f949c87b5bce2d403c1"
 CF_ACCESS_TEAM_DOMAIN = "amlstore.cloudflareaccess.com"
-ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Antonino.cardelli@outlook.it"
+ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Desk@eurolicenze.com,Antonino.cardelli@outlook.it"
 ADMIN_ALLOW_DELETE_ORDERS = "1"
 ADMIN_ALLOW_DELETE_CARTS = "1"
 
