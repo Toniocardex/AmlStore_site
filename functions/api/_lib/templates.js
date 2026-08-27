@@ -320,7 +320,7 @@ const i18n = {
 /** Dati bonifico fissi */
 const BANK = {
     iban:  'IT91 S062 3033 5400 0001 5095 392',
-    bene:  'Eurolicenze di Cardelli Antonino',
+    bene:  'Licensoft di Cardelli Antonino',
     bank:  'Crédit Agricole',
 };
 
