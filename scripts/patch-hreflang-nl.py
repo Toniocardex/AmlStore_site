@@ -25,7 +25,7 @@ LOCALIZED = {
 }
 
 HREFLANG_PT = re.compile(
-    r'(<link rel="alternate" hreflang="pt"\s+href="https://aml-store\.com/pt/([^"]*)">)\s*'
+    r'(<link rel="alternate" hreflang="pt"\s+href="https://eurolicenze\.com/pt/([^"]*)">)\s*'
     r'(<link rel="alternate" hreflang="x-default")',
 )
 INLANG_ARR = (
