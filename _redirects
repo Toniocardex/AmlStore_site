@@ -621,9 +621,3 @@ https://www.eurolicenze.com/* https://eurolicenze.com/:splat 301
 /it/antivirus/bitdefender-antivirus-plus /it/bitdefender-plus-1-device 301
 /it/antivirus/kaspersky-standard /it/kaspersky-standard 301
 /it/antivirus/mcafee-total-protection /it/mcafee-total-protection-1-device 301
-
-# ── Catch-all migrazione eurolicenze.com (SEMPRE ultima regola) ─────────────
-# Safety net per qualunque URL del vecchio Eurolicenze-site non mappato sopra
-# (pagine minori, articoli non censiti). 302 perché non è una corrispondenza
-# 1:1 certa, solo per evitare 404 secchi.
-/* /it/ 302
