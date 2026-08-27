@@ -96,7 +96,7 @@
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: #ffffff;
-    max-width: 18ch;
+    max-width: 23ch;
 }
 
 .home-hero-subtitle {
@@ -981,9 +981,12 @@
     );
 }
 
-/* La larghezza resta contenuta per non arrivare sulla persona. */
+/* Con la vecchia foto (una persona a destra) la colonna restava stretta per
+   non arrivarci sopra. La composizione attuale (collage prodotto, nessun
+   soggetto fisso) tollera una colonna piu' larga: qui serve anche a far
+   stare "Protezione originale," su una riga sola invece di spezzarsi. */
 .home-hero--consumer .home-hero-content {
-    max-width: 30rem;
+    max-width: 34rem;
 }
 
 .home-hero--consumer .home-hero-title {
