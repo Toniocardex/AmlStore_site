@@ -2320,7 +2320,7 @@
                 <div class="header-container">
                     <div class="header-brand">
                         <a href="${esc(homeHref)}" class="logo">
-                            <img src="${esc(logoSrc)}" width="280" height="56" alt="${esc(t.logoAlt)}">
+                            <img src="${esc(logoSrc)}" width="168" height="56" alt="${esc(t.logoAlt)}">
                         </a>
                     </div>
                     <nav class="header-nav nav-links" aria-label="Primary">
@@ -2478,7 +2478,7 @@
                 <div class="mobile-drawer">
                     <div class="drawer-header">
                         <a href="${esc(homeHref)}" class="logo">
-                            <img src="${esc(logoSrc)}" width="260" height="52" alt="${esc(t.logoAlt)}">
+                            <img src="${esc(logoSrc)}" width="156" height="52" alt="${esc(t.logoAlt)}">
                         </a>
                         <button type="button" class="close-drawer" aria-label="${esc(t.closeNavMenu)}">
                             <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>

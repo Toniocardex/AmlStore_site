@@ -614,7 +614,7 @@ class EcommerceFooter extends HTMLElement {
                     <div class="container footer-main">
                         <div class="brand-col">
                             <a href="${esc(homeHref)}" class="footer-logo">
-                                <img src="${esc(logoSrc)}" width="400" height="96" alt="${esc(t.logoAlt)}">
+                                <img src="${esc(logoSrc)}" width="288" height="96" alt="${esc(t.logoAlt)}">
                             </a>
                             <p class="brand-desc">${esc(t.brandDesc)}</p>
                             <div class="brand-contacts">
