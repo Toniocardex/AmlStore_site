@@ -1401,6 +1401,10 @@
     width: 100vw;
     padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2rem);
     box-sizing: border-box;
+    /* Larghezza della figura del consulente. Vive qui e non nella media query
+       perche' la stessa misura serve due volte: alla figura e alla corsia che
+       le viene riservata dentro la griglia (vedi .home-guide__cols). */
+    --guide-figure-w: clamp(280px, 22vw, 420px);
 }
 
 .home-guide__inner {
@@ -1411,38 +1415,55 @@
 }
 
 /* Il consulente non vive dentro una card: e' parte della composizione della
-   banda scura, ancorato al bordo destro con il configuratore che gli passa
-   davanti. Serve un ritaglio su sfondo TRASPARENTE: una foto con fondo
-   bianco qui stonerebbe sul navy.
+   banda scura, ancorato al bordo destro accanto al configuratore. Serve un
+   ritaglio su sfondo TRASPARENTE: una foto con fondo bianco qui stonerebbe
+   sul navy.
 
-   E' un background e non un <img> di proposito: sotto i 1200px il gutter
-   destro sparisce e la figura finirebbe sopra il configuratore, ma un <img>
-   display:none veniva comunque scaricato dai telefoni (61 KB sprecati su
-   ogni visita mobile). Dichiarato dentro la media query non viene proprio
-   richiesto — stessa tecnica di footer.css e consultation.css. */
+   E' un background e non un <img> di proposito: sotto i 1200px non c'e'
+   spazio per la figura, ma un <img> display:none veniva comunque scaricato
+   dai telefoni (61 KB sprecati su ogni visita mobile). Dichiarato dentro la
+   media query non viene proprio richiesto — stessa tecnica di footer.css e
+   consultation.css. */
 .home-guide__figure {
     display: none;
 }
 
 @media (min-width: 1200px) {
+    /* Corsia riservata alla figura. Prima non esisteva: la figura passava
+       dietro al pannello, che per restare leggibile doveva farsi quasi opaco.
+       Finche' il pannello era corto la testa emergeva e la composizione
+       reggeva; da quando mostra anche il caveat e i link secondari e'
+       cresciuto e copriva il consulente quasi per intero, viso compreso.
+       Restringendo le colonne la figura sta accanto e non piu' dietro.
+
+       Si sottrae il gutter di pagina perche' quella parte di figura cade
+       gia' fuori dal contenuto: su schermi molto larghi il gutter la ospita
+       quasi tutta e le colonne non perdono quasi nulla. Sotto i 1244px la
+       formula sovrastima il gutter (li' l'inner e' limitato dal padding, non
+       dalla sua max-width) e la corsia risulta piu' larga del necessario:
+       e' l'errore dalla parte giusta, non produce sovrapposizioni.
+
+       I 2.5rem non sono solo il respiro fra pannello e figura: 100vw conta
+       anche la scrollbar mentre il gutter reale no, quindi il gutter viene
+       sovrastimato di mezza scrollbar e il margine se ne mangia una parte. */
+    .home-guide__cols {
+        padding-right: max(0px, calc(
+            var(--guide-figure-w) - (100vw - var(--home-content-w)) / 2 + 2.5rem
+        ));
+    }
+
     .home-guide__figure {
         display: block;
         position: absolute;
-        /* La figura vive nel gutter a destra della colonna centrale: il suo
-           bordo sinistro si allinea al bordo destro del contenuto, cosi' su
-           schermi larghi non copre affatto il pannello. Il 438px e' la sua
-           larghezza resa (570px di altezza per l'aspect ratio 769/1000).
-           Quando il gutter e' piu' stretto della figura il valore diventa
-           negativo e la figura sborda a destra invece di invadere il
-           pannello; il max() ferma lo sbordo a 70px per non perdere la
-           spalla destra. */
-        right: max(-70px, calc(50% - var(--home-content-w) / 2 - 438px));
-        /* Ancorata al fondo della banda, non sospesa a mezz'aria. L'altezza
-           e' volutamente contenuta: oltre i ~580px la figura diventa cosi'
-           larga da finire con il viso dietro il pannello invece che accanto. */
+        /* Ancorata al bordo destro della banda, che e' a tutta pagina: la
+           figura arriva al bordo dello schermo senza perdere la spalla. */
+        right: 0;
         bottom: 0;
         z-index: 0;
-        height: min(84%, 570px);
+        /* Dimensionata in larghezza e non in altezza: e' la larghezza a
+           decidere quanto invade la griglia, e la corsia sopra e' calcolata
+           sulla stessa variabile. L'aspect ratio nativo fa il resto. */
+        width: var(--guide-figure-w);
         aspect-ratio: 769 / 1000;
         background: url("../asset/media/home-guide-consultant.webp") bottom right / contain no-repeat;
         pointer-events: none;
@@ -1472,11 +1493,150 @@
     align-items: start;
 }
 
+/* Barra di stato del configuratore: progresso + "ricomincia". Il totale non e'
+   fisso (i rami hanno profondita' diversa), quindi i segmenti in eccesso
+   vengono nascosti dal JS invece che disegnati spenti. */
+.home-guide__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.home-guide__progress {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.home-guide__progress-seg {
+    width: 26px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--aml-slate-700);
+    transition: background 0.25s ease;
+}
+
+.home-guide__progress-seg.is-on {
+    background: var(--aml-orange-500);
+}
+
+.home-guide__progress-seg[hidden] {
+    display: none;
+}
+
+.home-guide__progress-label {
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--aml-slate-400, #94a3b8);
+}
+
+.home-guide__reset {
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    color: var(--aml-slate-300);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.home-guide__reset:hover {
+    color: #ffffff;
+}
+
+.home-guide__reset[hidden] {
+    display: none;
+}
+
+/* Filo di Arianna: ogni risposta gia' data resta cliccabile per tornarci
+   sopra. E' il pezzo che rende il percorso a piu' passi accettabile — senza,
+   sbagliare al passo 2 obbligherebbe a ricominciare da capo. */
+.home-guide__trail {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    list-style: none;
+}
+
+.home-guide__trail[hidden] {
+    display: none;
+}
+
+.home-guide__trail li {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.home-guide__trail li + li::before {
+    content: "›";
+    color: var(--aml-slate-500, #64748b);
+    font-size: var(--aml-text-sm);
+}
+
+.home-guide__crumb {
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--aml-slate-700);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--aml-slate-900) 55%, transparent);
+    color: var(--aml-slate-300);
+    font: inherit;
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.home-guide__crumb:hover {
+    border-color: var(--aml-orange-500);
+    color: #ffffff;
+}
+
+.home-guide__crumb:focus-visible {
+    outline: 2px solid var(--aml-orange-400);
+    outline-offset: 2px;
+}
+
+.home-guide__step[hidden] {
+    display: none;
+}
+
 .home-guide__question {
     margin: 0 0 1rem;
     font-size: var(--aml-text-sm);
     font-weight: 700;
     color: var(--aml-slate-200);
+}
+
+/* Nel wizard la domanda e' una alla volta ed e' il titolo del passo: puo'
+   permettersi il peso di un titolo vero. Nel markup legacy (altre lingue) le
+   domande sono due insieme e restano piccole, come sopra. */
+.home-guide__step .home-guide__question {
+    font-size: var(--aml-text-lg);
+    line-height: 1.35;
+    color: #ffffff;
+}
+
+/* Riceve il focus a ogni cambio di passo (tabindex="-1"): senza questa regola
+   il browser disegnerebbe comunque un anello attorno a un paragrafo, che a
+   mouse risulta un artefatto. Il focus resta visibile da tastiera. */
+.home-guide__question:focus {
+    outline: none;
+}
+
+.home-guide__question:focus-visible {
+    outline: 2px solid var(--aml-orange-400);
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .home-guide__options {
@@ -1548,8 +1708,9 @@
     padding: clamp(1.25rem, 3vw, 1.75rem);
     border-radius: 12px;
     border: 1px solid color-mix(in srgb, var(--aml-orange-500) 40%, transparent);
-    /* Quasi opaco, non piu' 70%: con la figura del consulente dietro, un
-       pannello traslucido lascerebbe trasparire il viso sotto il testo. */
+    /* Quasi opaco. Nasceva per coprire la figura del consulente, che passava
+       dietro; ora la figura ha una corsia sua e non ci passa piu', ma il
+       fondo pieno resta la scelta giusta per il contrasto del testo. */
     background: color-mix(in srgb, var(--aml-slate-800) 96%, transparent);
 }
 
@@ -1586,6 +1747,111 @@
     color: var(--aml-slate-300);
 }
 
+/* Stato di partenza: il pannello non finge una raccomandazione prima che il
+   cliente abbia risposto (era il difetto della versione precedente, che
+   partiva sempre dallo stesso prodotto). Al suo posto spiega cosa succede e
+   offre le tre guide di confronto, utili anche a chi non fa il percorso. */
+.home-guide__result.is-empty {
+    border-color: var(--aml-slate-700);
+}
+
+.home-guide__intro[hidden],
+.home-guide__card[hidden] {
+    display: none;
+}
+
+.home-guide__intro-sub {
+    margin: 1.25rem 0 0.5rem;
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    color: var(--aml-slate-400, #94a3b8);
+}
+
+.home-guide__hublist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+}
+
+.home-guide__hublist a {
+    font-size: var(--aml-text-sm);
+    font-weight: 700;
+    color: var(--aml-orange-400);
+    text-decoration: none;
+}
+
+.home-guide__hublist a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Il caveat. Serve a dire prima dell'acquisto quello che di solito si scopre
+   dopo (CAL escluse, supporto Windows 10 finito, licenza per singola
+   postazione): e' il motivo per cui il configuratore non e' un menu. */
+.home-guide__note {
+    display: flex;
+    gap: 0.5rem;
+    margin: -0.5rem 0 1.25rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--aml-orange-500);
+    background: color-mix(in srgb, var(--aml-orange-500) 12%, transparent);
+    font-size: var(--aml-text-xs);
+    line-height: 1.5;
+    color: var(--aml-slate-200);
+}
+
+.home-guide__note::before {
+    content: "!";
+    flex: 0 0 auto;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--aml-orange-500);
+    color: #ffffff;
+    font-weight: 700;
+    line-height: 1rem;
+    text-align: center;
+}
+
+.home-guide__note[hidden] {
+    display: none;
+}
+
+.home-guide__cta {
+    display: inline-flex;
+}
+
+/* Le vie d'uscita: l'alternativa concreta, il confronto e il contatto umano.
+   Senza queste il percorso resta un vicolo cieco quando il consiglio non
+   convince. */
+.home-guide__links {
+    display: grid;
+    gap: 0.5rem;
+    margin: 1.1rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--aml-slate-700);
+}
+
+.home-guide__link {
+    font-size: var(--aml-text-xs);
+    font-weight: 700;
+    color: var(--aml-slate-300);
+    text-decoration: none;
+}
+
+.home-guide__link:hover {
+    color: var(--aml-orange-400);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.home-guide__link[hidden] {
+    display: none;
+}
+
 @media (max-width: 760px) {
     .home-guide__cols {
         grid-template-columns: 1fr;
@@ -1593,7 +1859,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .home-guide__option {
+    .home-guide__option,
+    .home-guide__crumb,
+    .home-guide__progress-seg {
         transition: none;
     }
 }
