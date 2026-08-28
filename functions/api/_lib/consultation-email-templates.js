@@ -88,8 +88,8 @@ export function consultationInternalEmail(lead) {
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:24px;background:#f4f6f8">
     <tr><td align="center">
       <table width="680" cellpadding="0" cellspacing="0" style="width:100%;max-width:680px;background:#fff;border:1px solid #dce3ea;border-radius:10px;overflow:hidden">
-        <tr><td style="padding:22px 26px;background:#14243a;color:#fff">
-          <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#b9cbe1">Eurolicenze</p>
+        <tr><td style="padding:22px 26px;background:#0F172A;color:#fff">
+          <p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#CBD5E1">Eurolicenze</p>
           <h1 style="margin:0;font-size:22px">Nuova richiesta di consulenza</h1>
         </td></tr>
         <tr><td style="padding:24px 26px">
@@ -146,11 +146,11 @@ export function consultationConfirmationEmail(lead) {
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:24px;background:#f4f6f8">
     <tr><td align="center">
       <table width="620" cellpadding="0" cellspacing="0" style="width:100%;max-width:620px;background:#fff;border:1px solid #dce3ea;border-radius:10px;overflow:hidden">
-        <tr><td style="padding:22px 26px;background:#14243a;color:#fff"><strong style="font-size:18px">Eurolicenze</strong></td></tr>
+        <tr><td style="padding:22px 26px;background:#0F172A;color:#fff"><strong style="font-size:18px">Eurolicenze</strong></td></tr>
         <tr><td style="padding:28px 26px">
           <h1 style="margin:0 0 14px;font-size:24px">${esc(copy.heading)}</h1>
           <p style="margin:0 0 16px;line-height:1.65">${esc(copy.intro)}</p>
-          <p style="margin:0 0 20px;padding:12px 14px;background:#eaf0f6;border-radius:8px;line-height:1.55"><strong>${esc(copy.support)}</strong></p>
+          <p style="margin:0 0 20px;padding:12px 14px;background:#FFF3E9;border-radius:8px;line-height:1.55"><strong>${esc(copy.support)}</strong></p>
           <p style="margin:0 0 18px;color:#5f6b7a">${esc(copy.reference)}: <strong style="color:#152033">${esc(reference)}</strong></p>
           <p style="margin:0;color:#5f6b7a;font-size:13px;line-height:1.55">${esc(copy.footer)}</p>
         </td></tr>

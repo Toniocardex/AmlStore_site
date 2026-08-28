@@ -1,28 +1,30 @@
 /**
  * templates.js — template email HTML + plain text per Eurolicenze.
  * Inline styles obbligatori per compatibilità email client.
- * Palette istituzionale navy, allineata a --aml-* in css/page.css.
+ * Palette brand arancione, valori literal allineati ai token --aml-* di
+ * css/page.css (i client email non supportano le custom properties).
  */
 
-const ACCENT       = '#3267AC';
-const ACCENT_DARK  = '#14243A';
-const ACCENT_SOFT  = '#EAF0F6';
-const ACCENT_SOFT_BORDER = '#C7D6E5';
-const BG           = '#F4F6F8';
+const ACCENT       = '#C74104';   // --aml-brand (orange-700) · testo, link, numeri, bordi, CTA
+const ACCENT_DARK  = '#C74104';   // accento "forte" del brand (ex navy) · 5.2:1 su bianco
+const SURFACE_DARK = '#0F172A';   // --aml-navy (slate-900) · bande scure di header
+const ACCENT_SOFT  = '#FFF3E9';   // fondo tenue arancione (righe tabella, box omaggio)
+const ACCENT_SOFT_BORDER = '#FFD1B3'; // --aml-orange-200
+const BG           = '#F1F5F9';   // --aml-paper (slate-100)
 const CARD_BG      = '#ffffff';
-const TEXT         = '#152033';
-const TEXT_MUTED   = '#5F6B7A';
-const BORDER       = '#DCE3EA';
-const SUCCESS      = '#1F7A52';
-const SUCCESS_SOFT = '#E8F3ED';
-const AMBER_BG     = '#FCF3D9';
-const AMBER_BORDER = '#f3ce6b';
-const AMBER_TEXT   = '#92400E';
+const TEXT         = '#1E293B';   // --aml-ink (slate-800)
+const TEXT_MUTED   = '#475569';   // --aml-ink-2 (slate-600)
+const BORDER       = '#E2E8F0';   // --aml-line (slate-200)
+const SUCCESS      = '#1F7A52';   // --aml-ok (invariato)
+const SUCCESS_SOFT = '#E8F3ED';   // --aml-ok-bg (invariato)
+const AMBER_BG     = '#FCF3D9';   // --aml-warn-bg (invariato)
+const AMBER_BORDER = '#FBBF24';   // --aml-amber-400
+const AMBER_TEXT   = '#92400E';   // --aml-warn (invariato)
 const AMBER_TEXT_SOFT = '#78350f';
-const GOLD         = '#8C6423';
-const GOLD_SOFT    = '#F5EEDD';
-const GOLD_BORDER  = '#E4D3AC';
-const TEXT_FAINT   = '#8B95A3';
+const GOLD         = '#C74104';   // ex oro → accento brand (eyebrow, filetto superiore, pulsante attiva)
+const GOLD_SOFT    = '#FFF7ED';   // --aml-orange-50
+const GOLD_BORDER  = '#FFD1B3';   // --aml-orange-200
+const TEXT_FAINT   = '#94A3B8';   // --aml-slate-400
 const HEADING_FONT = "'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
 const BODY_FONT    = "-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
 
@@ -475,10 +477,10 @@ export function emailHtml(order, isPaid, guideAttached = false) {
 <body style="margin:0;padding:0;background:${BG};font-family:${BODY_FONT}">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:32px 16px">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(0,49,130,0.1)">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(15,23,42,0.10)">
 
   <!-- Logo header -->
-  <tr><td style="background:${ACCENT_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
+  <tr><td style="background:${SURFACE_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
         <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Eurolicenze" width="140" height="auto"
@@ -549,7 +551,7 @@ export function emailHtml(order, isPaid, guideAttached = false) {
   <!-- CTA -->
   <tr><td style="background:${CARD_BG};padding:6px 32px 32px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER};text-align:center">
     <a href="https://eurolicenze.com/${escHtml(locale)}/"
-       style="display:inline-block;background:${ACCENT_DARK};color:#fff;font-size:14.5px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;box-shadow:0 6px 18px rgba(0,49,130,0.3)">${t.cta}</a>
+       style="display:inline-block;background:${ACCENT_DARK};color:#fff;font-size:14.5px;font-weight:700;text-decoration:none;padding:14px 32px;border-radius:8px;box-shadow:0 6px 18px rgba(199,65,4,0.30)">${t.cta}</a>
   </td></tr>
 
   <!-- Footer -->
@@ -734,7 +736,7 @@ function activationBlock(key, locale, eyebrow) {
         <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${GOLD_SOFT};border:1px solid ${GOLD_BORDER};border-radius:8px">
           <tr><td style="padding:12px 14px">
             <p style="margin:0 0 3px;font-size:10.5px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:.6px">${escHtml(eyebrow)}</p>
-            <p style="margin:0;font-size:12.5px;color:#6b5530;line-height:1.55">${escHtml(text)}</p>
+            <p style="margin:0;font-size:12.5px;color:#7E2702;line-height:1.55">${escHtml(text)}</p>
           </td></tr>
         </table>`;
 }
@@ -814,10 +816,10 @@ export function licenseEmailHtml({ locale, orderId, name, items }) {
 <body style="margin:0;padding:0;background:${BG};font-family:${BODY_FONT}">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:32px 16px">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(20,36,58,0.12)">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(15,23,42,0.12)">
 
   <!-- Logo header -->
-  <tr><td style="background:${ACCENT_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
+  <tr><td style="background:${SURFACE_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
     <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
       <tr><td>
         <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Eurolicenze" width="140" height="auto"

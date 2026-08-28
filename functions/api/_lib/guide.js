@@ -14,7 +14,7 @@ import { safeParseJSON } from './utils.js';
 
 /** Oggetto R2 e nome con cui il cliente vede l'allegato. */
 export const GUIDE_KEY      = 'guida-copilot-microsoft-365.pdf';
-export const GUIDE_FILENAME = 'Guida-Copilot-Microsoft-365-Aml-Store.pdf';
+export const GUIDE_FILENAME = 'Guida-Copilot-Microsoft-365-Eurolicenze.pdf';
 
 /**
  * SKU che danno diritto alla guida: le due licenze M365 dirette più i bundle
