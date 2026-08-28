@@ -963,124 +963,374 @@
             </div>
         </section>
 
-        <section class="home-guide" aria-labelledby="home-guide-title" data-home-guide>
+        <section class="home-guide" aria-labelledby="home-guide-title" data-home-guide
+            data-i18n-step="Stap {n} van {total}" data-i18n-done="Klaar" data-i18n-crumb="Terug naar deze vraag">
             <div class="home-guide__figure" aria-hidden="true"></div>
             <div class="home-guide__inner">
                 <p class="home-section-eyebrow">Koopgids</p>
                 <h2 id="home-guide-title" class="home-section-title">Weet u niet welke licentie u moet kiezen?</h2>
-                <p class="home-guide__lede">Beantwoord twee vragen en wij geven aan welke software bij u past.</p>
+                <p class="home-guide__lede">Drie vragen over uw situatie, niet over een productcategorie. Op het einde wijzen we u één licentie aan, de reden voor die keuze en wat u moet weten voordat u koopt.</p>
                 <div class="home-guide__cols">
                     <div class="home-guide__steps">
-                        <p class="home-guide__question">1. Wat hebt u nodig?</p>
-                        <div class="home-guide__options home-guide__options--inline">
-                            <button type="button" class="home-guide__option is-selected" data-guide-category="antivirus" aria-pressed="true">Antivirus</button>
-                            <button type="button" class="home-guide__option" data-guide-category="office" aria-pressed="false">Office en productiviteit</button>
-                            <button type="button" class="home-guide__option" data-guide-category="windows" aria-pressed="false">Windows</button>
-                            <button type="button" class="home-guide__option" data-guide-category="business" aria-pressed="false">Servers en zakelijk</button>
+                        <div class="home-guide__meta">
+                            <span class="home-guide__progress" data-guide-progress aria-hidden="true">
+                                <span class="home-guide__progress-seg is-on"></span>
+                                <span class="home-guide__progress-seg"></span>
+                                <span class="home-guide__progress-seg"></span>
+                            </span>
+                            <span class="home-guide__progress-label" data-guide-progress-label>Stap 1 van 3</span>
+                            <button type="button" class="home-guide__reset" data-guide-reset hidden>Opnieuw beginnen</button>
                         </div>
 
-                        <div class="home-guide__step2" data-guide-group="office" hidden>
-                            <p class="home-guide__question">2. Voor wie is het?</p>
-                            <div class="home-guide__options">
-                                <button type="button" class="home-guide__option is-selected" data-guide-option
-                                    aria-pressed="true"
-                                    data-guide-href="microsoft-365-personal"
-                                    data-guide-title-value="Microsoft 365 Personal · 12 months"
-                                    data-guide-body-value="Word, Excel, PowerPoint en Outlook, 1 TB OneDrive en Copilot, op 5 apparaten tegelijk.">Alleen ik (1 gebruiker)</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="microsoft-365-family"
-                                    data-guide-title-value="Microsoft 365 Family · 12 months"
-                                    data-guide-body-value="Tot 6 personen, elk met een eigen account en 1 TB OneDrive. Copilot blijft bij de abonnementhouder.">Het hele gezin (tot 6)</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="office-2024-home-business"
-                                    data-guide-title-value="Office 2024 Home &amp; Business"
-                                    data-guide-body-value="Word, Excel, PowerPoint, Outlook en OneNote op 1 pc of Mac. Permanente licentie: eenmalig betalen, zonder jaarlijkse verlenging.">Ik betaal liever eenmalig</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="microsoft-365-business-standard"
-                                    data-guide-title-value="Microsoft 365 Business Standard"
-                                    data-guide-body-value="Premium Office-apps voor bedrijven, met de cloudservices die bij het Microsoft-plan horen.">Mijn bedrijf</button>
+                        <ol class="home-guide__trail" data-guide-trail hidden></ol>
+
+                        <!-- ══ Stap 1 ══ -->
+                        <div class="home-guide__step" data-guide-step="root">
+                            <p class="home-guide__question" tabindex="-1">Waar beginnen we?</p>
+                            <div class="home-guide__options home-guide__options--inline">
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="av" data-guide-chip="Bescherming">Ik moet mijn apparaten beschermen</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="office" data-guide-chip="Office">Ik heb Word, Excel en Outlook nodig</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="win" data-guide-chip="Windows">Ik moet Windows activeren of bijwerken</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="biz" data-guide-chip="Zakelijk">Ik moet mijn bedrijf uitrusten</button>
                             </div>
                         </div>
 
-                        <div class="home-guide__step2" data-guide-group="windows" hidden>
-                            <p class="home-guide__question">2. Wat voor pc?</p>
+                        <!-- ══ Tak antivirus ═══════════════════════════════════
+                             De beslissende vraag komt vóór het aantal
+                             apparaten: dat aantal kent de klant al, maar niet
+                             het criterium dat ESET, Kaspersky en Bitdefender
+                             onderscheidt. -->
+                        <div class="home-guide__step" data-guide-step="av" hidden>
+                            <p class="home-guide__question" tabindex="-1">Wat telt het zwaarst in uw bescherming?</p>
                             <div class="home-guide__options">
-                                <button type="button" class="home-guide__option is-selected" data-guide-option
-                                    aria-pressed="true"
-                                    data-guide-href="windows-11-home"
-                                    data-guide-title-value="Windows 11 Home"
-                                    data-guide-body-value="Originele digitale licentie voor één thuis-pc. Code en instructies per e-mail na betaling.">Persoonlijk gebruik, thuis</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="windows-11-pro"
-                                    data-guide-title-value="Windows 11 Pro"
-                                    data-guide-body-value="Professionele functies zoals BitLocker en Extern bureaublad, volgens Microsoft. Permanente licentie.">Werk of professionele studie</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="windows-10-pro"
-                                    data-guide-title-value="Windows 10 Pro"
-                                    data-guide-body-value="Originele 32/64-bits digitale licentie met professionele functies, voor hardware die niet compatibel is met Windows 11.">Een oudere pc</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="av-eset" data-guide-chip="Licht">Het mag de computer niet vertragen</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="av-kaspersky" data-guide-chip="Volledige suite">Ik wil een VPN en wachtwoordbeheerder inbegrepen</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="av-bitdefender" data-guide-chip="Alleen antivirus">Een degelijke antivirus is genoeg, zonder extra's</button>
                             </div>
                         </div>
 
-                        <div class="home-guide__step2" data-guide-group="antivirus">
-                            <p class="home-guide__question">2. Hoeveel apparaten wilt u beschermen?</p>
-                            <div class="home-guide__options">
-                                <button type="button" class="home-guide__option is-selected" data-guide-option
-                                    aria-pressed="true"
-                                    data-guide-href="eset-nod32-1-device"
-                                    data-guide-title-value="ESET NOD32 · 1 apparaat"
-                                    data-guide-body-value="Lichtgewicht antivirusbescherming voor één apparaat. Activering via het officiële ESET-portaal.">Slechts één</button>
+                        <div class="home-guide__step" data-guide-step="av-eset" hidden>
+                            <p class="home-guide__question" tabindex="-1">Hoeveel apparaten moet u dekken?</p>
+                            <div class="home-guide__options home-guide__options--inline">
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="bitdefender-plus-5-devices"
-                                    data-guide-title-value="Bitdefender Antivirus Plus · 5 apparaten"
-                                    data-guide-body-value="Dekt tot 5 apparaten: de gebruikelijke keuze voor een gezin. Activering via het officiële Bitdefender-portaal.">Tot 5 (gezin)</button>
+                                    data-result-href="eset-nod32-1-device"
+                                    data-result-title="ESET NOD32 Antivirus · 1 apparaat"
+                                    data-result-why="ESET NOD32 is de essentiële keuze: een antivirusengine en weinig meer, ontworpen om de bronnen van de computer zo min mogelijk te belasten. Activering via het officiële portaal ESET HOME."
+                                    data-result-note="Als u de pc lang houdt, kost de 2-jarige versie minder dan twee jaarlijkse verlengingen."
+                                    data-result-alt-href="eset-nod32-1-device-2y" data-result-alt-label="ESET NOD32 · 1 apparaat, 2 jaar"
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="ESET vergeleken met Kaspersky">1</button>
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="mcafee-total-protection-10-devices"
-                                    data-guide-title-value="McAfee Totaal Protection · 10 apparaten"
-                                    data-guide-body-value="Licentie voor 10 apparaten, activering via het officiële McAfee-portaal.">10 of meer</button>
+                                    data-result-href="eset-nod32-3-devices"
+                                    data-result-title="ESET NOD32 Antivirus · 3 apparaten"
+                                    data-result-why="Eén licentie voor drie apparaten, met dezelfde lichte engine als de versie voor één. Ze worden allemaal geactiveerd via hetzelfde ESET-HOME-account."
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="ESET vergeleken met Kaspersky">3</button>
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="kaspersky-plus"
-                                    data-guide-title-value="Kaspersky Plus · 1 apparaat"
-                                    data-guide-body-value="Plus-plan met de extra functies uit de Kaspersky-catalogus. Activeer via het officiële portaal.">Volledige bescherming</button>
+                                    data-result-href="eset-nod32-5-devices"
+                                    data-result-title="ESET NOD32 Antivirus · 5 apparaten"
+                                    data-result-why="De typische omvang voor een gezin: vijf apparaten gedekt door één licentie, zonder het gewicht van een volledige suite."
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="ESET vergeleken met Kaspersky">5</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="eset-nod32-10-devices"
+                                    data-result-title="ESET NOD32 Antivirus · 10 apparaten"
+                                    data-result-why="Tien apparaten met één licentie: de omvang die loont wanneer een huishouden of kantoor voorbij vijf te beschermen apparaten gaat."
+                                    data-result-compare-href="antivirus" data-result-compare-label="Alle antivirus in de catalogus">10</button>
                             </div>
                         </div>
 
-                        <div class="home-guide__step2" data-guide-group="business" hidden>
-                            <p class="home-guide__question">2. Wat wilt u beheren?</p>
+                        <div class="home-guide__step" data-guide-step="av-kaspersky" hidden>
+                            <p class="home-guide__question" tabindex="-1">Hoeveel apparaten moet u dekken?</p>
+                            <div class="home-guide__options home-guide__options--inline">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="kaspersky-premium-1-device"
+                                    data-result-title="Kaspersky Premium · 1 apparaat"
+                                    data-result-why="Premium is het hoogste plan in de Kaspersky-catalogus: naast de antivirus brengt het de extra tools van de suite, VPN en wachtwoordbeheer inbegrepen. Activering via My Kaspersky."
+                                    data-result-alt-href="kaspersky-plus" data-result-alt-label="Kaspersky Plus, het tussenplan"
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="Kaspersky vergeleken met ESET">1</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="kaspersky-premium-3-devices"
+                                    data-result-title="Kaspersky Premium · 3 apparaten"
+                                    data-result-why="De volledige tools van de Premium-suite uitgebreid naar drie apparaten, beheerd via één My Kaspersky-account."
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="Kaspersky vergeleken met ESET">3</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="kaspersky-premium-5-devices"
+                                    data-result-title="Kaspersky Premium · 5 apparaten"
+                                    data-result-why="Vijf apparaten met de volledige suite: de meest gevraagde opzet wanneer een huishouden pc's, telefoons en tablets allemaal moet dekken."
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="Kaspersky vergeleken met ESET">5</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="kaspersky-premium-10-devices"
+                                    data-result-title="Kaspersky Premium · 10 apparaten"
+                                    data-result-why="Het breedste niveau van de Premium-suite: tien apparaten met VPN en wachtwoordbeheer inbegrepen, onder één account."
+                                    data-result-compare-href="antivirus" data-result-compare-label="Alle antivirus in de catalogus">10</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="av-bitdefender" hidden>
+                            <p class="home-guide__question" tabindex="-1">Hoeveel apparaten moet u dekken?</p>
+                            <div class="home-guide__options home-guide__options--inline">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="bitdefender-plus-1-device"
+                                    data-result-title="Bitdefender Antivirus Plus · 1 apparaat"
+                                    data-result-why="Antivirus Plus is het instapniveau van Bitdefender: proactieve, lichte antimalwarebescherming, zonder de extra modules van de hogere suites. Activering via Bitdefender Central."
+                                    data-result-note="Het is een Windows-licentie: om ook Mac of Android te dekken hebt u een suite van een hoger niveau nodig."
+                                    data-result-compare-href="norton-vs-bitdefender" data-result-compare-label="Bitdefender vergeleken met Norton">1</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="bitdefender-plus-3-devices"
+                                    data-result-title="Bitdefender Antivirus Plus · 3 apparaten"
+                                    data-result-why="Dezelfde antimalwarebescherming op drie machines, beheerd via één Bitdefender Central-account."
+                                    data-result-compare-href="norton-vs-bitdefender" data-result-compare-label="Bitdefender vergeleken met Norton">3</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="bitdefender-plus-5-devices"
+                                    data-result-title="Bitdefender Antivirus Plus · 5 apparaten"
+                                    data-result-why="Vijf machines gedekt zonder te betalen voor modules die u niet zou gebruiken: de keuze voor wie de antivirus wil en niets meer."
+                                    data-result-compare-href="norton-vs-bitdefender" data-result-compare-label="Bitdefender vergeleken met Norton">5</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="bitdefender-plus-10-devices"
+                                    data-result-title="Bitdefender Antivirus Plus · 10 apparaten"
+                                    data-result-why="Tien machines op het basisniveau van Bitdefender: brede dekking terwijl het pakket essentieel blijft."
+                                    data-result-compare-href="antivirus" data-result-compare-label="Alle antivirus in de catalogus">10</button>
+                            </div>
+                        </div>
+
+                        <!-- ══ Tak Office ════════════════════════════════════
+                             De echte splitsing is niet „voor wie", maar
+                             abonnement tegenover permanente licentie: de keuze
+                             waarbij het vaakst fout gaat, dus in stap 2. -->
+                        <div class="home-guide__step" data-guide-step="office" hidden>
+                            <p class="home-guide__question" tabindex="-1">Hoe betaalt u liever?</p>
                             <div class="home-guide__options">
-                                <button type="button" class="home-guide__option is-selected" data-guide-option
-                                    aria-pressed="true"
-                                    data-guide-href="microsoft-365-business-standard"
-                                    data-guide-title-value="Microsoft 365 Business Standard"
-                                    data-guide-body-value="Premium Office-apps voor bedrijven, met de cloudservices die bij het Microsoft-plan horen.">De werkstations van mijn team</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="office-sub" data-guide-chip="Abonnement">Een jaarabonnement, altijd up-to-date</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="office-perp" data-guide-chip="Eenmalig">Eenmalig, zonder verlengingen</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="office-sub" hidden>
+                            <p class="home-guide__question" tabindex="-1">Wie gaat de apps gebruiken?</p>
+                            <div class="home-guide__options">
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="windows-server-2025"
-                                    data-guide-title-value="Windows Server 2025 Standard"
-                                    data-guide-body-value="Permanente licentie voor 16 cores. Clienttoegangslicenties (CAL’s) zijn niet inbegrepen: die moet u afzonderlijk kopen.">Een server</button>
+                                    data-guide-chip="Alleen ik"
+                                    data-result-href="microsoft-365-personal"
+                                    data-result-title="Microsoft 365 Personal · 12 maanden"
+                                    data-result-why="Personal is bedoeld voor één gebruiker: Word, Excel, PowerPoint en Outlook altijd up-to-date, 1 TB OneDrive en Copilot, te installeren op meerdere apparaten."
+                                    data-result-note="Als u thuis met meer dan één bent, dekt Family tot 6 personen met één abonnement: vaak loont het al vanaf de tweede gebruiker."
+                                    data-result-alt-href="microsoft-365-family" data-result-alt-label="Microsoft 365 Family, tot 6 personen"
+                                    data-result-compare-href="microsoft-365-family-vs-personal" data-result-compare-label="Personal of Family, de vergelijking">Alleen ik</button>
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="sql-server-2022-standard"
-                                    data-guide-title-value="SQL Server 2022 Standard"
-                                    data-guide-body-value="Permanente per-corelicentie (16 cores): bij dit model zijn geen CAL’s nodig en is het aantal gebruikers van de database onbeperkt.">Een SQL-database</button>
+                                    data-guide-chip="Gezin"
+                                    data-result-href="microsoft-365-family"
+                                    data-result-title="Microsoft 365 Family · 12 maanden"
+                                    data-result-why="Family dekt tot 6 personen: elk met een eigen account en een eigen 1 TB OneDrive, geen gedeelde ruimte."
+                                    data-result-note="Copilot blijft bij de abonnementhouder, het strekt zich niet uit tot de andere vijf accounts."
+                                    data-result-compare-href="microsoft-365-family-vs-personal" data-result-compare-label="Personal of Family, de vergelijking">Mijn gezin en ik (tot 6)</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Mijn team"
+                                    data-result-href="microsoft-365-business-standard"
+                                    data-result-title="Microsoft 365 Business Standard"
+                                    data-result-why="De zakelijke versie: premium Office-apps plus de cloudservices die bij het Microsoft-plan horen. De keuze wanneer u ook zakelijke e-mail op uw eigen domein nodig hebt."
+                                    data-result-compare-href="microsoft-365-solutions" data-result-compare-label="De Microsoft 365-oplossingen voor bedrijven">Mijn werkteam</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="office-perp" hidden>
+                            <p class="home-guide__question" tabindex="-1">Wat moet u echt gebruiken?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Zonder Outlook"
+                                    data-result-href="office-2024-home"
+                                    data-result-title="Office 2024 Home"
+                                    data-result-why="De permanente suite zonder Outlook: Word, Excel en PowerPoint op pc of Mac. U betaalt eenmalig en houdt de gekochte versie, zonder jaarlijkse verlenging."
+                                    data-result-note="Permanent betekent ook geen 1 TB OneDrive en geen automatische overgang naar de volgende versie."
+                                    data-result-alt-href="office-2024-home-business" data-result-alt-label="Office 2024 Home &amp; Business, met Outlook"
+                                    data-result-compare-href="office-2024-vs-microsoft-365" data-result-compare-label="Office 2024 of Microsoft 365, de vergelijking">Word, Excel en PowerPoint</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Met Outlook"
+                                    data-result-href="office-2024-home-business"
+                                    data-result-title="Office 2024 Home &amp; Business"
+                                    data-result-why="Voegt Outlook en OneNote toe aan de basis-apps, op 1 pc of Mac. De permanente versie om te kiezen wanneer de werk-e-mail via de client op de computer loopt."
+                                    data-result-note="De licentie geldt voor één machine: een tweede computer heeft een tweede licentie nodig."
+                                    data-result-compare-href="office-2024-vs-microsoft-365" data-result-compare-label="Office 2024 of Microsoft 365, de vergelijking">Ook Outlook, voor de werk-e-mail</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Volledige suite"
+                                    data-result-href="office-2021-professional-plus"
+                                    data-result-title="Office 2021 Professional Plus"
+                                    data-result-why="De volledige desktopsuite voor Windows met permanente licentie: de versie die zakelijk gewoonlijk wordt gekozen, waar elke toepassing nodig is en geen abonnement."
+                                    data-result-note="Alleen Windows: niet beschikbaar voor Mac."
+                                    data-result-compare-href="suite-office" data-result-compare-label="Alle Office-suites in de catalogus">De volledige suite, voor het werk</button>
+                            </div>
+                        </div>
+
+                        <!-- ══ Tak Windows ══════════════════════════════════ -->
+                        <div class="home-guide__step" data-guide-step="win" hidden>
+                            <p class="home-guide__question" tabindex="-1">Welke computer moet u activeren?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="win-11" data-guide-chip="Recente pc">Een recente pc, compatibel met Windows 11</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="win-10" data-guide-chip="Oudere pc">Een oudere pc, die Windows 11 niet aankan</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Fysieke drager"
+                                    data-result-href="windows-11-pro-oem-dvd"
+                                    data-result-title="Windows 11 Pro OEM · dvd en COA"
+                                    data-result-why="Fysieke verpakking met dvd in het Engels en COA met de productsleutel: de juiste keuze wanneer u een drager wilt bewaren en geen code per e-mail."
+                                    data-result-note="Geen digitale licentie: verzending per koerier, dus geen onmiddellijke levering."
+                                    data-result-alt-href="windows-11-pro" data-result-alt-label="Windows 11 Pro in de digitale versie"
+                                    data-result-compare-href="sistemi-operativi" data-result-compare-label="Alle besturingssystemen in de catalogus">Ik heb een fysieke drager nodig (dvd en COA)</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="win-11" hidden>
+                            <p class="home-guide__question" tabindex="-1">Waarvoor hebt u de pc nodig?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Thuis"
+                                    data-result-href="windows-11-home"
+                                    data-result-title="Windows 11 Home"
+                                    data-result-why="Home dekt alles wat een thuiscomputer nodig heeft. De extra functies van de Pro-versie — BitLocker, Extern bureaublad, lid worden van een domein — komen in dit geval nooit aan bod."
+                                    data-result-alt-href="windows-11-pro" data-result-alt-label="Windows 11 Pro, als u de professionele functies nodig hebt"
+                                    data-result-compare-href="windows-11-home-vs-pro" data-result-compare-label="Home of Pro, de vergelijking">Persoonlijk gebruik, thuis</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Werk"
+                                    data-result-href="windows-11-pro"
+                                    data-result-title="Windows 11 Pro"
+                                    data-result-why="Pro voegt BitLocker-versleuteling, inkomend Extern bureaublad en lid worden van een bedrijfsdomein toe: precies de functies die Home mist."
+                                    data-result-compare-href="windows-11-home-vs-pro" data-result-compare-label="Home of Pro, de vergelijking">Werk: versleuteling, extern bureaublad, domein</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="win-10" hidden>
+                            <p class="home-guide__question" tabindex="-1">Waarvoor hebt u de pc nodig?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Thuis"
+                                    data-result-href="windows-10-home"
+                                    data-result-title="Windows 10 Home"
+                                    data-result-why="Windows 10 blijft de weg wanneer de hardware niet aan de vereisten van Windows 11 voldoet. De Home-versie dekt het thuisgebruik."
+                                    data-result-note="De reguliere ondersteuning van Windows 10 eindigde in oktober 2025: kies het alleen als die pc echt niet naar Windows 11 kan."
+                                    data-result-compare-href="sistemi-operativi" data-result-compare-label="Alle besturingssystemen in de catalogus">Persoonlijk gebruik, thuis</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Werk"
+                                    data-result-href="windows-10-pro"
+                                    data-result-title="Windows 10 Pro"
+                                    data-result-why="De professionele functies — BitLocker, Extern bureaublad, domein — op hardware die niet compatibel is met Windows 11."
+                                    data-result-note="De reguliere ondersteuning van Windows 10 eindigde in oktober 2025: controleer eerst of de pc naar Windows 11 Pro kan."
+                                    data-result-alt-href="windows-11-pro" data-result-alt-label="Windows 11 Pro, als de pc compatibel is"
+                                    data-result-compare-href="sistemi-operativi" data-result-compare-label="Alle besturingssystemen in de catalogus">Werk: versleuteling, extern bureaublad, domein</button>
+                            </div>
+                        </div>
+
+                        <!-- ══ Tak zakelijk ═════════════════════════════════ -->
+                        <div class="home-guide__step" data-guide-step="biz" hidden>
+                            <p class="home-guide__question" tabindex="-1">Wat moet u dekken?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="biz-desk" data-guide-chip="Werkplekken">De werkplekken van uw medewerkers</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="biz-srv" data-guide-chip="Server">Een Windows-server</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="biz-sql" data-guide-chip="Database">Een SQL Server-database</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="biz-desk" hidden>
+                            <p class="home-guide__question" tabindex="-1">Hebt u ook zakelijke e-mail nodig?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Met cloud"
+                                    data-result-href="microsoft-365-business-standard"
+                                    data-result-title="Microsoft 365 Business Standard"
+                                    data-result-why="Brengt de premium Office-apps en de cloudservices van het Microsoft-plan samen: de standaardkeuze wanneer u naast de apps zakelijke e-mail op uw eigen domein nodig hebt."
+                                    data-result-note="De facturatie is per gebruiker per maand: het totaal verandert met het aantal medewerkers, niet met het aantal pc's."
+                                    data-result-compare-href="microsoft-365-solutions" data-result-compare-label="De Microsoft 365-oplossingen voor bedrijven">Ja: e-mail, samenwerking en cloud</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Alleen apps"
+                                    data-result-href="office-2021-professional-plus"
+                                    data-result-title="Office 2021 Professional Plus"
+                                    data-result-why="De volledige desktopsuite met permanente licentie: eenmaal per werkplek gekocht, zonder abonnement en zonder cloudservices om te beheren."
+                                    data-result-note="U hebt een licentie nodig voor elke werkplek, en die blijft op versie 2021: hij gaat niet vanzelf naar latere versies."
+                                    data-result-compare-href="suite-office" data-result-compare-label="Alle Office-suites in de catalogus">Nee, alleen de apps die op de pc's zijn geïnstalleerd</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="biz-srv" hidden>
+                            <p class="home-guide__question" tabindex="-1">Wat voor installatie is het?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Nieuw"
+                                    data-result-href="windows-server-2025"
+                                    data-result-title="Windows Server 2025 Standard · 16 cores"
+                                    data-result-why="De nieuwste versie, met permanente licentie voor 16 cores: de natuurlijke keuze voor een nieuwe installatie die jaren mee moet."
+                                    data-result-note="Clienttoegangslicenties (CAL's) zijn niet inbegrepen: die koopt u apart voor elke gebruiker of elk apparaat dat de server gebruikt."
+                                    data-result-alt-href="windows-server-2025-dvd" data-result-alt-label="Dezelfde versie met dvd-drager"
+                                    data-result-compare-href="windows-server" data-result-compare-label="Alle versies van Windows Server">Nieuw, ik wil de nieuwste versie</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Compatibiliteit"
+                                    data-result-href="windows-server-2022"
+                                    data-result-title="Windows Server 2022 Standard · 16 cores"
+                                    data-result-why="De versie om te kiezen wanneer een bedrijfstoepassing of andere toepassing is gecertificeerd voor 2022 en nog niet voor 2025: de door de leverancier aangegeven compatibiliteit gaat voor op het nieuwe."
+                                    data-result-note="CAL's niet inbegrepen en de interface is in het Engels."
+                                    data-result-compare-href="windows-server" data-result-compare-label="Alle versies van Windows Server">Ik moet compatibel blijven met een toepassing</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="2019-omgeving"
+                                    data-result-href="windows-server-2019"
+                                    data-result-title="Windows Server 2019 Standard"
+                                    data-result-why="Het heeft alleen zin om aan te sluiten op een infrastructuur die al op 2019 is vastgezet, waar versies mengen het beheer zou bemoeilijken."
+                                    data-result-note="CAL's niet inbegrepen. Voor een nieuw project is het toch beter om van een recentere versie uit te gaan."
+                                    data-result-alt-href="windows-server-2025" data-result-alt-label="Windows Server 2025, voor een nieuwe installatie"
+                                    data-result-compare-href="windows-server" data-result-compare-label="Alle versies van Windows Server">Hij komt bij een omgeving die al op 2019 draait</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="biz-sql" hidden>
+                            <p class="home-guide__question" tabindex="-1">Hoe kritiek is de belasting?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Bedrijfssoftware"
+                                    data-result-href="sql-server-2022-standard"
+                                    data-result-title="SQL Server 2022 Standard · 16 cores"
+                                    data-result-why="Standard dekt het grootste deel van de bedrijfsbelastingen. Met de licentie per core zijn geen CAL's nodig: het aantal gebruikers dat de database benadert is onbeperkt."
+                                    data-result-alt-href="sql-server-2022-enterprise" data-result-alt-label="SQL Server 2022 Enterprise, voor kritieke belastingen"
+                                    data-result-compare-href="strumenti" data-result-compare-label="De andere professionele tools">Een bedrijfstoepassing of standaardtoepassing</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Kritiek"
+                                    data-result-href="sql-server-2022-enterprise"
+                                    data-result-title="SQL Server 2022 Enterprise · 24 cores"
+                                    data-result-why="Enterprise is de versie voor kritieke belastingen en functies voor hoge beschikbaarheid, met 24 gelicentieerde cores. Ook hier maakt het per-coremodel de gebruikers onbeperkt."
+                                    data-result-note="Fysieke drager inbegrepen, interface in het Engels."
+                                    data-result-compare-href="strumenti" data-result-compare-label="De andere professionele tools">Kritieke gegevens en hoge beschikbaarheid</button>
                             </div>
                         </div>
                     </div>
-                    <div class="home-guide__result">
-                        <img class="home-guide__result-img" data-guide-image src="../asset/media/products/eset-nod32-1-device.webp?v=f5c88374e5" width="72" height="72" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
-                        <p class="home-guide__result-label">Aanbevolen voor u</p>
-                        <p class="home-guide__result-title" data-guide-title>ESET NOD32 · 1 apparaat</p>
-                        <p class="home-guide__result-body" data-guide-body>Lichtgewicht antivirus voor één apparaat. Activeer via het officiële ESET-portaal.</p>
-                        <a class="home-btn home-btn-primary" href="eset-nod32-1-device" data-guide-link>Naar de productpagina</a>
+
+                    <div class="home-guide__result is-empty" data-guide-result>
+                        <div class="home-guide__intro" data-guide-intro>
+                            <p class="home-guide__result-label">Hoe het werkt</p>
+                            <p class="home-guide__result-title">Eén licentie, met de reden voor de keuze</p>
+                            <p class="home-guide__result-body">Beantwoord de vragen hiernaast. In plaats van een productlijst krijgt u één aanbeveling, waarom we die adviseren en wat u moet weten voordat u koopt.</p>
+                            <p class="home-guide__intro-sub">Of ga meteen naar de drie keuzes waarbij het vaakst fout gaat:</p>
+                            <ul class="home-guide__hublist">
+                                <li><a href="office-2024-vs-microsoft-365">Office 2024 of Microsoft 365?</a></li>
+                                <li><a href="microsoft-365-family-vs-personal">Microsoft 365 Personal of Family?</a></li>
+                                <li><a href="windows-11-home-vs-pro">Windows 11 Home of Pro?</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Geen aria-live hier: bij het verschijnen van het
+                             resultaat gaat de focus naar de titel
+                             (tabindex="-1"), die het al aankondigt. Met beide
+                             zou een schermlezer de aanbeveling twee keer lezen. -->
+                        <div class="home-guide__card" data-guide-card hidden>
+                            <img class="home-guide__result-img" data-guide-image src="../asset/media/product-cover-fallback.webp?v=1b61904a2e" width="72" height="72" alt="" loading="lazy" decoding="async">
+                            <p class="home-guide__result-label">Aanbevolen voor u</p>
+                            <p class="home-guide__result-title" data-guide-title tabindex="-1"></p>
+                            <p class="home-guide__result-body" data-guide-why></p>
+                            <p class="home-guide__note" data-guide-note hidden></p>
+                            <a class="home-btn home-btn-primary home-guide__cta" href="#" data-guide-link>Naar de productpagina</a>
+                            <p class="home-guide__links">
+                                <a class="home-guide__link" href="#" data-guide-alt hidden></a>
+                                <a class="home-guide__link" href="#" data-guide-compare hidden></a>
+                                <a class="home-guide__link" href="consultatie">Geen van beide? Vraag het ons</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+                <noscript>
+                    <p class="home-guide__lede">De configurator heeft JavaScript nodig. U kunt toch beginnen bij de gidsen: <a href="office-2024-vs-microsoft-365">Office 2024 of Microsoft 365</a>, <a href="microsoft-365-family-vs-personal">Personal of Family</a>, <a href="windows-11-home-vs-pro">Windows 11 Home of Pro</a>, of bij de rubrieken <a href="antivirus">antivirus</a>, <a href="suite-office">Office-suites</a>, <a href="sistemi-operativi">besturingssystemen</a> en <a href="windows-server">Windows Server</a>.</p>
+                </noscript>
             </div>
         </section>
 

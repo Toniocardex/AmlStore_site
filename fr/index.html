@@ -962,124 +962,375 @@
             </div>
         </section>
 
-        <section class="home-guide" aria-labelledby="home-guide-title" data-home-guide>
+        <section class="home-guide" aria-labelledby="home-guide-title" data-home-guide
+            data-i18n-step="Étape {n} sur {total}" data-i18n-done="Terminé" data-i18n-crumb="Revenir à cette question">
             <div class="home-guide__figure" aria-hidden="true"></div>
             <div class="home-guide__inner">
                 <p class="home-section-eyebrow">Guide d'achat</p>
                 <h2 id="home-guide-title" class="home-section-title">Vous ne savez pas quelle licence choisir ?</h2>
-                <p class="home-guide__lede">Répondez à deux questions et nous vous dirons quel logiciel vous convient.</p>
+                <p class="home-guide__lede">Trois questions sur votre situation, pas sur une catégorie de produit. À la fin, nous vous indiquons une seule licence, la raison de ce choix et ce qu'il faut savoir avant d'acheter.</p>
                 <div class="home-guide__cols">
                     <div class="home-guide__steps">
-                        <p class="home-guide__question">1. De quoi avez-vous besoin ?</p>
-                        <div class="home-guide__options home-guide__options--inline">
-                            <button type="button" class="home-guide__option is-selected" data-guide-category="antivirus" aria-pressed="true">Antivirus</button>
-                            <button type="button" class="home-guide__option" data-guide-category="office" aria-pressed="false">Office et productivité</button>
-                            <button type="button" class="home-guide__option" data-guide-category="windows" aria-pressed="false">Windows</button>
-                            <button type="button" class="home-guide__option" data-guide-category="business" aria-pressed="false">Serveurs et entreprises</button>
+                        <div class="home-guide__meta">
+                            <span class="home-guide__progress" data-guide-progress aria-hidden="true">
+                                <span class="home-guide__progress-seg is-on"></span>
+                                <span class="home-guide__progress-seg"></span>
+                                <span class="home-guide__progress-seg"></span>
+                            </span>
+                            <span class="home-guide__progress-label" data-guide-progress-label>Étape 1 sur 3</span>
+                            <button type="button" class="home-guide__reset" data-guide-reset hidden>Recommencer</button>
                         </div>
 
-                        <div class="home-guide__step2" data-guide-group="office" hidden>
-                            <p class="home-guide__question">2. Pour qui ?</p>
-                            <div class="home-guide__options">
-                                <button type="button" class="home-guide__option is-selected" data-guide-option
-                                    aria-pressed="true"
-                                    data-guide-href="microsoft-365-personal"
-                                    data-guide-title-value="Microsoft 365 Personal · 12 mois"
-                                    data-guide-body-value="Word, Excel, PowerPoint et Outlook, 1 To de OneDrive et Copilot, sur 5 appareils à la fois.">Juste moi (1 utilisateur)</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="microsoft-365-family"
-                                    data-guide-title-value="Microsoft 365 Family · 12 mois"
-                                    data-guide-body-value="Jusqu'à 6 personnes, chacune avec son compte et 1 To de OneDrive. Copilot reste au titulaire.">Toute la famille (jusqu'à 6)</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="office-2024-home-business"
-                                    data-guide-title-value="Office 2024 Home &amp; Business"
-                                    data-guide-body-value="Word, Excel, PowerPoint, Outlook et OneNote sur 1 PC ou Mac. Licence perpétuelle : on paie une fois, sans renouvellement annuel.">Je préfère payer une seule fois</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="microsoft-365-business-standard"
-                                    data-guide-title-value="Microsoft 365 Business Standard"
-                                    data-guide-body-value="Applications Office premium pour les entreprises, avec les services cloud prévus par le plan Microsoft.">Mon entreprise</button>
+                        <ol class="home-guide__trail" data-guide-trail hidden></ol>
+
+                        <!-- ══ Étape 1 ══ -->
+                        <div class="home-guide__step" data-guide-step="root">
+                            <p class="home-guide__question" tabindex="-1">Par où commençons-nous ?</p>
+                            <div class="home-guide__options home-guide__options--inline">
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="av" data-guide-chip="Protection">Je dois protéger mes appareils</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="office" data-guide-chip="Office">J'ai besoin de Word, Excel et Outlook</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="win" data-guide-chip="Windows">Je dois activer ou mettre à niveau Windows</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="biz" data-guide-chip="Entreprise">Je dois équiper mon entreprise</button>
                             </div>
                         </div>
 
-                        <div class="home-guide__step2" data-guide-group="windows" hidden>
-                            <p class="home-guide__question">2. Sur quel PC ?</p>
+                        <!-- ══ Branche antivirus ═══════════════════════════════
+                             La question décisive vient avant le nombre
+                             d'appareils : le client connaît déjà ce nombre,
+                             mais pas le critère qui distingue ESET, Kaspersky
+                             et Bitdefender. -->
+                        <div class="home-guide__step" data-guide-step="av" hidden>
+                            <p class="home-guide__question" tabindex="-1">Qu'est-ce qui compte le plus dans votre protection ?</p>
                             <div class="home-guide__options">
-                                <button type="button" class="home-guide__option is-selected" data-guide-option
-                                    aria-pressed="true"
-                                    data-guide-href="windows-11-home"
-                                    data-guide-title-value="Windows 11 Home"
-                                    data-guide-body-value="Licence numérique authentique pour un PC domestique. Code et instructions par e-mail après le paiement.">Usage personnel, à la maison</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="windows-11-pro"
-                                    data-guide-title-value="Windows 11 Pro"
-                                    data-guide-body-value="Fonctions professionnelles comme BitLocker et Bureau à distance, selon Microsoft. Licence perpétuelle.">Travail ou études professionnelles</button>
-                                <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="windows-10-pro"
-                                    data-guide-title-value="Windows 10 Pro"
-                                    data-guide-body-value="Licence numérique authentique 32/64 bits avec fonctions professionnelles, pour un matériel non compatible avec Windows 11.">Un PC plus ancien</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="av-eset" data-guide-chip="Légèreté">Elle ne doit pas ralentir l'ordinateur</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="av-kaspersky" data-guide-chip="Suite complète">Je veux un VPN et un gestionnaire de mots de passe inclus</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="av-bitdefender" data-guide-chip="Antivirus seul">Un antivirus solide me suffit, sans extras</button>
                             </div>
                         </div>
 
-                        <div class="home-guide__step2" data-guide-group="antivirus">
-                            <p class="home-guide__question">2. Combien d'appareils protégez-vous ?</p>
-                            <div class="home-guide__options">
-                                <button type="button" class="home-guide__option is-selected" data-guide-option
-                                    aria-pressed="true"
-                                    data-guide-href="eset-nod32-1-device"
-                                    data-guide-title-value="ESET NOD32 · 1 appareil"
-                                    data-guide-body-value="Protection antivirus légère pour un seul appareil. Activation sur le portail officiel ESET.">Un seul</button>
+                        <div class="home-guide__step" data-guide-step="av-eset" hidden>
+                            <p class="home-guide__question" tabindex="-1">Combien d'appareils devez-vous couvrir ?</p>
+                            <div class="home-guide__options home-guide__options--inline">
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="bitdefender-plus-5-devices"
-                                    data-guide-title-value="Bitdefender Antivirus Plus · 5 appareils"
-                                    data-guide-body-value="Couvre jusqu'à 5 appareils : le choix habituel pour une famille. Activation sur le portail officiel Bitdefender.">Jusqu'à 5 (famille)</button>
+                                    data-result-href="eset-nod32-1-device"
+                                    data-result-title="ESET NOD32 Antivirus · 1 appareil"
+                                    data-result-why="ESET NOD32 est le choix essentiel : un moteur antivirus et peu d'autre chose, conçu pour peser le moins possible sur les ressources de l'ordinateur. Activation sur le portail officiel ESET HOME."
+                                    data-result-note="Si vous gardez le PC longtemps, la version 2 ans coûte moins que deux renouvellements annuels."
+                                    data-result-alt-href="eset-nod32-1-device-2y" data-result-alt-label="ESET NOD32 · 1 appareil, 2 ans"
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="ESET comparé à Kaspersky">1</button>
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="mcafee-total-protection-10-devices"
-                                    data-guide-title-value="McAfee Total Protection · 10 appareils"
-                                    data-guide-body-value="Licence pour 10 appareils, activation sur le portail officiel McAfee.">10 ou plus</button>
+                                    data-result-href="eset-nod32-3-devices"
+                                    data-result-title="ESET NOD32 Antivirus · 3 appareils"
+                                    data-result-why="Une seule licence pour trois appareils, avec le même moteur léger que la version unique. Ils s'activent tous depuis le même compte ESET HOME."
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="ESET comparé à Kaspersky">3</button>
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="kaspersky-plus"
-                                    data-guide-title-value="Kaspersky Plus · 1 appareil"
-                                    data-guide-body-value="Offre Plus avec les fonctions supplémentaires du catalogue Kaspersky. Activation sur le portail officiel.">Protection complète</button>
+                                    data-result-href="eset-nod32-5-devices"
+                                    data-result-title="ESET NOD32 Antivirus · 5 appareils"
+                                    data-result-why="La taille typique d'une famille : cinq appareils couverts par une seule licence, sans le poids d'une suite complète."
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="ESET comparé à Kaspersky">5</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="eset-nod32-10-devices"
+                                    data-result-title="ESET NOD32 Antivirus · 10 appareils"
+                                    data-result-why="Dix appareils sur une seule licence : la taille qui devient rentable quand une maison ou un bureau dépasse cinq appareils à protéger."
+                                    data-result-compare-href="antivirus" data-result-compare-label="Tous les antivirus du catalogue">10</button>
                             </div>
                         </div>
 
-                        <div class="home-guide__step2" data-guide-group="business" hidden>
-                            <p class="home-guide__question">2. Que devez-vous gérer ?</p>
+                        <div class="home-guide__step" data-guide-step="av-kaspersky" hidden>
+                            <p class="home-guide__question" tabindex="-1">Combien d'appareils devez-vous couvrir ?</p>
+                            <div class="home-guide__options home-guide__options--inline">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="kaspersky-premium-1-device"
+                                    data-result-title="Kaspersky Premium · 1 appareil"
+                                    data-result-why="Premium est l'offre la plus élevée du catalogue Kaspersky : au-delà de l'antivirus, elle apporte les outils supplémentaires de la suite, VPN et gestion des mots de passe compris. Activation sur My Kaspersky."
+                                    data-result-alt-href="kaspersky-plus" data-result-alt-label="Kaspersky Plus, l'offre intermédiaire"
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="Kaspersky comparé à ESET">1</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="kaspersky-premium-3-devices"
+                                    data-result-title="Kaspersky Premium · 3 appareils"
+                                    data-result-why="Les outils complets de la suite Premium étendus à trois appareils, gérés depuis un seul compte My Kaspersky."
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="Kaspersky comparé à ESET">3</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="kaspersky-premium-5-devices"
+                                    data-result-title="Kaspersky Premium · 5 appareils"
+                                    data-result-why="Cinq appareils avec la suite complète : la configuration la plus demandée quand une maison compte des PC, des téléphones et des tablettes à couvrir tous."
+                                    data-result-compare-href="kaspersky-vs-eset-nod32" data-result-compare-label="Kaspersky comparé à ESET">5</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="kaspersky-premium-10-devices"
+                                    data-result-title="Kaspersky Premium · 10 appareils"
+                                    data-result-why="Le palier le plus large de la suite Premium : dix appareils avec VPN et gestion des mots de passe inclus, sous un seul compte."
+                                    data-result-compare-href="antivirus" data-result-compare-label="Tous les antivirus du catalogue">10</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="av-bitdefender" hidden>
+                            <p class="home-guide__question" tabindex="-1">Combien d'appareils devez-vous couvrir ?</p>
+                            <div class="home-guide__options home-guide__options--inline">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="bitdefender-plus-1-device"
+                                    data-result-title="Bitdefender Antivirus Plus · 1 appareil"
+                                    data-result-why="Antivirus Plus est le niveau d'entrée de Bitdefender : une protection anti-malware proactive et légère, sans les modules supplémentaires des suites supérieures. Activation sur Bitdefender Central."
+                                    data-result-note="C'est une licence pour Windows : pour couvrir aussi Mac ou Android, il faut une suite de niveau supérieur."
+                                    data-result-compare-href="norton-vs-bitdefender" data-result-compare-label="Bitdefender comparé à Norton">1</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="bitdefender-plus-3-devices"
+                                    data-result-title="Bitdefender Antivirus Plus · 3 appareils"
+                                    data-result-why="La même protection anti-malware sur trois machines, gérées depuis un seul compte Bitdefender Central."
+                                    data-result-compare-href="norton-vs-bitdefender" data-result-compare-label="Bitdefender comparé à Norton">3</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="bitdefender-plus-5-devices"
+                                    data-result-title="Bitdefender Antivirus Plus · 5 appareils"
+                                    data-result-why="Cinq machines couvertes sans payer des modules que vous n'utiliseriez pas : le choix de ceux qui veulent l'antivirus et rien de plus."
+                                    data-result-compare-href="norton-vs-bitdefender" data-result-compare-label="Bitdefender comparé à Norton">5</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-result-href="bitdefender-plus-10-devices"
+                                    data-result-title="Bitdefender Antivirus Plus · 10 appareils"
+                                    data-result-why="Dix machines sur le niveau de base de Bitdefender : une couverture large tout en gardant l'essentiel."
+                                    data-result-compare-href="antivirus" data-result-compare-label="Tous les antivirus du catalogue">10</button>
+                            </div>
+                        </div>
+
+                        <!-- ══ Branche Office ══════════════════════════════════
+                             Le vrai embranchement n'est pas « pour qui », c'est
+                             abonnement contre licence perpétuelle : le choix sur
+                             lequel les clients se trompent le plus, donc en
+                             étape 2. -->
+                        <div class="home-guide__step" data-guide-step="office" hidden>
+                            <p class="home-guide__question" tabindex="-1">Comment préférez-vous payer ?</p>
                             <div class="home-guide__options">
-                                <button type="button" class="home-guide__option is-selected" data-guide-option
-                                    aria-pressed="true"
-                                    data-guide-href="microsoft-365-business-standard"
-                                    data-guide-title-value="Microsoft 365 Business Standard"
-                                    data-guide-body-value="Applications Office premium pour les entreprises, avec les services cloud prévus par le plan Microsoft.">Les postes de mes collaborateurs</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="office-sub" data-guide-chip="Abonnement">Un abonnement annuel, toujours à jour</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="office-perp" data-guide-chip="Une seule fois">Une seule fois, sans renouvellement</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="office-sub" hidden>
+                            <p class="home-guide__question" tabindex="-1">Qui utilisera les applications ?</p>
+                            <div class="home-guide__options">
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="windows-server-2025"
-                                    data-guide-title-value="Windows Server 2025 Standard"
-                                    data-guide-body-value="Licence perpétuelle pour 16 cœurs. Les licences d'accès client (CAL) ne sont pas incluses : elles doivent être achetées séparément.">Un serveur</button>
+                                    data-guide-chip="Juste moi"
+                                    data-result-href="microsoft-365-personal"
+                                    data-result-title="Microsoft 365 Personal · 12 mois"
+                                    data-result-why="Personal est conçu pour un utilisateur unique : Word, Excel, PowerPoint et Outlook toujours à jour, 1 To de OneDrive et Copilot, installables sur plusieurs appareils."
+                                    data-result-note="Si vous êtes plusieurs à la maison, Family couvre jusqu'à 6 personnes avec un seul abonnement : c'est souvent rentable dès le deuxième utilisateur."
+                                    data-result-alt-href="microsoft-365-family" data-result-alt-label="Microsoft 365 Family, jusqu'à 6 personnes"
+                                    data-result-compare-href="microsoft-365-family-vs-personal" data-result-compare-label="Personal ou Family, le comparatif">Juste moi</button>
                                 <button type="button" class="home-guide__option" data-guide-option
-                                    aria-pressed="false"
-                                    data-guide-href="sql-server-2022-standard"
-                                    data-guide-title-value="SQL Server 2022 Standard"
-                                    data-guide-body-value="Licence perpétuelle par cœur (16 cœurs) : avec ce modèle, aucune CAL n'est nécessaire et le nombre d'utilisateurs accédant à la base est illimité.">Une base de données SQL</button>
+                                    data-guide-chip="Famille"
+                                    data-result-href="microsoft-365-family"
+                                    data-result-title="Microsoft 365 Family · 12 mois"
+                                    data-result-why="Family couvre jusqu'à 6 personnes : chacune avec son propre compte et son propre 1 To de OneDrive, pas un espace partagé."
+                                    data-result-note="Copilot reste au titulaire de l'abonnement, il ne s'étend pas aux cinq autres comptes."
+                                    data-result-compare-href="microsoft-365-family-vs-personal" data-result-compare-label="Personal ou Family, le comparatif">Ma famille et moi (jusqu'à 6)</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Mon équipe"
+                                    data-result-href="microsoft-365-business-standard"
+                                    data-result-title="Microsoft 365 Business Standard"
+                                    data-result-why="La version pour entreprise : applications Office premium plus les services cloud prévus par le plan Microsoft. C'est le choix quand il faut aussi une messagerie professionnelle sur votre domaine."
+                                    data-result-compare-href="microsoft-365-solutions" data-result-compare-label="Les solutions Microsoft 365 pour les entreprises">Mon équipe de travail</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="office-perp" hidden>
+                            <p class="home-guide__question" tabindex="-1">Que devez-vous vraiment utiliser ?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Sans Outlook"
+                                    data-result-href="office-2024-home"
+                                    data-result-title="Office 2024 Home"
+                                    data-result-why="La suite perpétuelle sans Outlook : Word, Excel et PowerPoint sur PC ou Mac. On paie une seule fois et on garde la version achetée, sans renouvellement annuel."
+                                    data-result-note="Perpétuelle signifie aussi pas de 1 To de OneDrive et pas de passage automatique à la version suivante."
+                                    data-result-alt-href="office-2024-home-business" data-result-alt-label="Office 2024 Home &amp; Business, avec Outlook"
+                                    data-result-compare-href="office-2024-vs-microsoft-365" data-result-compare-label="Office 2024 ou Microsoft 365, le comparatif">Word, Excel et PowerPoint</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Avec Outlook"
+                                    data-result-href="office-2024-home-business"
+                                    data-result-title="Office 2024 Home &amp; Business"
+                                    data-result-why="Ajoute Outlook et OneNote aux applications de base, sur 1 PC ou Mac. C'est la version perpétuelle à choisir quand l'e-mail de travail passe par le client sur l'ordinateur."
+                                    data-result-note="La licence vaut pour une seule machine : un deuxième ordinateur demande une deuxième licence."
+                                    data-result-compare-href="office-2024-vs-microsoft-365" data-result-compare-label="Office 2024 ou Microsoft 365, le comparatif">Outlook aussi, pour l'e-mail de travail</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Suite complète"
+                                    data-result-href="office-2021-professional-plus"
+                                    data-result-title="Office 2021 Professional Plus"
+                                    data-result-why="La suite bureautique complète pour Windows avec licence perpétuelle : c'est la version habituellement choisie en entreprise, où toutes les applications sont nécessaires et aucun abonnement."
+                                    data-result-note="Windows uniquement : elle n'est pas disponible pour Mac."
+                                    data-result-compare-href="suite-office" data-result-compare-label="Toutes les suites Office du catalogue">La suite complète, pour le travail</button>
+                            </div>
+                        </div>
+
+                        <!-- ══ Branche Windows ═════════════════════════════════ -->
+                        <div class="home-guide__step" data-guide-step="win" hidden>
+                            <p class="home-guide__question" tabindex="-1">Quel ordinateur devez-vous activer ?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="win-11" data-guide-chip="PC récent">Un PC récent, compatible avec Windows 11</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="win-10" data-guide-chip="PC ancien">Un PC plus ancien, qui ne peut pas faire tourner Windows 11</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Support physique"
+                                    data-result-href="windows-11-pro-oem-dvd"
+                                    data-result-title="Windows 11 Pro OEM · DVD et COA"
+                                    data-result-why="Boîte physique avec DVD en anglais et COA contenant la clé de produit : le bon choix quand il faut un support à conserver plutôt qu'un code par e-mail."
+                                    data-result-note="Ce n'est pas une licence numérique : livraison par transporteur, donc pas de remise immédiate."
+                                    data-result-alt-href="windows-11-pro" data-result-alt-label="Windows 11 Pro en version numérique"
+                                    data-result-compare-href="sistemi-operativi" data-result-compare-label="Tous les systèmes d'exploitation du catalogue">J'ai besoin d'un support physique (DVD et COA)</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="win-11" hidden>
+                            <p class="home-guide__question" tabindex="-1">À quoi vous sert le PC ?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Maison"
+                                    data-result-href="windows-11-home"
+                                    data-result-title="Windows 11 Home"
+                                    data-result-why="Home couvre tout ce dont un ordinateur domestique a besoin. Les fonctions supplémentaires de la version Pro — BitLocker, Bureau à distance, ajout à un domaine — n'entrent jamais en jeu dans ce cas."
+                                    data-result-alt-href="windows-11-pro" data-result-alt-label="Windows 11 Pro, si vous avez besoin des fonctions professionnelles"
+                                    data-result-compare-href="windows-11-home-vs-pro" data-result-compare-label="Home ou Pro, le comparatif">Usage personnel, à la maison</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Travail"
+                                    data-result-href="windows-11-pro"
+                                    data-result-title="Windows 11 Pro"
+                                    data-result-why="Pro ajoute le chiffrement BitLocker, le Bureau à distance entrant et l'ajout à un domaine d'entreprise : exactement les fonctions que Home n'a pas."
+                                    data-result-compare-href="windows-11-home-vs-pro" data-result-compare-label="Home ou Pro, le comparatif">Travail : chiffrement, bureau à distance, domaine</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="win-10" hidden>
+                            <p class="home-guide__question" tabindex="-1">À quoi vous sert le PC ?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Maison"
+                                    data-result-href="windows-10-home"
+                                    data-result-title="Windows 10 Home"
+                                    data-result-why="Windows 10 reste la voie à suivre quand le matériel ne répond pas aux exigences de Windows 11. La version Home couvre l'usage domestique."
+                                    data-result-note="Le support standard de Windows 10 a pris fin en octobre 2025 : ne le choisissez que si ce PC ne peut vraiment pas passer à Windows 11."
+                                    data-result-compare-href="sistemi-operativi" data-result-compare-label="Tous les systèmes d'exploitation du catalogue">Usage personnel, à la maison</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Travail"
+                                    data-result-href="windows-10-pro"
+                                    data-result-title="Windows 10 Pro"
+                                    data-result-why="Les fonctions professionnelles — BitLocker, Bureau à distance, domaine — sur un matériel qui n'est pas compatible avec Windows 11."
+                                    data-result-note="Le support standard de Windows 10 a pris fin en octobre 2025 : vérifiez d'abord si le PC peut passer à Windows 11 Pro."
+                                    data-result-alt-href="windows-11-pro" data-result-alt-label="Windows 11 Pro, si le PC est compatible"
+                                    data-result-compare-href="sistemi-operativi" data-result-compare-label="Tous les systèmes d'exploitation du catalogue">Travail : chiffrement, bureau à distance, domaine</button>
+                            </div>
+                        </div>
+
+                        <!-- ══ Branche entreprise ══════════════════════════════ -->
+                        <div class="home-guide__step" data-guide-step="biz" hidden>
+                            <p class="home-guide__question" tabindex="-1">Que devez-vous couvrir ?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="biz-desk" data-guide-chip="Postes">Les postes de vos collaborateurs</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="biz-srv" data-guide-chip="Serveur">Un serveur Windows</button>
+                                <button type="button" class="home-guide__option" data-guide-option data-guide-next="biz-sql" data-guide-chip="Base de données">Une base de données SQL Server</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="biz-desk" hidden>
+                            <p class="home-guide__question" tabindex="-1">Avez-vous aussi besoin de l'e-mail d'entreprise ?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Avec cloud"
+                                    data-result-href="microsoft-365-business-standard"
+                                    data-result-title="Microsoft 365 Business Standard"
+                                    data-result-why="Réunit les applications Office premium et les services cloud du plan Microsoft : le choix standard quand, au-delà des applications, il faut une messagerie d'entreprise sur votre domaine."
+                                    data-result-note="La facturation est par utilisateur et par mois : le total varie avec le nombre de collaborateurs, pas avec le nombre de PC."
+                                    data-result-compare-href="microsoft-365-solutions" data-result-compare-label="Les solutions Microsoft 365 pour les entreprises">Oui : e-mail, collaboration et cloud</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Applications seules"
+                                    data-result-href="office-2021-professional-plus"
+                                    data-result-title="Office 2021 Professional Plus"
+                                    data-result-why="La suite bureautique complète avec licence perpétuelle : achetée une fois par poste, sans abonnement ni services cloud à gérer."
+                                    data-result-note="Il faut une licence pour chaque poste, et elle reste figée à la version 2021 : elle ne passe pas seule aux suivantes."
+                                    data-result-compare-href="suite-office" data-result-compare-label="Toutes les suites Office du catalogue">Non, seulement les applications installées sur les PC</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="biz-srv" hidden>
+                            <p class="home-guide__question" tabindex="-1">De quel type d'installation s'agit-il ?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Nouvelle"
+                                    data-result-href="windows-server-2025"
+                                    data-result-title="Windows Server 2025 Standard · 16 cœurs"
+                                    data-result-why="La dernière version, avec licence perpétuelle pour 16 cœurs : le choix naturel pour une nouvelle installation qui devra durer des années."
+                                    data-result-note="Les licences d'accès client (CAL) ne sont pas incluses : elles doivent être achetées à part pour chaque utilisateur ou appareil qui utilisera le serveur."
+                                    data-result-alt-href="windows-server-2025-dvd" data-result-alt-label="Même version avec support DVD"
+                                    data-result-compare-href="windows-server" data-result-compare-label="Toutes les versions de Windows Server">Nouvelle, je veux la dernière version</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Compatibilité"
+                                    data-result-href="windows-server-2022"
+                                    data-result-title="Windows Server 2022 Standard · 16 cœurs"
+                                    data-result-why="La version à choisir quand un logiciel de gestion ou une application est certifié pour 2022 et pas encore pour 2025 : la compatibilité annoncée par l'éditeur passe avant la nouveauté."
+                                    data-result-note="CAL non incluses et interface en anglais."
+                                    data-result-compare-href="windows-server" data-result-compare-label="Toutes les versions de Windows Server">Je dois rester compatible avec une application</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Environnement 2019"
+                                    data-result-href="windows-server-2019"
+                                    data-result-title="Windows Server 2019 Standard"
+                                    data-result-why="Cela n'a de sens que pour s'aligner sur une infrastructure déjà figée en 2019, où mélanger les versions compliquerait la gestion."
+                                    data-result-note="CAL non incluses. Pour un nouveau projet, il vaut mieux partir d'une version plus récente."
+                                    data-result-alt-href="windows-server-2025" data-result-alt-label="Windows Server 2025, pour une nouvelle installation"
+                                    data-result-compare-href="windows-server" data-result-compare-label="Toutes les versions de Windows Server">Elle s'ajoute à un environnement déjà en 2019</button>
+                            </div>
+                        </div>
+
+                        <div class="home-guide__step" data-guide-step="biz-sql" hidden>
+                            <p class="home-guide__question" tabindex="-1">Quelle est la criticité de la charge ?</p>
+                            <div class="home-guide__options">
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Gestion"
+                                    data-result-href="sql-server-2022-standard"
+                                    data-result-title="SQL Server 2022 Standard · 16 cœurs"
+                                    data-result-why="Standard couvre l'essentiel des charges de gestion. Avec la licence par cœur, aucune CAL n'est nécessaire : le nombre d'utilisateurs qui accèdent à la base est illimité."
+                                    data-result-alt-href="sql-server-2022-enterprise" data-result-alt-label="SQL Server 2022 Enterprise, pour les charges critiques"
+                                    data-result-compare-href="strumenti" data-result-compare-label="Les autres outils professionnels">Un logiciel de gestion ou une application standard</button>
+                                <button type="button" class="home-guide__option" data-guide-option
+                                    data-guide-chip="Critique"
+                                    data-result-href="sql-server-2022-enterprise"
+                                    data-result-title="SQL Server 2022 Enterprise · 24 cœurs"
+                                    data-result-why="Enterprise est la version pour les charges critiques et les fonctions de haute disponibilité, avec 24 cœurs sous licence. Là aussi, le modèle par cœur rend les utilisateurs illimités."
+                                    data-result-note="Support physique inclus, interface en anglais."
+                                    data-result-compare-href="strumenti" data-result-compare-label="Les autres outils professionnels">Données critiques et haute disponibilité</button>
                             </div>
                         </div>
                     </div>
-                    <div class="home-guide__result">
-                        <img class="home-guide__result-img" data-guide-image src="../asset/media/products/eset-nod32-1-device.webp?v=f5c88374e5" width="72" height="72" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='../asset/media/product-cover-fallback.webp'">
-                        <p class="home-guide__result-label">Recommandé pour vous</p>
-                        <p class="home-guide__result-title" data-guide-title>ESET NOD32 · 1 appareil</p>
-                        <p class="home-guide__result-body" data-guide-body>Antivirus léger pour un seul appareil. Activation sur le portail officiel ESET.</p>
-                        <a class="home-btn home-btn-primary" href="eset-nod32-1-device" data-guide-link>Voir la fiche produit</a>
+
+                    <div class="home-guide__result is-empty" data-guide-result>
+                        <div class="home-guide__intro" data-guide-intro>
+                            <p class="home-guide__result-label">Comment ça marche</p>
+                            <p class="home-guide__result-title">Une seule licence, avec la raison du choix</p>
+                            <p class="home-guide__result-body">Répondez aux questions ci-contre. Au lieu d'une liste de produits, vous obtenez une seule recommandation, pourquoi nous la conseillons et ce qu'il faut savoir avant d'acheter.</p>
+                            <p class="home-guide__intro-sub">Ou allez directement aux trois choix sur lesquels on se trompe le plus souvent :</p>
+                            <ul class="home-guide__hublist">
+                                <li><a href="office-2024-vs-microsoft-365">Office 2024 ou Microsoft 365 ?</a></li>
+                                <li><a href="microsoft-365-family-vs-personal">Microsoft 365 Personal ou Family ?</a></li>
+                                <li><a href="windows-11-home-vs-pro">Windows 11 Home ou Pro ?</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Pas d'aria-live ici : à l'apparition du résultat, le
+                             focus passe sur le titre (tabindex="-1"), qui
+                             l'annonce déjà. Avec les deux, un lecteur d'écran
+                             lirait la recommandation deux fois. -->
+                        <div class="home-guide__card" data-guide-card hidden>
+                            <img class="home-guide__result-img" data-guide-image src="../asset/media/product-cover-fallback.webp?v=1b61904a2e" width="72" height="72" alt="" loading="lazy" decoding="async">
+                            <p class="home-guide__result-label">Recommandé pour vous</p>
+                            <p class="home-guide__result-title" data-guide-title tabindex="-1"></p>
+                            <p class="home-guide__result-body" data-guide-why></p>
+                            <p class="home-guide__note" data-guide-note hidden></p>
+                            <a class="home-btn home-btn-primary home-guide__cta" href="#" data-guide-link>Voir la fiche produit</a>
+                            <p class="home-guide__links">
+                                <a class="home-guide__link" href="#" data-guide-alt hidden></a>
+                                <a class="home-guide__link" href="#" data-guide-compare hidden></a>
+                                <a class="home-guide__link" href="consultation">Ni l'un ni l'autre ? Demandez-nous</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
+
+                <noscript>
+                    <p class="home-guide__lede">Le configurateur a besoin de JavaScript. Vous pouvez tout de même partir des guides : <a href="office-2024-vs-microsoft-365">Office 2024 ou Microsoft 365</a>, <a href="microsoft-365-family-vs-personal">Personal ou Family</a>, <a href="windows-11-home-vs-pro">Windows 11 Home ou Pro</a>, ou des rayons <a href="antivirus">antivirus</a>, <a href="suite-office">suites Office</a>, <a href="sistemi-operativi">systèmes d'exploitation</a> et <a href="windows-server">Windows Server</a>.</p>
+                </noscript>
             </div>
         </section>
 
