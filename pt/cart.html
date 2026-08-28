@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="../css/page.css?v=36b14ee1c2">
     <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
     <link rel="stylesheet" href="../css/footer.css?v=31dc97e061">
-    <link rel="stylesheet" href="../css/cart.css?v=0d5b49b047">
+    <link rel="stylesheet" href="../css/cart.css?v=73a1ffa5e9">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://eurolicenze.com/#organization","name":"Eurolicenze","url":"https://eurolicenze.com/","logo":{"@type":"ImageObject","url":"https://eurolicenze.com/logo/logo-header-400.webp"},"email":"Desk@eurolicenze.com"},{"@type":"WebSite","@id":"https://eurolicenze.com/#website","url":"https://eurolicenze.com/","name":"Eurolicenze","inLanguage":["it","en","fr","de","es","pt","nl"],"publisher":{"@id":"https://eurolicenze.com/#organization"}},{"@type":"WebPage","@id":"https://eurolicenze.com/pt/cart#webpage","url":"https://eurolicenze.com/pt/cart","name":"Carrinho — Eurolicenze","description":"Resumo do carrinho Eurolicenze: artigos, totais e pagamento.","isPartOf":{"@id":"https://eurolicenze.com/#website"},"inLanguage":"pt"}]}
@@ -343,6 +343,22 @@
                             <div id="aml-cart-lines" class="cart-items-list"></div>
                         </div>
 
+                        <section
+                            id="aml-cart-crosssell"
+                            class="cart-crosssell"
+                            aria-labelledby="aml-cart-crosssell-title"
+                            data-label-add="Adicionar"
+                            data-label-added="Adicionado"
+                            data-label-save="Poupa"
+                            hidden
+                        >
+                            <div class="cart-crosssell__head">
+                                <h2 id="aml-cart-crosssell-title" class="cart-crosssell__title">Complete a sua configuração</h2>
+                                <p class="cart-crosssell__subtitle">Complementos escolhidos com base no que já tem no carrinho.</p>
+                            </div>
+                            <div class="cart-crosssell__list"></div>
+                        </section>
+
                         <div class="cart-trust-card">
                             <h2 class="cart-trust-card__title">Porque comprar na Eurolicenze com confiança</h2>
                             <div class="cart-trust-grid">
@@ -514,7 +530,8 @@
                 </footer>
             </ecommerce-footer>
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
-    <script src="../js/cart.js?v=c34e932f9b" defer></script>
+    <script src="../js/cart.js?v=3ff9f0881c" defer></script>
+    <script src="../js/cart-cross-sell.js?v=5047ce7fc6" defer></script>
     <script src="../js/trustpilot-widget.js?v=fc2eb825d8" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
     <script src="../components/lang-suggest.js?v=910b04817f" defer></script>

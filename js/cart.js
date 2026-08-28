@@ -869,6 +869,20 @@
         },
         // Mantenuto per compatibilità; la delegazione è ora automatica su document.
         bindAddButtons: function () {},
+        /**
+         * Aggiunge una riga costruita da un chiamante esterno (es. il motore di
+         * cross-sell, che legge da asset/cross-sell/{lang}.json e non ha una card
+         * DOM da cui dedurre i dati). Traccia `add_to_cart` come il flusso a
+         * click sulle card. Restituisce true se il carrello è stato scritto.
+         */
+        add: function (line) {
+            if (!line || !line.sku) return false;
+            const next = mergeAdd(readLines(), line);
+            if (!writeLines(next)) return false;
+            dispatch(next);
+            trackEvent('add_to_cart', { sku: line.sku });
+            return true;
+        },
         /** cartId del ciclo di vita corrente (creato al bisogno). Usato dal checkout per collegare l'ordine. */
         getCartId: ensureCartId,
         /** Chiude il ciclo di vita del cartId corrente: da chiamare dopo un acquisto completato. */

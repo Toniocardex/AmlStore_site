@@ -188,6 +188,8 @@ export const TRACKABLE_EVENTS = new Set([
     'paypal_captured',
     'paypal_cancelled',
     'paypal_failed',
+    'cross_sell_view',
+    'cross_sell_add',
 ]);
 
 /**

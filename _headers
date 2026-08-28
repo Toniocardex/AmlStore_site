@@ -39,6 +39,11 @@
 /asset/search-index/*
   Cache-Control: public, max-age=86400, must-revalidate
 
+# Indice del cross-sell: contiene prezzi mostrati a video, quindi cache piu'
+# corta della ricerca — un listino cambiato non deve restare in giro un giorno.
+/asset/cross-sell/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
 # Security headers (+ CSP gtag/Ads: googleadservices, syndication, frame Google)
 /*
   X-Content-Type-Options: nosniff

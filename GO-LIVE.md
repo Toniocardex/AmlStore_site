@@ -7,7 +7,10 @@
 > **Dopo ogni modifica alle pagine prodotto** (nuovo prodotto, prezzo, nome):
 > rieseguire anche `python scripts/build-search-index.py` (rigenera
 > `asset/search-index/{lang}.json` usati dalla ricerca nell'header — altrimenti
-> la ricerca resta con dati vecchi fino a 24h per via della cache in `_headers`).
+> la ricerca resta con dati vecchi fino a 24h per via della cache in `_headers`)
+> e `python scripts/build-cross-sell-index.py` (rigenera
+> `asset/cross-sell/{lang}.json`, letti dal motore di cross-sell del carrello:
+> con dati vecchi il carrello propone add-on a prezzi non più validi).
 >
 > **Dopo aver aggiunto una pagina, o modificato navigazione / footer**:
 > `node scripts/build-inline-chrome.mjs` (serve il dev server attivo).
@@ -23,6 +26,7 @@
 node scripts/build-inline-chrome.mjs      # markup di header/footer nelle pagine
 node scripts/extract-chrome-css.mjs       # solo se sono cambiati i loro stili
 python scripts/build-search-index.py      # solo se è cambiato il catalogo
+python scripts/build-cross-sell-index.py  # idem: add-on proposti nel carrello
 python scripts/bump-asset-version.py      # sempre per ultimo: ricalcola gli hash
 ```
 

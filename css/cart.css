@@ -108,20 +108,28 @@
     grid-template-areas:
         "items"
         "summary"
+        "xsell"
         "trust";
     gap: 1.75rem;
     align-items: start;
 }
 
 .cart-items-card { grid-area: items; min-width: 0; }
+.cart-crosssell { grid-area: xsell; min-width: 0; }
 .cart-trust-card { grid-area: trust; min-width: 0; }
 .cart-summary { grid-area: summary; }
+
+/* Il pannello cross-sell si nasconde da solo quando non ha candidati: senza
+   questa riga `[hidden]` perderebbe contro il `display:block` implicito
+   dell'area di griglia e lascerebbe un buco nel layout. */
+.cart-crosssell[hidden] { display: none; }
 
 @media (min-width: 960px) {
     .cart-layout {
         grid-template-columns: minmax(0, 7fr) minmax(19rem, 5fr);
         grid-template-areas:
             "items summary"
+            "xsell summary"
             "trust summary";
         gap: 2rem;
     }
@@ -411,7 +419,7 @@
 .cart-summary__total strong {
     font-size: 1.6rem;
     font-weight: var(--aml-weight-price);
-    color: var(--page-accent);
+    color: var(--page-text);
     white-space: nowrap;
 }
 
@@ -716,4 +724,190 @@
     .cart-page .aml-cart-qty-btn {
         transition: none;
     }
+}
+
+/* ── Cross-sell: add-on complementari al contenuto del carrello ───────────── */
+/* I candidati arrivano da js/cart-cross-sell.js; il pannello resta nascosto
+   quando il motore non trova nulla di pertinente. */
+
+.cart-crosssell {
+    border: 1px solid var(--page-border);
+    border-radius: var(--aml-radius-lg);
+    background: var(--aml-surface);
+    box-shadow: var(--aml-shadow-sm);
+    overflow: hidden;
+}
+
+.cart-crosssell__head {
+    padding: 1rem 1.25rem;
+    background: var(--aml-paper-2);
+    border-bottom: 1px solid var(--page-border);
+}
+
+.cart-crosssell__title {
+    margin: 0;
+    font-size: var(--aml-text-base);
+    font-weight: var(--aml-weight-display);
+    color: var(--page-text);
+}
+
+.cart-crosssell__subtitle {
+    margin: 0.2rem 0 0;
+    font-size: var(--aml-text-xs);
+    color: var(--page-text-secondary);
+}
+
+/* Righe compatte, non una griglia di card: la colonna di sinistra e' stretta
+   (7fr su 12) e tre card affiancate finirebbero schiacciate o a capo. La riga
+   riprende l'impaginazione di .cart-item qui sopra. */
+.cart-crosssell__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-crosssell__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+    border-top: 1px solid var(--page-border);
+}
+
+.cart-crosssell__card:first-child {
+    border-top: 0;
+}
+
+.cart-crosssell__link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cart-crosssell__link:hover .cart-crosssell__name {
+    color: var(--aml-brand);
+    text-decoration: underline;
+}
+
+.cart-crosssell__media {
+    display: block;
+    flex: 0 0 auto;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--aml-radius-sm);
+    background: var(--aml-paper-2);
+    overflow: hidden;
+}
+
+.cart-crosssell__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cart-crosssell__info {
+    display: block;
+    min-width: 0;
+}
+
+.cart-crosssell__name {
+    display: block;
+    font-size: var(--aml-text-sm);
+    font-weight: var(--aml-weight-strong);
+    line-height: 1.3;
+    color: var(--page-text);
+}
+
+.cart-crosssell__specs {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: var(--aml-text-xs);
+    line-height: 1.35;
+    color: var(--page-text-secondary);
+}
+
+.cart-crosssell__foot {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.cart-crosssell__prices {
+    display: grid;
+    justify-items: end;
+    gap: 0.1rem;
+    text-align: right;
+}
+
+.cart-crosssell__price {
+    font-size: var(--aml-text-base);
+    font-weight: var(--aml-weight-price);
+    color: var(--page-text);
+}
+
+.cart-crosssell__was {
+    font-size: var(--aml-text-xs);
+    color: var(--page-text-secondary);
+    text-decoration: line-through;
+}
+
+.cart-crosssell__save {
+    font-size: var(--aml-text-xs);
+    font-weight: var(--aml-weight-strong);
+    color: var(--aml-save-ink);
+}
+
+.cart-crosssell__add {
+    flex: 0 0 auto;
+    border: 0;
+    border-radius: var(--aml-radius-sm);
+    padding: 0.55rem 1rem;
+    font-family: inherit;
+    font-size: var(--aml-text-xs);
+    font-weight: var(--aml-weight-strong);
+    white-space: nowrap;
+    color: var(--aml-cta-ink);
+    background: var(--aml-cta-bg);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.cart-crosssell__add:hover {
+    background: var(--aml-cta-bg-hover);
+}
+
+.cart-crosssell__add.is-added,
+.cart-crosssell__add.is-added:hover {
+    background: var(--aml-trust-ink);
+    cursor: default;
+}
+
+/* Sotto i 640px prezzo e pulsante scendono su una riga propria, come fanno i
+   controlli di .cart-item: sulla stessa riga di nome + immagine non ci stanno. */
+@media (max-width: 640px) {
+    .cart-crosssell__card {
+        flex-wrap: wrap;
+        row-gap: 0.75rem;
+    }
+
+    .cart-crosssell__link {
+        flex: 1 1 100%;
+    }
+
+    .cart-crosssell__foot {
+        flex: 1 1 100%;
+        justify-content: space-between;
+    }
+
+    .cart-crosssell__prices {
+        justify-items: start;
+        text-align: left;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cart-crosssell__add { transition: none; }
 }
