@@ -31,7 +31,13 @@ SKIP_CATEGORY = {
     "sistemi-operativi", "suite-office", "antivirus",
     "windows-server", "strumenti", "pacchetti",
 }
-SKIP = SKIP_UTILITY | SKIP_CATEGORY
+# Pagine di confronto SEO (wave 1): editoriali, stesso slug in tutte le lingue.
+SKIP_COMPARE = {
+    "kaspersky-vs-eset-nod32", "microsoft-365-family-vs-personal",
+    "norton-vs-bitdefender", "office-2024-vs-microsoft-365",
+    "windows-11-home-vs-pro",
+}
+SKIP = SKIP_UTILITY | SKIP_CATEGORY | SKIP_COMPARE
 
 JSONLD_RE = re.compile(
     r'<script type="application/ld\+json">\s*(.*?)\s*</script>',
