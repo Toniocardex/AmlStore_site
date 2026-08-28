@@ -49,6 +49,15 @@
         var compareLink = root.querySelector('[data-guide-compare]');
         if (!result || !card || !title || !why || !link) return;
 
+        /* Stringhe generate dal JS (etichetta progresso, tooltip del filo di
+           Arianna): stanno negli attributi data- del contenitore cosi' ogni
+           lingua fornisce le sue col markup, senza un dizionario qui dentro.
+           Il default e' l'italiano, per non rompere una pagina che non le
+           dichiara. "{n}" e "{total}" nel passo vengono sostituiti. */
+        var i18nStep = root.getAttribute('data-i18n-step') || 'Passo {n} di {total}';
+        var i18nDone = root.getAttribute('data-i18n-done') || 'Fatto';
+        var i18nCrumb = root.getAttribute('data-i18n-crumb') || 'Torna a questa domanda';
+
         /* Percorso corrente: un elemento per domanda gia' risposta, con il
            passo in cui e' stata posta e il bottone scelto. Serve sia al
            filo di Arianna sia al "torna indietro". */
@@ -94,8 +103,8 @@
             });
             if (barLabel) {
                 barLabel.textContent = done
-                    ? 'Fatto'
-                    : 'Passo ' + (index + 1) + ' di ' + total;
+                    ? i18nDone
+                    : i18nStep.replace('{n}', index + 1).replace('{total}', total);
             }
         }
 
@@ -109,7 +118,7 @@
                 btn.type = 'button';
                 btn.className = 'home-guide__crumb';
                 btn.textContent = entry.chip;
-                btn.title = 'Torna a questa domanda';
+                btn.title = i18nCrumb;
                 btn.addEventListener('click', function () {
                     rewindTo(i);
                 });
