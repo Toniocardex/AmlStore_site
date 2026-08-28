@@ -350,7 +350,15 @@
 
             const ensureSearchIndexLoaded = () => {
                 if (SEARCH_INDEX_CACHE[searchLang]) return Promise.resolve(SEARCH_INDEX_CACHE[searchLang]);
-                return fetch(`${staticRoot}/asset/search-index/${searchLang}.json`)
+                // `no-cache` = richiesta condizionale, non "salta la cache": si
+                // riceve un 304 vuoto finche' l'indice non cambia. Senza, la copia
+                // in cache resterebbe valida per le 24h dichiarate in _headers e i
+                // risultati mostrerebbero prezzi vecchi dopo un cambio di listino.
+                // L'URL non ha un token ?v= da bustare: lo costruisce questo file,
+                // non l'HTML, quindi bump-asset-version.py non lo vede. Costo
+                // trascurabile: la fetch parte solo all'apertura della ricerca, e
+                // una volta sola per lingua grazie a SEARCH_INDEX_CACHE.
+                return fetch(`${staticRoot}/asset/search-index/${searchLang}.json`, { cache: 'no-cache' })
                     .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
                     .then((data) => {
                         SEARCH_INDEX_CACHE[searchLang] = Array.isArray(data) ? data : [];

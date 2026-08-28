@@ -36,6 +36,11 @@
 /asset/payments_logo/*
   Cache-Control: public, max-age=2592000, must-revalidate
 
+# Indice della ricerca: i risultati mostrano anche il prezzo, quindi vale la
+# stessa nota del cross-sell qui sotto — nessun token ?v= da bustare (l'URL lo
+# costruisce components/header.js), e il client chiede l'indice con
+# `cache: 'no-cache'`, cioe' sempre in revalidazione. Questo max-age vale per le
+# cache intermedie.
 /asset/search-index/*
   Cache-Control: public, max-age=86400, must-revalidate
 
