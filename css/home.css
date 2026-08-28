@@ -936,21 +936,36 @@
     margin-inline: calc(50% - 50vw);
     width: 100vw;
     margin-top: 0;
-    background-color: var(--aml-slate-100);
+    /* Oltre il cap dello sfondo (vedi .home-hero__bg img) questo fondo riempie
+       il margine: stesso verso del gradiente interno dell'immagine, cosi' la
+       giunzione su schermi molto larghi non si vede. */
+    background: linear-gradient(180deg, var(--aml-slate-50), var(--aml-slate-100));
     color: var(--aml-slate-900);
     overflow: hidden;
     isolation: isolate;
+    /* Velo leggermente avoriato invece del grigio-paper puro: la meta'
+       sinistra su widescreen non risulta clinica. 8% di brand-soft e' sotto
+       la soglia percettiva sul testo ma toglie il "bianco morto". */
+    --aml-hero-veil: color-mix(in srgb, var(--aml-paper) 92%, var(--aml-brand-soft));
 }
 
 .home-hero__bg {
     position: absolute;
     inset: 0;
     z-index: 0;
-    display: block;
+    /* flex + flex-end: l'immagine e' cappata (vedi img sotto) e ancorata a
+       destra. Il contenitore resta a tutta larghezza, cosi' il velo ::after
+       copre anche il margine e il contrasto testo non cambia. */
+    display: flex;
+    justify-content: flex-end;
 }
 
 .home-hero__bg img {
-    width: 100%;
+    /* Cap a 1728px: oltre, l'immagine 2.36:1 si stirava e la sua meta'
+       sinistra vuota diventava un vuoto bianco enorme. Cappata e ancorata a
+       destra, il soggetto resta ben inquadrato e il resto lo fa il fondo di
+       sezione (quasi identico al bordo sinistro dell'immagine). */
+    width: min(100%, 1728px);
     height: 100%;
     object-fit: cover;
     /* Foto centrata: il soggetto cade nella meta' destra e la sinistra resta
@@ -974,9 +989,9 @@
     inset: 0;
     background: linear-gradient(
         90deg,
-        color-mix(in srgb, var(--aml-paper) 58%, transparent) 0%,
-        color-mix(in srgb, var(--aml-paper) 47%, transparent) 35%,
-        color-mix(in srgb, var(--aml-paper) 20%, transparent) 50%,
+        color-mix(in srgb, var(--aml-hero-veil) 58%, transparent) 0%,
+        color-mix(in srgb, var(--aml-hero-veil) 47%, transparent) 35%,
+        color-mix(in srgb, var(--aml-hero-veil) 20%, transparent) 50%,
         transparent 64%
     );
 }
@@ -986,11 +1001,20 @@
    soggetto fisso) tollera una colonna piu' larga: qui serve anche a far
    stare "Protezione originale," su una riga sola invece di spezzarsi. */
 .home-hero--consumer .home-hero-content {
-    max-width: 34rem;
+    max-width: 38rem;
 }
 
 .home-hero--consumer .home-hero-title {
     color: var(--aml-slate-900);
+}
+
+/* Solo da tablet in su: un filo piu' grande del base per bilanciare, con la
+   colonna a 38rem, il vuoto a sinistra su widescreen. Sotto i 901px vale la
+   scala mobile definita nel media query dedicato. */
+@media (min-width: 901px) {
+    .home-hero--consumer .home-hero-title {
+        font-size: clamp(2.4rem, 4.6vw, 3.4rem);
+    }
 }
 
 /* Slate-900 come il titolo: con lo slate-700 precedente il velo necessario
@@ -1110,15 +1134,15 @@
        verticale e concentrato in alto, dove sta il titolo: si spegne
        prima di arrivare ai box cosi' restano leggibili. */
     .home-hero--consumer {
-        background-color: var(--aml-paper);
+        background: var(--aml-paper);
     }
 
     .home-hero__bg::after {
         background: linear-gradient(
             180deg,
-            color-mix(in srgb, var(--aml-paper) 78%, transparent) 0%,
-            color-mix(in srgb, var(--aml-paper) 55%, transparent) 24%,
-            color-mix(in srgb, var(--aml-paper) 18%, transparent) 40%,
+            color-mix(in srgb, var(--aml-hero-veil) 78%, transparent) 0%,
+            color-mix(in srgb, var(--aml-hero-veil) 55%, transparent) 24%,
+            color-mix(in srgb, var(--aml-hero-veil) 18%, transparent) 40%,
             transparent 55%
         );
     }
