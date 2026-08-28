@@ -41,6 +41,10 @@
 
 # Indice del cross-sell: contiene prezzi mostrati a video, quindi cache piu'
 # corta della ricerca — un listino cambiato non deve restare in giro un giorno.
+# L'URL non ha un token ?v= da bustare (lo costruisce js/cart-cross-sell.js, non
+# l'HTML, quindi bump-asset-version.py non lo vede): il client lo compensa
+# chiedendolo con `cache: 'no-cache'`, cioe' sempre in revalidazione. Questo
+# max-age vale per le cache intermedie.
 /asset/cross-sell/*
   Cache-Control: public, max-age=3600, must-revalidate
 

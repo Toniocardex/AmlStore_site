@@ -74,6 +74,17 @@ FAMILY_BY_CATEGORY = {
 }
 FAMILY_DEFAULT = "tools"
 
+# Prodotti a fine supporto: restano in vendita sulla loro pagina, ma il carrello
+# non li propone come add-on — dentro una famiglia vince il piu' economico, e
+# senza questa marcatura Windows 10 Home (39,13) scavalcherebbe sempre Windows 11
+# Home (61,00) come suggerimento a chi compra Office.
+# Elenco volutamente minimo: estenderlo (Office 2019, 2021...) e' una scelta
+# commerciale, non tecnica.
+LEGACY_SLUGS = {
+    "windows-10-home",
+    "windows-10-pro",
+}
+
 
 def load_catalog_by_sku():
     data = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
@@ -146,6 +157,8 @@ def extract_entry(html_path, catalog_by_sku):
     # non racconta il secondo). Il motore li esclude dai candidati.
     if entry["type"] == "bundle" or html_path.stem.startswith("bundle-"):
         entry["bundle"] = True
+    if html_path.stem in LEGACY_SLUGS:
+        entry["legacy"] = True
     return entry
 
 

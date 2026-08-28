@@ -7,8 +7,9 @@
  *
  * Regole, in ordine di applicazione:
  *  1. esclusioni dure — già nel carrello, stessa famiglia di un articolo presente,
- *     bundle (contengono un secondo prodotto e si sovrappongono), fisici quando il
- *     carrello è tutto digitale (aggiungerebbero un indirizzo di spedizione);
+ *     bundle (contengono un secondo prodotto e si sovrappongono), prodotti a fine
+ *     supporto, fisici quando il carrello è tutto digitale (aggiungerebbero un
+ *     indirizzo di spedizione);
  *  2. affinità — ogni articolo nel carrello vota le famiglie complementari;
  *  3. prezzo — un add-on costa meno dell'articolo più caro del carrello, altrimenti
  *     non è un add-on ma un secondo acquisto;
@@ -34,8 +35,10 @@
     const AFFINITY = {
         windows:    { antivirus: 1.00, office: 0.85, m365: 0.80, backup: 0.55, tools: 0.35 },
         server:     { antivirus: 0.70, backup: 0.75, tools: 0.45, office: 0.30 },
-        office:     { antivirus: 1.00, tools: 0.60, backup: 0.50, windows: 0.30 },
-        m365:       { antivirus: 1.00, tools: 0.55, backup: 0.50, windows: 0.30 },
+        // windows piu' basso di tools/backup: chi compra una suite office ha gia'
+        // un PC acceso, il sistema operativo e' l'add-on meno probabile del gruppo.
+        office:     { antivirus: 1.00, tools: 0.60, backup: 0.50, windows: 0.15 },
+        m365:       { antivirus: 1.00, tools: 0.55, backup: 0.50, windows: 0.15 },
         antivirus:  { office: 0.85, m365: 0.80, backup: 0.65, tools: 0.40, windows: 0.30 },
         backup:     { antivirus: 0.80, office: 0.45, m365: 0.45, tools: 0.35 },
         tools:      { office: 0.60, m365: 0.55, antivirus: 0.55, backup: 0.35 },
@@ -116,6 +119,7 @@
             if (!p || !p.sku) return;
             if (skusInCart[p.sku]) return;
             if (p.bundle) return;
+            if (p.legacy) return;
             if (familiesInCart[p.family]) return;
             if (p.physical && !cartHasPhysical) return;
             const base = familyScore[p.family];
@@ -436,7 +440,13 @@
 
         watchVisibility();
 
-        fetch(staticRoot + '/asset/cross-sell/' + lang + '.json')
+        // `no-cache` = richiesta condizionale, non "salta la cache": il browser
+        // chiede sempre conferma e riceve un 304 vuoto quando l'indice non e'
+        // cambiato. Senza, la copia in cache resterebbe valida per l'ora dichiarata
+        // in _headers e il pannello mostrerebbe prezzi vecchi dopo un aggiornamento
+        // di listino. L'URL non ha un token di versione da bustare: lo costruisce
+        // questo file, non l'HTML, quindi bump-asset-version.py non lo vede.
+        fetch(staticRoot + '/asset/cross-sell/' + lang + '.json', { cache: 'no-cache' })
             .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
             .then((data) => {
                 catalog = Array.isArray(data) ? data : [];

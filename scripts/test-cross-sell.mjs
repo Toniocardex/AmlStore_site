@@ -79,6 +79,25 @@ test('nessun bundle fra i candidati', () => {
     }
 });
 
+test('nessun prodotto a fine supporto fra i candidati', () => {
+    for (const slug of ['microsoft-365-family', 'excel-2024', 'kaspersky-premium-5-devices']) {
+        assert.ok(!pickSuggestions(catalog, [line(slug)]).some((p) => p.legacy));
+    }
+});
+
+test('a chi compra Office il Windows proposto e\' l\'11 Home, non il 10', () => {
+    for (const slug of ['microsoft-365-family', 'excel-2024']) {
+        const win = pickSuggestions(catalog, [line(slug)]).find((p) => p.family === 'windows');
+        if (win) assert.equal(win.slug, 'windows-11-home', `carrello ${slug} -> ${win.slug}`);
+    }
+});
+
+test('windows resta l\'ultima delle proposte a un carrello Office', () => {
+    const picks = pickSuggestions(catalog, [line('microsoft-365-family')]);
+    const i = picks.findIndex((p) => p.family === 'windows');
+    if (i >= 0) assert.equal(i, picks.length - 1, 'windows non e\' in coda');
+});
+
 test('carrello tutto digitale: nessun prodotto fisico proposto', () => {
     const picks = pickSuggestions(catalog, [line('microsoft-365-family')]);
     assert.ok(picks.every((p) => !p.physical));
