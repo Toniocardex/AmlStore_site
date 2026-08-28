@@ -99,6 +99,7 @@
             openNavMenu: 'Apri menu di navigazione',
             closeNavMenu: 'Chiudi menu',
             selectLanguage: 'Seleziona lingua',
+            langSelectorLabel: 'Lingua: italiano — cambia lingua',
             cartAriaEmpty: 'Carrello, nessun articolo',
             cartAriaOne: 'Carrello, 1 articolo',
             cartAriaMany: 'Carrello, {{n}} articoli',
@@ -171,6 +172,7 @@
             openNavMenu: 'Open navigation menu',
             closeNavMenu: 'Close menu',
             selectLanguage: 'Select language',
+            langSelectorLabel: 'Language: English — change language',
             cartAriaEmpty: 'Shopping cart, empty',
             cartAriaOne: 'Shopping cart, 1 item',
             cartAriaMany: 'Shopping cart, {{n}} items',
@@ -243,6 +245,7 @@
             openNavMenu: 'Ouvrir le menu de navigation',
             closeNavMenu: 'Fermer le menu',
             selectLanguage: 'Choisir la langue',
+            langSelectorLabel: 'Langue : français — changer de langue',
             cartAriaEmpty: 'Panier vide',
             cartAriaOne: 'Panier, 1 article',
             cartAriaMany: 'Panier, {{n}} articles',
@@ -315,6 +318,7 @@
             openNavMenu: 'Navigationsmenü öffnen',
             closeNavMenu: 'Menü schließen',
             selectLanguage: 'Sprache wählen',
+            langSelectorLabel: 'Sprache: Deutsch — Sprache ändern',
             cartAriaEmpty: 'Warenkorb leer',
             cartAriaOne: 'Warenkorb, 1 Artikel',
             cartAriaMany: 'Warenkorb, {{n}} Artikel',
@@ -387,6 +391,7 @@
             openNavMenu: 'Abrir menú de navegación',
             closeNavMenu: 'Cerrar menú',
             selectLanguage: 'Seleccionar idioma',
+            langSelectorLabel: 'Idioma: español — cambiar idioma',
             cartAriaEmpty: 'Carrito vacío',
             cartAriaOne: 'Carrito, 1 artículo',
             cartAriaMany: 'Carrito, {{n}} artículos',
@@ -459,6 +464,7 @@
             openNavMenu: 'Abrir menu de navegação',
             closeNavMenu: 'Fechar menu',
             selectLanguage: 'Selecionar idioma',
+            langSelectorLabel: 'Idioma: português — mudar idioma',
             cartAriaEmpty: 'Carrinho vazio',
             cartAriaOne: 'Carrinho, 1 artigo',
             cartAriaMany: 'Carrinho, {{n}} artigos',
@@ -531,6 +537,7 @@
             openNavMenu: 'Navigatiemenu openen',
             closeNavMenu: 'Menu sluiten',
             selectLanguage: 'Taal selecteren',
+            langSelectorLabel: 'Taal: Nederlands — taal wijzigen',
             cartAriaEmpty: 'Winkelwagen leeg',
             cartAriaOne: 'Winkelwagen, 1 artikel',
             cartAriaMany: 'Winkelwagen, {{n}} artikelen',
@@ -2433,7 +2440,7 @@
                         </div>
 
                         <div class="lang-wrapper">
-                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-controls="header-lang-dropdown" aria-label="${esc(t.selectLanguage)}">
+                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-controls="header-lang-dropdown" aria-label="${esc(t.langSelectorLabel || t.selectLanguage)}">
                                 <img class="flag-icon" src="${esc(flagSrc(activeLang.flag))}" alt="" decoding="async">
                                 <span>${activeLang.label}</span>
                                 <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>

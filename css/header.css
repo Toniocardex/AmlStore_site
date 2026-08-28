@@ -1185,9 +1185,22 @@ ecommerce-header .nav-links { display: none; }
     ecommerce-header.is-compact .header-container {
         min-height: 64px;
     }
+    /* Il brand qui puo' restringersi (flex: 1 1 auto piu' sopra), ma il logo
+       era rimasto flex-shrink: 0 con un'immagine senza max-width: sotto i
+       ~380px usciva dal suo contenitore e finiva sotto il pulsante di
+       ricerca. Ora si adatta allo spazio che il brand gli lascia; object-fit
+       tiene le proporzioni nonostante l'altezza fissa, e object-position lo
+       ancora a sinistra invece di centrarlo nel box che avanza. */
+    ecommerce-header .logo {
+        flex-shrink: 1;
+        min-width: 0;
+    }
     ecommerce-header .logo img,
 ecommerce-header.is-compact .logo img {
         height: 44px;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: left center;
     }
     ecommerce-header .header-actions,
 ecommerce-header .right-section { gap: 0.35rem; }
@@ -1196,6 +1209,32 @@ ecommerce-header .right-section { gap: 0.35rem; }
         height: 36px;
     }
     ecommerce-header .search-panel { top: 72px; width: min(94vw, 640px); max-height: calc(100vh - 100px); }
+}
+
+/* Schermi stretti: il selettore lingua si riduce alla bandiera.
+   Era il controllo piu' largo della barra — 84px, piu' del logo che gli
+   restava accanto — e due terzi se ne andavano in sigla e freccia. Con
+   quattro controlli su 288px utili non restava spazio per il logo, che si
+   comprimeva fino a 68px. La bandiera identifica la lingua da sola e il
+   bordo del bottone continua a segnalare che e' un controllo.
+
+   Nascondere la sigla non toglie nulla agli screen reader: il bottone ha
+   aria-label, che gia' prima sostituiva il testo interno nell'annuncio. */
+@media (max-width: 480px) {
+    ecommerce-header .lang-selector {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        gap: 0;
+    }
+    ecommerce-header .lang-selector > span,
+    ecommerce-header .lang-selector .chevron-down {
+        display: none;
+    }
+    ecommerce-header .lang-selector img.flag-icon {
+        width: 22px;
+        height: 22px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
