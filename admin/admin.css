@@ -583,6 +583,10 @@ select.adm-input {
 .adm-badge--checkout  { background: rgba(139,92,246,.12);  color: #c4b5fd; border-color: rgba(139,92,246,.25); }
 .adm-badge--empty     { background: rgba(100,116,139,.08); color: #64748b; border-color: rgba(100,116,139,.15); }
 
+/* Ripiego per stati/metodi non mappati: neutro e in corsivo, cosi' si legge
+   come 'valore sconosciuto' e non come uno degli stati veri. */
+.adm-badge--unknown   { background: rgba(148,163,184,.14); color: #cbd5e1; border-color: rgba(203,213,225,.26); font-style: italic; }
+
 /* ─── Hidden attribute override (previene che display:flex sovrascriva [hidden]) */
 [hidden] { display: none !important; }
 

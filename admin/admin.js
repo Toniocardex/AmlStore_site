@@ -167,6 +167,12 @@
 
     /* ─── Rendering tabella ────────────────────────────────────────────────── */
 
+    /* Etichetta di ripiego per un valore non mappato: leggibile a video, ma
+       riconoscibile come dato grezzo. */
+    function rawLabel(value) {
+        return String(value || '—').replace(/_/g, ' ');
+    }
+
     function statusBadge(status) {
         var map = {
             pending_payment: ['pending', 'In attesa'],
@@ -174,7 +180,10 @@
             cancelled:       ['cancelled','Annullato'],
             refunded:        ['refunded', 'Rimborsato'],
         };
-        var m = map[status] || ['pending', status];
+        /* Un valore fuori mappa e' un dato inatteso, non un ordine in attesa:
+           badge neutro, cosi' si vede che e' sconosciuto invece di leggersi
+           come uno stato che non e'. */
+        var m = map[status] || ['unknown', rawLabel(status)];
         return '<span class="adm-badge adm-badge--' + m[0] + '">' + esc(m[1]) + '</span>';
     }
 
@@ -184,7 +193,10 @@
             paypal:        ['paypal',   'PayPal'],
             bank_transfer: ['transfer', 'Bonifico'],
         };
-        var m = map[method] || ['transfer', method];
+        /* Il backend scrive solo stripe | paypal | bank_transfer (vedi
+           functions/api/[[catchall]].js). Qualsiasi altro valore prendeva lo
+           stile del bonifico: un metodo diverso col colore di un altro. */
+        var m = map[method] || ['unknown', rawLabel(method)];
         return '<span class="adm-badge adm-badge--' + m[0] + '">' + esc(m[1]) + '</span>';
     }
 
