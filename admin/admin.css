@@ -568,11 +568,18 @@ select.adm-input {
 /* Metodo pagamento */
 .adm-badge--stripe   { background: rgba(139,92,246,.12); color: #c4b5fd; border-color: rgba(139,92,246,.25); }
 .adm-badge--paypal   { background: rgba(59,130,246,.12); color: #93c5fd; border-color: rgba(59,130,246,.25); }
-.adm-badge--transfer { background: rgba(249,115,22,.12); color: #fdba74; border-color: rgba(249,115,22,.25); }
+/* Ciano, non arancione: l'arancione ora e' l'accento del pannello e un badge
+   di metodo in tinta brand si legge come un elemento attivo. Nella colonna
+   Metodo resta distinto da Carta (viola) e PayPal (blu), e nella riga non si
+   confonde col verde di Pagato accanto — il teal, provato prima, si'. */
+.adm-badge--transfer { background: rgba(6,182,212,.14); color: #22d3ee; border-color: rgba(34,211,238,.28); }
 
 /* Stato carrelli */
 .adm-badge--active    { background: rgba(6,182,212,.12);   color: #22d3ee; border-color: rgba(6,182,212,.25); }
-.adm-badge--abandoned { background: rgba(234,88,12,.12);   color: #fb923c; border-color: rgba(234,88,12,.25); }
+/* Rosa/rose invece dell'arancione: e' uno stato perso, quindi negativo, ma
+   piu' tenue del rosso di Annullato — la lista dei carrelli e' filtrata su
+   'abbandonati' e sarebbe una colonna intera di allarmi. */
+.adm-badge--abandoned { background: rgba(244,63,94,.10);   color: #fda4af; border-color: rgba(244,63,94,.24); }
 .adm-badge--checkout  { background: rgba(139,92,246,.12);  color: #c4b5fd; border-color: rgba(139,92,246,.25); }
 .adm-badge--empty     { background: rgba(100,116,139,.08); color: #64748b; border-color: rgba(100,116,139,.15); }
 
