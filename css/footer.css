@@ -157,6 +157,13 @@ ecommerce-footer .footer-pay__logo img {
     display: block;
 }
 
+/* Amazon Pay: marchio circa 5:1, col max-width 38px verrebbe illeggibile.
+   Altezza ridotta per non far sembrare la chip sproporzionata accanto alle altre. */
+ecommerce-footer .footer-pay__logo[data-brand='Amazon Pay'] img {
+    height: 12px;
+    max-width: 63px;
+}
+
 ecommerce-footer .footer-nav {
     display: contents;
 }

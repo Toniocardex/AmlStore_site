@@ -631,6 +631,7 @@ class EcommerceFooter extends HTMLElement {
                                 <span class="footer-pay__logo" data-brand="PayPal"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_PayPal-logo.svg" alt="PayPal" width="40" height="14" loading="lazy" decoding="async"></span>
                                 <span class="footer-pay__logo" data-brand="Apple Pay"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Apple_Pay_logo.svg" alt="Apple Pay" width="30" height="14" loading="lazy" decoding="async"></span>
                                 <span class="footer-pay__logo" data-brand="Google Pay"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Google_Pay_Logo.svg" alt="Google Pay" width="30" height="14" loading="lazy" decoding="async"></span>
+                                <span class="footer-pay__logo" data-brand="Amazon Pay"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Amazon_Pay_logo.svg" alt="Amazon Pay" width="58" height="12" loading="lazy" decoding="async"></span>
                                 <span class="footer-pay__logo" data-brand="Stripe"><img src="${esc(staticRoot)}/asset/payments_logo/img-aml-store_Stripe_Logo.svg" alt="Stripe" width="30" height="14" loading="lazy" decoding="async"></span>
                             </div>
                         </div>
