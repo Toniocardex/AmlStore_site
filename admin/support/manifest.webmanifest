@@ -1,14 +1,14 @@
 {
   "id": "/admin/support/",
-  "name": "Aml Store Support Admin",
-  "short_name": "Support",
-  "description": "Console operatore Aml Store per l'assistenza guest realtime.",
+  "name": "Eurolicenze Support Admin",
+  "short_name": "Supporto",
+  "description": "Console operatore Eurolicenze per l'assistenza guest realtime.",
   "start_url": "/admin/support/",
   "scope": "/admin/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#123d37",
-  "background_color": "#eef2f1",
+  "theme_color": "#0F172A",
+  "background_color": "#F1F5F9",
   "icons": [
     {
       "src": "/admin/support/icon.svg",

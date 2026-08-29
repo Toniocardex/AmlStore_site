@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'aml-support-shell-v3';
+const CACHE_VERSION = 'aml-support-shell-v4';
 const APP_SHELL = [
     '/admin/support/',
     '/admin/support/support.css',
@@ -6,6 +6,8 @@ const APP_SHELL = [
     '/admin/support/support.js',
     '/admin/support/manifest.webmanifest',
     '/admin/support/icon.svg',
+    '/fonts/montserrat.css',
+    '/logo/logo-header-400-light.webp',
     '/favicon/apple-touch-icon.png',
 ];
 

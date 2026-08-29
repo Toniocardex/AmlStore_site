@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Aml Store Support">
-  <rect width="512" height="512" rx="112" fill="#123d37"/>
-  <path d="M116 268c0-84 60-148 140-148s140 64 140 148v76c0 26-22 48-48 48h-54v-68h42v-56c0-48-34-84-80-84s-80 36-80 84v56h42v68h-54c-26 0-48-22-48-48z" fill="#f1c75b"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Eurolicenze Support">
+  <rect width="512" height="512" rx="112" fill="#0F172A"/>
+  <path d="M116 268c0-84 60-148 140-148s140 64 140 148v76c0 26-22 48-48 48h-54v-68h42v-56c0-48-34-84-80-84s-80 36-80 84v56h42v68h-54c-26 0-48-22-48-48z" fill="#FF7024"/>
   <circle cx="256" cy="274" r="54" fill="#fff"/>
-  <path d="M225 278h62M225 304h38" fill="none" stroke="#176b5b" stroke-width="18" stroke-linecap="round"/>
+  <path d="M225 278h62M225 304h38" fill="none" stroke="#0F172A" stroke-width="18" stroke-linecap="round"/>
 </svg>

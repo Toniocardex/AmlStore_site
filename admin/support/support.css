@@ -1,2 +1,375 @@
-:root{color-scheme:light;--green:#123d37;--accent:#176b5b;--line:#dbe3e1;--soft:#f3f6f5;--ink:#15231f;--muted:#64716e}*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:#eef2f1}button,select,textarea{font:inherit}.sup-header{height:58px;background:var(--green);color:#fff;display:flex;align-items:center;padding:0 18px;gap:20px}.sup-brand{color:#fff;text-decoration:none;font-weight:800}.sup-brand span{font-weight:500;opacity:.75;margin-left:8px}.sup-presence{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px}.sup-presence i{width:8px;height:8px;border-radius:50%;background:#d0a637}.sup-presence.online i{background:#56d39b}.sup-logout{color:#fff;font-size:13px}.sup-shell{height:calc(100dvh - 58px);display:grid;grid-template-columns:minmax(260px,340px) minmax(420px,1fr) minmax(220px,290px);max-width:1700px;margin:auto;background:#fff}.sup-inbox,.sup-conversation,.sup-details{min-width:0;border-right:1px solid var(--line)}.sup-inbox{display:flex;flex-direction:column}.sup-toolbar{padding:16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex:none}.sup-toolbar h1{font-size:17px;margin:0;flex:1;min-width:0}.sup-toolbar select{border:1px solid var(--line);border-radius:8px;padding:7px 8px;background:#fff;max-width:150px;flex:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sup-list{overflow:auto;flex:1;min-height:0;display:flex;flex-direction:column}.sup-placeholder{font-size:13px;text-align:center;padding:24px}.sup-card{display:block;width:100%;border:0;border-bottom:1px solid var(--line);background:#fff;text-align:left;padding:14px;cursor:pointer}.sup-card:hover,.sup-card.active{background:#edf6f3}.sup-card-top{display:flex;justify-content:space-between;gap:8px}.sup-card strong{font-size:13px}.sup-card time{font-size:10px;color:var(--muted)}.sup-card p{font-size:12px;color:#4d5b57;margin:7px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sup-card small{font-size:10px;color:var(--muted)}.sup-unread{display:inline-grid;place-items:center;min-width:19px;height:19px;border-radius:10px;background:var(--accent);color:#fff;font-size:10px}.sup-more{width:100%;padding:9px;border:0;background:var(--soft)}.sup-conversation{display:grid;grid-template-rows:auto 1fr auto}.sup-conversation-head{min-height:65px;padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}.sup-conversation-head>div:first-of-type{flex:1}.sup-conversation-head strong,.sup-conversation-head small{display:block}.sup-conversation-head strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sup-conversation-head small{font-size:10px;color:var(--muted);margin-top:3px}.sup-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.sup-actions button,.sup-quick button{border:1px solid var(--line);border-radius:7px;background:#fff;padding:6px 8px;font-size:11px;cursor:pointer}.sup-back{display:none;border:0;background:none;font-size:22px}.sup-messages{overflow:auto;padding:18px;display:flex;flex-direction:column;gap:10px;background:#f8faf9}.sup-message{max-width:78%;padding:10px 12px;border-radius:13px;background:#fff;border:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.45}.sup-message.operator{align-self:flex-end;background:var(--accent);color:#fff;border-color:var(--accent)}.sup-message small{display:block;font-size:9px;opacity:.65;margin-top:4px}.sup-placeholder{margin:auto;color:var(--muted)}.sup-reply{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line)}.sup-reply textarea{flex:1;resize:none;min-height:58px;max-height:120px;border:1px solid #bdcac7;border-radius:9px;padding:9px}.sup-reply button{border:0;border-radius:9px;background:var(--accent);color:#fff;font-weight:700;padding:0 16px}.sup-conversation[data-empty=true] .sup-reply,.sup-conversation[data-empty=true] .sup-actions{visibility:hidden}.sup-details{padding:18px;overflow:auto;border-right:0}.sup-details h2{font-size:13px;margin:0 0 10px}.sup-details h2:not(:first-child){margin-top:24px}.sup-details dl{margin:0}.sup-details dt{font-size:10px;text-transform:uppercase;color:var(--muted);margin-top:10px}.sup-details dd{font-size:12px;margin:3px 0;overflow-wrap:anywhere}.sup-quick{display:flex;flex-wrap:wrap;gap:6px}#sup-toast{position:fixed;right:16px;bottom:16px;background:#1e2926;color:#fff;border-radius:9px;padding:10px 14px;font-size:12px;opacity:0;pointer-events:none;transition:opacity .15s}#sup-toast.show{opacity:1}@media(max-width:1050px){.sup-shell{grid-template-columns:300px 1fr}.sup-details{display:none}}@media(max-width:720px){.sup-shell{display:block}.sup-inbox,.sup-conversation{height:100%;border:0}.sup-conversation{display:none}.sup-shell.conversation-open .sup-inbox{display:none}.sup-shell.conversation-open .sup-conversation{display:grid}.sup-back{display:block}.sup-conversation-head{padding:8px 10px 10px;flex-wrap:wrap;row-gap:8px}.sup-conversation-head>div:first-of-type{min-width:0}.sup-actions{flex-basis:100%;max-width:none;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}.sup-actions::-webkit-scrollbar{display:none}.sup-actions button{flex:none;padding:8px 11px;font-size:12px;min-height:36px}.sup-message{max-width:88%}}
-@media(max-width:400px){.sup-toolbar select{max-width:120px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* ─── Console operatore — Supporto ────────────────────────────────────────────
+   Allineata alla palette del sito (css/page.css) e alla stessa regola dei tre
+   ruoli usata dal widget guest (components/support-chat.js):
+
+     slate/navy →  chrome: header, bolle operatore, superfici
+     arancione  →  azione: Invia, non letti, conversazione attiva, focus
+     verde      →  rassicurare: presenza realtime
+
+   La console e' chrome di lavoro, non una vetrina: l'arancione resta sulle
+   azioni, altrimenti un thread lungo diventa una colonna arancione.
+   I valori sono copiati da css/page.css perche' qui non e' caricato.        */
+
+:root {
+    color-scheme: light;
+
+    /* Chrome scuro (slate-900) */
+    --sup-chrome: #0F172A;
+
+    /* Neutrali */
+    --sup-ink: #1E293B;
+    --sup-ink-2: #475569;
+    --sup-muted: #64748B;
+    --sup-line: #E2E8F0;
+    --sup-line-strong: #CBD5E1;
+    --sup-surface: #FFFFFF;
+    --sup-paper: #F8FAFC;
+    --sup-paper-2: #F1F5F9;
+
+    /* Azione (orange-600 / orange-500 / orange-700) */
+    --sup-cta: #F05A10;
+    --sup-cta-hover: #FF7024;
+    --sup-cta-ink: #FFFFFF;
+    --sup-accent-ink: #C74104;
+    --sup-accent-soft: #FFF7ED;
+    --sup-accent-line: #FFD1B3;
+
+    /* Semantici */
+    --sup-ok: #34D399;
+    --sup-warn: #FBBF24;
+
+    --sup-radius: 8px;
+    --sup-header-h: 58px;
+    --sup-font: 'Montserrat', 'Montserrat Fallback', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box }
+
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: var(--sup-font);
+    color: var(--sup-ink);
+    background: var(--sup-paper-2);
+}
+
+button, select, textarea { font: inherit }
+
+:focus-visible { outline: 2px solid var(--sup-cta); outline-offset: 2px }
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+
+.sup-header {
+    height: var(--sup-header-h);
+    background: var(--sup-chrome);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    gap: 20px;
+}
+
+.sup-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0 }
+.sup-brand img { height: 26px; width: auto; display: block; flex: none }
+
+.sup-brand span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--sup-accent-line);
+    background: color-mix(in srgb, var(--sup-cta) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--sup-cta) 35%, transparent);
+    border-radius: 4px;
+    padding: 2px 6px;
+    line-height: 1.4;
+    flex: none;
+}
+
+.sup-presence { margin-left: auto; display: flex; align-items: center; gap: 7px; font-size: 12px; color: #CBD5E1 }
+.sup-presence i { width: 8px; height: 8px; border-radius: 50%; background: var(--sup-warn) }
+.sup-presence.online i { background: var(--sup-ok); box-shadow: 0 0 0 3px rgba(52, 211, 153, .2) }
+.sup-logout { color: #CBD5E1; font-size: 13px }
+.sup-logout:hover { color: #fff }
+
+/* ─── Layout ──────────────────────────────────────────────────────────────── */
+
+.sup-shell {
+    height: calc(100dvh - var(--sup-header-h));
+    display: grid;
+    grid-template-columns: minmax(260px, 340px) minmax(420px, 1fr) minmax(220px, 290px);
+    /* La riga deve stare nell'altezza dello schermo: con `auto` la lista
+       conversazioni (decine di card) la faceva crescere oltre il viewport e
+       spingeva fuori campo il box di risposta. */
+    grid-template-rows: minmax(0, 1fr);
+    max-width: 1700px;
+    margin: auto;
+    background: var(--sup-surface);
+}
+
+.sup-inbox, .sup-conversation, .sup-details { min-width: 0; min-height: 0; border-right: 1px solid var(--sup-line) }
+.sup-inbox { display: flex; flex-direction: column }
+
+.sup-toolbar {
+    padding: 16px;
+    border-bottom: 1px solid var(--sup-line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: none;
+}
+
+.sup-toolbar h1 {
+    font-size: 17px;
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    font-weight: 700;
+    /* Sotto i 1050px la colonna scende a 300px e il titolo finiva tagliato
+       a meta' dalla select: meglio troncarlo di proposito. */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sup-toolbar select {
+    border: 1px solid var(--sup-line-strong);
+    border-radius: var(--sup-radius);
+    padding: 7px 8px;
+    background: var(--sup-surface);
+    color: var(--sup-ink);
+    max-width: 150px;
+    flex: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sup-list { overflow: auto; flex: 1; min-height: 0; display: flex; flex-direction: column }
+.sup-placeholder { font-size: 13px; text-align: center; padding: 24px; color: var(--sup-muted) }
+
+/* ─── Card conversazione ──────────────────────────────────────────────────── */
+
+.sup-card {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--sup-line);
+    border-left: 3px solid transparent;
+    background: var(--sup-surface);
+    text-align: left;
+    padding: 14px;
+    cursor: pointer;
+    transition: background .12s ease, border-color .12s ease;
+}
+
+.sup-card:hover { background: var(--sup-paper) }
+.sup-card.active { background: var(--sup-accent-soft); border-left-color: var(--sup-cta) }
+.sup-card-top { display: flex; justify-content: space-between; gap: 8px }
+.sup-card strong { font-size: 13px; font-weight: 600 }
+.sup-card time { font-size: 10px; color: var(--sup-muted) }
+
+.sup-card p {
+    font-size: 12px;
+    color: var(--sup-ink-2);
+    margin: 7px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sup-card small { font-size: 10px; color: var(--sup-muted) }
+
+.sup-unread {
+    display: inline-grid;
+    place-items: center;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 5px;
+    border-radius: 10px;
+    /* orange-700, non il 600 della CTA: a 10px il testo bianco sul 600 sta
+       sotto 4.5:1, e questo badge e' un numero che va letto di sfuggita. */
+    background: var(--sup-accent-ink);
+    color: var(--sup-cta-ink);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.sup-more {
+    width: 100%;
+    padding: 9px;
+    border: 0;
+    border-top: 1px solid var(--sup-line);
+    background: var(--sup-paper);
+    color: var(--sup-accent-ink);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sup-more:hover { background: var(--sup-accent-soft) }
+
+/* ─── Conversazione ───────────────────────────────────────────────────────── */
+
+.sup-conversation { display: grid; grid-template-rows: auto 1fr auto }
+
+.sup-conversation-head {
+    min-height: 65px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--sup-line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sup-conversation-head > div:first-of-type { flex: 1 }
+.sup-conversation-head strong, .sup-conversation-head small { display: block }
+.sup-conversation-head strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700 }
+.sup-conversation-head small { font-size: 10px; color: var(--sup-muted); margin-top: 3px }
+.sup-actions { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end }
+
+.sup-actions button, .sup-quick button {
+    border: 1px solid var(--sup-line-strong);
+    border-radius: 7px;
+    background: var(--sup-surface);
+    color: var(--sup-ink);
+    padding: 6px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background .12s ease, border-color .12s ease, color .12s ease;
+}
+
+.sup-actions button:hover, .sup-quick button:hover {
+    background: var(--sup-accent-soft);
+    border-color: var(--sup-accent-line);
+    color: var(--sup-accent-ink);
+}
+
+.sup-back { display: none; border: 0; background: none; font-size: 22px; color: var(--sup-ink) }
+
+.sup-messages {
+    overflow: auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--sup-paper);
+}
+
+.sup-message {
+    max-width: 78%;
+    padding: 10px 12px;
+    border-radius: 13px;
+    border-bottom-left-radius: 5px;
+    background: var(--sup-surface);
+    border: 1px solid var(--sup-line);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.sup-message.operator {
+    align-self: flex-end;
+    background: var(--sup-chrome);
+    color: #fff;
+    border-color: var(--sup-chrome);
+    border-radius: 13px;
+    border-bottom-right-radius: 5px;
+}
+
+.sup-message small { display: block; font-size: 9px; opacity: .65; margin-top: 4px }
+.sup-placeholder { margin: auto; color: var(--sup-muted) }
+
+.sup-reply { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--sup-line) }
+
+.sup-reply textarea {
+    flex: 1;
+    resize: none;
+    min-height: 58px;
+    max-height: 120px;
+    border: 1px solid var(--sup-line-strong);
+    border-radius: 9px;
+    padding: 9px;
+    color: var(--sup-ink);
+    transition: border-color .15s ease;
+}
+
+.sup-reply textarea::placeholder { color: var(--sup-muted); opacity: 1 }
+.sup-reply textarea:focus { border-color: var(--sup-cta) }
+
+.sup-reply button {
+    border: 0;
+    border-radius: 9px;
+    background: var(--sup-cta);
+    color: var(--sup-cta-ink);
+    font-weight: 700;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: background .12s ease;
+}
+
+.sup-reply button:hover { background: var(--sup-cta-hover) }
+.sup-conversation[data-empty=true] .sup-reply, .sup-conversation[data-empty=true] .sup-actions { visibility: hidden }
+
+/* ─── Dettagli guest ──────────────────────────────────────────────────────── */
+
+.sup-details { padding: 18px; overflow: auto; border-right: 0; background: var(--sup-surface) }
+.sup-details h2 { font-size: 13px; margin: 0 0 10px; font-weight: 700 }
+.sup-details h2:not(:first-child) { margin-top: 24px }
+.sup-details dl { margin: 0 }
+.sup-details dt { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--sup-muted); margin-top: 10px }
+.sup-details dd { font-size: 12px; margin: 3px 0; overflow-wrap: anywhere }
+.sup-quick { display: flex; flex-wrap: wrap; gap: 6px }
+
+#sup-toast {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    background: var(--sup-chrome);
+    color: #fff;
+    border-radius: 9px;
+    padding: 10px 14px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s;
+}
+
+#sup-toast.show { opacity: 1 }
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 1050px) {
+    .sup-shell { grid-template-columns: 300px 1fr }
+    .sup-details { display: none }
+}
+
+@media (max-width: 720px) {
+    .sup-shell { display: block }
+    .sup-inbox, .sup-conversation { height: 100%; border: 0 }
+    .sup-conversation { display: none }
+    .sup-shell.conversation-open .sup-inbox { display: none }
+    .sup-shell.conversation-open .sup-conversation { display: grid }
+    .sup-back { display: block }
+    .sup-conversation-head { padding: 8px 10px 10px; flex-wrap: wrap; row-gap: 8px }
+    .sup-conversation-head > div:first-of-type { min-width: 0 }
+    .sup-actions {
+        flex-basis: 100%;
+        max-width: none;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        scrollbar-width: none;
+    }
+    .sup-actions::-webkit-scrollbar { display: none }
+    .sup-actions button { flex: none; padding: 8px 11px; font-size: 12px; min-height: 36px }
+    .sup-message { max-width: 88% }
+}
+
+@media (max-width: 400px) {
+    .sup-toolbar select { max-width: 120px }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; transition: none !important }
+}
