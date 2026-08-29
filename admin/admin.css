@@ -1,14 +1,24 @@
-/* ─── Aml Store Admin Panel — CSS ─────────────────────────────────────────── */
+/* ─── Eurolicenze Admin Panel — CSS ───────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    --adm-bg:        #0d0f18;
-    --adm-surface:   #151720;
-    --adm-card:      #1e2130;
-    --adm-border:    #2a2e45;
-    --adm-accent:    #3b82f6;
-    --adm-accent-h:  #2563eb;
+    /* Neutrali: scala slate del design system (css/page.css), la stessa delle
+       superfici scure del sito pubblico (barra annuncio, footer). */
+    --adm-bg:        #090D16;   /* slate-950 */
+    --adm-surface:   #0F172A;   /* slate-900 */
+    --adm-card:      #1E293B;   /* slate-800 */
+    --adm-border:    #334155;   /* slate-700 */
+    /* Accento = CTA del sito: riempimenti (bottoni, pill attiva, barre del
+       grafico) e bordi di focus. L'hover schiarisce come sul sito, non
+       scurisce. Per il testo c'e' --adm-accent-ink qui sotto. */
+    --adm-accent:    #F05A10;   /* orange-600 = --aml-cta-bg */
+    --adm-accent-h:  #FF7024;   /* orange-500 = --aml-cta-bg-hover */
+    /* Su fondo scuro il testo arancione vuole un gradino piu' chiaro del
+       riempimento: l'orange-600 sulla card scende a 4.3:1, l'orange-400 sta
+       a 6:1. E' il ribaltamento della regola del sito, dove il testo usa
+       l'orange-700 e il riempimento il 600. */
+    --adm-accent-ink: #FF8442;  /* orange-400 — link, ID ordine, badge */
     --adm-danger:    #ef4444;
     --adm-danger-h:  #dc2626;
     --adm-success:   #10b981;
@@ -32,8 +42,24 @@ html, body {
     line-height: 1.5;
 }
 
-a { color: var(--adm-accent); text-decoration: none; }
+a { color: var(--adm-accent-ink); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+/* Montserrat: il font del sito, ma solo sul chrome (header, titoli, badge,
+   bottoni). Nelle tabelle resta lo stack di sistema: Montserrat e' ~12% piu'
+   largo e sulla colonna Articoli raddoppiava l'altezza delle righe, cioe'
+   meno ordini a schermo — in un pannello di lavoro la densita' viene prima
+   del carattere. */
+.adm-header,
+.adm-page-title,
+.adm-header__admin-badge,
+.adm-modal__title,
+.adm-filter-section__title,
+.adm-detail-section__title,
+.adm-analytics-section__title,
+.adm-btn {
+    font-family: 'Montserrat', 'Montserrat Fallback', system-ui, sans-serif;
+}
 
 /* ─── Header ─────────────────────────────────────────────────────────────── */
 
@@ -101,8 +127,8 @@ a:hover { text-decoration: underline; }
 .adm-nav-btn:hover { color: var(--adm-text); background: rgba(255,255,255,.04); }
 .adm-nav-btn.is-active {
     color: #fff;
-    background: rgba(59,130,246,.18);
-    border-color: rgba(59,130,246,.35);
+    background: color-mix(in srgb, var(--adm-accent) 18%, transparent);
+    border-color: color-mix(in srgb, var(--adm-accent) 35%, transparent);
 }
 
 .adm-layout--stock { grid-template-columns: 1fr; }
@@ -128,9 +154,9 @@ a:hover { text-decoration: underline; }
     font-weight: 700;
     letter-spacing: .08em;
     text-transform: uppercase;
-    color: var(--adm-accent);
-    background: rgba(59,130,246,.12);
-    border: 1px solid rgba(59,130,246,.25);
+    color: var(--adm-accent-ink);
+    background: color-mix(in srgb, var(--adm-accent) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--adm-accent) 25%, transparent);
     border-radius: 4px;
     padding: .15rem .45rem;
     line-height: 1.4;
@@ -468,14 +494,14 @@ select.adm-input {
 }
 
 .adm-table tbody tr {
-    border-bottom: 1px solid rgba(42,46,69,.6);
+    border-bottom: 1px solid rgba(51,65,85,.6);
     transition: background .12s;
     cursor: pointer;
 }
 /* Zebra stripes leggere */
 .adm-table tbody tr:nth-child(even) { background: rgba(255,255,255,.018); }
 .adm-table tbody tr:last-child { border-bottom: none; }
-.adm-table tbody tr:hover { background: rgba(59,130,246,.09) !important; }
+.adm-table tbody tr:hover { background: color-mix(in srgb, var(--adm-accent) 9%, transparent) !important; }
 .adm-table tbody tr.adm-row--archived { opacity: .45; }
 
 .adm-table td {
@@ -506,7 +532,7 @@ select.adm-input {
     font-family: 'SF Mono', 'Fira Code', monospace;
     font-size: .8rem;
     font-weight: 700;
-    color: var(--adm-accent);
+    color: var(--adm-accent-ink);
     letter-spacing: .03em;
 }
 .adm-order-id:hover { text-decoration: underline; }
@@ -769,7 +795,7 @@ select.adm-input {
 }
 .adm-detail-table td {
     padding: .5rem .5rem;
-    border-bottom: 1px solid rgba(42,46,69,.5);
+    border-bottom: 1px solid rgba(51,65,85,.5);
     color: var(--adm-text);
 }
 .adm-detail-table tr:last-child td { border-bottom: none; }
@@ -808,7 +834,7 @@ select.adm-input {
 }
 .adm-toast--success { background: #065f46; color: #a7f3d0; border: 1px solid #10b981; }
 .adm-toast--error   { background: #450a0a; color: #fca5a5; border: 1px solid #ef4444; }
-.adm-toast--info    { background: #1e3a8a; color: #bfdbfe; border: 1px solid #3b82f6; }
+.adm-toast--info    { background: #7E2702; color: #FFE8D6; border: 1px solid #F05A10; }
 
 @keyframes adm-toast-in {
     from { opacity: 0; transform: translateY(12px); }
@@ -882,7 +908,7 @@ select.adm-input {
     }
     .adm-table tbody tr {
         padding: 1rem 1.1rem;
-        border-bottom: 1px solid rgba(42, 46, 69, .6);
+        border-bottom: 1px solid rgba(51, 65, 85, .6);
         position: relative;
     }
     .adm-table tbody tr:last-child { border-bottom: none; }
@@ -943,7 +969,7 @@ select.adm-input {
         padding-bottom: .6rem;
         margin-bottom: .4rem;
         padding-left: 1.75rem;
-        border-bottom: 1px solid rgba(42, 46, 69, .4);
+        border-bottom: 1px solid rgba(51, 65, 85, .4);
         font-size: .95rem;
     }
     .adm-table td[data-label="Ordine"]::before,
@@ -954,7 +980,7 @@ select.adm-input {
     .adm-td--actions {
         padding-top: .7rem !important;
         margin-top: .3rem;
-        border-top: 1px solid rgba(42, 46, 69, .4);
+        border-top: 1px solid rgba(51, 65, 85, .4);
     }
     .adm-table .btn-detail,
     .adm-table [data-stock-save] {
@@ -1065,7 +1091,7 @@ select.adm-input {
     position: relative;
 }
 
-.adm-chart__col:hover { background: rgba(59, 130, 246, .07); }
+.adm-chart__col:hover { background: color-mix(in srgb, var(--adm-accent) 7%, transparent); }
 
 .adm-chart__bar {
     position: relative;

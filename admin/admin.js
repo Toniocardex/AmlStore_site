@@ -403,7 +403,7 @@
         html += '<div class="adm-detail-section">'
             + '<p class="adm-detail-section__title">Riepilogo</p>'
             + '<div class="adm-detail-grid">'
-            + field('N° Ordine',  '<span style="font-family:monospace;color:var(--adm-accent)">' + esc(o.orderId) + '</span>')
+            + field('N° Ordine',  '<span style="font-family:monospace;color:var(--adm-accent-ink)">' + esc(o.orderId) + '</span>')
             + field('Stato',      statusBadge(o.status))
             + field('Metodo',     methodBadge(o.paymentMethod))
             + field('Totale',     '<strong>' + esc(fmtMoney(o.totalMinor, o.currency)) + '</strong>')
