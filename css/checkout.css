@@ -1077,3 +1077,306 @@
     color: var(--aml-warn);
     word-break: break-all;
 }
+
+/* ═══ Checkout "blindato" — header/footer enclosed ═══════════════════════════ */
+
+.checkout-chrome-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--aml-surface);
+    border-bottom: 1px solid var(--page-border);
+    box-shadow: var(--aml-shadow-sm);
+}
+
+.checkout-chrome-header__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    min-height: 56px;
+    padding: 0.5rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.checkout-chrome-header__logo {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+}
+
+.checkout-chrome-header__logo img {
+    height: 38px;
+    width: auto;
+}
+
+.checkout-chrome-header__ssl {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: var(--aml-ok-bg);
+    color: var(--aml-ok);
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid color-mix(in srgb, var(--aml-ok) 25%, transparent);
+    white-space: nowrap;
+}
+
+.checkout-chrome-footer {
+    margin-top: 3rem;
+    padding: 1.5rem 1.25rem;
+    border-top: 1px solid var(--page-border);
+    background: var(--aml-paper);
+    text-align: center;
+}
+
+.checkout-chrome-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.25rem;
+    margin-bottom: 0.6rem;
+}
+
+.checkout-chrome-footer__links a {
+    color: var(--page-text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-underline-offset: 2px;
+}
+
+.checkout-chrome-footer__links a:hover {
+    color: var(--page-text);
+    text-decoration: underline;
+}
+
+.checkout-chrome-footer__copy {
+    margin: 0;
+    font-size: 0.72rem;
+    color: var(--page-text-muted);
+}
+
+/* ═══ Riepilogo comprimibile mobile (<details> nativo) ══════════════════════ */
+
+.checkout-msummary {
+    display: none;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--page-border);
+    border-radius: var(--aml-radius-md);
+    background: var(--aml-surface);
+    overflow: hidden;
+}
+
+.checkout-msummary__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.9rem;
+    color: var(--page-text-secondary);
+}
+
+.checkout-msummary__bar::-webkit-details-marker { display: none; }
+
+.checkout-msummary__left {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--page-accent);
+    font-weight: 600;
+}
+
+.checkout-msummary__hide { display: none; }
+.checkout-msummary[open] .checkout-msummary__show { display: none; }
+.checkout-msummary[open] .checkout-msummary__hide { display: inline; }
+
+.checkout-msummary__chevron {
+    transition: transform 0.2s ease;
+}
+
+.checkout-msummary[open] .checkout-msummary__chevron {
+    transform: rotate(180deg);
+}
+
+.checkout-msummary__total {
+    font-weight: 800;
+    color: var(--page-text);
+    font-size: 1rem;
+}
+
+.checkout-msummary__body {
+    padding: 0.5rem 1rem 1rem;
+    border-top: 1px solid var(--page-border);
+    background: var(--aml-paper);
+}
+
+.checkout-msummary__items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin: 0.75rem 0;
+}
+
+.checkout-msummary__totals .checkout-total-row {
+    margin-bottom: 0.4rem;
+}
+
+@media (max-width: 767px) {
+    .checkout-msummary {
+        display: block;
+        position: sticky;
+        top: 56px;
+        z-index: 20;
+    }
+
+    .checkout-summary-col {
+        display: none;
+    }
+}
+
+/* ═══ Express Checkout + divisore ══════════════════════════════════════════ */
+
+.express-checkout {
+    margin-bottom: 0.5rem;
+}
+
+.express-checkout[hidden] { display: none; }
+
+.express-checkout__hint {
+    margin: 0 0 0.6rem;
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--page-text-muted);
+}
+
+#express-checkout-element {
+    min-height: 48px;
+}
+
+.checkout-or-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 1.4rem 0 0.4rem;
+    color: var(--page-text-muted);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.checkout-or-divider::before,
+.checkout-or-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--page-border);
+}
+
+/* ═══ Stripe Payment Element (carta on-page) ═══════════════════════════════ */
+
+.payment-element-gate {
+    margin: 0.75rem 0 0;
+    padding: 0.75rem 0.9rem;
+    border: 1px dashed var(--page-border);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--page-text-secondary);
+    background: var(--aml-paper);
+}
+
+.payment-element-gate[hidden] { display: none; }
+
+.payment-element-loading {
+    margin-top: 0.75rem;
+    font-size: 0.82rem;
+    color: var(--page-text-muted);
+}
+
+.payment-element-loading[hidden] { display: none; }
+
+#payment-element {
+    margin-top: 0.75rem;
+}
+
+#payment-element:empty {
+    min-height: 0;
+}
+
+/* ═══ Box garanzia + supporto + riga IVA + badge stock ════════════════════ */
+
+.checkout-guarantee-box {
+    margin-top: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    background: var(--aml-ok-bg);
+    border: 1px solid color-mix(in srgb, var(--aml-ok) 22%, transparent);
+}
+
+.checkout-guarantee-box__title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0 0 0.3rem;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--aml-ok);
+}
+
+.checkout-guarantee-box__text {
+    margin: 0;
+    font-size: 0.76rem;
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--aml-ok) 82%, var(--page-text));
+}
+
+.checkout-support-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--page-border);
+    font-size: 0.76rem;
+    line-height: 1.5;
+    color: var(--page-text-secondary);
+}
+
+.checkout-support-box__icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--page-accent) 12%, transparent);
+    color: var(--page-accent);
+}
+
+.checkout-support-box a {
+    color: var(--page-accent);
+    font-weight: 700;
+}
+
+.checkout-total-row--vat {
+    font-size: 0.8rem;
+    color: var(--page-text-muted);
+}
+
+.checkout-stock-badge {
+    margin: 0.25rem 0 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--aml-ok);
+}

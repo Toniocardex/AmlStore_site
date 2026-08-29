@@ -1,0 +1,9 @@
+PLACEHOLDER — sostituire con il contenuto reale fornito da Stripe.
+
+Dashboard Stripe → Settings → Payments → Payment methods → Apple Pay →
+"Add a new domain" → inserire eurolicenze.com. Stripe mostra (o verifica
+automaticamente) il file di associazione dominio: copiarne il contenuto
+esatto QUI, sovrascrivendo per intero questo testo, e ridistribuire.
+
+Finché questo file contiene il placeholder, Apple Pay NON verrà mostrato
+sul checkout. Google Pay e Link non dipendono da questo file.

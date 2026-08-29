@@ -13,6 +13,13 @@
     const TRANSFER_WORKER_URL    = '/api/bank-transfer-order';
     const PAYPAL_CONFIG_URL      = '/api/paypal-config';
 
+    // Pilota IT: solo /it/checkout ha il markup on-page (#payment-element).
+    // Le altre lingue restano sul flusso Stripe Checkout ospitato (redirect)
+    // finché non vengono migrate. Un solo checkout.js serve entrambi.
+    function isOnPageStripe() {
+        return !!document.getElementById('payment-element');
+    }
+
     const PAYPAL_LOCALE_MAP = {
         it: 'it_IT', en: 'en_US', fr: 'fr_FR', de: 'de_DE', es: 'es_ES', pt: 'pt_PT', nl: 'nl_NL',
     };
@@ -30,6 +37,19 @@
 
     /* ─── Stato Sottomissione ──────────────────────────────────────────────── */
     var _isSubmitting = false;
+
+    /* ─── Stato Stripe Elements (flusso on-page) ───────────────────────────── */
+    var STRIPE_CONFIG_URL          = '/api/stripe-config';
+    var STRIPE_PI_URL              = '/api/create-payment-intent';
+    var STRIPE_INTENT_RETURN_URL   = '/api/stripe-intent-return';
+
+    var _stripe            = null;   // istanza Stripe(pk)
+    var _stripeEnabled     = false;  // publishable key presente
+    var _elementsManual    = null;   // elements() per il Payment Element (carta)
+    var _paymentElement    = null;
+    var _paymentElMounting = false;
+    var _elementsExpress   = null;   // elements() per l'Express Checkout Element
+    var _lastPiCustomerKey = '';     // per rimontare il PE se cambiano i dati cliente
 
     /* ─── Idempotency key ──────────────────────────────────────────────────── */
     // Chiave stabile per (sessione, metodo, carrello, email): un retry dello stesso
@@ -392,10 +412,12 @@
             if (transferSection) transferSection.hidden  = method !== 'transfer';
             if (paypalSection)   paypalSection.hidden    = method !== 'paypal';
 
-            if (btnStripe)   btnStripe.style.display   = method === 'stripe'   ? '' : 'none';
+            var stripeBtnOk = method === 'stripe' && (!isOnPageStripe() || _stripeEnabled);
+            if (btnStripe)   btnStripe.style.display   = stripeBtnOk ? '' : 'none';
             if (btnTransfer) btnTransfer.style.display  = method === 'transfer' ? '' : 'none';
 
             if (method === 'paypal') initPaypalButtons();
+            if (method === 'stripe' && isOnPageStripe()) maybeMountPaymentElement();
         }
 
         radios.forEach(function (r) { r.addEventListener('change', updateVisibility); });
@@ -519,13 +541,32 @@
         });
 
         var minor   = cart.totalMinor ? cart.totalMinor() : 0;
+        var vatMinor = Math.round(minor - minor / 1.22); // IVA 22% inclusa (solo display)
+
         var totalEl = document.getElementById('checkout-grand-total');
         var subEl   = document.getElementById('checkout-subtotal');
+        var vatEl   = document.getElementById('checkout-vat');
         var tAmount = document.getElementById('transfer-amount');
+        var payAmt  = document.getElementById('btn-pay-amount');
 
         if (totalEl) totalEl.textContent = formatMoney(minor, currency);
         if (subEl)   subEl.textContent   = formatMoney(minor, currency);
+        if (vatEl)   vatEl.textContent   = formatMoney(vatMinor, currency);
         if (tAmount) tAmount.textContent = formatMoney(minor, currency);
+        if (payAmt)  payAmt.textContent  = formatMoney(minor, currency);
+
+        // Mirror sul riepilogo comprimibile mobile (<details> nativo, zero JS)
+        var mItems = document.getElementById('mcheckout-items');
+        if (mItems) mItems.innerHTML = container.innerHTML;
+        [
+            ['mcheckout-grand-total',   formatMoney(minor, currency)],
+            ['mcheckout-grand-total-2', formatMoney(minor, currency)],
+            ['mcheckout-subtotal',      formatMoney(minor, currency)],
+            ['mcheckout-vat',           formatMoney(vatMinor, currency)],
+        ].forEach(function (pair) {
+            var el = document.getElementById(pair[0]);
+            if (el) el.textContent = pair[1];
+        });
 
         var emptySection    = document.getElementById('checkout-empty-section');
         var checkoutContent = document.getElementById('checkout-content');
@@ -546,7 +587,7 @@
         });
     }
 
-    /* ─── Flusso Stripe ────────────────────────────────────────────────────── */
+    /* ─── Flusso Stripe legacy (Checkout ospitato, redirect) — lingue non IT ─── */
 
     function handleStripeSubmit(e) {
         e.preventDefault();
@@ -578,9 +619,7 @@
                 }),
             });
         })
-        .then(function (res) {
-            return readCheckoutApi(res);
-        })
+        .then(function (res) { return readCheckoutApi(res); })
         .then(function (data) {
             if (data && data.url) {
                 global.location.href = data.url;
@@ -596,6 +635,226 @@
             if (btn) { btn.removeAttribute('aria-busy'); btn.disabled = false; }
             _isSubmitting = false;
         });
+    }
+
+    /* ─── Flusso Stripe on-page (Express Checkout Element + Payment Element) ─── */
+
+    function getReturnUrl() {
+        return global.location.origin + STRIPE_INTENT_RETURN_URL + '?lang=' + getLang();
+    }
+
+    /** true se l'anagrafica minima per creare il PaymentIntent manuale è valida. */
+    function customerDataReady() {
+        var activeTab = document.querySelector('[role="tab"][aria-selected="true"]');
+        var isCompany = activeTab && activeTab.dataset.customerType === 'business';
+        var sfx       = isCompany ? '-b' : '';
+        var val = function (id) {
+            var el = document.getElementById(id);
+            return el ? el.value.trim() : '';
+        };
+        if (!val('field-first-name' + sfx) || !val('field-last-name' + sfx)) return false;
+        if (!validateEmail(val('field-email' + sfx))) return false;
+        if (isCompany) {
+            if (!val('field-ragione-sociale') || !validatePIVA(val('field-piva'))) return false;
+            if (!val('field-sdi') && !val('field-pec')) return false;
+        }
+        return true;
+    }
+
+    /** Chiave per capire se i dati cliente sono cambiati e va rimontato il PE. */
+    function customerKey() {
+        var c = collectFormData();
+        return [c.type, c.email, c.firstName, c.lastName, c.piva, c.sdi, c.pec].join('|').toLowerCase();
+    }
+
+    function showStripeUnavailable() {
+        var ids = ['express-checkout', 'btn-stripe-submit', 'payment-element-gate', 'payment-element'];
+        ids.forEach(function (id) { var el = document.getElementById(id); if (el) el.hidden = true; });
+        var btn = document.getElementById('btn-stripe-submit');
+        if (btn) btn.style.display = 'none';
+        var un = document.getElementById('stripe-unavailable');
+        if (un) un.hidden = false;
+    }
+
+    function postPaymentIntent(payload) {
+        return fetch(STRIPE_PI_URL, {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(payload),
+        }).then(readCheckoutApi);
+    }
+
+    function initStripeCheckout() {
+        if (!global.Stripe) { showStripeUnavailable(); return; }
+        fetch(STRIPE_CONFIG_URL)
+            .then(function (res) { return res.ok ? res.json() : {}; })
+            .then(function (cfg) {
+                if (!cfg || !cfg.publishableKey) { showStripeUnavailable(); return; }
+                _stripe        = global.Stripe(cfg.publishableKey);
+                _stripeEnabled = true;
+                var selected = document.querySelector('input[name="payment-method"]:checked');
+                if (selected && selected.value === 'stripe') {
+                    var btn = document.getElementById('btn-stripe-submit');
+                    if (btn) btn.style.display = '';
+                    maybeMountPaymentElement();
+                }
+                mountExpressCheckout();
+            })
+            .catch(function () { showStripeUnavailable(); });
+    }
+
+    /** Express Checkout Element: wallet 1-click, cliente valorizzato dal webhook. */
+    function mountExpressCheckout() {
+        var section = document.getElementById('express-checkout');
+        var mount   = document.getElementById('express-checkout-element');
+        if (!section || !mount || !_stripe) return;
+
+        var cart  = global.AmlCart;
+        var items = checkoutCartLines(cart);
+        if (!items.length || cartHasPhysical(items)) return; // no wallet per articoli fisici
+
+        buildIdempotencyKey('pex', items, '')
+        .then(function (idempotencyKey) {
+            return postPaymentIntent({
+                mode:           'express',
+                idempotencyKey: idempotencyKey,
+                items:          items,
+                lang:           getLang(),
+                cartId:         cart && cart.getCartId ? cart.getCartId() : undefined,
+            });
+        })
+        .then(function (data) {
+            if (!data || !data.clientSecret) return;
+            _elementsExpress = _stripe.elements({ clientSecret: data.clientSecret });
+            var ece = _elementsExpress.create('expressCheckout', {
+                buttonHeight: 48,
+                paymentMethodOrder: ['applePay', 'googlePay', 'link'],
+            });
+            ece.on('ready', function (e) {
+                var methods = e && e.availablePaymentMethods;
+                section.hidden = !methods; // nessun wallet disponibile → resta nascosto
+            });
+            ece.on('confirm', function () {
+                if (_isSubmitting) return;
+                _isSubmitting = true;
+                hideGlobalError();
+                confirmStripePayment(_elementsExpress);
+            });
+            ece.mount(mount);
+        })
+        .catch(function (err) {
+            console.warn('[Checkout] Express Checkout non disponibile:', err && err.message);
+        });
+    }
+
+    /** (Ri)monta il Payment Element quando l'anagrafica è pronta e Stripe è il metodo scelto. */
+    function maybeMountPaymentElement() {
+        if (!_stripeEnabled || !_stripe) return;
+        var selected = document.querySelector('input[name="payment-method"]:checked');
+        if (!selected || selected.value !== 'stripe') return;
+
+        var gate    = document.getElementById('payment-element-gate');
+        var loading = document.getElementById('payment-element-loading');
+
+        if (!customerDataReady()) {
+            if (gate) gate.hidden = false;
+            return;
+        }
+        var key = customerKey();
+        if (_paymentElement && key === _lastPiCustomerKey) { if (gate) gate.hidden = true; return; }
+        if (_paymentElMounting) return;
+
+        _paymentElMounting = true;
+        if (gate) gate.hidden = true;
+        if (loading) loading.hidden = false;
+
+        var cart     = global.AmlCart;
+        var items    = checkoutCartLines(cart);
+        var customer = collectFormData();
+
+        buildIdempotencyKey('pi', items, customer.email)
+        .then(function (idempotencyKey) {
+            return postPaymentIntent({
+                mode:           'manual',
+                idempotencyKey: idempotencyKey,
+                customer:       customer,
+                items:          items,
+                lang:           getLang(),
+                shipping:       shippingPayloadIfNeeded(),
+                cartId:         cart && cart.getCartId ? cart.getCartId() : undefined,
+            });
+        })
+        .then(function (data) {
+            if (!data || !data.clientSecret) throw new Error('clientSecret mancante');
+            if (_paymentElement) { try { _paymentElement.unmount(); } catch (_) {} _paymentElement = null; }
+            _elementsManual = _stripe.elements({ clientSecret: data.clientSecret });
+            _paymentElement = _elementsManual.create('payment', { layout: 'tabs' });
+            _paymentElement.mount('#payment-element');
+            _lastPiCustomerKey = customerKey();
+        })
+        .catch(function (err) {
+            console.error('[Checkout] Payment Element error:', err);
+            showGlobalError(err && err.status && err.message ? err.message
+                : 'Impossibile preparare il pagamento con carta. Riprova o usa PayPal.');
+        })
+        .then(function () {
+            _paymentElMounting = false;
+            if (loading) loading.hidden = true;
+        });
+    }
+
+    /** Conferma un pagamento (manuale o express) con l'istanza elements passata. */
+    function confirmStripePayment(elements) {
+        var btn = document.getElementById('btn-stripe-submit');
+        if (btn) { btn.setAttribute('aria-busy', 'true'); btn.disabled = true; }
+
+        _stripe.confirmPayment({
+            elements: elements,
+            confirmParams: { return_url: getReturnUrl() },
+            redirect: 'if_required',
+        })
+        .then(function (result) {
+            if (result.error) {
+                showGlobalError(result.error.message || 'Pagamento non riuscito. Riprova.');
+                if (btn) { btn.removeAttribute('aria-busy'); btn.disabled = false; }
+                _isSubmitting = false;
+                return;
+            }
+            var pi = result.paymentIntent;
+            if (pi && (pi.status === 'succeeded' || pi.status === 'processing' || pi.status === 'requires_capture')) {
+                rotateSessionSalt();
+                global.location.href = getReturnUrl() + '&payment_intent=' + encodeURIComponent(pi.id);
+            } else {
+                showGlobalError('Pagamento in sospeso. Se hai completato l’operazione riceverai la conferma via email.');
+                if (btn) { btn.removeAttribute('aria-busy'); btn.disabled = false; }
+                _isSubmitting = false;
+            }
+        })
+        .catch(function (err) {
+            console.error('[Checkout] confirmPayment error:', err);
+            showGlobalError('Errore di connessione durante il pagamento. Riprova.');
+            if (btn) { btn.removeAttribute('aria-busy'); btn.disabled = false; }
+            _isSubmitting = false;
+        });
+    }
+
+    /** Click sul bottone "Paga" del percorso carta manuale. */
+    function handleStripePayClick(e) {
+        e.preventDefault();
+        if (_isSubmitting) return;
+        if (!_stripeEnabled) return;
+        if (!validateForm()) return;
+
+        hideGlobalError();
+
+        if (!_paymentElement) {
+            // Anagrafica ok ma campi carta non ancora montati: montali e chiedi di compilarli.
+            maybeMountPaymentElement();
+            showGlobalError('Inserisci i dati della carta qui sopra, poi premi di nuovo "Paga".');
+            return;
+        }
+        _isSubmitting = true;
+        confirmStripePayment(_elementsManual);
     }
 
     /* ─── Flusso Bonifico ──────────────────────────────────────────────────── */
@@ -859,9 +1118,31 @@
         var btnTransfer = document.getElementById('btn-transfer-submit');
         var form        = document.getElementById('checkout-form');
 
-        if (btnStripe)   btnStripe.addEventListener('click',   handleStripeSubmit);
+        if (btnStripe)   btnStripe.addEventListener('click', isOnPageStripe() ? handleStripePayClick : handleStripeSubmit);
         if (btnTransfer) btnTransfer.addEventListener('click', handleTransferSubmit);
         if (form) form.addEventListener('submit', function (ev) { ev.preventDefault(); });
+    }
+
+    /** Al variare dei dati cliente, (ri)monta il Payment Element se serve. */
+    function initStripeRemountTriggers() {
+        var ids = [
+            'field-first-name', 'field-last-name', 'field-email',
+            'field-first-name-b', 'field-last-name-b', 'field-email-b',
+            'field-ragione-sociale', 'field-piva', 'field-sdi', 'field-pec',
+        ];
+        var debounce;
+        ids.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            el.addEventListener('blur', function () {
+                clearTimeout(debounce);
+                debounce = setTimeout(maybeMountPaymentElement, 150);
+            });
+        });
+        var tablist = document.querySelector('[role="tablist"].customer-tabs');
+        if (tablist) tablist.addEventListener('click', function () {
+            setTimeout(maybeMountPaymentElement, 0);
+        });
     }
 
     /* ─── Init principale ──────────────────────────────────────────────────── */
@@ -882,6 +1163,11 @@
         initSummaryToggle();
         initSubmitButtons();
         initCartEmailSync();
+
+        if (isOnPageStripe()) {
+            initStripeRemountTriggers();
+            initStripeCheckout();
+        }
     }
 
     if (document.readyState === 'loading') {

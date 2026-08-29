@@ -50,7 +50,8 @@ Da eseguire nel progetto Pages (`aml-store`), valori **live**:
 wrangler pages secret put TOKEN_SECRET          # stringa random ≥32 caratteri
 wrangler pages secret put FRAUD_HASH_SECRET     # stringa random ≥32 caratteri (HMAC rate-limit checkout)
 wrangler pages secret put STRIPE_SECRET_KEY     # sk_live_...
-wrangler pages secret put STRIPE_WEBHOOK_SECRET # whsec_... (webhook → /api/webhooks/stripe)
+wrangler pages secret put STRIPE_WEBHOOK_SECRET # whsec_... (webhook → /api/webhooks/stripe; abilitare anche l'evento payment_intent.succeeded)
+wrangler pages secret put STRIPE_PUBLISHABLE_KEY # pk_live_... (dato pubblico, esposto via /api/stripe-config per il Payment/Express Element di /it/checkout)
 wrangler pages secret put PAYPAL_CLIENT_ID      # Client ID app PayPal LIVE
 wrangler pages secret put PAYPAL_CLIENT_SECRET  # Client Secret app PayPal LIVE
 wrangler pages secret put RESEND_API_KEY        # re_...

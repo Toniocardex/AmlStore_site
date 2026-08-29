@@ -101,12 +101,54 @@ export async function getOrderByPaypalOrderId(db, paypalOrderId) {
 }
 
 /**
+ * Recupera un ordine per stripe_payment_intent (flusso Payment Element on-page).
+ * @param {D1Database} db
+ * @param {string} paymentIntentId
+ * @returns {Promise<object|null>}
+ */
+export async function getOrderByStripePaymentIntent(db, paymentIntentId) {
+    return db.prepare('SELECT * FROM orders WHERE stripe_payment_intent = ?').bind(paymentIntentId).first();
+}
+
+/**
  * Aggiorna lo stripe_session_id su un ordine appena creato.
  */
 export async function setStripeSession(db, orderId, stripeSessionId) {
     await db.prepare(
         'UPDATE orders SET stripe_session_id = ?, updated_at = ? WHERE id = ?'
     ).bind(stripeSessionId, now(), orderId).run();
+}
+
+/**
+ * Aggiorna lo stripe_payment_intent su un ordine pending (prima della conferma
+ * on-page). Il webhook `payment_intent.succeeded` ritrova l'ordine da qui.
+ */
+export async function setStripePaymentIntent(db, orderId, paymentIntentId) {
+    await db.prepare(
+        'UPDATE orders SET stripe_payment_intent = ?, updated_at = ? WHERE id = ?'
+    ).bind(paymentIntentId, now(), orderId).run();
+}
+
+/**
+ * Valorizza i dati cliente di un ordine Express (wallet) con i billing_details
+ * restituiti da Stripe sulla charge (nessun form nostro è stato compilato).
+ * Gemella di `setPaypalCustomerFromPayer`: no-op semantico per gli ordini del
+ * checkout manuale, dove il cliente è già valorizzato dal form.
+ */
+export async function setStripeCustomerFromChargeDetails(db, orderId, { email, name }) {
+    const parts = String(name || '').trim().split(/\s+/);
+    const firstName = parts.shift() || '';
+    const lastName = parts.join(' ');
+    await db.prepare(`
+        UPDATE orders
+        SET customer_email = ?, customer_first_name = ?, customer_last_name = ?, updated_at = ?
+        WHERE id = ?
+    `).bind(
+        email || '',
+        firstName,
+        lastName,
+        now(), orderId
+    ).run();
 }
 
 /**

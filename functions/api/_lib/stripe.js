@@ -65,6 +65,75 @@ export async function createCheckoutSession(stripeSecretKey, {
 }
 
 /**
+ * Crea un Stripe PaymentIntent (flusso on-page: Express Checkout Element +
+ * Payment Element). L'importo è sempre in minor units e calcolato server-side.
+ *
+ * @param {string} stripeSecretKey — env var STRIPE_SECRET_KEY
+ * @param {object} params
+ * @param {string} params.orderId         — orderId interno (metadata + idempotency)
+ * @param {number} params.amountMinor     — totale in centesimi
+ * @param {string} [params.currency='eur']
+ * @param {string} [params.receiptEmail]  — email per la ricevuta Stripe (se nota)
+ * @param {string} [params.locale]        — it|en|fr|de|es|pt|nl (solo metadata)
+ * @returns {Promise<{ id: string, client_secret: string, status: string }>}
+ */
+export async function createPaymentIntent(stripeSecretKey, {
+    orderId,
+    amountMinor,
+    currency = 'eur',
+    receiptEmail,
+    locale,
+}) {
+    const params = new URLSearchParams();
+    params.set('amount', String(Math.round(amountMinor || 0)));
+    params.set('currency', String(currency || 'eur').toLowerCase());
+    params.set('automatic_payment_methods[enabled]', 'true');
+    params.set('metadata[order_id]', orderId);
+    if (locale) params.set('metadata[locale]', locale);
+    if (receiptEmail) params.set('receipt_email', receiptEmail);
+
+    const res = await fetch(`${STRIPE_API}/payment_intents`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${stripeSecretKey}`,
+            'Content-Type':  'application/x-www-form-urlencoded',
+            'Idempotency-Key': `pi_${orderId}`,
+        },
+        body: params.toString(),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(`Stripe error ${res.status}: ${data?.error?.message || JSON.stringify(data)}`);
+    }
+
+    return { id: data.id, client_secret: data.client_secret, status: data.status };
+}
+
+/**
+ * Recupera un PaymentIntent (usato dal return handler per confermare
+ * `status === 'succeeded'` server-side prima di emettere il token thank-you).
+ * `expand[]=latest_charge` per avere i billing_details del pagatore wallet.
+ *
+ * @param {string} stripeSecretKey
+ * @param {string} paymentIntentId
+ * @returns {Promise<object>} — PaymentIntent Stripe parsed
+ */
+export async function retrievePaymentIntent(stripeSecretKey, paymentIntentId) {
+    const url = `${STRIPE_API}/payment_intents/${encodeURIComponent(paymentIntentId)}`
+              + `?expand[]=latest_charge`;
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: { 'Authorization': `Bearer ${stripeSecretKey}` },
+    });
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(`Stripe error ${res.status}: ${data?.error?.message || JSON.stringify(data)}`);
+    }
+    return data;
+}
+
+/**
  * Verifica la firma di un webhook Stripe.
  * Implementazione manuale HMAC-SHA256 (algoritmo v1 di Stripe).
  *

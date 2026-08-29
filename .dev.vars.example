@@ -16,6 +16,8 @@ PAYPAL_CLIENT_SECRET=<client-secret-sandbox>
 # RESEND_API_KEY=re_xxx
 # STRIPE_SECRET_KEY=sk_test_xxx
 # STRIPE_WEBHOOK_SECRET=whsec_xxx
+# STRIPE_PUBLISHABLE_KEY=pk_test_xxx   # solo /it/checkout on-page (Payment/Express Element);
+#                                      # se assente il frontend degrada su PayPal/bonifico
 
 # Pannello admin senza Cloudflare Access in locale
 # ADMIN_DEV_BYPASS=1

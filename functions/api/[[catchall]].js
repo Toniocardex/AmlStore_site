@@ -31,11 +31,12 @@
 
 import { generateToken, verifyToken }                    from './_lib/token.js';
 import { createOrder, getOrderById, getOrderByStripeSession,
-         getOrderByPaypalOrderId, setStripeSession,
-         setPaypalOrderId, markPaidStripe, markPaidPaypal,
-         setPaypalCustomerFromPayer,
+         getOrderByPaypalOrderId, getOrderByStripePaymentIntent, setStripeSession,
+         setStripePaymentIntent, setPaypalOrderId, markPaidStripe, markPaidPaypal,
+         setPaypalCustomerFromPayer, setStripeCustomerFromChargeDetails,
          toPublicOrder }                                  from './_lib/order.js';
-import { createCheckoutSession, verifyStripeWebhook }    from './_lib/stripe.js';
+import { createCheckoutSession, createPaymentIntent,
+         retrievePaymentIntent, verifyStripeWebhook }    from './_lib/stripe.js';
 import { getAccessToken, createPaypalOrder,
          capturePaypalOrder, getPaypalOrder,
          verifyPaypalWebhookSignature }                  from './_lib/paypal.js';
@@ -151,11 +152,20 @@ export async function onRequest(context) {
         }
 
         // ── Routes pubbliche ─────────────────────────────────────────────────────
+        if (path === '/api/stripe-config' && request.method === 'GET') {
+            return handleStripeConfig(request, env);
+        }
         if (path === '/api/stripe-create-session' && request.method === 'POST') {
             return await handleStripeCreateSession(request, env);
         }
+        if (path === '/api/create-payment-intent' && request.method === 'POST') {
+            return await handleCreatePaymentIntent(request, env);
+        }
         if (path === '/api/stripe-return' && request.method === 'GET') {
             return await handleStripeReturn(request, env);
+        }
+        if (path === '/api/stripe-intent-return' && request.method === 'GET') {
+            return await handleStripeIntentReturn(request, env);
         }
         if (path === '/api/webhooks/stripe' && request.method === 'POST') {
             return await handleStripeWebhook(request, env);
@@ -718,6 +728,146 @@ async function handleStripeCreateSession(request, env) {
     return json({ url: session.url, orderId }, 200, request, env);
 }
 
+/* ─── GET /api/stripe-config ────────────────────────────────────────────────── */
+// Espone la publishable key Stripe (dato pubblico: finisce comunque nel client).
+// Se non configurata il frontend nasconde Express Checkout + Payment Element e
+// tiene solo PayPal / Bonifico.
+
+function handleStripeConfig(request, env) {
+    return json({ publishableKey: env.STRIPE_PUBLISHABLE_KEY || '' }, 200, request, env);
+}
+
+/* ─── POST /api/create-payment-intent ──────────────────────────────────────── */
+// Flusso on-page (Express Checkout Element + Payment Element). L'importo è sempre
+// ricalcolato server-side dal catalogo. Due modalità:
+//   mode:'manual'  → il form anagrafico è compilato e validato (anche B2B)
+//   mode:'express' → wallet 1-click, cliente placeholder valorizzato dal webhook
+
+async function handleCreatePaymentIntent(request, env) {
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
+
+    if (!env.STRIPE_SECRET_KEY) {
+        return err('Pagamento con carta non disponibile', 503, request, env);
+    }
+
+    const body = await request.json().catch(() => null);
+    if (!body) return err('Invalid JSON', 400, request, env);
+
+    const mode = body.mode === 'express' ? 'express' : 'manual';
+
+    let orderId, amountMinor, currency, locale, receiptEmail;
+
+    if (mode === 'manual') {
+        const paramsOrErr = await orderParamsFromBodySafe(body, 'stripe', request, env);
+        if (paramsOrErr.error) return paramsOrErr.error;
+        const params = paramsOrErr;
+
+        const rateGate = await gateNewCheckoutAttempt(env, request, params);
+        if (rateGate) return rateGate;
+
+        try {
+            orderId = await createOrder(env.DB, params);
+        } catch (dbErr) {
+            if (String(dbErr).includes('UNIQUE')) {
+                const existing = await env.DB
+                    .prepare('SELECT id, status FROM orders WHERE idempotency_key = ?')
+                    .bind(params.idempotencyKey).first();
+                if (!existing?.id) throw dbErr;
+                if (existing.status === 'paid') return err('Ordine già pagato', 409, request, env);
+                orderId = existing.id;
+            } else {
+                throw dbErr;
+            }
+        }
+
+        amountMinor  = params.totalMinor;
+        currency     = params.currency;
+        locale       = params.locale || 'it';
+        receiptEmail = params.customerEmail;
+    } else {
+        let items;
+        try {
+            items = resolveAndValidateItems(body.items);
+        } catch (catalogErr) {
+            return err(catalogErr.message || 'Invalid catalog', 400, request, env);
+        }
+        if (itemsRequireShipping(items)) {
+            return err('Express Checkout non disponibile per articoli con spedizione fisica', 400, request, env);
+        }
+        try {
+            await assertCartStock(env.DB, items);
+        } catch (stockErr) {
+            return err(stockErr.message || 'Stock insufficiente', stockErr.status || 409, request, env);
+        }
+
+        const rawLang = String(body.lang || 'it').toLowerCase();
+        locale = ALLOWED_LOCALES.has(rawLang) ? rawLang : 'it';
+        const idempotencyKey = normalizeIdempotencyKey(body.idempotencyKey);
+
+        const existing = await env.DB
+            .prepare('SELECT id, status FROM orders WHERE idempotency_key = ?')
+            .bind(idempotencyKey).first();
+        if (existing?.status === 'paid') return err('Ordine già pagato', 409, request, env);
+        if (!existing?.id) {
+            const rateGate = await checkExpressCheckoutIpRateLimit(env, request);
+            if (rateGate) return rateLimitResponse(rateGate, request, env);
+        }
+
+        try {
+            orderId = existing?.id || await createOrder(env.DB, {
+                idempotencyKey,
+                customerEmail:     '',
+                customerFirstName: '',
+                customerLastName:  '',
+                customerCompany:   null,
+                customerType:      'private',
+                customerPhone:     null,
+                customerPiva:      null,
+                customerSdi:       null,
+                customerPec:       null,
+                locale,
+                lineItems:         items,
+                totalMinor:        totalMinorFromItems(items),
+                currency:          items[0].currency,
+                paymentMethod:     'stripe',
+                requiresShipping:  false,
+                shipping:          null,
+            });
+        } catch (dbErr) {
+            if (String(dbErr).includes('UNIQUE')) {
+                const row = await env.DB
+                    .prepare('SELECT id FROM orders WHERE idempotency_key = ?')
+                    .bind(idempotencyKey).first();
+                orderId = row?.id;
+                if (!orderId) throw dbErr;
+            } else {
+                throw dbErr;
+            }
+        }
+
+        amountMinor = totalMinorFromItems(items);
+        currency    = items[0].currency;
+    }
+
+    await linkCartCheckoutStarted(env, body, orderId);
+
+    const pi = await createPaymentIntent(env.STRIPE_SECRET_KEY, {
+        orderId,
+        amountMinor,
+        currency,
+        receiptEmail,
+        locale,
+    });
+    await setStripePaymentIntent(env.DB, orderId, pi.id);
+
+    if (mode === 'express') {
+        await recordEvent(env, request, { eventName: 'stripe_express_click', orderId });
+    }
+
+    return json({ clientSecret: pi.client_secret, orderId }, 200, request, env);
+}
+
 /* ─── GET /api/stripe-return ────────────────────────────────────────────────── */
 // Stripe redirige qui dopo pagamento con {CHECKOUT_SESSION_ID}
 // Il Worker verifica, genera token, redirige alla thank-you page.
@@ -745,7 +895,65 @@ async function handleStripeReturn(request, env) {
     return Response.redirect(dest, 302);
 }
 
+/* ─── GET /api/stripe-intent-return ─────────────────────────────────────────── */
+// Ritorno del flusso on-page (Payment Element / Express Checkout Element).
+// Usato sia come `return_url` nei casi 3DS con redirect (Stripe aggiunge
+// ?payment_intent=…), sia chiamato da checkout.js dopo un confirmPayment
+// risolto senza redirect. Il webhook resta la fonte di verità per l'evasione.
+
+async function handleStripeIntentReturn(request, env) {
+    const url     = new URL(request.url);
+    const piId    = url.searchParams.get('payment_intent');
+    const rawLang = (url.searchParams.get('lang') || 'it').toLowerCase();
+    const lang    = ALLOWED_LOCALES.has(rawLang) ? rawLang : 'it';
+    const origin  = env.SITE_ORIGIN || 'https://eurolicenze.com';
+
+    if (!piId) {
+        return Response.redirect(`${origin}/${lang}/checkout?error=missing_pi`, 302);
+    }
+
+    let pi;
+    try {
+        pi = await retrievePaymentIntent(env.STRIPE_SECRET_KEY, piId);
+    } catch (e) {
+        console.error('[stripe-intent-return] retrieve fallito:', e.message);
+        return Response.redirect(`${origin}/${lang}/checkout?error=pi_lookup`, 302);
+    }
+
+    if (pi.status !== 'succeeded') {
+        return Response.redirect(`${origin}/${lang}/checkout?error=payment_${pi.status || 'incomplete'}`, 302);
+    }
+
+    const order = await getOrderByStripePaymentIntent(env.DB, pi.id);
+    if (!order) {
+        return Response.redirect(`${origin}/${lang}/checkout?error=order_not_found`, 302);
+    }
+
+    const token = await generateToken(env.TOKEN_SECRET, order.id);
+    const dest  = `${origin}/${lang}/checkout-success?oid=${token.oid}&exp=${token.exp}&t=${encodeURIComponent(token.t)}`;
+    return Response.redirect(dest, 302);
+}
+
 /* ─── POST /api/webhooks/stripe ─────────────────────────────────────────────── */
+
+// Evasione ordine Stripe: mark-paid + deduct stock + email conferma/interna.
+// Idempotente (dedup via stock_deductions e *_sent_at). Condivisa dai rami
+// checkout.session.completed e payment_intent.succeeded del webhook.
+async function fulfilPaidStripeOrder(env, order, eventSrc) {
+    const wasUnpaid = order.status !== 'paid';
+    const updatedOrder = await getOrderById(env.DB, order.id);
+    await deductStockForOrderRow(env.DB, updatedOrder || order);
+    if (wasUnpaid) {
+        await sendConfirmationOnce(
+            env.DB, updatedOrder,
+            env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
+            eventSrc, env.GUIDES
+        );
+        await sendInternalOrderNotificationOnce(
+            env.DB, updatedOrder, env.RESEND_API_KEY, eventSrc
+        );
+    }
+}
 
 async function handleStripeWebhook(request, env) {
     const rawBody  = await request.text();
@@ -759,7 +967,7 @@ async function handleStripeWebhook(request, env) {
         return new Response('Unauthorized', { status: 401 });
     }
 
-    // Gestiamo solo checkout.session.completed
+    // Checkout ospitato (redirect legacy)
     if (event.type === 'checkout.session.completed') {
         const session = event.data?.object;
         const stripeSessionId      = session?.id;
@@ -774,21 +982,38 @@ async function handleStripeWebhook(request, env) {
         if (order.status !== 'paid') {
             await markPaidStripe(env.DB, order.id, { stripeSessionId, stripePaymentIntent });
         }
-        // Stock: sempre (idempotente via stock_deductions) anche su retry webhook
-        // se mark-paid era riuscito e il deduct era fallito al primo passaggio.
-        const updatedOrder = await getOrderById(env.DB, order.id);
-        await deductStockForOrderRow(env.DB, updatedOrder || order);
+        await fulfilPaidStripeOrder(env, order, 'webhook_stripe');
+    }
+
+    // Flusso on-page (Payment Element / Express Checkout Element)
+    if (event.type === 'payment_intent.succeeded') {
+        const pi = event.data?.object;
+        const piId = pi?.id;
+
+        const order = await getOrderByStripePaymentIntent(env.DB, piId);
+        if (!order) {
+            console.warn('[webhook/stripe] Ordine non trovato per payment_intent:', piId);
+            return new Response('OK', { status: 200 }); // Ack comunque a Stripe
+        }
+
+        // Express (wallet): nessun form compilato — l'unica fonte per email/nome
+        // è la charge Stripe. No-op per gli ordini del checkout manuale.
+        if (!order.customer_email) {
+            const charge = pi?.charges?.data?.[0] || pi?.latest_charge || null;
+            const bd = (charge && typeof charge === 'object') ? (charge.billing_details || {}) : {};
+            const email = pi?.receipt_email || bd.email || '';
+            if (email) {
+                await setStripeCustomerFromChargeDetails(env.DB, order.id, { email, name: bd.name });
+            }
+        }
+
         if (order.status !== 'paid') {
-            await sendConfirmationOnce(
-                env.DB, updatedOrder,
-                env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
-                'webhook_stripe', env.GUIDES
-            );
-            await sendInternalOrderNotificationOnce(
-                env.DB, updatedOrder,
-                env.RESEND_API_KEY,
-                'webhook_stripe'
-            );
+            await markPaidStripe(env.DB, order.id, { stripePaymentIntent: piId });
+        }
+        await fulfilPaidStripeOrder(env, order, 'webhook_stripe_pi');
+
+        if (order.status !== 'paid') {
+            await recordEvent(env, request, { eventName: 'purchase', orderId: order.id });
         }
     }
 

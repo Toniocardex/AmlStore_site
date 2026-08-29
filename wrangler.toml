@@ -81,7 +81,12 @@ VAPID_SUBJECT = "mailto:Info@amlstore.it"
 # RESEND_API_KEY         — API key Resend (re_xxxx...)
 # TRUSTPILOT_BCC         — indirizzo ...+token@invite.trustpilot.com
 # STRIPE_SECRET_KEY      — sk_live_... (o sk_test_... in sviluppo)
-# STRIPE_WEBHOOK_SECRET  — whsec_... da Stripe Dashboard > Webhooks
+# STRIPE_WEBHOOK_SECRET  — whsec_... da Stripe Dashboard > Webhooks (deve inviare
+#                          anche l'evento payment_intent.succeeded)
+# STRIPE_PUBLISHABLE_KEY — pk_live_... esposto al frontend via /api/stripe-config
+#                          (dato pubblico); serve al Payment/Express Element di
+#                          /it/checkout. Se assente il checkout on-page degrada
+#                          su PayPal/bonifico.
 # PAYPAL_CLIENT_ID       — Client ID PayPal LIVE (esposto al frontend via
 #                          /api/paypal-config: è un dato pubblico)
 # PAYPAL_CLIENT_SECRET   — Client Secret PayPal LIVE (solo server-side)

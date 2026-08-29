@@ -183,6 +183,7 @@ export const TRACKABLE_EVENTS = new Set([
     'add_to_cart',
     'buy_now_click',
     'paypal_express_click',
+    'stripe_express_click',
     'paypal_opened',
     'paypal_approved',
     'paypal_captured',
