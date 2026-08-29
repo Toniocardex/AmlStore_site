@@ -743,6 +743,24 @@
         var ece = _elementsExpress.create('expressCheckout', {
             buttonHeight: 48,
             emailRequired: true,
+            // `paymentMethodOrder` e' solo una preferenza di ordinamento: senza
+            // `paymentMethods` l'Element mostra TUTTI i wallet abilitati
+            // sull'account Stripe. Servono due esclusioni esplicite:
+            //
+            //  amazonPay — abilitato in dashboard ma con dominio non registrato
+            //    presso Amazon: il bottone renderizza e poi fallisce in CORS
+            //    (merchantId=undefined), cioe' un pulsante di pagamento rotto.
+            //  paypal    — lo abbiamo gia' fra i metodi qui sotto, con la nostra
+            //    integrazione e il nostro webhook. Mostrarlo anche qui significa
+            //    due bottoni PayPal nella stessa pagina che creano l'ordine per
+            //    strade diverse: confonde il cliente e spacca le statistiche.
+            paymentMethods: {
+                applePay:  'auto',
+                googlePay: 'auto',
+                link:      'auto',
+                amazonPay: 'never',
+                paypal:    'never',
+            },
             paymentMethodOrder: ['applePay', 'googlePay', 'link'],
         });
 
