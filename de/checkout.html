@@ -254,20 +254,6 @@
                                         </span>
                                     </label>
                                 </div>
-                                <!-- PayPal -->
-                                <div class="payment-option">
-                                    <input type="radio" name="payment-method" id="pay-paypal" value="paypal">
-                                    <label class="payment-option-label" for="pay-paypal">
-                                        <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">PayPal</span>
-                                            <span class="payment-option-desc">Zahlen Sie mit Ihrem PayPal-Guthaben oder einer hinterlegten Karte</span>
-                                            <span class="payment-icons" aria-label="PayPal">
-                                                <span class="payment-icon payment-icon--img payment-icon--paypal-wide" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" width="80" height="18" alt="" loading="lazy" decoding="async"></span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
 
                                 <div class="payment-option">
                                     <input type="radio" name="payment-method" id="pay-transfer" value="transfer">
@@ -305,15 +291,10 @@
                                 <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Kartenfelder werden geladen…</div>
                                 <div id="payment-element"></div>
                                 <div id="stripe-unavailable" class="payment-element-gate" hidden>
-                                    Kartenzahlung ist derzeit nicht verfügbar — nutzen Sie PayPal oder Überweisung.
+                                    Kartenzahlung ist derzeit nicht verfügbar: Sie können die Bestellung per Banküberweisung abschließen.
                                 </div>
                             </div>
 
-                            <!-- PayPal-Bereich -->
-                            <div id="paypal-section" class="paypal-section" hidden>
-                                <div id="paypal-loading" class="paypal-loading" hidden aria-live="polite">PayPal wird geladen…</div>
-                                <div id="paypal-buttons-container" class="paypal-buttons-container"></div>
-                            </div>
                         </section>
 
                         <div id="checkout-error-msg" class="checkout-error-msg" role="alert" aria-live="assertive" hidden data-network-error="Verbindungsfehler. Bitte versuchen Sie es erneut." data-rate-limit-error="Zu viele Checkout-Versuche. Bitte versuchen Sie es in einigen Minuten erneut."
@@ -414,7 +395,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=3ff9f0881c" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../js/checkout.js?v=998a317a1f" defer></script>
+    <script src="../js/checkout.js?v=2560c72f2e" defer></script>
 
 </body>
 </html>

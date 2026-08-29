@@ -262,20 +262,6 @@
                                         </span>
                                     </label>
                                 </div>
-                                <!-- PayPal -->
-                                <div class="payment-option">
-                                    <input type="radio" name="payment-method" id="pay-paypal" value="paypal">
-                                    <label class="payment-option-label" for="pay-paypal">
-                                        <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">PayPal</span>
-                                            <span class="payment-option-desc">Payez avec votre solde PayPal ou une carte associée</span>
-                                            <span class="payment-icons" aria-label="PayPal">
-                                                <span class="payment-icon payment-icon--img payment-icon--paypal-wide" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" width="80" height="18" alt="" loading="lazy" decoding="async"></span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
 
                                 <div class="payment-option">
                                     <input type="radio" name="payment-method" id="pay-transfer" value="transfer">
@@ -313,15 +299,10 @@
                                 <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Chargement des champs de carte…</div>
                                 <div id="payment-element"></div>
                                 <div id="stripe-unavailable" class="payment-element-gate" hidden>
-                                    Le paiement par carte est indisponible pour le moment — utilisez PayPal ou le virement.
+                                    Le paiement par carte est indisponible pour le moment : vous pouvez finaliser la commande par virement bancaire.
                                 </div>
                             </div>
 
-                            <!-- Section PayPal -->
-                            <div id="paypal-section" class="paypal-section" hidden>
-                                <div id="paypal-loading" class="paypal-loading" hidden aria-live="polite">Chargement PayPal…</div>
-                                <div id="paypal-buttons-container" class="paypal-buttons-container"></div>
-                            </div>
                         </section>
 
                         <div id="checkout-error-msg" class="checkout-error-msg" role="alert" aria-live="assertive" hidden data-network-error="Erreur de connexion. Veuillez réessayer dans un instant." data-rate-limit-error="Trop de tentatives de paiement. Réessayez dans quelques minutes."
@@ -422,7 +403,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=3ff9f0881c" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../js/checkout.js?v=998a317a1f" defer></script>
+    <script src="../js/checkout.js?v=2560c72f2e" defer></script>
 
 </body>
 </html>

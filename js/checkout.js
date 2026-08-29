@@ -752,18 +752,21 @@
             // con merchantId=undefined). Dominio registrato il 2026-08-29
             // (pmd_1U9mwOKD4bVig4Jg74x1VXgD), quindi riattivato.
             //
-            // paypal resta escluso: c'e' gia' fra i metodi qui sotto con la
-            // nostra integrazione e il nostro webhook. Due bottoni PayPal che
-            // creano l'ordine per strade diverse confondono il cliente e
-            // dividono le statistiche.
+            // paypal e' passato a Stripe: la nostra integrazione SDK stava sotto
+            // il form e in createOrder chiamava validateForm(), quindi il bottone
+            // non partiva finche' il cliente non aveva compilato l'anagrafica —
+            // l'opposto di un 1-click. Qui in cima non vede nemmeno il form.
+            // L'opzione PayPal e il contenitore dei bottoni SDK sono stati tolti
+            // dai sette checkout: restava un doppione che creava l'ordine per
+            // un'altra strada.
             paymentMethods: {
                 applePay:  'auto',
                 googlePay: 'auto',
                 link:      'auto',
                 amazonPay: 'auto',
-                paypal:    'never',
+                paypal:    'auto',
             },
-            paymentMethodOrder: ['applePay', 'googlePay', 'link', 'amazonPay'],
+            paymentMethodOrder: ['applePay', 'googlePay', 'paypal', 'link', 'amazonPay'],
         });
 
         ece.on('ready', function (e) {
