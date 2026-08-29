@@ -34,7 +34,7 @@ import { createOrder, getOrderById, getOrderByStripeSession,
          getOrderByPaypalOrderId, getOrderByStripePaymentIntent, setStripeSession,
          setStripePaymentIntent, setPaypalOrderId, markPaidStripe, markPaidPaypal,
          setPaypalCustomerFromPayer, setStripeCustomerFromChargeDetails,
-         toPublicOrder }                                  from './_lib/order.js';
+         updatePendingOrderCustomer, toPublicOrder }      from './_lib/order.js';
 import { createCheckoutSession, createPaymentIntent,
          retrievePaymentIntent, verifyStripeWebhook }    from './_lib/stripe.js';
 import { getAccessToken, createPaypalOrder,
@@ -702,6 +702,10 @@ async function handleStripeCreateSession(request, env) {
                 return err('Ordine già pagato', 409, request, env);
             }
             orderId = existing.id;
+            // Stessa email e stesso carrello = stessa chiave: se l'utente torna
+            // indietro e cambia i dati (tipicamente Privato → Azienda), senza
+            // questo riallineamento P.IVA e SDI non arriverebbero mai in D1.
+            await updatePendingOrderCustomer(env.DB, orderId, params);
         } else {
             throw dbErr;
         }
@@ -777,6 +781,14 @@ async function handleCreatePaymentIntent(request, env) {
                 if (!existing?.id) throw dbErr;
                 if (existing.status === 'paid') return err('Ordine già pagato', 409, request, env);
                 orderId = existing.id;
+
+                // Il Payment Element viene rimontato ogni volta che cambiano i dati
+                // cliente, ma l'idempotency key dipende solo da email e carrello:
+                // correggere il cognome, o passare a "Azienda" tenendo la stessa
+                // email, ricade sulla stessa chiave. Senza questo riallineamento i
+                // dati nuovi (P.IVA, SDI, ragione sociale) andrebbero persi e
+                // l'ordine resterebbe registrato come privato.
+                await updatePendingOrderCustomer(env.DB, orderId, params);
             } else {
                 throw dbErr;
             }
@@ -1107,6 +1119,9 @@ async function handlePaypalCreateOrder(request, env) {
                 .bind(params.idempotencyKey).first();
             orderId = existing?.id;
             if (!orderId) throw dbErr;
+            // Vedi handleCreatePaymentIntent: la chiave non copre i dati fiscali,
+            // quindi il riuso deve riallinearli o vanno persi.
+            await updatePendingOrderCustomer(env.DB, orderId, params);
         } else {
             throw dbErr;
         }
@@ -1451,6 +1466,11 @@ async function handleBankTransferOrder(request, env) {
                 .bind(params.idempotencyKey).first();
             orderId = existing?.id;
             if (!orderId) throw dbErr;
+            // Vedi handleCreatePaymentIntent: la chiave non copre i dati fiscali,
+            // quindi il riuso deve riallinearli o vanno persi. Qui conta doppio:
+            // l'email col riepilogo bonifico parte subito dopo, e la fattura la
+            // si emette su questi campi.
+            await updatePendingOrderCustomer(env.DB, orderId, params);
         } else {
             throw dbErr;
         }

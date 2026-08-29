@@ -101,6 +101,63 @@ export async function getOrderByPaypalOrderId(db, paypalOrderId) {
 }
 
 /**
+ * Riallinea i dati cliente di un ordine ancora da pagare.
+ *
+ * Serve al riuso su idempotency_key: la chiave e' derivata da (sale, prefisso,
+ * email, carrello), quindi correggere il cognome o passare da Privato ad Azienda
+ * con la stessa email produce la STESSA chiave. Senza questo update il secondo
+ * invio si limitava a riusare la riga esistente e i dati nuovi — P.IVA, SDI,
+ * ragione sociale, tipo cliente — venivano semplicemente persi, con l'ordine
+ * registrato come privato.
+ *
+ * Non tocca line_items/total_minor/currency: l'importo e' gia' impegnato nel
+ * PaymentIntent creato al primo giro, e riscriverlo qui vorrebbe dire mostrare
+ * righe che non corrispondono a quanto viene addebitato.
+ *
+ * La WHERE su 'pending_payment' e' la garanzia che un ordine gia' pagato non
+ * possa piu' vedersi riscrivere l'intestatario.
+ *
+ * @returns {Promise<boolean>} true se la riga e' stata aggiornata
+ */
+export async function updatePendingOrderCustomer(db, orderId, {
+    customerEmail,
+    customerFirstName,
+    customerLastName,
+    customerCompany,
+    customerType,
+    customerPhone,
+    customerPiva,
+    customerSdi,
+    customerPec,
+    locale,
+    requiresShipping,
+    shipping,
+}) {
+    const ship = shipping || {};
+    const res = await db.prepare(`
+        UPDATE orders
+        SET customer_email = ?, customer_first_name = ?, customer_last_name = ?,
+            customer_company = ?, customer_type = ?, customer_phone = ?,
+            customer_piva = ?, customer_sdi = ?, customer_pec = ?,
+            locale = ?, requires_shipping = ?,
+            shipping_address_line1 = ?, shipping_city = ?,
+            shipping_postal_code = ?, shipping_province = ?, shipping_country = ?,
+            updated_at = ?
+        WHERE id = ? AND status = 'pending_payment'
+    `).bind(
+        customerEmail, customerFirstName, customerLastName,
+        customerCompany || null, customerType || 'private', customerPhone || null,
+        customerPiva || null, customerSdi || null, customerPec || null,
+        locale || 'it', requiresShipping ? 1 : 0,
+        ship.addressLine1 || null, ship.city || null,
+        ship.postalCode || null, ship.province || null, ship.country || null,
+        now(), orderId
+    ).run();
+
+    return Boolean(res?.meta?.changes);
+}
+
+/**
  * Recupera un ordine per stripe_payment_intent (flusso Payment Element on-page).
  * @param {D1Database} db
  * @param {string} paymentIntentId
