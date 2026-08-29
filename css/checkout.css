@@ -372,6 +372,13 @@
     height: 15px;
 }
 
+/* Amazon Pay: marchio molto largo (176x34, circa 5:1). Col max-width 44px di
+   default verrebbe schiacciato e illeggibile. */
+.payment-icon--img.payment-icon--amazon-wide img {
+    max-width: 68px;
+    height: 13px;
+}
+
 /* ─── Card bonifico (istruzioni) ───────────────────────────────────────────── */
 
 .transfer-section {

@@ -32,6 +32,7 @@
             method_paypal:  'PayPal',
             method_transfer:'Bonifico bancario',
             transfer_wait:  'In attesa di pagamento',
+            processing:     'Pagamento in elaborazione',
             paid:           'Pagato',
             causale_label:  'Causale da usare per il bonifico',
             expired_title:  'Link scaduto',
@@ -53,6 +54,7 @@
             method_paypal:  'PayPal',
             method_transfer:'Bank transfer',
             transfer_wait:  'Awaiting payment',
+            processing:     'Payment processing',
             paid:           'Paid',
             causale_label:  'Bank transfer reference',
             expired_title:  'Link expired',
@@ -74,6 +76,7 @@
             method_paypal:  'PayPal',
             method_transfer:'Virement bancaire',
             transfer_wait:  'En attente de paiement',
+            processing:     'Paiement en cours de traitement',
             paid:           'Payé',
             causale_label:  'Référence pour le virement',
             expired_title:  'Lien expiré',
@@ -95,6 +98,7 @@
             method_paypal:  'PayPal',
             method_transfer:'Banküberweisung',
             transfer_wait:  'Zahlung ausstehend',
+            processing:     'Zahlung wird verarbeitet',
             paid:           'Bezahlt',
             causale_label:  'Verwendungszweck für die Überweisung',
             expired_title:  'Link abgelaufen',
@@ -116,6 +120,7 @@
             method_paypal:  'PayPal',
             method_transfer:'Transferencia bancaria',
             transfer_wait:  'Pago pendiente',
+            processing:     'Pago en proceso',
             paid:           'Pagado',
             causale_label:  'Concepto para la transferencia',
             expired_title:  'Enlace caducado',
@@ -137,6 +142,7 @@
             method_paypal:  'PayPal',
             method_transfer:'Transferência bancária',
             transfer_wait:  'A aguardar pagamento',
+            processing:     'Pagamento em processamento',
             paid:           'Pago',
             causale_label:  'Referência para a transferência',
             expired_title:  'Ligação expirada',
@@ -158,6 +164,7 @@
             method_paypal:  'PayPal',
             method_transfer:'Bankoverschrijving',
             transfer_wait:  'Betaling in behandeling',
+            processing:     'Betaling wordt verwerkt',
             paid:           'Betaald',
             causale_label:  'Omschrijving voor de overschrijving',
             expired_title:  'Link verlopen',
@@ -246,7 +253,11 @@
         setText('success-order-id', order.orderId);
         setText('success-date',     fmtDate(order.createdAt));
         setText('success-method',   methodLabel);
-        setText('success-status-badge', isPaid ? t('paid') : t('transfer_wait'));
+        // Tre stati, non due: 'in attesa di pagamento' vale per il bonifico, dove il
+        // cliente non ha ancora pagato. Un ordine Stripe/PayPal non ancora 'paid' e'
+        // invece in elaborazione — i soldi li ha gia' messi — e dirgli che siamo in
+        // attesa del suo pagamento lo spinge a pagare due volte.
+        setText('success-status-badge', isPaid ? t('paid') : (isBT ? t('transfer_wait') : t('processing')));
 
         // Classe badge
         var badge = $('success-status-badge');
