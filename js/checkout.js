@@ -743,25 +743,27 @@
         var ece = _elementsExpress.create('expressCheckout', {
             buttonHeight: 48,
             emailRequired: true,
-            // `paymentMethodOrder` e' solo una preferenza di ordinamento: senza
-            // `paymentMethods` l'Element mostra TUTTI i wallet abilitati
-            // sull'account Stripe. Servono due esclusioni esplicite:
+            // `paymentMethodOrder` ordina soltanto, non filtra: senza
+            // `paymentMethods` l'Element propone tutti i wallet attivi in
+            // dashboard. Qui l'elenco e' esplicito.
             //
-            //  amazonPay — abilitato in dashboard ma con dominio non registrato
-            //    presso Amazon: il bottone renderizza e poi fallisce in CORS
-            //    (merchantId=undefined), cioe' un pulsante di pagamento rotto.
-            //  paypal    — lo abbiamo gia' fra i metodi qui sotto, con la nostra
-            //    integrazione e il nostro webhook. Mostrarlo anche qui significa
-            //    due bottoni PayPal nella stessa pagina che creano l'ordine per
-            //    strade diverse: confonde il cliente e spacca le statistiche.
+            // amazonPay era 'never' finche' eurolicenze.com non era fra i domini
+            // registrati in Stripe (il bottone si disegnava e poi falliva in CORS
+            // con merchantId=undefined). Dominio registrato il 2026-08-29
+            // (pmd_1U9mwOKD4bVig4Jg74x1VXgD), quindi riattivato.
+            //
+            // paypal resta escluso: c'e' gia' fra i metodi qui sotto con la
+            // nostra integrazione e il nostro webhook. Due bottoni PayPal che
+            // creano l'ordine per strade diverse confondono il cliente e
+            // dividono le statistiche.
             paymentMethods: {
                 applePay:  'auto',
                 googlePay: 'auto',
                 link:      'auto',
-                amazonPay: 'never',
+                amazonPay: 'auto',
                 paypal:    'never',
             },
-            paymentMethodOrder: ['applePay', 'googlePay', 'link'],
+            paymentMethodOrder: ['applePay', 'googlePay', 'link', 'amazonPay'],
         });
 
         ece.on('ready', function (e) {
