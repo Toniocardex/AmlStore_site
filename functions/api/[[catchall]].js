@@ -572,6 +572,48 @@ async function orderParamsFromBodySafe(body, paymentMethod, request, env) {
     }
 }
 
+/**
+ * Righe e importo da usare quando si riusa un ordine gia' presente in D1.
+ *
+ * Il PSP va sempre istruito con quanto e' SALVATO sull'ordine, mai con il
+ * ricalcolo della richiesta corrente. Entro le 24 ore la cosa non si nota —
+ * l'Idempotency-Key Stripe (= orderId) fa rigiocare la stessa sessione/PI — ma
+ * quelle chiavi scadono: passato un giorno, la stessa idempotency_key produce un
+ * PSP object NUOVO, calcolato sulle righe nuove, agganciato a una riga ordine che
+ * contiene ancora le vecchie. Da li' in poi l'importo addebitato e le licenze
+ * evase divergono.
+ *
+ * Prendere il dato salvato risolve anche il caso ostile: chi rigiocasse la stessa
+ * chiave con un carrello piu' caro verrebbe comunque addebitato — e servito —
+ * secondo l'ordine originale.
+ *
+ * @returns {{lineItems: object[], totalMinor: number, currency: string}}
+ */
+function reusedOrderAmounts(existingOrder, recomputed) {
+    const lineItems  = safeParseJSON(existingOrder?.line_items, null);
+    const totalMinor = Number(existingOrder?.total_minor);
+
+    // Riga malformata o incompleta (SELECT senza le colonne): meglio il ricalcolo
+    // che un importo nullo.
+    if (!Array.isArray(lineItems) || !lineItems.length || !Number.isFinite(totalMinor)) {
+        return recomputed;
+    }
+
+    if (totalMinor !== recomputed.totalMinor) {
+        console.warn('[checkout] riuso ordine con totale diverso dal ricalcolo:', {
+            orderId:  existingOrder.id,
+            salvato:  totalMinor,
+            corrente: recomputed.totalMinor,
+        });
+    }
+
+    return {
+        lineItems,
+        totalMinor,
+        currency: existingOrder.currency || recomputed.currency,
+    };
+}
+
 /** Collega il cartId (se presente nel body) all'ordine appena creato. Non deve mai bloccare il checkout. */
 async function linkCartCheckoutStarted(env, body, orderId) {
     const cartId = String(body?.cartId || '').trim();
@@ -686,6 +728,11 @@ async function handleStripeCreateSession(request, env) {
 
     // Crea ordine in D1
     let orderId;
+    let amounts = {
+        lineItems:  params.lineItems,
+        totalMinor: params.totalMinor,
+        currency:   params.currency,
+    };
     try {
         orderId = await createOrder(env.DB, params);
     } catch (dbErr) {
@@ -695,7 +742,7 @@ async function handleStripeCreateSession(request, env) {
         // sempre una url valida anche su retry.
         if (String(dbErr).includes('UNIQUE')) {
             const existing = await env.DB
-                .prepare('SELECT id, status FROM orders WHERE idempotency_key = ?')
+                .prepare('SELECT id, status, line_items, total_minor, currency FROM orders WHERE idempotency_key = ?')
                 .bind(params.idempotencyKey).first();
             if (!existing?.id) throw dbErr;
             if (existing.status === 'paid') {
@@ -706,6 +753,7 @@ async function handleStripeCreateSession(request, env) {
             // indietro e cambia i dati (tipicamente Privato → Azienda), senza
             // questo riallineamento P.IVA e SDI non arriverebbero mai in D1.
             await updatePendingOrderCustomer(env.DB, orderId, params);
+            amounts = reusedOrderAmounts(existing, amounts);
         } else {
             throw dbErr;
         }
@@ -721,7 +769,7 @@ async function handleStripeCreateSession(request, env) {
     const session = await createCheckoutSession(env.STRIPE_SECRET_KEY, {
         orderId,
         customerEmail: params.customerEmail,
-        lineItems:     params.lineItems,
+        lineItems:     amounts.lineItems,
         locale:        lang,
         successUrl,
         cancelUrl,
@@ -771,12 +819,18 @@ async function handleCreatePaymentIntent(request, env) {
         const rateGate = await gateNewCheckoutAttempt(env, request, params);
         if (rateGate) return rateGate;
 
+        let amounts = {
+            lineItems:  params.lineItems,
+            totalMinor: params.totalMinor,
+            currency:   params.currency,
+        };
+
         try {
             orderId = await createOrder(env.DB, params);
         } catch (dbErr) {
             if (String(dbErr).includes('UNIQUE')) {
                 const existing = await env.DB
-                    .prepare('SELECT id, status FROM orders WHERE idempotency_key = ?')
+                    .prepare('SELECT id, status, line_items, total_minor, currency FROM orders WHERE idempotency_key = ?')
                     .bind(params.idempotencyKey).first();
                 if (!existing?.id) throw dbErr;
                 if (existing.status === 'paid') return err('Ordine già pagato', 409, request, env);
@@ -789,13 +843,14 @@ async function handleCreatePaymentIntent(request, env) {
                 // dati nuovi (P.IVA, SDI, ragione sociale) andrebbero persi e
                 // l'ordine resterebbe registrato come privato.
                 await updatePendingOrderCustomer(env.DB, orderId, params);
+                amounts = reusedOrderAmounts(existing, amounts);
             } else {
                 throw dbErr;
             }
         }
 
-        amountMinor  = params.totalMinor;
-        currency     = params.currency;
+        amountMinor  = amounts.totalMinor;
+        currency     = amounts.currency;
         locale       = params.locale || 'it';
         receiptEmail = params.customerEmail;
     } else {
@@ -841,7 +896,7 @@ async function handleCreatePaymentIntent(request, env) {
         const idempotencyKey = normalizeIdempotencyKey(body.idempotencyKey);
 
         const existing = await env.DB
-            .prepare('SELECT id, status FROM orders WHERE idempotency_key = ?')
+            .prepare('SELECT id, status, line_items, total_minor, currency FROM orders WHERE idempotency_key = ?')
             .bind(idempotencyKey).first();
         if (existing?.status === 'paid') return err('Ordine già pagato', 409, request, env);
         if (!existing?.id) {
@@ -856,6 +911,9 @@ async function handleCreatePaymentIntent(request, env) {
         const nameParts = walletName.split(/\s+/).filter(Boolean);
         const walletFirstName = nameParts.shift() || '';
         const walletLastName  = nameParts.join(' ');
+
+        // Riga ordine riusata, se c'e': l'importo del PaymentIntent va preso da li'.
+        let reused = existing?.id ? existing : null;
 
         try {
             orderId = existing?.id || await createOrder(env.DB, {
@@ -880,17 +938,26 @@ async function handleCreatePaymentIntent(request, env) {
         } catch (dbErr) {
             if (String(dbErr).includes('UNIQUE')) {
                 const row = await env.DB
-                    .prepare('SELECT id FROM orders WHERE idempotency_key = ?')
+                    .prepare('SELECT id, line_items, total_minor, currency FROM orders WHERE idempotency_key = ?')
                     .bind(idempotencyKey).first();
                 orderId = row?.id;
                 if (!orderId) throw dbErr;
+                reused = row;
             } else {
                 throw dbErr;
             }
         }
 
-        amountMinor  = totalMinorFromItems(items);
-        currency     = items[0].currency;
+        const amounts = reused
+            ? reusedOrderAmounts(reused, {
+                lineItems:  items,
+                totalMinor: totalMinorFromItems(items),
+                currency:   items[0].currency,
+            })
+            : { totalMinor: totalMinorFromItems(items), currency: items[0].currency };
+
+        amountMinor  = amounts.totalMinor;
+        currency     = amounts.currency;
         // Passato a Stripe: e' anche un segnale in piu' per Radar, che su un
         // PaymentIntent senza email/nome ha molti meno appigli che su una
         // Checkout Session (dove customer_email era sempre valorizzata).
@@ -1110,18 +1177,24 @@ async function handlePaypalCreateOrder(request, env) {
 
     // Crea ordine in D1
     let orderId;
+    let amounts = {
+        lineItems:  params.lineItems,
+        totalMinor: params.totalMinor,
+        currency:   params.currency,
+    };
     try {
         orderId = await createOrder(env.DB, params);
     } catch (dbErr) {
         if (String(dbErr).includes('UNIQUE')) {
             const existing = await env.DB
-                .prepare('SELECT id FROM orders WHERE idempotency_key = ?')
+                .prepare('SELECT id, line_items, total_minor, currency FROM orders WHERE idempotency_key = ?')
                 .bind(params.idempotencyKey).first();
             orderId = existing?.id;
             if (!orderId) throw dbErr;
             // Vedi handleCreatePaymentIntent: la chiave non copre i dati fiscali,
             // quindi il riuso deve riallinearli o vanno persi.
             await updatePendingOrderCustomer(env.DB, orderId, params);
+            amounts = reusedOrderAmounts(existing, amounts);
         } else {
             throw dbErr;
         }
@@ -1133,12 +1206,12 @@ async function handlePaypalCreateOrder(request, env) {
         env.PAYPAL_BASE_URL, env.PAYPAL_CLIENT_ID, env.PAYPAL_CLIENT_SECRET
     );
 
-    const totalStr     = (params.totalMinor / 100).toFixed(2);
+    const totalStr     = (amounts.totalMinor / 100).toFixed(2);
     const paypalOrderId = await createPaypalOrder(env.PAYPAL_BASE_URL, accessToken, {
         orderId,
         totalMinorStr: totalStr,
-        currency:      params.currency,
-        lineItems:     params.lineItems,
+        currency:      amounts.currency,
+        lineItems:     amounts.lineItems,
     });
 
     await setPaypalOrderId(env.DB, orderId, paypalOrderId);
@@ -1248,7 +1321,7 @@ async function handlePaypalExpressCreateOrder(request, env) {
     // Riuso ordine esistente su retry della stessa idempotency_key, altrimenti
     // limite per IP: niente email disponibile a questo punto del flusso.
     const existing = await env.DB
-        .prepare('SELECT id FROM orders WHERE idempotency_key = ?')
+        .prepare('SELECT id, line_items, total_minor, currency FROM orders WHERE idempotency_key = ?')
         .bind(idempotencyKey).first();
     if (!existing?.id) {
         const rateGate = await checkExpressCheckoutIpRateLimit(env, request);
@@ -1256,6 +1329,7 @@ async function handlePaypalExpressCreateOrder(request, env) {
     }
 
     let orderId;
+    let reused = existing?.id ? existing : null;
     try {
         orderId = await createOrder(env.DB, {
             idempotencyKey,
@@ -1279,10 +1353,11 @@ async function handlePaypalExpressCreateOrder(request, env) {
     } catch (dbErr) {
         if (String(dbErr).includes('UNIQUE')) {
             const row = await env.DB
-                .prepare('SELECT id FROM orders WHERE idempotency_key = ?')
+                .prepare('SELECT id, line_items, total_minor, currency FROM orders WHERE idempotency_key = ?')
                 .bind(idempotencyKey).first();
             orderId = row?.id;
             if (!orderId) throw dbErr;
+            reused = row;
         } else {
             throw dbErr;
         }
@@ -1293,12 +1368,19 @@ async function handlePaypalExpressCreateOrder(request, env) {
         env.PAYPAL_BASE_URL, env.PAYPAL_CLIENT_ID, env.PAYPAL_CLIENT_SECRET
     );
 
-    const totalStr = (totalMinorFromItems(items) / 100).toFixed(2);
+    const recomputed = {
+        lineItems:  items,
+        totalMinor: totalMinorFromItems(items),
+        currency:   items[0].currency,
+    };
+    const amounts = reused ? reusedOrderAmounts(reused, recomputed) : recomputed;
+
+    const totalStr = (amounts.totalMinor / 100).toFixed(2);
     const paypalOrderId = await createPaypalOrder(env.PAYPAL_BASE_URL, accessToken, {
         orderId,
         totalMinorStr: totalStr,
-        currency:      items[0].currency,
-        lineItems:     items,
+        currency:      amounts.currency,
+        lineItems:     amounts.lineItems,
     });
 
     await setPaypalOrderId(env.DB, orderId, paypalOrderId);

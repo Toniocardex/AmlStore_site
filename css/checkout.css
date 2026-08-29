@@ -1228,7 +1228,18 @@
     margin-bottom: 0.4rem;
 }
 
-@media (max-width: 767px) {
+/* Soglia allineata agli 860px del blocco responsive piu' sotto, dove
+   .checkout-grid passa a colonna singola. Fermarsi a 767px lasciava una fascia
+   768-860px in cui la colonna riepilogo era ancora visibile ma senza
+   intestazione: quel blocco nasconde .checkout-summary-title dando per scontato
+   .summary-toggle-btn, che nel markup nuovo non esiste piu'.
+
+   Il selettore discendente NON e' decorativo: questo foglio e' condiviso con le
+   lingue ancora sul markup vecchio, che non hanno .checkout-msummary. Con un
+   `.checkout-summary-col { display: none }` secco resterebbero senza riepilogo
+   ordine del tutto su mobile. Qui la colonna sparisce solo dove esiste davvero
+   qualcosa che la sostituisce. */
+@media (max-width: 860px) {
     .checkout-msummary {
         display: block;
         position: sticky;
@@ -1236,7 +1247,7 @@
         z-index: 20;
     }
 
-    .checkout-summary-col {
+    .checkout-msummary ~ .checkout-grid .checkout-summary-col {
         display: none;
     }
 }
