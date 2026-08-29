@@ -1065,14 +1065,16 @@ def _pills(brand_short, devices, years=1, extra=None):
     return out
 
 
-def _name(brand, line, devices, years=1, no_sub=False):
+def _name(brand, line, devices, years=1, no_sub=False, edition_year=None):
     d = _devices(devices)
     y = _year(years)
     out = {}
     for lg in LANGS:
         prefix = f"{brand} {line}".strip() if line else brand
+        if edition_year:
+            prefix = f"{prefix} {edition_year}"
         base = f"{prefix} — {d[lg]}"
-        if years != 1:
+        if years != 1 or edition_year:
             base = f"{prefix} — {d[lg]} · {y[lg]}"
         if no_sub:
             suffix = {
@@ -1309,22 +1311,23 @@ for slug, n in [
     _add_bitdefender(slug, n)
 
 
-def _add_kaspersky(slug, tier, devices):
+def _add_kaspersky(slug, tier, devices, edition_year=None):
+    tier_label = f"{tier} {edition_year}" if edition_year else tier
     PRODUCTS[slug] = _av_page(
         brand="Kaspersky",
         line=tier,
         title_span=L(
-            it=f"{tier} · {_devices(devices)['it']}",
-            en=f"{tier} · {_devices(devices)['en']}",
-            fr=f"{tier} · {_devices(devices)['fr']}",
-            de=f"{tier} · {_devices(devices)['de']}",
-            es=f"{tier} · {_devices(devices)['es']}",
-            pt=f"{tier} · {_devices(devices)['pt']}",
-            nl=f"{tier} · {_devices(devices)['nl']}",
+            it=f"{tier_label} · {_devices(devices)['it']}",
+            en=f"{tier_label} · {_devices(devices)['en']}",
+            fr=f"{tier_label} · {_devices(devices)['fr']}",
+            de=f"{tier_label} · {_devices(devices)['de']}",
+            es=f"{tier_label} · {_devices(devices)['es']}",
+            pt=f"{tier_label} · {_devices(devices)['pt']}",
+            nl=f"{tier_label} · {_devices(devices)['nl']}",
         ),
         devices=devices,
         years=1,
-        name=_name(f"Kaspersky {tier}", "", devices),
+        name=_name(f"Kaspersky {tier}", "", devices, edition_year=edition_year),
         desc=L(
             it=f"Kaspersky {tier} per {_devices(devices)['it']}: suite di sicurezza avanzata con protezione in tempo reale, licenza originale e invio immediato via email. Attivazione sicura su My Kaspersky.",
             en=f"Kaspersky {tier} for {_devices(devices)['en']}: advanced security suite with real-time defence, genuine digital licence, and instant email delivery. Official activation on My Kaspersky.",
@@ -1360,30 +1363,31 @@ def _add_kaspersky(slug, tier, devices):
     )
 
 
-_add_kaspersky("kaspersky-standard", "Standard", 1)
-_add_kaspersky("kaspersky-plus", "Plus", 1)
-_add_kaspersky("kaspersky-premium-1-device", "Premium", 1)
-_add_kaspersky("kaspersky-premium-3-devices", "Premium", 3)
-_add_kaspersky("kaspersky-premium-5-devices", "Premium", 5)
-_add_kaspersky("kaspersky-premium-10-devices", "Premium", 10)
+_add_kaspersky("kaspersky-standard", "Standard", 1, edition_year=2026)
+_add_kaspersky("kaspersky-plus", "Plus", 1, edition_year=2026)
+_add_kaspersky("kaspersky-premium-1-device", "Premium", 1, edition_year=2026)
+_add_kaspersky("kaspersky-premium-3-devices", "Premium", 3, edition_year=2026)
+_add_kaspersky("kaspersky-premium-5-devices", "Premium", 5, edition_year=2026)
+_add_kaspersky("kaspersky-premium-10-devices", "Premium", 10, edition_year=2026)
 
 
-def _add_mcafee(slug, devices):
+def _add_mcafee(slug, devices, edition_year=None):
+    line_label = f"Total Protection {edition_year}" if edition_year else "Total Protection"
     PRODUCTS[slug] = _av_page(
         brand="McAfee",
         line="Total Protection",
         title_span=L(
-            it=f"Total Protection · {_devices(devices)['it']}",
-            en=f"Total Protection · {_devices(devices)['en']}",
-            fr=f"Total Protection · {_devices(devices)['fr']}",
-            de=f"Total Protection · {_devices(devices)['de']}",
-            es=f"Total Protection · {_devices(devices)['es']}",
-            pt=f"Total Protection · {_devices(devices)['pt']}",
-            nl=f"Total Protection · {_devices(devices)['nl']}",
+            it=f"{line_label} · {_devices(devices)['it']}",
+            en=f"{line_label} · {_devices(devices)['en']}",
+            fr=f"{line_label} · {_devices(devices)['fr']}",
+            de=f"{line_label} · {_devices(devices)['de']}",
+            es=f"{line_label} · {_devices(devices)['es']}",
+            pt=f"{line_label} · {_devices(devices)['pt']}",
+            nl=f"{line_label} · {_devices(devices)['nl']}",
         ),
         devices=devices,
         years=1,
-        name=_name("McAfee Total Protection", "", devices),
+        name=_name("McAfee Total Protection", "", devices, edition_year=edition_year),
         desc=L(
             it=f"McAfee Total Protection per {_devices(devices)['it']}: difesa multi-dispositivo completa con protezione web avanzata, licenza digitale originale e consegna immediata via email. Attivazione su McAfee My Account.",
             en=f"McAfee Total Protection for {_devices(devices)['en']}: complete multi-device protection with advanced web security, genuine licence, and instant email delivery. Official activation via McAfee My Account.",
@@ -1424,7 +1428,7 @@ for slug, n in [
     ("mcafee-total-protection-5-devices", 5),
     ("mcafee-total-protection-10-devices", 10),
 ]:
-    _add_mcafee(slug, n)
+    _add_mcafee(slug, n, edition_year=2026)
 
 backfill_lang(PRODUCTS)
 backfill_lang(PRODUCTS, target="nl", source="en", translate=nl_text)

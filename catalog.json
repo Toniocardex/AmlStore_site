@@ -387,7 +387,7 @@
   {
     "sku": "KASP_STD_1D_1A",
     "ean": "5056244919368",
-    "name": "Kaspersky Standard | Antivirus 2025",
+    "name": "Kaspersky Standard 2026 | 1 Dispositivo | 1 Anno",
     "unitAmountMinor": 1956,
     "compareAtMinor": 3499,
     "currency": "EUR",
@@ -396,7 +396,7 @@
   },
   {
     "sku": "KASP_PLUS_1D_1A",
-    "name": "Kaspersky Plus | Internet Security 2025",
+    "name": "Kaspersky Plus 2026 | 1 Dispositivo | 1 Anno",
     "unitAmountMinor": 3295,
     "compareAtMinor": 5499,
     "currency": "EUR",
@@ -406,7 +406,7 @@
   {
     "sku": "KL1047TDAFS",
     "ean": "5056244926649",
-    "name": "Kaspersky Premium | 1 Dispositivo | 1 Anno",
+    "name": "Kaspersky Premium 2026 | 1 Dispositivo | 1 Anno",
     "unitAmountMinor": 3799,
     "compareAtMinor": 7999,
     "currency": "EUR",
@@ -501,7 +501,7 @@
   {
     "sku": "MTP00MNRXRAAD",
     "ean": "0731944715155",
-    "name": "McAfee Total Protection | 10 Dispositivi | 1 Anno",
+    "name": "McAfee Total Protection 2026 | 10 Dispositivi | 1 Anno",
     "unitAmountMinor": 1844,
     "compareAtMinor": 7999,
     "currency": "EUR",
@@ -511,7 +511,7 @@
   {
     "sku": "KL1047GDCFS1",
     "ean": "5056244915377",
-    "name": "Kaspersky Premium | 3 Dispositivi | 1 Anno",
+    "name": "Kaspersky Premium 2026 | 3 Dispositivi | 1 Anno",
     "unitAmountMinor": 3604,
     "compareAtMinor": 6899,
     "currency": "EUR",
@@ -521,7 +521,7 @@
   {
     "sku": "KL1047GDEFS",
     "ean": "5056244915384",
-    "name": "Kaspersky Premium | 5 Dispositivi | 1 Anno",
+    "name": "Kaspersky Premium 2026 | 5 Dispositivi | 1 Anno",
     "unitAmountMinor": 4634,
     "compareAtMinor": 7899,
     "currency": "EUR",
@@ -531,7 +531,7 @@
   {
     "sku": "KL1047GDKFS",
     "ean": "5056244915391",
-    "name": "Kaspersky Premium | 10 Dispositivi | 1 Anno",
+    "name": "Kaspersky Premium 2026 | 10 Dispositivi | 1 Anno",
     "unitAmountMinor": 5700,
     "compareAtMinor": 8999,
     "currency": "EUR",
