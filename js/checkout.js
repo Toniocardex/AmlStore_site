@@ -639,6 +639,12 @@
 
     /* ─── Flusso Stripe on-page (Express Checkout Element + Payment Element) ─── */
 
+    // Stati PaymentIntent in cui il denaro e' impegnato e il cliente ha finito.
+    // Deve restare allineata a SETTLED_PI_STATUSES in functions/api/[[catchall]].js:
+    // se il client redirige per uno stato che il server non accetta, chi ha appena
+    // pagato si ritrova sul form con un errore.
+    var SETTLED_PI_STATUSES = ['succeeded', 'processing', 'requires_capture'];
+
     function getReturnUrl() {
         return global.location.origin + STRIPE_INTENT_RETURN_URL + '?lang=' + getLang();
     }
@@ -885,8 +891,12 @@
                 return;
             }
             var pi = result.paymentIntent;
-            if (pi && (pi.status === 'succeeded' || pi.status === 'processing' || pi.status === 'requires_capture')) {
-                rotateSessionSalt();
+            if (pi && SETTLED_PI_STATUSES.indexOf(pi.status) !== -1) {
+                // Niente rotateSessionSalt() qui: il sale va ruotato solo a ordine
+                // davvero concluso, e ci pensa checkout-success.js quando l'ordine
+                // viene trovato. Ruotarlo prima significherebbe che un ritorno in
+                // errore fa ripartire il cliente con una idempotency key nuova,
+                // cioe' con un secondo ordine e un secondo addebito.
                 global.location.href = getReturnUrl() + '&payment_intent=' + encodeURIComponent(pi.id);
             } else {
                 showGlobalError('Pagamento in sospeso. Se hai completato l’operazione riceverai la conferma via email.');
@@ -1187,6 +1197,51 @@
         if (form) form.addEventListener('submit', function (ev) { ev.preventDefault(); });
     }
 
+    /**
+     * Mostra il motivo per cui il PSP ci ha rimandato indietro.
+     *
+     * /api/stripe-intent-return e il cancel_url del Checkout ospitato rimandano
+     * su /{lang}/checkout?error=... (o ?cancelled=1). Senza questo, chi torna
+     * indietro trova il form intatto e nessuna spiegazione: il riflesso naturale
+     * e' ritentare, ed e' cosi' che nasce un secondo addebito.
+     *
+     * I testi vivono come data-attribute su #checkout-error-msg (stesso schema di
+     * data-network-error). Se mancano — le lingue non ancora allineate — non si
+     * mostra nulla, invece di scrivere in italiano su una pagina tedesca.
+     */
+    function initReturnNotice() {
+        var el = document.getElementById('checkout-error-msg');
+        if (!el || !global.URLSearchParams) return;
+
+        var qs = new URLSearchParams(global.location.search);
+        var reason = qs.get('error');
+        var attr;
+
+        if (qs.get('cancelled')) {
+            attr = 'data-cancelled-notice';
+        } else if (!reason) {
+            return;
+        } else if (reason.indexOf('payment_') === 0) {
+            // Pagamento rifiutato/annullato dal PSP: ritentare ha senso.
+            attr = 'data-payment-failed-notice';
+        } else {
+            // missing_pi / pi_lookup / order_not_found: non sappiamo se l'addebito
+            // sia andato a buon fine, quindi va scoraggiato un secondo tentativo.
+            attr = 'data-payment-unconfirmed-notice';
+        }
+
+        var msg = el.getAttribute(attr);
+        if (msg) showGlobalError(msg);
+
+        // Ripulisce la query: un refresh non deve rimostrare l'avviso.
+        try {
+            qs.delete('error');
+            qs.delete('cancelled');
+            var q = qs.toString();
+            global.history.replaceState({}, '', global.location.pathname + (q ? '?' + q : ''));
+        } catch (_) {}
+    }
+
     /** Al variare dei dati cliente, (ri)monta il Payment Element se serve. */
     function initStripeRemountTriggers() {
         var ids = [
@@ -1227,6 +1282,7 @@
         initSummaryToggle();
         initSubmitButtons();
         initCartEmailSync();
+        initReturnNotice();
 
         if (isOnPageStripe()) {
             initStripeRemountTriggers();

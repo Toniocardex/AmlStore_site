@@ -936,6 +936,20 @@ async function handleStripeReturn(request, env) {
 // ?payment_intent=…), sia chiamato da checkout.js dopo un confirmPayment
 // risolto senza redirect. Il webhook resta la fonte di verità per l'evasione.
 
+// Stati in cui il cliente ha fatto la sua parte e il denaro è impegnato: va
+// portato alla thank-you page, non rimandato al form.
+//   succeeded        → incassato
+//   processing       → metodi a notifica differita (SEPA, Bancontact, Klarna e
+//                      carte che settlano in modo asincrono). Con
+//                      automatic_payment_methods questi stati sono all'ordine
+//                      del giorno; rimbalzarli indietro significa mostrare un
+//                      errore a chi ha appena pagato, e invitarlo a ripagare.
+//   requires_capture → cattura manuale, oggi non usata: incluso perché anche lì
+//                      i fondi sono autorizzati.
+// Restano esclusi requires_payment_method / requires_action / canceled, dove
+// l'utente deve davvero rifare qualcosa.
+const SETTLED_PI_STATUSES = new Set(['succeeded', 'processing', 'requires_capture']);
+
 async function handleStripeIntentReturn(request, env) {
     const url     = new URL(request.url);
     const piId    = url.searchParams.get('payment_intent');
@@ -955,7 +969,7 @@ async function handleStripeIntentReturn(request, env) {
         return Response.redirect(`${origin}/${lang}/checkout?error=pi_lookup`, 302);
     }
 
-    if (pi.status !== 'succeeded') {
+    if (!SETTLED_PI_STATUSES.has(pi.status)) {
         return Response.redirect(`${origin}/${lang}/checkout?error=payment_${pi.status || 'incomplete'}`, 302);
     }
 

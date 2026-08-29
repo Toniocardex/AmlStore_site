@@ -1,3 +1,8 @@
+ATTENZIONE: finché questo file contiene il placeholder, IMPEDISCE la verifica
+del dominio per Apple Pay — Stripe prova a registrare eurolicenze.com in
+automatico scaricando proprio questo URL e riceve questo testo invece del
+proprio payload. O lo si sostituisce col contenuto reale, o lo si cancella.
+
 PLACEHOLDER — sostituire con il contenuto reale fornito da Stripe.
 
 Dashboard Stripe → Settings → Payments → Payment methods → Apple Pay →
