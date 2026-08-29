@@ -1324,7 +1324,7 @@
     min-height: 0;
 }
 
-/* ═══ Box garanzia + supporto + riga IVA + badge stock ════════════════════ */
+/* ═══ Box garanzia + supporto + badge stock ═══════════════════════════════ */
 
 .checkout-guarantee-box {
     margin-top: 1rem;
@@ -1378,11 +1378,6 @@
 .checkout-support-box a {
     color: var(--page-accent);
     font-weight: 700;
-}
-
-.checkout-total-row--vat {
-    font-size: 0.8rem;
-    color: var(--page-text-muted);
 }
 
 .checkout-stock-badge {

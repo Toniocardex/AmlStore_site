@@ -23,268 +23,27 @@
 
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <link rel="stylesheet" href="../css/page.css?v=36b14ee1c2">
-    <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
-    <link rel="stylesheet" href="../css/footer.css?v=31dc97e061">
-    <link rel="stylesheet" href="../css/checkout.css?v=1382b83266">
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="../css/checkout.css?v=52841d47f3">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
     <a class="skip-link" href="#main">Zum Hauptinhalt springen</a>
-    <aml-lang-suggest></aml-lang-suggest>
 
-    <ecommerce-header translate="no" class="notranslate">
-<div class="header-utility">
-                    <div class="header-utility__inner">
-                        <span class="header-utility__rating">★ 4,8/5 auf Trustpilot</span>
-                        <span class="header-utility__claim">Europäischer Softwarehändler</span>
-                        <span class="header-utility__claim header-utility__claim--persistent">MwSt.-Rechnung verfügbar</span>
-                        <span class="header-utility__claim">Support per E-Mail und WhatsApp</span>
-                    </div>
-                </div>
-
-                <div class="header-container">
-                    <div class="header-brand">
-                        <a href="/de/" class="logo">
-                            <img src="/logo/logo-header-400.webp?v=2519bffb45" width="168" height="56" alt="Eurolicenze">
-                        </a>
-                    </div>
-                    <nav class="header-nav nav-links" aria-label="Primary">
-                            <div class="nav-av-wrap">
-                                <div class="nav-av-inner">
-                                    <a href="/de/antivirus" class="nav-av-root"><svg class="nav-root-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path></svg><span>Antivirus</span></a>
-                                    <button type="button" class="nav-av-caret" aria-expanded="false" aria-haspopup="true" aria-label="Antivirus-Untermenü öffnen">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-av-dropdown" role="menu">
-                                    <a href="/de/antivirus" class="nav-av-dropdown__overview" role="menuitem">Antivirus-Katalog</a>
-                                    <a href="/de/mcafee-total-protection-1-device" role="menuitem">McAfee Total Protection</a>
-                                    <a href="/de/norton-360-standard" role="menuitem">Norton 360 Standard</a>
-                                    <a href="/de/eset-nod32-1-device" role="menuitem">ESET NOD32</a>
-                                    <a href="/de/bitdefender-plus-1-device" role="menuitem">Bitdefender Plus</a>
-                                    <a href="/de/kaspersky-standard" role="menuitem">Kaspersky Standard</a>
-                                    <a href="/de/strumenti" role="menuitem">Tools &amp; mehr</a>
-                                </div>
-                            </div>
-                            <div class="nav-m365-wrap">
-                                <div class="nav-m365-inner">
-                                    <a href="/de/microsoft-365-solutions" class="nav-m365-root"><svg class="nav-root-icon" viewBox="0 0 50 50" aria-hidden="true"><path d="M20.13,32.5c-2.79-1.69-4.53-4.77-4.53-8.04V8.9c0-1.63,0.39-3.19,1.11-4.57L7.54,9.88C4.74,11.57,3,14.65,3,17.92v14.15c0,1.59,0.42,3.14,1.16,4.5c0.69,1.12,1.67,2.06,2.88,2.74c2.53,1.42,5.51,1.36,7.98-0.15l8.02-4.9L20.13,32.5z M42.84,27.14l-8.44-5.05v2.29c0,3.25-1.72,6.33-4.49,8.02l-13.84,8.47c-1.52,0.93-3.19,1.42-4.87,1.46l8.93,5.41c1.5,0.91,3.19,1.36,4.87,1.36s3.37-0.45,4.87-1.36l9.08-5.5l3.52-2.13c0.27-0.16,0.53-0.34,0.78-0.54c0.08-0.05,0.16-0.11,0.23-0.16c0.65-0.53,1.23-1.13,1.71-1.79c0.02-0.03,0.04-0.06,0.06-0.09c0.77-1.19,1.2-2.59,1.19-4.06C46.43,30.85,45.09,28.48,42.84,27.14z M42.46,9.88l-9.57-5.79l-3.02-1.83C29.45,2,29.01,1.79,28.56,1.61c-0.49-0.21-1-0.37-1.51-0.47c-1.84-0.38-3.76-0.08-5.46,0.89c-2.5,1.43-3.99,3.99-3.99,6.87v9.6l2.8-1.65c2.84-1.67,6.36-1.66,9.19,0.03l14.28,8.54c1.29,0.78,2.35,1.81,3.12,3.02L47,17.92C47,14.65,45.26,11.57,42.46,9.88z"></path></svg><span>Microsoft 365</span></a>
-                                    <button type="button" class="nav-m365-caret" aria-expanded="false" aria-haspopup="true" aria-label="Microsoft-365-Untermenü öffnen">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-m365-dropdown" role="menu">
-                                    <a href="/de/microsoft-365-solutions" class="nav-m365-dropdown__overview" role="menuitem">Suite-Überblick</a>
-                                    <a href="/de/microsoft-365-personal" role="menuitem">Microsoft 365 Personal</a>
-                                    <a href="/de/microsoft-365-family" role="menuitem">Microsoft 365 Family</a>
-                                    <a href="/de/microsoft-365-business-standard" role="menuitem">Microsoft 365 Business Standard</a>
-                                    <a href="/de/pacchetti" role="menuitem">Pakete</a>
-                                    <a href="/de/bundle-windows-11-home-m365-personal" role="menuitem">Win11 + M365 Personal</a>
-                                    <a href="/de/bundle-m365-personal-mcafee" role="menuitem">M365 + McAfee</a>
-                                    <a href="/de/bundle-m365-personal-kaspersky" role="menuitem">M365 + Kaspersky</a>
-                                </div>
-                            </div>
-                            <div class="nav-win-wrap">
-                                <div class="nav-win-inner">
-                                    <a href="/de/sistemi-operativi" class="nav-win-root"><svg class="nav-root-icon" viewBox="0 0 14 14" aria-hidden="true"><path d="m 5.91827,7.331731 v 4.694712 L 1,11.348557 V 7.331731 h 4.91827 z m 0,-5.358174 V 6.725962 H 1 V 2.651443 z M 13,7.331731 V 13 L 6.45913,12.098557 V 7.331731 H 13 z M 13,1 V 6.725962 H 6.45913 V 1.901443 z"></path></svg><span>Windows</span></a>
-                                    <button type="button" class="nav-win-caret" aria-expanded="false" aria-haspopup="true" aria-label="Windows-Untermenü öffnen">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-win-dropdown" role="menu">
-                                    <a href="/de/sistemi-operativi" class="nav-win-dropdown__overview" role="menuitem">Betriebssysteme</a>
-                                    <a href="/de/windows-11-home" role="menuitem">Windows 11 Home</a>
-                                    <a href="/de/windows-11-pro" role="menuitem">Windows 11 Pro</a>
-                                    <a href="/de/windows-11-pro-oem-dvd" role="menuitem">Windows 11 Pro OEM DVD</a>
-                                    <a href="/de/windows-11-pro-coa" role="menuitem">Windows 11 Pro COA</a>
-                                    <a href="/de/windows-10-home" role="menuitem">Windows 10 Home</a>
-                                    <a href="/de/windows-10-pro" role="menuitem">Windows 10 Pro</a>
-                                    <a href="/de/windows-server" class="nav-win-dropdown__overview" role="menuitem">Windows Server &amp; SQL</a>
-                                </div>
-                            </div>
-                            <div class="nav-office-wrap">
-                                <div class="nav-office-inner">
-                                    <a href="/de/suite-office" class="nav-office-root"><svg class="nav-root-icon" viewBox="0 0 50 50" aria-hidden="true"><path d="M43 11.11v27.6c0 2.54-1.73 4.77-4.21 5.43l-8.63 2.41c.5-.94.78-2.02.78-3.16V5.65c0-.86-.19-1.68-.53-2.42l8.45 2.47C41.29 6.37 43 8.6 43 11.11zM28.94 37v6.39c0 1.99-1.19 3.72-2.96 4.33-.43.1-.87.15-1.31.15-1 0-2-.26-2.92-.76L13.45 42c-1.04-.64-1.52-1.86-1.19-3.04.33-1.17 1.38-1.96 2.6-1.96H28.94zM28.94 5.65v5.72l-10.28 3.64c-.99.36-1.66 1.3-1.66 2.36v13.36c0 1.09-.59 2.1-1.54 2.62l-4.07 2.27C10.94 35.88 10.44 36 9.95 36c-.51 0-1.03-.14-1.49-.41C7.54 35.05 7 34.1 7 33.05V14.83c0-1.93 1.04-3.72 2.72-4.68L22.8 2.71c1.08-.61 2.28-.83 3.45-.65.07.06.16.11.26.14C27.72 2.6 28.94 3.82 28.94 5.65z"></path></svg><span>Office</span></a>
-                                    <button type="button" class="nav-office-caret" aria-expanded="false" aria-haspopup="true" aria-label="Office-Untermenü öffnen">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                                    </button>
-                                </div>
-                                <div class="nav-office-dropdown" role="menu">
-                                    <a href="/de/suite-office" class="nav-office-dropdown__overview" role="menuitem">Office-Suite</a>
-                                    <a href="/de/office-2024-home" role="menuitem">Office 2024 Home</a>
-                                    <a href="/de/office-2024-home-business" role="menuitem">Office 2024 Home &amp; Business</a>
-                                    <a href="/de/office-2021-home-student" role="menuitem">Office 2021 Home &amp; Student</a>
-                                    <a href="/de/office-2021-professional-plus" role="menuitem">Office 2021 Pro Plus</a>
-                                    <a href="/de/office-2019-professional-plus" role="menuitem">Office 2019 Pro Plus</a>
-                                    <a href="/de/office-2021-home-business" role="menuitem">Office 2021 Home &amp; Business</a>
-                                    <a href="/de/office-2021-home-business-mac" role="menuitem">Office 2021 Home &amp; Business Mac</a>
-                                    <a href="/de/office-2019-home-student" role="menuitem">Office 2019 Home &amp; Student</a>
-                                    <a href="/de/word-2024" role="menuitem">Word 2024</a>
-                                    <a href="/de/excel-2024" role="menuitem">Excel 2024</a>
-                                    <a href="/de/powerpoint-2024" role="menuitem">PowerPoint 2024</a>
-                                    <a href="/de/outlook-2024" role="menuitem">Outlook 2024</a>
-                                    <a href="/de/project-standard-2024" role="menuitem">Project Standard 2024</a>
-                                    <a href="/de/project-professional-2024" role="menuitem">Project Professional 2024</a>
-                                    <a href="/de/visio-standard-2024" role="menuitem">Visio Standard 2024</a>
-                                    <a href="/de/visio-professional-2024" role="menuitem">Visio Professional 2024</a>
-                                </div>
-                            </div>
-                    </nav>
-                    
-                    <div class="header-actions right-section">
-                        <button type="button" class="search-toggle" aria-label="Produkte durchsuchen" aria-haspopup="true" aria-expanded="false">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"></path></svg>
-                        </button>
-
-                        <div class="support-wrap">
-                            <button type="button" class="support-trigger" aria-expanded="false" aria-controls="header-support-panel" aria-haspopup="true" aria-label="Support">
-                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"></path></svg>
-                                <span class="support-trigger__label">Support</span>
-                                <svg class="support-trigger__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                            </button>
-                            <div id="header-support-panel" class="support-panel" hidden="">
-                                <p class="support-panel__heading">Schriftlicher Support</p>
-                                <a class="support-panel__link" href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>
-                                <a class="support-panel__link" href="https://wa.me/393925580413" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                                <p class="support-panel__hours">Mo–Sa · 08:00–19:00 Uhr CET/CEST</p>
-                            </div>
-                        </div>
-
-                        <div class="lang-wrapper">
-                            <button type="button" class="lang-selector" aria-haspopup="true" aria-expanded="false" aria-controls="header-lang-dropdown" aria-label="Sprache: Deutsch — Sprache ändern">
-                                <img class="flag-icon" src="/images/flags/de.svg?v=db488ee012" alt="" decoding="async">
-                                <span>DE</span>
-                                <svg class="chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"></path></svg>
-                            </button>
-                            <div id="header-lang-dropdown" class="lang-dropdown" role="menu" aria-label="Sprache wählen">
-                                
-                                <a href="/it/cart" class="lang-option" role="menuitem" hreflang="it">
-                                    <img class="flag-icon" src="/images/flags/it.svg?v=0bc893e759" alt="" decoding="async">
-                                    <span>IT</span>
-                                    
-                                </a>
-                                <a href="/en/cart" class="lang-option" role="menuitem" hreflang="en">
-                                    <img class="flag-icon" src="/images/flags/gb.svg?v=0d98245415" alt="" decoding="async">
-                                    <span>EN</span>
-                                    
-                                </a>
-                                <a href="/fr/cart" class="lang-option" role="menuitem" hreflang="fr">
-                                    <img class="flag-icon" src="/images/flags/fr.svg?v=97e492e72d" alt="" decoding="async">
-                                    <span>FR</span>
-                                    
-                                </a>
-                                <a href="/de/cart" class="lang-option active" role="menuitem" hreflang="de" aria-current="true">
-                                    <img class="flag-icon" src="/images/flags/de.svg?v=db488ee012" alt="" decoding="async">
-                                    <span>DE</span>
-                                    <svg class="lang-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg>
-                                </a>
-                                <a href="/es/cart" class="lang-option" role="menuitem" hreflang="es">
-                                    <img class="flag-icon" src="/images/flags/es.svg?v=df08203832" alt="" decoding="async">
-                                    <span>ES</span>
-                                    
-                                </a>
-                                <a href="/pt/cart" class="lang-option" role="menuitem" hreflang="pt">
-                                    <img class="flag-icon" src="/images/flags/pt.svg?v=959580b210" alt="" decoding="async">
-                                    <span>PT</span>
-                                    
-                                </a>
-                                <a href="/nl/cart" class="lang-option" role="menuitem" hreflang="nl">
-                                    <img class="flag-icon" src="/images/flags/nl.svg?v=a6510008c3" alt="" decoding="async">
-                                    <span>NL</span>
-                                    
-                                </a>
-                            </div>
-                        </div>
-
-                        <a href="/de/cart" class="cart-wrapper" aria-label="Warenkorb leer">
-                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"></path></svg>
-                            <span class="cart-badge" aria-hidden="true">0</span>
-                        </a>
-
-                        <button type="button" class="mobile-toggle" aria-label="Navigationsmenü öffnen">
-                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="search-backdrop"></div>
-                <div class="search-panel" role="dialog" aria-modal="true" aria-label="Produkte durchsuchen">
-                    <div class="search-panel-row">
-                        <svg class="search-input-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"></path></svg>
-                        <input type="search" class="search-input" placeholder="Produkt suchen…" aria-label="Produkt suchen…" autocomplete="off">
-                        <button type="button" class="search-close" aria-label="Suche schließen">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-                        </button>
-                    </div>
-                    <div class="search-results" role="region" aria-live="polite" aria-atomic="true"></div>
-                </div>
-
-                <div class="overlay"></div>
-                <div class="mobile-drawer">
-                    <div class="drawer-header">
-                        <a href="/de/" class="logo">
-                            <img src="/logo/logo-header-400.webp?v=2519bffb45" width="156" height="52" alt="Eurolicenze">
-                        </a>
-                        <button type="button" class="close-drawer" aria-label="Menü schließen">
-                            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-                        </button>
-                    </div>
-                    
-                    <nav class="drawer-nav">
-                        <div class="drawer-av-block">
-                            <div class="drawer-av-heading">Antivirus</div>
-                            <a href="/de/antivirus">Antivirus-Katalog</a>
-                            <a href="/de/mcafee-total-protection-1-device">McAfee Total Protection</a>
-                            <a href="/de/norton-360-standard">Norton 360 Standard</a>
-                            <a href="/de/eset-nod32-1-device">ESET NOD32</a>
-                            <a href="/de/bitdefender-plus-1-device">Bitdefender Plus</a>
-                            <a href="/de/kaspersky-standard">Kaspersky Standard</a>
-                            <a href="/de/strumenti">Tools &amp; mehr</a>
-                        </div>
-                        <div class="drawer-m365-block">
-                            <div class="drawer-m365-heading">Microsoft 365</div>
-                            <a href="/de/microsoft-365-solutions">Suite-Überblick</a>
-                            <a href="/de/microsoft-365-personal">Microsoft 365 Personal</a>
-                            <a href="/de/microsoft-365-family">Microsoft 365 Family</a>
-                            <a href="/de/microsoft-365-business-standard">Microsoft 365 Business Standard</a>
-                        </div>
-                        <div class="drawer-bundle-block">
-                            <div class="drawer-bundle-heading">Pakete</div>
-                            <a href="/de/pacchetti">Pakete</a>
-                            <a href="/de/bundle-windows-11-home-m365-personal">Win11 + M365 Personal</a>
-                            <a href="/de/bundle-m365-personal-mcafee">M365 + McAfee</a>
-                            <a href="/de/bundle-m365-personal-kaspersky">M365 + Kaspersky</a>
-                        </div>
-                        <div class="drawer-win-block">
-                            <div class="drawer-win-heading">Windows</div>
-                            <a href="/de/sistemi-operativi">Betriebssysteme</a>
-                            <a href="/de/windows-11-home">Windows 11 Home</a>
-                            <a href="/de/windows-11-pro">Windows 11 Pro</a>
-                            <a href="/de/windows-11-pro-oem-dvd">Windows 11 Pro OEM DVD</a>
-                            <a href="/de/windows-11-pro-coa">Windows 11 Pro COA</a>
-                            <a href="/de/windows-10-home">Windows 10 Home</a>
-                            <a href="/de/windows-10-pro">Windows 10 Pro</a>
-                            <a href="/de/windows-server">Windows Server &amp; SQL</a>
-                        </div>
-                        <div class="drawer-office-block">
-                            <div class="drawer-office-heading">Office</div>
-                            <a href="/de/suite-office">Office-Suite</a>
-                            <a href="/de/office-2024-home">Office 2024 Home</a>
-                            <a href="/de/office-2024-home-business">Office 2024 Home &amp; Business</a>
-                            <a href="/de/office-2021-home-student">Office 2021 Home &amp; Student</a>
-                            <a href="/de/office-2021-professional-plus">Office 2021 Pro Plus</a>
-                            <a href="/de/office-2019-professional-plus">Office 2019 Pro Plus</a>
-                        </div>
-                    </nav>
-                    
-                    <div class="drawer-footer">
-                        <p class="drawer-support-title">Support</p>
-                        <a class="drawer-support-link" href="mailto:Desk@eurolicenze.com">Desk@eurolicenze.com</a>
-                        <a class="drawer-support-link" href="https://wa.me/393925580413" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                        <p class="drawer-support-hours">Mo–Sa · 08:00–19:00 Uhr CET/CEST</p>
-                    </div>
-                </div>
-            </ecommerce-header>
+    <header class="checkout-chrome-header">
+        <div class="checkout-chrome-header__inner">
+            <a href="/de/" class="checkout-chrome-header__logo" aria-label="Eurolicenze — zurück zur Startseite">
+                <img src="/logo/logo-header-400.webp?v=2519bffb45" width="150" height="50" alt="Eurolicenze">
+            </a>
+            <span class="checkout-chrome-header__ssl">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                Sicherer SSL-Checkout
+            </span>
+        </div>
+    </header>
 
     <main id="main" class="checkout-page">
 
@@ -318,9 +77,41 @@
 
         <div id="checkout-content" hidden>
 
+            <details id="checkout-msummary" class="checkout-msummary">
+                <summary class="checkout-msummary__bar">
+                    <span class="checkout-msummary__left">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="checkout-msummary__toggle-text">
+                            <span class="checkout-msummary__show">Übersicht anzeigen</span>
+                            <span class="checkout-msummary__hide">Übersicht ausblenden</span>
+                        </span>
+                        <svg class="checkout-msummary__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                    <span class="checkout-msummary__total" id="mcheckout-grand-total">—</span>
+                </summary>
+                <div class="checkout-msummary__body">
+                    <div id="mcheckout-items" class="checkout-msummary__items" data-qty-label="Menge"></div>
+                    <div class="checkout-msummary__totals">
+                        <div class="checkout-total-row"><span>Zwischensumme</span><span id="mcheckout-subtotal">—</span></div>
+                        <div class="checkout-total-row checkout-grand-total"><span>Gesamt</span><span id="mcheckout-grand-total-2">—</span></div>
+                    </div>
+                </div>
+            </details>
+
             <div class="checkout-grid">
 
                 <div class="checkout-form-col">
+
+                    <section id="express-checkout" class="express-checkout" hidden aria-label="Schnelle Zahlung">
+                        <p class="express-checkout__hint">Schnellkauf mit 1 Klick</p>
+                        <div id="express-checkout-element"></div>
+                        <div class="checkout-or-divider"><span>oder Daten manuell eingeben</span></div>
+                    </section>
 
                     <form
                         id="checkout-form"
@@ -451,8 +242,8 @@
                                     <label class="payment-option-label" for="pay-stripe">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
                                         <span class="payment-option-content">
-                                            <span class="payment-option-title">Karte / Digitale Zahlungen</span>
-                                            <span class="payment-option-desc">Sichere Zahlung über Stripe — SSL-verschlüsselt</span>
+                                            <span class="payment-option-title">Kredit- oder Debitkarte</span>
+                                            <span class="payment-option-desc">Sichere Kartenfelder von Stripe — SSL-verschlüsselt, nie auf unseren Servern</span>
                                             <span class="payment-icons" aria-label="Akzeptierte Zahlungsmethoden: Visa, Mastercard, American Express, Apple Pay, Google Pay">
                                                 <span class="payment-icon payment-icon--img" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
                                                 <span class="payment-icon payment-icon--img" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
@@ -470,7 +261,7 @@
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
                                         <span class="payment-option-content">
                                             <span class="payment-option-title">PayPal</span>
-                                            <span class="payment-option-desc">Zahlen Sie mit Ihrem PayPal-Konto oder Kreditkarte über PayPal</span>
+                                            <span class="payment-option-desc">Zahlen Sie mit Ihrem PayPal-Guthaben oder einer hinterlegten Karte</span>
                                             <span class="payment-icons" aria-label="PayPal">
                                                 <span class="payment-icon payment-icon--img payment-icon--paypal-wide" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" width="80" height="18" alt="" loading="lazy" decoding="async"></span>
                                             </span>
@@ -507,7 +298,16 @@
                                     <p class="transfer-note">Ihre Bestellung wird innerhalb von 1–3 Werktagen nach Zahlungseingang bearbeitet. Sie erhalten eine Bestätigungs-E-Mail.</p>
                                 </div>
                             </div>
-                            <div id="stripe-section"></div>
+                            <div id="stripe-section">
+                                <p id="payment-element-gate" class="payment-element-gate">
+                                    Geben Sie oben Name und E-Mail ein, um mit Karte zu bezahlen.
+                                </p>
+                                <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Kartenfelder werden geladen…</div>
+                                <div id="payment-element"></div>
+                                <div id="stripe-unavailable" class="payment-element-gate" hidden>
+                                    Kartenzahlung ist derzeit nicht verfügbar — nutzen Sie PayPal oder Überweisung.
+                                </div>
+                            </div>
 
                             <!-- PayPal-Bereich -->
                             <div id="paypal-section" class="paypal-section" hidden>
@@ -516,16 +316,29 @@
                             </div>
                         </section>
 
-                        <div id="checkout-error-msg" class="checkout-error-msg" role="alert" aria-live="assertive" hidden data-network-error="Verbindungsfehler. Bitte versuchen Sie es erneut." data-rate-limit-error="Zu viele Checkout-Versuche. Bitte versuchen Sie es in einigen Minuten erneut."></div>
+                        <div id="checkout-error-msg" class="checkout-error-msg" role="alert" aria-live="assertive" hidden data-network-error="Verbindungsfehler. Bitte versuchen Sie es erneut." data-rate-limit-error="Zu viele Checkout-Versuche. Bitte versuchen Sie es in einigen Minuten erneut."
+                            data-cancelled-notice="Zahlung abgebrochen. Ihr Warenkorb ist noch da — Sie können jederzeit fortfahren."
+                            data-payment-failed-notice="Die Zahlung war nicht erfolgreich und es wurde nichts abgebucht. Versuchen Sie es erneut oder wählen Sie eine andere Methode."
+                            data-payment-unconfirmed-notice="Wir konnten das Ergebnis der Zahlung nicht bestätigen. Bitte bestellen Sie nicht erneut: Schreiben Sie an Desk@eurolicenze.com, wir prüfen, ob die Abbuchung erfolgt ist."></div>
 
-                        <button type="button" id="btn-stripe-submit" class="btn-checkout-primary" aria-label="Sicher bezahlen mit Stripe">
+                        <button type="button" id="btn-stripe-submit" class="btn-checkout-primary" aria-label="Mit Karte bezahlen und Lizenz per E-Mail erhalten">
                             <span class="btn-spinner" aria-hidden="true"></span>
-                            <span class="btn-text">🔒 Sicher bezahlen</span>
+                            <span class="btn-text">🔒 <span id="btn-pay-amount">—</span> bezahlen — Lizenz sofort</span>
                         </button>
                         <button type="button" id="btn-transfer-submit" class="btn-checkout-primary" style="display:none;" aria-label="Bestellung bestätigen und Überweisungsdaten anzeigen">
                             <span class="btn-spinner" aria-hidden="true"></span>
                             <span class="btn-text">Bestellung bestätigen</span>
                         </button>
+
+                        <div class="checkout-guarantee-box" role="note">
+                            <p class="checkout-guarantee-box__title">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Sofortige digitale Lieferung, rund um die Uhr
+                            </p>
+                            <p class="checkout-guarantee-box__text">
+                                Originaler Product Key, offizieller Link und Aktivierungsanleitung direkt nach der Zahlung per E-Mail.
+                            </p>
+                        </div>
 
                         <p class="checkout-terms">
                             Mit dem Fortfahren akzeptieren Sie unsere <a href="/de/terms-and-conditions" rel="noopener">AGB</a>
@@ -553,13 +366,13 @@
 
                 <div class="checkout-summary-col">
                     <div class="checkout-summary">
-                        <button type="button" id="summary-toggle-btn" class="summary-toggle-btn" aria-expanded="true" aria-controls="checkout-summary-body">
-                            <span>Bestellübersicht</span>
-                            <span class="summary-toggle-icon" aria-hidden="true">▼</span>
-                        </button>
-                        <p class="checkout-summary-title" aria-hidden="true">Bestellübersicht</p>
+                        <p class="checkout-summary-title">Bestellübersicht</p>
                         <div id="checkout-summary-body">
                             <div id="checkout-items" class="checkout-items" aria-live="polite" data-qty-label="Menge"></div>
+                            <p class="checkout-stock-badge">
+                                <span aria-hidden="true">✓</span> Sofort verfügbar · Lieferung per E-Mail
+                            </p>
+
                             <div class="checkout-totals">
                                 <div class="checkout-total-row"><span class="checkout-total-label">Zwischensumme</span><span id="checkout-subtotal">—</span></div>
                                 <div class="checkout-total-row"><span class="checkout-total-label">Versand</span><span id="checkout-shipping-note" data-label-digital="Digital — kostenlos" data-label-physical="Kostenlos">Digital — kostenlos</span></div>
@@ -568,6 +381,16 @@
                             <div class="checkout-trust" aria-label="Zahlungssicherheit">
                                 <span class="checkout-trust-icon" aria-hidden="true">🔒</span>
                                 <span>Sichere SSL-Zahlung · Stripe PCI-DSS</span>
+                            </div>
+
+                            <div class="checkout-support-box">
+                                <span class="checkout-support-box__icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                                </span>
+                                <span>
+                                    <strong>Brauchen Sie Hilfe?</strong><br>
+                                    Support über <a href="https://wa.me/393925580413" target="_blank" rel="noopener">WhatsApp</a> und E-Mail, Mo–Sa 08:00–19:00 Uhr, auf Italienisch und Englisch
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -579,91 +402,19 @@
     </main>
 
     <aml-cookie-banner></aml-cookie-banner>
-    <ecommerce-footer translate="no" class="notranslate">
-<footer class="site-footer">
-                    <div class="container footer-main">
-                        <div class="brand-col">
-                            <a href="/de/" class="footer-logo">
-                                <img src="/logo/logo-header-400-light.webp?v=f72bdd0c88" width="288" height="96" alt="Eurolicenze">
-                            </a>
-                            <p class="brand-desc">Originalsoftware, italienische Rechnungsstellung und persönliche Unterstützung. Lösungen für Privatkunden, Fachleute und Unternehmen.</p>
-                            <div class="brand-contacts">
-                                <a href="tel:+393925580413" aria-label="Telefon: +39 392 558 0413">+39 392 558 0413</a>
-                                <a href="mailto:Desk@eurolicenze.com" aria-label="E-Mail: Desk@eurolicenze.com">Desk@eurolicenze.com</a>
-                            </div>
-                            <p class="brand-support">
-                                <span>Mo–Sa · 08:00–19:00 Uhr (italienische Zeit)</span>
-                                <span>Support auf Englisch</span>
-                            </p>
-                            <div class="footer-pay" role="group" aria-label="Akzeptierte Zahlungsmethoden">
-                                <span class="footer-pay__logo" data-brand="Visa"><img src="/asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" alt="Visa" width="30" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="Mastercard"><img src="/asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" alt="Mastercard" width="30" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="PayPal"><img src="/asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" alt="PayPal" width="40" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="Apple Pay"><img src="/asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" alt="Apple Pay" width="30" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="Google Pay"><img src="/asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" alt="Google Pay" width="30" height="14" loading="lazy" decoding="async"></span>
-                                <span class="footer-pay__logo" data-brand="Stripe"><img src="/asset/payments_logo/img-aml-store_Stripe_Logo.svg?v=64b2a1fb7f" alt="Stripe" width="30" height="14" loading="lazy" decoding="async"></span>
-                            </div>
-                        </div>
-
-                        <nav class="footer-nav" aria-label="Navigation in der Fußzeile">
-                            <section class="nav-col" aria-labelledby="footer-catalog-de">
-                                <h2 id="footer-catalog-de" class="col-title">Katalog</h2>
-                                <ul class="link-list">
-                                    <li><a href="/de/antivirus">Antivirus</a></li>
-                                    <li><a href="/de/microsoft-365-solutions">Microsoft 365</a></li>
-                                    <li><a href="/de/sistemi-operativi">Windows</a></li>
-                                    <li><a href="/de/suite-office">Office</a></li>
-                                </ul>
-                            </section>
-
-                            <section class="nav-col" aria-labelledby="footer-company-de">
-                                <h2 id="footer-company-de" class="col-title">Unternehmen</h2>
-                                <ul class="link-list">
-                                    <li><a href="/de/ueber-uns">Über uns</a></li>
-                                    <li><a href="/de/beratung">Softwareberatung</a></li>
-                                    <li><a href="/de/windows-server">Business-Lösungen</a></li>
-                                    <li><a href="https://de.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">Bewertungen</a></li>
-                                    <li><a href="/de/contacts">Kontakt</a></li>
-                                </ul>
-                            </section>
-
-                            <section class="nav-col" aria-labelledby="footer-support-de">
-                                <h2 id="footer-support-de" class="col-title">Support</h2>
-                                <ul class="link-list">
-                                    <li><a href="/de/#come-funziona">So funktioniert es</a></li>
-                                    <li><a href="https://wa.me/393925580413" target="_blank" rel="noopener noreferrer">Kundensupport</a></li>
-                                    <li><a href="/de/terms-and-conditions">Allgemeine Geschäftsbedingungen</a></li>
-                                    <li><a href="/de/returns-and-refunds">Rückgabe und Erstattung</a></li>
-                                </ul>
-                            </section>
-                        </nav>
-                    </div>
-
-                    <div class="footer-bottom">
-                        <div class="container footer-bottom-inner">
-                            <p class="copyright">
-                                © 2026 Eurolicenze. Alle Rechte vorbehalten.
-                                <span class="copyright-legal">Licensoft di Cardelli Antonino · Via Trento 5/A, 20015 Parabiago (MI), Italien · USt-IdNr. 11461870963</span>
-                                <span class="copyright-legal">Erwähnte Produktnamen, Logos und Marken sind Eigentum ihrer jeweiligen Inhaber und dienen nur zu Identifikations-/Illustrationszwecken. Eurolicenze ist weder mit den Markeninhabern verbunden noch von ihnen gesponsert.</span>
-                            </p>
-                            <nav class="legal-links" aria-label="Rechtliche Informationen">
-                                <a href="/de/privacy-policy">Datenschutz</a>
-                                <a href="/de/cookie-policy">Cookies</a>
-                                <a href="/de/terms-and-conditions">Allgemeine Geschäftsbedingungen</a>
-                                <button type="button" data-aml-cookie-settings="">Cookie-Einstellungen</button>
-                            </nav>
-                        </div>
-                    </div>
-                </footer>
-            </ecommerce-footer>
+    <footer class="checkout-chrome-footer">
+        <nav class="checkout-chrome-footer__links" aria-label="Rechtliche Hinweise">
+            <a href="/de/privacy-policy" target="_blank" rel="noopener">Datenschutzerklärung</a>
+            <a href="/de/terms-and-conditions" target="_blank" rel="noopener">AGB</a>
+            <a href="/de/returns-and-refunds" target="_blank" rel="noopener">Garantie und Rückgabe</a>
+        </nav>
+        <p class="checkout-chrome-footer__copy">© 2026 Eurolicenze · Licensoft di Cardelli Antonino · P.IVA 11461870963</p>
+    </footer>
 
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=3ff9f0881c" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../components/lang-suggest.js?v=910b04817f" defer></script>
-    <script src="../components/header.js?v=89961e44b4" defer></script>
-    <script src="../components/footer.js?v=055e02cb83" defer></script>
-    <script src="../js/checkout.js?v=68c498b7a1" defer></script>
+    <script src="../js/checkout.js?v=db6c81b6bf" defer></script>
 
 </body>
 </html>

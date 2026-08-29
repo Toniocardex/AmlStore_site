@@ -540,18 +540,19 @@
             container.appendChild(item);
         });
 
+        // Nessuna riga IVA: le vendite sono in regime forfettario, quindi l'IVA
+        // non e' applicata e il prezzo esposto e' gia' quello finale. Mostrarne
+        // una quota sarebbe una dichiarazione fiscale falsa — e un cliente con
+        // P.IVA potrebbe tentare di detrarre un'imposta mai addebitata.
         var minor   = cart.totalMinor ? cart.totalMinor() : 0;
-        var vatMinor = Math.round(minor - minor / 1.22); // IVA 22% inclusa (solo display)
 
         var totalEl = document.getElementById('checkout-grand-total');
         var subEl   = document.getElementById('checkout-subtotal');
-        var vatEl   = document.getElementById('checkout-vat');
         var tAmount = document.getElementById('transfer-amount');
         var payAmt  = document.getElementById('btn-pay-amount');
 
         if (totalEl) totalEl.textContent = formatMoney(minor, currency);
         if (subEl)   subEl.textContent   = formatMoney(minor, currency);
-        if (vatEl)   vatEl.textContent   = formatMoney(vatMinor, currency);
         if (tAmount) tAmount.textContent = formatMoney(minor, currency);
         if (payAmt)  payAmt.textContent  = formatMoney(minor, currency);
 
@@ -562,7 +563,6 @@
             ['mcheckout-grand-total',   formatMoney(minor, currency)],
             ['mcheckout-grand-total-2', formatMoney(minor, currency)],
             ['mcheckout-subtotal',      formatMoney(minor, currency)],
-            ['mcheckout-vat',           formatMoney(vatMinor, currency)],
         ].forEach(function (pair) {
             var el = document.getElementById(pair[0]);
             if (el) el.textContent = pair[1];
