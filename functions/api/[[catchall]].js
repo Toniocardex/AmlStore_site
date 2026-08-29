@@ -51,7 +51,8 @@ import { assertCartStock, deductStockForPaidOrder, getStockQty,
          listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
 import { safeParseJSON }                                 from './_lib/utils.js';
 import { checkCheckoutEmailRateLimit,
-         checkExpressCheckoutIpRateLimit }                from './_lib/checkout-rate-limit.js';
+         checkExpressCheckoutIpRateLimit,
+         checkStripeExpressIpRateLimit }                 from './_lib/checkout-rate-limit.js';
 import { upsertCartSession, markCartCheckoutStarted,
          checkCartSyncRateLimit, listCarts, getCartStats,
          normalizeHoursIdle, maybeRunCartRetention, deleteCart } from './_lib/cart.js';
@@ -786,6 +787,12 @@ async function handleCreatePaymentIntent(request, env) {
         locale       = params.locale || 'it';
         receiptEmail = params.customerEmail;
     } else {
+        // Kill switch: permette di spegnere il solo wallet 1-click da Cloudflare
+        // senza un nuovo deploy, lasciando in piedi carta manuale/PayPal/bonifico.
+        if (String(env.STRIPE_EXPRESS_ENABLED ?? '1') !== '1') {
+            return err('Express Checkout non disponibile', 503, request, env);
+        }
+
         let items;
         try {
             items = resolveAndValidateItems(body.items);
@@ -795,6 +802,22 @@ async function handleCreatePaymentIntent(request, env) {
         if (itemsRequireShipping(items)) {
             return err('Express Checkout non disponibile per articoli con spedizione fisica', 400, request, env);
         }
+
+        // L'email del wallet e' obbligatoria (ExpressCheckoutElement e' montato con
+        // emailRequired: true). Due motivi, entrambi vincolanti:
+        //  1) la licenza viene emessa a mano dopo i controlli antifrode: un ordine
+        //     pagato senza destinatario non e' evadibile e il cliente non e'
+        //     contattabile (Apple/Google Pay non comunicano l'email a Stripe se
+        //     l'Element non la richiede, quindi non c'e' nemmeno un fallback);
+        //  2) senza email questo path resterebbe fuori dal freno primario per
+        //     email — che e' fail-closed — lasciando solo un limite per IP
+        //     (ADR-001 §3.2 T7: "pochi tentativi da molti IP").
+        const walletEmail = cleanString(body.walletEmail, 254).toLowerCase();
+        if (!validateEmail(walletEmail)) {
+            return err('Email del wallet mancante o non valida', 400, request, env);
+        }
+        const walletName = cleanLine(body.walletName, 160);
+
         try {
             await assertCartStock(env.DB, items);
         } catch (stockErr) {
@@ -810,16 +833,24 @@ async function handleCreatePaymentIntent(request, env) {
             .bind(idempotencyKey).first();
         if (existing?.status === 'paid') return err('Ordine già pagato', 409, request, env);
         if (!existing?.id) {
-            const rateGate = await checkExpressCheckoutIpRateLimit(env, request);
-            if (rateGate) return rateLimitResponse(rateGate, request, env);
+            // Stesso ordine dei controlli del path manuale: prima l'email
+            // (primario, fail-closed), poi l'IP (secondario).
+            const emailGate = await checkCheckoutEmailRateLimit(env, walletEmail);
+            if (emailGate) return rateLimitResponse(emailGate, request, env);
+            const ipGate = await checkStripeExpressIpRateLimit(env, request);
+            if (ipGate) return rateLimitResponse(ipGate, request, env);
         }
+
+        const nameParts = walletName.split(/\s+/).filter(Boolean);
+        const walletFirstName = nameParts.shift() || '';
+        const walletLastName  = nameParts.join(' ');
 
         try {
             orderId = existing?.id || await createOrder(env.DB, {
                 idempotencyKey,
-                customerEmail:     '',
-                customerFirstName: '',
-                customerLastName:  '',
+                customerEmail:     walletEmail,
+                customerFirstName: walletFirstName,
+                customerLastName:  walletLastName,
                 customerCompany:   null,
                 customerType:      'private',
                 customerPhone:     null,
@@ -846,8 +877,12 @@ async function handleCreatePaymentIntent(request, env) {
             }
         }
 
-        amountMinor = totalMinorFromItems(items);
-        currency    = items[0].currency;
+        amountMinor  = totalMinorFromItems(items);
+        currency     = items[0].currency;
+        // Passato a Stripe: e' anche un segnale in piu' per Radar, che su un
+        // PaymentIntent senza email/nome ha molti meno appigli che su una
+        // Checkout Session (dove customer_email era sempre valorizzata).
+        receiptEmail = walletEmail;
     }
 
     await linkCartCheckoutStarted(env, body, orderId);
@@ -996,14 +1031,25 @@ async function handleStripeWebhook(request, env) {
             return new Response('OK', { status: 200 }); // Ack comunque a Stripe
         }
 
-        // Express (wallet): nessun form compilato — l'unica fonte per email/nome
-        // è la charge Stripe. No-op per gli ordini del checkout manuale.
+        // Rete di sicurezza: dal passaggio all'Express Element con emailRequired
+        // l'ordine nasce gia' con l'email del wallet, quindi qui non dovrebbe mai
+        // entrare. Resta per gli ordini creati prima di quel cambio.
+        // NB: i payload dei webhook non sono mai espansi — `pi.latest_charge` e'
+        // una stringa e `pi.charges` non esiste piu' dalla API 2022-11-15 — quindi
+        // i billing_details vanno letti con una GET esplicita, non dall'evento.
         if (!order.customer_email) {
-            const charge = pi?.charges?.data?.[0] || pi?.latest_charge || null;
-            const bd = (charge && typeof charge === 'object') ? (charge.billing_details || {}) : {};
-            const email = pi?.receipt_email || bd.email || '';
-            if (email) {
-                await setStripeCustomerFromChargeDetails(env.DB, order.id, { email, name: bd.name });
+            try {
+                const full   = await retrievePaymentIntent(env.STRIPE_SECRET_KEY, piId);
+                const charge = full?.latest_charge;
+                const bd     = (charge && typeof charge === 'object') ? (charge.billing_details || {}) : {};
+                const email  = full?.receipt_email || bd.email || '';
+                if (email) {
+                    await setStripeCustomerFromChargeDetails(env.DB, order.id, { email, name: bd.name });
+                } else {
+                    console.error('[webhook/stripe] Ordine pagato senza email cliente:', order.id);
+                }
+            } catch (e) {
+                console.error('[webhook/stripe] Recupero billing_details fallito:', order.id, e?.message || e);
             }
         }
 

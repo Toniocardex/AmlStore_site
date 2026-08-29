@@ -703,7 +703,19 @@
             .catch(function () { showStripeUnavailable(); });
     }
 
-    /** Express Checkout Element: wallet 1-click, cliente valorizzato dal webhook. */
+    /**
+     * Express Checkout Element: wallet 1-click.
+     *
+     * Deferred mode (`mode:'payment'` + amount, senza clientSecret): l'Element si
+     * monta con il solo importo e il PaymentIntent nasce nell'handler `confirm`,
+     * cioe' solo quando qualcuno preme davvero il bottone del wallet. Montarlo
+     * con un clientSecret significherebbe creare un ordine e una credenziale di
+     * pagamento a ogni caricamento di pagina, anche sui browser senza wallet.
+     *
+     * `emailRequired` non e' cosmetico: senza, i wallet non restituiscono l'email
+     * ne' a noi ne' a Stripe, e la licenza (emessa a mano dopo i controlli
+     * antifrode) resterebbe senza destinatario.
+     */
     function mountExpressCheckout() {
         var section = document.getElementById('express-checkout');
         var mount   = document.getElementById('express-checkout-element');
@@ -713,37 +725,82 @@
         var items = checkoutCartLines(cart);
         if (!items.length || cartHasPhysical(items)) return; // no wallet per articoli fisici
 
-        buildIdempotencyKey('pex', items, '')
+        var totalMinor = cart && cart.totalMinor ? cart.totalMinor() : 0;
+        if (!totalMinor) return;
+
+        _elementsExpress = _stripe.elements({
+            mode:     'payment',
+            amount:   totalMinor,
+            currency: String((items[0] && items[0].currency) || 'eur').toLowerCase(),
+        });
+
+        var ece = _elementsExpress.create('expressCheckout', {
+            buttonHeight: 48,
+            emailRequired: true,
+            paymentMethodOrder: ['applePay', 'googlePay', 'link'],
+        });
+
+        ece.on('ready', function (e) {
+            var methods = e && e.availablePaymentMethods;
+            section.hidden = !methods; // nessun wallet disponibile → resta nascosto
+        });
+
+        ece.on('confirm', function (event) {
+            if (_isSubmitting) {
+                if (event && event.paymentFailed) event.paymentFailed({ reason: 'fail' });
+                return;
+            }
+            _isSubmitting = true;
+            hideGlobalError();
+            confirmExpressPayment(event);
+        });
+
+        ece.mount(mount);
+    }
+
+    /** Conferma il wallet: submit → PaymentIntent server-side → confirmPayment. */
+    function confirmExpressPayment(event) {
+        var cart    = global.AmlCart;
+        var items   = checkoutCartLines(cart);
+        var details = (event && event.billingDetails) || {};
+        var email   = String(details.email || '').trim();
+
+        function abort(msg) {
+            _isSubmitting = false;
+            if (event && event.paymentFailed) event.paymentFailed({ reason: 'fail' });
+            if (msg) showGlobalError(msg);
+        }
+
+        if (!validateEmail(email)) {
+            abort('Non abbiamo ricevuto un indirizzo email dal wallet. Completa l’ordine con il modulo qui sotto.');
+            return;
+        }
+
+        // Deferred mode: submit() prima di creare il PaymentIntent (richiesto da Stripe).
+        _elementsExpress.submit()
+        .then(function (res) {
+            if (res && res.error) throw res.error;
+            return buildIdempotencyKey('pex', items, email);
+        })
         .then(function (idempotencyKey) {
             return postPaymentIntent({
                 mode:           'express',
                 idempotencyKey: idempotencyKey,
+                walletEmail:    email,
+                walletName:     String(details.name || '').trim() || undefined,
                 items:          items,
                 lang:           getLang(),
                 cartId:         cart && cart.getCartId ? cart.getCartId() : undefined,
             });
         })
         .then(function (data) {
-            if (!data || !data.clientSecret) return;
-            _elementsExpress = _stripe.elements({ clientSecret: data.clientSecret });
-            var ece = _elementsExpress.create('expressCheckout', {
-                buttonHeight: 48,
-                paymentMethodOrder: ['applePay', 'googlePay', 'link'],
-            });
-            ece.on('ready', function (e) {
-                var methods = e && e.availablePaymentMethods;
-                section.hidden = !methods; // nessun wallet disponibile → resta nascosto
-            });
-            ece.on('confirm', function () {
-                if (_isSubmitting) return;
-                _isSubmitting = true;
-                hideGlobalError();
-                confirmStripePayment(_elementsExpress);
-            });
-            ece.mount(mount);
+            if (!data || !data.clientSecret) throw new Error('clientSecret mancante');
+            confirmStripePayment(_elementsExpress, data.clientSecret);
         })
         .catch(function (err) {
-            console.warn('[Checkout] Express Checkout non disponibile:', err && err.message);
+            console.error('[Checkout] Express Checkout error:', err);
+            abort(err && err.status && err.message ? err.message
+                : 'Pagamento rapido non riuscito. Riprova o completa l’ordine con il modulo qui sotto.');
         });
     }
 
@@ -803,16 +860,23 @@
         });
     }
 
-    /** Conferma un pagamento (manuale o express) con l'istanza elements passata. */
-    function confirmStripePayment(elements) {
+    /**
+     * Conferma un pagamento con l'istanza elements passata.
+     * `clientSecret` va passato solo dal flusso express (deferred mode); nel
+     * flusso manuale e' gia' legato all'istanza `elements`.
+     */
+    function confirmStripePayment(elements, clientSecret) {
         var btn = document.getElementById('btn-stripe-submit');
         if (btn) { btn.setAttribute('aria-busy', 'true'); btn.disabled = true; }
 
-        _stripe.confirmPayment({
+        var opts = {
             elements: elements,
             confirmParams: { return_url: getReturnUrl() },
             redirect: 'if_required',
-        })
+        };
+        if (clientSecret) opts.clientSecret = clientSecret;
+
+        _stripe.confirmPayment(opts)
         .then(function (result) {
             if (result.error) {
                 showGlobalError(result.error.message || 'Pagamento non riuscito. Riprova.');

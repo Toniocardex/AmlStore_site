@@ -57,6 +57,12 @@ ADMIN_ALLOWED_EMAILS  = "Info@amlstore.it,Desk@eurolicenze.com,Antonino.cardelli
 ADMIN_ALLOW_DELETE_ORDERS = "1"
 ADMIN_ALLOW_DELETE_CARTS = "1"
 
+# Kill switch del solo wallet 1-click (Apple/Google Pay, Link) sul checkout.
+# "0" fa rispondere 503 a /api/create-payment-intent in modalita' express e
+# lascia intatti carta manuale, PayPal e bonifico: serve a spegnere l'Express
+# Checkout da dashboard, senza un nuovo deploy, se emergesse un abuso.
+STRIPE_EXPRESS_ENABLED = "1"
+
 # Support chat — attivata il 2026-08-24 per test reali in produzione, con
 # alcune voci della checklist ancora aperte per scelta esplicita dell'utente
 # (Safari iPhone non testato, Push reale da desktop non confermata fuori

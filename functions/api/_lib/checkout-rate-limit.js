@@ -155,3 +155,66 @@ export async function checkExpressCheckoutIpRateLimit(env, request) {
     }
     return null;
 }
+
+/** Finestra e soglia per l'IP sullo Stripe Express (wallet 1-click).
+ *  Soglia piu' bassa del gemello PayPal e bucket separato: qui l'endpoint
+ *  restituisce un clientSecret, cioe' una credenziale di pagamento confermabile
+ *  dal browser con la sola publishable key. Il gemello PayPal restituisce invece
+ *  un order id che si puo' pagare solo passando dall'interfaccia PayPal, quindi
+ *  non regge lo stesso modello di minaccia (vedi ADR-001 §3.2 T7). */
+const STRIPE_EXPRESS_IP_WINDOW_MS = 10 * 60 * 1000;
+const STRIPE_EXPRESS_IP_MAX_ATTEMPTS = 5;
+
+/**
+ * Rate limit per IP sulla creazione di un PaymentIntent Stripe Express.
+ *
+ * Fail-CLOSED sugli errori D1, al contrario del gemello PayPal: su questo path
+ * il controllo per email (`checkCheckoutEmailRateLimit`, gia' fail-closed) e'
+ * comunque primario, quindi un D1 non raggiungibile blocca il checkout in ogni
+ * caso — restare fail-open qui darebbe solo l'illusione di un secondo livello.
+ *
+ * Un header CF-Connecting-IP assente NON blocca: in produzione Cloudflare lo
+ * imposta sempre, in `wrangler pages dev` non esiste, e il freno per email
+ * resta attivo in entrambi i casi.
+ *
+ * @param {object} env
+ * @param {Request} request
+ * @returns {Promise<null | { limited: true, retryAfter: number, message: string, code: string, status: number }>}
+ */
+export async function checkStripeExpressIpRateLimit(env, request) {
+    const secret = env.FRAUD_HASH_SECRET;
+    if (!secret || !env.DB) return null;
+
+    const ip = request.headers.get('CF-Connecting-IP') || '';
+    if (!ip) return null;
+
+    try {
+        const ipHash = await hmacIdentifier(secret, 'st-express-ip', ip);
+        const bucketKey = `st-express:${ipHash}`;
+        const windowId = `10m:${windowSlot(STRIPE_EXPRESS_IP_WINDOW_MS)}`;
+        const count = await bumpBucket(env.DB, bucketKey, windowId);
+        if (count > STRIPE_EXPRESS_IP_MAX_ATTEMPTS) {
+            console.warn('[rate-limit] stripe express IP blocked', {
+                count,
+                max: STRIPE_EXPRESS_IP_MAX_ATTEMPTS,
+            });
+            return {
+                limited: true,
+                retryAfter: retryAfterForWindow(STRIPE_EXPRESS_IP_WINDOW_MS),
+                message: 'Too many checkout attempts. Please try again later.',
+                code: 'CHECKOUT_RATE_LIMITED',
+                status: 429,
+            };
+        }
+    } catch (e) {
+        console.error('[rate-limit] stripe express IP check failed (fail closed):', e?.message || e);
+        return {
+            limited: true,
+            retryAfter: 60,
+            message: 'Checkout temporarily unavailable. Please try again later.',
+            code: 'PROTECTION_UNAVAILABLE',
+            status: 503,
+        };
+    }
+    return null;
+}
