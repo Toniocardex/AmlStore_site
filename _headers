@@ -53,9 +53,10 @@
 /asset/cross-sell/*
   Cache-Control: public, max-age=3600, must-revalidate
 
-# Apple Pay: file di associazione dominio servito come testo semplice
-/.well-known/apple-developer-merchantid-domain-association
-  Content-Type: text/plain
+# Nessuna regola per /.well-known/apple-developer-merchantid-domain-association:
+# la registrazione del dominio presso Stripe (Settings → Payments → Domini delle
+# modalità di pagamento) verifica quell'URL, e un file statico nostro la
+# oscurerebbe facendola fallire. Va servito da Stripe, non da noi.
 
 # Security headers (+ CSP gtag/Ads: googleadservices, syndication, frame Google)
 /*
