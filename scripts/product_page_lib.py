@@ -165,9 +165,7 @@ TRUSTPILOT_TOKEN = "27270fde-f5a0-4937-9101-76b7ebae8a1a"
 def _trustpilot_buy_mini(lang):
     """Micro TrustBox nella buy card (sotto CTA)."""
     tp_locale, tp_url = TRUSTPILOT_LOCALE[lang]
-    fallback_lead = TRUSTPILOT_FALLBACK_LEAD[lang]
     return f"""                <div class="product-trustpilot pdp-buy-trustpilot">
-                    <p class="product-trustpilot__fallback trustpilot-fallback">{fallback_lead} <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>.</p>
                     <div
                         id="trustpilot-widget"
                         class="trustpilot-widget"
@@ -2577,7 +2575,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
 {_render_paypal_express(lang) if not is_physical_sku(sku) else ""}                <ul class="pdp-assur">
 {_render_assur(v3, ASSUR_KEYS[:2])}
                 </ul>
-{copilot_bonus_html}
+{_trustpilot_buy_mini(lang)}{copilot_bonus_html}
             </div>
         </div>
     </section>
