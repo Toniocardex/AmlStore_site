@@ -56,7 +56,7 @@ export const CATALOG = {
   "P6L-00076": { name: "Microsoft SQL Server 2022 Enterprise 24 Core Unlimited CALs incl. DVD", unitAmountMinor: 399700, compareAtMinor: 665000, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server", physical: true },
   "P73-07788_ESD": { name: "Microsoft Windows Server 2019 Standard 64-bit 16 Core", unitAmountMinor: 15300, compareAtMinor: 67999, currency: 'EUR', type: "perpetual", category: "sistema operativo > windows server" },
   "B0CXZR44LP": { name: "CorelDRAW Graphics Suite 2024 | Acquisto unico | Windows o Mac", unitAmountMinor: 58700, compareAtMinor: 77900, currency: 'EUR', type: "perpetual", category: "multimedia > photoediting" },
-  "1108921": { name: "McAfee Total Protection 2026 | 1 Dispositivo | 1 Anno", unitAmountMinor: 1025, compareAtMinor: 2995, currency: 'EUR', type: "subscription", category: "antivirus" },
+  "1108921": { name: "McAfee Total Protection 2026 | 1 Dispositivo | 1 Anno", unitAmountMinor: 795, compareAtMinor: 2995, currency: 'EUR', type: "subscription", category: "antivirus" },
   "1108923": { name: "McAfee Total Protection 2026 | 5 Dispositivi | 1 Anno", unitAmountMinor: 1544, compareAtMinor: 3995, currency: 'EUR', type: "subscription", category: "antivirus" },
   "MTP00MNRXRAAD": { name: "McAfee Total Protection | 10 Dispositivi | 1 Anno", unitAmountMinor: 1844, compareAtMinor: 7999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "KL1047GDCFS1": { name: "Kaspersky Premium | 3 Dispositivi | 1 Anno", unitAmountMinor: 3604, compareAtMinor: 6899, currency: 'EUR', type: "subscription", category: "antivirus" },
