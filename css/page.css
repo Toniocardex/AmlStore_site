@@ -1055,3 +1055,41 @@ ecommerce-footer {
     .checkout-stepper__step--next .checkout-stepper__label { display: none; }
     .checkout-stepper__line { min-width: 24px; }
 }
+
+/* ── Voto Trustpilot (link statico) ───────────────────────────────────────
+   Condiviso da buy card PDP (.pdp-buy-trustpilot) e riepilogo carrello
+   (.cart-summary__trust): entrambe caricano page.css, non i rispettivi fogli
+   dell'altra. Sostituisce il TrustBox ufficiale, uscito dal piano gratuito
+   Trustpilot il 2026-08-30. La stella tiene il verde del brand Trustpilot;
+   il resto resta neutro per non competere con la CTA arancione sopra. */
+.tp-score {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: inherit;
+    font-size: var(--aml-text-sm);
+    line-height: 1.4;
+}
+
+.tp-score__star {
+    color: #00b67a;
+    font-size: 1.05em;
+}
+
+.tp-score__value {
+    font-weight: var(--aml-weight-strong);
+    color: var(--page-text);
+}
+
+.tp-score__count {
+    color: var(--page-text-muted);
+}
+
+.tp-score:hover .tp-score__value,
+.tp-score:focus-visible .tp-score__value {
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+}

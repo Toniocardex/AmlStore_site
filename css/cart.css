@@ -479,31 +479,14 @@
     max-width: 68px;
 }
 
+/* Voto Trustpilot sotto la CTA di checkout. Il link .tp-score e' definito in
+   page.css (condiviso con la PDP); qui si tara solo la misura. */
 .cart-summary__trust {
     text-align: center;
 }
 
-.cart-summary__trust .product-trustpilot__fallback {
-    margin: 0;
+.cart-summary__trust .tp-score {
     font-size: var(--aml-text-xs);
-    line-height: 1.5;
-    color: var(--page-text-secondary);
-}
-
-.cart-summary__trust .product-trustpilot__fallback a {
-    color: var(--page-text);
-    font-weight: var(--aml-weight-strong);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.cart-summary__trust .trustpilot-widget {
-    min-height: 40px;
-    width: 100%;
-}
-
-.cart-summary__trust .trustpilot-widget:not(.trustpilot-widget--active) {
-    display: none;
 }
 
 /* ── Stepper quantità e rimozione (condivisi tra layout tabella e card) ─── */

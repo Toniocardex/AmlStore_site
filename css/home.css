@@ -257,14 +257,9 @@
     text-underline-offset: 0.12em;
 }
 
-#trustpilot-widget {
-    min-height: 40px;
-    width: 100%;
-}
-
-#trustpilot-widget:not(.trustpilot-widget--active) {
-    display: none;
-}
+/* Le regole di #trustpilot-widget sono state rimosse col TrustBox (uscito dal
+   piano gratuito Trustpilot il 2026-08-30). La home non ha piu' la sezione
+   .home-social-proof che lo conteneva; il voto resta nella barra header. */
 
 /* ══ RECENSIONI (mockup 2 colonne: intro a sinistra, 3 card a destra) ═════ */
 

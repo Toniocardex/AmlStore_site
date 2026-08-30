@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
-"""Patch chirurgica una tantum: aggiunge il micro-widget Trustpilot nella
-buy card di ogni pagina prodotto (PDP), nelle 7 lingue.
+"""Patch chirurgica una tantum: aggiunge il blocco Trustpilot nella buy card
+di ogni pagina prodotto (PDP), nelle 7 lingue.
+
+NOTA (2026-08-30): quando e' stato scritto inseriva il micro TrustBox
+ufficiale; quel widget e' poi uscito dal piano gratuito Trustpilot ed e'
+stato sostituito dal link statico al voto (vedi
+replace-trustpilot-widget-with-score.py). Questo script resta valido: legge
+il frammento da _trustpilot_buy_mini(), quindi oggi inserirebbe la versione
+statica, non il widget morto.
 
 Il generatore (product_page_lib.py, funzione build_rich_product_page) lo
 inserisce gia' per le pagine future — vedi _trustpilot_buy_mini() e il suo

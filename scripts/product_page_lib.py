@@ -147,39 +147,52 @@ TRUSTPILOT_LOCALE = {
     "nl": ("nl-NL", "https://nl.trustpilot.com/review/aml-store.com"),
 }
 
-TRUSTPILOT_FALLBACK_LEAD = {
-    "it": "Esperienze reali condivise dai clienti su",
-    "en": "Real experiences shared by customers on",
-    "fr": "Expériences réelles partagées sur",
-    "de": "Echte Erfahrungen von Kunden auf",
-    "es": "Experiencias reales compartidas en",
-    "pt": "Experiências reais partilhadas por clientes em",
-    "nl": "Echte ervaringen van klanten op",
+# Voto reale letto su it.trustpilot.com/review/aml-store.com il 2026-08-25.
+# E' una fotografia, non un dato vivo: il TrustBox ufficiale (che si aggiornava
+# da solo) e' uscito dal piano gratuito di Trustpilot il 2026-08-30, quindi qui
+# e per l'aggregateRating del JSON-LD i numeri vanno riallineati a mano quando
+# cambiano in modo sensibile. Stessi valori usati nella barra header e sulla
+# home: cambiandoli qui, aggiornare anche quelli.
+TRUSTPILOT_SCORE = "4,8"
+TRUSTPILOT_SCORE_EN = "4.8"
+TRUSTPILOT_REVIEW_COUNT = 94
+
+# "<voto>/5 <preposizione> Trustpilot" — identico a header-utility__rating.
+TRUSTPILOT_SCORE_LEAD = {
+    "it": "su", "en": "on", "fr": "sur", "de": "auf",
+    "es": "en", "pt": "no", "nl": "op",
 }
 
-TRUSTPILOT_BUSINESS_UNIT = "61c44c912f493a1a7cd810fa"
-TRUSTPILOT_TEMPLATE_ID = "5419b6a8b0d04a076446a9ad"
-TRUSTPILOT_TOKEN = "27270fde-f5a0-4937-9101-76b7ebae8a1a"
+TRUSTPILOT_REVIEWS_WORD = {
+    "it": "recensioni",
+    "en": "reviews",
+    "fr": "avis",
+    "de": "Bewertungen",
+    "es": "reseñas",
+    "pt": "avaliações",
+    "nl": "beoordelingen",
+}
 
 
 def _trustpilot_buy_mini(lang):
-    """Micro TrustBox nella buy card (sotto CTA)."""
-    tp_locale, tp_url = TRUSTPILOT_LOCALE[lang]
+    """Riprova sociale statica nella buy card (sotto CTA).
+
+    Era il micro TrustBox ufficiale; dal 2026-08-30 il widget non e' piu'
+    incluso nel piano gratuito Trustpilot e l'iframe restava in caricamento
+    a vuoto. Sostituito da un link statico con il voto reale — nessuna
+    dipendenza esterna, ma vedi la nota su TRUSTPILOT_SCORE: va aggiornato
+    a mano.
+    """
+    _, tp_url = TRUSTPILOT_LOCALE[lang]
+    score = TRUSTPILOT_SCORE_EN if lang == "en" else TRUSTPILOT_SCORE
+    lead = TRUSTPILOT_SCORE_LEAD[lang]
+    reviews = TRUSTPILOT_REVIEWS_WORD[lang]
     return f"""                <div class="product-trustpilot pdp-buy-trustpilot">
-                    <div
-                        id="trustpilot-widget"
-                        class="trustpilot-widget"
-                        data-locale="{tp_locale}"
-                        data-template-id="{TRUSTPILOT_TEMPLATE_ID}"
-                        data-businessunit-id="{TRUSTPILOT_BUSINESS_UNIT}"
-                        data-style-height="40px"
-                        data-style-width="100%"
-                        data-token="{TRUSTPILOT_TOKEN}"
-                        data-min-review-count="0"
-                        data-style-alignment="center"
-                    >
-                        <a href="{tp_url}" target="_blank" rel="noopener noreferrer">Trustpilot</a>
-                    </div>
+                    <a class="tp-score" href="{tp_url}" target="_blank" rel="noopener noreferrer">
+                        <span class="tp-score__star" aria-hidden="true">★</span>
+                        <span class="tp-score__value">{score}/5 {lead} Trustpilot</span>
+                        <span class="tp-score__count">{TRUSTPILOT_REVIEW_COUNT} {reviews}</span>
+                    </a>
                 </div>
 """
 
@@ -187,10 +200,6 @@ def _trustpilot_buy_mini(lang):
 def _trustpilot_block(lang):
     """Deprecated layout: prefer _trustpilot_buy_mini nella buy card."""
     return _trustpilot_buy_mini(lang)
-
-
-def _trustpilot_script_tag():
-    return '    <script src="../js/trustpilot-widget.js" defer></script>\n'
 
 
 # Override copy per SKU fisici (tax/passi) — non tocca licenze digitali
@@ -1985,7 +1994,6 @@ VARIANT_OF = {
 for _obj in (
     STOCK_I18N,
     TRUSTPILOT_LOCALE,
-    TRUSTPILOT_FALLBACK_LEAD,
     PHYSICAL_LABELS,
     PHYSICAL_UI,
     V3_UI,
@@ -2601,7 +2609,7 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
     <script src="../js/product-page.js" defer></script>
     <script src="../js/product-v3.js" defer></script>
     <script src="../js/pdp-activation-modal.js" defer></script>
-{_paypal_express_script_tag(sku)}{_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
+{_paypal_express_script_tag(sku)}{_stock_script_tag(sku)}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
 </body>
@@ -2756,7 +2764,7 @@ def build_compact_product_page(lang, prod):
     <script src="../js/locale-path.js"></script>
     <script src="../js/cart.js" defer></script>
     <script src="../js/product-page.js" defer></script>
-{_stock_script_tag(sku)}{_trustpilot_script_tag()}    <script src="../components/cookie-banner.js" defer></script>
+{_stock_script_tag(sku)}    <script src="../components/cookie-banner.js" defer></script>
     <script src="../components/header.js" defer></script>
     <script src="../components/footer.js" defer></script>
 </body>

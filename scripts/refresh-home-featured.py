@@ -365,6 +365,13 @@ def featured_prod(lang, base):
 
 
 def social_proof_section(lang):
+    # ATTENZIONE: il TrustBox qui sotto e' morto — dal 2026-08-30 il widget non
+    # e' piu' nel piano gratuito Trustpilot e l'iframe resta in caricamento a
+    # vuoto. Oggi e' innocuo perche' la home non ha piu' <section
+    # class="home-social-proof">, quindi SOCIAL_PROOF_RE non trova nulla e
+    # questa funzione non viene mai applicata. Se la sezione viene riattivata,
+    # sostituire il widget col link statico al voto: vedi
+    # _trustpilot_buy_mini() in product_page_lib.py.
     copy = HOME_COPY[lang]
     return f"""
         <section class="home-social-proof" aria-labelledby="home-social-title">

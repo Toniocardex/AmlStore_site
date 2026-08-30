@@ -143,7 +143,8 @@
     contain-intrinsic-size: 0 600px;
 }
 
-/* Trustpilot micro-widget (post-consent; fallback link always visible) */
+/* Riprova sociale Trustpilot: link statico al voto reale. Era il TrustBox
+   ufficiale, uscito dal piano gratuito Trustpilot il 2026-08-30. */
 .product-trustpilot {
     text-align: center;
     max-width: 40rem;
@@ -151,29 +152,8 @@
     padding-top: 8px;
 }
 
-.product-trustpilot__fallback {
-    margin: 0 0 0.75rem;
-    font-size: var(--aml-text-base);
-    line-height: 1.5;
-    font-weight: 500;
-    color: var(--aml-ink-2);
-}
-
-.product-trustpilot__fallback a {
-    color: var(--page-accent);
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 0.12em;
-}
-
-.product-trustpilot .trustpilot-widget {
-    min-height: 40px;
-    width: 100%;
-}
-
-.product-trustpilot .trustpilot-widget:not(.trustpilot-widget--active) {
-    display: none;
-}
+/* Il link .tp-score e' definito in page.css: lo condividono PDP e carrello,
+   che non caricano questo foglio. */
 
 /* Divider */
 .v2-divider {
@@ -1457,23 +1437,16 @@ body { background: var(--page-bg); }
 
 .pdp-note strong { font-weight: 800; }
 
-/* Trustpilot Micro TrustBox nella buy card (sotto CTA) */
+/* Voto Trustpilot nella buy card (sotto CTA) */
 .pdp-buy-trustpilot {
     margin: 12px 0 4px;
-    min-height: 40px;
     width: 100%;
-}
-
-.pdp-buy-trustpilot .trustpilot-widget {
-    min-height: 40px;
 }
 
 .pdp-page .product-trustpilot {
     max-width: 100%;
     padding-top: 0;
 }
-
-.pdp-page .product-trustpilot__fallback { margin-bottom: 0; }
 
 /* ── FAQ per argomento (override del componente condiviso) ────────────────── */
 .pdp-page .home-faq .home-section-title,
