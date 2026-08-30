@@ -292,7 +292,10 @@
         hideEl('success-error');
         showEl('success-details');
 
-        if (isPaid) trackPurchase(order);
+        if (isPaid) {
+            trackPurchase(order);
+            sendTrustpilotInvitation(order);
+        }
     }
 
     /* ─── Google Ads / GA4 — evento di acquisto ────────────────────────────── */
@@ -350,6 +353,42 @@
             currency:        String(order.currency || 'EUR').toUpperCase(),
             transaction_id:  order.orderId,
         });
+    }
+
+    /* ─── Trustpilot — invito a recensione dopo un ordine pagato ───────────── */
+
+    function sendTrustpilotInvitation(order) {
+        var FIRED_KEY = 'aml-trustpilot-invited:' + order.orderId;
+        try {
+            if (global.sessionStorage.getItem(FIRED_KEY)) return;
+            global.sessionStorage.setItem(FIRED_KEY, '1');
+        } catch (_) {
+            /* senza sessionStorage si rischia un doppio invito raro: meglio
+               procedere comunque che perdere la richiesta di recensione */
+        }
+
+        if (typeof global.tp !== 'function' || !order.email) return;
+
+        try {
+            var fullName = [order.firstName, order.lastName].filter(Boolean).join(' ').trim();
+            var items    = order.lineItems || [];
+            // Niente productUrl/imageUrl: i line item ordine hanno solo sku/name/qty/
+            // prezzo (vedi resolveAndValidateItems in functions/api/_lib/catalog.js),
+            // non lo slug della pagina prodotto o l'immagine. Omessi invece di
+            // inventare un URL sbagliato nell'email al cliente.
+            global.tp('createInvitation', {
+                recipientEmail: order.email,
+                recipientName:  fullName || order.email,
+                referenceId:    order.orderId,
+                source:         'InvitationScript',
+                productSkus:    items.map(function (item) { return item.sku; }),
+                products: items.map(function (item) {
+                    return { sku: item.sku, name: orderLineLabel(item) };
+                }),
+            });
+        } catch (_) {
+            /* mai bloccare la pagina di conferma per un errore di Trustpilot */
+        }
     }
 
     /* ─── Errore / scadenza ────────────────────────────────────────────────── */
