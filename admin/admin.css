@@ -334,6 +334,8 @@ select.adm-input {
 
 /* ─── Buttons ────────────────────────────────────────────────────────────── */
 
+a.adm-btn:hover { text-decoration: none; }
+
 .adm-btn {
     display: inline-flex;
     align-items: center;

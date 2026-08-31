@@ -540,6 +540,12 @@
             footerHtml += '<button class="adm-btn adm-btn--danger adm-btn--sm" id="btn-delete"'
                 + ' title="Elimina definitivamente dal database">Elimina</button>';
         }
+        // Generatore email licenza: si apre in una nuova scheda, cosi' il riepilogo
+        // qui accanto resta visibile e si copia/incolla direttamente nel tool.
+        footerHtml += '<a class="adm-btn adm-btn--ghost" href="/admin/email-license-generator.html"'
+            + ' target="_blank" rel="noopener"'
+            + ' title="Apre il generatore in una nuova scheda: copia qui il riepilogo e incollalo la">Email licenza ↗</a>';
+
         footerHtml += '<button class="adm-btn adm-btn--ghost" id="btn-close-detail">Chiudi</button>';
         $('modal-footer').innerHTML = footerHtml;
 
