@@ -66,7 +66,7 @@
                 if (event.key === 'Tab') this.trapFocus(event, panel);
             });
             this.watchConsentBanner();
-            this.watchStickyCart();
+            this.watchStickyBars();
         }
 
         // Il pannello e' un dialog ARIA, non un <dialog> nativo: il browser non
@@ -103,22 +103,64 @@
             window.addEventListener('load', sync, { once: true });
         }
 
-        /* Sulla PDP mobile la barra "Aggiungi al carrello" e' fixed in basso
-           quanto il launcher: senza questo scarto il launcher finisce sopra il
-           pulsante d'acquisto principale. Su desktop la barra sticky sta in alto,
-           quindi lo scarto si applica solo sotto i 768px. */
-        watchStickyCart() {
-            const bar = document.getElementById('product-sticky-cta');
-            if (!bar) return;
-            const mobileQuery = window.matchMedia('(max-width: 768px)');
+        /* Piu' pagine hanno una barra d'azione fixed in basso alla stessa altezza
+           del launcher: senza scarto il launcher ci finisce sopra e copre proprio
+           la CTA principale.
+             - PDP: #product-sticky-cta, visibile solo sotto i 768px e solo quando
+               si e' scrollato oltre il blocco d'acquisto (classe --visible).
+             - Carrello: .cart-summary__cta, che sotto gli 860px diventa barra fissa
+               (vedi css/cart.css). Li' non c'e' una classe di stato: e' fissa per
+               tutta la larghezza sotto il breakpoint, quindi basta la media query.
+           Il checkout non compare qui: la sua chrome "blindata" non monta la chat.
+
+           Lo scarto e' il massimo tra le barre attive, non la somma: sono
+           alternative fra loro, mai due sulla stessa pagina. */
+        watchStickyBars() {
+            const bars = [
+                {
+                    el: document.getElementById('product-sticky-cta'),
+                    query: window.matchMedia('(max-width: 768px)'),
+                    isActive: (el) => el.classList.contains('product-sticky-cta--visible'),
+                },
+                {
+                    el: document.querySelector('.cart-summary__cta'),
+                    query: window.matchMedia('(max-width: 860px)'),
+                    // Il carrello vuoto nasconde l'antenato #aml-cart-filled.
+                    // NON usare offsetParent: e' sempre null per un elemento
+                    // position:fixed, e la barra lo e' — il launcher finirebbe
+                    // sopra la CTA a carrello pieno. checkVisibility copre anche
+                    // visibility/opacity, se un domani il pannello vuoto passasse
+                    // a quelli invece che a [hidden]; il ripiego su
+                    // getClientRects vale dove non e' supportato.
+                    isActive: (el) => (
+                        typeof el.checkVisibility === 'function'
+                            ? el.checkVisibility({ visibilityProperty: true, opacityProperty: true })
+                            : el.getClientRects().length > 0
+                    ),
+                },
+            ].filter((b) => b.el);
+            if (!bars.length) return;
+
             const sync = () => {
-                const overlap = mobileQuery.matches && bar.classList.contains('product-sticky-cta--visible');
-                this.style.setProperty('--sc-cart-offset', overlap ? bar.getBoundingClientRect().height + 'px' : '0px');
+                let offset = 0;
+                for (const bar of bars) {
+                    if (!bar.query.matches || !bar.isActive(bar.el)) continue;
+                    const rect = bar.el.getBoundingClientRect();
+                    // Una barra nascosta misura 0: non va contata.
+                    if (rect.height > 0) offset = Math.max(offset, rect.height);
+                }
+                this.style.setProperty('--sc-cart-offset', offset + 'px');
             };
+
             sync();
-            new MutationObserver(sync).observe(bar, { attributes: true, attributeFilter: ['class'] });
-            mobileQuery.addEventListener('change', sync);
+            for (const bar of bars) {
+                new MutationObserver(sync).observe(bar.el, { attributes: true, attributeFilter: ['class', 'hidden', 'style'] });
+                bar.query.addEventListener('change', sync);
+            }
             window.addEventListener('resize', sync, { passive: true });
+            // Il carrello monta le sue righe da JS: la barra puo' comparire o
+            // cambiare altezza dopo il primo sync.
+            document.addEventListener('aml-cart-changed', sync);
         }
 
         render() {

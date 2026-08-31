@@ -1514,7 +1514,10 @@ async function handleTrack(request, env) {
 
         const orderId = body?.orderId ? cleanString(body.orderId, 40) : undefined;
         const sku     = body?.sku ? cleanString(body.sku, 64) : undefined;
-        await recordEvent(env, request, { eventName, orderId, sku });
+        // cartId lega l'evento alla riga di cart_sessions: e' cosi' che il funnel
+        // diventa leggibile per singolo carrello abbandonato, non solo aggregato.
+        const cartId  = body?.cartId ? cleanString(body.cartId, 64) : undefined;
+        await recordEvent(env, request, { eventName, orderId, sku, cartId });
     } catch (e) {
         console.warn('[track] fallito (fail-open):', e?.message || e);
     }

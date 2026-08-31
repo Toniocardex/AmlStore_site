@@ -201,11 +201,60 @@
         document.querySelectorAll('.form-field.is-invalid').forEach(function (f) { clearFieldError(f); });
     }
 
+    /**
+     * Porta l'elemento in vista solo se non lo e' gia'.
+     *
+     * Un messaggio d'errore smascherato fuori schermo e' indistinguibile da un
+     * click che non ha fatto nulla: e' li' che l'utente abbandona o ritenta.
+     */
+    function scrollIntoViewIfNeeded(el) {
+        if (!el) return;
+
+        function attempt() {
+            try {
+                var rect = el.getBoundingClientRect();
+                var vh   = global.innerHeight || document.documentElement.clientHeight;
+                // Margine per la barra CTA fissa su mobile.
+                if (rect.top >= 0 && rect.bottom <= vh - 80) return true;
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (_) {
+                try { el.scrollIntoView(); } catch (__) {}
+            }
+            return false;
+        }
+
+        if (attempt()) return;
+
+        // Riepilogo carrello e campi carta montano dopo il primo scroll e
+        // spingono il messaggio piu' in basso: senza i tentativi successivi
+        // finirebbe di nuovo fuori schermo.
+        //
+        // Le retry vanno pero' annullate appena l'utente scrolla da solo: il
+        // solo controllo "e' in vista" non distingue "il layout non si e'
+        // ancora assestato" da "l'utente e' andato via di proposito", e
+        // riporterebbe indietro chi e' risalito a correggere un campo.
+        var cancelled = false;
+        function onUserScroll() { cancelled = true; cleanup(); }
+        function cleanup() {
+            global.removeEventListener('wheel', onUserScroll);
+            global.removeEventListener('touchmove', onUserScroll);
+            global.removeEventListener('keydown', onUserScroll);
+        }
+        global.addEventListener('wheel', onUserScroll, { passive: true, once: true });
+        global.addEventListener('touchmove', onUserScroll, { passive: true, once: true });
+        global.addEventListener('keydown', onUserScroll, { once: true });
+
+        function retry() { if (!cancelled) attempt(); }
+        setTimeout(retry, 700);
+        setTimeout(function () { retry(); cleanup(); }, 1600);
+    }
+
     function showGlobalError(msg) {
         var el = document.getElementById('checkout-error-msg');
         if (!el) return;
         el.textContent = msg;
         el.hidden = false;
+        scrollIntoViewIfNeeded(el);
     }
 
     function hideGlobalError() {
@@ -393,6 +442,130 @@
         return valid && shippingValid;
     }
 
+    /* --- Funnel: dove si ferma il cliente ---------------------------------- */
+
+    /**
+     * Registra la posizione raggiunta nel checkout.
+     *
+     * Ogni evento parte UNA SOLA VOLTA per caricamento pagina: sono posizioni nel
+     * funnel, non contatori di interazione, e senza il dedup un utente che
+     * corregge l'email gonfierebbe checkout_contact_started falsando il tasso di
+     * abbandono fra uno step e l'altro.
+     *
+     * cartId aggancia l'evento alla riga di cart_sessions, cosi' un carrello
+     * abbandonato si legge fin dove era arrivato invece che solo in aggregato.
+     * Vedi schema-analytics-checkout-funnel-migration.sql.
+     */
+    var _funnelSent = {};
+
+    function trackFunnel(step) {
+        if (_funnelSent[step]) return;
+        _funnelSent[step] = true;
+        try {
+            var cart = global.AmlCart;
+            var payload = { event: step };
+            if (cart && cart.getCartId) {
+                var cid = cart.getCartId();
+                if (cid) payload.cartId = cid;
+            }
+            fetch('/api/track', {
+                method:    'POST',
+                headers:   { 'Content-Type': 'application/json' },
+                keepalive: true,
+                body:      JSON.stringify(payload),
+            }).catch(function () {});
+        } catch (_) { /* il tracking non deve mai rompere il checkout */ }
+    }
+
+    /* --- Sezioni progressive ----------------------------------------------- */
+
+    /**
+     * Tiene bloccata la sezione pagamento finche' l'anagrafica non e' completa.
+     *
+     * Il testo del blocco viene clonato da #payment-element-gate invece di essere
+     * scritto qui: quella stringa esiste gia' tradotta in tutte e 7 le lingue e
+     * dice esattamente la stessa cosa. Nessuna traduzione nuova da mantenere.
+     */
+    function initProgressiveSections() {
+        var paymentTitle = document.getElementById('section-title-payment');
+        if (!paymentTitle) return;
+        var section = paymentTitle.closest('.form-section');
+        if (!section) return;
+
+        var lock = document.createElement('p');
+        lock.className = 'checkout-step-lock';
+        lock.id = 'checkout-step-lock';
+        var gate = document.getElementById('payment-element-gate');
+        lock.textContent = (gate && gate.textContent.trim()) || '';
+        lock.insertAdjacentHTML('afterbegin',
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
+            + '<rect x="3" y="11" width="18" height="11" rx="2"></rect>'
+            + '<path stroke-linecap="round" d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
+        paymentTitle.insertAdjacentElement('afterend', lock);
+
+        var wasReady = null;
+        function sync() {
+            var ready = customerDataReady();
+            if (ready === wasReady) return;
+            wasReady = ready;
+
+            section.classList.toggle('form-section--locked', !ready);
+            lock.hidden = ready;
+            // inert toglie interazione e voce nell'albero di accessibilita': la
+            // sola opacita' lascerebbe i radio raggiungibili col tab.
+            if (ready) section.removeAttribute('inert');
+            else section.setAttribute('inert', '');
+
+            if (ready) trackFunnel('checkout_contact_completed');
+        }
+
+        var CONTACT_IDS = [
+            'field-first-name', 'field-last-name', 'field-email', 'field-phone',
+            'field-first-name-b', 'field-last-name-b', 'field-email-b', 'field-phone-b',
+            'field-ragione-sociale', 'field-piva', 'field-sdi', 'field-pec',
+        ];
+        CONTACT_IDS.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            // Il telefono e' opzionale: da solo non significa "ha iniziato
+            // l'anagrafica", segnerebbe come avviati anche gli abbandoni immediati.
+            var countsAsStart = id.indexOf('field-phone') !== 0;
+            el.addEventListener('input', function () {
+                if (countsAsStart && el.value.trim()) trackFunnel('checkout_contact_started');
+                sync();
+            });
+            el.addEventListener('blur', sync);
+        });
+
+        var tablist = document.querySelector('[role="tablist"].customer-tabs');
+        if (tablist) tablist.addEventListener('click', function () { setTimeout(sync, 0); });
+
+        // Il ripristino dei campi del browser (torna indietro, bfcache, gestore
+        // password) non emette 'input': senza questi due sync la sezione
+        // resterebbe bloccata con l'anagrafica gia' piena, cioe' un vicolo cieco.
+        global.addEventListener('pageshow', sync);
+        setTimeout(sync, 400);
+
+        // Scelta metodo o campi carta = il cliente e' entrato nel passo pagamento.
+        //
+        // isTrusted scarta i change sintetici: showStripeUnavailable() seleziona
+        // il bonifico via dispatchEvent, e senza questo filtro ogni pagina con
+        // Stripe non disponibile registrerebbe un checkout_payment_started prima
+        // ancora che il cliente tocchi il form, falsando tutto il funnel.
+        document.querySelectorAll('input[name="payment-method"]').forEach(function (r) {
+            r.addEventListener('change', function (ev) {
+                if (ev && ev.isTrusted === false) return;
+                trackFunnel('checkout_payment_started');
+            });
+        });
+        // Niente listener DOM su #payment-element: il Payment Element e' un iframe
+        // cross-origin, i click al suo interno non arrivano mai al parent. Il
+        // segnale vero e' l'evento 'focus' di Stripe Elements, agganciato al
+        // momento del mount in maybeMountPaymentElement().
+
+        sync();
+    }
+
     /* ─── Metodi di pagamento — visibilità ────────────────────────────────── */
 
     function initPaymentMethod() {
@@ -572,6 +745,11 @@
         var checkoutContent = document.getElementById('checkout-content');
         if (emptySection)    emptySection.hidden    = true;
         if (checkoutContent) checkoutContent.hidden = false;
+
+        // Prima posizione del funnel. Va qui e non in init(): e' l'unico punto in
+        // cui sappiamo che il carrello non e' vuoto e il form e' davvero a schermo,
+        // altrimenti conteremmo come "arrivati al checkout" anche i carrelli vuoti.
+        trackFunnel('checkout_view');
     }
 
     /* ─── Toggle riepilogo mobile ──────────────────────────────────────────── */
@@ -593,6 +771,11 @@
         e.preventDefault();
         if (_isSubmitting) return;
         if (!validateForm()) return;
+        // Dopo la validazione: un click su form invalido registrerebbe
+        // pay_clicked senza contact_completed, cioe' uno stadio tardivo con piu'
+        // eventi di uno precedente. Chi si blocca qui risulta gia' fermo allo
+        // step contatti, che e' dove si e' fermato davvero.
+        trackFunnel('checkout_pay_clicked');
 
         var btn      = document.getElementById('btn-stripe-submit');
         var cart     = global.AmlCart;
@@ -680,6 +863,23 @@
         if (btn) btn.style.display = 'none';
         var un = document.getElementById('stripe-unavailable');
         if (un) un.hidden = false;
+
+        // Senza questo ripiego la pagina resta senza CTA: la carta e' nascosta ma
+        // il bonifico non e' selezionato, quindi nessun bottone di submit e'
+        // visibile e l'utente arriva in fondo al form senza nulla da premere.
+        var stripeRadio = document.getElementById('pay-stripe');
+        if (stripeRadio) {
+            stripeRadio.disabled = true;
+            var opt = stripeRadio.closest('.payment-option');
+            if (opt) opt.classList.add('payment-option--disabled');
+        }
+        var transferRadio = document.getElementById('pay-transfer');
+        if (transferRadio && !transferRadio.checked) {
+            transferRadio.checked = true;
+            // initPaymentMethod e' gia' inizializzato: l'evento fa comparire la
+            // sezione bonifico e il relativo bottone "Conferma ordine".
+            transferRadio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
     }
 
     function postPaymentIntent(payload) {
@@ -875,6 +1075,10 @@
             if (_paymentElement) { try { _paymentElement.unmount(); } catch (_) {} _paymentElement = null; }
             _elementsManual = _stripe.elements({ clientSecret: data.clientSecret });
             _paymentElement = _elementsManual.create('payment', { layout: 'tabs' });
+            // Il default e' gia' "carta": chi non cambia metodo non emette mai un
+            // change sui radio, quindi senza questo il passo pagamento risulterebbe
+            // saltato proprio per il percorso piu' comune.
+            _paymentElement.on('focus', function () { trackFunnel('checkout_payment_started'); });
             _paymentElement.mount('#payment-element');
             _lastPiCustomerKey = customerKey();
         })
@@ -941,13 +1145,36 @@
         if (_isSubmitting) return;
         if (!_stripeEnabled) return;
         if (!validateForm()) return;
+        trackFunnel('checkout_pay_clicked');
 
         hideGlobalError();
 
         if (!_paymentElement) {
-            // Anagrafica ok ma campi carta non ancora montati: montali e chiedi di compilarli.
+            // Anagrafica ok ma campi carta non ancora montati: montali e porta
+            // l'utente sopra di essi. Senza lo scroll il click sembra a vuoto,
+            // perche' i campi da compilare stanno fuori schermo.
+            // Porta subito in vista l'area pagamento: maybeMountPaymentElement
+            // scopre gia' #payment-element-loading, quindi l'utente vede
+            // "Caricamento campi carta..." invece di un click a vuoto.
+            scrollIntoViewIfNeeded(document.getElementById('stripe-section')
+                || document.getElementById('payment-element'));
+            // Il mount richiede una chiamata di rete per creare il PaymentIntent:
+            // con un ritardo fisso il focus cadrebbe su un div ancora vuoto ogni
+            // volta che la rete e' piu' lenta della stima. Qui si aspetta il
+            // mount vero, con un tetto per non restare appesi se fallisce.
             maybeMountPaymentElement();
-            showGlobalError('Inserisci i dati della carta qui sopra, poi premi di nuovo "Paga".');
+            var waited = 0;
+            var poll = setInterval(function () {
+                waited += 150;
+                if (_paymentElement) {
+                    clearInterval(poll);
+                    if (_paymentElement.focus) {
+                        try { _paymentElement.focus(); } catch (_) {}
+                    }
+                } else if (waited >= 6000) {
+                    clearInterval(poll);
+                }
+            }, 150);
             return;
         }
         _isSubmitting = true;
@@ -960,6 +1187,7 @@
         e.preventDefault();
         if (_isSubmitting) return;
         if (!validateForm()) return;
+        trackFunnel('checkout_pay_clicked');
 
         var btn      = document.getElementById('btn-transfer-submit');
         var cart     = global.AmlCart;
@@ -1280,6 +1508,18 @@
                 clearTimeout(debounce);
                 debounce = setTimeout(maybeMountPaymentElement, 150);
             });
+            // Il solo blur non basta: chi compila e tocca direttamente l'area
+            // pagamento trova il testo del gate al posto dei campi carta.
+            // Solo il PRIMO mount, pero': rimontare mentre si digita creerebbe
+            // un PaymentIntent per ogni variazione dei dati cliente.
+            el.addEventListener('input', function () {
+                if (_paymentElement || _paymentElMounting) return;
+                clearTimeout(debounce);
+                debounce = setTimeout(function () {
+                    if (_paymentElement || _paymentElMounting) return;
+                    maybeMountPaymentElement();
+                }, 800);
+            });
         });
         var tablist = document.querySelector('[role="tablist"].customer-tabs');
         if (tablist) tablist.addEventListener('click', function () {
@@ -1302,6 +1542,7 @@
         initCustomerTabs();
         initSDIUppercase();
         initPaymentMethod();
+        initProgressiveSections();
         initSummaryToggle();
         initSubmitButtons();
         initCartEmailSync();

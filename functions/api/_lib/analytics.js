@@ -191,6 +191,14 @@ export const TRACKABLE_EVENTS = new Set([
     'paypal_failed',
     'cross_sell_view',
     'cross_sell_add',
+    // Funnel di checkout — vedi schema-analytics-checkout-funnel-migration.sql.
+    // L'ordine qui sotto e' l'ordine delle posizioni: la differenza fra due
+    // eventi consecutivi e' il punto in cui il cliente si ferma.
+    'checkout_view',
+    'checkout_contact_started',
+    'checkout_contact_completed',
+    'checkout_payment_started',
+    'checkout_pay_clicked',
 ]);
 
 /**
@@ -199,9 +207,9 @@ export const TRACKABLE_EVENTS = new Set([
  * fail-open al suo interno — un suo errore non deve mai bloccare la risposta.
  * @param {object} env
  * @param {Request} request
- * @param {{eventName: string, orderId?: string, sku?: string}} params
+ * @param {{eventName: string, orderId?: string, sku?: string, cartId?: string}} params
  */
-export async function recordEvent(env, request, { eventName, orderId, sku }) {
+export async function recordEvent(env, request, { eventName, orderId, sku, cartId }) {
     const secret = env.FRAUD_HASH_SECRET;
     if (!secret || !env.DB) return;
     if (!TRACKABLE_EVENTS.has(eventName) && eventName !== 'purchase') return;
@@ -216,10 +224,24 @@ export async function recordEvent(env, request, { eventName, orderId, sku }) {
             ? await hmacIdentifier(secret, `ev-${day}`, `${ip}|${ua}`)
             : await hmacIdentifier(secret, `ev-${day}`, `anon|${ua}`);
 
-        await env.DB.prepare(`
-            INSERT INTO analytics_events (id, event_name, order_id, sku, visitor_hash, created_at)
-            VALUES (?, ?, ?, ?, ?, ?)
-        `).bind(crypto.randomUUID(), eventName, orderId || null, sku || null, visitorHash, ts).run();
+        const id = crypto.randomUUID();
+        try {
+            await env.DB.prepare(`
+                INSERT INTO analytics_events (id, event_name, order_id, sku, cart_id, visitor_hash, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            `).bind(id, eventName, orderId || null, sku || null, cartId || null, visitorHash, ts).run();
+        } catch (colErr) {
+            // cart_id esiste solo dopo schema-analytics-checkout-funnel-migration.sql.
+            // Senza questo ripiego, fra il deploy del codice e l'esecuzione della
+            // migrazione OGNI evento fallirebbe — non solo i nuovi del funnel, ma
+            // anche add_to_cart, purchase e paypal_* — e in silenzio, perche' la
+            // funzione e' fail-open. Qui si perde solo il cart_id, non l'evento.
+            if (!/cart_id|no such column/i.test(colErr?.message || '')) throw colErr;
+            await env.DB.prepare(`
+                INSERT INTO analytics_events (id, event_name, order_id, sku, visitor_hash, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+            `).bind(id, eventName, orderId || null, sku || null, visitorHash, ts).run();
+        }
     } catch (e) {
         console.warn('[analytics] recordEvent fallita:', e?.message || e);
     }

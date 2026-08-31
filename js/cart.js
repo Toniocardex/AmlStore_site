@@ -363,11 +363,12 @@
     function ensureToastStyles() {
         if (document.getElementById('aml-cart-toast-style')) return;
         var css = ''
-            + '.aml-cart-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);'
+            + '.aml-cart-toast{position:fixed;left:50%;bottom:calc(24px + var(--aml-toast-lift, 0px));'
+            + 'transform:translate(-50%,16px);'
             + 'display:flex;align-items:center;gap:12px;max-width:min(92vw,420px);padding:13px 16px;'
             + 'background:rgba(17,24,39,0.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);'
             + 'color:#f9fafb;border:1px solid rgba(255,255,255,0.12);border-radius:8px;'
-            + 'box-shadow:0 12px 32px rgba(0,0,0,0.35);z-index:1200;opacity:0;pointer-events:none;'
+            + 'box-shadow:0 12px 32px rgba(0,0,0,0.35);z-index:10045;opacity:0;pointer-events:none;'
             + 'font-family:inherit;font-size:0.92rem;line-height:1.35;'
             + 'transition:opacity 0.25s ease,transform 0.25s ease;}'
             + '.aml-cart-toast.is-visible{opacity:1;transform:translate(-50%,0);pointer-events:auto;}'
@@ -448,10 +449,44 @@
         toastHideTimer = null;
     }
 
+    /**
+     * Alza il toast sopra il launcher della chat.
+     *
+     * Entrambi sono fixed nell'angolo in basso a destra e il launcher ha
+     * z-index 10040: senza questo scarto il fumetto della chat copre proprio
+     * il link "Vai al carrello", cioe' l'unica azione del toast.
+     *
+     * La misura viene dall'host <support-chat> invece che da un valore fisso
+     * perche' il launcher si sposta gia' da solo: --sc-cart-offset lo alza
+     * sopra la barra d'acquisto sulla PDP mobile.
+     */
+    function toastLiftOverChat(el) {
+        var lift = 0;
+        try {
+            var chat = document.querySelector('support-chat');
+            if (chat) {
+                var rect = chat.getBoundingClientRect();
+                var vh   = global.innerHeight || document.documentElement.clientHeight;
+                // Solo col launcher chiuso: l'host misura allora la pillola (52px).
+                // Col pannello aperto e' alto quasi quanto la pagina e il toast
+                // finirebbe fuori schermo — li' resta in basso, tanto ha z-index
+                // 10045 e si vede comunque sopra il pannello.
+                if (rect.height > 0 && rect.height <= 100 && rect.bottom > 0) {
+                    // Distanza dal fondo del bordo superiore del launcher, piu' il gap.
+                    // Non e' un valore fisso perche' il launcher si alza a sua volta
+                    // sopra le barre CTA fisse di PDP e carrello (--sc-cart-offset).
+                    lift = Math.max(0, vh - rect.top + 12);
+                }
+            }
+        } catch (_) { lift = 0; }
+        el.style.setProperty('--aml-toast-lift', lift + 'px');
+    }
+
     function showCartToast(line) {
         var el = ensureToastEl();
         var nameEl = el.querySelector('.aml-cart-toast__name');
         if (nameEl) nameEl.textContent = lineDisplayName(line);
+        toastLiftOverChat(el);
         // Riapparizione pulita anche se già visibile (riavvia transizione e timer)
         el.classList.remove('is-visible');
         void el.offsetWidth; // reflow per riavviare la transizione
@@ -675,10 +710,13 @@
             itemsEl.textContent = '';
 
             if (countEl) countEl.textContent = qty + ' ' + (qty === 1 ? itemSingular : itemPlural);
+            const allDigital = lines.every((l) => !l.physical);
             if (deliveryNoteEl) {
-                const allDigital = lines.every((l) => !l.physical);
                 deliveryNoteEl.textContent = allDigital ? shippingDigital : shippingMixed;
             }
+            // Il chip "consegna digitale" per riga ripete l'intestazione solo se
+            // TUTTO il carrello e' digitale: e' li' che su mobile si puo' togliere.
+            if (itemsEl) itemsEl.classList.toggle('cart-items-list--all-digital', allDigital);
 
             lines.forEach((l) => {
                 const q = Number(l.quantity) || 0;
@@ -720,7 +758,13 @@
                     .map((s) => s.trim())
                     .filter(Boolean)
                     .forEach((s) => chips.appendChild(buildChip(s)));
-                chips.appendChild(buildChip(l.physical ? deliveryPhysical : deliveryDigital, 'delivery'));
+                // Modificatore distinto: su mobile il chip digitale si nasconde
+                // (ridondante con l'intestazione) mentre quello di spedizione no,
+                // perche' in un carrello misto dice quale articolo viaggia per posta.
+                chips.appendChild(buildChip(
+                    l.physical ? deliveryPhysical : deliveryDigital,
+                    l.physical ? 'shipping' : 'delivery',
+                ));
                 body.appendChild(chips);
 
                 const controls = document.createElement('div');

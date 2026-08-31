@@ -1393,3 +1393,134 @@
     font-weight: 700;
     color: var(--aml-ok);
 }
+
+/* ═══ Metodo di pagamento non disponibile ══════════════════════════════════ */
+/* Impostata da showStripeUnavailable(): la carta resta visibile ma spenta, cosi'
+   e' chiaro perche' il flusso e' passato al bonifico invece di sembrare rotto. */
+
+.payment-option--disabled .payment-option-label {
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+/* ═══ Barra CTA fissa su mobile ════════════════════════════════════════════ */
+/* Il form di checkout su mobile e' lungo ~3 schermate e il bottone di pagamento
+   vive in fondo: chi esita a meta' form non ha nessuna azione a portata di
+   pollice. Qui il bottone gia' presente diventa la barra fissa — nessun markup
+   duplicato, quindi importo e stato aria-busy restano quelli veri. */
+
+@media (max-width: 860px) {
+    .btn-checkout-primary {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 40;
+        width: 100%;
+        margin-top: 0;
+        border-radius: 0;
+        /* A tutta larghezza non c'e' show-through agli angoli mentre il
+           contenuto scorre sotto. */
+        min-height: 58px;
+        padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+        box-shadow: 0 -4px 20px rgb(0 0 0 / 18%);
+    }
+
+    /* Il transform in hover/active sposterebbe una barra fissa. */
+    .btn-checkout-primary:hover:not(:disabled),
+    .btn-checkout-primary:active:not(:disabled) {
+        transform: none;
+    }
+
+    /* Spazio perche' garanzia e termini non finiscano sotto la barra. */
+    #checkout-form {
+        padding-bottom: 72px;
+    }
+
+    /* Idem per i link legali in fondo: la barra e' fixed e li coprirebbe
+       proprio quando l'utente scorre in fondo per controllarli. */
+    .checkout-chrome-footer {
+        padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* ═══ Sezioni progressive numerate ═════════════════════════════════════════ */
+/* Il numero arriva da un counter CSS, non dal markup: le sezioni sono le stesse
+   in tutte e 7 le lingue e cosi' non c'e' nessuna stringa da tradurre. Il
+   counter si auto-aggiusta anche quando la sezione spedizione non c'e': con
+   [hidden] l'elemento non genera box, quindi non incrementa il counter e il
+   pagamento resta "2" invece di diventare "3". */
+
+#checkout-form {
+    counter-reset: checkout-step;
+}
+
+.form-section {
+    counter-increment: checkout-step;
+}
+
+.form-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.form-section-title::before {
+    content: counter(checkout-step);
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--page-accent);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* ── Sezione bloccata finche' la precedente non e' completa ─────────────── */
+/* Il blocco e' volutamente leggero: la sezione resta visibile e leggibile,
+   cosi' si vede cosa arriva dopo (e che i metodi di pagamento ci sono) senza
+   poterci interagire prima del tempo. L'attributo inert, messo da JS, toglie
+   davvero l'interazione e la esclude dall'albero di accessibilita': la sola
+   opacita' lascerebbe i radio raggiungibili da tastiera. */
+
+.form-section--locked .form-section-title::before {
+    background: var(--page-text-muted);
+}
+
+.form-section--locked .payment-options,
+.form-section--locked .transfer-section,
+.form-section--locked #stripe-section {
+    opacity: 0.45;
+    filter: grayscale(1);
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.checkout-step-lock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px dashed var(--page-border);
+    border-radius: 6px;
+    background: var(--aml-paper-2, #f8fafc);
+    color: var(--page-text-muted);
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+.checkout-step-lock svg {
+    flex: 0 0 auto;
+    width: 15px;
+    height: 15px;
+}
+
+.checkout-step-lock[hidden] {
+    display: none;
+}
