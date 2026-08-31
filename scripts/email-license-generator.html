@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Generatore email licenza · Eurolicenze</title>
+<!--
+  Strumento interno: genera il sorgente dell'email di consegna licenza da
+  incollare in Zoho Mail (vista sorgente HTML).
+
+  PORTING da functions/api/_lib/templates.js — i blocchi qui sotto
+  (I18N, ACTIVATION, licenseEmailHtml, licenseEmailText, licenseSubject) sono
+  la copia 1:1 delle funzioni del repo. Se templates.js cambia, riallineare
+  questo file: e' l'unico punto di duplicazione voluta, necessaria perche'
+  functions/ non e' servita come asset statico da Cloudflare Pages.
+
+  Uso: aprire il file in locale con doppio clic (nessun server necessario).
+
+  ATTENZIONE — pages_build_output_dir = "." pubblica tutto il repo, quindi
+  questa pagina e' raggiungibile anche su eurolicenze.com/scripts/. Non
+  contiene segreti ne' dati cliente (tutto resta nel browser, niente rete),
+  ma NON salvare mai qui dentro chiavi o dati di ordini reali.
+-->
+<style>
+  :root{
+    --brand:#C74104; --brand-soft:#FFF3E9; --navy:#0F172A; --panel:#16202F;
+    --panel-2:#1E2A3B; --line:#2A3850; --ink:#E7EDF6; --ink-2:#9FB0C7;
+    --ok:#2FA36B; --warn:#F0B429; --err:#E5484D; --radius:10px;
+    --mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:14px;line-height:1.5}
+  header{background:var(--panel);border-bottom:1px solid var(--line);border-top:4px solid var(--brand);
+         padding:16px 24px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+         position:sticky;top:0;z-index:10}
+  header h1{margin:0;font-size:17px;font-weight:800;letter-spacing:-.2px}
+  header .sub{color:var(--ink-2);font-size:12.5px}
+  .wrap{max-width:1400px;margin:0 auto;padding:22px 24px 60px;
+        display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start}
+  @media (max-width:1080px){.wrap{grid-template-columns:minmax(0,1fr)}}
+  .col{display:flex;flex-direction:column;gap:18px;min-width:0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .card > h2{margin:0;padding:13px 18px;font-size:12px;font-weight:700;text-transform:uppercase;
+             letter-spacing:.9px;color:var(--brand);border-bottom:1px solid var(--line);background:var(--panel-2);
+             display:flex;align-items:center;gap:9px}
+  .card > h2 .step{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--brand);color:#fff;
+                   align-items:center;justify-content:center;font-size:11px;font-weight:800;letter-spacing:0}
+  .card .body{padding:16px 18px}
+  label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
+        color:var(--ink-2);margin:0 0 5px}
+  input,select,textarea{width:100%;background:#0C1522;color:var(--ink);border:1px solid var(--line);
+        border-radius:8px;padding:9px 11px;font-size:13.5px;font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:2px solid rgba(199,65,4,.55);outline-offset:-1px;border-color:var(--brand)}
+  textarea{resize:vertical;font-family:var(--mono);font-size:12.5px;line-height:1.5}
+  .grid{display:grid;gap:12px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1.4fr .8fr .8fr}
+  @media (max-width:620px){.g2,.g3{grid-template-columns:1fr}}
+  .row{margin-bottom:12px}
+  .row:last-child{margin-bottom:0}
+  button{background:var(--brand);color:#fff;border:0;border-radius:8px;padding:9px 16px;font-size:13px;
+         font-weight:700;cursor:pointer;font-family:inherit}
+  button:hover{filter:brightness(1.08)}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink-2);font-weight:600}
+  button.ghost:hover{color:var(--ink);border-color:var(--brand)}
+  button.sm{padding:5px 11px;font-size:11.5px}
+  .actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:13px}
+  .item{border:1px solid var(--line);border-radius:9px;padding:13px;margin-bottom:11px;background:#0C1522}
+  .item .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
+  .item .head span{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-2)}
+  .out{margin-bottom:14px}
+  .out:last-child{margin-bottom:0}
+  .out .bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:10px}
+  .out .bar label{margin:0}
+  .hint{color:var(--ink-2);font-size:12px;margin:0 0 12px}
+  .hint code{font-family:var(--mono);color:var(--ink);background:#0C1522;padding:1px 5px;border-radius:4px;font-size:11.5px}
+  #log{font-size:12.5px;margin-top:11px;padding:10px 12px;border-radius:8px;display:none;border:1px solid var(--line)}
+  #log.ok{display:block;background:rgba(47,163,107,.1);border-color:rgba(47,163,107,.45);color:#8FE0B8}
+  #log.warn{display:block;background:rgba(240,180,41,.1);border-color:rgba(240,180,41,.45);color:#F5D68A}
+  #log ul{margin:6px 0 0;padding-left:18px}
+  .checks{list-style:none;margin:0;padding:0;font-size:12.5px}
+  .checks li{padding:4px 0;display:flex;gap:8px;align-items:flex-start}
+  .checks li b{font-weight:700}
+  .checks .ico{flex:0 0 auto}
+  .ok-t{color:#8FE0B8} .warn-t{color:#F5D68A} .err-t{color:#FF9C9F}
+  iframe{width:100%;height:620px;border:0;background:#F1F5F9;display:block}
+  .copied{color:#8FE0B8!important;border-color:rgba(47,163,107,.5)!important}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Generatore email licenza</h1>
+  <span class="sub">Eurolicenze · incolla i dati dell'ordine, copia il sorgente in Zoho Mail</span>
+</header>
+
+<div class="wrap">
+
+  <!-- ── Colonna sinistra: input ─────────────────────────────────────────── -->
+  <div class="col">
+
+    <section class="card">
+      <h2><span class="step">1</span> Incolla il riepilogo ordine</h2>
+      <div class="body">
+        <p class="hint">Apri l'ordine in <code>admin/#orders</code>, seleziona tutto il pannello di dettaglio
+          (riepilogo + cliente + articoli) e incollalo qui. Vengono riconosciuti n° ordine, nome, email, lingua,
+          prodotto, SKU ed eventuali chiavi già presenti nel testo.</p>
+        <textarea id="paste" rows="9" autofocus placeholder="Incolla qui (Ctrl+V) — la compilazione parte da sola."></textarea>
+        <div class="actions">
+          <button id="btnParse">Analizza e compila</button>
+          <button id="btnClear" class="ghost">Svuota tutto</button>
+        </div>
+        <div id="log"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">2</span> Dati email</h2>
+      <div class="body">
+        <div class="grid g2 row">
+          <div><label for="orderId">N° ordine</label><input id="orderId" placeholder="EL-XXXXXXXX"></div>
+          <div><label for="locale">Lingua</label>
+            <select id="locale">
+              <option value="it" selected>Italiano (it)</option>
+              <option value="en">English (en)</option>
+              <option value="fr">Français (fr)</option>
+              <option value="de">Deutsch (de)</option>
+              <option value="es">Español (es)</option>
+              <option value="pt">Português (pt)</option>
+              <option value="nl">Nederlands (nl)</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid g2 row">
+          <div><label for="name">Nome nel saluto</label><input id="name"></div>
+          <div><label for="email">Email cliente</label><input id="email"></div>
+        </div>
+        <div id="items"></div>
+        <div class="actions">
+          <button id="btnAddItem" class="ghost sm">+ Aggiungi prodotto</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Controlli prima dell'invio</h2>
+      <div class="body"><ul class="checks" id="checks"></ul></div>
+    </section>
+
+  </div>
+
+  <!-- ── Colonna destra: output ──────────────────────────────────────────── -->
+  <div class="col">
+
+    <section class="card">
+      <h2><span class="step">3</span> Da copiare in Zoho Mail</h2>
+      <div class="body">
+        <p class="hint">Incolla l'HTML nella vista <b>sorgente</b> di Zoho (l'editor visuale riscriverebbe gli stili inline).</p>
+
+        <div class="out">
+          <div class="bar"><label for="outTo">Destinatario</label>
+            <button class="ghost sm" data-copy="outTo">Copia</button></div>
+          <input id="outTo" readonly>
+        </div>
+
+        <div class="out">
+          <div class="bar"><label for="outSubject">Oggetto</label>
+            <button class="ghost sm" data-copy="outSubject">Copia</button></div>
+          <input id="outSubject" readonly>
+        </div>
+
+        <div class="out">
+          <div class="bar"><label for="outHtml">Sorgente HTML</label>
+            <span>
+              <button class="ghost sm" data-copy="outHtml">Copia HTML</button>
+              <button class="ghost sm" id="btnDownload">Scarica .html</button>
+            </span>
+          </div>
+          <textarea id="outHtml" rows="12" readonly></textarea>
+        </div>
+
+        <div class="out">
+          <div class="bar"><label for="outText">Fallback testo semplice</label>
+            <button class="ghost sm" data-copy="outText">Copia testo</button></div>
+          <textarea id="outText" rows="9" readonly></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Anteprima</h2>
+      <iframe id="preview" title="Anteprima email"></iframe>
+    </section>
+
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   BLOCCO PORTATO DA functions/api/_lib/templates.js — mantenere allineato.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+const ACCENT_DARK = '#C74104', SURFACE_DARK = '#0F172A', BG = '#F1F5F9', CARD_BG = '#ffffff';
+const TEXT = '#1E293B', TEXT_MUTED = '#475569', BORDER = '#E2E8F0';
+const SUCCESS = '#1F7A52', SUCCESS_SOFT = '#E8F3ED';
+const GOLD = '#C74104', GOLD_SOFT = '#FFF7ED', GOLD_BORDER = '#FFD1B3', TEXT_FAINT = '#94A3B8';
+const HEADING_FONT = "'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+const BODY_FONT    = "-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+
+const I18N = {
+  it:{order_id:'N° ordine',footer_copy:'© {year} Eurolicenze di Cardelli Antonino — P.IVA inclusa in fattura',footer_tagline:'Licenze digitali originali · eurolicenze.com',license_subject:'La tua licenza — ordine #{orderId} — Eurolicenze',license_eyebrow:'Licenza digitale',license_greeting:'Ecco la tua licenza, {name}!',license_intro:'Grazie per il tuo acquisto. Qui sotto trovi la chiave del tuo prodotto, pronta per l\'attivazione.',license_key_label:'Chiave prodotto',license_copy_hint:'Tocca per selezionare e copiare',activation_eyebrow:'Come attivare',license_note:'Conserva questa email: la chiave è personale ed è associata al tuo ordine.',license_help:'Hai bisogno di assistenza con l\'attivazione? Scrivici:'},
+  en:{order_id:'Order no.',footer_copy:'© {year} Eurolicenze di Cardelli Antonino',footer_tagline:'Genuine digital licences · eurolicenze.com',license_subject:'Your licence — order #{orderId} — Eurolicenze',license_eyebrow:'Digital licence',license_greeting:'Here is your licence, {name}!',license_intro:'Thank you for your purchase. Below is your product key, ready to activate.',license_key_label:'Product key',license_copy_hint:'Tap to select and copy',activation_eyebrow:'How to activate',license_note:'Keep this email: the key is personal and tied to your order.',license_help:'Need help activating it? Contact us:'},
+  fr:{order_id:'N° commande',footer_copy:'© {year} Eurolicenze di Cardelli Antonino',footer_tagline:'Licences numériques originales · eurolicenze.com',license_subject:'Votre licence — commande #{orderId} — Eurolicenze',license_eyebrow:'Licence numérique',license_greeting:'Voici votre licence, {name} !',license_intro:'Merci pour votre achat. Vous trouverez ci-dessous la clé de votre produit, prête à activer.',license_key_label:'Clé produit',license_copy_hint:'Appuyez pour sélectionner et copier',activation_eyebrow:'Comment activer',license_note:'Conservez cet e-mail : la clé est personnelle et liée à votre commande.',license_help:'Besoin d\'aide pour l\'activation ? Contactez-nous :'},
+  de:{order_id:'Bestellnr.',footer_copy:'© {year} Eurolicenze di Cardelli Antonino',footer_tagline:'Originale digitale Lizenzen · eurolicenze.com',license_subject:'Ihre Lizenz — Bestellung #{orderId} — Eurolicenze',license_eyebrow:'Digitale Lizenz',license_greeting:'Hier ist Ihre Lizenz, {name}!',license_intro:'Vielen Dank für Ihren Kauf. Unten finden Sie Ihren Produktschlüssel, bereit zur Aktivierung.',license_key_label:'Produktschlüssel',license_copy_hint:'Zum Markieren und Kopieren tippen',activation_eyebrow:'So aktivieren Sie',license_note:'Bewahren Sie diese E-Mail auf: Der Schlüssel ist persönlich und Ihrer Bestellung zugeordnet.',license_help:'Brauchen Sie Hilfe bei der Aktivierung? Kontaktieren Sie uns:'},
+  es:{order_id:'N.° de pedido',footer_copy:'© {year} Eurolicenze di Cardelli Antonino',footer_tagline:'Licencias digitales originales · eurolicenze.com',license_subject:'Su licencia — pedido #{orderId} — Eurolicenze',license_eyebrow:'Licencia digital',license_greeting:'¡Aquí tiene su licencia, {name}!',license_intro:'Gracias por su compra. A continuación encontrará la clave de su producto, lista para activar.',license_key_label:'Clave de producto',license_copy_hint:'Toca para seleccionar y copiar',activation_eyebrow:'Cómo activar',license_note:'Conserve este correo: la clave es personal y está asociada a su pedido.',license_help:'¿Necesita ayuda con la activación? Contáctenos:'},
+  pt:{order_id:'N.º do pedido',footer_copy:'© {year} Eurolicenze di Cardelli Antonino',footer_tagline:'Licenças digitais originais · eurolicenze.com',license_subject:'A sua licença — pedido #{orderId} — Eurolicenze',license_eyebrow:'Licença digital',license_greeting:'Aqui está a sua licença, {name}!',license_intro:'Obrigado pela sua compra. Abaixo encontra a chave do seu produto, pronta para ativação.',license_key_label:'Chave do produto',license_copy_hint:'Toque para selecionar e copiar',activation_eyebrow:'Como ativar',license_note:'Guarde este email: a chave é pessoal e está associada ao seu pedido.',license_help:'Precisa de ajuda com a ativação? Contacte-nos:'},
+  nl:{order_id:'Bestelnr.',footer_copy:'© {year} Eurolicenze di Cardelli Antonino',footer_tagline:'Originele digitale licenties · eurolicenze.com',license_subject:'Uw licentie — bestelling #{orderId} — Eurolicenze',license_eyebrow:'Digitale licentie',license_greeting:'Hier is uw licentie, {name}!',license_intro:'Bedankt voor uw aankoop. Hieronder vindt u de productsleutel, klaar voor activering.',license_key_label:'Productsleutel',license_copy_hint:'Tik om te selecteren en te kopiëren',activation_eyebrow:'Hoe activeren',license_note:'Bewaar deze e-mail: de sleutel is persoonlijk en gekoppeld aan uw bestelling.',license_help:'Hulp nodig bij de activering? Neem contact met ons op:'},
+};
+
+function activationLabels(portal){
+  return {it:`Attiva su ${portal} →`,en:`Activate on ${portal} →`,fr:`Activer sur ${portal} →`,
+          de:`Aktivieren auf ${portal} →`,es:`Activar en ${portal} →`,pt:`Ativar em ${portal} →`,
+          nl:`Activeren op ${portal} →`};
+}
+
+const ACTIVATION = {
+  windows:{kind:'text',text:{
+    it:'Impostazioni → Sistema → Attivazione con il codice sopra. Usa i canali ufficiali Microsoft.',
+    en:'Settings → System → Activation using the code above. Use official Microsoft channels.',
+    fr:'Paramètres → Système → Activation avec le code ci-dessus. Utilisez les canaux officiels Microsoft.',
+    de:'Einstellungen → System → Aktivierung mit dem obigen Code. Nutzen Sie die offiziellen Microsoft-Kanäle.',
+    es:'Configuración → Sistema → Activación con el código anterior. Use los canales oficiales de Microsoft.',
+    pt:'Definições → Sistema → Ativação com o código acima. Use os canais oficiais da Microsoft.',
+    nl:'Instellingen → Systeem → Activering met de code hierboven. Gebruik de officiële Microsoft-kanalen.'}},
+  windows_server:{kind:'text',text:{
+    it:'Installa il sistema e attiva la licenza con il codice sopra tramite i canali ufficiali Microsoft.',
+    en:'Install the system and activate the licence with the code above via official Microsoft channels.',
+    fr:'Installez le système et activez la licence avec le code ci-dessus via les canaux officiels Microsoft.',
+    de:'Installieren Sie das System und aktivieren Sie die Lizenz mit dem obigen Code über die offiziellen Microsoft-Kanäle.',
+    es:'Instale el sistema y active la licencia con el código anterior a través de los canales oficiales de Microsoft.',
+    pt:'Instale o sistema e ative a licença com o código acima através dos canais oficiais da Microsoft.',
+    nl:'Installeer het systeem en activeer de licentie met de code hierboven via de officiële Microsoft-kanalen.'}},
+  office:{kind:'button',url:'https://setup.office.com/Home',label:activationLabels('setup.office.com'),note:{
+    it:'Poi installa le app da office.com.',en:'Then install the apps from office.com.',
+    fr:'Puis installez les applications depuis office.com.',de:'Installieren Sie dann die Apps von office.com.',
+    es:'Luego instale las aplicaciones desde office.com.',pt:'Depois instale as aplicações a partir de office.com.',
+    nl:'Installeer daarna de apps via office.com.'}},
+  kaspersky:{kind:'button',url:'https://my.kaspersky.com',           label:activationLabels('My Kaspersky')},
+  norton:   {kind:'button',url:'https://my.norton.com',              label:activationLabels('My Norton')},
+  mcafee:   {kind:'button',url:'https://www.mcafee.com/my-account/', label:activationLabels('McAfee My Account')},
+  eset:     {kind:'button',url:'https://home.eset.com',              label:activationLabels('ESET HOME')},
+  adobe:    {kind:'button',url:'https://account.adobe.com',          label:activationLabels('account Adobe')},
+  acronis:  {kind:'button',url:'https://account.acronis.com',        label:activationLabels('account Acronis')},
+  corel:    {kind:'button',url:'https://www.coreldraw.com',          label:activationLabels('account Corel')},
+};
+
+const ACTIVATION_LABELS = {
+  '':'— nessun blocco attivazione —', windows:'Windows (istruzioni)', windows_server:'Windows Server (istruzioni)',
+  office:'Office / Microsoft 365', kaspersky:'Kaspersky', norton:'Norton', mcafee:'McAfee',
+  eset:'ESET', adobe:'Adobe', acronis:'Acronis', corel:'Corel',
+};
+
+function escHtml(str){
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function activationBlock(key, locale, eyebrow){
+  const a = ACTIVATION[key];
+  if(!a) return '';
+  if(a.kind === 'button'){
+    const label = a.label[locale] || a.label.it;
+    const note  = a.note ? (a.note[locale] || a.note.it) : '';
+    return `
+        <table cellpadding="0" cellspacing="0" style="margin-top:16px">
+          <tr><td>
+            <a href="${a.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:${GOLD};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 22px;border-radius:8px;letter-spacing:.1px">${escHtml(label)}</a>
+          </td></tr>
+        </table>
+        ${note ? `<p style="margin:9px 0 0;font-size:12px;color:${TEXT_MUTED}">${escHtml(note)}</p>` : ''}`;
+  }
+  const text = a.text[locale] || a.text.it;
+  return `
+        <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${GOLD_SOFT};border:1px solid ${GOLD_BORDER};border-radius:8px">
+          <tr><td style="padding:12px 14px">
+            <p style="margin:0 0 3px;font-size:10.5px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:.6px">${escHtml(eyebrow)}</p>
+            <p style="margin:0;font-size:12.5px;color:#7E2702;line-height:1.55">${escHtml(text)}</p>
+          </td></tr>
+        </table>`;
+}
+
+function licenseSubject(locale, orderId){
+  const t = I18N[locale] || I18N.it;
+  return t.license_subject.replace('{orderId}', orderId);
+}
+
+function licenseEmailHtml({locale, orderId, name, items}){
+  locale = locale || 'it';
+  const t = I18N[locale] || I18N.it;
+  const year = new Date().getFullYear();
+
+  const greeting = t.license_greeting.replace('{name}', escHtml(name || ''));
+  const list  = items || [];
+  const multi = list.length > 1;
+
+  const cards = list.map((item, i) => `
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${CARD_BG};border:1px solid ${BORDER};border-radius:12px;margin-bottom:14px">
+      <tr><td style="padding:20px 22px">
+        <table cellpadding="0" cellspacing="0" style="width:100%;margin-bottom:14px">
+          <tr>
+            ${multi ? `<td width="26" valign="top" style="padding-right:10px;padding-top:1px">
+              <table cellpadding="0" cellspacing="0"><tr><td width="22" height="22" align="center" valign="middle" style="background:${ACCENT_DARK};border-radius:50%;font-family:${HEADING_FONT};font-size:11px;font-weight:700;color:#fff">${i + 1}</td></tr></table>
+            </td>` : ''}
+            <td valign="top">
+              <p style="margin:0 0 2px;font-size:15.5px;font-weight:700;color:${TEXT}">${escHtml(item.productName || '')}</p>
+              ${item.sku ? `<p style="margin:0;font-size:11.5px;color:${TEXT_FAINT};font-family:'SFMono-Regular',Consolas,monospace;letter-spacing:.2px">${escHtml(item.sku)}</p>` : ''}
+            </td>
+          </tr>
+        </table>
+
+        <p style="margin:0 0 6px;font-size:11px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.license_key_label}</p>
+        <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};border:1px solid ${BORDER};border-radius:9px">
+          <tr><td style="padding:13px 16px">
+            <span style="font-family:'SFMono-Regular',Consolas,monospace;font-size:17px;font-weight:700;color:${ACCENT_DARK};letter-spacing:.6px;word-break:break-all">${escHtml(item.key || '')}</span>
+          </td></tr>
+        </table>
+        <p style="margin:6px 2px 0;font-size:11px;color:${TEXT_FAINT};font-style:italic">${t.license_copy_hint}</p>
+
+        ${activationBlock(item.activation, locale, t.activation_eyebrow)}
+      </td></tr>
+    </table>`).join('');
+
+  return `<!DOCTYPE html>
+<html lang="${escHtml(locale)}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${licenseSubject(locale, orderId)}</title>
+<style>
+  @font-face{font-family:'Montserrat';src:url('https://eurolicenze.com/fonts/montserrat-latin-700.woff2') format('woff2');font-weight:700}
+  @font-face{font-family:'Montserrat';src:url('https://eurolicenze.com/fonts/montserrat-latin-800.woff2') format('woff2');font-weight:800}
+</style>
+</head>
+<body style="margin:0;padding:0;background:${BG};font-family:${BODY_FONT}">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};padding:32px 16px">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;box-shadow:0 6px 28px rgba(15,23,42,0.12)">
+
+  <!-- Logo header -->
+  <tr><td style="background:${SURFACE_DARK};border-top:4px solid ${GOLD};border-radius:10px 10px 0 0;padding:22px 32px;text-align:center">
+    <table cellpadding="0" cellspacing="0" style="display:inline-block;background:#ffffff;border-radius:8px;padding:8px 16px">
+      <tr><td>
+        <img src="https://eurolicenze.com/logo/logo-header-400.webp" alt="Eurolicenze" width="140" height="auto"
+             style="display:block;max-width:140px">
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Body card -->
+  <tr><td style="background:${CARD_BG};padding:36px 32px 28px;border-left:1px solid ${BORDER};border-right:1px solid ${BORDER}">
+
+    <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:${GOLD};text-transform:uppercase;letter-spacing:1.1px">${t.license_eyebrow} · Eurolicenze</p>
+
+    <table cellpadding="0" cellspacing="0" style="margin-bottom:24px">
+      <tr>
+        <td width="40" valign="top" style="padding-right:12px">
+          <table cellpadding="0" cellspacing="0"><tr><td width="36" height="36" align="center" valign="middle" style="background:${SUCCESS_SOFT};border-radius:50%;font-size:18px;color:${SUCCESS}">🔑</td></tr></table>
+        </td>
+        <td valign="middle">
+          <h1 style="margin:0 0 4px;font-family:${HEADING_FONT};font-size:23px;font-weight:800;color:${TEXT};letter-spacing:-.2px">${greeting}</h1>
+          <p style="margin:0;font-size:14.5px;color:${TEXT_MUTED};line-height:1.5">${t.license_intro}</p>
+        </td>
+      </tr>
+    </table>
+
+    <table cellpadding="0" cellspacing="0" style="width:100%;margin-bottom:24px;padding-bottom:20px;border-bottom:1px dashed ${BORDER}">
+      <tr>
+        <td>
+          <p style="margin:0 0 5px;font-size:11px;color:${TEXT_MUTED};text-transform:uppercase;letter-spacing:.6px;font-weight:600">${t.order_id}</p>
+          <p style="margin:0;font-size:17px;font-weight:800;color:${ACCENT_DARK};font-family:'SFMono-Regular',Consolas,monospace;letter-spacing:.2px">${escHtml(orderId)}</p>
+        </td>
+      </tr>
+    </table>
+
+    ${cards}
+
+    <p style="margin:20px 0 0;font-size:12px;color:${TEXT_MUTED};line-height:1.5">🔒&nbsp; ${t.license_note}</p>
+
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="background:#f0f2f5;border-radius:0 0 10px 10px;padding:22px 32px;border:1px solid ${BORDER};border-top:none;text-align:center">
+    <p style="margin:0 0 8px;font-size:13px;color:${TEXT_MUTED}">${t.license_help} <a href="mailto:Desk@eurolicenze.com" style="color:${ACCENT_DARK};font-weight:600">Desk@eurolicenze.com</a></p>
+    <p style="margin:0 0 10px;font-size:11px;color:#9ca3af">${t.footer_copy.replace('{year}', year)}</p>
+    <p style="margin:0;font-size:10.5px;color:#b0b5bd;letter-spacing:.3px">${t.footer_tagline}</p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+}
+
+function licenseEmailText({locale, orderId, name, items}){
+  locale = locale || 'it';
+  const t = I18N[locale] || I18N.it;
+  const lines = ['Eurolicenze', t.license_greeting.replace('{name}', name || ''), '',
+                 t.license_intro, '', `${t.order_id}: ${orderId}`, ''];
+  (items || []).forEach(item => {
+    lines.push(`${item.productName}${item.sku ? ' (' + item.sku + ')' : ''}`);
+    lines.push(`${t.license_key_label}: ${item.key}`);
+    const a = ACTIVATION[item.activation];
+    if(a){
+      if(a.kind === 'button'){
+        lines.push(`${a.label[locale] || a.label.it} ${a.url}`);
+        if(a.note) lines.push(a.note[locale] || a.note.it);
+      } else {
+        lines.push(`${t.activation_eyebrow}: ${a.text[locale] || a.text.it}`);
+      }
+    }
+    lines.push('');
+  });
+  lines.push(t.license_note, '', `${t.license_help} Desk@eurolicenze.com`);
+  return lines.join('\n');
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FINE BLOCCO PORTATO — sotto: logica del generatore.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+const $  = id => document.getElementById(id);
+const itemsBox = $('items');
+
+/** Riconosce il vendor dal nome prodotto → chiave ACTIVATION. */
+function detectActivation(productName){
+  const n = String(productName || '').toLowerCase();
+  if(/mcafee/.test(n))                      return 'mcafee';
+  if(/kaspersky/.test(n))                   return 'kaspersky';
+  if(/norton/.test(n))                      return 'norton';
+  if(/\beset\b/.test(n))                    return 'eset';
+  if(/adobe|photoshop|acrobat|illustrator/.test(n)) return 'adobe';
+  if(/acronis/.test(n))                     return 'acronis';
+  if(/corel|coreldraw|paintshop/.test(n))   return 'corel';
+  if(/windows\s*server/.test(n))            return 'windows_server';
+  if(/windows/.test(n))                     return 'windows';
+  if(/office|microsoft\s*365|project|visio/.test(n)) return 'office';
+  return '';
+}
+
+/** Riga prodotto nel form. */
+function addItem(data){
+  data = data || {};
+  const idx = itemsBox.children.length;
+  const el = document.createElement('div');
+  el.className = 'item';
+  el.innerHTML = `
+    <div class="head">
+      <span>Prodotto ${idx + 1}</span>
+      <button type="button" class="ghost sm" data-remove>Rimuovi</button>
+    </div>
+    <div class="grid g2" style="margin-bottom:12px">
+      <div><label>Nome prodotto</label><input data-f="productName"></div>
+      <div><label>SKU</label><input data-f="sku"></div>
+    </div>
+    <div class="grid g2">
+      <div><label>Chiave prodotto</label>
+        <input data-f="key" placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX" style="font-family:var(--mono)"></div>
+      <div><label>Blocco attivazione</label><select data-f="activation"></select></div>
+    </div>`;
+  const sel = el.querySelector('[data-f="activation"]');
+  Object.entries(ACTIVATION_LABELS).forEach(([v, lbl]) => sel.add(new Option(lbl, v)));
+
+  el.querySelector('[data-f="productName"]').value = data.productName || '';
+  el.querySelector('[data-f="sku"]').value         = data.sku || '';
+  el.querySelector('[data-f="key"]').value         = data.key || '';
+  sel.value = data.activation !== undefined ? data.activation : detectActivation(data.productName);
+
+  el.querySelector('[data-remove]').addEventListener('click', () => {
+    el.remove(); renumber(); render();
+  });
+  // Il vendor si riallinea al nome finché non lo scegli a mano.
+  el.querySelector('[data-f="productName"]').addEventListener('input', e => {
+    if(!sel.dataset.touched) sel.value = detectActivation(e.target.value);
+    render();
+  });
+  sel.addEventListener('change', () => { sel.dataset.touched = '1'; render(); });
+  el.querySelectorAll('input').forEach(i => i.addEventListener('input', render));
+
+  itemsBox.appendChild(el);
+  renumber();
+}
+
+function renumber(){
+  [...itemsBox.children].forEach((el, i) => { el.querySelector('.head span').textContent = 'Prodotto ' + (i + 1); });
+}
+
+function readItems(){
+  return [...itemsBox.children].map(el => ({
+    productName: el.querySelector('[data-f="productName"]').value.trim(),
+    sku:         el.querySelector('[data-f="sku"]').value.trim(),
+    key:         el.querySelector('[data-f="key"]').value.trim(),
+    activation:  el.querySelector('[data-f="activation"]').value,
+  }));
+}
+
+/* ── Parser del riepilogo incollato dall'admin ─────────────────────────────
+   Tollerante: l'admin puo' essere copiato con etichetta e valore sulla stessa
+   riga o su righe separate; tutto cio' che non riconosce resta modificabile.  */
+
+const KEY_RE   = /\b[A-Z0-9]{4,6}(?:-[A-Z0-9]{4,6}){2,5}\b/g;
+const SKU_RE   = /^[A-Z0-9][A-Z0-9._-]{4,24}$/i;
+const LABELS   = /^(n°\s*ordine|numero ordine|stato|metodo|totale|creato|pagato il|locale|email conf\.?|email cliente|email interna|evento interno|nome|email|tipo|telefono|prodotto|qtà|qta|subtotale|riepilogo|notifiche|cliente|articoli|ordine)\b/i;
+
+function valueAfter(text, label){
+  const re = new RegExp('^\\s*' + label + '\\s*[:\\t]?\\s*(.*)$', 'im');
+  const m  = re.exec(text);
+  if(!m) return '';
+  if(m[1].trim()) return m[1].trim();              // valore sulla stessa riga
+  const lines = text.split(/\r?\n/);
+  const i = lines.findIndex(l => new RegExp('^\\s*' + label + '\\s*$', 'i').test(l));
+  return i >= 0 && lines[i + 1] ? lines[i + 1].trim() : '';
+}
+
+function parsePaste(raw){
+  const text  = String(raw || '').replace(/ /g, ' ');
+  const lines = text.split(/\r?\n/).map(l => l.trim());
+  const found = [];
+
+  const orderId = (text.match(/\bEL-[A-Z0-9]{5,}\b/i) || [''])[0].toUpperCase();
+  if(orderId){ $('orderId').value = orderId; found.push('n° ordine ' + orderId); }
+
+  const email = (text.match(/[\w.+-]+@[\w-]+\.[\w.-]+/) || [''])[0];
+  if(email){ $('email').value = email; found.push('email ' + email); }
+
+  let fullName = valueAfter(text, 'nome');
+  if(!fullName){
+    const caps = lines.find(l => /^[A-ZÀ-Ý][A-ZÀ-Ý'\- ]{4,}$/.test(l) && l.split(/\s+/).length <= 4);
+    fullName = caps || '';
+  }
+  if(fullName){
+    const first = fullName.trim().split(/\s+/)[0];
+    $('name').value = first.charAt(0).toUpperCase() + first.slice(1).toLowerCase();
+    found.push('nome ' + $('name').value);
+  }
+
+  const loc = valueAfter(text, 'locale').toLowerCase().slice(0, 2);
+  if(loc && I18N[loc]){ $('locale').value = loc; found.push('lingua ' + loc); }
+
+  // Chiavi licenza gia' presenti nel testo incollato (di solito nessuna).
+  const keys = (text.match(KEY_RE) || []).filter(k => k !== orderId && !/^EL-/i.test(k));
+
+  // Articoli: riga "nome prodotto" seguita (entro 2 righe) da uno SKU.
+  const products = [];
+  lines.forEach((line, i) => {
+    if(!line || LABELS.test(line) || line.length < 8) return;
+    if(!/[a-z]/.test(line)) return;                       // scarta intestazioni maiuscole
+    if(/@/.test(line) || /^EL-/i.test(line)) return;
+    const looksProduct = /\|/.test(line) || /\b(20\d\d|dispositiv|device|anno|year|licen)/i.test(line);
+    if(!looksProduct) return;
+    let sku = '';
+    for(let j = i + 1; j <= i + 2 && j < lines.length; j++){
+      const cand = (lines[j] || '').split(/\s{2,}|\t/)[0].trim();
+      if(cand && SKU_RE.test(cand) && !/^EL-/i.test(cand) && !LABELS.test(cand)){ sku = cand; break; }
+    }
+    products.push({productName: line.replace(/\s{2,}.*$/, '').trim(), sku});
+  });
+
+  itemsBox.innerHTML = '';
+  if(products.length){
+    products.forEach((p, i) => addItem({...p, key: keys[i] || ''}));
+    found.push(products.length + ' prodotto/i');
+  } else {
+    addItem({key: keys[0] || ''});
+  }
+  if(keys.length) found.push(keys.length + ' chiave/i');
+
+  const missing = [];
+  if(!$('orderId').value) missing.push('n° ordine');
+  if(!$('name').value)    missing.push('nome cliente');
+  if(!$('email').value)   missing.push('email cliente');
+  if(!products.length)    missing.push('prodotto e SKU');
+  if(!keys.length)        missing.push('chiave licenza (incollala a mano)');
+
+  const log = $('log');
+  log.className = missing.length ? 'warn' : 'ok';
+  log.innerHTML = (found.length ? '<b>Riconosciuto:</b> ' + found.join(' · ') : '<b>Nessun dato riconosciuto.</b>')
+    + (missing.length ? '<ul><li>Da completare a mano: ' + missing.join(', ') + '</li></ul>' : '');
+
+  render();
+}
+
+/* ── Render output ───────────────────────────────────────────────────────── */
+
+function currentData(){
+  return {
+    locale:  $('locale').value,
+    orderId: $('orderId').value.trim(),
+    name:    $('name').value.trim(),
+    items:   readItems(),
+  };
+}
+
+function render(){
+  const d = currentData();
+  const html = licenseEmailHtml(d);
+  const text = licenseEmailText(d);
+
+  $('outHtml').value    = html;
+  $('outText').value    = text;
+  $('outSubject').value = licenseSubject(d.locale, d.orderId);
+  $('outTo').value      = $('email').value.trim();
+  $('preview').srcdoc   = html;
+
+  const checks = [];
+  const add = (ok, msg) => checks.push({ok, msg});
+  add(!!d.orderId, d.orderId ? 'N° ordine: ' + d.orderId : 'Manca il n° ordine');
+  add(!!d.name,    d.name ? 'Saluto a: ' + d.name : 'Manca il nome nel saluto');
+  add(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('email').value.trim()),
+      $('email').value.trim() ? 'Destinatario: ' + $('email').value.trim() : 'Manca l\'email del destinatario');
+  if(!d.items.length) add(false, 'Nessun prodotto inserito');
+  d.items.forEach((it, i) => {
+    const n = d.items.length > 1 ? ' #' + (i + 1) : '';
+    add(!!it.productName, it.productName ? 'Prodotto' + n + ': ' + it.productName : 'Manca il nome prodotto' + n);
+    add(!!it.key, it.key ? 'Chiave' + n + ' presente' : 'MANCA LA CHIAVE' + n);
+    add(!!it.activation, it.activation
+        ? 'Attivazione' + n + ': ' + ACTIVATION_LABELS[it.activation]
+        : 'Nessun blocco attivazione' + n + ' (opzionale)');
+  });
+
+  $('checks').innerHTML = checks.map(c =>
+    `<li class="${c.ok ? 'ok-t' : 'warn-t'}"><span class="ico">${c.ok ? '✓' : '!'}</span><span>${escHtml(c.msg)}</span></li>`
+  ).join('');
+}
+
+/* ── Copia / download / reset ────────────────────────────────────────────── */
+
+function copyFrom(id, btn){
+  const el = $(id);
+  const done = () => {
+    const old = btn.textContent;
+    btn.textContent = 'Copiato ✓'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1400);
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(el.value).then(done).catch(() => { el.select(); document.execCommand('copy'); done(); });
+  } else {
+    el.removeAttribute('readonly'); el.select(); document.execCommand('copy');
+    el.setAttribute('readonly', ''); done();
+  }
+}
+
+document.querySelectorAll('[data-copy]').forEach(b =>
+  b.addEventListener('click', () => copyFrom(b.dataset.copy, b)));
+
+$('btnDownload').addEventListener('click', () => {
+  const id = $('orderId').value.trim() || 'email-licenza';
+  const blob = new Blob([$('outHtml').value], {type: 'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = id + '.html';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+});
+
+$('btnParse').addEventListener('click', () => parsePaste($('paste').value));
+$('paste').addEventListener('paste', () => setTimeout(() => parsePaste($('paste').value), 0));
+
+$('btnClear').addEventListener('click', () => {
+  ['paste','orderId','name','email'].forEach(id => $(id).value = '');
+  $('locale').value = 'it';
+  $('log').className = '';
+  itemsBox.innerHTML = ''; addItem(); render();
+});
+
+$('btnAddItem').addEventListener('click', () => { addItem(); render(); });
+['orderId','name','email','locale'].forEach(id => $(id).addEventListener('input', render));
+$('locale').addEventListener('change', render);
+
+addItem();
+render();
+</script>
+</body>
+</html>
