@@ -1219,3 +1219,20 @@ a.adm-btn:hover { text-decoration: none; }
     .adm-table--compact td { padding: .3rem .4rem; }
     .adm-table--compact td::before { content: none; }
 }
+
+/* ═══ Funnel di checkout (tab Analytics) ═══════════════════════════════════ */
+/* Le altre sezioni sono classifiche a due colonne e stanno comode in mezza
+   griglia; il funnel ne ha quattro (passo, eventi, due percentuali), quindi
+   occupa la riga intera invece di spezzare le intestazioni. */
+
+.adm-analytics-section--wide {
+    grid-column: 1 / -1;
+}
+
+/* Caduta marcata rispetto al passo precedente: e' il punto in cui si perdono i
+   clienti, e in una colonna di percentuali tutte uguali passerebbe inosservato.
+   La soglia sta nel JS (renderFunnel), qui c'e' solo l'evidenziazione. */
+.adm-rank__pct--drop {
+    color: var(--adm-danger);
+    font-weight: 700;
+}

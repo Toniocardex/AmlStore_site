@@ -1326,6 +1326,35 @@
             : ['abandoned', 'Abbandonato'];
     }
 
+    /* Etichette brevi: la colonna sta accanto a Stato e non deve allargare la
+       tabella. Le stesse posizioni, per esteso, sono nel funnel della tab
+       Analytics; l'ordine canonico vive in CHECKOUT_FUNNEL_STEPS lato server. */
+    var CART_STEP_LABELS = {
+        checkout_view:              ['Checkout',       'empty'],
+        checkout_contact_started:   ['Dati avviati',   'unknown'],
+        checkout_contact_completed: ['Dati ok',        'active'],
+        checkout_payment_started:   ['Pagamento',      'checkout'],
+        checkout_pay_clicked:       ['Ha premuto paga', 'pending'],
+    };
+
+    /**
+     * Punto piu' avanzato toccato nel checkout.
+     *
+     * Il trattino non vuol dire "non e' mai arrivato al checkout": i carrelli
+     * precedenti alla migrazione che ha aggiunto cart_id non hanno eventi
+     * agganciabili. Il title lo dice, per non far leggere come dato un buco.
+     */
+    function furthestStepCell(c) {
+        var step = c.furthestStep;
+        if (!step) {
+            return '<span class="adm-td--muted" title="Nessun evento di checkout '
+                 + 'collegato: il cliente non ha raggiunto il checkout, oppure il '
+                 + 'carrello precede il tracciamento del funnel.">—</span>';
+        }
+        var info = CART_STEP_LABELS[step] || [step, 'neutral'];
+        return '<span class="adm-badge adm-badge--' + info[1] + '">' + esc(info[0]) + '</span>';
+    }
+
     function renderCartsTable(carts) {
         hide('adm-cart-loading');
 
@@ -1364,6 +1393,7 @@
                 + '<td data-label="Articoli"><div class="adm-items-list">' + (items || '<span class="adm-td--muted">—</span>') + '</div></td>'
                 + '<td class="adm-td--center adm-td--nowrap" data-label="Totale"><strong>' + esc(fmtMoney(c.totalMinor, c.currency)) + '</strong></td>'
                 + '<td data-label="Lingua">' + esc((c.locale || '').toUpperCase()) + '</td>'
+                + '<td class="adm-td--center adm-td--nowrap" data-label="Arrivato a">' + furthestStepCell(c) + '</td>'
                 + '<td class="adm-td--center" data-label="Stato"><span class="adm-badge adm-badge--' + st[0] + '">' + esc(st[1]) + '</span></td>'
                 + '<td class="adm-td--center adm-td--actions">'
                     + (state.cart.capabilities.deleteCarts

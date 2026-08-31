@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply schema.sql (+ stock migration) to all local Miniflare D1 sqlite files used by pages dev."""
+"""Apply schema.sql (+ stock/analytics migrations) to all local Miniflare D1 sqlite files used by pages dev."""
 import sqlite3
 from pathlib import Path
 
@@ -7,6 +7,23 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = (ROOT / "schema.sql").read_text(encoding="utf-8")
 STOCK = (ROOT / "schema-stock-migration.sql").read_text(encoding="utf-8")
 CHAT_CORE = (ROOT / "migrations" / "0002_chat_core.sql").read_text(encoding="utf-8")
+# listCarts fa un LEFT JOIN su analytics_events per lo step raggiunto: senza
+# questa tabella la lista carrelli dell'admin fallirebbe in locale con
+# "no such table". La ALTER della migrazione funnel non e' idempotente, quindi
+# la colonna cart_id sta direttamente nella CREATE TABLE qui sotto.
+EVENTS = (ROOT / "schema-analytics-events-migration.sql").read_text(encoding="utf-8")
+# page_views + le sue ALTER: senza, la tab Analytics dell'admin risponde 500 in
+# locale ("no such table: page_views") e non e' verificabile.
+PAGE_VIEWS = (ROOT / "schema-analytics-migration.sql").read_text(encoding="utf-8")
+# Le ALTER non sono ripetibili: raccolte qui e applicate ignorando il duplicato.
+ALTERS = [
+    "ALTER TABLE page_views ADD COLUMN is_bot INTEGER NOT NULL DEFAULT 0;",
+    "CREATE INDEX IF NOT EXISTS idx_page_views_day_is_bot ON page_views(day, is_bot);",
+    "ALTER TABLE page_views ADD COLUMN suggested_lang TEXT;",
+    "CREATE INDEX IF NOT EXISTS idx_page_views_day_suggested_lang ON page_views(day, suggested_lang);",
+    "ALTER TABLE analytics_events ADD COLUMN cart_id TEXT;",
+    "CREATE INDEX IF NOT EXISTS idx_analytics_events_cart ON analytics_events(cart_id);",
+]
 D1_DIRS = [
     ROOT / ".wrangler" / "state-chat" / "v3" / "d1" / "miniflare-D1DatabaseObject",
     ROOT / ".wrangler" / "state-pages" / "v3" / "d1" / "miniflare-D1DatabaseObject",
@@ -82,6 +99,14 @@ for d1_dir in existing_dirs:
         con.executescript(SCHEMA)
         con.executescript(STOCK)
         con.executescript(CHAT_CORE)
+        con.executescript(EVENTS)
+        con.executescript(PAGE_VIEWS)
+        for stmt in ALTERS:
+            try:
+                con.execute(stmt)
+            except sqlite3.OperationalError as exc:
+                if "duplicate column name" not in str(exc):
+                    raise
         upgrade_deletion_jobs(con)
         con.commit()
         tables = [r[0] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
