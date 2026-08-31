@@ -702,7 +702,17 @@ const ACTIVATION = {
     },
     kaspersky: { kind: 'button', url: 'https://my.kaspersky.com',           label: activationLabels('My Kaspersky') },
     norton:    { kind: 'button', url: 'https://my.norton.com',              label: activationLabels('My Norton') },
-    mcafee:    { kind: 'button', url: 'https://www.mcafee.com/my-account/', label: activationLabels('McAfee My Account') },
+    // Pagina ufficiale di attivazione del codice prodotto (sostituisce la vecchia
+    // area my-account): etichetta dedicata, non segue il pattern "Attiva su <portale>".
+    mcafee:    { kind: 'button', url: 'https://www.mcafee.com/it-it/consumer-support/activate-product-key.html', label: {
+        it: 'Attiva il codice prodotto →',
+        en: 'Activate your product key →',
+        fr: 'Activer votre clé produit →',
+        de: 'Produktschlüssel aktivieren →',
+        es: 'Activar la clave de producto →',
+        pt: 'Ativar a chave do produto →',
+        nl: 'Productsleutel activeren →',
+    } },
     eset:      { kind: 'button', url: 'https://home.eset.com',              label: activationLabels('ESET HOME') },
     adobe:     { kind: 'button', url: 'https://account.adobe.com',          label: activationLabels('account Adobe') },
     acronis:   { kind: 'button', url: 'https://account.acronis.com',        label: activationLabels('account Acronis') },
