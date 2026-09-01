@@ -29,6 +29,17 @@
         de: '/de/cart', es: '/es/cart', pt: '/pt/cart', nl: '/nl/cart',
     };
 
+    /* Copertina di ripiego per le miniature del riepilogo: percorso assoluto
+       perche' il checkout vive sotto /<lang>/ in tutte e sette le lingue. */
+    const FALLBACK_THUMB = '/asset/media/product-cover-fallback.webp';
+
+    /** Fa cadere una miniatura sulla copertina di ripiego se la sua non carica. */
+    function bindThumbFallback(img) {
+        img.addEventListener('error', function () {
+            if (img.getAttribute('src') !== FALLBACK_THUMB) img.src = FALLBACK_THUMB;
+        });
+    }
+
     /* ─── Stato PayPal SDK ─────────────────────────────────────────────────── */
 
     var _ppSdkLoaded  = false;
@@ -568,6 +579,27 @@
 
     /* ─── Metodi di pagamento — visibilità ────────────────────────────────── */
 
+    /**
+     * Nasconde la barra azioni quando nessuno dei due bottoni di submit e'
+     * visibile.
+     *
+     * Serve con PayPal selezionato: li' la CTA sono i bottoni dell'SDK e
+     * entrambi i submit sono spenti. Su mobile la barra e' una superficie fissa
+     * con bordo e sfondo, quindi senza questo resterebbe in fondo allo schermo
+     * come una striscia vuota. Legge lo stato dal DOM invece di riceverlo come
+     * argomento, cosi' vale anche per showStripeUnavailable(), che spegne il
+     * bottone carta da un altro punto del flusso.
+     */
+    function syncActionsBar() {
+        var bar = document.querySelector('.checkout-actions');
+        if (!bar) return;
+        var anyVisible = ['btn-stripe-submit', 'btn-transfer-submit'].some(function (id) {
+            var el = document.getElementById(id);
+            return el && !el.hidden && el.style.display !== 'none';
+        });
+        bar.hidden = !anyVisible;
+    }
+
     function initPaymentMethod() {
         var radios          = document.querySelectorAll('input[name="payment-method"]');
         var stripeSection   = document.getElementById('stripe-section');
@@ -588,6 +620,7 @@
             var stripeBtnOk = method === 'stripe' && (!isOnPageStripe() || _stripeEnabled);
             if (btnStripe)   btnStripe.style.display   = stripeBtnOk ? '' : 'none';
             if (btnTransfer) btnTransfer.style.display  = method === 'transfer' ? '' : 'none';
+            syncActionsBar();
 
             if (method === 'paypal') initPaypalButtons();
             if (method === 'stripe' && isOnPageStripe()) maybeMountPaymentElement();
@@ -697,6 +730,7 @@
             var lineMinor = Math.round(Number(line.unitAmount) || 0) * qty;
 
             var item  = document.createElement('div'); item.className  = 'checkout-item';
+            var thumb = document.createElement('img'); thumb.className = 'checkout-item-thumb';
             var info  = document.createElement('div'); info.className  = 'checkout-item-info';
             var name  = document.createElement('div'); name.className  = 'checkout-item-name';
             var qtyEl = document.createElement('div'); qtyEl.className = 'checkout-item-qty';
@@ -706,8 +740,20 @@
             qtyEl.textContent = (container.getAttribute('data-qty-label') || 'Qtà') + ': ' + qty;
             price.textContent = formatMoney(lineMinor, currency);
 
+            // Stessa copertina e stesso fallback del carrello: le righe salvate
+            // prima di questa versione non hanno `image`, e senza fallback
+            // resterebbe un'icona di immagine rotta dentro il riepilogo.
+            thumb.src = line.image || FALLBACK_THUMB;
+            thumb.alt = '';
+            thumb.width = 44;
+            thumb.height = 44;
+            thumb.loading = 'lazy';
+            thumb.decoding = 'async';
+            bindThumbFallback(thumb);
+
             info.appendChild(name);
             info.appendChild(qtyEl);
+            item.appendChild(thumb);
             item.appendChild(info);
             item.appendChild(price);
             container.appendChild(item);
@@ -731,7 +777,12 @@
 
         // Mirror sul riepilogo comprimibile mobile (<details> nativo, zero JS)
         var mItems = document.getElementById('mcheckout-items');
-        if (mItems) mItems.innerHTML = container.innerHTML;
+        if (mItems) {
+            mItems.innerHTML = container.innerHTML;
+            // innerHTML serializza il markup ma non porta con se' i listener:
+            // le copie vanno riagganciate o qui il ripiego non scatterebbe.
+            mItems.querySelectorAll('.checkout-item-thumb').forEach(bindThumbFallback);
+        }
         [
             ['mcheckout-grand-total',   formatMoney(minor, currency)],
             ['mcheckout-grand-total-2', formatMoney(minor, currency)],
@@ -873,6 +924,7 @@
         ids.forEach(function (id) { var el = document.getElementById(id); if (el) el.hidden = true; });
         var btn = document.getElementById('btn-stripe-submit');
         if (btn) btn.style.display = 'none';
+        syncActionsBar();
         var un = document.getElementById('stripe-unavailable');
         if (un) un.hidden = false;
 
@@ -914,6 +966,7 @@
                 if (selected && selected.value === 'stripe') {
                     var btn = document.getElementById('btn-stripe-submit');
                     if (btn) btn.style.display = '';
+                    syncActionsBar();
                     maybeMountPaymentElement();
                 }
                 mountExpressCheckout();

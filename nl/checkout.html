@@ -70,7 +70,7 @@
 
         <!-- Empty cart section -->
         <div id="checkout-empty-section" class="checkout-empty" aria-live="polite">
-            <div class="checkout-empty-icon" aria-hidden="true">🛒</div>
+            <div class="checkout-empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
             <h2>Uw winkelwagen is leeg</h2>
             <p>Voeg producten toe aan uw winkelwagen voordat u gaat afrekenen.</p>
             <a class="btn-back-shop" href="/nl/#piu-venduti">Terug naar de catalogus</a>
@@ -185,7 +185,7 @@
                                             inputmode="email"
                                         >
                                     </div>
-                                <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-row--2">
                                     <div class="form-field">
                                         <label for="field-first-name">Voornaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
                                         <input
@@ -209,8 +209,8 @@
                                         >
                                     </div>
                                 </div>
-                                <div class="form-field" style="margin-top: 1rem;">
-                                        <label for="field-phone">Telefoon <span style="font-weight:400;color:var(--page-text-muted)">(optioneel)</span></label>
+                                <div class="form-field">
+                                        <label for="field-phone">Telefoon <span class="field-optional">(optioneel)</span></label>
                                         <input
                                             type="tel"
                                             id="field-phone"
@@ -242,7 +242,7 @@
                                             inputmode="email"
                                         >
                                     </div>
-                                <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-row--2">
                                     <div class="form-field">
                                         <label for="field-first-name-b">Voornaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
                                         <input
@@ -266,8 +266,8 @@
                                         >
                                     </div>
                                 </div>
-                                <div class="form-field" style="margin-top: 1rem;">
-                                        <label for="field-phone-b">Telefoon <span style="font-weight:400;color:var(--page-text-muted)">(optioneel)</span></label>
+                                <div class="form-field">
+                                        <label for="field-phone-b">Telefoon <span class="field-optional">(optioneel)</span></label>
                                         <input
                                             type="tel"
                                             id="field-phone-b"
@@ -308,7 +308,7 @@
                                         <div class="form-field">
                                             <label for="field-sdi">
                                                 SDI-code
-                                                <span style="font-weight:400;color:var(--page-text-muted)">(optioneel als PEC is ingevuld)</span>
+                                                <span class="field-optional">(optioneel als PEC is ingevuld)</span>
                                             </label>
                                             <input
                                                 type="text"
@@ -319,12 +319,12 @@
                                                 autocomplete="off"
                                                 aria-describedby="sdi-hint"
                                             >
-                                            <p id="sdi-hint" class="field-hint" style="font-size:0.74rem;color:var(--page-text-muted);margin:0.2rem 0 0;">7 alfanumerieke tekens — vul SDI of PEC in</p>
+                                            <p id="sdi-hint" class="field-hint">7 alfanumerieke tekens — vul SDI of PEC in</p>
                                         </div>
                                         <div class="form-field">
                                             <label for="field-pec">
                                                 PEC-e-mail
-                                                <span style="font-weight:400;color:var(--page-text-muted)">(optioneel als SDI is ingevuld)</span>
+                                                <span class="field-optional">(optioneel als SDI is ingevuld)</span>
                                             </label>
                                             <input
                                                 type="email"
@@ -342,15 +342,15 @@
 
                         <!-- ── 1b. Verzendadres (alleen als de winkelwagen fysieke artikelen bevat) ── -->
                         <section id="shipping-section" class="form-section" aria-labelledby="section-title-shipping" hidden>
-                            <p id="section-title-shipping" class="form-section-title">📦 Verzendadres</p>
-                            <p class="field-hint" style="margin:-0.5rem 0 1rem;">Uw winkelwagen bevat een fysiek artikel (dvd of COA-sticker) dat per post naar u wordt verzonden.</p>
+                            <p id="section-title-shipping" class="form-section-title">Verzendadres</p>
+                            <p class="field-hint">Uw winkelwagen bevat een fysiek artikel (dvd of COA-sticker) dat per post naar u wordt verzonden.</p>
 
                             <div class="form-field">
                                 <label for="field-address">Adres (straat en huisnummer) <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
                                 <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="Keizersgracht 1">
                             </div>
 
-                            <div class="form-row--2" style="margin-top: 1rem;">
+                            <div class="form-row--2">
                                 <div class="form-field">
                                     <label for="field-city">Plaats <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
                                     <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="Amsterdam">
@@ -361,9 +361,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-row--2" style="margin-top: 1rem;">
+                            <div class="form-row--2">
                                 <div class="form-field">
-                                    <label for="field-province">Provincie / staat <span style="font-weight:400;color:var(--page-text-muted)">(optioneel)</span></label>
+                                    <label for="field-province">Provincie / staat <span class="field-optional">(optioneel)</span></label>
                                     <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
                                 </div>
                                 <div class="form-field">
@@ -509,24 +509,26 @@
                             data-payment-unconfirmed-notice="We konden de uitkomst van de betaling niet bevestigen. Plaats de bestelling niet opnieuw: mail ons op Desk@eurolicenze.com, dan controleren wij of er is afgeschreven."
                         ></div>
 
-                        <button
-                            type="button"
-                            id="btn-stripe-submit" class="btn-checkout-primary" aria-label="Met kaart betalen en de licentie per e-mail ontvangen"
-                        >
-                            <span class="btn-spinner" aria-hidden="true"></span>
-                            <span class="btn-text">🔒 <span id="btn-pay-amount">—</span> betalen — licentie direct</span>
-                        </button>
+                        <div class="checkout-actions">
+                            <button
+                                type="button"
+                                id="btn-stripe-submit" class="btn-checkout-primary" aria-label="Met kaart betalen en de licentie per e-mail ontvangen"
+                            >
+                                <span class="btn-spinner" aria-hidden="true"></span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text"><span id="btn-pay-amount">—</span> betalen — licentie direct</span>
+                            </button>
 
-                        <button
-                            type="button"
-                            id="btn-transfer-submit"
-                            class="btn-checkout-primary"
-                            style="display:none;"
-                            aria-label="Bestelling bevestigen en instructies voor bankoverschrijving bekijken"
-                        >
-                            <span class="btn-spinner" aria-hidden="true"></span>
-                            <span class="btn-text">Bestelling bevestigen</span>
-                        </button>
+                            <button
+                                type="button"
+                                id="btn-transfer-submit"
+                                class="btn-checkout-primary"
+                                style="display:none;"
+                                aria-label="Bestelling bevestigen en instructies voor bankoverschrijving bekijken"
+                            >
+                                <span class="btn-spinner" aria-hidden="true"></span>
+                                <span class="btn-text">Bestelling bevestigen</span>
+                            </button>
+                        </div>
 
                         <div class="checkout-guarantee-box" role="note">
                             <p class="checkout-guarantee-box__title">
@@ -604,10 +606,6 @@
                                 data-qty-label="Aantal"
                             ></div>
 
-                            <p class="checkout-stock-badge">
-                                <span aria-hidden="true">✓</span> Direct beschikbaar · levering per e-mail
-                            </p>
-
                             <div class="checkout-totals">
                                 <div class="checkout-total-row">
                                     <span class="checkout-total-label">Subtotaal</span>
@@ -624,7 +622,7 @@
                             </div>
 
                             <div class="checkout-trust" aria-label="Betaalbeveiliging">
-                                <span class="checkout-trust-icon" aria-hidden="true">🔒</span>
+                                <span class="checkout-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>
                                 <span>Beveiligde SSL-betaling · Stripe PCI-DSS</span>
                             </div>
 

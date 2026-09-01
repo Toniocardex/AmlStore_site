@@ -1,10 +1,6 @@
 /**
  * Pagina carrello — token da page.css.
  */
-.cart-page {
-    max-width: var(--aml-maxw);
-}
-
 .cart-page .cart-breadcrumbs {
     display: flex;
     flex-wrap: wrap;

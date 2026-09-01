@@ -69,7 +69,7 @@
         </ol>
 
         <div id="checkout-empty-section" class="checkout-empty" aria-live="polite">
-            <div class="checkout-empty-icon" aria-hidden="true">🛒</div>
+            <div class="checkout-empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
             <h2>Ihr Warenkorb ist leer</h2>
             <p>Fügen Sie Produkte zu Ihrem Warenkorb hinzu, bevor Sie zur Kasse gehen.</p>
             <a class="btn-back-shop" href="/de/#piu-venduti">Zurück zum Katalog</a>
@@ -141,7 +141,7 @@
                                         <label for="field-email">E-Mail für Zustellung <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr> <span class="field-note-ok">Sofortiger Versand</span></label>
                                         <input type="email" id="field-email" name="email" required autocomplete="email" placeholder="max.mueller@email.de" inputmode="email">
                                     </div>
-                                <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-row--2">
                                     <div class="form-field">
                                         <label for="field-first-name">Vorname <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
                                         <input type="text" id="field-first-name" name="firstName" required autocomplete="given-name" placeholder="Max">
@@ -151,8 +151,8 @@
                                         <input type="text" id="field-last-name" name="lastName" required autocomplete="family-name" placeholder="Müller">
                                     </div>
                                 </div>
-                                <div class="form-field" style="margin-top: 1rem;">
-                                        <label for="field-phone">Telefon <span style="font-weight:400;color:var(--page-text-muted)">(optional)</span></label>
+                                <div class="form-field">
+                                        <label for="field-phone">Telefon <span class="field-optional">(optional)</span></label>
                                         <input type="tel" id="field-phone" name="phone" autocomplete="tel" placeholder="+49 170 0000000" inputmode="tel">
                                     </div>
                             </div>
@@ -162,7 +162,7 @@
                                         <label for="field-email-b">E-Mail für Zustellung <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr> <span class="field-note-ok">Sofortiger Versand</span></label>
                                         <input type="email" id="field-email-b" name="email" required autocomplete="email" placeholder="max@unternehmen.de" inputmode="email">
                                     </div>
-                                <div class="form-row--2" style="margin-top: 1rem;">
+                                <div class="form-row--2">
                                     <div class="form-field">
                                         <label for="field-first-name-b">Vorname <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
                                         <input type="text" id="field-first-name-b" name="firstName" required autocomplete="given-name" placeholder="Max">
@@ -172,8 +172,8 @@
                                         <input type="text" id="field-last-name-b" name="lastName" required autocomplete="family-name" placeholder="Müller">
                                     </div>
                                 </div>
-                                <div class="form-field" style="margin-top: 1rem;">
-                                        <label for="field-phone-b">Telefon <span style="font-weight:400;color:var(--page-text-muted)">(optional)</span></label>
+                                <div class="form-field">
+                                        <label for="field-phone-b">Telefon <span class="field-optional">(optional)</span></label>
                                         <input type="tel" id="field-phone-b" name="phone" autocomplete="tel" placeholder="+49 30 0000000" inputmode="tel">
                                     </div>
                                 <div class="business-fields">
@@ -187,12 +187,12 @@
                                     </div>
                                     <div class="form-row--2">
                                         <div class="form-field">
-                                            <label for="field-sdi">SDI-Code <span style="font-weight:400;color:var(--page-text-muted)">(opt. wenn PEC angegeben)</span></label>
+                                            <label for="field-sdi">SDI-Code <span class="field-optional">(opt. wenn PEC angegeben)</span></label>
                                             <input type="text" id="field-sdi" name="sdi" placeholder="0000000" maxlength="7" autocomplete="off" aria-describedby="sdi-hint">
                                             <p id="sdi-hint" style="font-size:0.74rem;color:var(--page-text-muted);margin:0.2rem 0 0;">7 alphanumerische Zeichen — SDI oder PEC erforderlich</p>
                                         </div>
                                         <div class="form-field">
-                                            <label for="field-pec">PEC <span style="font-weight:400;color:var(--page-text-muted)">(opt. wenn SDI angegeben)</span></label>
+                                            <label for="field-pec">PEC <span class="field-optional">(opt. wenn SDI angegeben)</span></label>
                                             <input type="email" id="field-pec" name="pec" placeholder="rechnung@pec.unternehmen.de" inputmode="email" autocomplete="off">
                                         </div>
                                     </div>
@@ -201,13 +201,13 @@
                         </section>
 
                         <section id="shipping-section" class="form-section" aria-labelledby="section-title-shipping" hidden>
-                            <p id="section-title-shipping" class="form-section-title">📦 Lieferadresse</p>
-                            <p class="field-hint" style="margin:-0.5rem 0 1rem;">Ihr Warenkorb enthält einen physischen Artikel (DVD oder COA-Aufkleber), der Ihnen per Post zugeschickt wird.</p>
+                            <p id="section-title-shipping" class="form-section-title">Lieferadresse</p>
+                            <p class="field-hint">Ihr Warenkorb enthält einen physischen Artikel (DVD oder COA-Aufkleber), der Ihnen per Post zugeschickt wird.</p>
                             <div class="form-field">
                                 <label for="field-address">Adresse (Straße und Hausnummer) <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
                                 <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="Musterstraße 12">
                             </div>
-                            <div class="form-row--2" style="margin-top: 1rem;">
+                            <div class="form-row--2">
                                 <div class="form-field">
                                     <label for="field-city">Stadt <abbr title="Pflichtfeld" aria-label="Pflichtfeld">*</abbr></label>
                                     <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="Berlin">
@@ -217,9 +217,9 @@
                                     <input type="text" id="field-postal-code" name="postalCode" autocomplete="postal-code" placeholder="10115">
                                 </div>
                             </div>
-                            <div class="form-row--2" style="margin-top: 1rem;">
+                            <div class="form-row--2">
                                 <div class="form-field">
-                                    <label for="field-province">Bundesland <span style="font-weight:400;color:var(--page-text-muted)">(optional)</span></label>
+                                    <label for="field-province">Bundesland <span class="field-optional">(optional)</span></label>
                                     <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
                                 </div>
                                 <div class="form-field">
@@ -326,14 +326,16 @@
                             data-payment-failed-notice="Die Zahlung war nicht erfolgreich und es wurde nichts abgebucht. Versuchen Sie es erneut oder wählen Sie eine andere Methode."
                             data-payment-unconfirmed-notice="Wir konnten das Ergebnis der Zahlung nicht bestätigen. Bitte bestellen Sie nicht erneut: Schreiben Sie an Desk@eurolicenze.com, wir prüfen, ob die Abbuchung erfolgt ist."></div>
 
-                        <button type="button" id="btn-stripe-submit" class="btn-checkout-primary" aria-label="Mit Karte bezahlen und Lizenz per E-Mail erhalten">
-                            <span class="btn-spinner" aria-hidden="true"></span>
-                            <span class="btn-text">🔒 <span id="btn-pay-amount">—</span> bezahlen — Lizenz sofort</span>
-                        </button>
-                        <button type="button" id="btn-transfer-submit" class="btn-checkout-primary" style="display:none;" aria-label="Bestellung bestätigen und Überweisungsdaten anzeigen">
-                            <span class="btn-spinner" aria-hidden="true"></span>
-                            <span class="btn-text">Bestellung bestätigen</span>
-                        </button>
+                        <div class="checkout-actions">
+                            <button type="button" id="btn-stripe-submit" class="btn-checkout-primary" aria-label="Mit Karte bezahlen und Lizenz per E-Mail erhalten">
+                                <span class="btn-spinner" aria-hidden="true"></span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text"><span id="btn-pay-amount">—</span> bezahlen — Lizenz sofort</span>
+                            </button>
+                            <button type="button" id="btn-transfer-submit" class="btn-checkout-primary" style="display:none;" aria-label="Bestellung bestätigen und Überweisungsdaten anzeigen">
+                                <span class="btn-spinner" aria-hidden="true"></span>
+                                <span class="btn-text">Bestellung bestätigen</span>
+                            </button>
+                        </div>
 
                         <div class="checkout-guarantee-box" role="note">
                             <p class="checkout-guarantee-box__title">
@@ -374,9 +376,6 @@
                         <p class="checkout-summary-title">Bestellübersicht</p>
                         <div id="checkout-summary-body">
                             <div id="checkout-items" class="checkout-items" aria-live="polite" data-qty-label="Menge"></div>
-                            <p class="checkout-stock-badge">
-                                <span aria-hidden="true">✓</span> Sofort verfügbar · Lieferung per E-Mail
-                            </p>
 
                             <div class="checkout-totals">
                                 <div class="checkout-total-row"><span class="checkout-total-label">Zwischensumme</span><span id="checkout-subtotal">—</span></div>
@@ -384,7 +383,7 @@
                                 <div class="checkout-total-row checkout-grand-total"><span class="checkout-total-label">Gesamt</span><span id="checkout-grand-total">—</span></div>
                             </div>
                             <div class="checkout-trust" aria-label="Zahlungssicherheit">
-                                <span class="checkout-trust-icon" aria-hidden="true">🔒</span>
+                                <span class="checkout-trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span>
                                 <span>Sichere SSL-Zahlung · Stripe PCI-DSS</span>
                             </div>
 
