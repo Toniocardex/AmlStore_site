@@ -1,14 +1,42 @@
 #!/usr/bin/env python3
-"""Generate static contacts.html for it/en/fr/de/es — corporate layout.
+# -*- coding: utf-8 -*-
+"""Guardia sulle pagine contacts.html (7 lingue).
 
-Content (support hours, address, VAT) matches the JSON-LD below and the
-translated labels already used in components/footer.js, so this stays a
-single source of truth for the five language variants.
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
+
+Fino a settembre 2026 main() chiamava page(lang) e sovrascriveva le 7 pagine.
+Era sfuggito ai giri di disarmo precedenti perche' non chiama
+build_product_page(): ha un page() suo, e non e' una scheda prodotto.
+
+Eseguirlo oggi distruggerebbe circa tre quarti di ogni pagina: page() rende
+10,5-10,7 KB contro pagine pubblicate di 39,9-40,4 KB, 7 diff su 7 e un delta
+di 29,4-29,7 KB. Tutti e quattro i marcatori di PIPELINE_MARKERS sono presenti
+nel pubblicato e assenti nel generato, su tutte e 7. Il perche', e i cinque
+strati che andrebbero persi, stanno in scripts/page_pipeline_guard.py.
+
+COPY resta la sorgente unica dei contenuti (orari di supporto, indirizzo, IVA),
+coerente con il JSON-LD e con le etichette tradotte di components/footer.js.
+Ma aggiornarlo non basta piu' a propagare la modifica: rieseguire lo script
+butterebbe via la post-produzione, quindi il cambiamento va riportato a mano
+sulla pagina pubblicata.
+
+Nota: il vecchio docstring diceva "it/en/fr/de/es", ma COPY contiene da tempo
+tutte e 7 le lingue e tutte e 7 le contacts.html esistono. La riga era stale.
+
+Quel che lo script fa ancora, e per cui va tenuto: verifica che le 7 pagine
+esistano con i quattro strati addosso. Senza effetti collaterali, non scrive
+nulla.
+
+    python scripts/write-contacts-pages.py
 """
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
 
 LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "nl": "nl_NL"}
 
@@ -421,10 +449,15 @@ def page(lang: str) -> str:
 
 
 def main():
+    errors = []
     for lang in COPY:
-        path = ROOT / lang / "contacts.html"
-        path.write_text(page(lang), encoding="utf-8")
-        print("wrote", path.relative_to(ROOT))
+        html = load(lang, "contacts")
+        if html is None:
+            errors.append(f"{lang}/contacts.html: manca la pagina contatti")
+            continue
+        errors += pipeline_errors(lang, "contacts", html)
+
+    fail_if(errors, f"OK: pagina contatti x {len(COPY)} lingue")
 
 
 if __name__ == "__main__":

@@ -1,25 +1,39 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Genera le 5 pagine di confronto (wave 1 SEO/GEO) in tutte le 7 lingue.
+"""Guardia sulle 5 pagine di confronto (wave 1 SEO/GEO) in 7 lingue = 35 file.
 
-Contenuto tradotto a mano (prezzi e feature ancorati al catalogo reale,
-nessun dato inventato), stessa struttura HTML in ogni lingua cosi' le
-pagine restano confrontabili tra loro. Il chrome header/footer resta
-vuoto (<ecommerce-header>/<ecommerce-footer> senza contenuto): lo
-riempie build-inline-chrome.mjs, come per le pagine del generatore.
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
 
-Uso:
+Fino a settembre 2026 il blocco __main__ chiamava render() e sovrascriveva i 35
+file. Era sfuggito ai giri di disarmo precedenti perche' non chiama
+build_product_page() ne' build_catalog_page(): ha un render() suo.
+
+Eseguirlo oggi distruggerebbe circa due terzi di ogni pagina: render() rende
+11,7-13,6 KB contro pagine pubblicate di 41,1-43,2 KB, 35 diff su 35 e un delta
+di 29,4-29,7 KB. Mancano nel generato header e footer inline e il cache busting
+?v= (il banner lang-suggest c'e' gia'). Il perche', e i cinque strati che
+andrebbero persi, stanno in scripts/page_pipeline_guard.py.
+
+Queste 35 pagine non sono nel registro di generate-wave3.py: nessun altro
+script le sorveglia, quindi qui non c'e' sovrapposizione con nulla.
+
+PAGES e render() restano il contenuto di queste pagine -- tutto il testo delle
+5 comparative in 7 lingue vive qui -- e render() serve anche a rimisurare il
+disallineamento in memoria, come descritto in page_pipeline_guard.py.
+
+Quel che lo script fa ancora, e per cui va tenuto: verifica che le 35 pagine
+esistano con i quattro strati addosso e che siano tutte in sitemap.xml. Senza
+effetti collaterali, non scrive nulla.
+
     python scripts/build_compare_pages.py
-Poi, come sempre dopo aver toccato pagine catalogo/confronto:
-    python scripts/apply-lang-suggest-banner.py
-    node scripts/build-inline-chrome.mjs   (dev server attivo)
-    python scripts/bump-asset-version.py
-    python scripts/rebuild-sitemap.py
 """
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
 TAG_RE = re.compile(r"<[^>]+>")
 LANGS = ("it", "en", "fr", "de", "es", "pt", "nl")
 LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE",
@@ -1927,13 +1941,31 @@ PAGES = [
 ]
 
 
-if __name__ == "__main__":
-    count = 0
+def check_sitemap():
+    """Le 35 pagine di confronto devono essere in sitemap.xml."""
+    text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    return [
+        f"sitemap.xml: manca {lang}/{page['slug']}"
+        for page in PAGES
+        for lang in LANGS
+        if f"https://eurolicenze.com/{lang}/{page['slug']}" not in text
+    ]
+
+
+def main():
+    errors = []
     for page in PAGES:
         for lang in LANGS:
-            out_dir = ROOT / lang
-            out_dir.mkdir(exist_ok=True)
-            path = out_dir / f"{page['slug']}.html"
-            path.write_text(render(page, lang), encoding="utf-8", newline="\n")
-            count += 1
-    print(f"pagine scritte: {count} ({len(PAGES)} confronti x {len(LANGS)} lingue)")
+            html = load(lang, page["slug"])
+            if html is None:
+                errors.append(f"{lang}/{page['slug']}.html: manca il file")
+                continue
+            errors += pipeline_errors(lang, page["slug"], html)
+
+    errors += check_sitemap()
+
+    fail_if(errors, f"OK: {len(PAGES)} confronti x {len(LANGS)} lingue")
+
+
+if __name__ == "__main__":
+    main()

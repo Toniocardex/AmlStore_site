@@ -1,15 +1,43 @@
 #!/usr/bin/env python3
-"""Generate static "Chi siamo" / About pages for it/en/fr/de/es — corporate layout.
+# -*- coding: utf-8 -*-
+"""Guardia sulle pagine "Chi siamo" / About (7 lingue, uno slug per lingua).
 
-Every fact here (founding year, solo operation, order count, Microsoft
-Partner status, markets served) was provided directly by the site owner —
-nothing here is invented. Keep it that way: if a fact changes or a new one
-is added, update COPY below rather than hand-editing the generated HTML.
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
+
+Fino a settembre 2026 main() chiamava page(lang) e sovrascriveva le 7 pagine.
+Era sfuggito ai giri di disarmo precedenti perche' non chiama
+build_product_page(): ha un page() suo, e non e' una scheda prodotto.
+
+Eseguirlo oggi distruggerebbe circa tre quarti di ogni pagina: page() rende
+9,3-9,7 KB contro pagine pubblicate di 38,8-39,5 KB, 7 diff su 7 e un delta di
+29,5-29,7 KB. Tutti e quattro i marcatori di PIPELINE_MARKERS sono presenti nel
+pubblicato e assenti nel generato, su tutte e 7. Il perche', e i cinque strati
+che andrebbero persi, stanno in scripts/page_pipeline_guard.py.
+
+Il docstring diceva: "se un dato cambia, aggiorna COPY invece di modificare a
+mano l'HTML generato". Quel consiglio oggi e' pericoloso: aggiornare COPY e
+rieseguire lo script butterebbe via la post-produzione. Per cambiare un dato si
+modifica la pagina pubblicata, oppure si aggiorna COPY qui e si riporta la
+modifica a mano.
+
+I fatti in COPY (anno di fondazione, gestione individuale, numero di ordini,
+stato Microsoft Partner, mercati serviti) vengono dal proprietario del sito:
+niente qui e' inventato, e va tenuto cosi'.
+
+Quel che lo script fa ancora, e per cui va tenuto: verifica che le 7 pagine
+esistano, una per lingua con lo slug giusto, e con i quattro strati addosso.
+Senza effetti collaterali, non scrive nulla.
+
+    python scripts/write-about-page.py
 """
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
 
 LOCALE = {"it": "it_IT", "en": "en_US", "fr": "fr_FR", "de": "de_DE", "es": "es_ES", "pt": "pt_PT", "nl": "nl_NL"}
 
@@ -448,10 +476,16 @@ def page(lang: str) -> str:
 
 
 def main():
+    errors = []
     for lang in COPY:
-        path = ROOT / lang / f"{SLUG[lang]}.html"
-        path.write_text(page(lang), encoding="utf-8")
-        print("wrote", path.relative_to(ROOT))
+        slug = SLUG[lang]
+        html = load(lang, slug)
+        if html is None:
+            errors.append(f"{lang}/{slug}.html: manca la pagina Chi siamo")
+            continue
+        errors += pipeline_errors(lang, slug, html)
+
+    fail_if(errors, f"OK: pagina Chi siamo x {len(COPY)} lingue")
 
 
 if __name__ == "__main__":
