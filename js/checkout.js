@@ -815,19 +815,6 @@
         trackFunnel('checkout_view');
     }
 
-    /* ─── Toggle riepilogo mobile ──────────────────────────────────────────── */
-
-    function initSummaryToggle() {
-        var btn  = document.getElementById('summary-toggle-btn');
-        var body = document.getElementById('checkout-summary-body');
-        if (!btn || !body) return;
-        btn.addEventListener('click', function () {
-            var expanded = btn.getAttribute('aria-expanded') === 'true';
-            btn.setAttribute('aria-expanded', String(!expanded));
-            body.hidden = expanded;
-        });
-    }
-
     /* ─── Flusso Stripe legacy (Checkout ospitato, redirect) — lingue non IT ─── */
 
     function handleStripeSubmit(e) {
@@ -1377,7 +1364,6 @@
     function setPaypalLoadingVisible(loadingEl, visible) {
         if (!loadingEl) return;
         loadingEl.hidden = !visible;
-        loadingEl.classList.toggle('is-visible', visible);
     }
 
     function initPaypalButtons() {
@@ -1608,7 +1594,6 @@
         initSDIUppercase();
         initPaymentMethod();
         initProgressiveSections();
-        initSummaryToggle();
         initSubmitButtons();
         initCartEmailSync();
         initReturnNotice();

@@ -31,32 +31,6 @@
     max-width: 1000px;
 }
 
-.checkout-breadcrumbs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--page-text-muted);
-    margin-bottom: 1.5rem;
-}
-
-.checkout-breadcrumbs a {
-    color: var(--page-text-secondary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.checkout-breadcrumbs a:hover {
-    color: var(--page-text);
-}
-
-.checkout-breadcrumbs .sep {
-    color: var(--page-text-muted);
-    user-select: none;
-}
-
 /* La colonna del form era ~690px: email e telefono a piena larghezza avevano una
    misura di riga sproporzionata. Con pagina a 1000px e riepilogo a 340 il form
    scende a ~620px, larghezza corretta per campi a una e due colonne. */
@@ -267,10 +241,6 @@
     position: relative;
 }
 
-.customer-tab-panel[hidden] {
-    display: none;
-}
-
 /* Campi aziendali extra */
 /* Niente gap qui: la distanza fra i gruppi di campi la impone gia' la regola
    sui fratelli adiacenti piu' sotto, e sommare le due sorgenti raddoppiava lo
@@ -425,11 +395,6 @@
     object-position: center;
 }
 
-.payment-icon--img.payment-icon--paypal-wide img {
-    max-width: 56px;
-    height: 15px;
-}
-
 .payment-icon--img.payment-icon--transfer img {
     max-width: 42px;
     height: 15px;
@@ -509,57 +474,6 @@
     border-top: 1px solid var(--page-border);
 }
 
-/* ─── PayPal (testo placeholder — non usato se c’è .payment-icon--img) ─────── */
-
-.payment-icon--paypal {
-    background: #003087;
-    color: #fff;
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.03em;
-    padding: 0.18rem 0.55rem;
-    border-radius: 4px;
-    border: none;
-}
-
-.paypal-section {
-    margin-top: 1.1rem;
-}
-
-.paypal-buttons-container {
-    /* Riserva spazio minimo mentre i bottoni PayPal si renderizzano */
-    min-height: 50px;
-}
-
-.paypal-loading {
-    display: none;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--page-text-muted);
-    font-size: 0.82rem;
-    padding: 0.6rem 0;
-}
-
-.paypal-loading.is-visible {
-    display: flex;
-}
-
-.paypal-loading::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid var(--page-border);
-    border-top-color: var(--page-accent);
-    border-radius: 50%;
-    animation: spinner-rotate 0.7s linear infinite;
-    flex-shrink: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .paypal-loading::before { animation: none; }
-}
-
 /* ─── Sezione conferma ordine bonifico ─────────────────────────────────────── */
 
 .transfer-confirm-section {
@@ -623,40 +537,6 @@
     letter-spacing: var(--checkout-eyebrow-track);
     color: var(--page-text-muted);
     margin: 0 0 1.1rem;
-}
-
-/* Collasso mobile */
-.summary-toggle-btn {
-    display: none;
-    width: 100%;
-    min-height: 44px;
-    padding: 0.75rem 1.1rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--page-text);
-    text-align: left;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-}
-
-.summary-toggle-btn:focus-visible {
-    outline: 2px solid var(--page-accent);
-    outline-offset: 2px;
-}
-
-.summary-toggle-icon {
-    font-size: 0.75rem;
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
-}
-
-.summary-toggle-btn[aria-expanded="true"] .summary-toggle-icon {
-    transform: rotate(180deg);
 }
 
 /* Lista prodotti nel riepilogo */
@@ -960,7 +840,6 @@
     .customer-tab-btn,
     .payment-option-label,
     .btn-checkout-primary,
-    .summary-toggle-icon,
     .btn-back-shop {
         transition: none;
     }
@@ -991,16 +870,8 @@
         order: -1;
     }
 
-    .summary-toggle-btn {
-        display: flex;
-    }
-
     .checkout-summary-title {
         display: none; /* sostituito dal bottone toggle */
-    }
-
-    .checkout-summary-body[hidden] {
-        display: none;
     }
 }
 
@@ -1370,14 +1241,12 @@
 /* Soglia allineata agli 860px del blocco responsive piu' sotto, dove
    .checkout-grid passa a colonna singola. Fermarsi a 767px lasciava una fascia
    768-860px in cui la colonna riepilogo era ancora visibile ma senza
-   intestazione: quel blocco nasconde .checkout-summary-title dando per scontato
-   .summary-toggle-btn, che nel markup nuovo non esiste piu'.
+   intestazione, perche' quel blocco nasconde .checkout-summary-title.
 
-   Il selettore discendente NON e' decorativo: questo foglio e' condiviso con le
-   lingue ancora sul markup vecchio, che non hanno .checkout-msummary. Con un
-   `.checkout-summary-col { display: none }` secco resterebbero senza riepilogo
-   ordine del tutto su mobile. Qui la colonna sparisce solo dove esiste davvero
-   qualcosa che la sostituisce. */
+   Il selettore resta condizionato a .checkout-msummary: la colonna sparisce
+   solo dove esiste davvero qualcosa che la sostituisce. Oggi tutte e 7 le
+   lingue hanno il riepilogo comprimibile, quindi la condizione e' sempre vera;
+   e' una guardia, non un ramo attivo. */
 @media (max-width: 860px) {
     .checkout-msummary {
         display: block;
