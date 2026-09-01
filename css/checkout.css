@@ -5,17 +5,21 @@
 
 /* ─── Layout principale ─────────────────────────────────────────────────────── */
 
-.checkout-page {
-    padding-top: 2.5rem;
-    padding-bottom: 4rem;
-
-    /* Scala delle etichette in maiuscoletto. Prima ogni blocco aveva la sua
-       misura (0.68 / 0.70 / 0.75 / 0.82rem): tre livelli dichiarati qui e usati
-       ovunque tengono allineate intestazioni di sezione e micro-label. */
+/* Scala delle etichette in maiuscoletto. Prima ogni blocco aveva la sua misura
+   (0.68 / 0.70 / 0.75 / 0.82rem): due livelli dichiarati qui e usati ovunque
+   tengono allineate intestazioni di sezione e micro-label. Sta su body e non su
+   .checkout-page perche' la usa anche il chrome header, che di .checkout-page
+   e' fratello e non discendente. */
+body {
     --checkout-eyebrow-size: 0.72rem;
     --checkout-eyebrow-track: 0.07em;
     --checkout-micro-size: 0.68rem;
     --checkout-micro-track: 0.05em;
+}
+
+.checkout-page {
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
 }
 
 .checkout-page h1 {
@@ -1105,15 +1109,27 @@
 .checkout-chrome-header__ssl {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    background: var(--aml-ok-bg);
-    color: var(--aml-ok);
-    font-size: 0.75rem;
+    gap: 0.42rem;
+    padding: 0.34rem 0.6rem;
+    /* 4px come i chip dei metodi di pagamento, non i 6px di CTA e input: e' alto
+       27px come loro, e su quell'altezza 6px legge molto piu' tondo che sui 44-50px
+       di un campo o di un bottone. Stesso raggio in assoluto, non in proporzione. */
+    border-radius: 4px;
+    background: var(--aml-paper-2);
+    border: 1px solid var(--page-border);
+    color: var(--page-text-secondary);
+    font-size: var(--checkout-micro-size);
     font-weight: 700;
-    border: 1px solid color-mix(in srgb, var(--aml-ok) 25%, transparent);
+    letter-spacing: var(--checkout-micro-track);
+    text-transform: uppercase;
     white-space: nowrap;
+}
+
+/* Il verde resta, ma solo qui: basta a dire "sicuro" senza che l'etichetta
+   pesi quanto il logo. */
+.checkout-chrome-header__ssl svg {
+    flex-shrink: 0;
+    color: var(--aml-ok);
 }
 
 /* Sotto i 380px logo e badge sommavano piu' della larghezza dello schermo e la
@@ -1129,8 +1145,7 @@
     }
 
     .checkout-chrome-header__ssl {
-        padding: 0.28rem 0.55rem;
-        font-size: 0.68rem;
+        padding: 0.28rem 0.5rem;
         gap: 0.3rem;
     }
 }
