@@ -412,6 +412,26 @@
                                 </div>
 
 
+                                <!-- PayPal -->
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-paypal"
+                                        value="paypal"
+                                    >
+                                    <label class="payment-option-label" for="pay-paypal">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">PayPal</span>
+                                            <span class="payment-option-desc">Paga con il tuo conto PayPal o con carta</span>
+                                            <span class="payment-icons" aria-label="PayPal">
+                                                <span class="payment-icon payment-icon--img" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+
                                 <!-- Bonifico -->
                                 <div class="payment-option">
                                     <input
@@ -434,6 +454,13 @@
                             </div>
 
                             <!-- Istruzioni bonifico (visibili solo se bonifico selezionato) -->
+                            <!-- Sezione PayPal (i pulsanti dell'SDK fanno da CTA: qui non
+                                 compare nessun bottone di submit del form) -->
+                            <div id="paypal-section" hidden>
+                                <p id="paypal-loading" class="payment-element-loading" hidden aria-live="polite">Caricamento PayPal…</p>
+                                <div id="paypal-buttons-container"></div>
+                            </div>
+
                             <div id="transfer-section" class="transfer-section" hidden aria-live="polite">
                                 <div class="transfer-card">
                                     <h3>Dati per il bonifico</h3>
