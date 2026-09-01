@@ -1,14 +1,43 @@
 #!/usr/bin/env python3
-"""Regenerate all Office-template rich product pages × 5 langs (+ M365 Business Standard)."""
+# -*- coding: utf-8 -*-
+"""Guardia su tutte le schede template Office + M365 Business Standard
+(17 slug x 7 lingue = 119 file).
+
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
+
+Fino a settembre 2026 main() chiamava build_product_page() e sovrascriveva i 119
+file. Eseguirlo oggi ne distruggerebbe circa meta': build_product_page() rende
+24,1-60,8 KB, i file pubblicati stanno fra 53,9 e 90,8 KB, il confronto e' 119
+diff su 119 (nessuna pagina coincide) e il delta e' 29,6-30,3 KB per pagina.
+Non e' un bug della libreria: e' la pipeline di post-produzione che manca.
+Il perche', e i cinque strati che andrebbero persi, stanno in
+scripts/page_pipeline_guard.py.
+
+Oltre alla pipeline, qui si perderebbero anche modifiche di contenuto fatte a
+mano sul solo HTML, che nessun modulo di contenuto conosce:
+
+  - microsoft-365-business-standard (7 lingue): il conteggio dispositivi nel
+    <title>, in og:title e nel "name" del JSON-LD ("... 1 Anno - 15 dispositivi"
+    contro "... 1 Anno | Licenza Originale"), e il passaggio da "Fattura
+    Elettronica con P.IVA" a "Fattura elettronica" in cinque punti della pagina.
+
+Quel che lo script fa ancora, e per cui va tenuto: controlla che ogni slug abbia
+contenuto rich agganciato a resolve_rich_content() (era il suo check iniziale) e
+verifica sulle pagine pubblicate CTA, SKU e i quattro strati. Senza effetti
+collaterali, non scrive nulla.
+
+    python scripts/regen-all-office-rich.py
+"""
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from product_page_lib import LANGS, build_product_page, resolve_rich_content  # noqa: E402
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
+from product_page_lib import LANGS, resolve_rich_content  # noqa: E402
 
-# sku, slug, template, card_name, image fallback
+# sku, slug, template, card_name
 DEFS = [
     ("EP2-06798", "office-2024-home", "office", "Office 2024 Home"),
     ("EP2-06606", "office-2024-home-business", "office", "Office 2024 Home & Business"),
@@ -29,43 +58,26 @@ DEFS = [
     ("KLQ-00388", "microsoft-365-business-standard", "m365", "Microsoft 365 Business Standard"),
 ]
 
-IMG = {
-    "office": "microsoft-365-personal.webp",
-    "m365": "microsoft-365-personal.webp",
-}
-
 
 def main():
-    # Ensure every def has rich content (except we may add m365 later)
-    missing = []
-    for sku, slug, template, card_name in DEFS:
-        content, _ = resolve_rich_content(slug)
-        if not content and slug != "microsoft-365-business-standard":
-            missing.append(slug)
+    missing = [slug for _, slug, _, _ in DEFS if not resolve_rich_content(slug)[0]]
     if missing:
         raise SystemExit(f"Missing rich content for: {missing}")
 
-    for sku, slug, template, card_name in DEFS:
-        content, _ = resolve_rich_content(slug)
-        if not content:
-            print("skip (no rich content yet)", slug)
-            continue
-        prod = {
-            "sku": sku,
-            "slug": slug,
-            "template": template,
-            "card_name": card_name,
-            "image": IMG.get(template, "microsoft-365-personal.webp"),
-        }
+    errors = []
+    for sku, slug, _template, _card_name in DEFS:
         for lang in LANGS:
-            path = ROOT / lang / f"{slug}.html"
-            html = build_product_page(lang, prod)
+            html = load(lang, slug)
+            if html is None:
+                errors.append(f"{lang}/{slug}.html: manca il file")
+                continue
             if 'id="product-primary-cta"' not in html:
-                raise SystemExit(f"CTA missing: {slug}/{lang}")
+                errors.append(f"{lang}/{slug}.html: manca la CTA primaria")
             if f'data-stripe-product-sku="{sku}"' not in html:
-                raise SystemExit(f"SKU missing: {slug}/{lang}")
-            path.write_text(html, encoding="utf-8")
-        print("rich", slug, "×", len(LANGS))
+                errors.append(f"{lang}/{slug}.html: SKU diverso da {sku}")
+            errors += pipeline_errors(lang, slug, html)
+
+    fail_if(errors, f"OK: {len(DEFS)} slug Office/M365 x {len(LANGS)} lingue")
 
 
 if __name__ == "__main__":
