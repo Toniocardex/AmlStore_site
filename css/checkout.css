@@ -1263,11 +1263,13 @@ body {
    lingue hanno il riepilogo comprimibile, quindi la condizione e' sempre vera;
    e' una guardia, non un ramo attivo. */
 @media (max-width: 860px) {
+    /* Scorre via con la pagina invece di restare incollato sotto l'header.
+       Aperto di default e agganciato a top:56px occupava 276px su uno schermo
+       da 780: con la barra CTA fissa in fondo restava poco piu' della meta'
+       dell'altezza per compilare i campi. Il totale resta comunque sempre in
+       vista sul bottone di pagamento. */
     .checkout-msummary {
         display: block;
-        position: sticky;
-        top: 56px;
-        z-index: 20;
     }
 
     .checkout-msummary ~ .checkout-grid .checkout-summary-col {
