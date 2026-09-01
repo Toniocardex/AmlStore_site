@@ -34,6 +34,35 @@ export async function getStockQty(db, sku) {
     return Number.isFinite(q) && q > 0 ? Math.floor(q) : 0;
 }
 
+const STOCK_SNAPSHOT_TTL_MS = 60_000;
+let stockSnapshotCache = null;
+
+/**
+ * Snapshot dell'intero magazzino, con cache breve per isolate.
+ *
+ * SOLO per il livello SEO (JSON-LD e feed Merchant): letture ad alto volume,
+ * dove un valore vecchio di un minuto e' accettabile e una query D1 per
+ * pageview no. Checkout ed evasione NON devono usarlo: assertCartStock e
+ * deductStockForPaidOrder leggono sempre fresco.
+ *
+ * @param {D1Database} db
+ * @returns {Promise<Map<string, number>>} sku -> qty (SKU assente = 0)
+ */
+export async function getStockSnapshot(db) {
+    const nowMs = Date.now();
+    if (stockSnapshotCache && nowMs - stockSnapshotCache.at < STOCK_SNAPSHOT_TTL_MS) {
+        return stockSnapshotCache.map;
+    }
+    const map = new Map();
+    const rows = await db.prepare('SELECT sku, qty FROM product_stock').all();
+    for (const r of rows.results || []) {
+        const q = Math.floor(Number(r.qty));
+        map.set(String(r.sku), Number.isFinite(q) && q > 0 ? q : 0);
+    }
+    stockSnapshotCache = { at: nowMs, map };
+    return map;
+}
+
 /**
  * @param {D1Database} db
  * @returns {Promise<Array<{ sku: string, name: string, qty: number, updatedAt: string|null, updatedBy: string|null }>>}
