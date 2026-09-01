@@ -1524,3 +1524,38 @@
 .checkout-step-lock[hidden] {
     display: none;
 }
+
+/* ═══ Nota accanto all'etichetta email ═════════════════════════════════════ */
+/* Dice a cosa serve l'indirizzo proprio mentre lo si digita: e' il campo su cui
+   arriva la licenza, non un dato raccolto per marketing. Segue l'idioma gia'
+   usato dall'etichetta Telefono, che incorpora uno <span> secondario. */
+
+/* La nota va all'estremita' opposta dell'etichetta, non a capo sotto: e' un
+   dettaglio di rassicurazione, non una seconda riga di istruzioni. */
+.form-field label:has(.field-note-ok) {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.field-note-ok {
+    margin-left: auto;
+    font-weight: 600;
+    font-size: 0.72rem;
+    color: var(--aml-trust-ink, var(--aml-ok));
+    white-space: nowrap;
+}
+
+/* ═══ Riepilogo mobile aperto di default ═══════════════════════════════════ */
+/* Con il riepilogo chiuso si vede solo il totale: si sa quanto si paga ma non
+   per cosa, e verificarlo costa un tocco in piu' proprio dove si esita. Aperto,
+   la voce e' li'. L'altezza e' limitata perche' un carrello lungo non spinga il
+   form fuori schermo: oltre il limite la lista scorre da sola. */
+
+@media (max-width: 860px) {
+    .checkout-msummary[open] .checkout-msummary__items {
+        max-height: 30vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+}

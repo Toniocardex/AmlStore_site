@@ -746,6 +746,18 @@
         if (emptySection)    emptySection.hidden    = true;
         if (checkoutContent) checkoutContent.hidden = false;
 
+        /* Riepilogo mobile aperto di default, ma solo per carrelli corti.
+           Chiuso mostra il totale senza dire per cosa, e verificarlo costa un
+           tocco proprio nel punto in cui si esita. Sopra le 3 voci resta chiuso:
+           aperto spingerebbe il form fuori schermo, che e' peggio del problema
+           che risolve. Se l'utente lo ha gia' aperto o chiuso a mano non si
+           tocca piu' nulla: e' una scelta sua. */
+        var msummary = document.getElementById('checkout-msummary');
+        if (msummary && !msummary.dataset.amlAutoOpened) {
+            msummary.dataset.amlAutoOpened = '1';
+            if (lines.length > 0 && lines.length <= 3) msummary.open = true;
+        }
+
         // Prima posizione del funnel. Va qui e non in init(): e' l'unico punto in
         // cui sappiamo che il carrello non e' vuoto e il form e' davvero a schermo,
         // altrimenti conteremmo come "arrivati al checkout" anche i carrelli vuoti.

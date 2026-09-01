@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <link rel="stylesheet" href="../css/page.css?v=b104e76175">
-    <link rel="stylesheet" href="../css/checkout.css?v=e0f9a74a1f">
+    <link rel="stylesheet" href="../css/checkout.css?v=9d0ecd013f">
     <script src="https://js.stripe.com/v3/"></script>
     <script src="../js/theme-init.js?v=032640d55c"></script>
 </head>
@@ -175,7 +175,19 @@
                                 aria-labelledby="tab-private"
                                 tabindex="0"
                             >
-                                <div class="form-row--2">
+                                <div class="form-field">
+                                        <label for="field-email">Email di consegna <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr> <span class="field-note-ok">Invio immediato</span></label>
+                                        <input
+                                            type="email"
+                                            id="field-email"
+                                            name="email"
+                                            required
+                                            autocomplete="email"
+                                            placeholder="mario.rossi@email.it"
+                                            inputmode="email"
+                                        >
+                                    </div>
+                                <div class="form-row--2" style="margin-top: 1rem;">
                                     <div class="form-field">
                                         <label for="field-first-name">Nome <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
                                         <input
@@ -199,21 +211,7 @@
                                         >
                                     </div>
                                 </div>
-
-                                <div class="form-row--2" style="margin-top: 1rem;">
-                                    <div class="form-field">
-                                        <label for="field-email">Email <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
-                                        <input
-                                            type="email"
-                                            id="field-email"
-                                            name="email"
-                                            required
-                                            autocomplete="email"
-                                            placeholder="mario.rossi@email.it"
-                                            inputmode="email"
-                                        >
-                                    </div>
-                                    <div class="form-field">
+                                <div class="form-field" style="margin-top: 1rem;">
                                         <label for="field-phone">Telefono <span style="font-weight:400;color:var(--page-text-muted)">(opzionale)</span></label>
                                         <input
                                             type="tel"
@@ -224,7 +222,6 @@
                                             inputmode="tel"
                                         >
                                     </div>
-                                </div>
                             </div>
 
                             <!-- Panel azienda -->
@@ -238,7 +235,19 @@
                                 <!-- Stessi campi del privato, condivisi nel DOM -->
                                 <p class="visually-hidden">Compila i campi anagrafici e i dati aziendali qui sotto.</p>
 
-                                <div class="form-row--2">
+                                <div class="form-field">
+                                        <label for="field-email-b">Email di consegna <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr> <span class="field-note-ok">Invio immediato</span></label>
+                                        <input
+                                            type="email"
+                                            id="field-email-b"
+                                            name="email"
+                                            required
+                                            autocomplete="email"
+                                            placeholder="mario.rossi@azienda.it"
+                                            inputmode="email"
+                                        >
+                                    </div>
+                                <div class="form-row--2" style="margin-top: 1rem;">
                                     <div class="form-field">
                                         <label for="field-first-name-b">Nome <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
                                         <input
@@ -262,21 +271,7 @@
                                         >
                                     </div>
                                 </div>
-
-                                <div class="form-row--2" style="margin-top: 1rem;">
-                                    <div class="form-field">
-                                        <label for="field-email-b">Email <abbr title="obbligatorio" aria-label="obbligatorio">*</abbr></label>
-                                        <input
-                                            type="email"
-                                            id="field-email-b"
-                                            name="email"
-                                            required
-                                            autocomplete="email"
-                                            placeholder="mario.rossi@azienda.it"
-                                            inputmode="email"
-                                        >
-                                    </div>
-                                    <div class="form-field">
+                                <div class="form-field" style="margin-top: 1rem;">
                                         <label for="field-phone-b">Telefono <span style="font-weight:400;color:var(--page-text-muted)">(opzionale)</span></label>
                                         <input
                                             type="tel"
@@ -287,7 +282,6 @@
                                             inputmode="tel"
                                         >
                                     </div>
-                                </div>
 
                                 <!-- Campi aziendali aggiuntivi -->
                                 <div class="business-fields">
@@ -667,7 +661,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=d6018dc154" defer></script>
     <script src="../components/cookie-banner.js?v=890525cdff" defer></script>
-    <script src="../js/checkout.js?v=0e49b28437" defer></script>
+    <script src="../js/checkout.js?v=aff884301f" defer></script>
 
 </body>
 </html>

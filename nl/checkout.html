@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <link rel="stylesheet" href="../css/page.css?v=b104e76175">
     <script src="https://js.stripe.com/v3/"></script>
-    <link rel="stylesheet" href="../css/checkout.css?v=e0f9a74a1f">
+    <link rel="stylesheet" href="../css/checkout.css?v=9d0ecd013f">
     <script src="../js/theme-init.js?v=032640d55c"></script>
 </head>
 <body>
@@ -173,7 +173,19 @@
                                 aria-labelledby="tab-private"
                                 tabindex="0"
                             >
-                                <div class="form-row--2">
+                                <div class="form-field">
+                                        <label for="field-email">E-mail voor levering <abbr title="verplicht" aria-label="verplicht">*</abbr> <span class="field-note-ok">Directe verzending</span></label>
+                                        <input
+                                            type="email"
+                                            id="field-email"
+                                            name="email"
+                                            required
+                                            autocomplete="email"
+                                            placeholder="jan.jansen@email.com"
+                                            inputmode="email"
+                                        >
+                                    </div>
+                                <div class="form-row--2" style="margin-top: 1rem;">
                                     <div class="form-field">
                                         <label for="field-first-name">Voornaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
                                         <input
@@ -197,21 +209,7 @@
                                         >
                                     </div>
                                 </div>
-
-                                <div class="form-row--2" style="margin-top: 1rem;">
-                                    <div class="form-field">
-                                        <label for="field-email">E-mail <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                        <input
-                                            type="email"
-                                            id="field-email"
-                                            name="email"
-                                            required
-                                            autocomplete="email"
-                                            placeholder="jan.jansen@email.com"
-                                            inputmode="email"
-                                        >
-                                    </div>
-                                    <div class="form-field">
+                                <div class="form-field" style="margin-top: 1rem;">
                                         <label for="field-phone">Telefoon <span style="font-weight:400;color:var(--page-text-muted)">(optioneel)</span></label>
                                         <input
                                             type="tel"
@@ -222,7 +220,6 @@
                                             inputmode="tel"
                                         >
                                     </div>
-                                </div>
                             </div>
 
                             <!-- Business panel -->
@@ -233,7 +230,19 @@
                                 tabindex="0"
                                 hidden
                             >
-                                <div class="form-row--2">
+                                <div class="form-field">
+                                        <label for="field-email-b">E-mail voor levering <abbr title="verplicht" aria-label="verplicht">*</abbr> <span class="field-note-ok">Directe verzending</span></label>
+                                        <input
+                                            type="email"
+                                            id="field-email-b"
+                                            name="email"
+                                            required
+                                            autocomplete="email"
+                                            placeholder="jan@bedrijf.nl"
+                                            inputmode="email"
+                                        >
+                                    </div>
+                                <div class="form-row--2" style="margin-top: 1rem;">
                                     <div class="form-field">
                                         <label for="field-first-name-b">Voornaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
                                         <input
@@ -257,21 +266,7 @@
                                         >
                                     </div>
                                 </div>
-
-                                <div class="form-row--2" style="margin-top: 1rem;">
-                                    <div class="form-field">
-                                        <label for="field-email-b">E-mail <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                        <input
-                                            type="email"
-                                            id="field-email-b"
-                                            name="email"
-                                            required
-                                            autocomplete="email"
-                                            placeholder="jan@bedrijf.nl"
-                                            inputmode="email"
-                                        >
-                                    </div>
-                                    <div class="form-field">
+                                <div class="form-field" style="margin-top: 1rem;">
                                         <label for="field-phone-b">Telefoon <span style="font-weight:400;color:var(--page-text-muted)">(optioneel)</span></label>
                                         <input
                                             type="tel"
@@ -282,7 +277,6 @@
                                             inputmode="tel"
                                         >
                                     </div>
-                                </div>
 
                                 <div class="business-fields">
                                     <div class="form-field">
@@ -640,7 +634,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=d6018dc154" defer></script>
     <script src="../components/cookie-banner.js?v=890525cdff" defer></script>
-    <script src="../js/checkout.js?v=0e49b28437" defer></script>
+    <script src="../js/checkout.js?v=aff884301f" defer></script>
 
 </body>
 </html>
