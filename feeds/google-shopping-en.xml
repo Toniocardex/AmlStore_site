@@ -411,13 +411,29 @@
       <g:item_group_id>mcafee-total-protection</g:item_group_id>
     </item>
     <item>
+      <g:id>MTP-3D-1Y</g:id>
+      <title>McAfee Total Protection 2026 — 3 devices · 1 year</title>
+      <description>McAfee Total Protection for 3 devices: complete multi-device protection with advanced web security, genuine licence, and instant email delivery. Official activation via McAfee My Account.</description>
+      <link>https://eurolicenze.com/en/mcafee-total-protection-3-devices</link>
+      <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-3-devices.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>10.99 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:adult>no</g:adult>
+      <g:brand>McAfee</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Software &gt; Computer Software &gt; Antivirus &amp; Security Software</g:google_product_category>
+      <g:product_type>Antivirus</g:product_type>
+      <g:item_group_id>mcafee-total-protection</g:item_group_id>
+    </item>
+    <item>
       <g:id>1108923</g:id>
       <title>McAfee Total Protection 2026 — 5 devices · 1 year</title>
       <description>McAfee Total Protection for 5 devices: complete multi-device protection with advanced web security, genuine licence, and instant email delivery. Official activation via McAfee My Account.</description>
       <link>https://eurolicenze.com/en/mcafee-total-protection-5-devices</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-5-devices.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
-      <g:price>15.44 EUR</g:price>
+      <g:price>14.89 EUR</g:price>
       <g:condition>new</g:condition>
       <g:adult>no</g:adult>
       <g:brand>McAfee</g:brand>
@@ -648,7 +664,7 @@
     <item>
       <g:id>EP2-06798</g:id>
       <title>Office 2024 Home</title>
-      <description>Office 2024 suite for home use: Word, Excel and PowerPoint on PC or Mac, genuine digital licence and email delivery of the key within minutes.</description>
+      <description>Office 2024 suite for home use: Word, Excel and PowerPoint on PC or Mac, genuine digital licence and email delivery of the key within 2–15 minutes.</description>
       <link>https://eurolicenze.com/en/office-2024-home</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/office-2024-home.jpg</g:image_link>
       <g:availability>in_stock</g:availability>

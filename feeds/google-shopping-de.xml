@@ -411,13 +411,29 @@
       <g:item_group_id>mcafee-total-protection</g:item_group_id>
     </item>
     <item>
+      <g:id>MTP-3D-1Y</g:id>
+      <title>McAfee Total Protection 2026 — 3 Geräte · 1 Jahr</title>
+      <description>McAfee Total Protection für 3 Geräte: umfassender Mehrgeräteschutz mit fortschrittlicher Websicherheit, digitaler Original-Lizenz und E-Mail-Zustellung. Aktivierung im McAfee-Portal.</description>
+      <link>https://eurolicenze.com/de/mcafee-total-protection-3-devices</link>
+      <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-3-devices.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>10.99 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:adult>no</g:adult>
+      <g:brand>McAfee</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Software &gt; Computer Software &gt; Antivirus &amp; Security Software</g:google_product_category>
+      <g:product_type>Antivirus</g:product_type>
+      <g:item_group_id>mcafee-total-protection</g:item_group_id>
+    </item>
+    <item>
       <g:id>1108923</g:id>
       <title>McAfee Total Protection 2026 — 5 Geräte · 1 Jahr</title>
       <description>McAfee Total Protection für 5 Geräte: umfassender Mehrgeräteschutz mit fortschrittlicher Websicherheit, digitaler Original-Lizenz und E-Mail-Zustellung. Aktivierung im McAfee-Portal.</description>
       <link>https://eurolicenze.com/de/mcafee-total-protection-5-devices</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-5-devices.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
-      <g:price>15.44 EUR</g:price>
+      <g:price>14.89 EUR</g:price>
       <g:condition>new</g:condition>
       <g:adult>no</g:adult>
       <g:brand>McAfee</g:brand>

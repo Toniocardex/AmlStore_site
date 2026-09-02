@@ -44,6 +44,7 @@
   <url><loc>https://eurolicenze.com/it/kaspersky-vs-eset-nod32</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/it/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/it/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://eurolicenze.com/it/mcafee-total-protection-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/it/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/it/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/it/microsoft-365-family-vs-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -120,6 +121,7 @@
   <url><loc>https://eurolicenze.com/en/kaspersky-vs-eset-nod32</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/en/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/en/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://eurolicenze.com/en/mcafee-total-protection-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/en/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/en/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/en/microsoft-365-family-vs-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -195,6 +197,7 @@
   <url><loc>https://eurolicenze.com/fr/kaspersky-vs-eset-nod32</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/fr/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/fr/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://eurolicenze.com/fr/mcafee-total-protection-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/fr/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/fr/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/fr/microsoft-365-family-vs-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -271,6 +274,7 @@
   <url><loc>https://eurolicenze.com/de/kaspersky-vs-eset-nod32</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/de/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/de/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://eurolicenze.com/de/mcafee-total-protection-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/de/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/de/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/de/microsoft-365-family-vs-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -347,6 +351,7 @@
   <url><loc>https://eurolicenze.com/es/kaspersky-vs-eset-nod32</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/es/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/es/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://eurolicenze.com/es/mcafee-total-protection-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/es/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/es/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/es/microsoft-365-family-vs-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -423,6 +428,7 @@
   <url><loc>https://eurolicenze.com/pt/kaspersky-vs-eset-nod32</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/pt/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/pt/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://eurolicenze.com/pt/mcafee-total-protection-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/pt/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/pt/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/pt/microsoft-365-family-vs-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
@@ -499,6 +505,7 @@
   <url><loc>https://eurolicenze.com/nl/kaspersky-vs-eset-nod32</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/nl/mcafee-total-protection-1-device</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/nl/mcafee-total-protection-10-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://eurolicenze.com/nl/mcafee-total-protection-3-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/nl/mcafee-total-protection-5-devices</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/nl/microsoft-365-business-standard</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
   <url><loc>https://eurolicenze.com/nl/microsoft-365-family-vs-personal</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>

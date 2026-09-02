@@ -146,7 +146,7 @@
     <item>
       <g:id>SC_W11HOME_M365PERS</g:id>
       <title>Windows 11 Home + M365 Personal — 5 apparaten</title>
-      <description>Windows 11 Home als permanente digitale licentie plus 12 maanden Microsoft 365 Personal: altijd actuele Office-apps, 1 TB OneDrive, Copilot AI en levering per e-mail binnen enkele minuten.</description>
+      <description>Windows 11 Home als permanente digitale licentie plus 12 maanden Microsoft 365 Personal: altijd actuele Office-apps, 1 TB OneDrive, Copilot AI en levering per e-mail binnen 2–15 minuten.</description>
       <link>https://eurolicenze.com/nl/bundle-windows-11-home-m365-personal</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/bundle-windows-11-home-m365-personal.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
@@ -411,13 +411,29 @@
       <g:item_group_id>mcafee-total-protection</g:item_group_id>
     </item>
     <item>
+      <g:id>MTP-3D-1Y</g:id>
+      <title>McAfee Total Protection 2026 — 3 apparaten · 1 jaar</title>
+      <description>McAfee Total Protection voor 3 apparaten: complete bescherming voor meerdere apparaten met geavanceerde webbeveiliging, een originele digitale licentie en directe levering per e-mail. Activering via McAfee My Account.</description>
+      <link>https://eurolicenze.com/nl/mcafee-total-protection-3-devices</link>
+      <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-3-devices.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>10.99 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:adult>no</g:adult>
+      <g:brand>McAfee</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>Software &gt; Computer Software &gt; Antivirus &amp; Security Software</g:google_product_category>
+      <g:product_type>Antivirus</g:product_type>
+      <g:item_group_id>mcafee-total-protection</g:item_group_id>
+    </item>
+    <item>
       <g:id>1108923</g:id>
       <title>McAfee Total Protection 2026 — 5 apparaten · 1 jaar</title>
       <description>McAfee Total Protection voor 5 apparaten: complete bescherming voor meerdere apparaten met geavanceerde webbeveiliging, een originele digitale licentie en directe levering per e-mail. Activering via McAfee My Account.</description>
       <link>https://eurolicenze.com/nl/mcafee-total-protection-5-devices</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-5-devices.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
-      <g:price>15.44 EUR</g:price>
+      <g:price>14.89 EUR</g:price>
       <g:condition>new</g:condition>
       <g:adult>no</g:adult>
       <g:brand>McAfee</g:brand>
@@ -648,7 +664,7 @@
     <item>
       <g:id>EP2-06798</g:id>
       <title>Office 2024 Home</title>
-      <description>Office 2024-suite voor thuisgebruik: Word, Excel en PowerPoint op pc of Mac, originele digitale licentie en levering van de code per e-mail binnen enkele minuten.</description>
+      <description>Office 2024-suite voor thuisgebruik: Word, Excel en PowerPoint op pc of Mac, originele digitale licentie en levering van de code per e-mail binnen 2–15 minuten.</description>
       <link>https://eurolicenze.com/nl/office-2024-home</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/office-2024-home.jpg</g:image_link>
       <g:availability>in_stock</g:availability>

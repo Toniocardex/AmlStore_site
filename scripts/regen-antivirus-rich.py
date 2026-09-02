@@ -65,6 +65,7 @@ DEFS = [
     ("KL1047GDEFS", "kaspersky-premium-5-devices", "Kaspersky"),
     ("KL1047GDKFS", "kaspersky-premium-10-devices", "Kaspersky"),
     ("1108921", "mcafee-total-protection-1-device", "McAfee"),
+    ("MTP-3D-1Y", "mcafee-total-protection-3-devices", "McAfee"),
     ("1108923", "mcafee-total-protection-5-devices", "McAfee"),
     ("MTP00MNRXRAAD", "mcafee-total-protection-10-devices", "McAfee"),
 ]

@@ -492,8 +492,18 @@
     "sku": "1108923",
     "ean": "0731944742038",
     "name": "McAfee Total Protection 2026 | 5 Dispositivi | 1 Anno",
-    "unitAmountMinor": 1544,
+    "unitAmountMinor": 1489,
     "compareAtMinor": 3995,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "MTP-3D-1Y",
+    "ean": "",
+    "name": "McAfee Total Protection 2026 | 3 Dispositivi | 1 Anno",
+    "unitAmountMinor": 1099,
+    "compareAtMinor": 3495,
     "currency": "EUR",
     "type": "subscription",
     "category": "antivirus"

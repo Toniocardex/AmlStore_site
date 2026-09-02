@@ -1862,6 +1862,7 @@ VARIANT_SETS = {
     ],
     "mcafee-total": [
         {"sku": "1108921", "slug": "mcafee-total-protection-1-device", "label": "1", "sub": _dev_sub(1)},
+        {"sku": "MTP-3D-1Y", "slug": "mcafee-total-protection-3-devices", "label": "3", "sub": _dev_sub(3)},
         {"sku": "1108923", "slug": "mcafee-total-protection-5-devices", "label": "5", "sub": _dev_sub(5)},
         {"sku": "MTP00MNRXRAAD", "slug": "mcafee-total-protection-10-devices", "label": "10", "sub": _dev_sub(10)},
     ],

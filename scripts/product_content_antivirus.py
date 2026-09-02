@@ -1425,6 +1425,7 @@ def _add_mcafee(slug, devices, edition_year=None):
 
 for slug, n in [
     ("mcafee-total-protection-1-device", 1),
+    ("mcafee-total-protection-3-devices", 3),
     ("mcafee-total-protection-5-devices", 5),
     ("mcafee-total-protection-10-devices", 10),
 ]:
