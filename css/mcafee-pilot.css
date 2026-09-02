@@ -483,51 +483,8 @@
 /* FAQ: allineata alla voce delle altre sezioni */
 .pdp-hero--banner #faq .home-faq-list { margin-top: 26px; }
 
-/* ═══ FASCIA DI CHIUSURA ═════════════════════════════════════════════ */
-.pdp-hero--banner + .mc-close,
-body.pdp-hero--banner .mc-close {
-    background: var(--pdp-navy);
-    color: var(--pdp-surface);
-    text-align: center;
-    padding: clamp(56px, 9vw, 92px) var(--pdp-gutter);
-}
-body.pdp-hero--banner .mc-close h2 {
-    margin: 0;
-    font-family: var(--font-sans);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    line-height: 1.06;
-    font-size: clamp(1.7rem, 4.6vw, 2.7rem);
-    color: var(--pdp-surface);
-}
-body.pdp-hero--banner .mc-close p {
-    margin: 12px auto 0;
-    max-width: 46ch;
-    font-size: 1rem;
-    color: color-mix(in srgb, var(--pdp-surface) 72%, transparent);
-}
-body.pdp-hero--banner .mc-close__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 24px;
-    padding: 15px 28px;
-    border-radius: 12px;
-    background: var(--page-accent);
-    color: var(--pdp-surface);
-    font-family: var(--font-sans);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-    text-decoration: none;
-    transition: background .18s ease;
-}
-body.pdp-hero--banner .mc-close__cta:hover { background: var(--aml-cta-bg-hover, var(--page-accent)); }
-body.pdp-hero--banner .mc-close__cta:focus-visible { outline: 3px solid var(--page-accent); outline-offset: 3px; }
-body.pdp-hero--banner .mc-close__cta svg { width: 19px; height: 19px; }
-
-/* trustbar rimossa dal markup: niente da nascondere */
+/* Fascia di chiusura eliminata: la sticky cart copre gia' l'invito all'acquisto.
+   Trustbar rimossa dal markup: niente da nascondere. */
 
 /* ═══ MOTION — reveal (js/mcafee-pilot.js aggiunge .mc-reveal) ═══════ */
 .pdp-hero--banner .mc-reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }

@@ -1,7 +1,7 @@
 /**
  * PILOTA McAfee 1 dispositivo — micro-interazioni.
  * Attivo solo su body.pdp-hero--banner. Nessuna dipendenza.
- *  1. reveal-on-scroll di .mc-sec e .mc-close;
+ *  1. reveal-on-scroll di .mc-sec;
  *  2. count-up del prezzo (.pdp-price-sale) quando la buy card entra in view.
  * Degrada a "gia' visibile / valore finale" senza JS o con reduced-motion.
  */
@@ -13,7 +13,7 @@
     var hasIO = 'IntersectionObserver' in window;
 
     /* 1. reveal ---------------------------------------------------------- */
-    var secs = document.querySelectorAll('.mc-sec, .mc-close');
+    var secs = document.querySelectorAll('.mc-sec');
     if (secs.length && hasIO && !reduce) {
         secs.forEach(function (el) { el.classList.add('mc-reveal'); });
         var io = new IntersectionObserver(function (entries) {
