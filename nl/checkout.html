@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <link rel="stylesheet" href="../css/page.css?v=1f03cf55ec">
     <script src="https://js.stripe.com/v3/"></script>
-    <link rel="stylesheet" href="../css/checkout.css?v=87c834411f">
+    <link rel="stylesheet" href="../css/checkout.css?v=603a4c2776">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
@@ -512,11 +512,12 @@
                         <div class="checkout-actions">
                             <button
                                 type="button"
-                                id="btn-stripe-submit" class="btn-checkout-primary" aria-label="Met kaart betalen en de licentie per e-mail ontvangen"
+                                id="btn-stripe-submit" class="btn-checkout-primary"
                             >
                                 <span class="btn-spinner" aria-hidden="true"></span>
-                                <svg class="btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text"><span id="btn-pay-amount">—</span> betalen — licentie direct</span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text">Bestelling afronden — <span id="btn-pay-amount">—</span></span>
                             </button>
+                        <p class="checkout-cta-note" id="checkout-cta-note"><span class="checkout-cta-note__dot" aria-hidden="true"></span>Digitale levering per e-mail · 2–15 min</p>
 
                             <button
                                 type="button"
@@ -659,7 +660,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=82de60c300" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../js/checkout.js?v=a8c241938d" defer></script>
+    <script src="../js/checkout.js?v=316370e5a6" defer></script>
 
 </body>
 </html>

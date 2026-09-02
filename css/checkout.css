@@ -1578,3 +1578,45 @@ body {
         overscroll-behavior: contain;
     }
 }
+
+/* Promessa di consegna sotto la CTA, non dentro.
+   Il pulsante diceva "Paga X — licenza immediata": due informazioni schiacciate
+   in una riga sola che su schermi stretti si accorciava male, e "Paga" metteva
+   in primo piano l'uscita di denaro invece della chiusura dell'ordine. Ora
+   dentro resta il verbo e la cifra, il valore sta fuori in un corpo piu'
+   discreto. Vive e si nasconde insieme al bottone carta: per il bonifico la
+   consegna non e' in 2-15 minuti e la riga sarebbe una promessa falsa. */
+.checkout-cta-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin: 8px 0 0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--page-text-secondary);
+    text-align: center;
+}
+
+.checkout-cta-note[hidden] {
+    display: none;
+}
+
+.checkout-cta-note__dot {
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--aml-ok);
+    animation: checkoutCtaPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes checkoutCtaPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .4; transform: scale(0.85); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .checkout-cta-note__dot { animation: none; }
+}

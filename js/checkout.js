@@ -619,6 +619,11 @@
 
             var stripeBtnOk = method === 'stripe' && (!isOnPageStripe() || _stripeEnabled);
             if (btnStripe)   btnStripe.style.display   = stripeBtnOk ? '' : 'none';
+            // La nota "consegna in 2-15 min" vale per il pagamento con carta:
+            // col bonifico la licenza parte quando l'incasso e' visibile, e
+            // lasciarla li' sarebbe una promessa che non manteniamo.
+            var ctaNote = document.getElementById('checkout-cta-note');
+            if (ctaNote) ctaNote.hidden = !stripeBtnOk;
             if (btnTransfer) btnTransfer.style.display  = method === 'transfer' ? '' : 'none';
             syncActionsBar();
 
