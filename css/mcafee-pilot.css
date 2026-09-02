@@ -141,24 +141,40 @@
     max-width: 46ch;
 }
 
-/* ═══ BUY PANEL — riuso #product-pricing, resa "console" ══════════════ */
+/* ═══ BUY PANEL — riuso #product-pricing, resa 1:1 col mockup ═════════
+   Ordine mockup: testata / label / selettore / prezzo / nota / CTA /
+   express / PayPal / garanzie (spunte + regione) / Trustpilot.
+   #product-pricing tiene l'ordine DOM di produzione: qui si riordina in
+   flex e si sposta il gruppo garanzie sotto i pagamenti. */
 .pdp-hero--banner .mc-buy {
     position: static;
     margin-top: calc(var(--mc-buy-lift) * -1);
-    padding: 0;
+    padding: 0 0 22px;
     overflow: hidden;
     border-radius: 18px;
     box-shadow: var(--aml-shadow-lg), var(--aml-shadow-sm);
+    display: flex;
+    flex-direction: column;
 }
 @media (max-width: 900px) {
     .pdp-hero--banner .mc-lead__grid { grid-template-columns: 1fr; gap: 22px; }
     .pdp-hero--banner .mc-buy { margin-top: calc(var(--mc-buy-lift) * -0.42); max-width: 404px; }
 }
-.pdp-hero--banner .mc-buy > * { padding-left: 22px; padding-right: 22px; }
+.pdp-hero--banner .mc-buy > * { padding-left: 22px; padding-right: 22px; margin-block: 0; }
+.pdp-hero--banner .mc-buy .pdp-avail        { order: 1; }
+.pdp-hero--banner .mc-buy .pdp-plans__label { order: 2; }
+.pdp-hero--banner .mc-buy .pdp-plans        { order: 3; }
+.pdp-hero--banner .mc-buy .pdp-price-row    { order: 4; }
+.pdp-hero--banner .mc-buy .pdp-price-note   { order: 5; }
+.pdp-hero--banner .mc-buy .pdp-btn-primary  { order: 6; }
+.pdp-hero--banner .mc-buy .pdp-cta-sep      { order: 7; }
+.pdp-hero--banner .mc-buy .pdp-paypal-express { order: 8; }
+.pdp-hero--banner .mc-buy .pdp-trust-checks { order: 9; }
+.pdp-hero--banner .mc-buy .pdp-region       { order: 10; }
+.pdp-hero--banner .mc-buy .product-trustpilot { order: 11; }
 
 /* testata scura */
 .pdp-hero--banner .mc-buy .pdp-avail {
-    margin: 0;
     padding-top: 16px;
     padding-bottom: 16px;
     background: var(--pdp-navy);
@@ -184,52 +200,67 @@
     text-transform: uppercase;
     letter-spacing: .03em;
 }
-.pdp-hero--banner .mc-buy .pdp-avail + * { padding-top: 20px; }
-.pdp-hero--banner .mc-buy > *:last-child { padding-bottom: 20px; }
 
-/* spunte */
-.pdp-hero--banner .mc-buy .pdp-trust-checks { margin: 0 0 16px; }
-
-/* selettore: 4 in fila, la corrente in pill scura */
+/* selettore: contenitore unico, la corrente = pill CHIARA sollevata */
 .pdp-hero--banner .mc-buy .pdp-plans__label {
     font-family: var(--mc-mono);
     text-transform: uppercase;
     letter-spacing: .1em;
     font-size: .72rem;
     color: var(--pdp-muted);
-    margin-bottom: 9px;
+    margin: 20px 22px 9px;
 }
 .pdp-hero--banner .mc-buy .pdp-plans {
     grid-template-columns: repeat(4, 1fr);
-    background: var(--pdp-surface);
+    background: var(--pdp-surface-2);
+    border-color: var(--pdp-border);
+}
+.pdp-hero--banner .mc-buy .pdp-plan {
+    gap: 0;
+    color: var(--pdp-muted);
 }
 .pdp-hero--banner .mc-buy .pdp-plan b {
     font-family: var(--font-sans);
     font-weight: 800;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
+    line-height: 1;
 }
-.pdp-hero--banner .mc-buy .pdp-plan span { font-size: .62rem; text-transform: uppercase; letter-spacing: .02em; }
+.pdp-hero--banner .mc-buy .pdp-plan span {
+    font-size: .58rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    opacity: .75;
+    margin-top: 2px;
+}
 .pdp-hero--banner .mc-buy .pdp-plan.is-current {
-    background: var(--pdp-navy);
-    color: var(--pdp-surface);
-    border-color: var(--pdp-navy);
+    background: var(--pdp-surface);
+    color: var(--pdp-ink);
+    border-color: var(--pdp-border);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--pdp-ink) 12%, transparent);
 }
+.pdp-hero--banner .mc-buy .pdp-plan.is-current span { opacity: 1; }
 @media (max-width: 380px) { .pdp-hero--banner .mc-buy .pdp-plans { grid-template-columns: repeat(2, 1fr); } }
 
-/* prezzo mono, grande */
-.pdp-hero--banner .mc-buy .pdp-price-row { margin: 18px 0 2px; }
+/* prezzo mono, € in apice */
+.pdp-hero--banner .mc-buy .pdp-price-row { margin: 18px 0 4px; align-items: baseline; gap: 6px 10px; }
 .pdp-hero--banner .mc-buy .pdp-price-sale {
     font-family: var(--mc-mono);
     font-variant-numeric: tabular-nums;
     font-weight: 600;
-    font-size: clamp(2.4rem, 5.4vw, 3rem);
+    font-size: clamp(2.5rem, 5.6vw, 3.1rem);
     letter-spacing: -0.03em;
+    color: var(--pdp-ink);
+}
+.pdp-hero--banner .mc-buy .pdp-price-sale::first-letter {
+    font-size: .42em;
+    color: var(--pdp-muted);
+    margin-right: -0.18em;
 }
 .pdp-hero--banner .mc-buy .pdp-price-msrp {
     font-family: var(--mc-mono);
     font-variant-numeric: tabular-nums;
 }
-.pdp-hero--banner .mc-buy .pdp-price-note { margin-bottom: 14px; }
+.pdp-hero--banner .mc-buy .pdp-price-note { margin-bottom: 16px; font-size: .8rem; }
 
 .pdp-hero--banner .mc-buy .pdp-btn-primary {
     text-transform: uppercase;
@@ -239,9 +270,29 @@
 .pdp-hero--banner .mc-buy .pdp-cta-sep {
     font-family: var(--mc-mono);
     text-transform: uppercase;
-    letter-spacing: .12em;
-    font-size: .68rem;
+    letter-spacing: .14em;
+    font-size: .66rem;
+    color: var(--pdp-muted);
+    margin: 16px 22px 12px;
 }
+.pdp-hero--banner .mc-buy .pdp-paypal-express { margin-top: 0; }
+
+/* gruppo garanzie sotto i pagamenti: spunte + regione con filetto sopra */
+.pdp-hero--banner .mc-buy .pdp-trust-checks {
+    margin: 4px 22px 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--pdp-border);
+    display: grid;
+    gap: 9px;
+    font-size: .86rem;
+}
+.pdp-hero--banner .mc-buy .pdp-region {
+    margin: 9px 22px 0;
+    font-size: .86rem;
+    color: var(--pdp-ink);
+}
+.pdp-hero--banner .mc-buy .pdp-region svg { color: var(--pdp-ok); }
+.pdp-hero--banner .mc-buy .product-trustpilot { margin: 14px 22px 0; }
 
 /* ═══ CORPO ═══════════════════════════════════════════════════════════ */
 .pdp-hero--banner .mc-main { padding-top: 0; }
