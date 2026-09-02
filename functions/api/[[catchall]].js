@@ -43,6 +43,7 @@ import { getAccessToken, createPaypalOrder,
 import { sendConfirmationOnce,
          sendInternalOrderNotificationOnce,
          sendConsultationRequest }                       from './_lib/email.js';
+import { isBlockedEmailDomain }                         from './_lib/email-domains.js';
 import { resolveAdminAuth, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
          unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
@@ -383,7 +384,7 @@ function normalizeIdempotencyKey(v) {
     return key;
 }
 
-function validateCustomer(rawCustomer, rawLang) {
+function validateCustomer(rawCustomer, rawLang, env) {
     const c = rawCustomer || {};
     const lang = cleanString(rawLang || 'it', 2).toLowerCase();
     if (!ALLOWED_LOCALES.has(lang)) throw Object.assign(new Error('Lingua non valida'), { status: 400 });
@@ -408,6 +409,12 @@ function validateCustomer(rawCustomer, rawLang) {
     if (!customer.firstName) throw Object.assign(new Error('Nome cliente mancante'), { status: 400 });
     if (!customer.lastName) throw Object.assign(new Error('Cognome cliente mancante'), { status: 400 });
     if (!validateEmail(customer.email)) throw Object.assign(new Error('Email cliente non valida'), { status: 400 });
+    // Messaggio volutamente generico: dire "dominio bloccato" spiegherebbe a chi
+    // sta testando carte come aggirare il filtro, e a un cliente vero in falso
+    // positivo serve solo sapere che deve usare un altro indirizzo.
+    if (isBlockedEmailDomain(customer.email, env)) {
+        throw Object.assign(new Error('Indirizzo email non accettato: usane un altro'), { status: 400 });
+    }
     if (customer.phone && customer.phone.length < 7) {
         throw Object.assign(new Error('Telefono cliente non valido'), { status: 400 });
     }
@@ -457,8 +464,8 @@ function validateShipping(raw) {
 /**
  * Costruisce i parametri ordine dal body JSON del checkout.
  */
-function orderParamsFromBody(body, paymentMethod) {
-    const { customer: c, lang } = validateCustomer(body.customer, body.lang);
+function orderParamsFromBody(body, paymentMethod, env) {
+    const { customer: c, lang } = validateCustomer(body.customer, body.lang, env);
     let items;
     try {
         items = resolveAndValidateItems(body.items);
@@ -556,7 +563,7 @@ async function handleConsultationRequest(request, env) {
 
 async function orderParamsFromBodySafe(body, paymentMethod, request, env) {
     try {
-        const params = orderParamsFromBody(body, paymentMethod);
+        const params = orderParamsFromBody(body, paymentMethod, env);
         try {
             await assertCartStock(env.DB, params.lineItems);
         } catch (stockErr) {
@@ -689,6 +696,12 @@ async function handleCartSync(request, env, context) {
     if (email && (email.length > 254 || !CART_EMAIL_RE.test(email))) {
         return err('Email non valida', 400, request, env);
     }
+    // Il carrello non viene rifiutato, si scarta solo l'email: e' da questa
+    // porta che sono entrati i carrelli di card testing, e tenerli fuori da
+    // cart_sessions evita di sporcare i dati di recupero. Rifiutare l'intera
+    // sync sarebbe sbagliato: qui l'email e' facoltativa e il blocco vero sta
+    // sulla creazione dell'ordine, dove costa qualcosa all'attaccante.
+    if (email && isBlockedEmailDomain(email, env)) email = null;
     if (!email) email = null;
 
     const rawLocale = String(body.locale || 'it').toLowerCase();
@@ -1514,7 +1527,10 @@ async function handleTrack(request, env) {
 
         const orderId = body?.orderId ? cleanString(body.orderId, 40) : undefined;
         const sku     = body?.sku ? cleanString(body.sku, 64) : undefined;
-        await recordEvent(env, request, { eventName, orderId, sku });
+        // cartId lega l'evento alla riga di cart_sessions: e' cosi' che il funnel
+        // diventa leggibile per singolo carrello abbandonato, non solo aggregato.
+        const cartId  = body?.cartId ? cleanString(body.cartId, 64) : undefined;
+        await recordEvent(env, request, { eventName, orderId, sku, cartId });
     } catch (e) {
         console.warn('[track] fallito (fail-open):', e?.message || e);
     }

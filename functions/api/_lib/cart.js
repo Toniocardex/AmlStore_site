@@ -19,6 +19,7 @@
 
 import { now, safeParseJSON }          from './utils.js';
 import { hmacIdentifier, bumpBucket, windowSlot, retryAfterForWindow } from './rate-limit.js';
+import { CHECKOUT_FUNNEL_STEPS }       from './analytics.js';
 
 /* ─── Upsert snapshot carrello ───────────────────────────────────────────────── */
 
@@ -277,13 +278,36 @@ export async function listCarts(db, {
     if (country) { conditions.push('cart_sessions.country = ?'); bindings.push(country); }
 
     const where = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
-    const join  = 'LEFT JOIN orders ON orders.id = cart_sessions.checkout_order_id';
+
+    /* Step piu' avanzato raggiunto nel checkout, per carrello.
+       Il rank viene generato da CHECKOUT_FUNNEL_STEPS invece che scritto a mano,
+       cosi' l'ordine resta uno solo per tutto il progetto. `purchase` e' escluso:
+       arriva dal webhook ordine e non porta cart_id, e comunque per i carrelli
+       convertiti lo stato vero si legge gia' da checkout_order_id.
+
+       MAX() e non l'ultimo evento in ordine di tempo: chi torna indietro a
+       correggere l'anagrafica riemette uno step precedente, e "fin dove e'
+       arrivato" deve restare il punto piu' avanzato toccato. */
+    const funnelRank = CHECKOUT_FUNNEL_STEPS
+        .filter((step) => step !== 'purchase')
+        .map((step, i) => `WHEN '${step}' THEN ${i + 1}`)
+        .join(' ');
+
+    const join = `
+        LEFT JOIN orders ON orders.id = cart_sessions.checkout_order_id
+        LEFT JOIN (
+            SELECT cart_id, MAX(CASE event_name ${funnelRank} ELSE 0 END) AS step_rank
+            FROM analytics_events
+            WHERE cart_id IS NOT NULL
+            GROUP BY cart_id
+        ) funnel ON funnel.cart_id = cart_sessions.id`;
 
     const [countRow, rows] = await Promise.all([
         db.prepare(`SELECT COUNT(*) as n FROM cart_sessions ${join} ${where}`)
           .bind(...bindings).first(),
         db.prepare(`
-            SELECT cart_sessions.*, orders.status as order_status, orders.paid_at as order_paid_at
+            SELECT cart_sessions.*, orders.status as order_status, orders.paid_at as order_paid_at,
+                   funnel.step_rank as funnel_step_rank
             FROM cart_sessions ${join} ${where}
             ORDER BY cart_sessions.updated_at DESC
             LIMIT ? OFFSET ?
@@ -314,7 +338,18 @@ function formatCartRow(row) {
         checkoutOrderId:   row.checkout_order_id   || null,
         orderStatus:       row.order_status        || null,
         orderPaidAt:       row.order_paid_at        || null,
+        // null = nessun evento di checkout agganciato: o il cliente non e' mai
+        // arrivato al checkout, o il carrello e' anteriore alla migrazione che
+        // ha aggiunto cart_id (schema-analytics-checkout-funnel-migration.sql).
+        furthestStep:      funnelStepFromRank(row.funnel_step_rank),
     };
+}
+
+/** Nome dello step dal rank prodotto dalla query, o null se non ce n'e' uno. */
+function funnelStepFromRank(rank) {
+    const n = Number(rank);
+    if (!Number.isFinite(n) || n < 1) return null;
+    return CHECKOUT_FUNNEL_STEPS[n - 1] || null;
 }
 
 /* ─── Statistiche aggregate (vista admin "Carrelli") ─────────────────────────── */

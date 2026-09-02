@@ -1,5 +1,52 @@
 #!/usr/bin/env python3
-"""Generate wave-2 product pages (Office perpetual + M365 Business), suite-office catalog, sitemap, redirects."""
+# -*- coding: utf-8 -*-
+"""Guardia sulle 5 schede wave-2, sul catalogo suite-office, sitemap e
+_redirects (5 slug x 5 lingue = 25 schede + 5 cataloghi).
+
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
+
+Fino a settembre 2026 main() chiamava build_page() e build_suite_office() e
+sovrascriveva 25 schede piu' le 5 copie del catalogo suite-office, poi
+appendeva a sitemap.xml e _redirects. Era sfuggito ai giri di disarmo
+precedenti perche' non chiama build_product_page() ne' build_catalog_page(): ha
+i suoi builder, piu' vecchi.
+
+Eseguirlo oggi distruggerebbe circa il 90% di ogni pagina:
+
+  - schede:       generato 6,4-6,8 KB,  pubblicato 57,7-90,8 KB, 25 diff su 25
+  - suite-office: generato 11,8-11,9 KB, pubblicato 68,6-69,1 KB, 5 diff su 5
+
+Tutti e quattro i marcatori di PIPELINE_MARKERS sono presenti nel pubblicato e
+assenti nel generato, su tutte e 30 le pagine. Il perche', e i cinque strati
+che andrebbero persi, stanno in scripts/page_pipeline_guard.py.
+
+Non finirebbe li'. Questo script scrive URL con estensione .html, mentre
+sitemap.xml e _redirects sono passati alle forme senza estensione: nessuno dei
+25 URL .html e' oggi in sitemap.xml, quindi append_sitemap() ne aggiungerebbe
+25 duplicati, e append_redirects() aggiungerebbe 5 regole .html gia' coperte
+piu' la regola /it/office-suite, che oggi non c'e' -- probabilmente rimossa
+apposta, come la /it/antivirus di generate-wave3.py che faceva loop con gli URL
+puliti di Pages.
+
+Attenzione: wave-2 e' anteriore a pt/ e nl/ e copre solo 5 lingue. Le stesse
+schede sono controllate su tutte e 7 dal main() di scripts/generate-wave3.py, e
+suite-office anche da scripts/regen-catalogs-only.py, che pero' non sapeva di
+poter essere scavalcato da qui. Resta proprio di questo script la copertura di
+sitemap e _redirects per il registro wave-2: wave3 esclude suite-office apposta
+dalla sua verifica sitemap.
+
+build_page() e build_suite_office() sono conservati solo per rimisurare il
+disallineamento in memoria, come descritto in page_pipeline_guard.py. Non hanno
+piu' chiamanti che scrivono.
+
+Quel che lo script fa ancora, e per cui va tenuto: verifica che le 25 schede e
+le 5 copie di suite-office esistano con i quattro strati addosso, e che
+sitemap.xml e _redirects coprano il registro -- cioe' quello che
+append_sitemap() e append_redirects() garantivano scrivendo. Senza effetti
+collaterali, non scrive nulla.
+
+    python scripts/generate-wave2.py
+"""
 import json
 import re
 import sys
@@ -7,6 +54,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
 from product_page_lib import product_card  # noqa: E402
 CATALOG = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
 LANGS = ("it", "en", "fr", "de", "es")
@@ -425,58 +473,51 @@ def build_suite_office(lang):
 """
 
 
-def append_sitemap():
-    path = ROOT / "sitemap.xml"
-    text = path.read_text(encoding="utf-8")
-    inserts = []
+def check_sitemap():
+    """Le 25 schede e suite-office devono essere in sitemap.xml, senza estensione."""
+    text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     slugs = ["suite-office"] + [p["slug"] for p in WAVE2]
-    for lang in LANGS:
-        for slug in slugs:
-            url = f"https://eurolicenze.com/{lang}/{slug}"
-            if url in text:
-                continue
-            inserts.append(
-                f'  <url><loc>{url}</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>'
-            )
-    if inserts:
-        text = text.replace("</urlset>", "\n".join(inserts) + "\n</urlset>")
-        path.write_text(text, encoding="utf-8")
-        print("sitemap +", len(inserts))
+    return [
+        f"sitemap.xml: manca {lang}/{slug}"
+        for lang in LANGS
+        for slug in slugs
+        if f"https://eurolicenze.com/{lang}/{slug}" not in text
+    ]
 
 
-def append_redirects():
-    path = ROOT / "_redirects"
-    lines = path.read_text(encoding="utf-8").rstrip().splitlines()
-    existing = set(lines)
-    added = 0
+def check_redirects():
+    """Ogni slug con woo_it deve avere la sua regola, con o senza estensione."""
+    text = (ROOT / "_redirects").read_text(encoding="utf-8")
+    errors = []
     for p in WAVE2:
         woo = p.get("woo_it")
         if not woo:
             continue
-        rule = f"{woo} /it/{p['slug']}.html 301"
-        if rule not in existing:
-            lines.append(rule)
-            existing.add(rule)
-            added += 1
-    suite_rule = "/it/office-suite /it/suite-office.html 301"
-    if suite_rule not in existing:
-        lines.append(suite_rule)
-        added += 1
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("redirects +", added)
+        if f"{woo} /it/{p['slug']} 301" not in text and f"{woo} /it/{p['slug']}.html 301" not in text:
+            errors.append(f"_redirects: manca la regola per {woo}")
+    return errors
 
 
 def main():
+    errors = []
     for lang in LANGS:
-        suite_path = ROOT / lang / "suite-office.html"
-        suite_path.write_text(build_suite_office(lang), encoding="utf-8")
-        print("catalog", suite_path.relative_to(ROOT))
+        html = load(lang, "suite-office")
+        if html is None:
+            errors.append(f"{lang}/suite-office.html: manca il catalogo")
+        else:
+            errors += pipeline_errors(lang, "suite-office", html)
         for p in WAVE2:
-            out = ROOT / lang / f"{p['slug']}.html"
-            out.write_text(build_page(lang, p), encoding="utf-8")
-            print("page", out.relative_to(ROOT))
-    append_sitemap()
-    append_redirects()
+            page = load(lang, p["slug"])
+            if page is None:
+                errors.append(f"{lang}/{p['slug']}.html: manca il file")
+                continue
+            errors += pipeline_errors(lang, p["slug"], page)
+
+    errors += check_sitemap()
+    errors += check_redirects()
+
+    fail_if(errors, f"OK: {len(WAVE2)} schede wave-2 + catalogo suite-office "
+                    f"x {len(LANGS)} lingue, sitemap e _redirects allineati")
 
 
 if __name__ == "__main__":

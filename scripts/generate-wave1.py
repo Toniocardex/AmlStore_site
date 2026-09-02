@@ -1,5 +1,46 @@
 #!/usr/bin/env python3
-"""Generate wave-1 product pages, catalog cards, sitemap entries, redirects."""
+# -*- coding: utf-8 -*-
+"""Guardia sulle 6 schede wave-1, sul catalogo sistemi-operativi, sitemap e
+_redirects (6 slug x 5 lingue = 30 file).
+
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
+
+Fino a settembre 2026 main() chiamava build_page() e sovrascriveva le 30
+schede, poi rifaceva le card del catalogo sistemi-operativi e appendeva a
+sitemap.xml e _redirects. Era sfuggito ai giri di disarmo precedenti perche'
+non chiama build_product_page(): ha un build_page() suo, piu' vecchio.
+
+Eseguirlo oggi e' il caso peggiore di tutti. build_page() rende 6,6-6,9 KB
+contro pagine pubblicate di 54,0-69,3 KB: 30 diff su 30 e un delta di
+47,3-62,4 KB, cioe' circa il 90% di ogni pagina. Tutti e quattro i marcatori di
+PIPELINE_MARKERS sono presenti nel pubblicato e assenti nel generato, su tutte
+e 30. Il perche', e i cinque strati che andrebbero persi, stanno in
+scripts/page_pipeline_guard.py.
+
+Non finirebbe li'. Questo script scrive URL con estensione .html, mentre
+sitemap.xml e _redirects sono passati alle forme senza estensione: nessuno dei
+30 URL .html e' oggi in sitemap.xml, quindi append_sitemap() ne aggiungerebbe
+30 duplicati, e append_redirects() aggiungerebbe 6 regole .html gia' coperte
+dalle equivalenti senza estensione.
+
+Attenzione: wave-1 e' anteriore a pt/ e nl/ e copre solo 5 lingue. Le stesse
+schede sono controllate su tutte e 7 dal main() di scripts/generate-wave3.py,
+che le ha nel suo registro. Resta proprio di questo script il catalogo
+sistemi-operativi, che nessun altro sorveglia: wave3 lo esclude apposta dalla
+sua verifica sitemap.
+
+build_page() e' conservato solo per rimisurare il disallineamento in memoria,
+come descritto in page_pipeline_guard.py. Non ha piu' chiamanti che scrivono.
+
+Quel che lo script fa ancora, e per cui va tenuto: verifica che le 30 schede
+esistano con i quattro strati addosso, che il catalogo sistemi-operativi mostri
+le card dei 3 slug Windows invece dello skeleton, e che sitemap.xml e
+_redirects coprano il registro -- cioe' quello che patch_sistemi_operativi(),
+append_sitemap() e append_redirects() garantivano scrivendo. Senza effetti
+collaterali, non scrive nulla.
+
+    python scripts/generate-wave1.py
+"""
 import json
 import math
 import re
@@ -8,6 +49,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
 from product_page_lib import product_card  # noqa: E402
 CATALOG = json.loads((ROOT / "catalog.json").read_text(encoding="utf-8"))
 LANGS = ("it", "en", "fr", "de", "es")
@@ -301,85 +343,68 @@ def build_page(lang, prod):
 """
 
 
-def patch_sistemi_operativi():
-    os_products = [p for p in WAVE1 if p["template"] == "windows"]
+def check_sistemi_operativi():
+    """Le card dei 3 slug Windows devono essere sul catalogo, non lo skeleton.
+
+    patch_sistemi_operativi() le scriveva sostituendo il blocco skeleton: se lo
+    skeleton tornasse, il catalogo mostrerebbe segnaposto al posto dei prodotti.
+    """
+    errors = []
+    os_slugs = [p["slug"] for p in WAVE1 if p["template"] == "windows"]
     for lang in LANGS:
-        path = ROOT / lang / "sistemi-operativi.html"
-        text = path.read_text(encoding="utf-8")
-        labels = LABELS[lang]
-        cards = []
-        for p in os_products:
-            e = entry(p["sku"])
-            short = p["slug"].replace("-", " ").title().replace("Windows 11 Pro", "Windows 11 Pro").replace("Windows 10 Home", "Windows 10 Home")
-            if p["slug"] == "windows-11-pro":
-                short = "Windows 11 Pro"
-            elif p["slug"] == "windows-10-home":
-                short = "Windows 10 Home"
-            elif p["slug"] == "windows-10-pro":
-                short = "Windows 10 Pro"
-            blurb = "ESD · " + ("Attivazione immediata" if lang == "it" else "Instant activation")
-            prod = {
-                "sku": p["sku"],
-                "slug": p["slug"],
-                "template": p["template"],
-                "card_name": short,
-                "image": p["image"],
-                "blurb": blurb,
-            }
-            cards.append(product_card(lang, prod, labels))
-        skeleton = re.search(
-            r"\n                <div class=\"product-card\">\n                    <div class=\"skeleton-img\">.*?</div>\n                </div>\n                <div class=\"product-card\">.*?</div>\n            </div>",
-            text,
-            re.S,
-        )
-        if skeleton:
-            replacement = "\n" + "\n".join(cards) + "\n            </div>"
-            text = text[: skeleton.start()] + replacement + text[skeleton.end() :]
-            path.write_text(text, encoding="utf-8")
-            print("patched", path)
-
-
-def append_sitemap():
-    path = ROOT / "sitemap.xml"
-    text = path.read_text(encoding="utf-8")
-    inserts = []
-    for lang in LANGS:
-        for p in WAVE1:
-            url = f"https://eurolicenze.com/{lang}/{p['slug']}.html"
-            if url in text:
-                continue
-            inserts.append(
-                f'  <url><loc>{url}</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>'
-            )
-    if inserts:
-        text = text.replace("</urlset>", "\n".join(inserts) + "\n</urlset>")
-        path.write_text(text, encoding="utf-8")
-        print("sitemap +", len(inserts))
-
-
-def append_redirects():
-    path = ROOT / "_redirects"
-    lines = path.read_text(encoding="utf-8").rstrip().splitlines()
-    existing = set(lines)
-    for p in WAVE1:
-        if "woo_it" not in p:
+        html = load(lang, "sistemi-operativi")
+        if html is None:
+            errors.append(f"{lang}/sistemi-operativi.html: manca il catalogo")
             continue
-        rule = f"{p['woo_it']} /it/{p['slug']}.html 301"
-        if rule not in existing:
-            lines.append(rule)
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("redirects updated")
+        for slug in os_slugs:
+            if slug not in html:
+                errors.append(f"{lang}/sistemi-operativi.html: manca la card {slug}")
+        if "skeleton-img" in html:
+            errors.append(f"{lang}/sistemi-operativi.html: skeleton non sostituito dalle card")
+        errors += pipeline_errors(lang, "sistemi-operativi", html)
+    return errors
+
+
+def check_sitemap():
+    """Le 30 schede devono essere in sitemap.xml, nella forma senza estensione."""
+    text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    return [
+        f"sitemap.xml: manca {lang}/{p['slug']}"
+        for lang in LANGS
+        for p in WAVE1
+        if f"<loc>https://eurolicenze.com/{lang}/{p['slug']}</loc>" not in text
+    ]
+
+
+def check_redirects():
+    """Ogni slug con woo_it deve avere la sua regola, con o senza estensione."""
+    text = (ROOT / "_redirects").read_text(encoding="utf-8")
+    errors = []
+    for p in WAVE1:
+        woo = p.get("woo_it")
+        if not woo:
+            continue
+        if f"{woo} /it/{p['slug']} 301" not in text and f"{woo} /it/{p['slug']}.html 301" not in text:
+            errors.append(f"_redirects: manca la regola per {woo}")
+    return errors
 
 
 def main():
+    errors = []
     for lang in LANGS:
         for p in WAVE1:
-            out = ROOT / lang / f"{p['slug']}.html"
-            out.write_text(build_page(lang, p), encoding="utf-8")
-            print("page", out.relative_to(ROOT))
-    patch_sistemi_operativi()
-    append_sitemap()
-    append_redirects()
+            html = load(lang, p["slug"])
+            if html is None:
+                errors.append(f"{lang}/{p['slug']}.html: manca il file")
+                continue
+            errors += pipeline_errors(lang, p["slug"], html)
+
+    errors += check_sistemi_operativi()
+    errors += check_sitemap()
+    errors += check_redirects()
+
+    fail_if(errors, f"OK: {len(WAVE1)} schede wave-1 x {len(LANGS)} lingue, "
+                    "catalogo sistemi-operativi, sitemap e _redirects allineati")
 
 
 if __name__ == "__main__":

@@ -5,47 +5,43 @@
 
 /* ─── Layout principale ─────────────────────────────────────────────────────── */
 
+/* Scala delle etichette in maiuscoletto. Prima ogni blocco aveva la sua misura
+   (0.68 / 0.70 / 0.75 / 0.82rem): due livelli dichiarati qui e usati ovunque
+   tengono allineate intestazioni di sezione e micro-label. Sta su body e non su
+   .checkout-page perche' la usa anche il chrome header, che di .checkout-page
+   e' fratello e non discendente. */
+body {
+    --checkout-eyebrow-size: 0.72rem;
+    --checkout-eyebrow-track: 0.07em;
+    --checkout-micro-size: 0.68rem;
+    --checkout-micro-track: 0.05em;
+}
+
 .checkout-page {
-    max-width: 1100px;
     padding-top: 2.5rem;
     padding-bottom: 4rem;
 }
 
 .checkout-page h1 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     font-size: 2rem;
 }
 
-.checkout-breadcrumbs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--page-text-muted);
-    margin-bottom: 1.5rem;
+/* checkout.css e' condiviso con la pagina di conferma, che monta l'header
+   completo del sito (--aml-maxw). La colonna stretta vale solo dove c'e' il
+   chrome ridotto del checkout: applicarla anche alla conferma spostava il suo
+   titolo 100px a destra del logo. */
+.checkout-chrome-header ~ .checkout-page {
+    max-width: 1000px;
 }
 
-.checkout-breadcrumbs a {
-    color: var(--page-text-secondary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.checkout-breadcrumbs a:hover {
-    color: var(--page-text);
-}
-
-.checkout-breadcrumbs .sep {
-    color: var(--page-text-muted);
-    user-select: none;
-}
-
+/* La colonna del form era ~690px: email e telefono a piena larghezza avevano una
+   misura di riga sproporzionata. Con pagina a 1000px e riepilogo a 340 il form
+   scende a ~620px, larghezza corretta per campi a una e due colonne. */
 .checkout-grid {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 2.25rem;
     align-items: start;
     margin-top: 2rem;
 }
@@ -67,10 +63,10 @@
 }
 
 .form-section-title {
-    font-size: 0.75rem;
+    font-size: var(--checkout-eyebrow-size);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--checkout-eyebrow-track);
     color: var(--page-text-muted);
     margin: 0 0 1.25rem;
 }
@@ -92,6 +88,45 @@
     font-weight: 600;
     color: var(--page-text-secondary);
     letter-spacing: 0.01em;
+}
+
+/* Qualificatore "(opzionale)" dentro la label. Era ripetuto quattro volte come
+   attributo style inline: qui e' una classe sola, cosi' il grigio e il peso
+   restano identici su tutti i campi. */
+.field-optional {
+    font-weight: 400;
+    color: var(--page-text-muted);
+}
+
+/* Nota esplicativa sotto un campo (formato SDI, avviso spedizione). */
+.field-hint {
+    font-size: 0.74rem;
+    line-height: 1.45;
+    color: var(--page-text-muted);
+    margin: 0;
+}
+
+/* Spaziatura verticale fra gruppi di campi. Prima ogni gruppo portava un
+   margin-top: 1rem inline, ripetuto sei volte per file e da riscrivere a ogni
+   campo aggiunto; questa regola vale sia nei pannelli anagrafica sia nella
+   sezione spedizione, che non e' un tabpanel. */
+.form-field + .form-field,
+.form-field + .form-row--2,
+.form-row--2 + .form-field,
+.form-row--2 + .form-row--2 {
+    margin-top: 1rem;
+}
+
+/* Dentro una riga a due colonne i campi sono fratelli ma affiancati: lo stacco
+   verticale li disallineerebbe fra loro (la spaziatura la fa gia' il gap). */
+.form-row--2 > .form-field + .form-field {
+    margin-top: 0;
+}
+
+/* Nota introduttiva di sezione: recupera lo stacco che il titolo ha gia' sotto
+   di se', cosi' resta agganciata al titolo invece di galleggiare fra i due. */
+.form-section-title + .field-hint {
+    margin: -0.75rem 0 1.15rem;
 }
 
 .form-field input,
@@ -210,16 +245,14 @@
     position: relative;
 }
 
-.customer-tab-panel[hidden] {
-    display: none;
-}
-
 /* Campi aziendali extra */
+/* Niente gap qui: la distanza fra i gruppi di campi la impone gia' la regola
+   sui fratelli adiacenti piu' sotto, e sommare le due sorgenti raddoppiava lo
+   stacco (32px invece di 16) nel solo blocco dati aziendali. */
 .business-fields {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     border-top: 1px solid var(--page-border);
     padding-top: 1rem;
 }
@@ -305,7 +338,10 @@
     min-width: 0;
 }
 
+/* Titolo e descrizione sono <span>: senza display:block restano inline e si
+   fondono in un unico paragrafo che va a capo a meta' frase. */
 .payment-option-title {
+    display: block;
     font-size: 0.92rem;
     font-weight: 700;
     color: var(--page-text);
@@ -313,6 +349,7 @@
 }
 
 .payment-option-desc {
+    display: block;
     font-size: 0.8rem;
     color: var(--page-text-secondary);
     margin: 0;
@@ -362,11 +399,6 @@
     object-position: center;
 }
 
-.payment-icon--img.payment-icon--paypal-wide img {
-    max-width: 56px;
-    height: 15px;
-}
-
 .payment-icon--img.payment-icon--transfer img {
     max-width: 42px;
     height: 15px;
@@ -393,10 +425,10 @@
 }
 
 .transfer-card h3 {
-    font-size: 0.82rem;
+    font-size: var(--checkout-eyebrow-size);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--checkout-eyebrow-track);
     color: var(--page-accent);
     margin: 0 0 0.9rem;
 }
@@ -417,10 +449,10 @@
 }
 
 .transfer-info-label {
-    font-size: 0.7rem;
+    font-size: var(--checkout-micro-size);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: var(--checkout-micro-track);
     color: var(--page-text-muted);
 }
 
@@ -444,57 +476,6 @@
     line-height: 1.5;
     padding-top: 0.75rem;
     border-top: 1px solid var(--page-border);
-}
-
-/* ─── PayPal (testo placeholder — non usato se c’è .payment-icon--img) ─────── */
-
-.payment-icon--paypal {
-    background: #003087;
-    color: #fff;
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.03em;
-    padding: 0.18rem 0.55rem;
-    border-radius: 4px;
-    border: none;
-}
-
-.paypal-section {
-    margin-top: 1.1rem;
-}
-
-.paypal-buttons-container {
-    /* Riserva spazio minimo mentre i bottoni PayPal si renderizzano */
-    min-height: 50px;
-}
-
-.paypal-loading {
-    display: none;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--page-text-muted);
-    font-size: 0.82rem;
-    padding: 0.6rem 0;
-}
-
-.paypal-loading.is-visible {
-    display: flex;
-}
-
-.paypal-loading::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid var(--page-border);
-    border-top-color: var(--page-accent);
-    border-radius: 50%;
-    animation: spinner-rotate 0.7s linear infinite;
-    flex-shrink: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .paypal-loading::before { animation: none; }
 }
 
 /* ─── Sezione conferma ordine bonifico ─────────────────────────────────────── */
@@ -554,46 +535,12 @@
 }
 
 .checkout-summary-title {
-    font-size: 0.75rem;
+    font-size: var(--checkout-eyebrow-size);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--checkout-eyebrow-track);
     color: var(--page-text-muted);
     margin: 0 0 1.1rem;
-}
-
-/* Collasso mobile */
-.summary-toggle-btn {
-    display: none;
-    width: 100%;
-    min-height: 44px;
-    padding: 0.75rem 1.1rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--page-text);
-    text-align: left;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-}
-
-.summary-toggle-btn:focus-visible {
-    outline: 2px solid var(--page-accent);
-    outline-offset: 2px;
-}
-
-.summary-toggle-icon {
-    font-size: 0.75rem;
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
-}
-
-.summary-toggle-btn[aria-expanded="true"] .summary-toggle-icon {
-    transform: rotate(180deg);
 }
 
 /* Lista prodotti nel riepilogo */
@@ -611,17 +558,38 @@
     font-size: 0.875rem;
 }
 
+/* Miniatura: il riepilogo era una lista di sole stringhe e i nomi lunghi si
+   somigliano tutti ("Microsoft 365 Personal | 12 Mesi | ..."). La copertina
+   rende riconoscibile a colpo d'occhio cosa si sta comprando. */
+.checkout-item-thumb {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--aml-radius-sm);
+    border: 1px solid var(--page-border);
+    background: var(--aml-paper-2);
+    object-fit: contain;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
 .checkout-item-info {
     flex: 1;
     min-width: 0;
 }
 
+/* Due righe invece del troncamento a una: i nomi prodotto sono composti da tre
+   segmenti separati da "|" e l'ellissi tagliava sempre l'informazione utile
+   (durata, numero di dispositivi). */
 .checkout-item-name {
     font-weight: 600;
     color: var(--page-text);
-    white-space: nowrap;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .checkout-item-qty {
@@ -679,11 +647,19 @@
 }
 
 .checkout-trust-icon {
-    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
     flex-shrink: 0;
+    color: var(--page-text-secondary);
 }
 
 /* ─── Bottoni ───────────────────────────────────────────────────────────────── */
+
+/* Contenitore dei due bottoni di submit (carta / bonifico): su desktop e' un
+   semplice wrapper, su mobile diventa la barra fissa in fondo allo schermo. */
+.checkout-actions[hidden] {
+    display: none;
+}
 
 .btn-checkout-primary {
     display: inline-flex;
@@ -701,8 +677,10 @@
     font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 6px 24px color-mix(in srgb, var(--page-accent) 35%, transparent);
-    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, opacity 0.2s ease;
+    /* L'alone colorato era al 35% e faceva "galleggiare" il bottone sopra la
+       pagina. Un'ombra neutra e stretta lo tiene ancorato alla colonna. */
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.10), 0 4px 12px color-mix(in srgb, var(--page-accent) 18%, transparent);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.2s ease;
     letter-spacing: 0.01em;
     margin-top: 1.25rem;
     position: relative;
@@ -710,12 +688,13 @@
 }
 
 .btn-checkout-primary:hover:not(:disabled) {
-    transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 10px 32px color-mix(in srgb, var(--page-accent) 45%, transparent);
+    transform: translateY(-1px);
+    background: color-mix(in srgb, #000 8%, var(--page-accent));
+    box-shadow: 0 2px 4px rgba(16, 24, 40, 0.12), 0 8px 20px color-mix(in srgb, var(--page-accent) 24%, transparent);
 }
 
 .btn-checkout-primary:active:not(:disabled) {
-    transform: translateY(0) scale(0.99);
+    transform: translateY(0);
 }
 
 .btn-checkout-primary:focus-visible {
@@ -728,6 +707,18 @@
     opacity: 0.65;
     cursor: not-allowed;
     transform: none;
+}
+
+/* Lucchetto nel bottone di pagamento: era un'emoji dentro la stringa tradotta,
+   quindi cambiava forma su ogni sistema operativo e non seguiva il colore del
+   testo. Sparisce durante il caricamento, dove il posto e' dello spinner. */
+.btn-checkout-primary .btn-icon {
+    flex-shrink: 0;
+    margin-right: 0.45rem;
+}
+
+.btn-checkout-primary[aria-busy="true"] .btn-icon {
+    display: none;
 }
 
 /* Spinner loading sul bottone */
@@ -784,8 +775,10 @@
 }
 
 .checkout-empty-icon {
-    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
     margin-bottom: 1rem;
+    color: var(--page-text-muted);
 }
 
 .checkout-empty h2 {
@@ -851,7 +844,6 @@
     .customer-tab-btn,
     .payment-option-label,
     .btn-checkout-primary,
-    .summary-toggle-icon,
     .btn-back-shop {
         transition: none;
     }
@@ -882,16 +874,8 @@
         order: -1;
     }
 
-    .summary-toggle-btn {
-        display: flex;
-    }
-
     .checkout-summary-title {
         display: none; /* sostituito dal bottone toggle */
-    }
-
-    .checkout-summary-body[hidden] {
-        display: none;
     }
 }
 
@@ -1097,10 +1081,14 @@
 }
 
 .checkout-chrome-header__inner {
-    max-width: 1100px;
+    /* Stessa larghezza, stesso box-sizing e stesso padding di .checkout-page: il
+       logo deve cadere sulla verticale del titolo e della colonna del form. In
+       content-box con padding 1.25rem partiva 24px piu' a sinistra. */
+    max-width: 1000px;
+    box-sizing: border-box;
     margin: 0 auto;
     min-height: 56px;
-    padding: 0.5rem 1.25rem;
+    padding: 0.5rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1121,15 +1109,45 @@
 .checkout-chrome-header__ssl {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    background: var(--aml-ok-bg);
-    color: var(--aml-ok);
-    font-size: 0.75rem;
+    gap: 0.42rem;
+    padding: 0.34rem 0.6rem;
+    /* 4px come i chip dei metodi di pagamento, non i 6px di CTA e input: e' alto
+       27px come loro, e su quell'altezza 6px legge molto piu' tondo che sui 44-50px
+       di un campo o di un bottone. Stesso raggio in assoluto, non in proporzione. */
+    border-radius: 4px;
+    background: var(--aml-paper-2);
+    border: 1px solid var(--page-border);
+    color: var(--page-text-secondary);
+    font-size: var(--checkout-micro-size);
     font-weight: 700;
-    border: 1px solid color-mix(in srgb, var(--aml-ok) 25%, transparent);
+    letter-spacing: var(--checkout-micro-track);
+    text-transform: uppercase;
     white-space: nowrap;
+}
+
+/* Il verde resta, ma solo qui: basta a dire "sicuro" senza che l'etichetta
+   pesi quanto il logo. */
+.checkout-chrome-header__ssl svg {
+    flex-shrink: 0;
+    color: var(--aml-ok);
+}
+
+/* Sotto i 380px logo e badge sommavano piu' della larghezza dello schermo e la
+   pagina intera guadagnava uno scorrimento orizzontale. Il badge resta per
+   intero, testo compreso: e' una rassicurazione, non un ornamento. */
+@media (max-width: 380px) {
+    .checkout-chrome-header__inner {
+        gap: 0.5rem;
+    }
+
+    .checkout-chrome-header__logo img {
+        height: 30px;
+    }
+
+    .checkout-chrome-header__ssl {
+        padding: 0.28rem 0.5rem;
+        gap: 0.3rem;
+    }
 }
 
 .checkout-chrome-footer {
@@ -1238,20 +1256,20 @@
 /* Soglia allineata agli 860px del blocco responsive piu' sotto, dove
    .checkout-grid passa a colonna singola. Fermarsi a 767px lasciava una fascia
    768-860px in cui la colonna riepilogo era ancora visibile ma senza
-   intestazione: quel blocco nasconde .checkout-summary-title dando per scontato
-   .summary-toggle-btn, che nel markup nuovo non esiste piu'.
+   intestazione, perche' quel blocco nasconde .checkout-summary-title.
 
-   Il selettore discendente NON e' decorativo: questo foglio e' condiviso con le
-   lingue ancora sul markup vecchio, che non hanno .checkout-msummary. Con un
-   `.checkout-summary-col { display: none }` secco resterebbero senza riepilogo
-   ordine del tutto su mobile. Qui la colonna sparisce solo dove esiste davvero
-   qualcosa che la sostituisce. */
+   Il selettore resta condizionato a .checkout-msummary: la colonna sparisce
+   solo dove esiste davvero qualcosa che la sostituisce. Oggi tutte e 7 le
+   lingue hanno il riepilogo comprimibile, quindi la condizione e' sempre vera;
+   e' una guardia, non un ramo attivo. */
 @media (max-width: 860px) {
+    /* Scorre via con la pagina invece di restare incollato sotto l'header.
+       Aperto di default e agganciato a top:56px occupava 276px su uno schermo
+       da 780: con la barra CTA fissa in fondo restava poco piu' della meta'
+       dell'altezza per compilare i campi. Il totale resta comunque sempre in
+       vista sul bottone di pagamento. */
     .checkout-msummary {
         display: block;
-        position: sticky;
-        top: 56px;
-        z-index: 20;
     }
 
     .checkout-msummary ~ .checkout-grid .checkout-summary-col {
@@ -1387,9 +1405,176 @@
     font-weight: 700;
 }
 
-.checkout-stock-badge {
-    margin: 0.25rem 0 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--aml-ok);
+/* ═══ Metodo di pagamento non disponibile ══════════════════════════════════ */
+/* Impostata da showStripeUnavailable(): la carta resta visibile ma spenta, cosi'
+   e' chiaro perche' il flusso e' passato al bonifico invece di sembrare rotto. */
+
+.payment-option--disabled .payment-option-label {
+    opacity: 0.45;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+/* ═══ Barra CTA fissa su mobile ════════════════════════════════════════════ */
+/* Il form di checkout su mobile e' lungo ~3 schermate e il bottone di pagamento
+   vive in fondo: chi esita a meta' form non ha nessuna azione a portata di
+   pollice. Prima il bottone stesso diventava la barra, senza nessuna superficie
+   dietro: il contenuto scorreva a filo dei suoi bordi e i campi passavano
+   visibilmente sotto la CTA. Ora la barra e' .checkout-actions, il contenitore
+   che avvolge i due bottoni gia' presenti — nessun markup duplicato, quindi
+   importo e stato aria-busy restano quelli veri. */
+
+@media (max-width: 860px) {
+    .checkout-actions {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 40;
+        margin: 0;
+        padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom, 0px));
+        background: color-mix(in srgb, var(--aml-surface) 94%, transparent);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--page-border);
+        box-shadow: 0 -2px 16px rgba(16, 24, 40, 0.10);
+    }
+
+    .checkout-actions .btn-checkout-primary {
+        margin-top: 0;
+        min-height: 50px;
+        box-shadow: none;
+    }
+
+    /* Il transform in hover/active sposterebbe una barra fissa. */
+    .btn-checkout-primary:hover:not(:disabled),
+    .btn-checkout-primary:active:not(:disabled) {
+        transform: none;
+    }
+
+    /* Spazio perche' garanzia e termini non finiscano sotto la barra. */
+    #checkout-form {
+        padding-bottom: 84px;
+    }
+
+    /* Idem per i link legali in fondo: la barra e' fixed e li coprirebbe
+       proprio quando l'utente scorre in fondo per controllarli. */
+    .checkout-chrome-footer {
+        padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* ═══ Sezioni progressive numerate ═════════════════════════════════════════ */
+/* Il numero arriva da un counter CSS, non dal markup: le sezioni sono le stesse
+   in tutte e 7 le lingue e cosi' non c'e' nessuna stringa da tradurre. Il
+   counter si auto-aggiusta anche quando la sezione spedizione non c'e': con
+   [hidden] l'elemento non genera box, quindi non incrementa il counter e il
+   pagamento resta "2" invece di diventare "3". */
+
+#checkout-form {
+    counter-reset: checkout-step;
+}
+
+.form-section {
+    counter-increment: checkout-step;
+}
+
+.form-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.form-section-title::before {
+    content: counter(checkout-step);
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--page-accent);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* ── Sezione bloccata finche' la precedente non e' completa ─────────────── */
+/* Il blocco e' volutamente leggero: la sezione resta visibile e leggibile,
+   cosi' si vede cosa arriva dopo (e che i metodi di pagamento ci sono) senza
+   poterci interagire prima del tempo. L'attributo inert, messo da JS, toglie
+   davvero l'interazione e la esclude dall'albero di accessibilita': la sola
+   opacita' lascerebbe i radio raggiungibili da tastiera. */
+
+.form-section--locked .form-section-title::before {
+    background: var(--page-text-muted);
+}
+
+.form-section--locked .payment-options,
+.form-section--locked .transfer-section,
+.form-section--locked #stripe-section {
+    opacity: 0.45;
+    filter: grayscale(1);
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.checkout-step-lock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px dashed var(--page-border);
+    border-radius: 6px;
+    background: var(--aml-paper-2, #f8fafc);
+    color: var(--page-text-muted);
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+.checkout-step-lock svg {
+    flex: 0 0 auto;
+    width: 15px;
+    height: 15px;
+}
+
+.checkout-step-lock[hidden] {
+    display: none;
+}
+
+/* ═══ Nota accanto all'etichetta email ═════════════════════════════════════ */
+/* Dice a cosa serve l'indirizzo proprio mentre lo si digita: e' il campo su cui
+   arriva la licenza, non un dato raccolto per marketing. Segue l'idioma gia'
+   usato dall'etichetta Telefono, che incorpora uno <span> secondario. */
+
+/* La nota va all'estremita' opposta dell'etichetta, non a capo sotto: e' un
+   dettaglio di rassicurazione, non una seconda riga di istruzioni. */
+.form-field label:has(.field-note-ok) {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.field-note-ok {
+    margin-left: auto;
+    font-weight: 600;
+    font-size: 0.72rem;
+    color: var(--aml-trust-ink, var(--aml-ok));
+    white-space: nowrap;
+}
+
+/* ═══ Riepilogo mobile aperto di default ═══════════════════════════════════ */
+/* Con il riepilogo chiuso si vede solo il totale: si sa quanto si paga ma non
+   per cosa, e verificarlo costa un tocco in piu' proprio dove si esita. Aperto,
+   la voce e' li'. L'altezza e' limitata perche' un carrello lungo non spinga il
+   form fuori schermo: oltre il limite la lista scorre da sola. */
+
+@media (max-width: 860px) {
+    .checkout-msummary[open] .checkout-msummary__items {
+        max-height: 30vh;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
 }

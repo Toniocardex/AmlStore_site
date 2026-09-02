@@ -702,12 +702,42 @@ const ACTIVATION = {
     },
     kaspersky: { kind: 'button', url: 'https://my.kaspersky.com',           label: activationLabels('My Kaspersky') },
     norton:    { kind: 'button', url: 'https://my.norton.com',              label: activationLabels('My Norton') },
-    mcafee:    { kind: 'button', url: 'https://www.mcafee.com/my-account/', label: activationLabels('McAfee My Account') },
+    // Pagina ufficiale di attivazione del codice prodotto (sostituisce la vecchia
+    // area my-account): etichetta dedicata, non segue il pattern "Attiva su <portale>".
+    // Unico vendor con URL localizzato per lingua (vedi activationUrl).
+    mcafee:    { kind: 'button', url: {
+        it: 'https://www.mcafee.com/it-it/consumer-support/activate-product-key.html',
+        en: 'https://www.mcafee.com/en-gb/consumer-support/activate-product-key.html',
+        fr: 'https://www.mcafee.com/fr-fr/consumer-support/activate-product-key.html',
+        de: 'https://www.mcafee.com/de-de/consumer-support/activate-product-key.html',
+        es: 'https://www.mcafee.com/es-es/consumer-support/activate-product-key.html',
+        pt: 'https://www.mcafee.com/pt-pt/consumer-support/activate-product-key.html',
+        nl: 'https://www.mcafee.com/nl-nl/consumer-support/activate-product-key.html',
+    }, label: {
+        it: 'Attiva il codice prodotto →',
+        en: 'Activate your product key →',
+        fr: 'Activer votre clé produit →',
+        de: 'Produktschlüssel aktivieren →',
+        es: 'Activar la clave de producto →',
+        pt: 'Ativar a chave do produto →',
+        nl: 'Productsleutel activeren →',
+    } },
     eset:      { kind: 'button', url: 'https://home.eset.com',              label: activationLabels('ESET HOME') },
     adobe:     { kind: 'button', url: 'https://account.adobe.com',          label: activationLabels('account Adobe') },
     acronis:   { kind: 'button', url: 'https://account.acronis.com',        label: activationLabels('account Acronis') },
     corel:     { kind: 'button', url: 'https://www.coreldraw.com',          label: activationLabels('account Corel') },
 };
+
+/**
+ * URL del portale di attivazione: stringa unica (stesso link per tutti) oppure
+ * mappa per locale, con fallback all'italiano per le lingue non previste.
+ * @param {object} a — voce di ACTIVATION
+ * @param {string} locale
+ * @returns {string}
+ */
+function activationUrl(a, locale) {
+    return typeof a.url === 'string' ? a.url : (a.url[locale] || a.url.it);
+}
 
 /**
  * Genera il blocco HTML di attivazione (pulsante o box informativo) da
@@ -726,7 +756,7 @@ function activationBlock(key, locale, eyebrow) {
         return `
         <table cellpadding="0" cellspacing="0" style="margin-top:16px">
           <tr><td>
-            <a href="${a.url}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:${GOLD};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 22px;border-radius:8px;letter-spacing:.1px">${escHtml(label)}</a>
+            <a href="${activationUrl(a, locale)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:${GOLD};color:#fff;font-size:13px;font-weight:700;text-decoration:none;padding:11px 22px;border-radius:8px;letter-spacing:.1px">${escHtml(label)}</a>
           </td></tr>
         </table>
         ${note ? `<p style="margin:9px 0 0;font-size:12px;color:${TEXT_MUTED}">${escHtml(note)}</p>` : ''}`;
@@ -900,7 +930,7 @@ export function licenseEmailText({ locale, orderId, name, items }) {
         if (a) {
             if (a.kind === 'button') {
                 const label = a.label[locale] || a.label.it;
-                lines.push(`${label} ${a.url}`);
+                lines.push(`${label} ${activationUrl(a, locale)}`);
                 if (a.note) lines.push(a.note[locale] || a.note.it);
             } else {
                 lines.push(`${t.activation_eyebrow}: ${a.text[locale] || a.text.it}`);

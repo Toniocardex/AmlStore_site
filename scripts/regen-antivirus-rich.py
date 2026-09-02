@@ -1,13 +1,47 @@
 #!/usr/bin/env python3
-"""Regenerate all antivirus rich product pages × 5 langs (sample-page layout)."""
+# -*- coding: utf-8 -*-
+"""Guardia sulle schede antivirus (23 slug x 7 lingue = 161 file).
+
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
+
+Fino a settembre 2026 main() chiamava build_product_page() e sovrascriveva i 161
+file. Eseguirlo oggi ne distruggerebbe circa meta': build_product_page() rende
+26,0-31,4 KB, i file pubblicati stanno fra 56,0 e 61,3 KB, il confronto e' 161
+diff su 161 (nessuna pagina coincide) e il delta e' 29,7-30,2 KB per pagina.
+Non e' un bug della libreria: e' la pipeline di post-produzione che manca.
+Il perche', e i cinque strati che andrebbero persi, stanno in
+scripts/page_pipeline_guard.py.
+
+Oltre alla pipeline, qui il generatore e le pagine divergono anche nel merito,
+in tutte e due le direzioni:
+
+  - mcafee-total-protection-5-devices e -10-devices (7 lingue ciascuno): il
+    prezzo del piano "1 dispositivo" nel selettore .pdp-plan e' aggiornato solo
+    sull'HTML (10,25 EUR); il generatore lo ricalcolerebbe a 7,95 EUR, cioe'
+    riporterebbe indietro un prezzo in vetrina.
+  - bitdefender-plus-* in es (4 slug): qui e' il contrario, sul disco c'e' una
+    riga di copy mezza italiana ("Tecnologia Photon per analisi veloces sin
+    ralentizaciones") che nel generatore e' gia' corretta. Va sistemata con una
+    patch mirata sull'HTML, non rigenerando (vedi
+    scripts/add-antivirus-edition-year.py per la forma di quelle patch).
+
+Quel che lo script fa ancora, e per cui va tenuto: controlla che ogni slug con
+contenuto in product_content_antivirus.py abbia una definizione qui (era il suo
+check di copertura) e verifica sulle pagine pubblicate hero, CTA, SKU,
+copertina di prodotto e i quattro strati. Senza effetti collaterali, non scrive
+nulla.
+
+    python scripts/regen-antivirus-rich.py
+"""
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
 from product_content_antivirus import PRODUCTS as AV  # noqa: E402
-from product_page_lib import LANGS, build_product_page, resolve_rich_content  # noqa: E402
+from product_page_lib import LANGS, resolve_rich_content  # noqa: E402
 
 DEFS = [
     ("EAVH-N1-A1", "eset-nod32-1-device", "ESET"),
@@ -37,33 +71,31 @@ DEFS = [
 
 
 def main():
-    missing = [s for s in AV if s not in {d[1] for d in DEFS}]
-    if missing:
-        raise SystemExit(f"Content without defs: {missing}")
-    for sku, slug, brand in DEFS:
-        content, ui = resolve_rich_content(slug)
-        if not content:
-            raise SystemExit(f"No rich content for {slug}")
-        prod = {
-            "sku": sku,
-            "slug": slug,
-            "template": "antivirus",
-            "card_name": content["name"]["it"],
-            "image": "product-cover-fallback.webp",
-            "brand": brand,
-        }
+    orphans = [s for s in AV if s not in {d[1] for d in DEFS}]
+    if orphans:
+        raise SystemExit(f"Content without defs: {orphans}")
+
+    errors = []
+    for sku, slug, _brand in DEFS:
+        if not resolve_rich_content(slug)[0]:
+            errors.append(f"{slug}: nessun contenuto rich")
+            continue
         for lang in LANGS:
-            html = build_product_page(lang, prod)
+            html = load(lang, slug)
+            if html is None:
+                errors.append(f"{lang}/{slug}.html: manca il file")
+                continue
             if "pdp-hero" not in html:
-                raise SystemExit(f"Missing sample hero ambient: {slug}/{lang}")
+                errors.append(f"{lang}/{slug}.html: manca l'hero .pdp-hero")
             if 'id="product-primary-cta"' not in html:
-                raise SystemExit(f"Missing CTA: {slug}/{lang}")
+                errors.append(f"{lang}/{slug}.html: manca la CTA primaria")
             if f'data-stripe-product-sku="{sku}"' not in html:
-                raise SystemExit(f"SKU mismatch: {slug}/{lang}")
+                errors.append(f"{lang}/{slug}.html: SKU diverso da {sku}")
             if f"products/{slug}.webp" not in html:
-                raise SystemExit(f"Product image missing in HTML: {slug}/{lang}")
-            (ROOT / lang / f"{slug}.html").write_text(html, encoding="utf-8")
-        print("rich", slug, "×", len(LANGS))
+                errors.append(f"{lang}/{slug}.html: manca la copertina products/{slug}.webp")
+            errors += pipeline_errors(lang, slug, html)
+
+    fail_if(errors, f"OK: {len(DEFS)} slug antivirus x {len(LANGS)} lingue")
 
 
 if __name__ == "__main__":

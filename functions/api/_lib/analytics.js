@@ -179,6 +179,26 @@ export async function recordPageView(context) {
 // 'purchase' è scritto solo server-side dagli handler di capture/webhook, mai
 // dal client via /api/track, per restare un dato attendibile e non spoofabile.
 
+/**
+ * Le posizioni del funnel di checkout, in ordine.
+ *
+ * Unica fonte di verita' per l'ordine: getAnalyticsSummary ci costruisce sopra
+ * i tassi di passaggio e la vista admin ci legge le etichette, cosi' aggiungere
+ * uno step non richiede di allineare a mano due liste che possono divergere.
+ *
+ * `purchase` chiude l'imbuto e viene da un'altra strada (webhook ordine, non
+ * dal browser), quindi non e' fra i TRACKABLE_EVENTS: recordEvent lo ammette
+ * con un controllo a parte.
+ */
+export const CHECKOUT_FUNNEL_STEPS = [
+    'checkout_view',
+    'checkout_contact_started',
+    'checkout_contact_completed',
+    'checkout_payment_started',
+    'checkout_pay_clicked',
+    'purchase',
+];
+
 export const TRACKABLE_EVENTS = new Set([
     'add_to_cart',
     'buy_now_click',
@@ -191,6 +211,14 @@ export const TRACKABLE_EVENTS = new Set([
     'paypal_failed',
     'cross_sell_view',
     'cross_sell_add',
+    // Funnel di checkout — vedi schema-analytics-checkout-funnel-migration.sql.
+    // L'ordine qui sotto e' l'ordine delle posizioni: la differenza fra due
+    // eventi consecutivi e' il punto in cui il cliente si ferma.
+    'checkout_view',
+    'checkout_contact_started',
+    'checkout_contact_completed',
+    'checkout_payment_started',
+    'checkout_pay_clicked',
 ]);
 
 /**
@@ -199,9 +227,9 @@ export const TRACKABLE_EVENTS = new Set([
  * fail-open al suo interno — un suo errore non deve mai bloccare la risposta.
  * @param {object} env
  * @param {Request} request
- * @param {{eventName: string, orderId?: string, sku?: string}} params
+ * @param {{eventName: string, orderId?: string, sku?: string, cartId?: string}} params
  */
-export async function recordEvent(env, request, { eventName, orderId, sku }) {
+export async function recordEvent(env, request, { eventName, orderId, sku, cartId }) {
     const secret = env.FRAUD_HASH_SECRET;
     if (!secret || !env.DB) return;
     if (!TRACKABLE_EVENTS.has(eventName) && eventName !== 'purchase') return;
@@ -216,10 +244,24 @@ export async function recordEvent(env, request, { eventName, orderId, sku }) {
             ? await hmacIdentifier(secret, `ev-${day}`, `${ip}|${ua}`)
             : await hmacIdentifier(secret, `ev-${day}`, `anon|${ua}`);
 
-        await env.DB.prepare(`
-            INSERT INTO analytics_events (id, event_name, order_id, sku, visitor_hash, created_at)
-            VALUES (?, ?, ?, ?, ?, ?)
-        `).bind(crypto.randomUUID(), eventName, orderId || null, sku || null, visitorHash, ts).run();
+        const id = crypto.randomUUID();
+        try {
+            await env.DB.prepare(`
+                INSERT INTO analytics_events (id, event_name, order_id, sku, cart_id, visitor_hash, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            `).bind(id, eventName, orderId || null, sku || null, cartId || null, visitorHash, ts).run();
+        } catch (colErr) {
+            // cart_id esiste solo dopo schema-analytics-checkout-funnel-migration.sql.
+            // Senza questo ripiego, fra il deploy del codice e l'esecuzione della
+            // migrazione OGNI evento fallirebbe — non solo i nuovi del funnel, ma
+            // anche add_to_cart, purchase e paypal_* — e in silenzio, perche' la
+            // funzione e' fail-open. Qui si perde solo il cart_id, non l'evento.
+            if (!/cart_id|no such column/i.test(colErr?.message || '')) throw colErr;
+            await env.DB.prepare(`
+                INSERT INTO analytics_events (id, event_name, order_id, sku, visitor_hash, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+            `).bind(id, eventName, orderId || null, sku || null, visitorHash, ts).run();
+        }
     } catch (e) {
         console.warn('[analytics] recordEvent fallita:', e?.message || e);
     }
@@ -294,7 +336,9 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS, includeBots
     const cutoff = dayCutoff(days);
     const botClause = includeBots ? '' : 'AND is_bot = 0';
 
-    const [totals, daily, topPages, topReferrers, topCountries, topSuggestedLangs, devices, direct, bots] = await Promise.all([
+    const funnelPlaceholders = CHECKOUT_FUNNEL_STEPS.map(() => '?').join(', ');
+
+    const [totals, daily, topPages, topReferrers, topCountries, topSuggestedLangs, devices, direct, bots, funnel] = await Promise.all([
         db.prepare(`
             SELECT COUNT(*) as views, COUNT(DISTINCT visitor_hash) as visitors
             FROM page_views WHERE day >= ? ${botClause}
@@ -353,7 +397,60 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS, includeBots
             SELECT COUNT(*) as views, COUNT(DISTINCT visitor_hash) as visitors
             FROM page_views WHERE day >= ? AND is_bot = 1
         `).bind(cutoff).first(),
+
+        /* Funnel di checkout. Legge analytics_events, non page_views: e' l'unico
+           aggregato di questa vista che non parla di traffico ma di percorso.
+
+           created_at e' un ISO completo e cutoff un YYYY-MM-DD: il confronto fra
+           stringhe ISO-8601 resta corretto perche' il formato e' ordinabile
+           lessicograficamente.
+
+           analytics_events non ha is_bot, quindi includeBots non si applica qui:
+           gli eventi nascono da interazioni con il form, che i bot non fanno. */
+        db.prepare(`
+            SELECT event_name,
+                   COUNT(*) as events,
+                   COUNT(DISTINCT visitor_hash) as visitors,
+                   COUNT(DISTINCT cart_id) as carts
+            FROM analytics_events
+            WHERE created_at >= ? AND event_name IN (${funnelPlaceholders})
+            GROUP BY event_name
+        `).bind(cutoff, ...CHECKOUT_FUNNEL_STEPS).all()
+          // Il funnel e' l'unico aggregato che non legge page_views: se
+          // analytics_events mancasse, un Promise.all senza questo catch
+          // farebbe cadere l'INTERA vista Analytics — pageview comprese — per
+          // colpa di un solo riquadro. Meglio un imbuto vuoto che una tab rotta.
+          .catch((e) => {
+              console.warn('[analytics] funnel non disponibile:', e?.message || e);
+              return { results: [] };
+          }),
     ]);
+
+    /* Imbuto in ordine di posizione, con i passaggi calcolati qui e non nel
+       frontend: il tasso che conta e' quello rispetto allo step PRECEDENTE (dove
+       si perde la gente), mentre `ofFirst` da' la vista d'insieme dall'ingresso.
+       Gli step senza eventi restano a zero invece di sparire, altrimenti
+       l'imbuto sembrerebbe piu' corto di quello che e'. */
+    const funnelByName = new Map((funnel.results || []).map(r => [r.event_name, r]));
+    let previousEvents = null;
+    const checkoutFunnel = CHECKOUT_FUNNEL_STEPS.map((step) => {
+        const row    = funnelByName.get(step);
+        const events = row?.events || 0;
+        const first  = funnelByName.get(CHECKOUT_FUNNEL_STEPS[0])?.events || 0;
+        const entry  = {
+            step,
+            events,
+            visitors: row?.visitors || 0,
+            carts:    row?.carts    || 0,
+            // null al primo step e quando manca il termine di paragone: uno zero
+            // si leggerebbe come "perso il 100%", che e' un'altra informazione.
+            ofPrevious: previousEvents === null ? null
+                : (previousEvents > 0 ? events / previousEvents : null),
+            ofFirst: first > 0 ? events / first : null,
+        };
+        previousEvents = events;
+        return entry;
+    });
 
     /* `directViews` sta fuori dalla classifica: "nessun referrer" non e' una
        sorgente fra le altre, ma e' il dato che dice quanta parte del traffico
@@ -375,6 +472,7 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS, includeBots
         topCountries: (topCountries.results || []).map(r => ({ country: r.country, views: r.views })),
         topSuggestedLangs: (topSuggestedLangs.results || []).map(r => ({ suggested_lang: r.suggested_lang, views: r.views })),
         devices:      (devices.results      || []).map(r => ({ device: r.device, views: r.views })),
+        checkoutFunnel,
     };
 }
 

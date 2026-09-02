@@ -969,10 +969,13 @@ ecommerce-footer {
 
 /* ─── Checkout stepper (cart → checkout → conferma) ────────────────────────── */
 
+/* Allineato a sinistra, non centrato: in tutte e tre le pagine che lo usano
+   (carrello, checkout, conferma) il titolo e' a sinistra, e uno stepper centrato
+   sul viewport creava due assi in conflitto invece di un unico blocco. */
 .checkout-stepper {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0.25rem 0 2.25rem;
     gap: 0;
     list-style: none;
@@ -1061,9 +1064,16 @@ ecommerce-footer {
     .checkout-stepper__line { transition: none; }
 }
 
+/* Allineato a sinistra l'etichetta mancante dell'ultimo passo lasciava il terzo
+   pallino spaiato in fondo alla riga. Accorciando i connettori "Conferma" entra
+   fino a 340px, sotto i quali resta il solo pallino. */
 @media (max-width: 400px) {
+    .checkout-stepper__line { min-width: 20px; }
+}
+
+@media (max-width: 340px) {
     .checkout-stepper__step--next .checkout-stepper__label { display: none; }
-    .checkout-stepper__line { min-width: 24px; }
+    .checkout-stepper__line { min-width: 16px; }
 }
 
 /* ── Voto Trustpilot (link statico) ───────────────────────────────────────

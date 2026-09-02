@@ -142,6 +142,79 @@
         renderTopList('adm-analytics-lang-suggest-tbody', data.topSuggestedLangs || [], 'suggested_lang', views, 'Lingua');
         renderTopList('adm-analytics-devices-tbody',   data.devices      || [], 'device',  views, 'Tipo');
         renderReferrers(data, views);
+        renderFunnel(data.checkoutFunnel || []);
+    }
+
+    /* ─── Funnel di checkout ───────────────────────────────────────────────── */
+
+    var FUNNEL_LABELS = {
+        checkout_view:              'Arrivo al checkout',
+        checkout_contact_started:   'Inizia i dati',
+        checkout_contact_completed: 'Dati completi',
+        checkout_payment_started:   'Entra nel pagamento',
+        checkout_pay_clicked:       'Preme paga',
+        purchase:                   'Ordine completato',
+    };
+
+    /**
+     * L'imbuto, con la caduta fra un passo e il precedente.
+     *
+     * La barra e' in scala sul primo passo e non sul massimo come nelle altre
+     * classifiche: un imbuto si legge per quanto si restringe rispetto a chi e'
+     * entrato, e usare il massimo darebbe sempre il 100% al primo dando l'idea
+     * di una classifica invece che di una sequenza.
+     */
+    function renderFunnel(steps) {
+        var tbody = $('adm-analytics-funnel-tbody');
+        if (!tbody) return;
+
+        var first = steps.length ? (steps[0].events || 0) : 0;
+        if (!steps.length || !first) {
+            tbody.innerHTML = emptyRow();
+            text('adm-analytics-funnel-note', 'Nessun evento di checkout nel periodo.');
+            return;
+        }
+
+        tbody.innerHTML = steps.map(function (s, i) {
+            var events = s.events || 0;
+            var width  = first ? (events / first) * 100 : 0;
+            // La caduta si evidenzia solo dove c'e' un passo prima con cui
+            // confrontarsi e la perdita supera un quarto: sotto quella soglia
+            // colorare ogni riga toglierebbe significato al segnale.
+            var drop   = (s.ofPrevious !== null && s.ofPrevious !== undefined && s.ofPrevious < 0.75);
+            return '<tr>'
+                 + '<td data-label="Passo">'
+                 +   '<span class="adm-rank"><span class="adm-rank__fill" style="width:' + width.toFixed(1) + '%"></span>'
+                 +   '<span class="adm-rank__text">' + esc((i + 1) + '. ' + (FUNNEL_LABELS[s.step] || s.step)) + '</span></span>'
+                 + '</td>'
+                 + '<td class="adm-th--center adm-td--nowrap" data-label="Eventi">'
+                 +   '<span class="adm-rank__value">' + esc(fmtNum(events)) + '</span>'
+                 + '</td>'
+                 + '<td class="adm-th--center adm-td--nowrap" data-label="Dal passo prec.">'
+                 +   (s.ofPrevious === null || s.ofPrevious === undefined
+                        ? '<span class="adm-rank__pct">—</span>'
+                        : '<span class="adm-rank__pct' + (drop ? ' adm-rank__pct--drop' : '') + '">'
+                          + esc(fmtRatio(s.ofPrevious)) + '</span>')
+                 + '</td>'
+                 + '<td class="adm-th--center adm-td--nowrap" data-label="Da ingresso">'
+                 +   '<span class="adm-rank__pct">' + esc(fmtRatio(s.ofFirst)) + '</span>'
+                 + '</td>'
+                 + '</tr>';
+        }).join('');
+
+        var last = steps[steps.length - 1];
+        text('adm-analytics-funnel-note',
+            'Conversione da ingresso checkout a ordine: ' + fmtRatio(last && last.ofFirst) + '. '
+            + 'I bot non compaiono: questi eventi nascono da interazioni con il form. '
+            + 'Un evento per caricamento pagina, non per click.');
+    }
+
+    /** Rapporto 0-1 in percentuale. Distinto da fmtPct, che prende parte e totale. */
+    function fmtRatio(r) {
+        if (r === null || r === undefined) return '—';
+        var p = Number(r) * 100;
+        if (!isFinite(p)) return '—';
+        return (p < 1 && p > 0 ? p.toFixed(1) : Math.round(p)) + '%';
     }
 
     function renderStats(data, daily) {

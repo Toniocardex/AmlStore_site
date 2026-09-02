@@ -1,20 +1,50 @@
 #!/usr/bin/env python3
-"""Generate remaining product pages, rebuild catalog pages, sitemap and redirects."""
+# -*- coding: utf-8 -*-
+"""Registro dei prodotti del sito, e guardia su schede, cataloghi, sitemap e
+_redirects (62 slug x 7 lingue + 6 cataloghi x 7 lingue).
+
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
+
+Fino a settembre 2026 main() chiamava build_product_page() e build_catalog_page()
+e sovrascriveva 427 schede + 42 cataloghi, poi appendeva a sitemap.xml e
+_redirects. Eseguirlo oggi distruggerebbe circa meta' di ogni scheda e fino a
+tre quarti di ogni catalogo:
+
+  - schede:    generato 24,1-60,8 KB, pubblicato 53,9-90,8 KB, 427 diff su 427
+  - cataloghi: generato  8,3-46,9 KB, pubblicato 37,9-77,0 KB,  42 diff su 42
+
+Il delta e' quasi costante, ~30 KB per pagina, e non e' un bug della libreria:
+e' la pipeline di post-produzione che manca. Il perche', e i cinque strati che
+andrebbero persi, stanno in scripts/page_pipeline_guard.py. Oltre alla pipeline
+si perderebbero FAQ JSON-LD (microsoft-365-personal), prezzi .pdp-plan
+aggiornati a mano (mcafee 5 e 10 dispositivi) e i conteggi dispositivi nei
+titoli e nel JSON-LD di 7 slug -- l'elenco completo e' nei docstring di
+regen-legacy-rich.py e regen-antivirus-rich.py.
+
+QUESTO MODULO RESTA IL REGISTRO DEI PRODOTTI e va importato: PRODUCTS,
+PRESERVE_PAGES e listing_groups() sono usati da regen-catalogs-only.py,
+generate-nl-only.py e regen-trustpilot-pdp.py. L'assert di coerenza con
+catalog.json gira a import-time, come prima.
+
+Quel che lo script fa ancora, e per cui va tenuto: verifica che ogni scheda e
+ogni catalogo esistano con i quattro strati addosso, e che sitemap.xml e
+_redirects coprano tutto il registro -- cioe' quello che append_sitemap() e
+append_redirects() garantivano scrivendo. Senza effetti collaterali, non scrive
+nulla.
+
+    python scripts/generate-wave3.py
+"""
 import json
-import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
 from product_page_lib import (  # noqa: E402
-    BASE_LABELS,
     LANGS,
     ROOT as LIB_ROOT,
     TEMPLATE_META,
-    build_catalog_page,
-    build_product_page,
-    entry,
 )
 
 assert LIB_ROOT == ROOT
@@ -158,66 +188,74 @@ def listing_groups():
     return groups
 
 
-def append_sitemap(slugs):
-    path = ROOT / "sitemap.xml"
-    text = path.read_text(encoding="utf-8")
-    inserts = []
-    for lang in LANGS:
-        for slug in slugs:
-            url = f"https://eurolicenze.com/{lang}/{slug}"
-            if url in text:
-                continue
-            inserts.append(
-                f'  <url><loc>{url}</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>'
-            )
-    if inserts:
-        text = text.replace("</urlset>", "\n".join(inserts) + "\n</urlset>")
-        path.write_text(text, encoding="utf-8")
-    print("sitemap +", len(inserts))
+def check_sitemap(slugs):
+    """Ogni URL del registro deve gia' stare in sitemap.xml.
+
+    Era quello che append_sitemap() otteneva appendendo: se una voce manca, la
+    pagina esiste ma nessuno la dichiara ai crawler.
+    """
+    text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    return [
+        f"sitemap.xml: manca https://eurolicenze.com/{lang}/{slug}"
+        for lang in LANGS
+        for slug in slugs
+        if f"https://eurolicenze.com/{lang}/{slug}" not in text
+    ]
 
 
-def append_redirects(products):
-    path = ROOT / "_redirects"
-    lines = path.read_text(encoding="utf-8").rstrip().splitlines()
-    existing = set(lines)
-    added = 0
-    # Do not add /it/antivirus → antivirus.html (loops with Pages pretty URLs).
+def check_redirects(products):
+    """Ogni vecchio URL WooCommerce deve avere la sua 301.
+
+    Era quello che append_redirects() otteneva appendendo. Le destinazioni sono
+    senza estensione (Pages serve *.html agli URL puliti); la variante .html
+    conta comunque come coperta. Nessuna regola /it/antivirus -> antivirus.html:
+    va in loop con gli URL puliti di Pages.
+    """
+    text = (ROOT / "_redirects").read_text(encoding="utf-8")
+    lines = set(text.rstrip().splitlines())
+    errors = []
     for p in products:
         woo = p.get("woo_it")
-        if woo:
-            # Prefer extensionless destinations (Pages serves *.html at pretty URLs).
-            rule = f"{woo} /it/{p['slug']} 301"
-            if rule not in existing and f"{woo} /it/{p['slug']}.html 301" not in existing:
-                lines.append(rule)
-                existing.add(rule)
-                added += 1
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("redirects +", added)
+        if not woo:
+            continue
+        if (f"{woo} /it/{p['slug']} 301" not in lines
+                and f"{woo} /it/{p['slug']}.html 301" not in lines):
+            errors.append(f"_redirects: manca la 301 {woo} -> /it/{p['slug']}")
+    return errors
 
 
 def main():
-    new_slugs = []
+    errors = []
+    page_slugs = []
+    # Le PRESERVE_PAGES sono scritte a mano, ma la pipeline le attraversa come
+    # tutte le altre: vanno controllate anche loro.
     for p in PRODUCTS:
-        out = ROOT / "it" / f"{p['slug']}.html"
-        if out.name in PRESERVE_PAGES:
-            continue
+        slug = p["slug"]
+        page_slugs.append(slug)
         for lang in LANGS:
-            target = ROOT / lang / f"{p['slug']}.html"
-            target.write_text(build_product_page(lang, p), encoding="utf-8")
-        new_slugs.append(p["slug"])
-        print("page", p["slug"])
+            html = load(lang, slug)
+            if html is None:
+                errors.append(f"{lang}/{slug}.html: manca il file")
+                continue
+            errors += pipeline_errors(lang, slug, html)
 
-    groups = listing_groups()
     catalog_slugs = []
-    for catalog_slug, items in groups.items():
+    for catalog_slug in listing_groups():
         catalog_slugs.append(catalog_slug)
         for lang in LANGS:
-            path = ROOT / lang / f"{catalog_slug}.html"
-            path.write_text(build_catalog_page(lang, catalog_slug, items), encoding="utf-8")
-        print("catalog", catalog_slug, len(items), "items")
+            html = load(lang, catalog_slug)
+            if html is None:
+                errors.append(f"{lang}/{catalog_slug}.html: manca il catalogo")
+                continue
+            errors += pipeline_errors(lang, catalog_slug, html)
 
-    append_sitemap(new_slugs + [s for s in catalog_slugs if s not in ("sistemi-operativi", "suite-office")])
-    append_redirects(PRODUCTS)
+    errors += check_sitemap(
+        page_slugs + [s for s in catalog_slugs if s not in ("sistemi-operativi", "suite-office")]
+    )
+    errors += check_redirects(PRODUCTS)
+
+    fail_if(errors, f"OK: {len(PRODUCTS)} schede + {len(catalog_slugs)} cataloghi "
+                    f"x {len(LANGS)} lingue, sitemap e _redirects allineati")
 
 
 if __name__ == "__main__":

@@ -1,59 +1,63 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Sostituisce la nota testuale pagamenti (.pf-pay-note) con i loghi (.pdp-pay)
-su tutte le pagine prodotto rich, allineandole al layout della pagina pilota
-(office-2024-home-business).
+"""Guardia sulla migrazione della nota pagamenti (una tantum, gia' esaurita).
 
-Patch mirata sull'HTML esistente, non una rigenerazione: i generatori
-(regen-*.py / build_product_page) sono disallineati dal pre-render di
-header/footer introdotto separatamente e riscriverebbero l'intera pagina
-alla versione vecchia (senza header/footer inline, senza hash ?v=).
+RITIRATO: questo script non modifica piu' le pagine.
 
-Da eseguire una tantum, poi bump-asset-version.py per gli hash dei loghi.
+Non condivideva il difetto degli altri regen-*: non chiamava mai
+build_product_page(), faceva una sostituzione mirata dentro l'HTML esistente
+(.pf-pay-note -> .pdp-pay) e lo diceva gia' nel suo docstring. Il motivo per cui
+va in pensione e' un altro: non ha piu' niente da fare, e il suo unico effetto
+possibile ormai sarebbe un danno.
+
+  - `.pf-pay-note`, la sua sorgente, non compare piu' su nessuna delle pagine
+    del sito: la migrazione e' andata a termine (commit d92ad113, 309 pagine);
+  - `.pdp-pay`, la sua destinazione, non c'e' piu' nemmeno lei: quell'area della
+    buy card e' stata rifatta e oggi ospita il blocco PayPal Express
+    (.pdp-paypal-express, reso da product_page_lib._render_paypal_express);
+  - di conseguenza il suo BLOCK_RE non combacia con nulla. L'unico esito
+    raggiungibile era `pagine aggiornate: 0`;
+  - e girava solo su it/en/fr/de/es: pt e nl non erano mai coperte.
+
+_render_payment_logos() in product_page_lib.py aveva qui il suo unico chiamante:
+ora e' codice morto ed e' un candidato alla rimozione, insieme alle chiavi
+`payments_aria` / loghi in V3_UI se non le usa nessun altro.
+
+Quel che lo script fa ancora, e per cui va tenuto: verifica che la migrazione
+resti chiusa in entrambe le direzioni -- nessuna pagina e' tornata alla nota
+testuale, e nessuna espone il blocco loghi ormai sostituito. Senza effetti
+collaterali, non scrive nulla.
+
+    python scripts/apply-payment-logos.py
 """
-import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from product_page_lib import V3_UI, _render_payment_logos  # noqa: E402
+from page_pipeline_guard import fail_if  # noqa: E402
+from product_page_lib import LANGS  # noqa: E402
 
-LANGS = ["it", "en", "fr", "de", "es"]
-
-BLOCK_RE = re.compile(
-    r'                <p class="pf-pay-note">\n'
-    r'                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
-    r'<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>'
-    r'<path stroke-linecap="round" stroke-linejoin="round" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>\n'
-    r'                    .*?\n'
-    r'                </p>'
+# (marcatore, perche' non deve esserci)
+OBSOLETE = (
+    ('class="pf-pay-note"', "nota pagamenti testuale, sostituita nel commit d92ad113"),
+    ('class="pdp-pay"', "blocco loghi pagamenti, sostituito dal blocco PayPal Express"),
 )
 
 
 def main():
-    touched = 0
-    skipped = []
+    errors = []
+    checked = 0
     for lang in LANGS:
-        replacement = _render_payment_logos(V3_UI[lang])
         for path in sorted((ROOT / lang).glob("*.html")):
+            checked += 1
             src = path.read_text(encoding="utf-8")
-            if 'class="pf-pay-note"' not in src:
-                continue
-            out, n = BLOCK_RE.subn(replacement, src)
-            if n != 1:
-                skipped.append((str(path), n))
-                continue
-            path.write_text(out, encoding="utf-8", newline="\n")
-            touched += 1
+            for marker, why in OBSOLETE:
+                if marker in src:
+                    errors.append(f"{lang}/{path.name}: {marker} e' ricomparso -- {why}")
 
-    print(f"pagine aggiornate: {touched}")
-    if skipped:
-        print("ATTENZIONE, pf-pay-note trovato ma pattern non combaciante:")
-        for p, n in skipped:
-            print(f"  - {p} ({n} match)")
-        sys.exit(1)
+    fail_if(errors, f"OK: {checked} pagine, nessun residuo della nota pagamenti")
 
 
 if __name__ == "__main__":

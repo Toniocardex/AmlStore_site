@@ -24,6 +24,8 @@
         <button type="button" class="adm-nav-btn" data-adm-view="carts" id="nav-carts">Carrelli</button>
         <button type="button" class="adm-nav-btn" data-adm-view="analytics" id="nav-analytics">Analytics</button>
         <a class="adm-nav-btn" href="/admin/support/">Supporto</a>
+        <a class="adm-nav-btn" href="/admin/email-license-generator.html" target="_blank" rel="noopener"
+           title="Apre il generatore in una nuova scheda, per copiare il riepilogo ordine">Email licenza ↗</a>
     </nav>
     <div class="adm-header__right">
         <span class="adm-user-email" id="adm-user-email"></span>
@@ -298,6 +300,7 @@
                         <th>Articoli</th>
                         <th class="adm-th--center">Totale</th>
                         <th>Lingua</th>
+                        <th class="adm-th--center">Arrivato a</th>
                         <th class="adm-th--center">Stato</th>
                         <th class="adm-th--center">Azioni</th>
                     </tr>
@@ -373,6 +376,20 @@
                         <thead><tr><th>Pagina</th><th class="adm-th--center">Visite</th></tr></thead>
                         <tbody id="adm-analytics-pages-tbody"></tbody>
                     </table>
+                </section>
+
+                <section class="adm-analytics-section adm-analytics-section--wide">
+                    <h2 class="adm-analytics-section__title">Funnel di checkout</h2>
+                    <table class="adm-table adm-table--compact">
+                        <thead><tr>
+                            <th>Passo</th>
+                            <th class="adm-th--center">Eventi</th>
+                            <th class="adm-th--center">Dal passo prec.</th>
+                            <th class="adm-th--center">Dall'ingresso</th>
+                        </tr></thead>
+                        <tbody id="adm-analytics-funnel-tbody"></tbody>
+                    </table>
+                    <p class="adm-stat-note" id="adm-analytics-funnel-note"></p>
                 </section>
 
                 <section class="adm-analytics-section">

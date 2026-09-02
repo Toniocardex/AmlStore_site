@@ -2311,7 +2311,14 @@ def build_rich_product_page(lang, prod, content, ui_map=None):
                     "url": page_url,
                     "priceCurrency": "EUR",
                     "price": price_dec,
-                    "availability": "https://schema.org/InStock",
+                    # SKU fisico: default prudente. Il valore vero lo inietta
+                    # functions/_middleware.js leggendo il magazzino in D1; questo
+                    # e' solo cio' che resta se quel livello non risponde, e
+                    # promettere disponibilita' che non c'e' costa piu' del contrario.
+                    "availability": (
+                        "https://schema.org/OutOfStock" if is_physical_sku(sku)
+                        else "https://schema.org/InStock"
+                    ),
                     "itemCondition": "https://schema.org/NewCondition",
                     "seller": {"@id": "https://eurolicenze.com/#organization"},
                 },
@@ -2659,7 +2666,14 @@ def build_compact_product_page(lang, prod):
                     "url": f"https://eurolicenze.com/{lang}/{slug}",
                     "priceCurrency": "EUR",
                     "price": price_dec,
-                    "availability": "https://schema.org/InStock",
+                    # SKU fisico: default prudente. Il valore vero lo inietta
+                    # functions/_middleware.js leggendo il magazzino in D1; questo
+                    # e' solo cio' che resta se quel livello non risponde, e
+                    # promettere disponibilita' che non c'e' costa piu' del contrario.
+                    "availability": (
+                        "https://schema.org/OutOfStock" if is_physical_sku(sku)
+                        else "https://schema.org/InStock"
+                    ),
                     "itemCondition": "https://schema.org/NewCondition",
                 },
             }

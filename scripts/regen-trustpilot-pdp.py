@@ -1,19 +1,57 @@
 #!/usr/bin/env python3
-"""Regenerate all product PDPs with Trustpilot block; patch preserved pages."""
+# -*- coding: utf-8 -*-
+"""Guardia sul blocco Trustpilot di tutte le schede prodotto
+(62 slug x 7 lingue = 434 file, comprese le PRESERVE_PAGES).
+
+RITIRATO COME GENERATORE: questo script non riscrive piu' le pagine.
+
+Aveva due percorsi di scrittura, e nessuno dei due andava piu' bene.
+
+1) Rigenerazione delle 61 schede non preservate. main() chiamava
+   build_product_page() e sovrascriveva 427 file. Eseguirlo oggi ne
+   distruggerebbe circa meta': build_product_page() rende 24,1-60,8 KB, i file
+   pubblicati stanno fra 53,9 e 90,8 KB, il confronto e' 427 diff su 427
+   (nessuna pagina coincide) e il delta e' 29,6-32,3 KB per pagina. Non e' un
+   bug della libreria: e' la pipeline di post-produzione che manca. Il perche',
+   e i cinque strati che andrebbero persi, stanno in
+   scripts/page_pipeline_guard.py. Oltre alla pipeline si perderebbero anche
+   FAQ JSON-LD (microsoft-365-personal), prezzi .pdp-plan aggiornati a mano
+   (mcafee 5 e 10 dispositivi) e i conteggi dispositivi nei titoli e nel
+   JSON-LD di 7 slug -- l'elenco completo e' nei docstring di
+   regen-legacy-rich.py e regen-antivirus-rich.py.
+
+2) patch_preserve() sulle pagine scritte a mano. Inseriva il vecchio blocco
+   #trustpilot-widget cercando ancore (</div></section> prima di <hr
+   class="v2-divider">, il tag <script> di product-page.js) che quelle pagine
+   non hanno piu': sui fallback cadeva su </main> e </body>, cioe' appendeva
+   markup in fondo alla pagina.
+
+In piu' era gia' morto per conto suo: importa _trustpilot_script_tag da
+product_page_lib, che non esiste piu'. Lanciarlo oggi dava ImportError prima di
+toccare un file. E il layout che cercava di installare e' superato: il TrustBox
+grande e' stato spostato nella buy card da scripts/move-trustpilot-to-buy-card.py
+e oggi lo rende _trustpilot_buy_mini() come .product-trustpilot.pdp-buy-trustpilot
+(_trustpilot_block() e' rimasto solo come alias deprecato). Le sue vecchie
+invarianti -- id="trustpilot-widget" e trustpilot-widget.js -- oggi sono false su
+tutte e 434 le pagine: erano un controllo che segnalava un layout smontato tre
+volte fa.
+
+Quel che lo script fa ancora, e per cui va tenuto: verifica che il TrustBox
+attuale sia presente su tutte le schede prodotto, incluse quelle preservate --
+la copertura che patch_preserve() cercava di garantire -- piu' i quattro strati.
+Senza effetti collaterali, non scrive nulla.
+
+    python scripts/regen-trustpilot-pdp.py
+"""
 import importlib.util
-import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from product_page_lib import (  # noqa: E402
-    LANGS,
-    _trustpilot_block,
-    _trustpilot_script_tag,
-    build_product_page,
-)
+from page_pipeline_guard import fail_if, load, pipeline_errors  # noqa: E402
+from product_page_lib import LANGS  # noqa: E402
 
 spec = importlib.util.spec_from_file_location("generate_wave3", ROOT / "scripts" / "generate-wave3.py")
 gw3 = importlib.util.module_from_spec(spec)
@@ -22,82 +60,28 @@ spec.loader.exec_module(gw3)
 PRESERVE = gw3.PRESERVE_PAGES
 PRODUCTS = gw3.PRODUCTS
 
-
-def patch_preserve(path: Path, lang: str) -> bool:
-    html = path.read_text(encoding="utf-8")
-    already = 'id="trustpilot-widget"' in html and "trustpilot-widget.js" in html
-    if already:
-        return False
-
-    block = _trustpilot_block(lang)
-    script = _trustpilot_script_tag()
-    changed = False
-
-    if 'id="trustpilot-widget"' not in html:
-        # After steps section, before divider (allow blank lines)
-        m = re.search(
-            r"(</div>\s*</section>)\s*(<hr class=\"v2-divider\">)",
-            html,
-            flags=re.MULTILINE,
-        )
-        if m:
-            html = html[: m.start()] + m.group(1) + "\n" + block + m.group(2) + html[m.end() :]
-            changed = True
-        else:
-            html = html.replace("</main>", block + "    </main>", 1)
-            changed = True
-
-    if "trustpilot-widget.js" not in html:
-        html2, n = re.subn(
-            r'(<script src="../js/product-page\.js[^"]*" defer></script>)',
-            script + r"    \1",
-            html,
-            count=1,
-        )
-        if n:
-            html = html2
-            changed = True
-        else:
-            html = html.replace("</body>", script + "</body>", 1)
-            changed = True
-
-    if changed:
-        path.write_text(html, encoding="utf-8")
-    return changed
+# Il TrustBox come lo rende oggi _trustpilot_buy_mini(), dentro la buy card.
+TRUSTPILOT_MARKERS = ("product-trustpilot", "pdp-buy-trustpilot")
 
 
 def main():
-    rebuilt = 0
+    errors = []
     for p in PRODUCTS:
-        fname = f"{p['slug']}.html"
-        if fname in PRESERVE:
-            continue
+        slug = p["slug"]
+        preserved = f"{slug}.html" in PRESERVE
         for lang in LANGS:
-            target = ROOT / lang / fname
-            html = build_product_page(lang, p)
-            if 'id="trustpilot-widget"' not in html:
-                raise SystemExit(f"missing trustpilot in build: {fname}/{lang}")
-            if "trustpilot-widget.js" not in html:
-                raise SystemExit(f"missing trustpilot script: {fname}/{lang}")
-            target.write_text(html, encoding="utf-8")
-        rebuilt += 1
-        print("rebuild", p["slug"])
-
-    patched = 0
-    for fname in sorted(PRESERVE):
-        slug = fname.replace(".html", "")
-        for lang in LANGS:
-            path = ROOT / lang / fname
-            if not path.exists():
-                print("missing preserve", lang, fname)
+            html = load(lang, slug)
+            if html is None:
+                errors.append(f"{lang}/{slug}.html: manca il file")
                 continue
-            if patch_preserve(path, lang):
-                patched += 1
-                print("patch", lang, slug)
-            else:
-                print("skip", lang, slug)
+            for marker in TRUSTPILOT_MARKERS:
+                if marker not in html:
+                    where = "pagina preservata" if preserved else "scheda generata"
+                    errors.append(f"{lang}/{slug}.html ({where}): manca il TrustBox ({marker})")
+            errors += pipeline_errors(lang, slug, html)
 
-    print(f"done rebuild={rebuilt} patch_ops={patched}")
+    fail_if(errors, f"OK: TrustBox su {len(PRODUCTS)} slug x {len(LANGS)} lingue "
+                    f"({len(PRESERVE)} preservati inclusi)")
 
 
 if __name__ == "__main__":
