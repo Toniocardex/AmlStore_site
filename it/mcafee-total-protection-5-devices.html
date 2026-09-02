@@ -134,7 +134,7 @@
     <script src="../js/consent-init.js?v=1014bf53bc"></script>
     <link rel="icon" href="../favicon/favicon.png?v=48eb537367" type="image/png">
     <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png?v=c9d7938f28">
-    <link rel="preload" as="image" href="../asset/media/products/mcafee-total-protection-5-devices-banner.webp?v=74d2659aab" fetchpriority="high" type="image/webp">
+    <link rel="preload" as="image" href="../asset/media/products/mcafee-total-protection-5-devices.webp?v=b1c9441b92" fetchpriority="high" type="image/webp">
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <!-- Font del mockup di riferimento (Plus Jakarta Sans + Inter), scopato alla
          sola PDP tramite --font-sans su .pdp-page — non tocca header/footer,
@@ -152,11 +152,10 @@
     <link rel="stylesheet" href="../css/footer.css?v=f4d2eaeb91">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
     <link rel="stylesheet" href="../css/product-pdp.css?v=666f06b0dd">
-    <link rel="stylesheet" href="../css/mcafee-pilot.css?v=57d37509ac">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script>window.__amlPaypalConfig = fetch("/api/paypal-config").then(function(r){return r.json();}).catch(function(){return null;});</script>
 </head>
-<body class="pdp-page pdp-hero--banner">
+<body class="pdp-page">
     <a class="skip-link" href="#main">Vai al contenuto principale</a>
     <aml-lang-suggest></aml-lang-suggest>
     <ecommerce-header translate="no" class="notranslate">
@@ -431,8 +430,6 @@
     </div>
 
     <section class="pdp-hero" aria-label="Prodotto e acquisto">
-        <img class="pdp-hero__banner" src="../asset/media/products/mcafee-total-protection-5-devices-banner.webp?v=74d2659aab" alt="McAfee Total Protection — naviga, lavora, gioca al sicuro: antivirus, VPN e gestore password in un unico abbonamento." width="1760" height="982" fetchpriority="high" decoding="async">
-        <div class="pdp-hero__banner-fade" aria-hidden="true"></div>
 
         <div class="pdp-breadcrumb">
             <nav aria-label="Percorso navigazione">
@@ -717,14 +714,6 @@
                 </div>
             </div>
         </section>
-        <section class="pdp-mc-close" aria-label="Acquista McAfee Total Protection">
-            <h2>Mettiti al sicuro ora</h2>
-            <p>Licenza McAfee originale, fattura italiana e supporto in italiano via email e WhatsApp. Garanzia di sostituzione o rimborso.</p>
-            <a class="pdp-mc-close__cta" href="#product-pricing">
-                <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45A2 2 0 0 0 8 17h12v-2H8.42a.25.25 0 0 1-.22-.37L9.1 13h7.45a2 2 0 0 0 1.75-1.03l3.58-6.49A1 1 0 0 0 21 4H5.21l-.94-2H1zm16 16c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Aggiungi al carrello
-            </a>
-        </section>
     </main>
     <dialog id="pdp-activation" class="pdp-dialog" aria-labelledby="pdp-activation-title">
         <h2 id="pdp-activation-title" class="pdp-dialog__title">Tre passi per iniziare</h2>
@@ -823,7 +812,6 @@
     <script src="../js/product-v3.js?v=f7e393e904" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
     <script src="../js/pdp-paypal-express.js?v=365cb44001" defer></script>
-    <script src="../js/mcafee-pilot.js?v=28b4a63d0a" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
     <script src="../components/lang-suggest.js?v=910b04817f" defer></script>
     <script src="../components/header.js?v=e3c147707e" defer></script>

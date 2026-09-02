@@ -1,55 +1,48 @@
 /**
- * PILOTA McAfee — micro-interazioni della sola scheda pilota.
+ * PILOTA McAfee 1 dispositivo — micro-interazioni.
  * Attivo solo su body.pdp-hero--banner. Nessuna dipendenza.
- *  1. reveal-on-scroll delle sezioni corpo + fascia di chiusura;
- *  2. count-up del prezzo quando la buy card entra in viewport.
- * Tutto degrada a "gia' visibile / valore finale" senza JS o con
- * prefers-reduced-motion.
+ *  1. reveal-on-scroll di .mc-sec e .mc-close;
+ *  2. count-up del prezzo (.pdp-price-sale) quando la buy card entra in view.
+ * Degrada a "gia' visibile / valore finale" senza JS o con reduced-motion.
  */
 (function () {
     'use strict';
     if (!document.body || !document.body.classList.contains('pdp-hero--banner')) return;
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasIO = 'IntersectionObserver' in window;
 
-    /* 1. Reveal-on-scroll -------------------------------------------------- */
-    var targets = document.querySelectorAll('.pdp-sec, .pdp-mc-close');
-    if (targets.length && 'IntersectionObserver' in window && !reduce) {
-        targets.forEach(function (el) { el.classList.add('mc-reveal'); });
+    /* 1. reveal ---------------------------------------------------------- */
+    var secs = document.querySelectorAll('.mc-sec, .mc-close');
+    if (secs.length && hasIO && !reduce) {
+        secs.forEach(function (el) { el.classList.add('mc-reveal'); });
         var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
-                if (e.isIntersecting) {
-                    e.target.classList.add('mc-in');
-                    io.unobserve(e.target);
-                }
+                if (e.isIntersecting) { e.target.classList.add('mc-in'); io.unobserve(e.target); }
             });
         }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-        targets.forEach(function (el) { io.observe(el); });
+        secs.forEach(function (el) { io.observe(el); });
     }
 
-    /* 2. Count-up del prezzo ------------------------------------------------ */
-    var priceEl = document.querySelector('#product-pricing .pdp-price-sale');
+    /* 2. count-up prezzo ---------------------------------------------------- */
     var buy = document.getElementById('product-pricing');
-    if (priceEl && buy && !reduce && 'IntersectionObserver' in window) {
-        var raw = priceEl.textContent;                       // es. "€ 7,95"
-        var m = raw.match(/([\d.]+),(\d{2})/);
-        if (m) {
-            var target = parseFloat(m[1].replace(/\./g, '') + '.' + m[2]);
-            var prefix = raw.slice(0, raw.indexOf(m[0]));    // "€ "
+    var priceEl = buy && buy.querySelector('.pdp-price-sale');
+    if (priceEl && hasIO && !reduce) {
+        var raw = priceEl.textContent;                       // "€ 7,95"
+        var mm = raw.match(/([\d.]+),(\d{2})/);
+        if (mm) {
+            var target = parseFloat(mm[1].replace(/\./g, '') + '.' + mm[2]);
+            var prefix = raw.slice(0, raw.indexOf(mm[0]));
             var fmt = function (v) {
-                return prefix + v.toLocaleString('it-IT', {
-                    minimumFractionDigits: 2, maximumFractionDigits: 2
-                });
+                return prefix + v.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             };
             var run = function () {
-                var start = null, dur = 460, from = 0;
+                var t0 = null, dur = 460;
                 var step = function (ts) {
-                    start = start || ts;
-                    var p = Math.min(1, (ts - start) / dur);
-                    var eased = 1 - Math.pow(1 - p, 3);
-                    priceEl.textContent = fmt(from + (target - from) * eased);
-                    if (p < 1) requestAnimationFrame(step);
-                    else priceEl.textContent = fmt(target);
+                    t0 = t0 || ts;
+                    var p = Math.min(1, (ts - t0) / dur);
+                    priceEl.textContent = fmt(target * (1 - Math.pow(1 - p, 3)));
+                    if (p < 1) requestAnimationFrame(step); else priceEl.textContent = fmt(target);
                 };
                 requestAnimationFrame(step);
             };

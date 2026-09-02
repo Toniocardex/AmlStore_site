@@ -421,7 +421,7 @@
       <g:condition>new</g:condition>
       <g:adult>no</g:adult>
       <g:brand>McAfee</g:brand>
-      <g:mpn>MTP51ENG3RAAD</g:mpn>
+      <g:identifier_exists>no</g:identifier_exists>
       <g:google_product_category>Software &gt; Computer Software &gt; Antivirus &amp; Security Software</g:google_product_category>
       <g:product_type>Antivirus</g:product_type>
       <g:item_group_id>mcafee-total-protection</g:item_group_id>

@@ -381,7 +381,7 @@
     <item>
       <g:id>1108921</g:id>
       <title>McAfee Total Protection 2026 — 1 dispositivo · 1 anno</title>
-      <description>McAfee Total Protection per 1 dispositivo: difesa multi-dispositivo completa con protezione web avanzata, licenza digitale originale e consegna immediata via email. Attivazione su McAfee My Account.</description>
+      <description>McAfee Total Protection per 1 dispositivo: difesa multi-dispositivo completa con protezione web avanzata, licenza digitale originale e consegna immediata via email. Attivazione sul sito ufficiale McAfee.</description>
       <link>https://eurolicenze.com/it/mcafee-total-protection-1-device</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-1-device.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
@@ -421,7 +421,7 @@
       <g:condition>new</g:condition>
       <g:adult>no</g:adult>
       <g:brand>McAfee</g:brand>
-      <g:mpn>MTP51ENG3RAAD</g:mpn>
+      <g:identifier_exists>no</g:identifier_exists>
       <g:google_product_category>Software &gt; Computer Software &gt; Antivirus &amp; Security Software</g:google_product_category>
       <g:product_type>Antivirus</g:product_type>
       <g:item_group_id>mcafee-total-protection</g:item_group_id>
