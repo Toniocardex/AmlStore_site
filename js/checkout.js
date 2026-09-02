@@ -16,6 +16,18 @@
     // Pilota IT: solo /it/checkout ha il markup on-page (#payment-element).
     // Le altre lingue restano sul flusso Stripe Checkout ospitato (redirect)
     // finché non vengono migrate. Un solo checkout.js serve entrambi.
+    // I metodi che si pagano restando in pagina: il radio sceglie, il
+    // PaymentIntent nasce con quel solo tipo e il Payment Element rende una
+    // interfaccia sola. Niente riga di tab, niente tendina di overflow.
+    // SEPA e Klarna sono qui e non fra i wallet perche' sono a notifica
+    // differita: la loro riga dichiara che la licenza parte alla conferma.
+    var ONPAGE_METHODS = { stripe: 'card', sepa: 'sepa_debit', klarna: 'klarna' };
+
+    function onPageMethod(value) {
+        return Object.prototype.hasOwnProperty.call(ONPAGE_METHODS, value)
+            ? ONPAGE_METHODS[value] : null;
+    }
+
     function isOnPageStripe() {
         return !!document.getElementById('payment-element');
     }
@@ -613,22 +625,23 @@
             if (!selected) return;
             var method = selected.value;
 
-            if (stripeSection)   stripeSection.hidden   = method !== 'stripe';
+            var pmType = onPageMethod(method);
+            if (stripeSection)   stripeSection.hidden   = !pmType;
             if (transferSection) transferSection.hidden  = method !== 'transfer';
             if (paypalSection)   paypalSection.hidden    = method !== 'paypal';
 
-            var stripeBtnOk = method === 'stripe' && (!isOnPageStripe() || _stripeEnabled);
+            var stripeBtnOk = !!pmType && (!isOnPageStripe() || _stripeEnabled);
             if (btnStripe)   btnStripe.style.display   = stripeBtnOk ? '' : 'none';
             // La nota "consegna in 2-15 min" vale per il pagamento con carta:
             // col bonifico la licenza parte quando l'incasso e' visibile, e
             // lasciarla li' sarebbe una promessa che non manteniamo.
             var ctaNote = document.getElementById('checkout-cta-note');
-            if (ctaNote) ctaNote.hidden = !stripeBtnOk;
+            if (ctaNote) ctaNote.hidden = !(stripeBtnOk && method === 'stripe');
             if (btnTransfer) btnTransfer.style.display  = method === 'transfer' ? '' : 'none';
             syncActionsBar();
 
             if (method === 'paypal') initPaypalButtons();
-            if (method === 'stripe' && isOnPageStripe()) maybeMountPaymentElement();
+            if (pmType && isOnPageStripe()) maybeMountPaymentElement();
         }
 
         radios.forEach(function (r) { r.addEventListener('change', updateVisibility); });
@@ -1102,7 +1115,8 @@
     function maybeMountPaymentElement() {
         if (!_stripeEnabled || !_stripe) return;
         var selected = document.querySelector('input[name="payment-method"]:checked');
-        if (!selected || selected.value !== 'stripe') return;
+        var pmType   = selected && onPageMethod(selected.value);
+        if (!pmType) return;
 
         var gate    = document.getElementById('payment-element-gate');
         var loading = document.getElementById('payment-element-loading');
@@ -1111,7 +1125,9 @@
             if (gate) gate.hidden = false;
             return;
         }
-        var key = customerKey();
+        // La chiave porta anche il metodo: cambiare da carta a SEPA deve
+        // rifare il PaymentIntent, non riusare quello di prima.
+        var key = customerKey() + '|' + pmType;
         if (_paymentElement && key === _lastPiCustomerKey) { if (gate) gate.hidden = true; return; }
         if (_paymentElMounting) return;
 
@@ -1127,6 +1143,7 @@
         .then(function (idempotencyKey) {
             return postPaymentIntent({
                 mode:           'manual',
+                method:         pmType,
                 idempotencyKey: idempotencyKey,
                 customer:       customer,
                 items:          items,
@@ -1145,7 +1162,7 @@
             // saltato proprio per il percorso piu' comune.
             _paymentElement.on('focus', function () { trackFunnel('checkout_payment_started'); });
             _paymentElement.mount('#payment-element');
-            _lastPiCustomerKey = customerKey();
+            _lastPiCustomerKey = key;
         })
         .catch(function (err) {
             console.error('[Checkout] Payment Element error:', err);

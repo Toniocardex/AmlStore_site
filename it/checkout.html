@@ -438,6 +438,38 @@
                                     <input
                                         type="radio"
                                         name="payment-method"
+                                        id="pay-sepa"
+                                        value="sepa"
+                                    >
+                                    <label class="payment-option-label" for="pay-sepa">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Addebito SEPA</span>
+                                            <span class="payment-option-desc">La licenza parte alla conferma dell'addebito</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-klarna"
+                                        value="klarna"
+                                    >
+                                    <label class="payment-option-label" for="pay-klarna">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Klarna</span>
+                                            <span class="payment-option-desc">La licenza parte alla conferma del pagamento</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
                                         id="pay-transfer"
                                         value="transfer"
                                     >
@@ -497,9 +529,8 @@
                             <!-- Sezione Stripe (Payment Element on-page) -->
                             <div id="stripe-section">
                                 <p id="payment-element-gate" class="payment-element-gate">
-                                    Compila nome ed email qui sopra per pagare con carta.
-                                </p>
-                                <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Caricamento campi carta…</div>
+                            Compila nome ed email qui sopra per proseguire con il pagamento.</p>
+                                <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Caricamento del modulo di pagamento…</div>
                                 <div id="payment-element"></div>
                                 <div id="stripe-unavailable" class="payment-element-gate" hidden>
                                     Pagamento con carta non disponibile in questo momento: puoi completare l'ordine con bonifico bancario.
@@ -686,7 +717,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=82de60c300" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../js/checkout.js?v=6324a26488" defer></script>
+    <script src="../js/checkout.js?v=ca76dc53bd" defer></script>
 
 </body>
 </html>

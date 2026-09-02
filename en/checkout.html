@@ -430,6 +430,38 @@
                                     <input
                                         type="radio"
                                         name="payment-method"
+                                        id="pay-sepa"
+                                        value="sepa"
+                                    >
+                                    <label class="payment-option-label" for="pay-sepa">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">SEPA Direct Debit</span>
+                                            <span class="payment-option-desc">The licence is sent once the debit is confirmed</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-klarna"
+                                        value="klarna"
+                                    >
+                                    <label class="payment-option-label" for="pay-klarna">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Klarna</span>
+                                            <span class="payment-option-desc">The licence is sent once payment is confirmed</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
                                         id="pay-transfer"
                                         value="transfer"
                                     >
@@ -487,9 +519,8 @@
 
                             <div id="stripe-section">
                                 <p id="payment-element-gate" class="payment-element-gate">
-                                    Fill in your name and email above to pay by card.
-                                </p>
-                                <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Loading card fields…</div>
+                            Fill in your name and email above to continue with payment.</p>
+                                <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Loading payment form…</div>
                                 <div id="payment-element"></div>
                                 <div id="stripe-unavailable" class="payment-element-gate" hidden>
                                     Card payment is unavailable right now: you can complete your order by bank transfer.
@@ -660,7 +691,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=82de60c300" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../js/checkout.js?v=6324a26488" defer></script>
+    <script src="../js/checkout.js?v=ca76dc53bd" defer></script>
 
 </body>
 </html>

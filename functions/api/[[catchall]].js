@@ -984,9 +984,18 @@ async function handleCreatePaymentIntent(request, env) {
     // Manuale: solo `card`. Cosi' il Payment Element mostra i campi carta e
     // basta — niente riga di tab, niente tendina — e la sezione dice davvero
     // quello che l'etichetta promette ("Carta di credito o debito").
+    // Express: Apple/Google Pay viaggiano come `card`, Link e Amazon Pay sono
+    // tipi a se'. Manuale: il metodo lo sceglie il radio del checkout, e il
+    // PaymentIntent nasce con quel solo tipo — cosi' il Payment Element rende
+    // una interfaccia sola, senza riga di tab ne' tendina di overflow.
+    // Allowlist chiusa: il tipo arriva dal client e non va passato a Stripe
+    // cosi' com'e'. SEPA e Klarna sono a notifica differita e la loro riga nel
+    // checkout lo dichiara ("la licenza parte alla conferma").
+    const MANUAL_METHODS = new Set(['card', 'sepa_debit', 'klarna']);
+    const chiesto = String(body.method || 'card');
     const methods = mode === 'express'
         ? ['card', 'link', 'amazon_pay', 'paypal']
-        : ['card'];
+        : [MANUAL_METHODS.has(chiesto) ? chiesto : 'card'];
 
     const pi = await createPaymentIntent(env.STRIPE_SECRET_KEY, {
         orderId,

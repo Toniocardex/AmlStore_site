@@ -112,7 +112,14 @@ export async function createPaymentIntent(stripeSecretKey, {
         headers: {
             'Authorization': `Bearer ${stripeSecretKey}`,
             'Content-Type':  'application/x-www-form-urlencoded',
-            'Idempotency-Key': `pi_${orderId}`,
+            // La chiave porta anche i metodi: un cliente che passa da carta a
+            // SEPA sullo stesso ordine deve ottenere un PaymentIntent NUOVO col
+            // tipo giusto. Con la sola chiave `pi_<orderId>` Stripe rigiocherebbe
+            // quello di prima, ristretto al metodo scelto la prima volta, e il
+            // secondo metodo non si monterebbe mai. Il PaymentIntent vecchio
+            // resta in requires_payment_method e scade da solo: solo quello
+            // confermato incassa, e setStripePaymentIntent tiene l'ultimo.
+            'Idempotency-Key': `pi_${orderId}_${(methods || ['auto']).join('-')}`,
         },
         body: params.toString(),
     });

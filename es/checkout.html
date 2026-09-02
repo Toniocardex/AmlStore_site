@@ -274,6 +274,28 @@
                                 </div>
 
                                 <div class="payment-option">
+                                    <input type="radio" name="payment-method" id="pay-sepa" value="sepa">
+                                    <label class="payment-option-label" for="pay-sepa">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Adeudo SEPA</span>
+                                            <span class="payment-option-desc">La licencia se envía al confirmarse el adeudo</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" name="payment-method" id="pay-klarna" value="klarna">
+                                    <label class="payment-option-label" for="pay-klarna">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <span class="payment-option-content">
+                                            <span class="payment-option-title">Klarna</span>
+                                            <span class="payment-option-desc">La licencia se envía al confirmarse el pago</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="payment-option">
                                     <input type="radio" name="payment-method" id="pay-transfer" value="transfer">
                                     <label class="payment-option-label" for="pay-transfer">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
@@ -311,9 +333,8 @@
                             </div>
                             <div id="stripe-section">
                                 <p id="payment-element-gate" class="payment-element-gate">
-                                    Rellena tu nombre y correo arriba para pagar con tarjeta.
-                                </p>
-                                <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Cargando campos de la tarjeta…</div>
+                            Rellena tu nombre y correo arriba para continuar con el pago.</p>
+                                <div id="payment-element-loading" class="payment-element-loading" hidden aria-live="polite">Cargando el formulario de pago…</div>
                                 <div id="payment-element"></div>
                                 <div id="stripe-unavailable" class="payment-element-gate" hidden>
                                     El pago con tarjeta no está disponible ahora mismo: puedes completar el pedido por transferencia bancaria.
@@ -420,7 +441,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=82de60c300" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../js/checkout.js?v=6324a26488" defer></script>
+    <script src="../js/checkout.js?v=ca76dc53bd" defer></script>
 
 </body>
 </html>
