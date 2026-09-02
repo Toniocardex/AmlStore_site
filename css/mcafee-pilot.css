@@ -1,0 +1,188 @@
+/**
+ * PILOTA — McAfee Total Protection 1 dispositivo (it/mcafee-total-protection-1-device.html)
+ *
+ * Redesign della sola scheda pilota: l'hero diventa il banner grafico a tutta
+ * larghezza, il pannello d'acquisto scavalca il bordo scuro→carta. Caricato
+ * DOPO product-pdp.css e scopato su body.pdp-hero--banner: inerte su ogni
+ * altra PDP. Per tornare allo standard: togliere il <link> e la classe dal
+ * <body>.
+ *
+ * Vincoli rispettati:
+ *  - nessun webfont nuovo: resta --font-sans (Plus Jakarta Sans + Inter);
+ *  - nessun literal di colore: solo token esistenti, color-mix, transparent;
+ *  - il ruolo "risparmio" resta verde (decisione 2026-09-02), la CTA resta
+ *    l'unico arancione.
+ */
+
+.pdp-hero--banner {
+    --pdp-banner-h: clamp(220px, 34vw, 380px);
+    --pdp-buy-lift: clamp(64px, 12vw, 148px);
+}
+
+/* ── HERO: il banner è il fondo, il resto scorre sotto su carta ──────────── */
+.pdp-hero--banner .pdp-hero {
+    padding-top: var(--pdp-banner-h);
+    background: var(--pdp-navy); /* dietro l'immagine mentre carica */
+}
+
+.pdp-hero--banner .pdp-hero__banner {
+    position: absolute;
+    inset: 0 0 auto 0;
+    width: 100%;
+    height: var(--pdp-banner-h);
+    object-fit: cover;
+    object-position: 64% 40%;
+    z-index: 0;
+}
+
+/* Sfumatura del banner verso la carta: niente taglio netto sulla cucitura. */
+.pdp-hero--banner .pdp-hero__banner-fade {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: var(--pdp-banner-h);
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+        transparent 0%,
+        transparent 60%,
+        color-mix(in srgb, var(--pdp-surface) 45%, transparent) 82%,
+        var(--pdp-surface) 100%);
+}
+
+/* Breadcrumb spostato SOPRA il banner (fuori flusso): testo chiaro sul buio. */
+.pdp-hero--banner .pdp-breadcrumb {
+    position: absolute;
+    inset: 14px 0 auto 0;
+    z-index: 3;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.pdp-hero--banner .pdp-breadcrumb a,
+.pdp-hero--banner .pdp-breadcrumb span[aria-current] {
+    color: var(--pdp-surface);
+}
+.pdp-hero--banner .pdp-breadcrumb a:hover {
+    color: var(--pdp-surface);
+    opacity: 0.78;
+}
+.pdp-hero--banner .pdp-breadcrumb .sep {
+    color: var(--pdp-surface);
+    opacity: 0.45;
+}
+/* Su mobile il banner è basso e la sua grafica ha già del testo: il breadcrumb
+   torna nel flusso, scuro su carta, sotto il banner. */
+@media (max-width: 700px) {
+    .pdp-hero--banner .pdp-breadcrumb {
+        position: static;
+        padding-top: 14px;
+    }
+    .pdp-hero--banner .pdp-breadcrumb a,
+    .pdp-hero--banner .pdp-breadcrumb span[aria-current] {
+        color: var(--pdp-muted);
+    }
+    .pdp-hero--banner .pdp-breadcrumb .sep {
+        color: var(--pdp-border);
+        opacity: 1;
+    }
+}
+
+/* ── GRIGLIA: info su carta, pannello d'acquisto a cavallo del bordo ─────── */
+.pdp-hero--banner .pdp-hero__inner {
+    position: relative;
+    z-index: 2;
+    padding-top: 28px;
+}
+
+.pdp-hero--banner .pdp-buy {
+    position: relative;
+    top: 0;
+    margin-top: calc(var(--pdp-buy-lift) * -1);
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--aml-shadow-lg), var(--aml-shadow-sm);
+}
+@media (max-width: 1024px) {
+    .pdp-hero--banner .pdp-buy {
+        margin-top: calc(var(--pdp-buy-lift) * -0.5);
+    }
+}
+
+/* Testata scura del pannello: la riga disponibilità bleeda ai bordi. */
+.pdp-hero--banner .pdp-buy > * {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.pdp-hero--banner .pdp-buy .pdp-avail {
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: var(--pdp-navy);
+    border-bottom: 1px solid color-mix(in srgb, var(--pdp-surface) 12%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.pdp-hero--banner .pdp-buy .pdp-avail__pill {
+    background: transparent;
+    padding: 0;
+    color: var(--pdp-ok);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: var(--aml-text-xs);
+}
+.pdp-hero--banner .pdp-buy .pdp-avail__dot {
+    background: var(--pdp-ok);
+}
+.pdp-hero--banner .pdp-buy .pdp-avail__eta {
+    color: color-mix(in srgb, var(--pdp-surface) 68%, transparent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: var(--aml-text-xs);
+}
+.pdp-hero--banner .pdp-buy .pdp-avail + * {
+    padding-top: 20px;
+}
+.pdp-hero--banner .pdp-buy > *:last-child {
+    padding-bottom: 22px;
+}
+
+/* ── TIPOGRAFIA: "tattico" senza font condensato, solo maiuscolo + tracking ── */
+.pdp-hero--banner .pdp-h1 {
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+    line-height: 1.03;
+}
+/* Tutto il titolo in inchiostro: con il maiuscolo l'accento arancione sull'intera
+   frase gridava troppo. L'energia cromatica la porta il banner. */
+.pdp-hero--banner .pdp-h1 span {
+    color: var(--pdp-ink);
+}
+.pdp-hero--banner .pdp-price-sale {
+    font-variant-numeric: tabular-nums;
+}
+.pdp-hero--banner .pdp-btn-primary {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* L'immagine quadrata di prodotto è ridondante: il banner è già l'hero. */
+.pdp-hero--banner .pdp-media {
+    display: none;
+}
+
+/* Selettore varianti: da 2×2 a 4 in fila; la corrente è una pill scura. */
+.pdp-hero--banner .pdp-plans {
+    grid-template-columns: repeat(4, 1fr);
+}
+.pdp-hero--banner .pdp-plan.is-current {
+    background: var(--pdp-navy);
+    color: var(--pdp-surface);
+    border-color: var(--pdp-navy);
+}
+@media (max-width: 400px) {
+    .pdp-hero--banner .pdp-plans {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
