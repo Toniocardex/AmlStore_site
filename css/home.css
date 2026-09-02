@@ -2104,6 +2104,18 @@
         grid-template-columns: repeat(2, minmax(0, 280px));
         justify-content: center;
     }
+
+    /* 4 varianti (es. McAfee 1/3/5/10): 2x2 fino a 1200px, poi 4 in fila. */
+    .plan-grid.plan-grid--count-4 {
+        grid-template-columns: repeat(2, minmax(0, 320px));
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1200px) {
+    .plan-grid.plan-grid--count-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .plan-card {
