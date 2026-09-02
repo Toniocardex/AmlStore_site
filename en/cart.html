@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="../css/page.css?v=1f03cf55ec">
     <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
     <link rel="stylesheet" href="../css/footer.css?v=f4d2eaeb91">
-    <link rel="stylesheet" href="../css/cart.css?v=190e7ab1b3">
+    <link rel="stylesheet" href="../css/cart.css?v=5cfa6b85ed">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <!-- Optional: Stripe Payment Links per SKU (HTTPS). -->
     <!-- <script>window.AML_STRIPE_PAYMENT_LINK_BY_SKU = { "microsoft-365-family-12m": "https://buy.stripe.com/..." };</script> -->
@@ -333,7 +333,7 @@
             data-label-delivery-digital="Digital delivery via email"
             data-label-delivery-physical="Home delivery"
             data-label-shipping-digital="Immediate digital delivery"
-            data-label-shipping-mixed="Shipping included"
+            data-label-summary-shipping="Shipping" data-label-summary-shipping-value="Free" data-label-summary-delivery="Digital delivery" data-label-summary-delivery-value="Instant" data-label-shipping-mixed="Shipping included"
         >
             <div id="aml-cart-empty" class="cart-empty-panel" hidden>
                 <p>Your cart is empty.</p>
@@ -344,7 +344,6 @@
                 <div class="cart-layout">
                         <div class="cart-items-card">
                             <div class="cart-items-card__head">
-                                <span class="cart-items-card__label">Software licence details</span>
                                 <span id="aml-cart-delivery-note" class="cart-items-card__delivery"></span>
                             </div>
                             <div id="aml-cart-lines" class="cart-items-list"></div>
@@ -409,8 +408,8 @@
                                     <span id="aml-cart-subtotal">—</span>
                                 </div>
                                 <div class="cart-summary__row">
-                                    <span>Shipping</span>
-                                    <span class="cart-summary__free">Free</span>
+                                    <span id="aml-cart-delivery-label">Digital delivery</span>
+                                    <span id="aml-cart-delivery-value" class="cart-summary__free">Instant</span>
                                 </div>
                             </div>
 
@@ -531,11 +530,11 @@
             </ecommerce-footer>
 
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
-    <script src="../js/cart.js?v=08748e2f0e" defer></script>
+    <script src="../js/cart.js?v=a24551ce1b" defer></script>
     <script src="../js/cart-cross-sell.js?v=4df85cb8ff" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
     <script src="../components/lang-suggest.js?v=910b04817f" defer></script>
-    <script src="../components/header.js?v=1d96ebf2a2" defer></script>
+    <script src="../components/header.js?v=e3c147707e" defer></script>
     <script src="../components/footer.js?v=055e02cb83" defer></script>
 </body>
 </html>

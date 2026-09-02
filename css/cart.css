@@ -1022,3 +1022,85 @@
         padding-bottom: 72px;
     }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Carrello: alleggerimento della riga prodotto (audit CRO 2026-09-02).
+   La card impilava in pochi centimetri tre chip grigi che ripetevano il
+   titolo, due badge verdi che ripetevano l'intestazione, il riquadro
+   "Rimuovi", quello dello stepper e la cornice esterna.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Configurazione come riga di testo: i chip riquadrati dicevano cose che il
+   titolo dice gia', e quel che resta non vale una cornice per pezzo. */
+.cart-page .cart-item__config {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--page-text-secondary);
+}
+
+/* Cestino: stessa altezza dello stepper a cui sta accanto, nessun bordo
+   finche' non lo si punta — un terzo riquadro sulla riga era di troppo. */
+.cart-page .aml-cart-remove--icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-color: transparent;
+    border-radius: 8px;
+}
+
+.cart-page .aml-cart-remove--icon svg {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+/* ── Stepper quantita' ───────────────────────────────────────────────────
+   Segmenti separati da un filetto interno invece che dai bordi dell'input:
+   il campo smette di sembrare un secondo controllo dentro il primo. */
+.cart-page .aml-cart-qty-stepper {
+    border-radius: 10px;
+    background: var(--page-bg);
+    box-shadow: inset 0 0 0 1px var(--page-border);
+    border-color: transparent;
+    transition: box-shadow 0.15s ease;
+}
+
+/* Il fuoco da tastiera finisce sull'input, ma chi guarda deve vedere
+   illuminarsi il gruppo intero, non un rettangolo interno. */
+.cart-page .aml-cart-qty-stepper:focus-within {
+    box-shadow: inset 0 0 0 2px var(--page-accent);
+}
+
+.cart-page .aml-cart-qty-btn {
+    border-radius: 0;
+    color: var(--page-text-secondary);
+    font-size: 1.1rem;
+}
+
+.cart-page .aml-cart-qty-btn:hover:not(:disabled) {
+    color: var(--page-text);
+}
+
+/* L'outline del bottone e' ridondante: il gruppo si illumina gia' da solo,
+   e due contorni annidati si leggono peggio di uno. */
+.cart-page .aml-cart-qty-btn:focus-visible {
+    outline: none;
+    background: color-mix(in srgb, var(--page-accent) 12%, transparent);
+}
+
+.cart-page .aml-cart-qty {
+    border-left-color: var(--page-border);
+    border-right-color: var(--page-border);
+    background: transparent;
+}
+
+.cart-page .aml-cart-qty:focus,
+.cart-page .aml-cart-qty:focus-visible {
+    outline: none;
+}

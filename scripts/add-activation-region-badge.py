@@ -33,6 +33,20 @@ COPY = {
         "label": "Región de activación",
         "value": "Unión Europea / EEE",
     },
+    # pt e nl mancavano del tutto: per questo le loro 124 PDP sono rimaste
+    # senza regione di attivazione fino al 2026-09-02. Etichette e valori non
+    # sono tradotti qui per la prima volta, esistono gia' nelle tabelle
+    # specifiche delle pagine Microsoft 365.
+    "pt": {
+        "aria": "Detalhes da licença",
+        "label": "Região de ativação",
+        "value": "União Europeia / EEE",
+    },
+    "nl": {
+        "aria": "Licentiegegevens",
+        "label": "Activeringsregio",
+        "value": "Europese Unie / EER",
+    },
 }
 
 META_BLOCK = """\

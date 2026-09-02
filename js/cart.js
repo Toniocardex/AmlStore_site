@@ -681,6 +681,21 @@
         const deliveryPhysical = mount.getAttribute('data-label-delivery-physical') || 'Physical shipping';
         const shippingDigital = mount.getAttribute('data-label-shipping-digital') || 'Immediate digital delivery';
         const shippingMixed = mount.getAttribute('data-label-shipping-mixed') || 'Shipping';
+        const sumShipLabel = mount.getAttribute('data-label-summary-shipping') || 'Shipping';
+        const sumShipValue = mount.getAttribute('data-label-summary-shipping-value') || 'Free';
+        const sumDelivLabel = mount.getAttribute('data-label-summary-delivery') || 'Digital delivery';
+        const sumDelivValue = mount.getAttribute('data-label-summary-delivery-value') || 'Instant';
+        const deliveryLabelEl = document.getElementById('aml-cart-delivery-label');
+        const deliveryValueEl = document.getElementById('aml-cart-delivery-value');
+
+        // Cestino al posto della parola "Rimuovi": un bottone di testo
+        // accanto allo stepper faceva tre riquadri in fila sulla stessa riga.
+        const TRASH_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+            + ' stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"'
+            + ' aria-hidden="true" focusable="false">'
+            + '<path d="M4 7h16M10 11v6M14 11v6"/>'
+            + '<path d="M6 7l1 13h10l1-13"/>'
+            + '<path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>';
 
         function buildChip(text, modifier) {
             const chip = document.createElement('span');
@@ -713,6 +728,10 @@
             const allDigital = lines.every((l) => !l.physical);
             if (deliveryNoteEl) {
                 deliveryNoteEl.textContent = allDigital ? shippingDigital : shippingMixed;
+            }
+            if (deliveryLabelEl && deliveryValueEl) {
+                deliveryLabelEl.textContent = allDigital ? sumDelivLabel : sumShipLabel;
+                deliveryValueEl.textContent = allDigital ? sumDelivValue : sumShipValue;
             }
             // Il chip "consegna digitale" per riga ripete l'intestazione solo se
             // TUTTO il carrello e' digitale: e' li' che su mobile si puo' togliere.
@@ -751,21 +770,35 @@
                 }
                 body.appendChild(nameEl);
 
-                const chips = document.createElement('div');
-                chips.className = 'cart-item__chips';
-                String(l.specs || '')
+                // Il titolo dice gia' marca e configurazione ("Kaspersky
+                // Standard 2026 · 1 dispositivo"): ripeterle nei chip
+                // subito sotto era scrivere due volte la stessa cosa a un
+                // millimetro di distanza. Restano i soli pezzi che il titolo
+                // non contiene, come riga di testo.
+                const titoloNorm = label.toLowerCase();
+                const config = String(l.specs || '')
                     .split('·')
                     .map((s) => s.trim())
                     .filter(Boolean)
-                    .forEach((s) => chips.appendChild(buildChip(s)));
+                    .filter((s) => titoloNorm.indexOf(s.toLowerCase()) === -1);
+                if (config.length) {
+                    const cfg = document.createElement('p');
+                    cfg.className = 'cart-item__config';
+                    cfg.textContent = config.join(' · ');
+                    body.appendChild(cfg);
+                }
+                const chips = document.createElement('div');
+                chips.className = 'cart-item__chips';
                 // Modificatore distinto: su mobile il chip digitale si nasconde
                 // (ridondante con l'intestazione) mentre quello di spedizione no,
                 // perche' in un carrello misto dice quale articolo viaggia per posta.
-                chips.appendChild(buildChip(
-                    l.physical ? deliveryPhysical : deliveryDigital,
-                    l.physical ? 'shipping' : 'delivery',
-                ));
-                body.appendChild(chips);
+                if (!allDigital) {
+                    chips.appendChild(buildChip(
+                        l.physical ? deliveryPhysical : deliveryDigital,
+                        l.physical ? 'shipping' : 'delivery',
+                    ));
+                }
+                if (chips.childNodes.length) body.appendChild(chips);
 
                 const controls = document.createElement('div');
                 controls.className = 'cart-item__controls';
@@ -777,6 +810,8 @@
 
                 const stepper = document.createElement('div');
                 stepper.className = 'aml-cart-qty-stepper';
+                stepper.setAttribute('role', 'group');
+                stepper.setAttribute('aria-label', qtyAria + ': ' + label);
 
                 const btnMinus = document.createElement('button');
                 btnMinus.type = 'button';
@@ -784,7 +819,10 @@
                 btnMinus.setAttribute('data-sku-qty', l.sku);
                 btnMinus.setAttribute('aria-label', qtyMinusAria + ' ' + label);
                 btnMinus.disabled = q <= 1;
-                btnMinus.appendChild(document.createTextNode('−'));
+                const segMinus = document.createElement('span');
+                segMinus.setAttribute('aria-hidden', 'true');
+                segMinus.textContent = '−';
+                btnMinus.appendChild(segMinus);
 
                 const inp = document.createElement('input');
                 inp.type = 'number';
@@ -803,7 +841,10 @@
                 btnPlus.setAttribute('data-sku-qty', l.sku);
                 btnPlus.setAttribute('aria-label', qtyPlusAria + ' ' + label);
                 btnPlus.disabled = q >= 99;
-                btnPlus.appendChild(document.createTextNode('+'));
+                const segPlus = document.createElement('span');
+                segPlus.setAttribute('aria-hidden', 'true');
+                segPlus.textContent = '+';
+                btnPlus.appendChild(segPlus);
 
                 stepper.appendChild(btnMinus);
                 stepper.appendChild(inp);
@@ -812,9 +853,11 @@
 
                 const rm = document.createElement('button');
                 rm.type = 'button';
-                rm.className = 'aml-cart-remove';
+                rm.className = 'aml-cart-remove aml-cart-remove--icon';
                 rm.setAttribute('data-sku-remove', l.sku);
-                rm.textContent = removeLabel;
+                rm.setAttribute('aria-label', removeLabel + ': ' + label);
+                rm.setAttribute('title', removeLabel);
+                rm.innerHTML = TRASH_SVG;
                 controls.appendChild(rm);
 
                 item.appendChild(media);

@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="../css/page.css?v=1f03cf55ec">
     <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
     <link rel="stylesheet" href="../css/footer.css?v=f4d2eaeb91">
-    <link rel="stylesheet" href="../css/cart.css?v=190e7ab1b3">
+    <link rel="stylesheet" href="../css/cart.css?v=5cfa6b85ed">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://eurolicenze.com/#organization","name":"Eurolicenze","url":"https://eurolicenze.com/","logo":{"@type":"ImageObject","url":"https://eurolicenze.com/logo/logo-header-400.webp"},"email":"Desk@eurolicenze.com"},{"@type":"WebSite","@id":"https://eurolicenze.com/#website","url":"https://eurolicenze.com/","name":"Eurolicenze","inLanguage":["it","en","fr","de","es","pt","nl"],"publisher":{"@id":"https://eurolicenze.com/#organization"}},{"@type":"WebPage","@id":"https://eurolicenze.com/pt/cart#webpage","url":"https://eurolicenze.com/pt/cart","name":"Carrinho — Eurolicenze","description":"Resumo do carrinho Eurolicenze: artigos, totais e pagamento.","isPartOf":{"@id":"https://eurolicenze.com/#website"},"inLanguage":"pt"}]}
@@ -326,7 +326,7 @@
             data-label-delivery-digital="Entrega digital por email"
             data-label-delivery-physical="Entrega ao domicílio"
             data-label-shipping-digital="Entrega digital imediata"
-            data-label-shipping-mixed="Envio incluído"
+            data-label-summary-shipping="Envio" data-label-summary-shipping-value="Grátis" data-label-summary-delivery="Entrega digital" data-label-summary-delivery-value="Imediata" data-label-shipping-mixed="Envio incluído"
         >
             <div id="aml-cart-empty" class="cart-empty-panel" hidden>
                 <p>O seu carrinho está vazio.</p>
@@ -337,7 +337,6 @@
                 <div class="cart-layout">
                         <div class="cart-items-card">
                             <div class="cart-items-card__head">
-                                <span class="cart-items-card__label">Detalhes das licenças</span>
                                 <span id="aml-cart-delivery-note" class="cart-items-card__delivery"></span>
                             </div>
                             <div id="aml-cart-lines" class="cart-items-list"></div>
@@ -402,8 +401,8 @@
                                     <span id="aml-cart-subtotal">—</span>
                                 </div>
                                 <div class="cart-summary__row">
-                                    <span>Envio</span>
-                                    <span class="cart-summary__free">Grátis</span>
+                                    <span id="aml-cart-delivery-label">Entrega digital</span>
+                                    <span id="aml-cart-delivery-value" class="cart-summary__free">Imediata</span>
                                 </div>
                             </div>
 
@@ -523,11 +522,11 @@
                 </footer>
             </ecommerce-footer>
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
-    <script src="../js/cart.js?v=08748e2f0e" defer></script>
+    <script src="../js/cart.js?v=a24551ce1b" defer></script>
     <script src="../js/cart-cross-sell.js?v=4df85cb8ff" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
     <script src="../components/lang-suggest.js?v=910b04817f" defer></script>
-    <script src="../components/header.js?v=1d96ebf2a2" defer></script>
+    <script src="../components/header.js?v=e3c147707e" defer></script>
     <script src="../components/footer.js?v=055e02cb83" defer></script>
 </body>
 </html>
