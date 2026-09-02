@@ -979,12 +979,22 @@ async function handleCreatePaymentIntent(request, env) {
 
     await linkCartCheckoutStarted(env, body, orderId);
 
+    // Express: Apple/Google Pay viaggiano come `card`, Link e Amazon Pay sono
+    // tipi a se' e senza di loro il wallet fallirebbe in conferma.
+    // Manuale: solo `card`. Cosi' il Payment Element mostra i campi carta e
+    // basta — niente riga di tab, niente tendina — e la sezione dice davvero
+    // quello che l'etichetta promette ("Carta di credito o debito").
+    const methods = mode === 'express'
+        ? ['card', 'link', 'amazon_pay', 'paypal']
+        : ['card'];
+
     const pi = await createPaymentIntent(env.STRIPE_SECRET_KEY, {
         orderId,
         amountMinor,
         currency,
         receiptEmail,
         locale,
+        methods,
     });
     await setStripePaymentIntent(env.DB, orderId, pi.id);
 

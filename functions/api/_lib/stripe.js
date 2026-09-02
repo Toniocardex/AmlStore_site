@@ -75,6 +75,9 @@ export async function createCheckoutSession(stripeSecretKey, {
  * @param {string} [params.currency='eur']
  * @param {string} [params.receiptEmail]  — email per la ricevuta Stripe (se nota)
  * @param {string} [params.locale]        — it|en|fr|de|es|pt|nl (solo metadata)
+ * @param {string[]} [params.methods]     — payment_method_types espliciti; se
+ *   omesso resta automatic_payment_methods, cioe' tutto quello che e' attivo in
+ *   dashboard.
  * @returns {Promise<{ id: string, client_secret: string, status: string }>}
  */
 export async function createPaymentIntent(stripeSecretKey, {
@@ -83,11 +86,23 @@ export async function createPaymentIntent(stripeSecretKey, {
     currency = 'eur',
     receiptEmail,
     locale,
+    methods,
 }) {
     const params = new URLSearchParams();
     params.set('amount', String(Math.round(amountMinor || 0)));
     params.set('currency', String(currency || 'eur').toLowerCase());
-    params.set('automatic_payment_methods[enabled]', 'true');
+    // Con automatic_payment_methods il PaymentIntent offre TUTTO quello che e'
+    // acceso in dashboard: undici metodi, di cui il Payment Element mostra
+    // quattro in tab e scarica gli altri in una tendina di overflow. Peggio,
+    // meta' di quelli (SEPA, Klarna, Bancontact, Przelewy24) sono a notifica
+    // differita: restano in `processing` e l'evasione scatta solo su
+    // `payment_intent.succeeded`, quindi con quelli la licenza non parte nei
+    // 2-15 minuti promessi sotto la CTA. Chi passa `methods` decide.
+    if (Array.isArray(methods) && methods.length) {
+        methods.forEach((m, i) => params.set(`payment_method_types[${i}]`, m));
+    } else {
+        params.set('automatic_payment_methods[enabled]', 'true');
+    }
     params.set('metadata[order_id]', orderId);
     if (locale) params.set('metadata[locale]', locale);
     if (receiptEmail) params.set('receipt_email', receiptEmail);
