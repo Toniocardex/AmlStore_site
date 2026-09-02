@@ -187,9 +187,12 @@ def _trustpilot_buy_mini(lang):
     score = TRUSTPILOT_SCORE_EN if lang == "en" else TRUSTPILOT_SCORE
     lead = TRUSTPILOT_SCORE_LEAD[lang]
     reviews = TRUSTPILOT_REVIEWS_WORD[lang]
+    # Riempimento delle cinque stelle: derivato dal punteggio, non fisso, o
+    # resterebbe indietro alla prima variazione del voto.
+    fill = "%g" % (float(str(score).replace(",", ".")) / 5 * 100)
     return f"""                <div class="product-trustpilot pdp-buy-trustpilot">
                     <a class="tp-score" href="{tp_url}" target="_blank" rel="noopener noreferrer">
-                        <span class="tp-score__star" aria-hidden="true">★</span>
+                        <span class="tp-score__stars" aria-hidden="true" style="--tp-fill:{fill}%">★★★★★</span>
                         <span class="tp-score__value">{score}/5 {lead} Trustpilot</span>
                         <span class="tp-score__count">{TRUSTPILOT_REVIEW_COUNT} {reviews}</span>
                     </a>

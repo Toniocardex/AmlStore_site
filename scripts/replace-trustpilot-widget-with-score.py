@@ -56,7 +56,7 @@ def score_anchor(lang, indent):
     reviews = TRUSTPILOT_REVIEWS_WORD[lang]
     return (
         f'{indent}<a class="tp-score" href="{tp_url}" target="_blank" rel="noopener noreferrer">\n'
-        f'{indent}    <span class="tp-score__star" aria-hidden="true">★</span>\n'
+        f'{indent}    <span class="tp-score__stars" aria-hidden="true" style="--tp-fill:96%">★★★★★</span>\n'
         f'{indent}    <span class="tp-score__value">{score}/5 {lead} Trustpilot</span>\n'
         f'{indent}    <span class="tp-score__count">{TRUSTPILOT_REVIEW_COUNT} {reviews}</span>\n'
         f"{indent}</a>\n"
