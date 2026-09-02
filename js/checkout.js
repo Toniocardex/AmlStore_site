@@ -73,6 +73,10 @@
     var _paymentElMounting = false;
     var _elementsExpress   = null;   // elements() per l'Express Checkout Element
     var _lastPiCustomerKey = '';     // per rimontare il PE se cambiano i dati cliente
+    // Se una seconda selezione arriva mentre la prima e' ancora in volo, non
+    // si scarta: si segna e si rifa' la richiesta a fine ciclo, rileggendo la
+    // selezione CORRENTE del radio (non quella del momento in cui era arrivata).
+    var _paymentElRemountPending = false;
 
     /* ─── Idempotency key ──────────────────────────────────────────────────── */
     // Chiave stabile per (sessione, metodo, carrello, email): un retry dello stesso
@@ -1129,7 +1133,15 @@
         // rifare il PaymentIntent, non riusare quello di prima.
         var key = customerKey() + '|' + pmType;
         if (_paymentElement && key === _lastPiCustomerKey) { if (gate) gate.hidden = true; return; }
-        if (_paymentElMounting) return;
+        if (_paymentElMounting) {
+            // Non si scarta: la selezione e' cambiata mentre la richiesta
+            // precedente era in volo (es. Carta -> SEPA in rapida successione).
+            // Scartarla lascerebbe montato il form del metodo vecchio con il
+            // radio nuovo selezionato, disallineati finche' l'utente non tocca
+            // un TERZO metodo (un click sullo stesso radio non genera 'change').
+            _paymentElRemountPending = true;
+            return;
+        }
 
         _paymentElMounting = true;
         if (gate) gate.hidden = true;
@@ -1172,6 +1184,10 @@
         .then(function () {
             _paymentElMounting = false;
             if (loading) loading.hidden = true;
+            if (_paymentElRemountPending) {
+                _paymentElRemountPending = false;
+                maybeMountPaymentElement();
+            }
         });
     }
 
