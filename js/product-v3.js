@@ -39,22 +39,6 @@
     });
 
     /**
-     * Ponte verso il checkout dopo l'aggiunta al carrello.
-     * Senza "Acquista ora" il percorso standard non ha piu' un invito
-     * persistente a proseguire: resta solo il toast di cart.js, che sparisce
-     * dopo 4 secondi e compare in fondo allo schermo mentre l'utente sta
-     * guardando un bottone a meta' pagina. Il link nasce hidden nella buy
-     * card e resta scoperto per tutta la sessione di lettura.
-     * No-op sulle pagine che .pdp-added non ce l'hanno.
-     */
-    document.addEventListener('click', function (event) {
-        if (!event.target || !event.target.closest) return;
-        if (!event.target.closest('[data-cart-add]')) return;
-        var bridge = document.querySelector('.pdp-added');
-        if (bridge) bridge.hidden = false;
-    });
-
-    /**
      * Frecce di scroll della barra tab app: su desktop non c'e' lo swipe del
      * touch e la scrollbar resta nascosta (vedi product-pdp.css), quindi senza
      * questo non c'e' alcun indizio che Outlook/OneDrive/Copilot esistono

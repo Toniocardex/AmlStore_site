@@ -3027,30 +3027,6 @@ body { background: var(--page-bg); }
     display: none;
 }
 
-/* Ponte verso il checkout dopo l'aggiunta al carrello. Nasce hidden, lo
-   scopre product-v3.js al primo [data-cart-add]: tolto "Acquista ora",
-   l'unico invito a proseguire era il toast di cart.js, che vive 4 secondi e
-   compare in fondo allo schermo mentre l'utente guarda un bottone a meta'
-   pagina. Non e' il cart drawer (rimandato): e' solo un'ancora che resta. */
-.pdp-added {
-    margin: 10px 0 0;
-    font-size: var(--aml-text-sm);
-    text-align: center;
-}
-
-.pdp-added[hidden] {
-    display: none;
-}
-
-.pdp-added a {
-    color: var(--aml-brand);
-    font-weight: 700;
-}
-
-.pdp-added a:hover {
-    text-decoration: underline;
-}
-
 /* .pdp-cross scende sotto i percorsi d'acquisto: da li' in giu' non e' piu'
    una fuga dalla conversione ma la risposta a chi ha ancora un dubbio.
    Perde anche l'arancione: sotto la CTA finivano tre link brand in fila

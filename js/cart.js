@@ -154,7 +154,7 @@
         const cartId = ensureCartId();
         const payload = {
             cartId,
-            locale: toastLang(),
+            locale: cartLang(),
             items: lines.map((l) => ({ sku: l.sku, quantity: Number(l.quantity) || 1 })),
         };
         if (email) payload.email = email;
@@ -338,161 +338,556 @@
         return fallback && isCartLineRoot(fallback) ? fallback : null;
     }
 
-    /* ─── Toast "aggiunto al carrello" ─────────────────────────────────────────── */
-    // Feedback visivo immediato su ogni pagina con bottoni [data-cart-add]:
-    // il solo badge nell'header non è abbastanza visibile.
+    /* ─── Cart drawer ──────────────────────────────────────────────────────────
+       Sostituisce il toast "aggiunto al carrello". Il toast confermava
+       l'aggiunta e spariva dopo 4 secondi: tolto "Acquista ora" dalla PDP,
+       quel messaggio effimero era diventato l'unico ponte verso il checkout.
 
-    var TOAST_I18N = {
-        it: { added: 'Aggiunto al carrello', view: 'Vai al carrello' },
-        en: { added: 'Added to cart', view: 'View cart' },
-        fr: { added: 'Ajouté au panier', view: 'Voir le panier' },
-        de: { added: 'Zum Warenkorb hinzugefügt', view: 'Warenkorb ansehen' },
-        es: { added: 'Añadido al carrito', view: 'Ver carrito' },
-        pt: { added: 'Adicionado ao carrinho', view: 'Ver carrinho' },
-        nl: { added: 'Toegevoegd aan winkelwagen', view: 'Bekijk winkelwagen' },
+       Riusa tutto quello che c'era gia': lo stato del carrello e le sue
+       funzioni (readLines/setQuantity/removeLine/formatMoney), il motore di
+       suggerimenti `AmlCrossSell.pickSuggestions` con l'indice
+       asset/cross-sell/{lang}.json, e le etichette gia' tradotte del
+       carrello. Le uniche stringhe nuove sono "chiudi" e "continua". */
+
+    var DRAWER_I18N = {
+        it: { titolo: 'Il Tuo Carrello', consegna: 'Consegna digitale immediata',
+              subtotale: 'Subtotale prodotti', rigaCons: 'Consegna digitale', valCons: 'Immediata',
+              checkout: 'Procedi al checkout', crossTit: 'Completa la tua configurazione',
+              aggiungi: 'Aggiungi', rimuovi: 'Rimuovi', qty: 'Quantità',
+              meno: 'Riduci quantità per', piu: 'Aumenta quantità per',
+              artSing: 'Articolo', artPlur: 'Articoli', vuoto: 'Il carrello è vuoto.',
+              sicuri: 'Pagamenti protetti', fattura: 'Fattura elettronica',
+              chiudi: 'Chiudi', continua: 'Continua lo shopping' },
+        en: { titolo: 'Your Cart', consegna: 'Immediate digital delivery',
+              subtotale: 'Products subtotal', rigaCons: 'Digital delivery', valCons: 'Instant',
+              checkout: 'Proceed to checkout', crossTit: 'Complete your setup',
+              aggiungi: 'Add', rimuovi: 'Remove', qty: 'Quantity',
+              meno: 'Decrease quantity for', piu: 'Increase quantity for',
+              artSing: 'Item', artPlur: 'Items', vuoto: 'Your cart is empty.',
+              sicuri: 'Secure payments', fattura: 'Invoice available',
+              chiudi: 'Close', continua: 'Continue shopping' },
+        fr: { titolo: 'Votre Panier', consegna: 'Livraison numérique immédiate',
+              subtotale: 'Sous-total produits', rigaCons: 'Livraison numérique', valCons: 'Immédiate',
+              checkout: 'Passer à la caisse', crossTit: 'Complétez votre configuration',
+              aggiungi: 'Ajouter', rimuovi: 'Retirer', qty: 'Quantité',
+              meno: 'Réduire la quantité pour', piu: 'Augmenter la quantité pour',
+              artSing: 'Article', artPlur: 'Articles', vuoto: 'Votre panier est vide.',
+              sicuri: 'Paiements sécurisés', fattura: 'Facture disponible',
+              chiudi: 'Fermer', continua: 'Continuer mes achats' },
+        de: { titolo: 'Ihr Warenkorb', consegna: 'Sofortige digitale Lieferung',
+              subtotale: 'Zwischensumme Produkte', rigaCons: 'Digitale Lieferung', valCons: 'Sofort',
+              checkout: 'Zur Kasse', crossTit: 'Vervollständigen Sie Ihre Ausstattung',
+              aggiungi: 'Hinzufügen', rimuovi: 'Entfernen', qty: 'Menge',
+              meno: 'Menge verringern für', piu: 'Menge erhöhen für',
+              artSing: 'Artikel', artPlur: 'Artikel', vuoto: 'Ihr Warenkorb ist leer.',
+              sicuri: 'Sichere Zahlungen', fattura: 'Rechnung verfügbar',
+              chiudi: 'Schließen', continua: 'Weiter einkaufen' },
+        es: { titolo: 'Tu Carrito', consegna: 'Entrega digital inmediata',
+              subtotale: 'Subtotal de productos', rigaCons: 'Entrega digital', valCons: 'Inmediata',
+              checkout: 'Ir al pago', crossTit: 'Completa tu configuración',
+              aggiungi: 'Añadir', rimuovi: 'Quitar', qty: 'Cantidad',
+              meno: 'Reducir cantidad para', piu: 'Aumentar cantidad para',
+              artSing: 'Artículo', artPlur: 'Artículos', vuoto: 'Su carrito está vacío.',
+              sicuri: 'Pagos seguros', fattura: 'Factura disponible',
+              chiudi: 'Cerrar', continua: 'Seguir comprando' },
+        pt: { titolo: 'O seu carrinho', consegna: 'Entrega digital imediata',
+              subtotale: 'Subtotal dos produtos', rigaCons: 'Entrega digital', valCons: 'Imediata',
+              checkout: 'Prosseguir para o checkout', crossTit: 'Complete a sua configuração',
+              aggiungi: 'Adicionar', rimuovi: 'Remover', qty: 'Quantidade',
+              meno: 'Diminuir quantidade de', piu: 'Aumentar quantidade de',
+              artSing: 'Artigo', artPlur: 'Artigos', vuoto: 'O seu carrinho está vazio.',
+              sicuri: 'Pagamentos seguros', fattura: 'Fatura disponível',
+              chiudi: 'Fechar', continua: 'Continuar a comprar' },
+        nl: { titolo: 'Uw winkelwagen', consegna: 'Directe digitale levering',
+              subtotale: 'Subtotaal producten', rigaCons: 'Digitale levering', valCons: 'Direct',
+              checkout: 'Doorgaan naar afrekenen', crossTit: 'Maak uw configuratie compleet',
+              aggiungi: 'Toevoegen', rimuovi: 'Verwijderen', qty: 'Aantal',
+              meno: 'Aantal verlagen voor', piu: 'Aantal verhogen voor',
+              artSing: 'Artikel', artPlur: 'Artikelen', vuoto: 'Uw winkelwagen is leeg.',
+              sicuri: 'Veilige betalingen', fattura: 'Factuur beschikbaar',
+              chiudi: 'Sluiten', continua: 'Verder winkelen' },
     };
-    var toastHideTimer = null;
 
-    function toastLang() {
+    function cartLang() {
         var m = (document.documentElement.lang || '').match(/^[a-z]{2}/i)
              || (global.location.pathname || '').match(/^\/([a-z]{2})\//);
         var code = m ? String(m[1] || m[0]).toLowerCase() : 'it';
-        return TOAST_I18N[code] ? code : 'it';
+        return DRAWER_I18N[code] ? code : 'it';
     }
 
-    function ensureToastStyles() {
-        if (document.getElementById('aml-cart-toast-style')) return;
-        var css = ''
-            + '.aml-cart-toast{position:fixed;left:50%;bottom:calc(24px + var(--aml-toast-lift, 0px));'
-            + 'transform:translate(-50%,16px);'
-            + 'display:flex;align-items:center;gap:12px;max-width:min(92vw,420px);padding:13px 16px;'
-            + 'background:rgba(17,24,39,0.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);'
-            + 'color:#f9fafb;border:1px solid rgba(255,255,255,0.12);border-radius:8px;'
-            + 'box-shadow:0 12px 32px rgba(0,0,0,0.35);z-index:10045;opacity:0;pointer-events:none;'
-            + 'font-family:inherit;font-size:0.92rem;line-height:1.35;'
-            + 'transition:opacity 0.25s ease,transform 0.25s ease;}'
-            + '.aml-cart-toast.is-visible{opacity:1;transform:translate(-50%,0);pointer-events:auto;}'
-            + '@media (min-width:640px){.aml-cart-toast{left:auto;right:24px;transform:translate(0,16px);}'
-            + '.aml-cart-toast.is-visible{transform:translate(0,0);}}'
-            + '.aml-cart-toast__check{flex-shrink:0;display:flex;align-items:center;justify-content:center;'
-            + 'width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);}'
-            + '.aml-cart-toast__check svg{width:16px;height:16px;stroke:#fff;stroke-width:3;fill:none;'
-            + 'stroke-linecap:round;stroke-linejoin:round;}'
-            + '.aml-cart-toast__body{min-width:0;}'
-            + '.aml-cart-toast__title{font-weight:700;}'
-            + '.aml-cart-toast__name{color:#d1d5db;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'
-            + 'max-width:260px;}'
-            + '.aml-cart-toast__link{flex-shrink:0;margin-left:4px;color:#7cc0ff;font-weight:700;'
-            + 'text-decoration:none;white-space:nowrap;}'
-            + '.aml-cart-toast__link:hover{text-decoration:underline;}'
-            + '.aml-cart-toast__link:focus-visible{outline:2px solid #7cc0ff;outline-offset:3px;border-radius:4px;}'
-            + '@media (prefers-reduced-motion:reduce){.aml-cart-toast{transition:opacity 0.2s ease;'
-            + 'transform:translate(-50%,0);}'
-            + '@media (min-width:640px){.aml-cart-toast{transform:none;}}}';
-        var style = document.createElement('style');
-        style.id = 'aml-cart-toast-style';
-        style.textContent = css;
-        document.head.appendChild(style);
+    var drawerEl = null;
+    var drawerPrevFocus = null;
+    var drawerCatalog = null;
+
+    var ICON_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"'
+        + ' stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    var ICON_TRASH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"'
+        + ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        + '<path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13"/>'
+        + '<path d="M9 7V5a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>';
+    var ICON_LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"'
+        + ' aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/>'
+        + '<path stroke-linecap="round" d="M8 10V7a4 4 0 018 0v3"/></svg>';
+
+    function ensureDrawerStyles() {
+        if (document.getElementById('aml-cart-drawer-style')) return;
+        var css =
+            '.aml-drawer-scrim{position:fixed;inset:0;z-index:10050;background:rgba(15,23,42,.45);'
+            + 'opacity:0;transition:opacity .22s ease;}'
+            + '.aml-drawer-scrim.is-open{opacity:1;}'
+            + '.aml-drawer{position:fixed;top:0;right:0;bottom:0;z-index:10051;width:min(420px,100%);'
+            + 'display:flex;flex-direction:column;background:var(--page-bg,#fff);'
+            + 'color:var(--page-text,#0f172a);box-shadow:-8px 0 32px rgba(15,23,42,.18);'
+            + 'transform:translateX(100%);transition:transform .26s cubic-bezier(.22,.61,.36,1);}'
+            + '.aml-drawer.is-open{transform:translateX(0);}'
+            + '@media (prefers-reduced-motion:reduce){.aml-drawer,.aml-drawer-scrim{transition:none;}}'
+            + '.aml-drawer__head{flex:0 0 auto;padding:16px 18px 12px;'
+            + 'border-bottom:1px solid var(--page-border,#e2e8f0);}'
+            + '.aml-drawer__titlerow{display:flex;align-items:center;gap:12px;}'
+            + '.aml-drawer__title{margin:0;font-size:1.05rem;font-weight:800;flex:1 1 auto;}'
+            + '.aml-drawer__close{flex:0 0 auto;width:40px;height:40px;display:inline-flex;'
+            + 'align-items:center;justify-content:center;border:none;border-radius:8px;'
+            + 'background:transparent;color:inherit;cursor:pointer;}'
+            + '.aml-drawer__close:hover{background:rgba(15,23,42,.06);}'
+            + '.aml-drawer__close svg{width:20px;height:20px;}'
+            + '.aml-drawer__chip{display:inline-flex;align-items:center;gap:7px;margin-top:10px;'
+            + 'padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:800;'
+            + 'letter-spacing:.04em;text-transform:uppercase;'
+            + 'background:var(--aml-ok-bg,#E8F3ED);color:var(--aml-ok,#1F7A52);}'
+            + '.aml-drawer__chip::before{content:"";width:7px;height:7px;border-radius:50%;'
+            + 'background:currentColor;}'
+            + '.aml-drawer__body{flex:1 1 auto;overflow-y:auto;padding:14px 18px;}'
+            + '.aml-drawer__empty{margin:24px 0;color:var(--page-text-secondary,#475569);}'
+            + '.aml-drawer__line{display:grid;grid-template-columns:56px 1fr;gap:12px;'
+            + 'padding:12px 0;border-bottom:1px solid var(--page-border,#e2e8f0);}'
+            + '.aml-drawer__line:last-of-type{border-bottom:none;}'
+            + '.aml-drawer__thumb{width:56px;height:56px;object-fit:contain;border-radius:6px;}'
+            + '.aml-drawer__name{margin:0;font-size:.92rem;font-weight:700;line-height:1.3;}'
+            + '.aml-drawer__name a{color:inherit;text-decoration:none;}'
+            + '.aml-drawer__name a:hover{text-decoration:underline;}'
+            + '.aml-drawer__config{margin:2px 0 0;font-size:.8rem;'
+            + 'color:var(--page-text-secondary,#475569);}'
+            + '.aml-drawer__row{display:flex;align-items:center;gap:10px;margin-top:8px;}'
+            + '.aml-drawer__price{font-weight:800;margin-right:auto;}'
+            + '.aml-drawer__foot{flex:0 0 auto;padding:14px 18px calc(14px + env(safe-area-inset-bottom));'
+            + 'border-top:1px solid var(--page-border,#e2e8f0);background:var(--page-bg,#fff);}'
+            + '.aml-drawer__sum{display:flex;justify-content:space-between;font-size:.9rem;'
+            + 'margin-bottom:6px;}'
+            + '.aml-drawer__sum--total{font-weight:800;font-size:1rem;}'
+            + '.aml-drawer__cta{display:flex;align-items:center;justify-content:center;gap:8px;'
+            + 'width:100%;margin-top:10px;padding:14px 20px;border:none;border-radius:8px;'
+            + 'background:var(--aml-cta-bg,#F05A10);color:var(--aml-cta-ink,#fff);'
+            + 'font:inherit;font-size:.98rem;font-weight:800;text-decoration:none;cursor:pointer;}'
+            + '.aml-drawer__secure{display:flex;align-items:center;justify-content:center;gap:7px;'
+            + 'margin:10px 0 0;font-size:.75rem;color:var(--page-text-secondary,#475569);}'
+            + '.aml-drawer__secure svg{width:14px;height:14px;flex:0 0 auto;}'
+            + '.aml-drawer__back{display:block;width:100%;margin-top:8px;padding:6px;border:none;'
+            + 'background:transparent;color:var(--page-text-secondary,#475569);font:inherit;'
+            + 'font-size:.82rem;text-decoration:underline;cursor:pointer;}'
+            + '.aml-drawer__cross{margin-top:18px;padding-top:14px;'
+            + 'border-top:1px solid var(--page-border,#e2e8f0);}'
+            + '.aml-drawer__cross-title{margin:0 0 10px;font-size:.72rem;font-weight:800;'
+            + 'letter-spacing:.07em;text-transform:uppercase;'
+            + 'color:var(--page-text-secondary,#475569);}'
+            + '.aml-drawer__sugg{display:grid;grid-template-columns:44px 1fr auto;gap:10px;'
+            + 'align-items:center;}'
+            + '.aml-drawer__sugg>div{min-width:0;}'
+            + '.aml-drawer__sugg img{width:44px;height:44px;object-fit:contain;}'
+            + '.aml-drawer__sugg-name{font-size:.85rem;font-weight:700;line-height:1.25;}'
+            + '.aml-drawer__sugg-specs{font-size:.75rem;color:var(--page-text-secondary,#475569);}'
+            + '.aml-drawer__sugg-price{font-size:.85rem;font-weight:700;}'
+            + '.aml-drawer__sugg-was{font-weight:400;text-decoration:line-through;'
+            + 'color:var(--page-text-secondary,#475569);margin-left:5px;}'
+            + '.aml-drawer__sugg-add{padding:8px 12px;border-radius:8px;'
+            + 'border:1px solid var(--page-border,#e2e8f0);background:transparent;color:inherit;'
+            + 'font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap;}'
+            + '.aml-drawer__sugg-add:hover{background:rgba(15,23,42,.05);}'
+            // Stepper e cestino riusano le classi della pagina carrello, ma
+            // css/cart.css e' incluso solo la': su PDP e categorie resterebbero
+            // senza stile. Qui sono ridefiniti nell'ambito del drawer.
+            + '.aml-drawer .aml-cart-qty-stepper{display:inline-flex;align-items:stretch;'
+            + 'border-radius:10px;background:var(--page-bg,#fff);overflow:hidden;'
+            + 'box-shadow:inset 0 0 0 1px var(--page-border,#e2e8f0);}'
+            + '.aml-drawer .aml-cart-qty-stepper:focus-within{'
+            + 'box-shadow:inset 0 0 0 2px var(--page-accent,#C74104);}'
+            + '.aml-drawer .aml-cart-qty-btn{width:38px;min-height:38px;padding:0;border:none;'
+            + 'background:transparent;color:var(--page-text-secondary,#475569);font:inherit;'
+            + 'font-size:1.1rem;font-weight:800;line-height:1;cursor:pointer;'
+            + 'display:inline-flex;align-items:center;justify-content:center;}'
+            + '.aml-drawer .aml-cart-qty-btn:disabled{opacity:.4;cursor:default;}'
+            + '.aml-drawer .aml-cart-qty{width:34px;min-height:38px;margin:0;padding:0;'
+            + 'border:none;border-left:1px solid var(--page-border,#e2e8f0);'
+            + 'border-right:1px solid var(--page-border,#e2e8f0);border-radius:0;'
+            + 'background:transparent;color:inherit;font:inherit;font-weight:700;'
+            + 'text-align:center;-moz-appearance:textfield;appearance:textfield;}'
+            + '.aml-drawer .aml-cart-qty::-webkit-outer-spin-button,'
+            + '.aml-drawer .aml-cart-qty::-webkit-inner-spin-button{'
+            + '-webkit-appearance:none;margin:0;}'
+            + '.aml-drawer .aml-cart-remove{display:inline-flex;align-items:center;'
+            + 'justify-content:center;width:38px;height:38px;padding:0;border:none;'
+            + 'border-radius:8px;background:transparent;'
+            + 'color:var(--page-text-secondary,#475569);cursor:pointer;}'
+            + '.aml-drawer .aml-cart-remove:hover{background:var(--aml-danger-bg,#FBEAE9);'
+            + 'color:var(--aml-danger,#B3261E);}'
+            + '.aml-drawer .aml-cart-remove svg{width:19px;height:19px;pointer-events:none;}';
+        var st = document.createElement('style');
+        st.id = 'aml-cart-drawer-style';
+        st.textContent = css;
+        document.head.appendChild(st);
     }
 
-    function ensureToastEl() {
-        var el = document.getElementById('aml-cart-toast');
-        if (el) return el;
-        ensureToastStyles();
-        var lang = toastLang();
-        var t = TOAST_I18N[lang];
+    function drawerCheckoutHref() {
+        var lang = cartLang();
+        return '/' + lang + '/checkout';
+    }
 
-        el = document.createElement('div');
-        el.id = 'aml-cart-toast';
-        el.className = 'aml-cart-toast';
-        el.setAttribute('role', 'status');
-        el.setAttribute('aria-live', 'polite');
+    function buildDrawer() {
+        if (drawerEl) return drawerEl;
+        ensureDrawerStyles();
+        var t = DRAWER_I18N[cartLang()];
 
-        var check = document.createElement('span');
-        check.className = 'aml-cart-toast__check';
-        check.setAttribute('aria-hidden', 'true');
-        check.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+        var scrim = document.createElement('div');
+        scrim.className = 'aml-drawer-scrim';
+        scrim.id = 'aml-cart-drawer-scrim';
+        scrim.addEventListener('click', closeCartDrawer);
 
-        var body = document.createElement('div');
-        body.className = 'aml-cart-toast__body';
-        var title = document.createElement('div');
-        title.className = 'aml-cart-toast__title';
-        title.textContent = t.added;
-        var name = document.createElement('div');
-        name.className = 'aml-cart-toast__name';
-        body.appendChild(title);
-        body.appendChild(name);
+        var el = document.createElement('aside');
+        el.className = 'aml-drawer';
+        el.id = 'aml-cart-drawer';
+        el.setAttribute('role', 'dialog');
+        el.setAttribute('aria-modal', 'true');
+        el.setAttribute('aria-labelledby', 'aml-cart-drawer-title');
+        el.hidden = true;
+        el.innerHTML =
+            '<div class="aml-drawer__head">'
+            + '<div class="aml-drawer__titlerow">'
+            + '<h2 class="aml-drawer__title" id="aml-cart-drawer-title"></h2>'
+            + '<button type="button" class="aml-drawer__close">' + ICON_CLOSE + '</button>'
+            + '</div>'
+            + '<span class="aml-drawer__chip"></span>'
+            + '</div>'
+            + '<div class="aml-drawer__body"></div>'
+            + '<div class="aml-drawer__foot"></div>';
+        el.querySelector('.aml-drawer__close').setAttribute('aria-label', t.chiudi);
+        el.querySelector('.aml-drawer__chip').textContent = t.consegna;
+        el.querySelector('.aml-drawer__close').addEventListener('click', closeCartDrawer);
 
-        var link = document.createElement('a');
-        link.className = 'aml-cart-toast__link';
-        link.href = '/' + lang + '/cart';
-        link.textContent = t.view + ' →';
+        document.body.appendChild(scrim);
+        document.body.appendChild(el);
+        drawerEl = el;
 
-        el.appendChild(check);
-        el.appendChild(body);
-        el.appendChild(link);
-
-        // Click fuori dal link = chiudi subito
+        // Delegazione: le righe vengono ricostruite a ogni render.
         el.addEventListener('click', function (e) {
-            if (e.target && e.target.closest && e.target.closest('a')) return;
-            hideCartToast();
+            var tgt = e.target;
+            if (!tgt || !tgt.closest) return;
+            var minus = tgt.closest('[data-drawer-minus]');
+            var plus = tgt.closest('[data-drawer-plus]');
+            var rm = tgt.closest('[data-drawer-remove]');
+            var add = tgt.closest('[data-drawer-add]');
+            if (minus || plus) {
+                var sku = (minus || plus).getAttribute('data-sku');
+                var cur = 0;
+                readLines().forEach(function (l) { if (l.sku === sku) cur = Number(l.quantity) || 0; });
+                var next = minus ? cur - 1 : cur + 1;
+                if (next >= 1 && next <= 99) setQuantity(sku, next);
+                return;
+            }
+            if (rm) { removeLine(rm.getAttribute('data-sku')); return; }
+            if (add) {
+                var payload = null;
+                try { payload = JSON.parse(add.getAttribute('data-payload')); } catch (_) { payload = null; }
+                if (payload && global.AmlCart && global.AmlCart.add) {
+                    global.AmlCart.add(payload);
+                    add.disabled = true;
+                }
+            }
         });
 
-        document.body.appendChild(el);
         return el;
     }
 
-    function hideCartToast() {
-        var el = document.getElementById('aml-cart-toast');
-        if (el) el.classList.remove('is-visible');
-        clearTimeout(toastHideTimer);
-        toastHideTimer = null;
-    }
+    function drawerLineNode(l, t) {
+        var q = Number(l.quantity) || 0;
+        var label = lineDisplayName(l);
+        var node = document.createElement('div');
+        node.className = 'aml-drawer__line';
 
-    /**
-     * Alza il toast sopra il launcher della chat.
-     *
-     * Entrambi sono fixed nell'angolo in basso a destra e il launcher ha
-     * z-index 10040: senza questo scarto il fumetto della chat copre proprio
-     * il link "Vai al carrello", cioe' l'unica azione del toast.
-     *
-     * La misura viene dall'host <support-chat> invece che da un valore fisso
-     * perche' il launcher si sposta gia' da solo: --sc-cart-offset lo alza
-     * sopra la barra d'acquisto sulla PDP mobile.
-     */
-    function toastLiftOverChat(el) {
-        var lift = 0;
-        try {
-            var chat = document.querySelector('support-chat');
-            if (chat) {
-                var rect = chat.getBoundingClientRect();
-                var vh   = global.innerHeight || document.documentElement.clientHeight;
-                // Solo col launcher chiuso: l'host misura allora la pillola (52px).
-                // Col pannello aperto e' alto quasi quanto la pagina e il toast
-                // finirebbe fuori schermo — li' resta in basso, tanto ha z-index
-                // 10045 e si vede comunque sopra il pannello.
-                if (rect.height > 0 && rect.height <= 100 && rect.bottom > 0) {
-                    // Distanza dal fondo del bordo superiore del launcher, piu' il gap.
-                    // Non e' un valore fisso perche' il launcher si alza a sua volta
-                    // sopra le barre CTA fisse di PDP e carrello (--sc-cart-offset).
-                    lift = Math.max(0, vh - rect.top + 12);
-                }
+        var img = document.createElement('img');
+        img.className = 'aml-drawer__thumb';
+        img.src = l.image || '';
+        img.alt = '';
+        img.loading = 'lazy';
+        node.appendChild(img);
+
+        var col = document.createElement('div');
+
+        var name = document.createElement('p');
+        name.className = 'aml-drawer__name';
+        if (l.productPath) {
+            var a = document.createElement('a');
+            a.href = l.productPath;
+            a.textContent = label;
+            name.appendChild(a);
+        } else {
+            name.textContent = label;
+        }
+        col.appendChild(name);
+
+        // Stessa deduplica della pagina carrello: la configurazione che il
+        // titolo dice gia' non si ripete.
+        var titolo = label.toLowerCase();
+        var cfg = String(l.specs || '').split('·').map(function (s) { return s.trim(); })
+            .filter(Boolean)
+            .filter(function (s) { return titolo.indexOf(s.toLowerCase()) === -1; });
+        if (cfg.length) {
+            var p = document.createElement('p');
+            p.className = 'aml-drawer__config';
+            p.textContent = cfg.join(' · ');
+            col.appendChild(p);
+        }
+
+        var row = document.createElement('div');
+        row.className = 'aml-drawer__row';
+
+        var price = document.createElement('span');
+        price.className = 'aml-drawer__price';
+        price.textContent = formatMoney(Math.round(Number(l.unitAmount) || 0) * q, l.currency);
+        row.appendChild(price);
+
+        var stepper = document.createElement('div');
+        stepper.className = 'aml-cart-qty-stepper';
+        stepper.setAttribute('role', 'group');
+        stepper.setAttribute('aria-label', t.qty + ': ' + label);
+        [['minus', '−', t.meno, q <= 1], ['plus', '+', t.piu, q >= 99]].forEach(function (spec, i) {
+            if (i === 1) {
+                var inp = document.createElement('input');
+                inp.type = 'number';
+                inp.className = 'aml-cart-qty';
+                inp.min = '1'; inp.max = '99'; inp.value = String(q);
+                inp.readOnly = true;
+                inp.tabIndex = -1;
+                inp.setAttribute('aria-hidden', 'true');
+                stepper.appendChild(inp);
             }
-        } catch (_) { lift = 0; }
-        el.style.setProperty('--aml-toast-lift', lift + 'px');
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'aml-cart-qty-btn aml-cart-qty-btn--' + spec[0];
+            b.setAttribute('data-drawer-' + spec[0], '1');
+            b.setAttribute('data-sku', l.sku);
+            b.setAttribute('aria-label', spec[2] + ' ' + label);
+            b.disabled = spec[3];
+            var seg = document.createElement('span');
+            seg.setAttribute('aria-hidden', 'true');
+            seg.textContent = spec[1];
+            b.appendChild(seg);
+            stepper.appendChild(b);
+        });
+        row.appendChild(stepper);
+
+        var rm = document.createElement('button');
+        rm.type = 'button';
+        rm.className = 'aml-cart-remove aml-cart-remove--icon';
+        rm.setAttribute('data-drawer-remove', '1');
+        rm.setAttribute('data-sku', l.sku);
+        rm.setAttribute('aria-label', t.rimuovi + ': ' + label);
+        rm.setAttribute('title', t.rimuovi);
+        rm.innerHTML = ICON_TRASH;
+        row.appendChild(rm);
+
+        col.appendChild(row);
+        node.appendChild(col);
+        return node;
     }
 
-    function showCartToast(line) {
-        var el = ensureToastEl();
-        var nameEl = el.querySelector('.aml-cart-toast__name');
-        if (nameEl) nameEl.textContent = lineDisplayName(line);
-        toastLiftOverChat(el);
-        // Riapparizione pulita anche se già visibile (riavvia transizione e timer)
-        el.classList.remove('is-visible');
-        void el.offsetWidth; // reflow per riavviare la transizione
-        el.classList.add('is-visible');
-        clearTimeout(toastHideTimer);
-        toastHideTimer = setTimeout(hideCartToast, 4000);
+    function renderDrawerCross(body, lines, t) {
+        if (!drawerCatalog || !global.AmlCrossSell || !global.AmlCrossSell.pickSuggestions) return;
+        var sugg = global.AmlCrossSell.pickSuggestions(drawerCatalog, lines, 1);
+        if (!sugg || !sugg.length) return;
+        var s = sugg[0];
+
+        var box = document.createElement('div');
+        box.className = 'aml-drawer__cross';
+        var h = document.createElement('p');
+        h.className = 'aml-drawer__cross-title';
+        h.textContent = t.crossTit;
+        box.appendChild(h);
+
+        var g = document.createElement('div');
+        g.className = 'aml-drawer__sugg';
+        var im = document.createElement('img');
+        im.src = s.image || ''; im.alt = ''; im.loading = 'lazy';
+        g.appendChild(im);
+
+        var mid = document.createElement('div');
+        var nm = document.createElement('div');
+        nm.className = 'aml-drawer__sugg-name';
+        nm.textContent = s.name || '';
+        mid.appendChild(nm);
+        if (s.specs) {
+            var sp = document.createElement('div');
+            sp.className = 'aml-drawer__sugg-specs';
+            sp.textContent = s.specs;
+            mid.appendChild(sp);
+        }
+        var pr = document.createElement('div');
+        pr.className = 'aml-drawer__sugg-price';
+        pr.textContent = formatMoney(s.priceMinor, s.currency);
+        if (s.compareAtMinor && s.compareAtMinor > s.priceMinor) {
+            var was = document.createElement('span');
+            was.className = 'aml-drawer__sugg-was';
+            was.textContent = formatMoney(s.compareAtMinor, s.currency);
+            pr.appendChild(was);
+        }
+        mid.appendChild(pr);
+        g.appendChild(mid);
+
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'aml-drawer__sugg-add';
+        btn.setAttribute('data-drawer-add', '1');
+        btn.setAttribute('data-payload', JSON.stringify({
+            sku: s.sku, name: s.name, currency: (s.currency || 'eur').toLowerCase(),
+            unitAmount: s.priceMinor, quantity: 1, image: s.image,
+            productPath: s.slug ? ('/' + cartLang() + '/' + s.slug) : '',
+            physical: false, specs: s.specs || '',
+        }));
+        btn.textContent = '+ ' + t.aggiungi;
+        g.appendChild(btn);
+
+        box.appendChild(g);
+        body.appendChild(box);
+    }
+
+    function renderDrawer() {
+        if (!drawerEl) return;
+        var t = DRAWER_I18N[cartLang()];
+        var lines = readLines();
+        var qty = totalQty(lines);
+        var minor = totalMinor(lines);
+        var currency = (lines[0] && lines[0].currency) || 'eur';
+
+        drawerEl.querySelector('.aml-drawer__title').textContent =
+            t.titolo + ' (' + qty + ')';
+
+        var body = drawerEl.querySelector('.aml-drawer__body');
+        var foot = drawerEl.querySelector('.aml-drawer__foot');
+        body.textContent = '';
+        foot.textContent = '';
+
+        if (!lines.length) {
+            var vuoto = document.createElement('p');
+            vuoto.className = 'aml-drawer__empty';
+            vuoto.textContent = t.vuoto;
+            body.appendChild(vuoto);
+            return;
+        }
+
+        lines.forEach(function (l) { body.appendChild(drawerLineNode(l, t)); });
+        renderDrawerCross(body, lines, t);
+
+        [[t.subtotale, formatMoney(minor, currency), false],
+         [t.rigaCons, t.valCons, true]].forEach(function (r) {
+            var d = document.createElement('div');
+            d.className = 'aml-drawer__sum' + (r[2] ? '' : ' aml-drawer__sum--total');
+            var a = document.createElement('span'); a.textContent = r[0];
+            var b = document.createElement('span'); b.textContent = r[1];
+            d.appendChild(a); d.appendChild(b);
+            foot.appendChild(d);
+        });
+
+        var cta = document.createElement('a');
+        cta.className = 'aml-drawer__cta';
+        cta.href = drawerCheckoutHref();
+        cta.textContent = t.checkout + ' →';
+        foot.appendChild(cta);
+
+        var sec = document.createElement('p');
+        sec.className = 'aml-drawer__secure';
+        sec.innerHTML = ICON_LOCK;
+        var secTxt = document.createElement('span');
+        secTxt.textContent = t.sicuri + ' · ' + t.fattura;
+        sec.appendChild(secTxt);
+        foot.appendChild(sec);
+
+        var back = document.createElement('button');
+        back.type = 'button';
+        back.className = 'aml-drawer__back';
+        back.textContent = '‹ ' + t.continua;
+        back.addEventListener('click', closeCartDrawer);
+        foot.appendChild(back);
+    }
+
+    function loadDrawerCross() {
+        if (drawerCatalog) { renderDrawer(); return; }
+        var lang = cartLang();
+        var vai = function () {
+            fetch('/asset/cross-sell/' + lang + '.json', { cache: 'no-cache' })
+                .then(function (r) { return r.ok ? r.json() : []; })
+                .then(function (d) { drawerCatalog = Array.isArray(d) ? d : []; renderDrawer(); })
+                .catch(function () { drawerCatalog = []; });
+        };
+        if (global.AmlCrossSell && global.AmlCrossSell.pickSuggestions) { vai(); return; }
+        // Il motore vive gia' nel repo ma e' incluso solo dalla pagina carrello:
+        // qui si carica al primo bisogno invece di appesantire ogni pagina.
+        var s = document.createElement('script');
+        s.src = '/js/cart-cross-sell.js';
+        s.async = true;
+        s.onload = vai;
+        s.onerror = function () { drawerCatalog = []; };
+        document.head.appendChild(s);
+    }
+
+    // Stepper, cestino e cross-sell passano tutti da dispatch(): il drawer
+    // si ridisegna dallo stato, non dal gesto che l'ha cambiato.
+    document.addEventListener(EVT, function () {
+        if (drawerEl && !drawerEl.hidden) renderDrawer();
+    });
+
+    function drawerKeydown(e) {
+        if (e.key === 'Escape') { closeCartDrawer(); return; }
+        if (e.key !== 'Tab' || !drawerEl) return;
+        var f = drawerEl.querySelectorAll('a[href], button:not([disabled]), input:not([disabled])');
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+
+    function openCartDrawer() {
+        if (!document.body) return false;
+        // Sulla pagina carrello il drawer sarebbe un doppione di cio' che
+        // l'utente sta gia' guardando: li' basta il ridisegno della lista.
+        if (document.getElementById('aml-cart-app')) return false;
+        var el = buildDrawer();
+        var scrim = document.getElementById('aml-cart-drawer-scrim');
+        drawerPrevFocus = document.activeElement;
+        renderDrawer();
+        loadDrawerCross();
+        el.hidden = false;
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(function () {
+            el.classList.add('is-open');
+            if (scrim) scrim.classList.add('is-open');
+            var close = el.querySelector('.aml-drawer__close');
+            if (close) close.focus();
+        });
+        document.addEventListener('keydown', drawerKeydown);
+        return true;
+    }
+
+    function closeCartDrawer() {
+        if (!drawerEl) return;
+        var scrim = document.getElementById('aml-cart-drawer-scrim');
+        drawerEl.classList.remove('is-open');
+        if (scrim) scrim.classList.remove('is-open');
+        document.removeEventListener('keydown', drawerKeydown);
+        document.body.style.overflow = '';
+        var el = drawerEl;
+        setTimeout(function () { if (!el.classList.contains('is-open')) el.hidden = true; }, 280);
+        if (drawerPrevFocus && drawerPrevFocus.focus) {
+            try { drawerPrevFocus.focus(); } catch (_) { /* elemento sparito */ }
+        }
+        drawerPrevFocus = null;
     }
 
     function announceCartAdded() {
@@ -640,7 +1035,7 @@
             if (writeLines(next)) {
                 dispatch(next);
                 // Checkout espresso: si aggiunge al carrello e si salta dritti al
-                // pagamento, niente toast/flash che tanto non fa in tempo a vedersi.
+                // pagamento, niente drawer/flash che tanto non fa in tempo a vedersi.
                 const redirect = btn.getAttribute('data-cart-checkout-redirect');
                 if (redirect) {
                     trackEvent('buy_now_click', { sku: line.sku });
@@ -648,10 +1043,10 @@
                     return;
                 }
                 trackEvent('add_to_cart', { sku: line.sku });
-                // Il toast ha role="status": annuncia già ai lettori di schermo.
-                // announceCartAdded() resta per le pagine senza body (fallback).
-                if (document.body) showCartToast(line);
-                else announceCartAdded();
+                // Il drawer conferma l'aggiunta e porta al checkout senza
+                // cambiare pagina; announceCartAdded() resta per i contesti
+                // senza body (fallback).
+                if (!openCartDrawer()) announceCartAdded();
                 flashCartButtonsForSource(lineRoot);
             }
         });

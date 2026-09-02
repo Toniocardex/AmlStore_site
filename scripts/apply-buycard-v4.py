@@ -21,7 +21,8 @@ Cosa fa, in ordine di comparsa nella card:
 5. gerarchia CTA 1+1: via "Acquista ora" (buy card e sticky bar), la CTA
    primaria e' "Aggiungi al carrello", PayPal Express resta come percorso
    express dopo un separatore etichettato;
-6. ponte `.pdp-added` verso il carrello, scoperto da `product-v3.js`;
+6. (qui c'era il ponte `.pdp-added`: sostituito dal cart drawer di
+   `js/cart.js`, che apre il carrello senza cambiare pagina);
 7. link di confronto spostato sotto i percorsi d'acquisto;
 8. Trustpilot in card: punteggio con etichetta, non conteggio;
 9. promessa di consegna allineata (sticky bar e prosa) all'intervallo reale
@@ -61,7 +62,6 @@ GLOBE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
 #              la policy condiziona il rimedio alla verifica del difetto
 #  eccellente  etichetta con cui Trustpilot stesso qualifica un punteggio in
 #              fascia alta; legata alla soglia, se il voto scende va rivista
-#  ponte       invito persistente al carrello dopo l'aggiunta
 #  spedizione  frase da togliere dalla nota prezzo: per un bene digitale
 #              consegnato via email e' un residuo dell'e-commerce fisico.
 #              Match esatto di proposito — sulle pagine di prodotti FISICI la
@@ -72,13 +72,11 @@ I18N = {
     "it": {"sconto": "sconto", "listino": ("prezzo di listino", "listino"),
            "garanzia": "Garanzia:", "rimedio": "sostituzione o rimborso",
            "eccellente": "Eccellente",
-           "ponte": "Vai al carrello e completa l'ordine",
            "spedizione": " Nessun costo di spedizione.",
            "vago": ("pochi minuti", "%s minuti")},
     "en": {"sconto": "discount", "listino": None,
            "garanzia": "Guarantee:", "rimedio": "replacement or refund",
            "eccellente": "Excellent",
-           "ponte": "Go to cart and complete your order",
            "spedizione": " No shipping fees.",
            "vago": ("within minutes", "within %s minutes")},
     "fr": {"sconto": "remise", "listino": None,
@@ -86,31 +84,26 @@ I18N = {
            # non e' uno spazio normale da "correggere".
            "garanzia": "Garantie :", "rimedio": "remplacement ou remboursement",
            "eccellente": "Excellent",
-           "ponte": "Voir le panier et finaliser la commande",
            "spedizione": " Pas de frais de port.",
            "vago": ("en quelques minutes", "en %s minutes")},
     "de": {"sconto": "Rabatt", "listino": None,
            "garanzia": "Garantie:", "rimedio": "Ersatz oder Erstattung",
            "eccellente": "Hervorragend",
-           "ponte": "Zum Warenkorb und Bestellung abschließen",
            "spedizione": " Keine Versandkosten.",
            "vago": ("innerhalb weniger Minuten", "innerhalb von %s Minuten")},
     "es": {"sconto": "descuento", "listino": None,
            "garanzia": "Garantía:", "rimedio": "sustitución o reembolso",
            "eccellente": "Excelente",
-           "ponte": "Ir al carrito y completar el pedido",
            "spedizione": " Sin gastos de envío.",
            "vago": ("en pocos minutos", "en %s minutos")},
     "pt": {"sconto": "desconto", "listino": None,
            "garanzia": "Garantia:", "rimedio": "substituição ou reembolso",
            "eccellente": "Excelente",
-           "ponte": "Ir para o carrinho e concluir o pedido",
            "spedizione": " Sem custos de envio.",
            "vago": ("em poucos minutos", "em %s minutos")},
     "nl": {"sconto": "korting", "listino": None,
            "garanzia": "Garantie:", "rimedio": "vervanging of terugbetaling",
            "eccellente": "Uitstekend",
-           "ponte": "Naar winkelwagen en bestelling afronden",
            "spedizione": " Geen verzendkosten.",
            "vago": ("binnen enkele minuten", "binnen %s minuten")},
 }
@@ -315,14 +308,6 @@ def patch(path):
         'data-cart-source="product-pricing">',
         '<button type="button" id="product-primary-cta" class="pdp-btn-primary" '
         'data-cart-add data-cart-source="product-pricing">', 1)
-
-    cta = re.search(r'<button type="button" id="product-primary-cta".*?</button>\n', src, re.S)
-    if not cta:
-        return salta(path, "CTA primaria non trovata per il ponte al carrello")
-    ponte = ('                <p class="pdp-added" hidden>\n'
-             '                    <a href="/%s/cart">%s →</a>\n'
-             '                </p>\n' % (lang, t["ponte"]))
-    src = src[:cta.end()] + ponte + src[cta.end():]
 
     # Il filetto nudo diventa separatore etichettato, e l'etichetta e' la
     # microcopy che stava SOTTO i bottoni PayPal: stessa parola, detta una
