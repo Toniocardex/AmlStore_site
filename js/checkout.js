@@ -648,7 +648,6 @@
 
     function updateShippingVisibility(items) {
         var section = document.getElementById('shipping-section');
-        var note    = document.getElementById('checkout-shipping-note');
         var needsShipping = cartHasPhysical(items);
 
         if (section) {
@@ -660,11 +659,20 @@
                 else input.removeAttribute('required');
             });
         }
-        if (note) {
-            note.textContent = needsShipping
-                ? (note.getAttribute('data-label-physical') || note.textContent)
-                : (note.getAttribute('data-label-digital')  || note.textContent);
-        }
+        // Etichetta E valore, non solo il valore: per un carrello tutto
+        // digitale non c'e' nessuna spedizione da dichiarare gratuita, e la
+        // riga deve dire quello che dice gia' il carrello al passo prima.
+        // Le due copie (riepilogo desktop e riepilogo comprimibile mobile)
+        // portano gli stessi data-attribute.
+        [['checkout-shipping-label', 'checkout-shipping-note'],
+         ['mcheckout-shipping-label', 'mcheckout-shipping-note']].forEach(function (pair) {
+            var lab = document.getElementById(pair[0]);
+            var val = document.getElementById(pair[1]);
+            if (!val) return;
+            var suffisso = needsShipping ? 'shipping' : 'delivery';
+            if (lab) lab.textContent = val.getAttribute('data-label-' + suffisso) || lab.textContent;
+            val.textContent = val.getAttribute('data-value-' + suffisso) || val.textContent;
+        });
         return needsShipping;
     }
 
