@@ -147,11 +147,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.paypal.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/page.css?v=b104e76175">
+    <link rel="stylesheet" href="../css/page.css?v=1912b59fdc">
     <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
     <link rel="stylesheet" href="../css/footer.css?v=f4d2eaeb91">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=ad789bdab1">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=f2c288788d">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script>window.__amlPaypalConfig = fetch("/api/paypal-config").then(function(r){return r.json();}).catch(function(){return null;});</script>
 </head>
@@ -416,15 +416,15 @@
             <img class="product-sticky-cta__thumb" src="../asset/media/products/norton-360-deluxe.webp?v=6cb83b581a" width="40" height="40" alt="" loading="lazy" decoding="async">
             <div class="product-sticky-cta__name">
                 <span class="product-sticky-cta__title">Norton 360 Deluxe — 3 dispositivos</span>
-                <span class="product-sticky-cta__eta">Entrega en 2 minutos por email</span>
+                <span class="product-sticky-cta__eta">Entrega en 2–15 min por email</span>
             </div>
             <div class="product-sticky-cta__prices" aria-hidden="true">
                 <span class="product-sticky-cta__msrp">€ 39,99</span>
                 <span class="product-sticky-cta__sale">€ 20,59</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing">
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Comprar ahora
+                Añadir al carrito
             </button>
         </div>
     </div>
@@ -478,57 +478,55 @@
                 data-stripe-product-sku="NORT_360DEL_3D_1A"
                 data-discount-percent="49">
                 <p class="pdp-avail">
-                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>Disponible · entrega inmediata</span>
+                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>Disponible</span>
                     <span class="pdp-avail__eta">Email en 2–15 min</span>
                 </p>
+                <ul class="pdp-trust-checks">
+                    <li>Activación en portales oficiales</li>
+                    <li><strong>Garantía:</strong> <a href="/es/returns-and-refunds">sustitución o reembolso</a></li>
+                </ul>
                 <p class="pdp-plans__label" id="pdp-plans-label">Selecciona la versión</p>
                 <div class="pdp-plans" role="group" aria-labelledby="pdp-plans-label">
                     <span class="pdp-plan is-current" aria-current="true"><b>Deluxe</b><span>3 dispositivos · con renovación · € 20,59</span></span>
                     <a class="pdp-plan" href="/es/norton-360-deluxe-no-sub"><b>Deluxe</b><span>3 dispositivos · sin renovación automática · € 19,56</span></a>
                 </div>
-                <p class="pdp-cross"><a href="/es/norton-360-standard">Prefieres Norton 360 Standard (1 dispositivo)</a></p>
-                <p class="pdp-buy__label">Precio Eurolicenze<span class="pdp-price-badge" aria-label="−49%">−49% DTO</span></p>
 
                 <div class="pdp-price-row" role="group" aria-label="Precios">
                     <span class="pdp-price-sale">€ 20,59</span>
                     <span class="pdp-price-msrp" aria-label="39,99">€ 39,99</span>
+                    <span class="pdp-price-badge">−49%</span>
                 </div>
-                <p class="pdp-price-save">Ahorras <strong>€ 19,40</strong> respecto al precio de lista (€ 39,99).</p>
-                <p class="pdp-price-note">Impuestos incluidos. Sin gastos de envío.</p>
+                <p class="pdp-price-note">Impuestos incluidos · descuento respecto al precio de lista</p>
 
 
-                <p class="pdp-meta-row" role="group" aria-label="Detalles de la licencia">
-                    <span class="pdp-meta-chip"><strong>Región de activación</strong> Unión Europea / EEE</span>
+                <p class="pdp-region">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M3.2 9h17.6M3.2 15h17.6"/><path stroke-linecap="round" d="M12 3c2.3 2.6 3.5 5.6 3.5 9s-1.2 6.4-3.5 9c-2.3-2.6-3.5-5.6-3.5-9S9.7 5.6 12 3z"/></svg>
+                    <span><strong>Región de activación:</strong> Unión Europea / EEE</span>
                 </p>
 
-                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/es/checkout">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                    Comprar ahora
-                </button>
-                <button type="button" class="pdp-btn-ghost" data-cart-add data-cart-source="product-pricing">
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Añadir al carrito
                 </button>
+                <p class="pdp-added" hidden>
+                    <a href="/es/cart">Ir al carrito y completar el pedido →</a>
+                </p>
 
-                <hr class="pdp-paypal-sep" aria-hidden="true">
+                <p class="pdp-cta-sep">Pago exprés</p>
                 <div id="pdp-paypal-express" class="pdp-paypal-express">
                     <div class="pdp-paypal-express__buttons" id="pdp-paypal-express-buttons"></div>
                     <p class="pdp-paypal-express__loading" id="pdp-paypal-express-loading" hidden>Cargando PayPal…</p>
                     <p class="pdp-paypal-express__error" id="pdp-paypal-express-error" role="alert" hidden
-                        data-msg-error="No se pudo cargar PayPal. Inténtalo de nuevo o usa Comprar ahora."
+                        data-msg-error="No se pudo cargar PayPal. Inténtalo de nuevo o usa Añadir al carrito."
                         data-msg-cancelled="Pago cancelado."
                         data-msg-capture-error="Error al confirmar el pago de PayPal. Contacta con soporte."></p>
-                    <p class="pdp-paypal-express__microcopy">Pago exprés</p>
                 </div>
-                <ul class="pdp-assur">
-                            <li>Activación en portales oficiales</li>
-                            <li>Entrega digital, sin envío</li>
-                </ul>
+                <p class="pdp-cross"><a href="/es/norton-360-standard">Prefieres Norton 360 Standard (1 dispositivo)</a></p>
                 <div class="product-trustpilot pdp-buy-trustpilot">
                     <a class="tp-score" href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">
                         <span class="tp-score__star" aria-hidden="true">★</span>
-                        <span class="tp-score__value">4,8/5 en Trustpilot</span>
-                        <span class="tp-score__count">94 reseñas</span>
+                        <span class="tp-score__value">Excelente 4,8/5</span>
+                        <span class="tp-score__count">en Trustpilot</span>
                     </a>
                 </div>
 
@@ -623,7 +621,7 @@
                 <li class="pdp-step">
                     <div>
                         <h3>Recibe la clave por email</h3>
-                        <p>Te enviamos la clave de licencia original e instrucciones claras por email en pocos minutos.</p>
+                        <p>Te enviamos la clave de licencia original e instrucciones claras por email en 2–15 minutos.</p>
                     </div>
                 </li>
                 <li class="pdp-step">
@@ -682,7 +680,7 @@
         <h2 id="pdp-activation-title" class="pdp-dialog__title">Tres pasos para empezar</h2>
         <ol class="pdp-dialog__steps">
                     <li><strong>Completa el pedido</strong> Elige tu plan y realiza el pago seguro con tarjeta o PayPal.</li>
-                    <li><strong>Recibe la clave por email</strong> Te enviamos la clave de licencia original e instrucciones claras por email en pocos minutos.</li>
+                    <li><strong>Recibe la clave por email</strong> Te enviamos la clave de licencia original e instrucciones claras por email en 2–15 minutos.</li>
                     <li><strong>Activa en el portal oficial</strong> Activa en el <strong>portal oficial de Norton (My Norton)</strong> con tu código e instala el software oficial de forma segura.</li>
         </ol>
         <div class="pdp-dialog__foot">
@@ -772,9 +770,9 @@
     <script src="../js/cart.js?v=3ff9f0881c" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
-    <script src="../js/product-v3.js?v=cc997542a2" defer></script>
+    <script src="../js/product-v3.js?v=842415341e" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
-    <script src="../js/pdp-paypal-express.js?v=6fd8defd9b" defer></script>
+    <script src="../js/pdp-paypal-express.js?v=365cb44001" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
     <script src="../components/lang-suggest.js?v=910b04817f" defer></script>
     <script src="../components/header.js?v=89961e44b4" defer></script>

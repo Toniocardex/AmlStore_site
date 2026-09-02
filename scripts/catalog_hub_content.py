@@ -500,7 +500,7 @@ HUB_CONTENT = {
                             </details>
                             <details class="home-faq-item">
                                 <summary>Come ricevo la licenza dopo l'acquisto?</summary>
-                                <div class="home-faq-body"><p>Codice e istruzioni di attivazione via email, tipicamente entro pochi minuti dal pagamento.</p></div>
+                                <div class="home-faq-body"><p>Codice e istruzioni di attivazione via email, tipicamente entro 2–15 minuti dal pagamento.</p></div>
                             </details>
                         </div>
                     </div>
@@ -557,7 +557,7 @@ HUB_CONTENT = {
                             </details>
                             <details class="home-faq-item">
                                 <summary>How do I receive the licence after purchase?</summary>
-                                <div class="home-faq-body"><p>Activation code and instructions by email, typically within a few minutes of payment.</p></div>
+                                <div class="home-faq-body"><p>Activation code and instructions by email, typically within 2–15 minutes of payment.</p></div>
                             </details>
                         </div>
                     </div>
@@ -671,7 +671,7 @@ HUB_CONTENT = {
                             </details>
                             <details class="home-faq-item">
                                 <summary>Wie erhalte ich die Lizenz nach dem Kauf?</summary>
-                                <div class="home-faq-body"><p>Aktivierungscode und Anleitung per E-Mail, in der Regel innerhalb weniger Minuten nach der Zahlung.</p></div>
+                                <div class="home-faq-body"><p>Aktivierungscode und Anleitung per E-Mail, in der Regel innerhalb von 2–15 Minuten nach der Zahlung.</p></div>
                             </details>
                         </div>
                     </div>
@@ -842,7 +842,7 @@ HUB_CONTENT = {
                             </details>
                             <details class="home-faq-item">
                                 <summary>Hoe ontvang ik de licentie na aankoop?</summary>
-                                <div class="home-faq-body"><p>Activeringscode en instructies per e-mail, meestal binnen enkele minuten na betaling.</p></div>
+                                <div class="home-faq-body"><p>Activeringscode en instructies per e-mail, meestal binnen 2–15 minuten na betaling.</p></div>
                             </details>
                         </div>
                     </div>

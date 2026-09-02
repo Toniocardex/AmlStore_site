@@ -225,7 +225,7 @@ PRODUCTS = {
                 ("c8", "blue", "Licenza", "Home & Business 2021", "Licenza perpetua ESD per un PC o Mac, con Outlook oltre a Word, Excel e PowerPoint."),
                 ("c4", "teal", None, "Outlook incluso", "Posta, calendario e contatti con Outlook desktop."),
                 ("c4", "purple", "Piattaforma", "PC o Mac", "Edizione compatibile con Windows e macOS supportati per Office 2021."),
-                ("c4", None, "Consegna", "Email in pochi minuti", "Codice e istruzioni dopo il pagamento."),
+                ("c4", None, "Consegna", "Email in 2–15 minuti", "Codice e istruzioni dopo il pagamento."),
                 ("c4", None, "Attivazione", "Portale Microsoft", "Attivazione su setup.office.com e installazione da office.com."),
                 ("c4", "dark", "Ideale per", "Professionisti", "Quando serve Outlook senza passare a Microsoft 365."),
             ],

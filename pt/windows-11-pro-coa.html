@@ -146,11 +146,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/page.css?v=b104e76175">
+    <link rel="stylesheet" href="../css/page.css?v=1912b59fdc">
     <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
     <link rel="stylesheet" href="../css/footer.css?v=f4d2eaeb91">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=ad789bdab1">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=f2c288788d">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body class="pdp-page">
@@ -420,9 +420,9 @@
                 <span class="product-sticky-cta__msrp">€ 79,00</span>
                 <span class="product-sticky-cta__sale">€ 32,95</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing">
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Comprar agora
+                Adicionar ao carrinho
             </button>
         </div>
     </div>
@@ -473,14 +473,13 @@
                 data-stripe-product-sku="W11_PRO_STICKER"
                 data-discount-percent="58"
             data-physical="true">
-                <p class="pdp-buy__label">Preço Eurolicenze<span class="pdp-price-badge" aria-label="−58%">−58% DESC</span></p>
 
                 <div class="pdp-price-row" role="group" aria-label="Preços">
                     <span class="pdp-price-sale">€ 32,95</span>
                     <span class="pdp-price-msrp" aria-label="79,00">€ 79,00</span>
+                    <span class="pdp-price-badge">−58%</span>
                 </div>
-                <p class="pdp-price-save">Poupas <strong>€ 46,05</strong> em relação ao preço de tabela (€ 79,00).</p>
-                <p class="pdp-price-note">Impostos incluídos. Artigo físico com envio gratuito (não é entrega apenas digital). Entrega à transportadora em 24 horas úteis após o pagamento.</p>
+                <p class="pdp-price-note">Impostos incluídos · desconto em relação ao preço de tabela. Artigo físico com envio gratuito (não é entrega apenas digital). Entrega à transportadora em 24 horas úteis após o pagamento.</p>
 
                 <p class="v2-stock" data-stock-status="loading" aria-live="polite"
                     data-stock-available="Disponibilidade: {n}"
@@ -490,25 +489,25 @@
                     <span class="v2-stock__dot" aria-hidden="true"></span>
                     <span class="v2-stock__text"></span>
                 </p>
+                <ul class="pdp-trust-checks">
+                    <li>Ativação em portais oficiais</li>
+                    <li>Suporte físico enviado, não apenas digital</li>
+                    <li><strong>Garantia:</strong> <a href="/pt/returns-and-refunds">substituição ou reembolso</a></li>
+                </ul>
 
-                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/pt/checkout">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                    Comprar agora
-                </button>
-                <button type="button" class="pdp-btn-ghost" data-cart-add data-cart-source="product-pricing">
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Adicionar ao carrinho
                 </button>
+                <p class="pdp-added" hidden>
+                    <a href="/pt/cart">Ir para o carrinho e concluir o pedido →</a>
+                </p>
 
-                <ul class="pdp-assur">
-                            <li>Ativação em portais oficiais</li>
-                            <li>Suporte físico enviado, não apenas digital</li>
-                </ul>
                 <div class="product-trustpilot pdp-buy-trustpilot">
                     <a class="tp-score" href="https://pt.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">
                         <span class="tp-score__star" aria-hidden="true">★</span>
-                        <span class="tp-score__value">4,8/5 no Trustpilot</span>
-                        <span class="tp-score__count">94 avaliações</span>
+                        <span class="tp-score__value">Excelente 4,8/5</span>
+                        <span class="tp-score__count">no Trustpilot</span>
                     </a>
                 </div>
 
@@ -780,7 +779,7 @@
     <script src="../js/cart.js?v=3ff9f0881c" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
-    <script src="../js/product-v3.js?v=cc997542a2" defer></script>
+    <script src="../js/product-v3.js?v=842415341e" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
     <script src="../js/product-stock.js?v=9ca07ec72b" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script><script src="../components/lang-suggest.js?v=910b04817f" defer></script>

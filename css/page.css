@@ -78,6 +78,7 @@
     /* Semantici */
     --aml-ok: #1F7A52;
     --aml-ok-bg: #E8F3ED;
+    --aml-ok-border: #B6D5C6;
     --aml-warn: #92400E;
     --aml-warn-bg: #FCF3D9;
     --aml-danger: #B3261E;
@@ -91,10 +92,17 @@
     --aml-cta-bg-hover: var(--aml-brand-vivid-hover);
     --aml-cta-ink: #FFFFFF;
 
-    /* Risparmiare */
-    --aml-save-ink: var(--aml-orange-800);
-    --aml-save-bg: var(--aml-orange-50);
-    --aml-save-border: var(--aml-orange-200);
+    /* Risparmiare — verde dal 2026-09-02 (audit CRO pre-rollout, punto 5).
+       Prima era arancione tenue. Spostato sul verde per lasciare
+       l'arancione alla sola CTA: il ruolo cambia INSIEME su tutto il
+       funnel (badge card categoria, riga risparmio, badge PDP, cross-sell
+       carrello), altrimenti lo stesso -44% cambierebbe colore fra listing
+       e scheda prodotto. Non e' il verde acceso del vecchio tema scuro che
+       era illeggibile su fondo chiaro: sono --aml-ok / --aml-ok-bg, gli
+       stessi del pill di disponibilita'. */
+    --aml-save-ink: var(--aml-ok);
+    --aml-save-bg: var(--aml-ok-bg);
+    --aml-save-border: var(--aml-ok-border);
 
     /* Rassicurare */
     --aml-trust-ink: var(--aml-ok);
@@ -564,7 +572,9 @@ a.product-card--link:focus-visible {
 }
 
 /* Stessa lingua visiva del badge sconto in PDP (.pdp-price-badge): il
-   ruolo "risparmio" e' arancione ovunque sul sito, mai verde. */
+   ruolo "risparmio" ha un colore solo su tutto il sito. Dal 2026-09-02
+   e' verde, non piu' arancione — si cambia dai token --aml-save-* in
+   page.css, mai su un singolo componente. */
 .product-card-badge {
     position: absolute;
     top: 0.65rem;

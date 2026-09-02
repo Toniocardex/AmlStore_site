@@ -27,7 +27,7 @@ UI = deepcopy(OFFICE_UI)
 _WIN_OVERRIDES = {
     "it": {
         "apps_eyebrow": "In evidenza",
-        "step2_body": "Ti inviamo la <strong>product key</strong> (e le istruzioni) via email, di solito entro pochi minuti dall'approvazione del pagamento. Per edizioni con supporto fisico (DVD/COA) segui anche quanto indicato in email.",
+        "step2_body": "Ti inviamo la <strong>product key</strong> (e le istruzioni) via email, di solito entro 2–15 minuti dall'approvazione del pagamento. Per edizioni con supporto fisico (DVD/COA) segui anche quanto indicato in email.",
         "step3_body": "Attiva Windows con il codice ricevuto: Impostazioni → Sistema → Attivazione (o la procedura descritta nell'email). Usa i canali ufficiali Microsoft.",
         "spec_cpu_body": "Processore compatibile con i requisiti Microsoft della versione Windows indicata (per Windows 11 tipicamente CPU supportata nell'elenco ufficiale).",
         "spec_os_body": "Questa scheda riguarda la licenza del sistema operativo indicato. Verifica hardware e TPM/Secure Boot dove richiesto (es. Windows 11).",
@@ -36,7 +36,7 @@ _WIN_OVERRIDES = {
     },
     "en": {
         "apps_eyebrow": "Highlights",
-        "step2_body": "We email the <strong>product key</strong> (and instructions), usually within minutes after payment approval. For editions with physical media (DVD/COA), also follow the email details.",
+        "step2_body": "We email the <strong>product key</strong> (and instructions), usually within 2–15 minutes after payment approval. For editions with physical media (DVD/COA), also follow the email details.",
         "step3_body": "Activate Windows with the received key: Settings → System → Activation (or the steps in the email). Use official Microsoft channels.",
         "spec_cpu_body": "A processor that meets Microsoft’s requirements for the indicated Windows version (for Windows 11, typically a CPU on Microsoft’s supported list).",
         "spec_os_body": "This page covers the indicated OS licence. Check hardware and TPM/Secure Boot where required (e.g. Windows 11).",
@@ -72,7 +72,7 @@ _WIN_OVERRIDES = {
     },
     "pt": {
         "apps_eyebrow": "Destaques",
-        "step2_body": "Enviamos-te a <strong>chave de produto</strong> (e as instruções) por email, normalmente em poucos minutos após a aprovação do pagamento. Para edições com suporte físico (DVD/COA), segue também as indicações no email.",
+        "step2_body": "Enviamos-te a <strong>chave de produto</strong> (e as instruções) por email, normalmente em 2–15 minutos após a aprovação do pagamento. Para edições com suporte físico (DVD/COA), segue também as indicações no email.",
         "step3_body": "Ativa o Windows com o código recebido: Definições → Sistema → Ativação (ou o procedimento descrito no email). Usa os canais oficiais da Microsoft.",
         "spec_cpu_body": "Processador compatível com os requisitos Microsoft da versão Windows indicada (para o Windows 11, normalmente CPU na lista oficial suportada).",
         "spec_os_body": "Esta ficha refere-se à licença do sistema operativo indicado. Verifica hardware e TPM/Secure Boot quando necessário (ex. Windows 11).",
@@ -81,7 +81,7 @@ _WIN_OVERRIDES = {
     },
     "nl": {
         "apps_eyebrow": "Hoogtepunten",
-        "step2_body": "Wij sturen u de <strong>productsleutel</strong> (en de instructies) per e-mail, meestal binnen enkele minuten na goedkeuring van de betaling. Voor edities met fysieke media (dvd/COA) volgt u ook de aanwijzingen in de e-mail.",
+        "step2_body": "Wij sturen u de <strong>productsleutel</strong> (en de instructies) per e-mail, meestal binnen 2–15 minuten na goedkeuring van de betaling. Voor edities met fysieke media (dvd/COA) volgt u ook de aanwijzingen in de e-mail.",
         "step3_body": "Activeer Windows met de ontvangen code: Instellingen → Systeem → Activering (of de procedure in de e-mail). Gebruik de officiële Microsoft-kanalen.",
         "spec_cpu_body": "Een processor die voldoet aan de Microsoft-vereisten voor de aangegeven Windows-versie (voor Windows 11 doorgaans een CPU op de officiële ondersteuningslijst).",
         "spec_os_body": "Deze fiche betreft de licentie van het aangegeven besturingssysteem. Controleer hardware en TPM/Secure Boot waar vereist (bijv. Windows 11).",

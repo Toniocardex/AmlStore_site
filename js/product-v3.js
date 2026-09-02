@@ -39,20 +39,19 @@
     });
 
     /**
-     * "Acquista ora" nella barra sticky: corsia veloce per chi ha già deciso.
-     * Aggiunge al carrello (delega di cart.js sul document) e salta direttamente al
-     * checkout, così l'etichetta corrisponde all'azione. Il checkout legge il carrello
-     * da localStorage e rimbalza da solo a /it/cart se è vuoto (js/checkout.js).
-     * Il rinvio lascia completare il listener delegato prima della navigazione.
+     * Ponte verso il checkout dopo l'aggiunta al carrello.
+     * Senza "Acquista ora" il percorso standard non ha piu' un invito
+     * persistente a proseguire: resta solo il toast di cart.js, che sparisce
+     * dopo 4 secondi e compare in fondo allo schermo mentre l'utente sta
+     * guardando un bottone a meta' pagina. Il link nasce hidden nella buy
+     * card e resta scoperto per tutta la sessione di lettura.
+     * No-op sulle pagine che .pdp-added non ce l'hanno.
      */
     document.addEventListener('click', function (event) {
-        var btn = event.target && event.target.closest
-            ? event.target.closest('[data-pdp-buy-now]')
-            : null;
-        if (!btn) return;
-        setTimeout(function () {
-            window.location.href = '/it/checkout';
-        }, 220);
+        if (!event.target || !event.target.closest) return;
+        if (!event.target.closest('[data-cart-add]')) return;
+        var bridge = document.querySelector('.pdp-added');
+        if (bridge) bridge.hidden = false;
     });
 
     /**

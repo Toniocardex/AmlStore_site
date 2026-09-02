@@ -29,7 +29,7 @@ UI = deepcopy(OFFICE_UI)
 _AV_OVERRIDES = {
     "it": {
         "apps_eyebrow": "In evidenza",
-        "step2_body": "Ti inviamo la <strong>licenza / codice</strong> e le istruzioni via email, di solito entro pochi minuti dall'approvazione del pagamento.",
+        "step2_body": "Ti inviamo la <strong>licenza / codice</strong> e le istruzioni via email, di solito entro 2–15 minuti dall'approvazione del pagamento.",
         "step3_body": "Attiva sul <strong>portale ufficiale del produttore</strong> con il codice ricevuto e segui le istruzioni nell'email.",
         "spec_cpu_body": "PC o dispositivi supportati dal produttore; verifica i requisiti aggiornati sulla scheda ufficiale del software.",
         "spec_os_body": "Windows, macOS, Android o iOS secondo le piattaforme supportate dal prodotto acquistato.",
@@ -39,7 +39,7 @@ _AV_OVERRIDES = {
     },
     "en": {
         "apps_eyebrow": "Highlights",
-        "step2_body": "We email the <strong>licence / key</strong> and instructions, usually within minutes after payment approval.",
+        "step2_body": "We email the <strong>licence / key</strong> and instructions, usually within 2–15 minutes after payment approval.",
         "step3_body": "Activate on the <strong>official vendor portal</strong> with the code received and follow the email instructions.",
         "spec_cpu_body": "PCs or devices supported by the vendor; check the latest requirements on the official product page.",
         "spec_os_body": "Windows, macOS, Android or iOS depending on platforms supported by the purchased product.",
@@ -79,7 +79,7 @@ _AV_OVERRIDES = {
     },
     "pt": {
         "apps_eyebrow": "Destaques",
-        "step2_body": "Enviamos-te a <strong>licença / código</strong> e as instruções por email, normalmente em poucos minutos após a aprovação do pagamento.",
+        "step2_body": "Enviamos-te a <strong>licença / código</strong> e as instruções por email, normalmente em 2–15 minutos após a aprovação do pagamento.",
         "step3_body": "Ativa no <strong>portal oficial do fabricante</strong> com o código recebido e segue as instruções no email.",
         "spec_cpu_body": "PC ou dispositivos suportados pelo fabricante; verifica os requisitos atualizados na ficha oficial do software.",
         "spec_os_body": "Windows, macOS, Android ou iOS segundo as plataformas suportadas pelo produto adquirido.",
@@ -89,7 +89,7 @@ _AV_OVERRIDES = {
     },
     "nl": {
         "apps_eyebrow": "Hoogtepunten",
-        "step2_body": "Wij sturen u de <strong>licentie / code</strong> en de instructies per e-mail, meestal binnen enkele minuten na goedkeuring van de betaling.",
+        "step2_body": "Wij sturen u de <strong>licentie / code</strong> en de instructies per e-mail, meestal binnen 2–15 minuten na goedkeuring van de betaling.",
         "step3_body": "Activeer op het <strong>officiële portaal van de uitgever</strong> met de ontvangen code en volg de instructies in de e-mail.",
         "spec_cpu_body": "Pc of apparaten die de uitgever ondersteunt; controleer de actuele vereisten op de officiële productfiche.",
         "spec_os_body": "Windows, macOS, Android of iOS volgens de platforms van het gekochte product.",
@@ -299,37 +299,37 @@ def _steps_for_brand(portal):
     return {
         "it": [
             ("Completa l'ordine", "Scegli il piano e procedi con il pagamento sicuro tramite carta o PayPal."),
-            ("Ricevi la licenza via email", "Ti inviamo il codice licenza originale e la guida di installazione via email in pochi minuti."),
+            ("Ricevi la licenza via email", "Ti inviamo il codice licenza originale e la guida di installazione via email in 2–15 minuti."),
             ("Attiva sul portale ufficiale", f"Attiva sul <strong>{portal['it']}</strong> con il codice ricevuto e installa il software ufficiale in tutta sicurezza."),
         ],
         "en": [
             ("Complete your order", "Select your plan and complete the secure payment by card or PayPal."),
-            ("Receive licence by email", "We email your genuine licence key and setup instructions within minutes."),
+            ("Receive licence by email", "We email your genuine licence key and setup instructions within 2–15 minutes."),
             ("Activate on official portal", f"Activate on the <strong>{portal['en']}</strong> with your received key and download the official client safely."),
         ],
         "fr": [
             ("Finalisez la commande", "Choisissez votre offre et réglez en toute sécurité par carte bancaire ou PayPal."),
-            ("Recevez la clé par e-mail", "Nous vous envoyons votre clé de licence officielle et le guide d'installation par e-mail en quelques minutes."),
+            ("Recevez la clé par e-mail", "Nous vous envoyons votre clé de licence officielle et le guide d'installation par e-mail en 2–15 minutes."),
             ("Activez sur le portail officiel", f"Activez sur le <strong>{portal['fr']}</strong> avec votre clé et installez l'antivirus officiel."),
         ],
         "de": [
             ("Bestellung abschließen", "Wählen Sie Ihren Plan und zahlen Sie sicher per Karte oder PayPal."),
-            ("Lizenz per E-Mail erhalten", "Wir senden Ihren originalen Lizenzschlüssel und die Anleitung innerhalb weniger Minuten per E-Mail."),
+            ("Lizenz per E-Mail erhalten", "Wir senden Ihren originalen Lizenzschlüssel und die Anleitung innerhalb von 2–15 Minuten per E-Mail."),
             ("Im offiziellen Portal aktivieren", f"Aktivieren Sie im <strong>{portal['de']}</strong> mit Ihrem Key und installieren Sie die offizielle Software."),
         ],
         "es": [
             ("Completa el pedido", "Elige tu plan y realiza el pago seguro con tarjeta o PayPal."),
-            ("Recibe la clave por email", "Te enviamos la clave de licencia original e instrucciones claras por email en pocos minutos."),
+            ("Recibe la clave por email", "Te enviamos la clave de licencia original e instrucciones claras por email en 2–15 minutos."),
             ("Activa en el portal oficial", f"Activa en el <strong>{portal['es']}</strong> con tu código e instala el software oficial de forma segura."),
         ],
         "pt": [
             ("Completa a encomenda", "Escolhe o plano e conclui o pagamento seguro com cartão ou PayPal."),
-            ("Recebe a licença por email", "Enviamos-te o código de licença original e o guia de instalação por email em poucos minutos."),
+            ("Recebe a licença por email", "Enviamos-te o código de licença original e o guia de instalação por email em 2–15 minutos."),
             ("Ativa no portal oficial", f"Ativa no <strong>{portal['pt']}</strong> com o código recebido e instala o software oficial com toda a segurança."),
         ],
         "nl": [
             ("Rond de bestelling af", "Kies het plan en rond de veilige betaling af met kaart of PayPal."),
-            ("Ontvang de licentie per e-mail", "Wij sturen u de originele licentiecode en de installatiegids binnen enkele minuten per e-mail."),
+            ("Ontvang de licentie per e-mail", "Wij sturen u de originele licentiecode en de installatiegids binnen 2–15 minuten per e-mail."),
             ("Activeer op het officiële portaal", f"Activeer op het <strong>{portal['nl']}</strong> met de ontvangen code en installeer de officiële software veilig."),
         ],
     }

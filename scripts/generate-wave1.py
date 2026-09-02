@@ -169,9 +169,9 @@ def build_page(lang, prod):
     price_dec = f"{sale / 100:.2f}"
     compare_dec = f"{compare / 100:.2f}"
     desc = (
-        f"{short}. Licenza digitale originale, consegna via email in pochi minuti."
+        f"{short}. Licenza digitale originale, consegna via email in 2–15 minuti."
         if lang == "it"
-        else f"{short}. Genuine digital licence, email delivery within minutes."
+        else f"{short}. Genuine digital licence, email delivery within 2–15 minutes."
     )
 
     ld = {
@@ -283,7 +283,7 @@ def build_page(lang, prod):
             <h2 id="steps-title">{'Consegna e attivazione' if lang == 'it' else 'Delivery and activation'}</h2>
             <ol class="product-process-steps__list">
                 <li><strong>{'Ordine' if lang == 'it' else 'Order'}</strong> — {'Checkout sicuro' if lang == 'it' else 'Secure checkout'}</li>
-                <li><strong>{'Email' if lang == 'it' else 'Email'}</strong> — {'Codice e istruzioni in pochi minuti' if lang == 'it' else 'Code and instructions within minutes'}</li>
+                <li><strong>{'Email' if lang == 'it' else 'Email'}</strong> — {'Codice e istruzioni in 2–15 minuti' if lang == 'it' else 'Code and instructions within 2–15 minutes'}</li>
                 <li><strong>{'Attivazione' if lang == 'it' else 'Activation'}</strong> — {'Portale ufficiale Microsoft' if lang == 'it' else 'Official Microsoft portal'}</li>
             </ol>
         </section>

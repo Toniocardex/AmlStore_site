@@ -147,11 +147,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.paypal.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/page.css?v=b104e76175">
+    <link rel="stylesheet" href="../css/page.css?v=1912b59fdc">
     <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
     <link rel="stylesheet" href="../css/footer.css?v=f4d2eaeb91">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=ad789bdab1">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=f2c288788d">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script>window.__amlPaypalConfig = fetch("/api/paypal-config").then(function(r){return r.json();}).catch(function(){return null;});</script>
 </head>
@@ -416,15 +416,15 @@
             <img class="product-sticky-cta__thumb" src="../asset/media/products/kaspersky-premium-3-devices.webp?v=4f813b21fd" width="40" height="40" alt="" loading="lazy" decoding="async">
             <div class="product-sticky-cta__name">
                 <span class="product-sticky-cta__title">Kaspersky Premium 2026 — 3 devices · 1 year</span>
-                <span class="product-sticky-cta__eta">Delivered in 2 minutes by email</span>
+                <span class="product-sticky-cta__eta">Delivered in 2–15 min by email</span>
             </div>
             <div class="product-sticky-cta__prices" aria-hidden="true">
                 <span class="product-sticky-cta__msrp">€ 68,99</span>
                 <span class="product-sticky-cta__sale">€ 36,04</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing">
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Buy now
+                Add to cart
             </button>
         </div>
     </div>
@@ -478,9 +478,14 @@
                 data-stripe-product-sku="KL1047GDCFS1"
                 data-discount-percent="48">
                 <p class="pdp-avail">
-                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>In stock · instant delivery</span>
+                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>In stock</span>
                     <span class="pdp-avail__eta">Email in 2–15 min</span>
                 </p>
+                <ul class="pdp-trust-checks">
+                    <li><strong>Authorised Kaspersky reseller</strong></li>
+                    <li>Genuine licences, activated on the official portal</li>
+                    <li><strong>Guarantee:</strong> <a href="/en/returns-and-refunds">replacement or refund</a></li>
+                </ul>
                 <p class="pdp-plans__label" id="pdp-plans-label">Choose your edition</p>
                 <div class="pdp-plans" role="group" aria-labelledby="pdp-plans-label">
                     <a class="pdp-plan" href="/en/kaspersky-premium-1-device"><b>1</b><span>1 device · € 37,99</span></a>
@@ -488,51 +493,42 @@
                     <a class="pdp-plan" href="/en/kaspersky-premium-5-devices"><b>5</b><span>5 devices · € 46,34</span></a>
                     <a class="pdp-plan" href="/en/kaspersky-premium-10-devices"><b>10</b><span>10 devices · € 57,00</span></a>
                 </div>
-                <p class="pdp-meta-row pdp-meta-row--partner" role="group" aria-label="Authorised Kaspersky reseller">
-                    <span class="pdp-meta-chip"><strong>Authorised Kaspersky reseller</strong> Genuine licences, activated on the official portal.</span>
-                </p>
-                <p class="pdp-buy__label">Eurolicenze price<span class="pdp-price-badge" aria-label="−48%">−48% OFF</span></p>
 
                 <div class="pdp-price-row" role="group" aria-label="Prices">
                     <span class="pdp-price-sale">€ 36,04</span>
                     <span class="pdp-price-msrp" aria-label="68,99">€ 68,99</span>
+                    <span class="pdp-price-badge">−48%</span>
                 </div>
-                <p class="pdp-price-save">You save <strong>€ 32,95</strong> versus the list price (€ 68,99).</p>
-                <p class="pdp-price-note">Tax included. No shipping fees.</p>
+                <p class="pdp-price-note">Tax included · discount versus the list price</p>
 
 
-                <p class="pdp-meta-row" role="group" aria-label="Licence details">
-                    <span class="pdp-meta-chip"><strong>Activation region</strong> European Union / EEA</span>
+                <p class="pdp-region">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M3.2 9h17.6M3.2 15h17.6"/><path stroke-linecap="round" d="M12 3c2.3 2.6 3.5 5.6 3.5 9s-1.2 6.4-3.5 9c-2.3-2.6-3.5-5.6-3.5-9S9.7 5.6 12 3z"/></svg>
+                    <span><strong>Activation region:</strong> European Union / EEA</span>
                 </p>
 
-                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/en/checkout">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                    Buy now
-                </button>
-                <button type="button" class="pdp-btn-ghost" data-cart-add data-cart-source="product-pricing">
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Add to cart
                 </button>
+                <p class="pdp-added" hidden>
+                    <a href="/en/cart">Go to cart and complete your order →</a>
+                </p>
 
-                <hr class="pdp-paypal-sep" aria-hidden="true">
+                <p class="pdp-cta-sep">Express checkout</p>
                 <div id="pdp-paypal-express" class="pdp-paypal-express">
                     <div class="pdp-paypal-express__buttons" id="pdp-paypal-express-buttons"></div>
                     <p class="pdp-paypal-express__loading" id="pdp-paypal-express-loading" hidden>Loading PayPal…</p>
                     <p class="pdp-paypal-express__error" id="pdp-paypal-express-error" role="alert" hidden
-                        data-msg-error="Unable to load PayPal. Try again or use Buy now."
+                        data-msg-error="Unable to load PayPal. Try again or use Add to cart."
                         data-msg-cancelled="Payment cancelled."
                         data-msg-capture-error="Error confirming PayPal payment. Please contact support."></p>
-                    <p class="pdp-paypal-express__microcopy">Express checkout</p>
                 </div>
-                <ul class="pdp-assur">
-                            <li>Activation on official portals</li>
-                            <li>Digital delivery, nothing to ship</li>
-                </ul>
                 <div class="product-trustpilot pdp-buy-trustpilot">
                     <a class="tp-score" href="https://www.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">
                         <span class="tp-score__star" aria-hidden="true">★</span>
-                        <span class="tp-score__value">4.8/5 on Trustpilot</span>
-                        <span class="tp-score__count">94 reviews</span>
+                        <span class="tp-score__value">Excellent 4.8/5</span>
+                        <span class="tp-score__count">on Trustpilot</span>
                     </a>
                 </div>
 
@@ -627,7 +623,7 @@
                 <li class="pdp-step">
                     <div>
                         <h3>Receive licence by email</h3>
-                        <p>We email your genuine licence key and setup instructions within minutes.</p>
+                        <p>We email your genuine licence key and setup instructions within 2–15 minutes.</p>
                     </div>
                 </li>
                 <li class="pdp-step">
@@ -686,7 +682,7 @@
         <h2 id="pdp-activation-title" class="pdp-dialog__title">Three steps to get started</h2>
         <ol class="pdp-dialog__steps">
                     <li><strong>Complete your order</strong> Select your plan and complete the secure payment by card or PayPal.</li>
-                    <li><strong>Receive licence by email</strong> We email your genuine licence key and setup instructions within minutes.</li>
+                    <li><strong>Receive licence by email</strong> We email your genuine licence key and setup instructions within 2–15 minutes.</li>
                     <li><strong>Activate on official portal</strong> Activate on the <strong>official Kaspersky portal (My Kaspersky)</strong> with your received key and download the official client safely.</li>
         </ol>
         <div class="pdp-dialog__foot">
@@ -776,9 +772,9 @@
     <script src="../js/cart.js?v=3ff9f0881c" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
-    <script src="../js/product-v3.js?v=cc997542a2" defer></script>
+    <script src="../js/product-v3.js?v=842415341e" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
-    <script src="../js/pdp-paypal-express.js?v=6fd8defd9b" defer></script>
+    <script src="../js/pdp-paypal-express.js?v=365cb44001" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
     <script src="../components/lang-suggest.js?v=910b04817f" defer></script>
     <script src="../components/header.js?v=89961e44b4" defer></script>

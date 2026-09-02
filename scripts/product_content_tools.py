@@ -130,32 +130,32 @@ PRODUCTS = {
         "steps": {
             "it": [
                 ("Ordine e pagamento", "Aggiungi il prodotto al carrello e completa il pagamento con i metodi disponibili."),
-                ("Consegna digitale", "Ricevi via email il codice di attivazione e le istruzioni, di norma entro pochi minuti dal pagamento."),
+                ("Consegna digitale", "Ricevi via email il codice di attivazione e le istruzioni, di norma entro 2–15 minuti dal pagamento."),
                 ("Attivazione", "Riscatta il codice sul tuo account Adobe e installa Acrobat da adobe.com o direttamente dall'app."),
             ],
             "en": [
                 ("Order and payment", "Add the product to your cart and complete checkout with the available methods."),
-                ("Digital delivery", "You receive the activation code and instructions by email, usually within minutes of payment."),
+                ("Digital delivery", "You receive the activation code and instructions by email, usually within 2–15 minutes of payment."),
                 ("Activation", "Redeem the code on your Adobe account and install Acrobat from adobe.com or directly from the app."),
             ],
             "fr": [
                 ("Commande et paiement", "Ajoutez le produit au panier et finalisez le paiement avec les méthodes disponibles."),
-                ("Livraison numérique", "Vous recevez le code d'activation et les instructions par e-mail, généralement en quelques minutes."),
+                ("Livraison numérique", "Vous recevez le code d'activation et les instructions par e-mail, généralement en 2–15 minutes."),
                 ("Activation", "Utilisez le code sur votre compte Adobe et installez Acrobat depuis adobe.com ou l'application."),
             ],
             "de": [
                 ("Bestellung und Zahlung", "Produkt in den Warenkorb legen und die Zahlung mit den verfügbaren Methoden abschließen."),
-                ("Digitale Lieferung", "Sie erhalten den Aktivierungscode und die Anleitung per E-Mail, meist innerhalb weniger Minuten."),
+                ("Digitale Lieferung", "Sie erhalten den Aktivierungscode und die Anleitung per E-Mail, meist innerhalb von 2–15 Minuten."),
                 ("Aktivierung", "Code im Adobe-Konto einlösen und Acrobat über adobe.com oder direkt aus der App installieren."),
             ],
             "es": [
                 ("Pedido y pago", "Añade el producto al carrito y completa el pago con los métodos disponibles."),
-                ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en pocos minutos."),
+                ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en 2–15 minutos."),
                 ("Activación", "Canjea el código en tu cuenta Adobe e instala Acrobat desde adobe.com o directamente desde la app."),
             ],
             "pt": [
                 ("Encomenda e pagamento", "Adiciona o produto ao carrinho e conclui o pagamento com os métodos disponíveis."),
-                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em poucos minutos após o pagamento."),
+                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em 2–15 minutos após o pagamento."),
                 ("Ativação", "Resgata o código na tua conta Adobe e instala o Acrobat a partir de adobe.com ou diretamente da app."),
             ],
         },
@@ -350,32 +350,32 @@ PRODUCTS = {
         "steps": {
             "it": [
                 ("Ordine e pagamento", "Aggiungi il prodotto al carrello e completa il pagamento con i metodi disponibili."),
-                ("Consegna digitale", "Ricevi via email il codice di attivazione e le istruzioni, di norma entro pochi minuti dal pagamento."),
+                ("Consegna digitale", "Ricevi via email il codice di attivazione e le istruzioni, di norma entro 2–15 minuti dal pagamento."),
                 ("Attivazione", "Riscatta il codice sul tuo account Adobe e installa Acrobat da adobe.com."),
             ],
             "en": [
                 ("Order and payment", "Add the product to your cart and complete checkout with the available methods."),
-                ("Digital delivery", "You receive the activation code and instructions by email, usually within minutes of payment."),
+                ("Digital delivery", "You receive the activation code and instructions by email, usually within 2–15 minutes of payment."),
                 ("Activation", "Redeem the code on your Adobe account and install Acrobat from adobe.com."),
             ],
             "fr": [
                 ("Commande et paiement", "Ajoutez le produit au panier et finalisez le paiement avec les méthodes disponibles."),
-                ("Livraison numérique", "Vous recevez le code d'activation et les instructions par e-mail, généralement en quelques minutes."),
+                ("Livraison numérique", "Vous recevez le code d'activation et les instructions par e-mail, généralement en 2–15 minutes."),
                 ("Activation", "Utilisez le code sur votre compte Adobe et installez Acrobat depuis adobe.com."),
             ],
             "de": [
                 ("Bestellung und Zahlung", "Produkt in den Warenkorb legen und die Zahlung mit den verfügbaren Methoden abschließen."),
-                ("Digitale Lieferung", "Sie erhalten den Aktivierungscode und die Anleitung per E-Mail, meist innerhalb weniger Minuten."),
+                ("Digitale Lieferung", "Sie erhalten den Aktivierungscode und die Anleitung per E-Mail, meist innerhalb von 2–15 Minuten."),
                 ("Aktivierung", "Code im Adobe-Konto einlösen und Acrobat über adobe.com installieren."),
             ],
             "es": [
                 ("Pedido y pago", "Añade el producto al carrito y completa el pago con los métodos disponibles."),
-                ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en pocos minutos."),
+                ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en 2–15 minutos."),
                 ("Activación", "Canjea el código en tu cuenta Adobe e instala Acrobat desde adobe.com."),
             ],
             "pt": [
                 ("Encomenda e pagamento", "Adiciona o produto ao carrinho e conclui o pagamento com os métodos disponíveis."),
-                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em poucos minutos após o pagamento."),
+                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em 2–15 minutos após o pagamento."),
                 ("Ativação", "Resgata o código na tua conta Adobe e instala o Acrobat a partir de adobe.com."),
             ],
         },
@@ -561,32 +561,32 @@ PRODUCTS = {
         "steps": {
             "it": [
                 ("Ordine e pagamento", "Aggiungi il prodotto al carrello e completa il pagamento con i metodi disponibili."),
-                ("Consegna digitale", "Ricevi via email il codice seriale e le istruzioni, di norma entro pochi minuti dal pagamento."),
+                ("Consegna digitale", "Ricevi via email il codice seriale e le istruzioni, di norma entro 2–15 minuti dal pagamento."),
                 ("Attivazione", "Scarica l'installer dal tuo account Corel e attiva la suite con il codice ricevuto."),
             ],
             "en": [
                 ("Order and payment", "Add the product to your cart and complete checkout with the available methods."),
-                ("Digital delivery", "You receive the serial code and instructions by email, usually within minutes of payment."),
+                ("Digital delivery", "You receive the serial code and instructions by email, usually within 2–15 minutes of payment."),
                 ("Activation", "Download the installer from your Corel account and activate the suite with the code received."),
             ],
             "fr": [
                 ("Commande et paiement", "Ajoutez le produit au panier et finalisez le paiement avec les méthodes disponibles."),
-                ("Livraison numérique", "Vous recevez le numéro de série et les instructions par e-mail, généralement en quelques minutes."),
+                ("Livraison numérique", "Vous recevez le numéro de série et les instructions par e-mail, généralement en 2–15 minutes."),
                 ("Activation", "Téléchargez l'installeur depuis votre compte Corel et activez la suite avec le code reçu."),
             ],
             "de": [
                 ("Bestellung und Zahlung", "Produkt in den Warenkorb legen und die Zahlung mit den verfügbaren Methoden abschließen."),
-                ("Digitale Lieferung", "Sie erhalten den Seriencode und die Anleitung per E-Mail, meist innerhalb weniger Minuten."),
+                ("Digitale Lieferung", "Sie erhalten den Seriencode und die Anleitung per E-Mail, meist innerhalb von 2–15 Minuten."),
                 ("Aktivierung", "Installationsdatei im Corel-Konto herunterladen und die Suite mit dem erhaltenen Code aktivieren."),
             ],
             "es": [
                 ("Pedido y pago", "Añade el producto al carrito y completa el pago con los métodos disponibles."),
-                ("Entrega digital", "Recibes el código de serie y las instrucciones por email, normalmente en pocos minutos."),
+                ("Entrega digital", "Recibes el código de serie y las instrucciones por email, normalmente en 2–15 minutos."),
                 ("Activación", "Descarga el instalador desde tu cuenta Corel y activa la suite con el código recibido."),
             ],
             "pt": [
                 ("Encomenda e pagamento", "Adiciona o produto ao carrinho e conclui o pagamento com os métodos disponíveis."),
-                ("Entrega digital", "Recebes por email o código de série e as instruções, normalmente em poucos minutos após o pagamento."),
+                ("Entrega digital", "Recebes por email o código de série e as instruções, normalmente em 2–15 minutos após o pagamento."),
                 ("Ativação", "Descarrega o instalador na tua conta Corel e ativa a suite com o código recebido."),
             ],
         },
@@ -781,32 +781,32 @@ PRODUCTS = {
         "steps": {
             "it": [
                 ("Ordine e pagamento", "Aggiungi il prodotto al carrello e completa il pagamento con i metodi disponibili."),
-                ("Consegna digitale", "Ricevi via email il codice di attivazione e le istruzioni, di norma entro pochi minuti dal pagamento."),
+                ("Consegna digitale", "Ricevi via email il codice di attivazione e le istruzioni, di norma entro 2–15 minuti dal pagamento."),
                 ("Attivazione", "Crea o accedi al tuo account Acronis, installa il software e attiva la licenza con il codice ricevuto."),
             ],
             "en": [
                 ("Order and payment", "Add the product to your cart and complete checkout with the available methods."),
-                ("Digital delivery", "You receive the activation code and instructions by email, usually within minutes of payment."),
+                ("Digital delivery", "You receive the activation code and instructions by email, usually within 2–15 minutes of payment."),
                 ("Activation", "Create or sign in to your Acronis account, install the software and activate the licence with the code received."),
             ],
             "fr": [
                 ("Commande et paiement", "Ajoutez le produit au panier et finalisez le paiement avec les méthodes disponibles."),
-                ("Livraison numérique", "Vous recevez le code d'activation et les instructions par e-mail, généralement en quelques minutes."),
+                ("Livraison numérique", "Vous recevez le code d'activation et les instructions par e-mail, généralement en 2–15 minutes."),
                 ("Activation", "Créez ou connectez-vous à votre compte Acronis, installez le logiciel et activez la licence avec le code reçu."),
             ],
             "de": [
                 ("Bestellung und Zahlung", "Produkt in den Warenkorb legen und die Zahlung mit den verfügbaren Methoden abschließen."),
-                ("Digitale Lieferung", "Sie erhalten den Aktivierungscode und die Anleitung per E-Mail, meist innerhalb weniger Minuten."),
+                ("Digitale Lieferung", "Sie erhalten den Aktivierungscode und die Anleitung per E-Mail, meist innerhalb von 2–15 Minuten."),
                 ("Aktivierung", "Acronis-Konto erstellen oder anmelden, Software installieren und Lizenz mit dem erhaltenen Code aktivieren."),
             ],
             "es": [
                 ("Pedido y pago", "Añade el producto al carrito y completa el pago con los métodos disponibles."),
-                ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en pocos minutos."),
+                ("Entrega digital", "Recibes el código de activación y las instrucciones por email, normalmente en 2–15 minutos."),
                 ("Activación", "Crea o accede a tu cuenta Acronis, instala el software y activa la licencia con el código recibido."),
             ],
             "pt": [
                 ("Encomenda e pagamento", "Adiciona o produto ao carrinho e conclui o pagamento com os métodos disponíveis."),
-                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em poucos minutos após o pagamento."),
+                ("Entrega digital", "Recebes por email o código de ativação e as instruções, normalmente em 2–15 minutos após o pagamento."),
                 ("Ativação", "Cria ou acede à tua conta Acronis, instala o software e ativa a licença com o código recebido."),
             ],
         },

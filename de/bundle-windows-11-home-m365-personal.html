@@ -147,11 +147,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.paypal.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/page.css?v=b104e76175">
+    <link rel="stylesheet" href="../css/page.css?v=1912b59fdc">
     <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
     <link rel="stylesheet" href="../css/footer.css?v=f4d2eaeb91">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=ad789bdab1">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=f2c288788d">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
     <script>window.__amlPaypalConfig = fetch("/api/paypal-config").then(function(r){return r.json();}).catch(function(){return null;});</script>
 </head>
@@ -416,15 +416,15 @@
             <img class="product-sticky-cta__thumb" src="../asset/media/products/bundle-windows-11-home-m365-personal.webp?v=a94f67147b" width="40" height="40" alt="" loading="lazy" decoding="async">
             <div class="product-sticky-cta__name">
                 <span class="product-sticky-cta__title">Windows 11 Home + M365 Personal</span>
-                <span class="product-sticky-cta__eta">Lieferung in 2 Minuten per E-Mail</span>
+                <span class="product-sticky-cta__eta">Lieferung in 2–15 Min. per E-Mail</span>
             </div>
             <div class="product-sticky-cta__prices" aria-hidden="true">
                 <span class="product-sticky-cta__msrp">€ 178,00</span>
                 <span class="product-sticky-cta__sale">€ 154,00</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing">
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Jetzt kaufen
+                In den Warenkorb
             </button>
         </div>
     </div>
@@ -535,51 +535,49 @@
                 data-stripe-product-sku="SC_W11HOME_M365PERS"
                 data-discount-percent="13">
                 <p class="pdp-avail">
-                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>Verfügbar · sofortige Lieferung</span>
+                    <span class="pdp-avail__pill"><span class="pdp-avail__dot" aria-hidden="true"></span>Verfügbar</span>
                     <span class="pdp-avail__eta">E-Mail in 2–15 Min.</span>
                 </p>
-                <p class="pdp-buy__label">Eurolicenze-Preis<span class="pdp-price-badge" aria-label="−13%">−13% RABATT</span></p>
+                <ul class="pdp-trust-checks">
+                    <li>Aktivierung über offizielle Portale</li>
+                    <li><strong>Garantie:</strong> <a href="/de/returns-and-refunds">Ersatz oder Erstattung</a></li>
+                </ul>
 
                 <div class="pdp-price-row" role="group" aria-label="Preise">
                     <span class="pdp-price-sale">€ 154,00</span>
                     <span class="pdp-price-msrp" aria-label="178,00">€ 178,00</span>
+                    <span class="pdp-price-badge">−13%</span>
                 </div>
-                <p class="pdp-price-save">Sie sparen <strong>€ 24,00</strong> gegenüber dem Listenpreis (€ 178,00).</p>
-                <p class="pdp-price-note">Steuern inklusive. Keine Versandkosten.</p>
+                <p class="pdp-price-note">Steuern inklusive · Rabatt gegenüber dem Listenpreis</p>
 
 
-                <p class="pdp-meta-row" role="group" aria-label="Lizenzdetails">
-                    <span class="pdp-meta-chip"><strong>Aktivierungsregion</strong> Europäische Union / EWR</span>
+                <p class="pdp-region">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M3.2 9h17.6M3.2 15h17.6"/><path stroke-linecap="round" d="M12 3c2.3 2.6 3.5 5.6 3.5 9s-1.2 6.4-3.5 9c-2.3-2.6-3.5-5.6-3.5-9S9.7 5.6 12 3z"/></svg>
+                    <span><strong>Aktivierungsregion:</strong> Europäische Union / EWR</span>
                 </p>
 
-                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/de/checkout">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                    Jetzt kaufen
-                </button>
-                <button type="button" class="pdp-btn-ghost" data-cart-add data-cart-source="product-pricing">
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     In den Warenkorb
                 </button>
+                <p class="pdp-added" hidden>
+                    <a href="/de/cart">Zum Warenkorb und Bestellung abschließen →</a>
+                </p>
 
-                <hr class="pdp-paypal-sep" aria-hidden="true">
+                <p class="pdp-cta-sep">Express-Checkout</p>
                 <div id="pdp-paypal-express" class="pdp-paypal-express">
                     <div class="pdp-paypal-express__buttons" id="pdp-paypal-express-buttons"></div>
                     <p class="pdp-paypal-express__loading" id="pdp-paypal-express-loading" hidden>PayPal wird geladen…</p>
                     <p class="pdp-paypal-express__error" id="pdp-paypal-express-error" role="alert" hidden
-                        data-msg-error="PayPal konnte nicht geladen werden. Versuchen Sie es erneut oder nutzen Sie Jetzt kaufen."
+                        data-msg-error="PayPal konnte nicht geladen werden. Versuchen Sie es erneut oder nutzen Sie In den Warenkorb."
                         data-msg-cancelled="Zahlung abgebrochen."
                         data-msg-capture-error="Fehler bei der Bestätigung der PayPal-Zahlung. Bitte kontaktieren Sie den Support."></p>
-                    <p class="pdp-paypal-express__microcopy">Express-Checkout</p>
                 </div>
-                <ul class="pdp-assur">
-                            <li>Aktivierung über offizielle Portale</li>
-                            <li>Digitale Lieferung, kein Versand</li>
-                </ul>
                 <div class="product-trustpilot pdp-buy-trustpilot">
                     <a class="tp-score" href="https://de.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">
                         <span class="tp-score__star" aria-hidden="true">★</span>
-                        <span class="tp-score__value">4,8/5 auf Trustpilot</span>
-                        <span class="tp-score__count">94 Bewertungen</span>
+                        <span class="tp-score__value">Hervorragend 4,8/5</span>
+                        <span class="tp-score__count">auf Trustpilot</span>
                     </a>
                 </div>
 
@@ -689,7 +687,7 @@
                 <li class="pdp-step">
                     <div>
                         <h3>Zwei Codes per E-Mail</h3>
-                        <p>Wir senden Ihnen den <strong>Product Key</strong> für Windows 11 Home und den Microsoft-365-Personal-Code mit der jeweiligen Anleitung, meist innerhalb weniger Minuten nach Zahlungsfreigabe.</p>
+                        <p>Wir senden Ihnen den <strong>Product Key</strong> für Windows 11 Home und den Microsoft-365-Personal-Code mit der jeweiligen Anleitung, meist innerhalb von 2–15 Minuten nach Zahlungsfreigabe.</p>
                     </div>
                 </li>
                 <li class="pdp-step">
@@ -748,7 +746,7 @@
         <h2 id="pdp-activation-title" class="pdp-dialog__title">Drei Schritte zum Start</h2>
         <ol class="pdp-dialog__steps">
                     <li><strong>Bestellung und Zahlung</strong> Paket in den Warenkorb legen und die sichere Zahlung mit den verfügbaren Methoden abschließen. Sie erhalten eine Bestellbestätigung gemäß den beim Checkout angezeigten Bedingungen.</li>
-                    <li><strong>Zwei Codes per E-Mail</strong> Wir senden Ihnen den <strong>Product Key</strong> für Windows 11 Home und den Microsoft-365-Personal-Code mit der jeweiligen Anleitung, meist innerhalb weniger Minuten nach Zahlungsfreigabe.</li>
+                    <li><strong>Zwei Codes per E-Mail</strong> Wir senden Ihnen den <strong>Product Key</strong> für Windows 11 Home und den Microsoft-365-Personal-Code mit der jeweiligen Anleitung, meist innerhalb von 2–15 Minuten nach Zahlungsfreigabe.</li>
                     <li><strong>Zwei separate Aktivierungen</strong> Windows 11 Home während der Installation oder in den Systemeinstellungen aktivieren, dann den Microsoft-365-Code unter <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> einlösen und die Apps über <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a> installieren.</li>
         </ol>
         <div class="pdp-dialog__foot">
@@ -838,9 +836,9 @@
     <script src="../js/cart.js?v=3ff9f0881c" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
-    <script src="../js/product-v3.js?v=cc997542a2" defer></script>
+    <script src="../js/product-v3.js?v=842415341e" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
-    <script src="../js/pdp-paypal-express.js?v=6fd8defd9b" defer></script>
+    <script src="../js/pdp-paypal-express.js?v=365cb44001" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
     <script src="../components/lang-suggest.js?v=910b04817f" defer></script>
     <script src="../components/header.js?v=89961e44b4" defer></script>

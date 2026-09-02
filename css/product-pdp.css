@@ -588,9 +588,11 @@ body { background: var(--page-bg); }
     text-decoration: line-through;
 }
 
-/* Ruolo "risparmio": e' l'unico elemento oltre alla CTA che puo' essere
-   arancione. I colori di prima venivano dal tema scuro ritirato — verde acceso
-   su verde traslucido — e sul fondo chiaro erano illeggibili. */
+/* Ruolo "risparmio", verde dal 2026-09-02: l'arancione e' rimasto alla sola
+   CTA. Il badge NON e' tornato al verde acceso del tema scuro ritirato, che su
+   fondo chiaro era illeggibile: usa --aml-save-* che ora puntano ad --aml-ok /
+   --aml-ok-bg, gli stessi del pill di disponibilita'. Il colore si cambia da
+   li', non qui, o il badge si desincronizza dalle card di categoria. */
 .pdp-price-badge {
     display: inline-flex;
     align-items: center;
@@ -2908,3 +2910,165 @@ body { background: var(--page-bg); }
     font-size: var(--aml-text-sm);
     color: var(--pdp-muted);
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Buy card v4 — report UX/CRO "Area Prezzo, Trust Signals e CTA Mobile".
+   Sulle pagine convertite queste classi sostituiscono i chip riquadrati
+   (.pdp-meta-chip), l'etichetta "Prezzo Riservato" (.pdp-buy__label), la
+   riga risparmio (.pdp-price-save), il filetto PayPal (.pdp-paypal-sep) e
+   la lista di chiusura (.pdp-assur). Le regole vecchie NON sono state
+   rimosse: le PDP non ancora rigenerate continuano a usarle.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Rassicurazioni in testa alla card: stesse informazioni dei chip
+   riquadrati, senza cornice. Le cornici nidificate spezzavano la card in
+   blocchi pesanti (border fatigue) invece di lasciarla leggere di seguito. */
+.pdp-trust-checks {
+    list-style: none;
+    display: grid;
+    gap: 5px;
+    margin: 0 0 12px;
+    padding: 0;
+    font-size: var(--aml-text-sm);
+    line-height: 1.4;
+    color: var(--aml-ink-2);
+}
+
+.pdp-trust-checks li {
+    position: relative;
+    padding-left: 20px;
+}
+
+.pdp-trust-checks li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--aml-trust-ink);
+    font-weight: 700;
+}
+
+.pdp-trust-checks strong {
+    color: var(--aml-ink);
+    font-weight: 700;
+}
+
+/* Il link alla policy dentro la spunta garanzia: senza questa regola
+   usciva col blu di default del browser. Neutro sottolineato come gli
+   altri link della card, l'arancione resta all'azione. */
+.pdp-trust-checks a {
+    color: var(--aml-ink-2);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.pdp-trust-checks a:hover {
+    color: var(--aml-ink);
+}
+
+/* Il badge sconto ora vive dentro .pdp-price-row (l'etichetta "Prezzo
+   Riservato" che lo conteneva e' stata rimossa): prezzo, barrato e badge
+   formano un solo gruppo ottico. I prezzi si allineano sulla baseline, il
+   badge sul centro — su baseline il riquadro risulterebbe troppo basso. */
+.pdp-price-row .pdp-price-badge {
+    align-self: center;
+}
+
+/* Regione di attivazione: informazione di servizio, riga con icona e non
+   chip riquadrato. */
+.pdp-region {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 0 0 16px;
+    font-size: var(--aml-text-sm);
+    line-height: 1.4;
+    color: var(--pdp-muted);
+}
+
+.pdp-region svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--aml-ink-2);
+}
+
+.pdp-region strong {
+    color: var(--aml-ink);
+    font-weight: 600;
+}
+
+/* Separatore fra CTA primaria e percorso express. Sostituisce il filetto
+   nudo .pdp-paypal-sep: etichettato, i due percorsi si leggono come
+   alternative esclusive invece che come una pila di bottoni. L'etichetta
+   e' la microcopy che stava sotto i bottoni PayPal ("Express checkout"),
+   spostata qui e non piu' ripetuta.
+   pdp-paypal-express.js lo nasconde insieme al componente se l'SDK PayPal
+   non carica — riconosce entrambe le classi. */
+.pdp-cta-sep {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+    font-size: var(--aml-text-xs);
+    color: var(--pdp-muted);
+}
+
+.pdp-cta-sep::before,
+.pdp-cta-sep::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--pdp-border);
+}
+
+.pdp-cta-sep[hidden] {
+    display: none;
+}
+
+/* Ponte verso il checkout dopo l'aggiunta al carrello. Nasce hidden, lo
+   scopre product-v3.js al primo [data-cart-add]: tolto "Acquista ora",
+   l'unico invito a proseguire era il toast di cart.js, che vive 4 secondi e
+   compare in fondo allo schermo mentre l'utente guarda un bottone a meta'
+   pagina. Non e' il cart drawer (rimandato): e' solo un'ancora che resta. */
+.pdp-added {
+    margin: 10px 0 0;
+    font-size: var(--aml-text-sm);
+    text-align: center;
+}
+
+.pdp-added[hidden] {
+    display: none;
+}
+
+.pdp-added a {
+    color: var(--aml-brand);
+    font-weight: 700;
+}
+
+.pdp-added a:hover {
+    text-decoration: underline;
+}
+
+/* .pdp-cross scende sotto i percorsi d'acquisto: da li' in giu' non e' piu'
+   una fuga dalla conversione ma la risposta a chi ha ancora un dubbio.
+   Perde anche l'arancione: sotto la CTA finivano tre link brand in fila
+   (ponte, confronto, garanzia) e l'arancione, che per la regola dei tre
+   ruoli e' il colore dell'azione, non distingueva piu' niente. Resta
+   arancione solo cio' che porta avanti l'ordine. */
+.pdp-buy .pdp-cross {
+    margin: 14px 0 0;
+    text-align: center;
+}
+
+.pdp-buy .pdp-cross a {
+    color: var(--aml-ink-2);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.pdp-buy .pdp-cross a:hover {
+    color: var(--aml-ink);
+}
+

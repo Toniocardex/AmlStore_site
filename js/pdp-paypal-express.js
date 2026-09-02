@@ -334,7 +334,8 @@
                 if (CONTAINER) {
                     CONTAINER.hidden = true;
                     var sep = CONTAINER.previousElementSibling;
-                    if (sep && sep.classList && sep.classList.contains('pdp-paypal-sep')) {
+                    if (sep && sep.classList && (sep.classList.contains('pdp-paypal-sep')
+                        || sep.classList.contains('pdp-cta-sep'))) {
                         sep.hidden = true;
                     }
                 }

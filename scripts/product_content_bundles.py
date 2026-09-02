@@ -128,32 +128,32 @@ def _bundle(av_name, av_short, av_feature_it, av_feature_en, av_feature_fr, av_f
         "steps": {
             "it": [
                 ("Ordine e pagamento", "Aggiungi il bundle al carrello e completa il pagamento con i metodi disponibili."),
-                ("Consegna digitale", "Ricevi via email entrambi i codici — Microsoft 365 e antivirus — di norma entro pochi minuti dal pagamento."),
+                ("Consegna digitale", "Ricevi via email entrambi i codici — Microsoft 365 e antivirus — di norma entro 2–15 minuti dal pagamento."),
                 ("Doppia attivazione", "Colleghi il codice Microsoft 365 al tuo account Microsoft e installi l'antivirus con il proprio codice sul portale del produttore."),
             ],
             "en": [
                 ("Order and payment", "Add the bundle to your cart and complete checkout with the available methods."),
-                ("Digital delivery", "You receive both codes — Microsoft 365 and antivirus — usually within minutes of payment."),
+                ("Digital delivery", "You receive both codes — Microsoft 365 and antivirus — usually within 2–15 minutes of payment."),
                 ("Two activations", "Link the Microsoft 365 code to your Microsoft account and install the antivirus with its own code on the vendor's portal."),
             ],
             "fr": [
                 ("Commande et paiement", "Ajoutez le pack au panier et finalisez le paiement avec les méthodes disponibles."),
-                ("Livraison numérique", "Vous recevez les deux codes — Microsoft 365 et antivirus — généralement en quelques minutes."),
+                ("Livraison numérique", "Vous recevez les deux codes — Microsoft 365 et antivirus — généralement en 2–15 minutes."),
                 ("Deux activations", "Liez le code Microsoft 365 à votre compte Microsoft et installez l'antivirus avec son propre code sur le portail de l'éditeur."),
             ],
             "de": [
                 ("Bestellung und Zahlung", "Paket in den Warenkorb legen und die Zahlung mit den verfügbaren Methoden abschließen."),
-                ("Digitale Lieferung", "Sie erhalten beide Codes — Microsoft 365 und Virenschutz — meist innerhalb weniger Minuten."),
+                ("Digitale Lieferung", "Sie erhalten beide Codes — Microsoft 365 und Virenschutz — meist innerhalb von 2–15 Minuten."),
                 ("Zwei Aktivierungen", "Microsoft-365-Code im Microsoft-Konto verknüpfen und den Virenschutz mit eigenem Code im Herstellerportal installieren."),
             ],
             "es": [
                 ("Pedido y pago", "Añade el pack al carrito y completa el pago con los métodos disponibles."),
-                ("Entrega digital", "Recibes ambos códigos —Microsoft 365 y antivirus— normalmente en pocos minutos."),
+                ("Entrega digital", "Recibes ambos códigos —Microsoft 365 y antivirus— normalmente en 2–15 minutos."),
                 ("Doble activación", "Vincula el código de Microsoft 365 a tu cuenta Microsoft e instala el antivirus con su propio código en el portal del fabricante."),
             ],
             "pt": [
                 ("Pedido e pagamento", "Adiciona o pacote ao carrinho e conclui o pagamento com os métodos disponíveis."),
-                ("Entrega digital", "Recebes por email ambos os códigos — Microsoft 365 e antivírus — normalmente em poucos minutos após o pagamento."),
+                ("Entrega digital", "Recebes por email ambos os códigos — Microsoft 365 e antivírus — normalmente em 2–15 minutos após o pagamento."),
                 ("Dupla ativação", "Associa o código Microsoft 365 à tua conta Microsoft e instala o antivírus com o seu próprio código no portal do fabricante."),
             ],
         },
@@ -324,13 +324,13 @@ PRODUCTS = {
             nl="Digitaal pakket · permanente licentie + 12 maanden abonnement",
         ),
         "desc": L(
-            it="Windows 11 Home in licenza digitale a vita più l'abbonamento Microsoft 365 Personal di 12 mesi: app Office sempre aggiornate, 1 TB OneDrive, Copilot AI e consegna via email in pochi minuti.",
+            it="Windows 11 Home in licenza digitale a vita più l'abbonamento Microsoft 365 Personal di 12 mesi: app Office sempre aggiornate, 1 TB OneDrive, Copilot AI e consegna via email in 2–15 minuti.",
             en="Windows 11 Home as a lifetime digital licence plus a 12-month Microsoft 365 Personal subscription: always up-to-date Office apps, 1 TB of OneDrive, Copilot AI and delivery by email in minutes.",
-            fr="Windows 11 Home en licence numérique à vie plus l'abonnement Microsoft 365 Personal de 12 mois : applications Office toujours à jour, 1 To de OneDrive, Copilot IA et livraison par e-mail en quelques minutes.",
-            de="Windows 11 Home als digitale Dauerlizenz plus ein 12-monatiges Microsoft-365-Personal-Abo: stets aktuelle Office-Apps, 1 TB OneDrive, Copilot KI und Lieferung per E-Mail in wenigen Minuten.",
+            fr="Windows 11 Home en licence numérique à vie plus l'abonnement Microsoft 365 Personal de 12 mois : applications Office toujours à jour, 1 To de OneDrive, Copilot IA et livraison par e-mail en 2–15 minutes.",
+            de="Windows 11 Home als digitale Dauerlizenz plus ein 12-monatiges Microsoft-365-Personal-Abo: stets aktuelle Office-Apps, 1 TB OneDrive, Copilot KI und Lieferung per E-Mail in 2–15 Minuten.",
             es="Windows 11 Home en licencia digital de por vida más la suscripción de 12 meses a Microsoft 365 Personal: apps Office siempre actualizadas, 1 TB de OneDrive, Copilot IA y entrega por email en minutos.",
-            pt="Windows 11 Home em licença digital vitalícia mais a subscrição de 12 meses do Microsoft 365 Personal: apps Office sempre atualizadas, 1 TB OneDrive, Copilot IA e entrega por email em poucos minutos.",
-            nl="Windows 11 Home als permanente digitale licentie plus 12 maanden Microsoft 365 Personal: altijd actuele Office-apps, 1 TB OneDrive, Copilot AI en levering per e-mail binnen enkele minuten.",
+            pt="Windows 11 Home em licença digital vitalícia mais a subscrição de 12 meses do Microsoft 365 Personal: apps Office sempre atualizadas, 1 TB OneDrive, Copilot IA e entrega por email em 2–15 minutos.",
+            nl="Windows 11 Home als permanente digitale licentie plus 12 maanden Microsoft 365 Personal: altijd actuele Office-apps, 1 TB OneDrive, Copilot AI en levering per e-mail binnen 2–15 minuten.",
         ),
         "features_title": L(
             it="Due prodotti Microsoft, un solo acquisto",
@@ -401,32 +401,32 @@ PRODUCTS = {
         "steps": {
             "it": [
                 ("Ordine e pagamento", "Aggiungi il pacchetto al carrello e completa il pagamento sicuro con i metodi disponibili. Ricevi la conferma d'ordine come da condizioni mostrate in checkout."),
-                ("Due codici via email", "Ti inviamo il <strong>product key</strong> di Windows 11 Home e il codice Microsoft 365 Personal, con le rispettive istruzioni, di solito entro pochi minuti dall'approvazione del pagamento."),
+                ("Due codici via email", "Ti inviamo il <strong>product key</strong> di Windows 11 Home e il codice Microsoft 365 Personal, con le rispettive istruzioni, di solito entro 2–15 minuti dall'approvazione del pagamento."),
                 ("Attivazione separata", 'Attiva Windows 11 Home durante l\'installazione o dalle impostazioni di sistema, poi riscatta il codice Microsoft 365 su <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> e installa le app da <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.'),
             ],
             "en": [
                 ("Order and payment", "Add the bundle to your cart and complete secure checkout with the available methods. You receive an order confirmation as shown at checkout."),
-                ("Two codes by email", "We email the <strong>product key</strong> for Windows 11 Home and the Microsoft 365 Personal code, with their instructions, usually within minutes of payment approval."),
+                ("Two codes by email", "We email the <strong>product key</strong> for Windows 11 Home and the Microsoft 365 Personal code, with their instructions, usually within 2–15 minutes of payment approval."),
                 ("Two separate activations", 'Activate Windows 11 Home during setup or from system settings, then redeem the Microsoft 365 code at <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> and install the apps from <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.'),
             ],
             "fr": [
                 ("Commande et paiement", "Ajoutez le pack au panier et finalisez le paiement sécurisé avec les méthodes disponibles. Vous recevez une confirmation de commande selon les conditions affichées au paiement."),
-                ("Deux codes par e-mail", "Nous vous envoyons le <strong>product key</strong> de Windows 11 Home et le code Microsoft 365 Personal, avec leurs instructions, généralement en quelques minutes après l'approbation du paiement."),
+                ("Deux codes par e-mail", "Nous vous envoyons le <strong>product key</strong> de Windows 11 Home et le code Microsoft 365 Personal, avec leurs instructions, généralement en 2–15 minutes après l'approbation du paiement."),
                 ("Deux activations séparées", 'Activez Windows 11 Home lors de l\'installation ou depuis les paramètres système, puis utilisez le code Microsoft 365 sur <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> et installez les apps depuis <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.'),
             ],
             "de": [
                 ("Bestellung und Zahlung", "Paket in den Warenkorb legen und die sichere Zahlung mit den verfügbaren Methoden abschließen. Sie erhalten eine Bestellbestätigung gemäß den beim Checkout angezeigten Bedingungen."),
-                ("Zwei Codes per E-Mail", "Wir senden Ihnen den <strong>Product Key</strong> für Windows 11 Home und den Microsoft-365-Personal-Code mit der jeweiligen Anleitung, meist innerhalb weniger Minuten nach Zahlungsfreigabe."),
+                ("Zwei Codes per E-Mail", "Wir senden Ihnen den <strong>Product Key</strong> für Windows 11 Home und den Microsoft-365-Personal-Code mit der jeweiligen Anleitung, meist innerhalb von 2–15 Minuten nach Zahlungsfreigabe."),
                 ("Zwei separate Aktivierungen", 'Windows 11 Home während der Installation oder in den Systemeinstellungen aktivieren, dann den Microsoft-365-Code unter <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> einlösen und die Apps über <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a> installieren.'),
             ],
             "es": [
                 ("Pedido y pago", "Añade el pack al carrito y completa el pago seguro con los métodos disponibles. Recibes la confirmación del pedido según las condiciones mostradas en el checkout."),
-                ("Dos códigos por email", "Te enviamos la <strong>clave de producto</strong> de Windows 11 Home y el código de Microsoft 365 Personal, con sus instrucciones, normalmente en pocos minutos tras la aprobación del pago."),
+                ("Dos códigos por email", "Te enviamos la <strong>clave de producto</strong> de Windows 11 Home y el código de Microsoft 365 Personal, con sus instrucciones, normalmente en 2–15 minutos tras la aprobación del pago."),
                 ("Doble activación", 'Activa Windows 11 Home durante la instalación o desde la configuración del sistema, luego canjea el código de Microsoft 365 en <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> e instala las apps desde <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.'),
             ],
             "pt": [
                 ("Pedido e pagamento", "Adiciona o pacote ao carrinho e conclui o pagamento seguro com os métodos disponíveis. Recebes a confirmação do pedido de acordo com as condições apresentadas no checkout."),
-                ("Dois códigos por email", "Enviamos-te a <strong>chave de produto</strong> do Windows 11 Home e o código do Microsoft 365 Personal, com as respetivas instruções, normalmente em poucos minutos após a aprovação do pagamento."),
+                ("Dois códigos por email", "Enviamos-te a <strong>chave de produto</strong> do Windows 11 Home e o código do Microsoft 365 Personal, com as respetivas instruções, normalmente em 2–15 minutos após a aprovação do pagamento."),
                 ("Ativação separada", 'Ativa o Windows 11 Home durante a instalação ou nas definições do sistema, depois resgata o código do Microsoft 365 em <a href="https://setup.office.com/Home" target="_blank" rel="noopener noreferrer">setup.office.com</a> e instala as apps a partir de <a href="https://www.office.com" target="_blank" rel="noopener noreferrer">office.com</a>.'),
             ],
         },

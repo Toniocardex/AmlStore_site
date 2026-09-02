@@ -139,11 +139,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/page.css?v=b104e76175">
+    <link rel="stylesheet" href="../css/page.css?v=1912b59fdc">
     <link rel="stylesheet" href="../css/header.css?v=969e1ca697">
     <link rel="stylesheet" href="../css/footer.css?v=f4d2eaeb91">
     <link rel="stylesheet" href="../css/product.css?v=51918bdcca">
-    <link rel="stylesheet" href="../css/product-pdp.css?v=ad789bdab1">
+    <link rel="stylesheet" href="../css/product-pdp.css?v=f2c288788d">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body class="pdp-page">
@@ -413,9 +413,9 @@
                 <span class="product-sticky-cta__msrp">€ 788,95</span>
                 <span class="product-sticky-cta__sale">€ 402,00</span>
             </div>
-            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing" data-pdp-buy-now>
+            <button type="button" class="btn-primary" data-cart-add data-cart-source="product-pricing">
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                Comprar ahora
+                Añadir al carrito
             </button>
         </div>
     </div>
@@ -469,14 +469,13 @@
                 data-stripe-product-sku="P73-08538"
                 data-discount-percent="49"
             data-physical="true">
-                <p class="pdp-buy__label">Precio Eurolicenze<span class="pdp-price-badge" aria-label="−49%">−49% DTO</span></p>
 
                 <div class="pdp-price-row" role="group" aria-label="Precios">
                     <span class="pdp-price-sale">€ 402,00</span>
                     <span class="pdp-price-msrp" aria-label="788,95">€ 788,95</span>
+                    <span class="pdp-price-badge">−49%</span>
                 </div>
-                <p class="pdp-price-save">Ahorras <strong>€ 386,95</strong> respecto al precio de lista (€ 788,95).</p>
-                <p class="pdp-price-note">Impuestos incluidos. Artículo físico con envío gratuito (no es entrega solo digital). Entrega al transportista en 24 horas laborables tras el pago.</p>
+                <p class="pdp-price-note">Impuestos incluidos · descuento respecto al precio de lista. Artículo físico con envío gratuito (no es entrega solo digital). Entrega al transportista en 24 horas laborables tras el pago.</p>
 
                 <p class="v2-stock" data-stock-status="loading" aria-live="polite"
                     data-stock-available="Disponibilidad: {n}"
@@ -486,29 +485,30 @@
                     <span class="v2-stock__dot" aria-hidden="true"></span>
                     <span class="v2-stock__text"></span>
                 </p>
+                <ul class="pdp-trust-checks">
+                    <li>Activación en portales oficiales</li>
+                    <li>Soporte físico enviado, no solo digital</li>
+                    <li><strong>Garantía:</strong> <a href="/es/returns-and-refunds">sustitución o reembolso</a></li>
+                </ul>
 
-                <p class="pdp-meta-row" role="group" aria-label="Detalles de la licencia">
-                    <span class="pdp-meta-chip"><strong>Región de activación</strong> Unión Europea / EEE</span>
+                <p class="pdp-region">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M3.2 9h17.6M3.2 15h17.6"/><path stroke-linecap="round" d="M12 3c2.3 2.6 3.5 5.6 3.5 9s-1.2 6.4-3.5 9c-2.3-2.6-3.5-5.6-3.5-9S9.7 5.6 12 3z"/></svg>
+                    <span><strong>Región de activación:</strong> Unión Europea / EEE</span>
                 </p>
 
-                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing" data-cart-checkout-redirect="/es/checkout">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                    Comprar ahora
-                </button>
-                <button type="button" class="pdp-btn-ghost" data-cart-add data-cart-source="product-pricing">
+                <button type="button" id="product-primary-cta" class="pdp-btn-primary" data-cart-add data-cart-source="product-pricing">
                     <svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                     Añadir al carrito
                 </button>
+                <p class="pdp-added" hidden>
+                    <a href="/es/cart">Ir al carrito y completar el pedido →</a>
+                </p>
 
-                <ul class="pdp-assur">
-                            <li>Activación en portales oficiales</li>
-                            <li>Soporte físico enviado, no solo digital</li>
-                </ul>
                 <div class="product-trustpilot pdp-buy-trustpilot">
                     <a class="tp-score" href="https://es.trustpilot.com/review/aml-store.com" target="_blank" rel="noopener noreferrer">
                         <span class="tp-score__star" aria-hidden="true">★</span>
-                        <span class="tp-score__value">4,8/5 en Trustpilot</span>
-                        <span class="tp-score__count">94 reseñas</span>
+                        <span class="tp-score__value">Excelente 4,8/5</span>
+                        <span class="tp-score__count">en Trustpilot</span>
                     </a>
                 </div>
 
@@ -771,7 +771,7 @@
     <script src="../js/cart.js?v=3ff9f0881c" defer></script>
     <script src="../js/faq.js?v=cadbe81664" defer></script>
     <script src="../js/product-page.js?v=eaccc91630" defer></script>
-    <script src="../js/product-v3.js?v=cc997542a2" defer></script>
+    <script src="../js/product-v3.js?v=842415341e" defer></script>
     <script src="../js/pdp-activation-modal.js?v=7bdef50ff8" defer></script>
     <script src="../js/product-stock.js?v=9ca07ec72b" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>

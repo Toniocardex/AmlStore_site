@@ -372,7 +372,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                               'checkout.'),
                                              ('Consegna digitale',
                                               'Ti inviamo la <strong>product key</strong> e le '
-                                              'istruzioni via email, di solito entro pochi minuti '
+                                              'istruzioni via email, di solito entro 2–15 minuti '
                                               "dall'approvazione del pagamento."),
                                              ('Attivazione',
                                               'Riscatta il codice su <a '
@@ -408,7 +408,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                              ('Livraison numérique',
                                               'Nous vous envoyons la <strong>clé de '
                                               'produit</strong> et les instructions par e-mail, '
-                                              'généralement en quelques minutes après validation '
+                                              'généralement en 2–15 minutes après validation '
                                               'du paiement.'),
                                              ('Activation',
                                               'Échangez le code sur <a '
@@ -1776,7 +1776,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                        "d'ordine come da condizioni mostrate in checkout."),
                                       ('Consegna digitale',
                                        'Ti inviamo la <strong>product key</strong> e le istruzioni '
-                                       "via email, di solito entro pochi minuti dall'approvazione "
+                                       "via email, di solito entro 2–15 minuti dall'approvazione "
                                        'del pagamento.'),
                                       ('Download e attivazione',
                                        'Scarica Windows 11 direttamente da Microsoft o usa il '
@@ -1787,7 +1787,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                        'confirmation as shown at checkout.'),
                                       ('Digital delivery',
                                        'We send your <strong>product key</strong> and instructions '
-                                       'by email, usually within minutes of payment approval.'),
+                                       'by email, usually within 2–15 minutes of payment approval.'),
                                       ('Download and activation',
                                        'Download Windows 11 directly from Microsoft or use the '
                                        'code to activate an existing PC.')],
@@ -1821,7 +1821,7 @@ PRODUCTS = {'microsoft-365-personal': {'copilot_bonus': True,
                                        'pedido según se muestra en el checkout.'),
                                       ('Entrega digital',
                                        'Te enviamos la <strong>clave de producto</strong> y las '
-                                       'instrucciones por email, normalmente en pocos minutos tras '
+                                       'instrucciones por email, normalmente en 2–15 minutos tras '
                                        'la aprobación del pago.'),
                                       ('Descarga y activación',
                                        'Descarga Windows 11 directamente desde Microsoft o usa el '

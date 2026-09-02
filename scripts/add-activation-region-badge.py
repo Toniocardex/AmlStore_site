@@ -53,6 +53,12 @@ def is_product_page(text: str) -> bool:
 
 
 def has_badge(text: str) -> bool:
+    # Dopo il redesign buy card v4 (scripts/apply-buycard-v4.py) il badge non
+    # e' piu' un chip riquadrato ma la riga inline .pdp-region: senza questo
+    # secondo controllo lo script crederebbe che manchi e rimetterebbe il chip
+    # grigio che il redesign ha appena tolto.
+    if 'class="pdp-region"' in text:
+        return True
     return "pdp-meta-row" in text and "pdp-meta-chip" in text
 
 
