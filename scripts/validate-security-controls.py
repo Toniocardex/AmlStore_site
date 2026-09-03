@@ -7,7 +7,9 @@ ROOT = Path(__file__).resolve().parents[1]
 CATCHALL = (ROOT / "functions/api/[[catchall]].js").read_text(encoding="utf-8")
 ADMIN = (ROOT / "functions/api/_lib/admin.js").read_text(encoding="utf-8")
 PAYPAL = (ROOT / "functions/api/_lib/paypal.js").read_text(encoding="utf-8")
-HEADERS = (ROOT / "_headers").read_text(encoding="utf-8")
+# La CSP e' servita da _middleware.js, non da _headers (righe lunghe scartate da
+# Cloudflare Pages) — vedi functions/_middleware.js.
+MIDDLEWARE = (ROOT / "functions/_middleware.js").read_text(encoding="utf-8")
 
 errors = []
 
@@ -60,10 +62,10 @@ require("PayPal capture currency not returned", "currencyCode:" in PAYPAL)
 require("PayPal captured amount not compared", "capturedMinor !== Number(order.total_minor)" in CATCHALL)
 require("PayPal captured currency not compared", "currencyCode" in CATCHALL and "order.currency" in CATCHALL)
 
-require("CSP header missing", "Content-Security-Policy:" in HEADERS)
-require("CSP base-uri restriction missing", "base-uri 'self'" in HEADERS)
-require("CSP object-src restriction missing", "object-src 'none'" in HEADERS)
-require("CSP frame-ancestors restriction missing", "frame-ancestors 'none'" in HEADERS)
+require("CSP header not set in middleware", "'Content-Security-Policy'" in MIDDLEWARE)
+require("CSP base-uri restriction missing", "base-uri 'self'" in MIDDLEWARE)
+require("CSP object-src restriction missing", "object-src 'none'" in MIDDLEWARE)
+require("CSP frame-ancestors restriction missing", "frame-ancestors 'none'" in MIDDLEWARE)
 
 if errors:
     print("SECURITY VALIDATION FAILED:", len(errors), "issue(s)")
