@@ -54,7 +54,12 @@ require("admin email allowlist missing", "ADMIN_ALLOWED_EMAILS" in ADMIN and "ad
 require("admin mutation origin guard missing", "validateAdminMutationRequest(request, env)" in CATCHALL)
 require("admin mutation body-size guard missing", "MAX_ADMIN_JSON_BODY_BYTES" in CATCHALL)
 require("admin delete flag missing", "ADMIN_ALLOW_DELETE_ORDERS" in CATCHALL)
-require("admin delete requires archived order", "not_archived" in ADMIN and "archived_at" in ADMIN)
+# deleteOrder consente l'hard-delete solo per ordini "disposable"
+# (pending_payment / cancelled) oppure gia' archiviati; gli altri -> not_deletable.
+require(
+    "admin hard-delete guard missing (non-disposable + non-archived must be refused)",
+    "not_deletable" in ADMIN and "archived_at" in ADMIN and "isDisposable" in ADMIN,
+)
 require("admin cart delete flag missing", "ADMIN_ALLOW_DELETE_CARTS" in CATCHALL)
 
 require("PayPal capture amount not returned", "amountValue:" in PAYPAL)
