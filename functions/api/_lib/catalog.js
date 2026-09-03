@@ -59,7 +59,7 @@ export const CATALOG = {
   "1108921": { name: "McAfee Total Protection 2026 | 1 Dispositivo | 1 Anno", unitAmountMinor: 795, compareAtMinor: 2995, currency: 'EUR', type: "subscription", category: "antivirus" },
   "1108923": { name: "McAfee Total Protection 2026 | 5 Dispositivi | 1 Anno", unitAmountMinor: 1489, compareAtMinor: 3995, currency: 'EUR', type: "subscription", category: "antivirus" },
   "MTP-3D-1Y": { name: "McAfee Total Protection 2026 | 3 Dispositivi | 1 Anno", unitAmountMinor: 1099, compareAtMinor: 3495, currency: 'EUR', type: "subscription", category: "antivirus" },
-  "MTP00MNRXRAAD": { name: "McAfee Total Protection | 10 Dispositivi | 1 Anno", unitAmountMinor: 1844, compareAtMinor: 7999, currency: 'EUR', type: "subscription", category: "antivirus" },
+  "MTP00MNRXRAAD": { name: "McAfee Total Protection | 10 Dispositivi | 1 Anno", unitAmountMinor: 1799, compareAtMinor: 7999, currency: 'EUR', type: "subscription", category: "antivirus" },
   "KL1047GDCFS1": { name: "Kaspersky Premium | 3 Dispositivi | 1 Anno", unitAmountMinor: 3604, compareAtMinor: 6899, currency: 'EUR', type: "subscription", category: "antivirus" },
   "KL1047GDEFS": { name: "Kaspersky Premium | 5 Dispositivi | 1 Anno", unitAmountMinor: 4634, compareAtMinor: 7899, currency: 'EUR', type: "subscription", category: "antivirus" },
   "KL1047GDKFS": { name: "Kaspersky Premium | 10 Dispositivi | 1 Anno", unitAmountMinor: 5700, compareAtMinor: 8999, currency: 'EUR', type: "subscription", category: "antivirus" },
