@@ -845,7 +845,6 @@
     function deleteReasonMessage(reason, fallback) {
         return {
             delete_disabled: 'Eliminazione disattivata da configurazione (ADMIN_ALLOW_DELETE_ORDERS).',
-            not_archived:    'Per ordini pagati: prima archivia, poi elimina.',
             not_deletable:   'Eliminabile solo se in attesa/annullato, oppure dopo archivio.',
             order_not_found: 'Ordine non trovato.',
         }[reason] || fallback;
