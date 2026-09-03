@@ -7,8 +7,11 @@
  * la categoria "Misurazione e statistiche" dal cookie banner.
  *
  * REQUISITO LATO CLARITY: nel dashboard del progetto, Settings -> Setup ->
- * "Cookie consent" deve essere ON, altrimenti Clarity parte gia' con i cookie
- * ignorando lo stato gestito qui sotto.
+ * "Cookie" deve restare ATTIVATO (default). E' il permesso a usare i cookie
+ * quando il consenso lo consente; la modalita' senza cookie prima del consenso
+ * la impone questo loader chiamando clarity('consent', false). Con "Cookie"
+ * disattivato Clarity sarebbe sempre cookieless e clarity('consent', true) non
+ * riabiliterebbe i cookie dopo il consenso.
  *
  * Il consenso e' persistito in localStorage 'aml-consent-v2' e gli aggiornamenti
  * arrivano via evento 'aml-consent-updated' (vedi components/cookie-banner.js).
@@ -49,12 +52,13 @@
         y.parentNode.insertBefore(t, y);
     })(w, d, 'clarity', 'script', CLARITY_PROJECT_ID);
 
-    // true  -> tracciamento con cookie (stitching tra sessioni)
-    // false -> revoca esplicita, Clarity torna/resta in cookieless
-    // Senza scelta salvata non chiamiamo nulla: con "Cookie consent" ON Clarity
-    // e' gia' in cookieless di default e una chiamata sarebbe rumore.
-    function syncConsent(consent, force) {
-        if (!consent && !force) return;
+    // Segnaliamo SEMPRE lo stato a Clarity, gia' al primo load:
+    //   granted            -> clarity('consent', true)  -> cookie (_clck/_clsk, stitching)
+    //   assente o negato    -> clarity('consent', false) -> modalita' senza cookie
+    // La chiamata immediata (prima ancora che il tag sia scaricato) finisce in
+    // coda e viene processata da clarity.js all'avvio, cosi' i cookie non
+    // vengono mai impostati senza consenso.
+    function syncConsent(consent) {
         try {
             w.clarity('consent', analyticsGranted(consent));
         } catch (_) {
@@ -62,9 +66,9 @@
         }
     }
 
-    syncConsent(readStoredConsent(), false);
+    syncConsent(readStoredConsent());
 
     w.addEventListener('aml-consent-updated', function (ev) {
-        syncConsent(ev && ev.detail ? ev.detail : readStoredConsent(), true);
+        syncConsent(ev && ev.detail ? ev.detail : readStoredConsent());
     });
 })(window, document);
