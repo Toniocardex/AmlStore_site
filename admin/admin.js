@@ -1229,6 +1229,16 @@
             var updated = it.updatedAt
                 ? fmtDate(it.updatedAt) + (it.updatedBy ? ' · ' + esc(it.updatedBy) : '')
                 : '—';
+            var pending = Number(it.pending) || 0;
+            // Il conteggio e' cliccabile solo quando c'e' qualcosa da mostrare:
+            // e' la domanda rimasta scoperta, il motivo per cui si riordina.
+            var pendingCell = pending > 0
+                ? '<button type="button" class="adm-btn adm-btn--ghost adm-btn--sm adm-stock-pending" '
+                    + 'data-restock-show="' + esc(it.sku) + '" '
+                    + 'title="Ultima richiesta: ' + (it.pendingLastAt ? esc(fmtDate(it.pendingLastAt)) : '—') + '">'
+                    + pending + '</button>'
+                : '<span class="adm-muted">0</span>';
+
             return '<tr data-sku="' + esc(it.sku) + '">'
                 + '<td class="adm-td--nowrap" data-label="SKU"><code class="adm-sku">' + esc(it.sku) + '</code></td>'
                 + '<td data-label="Prodotto">' + esc(it.name) + '</td>'
@@ -1236,12 +1246,52 @@
                 + '<input type="number" class="adm-input adm-input--qty" min="0" max="999999" step="1" '
                 + 'value="' + qty + '" data-stock-qty="' + esc(it.sku) + '" aria-label="Quantità ' + esc(it.sku) + '">'
                 + '</td>'
+                + '<td class="adm-th--center" data-label="In attesa">' + pendingCell + '</td>'
                 + '<td class="adm-muted" data-label="Aggiornato">' + updated + '</td>'
                 + '<td class="adm-th--center adm-td--actions">'
                 + '<button type="button" class="adm-btn adm-btn--primary adm-btn--sm" data-stock-save="' + esc(it.sku) + '">Salva</button>'
                 + '</td>'
                 + '</tr>';
         }).join('');
+    }
+
+    /**
+     * Elenco degli indirizzi in attesa per uno SKU, in una riga espansa sotto
+     * quella del prodotto. Un secondo clic la richiude.
+     */
+    function toggleRestockList(sku) {
+        var row = document.querySelector('tr[data-sku="' + CSS.escape(sku) + '"]');
+        if (!row) return;
+
+        var existing = row.nextElementSibling;
+        if (existing && existing.getAttribute('data-restock-row') === sku) {
+            existing.parentNode.removeChild(existing);
+            return;
+        }
+
+        var detail = document.createElement('tr');
+        detail.setAttribute('data-restock-row', sku);
+        detail.innerHTML = '<td colspan="6" class="adm-stock-pending__panel">Caricamento richieste…</td>';
+        row.parentNode.insertBefore(detail, row.nextSibling);
+
+        apiGet('/api/admin/restock?sku=' + encodeURIComponent(sku)).then(function (data) {
+            var items = data.items || [];
+            if (!items.length) {
+                detail.innerHTML = '<td colspan="6" class="adm-stock-pending__panel">Nessuna richiesta in attesa.</td>';
+                return;
+            }
+            var rows = items.map(function (r) {
+                return '<li><span class="adm-sku">' + esc(r.email) + '</span> '
+                    + '<span class="adm-muted">' + esc(String(r.lang || '').toUpperCase())
+                    + ' · ' + esc(fmtDate(r.createdAt)) + '</span></li>';
+            }).join('');
+            detail.innerHTML = '<td colspan="6" class="adm-stock-pending__panel">'
+                + '<p class="adm-muted">' + items.length + ' in attesa, dalla più vecchia:</p>'
+                + '<ul class="adm-stock-pending__list">' + rows + '</ul></td>';
+        }).catch(function (e) {
+            if (e.message === '401') return;
+            detail.innerHTML = '<td colspan="6" class="adm-stock-pending__panel">Errore: ' + esc(e.message) + '</td>';
+        });
     }
 
     function saveStock(sku) {
@@ -1256,8 +1306,15 @@
             toast('Quantità non valida', 'error');
             return;
         }
-        apiPost('/api/admin/stock', { sku: sku, qty: qty }).then(function () {
-            toast('Stock aggiornato: ' + sku + ' → ' + qty, 'success');
+        apiPost('/api/admin/stock', { sku: sku, qty: qty }).then(function (data) {
+            var notifying = Number(data && data.notifying) || 0;
+            toast(
+                'Stock aggiornato: ' + sku + ' → ' + qty
+                    // "in invio" e non "inviato": l'invio parte dopo la risposta
+                    // (waitUntil), quindi l'esito qui non e' ancora noto.
+                    + (notifying > 0 ? ' · avviso in invio a ' + notifying + ' iscritti' : ''),
+                'success'
+            );
             loadStock();
         }).catch(function (e) {
             toast((e.data && e.data.error) || e.message || 'Errore salvataggio', 'error');
@@ -1655,7 +1712,13 @@
         var stockTbody = $('adm-stock-tbody');
         if (stockTbody) {
             stockTbody.addEventListener('click', function (e) {
-                var btn = e.target && e.target.closest ? e.target.closest('[data-stock-save]') : null;
+                if (!e.target || !e.target.closest) return;
+                var pendingBtn = e.target.closest('[data-restock-show]');
+                if (pendingBtn) {
+                    toggleRestockList(pendingBtn.getAttribute('data-restock-show'));
+                    return;
+                }
+                var btn = e.target.closest('[data-stock-save]');
                 if (btn) saveStock(btn.getAttribute('data-stock-save'));
             });
             stockTbody.addEventListener('keydown', function (e) {

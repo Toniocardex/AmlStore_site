@@ -211,6 +211,11 @@ export const TRACKABLE_EVENTS = new Set([
     'paypal_failed',
     'cross_sell_view',
     'cross_sell_add',
+    // Avviso di ritorno disponibilita' sulle PDP fisiche: il rapporto fra i due
+    // e' il tasso di conversione del form, cioe' quanta della domanda persa per
+    // esaurimento si riesce almeno a intercettare.
+    'restock_view',
+    'restock_request',
     // Funnel di checkout — vedi schema-analytics-checkout-funnel-migration.sql.
     // L'ordine qui sotto e' l'ordine delle posizioni: la differenza fra due
     // eventi consecutivi e' il punto in cui il cliente si ferma.

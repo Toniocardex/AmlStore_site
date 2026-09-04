@@ -163,7 +163,8 @@
                 <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btn-stock-reload">Ricarica</button>
             </div>
         </div>
-        <p class="adm-stock-hint">Solo prodotti fisici (DVD/COA). Quantità reale di magazzino — 0 = non vendibile in vetrina.</p>
+        <p class="adm-stock-hint">Solo prodotti fisici (DVD/COA). Quantità reale di magazzino — 0 = non vendibile in vetrina.<br>
+            <strong>In attesa</strong> = quante persone hanno chiesto di essere avvisate mentre l'articolo era esaurito. Portando la quantità da 0 a un numero maggiore di zero vengono avvisate tutte, subito.</p>
         <div class="adm-loading" id="adm-stock-loading" aria-live="polite" hidden>
             <div class="adm-spinner"></div>
             <span>Caricamento magazzino…</span>
@@ -179,6 +180,7 @@
                         <th>SKU</th>
                         <th>Prodotto</th>
                         <th class="adm-th--center">Qty</th>
+                        <th class="adm-th--center">In attesa</th>
                         <th>Aggiornato</th>
                         <th class="adm-th--center">Azioni</th>
                     </tr>

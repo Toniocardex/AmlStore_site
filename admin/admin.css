@@ -143,6 +143,22 @@ a:hover { text-decoration: underline; }
     text-align: center;
     margin: 0 auto;
 }
+/* Richieste "avvisami" in attesa: il conteggio e' un bottone solo quando c'e'
+   davvero qualcuno in coda, e apre l'elenco nella riga sotto. */
+.adm-stock-pending {
+    min-width: 2.5rem;
+    font-variant-numeric: tabular-nums;
+}
+.adm-stock-pending__panel {
+    background: var(--adm-surface);
+    font-size: .85rem;
+}
+.adm-stock-pending__list {
+    margin: .4rem 0 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: .25rem;
+}
 .adm-sku {
     font-size: .78rem;
     color: var(--adm-muted2);

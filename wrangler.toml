@@ -126,8 +126,8 @@ VAPID_SUBJECT = "mailto:Info@amlstore.it"
 [[env.preview.d1_databases]]
 binding       = "DB"
 # D1 fisicamente separato da aml-orders (ADR-CHAT-001 §83): stesso schema
-# (schema.sql + schema-stock-migration.sql + migrations/0002_chat_core.sql),
-# zero dati reali di clienti/ordini.
+# (schema.sql + schema-stock-migration.sql + schema-restock-migration.sql +
+# migrations/0002_chat_core.sql), zero dati reali di clienti/ordini.
 database_name = "aml-store-preview"
 database_id   = "07947b6c-2b3a-418e-8c33-2d745bbccfda"
 

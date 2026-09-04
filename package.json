@@ -14,8 +14,9 @@
     "test:pwa": "vitest run --config vitest.pwa.config.mts",
     "test:crosssell": "node scripts/test-cross-sell.mjs",
     "typecheck:chat": "tsc -p tsconfig.chat.json",
-    "test": "python scripts/test-commercial-pricing.py && npm run test:crosssell && npm run test:emaildomains && npm run typecheck:chat && npm run test:chat && npm run test:pwa",
-    "test:emaildomains": "node scripts/test-email-domains.mjs"
+    "test": "python scripts/test-commercial-pricing.py && npm run test:crosssell && npm run test:emaildomains && npm run test:restock && npm run typecheck:chat && npm run test:chat && npm run test:pwa",
+    "test:emaildomains": "node scripts/test-email-domains.mjs",
+    "test:restock": "node scripts/test-restock.mjs"
   },
   "repository": {
     "type": "git",

@@ -7,6 +7,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = (ROOT / "schema.sql").read_text(encoding="utf-8")
 STOCK = (ROOT / "schema-stock-migration.sql").read_text(encoding="utf-8")
 CHAT_CORE = (ROOT / "migrations" / "0002_chat_core.sql").read_text(encoding="utf-8")
+# Richieste "avvisami quando torna disponibile": senza questa tabella la tab
+# Magazzino mostra zero in attesa (fail-soft) ma il form sulle PDP fisiche
+# risponde 503 in locale.
+RESTOCK = (ROOT / "schema-restock-migration.sql").read_text(encoding="utf-8")
 # listCarts fa un LEFT JOIN su analytics_events per lo step raggiunto: senza
 # questa tabella la lista carrelli dell'admin fallirebbe in locale con
 # "no such table". La ALTER della migrazione funnel non e' idempotente, quindi
@@ -98,6 +102,7 @@ for d1_dir in existing_dirs:
         con = sqlite3.connect(db_path)
         con.executescript(SCHEMA)
         con.executescript(STOCK)
+        con.executescript(RESTOCK)
         con.executescript(CHAT_CORE)
         con.executescript(EVENTS)
         con.executescript(PAGE_VIEWS)

@@ -14,6 +14,9 @@
  *   GET  /api/order-status
  *   GET  /api/stock
  *   POST /api/consultation-request
+ *   POST /api/restock-request
+ *   GET  /api/restock-cancel
+ *   POST /api/restock-cancel
  *   POST /api/cart/sync
  *   POST /api/track
  *
@@ -25,6 +28,7 @@
  *   POST /api/admin/orders/:id/unarchive
  *   GET  /api/admin/stock
  *   POST /api/admin/stock
+ *   GET  /api/admin/restock
  *   GET  /api/admin/carts
  *   GET  /api/admin/analytics
  */
@@ -42,12 +46,18 @@ import { getAccessToken, createPaypalOrder,
          verifyPaypalWebhookSignature }                  from './_lib/paypal.js';
 import { sendConfirmationOnce,
          sendInternalOrderNotificationOnce,
-         sendConsultationRequest }                       from './_lib/email.js';
+         sendConsultationRequest,
+         sendRestockNotifications }                      from './_lib/email.js';
 import { isBlockedEmailDomain }                         from './_lib/email-domains.js';
+import { createRestockRequest, pendingCountsBySku, listPendingForSku,
+         findRestockByToken, cancelRestockByToken, checkRestockIpRateLimit,
+         restockIpHash, RESTOCK_LOCALES }                from './_lib/restock.js';
+import { restockCancelPage }                             from './_lib/restock-email-templates.js';
 import { resolveAdminAuth, listOrders, getOrderDetail,
          markBankTransferPaid, archiveOrder,
          unarchiveOrder, deleteOrder }                   from './_lib/admin.js';
-import { resolveAndValidateItems, itemsRequireShipping } from './_lib/catalog.js';
+import { resolveAndValidateItems, itemsRequireShipping,
+         getCatalogEntry }                               from './_lib/catalog.js';
 import { assertCartStock, deductStockForPaidOrder, getStockQty,
          listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
 import { safeParseJSON }                                 from './_lib/utils.js';
@@ -201,6 +211,12 @@ export async function onRequest(context) {
         }
         if (path === '/api/consultation-request' && request.method === 'POST') {
             return await handleConsultationRequest(request, env);
+        }
+        if (path === '/api/restock-request' && request.method === 'POST') {
+            return await handleRestockRequest(request, env);
+        }
+        if (path === '/api/restock-cancel' && (request.method === 'GET' || request.method === 'POST')) {
+            return await handleRestockCancel(request, env);
         }
         if (path === '/api/cart/sync' && request.method === 'POST') {
             return await handleCartSync(request, env, context);
@@ -557,6 +573,126 @@ async function handleConsultationRequest(request, env) {
         reference,
         confirmationSent: Boolean(result.confirmationSent),
     }, 200, request, env);
+}
+
+/* ─── POST /api/restock-request ─────────────────────────────────────────────── */
+
+/**
+ * Iscrizione all'avviso "torna disponibile" su uno SKU fisico esaurito.
+ *
+ * Non parte nessuna email qui: l'unica che il cliente ricevera' e' quella del
+ * rifornimento, inviata quando l'Admin rialza la quantita' (vedi POST
+ * /api/admin/stock). Questo endpoint scrive e basta.
+ */
+async function handleRestockRequest(request, env) {
+    const invalidRequest = validateCheckoutRequest(request, env);
+    if (invalidRequest) return invalidRequest;
+
+    // Come per le consulenze: il Content-Length puo' mancare (transfer-encoding
+    // chunked) o mentire, quindi la dimensione va ricontrollata sul letto.
+    const rawBody = await request.text();
+    if (new TextEncoder().encode(rawBody).byteLength > MAX_JSON_BODY_BYTES) {
+        return err('Payload troppo grande', 413, request, env);
+    }
+
+    const body = safeParseJSON(rawBody, null);
+    if (!body) return err('Invalid JSON', 400, request, env);
+
+    // Honeypot: risposta identica a quella di successo, nessuna scrittura.
+    if (cleanLine(body.website, 200)) return json({ ok: true }, 200, request, env);
+
+    const sku = cleanString(body.sku, 64).trim();
+    if (!isPhysicalSku(sku)) return err('Prodotto non valido', 400, request, env);
+
+    const lang = cleanString(body.lang, 2).toLowerCase();
+    if (!RESTOCK_LOCALES.has(lang)) return err('Lingua non valida', 400, request, env);
+
+    const email = cleanString(body.email, 254).toLowerCase();
+    if (!validateEmail(email)) return err('Email non valida', 400, request, env);
+    if (isBlockedEmailDomain(email, env)) return err('Email non valida', 400, request, env);
+
+    if (body.privacy !== true) return err('Consenso privacy obbligatorio', 400, request, env);
+
+    const limited = await checkRestockIpRateLimit(env, request);
+    if (limited) {
+        return rateLimitResponse(
+            { ...limited, message: 'Troppe richieste. Riprova più tardi.', code: 'RESTOCK_RATE_LIMITED' },
+            request, env
+        );
+    }
+
+    // Se nel frattempo il magazzino e' rientrato, l'iscrizione non ha piu' senso:
+    // il client se ne accorge da qui e ricarica la scheda invece di lasciare il
+    // cliente in attesa di un'email che non arrivera' mai.
+    if (await getStockQty(env.DB, sku) > 0) {
+        return json({ ok: false, reason: 'in_stock' }, 409, request, env);
+    }
+
+    const ipHash = await restockIpHash(env, request);
+    const result = await createRestockRequest(env.DB, {
+        sku,
+        email,
+        lang,
+        pagePath: cleanLine(body.sourcePath, 240),
+        ipHash,
+    });
+
+    if (!result.ok) {
+        const status = result.reason === 'db_error' ? 503 : 400;
+        return err('Impossibile registrare la richiesta', status, request, env);
+    }
+
+    // `duplicate` non esce dall'endpoint: dire a chi scrive se un indirizzo era
+    // gia' iscritto lo trasformerebbe in un modo per sondare gli indirizzi altrui.
+    return json({ ok: true }, 200, request, env);
+}
+
+/* ─── GET|POST /api/restock-cancel ──────────────────────────────────────────── */
+
+/**
+ * Annullamento dell'avviso dal link in fondo all'email.
+ * GET mostra la conferma, POST cancella: un GET che cancellasse da solo
+ * verrebbe innescato anche dai prefetch dei client di posta.
+ */
+async function handleRestockCancel(request, env) {
+    const html = (body, status = 200) => new Response(body, {
+        status,
+        headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
+    });
+
+    const origin = env.SITE_ORIGIN || 'https://eurolicenze.com';
+    const url = new URL(request.url);
+
+    // La lingua della riga e' la fonte buona, ma se la riga non esiste piu'
+    // resta solo quella del link: senza, chi si era iscritto da una PDP tedesca
+    // leggerebbe in italiano che l'avviso non c'e' piu'.
+    const hintedLang = cleanString(url.searchParams.get('lang'), 2).toLowerCase();
+    const fallbackLang = RESTOCK_LOCALES.has(hintedLang) ? hintedLang : 'it';
+
+    let token = '';
+    if (request.method === 'POST') {
+        const form = await request.formData().catch(() => null);
+        token = cleanLine(form?.get('token'), 64);
+    } else {
+        token = cleanLine(url.searchParams.get('token'), 64);
+    }
+
+    const row = await findRestockByToken(env.DB, token);
+    if (!row) {
+        return html(
+            restockCancelPage({ lang: fallbackLang, state: 'gone', siteOrigin: origin, token }),
+            404
+        );
+    }
+
+    const lang = RESTOCK_LOCALES.has(row.lang) ? row.lang : 'it';
+
+    if (request.method === 'GET') {
+        return html(restockCancelPage({ lang, state: 'confirm', siteOrigin: origin, token }));
+    }
+
+    await cancelRestockByToken(env.DB, token);
+    return html(restockCancelPage({ lang, state: 'done', siteOrigin: origin, token }));
 }
 
 /* ─── POST /api/stripe-create-session ───────────────────────────────────────── */
@@ -1703,8 +1839,19 @@ async function handleAdminRoute(path, request, env, context) {
 
     // ── GET /api/admin/stock ──────────────────────────────────────────────────
     if (sub === '/stock' && request.method === 'GET') {
-        const items = await listAdminStock(env.DB);
-        return new Response(JSON.stringify({ items }), {
+        // Le richieste "avvisami" in attesa viaggiano con la riga di magazzino:
+        // e' il numero che serve per decidere quanto riordinare, e va letto
+        // accanto alla quantita', non in una pagina separata.
+        const [items, pending] = await Promise.all([
+            listAdminStock(env.DB),
+            pendingCountsBySku(env.DB),
+        ]);
+        const withPending = items.map((item) => ({
+            ...item,
+            pending: pending.get(item.sku)?.pending || 0,
+            pendingLastAt: pending.get(item.sku)?.lastAt || null,
+        }));
+        return new Response(JSON.stringify({ items: withPending }), {
             headers: { 'Content-Type': 'application/json' },
         });
     }
@@ -1717,7 +1864,26 @@ async function handleAdminRoute(path, request, env, context) {
         const body = await request.json().catch(() => ({}));
         try {
             const saved = await setStockQty(env.DB, body.sku, body.qty, actorEmail);
-            return new Response(JSON.stringify({ ok: true, item: saved }), {
+
+            // Rientro da esaurito: e' l'unico momento in cui partono gli avvisi.
+            // Fuori dalla risposta (waitUntil) perche' il salvataggio della
+            // quantita' non deve aspettare Resend per dirsi riuscito.
+            let notifying = 0;
+            if (saved.previousQty <= 0 && saved.qty > 0) {
+                const pending = await pendingCountsBySku(env.DB);
+                notifying = pending.get(saved.sku)?.pending || 0;
+                if (notifying > 0) {
+                    const entry = getCatalogEntry(saved.sku);
+                    context.waitUntil(
+                        sendRestockNotifications(
+                            env.DB, saved.sku, entry?.name || saved.sku,
+                            env.RESEND_API_KEY || '', env.SITE_ORIGIN || ''
+                        ).catch((e) => console.error('[restock] invio fallito:', e?.message || e))
+                    );
+                }
+            }
+
+            return new Response(JSON.stringify({ ok: true, item: saved, notifying }), {
                 headers: { 'Content-Type': 'application/json' },
             });
         } catch (e) {
@@ -1725,6 +1891,25 @@ async function handleAdminRoute(path, request, env, context) {
                 : e.reason === 'invalid_qty' ? 400
                 : 400;
             return adminJson({ ok: false, error: e.message, reason: e.reason || 'error' }, status);
+        }
+    }
+
+    // ── GET /api/admin/restock?sku= ───────────────────────────────────────────
+    if (sub === '/restock' && request.method === 'GET') {
+        const sku = new URL(request.url).searchParams.get('sku') || '';
+        if (!isPhysicalSku(sku)) {
+            return adminJson({ error: 'SKU non fisico o non in catalogo', reason: 'not_physical' }, 400);
+        }
+        try {
+            const items = await listPendingForSku(env.DB, sku);
+            return new Response(JSON.stringify({ sku, items }), {
+                headers: { 'Content-Type': 'application/json' },
+            });
+        } catch (e) {
+            console.warn('[restock] lista non disponibile:', e?.message || e);
+            return new Response(JSON.stringify({ sku, items: [] }), {
+                headers: { 'Content-Type': 'application/json' },
+            });
         }
     }
 

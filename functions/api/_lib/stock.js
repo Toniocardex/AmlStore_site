@@ -92,6 +92,9 @@ export async function listAdminStock(db) {
  * @param {string} sku
  * @param {number} qty
  * @param {string} actorEmail
+ * @returns {Promise<{ sku: string, qty: number, previousQty: number, updatedAt: string, updatedBy: string|null }>}
+ *   `previousQty` serve al chiamante per riconoscere il passaggio 0 -> N, cioe'
+ *   il momento in cui vanno avvisati gli iscritti (vedi restock.js).
  */
 export async function setStockQty(db, sku, qty, actorEmail) {
     const key = String(sku || '').trim();
@@ -106,6 +109,7 @@ export async function setStockQty(db, sku, qty, actorEmail) {
         err.reason = 'invalid_qty';
         throw err;
     }
+    const previousQty = await getStockQty(db, key);
     const ts = now();
     const actor = String(actorEmail || '').trim() || null;
     await db.prepare(`
@@ -116,7 +120,7 @@ export async function setStockQty(db, sku, qty, actorEmail) {
             updated_at = excluded.updated_at,
             updated_by = excluded.updated_by
     `).bind(key, q, ts, actor).run();
-    return { sku: key, qty: q, updatedAt: ts, updatedBy: actor };
+    return { sku: key, qty: q, previousQty, updatedAt: ts, updatedBy: actor };
 }
 
 /**

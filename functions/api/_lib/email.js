@@ -15,8 +15,11 @@ import { safeParseJSON }                                from './utils.js';
 import { attachGuideIfEligible }                        from './guide.js';
 import { consultationInternalEmail,
          consultationConfirmationEmail }                from './consultation-email-templates.js';
+import { restockBackInStockEmail }                      from './restock-email-templates.js';
+import { pendingBatchesForSku, markRestockNotified }    from './restock.js';
 
 const RESEND_API = 'https://api.resend.com/emails';
+const RESEND_BATCH_API = 'https://api.resend.com/emails/batch';
 const FROM       = 'Eurolicenze <ordini@eurolicenze.com>';
 const REPLY_TO   = 'Desk@eurolicenze.com';
 const INTERNAL_RECIPIENTS = ['Desk@eurolicenze.com', 'Antonino.cardelli@outlook.it'];
@@ -251,6 +254,32 @@ async function callResend(apiKey, payload) {
     return { ok: true };
 }
 
+/**
+ * Invio multiplo in una sola chiamata (max 100 messaggi, limite Resend).
+ * Usato solo dalle notifiche di ritorno disponibilita': gli allegati non sono
+ * supportati su questo endpoint, quindi non e' un sostituto di callResend.
+ */
+async function callResendBatch(apiKey, payloads) {
+    if (!payloads.length) return { ok: true };
+    let res;
+    try {
+        res = await fetch(RESEND_BATCH_API, {
+            method:  'POST',
+            headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+            body:    JSON.stringify(payloads),
+        });
+    } catch (e) {
+        console.error('[email] Resend batch network error:', e);
+        return { ok: false, error: 'network_error' };
+    }
+    if (!res.ok) {
+        const body = await res.text().catch(() => '');
+        console.error(`[email] Resend batch HTTP ${res.status}:`, body);
+        return { ok: false, error: `resend_http_${res.status}` };
+    }
+    return { ok: true };
+}
+
 /* ─── Export pubblici ────────────────────────────────────────────────────────── */
 
 /**
@@ -429,4 +458,98 @@ export async function sendConsultationRequest(lead, resendApiKey) {
         sent: true,
         confirmationSent: Boolean(confirmationResult.ok),
     };
+}
+
+/**
+ * Avvisa chi si era iscritto su uno SKU fisico tornato disponibile.
+ *
+ * Nessuna coda e nessun cap: si avvisano tutti gli iscritti in attesa, in
+ * ordine di iscrizione (scelta esplicita — le quantita' non sono riservate e
+ * l'email lo dice). Le righe vengono chiuse solo dopo un 2xx di Resend, quindi
+ * un fallimento di rete lascia le iscrizioni in attesa e il prossimo
+ * salvataggio del magazzino riprova, senza doppioni per chi era gia' passato.
+ *
+ * @param {D1Database} db
+ * @param {string} sku
+ * @param {string} productName
+ * @param {string} resendApiKey
+ * @param {string} siteOrigin
+ * @returns {Promise<{ sent: number, failed: number, skipped?: boolean }>}
+ */
+export async function sendRestockNotifications(db, sku, productName, resendApiKey, siteOrigin) {
+    if (!resendApiKey) {
+        console.warn('[restock-email] RESEND_API_KEY non configurato');
+        return { sent: 0, failed: 0, skipped: true };
+    }
+
+    const origin = String(siteOrigin || 'https://eurolicenze.com').replace(/\/+$/, '');
+
+    let batches;
+    try {
+        batches = await pendingBatchesForSku(db, sku);
+    } catch (e) {
+        console.error('[restock-email] lettura iscrizioni fallita:', e?.message || e);
+        return { sent: 0, failed: 0, skipped: true };
+    }
+    if (!batches.length) return { sent: 0, failed: 0, skipped: true };
+
+    let sent = 0;
+    let failed = 0;
+
+    for (const batch of batches) {
+        const payloads = batch.map((row) => {
+            const lang = row.lang || 'it';
+            const mail = restockBackInStockEmail({
+                lang,
+                productName,
+                productUrl: `${origin}${row.pagePath || `/${lang}/`}`,
+                // `lang` nel link serve solo se la riga non c'e' piu' quando si
+                // clicca: senza, quella pagina di esito uscirebbe in italiano
+                // anche per chi si era iscritto da una PDP tedesca.
+                cancelUrl: `${origin}/api/restock-cancel?token=${row.token}&lang=${encodeURIComponent(lang)}`,
+            });
+            return {
+                from: FROM,
+                to: [row.email],
+                subject: mail.subject,
+                html: mail.html,
+                text: mail.text,
+                reply_to: REPLY_TO,
+            };
+        });
+
+        let delivered = batch;
+
+        const result = await callResendBatch(resendApiKey, payloads);
+        if (!result.ok) {
+            /* Ripiego sull'invio uno-per-uno, che e' lo stesso percorso gia'
+               usato in produzione dalle email d'ordine. L'endpoint batch e' un
+               ottimizzazione, non una dipendenza: se rifiutasse il payload (un
+               campo non supportato, un limite nuovo) senza questo ripiego
+               nessuno verrebbe avvisato e il negozio se ne accorgerebbe solo
+               vedendo la coda che non si svuota. */
+            console.warn('[restock-email] batch fallito, ripiego su invii singoli:', result.error);
+            delivered = [];
+            for (let i = 0; i < batch.length; i++) {
+                const single = await callResend(resendApiKey, payloads[i]);
+                if (single.ok) delivered.push(batch[i]);
+                else failed++;
+            }
+            if (!delivered.length) continue;
+        }
+
+        try {
+            await markRestockNotified(db, delivered.map((r) => r.id));
+            sent += delivered.length;
+        } catch (e) {
+            // Le email sono partite: l'unico danno possibile e' un secondo
+            // invio al prossimo salvataggio del magazzino. Va segnalato, non
+            // trattato come fallimento dell'invio.
+            console.error('[restock-email] chiusura iscrizioni fallita dopo invio:', e?.message || e);
+            sent += delivered.length;
+        }
+    }
+
+    console.log('[restock-email] sku', sku, 'inviate', sent, 'fallite', failed);
+    return { sent, failed };
 }
