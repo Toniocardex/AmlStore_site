@@ -11,6 +11,12 @@
    .checkout-page perche' la usa anche il chrome header, che di .checkout-page
    e' fratello e non discendente. */
 body {
+    /* Sentinella di caricamento: la legge initCssLoadedProbe() in js/checkout.js
+       per accorgersi che QUESTO foglio non e' arrivato (rete, estensione, proxy).
+       Senza il CSS il checkout resta leggibile ma nudo, e nessuno ce lo direbbe.
+       Non rinominarla ne' spostarla senza aggiornare quella funzione. */
+    --checkout-css-loaded: 1;
+
     --checkout-eyebrow-size: 0.72rem;
     --checkout-eyebrow-track: 0.07em;
     --checkout-micro-size: 0.68rem;

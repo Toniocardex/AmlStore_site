@@ -219,6 +219,10 @@ export const TRACKABLE_EVENTS = new Set([
     'checkout_contact_completed',
     'checkout_payment_started',
     'checkout_pay_clicked',
+    // Diagnostica, non funnel: lo manda js/checkout.js quando la sentinella
+    // --checkout-css-loaded non c'e', cioe' quando checkout.css non ha
+    // applicato e il cliente sta guardando un checkout senza stile.
+    'checkout_css_missing',
 ]);
 
 /**
@@ -338,7 +342,7 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS, includeBots
 
     const funnelPlaceholders = CHECKOUT_FUNNEL_STEPS.map(() => '?').join(', ');
 
-    const [totals, daily, topPages, topReferrers, topCountries, topSuggestedLangs, devices, direct, bots, funnel] = await Promise.all([
+    const [totals, daily, topPages, topReferrers, topCountries, topSuggestedLangs, devices, direct, bots, funnel, cssMissingRow] = await Promise.all([
         db.prepare(`
             SELECT COUNT(*) as views, COUNT(DISTINCT visitor_hash) as visitors
             FROM page_views WHERE day >= ? ${botClause}
@@ -424,6 +428,24 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS, includeBots
               console.warn('[analytics] funnel non disponibile:', e?.message || e);
               return { results: [] };
           }),
+
+        /* Caricamenti del checkout in cui checkout.css non ha applicato: li
+           segnala initCssLoadedProbe() in js/checkout.js. Sta fuori dal funnel
+           di proposito — non e' una posizione del percorso ma un guasto, e si
+           legge in rapporto agli arrivi al checkout, non come passo successivo.
+           Stesso catch del funnel: un riquadro diagnostico non puo' far cadere
+           l'intera vista Analytics se analytics_events non c'e'. */
+        db.prepare(`
+            SELECT COUNT(*) as events,
+                   COUNT(DISTINCT visitor_hash) as visitors,
+                   MAX(created_at) as last_at
+            FROM analytics_events
+            WHERE created_at >= ? AND event_name = 'checkout_css_missing'
+        `).bind(cutoff).first()
+          .catch((e) => {
+              console.warn('[analytics] diagnostica CSS non disponibile:', e?.message || e);
+              return null;
+          }),
     ]);
 
     /* Imbuto in ordine di posizione, con i passaggi calcolati qui e non nel
@@ -452,6 +474,20 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS, includeBots
         return entry;
     });
 
+    /* Il guasto va letto in rapporto a chi e' arrivato al checkout: 5 casi su
+       5000 arrivi e 5 su 20 sono lo stesso numero e due situazioni diverse. */
+    const checkoutViews = funnelByName.get(CHECKOUT_FUNNEL_STEPS[0])?.events || 0;
+    const cssMissingEvents = cssMissingRow?.events || 0;
+    const cssMissing = {
+        events:   cssMissingEvents,
+        visitors: cssMissingRow?.visitors || 0,
+        lastAt:   cssMissingRow?.last_at  || null,
+        checkoutViews,
+        // null e non 0 quando al checkout non e' arrivato nessuno: uno zero per
+        // cento direbbe "non succede mai" anche a fronte di zero occasioni.
+        ofCheckoutViews: checkoutViews > 0 ? cssMissingEvents / checkoutViews : null,
+    };
+
     /* `directViews` sta fuori dalla classifica: "nessun referrer" non e' una
        sorgente fra le altre, ma e' il dato che dice quanta parte del traffico
        non arriva da un link esterno. */
@@ -473,6 +509,7 @@ export async function getAnalyticsSummary(db, { days = DEFAULT_DAYS, includeBots
         topSuggestedLangs: (topSuggestedLangs.results || []).map(r => ({ suggested_lang: r.suggested_lang, views: r.views })),
         devices:      (devices.results      || []).map(r => ({ device: r.device, views: r.views })),
         checkoutFunnel,
+        cssMissing,
     };
 }
 

@@ -504,6 +504,49 @@
         } catch (_) { /* il tracking non deve mai rompere il checkout */ }
     }
 
+    /* --- Diagnostica: il foglio di stile e' arrivato? ----------------------- */
+
+    /**
+     * Segnala i caricamenti in cui checkout.css non ha applicato.
+     *
+     * Il <link> e' render-blocking e questo file e' defer: quando la funzione
+     * gira, il foglio o e' applicato o la sua richiesta e' fallita — non esiste
+     * una via di mezzo da confondere con un ritardo. Senza quel CSS il checkout
+     * resta funzionante ma nudo (riepilogo, campi e metodi di pagamento senza
+     * stile) e fino a oggi nessuno ce lo diceva: l'unica traccia e' stato un
+     * replay Clarity del 04/09/2026, con il lucchetto dello step-lock alto
+     * quanto la colonna.
+     *
+     * La sentinella e' --checkout-css-loaded, dichiarata su body in checkout.css.
+     * Si legge al load e non al DOMContentLoaded: il load aspetta anche i fogli
+     * di stile, cosi' un foglio soltanto lento non viene contato come mancante.
+     *
+     * L'evento passa da trackFunnel perche' ne serve la stessa meccanica (una
+     * sola volta per caricamento, cartId agganciato, fail-open); non e' una
+     * posizione del funnel e infatti resta fuori da CHECKOUT_FUNNEL_STEPS.
+     */
+    function initCssLoadedProbe() {
+        function check() {
+            // I crawler headless eseguono JS ma spesso saltano i fogli di stile:
+            // senza questo filtro finirebbero nel conteggio come clienti rotti.
+            if (global.navigator && global.navigator.webdriver) return;
+
+            var flag = '';
+            try {
+                flag = getComputedStyle(document.body)
+                    .getPropertyValue('--checkout-css-loaded').trim();
+            } catch (_) {
+                return;   // niente getComputedStyle: meglio nessun dato che un falso positivo
+            }
+            if (flag === '1') return;
+
+            trackFunnel('checkout_css_missing');
+        }
+
+        if (document.readyState === 'complete') check();
+        else global.addEventListener('load', check);
+    }
+
     /* --- Sezioni progressive ----------------------------------------------- */
 
     /**
@@ -524,8 +567,12 @@
         lock.id = 'checkout-step-lock';
         var gate = document.getElementById('payment-element-gate');
         lock.textContent = (gate && gate.textContent.trim()) || '';
+        // width/height sul tag, non solo in CSS: un <svg> con solo viewBox non ha
+        // dimensione intrinseca e, se checkout.css non arriva (rete, estensione,
+        // proxy), si espande a tutta la colonna. Visto in un replay Clarity: un
+        // lucchetto alto quanto la pagina in mezzo al checkout.
         lock.insertAdjacentHTML('afterbegin',
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
+            '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
             + '<rect x="3" y="11" width="18" height="11" rx="2"></rect>'
             + '<path stroke-linecap="round" d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>');
         paymentTitle.insertAdjacentElement('afterend', lock);
@@ -1627,6 +1674,8 @@
     /* ─── Init principale ──────────────────────────────────────────────────── */
 
     function init() {
+        initCssLoadedProbe();
+
         if (global.AmlCart) {
             renderCartSummary();
         } else {

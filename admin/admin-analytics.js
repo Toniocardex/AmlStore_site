@@ -143,6 +143,59 @@
         renderTopList('adm-analytics-devices-tbody',   data.devices      || [], 'device',  views, 'Tipo');
         renderReferrers(data, views);
         renderFunnel(data.checkoutFunnel || []);
+        renderCssMissing(data.cssMissing);
+    }
+
+    /* ─── Diagnostica: checkout senza foglio di stile ────────────────────── */
+
+    /** '2026-09-04T15:20:31.000Z' → '4 set, 15:20' */
+    function fmtDayTime(iso) {
+        var s = String(iso || '');
+        if (s.length < 10) return '—';
+        var day = fmtDay(s.slice(0, 10));
+        var hhmm = s.slice(11, 16);
+        return hhmm ? day + ', ' + hhmm : day;
+    }
+
+    /**
+     * Caricamenti del checkout in cui checkout.css non ha applicato (vedi
+     * initCssLoadedProbe in js/checkout.js).
+     *
+     * Non e' un dato di traffico ma un allarme, e un allarme funziona solo se
+     * lo zero si vede quanto il resto: un riquadro che sparisce quando va tutto
+     * bene diventa indistinguibile da uno rotto che non misura piu' niente.
+     * Per questo il caso "nessuno" ha una riga propria e dichiara su quanti
+     * arrivi al checkout e' stato verificato.
+     */
+    function renderCssMissing(cm) {
+        var el = $('adm-analytics-cssfail');
+        if (!el) return;
+
+        cm = cm || {};
+        var events   = cm.events   || 0;
+        var visitors = cm.visitors || 0;
+        var arrivals = cm.checkoutViews || 0;
+
+        var note = '<p class="adm-stat-note">Il checkout resta funzionante ma senza stile: '
+                 + 'riepilogo, campi e metodi di pagamento nudi. Lo rileva al load la '
+                 + 'sentinella <code>--checkout-css-loaded</code> di checkout.css; i replay '
+                 + 'di Clarity non finiscono qui dentro, solo caricamenti veri.</p>';
+
+        if (!events) {
+            el.innerHTML = '<p class="adm-cssfail adm-cssfail--ok">Nessun caso nel periodo'
+                + (arrivals ? ', su ' + esc(fmtNum(arrivals)) + ' arrivi al checkout' : '')
+                + '.</p>' + note;
+            return;
+        }
+
+        el.innerHTML = '<p class="adm-cssfail adm-cssfail--alert">'
+            + esc(fmtNum(events)) + (events === 1 ? ' caricamento' : ' caricamenti')
+            + ' senza CSS</p>'
+            + statRow('Visitatori colpiti', fmtNum(visitors))
+            + statRow('Sugli arrivi al checkout',
+                      fmtRatio(cm.ofCheckoutViews) + (arrivals ? ' di ' + fmtNum(arrivals) : ''))
+            + statRow('Ultimo caso', fmtDayTime(cm.lastAt))
+            + note;
     }
 
     /* ─── Funnel di checkout ───────────────────────────────────────────────── */
