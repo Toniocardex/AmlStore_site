@@ -22,8 +22,9 @@
       "publicPriceMinor": 10200
     },
     "6GQ-00092": {
-      "mode": "preserve-cents",
-      "note": "104,95 EUR e' un prezzo commerciale deliberato (commit 56936b4a), verificato end-to-end su carrello/checkout in tutte le lingue; non un residuo di conversione da arrotondare."
+      "mode": "manual",
+      "publicPriceMinor": 9900,
+      "note": "99,00 EUR: riduzione commerciale richiesta dall'utente il 2026-09-08 (era 104,95, mode preserve-cents). Prezzo intero, override manuale approvato; propagato con scripts/set-manual-price.py + figure derivate a mano."
     },
     "QQ2-00012": {
       "mode": "preserve-cents",
