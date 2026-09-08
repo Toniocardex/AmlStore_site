@@ -29,8 +29,23 @@ body {
 }
 
 .checkout-page h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.35rem;
     font-size: 2rem;
+}
+
+.checkout-page-subtitle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--aml-text-sm);
+    font-weight: 500;
+    color: var(--page-text-secondary);
+    margin: 0 0 1.25rem;
+}
+
+.checkout-page-subtitle svg {
+    color: var(--aml-ok);
+    flex-shrink: 0;
 }
 
 /* checkout.css e' condiviso con la pagina di conferma, che monta l'header
@@ -139,11 +154,11 @@ body {
 .form-field select {
     width: 100%;
     box-sizing: border-box;
-    min-height: 44px;
-    padding: 0.6rem 0.85rem;
+    min-height: 46px;
+    padding: 0.65rem 0.85rem;
     background: var(--aml-surface);
     border: 1px solid var(--page-border);
-    border-radius: 6px;
+    border-radius: var(--aml-radius-md);
     color: var(--page-text);
     font-family: inherit;
     font-size: 0.9rem;
@@ -161,14 +176,44 @@ body {
 
 .form-field input:focus,
 .form-field select:focus {
-    border-color: var(--page-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--page-accent) 18%, transparent);
+    border-color: var(--aml-ok);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--aml-ok) 18%, transparent);
 }
 
 .form-field input:focus-visible,
 .form-field select:focus-visible {
-    outline: 2px solid var(--page-accent);
+    outline: 2px solid var(--aml-ok);
     outline-offset: 2px;
+}
+
+/* Campi con icona integrata a sinistra */
+.input-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-icon-wrap .input-icon {
+    position: absolute;
+    left: 0.85rem;
+    color: var(--page-text-muted);
+    pointer-events: none;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+    z-index: 2;
+}
+
+.input-icon-wrap input {
+    padding-left: 2.6rem;
+}
+
+.input-icon-wrap:focus-within .input-icon {
+    color: var(--aml-ok);
+}
+
+.form-field.is-invalid .input-icon-wrap .input-icon {
+    color: var(--aml-danger);
 }
 
 /* ── Stato errore ── */
@@ -240,12 +285,12 @@ body {
 }
 
 .customer-tab-btn[aria-selected="true"] {
-    background: color-mix(in srgb, var(--page-accent) 15%, transparent);
-    color: var(--page-accent);
+    background: color-mix(in srgb, var(--aml-ok) 12%, transparent);
+    color: var(--aml-ok);
 }
 
 .customer-tab-btn:focus-visible {
-    outline: 2px solid var(--page-accent);
+    outline: 2px solid var(--aml-ok);
     outline-offset: -2px;
     z-index: 1;
     position: relative;
@@ -265,10 +310,73 @@ body {
 
 /* ─── Metodi di pagamento ───────────────────────────────────────────────────── */
 
+/* ─── Metodi di pagamento — Griglia a card/tessere come da mockup ─────────── */
+
 .payment-options {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+}
+
+@media (max-width: 680px) {
+    .payment-options {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .payment-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ── Compat lingue non ancora migrate alle tessere ──────────────────────────
+   checkout.css e' condiviso dai 7 checkout, ma solo /it/ ha il markup a
+   tessere (.payment-option-header). de/en/es/fr/nl/pt usano ancora
+   .payment-option-content con le descrizioni: senza questo blocco il loro
+   markup a lista finirebbe schiacciato nella griglia a 5 colonne e le
+   descrizioni sparirebbero. Rimuovere quando tutti e 7 hanno le tessere. */
+.payment-options:not(:has(.payment-option-header)) {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+}
+
+.payment-options:not(:has(.payment-option-header)) .payment-option-label {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    height: auto;
+    min-height: 0;
+    text-align: left;
+}
+
+.payment-options:not(:has(.payment-option-header)) .payment-option-content {
+    flex: 1;
+    min-width: 0;
+    align-items: flex-start;
+}
+
+.payment-options:not(:has(.payment-option-header)) .payment-option-indicator {
+    position: static;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+}
+
+.payment-options:not(:has(.payment-option-header)) .payment-option-desc {
+    display: block;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--page-text-secondary);
+}
+
+.payment-options:not(:has(.payment-option-header)) .payment-icons {
+    justify-content: flex-start;
 }
 
 .payment-option {
@@ -285,89 +393,128 @@ body {
 
 .payment-option-label {
     display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem 1.1rem;
-    border: 1px solid var(--page-border);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.85rem 0.5rem;
+    border: 1.5px solid var(--page-border);
     border-radius: var(--aml-radius-md);
     cursor: pointer;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;
     background: var(--aml-surface);
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    min-height: 84px;
+    position: relative;
 }
 
 .payment-option-label:hover {
-    border-color: color-mix(in srgb, var(--aml-ink) 20%, var(--page-border));
-    background: var(--aml-paper);
+    border-color: var(--aml-ok-border);
+    background: var(--aml-paper-2);
 }
 
 .payment-option input[type="radio"]:checked + .payment-option-label {
-    border-color: var(--page-accent);
-    box-shadow: 0 0 0 1px var(--page-accent), 0 4px 20px var(--page-glow);
-    background: color-mix(in srgb, var(--page-accent) 8%, transparent);
+    border-color: var(--aml-ok);
+    box-shadow: 0 0 0 1px var(--aml-ok), 0 2px 8px color-mix(in srgb, var(--aml-ok) 16%, transparent);
+    background: var(--aml-ok-bg);
 }
 
 .payment-option input[type="radio"]:focus-visible + .payment-option-label {
-    outline: 2px solid var(--page-accent);
+    outline: 2px solid var(--aml-ok);
     outline-offset: 2px;
 }
 
 .payment-option-indicator {
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
-    border: 2px solid var(--page-border);
-    margin-top: 1px;
+    border: 1.5px solid var(--page-border);
     background: transparent;
-    transition: border-color 0.2s ease;
-    position: relative;
+    transition: border-color 0.2s ease, background 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .payment-option input[type="radio"]:checked + .payment-option-label .payment-option-indicator {
-    border-color: var(--page-accent);
+    border-color: var(--aml-ok);
+    background: var(--aml-ok);
 }
 
 .payment-option input[type="radio"]:checked + .payment-option-label .payment-option-indicator::after {
     content: '';
     display: block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--page-accent);
+    width: 3px;
+    height: 6px;
+    border: solid #ffffff;
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg) translate(-0.5px, -0.5px);
 }
 
+.payment-option-header,
 .payment-option-content {
-    flex: 1;
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
 }
 
-/* Titolo e descrizione sono <span>: senza display:block restano inline e si
-   fondono in un unico paragrafo che va a capo a meta' frase. */
+.payment-tile-icon {
+    color: var(--page-text);
+    flex-shrink: 0;
+}
+
 .payment-option-title {
-    display: block;
-    font-size: 0.92rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: var(--page-text);
-    margin: 0 0 0.2rem;
+    line-height: 1.2;
 }
 
 .payment-option-desc {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--page-text-secondary);
-    margin: 0;
-    line-height: 1.45;
+    display: none;
+}
+
+.payment-option-badge {
+    font-size: var(--checkout-micro-size);
+    font-weight: 600;
+    color: var(--page-text-muted);
+    background: var(--aml-paper);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--aml-radius-sm);
+    letter-spacing: var(--checkout-micro-track);
+    text-transform: uppercase;
+}
+
+.payment-icon--tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.payment-icon--tile img {
+    height: 18px;
+    width: auto;
+    max-width: 54px;
+    object-fit: contain;
 }
 
 /* Icone metodi pagamento */
 .payment-icons {
     display: flex;
-    gap: 0.35rem;
+    gap: 0.25rem;
     align-items: center;
-    margin-top: 0.5rem;
+    justify-content: center;
+    margin-top: 0.2rem;
     flex-wrap: wrap;
 }
 
@@ -424,8 +571,8 @@ body {
 }
 
 .transfer-card {
-    background: color-mix(in srgb, var(--page-accent) 6%, var(--aml-surface));
-    border: 1px solid color-mix(in srgb, var(--page-accent) 22%, transparent);
+    background: var(--aml-paper-2);
+    border: 1px solid var(--page-border);
     border-radius: var(--aml-radius-md);
     padding: 1.25rem 1.35rem;
 }
@@ -435,7 +582,7 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: var(--checkout-eyebrow-track);
-    color: var(--page-accent);
+    color: var(--page-text);
     margin: 0 0 0.9rem;
 }
 
@@ -445,13 +592,13 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.55rem;
+    gap: 0.65rem;
 }
 
 .transfer-info-list li {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.2rem;
 }
 
 .transfer-info-label {
@@ -471,8 +618,52 @@ body {
 
 .transfer-info-value.iban {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     letter-spacing: 0.04em;
+}
+
+.iban-copy-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.btn-copy-iban {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--aml-ok);
+    background: var(--aml-ok-bg);
+    border: 1px solid var(--aml-ok-border);
+    border-radius: var(--aml-radius-sm);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    flex-shrink: 0;
+}
+
+.btn-copy-iban:hover {
+    background: color-mix(in srgb, var(--aml-ok) 18%, transparent);
+    border-color: var(--aml-ok);
+}
+
+.btn-copy-iban:active {
+    transform: scale(0.97);
+}
+
+.btn-copy-iban.copied {
+    background: var(--aml-ok);
+    color: #ffffff;
+    border-color: var(--aml-ok);
+}
+
+.btn-copy-iban .copy-icon {
+    flex-shrink: 0;
 }
 
 .transfer-note {
@@ -672,20 +863,18 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 50px;
-    padding: 0.75rem 1.5rem;
+    min-height: 52px;
+    padding: 0.85rem 1.5rem;
     box-sizing: border-box;
-    background: var(--page-accent);
+    background: var(--aml-brand-vivid);
     color: #ffffff;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--aml-radius-md);
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
-    /* L'alone colorato era al 35% e faceva "galleggiare" il bottone sopra la
-       pagina. Un'ombra neutra e stretta lo tiene ancorato alla colonna. */
-    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.10), 0 4px 12px color-mix(in srgb, var(--page-accent) 18%, transparent);
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.10), 0 4px 12px color-mix(in srgb, var(--aml-brand-vivid) 25%, transparent);
     transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.2s ease;
     letter-spacing: 0.01em;
     margin-top: 1.25rem;
@@ -695,8 +884,8 @@ body {
 
 .btn-checkout-primary:hover:not(:disabled) {
     transform: translateY(-1px);
-    background: color-mix(in srgb, #000 8%, var(--page-accent));
-    box-shadow: 0 2px 4px rgba(16, 24, 40, 0.12), 0 8px 20px color-mix(in srgb, var(--page-accent) 24%, transparent);
+    background: var(--aml-brand-vivid-hover);
+    box-shadow: 0 2px 4px rgba(16, 24, 40, 0.12), 0 8px 20px color-mix(in srgb, var(--aml-brand-vivid) 35%, transparent);
 }
 
 .btn-checkout-primary:active:not(:disabled) {
@@ -704,7 +893,7 @@ body {
 }
 
 .btn-checkout-primary:focus-visible {
-    outline: 2px solid var(--page-accent);
+    outline: 2px solid var(--aml-brand-vivid);
     outline-offset: 3px;
 }
 
@@ -713,6 +902,37 @@ body {
     opacity: 0.65;
     cursor: not-allowed;
     transform: none;
+}
+
+.btn-arrow {
+    display: inline-block;
+    margin-left: 0.4rem;
+    font-size: 1.15rem;
+    line-height: 1;
+    font-weight: 700;
+    transition: transform 0.15s ease;
+}
+
+.btn-checkout-primary:hover:not(:disabled) .btn-arrow {
+    transform: translateX(3px);
+}
+
+/* Badge rassicurazione crittografia sotto la CTA (linee guida mockup) */
+.checkout-security-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    margin-top: 0.85rem;
+    font-size: var(--checkout-eyebrow-size);
+    font-weight: 600;
+    color: var(--page-text-muted);
+    text-align: center;
+}
+
+.checkout-security-badge svg {
+    color: var(--aml-ok);
+    flex-shrink: 0;
 }
 
 /* Lucchetto nel bottone di pagamento: era un'emoji dentro la stringa tradotta,
@@ -1355,8 +1575,11 @@ body {
     min-height: 0;
 }
 
-/* ═══ Box garanzia + supporto + badge stock ═══════════════════════════════ */
+/* ═══ Micro-badge garanzie minimali ════════════════════════════════════════ */
 
+/* Box garanzia "legacy": /it/ e' passato alle pill qui sotto, ma i 6 checkout
+   non ancora migrati hanno ancora <div class="checkout-guarantee-box">. Le due
+   forme convivono finche' la migrazione non e' completa. */
 .checkout-guarantee-box {
     margin-top: 1rem;
     padding: 0.85rem 1rem;
@@ -1380,6 +1603,41 @@ body {
     font-size: 0.76rem;
     line-height: 1.5;
     color: color-mix(in srgb, var(--aml-ok) 82%, var(--page-text));
+}
+
+.checkout-trust-pills {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin-top: 1.15rem;
+}
+
+@media (max-width: 580px) {
+    .checkout-trust-pills {
+        grid-template-columns: 1fr;
+        gap: 0.45rem;
+    }
+}
+
+.checkout-trust-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.65rem;
+    background: var(--aml-paper-2);
+    border: 1px solid var(--page-border);
+    border-radius: var(--aml-radius-sm);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--page-text);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.checkout-trust-pill svg {
+    color: var(--aml-ok);
+    flex-shrink: 0;
 }
 
 .checkout-support-box {
@@ -1488,7 +1746,13 @@ body {
 .form-section-title {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--page-text);
+    letter-spacing: 0.01em;
+    margin: 0 0 1.25rem;
+    text-transform: none;
 }
 
 .form-section-title::before {
@@ -1497,14 +1761,15 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: var(--page-accent);
-    color: #fff;
-    font-size: 0.72rem;
+    background: var(--aml-ok);
+    color: #ffffff;
+    font-size: 0.8rem;
     font-weight: 800;
     line-height: 1;
+    box-shadow: 0 1px 3px color-mix(in srgb, var(--aml-ok) 25%, transparent);
 }
 
 /* ── Sezione bloccata finche' la precedente non e' completa ─────────────── */

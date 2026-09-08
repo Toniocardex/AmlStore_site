@@ -1214,7 +1214,20 @@
         .then(function (data) {
             if (!data || !data.clientSecret) throw new Error('clientSecret mancante');
             if (_paymentElement) { try { _paymentElement.unmount(); } catch (_) {} _paymentElement = null; }
-            _elementsManual = _stripe.elements({ clientSecret: data.clientSecret });
+            _elementsManual = _stripe.elements({
+                clientSecret: data.clientSecret,
+                appearance: {
+                    theme: 'stripe',
+                    variables: {
+                        colorPrimary: '#1F7A52',
+                        colorBackground: '#ffffff',
+                        colorText: '#1E293B',
+                        colorDanger: '#B3261E',
+                        fontFamily: 'Montserrat, sans-serif',
+                        borderRadius: '8px'
+                    }
+                }
+            });
             _paymentElement = _elementsManual.create('payment', { layout: 'tabs' });
             // Il default e' gia' "carta": chi non cambia metodo non emette mai un
             // change sui radio, quindi senza questo il passo pagamento risulterebbe
@@ -1671,6 +1684,66 @@
         });
     }
 
+    /* ─── Copia IBAN ──────────────────────────────────────────────────────── */
+    // L'IBAN nel box bonifico e' scritto a gruppi di quattro per leggibilita':
+    // digitarlo a mano e' l'errore piu' comune che manda un pagamento in sospeso.
+    // Il bottone copia la versione senza spazi, letta dal testo stesso — nessun
+    // secondo literal da tenere allineato se l'IBAN cambia.
+
+    function copyText(text) {
+        if (global.navigator && navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(text)
+                .then(function () { return true; })
+                .catch(function () { return legacyCopyText(text); });
+        }
+        return Promise.resolve(legacyCopyText(text));
+    }
+
+    function legacyCopyText(text) {
+        try {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'absolute';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            return ok;
+        } catch (_) {
+            return false;
+        }
+    }
+
+    function initIbanCopy() {
+        var DONE_LABEL = 'Copiato!';
+        document.querySelectorAll('.btn-copy-iban').forEach(function (btn) {
+            var row    = btn.closest('.iban-copy-row');
+            var ibanEl = row && row.querySelector('.iban');
+            if (!ibanEl) return;
+
+            var textEl   = btn.querySelector('.btn-copy-iban__text');
+            var original = textEl ? textEl.textContent : '';
+            var timer;
+
+            btn.addEventListener('click', function () {
+                var value = ibanEl.textContent.replace(/\s+/g, '');
+                if (!value) return;
+                copyText(value).then(function (ok) {
+                    if (!ok) return;
+                    btn.classList.add('copied');
+                    if (textEl) textEl.textContent = DONE_LABEL;
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        btn.classList.remove('copied');
+                        if (textEl) textEl.textContent = original;
+                    }, 2000);
+                });
+            });
+        });
+    }
+
     /* ─── Init principale ──────────────────────────────────────────────────── */
 
     function init() {
@@ -1692,6 +1765,7 @@
         initSubmitButtons();
         initCartEmailSync();
         initReturnNotice();
+        initIbanCopy();
 
         if (isOnPageStripe()) {
             initStripeRemountTriggers();
