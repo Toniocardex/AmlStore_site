@@ -1764,12 +1764,14 @@ body {
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    background: var(--aml-ok);
+    /* Neutro, non verde: e' solo wayfinding. Il verde resta dove porta un
+       significato (metodo selezionato, badge SSL, pill, focus campi); qui
+       si sommava solo alla sequenza 1-2-3 arancione del progress in cima. */
+    background: var(--page-text);
     color: #ffffff;
     font-size: 0.8rem;
     font-weight: 800;
     line-height: 1;
-    box-shadow: 0 1px 3px color-mix(in srgb, var(--aml-ok) 25%, transparent);
 }
 
 /* ── Sezione bloccata finche' la precedente non e' completa ─────────────── */
