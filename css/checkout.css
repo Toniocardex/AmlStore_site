@@ -381,6 +381,7 @@ body {
 
 .payment-option {
     position: relative;
+    display: flex;
 }
 
 .payment-option input[type="radio"] {
@@ -403,6 +404,12 @@ body {
     cursor: pointer;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, transform 0.15s ease;
     background: var(--aml-surface);
+    /* flex:1 + width:100% riempiono la .payment-option (grid item gia' stirato
+       da align-items:stretch) senza dipendere dalla risoluzione di height:100%
+       in percentuale su un nipote: e' quello che lasciava la sola Carta piu'
+       alta quando i suoi loghi andavano a capo. */
+    flex: 1;
+    width: 100%;
     height: 100%;
     box-sizing: border-box;
     text-align: center;
@@ -516,6 +523,24 @@ body {
     justify-content: center;
     margin-top: 0.2rem;
     flex-wrap: wrap;
+}
+
+/* Dentro la tessera (markup nuovo) i loghi carta stanno su UNA riga, senza il
+   padding/sfondo dei chip: con il wrap la sola Carta cresceva di una riga e
+   sballava l'altezza uniforme della griglia. */
+.payment-option-label > .payment-icons {
+    flex-wrap: nowrap;
+    gap: 0.3rem;
+    margin-top: 0;
+}
+
+.payment-option-label > .payment-icons .payment-icon--img {
+    padding: 0;
+    background: transparent;
+}
+
+.payment-option-label > .payment-icons .payment-icon--img img {
+    height: 13px;
 }
 
 .payment-icon {
