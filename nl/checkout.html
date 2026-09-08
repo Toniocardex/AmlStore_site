@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <link rel="stylesheet" href="../css/page.css?v=1f03cf55ec">
     <script src="https://js.stripe.com/v3/"></script>
-    <link rel="stylesheet" href="../css/checkout.css?v=fc76de5ff8">
+    <link rel="stylesheet" href="../css/checkout.css?v=8c669f123a">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
@@ -49,6 +49,13 @@
     <main id="main" class="checkout-page">
 
         <h1>Afrekenen</h1>
+        <p class="checkout-page-subtitle">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Rond uw aankoop veilig af
+        </p>
 
         <ol class="checkout-stepper" aria-label="Voortgang van het afrekenen">
             <li class="checkout-stepper__step checkout-stepper__step--done">
@@ -177,50 +184,62 @@
                             >
                                 <div class="form-field">
                                         <label for="field-email">E-mail voor levering <abbr title="verplicht" aria-label="verplicht">*</abbr> <span class="field-note-ok">Directe verzending</span></label>
-                                        <input
-                                            type="email"
-                                            id="field-email"
-                                            name="email"
-                                            required
-                                            autocomplete="email"
-                                            placeholder="jan.jansen@email.com"
-                                            inputmode="email"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                            <input
+                                                type="email"
+                                                id="field-email"
+                                                name="email"
+                                                required
+                                                autocomplete="email"
+                                                placeholder="jan.jansen@email.com"
+                                                inputmode="email"
+                                            >
+                                        </div>
                                     </div>
                                 <div class="form-row--2">
                                     <div class="form-field">
                                         <label for="field-first-name">Voornaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                        <input
-                                            type="text"
-                                            id="field-first-name"
-                                            name="firstName"
-                                            required
-                                            autocomplete="given-name"
-                                            placeholder="Jan"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            <input
+                                                type="text"
+                                                id="field-first-name"
+                                                name="firstName"
+                                                required
+                                                autocomplete="given-name"
+                                                placeholder="Jan"
+                                            >
+                                        </div>
                                     </div>
                                     <div class="form-field">
                                         <label for="field-last-name">Achternaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                        <input
-                                            type="text"
-                                            id="field-last-name"
-                                            name="lastName"
-                                            required
-                                            autocomplete="family-name"
-                                            placeholder="Jansen"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            <input
+                                                type="text"
+                                                id="field-last-name"
+                                                name="lastName"
+                                                required
+                                                autocomplete="family-name"
+                                                placeholder="Jansen"
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-field">
                                         <label for="field-phone">Telefoon <span class="field-optional">(optioneel)</span></label>
-                                        <input
-                                            type="tel"
-                                            id="field-phone"
-                                            name="phone"
-                                            autocomplete="tel"
-                                            placeholder="+31 6 12345678"
-                                            inputmode="tel"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                            <input
+                                                type="tel"
+                                                id="field-phone"
+                                                name="phone"
+                                                autocomplete="tel"
+                                                placeholder="+31 6 12345678"
+                                                inputmode="tel"
+                                            >
+                                        </div>
                                     </div>
                             </div>
 
@@ -234,76 +253,94 @@
                             >
                                 <div class="form-field">
                                         <label for="field-email-b">E-mail voor levering <abbr title="verplicht" aria-label="verplicht">*</abbr> <span class="field-note-ok">Directe verzending</span></label>
-                                        <input
-                                            type="email"
-                                            id="field-email-b"
-                                            name="email"
-                                            required
-                                            autocomplete="email"
-                                            placeholder="jan@bedrijf.nl"
-                                            inputmode="email"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                            <input
+                                                type="email"
+                                                id="field-email-b"
+                                                name="email"
+                                                required
+                                                autocomplete="email"
+                                                placeholder="jan@bedrijf.nl"
+                                                inputmode="email"
+                                            >
+                                        </div>
                                     </div>
                                 <div class="form-row--2">
                                     <div class="form-field">
                                         <label for="field-first-name-b">Voornaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                        <input
-                                            type="text"
-                                            id="field-first-name-b"
-                                            name="firstName"
-                                            required
-                                            autocomplete="given-name"
-                                            placeholder="Jan"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            <input
+                                                type="text"
+                                                id="field-first-name-b"
+                                                name="firstName"
+                                                required
+                                                autocomplete="given-name"
+                                                placeholder="Jan"
+                                            >
+                                        </div>
                                     </div>
                                     <div class="form-field">
                                         <label for="field-last-name-b">Achternaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                        <input
-                                            type="text"
-                                            id="field-last-name-b"
-                                            name="lastName"
-                                            required
-                                            autocomplete="family-name"
-                                            placeholder="Jansen"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            <input
+                                                type="text"
+                                                id="field-last-name-b"
+                                                name="lastName"
+                                                required
+                                                autocomplete="family-name"
+                                                placeholder="Jansen"
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-field">
                                         <label for="field-phone-b">Telefoon <span class="field-optional">(optioneel)</span></label>
-                                        <input
-                                            type="tel"
-                                            id="field-phone-b"
-                                            name="phone"
-                                            autocomplete="tel"
-                                            placeholder="+31 20 123 4567"
-                                            inputmode="tel"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                            <input
+                                                type="tel"
+                                                id="field-phone-b"
+                                                name="phone"
+                                                autocomplete="tel"
+                                                placeholder="+31 20 123 4567"
+                                                inputmode="tel"
+                                            >
+                                        </div>
                                     </div>
 
                                 <div class="business-fields">
                                     <div class="form-field">
                                         <label for="field-ragione-sociale">Bedrijfsnaam <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                        <input
-                                            type="text"
-                                            id="field-ragione-sociale"
-                                            name="ragioneSociale"
-                                            autocomplete="organization"
-                                            placeholder="Voorbeeld B.V."
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-3"></path><path d="M9 9v.01"></path><path d="M9 12v.01"></path><path d="M9 15v.01"></path><path d="M9 18v.01"></path></svg>
+                                            <input
+                                                type="text"
+                                                id="field-ragione-sociale"
+                                                name="ragioneSociale"
+                                                autocomplete="organization"
+                                                placeholder="Voorbeeld B.V."
+                                            >
+                                        </div>
                                     </div>
 
                                     <div class="form-field">
                                         <label for="field-piva">Btw-nummer (Italiaanse P.IVA) <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                        <input
-                                            type="text"
-                                            id="field-piva"
-                                            name="piva"
-                                            placeholder="12345678901"
-                                            maxlength="11"
-                                            inputmode="numeric"
-                                            pattern="\d{11}"
-                                            autocomplete="off"
-                                        >
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="7" y1="8" x2="17" y2="8"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="7" y1="16" x2="13" y2="16"></line></svg>
+                                            <input
+                                                type="text"
+                                                id="field-piva"
+                                                name="piva"
+                                                placeholder="12345678901"
+                                                maxlength="11"
+                                                inputmode="numeric"
+                                                pattern="\d{11}"
+                                                autocomplete="off"
+                                            >
+                                        </div>
                                     </div>
 
                                     <div class="form-row--2">
@@ -312,15 +349,18 @@
                                                 SDI-code
                                                 <span class="field-optional">(optioneel als PEC is ingevuld)</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                id="field-sdi"
-                                                name="sdi"
-                                                placeholder="0000000"
-                                                maxlength="7"
-                                                autocomplete="off"
-                                                aria-describedby="sdi-hint"
-                                            >
+                                            <div class="input-icon-wrap">
+                                                <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                                <input
+                                                    type="text"
+                                                    id="field-sdi"
+                                                    name="sdi"
+                                                    placeholder="0000000"
+                                                    maxlength="7"
+                                                    autocomplete="off"
+                                                    aria-describedby="sdi-hint"
+                                                >
+                                            </div>
                                             <p id="sdi-hint" class="field-hint">7 alfanumerieke tekens — vul SDI of PEC in</p>
                                         </div>
                                         <div class="form-field">
@@ -328,14 +368,17 @@
                                                 PEC-e-mail
                                                 <span class="field-optional">(optioneel als SDI is ingevuld)</span>
                                             </label>
-                                            <input
-                                                type="email"
-                                                id="field-pec"
-                                                name="pec"
-                                                placeholder="factuur@pec.bedrijf.nl"
-                                                inputmode="email"
-                                                autocomplete="off"
-                                            >
+                                            <div class="input-icon-wrap">
+                                                <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                                <input
+                                                    type="email"
+                                                    id="field-pec"
+                                                    name="pec"
+                                                    placeholder="factuur@pec.bedrijf.nl"
+                                                    inputmode="email"
+                                                    autocomplete="off"
+                                                >
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -349,28 +392,43 @@
 
                             <div class="form-field">
                                 <label for="field-address">Adres (straat en huisnummer) <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="Keizersgracht 1">
+                                <div class="input-icon-wrap">
+                                    <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="Keizersgracht 1">
+                                </div>
                             </div>
 
                             <div class="form-row--2">
                                 <div class="form-field">
                                     <label for="field-city">Plaats <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                    <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="Amsterdam">
+                                    <div class="input-icon-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-3"></path></svg>
+                                        <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="Amsterdam">
+                                    </div>
                                 </div>
                                 <div class="form-field">
                                     <label for="field-postal-code">Postcode <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                    <input type="text" id="field-postal-code" name="postalCode" autocomplete="postal-code" placeholder="1012 AB">
+                                    <div class="input-icon-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg>
+                                        <input type="text" id="field-postal-code" name="postalCode" autocomplete="postal-code" placeholder="1012 AB">
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-row--2">
                                 <div class="form-field">
                                     <label for="field-province">Provincie / staat <span class="field-optional">(optioneel)</span></label>
-                                    <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
+                                    <div class="input-icon-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                                        <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
+                                    </div>
                                 </div>
                                 <div class="form-field">
                                     <label for="field-country">Land <abbr title="verplicht" aria-label="verplicht">*</abbr></label>
-                                    <input type="text" id="field-country" name="country" autocomplete="country-name" placeholder="Nederland">
+                                    <div class="input-icon-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                        <input type="text" id="field-country" name="country" autocomplete="country-name" placeholder="Nederland">
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -381,6 +439,7 @@
 
                             <div class="payment-options" role="radiogroup" aria-labelledby="section-title-payment">
 
+                                <!-- Stripe -->
                                 <div class="payment-option">
                                     <input
                                         type="radio"
@@ -391,21 +450,19 @@
                                     >
                                     <label class="payment-option-label" for="pay-stripe">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">Krediet- of debetkaart</span>
-                                            <span class="payment-option-desc">Veilige kaartvelden van Stripe — SSL-versleuteld, nooit op onze servers</span>
-                                            <span class="payment-icons" aria-label="Geaccepteerde methoden: Visa, Mastercard, American Express, Apple Pay, Google Pay, Amazon Pay">
-                                                <span class="payment-icon payment-icon--img" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img" title="American Express"><img src="../asset/payments_logo/img-aml-store_Amex_logo.svg?v=27a9919e6a" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img payment-icon--amazon-wide" title="Amazon Pay"><img src="../asset/payments_logo/img-aml-store_Amazon_Pay_logo.svg?v=0186c7551e" width="68" height="13" alt="" loading="lazy" decoding="async"></span>
-                                            </span>
+                                        <div class="payment-option-header">
+                                            <svg class="payment-tile-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                                                <line x1="2" y1="10" x2="22" y2="10"></line>
+                                            </svg>
+                                            <span class="payment-option-title">Kaart</span>
+                                        </div>
+                                        <span class="payment-icons" aria-label="Geaccepteerde methoden: Visa, Mastercard">
+                                            <span class="payment-icon payment-icon--img" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
+                                            <span class="payment-icon payment-icon--img" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
                                         </span>
                                     </label>
                                 </div>
-
 
                                 <!-- PayPal -->
                                 <div class="payment-option">
@@ -417,35 +474,17 @@
                                     >
                                     <label class="payment-option-label" for="pay-paypal">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">PayPal</span>
-                                            <span class="payment-option-desc">Betaal met je PayPal-account of kaart</span>
-                                            <span class="payment-icons" aria-label="PayPal">
-                                                <span class="payment-icon payment-icon--img" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
+                                        <div class="payment-option-header">
+                                            <span class="payment-icon payment-icon--img payment-icon--tile" title="PayPal">
+                                                <img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" width="48" height="16" alt="" loading="lazy" decoding="async">
                                             </span>
-                                        </span>
+                                            <span class="payment-option-title">PayPal</span>
+                                        </div>
+                                        <span class="payment-option-badge">Direct betalen</span>
                                     </label>
                                 </div>
 
-                                <div class="payment-option">
-                                    <input
-                                        type="radio"
-                                        name="payment-method"
-                                        id="pay-sepa"
-                                        value="sepa"
-                                    >
-                                    <label class="payment-option-label" for="pay-sepa">
-                                        <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">SEPA-incasso</span>
-                                            <span class="payment-option-desc">De licentie wordt verstuurd zodra de incasso is bevestigd</span>
-                                            <span class="payment-icons" aria-label="Geaccepteerde methoden: SEPA">
-                                                <span class="payment-icon payment-icon--img" title="SEPA"><img src="../asset/payments_logo/img-aml-store_SEPA_logo.svg?v=a95e3ec55c" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                            </span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
+                                <!-- Klarna -->
                                 <div class="payment-option">
                                     <input
                                         type="radio"
@@ -455,16 +494,17 @@
                                     >
                                     <label class="payment-option-label" for="pay-klarna">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
+                                        <div class="payment-option-header">
+                                            <span class="payment-icon payment-icon--img payment-icon--tile" title="Klarna">
+                                                <img src="../asset/payments_logo/img-aml-store_Klarna_logo.svg?v=04a2758348" width="48" height="16" alt="" loading="lazy" decoding="async">
+                                            </span>
                                             <span class="payment-option-title">Klarna</span>
-                                            <span class="payment-option-desc">De licentie wordt verstuurd zodra de betaling is bevestigd</span>
-                                            <span class="payment-icons" aria-label="Geaccepteerde methoden: Klarna">
-                                                <span class="payment-icon payment-icon--img" title="Klarna"><img src="../asset/payments_logo/img-aml-store_Klarna_logo.svg?v=04a2758348" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                            </span>
-                                            </span>
-                                        </span>
+                                        </div>
+                                        <span class="payment-option-badge">In 3 termijnen</span>
                                     </label>
                                 </div>
+
+                                <!-- Bonifico -->
                                 <div class="payment-option">
                                     <input
                                         type="radio"
@@ -474,13 +514,33 @@
                                     >
                                     <label class="payment-option-label" for="pay-transfer">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">Bankoverschrijving</span>
-                                            <span class="payment-option-desc">1–3 werkdagen na ontvangst van de betaling</span>
-                                            <span class="payment-icons" aria-label="Bankoverschrijving">
-                                                <span class="payment-icon payment-icon--img payment-icon--transfer" title="Bankoverschrijving"><img src="../asset/payments_logo/img-aml-store_bank-transfer.svg?v=90955b0eb9" width="40" height="18" alt="" loading="lazy" decoding="async"></span>
+                                        <div class="payment-option-header">
+                                            <svg class="payment-tile-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <path d="M3 21h18"></path><path d="M3 10h18"></path><path d="M5 6l7-3 7 3"></path><path d="M4 10v11"></path><path d="M20 10v11"></path><path d="M8 14v4"></path><path d="M12 14v4"></path><path d="M16 14v4"></path>
+                                            </svg>
+                                            <span class="payment-option-title">Overschrijving</span>
+                                        </div>
+                                        <span class="payment-option-badge">Bank</span>
+                                    </label>
+                                </div>
+
+                                <!-- SEPA -->
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-sepa"
+                                        value="sepa"
+                                    >
+                                    <label class="payment-option-label" for="pay-sepa">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <div class="payment-option-header">
+                                            <span class="payment-icon payment-icon--img payment-icon--tile" title="SEPA">
+                                                <img src="../asset/payments_logo/img-aml-store_SEPA_logo.svg?v=a95e3ec55c" width="48" height="16" alt="" loading="lazy" decoding="async">
                                             </span>
-                                        </span>
+                                            <span class="payment-option-title">SEPA</span>
+                                        </div>
+                                        <span class="payment-option-badge">Incasso</span>
                                     </label>
                                 </div>
                             </div>
@@ -498,7 +558,13 @@
                                     <ul class="transfer-info-list">
                                         <li>
                                             <span class="transfer-info-label">IBAN</span>
-                                            <span class="transfer-info-value iban">IT91 S062 3033 5400 0001 5095 392</span>
+                                            <span class="iban-copy-row">
+                                                <span class="transfer-info-value iban">IT91 S062 3033 5400 0001 5095 392</span>
+                                                <button type="button" class="btn-copy-iban" aria-label="IBAN naar klembord kopiëren" data-copied-label="Gekopieerd!">
+                                                    <svg class="copy-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                                    <span class="btn-copy-iban__text">IBAN kopiëren</span>
+                                                </button>
+                                            </span>
                                         </li>
                                         <li>
                                             <span class="transfer-info-label">Rekeninghouder</span>
@@ -554,7 +620,7 @@
                                 id="btn-stripe-submit" class="btn-checkout-primary"
                             >
                                 <span class="btn-spinner" aria-hidden="true"></span>
-                                <svg class="btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text">Bestelling afronden — <span id="btn-pay-amount">—</span></span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text">Veilig betalen — <span id="btn-pay-amount">—</span> <span class="btn-arrow" aria-hidden="true">›</span></span>
                             </button>
                         <p class="checkout-cta-note" id="checkout-cta-note"><span class="checkout-cta-note__dot" aria-hidden="true"></span>Digitale levering per e-mail · 2–15 min</p>
 
@@ -566,19 +632,32 @@
                                 aria-label="Bestelling bevestigen en instructies voor bankoverschrijving bekijken"
                             >
                                 <span class="btn-spinner" aria-hidden="true"></span>
-                                <span class="btn-text">Bestelling bevestigen</span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text">Bestelling veilig bevestigen <span class="btn-arrow" aria-hidden="true">›</span></span>
                             </button>
+
+                            <div class="checkout-security-badge" aria-label="Gegevensbeveiliging en versleuteling">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <span>Uw gegevens zijn beveiligd en versleuteld met 256-bit SSL</span>
+                            </div>
                         </div>
 
-                        <div class="checkout-guarantee-box" role="note">
-                            <p class="checkout-guarantee-box__title">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                Directe digitale levering, 24/7
-                            </p>
-                            <p class="checkout-guarantee-box__text">
-                                Originele productsleutel, officiële link en activatiegids direct na betaling per e-mail.
-                            </p>
-                        </div>
+                        <ul class="checkout-trust-pills" role="list">
+                            <li class="checkout-trust-pill">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Levering per e-mail · 2–15 min
+                            </li>
+                            <li class="checkout-trust-pill">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Levenslange licentie, 100% origineel
+                            </li>
+                            <li class="checkout-trust-pill">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                After-salesondersteuning inbegrepen
+                            </li>
+                        </ul>
 
                         <p class="checkout-terms">
                             Door verder te gaan aanvaardt u onze
@@ -698,7 +777,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=fc79103c0c" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../js/checkout.js?v=e46cb58ec0" defer></script>
+    <script src="../js/checkout.js?v=a61f981ed5" defer></script>
 
 </body>
 </html>

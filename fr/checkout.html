@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="../fonts/montserrat.css?v=3da8c0f35d">
     <link rel="stylesheet" href="../css/page.css?v=1f03cf55ec">
     <script src="https://js.stripe.com/v3/"></script>
-    <link rel="stylesheet" href="../css/checkout.css?v=fc76de5ff8">
+    <link rel="stylesheet" href="../css/checkout.css?v=8c669f123a">
     <script src="../js/theme-init.js?v=d487584e0d"></script>
 </head>
 <body>
@@ -49,6 +49,13 @@
     <main id="main" class="checkout-page">
 
         <h1>Paiement</h1>
+        <p class="checkout-page-subtitle">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Finalisez votre achat en toute sécurité
+        </p>
 
         <ol class="checkout-stepper" aria-label="Progression du paiement">
             <li class="checkout-stepper__step checkout-stepper__step--done">
@@ -149,61 +156,97 @@
                             <div role="tabpanel" id="panel-private" aria-labelledby="tab-private" tabindex="0">
                                 <div class="form-field">
                                         <label for="field-email">E-mail de livraison <abbr title="obligatoire" aria-label="obligatoire">*</abbr> <span class="field-note-ok">Envoi immédiat</span></label>
-                                        <input type="email" id="field-email" name="email" required autocomplete="email" placeholder="jean.dupont@email.fr" inputmode="email">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                            <input type="email" id="field-email" name="email" required autocomplete="email" placeholder="jean.dupont@email.fr" inputmode="email">
+                                        </div>
                                     </div>
                                 <div class="form-row--2">
                                     <div class="form-field">
                                         <label for="field-first-name">Prénom <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                        <input type="text" id="field-first-name" name="firstName" required autocomplete="given-name" placeholder="Jean">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            <input type="text" id="field-first-name" name="firstName" required autocomplete="given-name" placeholder="Jean">
+                                        </div>
                                     </div>
                                     <div class="form-field">
                                         <label for="field-last-name">Nom <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                        <input type="text" id="field-last-name" name="lastName" required autocomplete="family-name" placeholder="Dupont">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            <input type="text" id="field-last-name" name="lastName" required autocomplete="family-name" placeholder="Dupont">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-field">
                                         <label for="field-phone">Téléphone <span class="field-optional">(optionnel)</span></label>
-                                        <input type="tel" id="field-phone" name="phone" autocomplete="tel" placeholder="+33 6 00 00 00 00" inputmode="tel">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                            <input type="tel" id="field-phone" name="phone" autocomplete="tel" placeholder="+33 6 00 00 00 00" inputmode="tel">
+                                        </div>
                                     </div>
                             </div>
 
                             <div role="tabpanel" id="panel-business" aria-labelledby="tab-business" tabindex="0" hidden>
                                 <div class="form-field">
                                         <label for="field-email-b">E-mail de livraison <abbr title="obligatoire" aria-label="obligatoire">*</abbr> <span class="field-note-ok">Envoi immédiat</span></label>
-                                        <input type="email" id="field-email-b" name="email" required autocomplete="email" placeholder="jean@entreprise.fr" inputmode="email">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                            <input type="email" id="field-email-b" name="email" required autocomplete="email" placeholder="jean@entreprise.fr" inputmode="email">
+                                        </div>
                                     </div>
                                 <div class="form-row--2">
                                     <div class="form-field">
                                         <label for="field-first-name-b">Prénom <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                        <input type="text" id="field-first-name-b" name="firstName" required autocomplete="given-name" placeholder="Jean">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            <input type="text" id="field-first-name-b" name="firstName" required autocomplete="given-name" placeholder="Jean">
+                                        </div>
                                     </div>
                                     <div class="form-field">
                                         <label for="field-last-name-b">Nom <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                        <input type="text" id="field-last-name-b" name="lastName" required autocomplete="family-name" placeholder="Dupont">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                            <input type="text" id="field-last-name-b" name="lastName" required autocomplete="family-name" placeholder="Dupont">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-field">
                                         <label for="field-phone-b">Téléphone <span class="field-optional">(optionnel)</span></label>
-                                        <input type="tel" id="field-phone-b" name="phone" autocomplete="tel" placeholder="+33 1 00 00 00 00" inputmode="tel">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                            <input type="tel" id="field-phone-b" name="phone" autocomplete="tel" placeholder="+33 1 00 00 00 00" inputmode="tel">
+                                        </div>
                                     </div>
                                 <div class="business-fields">
                                     <div class="form-field">
                                         <label for="field-ragione-sociale">Raison sociale <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                        <input type="text" id="field-ragione-sociale" name="ragioneSociale" autocomplete="organization" placeholder="Entreprise S.A.S.">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-3"></path><path d="M9 9v.01"></path><path d="M9 12v.01"></path><path d="M9 15v.01"></path><path d="M9 18v.01"></path></svg>
+                                            <input type="text" id="field-ragione-sociale" name="ragioneSociale" autocomplete="organization" placeholder="Entreprise S.A.S.">
+                                        </div>
                                     </div>
                                     <div class="form-field">
                                         <label for="field-piva">N° TVA italienne (P.IVA) <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                        <input type="text" id="field-piva" name="piva" placeholder="12345678901" maxlength="11" inputmode="numeric" pattern="\d{11}" autocomplete="off">
+                                        <div class="input-icon-wrap">
+                                            <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="7" y1="8" x2="17" y2="8"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="7" y1="16" x2="13" y2="16"></line></svg>
+                                            <input type="text" id="field-piva" name="piva" placeholder="12345678901" maxlength="11" inputmode="numeric" pattern="\d{11}" autocomplete="off">
+                                        </div>
                                     </div>
                                     <div class="form-row--2">
                                         <div class="form-field">
                                             <label for="field-sdi">Code SDI <span class="field-optional">(opt. si PEC fourni)</span></label>
-                                            <input type="text" id="field-sdi" name="sdi" placeholder="0000000" maxlength="7" autocomplete="off" aria-describedby="sdi-hint">
+                                            <div class="input-icon-wrap">
+                                                <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                                <input type="text" id="field-sdi" name="sdi" placeholder="0000000" maxlength="7" autocomplete="off" aria-describedby="sdi-hint">
+                                            </div>
                                             <p id="sdi-hint" style="font-size:0.74rem;color:var(--page-text-muted);margin:0.2rem 0 0;">7 caractères alphanumériques — SDI ou PEC requis</p>
                                         </div>
                                         <div class="form-field">
                                             <label for="field-pec">PEC <span class="field-optional">(opt. si SDI fourni)</span></label>
-                                            <input type="email" id="field-pec" name="pec" placeholder="facture@pec.entreprise.fr" inputmode="email" autocomplete="off">
+                                            <div class="input-icon-wrap">
+                                                <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                                                <input type="email" id="field-pec" name="pec" placeholder="facture@pec.entreprise.fr" inputmode="email" autocomplete="off">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -215,26 +258,41 @@
                             <p class="field-hint">Votre panier contient un article physique (DVD ou autocollant COA) qui vous sera envoyé par courrier.</p>
                             <div class="form-field">
                                 <label for="field-address">Adresse (rue et numéro) <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="12 rue de la Paix">
+                                <div class="input-icon-wrap">
+                                    <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    <input type="text" id="field-address" name="address" autocomplete="street-address" placeholder="12 rue de la Paix">
+                                </div>
                             </div>
                             <div class="form-row--2">
                                 <div class="form-field">
                                     <label for="field-city">Ville <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                    <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="Paris">
+                                    <div class="input-icon-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M5 21V7l8-4v18"></path><path d="M19 21V11l-6-3"></path></svg>
+                                        <input type="text" id="field-city" name="city" autocomplete="address-level2" placeholder="Paris">
+                                    </div>
                                 </div>
                                 <div class="form-field">
                                     <label for="field-postal-code">Code postal <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                    <input type="text" id="field-postal-code" name="postalCode" autocomplete="postal-code" placeholder="75002">
+                                    <div class="input-icon-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg>
+                                        <input type="text" id="field-postal-code" name="postalCode" autocomplete="postal-code" placeholder="75002">
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-row--2">
                                 <div class="form-field">
                                     <label for="field-province">Région <span class="field-optional">(facultatif)</span></label>
-                                    <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
+                                    <div class="input-icon-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                                        <input type="text" id="field-province" name="province" autocomplete="address-level1" placeholder="">
+                                    </div>
                                 </div>
                                 <div class="form-field">
                                     <label for="field-country">Pays <abbr title="obligatoire" aria-label="obligatoire">*</abbr></label>
-                                    <input type="text" id="field-country" name="country" autocomplete="country-name" placeholder="France" value="France">
+                                    <div class="input-icon-wrap">
+                                        <svg class="input-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                        <input type="text" id="field-country" name="country" autocomplete="country-name" placeholder="France" value="France">
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -243,21 +301,28 @@
                             <p id="section-title-payment" class="form-section-title">Mode de paiement</p>
 
                             <div class="payment-options" role="radiogroup" aria-labelledby="section-title-payment">
+
+                                <!-- Stripe -->
                                 <div class="payment-option">
-                                    <input type="radio" name="payment-method" id="pay-stripe" value="stripe" checked>
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-stripe"
+                                        value="stripe"
+                                        checked
+                                    >
                                     <label class="payment-option-label" for="pay-stripe">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">Carte de crédit ou de débit</span>
-                                            <span class="payment-option-desc">Champs de carte sécurisés gérés par Stripe — chiffrés SSL, jamais sur nos serveurs</span>
-                                            <span class="payment-icons" aria-label="Méthodes acceptées: Visa, Mastercard, American Express, Apple Pay, Google Pay, Amazon Pay">
-                                                <span class="payment-icon payment-icon--img" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img" title="American Express"><img src="../asset/payments_logo/img-aml-store_Amex_logo.svg?v=27a9919e6a" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img" title="Apple Pay"><img src="../asset/payments_logo/img-aml-store_Apple_Pay_logo.svg?v=b772fd3954" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img" title="Google Pay"><img src="../asset/payments_logo/img-aml-store_Google_Pay_Logo.svg?v=f9ace8f0d4" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                                <span class="payment-icon payment-icon--img payment-icon--amazon-wide" title="Amazon Pay"><img src="../asset/payments_logo/img-aml-store_Amazon_Pay_logo.svg?v=0186c7551e" width="68" height="13" alt="" loading="lazy" decoding="async"></span>
-                                            </span>
+                                        <div class="payment-option-header">
+                                            <svg class="payment-tile-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                                                <line x1="2" y1="10" x2="22" y2="10"></line>
+                                            </svg>
+                                            <span class="payment-option-title">Carte</span>
+                                        </div>
+                                        <span class="payment-icons" aria-label="Méthodes acceptées : Visa, Mastercard">
+                                            <span class="payment-icon payment-icon--img" title="Visa"><img src="../asset/payments_logo/img-aml-store_Visa_logo.svg?v=a980021509" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
+                                            <span class="payment-icon payment-icon--img" title="Mastercard"><img src="../asset/payments_logo/img-aml-store_Mastercard_logo.svg?v=bd0a018453" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
                                         </span>
                                     </label>
                                 </div>
@@ -272,55 +337,73 @@
                                     >
                                     <label class="payment-option-label" for="pay-paypal">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">PayPal</span>
-                                            <span class="payment-option-desc">Payez avec votre compte PayPal ou par carte</span>
-                                            <span class="payment-icons" aria-label="PayPal">
-                                                <span class="payment-icon payment-icon--img" title="PayPal"><img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
+                                        <div class="payment-option-header">
+                                            <span class="payment-icon payment-icon--img payment-icon--tile" title="PayPal">
+                                                <img src="../asset/payments_logo/img-aml-store_PayPal-logo.svg?v=3ccafac25c" width="48" height="16" alt="" loading="lazy" decoding="async">
                                             </span>
-                                        </span>
+                                            <span class="payment-option-title">PayPal</span>
+                                        </div>
+                                        <span class="payment-option-badge">Paiement immédiat</span>
                                     </label>
                                 </div>
 
+                                <!-- Klarna -->
                                 <div class="payment-option">
-                                    <input type="radio" name="payment-method" id="pay-sepa" value="sepa">
-                                    <label class="payment-option-label" for="pay-sepa">
-                                        <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">Prélèvement SEPA</span>
-                                            <span class="payment-option-desc">La licence part à la confirmation du prélèvement</span>
-                                            <span class="payment-icons" aria-label="Moyens acceptés : SEPA">
-                                                <span class="payment-icon payment-icon--img" title="SEPA"><img src="../asset/payments_logo/img-aml-store_SEPA_logo.svg?v=a95e3ec55c" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                            </span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="payment-option">
-                                    <input type="radio" name="payment-method" id="pay-klarna" value="klarna">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-klarna"
+                                        value="klarna"
+                                    >
                                     <label class="payment-option-label" for="pay-klarna">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
+                                        <div class="payment-option-header">
+                                            <span class="payment-icon payment-icon--img payment-icon--tile" title="Klarna">
+                                                <img src="../asset/payments_logo/img-aml-store_Klarna_logo.svg?v=04a2758348" width="48" height="16" alt="" loading="lazy" decoding="async">
+                                            </span>
                                             <span class="payment-option-title">Klarna</span>
-                                            <span class="payment-option-desc">La licence part à la confirmation du paiement</span>
-                                            <span class="payment-icons" aria-label="Moyens acceptés : Klarna">
-                                                <span class="payment-icon payment-icon--img" title="Klarna"><img src="../asset/payments_logo/img-aml-store_Klarna_logo.svg?v=04a2758348" width="48" height="16" alt="" loading="lazy" decoding="async"></span>
-                                            </span>
-                                            </span>
-                                        </span>
+                                        </div>
+                                        <span class="payment-option-badge">En 3 fois</span>
                                     </label>
                                 </div>
+
+                                <!-- Bonifico -->
                                 <div class="payment-option">
-                                    <input type="radio" name="payment-method" id="pay-transfer" value="transfer">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-transfer"
+                                        value="transfer"
+                                    >
                                     <label class="payment-option-label" for="pay-transfer">
                                         <span class="payment-option-indicator" aria-hidden="true"></span>
-                                        <span class="payment-option-content">
-                                            <span class="payment-option-title">Virement bancaire</span>
-                                            <span class="payment-option-desc">1–3 jours ouvrables à réception du virement</span>
-                                            <span class="payment-icons" aria-label="Virement bancaire">
-                                                <span class="payment-icon payment-icon--img payment-icon--transfer" title="Virement bancaire"><img src="../asset/payments_logo/img-aml-store_bank-transfer.svg?v=90955b0eb9" width="40" height="18" alt="" loading="lazy" decoding="async"></span>
+                                        <div class="payment-option-header">
+                                            <svg class="payment-tile-icon" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                                                <path d="M3 21h18"></path><path d="M3 10h18"></path><path d="M5 6l7-3 7 3"></path><path d="M4 10v11"></path><path d="M20 10v11"></path><path d="M8 14v4"></path><path d="M12 14v4"></path><path d="M16 14v4"></path>
+                                            </svg>
+                                            <span class="payment-option-title">Virement</span>
+                                        </div>
+                                        <span class="payment-option-badge">Bancaire</span>
+                                    </label>
+                                </div>
+
+                                <!-- SEPA -->
+                                <div class="payment-option">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        id="pay-sepa"
+                                        value="sepa"
+                                    >
+                                    <label class="payment-option-label" for="pay-sepa">
+                                        <span class="payment-option-indicator" aria-hidden="true"></span>
+                                        <div class="payment-option-header">
+                                            <span class="payment-icon payment-icon--img payment-icon--tile" title="SEPA">
+                                                <img src="../asset/payments_logo/img-aml-store_SEPA_logo.svg?v=a95e3ec55c" width="48" height="16" alt="" loading="lazy" decoding="async">
                                             </span>
-                                        </span>
+                                            <span class="payment-option-title">SEPA</span>
+                                        </div>
+                                        <span class="payment-option-badge">Prélèvement</span>
                                     </label>
                                 </div>
                             </div>
@@ -337,7 +420,13 @@
                                     <h3>Coordonnées bancaires</h3>
                                     <ul class="transfer-info-list">
                                         <li><span class="transfer-info-label">IBAN</span>
-                                            <span class="transfer-info-value iban">IT91 S062 3033 5400 0001 5095 392</span></li>
+                                            <span class="iban-copy-row">
+                                                <span class="transfer-info-value iban">IT91 S062 3033 5400 0001 5095 392</span>
+                                                <button type="button" class="btn-copy-iban" aria-label="Copier l'IBAN dans le presse-papiers" data-copied-label="Copié !">
+                                                    <svg class="copy-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                                    <span class="btn-copy-iban__text">Copier l'IBAN</span>
+                                                </button>
+                                            </span></li>
                                         <li><span class="transfer-info-label">Titulaire</span><span class="transfer-info-value">Licensoft di Cardelli Antonino</span></li>
                                         <li><span class="transfer-info-label">Banque</span><span class="transfer-info-value">Crédit Agricole</span></li>
                                         <li><span class="transfer-info-label">Montant</span><span class="transfer-info-value" id="transfer-amount">—</span></li>
@@ -366,24 +455,37 @@
                         <div class="checkout-actions">
                             <button type="button" id="btn-stripe-submit" class="btn-checkout-primary">
                                 <span class="btn-spinner" aria-hidden="true"></span>
-                                <svg class="btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text">Finaliser la commande — <span id="btn-pay-amount">—</span></span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text">Payer en toute sécurité — <span id="btn-pay-amount">—</span> <span class="btn-arrow" aria-hidden="true">›</span></span>
                             </button>
                         <p class="checkout-cta-note" id="checkout-cta-note"><span class="checkout-cta-note__dot" aria-hidden="true"></span>Livraison numérique par e-mail · 2–15 min</p>
                             <button type="button" id="btn-transfer-submit" class="btn-checkout-primary" style="display:none;" aria-label="Confirmer la commande et voir les instructions de virement">
                                 <span class="btn-spinner" aria-hidden="true"></span>
-                                <span class="btn-text">Confirmer la commande</span>
+                                <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="btn-text">Confirmer la commande en toute sécurité <span class="btn-arrow" aria-hidden="true">›</span></span>
                             </button>
+
+                            <div class="checkout-security-badge" aria-label="Sécurité et chiffrement des données">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <span>Vos données sont protégées et chiffrées en SSL 256 bits</span>
+                            </div>
                         </div>
 
-                        <div class="checkout-guarantee-box" role="note">
-                            <p class="checkout-guarantee-box__title">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                Livraison numérique immédiate 24h/24
-                            </p>
-                            <p class="checkout-guarantee-box__text">
-                                Clé de produit originale, lien officiel et guide d'activation envoyés par e-mail juste après le paiement.
-                            </p>
-                        </div>
+                        <ul class="checkout-trust-pills" role="list">
+                            <li class="checkout-trust-pill">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Livraison par e-mail · 2–15 min
+                            </li>
+                            <li class="checkout-trust-pill">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Licence à vie 100 % originale
+                            </li>
+                            <li class="checkout-trust-pill">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Assistance après-vente incluse
+                            </li>
+                        </ul>
 
                         <p class="checkout-terms">
                             En continuant, vous acceptez nos <a href="/fr/terms-and-conditions" rel="noopener">conditions générales de vente</a>
@@ -456,7 +558,7 @@
     <script src="../js/locale-path.js?v=c22dd27cce"></script>
     <script src="../js/cart.js?v=fc79103c0c" defer></script>
     <script src="../components/cookie-banner.js?v=9b51b2e8c4" defer></script>
-    <script src="../js/checkout.js?v=e46cb58ec0" defer></script>
+    <script src="../js/checkout.js?v=a61f981ed5" defer></script>
 
 </body>
 </html>

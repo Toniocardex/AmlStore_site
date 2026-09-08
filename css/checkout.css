@@ -332,53 +332,6 @@ body {
     }
 }
 
-/* ── Compat lingue non ancora migrate alle tessere ──────────────────────────
-   checkout.css e' condiviso dai 7 checkout, ma solo /it/ ha il markup a
-   tessere (.payment-option-header). de/en/es/fr/nl/pt usano ancora
-   .payment-option-content con le descrizioni: senza questo blocco il loro
-   markup a lista finirebbe schiacciato nella griglia a 5 colonne e le
-   descrizioni sparirebbero. Rimuovere quando tutti e 7 hanno le tessere. */
-.payment-options:not(:has(.payment-option-header)) {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.payment-options:not(:has(.payment-option-header)) .payment-option-label {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 1rem;
-    padding: 1rem 1.1rem;
-    height: auto;
-    min-height: 0;
-    text-align: left;
-}
-
-.payment-options:not(:has(.payment-option-header)) .payment-option-content {
-    flex: 1;
-    min-width: 0;
-    align-items: flex-start;
-}
-
-.payment-options:not(:has(.payment-option-header)) .payment-option-indicator {
-    position: static;
-    width: 18px;
-    height: 18px;
-    margin-top: 1px;
-}
-
-.payment-options:not(:has(.payment-option-header)) .payment-option-desc {
-    display: block;
-    font-size: 0.8rem;
-    line-height: 1.45;
-    color: var(--page-text-secondary);
-}
-
-.payment-options:not(:has(.payment-option-header)) .payment-icons {
-    justify-content: flex-start;
-}
-
 .payment-option {
     position: relative;
     display: flex;
@@ -463,8 +416,7 @@ body {
     transform: rotate(45deg) translate(-0.5px, -0.5px);
 }
 
-.payment-option-header,
-.payment-option-content {
+.payment-option-header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -481,10 +433,6 @@ body {
     font-weight: 700;
     color: var(--page-text);
     line-height: 1.2;
-}
-
-.payment-option-desc {
-    display: none;
 }
 
 .payment-option-badge {
@@ -1602,34 +1550,6 @@ body {
 
 /* ═══ Micro-badge garanzie minimali ════════════════════════════════════════ */
 
-/* Box garanzia "legacy": /it/ e' passato alle pill qui sotto, ma i 6 checkout
-   non ancora migrati hanno ancora <div class="checkout-guarantee-box">. Le due
-   forme convivono finche' la migrazione non e' completa. */
-.checkout-guarantee-box {
-    margin-top: 1rem;
-    padding: 0.85rem 1rem;
-    border-radius: 10px;
-    background: var(--aml-ok-bg);
-    border: 1px solid color-mix(in srgb, var(--aml-ok) 22%, transparent);
-}
-
-.checkout-guarantee-box__title {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin: 0 0 0.3rem;
-    font-size: 0.82rem;
-    font-weight: 800;
-    color: var(--aml-ok);
-}
-
-.checkout-guarantee-box__text {
-    margin: 0;
-    font-size: 0.76rem;
-    line-height: 1.5;
-    color: color-mix(in srgb, var(--aml-ok) 82%, var(--page-text));
-}
-
 .checkout-trust-pills {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1741,15 +1661,18 @@ body {
         transform: none;
     }
 
-    /* Spazio perche' garanzia e termini non finiscano sotto la barra. */
+    /* Spazio perche' trust pill e termini non finiscano sotto la barra. La barra
+       fissa non e' piu' solo il bottone: sotto ci sono la nota consegna e il
+       badge SSL, ~130px in tutto. 84px (calibrati quando la barra era il solo
+       bottone) lasciavano i termini per meta' coperti. */
     #checkout-form {
-        padding-bottom: 84px;
+        padding-bottom: 140px;
     }
 
     /* Idem per i link legali in fondo: la barra e' fixed e li coprirebbe
        proprio quando l'utente scorre in fondo per controllarli. */
     .checkout-chrome-footer {
-        padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+        padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px));
     }
 }
 

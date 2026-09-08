@@ -1717,12 +1717,12 @@
     }
 
     function initIbanCopy() {
-        var DONE_LABEL = 'Copiato!';
         document.querySelectorAll('.btn-copy-iban').forEach(function (btn) {
             var row    = btn.closest('.iban-copy-row');
             var ibanEl = row && row.querySelector('.iban');
             if (!ibanEl) return;
 
+            var doneLabel = btn.getAttribute('data-copied-label') || 'Copiato!';
             var textEl   = btn.querySelector('.btn-copy-iban__text');
             var original = textEl ? textEl.textContent : '';
             var timer;
@@ -1733,7 +1733,7 @@
                 copyText(value).then(function (ok) {
                     if (!ok) return;
                     btn.classList.add('copied');
-                    if (textEl) textEl.textContent = DONE_LABEL;
+                    if (textEl) textEl.textContent = doneLabel;
                     clearTimeout(timer);
                     timer = setTimeout(function () {
                         btn.classList.remove('copied');
