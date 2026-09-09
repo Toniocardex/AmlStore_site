@@ -622,5 +622,25 @@
     "currency": "EUR",
     "type": "subscription",
     "category": "antivirus"
+  },
+  {
+    "sku": "EHSP-N1A1-VAKT-E",
+    "ean": "4022863006551",
+    "name": "ESET HOME Security Premium | 1 Anno | 1 Dispositivo",
+    "unitAmountMinor": 2899,
+    "compareAtMinor": 7998,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
+  },
+  {
+    "sku": "EHSP-N1A3-VAKT-E",
+    "ean": "4022863006568",
+    "name": "ESET HOME Security Premium | 1 Anno | 3 Dispositivi",
+    "unitAmountMinor": 3495,
+    "compareAtMinor": 8999,
+    "currency": "EUR",
+    "type": "subscription",
+    "category": "antivirus"
   }
 ]

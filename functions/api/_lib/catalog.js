@@ -71,6 +71,8 @@ export const CATALOG = {
   "EP2-06606": { name: "Microsoft Office 2024 Home and Business | Windows/Mac | Licenza ESD", unitAmountMinor: 20900, compareAtMinor: 29900, currency: 'EUR', type: "perpetual", category: "suite office" },
   "5W1-04285": { name: "Microsoft Outlook 2024 (Standalone) | Licenza ESD Originale", unitAmountMinor: 8200, compareAtMinor: 14900, currency: 'EUR', type: "perpetual", category: "suite office > microsoft office 2024" },
   "EAVH-N2-A1": { name: "Eset Nod32 Antivirus | 2 Anni | 1 Dispositivo", unitAmountMinor: 5200, compareAtMinor: 7998, currency: 'EUR', type: "subscription", category: "antivirus" },
+  "EHSP-N1A1-VAKT-E": { name: "ESET HOME Security Premium | 1 Anno | 1 Dispositivo", unitAmountMinor: 2899, compareAtMinor: 7998, currency: 'EUR', type: "subscription", category: "antivirus" },
+  "EHSP-N1A3-VAKT-E": { name: "ESET HOME Security Premium | 1 Anno | 3 Dispositivi", unitAmountMinor: 3495, compareAtMinor: 8999, currency: 'EUR', type: "subscription", category: "antivirus" },
 };
 
 /** @param {string} sku */

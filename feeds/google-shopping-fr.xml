@@ -174,6 +174,38 @@
       <g:product_type>Multimedia &gt; Photoediting</g:product_type>
     </item>
     <item>
+      <g:id>EHSP-N1A1-VAKT-E</g:id>
+      <title>ESET HOME Security Premium — 1 appareil · 1 an</title>
+      <description>ESET HOME Security Premium pour 1 appareil : licence authentique 1 an avec antivirus multicouche, VPN illimité et chiffrement des données. Livraison par e-mail en quelques minutes.</description>
+      <link>https://eurolicenze.com/fr/eset-home-security-premium-1-device</link>
+      <g:image_link>https://eurolicenze.com/asset/media/products/eset-home-security-premium-1-device.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>28.99 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:adult>no</g:adult>
+      <g:brand>ESET</g:brand>
+      <g:gtin>4022863006551</g:gtin>
+      <g:google_product_category>Software &gt; Computer Software &gt; Antivirus &amp; Security Software</g:google_product_category>
+      <g:product_type>Antivirus</g:product_type>
+      <g:item_group_id>eset-home-security-premium</g:item_group_id>
+    </item>
+    <item>
+      <g:id>EHSP-N1A3-VAKT-E</g:id>
+      <title>ESET HOME Security Premium — 3 appareils · 1 an</title>
+      <description>ESET HOME Security Premium pour 3 appareils : licence authentique 1 an avec antivirus multicouche, VPN illimité et chiffrement des données. Livraison par e-mail en quelques minutes.</description>
+      <link>https://eurolicenze.com/fr/eset-home-security-premium-3-devices</link>
+      <g:image_link>https://eurolicenze.com/asset/media/products/eset-home-security-premium-3-devices.jpg</g:image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>34.95 EUR</g:price>
+      <g:condition>new</g:condition>
+      <g:adult>no</g:adult>
+      <g:brand>ESET</g:brand>
+      <g:gtin>4022863006568</g:gtin>
+      <g:google_product_category>Software &gt; Computer Software &gt; Antivirus &amp; Security Software</g:google_product_category>
+      <g:product_type>Antivirus</g:product_type>
+      <g:item_group_id>eset-home-security-premium</g:item_group_id>
+    </item>
+    <item>
       <g:id>EAVH-N2-A1</g:id>
       <title>ESET NOD32 Antivirus – 1 Appareil (2 Ans)</title>
       <description>ESET NOD32 Antivirus pour 1 Appareil : protection légère et réactive, licence numérique authentique et envoi rapide par e-mail. Activation sur ESET HOME.</description>
@@ -381,7 +413,7 @@
     <item>
       <g:id>1108921</g:id>
       <title>McAfee Total Protection 2026 — 1 appareil · 1 an</title>
-      <description>McAfee Total Protection pour 1 appareil : protection multi-appareils complète avec sécurité web avancée, licence authentique et livraison par e-mail. Activation sur McAfee My Account.</description>
+      <description>McAfee Total Protection 2026 pour 1 appareil : licence authentique 1 an avec antivirus, McAfee WebAdvisor et optimisation du PC. Livraison par e-mail en quelques minutes.</description>
       <link>https://eurolicenze.com/fr/mcafee-total-protection-1-device</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-1-device.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
@@ -397,7 +429,7 @@
     <item>
       <g:id>MTP00MNRXRAAD</g:id>
       <title>McAfee Total Protection 2026 — 10 appareils · 1 an</title>
-      <description>McAfee Total Protection pour 10 appareils : protection multi-appareils complète avec sécurité web avancée, licence authentique et livraison par e-mail. Activation sur McAfee My Account.</description>
+      <description>McAfee Total Protection 2026 pour 10 appareils : licence authentique 1 an avec antivirus, McAfee WebAdvisor et optimisation du PC. Livraison par e-mail en quelques minutes.</description>
       <link>https://eurolicenze.com/fr/mcafee-total-protection-10-devices</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-10-devices.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
@@ -413,7 +445,7 @@
     <item>
       <g:id>MTP-3D-1Y</g:id>
       <title>McAfee Total Protection 2026 — 3 appareils · 1 an</title>
-      <description>McAfee Total Protection pour 3 appareils : protection multi-appareils complète avec sécurité web avancée, licence authentique et livraison par e-mail. Activation sur McAfee My Account.</description>
+      <description>McAfee Total Protection 2026 pour 3 appareils : licence authentique 1 an avec antivirus, McAfee WebAdvisor et optimisation du PC. Livraison par e-mail en quelques minutes.</description>
       <link>https://eurolicenze.com/fr/mcafee-total-protection-3-devices</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-3-devices.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
@@ -429,7 +461,7 @@
     <item>
       <g:id>1108923</g:id>
       <title>McAfee Total Protection 2026 — 5 appareils · 1 an</title>
-      <description>McAfee Total Protection pour 5 appareils : protection multi-appareils complète avec sécurité web avancée, licence authentique et livraison par e-mail. Activation sur McAfee My Account.</description>
+      <description>McAfee Total Protection 2026 pour 5 appareils : licence authentique 1 an avec antivirus, McAfee WebAdvisor et optimisation du PC. Livraison par e-mail en quelques minutes.</description>
       <link>https://eurolicenze.com/fr/mcafee-total-protection-5-devices</link>
       <g:image_link>https://eurolicenze.com/asset/media/products/mcafee-total-protection-5-devices.jpg</g:image_link>
       <g:availability>in_stock</g:availability>
