@@ -111,7 +111,7 @@ La mail licenza e l’assegnazione stanno **fuori** dal `if (wasUnpaid)` / `if (
 
 ### 6.1 Import chiavi
 
-`POST /api/admin/licenses/import` **solo** inserisce nel pool (`available`). Non evade gli ordini già pagati in coda: quelli restano sul flusso manuale (generatore) finché un operatore non preme Riprova sul singolo ordine.
+`POST /api/admin/licenses/import` **solo** inserisce nel pool (`available`). Non tocca gli ordini già pagati.
 
 La pesca dal pool avviene **solo** sugli hook di pagamento catturato (§6): il prossimo ordine pagato con chiavi sufficienti riceve la mail del generatore.
 
@@ -137,9 +137,9 @@ Altrimenti: **copy attuale**, incluse le stringhe `DA INVIARE MANUALMENTE` e `in
 
 | Route | Ruolo |
 |---|---|
-| `GET /api/admin/licenses` | Riepilogo per SKU (available/assigned), catalogo digitale, coda pending |
+| `GET /api/admin/licenses` | Riepilogo per SKU (available/assigned) e catalogo digitale |
 | `GET /api/admin/licenses?sku=` | Chiavi **disponibili mascherate** |
-| `POST /api/admin/licenses/import` | `{ sku, keys }` testo o array; duplicati `key_norm` ignorati. **Non** evade la coda. |
+| `POST /api/admin/licenses/import` | `{ sku, keys }` testo o array; duplicati `key_norm` ignorati |
 | `POST /api/admin/licenses/revoke` | Solo `available` |
 | `GET /api/admin/orders/:id` | + `licenseStatus`, `licenseEmailSentAt`, chiavi assegnate **in chiaro** |
 | `POST /api/admin/orders/:id/fulfill` | Riprova orchestratore su ordine già `paid` |
@@ -150,7 +150,7 @@ Import: max 500 chiavi, lunghezza max 256, scarta vuote/`#`. SKU deve esistere i
 
 ## 9. UI admin
 
-Nuova tab **Licenze** (`#licenses`): import, tabella pool, elimina disponibili, coda in attesa. Magazzino resta **solo fisico**.
+Nuova tab **Licenze** (`#licenses`): import, tabella pool, elimina disponibili. Magazzino resta **solo fisico**.
 
 Dettaglio ordine: stato evasione, chiavi, pulsante Riprova se `paid` e non `fulfilled`. Link al generatore invariato.
 

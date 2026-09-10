@@ -14,7 +14,6 @@ const MAX_IMPORT = 500;
 const MAX_KEY_LEN = 256;
 const MIN_KEY_LEN = 6;
 const IMPORT_BATCH = 40;
-const PENDING_FULFILL_LIMIT = 15;
 /** Allineato a resolveAndValidateItems: una riga carrello non supera 99. */
 const MAX_QTY_PER_LINE = 99;
 const ASSIGN_STALE_MS = 120_000;
@@ -595,53 +594,4 @@ export async function listAvailableKeysForSku(db, sku, limit = 100) {
         importedAt: r.imported_at,
         importedBy: r.imported_by || null,
     }));
-}
-
-function likeSkuPattern(sku) {
-    return `%"sku":"${String(sku).replace(/[%_]/g, '\\$&')}"%`;
-}
-
-export async function listPendingLicenseOrders(db, { sku = '', limit = 30 } = {}) {
-    const cap = Math.min(50, Math.max(1, Number(limit) || 30));
-    let sql = `
-        SELECT id, status, paid_at, created_at, customer_email,
-               customer_first_name, customer_last_name, locale,
-               line_items, license_status, license_email_sent_at
-        FROM orders
-        WHERE status = 'paid'
-          AND (license_status IS NULL OR license_status = 'pending')
-    `;
-    const binds = [];
-    if (sku) {
-        sql += ' AND line_items LIKE ?';
-        binds.push(likeSkuPattern(sku));
-    }
-    sql += ' ORDER BY COALESCE(paid_at, created_at) ASC LIMIT ?';
-    binds.push(cap);
-    const rows = await db.prepare(sql).bind(...binds).all();
-    return (rows.results || []).map((row) => {
-        const items = safeParseJSON(row.line_items, []);
-        const needed = digitalNeedFromItems(items);
-        return {
-            orderId: row.id,
-            paidAt: row.paid_at,
-            createdAt: row.created_at,
-            email: row.customer_email,
-            name: `${row.customer_first_name || ''} ${row.customer_last_name || ''}`.trim(),
-            licenseStatus: row.license_status || null,
-            needed: Object.fromEntries(needed),
-        };
-    });
-}
-
-export async function fulfillPendingOrdersForSku(env, sku, eventSrc) {
-    const orders = await listPendingLicenseOrders(env.DB, { sku, limit: PENDING_FULFILL_LIMIT });
-    const results = [];
-    for (const summary of orders) {
-        const row = await env.DB.prepare('SELECT * FROM orders WHERE id = ?').bind(summary.orderId).first();
-        if (!row || row.status !== 'paid') continue;
-        const result = await fulfillLicensesForPaidOrder(env, row, eventSrc);
-        results.push({ orderId: summary.orderId, status: result.status, emailed: result.emailed || 0 });
-    }
-    return results;
 }

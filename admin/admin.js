@@ -1381,14 +1381,11 @@
         show('adm-licenses-loading');
         hide('adm-licenses-error');
         hide('adm-licenses-table-wrap');
-        hide('adm-licenses-pending-wrap');
-        hide('adm-licenses-pending-title');
 
         apiGet('/api/admin/licenses').then(function (data) {
             state.licensesLoading = false;
             hide('adm-licenses-loading');
             fillLicenseSkuSelect(data.catalog || []);
-            renderLicensePending(data.pendingOrders || []);
             renderLicensePool(data.skus || []);
         }).catch(function (e) {
             state.licensesLoading = false;
@@ -1409,31 +1406,6 @@
                 return '<option value="' + esc(it.sku) + '">' + esc(it.sku) + ' — ' + esc(it.name) + '</option>';
             }).join('');
         if (current) sel.value = current;
-    }
-
-    function renderLicensePending(orders) {
-        var wrap = $('adm-licenses-pending-wrap');
-        var title = $('adm-licenses-pending-title');
-        var tbody = $('adm-licenses-pending-tbody');
-        if (!orders.length) {
-            if (wrap) wrap.hidden = true;
-            if (title) title.hidden = true;
-            return;
-        }
-        if (title) title.hidden = false;
-        if (wrap) wrap.hidden = false;
-        tbody.innerHTML = orders.map(function (o) {
-            var needed = Object.keys(o.needed || {}).map(function (sku) {
-                return esc(sku) + ' ×' + (o.needed[sku] || 1);
-            }).join(', ');
-            return '<tr>'
-                + '<td class="adm-td--nowrap"><span class="adm-order-id">' + esc(o.orderId) + '</span></td>'
-                + '<td>' + esc(o.name || '') + '<div class="adm-customer-email">' + esc(o.email || '') + '</div></td>'
-                + '<td class="adm-sku">' + needed + '</td>'
-                + '<td class="adm-muted">' + esc(fmtDate(o.paidAt || o.createdAt)) + '</td>'
-                + '<td class="adm-th--center"><button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" data-license-fulfill="' + esc(o.orderId) + '">Riprova</button></td>'
-                + '</tr>';
-        }).join('');
     }
 
     function renderLicensePool(skus) {
@@ -1943,14 +1915,6 @@
                         .then(function () { toast('Chiave rimossa dal pool', 'info'); loadLicenses(); })
                         .catch(function (err) { toast((err.data && err.data.error) || err.message, 'error'); });
                 }
-            });
-        }
-        var pendingTbody = $('adm-licenses-pending-tbody');
-        if (pendingTbody) {
-            pendingTbody.addEventListener('click', function (e) {
-                if (!e.target || !e.target.closest) return;
-                var btn = e.target.closest('[data-license-fulfill]');
-                if (btn) doFulfillLicenses(btn.getAttribute('data-license-fulfill'));
             });
         }
         var stockTbody = $('adm-stock-tbody');
