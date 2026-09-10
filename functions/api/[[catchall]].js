@@ -66,8 +66,7 @@ import { assertCartStock, deductStockForPaidOrder, getStockQty,
          listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
 import { fulfillLicensesForPaidOrder, isLicensesSchemaMissing,
          importLicenseKeys, revokeAvailableKey, summarizeLicensePool,
-         listAvailableKeysForSku, listDigitalSkus, listPendingLicenseOrders,
-         listAssignedKeysForOrder, fulfillPendingOrdersForSku } from './_lib/licenses.js';
+         listAvailableKeysForSku, listDigitalSkus, listPendingLicenseOrders } from './_lib/licenses.js';
 import { safeParseJSON }                                 from './_lib/utils.js';
 import { checkCheckoutEmailRateLimit,
          checkExpressCheckoutIpRateLimit,
@@ -1970,16 +1969,7 @@ async function handleAdminRoute(path, request, env, context) {
         const body = await request.json().catch(() => ({}));
         try {
             const saved = await importLicenseKeys(env.DB, body.sku, body.keys, actorEmail);
-            let fulfilled = [];
-            if (saved.imported > 0) {
-                fulfilled = await fulfillPendingOrdersForSku(
-                    env, String(body.sku || '').trim(), 'license_import'
-                ).catch((e) => {
-                    console.error('[licenses] coda dopo import fallita:', e?.message || e);
-                    return [];
-                });
-            }
-            return adminJson({ ok: true, ...saved, fulfilled });
+            return adminJson({ ok: true, ...saved });
         } catch (e) {
             const status = e.reason === 'unknown_sku' || e.reason === 'physical_sku' ? 400 : 400;
             return adminJson({ ok: false, error: e.message, reason: e.reason || 'error' }, status);

@@ -109,9 +109,11 @@ Innesti obbligatori (stesso helper, anche sui retry):
 
 La mail licenza e l’assegnazione stanno **fuori** dal `if (wasUnpaid)` / `if (status !== 'paid')` delle email di conferma, come lo stock: un retry deve poter completare `emailed_at` se la prima mail licenza è fallita.
 
-### 6.1 Import chiavi e coda
+### 6.1 Import chiavi
 
-Dopo `POST /api/admin/licenses/import` per SKU X: fino a 15 ordini `paid` con `license_status` `pending` o NULL il cui `line_items` contiene quello SKU, FIFO su `paid_at`. Stesso orchestratore. Se il pool ora copre, mail del generatore; altrimenti nessuno di quei tentativi cambia il manuale.
+`POST /api/admin/licenses/import` **solo** inserisce nel pool (`available`). Non evade gli ordini già pagati in coda: quelli restano sul flusso manuale (generatore) finché un operatore non preme Riprova sul singolo ordine.
+
+La pesca dal pool avviene **solo** sugli hook di pagamento catturato (§6): il prossimo ordine pagato con chiavi sufficienti riceve la mail del generatore.
 
 ## 7. Email
 
@@ -137,7 +139,7 @@ Altrimenti: **copy attuale**, incluse le stringhe `DA INVIARE MANUALMENTE` e `in
 |---|---|
 | `GET /api/admin/licenses` | Riepilogo per SKU (available/assigned), catalogo digitale, coda pending |
 | `GET /api/admin/licenses?sku=` | Chiavi **disponibili mascherate** |
-| `POST /api/admin/licenses/import` | `{ sku, keys }` testo o array; duplicati `key_norm` ignorati; poi coda §6.1 |
+| `POST /api/admin/licenses/import` | `{ sku, keys }` testo o array; duplicati `key_norm` ignorati. **Non** evade la coda. |
 | `POST /api/admin/licenses/revoke` | Solo `available` |
 | `GET /api/admin/orders/:id` | + `licenseStatus`, `licenseEmailSentAt`, chiavi assegnate **in chiaro** |
 | `POST /api/admin/orders/:id/fulfill` | Riprova orchestratore su ordine già `paid` |

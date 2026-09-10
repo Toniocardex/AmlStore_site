@@ -1502,8 +1502,7 @@
         apiPost('/api/admin/licenses/import', { sku: sku, keys: keys }).then(function (res) {
             var n = Number(res.imported) || 0;
             var dup = Number(res.duplicates) || 0;
-            var auto = (res.fulfilled || []).filter(function (f) { return f.status === 'fulfilled'; }).length;
-            toast('Importate ' + n + (dup ? ' · ' + dup + ' duplicate' : '') + (auto ? ' · ' + auto + ' ordini evasi' : ''), 'success');
+            toast('Importate ' + n + ' nel pool' + (dup ? ' · ' + dup + ' duplicate' : ''), 'success');
             if ($('license-import-keys')) $('license-import-keys').value = '';
             loadLicenses();
         }).catch(function (e) {
