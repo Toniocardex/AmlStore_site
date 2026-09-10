@@ -57,7 +57,12 @@ CREATE TABLE IF NOT EXISTS orders (
     marked_paid_at               TEXT,                    -- timestamp conferma manuale bonifico
     marked_paid_by               TEXT,                    -- email admin da JWT
     admin_notes                  TEXT,                    -- note opzionali admin
-    paid_notification_sent_at    TEXT                     -- idempotenza 2a email bonifico (pagamento confermato)
+    paid_notification_sent_at    TEXT,                    -- idempotenza 2a email bonifico (pagamento confermato)
+
+    -- Evasione licenze digitali (ADR-004). NULL = ordine precedente alla feature.
+    license_status               TEXT,                   -- pending | assigning | fulfilled | not_applicable
+    license_email_sent_at        TEXT,
+    license_email_event_src      TEXT
 );
 
 -- Indici per lookup rapidi
@@ -135,3 +140,21 @@ CREATE TABLE IF NOT EXISTS analytics_events (
 
 CREATE INDEX IF NOT EXISTS idx_analytics_events_name_created ON analytics_events(event_name, created_at);
 CREATE INDEX IF NOT EXISTS idx_analytics_events_order        ON analytics_events(order_id);
+
+-- Magazzino chiavi digitali. Incluso anche in schema-licenses-migration.sql
+-- per aggiornare in sicurezza database creati prima di ADR-004.
+CREATE TABLE IF NOT EXISTS license_keys (
+    id            TEXT PRIMARY KEY,
+    sku           TEXT NOT NULL,
+    key_norm      TEXT NOT NULL UNIQUE,
+    key_material  TEXT NOT NULL,
+    status        TEXT NOT NULL DEFAULT 'available',
+    order_id      TEXT,
+    assigned_at   TEXT,
+    emailed_at    TEXT,
+    imported_at   TEXT NOT NULL,
+    imported_by   TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_license_keys_sku_status ON license_keys(sku, status);
+CREATE INDEX IF NOT EXISTS idx_license_keys_order      ON license_keys(order_id);

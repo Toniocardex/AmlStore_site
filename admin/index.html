@@ -21,6 +21,7 @@
     <nav class="adm-header__nav" aria-label="Sezioni admin">
         <button type="button" class="adm-nav-btn is-active" data-adm-view="orders" id="nav-orders">Ordini</button>
         <button type="button" class="adm-nav-btn" data-adm-view="stock" id="nav-stock">Magazzino</button>
+        <button type="button" class="adm-nav-btn" data-adm-view="licenses" id="nav-licenses">Licenze</button>
         <button type="button" class="adm-nav-btn" data-adm-view="carts" id="nav-carts">Carrelli</button>
         <button type="button" class="adm-nav-btn" data-adm-view="analytics" id="nav-analytics">Analytics</button>
         <a class="adm-nav-btn" href="/admin/support/">Supporto</a>
@@ -186,6 +187,77 @@
                     </tr>
                 </thead>
                 <tbody id="adm-stock-tbody"></tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<!-- ── Vista Licenze (pool chiavi digitali, ADR-004) ──────────────────────── -->
+<div class="adm-layout adm-layout--stock" id="adm-view-licenses" hidden>
+    <main class="adm-main adm-main--full">
+        <div class="adm-toolbar">
+            <h1 class="adm-page-title">Licenze</h1>
+            <div class="adm-toolbar__right">
+                <span class="adm-count" id="adm-licenses-count"></span>
+                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btn-licenses-reload">Ricarica</button>
+            </div>
+        </div>
+        <p class="adm-stock-hint">Pool di chiavi ESD. Se al pagamento c'è una chiave per ogni riga digitale, parte in automatico la stessa email del generatore. Se manca anche una chiave, resta conferma ordine + invio manuale.</p>
+
+        <form class="adm-license-import" id="adm-license-import">
+            <div class="adm-license-import__row">
+                <div>
+                    <label class="adm-label" for="license-import-sku">SKU</label>
+                    <select id="license-import-sku" class="adm-input" required>
+                        <option value="">Seleziona prodotto…</option>
+                    </select>
+                </div>
+                <div class="adm-license-import__keys">
+                    <label class="adm-label" for="license-import-keys">Chiavi (una per riga)</label>
+                    <textarea id="license-import-keys" class="adm-input adm-textarea" rows="5" placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX" required></textarea>
+                </div>
+            </div>
+            <button type="submit" class="adm-btn adm-btn--primary" id="btn-license-import">Importa nel pool</button>
+        </form>
+
+        <div class="adm-loading" id="adm-licenses-loading" aria-live="polite" hidden>
+            <div class="adm-spinner"></div>
+            <span>Caricamento pool licenze…</span>
+        </div>
+        <div class="adm-empty" id="adm-licenses-error" hidden>
+            <p class="adm-empty__icon">⚠️</p>
+            <p id="adm-licenses-error-msg">Errore caricamento licenze.</p>
+        </div>
+
+        <h2 class="adm-filter-section__title" id="adm-licenses-pending-title" hidden>Ordini in attesa di chiave</h2>
+        <div class="adm-table-wrap" id="adm-licenses-pending-wrap" hidden>
+            <table class="adm-table">
+                <thead>
+                    <tr>
+                        <th>Ordine</th>
+                        <th>Cliente</th>
+                        <th>SKU mancanti</th>
+                        <th>Pagato</th>
+                        <th class="adm-th--center">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="adm-licenses-pending-tbody"></tbody>
+            </table>
+        </div>
+
+        <h2 class="adm-filter-section__title">Pool</h2>
+        <div class="adm-table-wrap" id="adm-licenses-table-wrap" hidden>
+            <table class="adm-table" id="adm-licenses-table">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Prodotto</th>
+                        <th class="adm-th--center">Disponibili</th>
+                        <th class="adm-th--center">Assegnate</th>
+                        <th class="adm-th--center">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="adm-licenses-tbody"></tbody>
             </table>
         </div>
     </main>

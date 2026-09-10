@@ -24,6 +24,8 @@
 import { now, safeParseJSON }          from './utils.js';
 import { sendInternalOrderNotificationOnce,
          sendPaidNotificationOnce }    from './email.js';
+import { fulfillLicensesForPaidOrder, isLicensesSchemaMissing,
+         listAssignedKeysForOrder } from './licenses.js';
 
 /* ─── JWT Cloudflare Access ──────────────────────────────────────────────────── */
 
@@ -213,6 +215,7 @@ export async function listOrders(db, {
                    paypal_order_id, paypal_capture_id,
                    confirmation_email_sent_at, paid_notification_sent_at,
                    internal_notification_sent_at, internal_notification_event_src,
+                   license_status, license_email_sent_at,
                    archived_at, marked_paid_at, marked_paid_by, admin_notes,
                    line_items
             FROM orders ${where}
@@ -234,7 +237,22 @@ export async function listOrders(db, {
  */
 export async function getOrderDetail(db, orderId) {
     const row = await db.prepare('SELECT * FROM orders WHERE id = ?').bind(orderId).first();
-    return row ? formatAdminOrder(row) : null;
+    if (!row) return null;
+    const order = formatAdminOrder(row);
+    try {
+        const keys = await listAssignedKeysForOrder(db, orderId);
+        order.licenses = keys.map((k) => ({
+            id: k.id,
+            sku: k.sku,
+            key: k.key_material,
+            assignedAt: k.assigned_at,
+            emailedAt: k.emailed_at || null,
+        }));
+    } catch (e) {
+        order.licenses = [];
+        console.warn('[admin] licenses sul dettaglio non disponibili:', e?.message || e);
+    }
+    return order;
 }
 
 function formatAdminOrder(row) {
@@ -280,6 +298,8 @@ function formatAdminOrder(row) {
         paidNotificationSentAt:  row.paid_notification_sent_at  || null,
         internalNotificationSentAt: row.internal_notification_sent_at || null,
         internalNotificationEventSrc: row.internal_notification_event_src || null,
+        licenseStatus:           row.license_status || null,
+        licenseEmailSentAt:     row.license_email_sent_at || null,
     };
 }
 
@@ -319,11 +339,28 @@ export async function markBankTransferPaid(db, orderId, actorEmail, notes, resen
     const order = await db.prepare('SELECT * FROM orders WHERE id = ?').bind(orderId).first();
     if (!order) return { ok: true };
 
+    const fulfillment = await fulfillLicensesForPaidOrder(
+        { DB: db, RESEND_API_KEY: resendApiKey },
+        order,
+        'bank_transfer_marked_paid'
+    ).catch((e) => {
+        if (isLicensesSchemaMissing(e)) {
+            console.warn('[licenses] schema assente, evasione automatica saltata');
+            return { status: 'pending', skipped: 'no_schema' };
+        }
+        console.error('[licenses] fulfill after mark-paid failed:', orderId, e?.message || e);
+        return { status: 'pending', error: 'fulfill_failed' };
+    });
+
     const emailResult = await sendPaidNotificationOnce(db, order, resendApiKey, trustpilotBcc, guideBucket);
-    const internalNotificationResult = await sendInternalOrderNotificationOnce(
-        db, order, resendApiKey, 'bank_transfer_marked_paid'
-    );
-    return { ok: true, emailResult, internalNotificationResult };
+    const skipInternal = fulfillment?.reason === 'in_progress'
+        || fulfillment?.skipped === 'send_in_progress';
+    const internalNotificationResult = skipInternal
+        ? { sent: false, skipped: true }
+        : await sendInternalOrderNotificationOnce(
+            db, order, resendApiKey, 'bank_transfer_marked_paid', fulfillment
+        );
+    return { ok: true, emailResult, internalNotificationResult, fulfillment };
 }
 
 /** Soft-archive un ordine. */
@@ -359,6 +396,16 @@ export async function deleteOrder(db, orderId) {
     const isDisposable = status === 'pending_payment' || status === 'cancelled';
     if (!isDisposable && !existing.archived_at) {
         return { ok: false, reason: 'not_deletable' };
+    }
+
+    try {
+        await db.prepare(`
+            UPDATE license_keys
+            SET status = 'available', order_id = NULL, assigned_at = NULL
+            WHERE order_id = ? AND emailed_at IS NULL
+        `).bind(orderId).run();
+    } catch (e) {
+        if (!isLicensesSchemaMissing(e)) throw e;
     }
 
     await db.batch([

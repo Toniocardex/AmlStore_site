@@ -28,6 +28,10 @@
  *   POST /api/admin/orders/:id/unarchive
  *   GET  /api/admin/stock
  *   POST /api/admin/stock
+ *   GET  /api/admin/licenses
+ *   POST /api/admin/licenses/import
+ *   POST /api/admin/licenses/revoke
+ *   POST /api/admin/orders/:id/fulfill
  *   GET  /api/admin/restock
  *   GET  /api/admin/carts
  *   GET  /api/admin/analytics
@@ -60,6 +64,10 @@ import { resolveAndValidateItems, itemsRequireShipping,
          getCatalogEntry }                               from './_lib/catalog.js';
 import { assertCartStock, deductStockForPaidOrder, getStockQty,
          listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
+import { fulfillLicensesForPaidOrder, isLicensesSchemaMissing,
+         importLicenseKeys, revokeAvailableKey, summarizeLicensePool,
+         listAvailableKeysForSku, listDigitalSkus, listPendingLicenseOrders,
+         listAssignedKeysForOrder, fulfillPendingOrdersForSku } from './_lib/licenses.js';
 import { safeParseJSON }                                 from './_lib/utils.js';
 import { checkCheckoutEmailRateLimit,
          checkExpressCheckoutIpRateLimit,
@@ -778,6 +786,26 @@ async function deductStockForOrderRow(db, order) {
     }
 }
 
+function shouldSendInternalAfterFulfill(fulfillment) {
+    return fulfillment?.reason !== 'in_progress'
+        && fulfillment?.skipped !== 'send_in_progress';
+}
+
+/** ADR-004: fail-soft se lo schema non e' ancora migrato. */
+async function fulfillLicensesSafe(env, order, eventSrc) {
+    if (!order?.id) return { status: 'skipped' };
+    try {
+        return await fulfillLicensesForPaidOrder(env, order, eventSrc);
+    } catch (e) {
+        if (isLicensesSchemaMissing(e)) {
+            console.warn('[licenses] schema assente, evasione automatica saltata');
+            return { status: 'pending', skipped: 'no_schema' };
+        }
+        console.error('[licenses] fulfill failed:', order.id, e?.message || e);
+        return { status: 'pending', error: 'fulfill_failed' };
+    }
+}
+
 async function handlePublicStock(request, env) {
     const sku = new URL(request.url).searchParams.get('sku') || '';
     const key = String(sku).trim();
@@ -1232,21 +1260,25 @@ async function handleStripeIntentReturn(request, env) {
 
 /* ─── POST /api/webhooks/stripe ─────────────────────────────────────────────── */
 
-// Evasione ordine Stripe: mark-paid + deduct stock + email conferma/interna.
-// Idempotente (dedup via stock_deductions e *_sent_at). Condivisa dai rami
-// checkout.session.completed e payment_intent.succeeded del webhook.
+// Evasione ordine Stripe: mark-paid + deduct stock + pool licenze (ADR-004)
+// + email conferma/interna. Idempotente (stock_deductions, *_sent_at, emailed_at).
 async function fulfilPaidStripeOrder(env, order, eventSrc) {
     const wasUnpaid = order.status !== 'paid';
     const updatedOrder = await getOrderById(env.DB, order.id);
     await deductStockForOrderRow(env.DB, updatedOrder || order);
+    const fulfillment = await fulfillLicensesSafe(env, updatedOrder || order, eventSrc);
     if (wasUnpaid) {
         await sendConfirmationOnce(
             env.DB, updatedOrder,
             env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
             eventSrc, env.GUIDES
         );
+    }
+    // Idempotente via internal_notification_sent_at. Non inviare su
+    // in_progress: l'altro worker manda il testo corretto (auto vs manuale).
+    if (shouldSendInternalAfterFulfill(fulfillment)) {
         await sendInternalOrderNotificationOnce(
-            env.DB, updatedOrder, env.RESEND_API_KEY, eventSrc
+            env.DB, updatedOrder, env.RESEND_API_KEY, eventSrc, fulfillment
         );
     }
 }
@@ -1442,16 +1474,20 @@ async function handlePaypalCaptureOrder(request, env) {
     // Invia email
     const updatedOrder = await getOrderById(env.DB, order.id);
     await deductStockForOrderRow(env.DB, updatedOrder || order);
+    const fulfillment = await fulfillLicensesSafe(env, updatedOrder || order, 'worker_capture');
     await sendConfirmationOnce(
         env.DB, updatedOrder,
         env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
         'worker_capture', env.GUIDES
     );
-    await sendInternalOrderNotificationOnce(
-        env.DB, updatedOrder,
-        env.RESEND_API_KEY,
-        'worker_capture'
-    );
+    if (shouldSendInternalAfterFulfill(fulfillment)) {
+        await sendInternalOrderNotificationOnce(
+            env.DB, updatedOrder,
+            env.RESEND_API_KEY,
+            'worker_capture',
+            fulfillment
+        );
+    }
     await recordEvent(env, request, { eventName: 'purchase', orderId: order.id });
 
     // Genera token thank-you
@@ -1647,18 +1683,22 @@ async function handlePaypalWebhook(request, env) {
         // Stock: sempre (idempotente via stock_deductions), anche su retry webhook.
         const updatedOrder = await getOrderById(env.DB, order.id);
         await deductStockForOrderRow(env.DB, updatedOrder || order);
+        const fulfillment = await fulfillLicensesSafe(env, updatedOrder || order, 'webhook_paypal');
         if (order.status !== 'paid') {
             await sendConfirmationOnce(
                 env.DB, updatedOrder,
                 env.RESEND_API_KEY, env.TRUSTPILOT_BCC || '',
                 'webhook_paypal', env.GUIDES
             );
+            await recordEvent(env, request, { eventName: 'purchase', orderId: order.id });
+        }
+        if (shouldSendInternalAfterFulfill(fulfillment)) {
             await sendInternalOrderNotificationOnce(
                 env.DB, updatedOrder,
                 env.RESEND_API_KEY,
-                'webhook_paypal'
+                'webhook_paypal',
+                fulfillment
             );
-            await recordEvent(env, request, { eventName: 'purchase', orderId: order.id });
         }
     }
 
@@ -1829,6 +1869,9 @@ async function handleAdminRoute(path, request, env, context) {
         if (result.ok || result.reason === 'already_paid') {
             const paidOrder = await getOrderById(env.DB, orderId);
             await deductStockForOrderRow(env.DB, paidOrder);
+            if (result.reason === 'already_paid') {
+                await fulfillLicensesSafe(env, paidOrder, 'bank_transfer_marked_paid');
+            }
         }
 
         const status = result.ok ? 200 : (result.reason === 'order_not_found' ? 404 : 409);
@@ -1892,6 +1935,88 @@ async function handleAdminRoute(path, request, env, context) {
                 : 400;
             return adminJson({ ok: false, error: e.message, reason: e.reason || 'error' }, status);
         }
+    }
+
+    // ── GET /api/admin/licenses ───────────────────────────────────────────────
+    if (sub === '/licenses' && request.method === 'GET') {
+        const sku = new URL(request.url).searchParams.get('sku') || '';
+        try {
+            if (sku) {
+                const keys = await listAvailableKeysForSku(env.DB, sku);
+                return adminJson({ sku, keys });
+            }
+            const [skus, pendingOrders] = await Promise.all([
+                summarizeLicensePool(env.DB),
+                listPendingLicenseOrders(env.DB, { limit: 30 }),
+            ]);
+            return adminJson({
+                skus,
+                catalog: listDigitalSkus(),
+                pendingOrders,
+            });
+        } catch (e) {
+            if (isLicensesSchemaMissing(e)) {
+                return adminJson({ skus: [], catalog: listDigitalSkus(), pendingOrders: [], error: 'schema_missing' }, 503);
+            }
+            throw e;
+        }
+    }
+
+    // ── POST /api/admin/licenses/import ─────────────────────────────────────
+    if (sub === '/licenses/import' && request.method === 'POST') {
+        const invalidRequest = validateAdminMutationRequest(request, env);
+        if (invalidRequest) return invalidRequest;
+
+        const body = await request.json().catch(() => ({}));
+        try {
+            const saved = await importLicenseKeys(env.DB, body.sku, body.keys, actorEmail);
+            let fulfilled = [];
+            if (saved.imported > 0) {
+                fulfilled = await fulfillPendingOrdersForSku(
+                    env, String(body.sku || '').trim(), 'license_import'
+                ).catch((e) => {
+                    console.error('[licenses] coda dopo import fallita:', e?.message || e);
+                    return [];
+                });
+            }
+            return adminJson({ ok: true, ...saved, fulfilled });
+        } catch (e) {
+            const status = e.reason === 'unknown_sku' || e.reason === 'physical_sku' ? 400 : 400;
+            return adminJson({ ok: false, error: e.message, reason: e.reason || 'error' }, status);
+        }
+    }
+
+    // ── POST /api/admin/licenses/revoke ───────────────────────────────────────
+    if (sub === '/licenses/revoke' && request.method === 'POST') {
+        const invalidRequest = validateAdminMutationRequest(request, env);
+        if (invalidRequest) return invalidRequest;
+
+        const body = await request.json().catch(() => ({}));
+        try {
+            await revokeAvailableKey(env.DB, body.id);
+            return adminJson({ ok: true });
+        } catch (e) {
+            const status = e.reason === 'not_available' ? 409 : 400;
+            return adminJson({ ok: false, error: e.message, reason: e.reason || 'error' }, status);
+        }
+    }
+
+    // ── POST /api/admin/orders/:id/fulfill ───────────────────────────────────
+    const fulfillMatch = sub.match(/^\/orders\/([^/]+)\/fulfill$/);
+    if (fulfillMatch && request.method === 'POST') {
+        const invalidRequest = validateAdminMutationRequest(request, env);
+        if (invalidRequest) return invalidRequest;
+
+        const orderId = fulfillMatch[1];
+        const paidOrder = await getOrderById(env.DB, orderId);
+        if (!paidOrder) {
+            return adminJson({ error: 'Order not found' }, 404);
+        }
+        if (paidOrder.status !== 'paid') {
+            return adminJson({ ok: false, reason: 'not_paid' }, 409);
+        }
+        const fulfillment = await fulfillLicensesSafe(env, paidOrder, 'admin_retry');
+        return adminJson({ ok: true, fulfillment });
     }
 
     // ── GET /api/admin/restock?sku= ───────────────────────────────────────────

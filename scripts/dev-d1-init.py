@@ -11,6 +11,9 @@ CHAT_CORE = (ROOT / "migrations" / "0002_chat_core.sql").read_text(encoding="utf
 # Magazzino mostra zero in attesa (fail-soft) ma il form sulle PDP fisiche
 # risponde 503 in locale.
 RESTOCK = (ROOT / "schema-restock-migration.sql").read_text(encoding="utf-8")
+# Pool chiavi digitali (ADR-004). Senza questa tabella l'evasione automatica
+# fa fail-soft sul flusso manuale; l'admin Licenze pero' non puo' importare.
+LICENSES = (ROOT / "schema-licenses-migration.sql").read_text(encoding="utf-8")
 # listCarts fa un LEFT JOIN su analytics_events per lo step raggiunto: senza
 # questa tabella la lista carrelli dell'admin fallirebbe in locale con
 # "no such table". La ALTER della migrazione funnel non e' idempotente, quindi
@@ -27,6 +30,10 @@ ALTERS = [
     "CREATE INDEX IF NOT EXISTS idx_page_views_day_suggested_lang ON page_views(day, suggested_lang);",
     "ALTER TABLE analytics_events ADD COLUMN cart_id TEXT;",
     "CREATE INDEX IF NOT EXISTS idx_analytics_events_cart ON analytics_events(cart_id);",
+    "ALTER TABLE orders ADD COLUMN license_status TEXT;",
+    "ALTER TABLE orders ADD COLUMN license_email_sent_at TEXT;",
+    "ALTER TABLE orders ADD COLUMN license_email_event_src TEXT;",
+    "CREATE INDEX IF NOT EXISTS idx_orders_license_status ON orders(license_status);",
 ]
 D1_DIRS = [
     ROOT / ".wrangler" / "state-chat" / "v3" / "d1" / "miniflare-D1DatabaseObject",
@@ -103,6 +110,16 @@ for d1_dir in existing_dirs:
         con.executescript(SCHEMA)
         con.executescript(STOCK)
         con.executescript(RESTOCK)
+        # CREATE TABLE/INDEX della migrazione licenze (idempotenti). Le ALTER
+        # su orders stanno in ALTERS: lo split su ';' rompeva i commenti SQL.
+        licenses_ddl = "\n".join(
+            line for line in LICENSES.splitlines()
+            if line.strip() and not line.strip().startswith("--")
+            and not line.strip().upper().startswith("ALTER TABLE")
+            and "idx_orders_license_status" not in line
+        )
+        if licenses_ddl.strip():
+            con.executescript(licenses_ddl)
         con.executescript(CHAT_CORE)
         con.executescript(EVENTS)
         con.executescript(PAGE_VIEWS)

@@ -24,6 +24,7 @@
         capabilities:    { deleteOrders: false },
         view:            'orders',
         stockLoading:    false,
+        licensesLoading: false,
         selected:        new Set(),
         cart: {
             page:      1,
@@ -187,6 +188,28 @@
         return '<span class="adm-badge adm-badge--' + m[0] + '">' + esc(m[1]) + '</span>';
     }
 
+    function licenseBadge(status) {
+        var map = {
+            fulfilled:      ['paid',    'Licenza inviata'],
+            pending:        ['pending', 'Licenza da inviare'],
+            assigning:      ['checkout','Evasione in corso'],
+            not_applicable: null,
+        };
+        var m = map[status];
+        if (!m) return '';
+        return ' <span class="adm-badge adm-badge--' + m[0] + '">' + esc(m[1]) + '</span>';
+    }
+
+    function licenseStatusLabel(status) {
+        var map = {
+            fulfilled:      'Inviata automaticamente',
+            pending:        'In attesa di chiavi nel pool',
+            assigning:      'Evasione in corso',
+            not_applicable: 'Non applicabile (solo fisico)',
+        };
+        return esc(map[status] || '—');
+    }
+
     function methodBadge(method) {
         var map = {
             stripe:        ['stripe',   'Carta'],
@@ -247,7 +270,7 @@
                 + '</td>'
                 + '<td data-label="Articoli"><div class="adm-items-list">' + (items || '<span class="adm-td--muted">—</span>') + '</div></td>'
                 + '<td data-label="Metodo">' + methodBadge(o.paymentMethod) + '</td>'
-                + '<td data-label="Stato">' + statusBadge(o.status) + (o.archivedAt ? ' <span class="adm-badge adm-badge--archived">Archiviato</span>' : '') + '</td>'
+                + '<td data-label="Stato">' + statusBadge(o.status) + licenseBadge(o.licenseStatus) + (o.archivedAt ? ' <span class="adm-badge adm-badge--archived">Archiviato</span>' : '') + '</td>'
                 + '<td class="adm-td--center adm-td--nowrap" data-label="Totale"><strong>' + esc(fmtMoney(o.totalMinor, o.currency)) + '</strong></td>'
                 + '<td class="adm-td--nowrap adm-td--muted" data-label="Data">' + esc(fmtDate(o.createdAt)) + '</td>'
                 + '<td class="adm-td--center adm-td--actions">'
@@ -432,6 +455,8 @@
             + field('Email interna', o.internalNotificationSentAt ? esc(fmtDate(o.internalNotificationSentAt)) : dash())
             + (o.internalNotificationEventSrc ? field('Evento interno', esc(o.internalNotificationEventSrc)) : '')
             + (isBT ? field('Email pagato', o.paidNotificationSentAt ? esc(fmtDate(o.paidNotificationSentAt)) : dash()) : '')
+            + field('Licenze', licenseStatusLabel(o.licenseStatus))
+            + (o.licenseEmailSentAt ? field('Email licenza', esc(fmtDate(o.licenseEmailSentAt))) : '')
         + '</div></div>';
 
         // Cliente
@@ -480,6 +505,23 @@
             + '</tr></thead><tbody>' + (itemRows || '<tr><td colspan="3" style="color:var(--adm-muted)">—</td></tr>') + '</tbody></table>'
             + '<p class="adm-detail-total">' + esc(fmtMoney(o.totalMinor, o.currency)) + '</p>'
         + '</div>';
+
+        var licenses = o.licenses || [];
+        if (licenses.length || (isPaid && o.licenseStatus && o.licenseStatus !== 'not_applicable')) {
+            var licRows = licenses.map(function (k) {
+                return '<tr>'
+                    + '<td class="adm-sku">' + esc(k.sku || '') + '</td>'
+                    + '<td class="adm-key-mono">' + esc(k.key || '') + '</td>'
+                    + '<td>' + (k.emailedAt ? esc(fmtDate(k.emailedAt)) : 'non inviata') + '</td>'
+                    + '</tr>';
+            }).join('');
+            html += '<div class="adm-detail-section">'
+                + '<p class="adm-detail-section__title">Chiavi assegnate</p>'
+                + (licRows
+                    ? '<table class="adm-detail-table"><thead><tr><th>SKU</th><th>Chiave</th><th>Email</th></tr></thead><tbody>' + licRows + '</tbody></table>'
+                    : '<p class="adm-muted">Nessuna chiave assegnata. Importa il SKU nella tab Licenze o usa il generatore.</p>')
+            + '</div>';
+        }
 
         // Riferimenti PSP
         if (o.stripeSessionId || o.stripePaymentIntent || o.paypalOrderId || o.paypalCaptureId) {
@@ -546,6 +588,10 @@
             + ' target="_blank" rel="noopener"'
             + ' title="Apre il generatore in una nuova scheda: copia qui il riepilogo e incollalo la">Email licenza ↗</a>';
 
+        if (isPaid && !isArchived && o.licenseStatus !== 'fulfilled' && o.licenseStatus !== 'not_applicable') {
+            footerHtml += '<button class="adm-btn adm-btn--primary" id="btn-fulfill-licenses">Riprova evasione licenze</button>';
+        }
+
         footerHtml += '<button class="adm-btn adm-btn--ghost" id="btn-close-detail">Chiudi</button>';
         $('modal-footer').innerHTML = footerHtml;
 
@@ -562,6 +608,13 @@
                     true,
                     function (notes) { doMarkPaid(o.orderId, notes); }
                 );
+            });
+        }
+
+        var btnFulfill = document.getElementById('btn-fulfill-licenses');
+        if (btnFulfill) {
+            btnFulfill.addEventListener('click', function () {
+                doFulfillLicenses(o.orderId);
             });
         }
 
@@ -654,6 +707,27 @@
                 closeConfirm();
                 toast('Errore: ' + (e.message || 'sconosciuto'), 'error');
             });
+    }
+
+    function doFulfillLicenses(orderId) {
+        apiPost('/api/admin/orders/' + encodeURIComponent(orderId) + '/fulfill', {})
+            .then(function (res) {
+                var st = (res.fulfillment && res.fulfillment.status) || '';
+                var skip = res.fulfillment && res.fulfillment.skipped;
+                if (st === 'fulfilled' && res.fulfillment && res.fulfillment.emailError) {
+                    toast('Chiavi assegnate, email non inviata: riprova', 'error');
+                } else if (st === 'fulfilled' && skip === 'send_in_progress') {
+                    toast('Invio email già in corso, riprova tra poco', 'info');
+                } else if (st === 'fulfilled') toast('Licenza inviata automaticamente ✓', 'success');
+                else if (st === 'pending' && res.fulfillment && res.fulfillment.reason === 'in_progress') {
+                    toast('Evasione già in corso su un altro worker, riprova tra poco', 'info');
+                }
+                else if (st === 'pending') toast('Pool insufficiente: resta l\'invio manuale', 'info');
+                else toast('Evasione tentata (' + (st || 'ok') + ')', 'info');
+                openDetail(orderId);
+                loadOrders();
+            })
+            .catch(function (e) { toast('Errore evasione: ' + e.message, 'error'); });
     }
 
     function doArchive(orderId) {
@@ -1151,24 +1225,29 @@
     /* ─── Magazzino ────────────────────────────────────────────────────────── */
 
     function setView(view) {
-        state.view = (view === 'stock' || view === 'carts' || view === 'analytics') ? view : 'orders';
+        state.view = (view === 'stock' || view === 'carts' || view === 'analytics' || view === 'licenses') ? view : 'orders';
         var ordersEl    = $('adm-view-orders');
         var stockEl     = $('adm-view-stock');
+        var licensesEl  = $('adm-view-licenses');
         var cartsEl     = $('adm-view-carts');
         var analyticsEl = $('adm-view-analytics');
         var navOrders    = $('nav-orders');
         var navStock     = $('nav-stock');
+        var navLicenses  = $('nav-licenses');
         var navCarts     = $('nav-carts');
         var navAnalytics = $('nav-analytics');
         if (ordersEl)    ordersEl.hidden    = state.view !== 'orders';
         if (stockEl)     stockEl.hidden     = state.view !== 'stock';
+        if (licensesEl)  licensesEl.hidden  = state.view !== 'licenses';
         if (cartsEl)     cartsEl.hidden     = state.view !== 'carts';
         if (analyticsEl) analyticsEl.hidden = state.view !== 'analytics';
         if (navOrders)    navOrders.classList.toggle('is-active', state.view === 'orders');
         if (navStock)     navStock.classList.toggle('is-active', state.view === 'stock');
+        if (navLicenses)  navLicenses.classList.toggle('is-active', state.view === 'licenses');
         if (navCarts)     navCarts.classList.toggle('is-active', state.view === 'carts');
         if (navAnalytics) navAnalytics.classList.toggle('is-active', state.view === 'analytics');
         if (state.view === 'stock')          loadStock();
+        else if (state.view === 'licenses') loadLicenses();
         else if (state.view === 'carts')     loadCarts();
         else if (state.view === 'analytics') loadAnalytics();
         else                                   loadOrders();
@@ -1291,6 +1370,146 @@
         }).catch(function (e) {
             if (e.message === '401') return;
             detail.innerHTML = '<td colspan="6" class="adm-stock-pending__panel">Errore: ' + esc(e.message) + '</td>';
+        });
+    }
+
+    /* ─── Pool licenze digitali (ADR-004) ─────────────────────────────────── */
+
+    function loadLicenses() {
+        if (state.licensesLoading) return;
+        state.licensesLoading = true;
+        show('adm-licenses-loading');
+        hide('adm-licenses-error');
+        hide('adm-licenses-table-wrap');
+        hide('adm-licenses-pending-wrap');
+        hide('adm-licenses-pending-title');
+
+        apiGet('/api/admin/licenses').then(function (data) {
+            state.licensesLoading = false;
+            hide('adm-licenses-loading');
+            fillLicenseSkuSelect(data.catalog || []);
+            renderLicensePending(data.pendingOrders || []);
+            renderLicensePool(data.skus || []);
+        }).catch(function (e) {
+            state.licensesLoading = false;
+            hide('adm-licenses-loading');
+            if (e.message !== '401') {
+                show('adm-licenses-error');
+                text('adm-licenses-error-msg', 'Errore caricamento licenze: ' + e.message);
+            }
+        });
+    }
+
+    function fillLicenseSkuSelect(catalog) {
+        var sel = $('license-import-sku');
+        if (!sel) return;
+        var current = sel.value;
+        sel.innerHTML = '<option value="">Seleziona prodotto…</option>'
+            + catalog.map(function (it) {
+                return '<option value="' + esc(it.sku) + '">' + esc(it.sku) + ' — ' + esc(it.name) + '</option>';
+            }).join('');
+        if (current) sel.value = current;
+    }
+
+    function renderLicensePending(orders) {
+        var wrap = $('adm-licenses-pending-wrap');
+        var title = $('adm-licenses-pending-title');
+        var tbody = $('adm-licenses-pending-tbody');
+        if (!orders.length) {
+            if (wrap) wrap.hidden = true;
+            if (title) title.hidden = true;
+            return;
+        }
+        if (title) title.hidden = false;
+        if (wrap) wrap.hidden = false;
+        tbody.innerHTML = orders.map(function (o) {
+            var needed = Object.keys(o.needed || {}).map(function (sku) {
+                return esc(sku) + ' ×' + (o.needed[sku] || 1);
+            }).join(', ');
+            return '<tr>'
+                + '<td class="adm-td--nowrap"><span class="adm-order-id">' + esc(o.orderId) + '</span></td>'
+                + '<td>' + esc(o.name || '') + '<div class="adm-customer-email">' + esc(o.email || '') + '</div></td>'
+                + '<td class="adm-sku">' + needed + '</td>'
+                + '<td class="adm-muted">' + esc(fmtDate(o.paidAt || o.createdAt)) + '</td>'
+                + '<td class="adm-th--center"><button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" data-license-fulfill="' + esc(o.orderId) + '">Riprova</button></td>'
+                + '</tr>';
+        }).join('');
+    }
+
+    function renderLicensePool(skus) {
+        text('adm-licenses-count', skus.length + ' SKU in pool');
+        if (!skus.length) {
+            show('adm-licenses-table-wrap');
+            $('adm-licenses-tbody').innerHTML = '<tr><td colspan="5" class="adm-muted">Pool vuoto. Importa le chiavi qui sopra.</td></tr>';
+            return;
+        }
+        show('adm-licenses-table-wrap');
+        $('adm-licenses-tbody').innerHTML = skus.map(function (it) {
+            return '<tr data-license-sku="' + esc(it.sku) + '">'
+                + '<td class="adm-td--nowrap"><code class="adm-sku">' + esc(it.sku) + '</code></td>'
+                + '<td>' + esc(it.name) + '</td>'
+                + '<td class="adm-th--center">' + (Number(it.available) || 0) + '</td>'
+                + '<td class="adm-th--center">' + (Number(it.assigned) || 0) + '</td>'
+                + '<td class="adm-th--center">'
+                + '<button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" data-license-show="' + esc(it.sku) + '">Chiavi</button>'
+                + '</td>'
+                + '</tr>';
+        }).join('');
+    }
+
+    function toggleLicenseKeys(sku) {
+        var row = document.querySelector('tr[data-license-sku="' + CSS.escape(sku) + '"]');
+        if (!row) return;
+        var existing = row.nextElementSibling;
+        if (existing && existing.getAttribute('data-license-keys') === sku) {
+            existing.parentNode.removeChild(existing);
+            return;
+        }
+        var detail = document.createElement('tr');
+        detail.setAttribute('data-license-keys', sku);
+        detail.innerHTML = '<td colspan="5" class="adm-stock-pending__panel">Caricamento chiavi…</td>';
+        row.parentNode.insertBefore(detail, row.nextSibling);
+
+        apiGet('/api/admin/licenses?sku=' + encodeURIComponent(sku)).then(function (data) {
+            var keys = data.keys || [];
+            if (!keys.length) {
+                detail.innerHTML = '<td colspan="5" class="adm-stock-pending__panel">Nessuna chiave disponibile.</td>';
+                return;
+            }
+            var rows = keys.map(function (k) {
+                return '<li><span class="adm-key-mono">' + esc(k.masked) + '</span> '
+                    + '<span class="adm-muted">' + esc(fmtDate(k.importedAt)) + '</span> '
+                    + '<button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" data-license-revoke="' + esc(k.id) + '">Elimina</button></li>';
+            }).join('');
+            detail.innerHTML = '<td colspan="5" class="adm-stock-pending__panel">'
+                + '<ul class="adm-stock-pending__list">' + rows + '</ul></td>';
+        }).catch(function (e) {
+            if (e.message === '401') return;
+            detail.innerHTML = '<td colspan="5" class="adm-stock-pending__panel">Errore: ' + esc(e.message) + '</td>';
+        });
+    }
+
+    function importLicenses(e) {
+        e.preventDefault();
+        var sku = ($('license-import-sku') && $('license-import-sku').value) || '';
+        var keys = ($('license-import-keys') && $('license-import-keys').value) || '';
+        if (!sku || !keys.trim()) {
+            toast('SKU e chiavi obbligatori', 'error');
+            return;
+        }
+        var btn = $('btn-license-import');
+        if (btn) { btn.disabled = true; btn.textContent = 'Importazione…'; }
+        apiPost('/api/admin/licenses/import', { sku: sku, keys: keys }).then(function (res) {
+            var n = Number(res.imported) || 0;
+            var dup = Number(res.duplicates) || 0;
+            var auto = (res.fulfilled || []).filter(function (f) { return f.status === 'fulfilled'; }).length;
+            toast('Importate ' + n + (dup ? ' · ' + dup + ' duplicate' : '') + (auto ? ' · ' + auto + ' ordini evasi' : ''), 'success');
+            if ($('license-import-keys')) $('license-import-keys').value = '';
+            loadLicenses();
+        }).catch(function (e) {
+            toast((e.data && e.data.error) || e.message || 'Errore import', 'error');
+        }).then(function () {
+            if (btn) { btn.disabled = false; btn.textContent = 'Importa nel pool'; }
         });
     }
 
@@ -1709,6 +1928,32 @@
         });
         var stockReload = $('btn-stock-reload');
         if (stockReload) stockReload.addEventListener('click', loadStock);
+        var licensesReload = $('btn-licenses-reload');
+        if (licensesReload) licensesReload.addEventListener('click', loadLicenses);
+        var licenseForm = $('adm-license-import');
+        if (licenseForm) licenseForm.addEventListener('submit', importLicenses);
+        var licensesTbody = $('adm-licenses-tbody');
+        if (licensesTbody) {
+            licensesTbody.addEventListener('click', function (e) {
+                if (!e.target || !e.target.closest) return;
+                var showBtn = e.target.closest('[data-license-show]');
+                if (showBtn) { toggleLicenseKeys(showBtn.getAttribute('data-license-show')); return; }
+                var revBtn = e.target.closest('[data-license-revoke]');
+                if (revBtn) {
+                    apiPost('/api/admin/licenses/revoke', { id: revBtn.getAttribute('data-license-revoke') })
+                        .then(function () { toast('Chiave rimossa dal pool', 'info'); loadLicenses(); })
+                        .catch(function (err) { toast((err.data && err.data.error) || err.message, 'error'); });
+                }
+            });
+        }
+        var pendingTbody = $('adm-licenses-pending-tbody');
+        if (pendingTbody) {
+            pendingTbody.addEventListener('click', function (e) {
+                if (!e.target || !e.target.closest) return;
+                var btn = e.target.closest('[data-license-fulfill]');
+                if (btn) doFulfillLicenses(btn.getAttribute('data-license-fulfill'));
+            });
+        }
         var stockTbody = $('adm-stock-tbody');
         if (stockTbody) {
             stockTbody.addEventListener('click', function (e) {
@@ -1738,6 +1983,7 @@
     window.adminApp = {
         reload: function () {
             if (state.view === 'stock')          loadStock();
+            else if (state.view === 'licenses') loadLicenses();
             else if (state.view === 'carts')     loadCarts();
             else if (state.view === 'analytics') loadAnalytics();
             else                                   loadOrders();

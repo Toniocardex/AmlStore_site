@@ -3,14 +3,16 @@
  *
  * sendConfirmationOnce   — email ordine (pending o paid). Stripe/PayPal/BT iniziale.
  * sendPaidNotificationOnce — email "pagamento ricevuto" per bonifico marcato pagato da admin.
+ * sendLicenseDeliveryOnce — consegna chiavi (markup del generatore, ADR-004).
  *
- * Entrambe sono idempotenti: controllano il flag DB prima di chiamare Resend
- * e aggiornano il flag solo dopo un 2xx. Retry sicuro.
+ * Conferma e paid-notification sono idempotenti sul flag DB. La consegna
+ * licenza e' idempotente per chiave (emailed_at), gestita dal chiamante.
  */
 
-import { emailSubject, emailHtml, emailText }          from './templates.js';
+import { emailSubject, emailHtml, emailText,
+         licenseSubject, licenseEmailHtml, licenseEmailText } from './templates.js';
 import { markConfirmationEmailSent, markPaidNotificationSent,
-         markInternalNotificationSent }                from './order.js';
+         markInternalNotificationSent, markLicenseEmailSent } from './order.js';
 import { safeParseJSON }                                from './utils.js';
 import { attachGuideIfEligible }                        from './guide.js';
 import { consultationInternalEmail,
@@ -91,27 +93,49 @@ function methodLabel(method) {
     }[method] || method || 'N/D';
 }
 
-function internalSubject(order) {
+function isAutoDelivered(fulfillment) {
+    if (!fulfillment || fulfillment.status !== 'fulfilled') return false;
+    if (Number(fulfillment.emailed) > 0) return true;
+    return fulfillment.skipped === 'already_emailed';
+}
+
+function internalSubject(order, fulfillment) {
     const paid = order.status === 'paid';
     const prefix = paid ? 'Nuovo ordine pagato' : 'Nuovo ordine bonifico';
-    const action = paid ? 'inviare licenza' : 'attendere pagamento';
+    const auto = paid && isAutoDelivered(fulfillment);
+    const action = !paid
+        ? 'attendere pagamento'
+        : (auto ? 'licenza inviata automaticamente' : 'inviare licenza');
     return `[Eurolicenze] ${prefix} ${order.id} - ${action}`;
 }
 
-function internalOrderHtml(order) {
+function lineLicenseLabel(item, isPaid, fulfillment) {
+    if (item.physical) return { html: '<span style="color:#1d4ed8">SPEDIRE FISICAMENTE</span>', text: 'SPEDIRE FISICAMENTE' };
+    if (isPaid && isAutoDelivered(fulfillment)) {
+        return { html: '<span style="color:#047857">INVIATA AUTOMATICAMENTE</span>', text: 'INVIATA AUTOMATICAMENTE' };
+    }
+    return { html: '<span style="color:#b45309">DA INVIARE MANUALMENTE</span>', text: 'DA INVIARE MANUALMENTE' };
+}
+
+function paidActionText(fulfillment) {
+    if (isAutoDelivered(fulfillment)) {
+        return 'PAGAMENTO CONFERMATO: licenza inviata automaticamente al cliente.';
+    }
+    return 'PAGAMENTO CONFERMATO: inviare manualmente la licenza al cliente.';
+}
+
+function internalOrderHtml(order, fulfillment) {
     const items = safeParseJSON(order.line_items, []);
     const isPaid = order.status === 'paid';
     const actionText = isPaid
-        ? 'PAGAMENTO CONFERMATO: inviare manualmente la licenza al cliente.'
+        ? paidActionText(fulfillment)
         : 'BONIFICO IN ATTESA: non inviare la licenza finche il pagamento non risulta ricevuto.';
 
     const rows = items.map((item) => {
         const qty = Number(item.qty || item.quantity || 1);
         const unit = Number(item.unit_amount_minor || item.unitAmount || 0);
         const subMinor = Math.round(unit) * qty;
-        const actionLabel = item.physical
-            ? '<span style="color:#1d4ed8">SPEDIRE FISICAMENTE</span>'
-            : '<span style="color:#b45309">DA INVIARE MANUALMENTE</span>';
+        const actionLabel = lineLicenseLabel(item, isPaid, fulfillment).html;
         return `
             <tr>
                 <td style="padding:10px;border-bottom:1px solid #e5e7eb">${esc(item.name || item.sku || 'Prodotto')}</td>
@@ -132,7 +156,7 @@ function internalOrderHtml(order) {
 
     return `<!DOCTYPE html>
 <html lang="it">
-<head><meta charset="UTF-8"><title>${esc(internalSubject(order))}</title></head>
+<head><meta charset="UTF-8"><title>${esc(internalSubject(order, fulfillment))}</title></head>
 <body style="margin:0;background:#f5f6f8;font-family:Arial,sans-serif;color:#1f2937">
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:24px;background:#f5f6f8">
     <tr><td align="center">
@@ -178,11 +202,11 @@ function internalOrderHtml(order) {
 </html>`;
 }
 
-function internalOrderText(order) {
+function internalOrderText(order, fulfillment) {
     const items = safeParseJSON(order.line_items, []);
     const isPaid = order.status === 'paid';
     const actionText = isPaid
-        ? 'PAGAMENTO CONFERMATO: inviare manualmente la licenza al cliente.'
+        ? paidActionText(fulfillment)
         : 'BONIFICO IN ATTESA: non inviare la licenza finche il pagamento non risulta ricevuto.';
 
     const lines = [
@@ -209,7 +233,7 @@ function internalOrderText(order) {
             `  ID articolo / SKU: ${item.sku || 'N/D'}`,
             `  Quantita: ${qty}`,
             `  Subtotale: ${formatMoney(subMinor, order.currency)}`,
-            `  Licenza: ${item.physical ? 'SPEDIRE FISICAMENTE' : 'DA INVIARE MANUALMENTE'}`,
+            `  Licenza: ${lineLicenseLabel(item, isPaid, fulfillment).text}`,
         );
     });
 
@@ -338,10 +362,12 @@ export async function sendConfirmationOnce(db, order, resendApiKey, trustpilotBc
 }
 
 /**
- * Invia una notifica operativa interna per evasione manuale licenza.
+ * Invia una notifica operativa interna per evasione licenza.
  * Destinatari fissi: Desk@eurolicenze.com e Antonino.cardelli@outlook.it.
+ * `fulfillment` opzionale (ADR-004): se status=fulfilled il testo dice che
+ * la mail di consegna e' gia' partita; altrimenti resta il copy manuale attuale.
  */
-export async function sendInternalOrderNotificationOnce(db, order, resendApiKey, eventSrc) {
+export async function sendInternalOrderNotificationOnce(db, order, resendApiKey, eventSrc, fulfillment = null) {
     if (order.internal_notification_sent_at) return { sent: false, skipped: true };
     if (!resendApiKey) {
         console.warn('[email] RESEND_API_KEY non configurato, notifica interna non inviata');
@@ -351,9 +377,9 @@ export async function sendInternalOrderNotificationOnce(db, order, resendApiKey,
     const payload = {
         from:     FROM,
         to:       INTERNAL_RECIPIENTS,
-        subject:  internalSubject(order),
-        html:     internalOrderHtml(order),
-        text:     internalOrderText(order),
+        subject:  internalSubject(order, fulfillment),
+        html:     internalOrderHtml(order, fulfillment),
+        text:     internalOrderText(order, fulfillment),
         reply_to: REPLY_TO,
     };
 
@@ -364,6 +390,54 @@ export async function sendInternalOrderNotificationOnce(db, order, resendApiKey,
         await markInternalNotificationSent(db, order.id, eventSrc);
     } catch (e) {
         console.error('[email] Impossibile aggiornare internal_notification_sent_at:', e);
+    }
+
+    return { sent: true };
+}
+
+/**
+ * Email di consegna licenza: stesso markup del generatore admin
+ * (`licenseEmailHtml` / `licenseEmailText`). Nessun BCC Trustpilot.
+ * Il chiamante marca emailed_at sulle chiavi dopo { sent: true }.
+ *
+ * @param {Array<{ productName: string, sku?: string, key: string, activation?: string }>} items
+ */
+export async function sendLicenseDeliveryOnce(db, order, items, resendApiKey, eventSrc) {
+    if (!resendApiKey) {
+        console.warn('[email] RESEND_API_KEY non configurato, consegna licenza non inviata');
+        return { sent: false, error: 'no_resend_key' };
+    }
+    if (!order?.customer_email) {
+        console.warn('[email] Consegna licenza senza email cliente:', order?.id);
+        return { sent: false, error: 'no_customer_email' };
+    }
+    if (!items?.length) return { sent: false, skipped: true };
+
+    const already = await db.prepare(
+        'SELECT license_email_sent_at FROM orders WHERE id = ?'
+    ).bind(order.id).first();
+    if (already?.license_email_sent_at) {
+        return { sent: false, skipped: true, already: true };
+    }
+
+    const locale = order.locale || 'it';
+    const name = `${order.customer_first_name || ''} ${order.customer_last_name || ''}`.trim();
+    const payload = {
+        from:     FROM,
+        to:       [buildRecipient(order)],
+        subject:  licenseSubject(locale, order.id),
+        reply_to: REPLY_TO,
+        html:     licenseEmailHtml({ locale, orderId: order.id, name, items }),
+        text:     licenseEmailText({ locale, orderId: order.id, name, items }),
+    };
+
+    const { ok, error } = await callResend(resendApiKey, payload);
+    if (!ok) return { sent: false, error };
+
+    try {
+        await markLicenseEmailSent(db, order.id, eventSrc);
+    } catch (e) {
+        console.error('[email] Impossibile aggiornare license_email_sent_at:', e);
     }
 
     return { sent: true };

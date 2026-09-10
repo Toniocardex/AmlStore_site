@@ -783,9 +783,9 @@ export function licenseSubject(locale, orderId) {
 }
 
 /**
- * Genera il corpo HTML dell'email di consegna licenza, per evasione manuale
- * (vedi sendInternalOrderNotificationOnce in email.js — l'ammin riceve una
- * notifica interna e invia questa email al cliente a mano, chiave alla mano).
+ * Genera il corpo HTML dell'email di consegna licenza.
+ * Usata sia dal generatore admin (Zoho, evasione manuale) sia da Resend
+ * quando il pool D1 copre l'ordine (ADR-004).
  *
  * @param {object} data
  * @param {string} data.locale

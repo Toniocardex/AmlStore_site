@@ -302,6 +302,21 @@ export async function markInternalNotificationSent(db, orderId, eventSrc) {
 }
 
 /**
+ * Prima mail di consegna licenza riuscita (ADR-004). COALESCE: i retry
+ * successivi non cancellano il timestamp originale.
+ */
+export async function markLicenseEmailSent(db, orderId, eventSrc) {
+    const ts = now();
+    await db.prepare(`
+        UPDATE orders
+        SET license_email_sent_at = COALESCE(license_email_sent_at, ?),
+            license_email_event_src = ?,
+            updated_at = ?
+        WHERE id = ?
+    `).bind(ts, eventSrc, ts, orderId).run();
+}
+
+/**
  * Restituisce solo i campi pubblici di un ordine (per la thank-you page).
  */
 export function toPublicOrder(order) {
