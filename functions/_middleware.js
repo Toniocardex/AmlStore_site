@@ -34,7 +34,7 @@ const CSP = [
     "frame-ancestors 'none'",
     "form-action 'self'",
     "script-src 'self' 'unsafe-inline' https://js.stripe.com https://widget.trustpilot.com " +
-        'https://*.paypal.com https://*.paypalobjects.com https://www.googletagmanager.com ' +
+        'https://invitejs.trustpilot.com https://*.paypal.com https://*.paypalobjects.com https://www.googletagmanager.com ' +
         'https://www.google-analytics.com https://www.googleadservices.com https://www.google.com ' +
         'https://google.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net ' +
         'https://www.clarity.ms https://*.clarity.ms',
