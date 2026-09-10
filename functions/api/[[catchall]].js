@@ -66,7 +66,7 @@ import { assertCartStock, deductStockForPaidOrder, getStockQty,
          listAdminStock, setStockQty, isPhysicalSku }    from './_lib/stock.js';
 import { fulfillLicensesForPaidOrder, isLicensesSchemaMissing,
          importLicenseKeys, revokeAvailableKey, summarizeLicensePool,
-         listAvailableKeysForSku, listDigitalSkus } from './_lib/licenses.js';
+         listAvailableKeysForSku, listDigitalSkus, listLicenseDeliveries } from './_lib/licenses.js';
 import { safeParseJSON }                                 from './_lib/utils.js';
 import { checkCheckoutEmailRateLimit,
          checkExpressCheckoutIpRateLimit,
@@ -1944,14 +1944,18 @@ async function handleAdminRoute(path, request, env, context) {
                 const keys = await listAvailableKeysForSku(env.DB, sku);
                 return adminJson({ sku, keys });
             }
-            const skus = await summarizeLicensePool(env.DB);
+            const [skus, deliveries] = await Promise.all([
+                summarizeLicensePool(env.DB),
+                listLicenseDeliveries(env.DB, { limit: 40 }),
+            ]);
             return adminJson({
                 skus,
                 catalog: listDigitalSkus(),
+                deliveries,
             });
         } catch (e) {
             if (isLicensesSchemaMissing(e)) {
-                return adminJson({ skus: [], catalog: listDigitalSkus(), error: 'schema_missing' }, 503);
+                return adminJson({ skus: [], catalog: listDigitalSkus(), deliveries: [], error: 'schema_missing' }, 503);
             }
             throw e;
         }

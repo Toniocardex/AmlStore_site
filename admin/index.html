@@ -220,6 +220,24 @@
             <button type="submit" class="adm-btn adm-btn--primary" id="btn-license-import">Importa nel pool</button>
         </form>
 
+        <h2 class="adm-filter-section__title" id="adm-licenses-feed-title">Invii automatici</h2>
+        <p class="adm-stock-hint">Controllo sul nostro invio: Resend ha accettato la mail (stesso criterio delle conferme ordine). Non verifica se è arrivata in inbox.</p>
+        <div class="adm-table-wrap" id="adm-licenses-feed-wrap" hidden>
+            <table class="adm-table" id="adm-licenses-feed-table">
+                <thead>
+                    <tr>
+                        <th>Ordine</th>
+                        <th>Cliente</th>
+                        <th>SKU</th>
+                        <th>Email licenza</th>
+                        <th>Stato</th>
+                        <th class="adm-th--center">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="adm-licenses-feed-tbody"></tbody>
+            </table>
+        </div>
+
         <div class="adm-loading" id="adm-licenses-loading" aria-live="polite" hidden>
             <div class="adm-spinner"></div>
             <span>Caricamento pool licenze…</span>

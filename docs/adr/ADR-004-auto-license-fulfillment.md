@@ -137,7 +137,7 @@ Altrimenti: **copy attuale**, incluse le stringhe `DA INVIARE MANUALMENTE` e `in
 
 | Route | Ruolo |
 |---|---|
-| `GET /api/admin/licenses` | Riepilogo per SKU (available/assigned) e catalogo digitale |
+| `GET /api/admin/licenses` | Riepilogo pool + feed invii automatici (senza materiale chiavi) |
 | `GET /api/admin/licenses?sku=` | Chiavi **disponibili mascherate** |
 | `POST /api/admin/licenses/import` | `{ sku, keys }` testo o array; duplicati `key_norm` ignorati |
 | `POST /api/admin/licenses/revoke` | Solo `available` |
@@ -150,7 +150,7 @@ Import: max 500 chiavi, lunghezza max 256, scarta vuote/`#`. SKU deve esistere i
 
 ## 9. UI admin
 
-Nuova tab **Licenze** (`#licenses`): import, tabella pool, elimina disponibili. Magazzino resta **solo fisico**.
+Nuova tab **Licenze** (`#licenses`): import, tabella pool, elimina disponibili, feed invii automatici (Resend accettato vs email non partita). Magazzino resta **solo fisico**.
 
 Dettaglio ordine: stato evasione, chiavi, pulsante Riprova se `paid` e non `fulfilled`. Link al generatore invariato.
 

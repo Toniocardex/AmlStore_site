@@ -37,6 +37,7 @@ const {
     isDigitalSku,
     capKeysToNeed,
     coversDigitalNeed,
+    licenseDeliveryState,
 } = await loadModule('licenses.js');
 
 const tests = [];
@@ -100,6 +101,18 @@ test('coversDigitalNeed e falso se manca una chiave', () => {
     const needed = new Map([['A', 2]]);
     assert.equal(coversDigitalNeed([{ sku: 'A' }], needed), false);
     assert.equal(coversDigitalNeed([{ sku: 'A' }, { sku: 'A' }], needed), true);
+});
+
+test('licenseDeliveryState distingue spedita e mail mancante', () => {
+    assert.equal(licenseDeliveryState({
+        emailSentAt: '2026-09-10T17:28:16.112Z', keysAssigned: 1, keysEmailed: 1,
+    }), 'sent');
+    assert.equal(licenseDeliveryState({
+        emailSentAt: null, keysAssigned: 1, keysEmailed: 0,
+    }), 'email_missing');
+    assert.equal(licenseDeliveryState({
+        eventSrc: 'sending:webhook_stripe', keysAssigned: 1, keysEmailed: 0,
+    }), 'sending');
 });
 
 test('activationFromProductName allinea il generatore', () => {

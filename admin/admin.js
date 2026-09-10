@@ -726,6 +726,7 @@
                 else toast('Evasione tentata (' + (st || 'ok') + ')', 'info');
                 openDetail(orderId);
                 loadOrders();
+                if (state.view === 'licenses') loadLicenses();
             })
             .catch(function (e) { toast('Errore evasione: ' + e.message, 'error'); });
     }
@@ -1381,11 +1382,13 @@
         show('adm-licenses-loading');
         hide('adm-licenses-error');
         hide('adm-licenses-table-wrap');
+        hide('adm-licenses-feed-wrap');
 
         apiGet('/api/admin/licenses').then(function (data) {
             state.licensesLoading = false;
             hide('adm-licenses-loading');
             fillLicenseSkuSelect(data.catalog || []);
+            renderLicenseFeed(data.deliveries || []);
             renderLicensePool(data.skus || []);
         }).catch(function (e) {
             state.licensesLoading = false;
@@ -1406,6 +1409,55 @@
                 return '<option value="' + esc(it.sku) + '">' + esc(it.sku) + ' — ' + esc(it.name) + '</option>';
             }).join('');
         if (current) sel.value = current;
+    }
+
+    function licenseEventSrcLabel(src) {
+        var map = {
+            webhook_stripe: 'Stripe',
+            webhook_stripe_pi: 'Stripe',
+            worker_capture: 'PayPal',
+            webhook_paypal: 'PayPal',
+            bank_transfer_marked_paid: 'Bonifico',
+            admin_retry: 'Riprova admin',
+        };
+        if (!src) return '';
+        if (src.indexOf('sending:') === 0) return 'Invio in corso';
+        return map[src] || src;
+    }
+
+    function renderLicenseFeed(items) {
+        var wrap = $('adm-licenses-feed-wrap');
+        var tbody = $('adm-licenses-feed-tbody');
+        var title = $('adm-licenses-feed-title');
+        if (title) title.textContent = 'Invii automatici' + (items.length ? ' (' + items.length + ')' : '');
+        if (!wrap || !tbody) return;
+        wrap.hidden = false;
+        if (!items.length) {
+            tbody.innerHTML = '<tr><td colspan="6" class="adm-muted">Nessun invio automatico ancora. Comparirà qui al prossimo ordine pagato con chiave in pool.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = items.map(function (d) {
+            var state = d.state || 'unknown';
+            var badge = state === 'sent'
+                ? '<span class="adm-badge adm-badge--paid">Spedita</span>'
+                : state === 'sending'
+                    ? '<span class="adm-badge adm-badge--checkout">Invio in corso</span>'
+                    : '<span class="adm-badge adm-badge--pending">Email non partita</span>';
+            var when = d.emailSentAt ? esc(fmtDate(d.emailSentAt)) : '—';
+            var src = licenseEventSrcLabel(d.eventSrc);
+            var retry = state === 'email_missing'
+                ? '<button type="button" class="adm-btn adm-btn--primary adm-btn--sm" data-license-fulfill="' + esc(d.orderId) + '">Riprova invio</button>'
+                : '';
+            var warn = state === 'email_missing' ? ' adm-row--warn' : '';
+            return '<tr class="' + warn.trim() + '">'
+                + '<td class="adm-td--nowrap"><button type="button" class="adm-order-id adm-linkish" data-license-detail="' + esc(d.orderId) + '">' + esc(d.orderId) + '</button></td>'
+                + '<td>' + esc(d.name || '') + '<div class="adm-customer-email">' + esc(d.email || '') + '</div></td>'
+                + '<td class="adm-sku">' + esc((d.skus || []).join(', ')) + '</td>'
+                + '<td class="adm-muted">' + when + (src ? '<div>' + esc(src) + '</div>' : '') + '</td>'
+                + '<td>' + badge + '</td>'
+                + '<td class="adm-th--center">' + retry + '</td>'
+                + '</tr>';
+        }).join('');
     }
 
     function renderLicensePool(skus) {
@@ -1903,6 +1955,16 @@
         if (licensesReload) licensesReload.addEventListener('click', loadLicenses);
         var licenseForm = $('adm-license-import');
         if (licenseForm) licenseForm.addEventListener('submit', importLicenses);
+        var licensesFeed = $('adm-licenses-feed-tbody');
+        if (licensesFeed) {
+            licensesFeed.addEventListener('click', function (e) {
+                if (!e.target || !e.target.closest) return;
+                var detailBtn = e.target.closest('[data-license-detail]');
+                if (detailBtn) { openDetail(detailBtn.getAttribute('data-license-detail')); return; }
+                var fulfillBtn = e.target.closest('[data-license-fulfill]');
+                if (fulfillBtn) doFulfillLicenses(fulfillBtn.getAttribute('data-license-fulfill'));
+            });
+        }
         var licensesTbody = $('adm-licenses-tbody');
         if (licensesTbody) {
             licensesTbody.addEventListener('click', function (e) {

@@ -577,6 +577,68 @@ export async function summarizeLicensePool(db) {
     return [...bySku.values()].sort((a, b) => a.sku.localeCompare(b.sku));
 }
 
+/**
+ * Stato operativo dell'invio automatico (non la consegna in inbox).
+ * `sent` = Resend ha accettato e le chiavi hanno emailed_at.
+ */
+export function licenseDeliveryState({ emailSentAt, eventSrc, keysAssigned, keysEmailed }) {
+    const assigned = Number(keysAssigned) || 0;
+    const emailed = Number(keysEmailed) || 0;
+    if (String(eventSrc || '').startsWith('sending:')) return 'sending';
+    if (assigned > 0 && emailed < assigned) return 'email_missing';
+    if (emailSentAt) return 'sent';
+    if (assigned > 0) return 'email_missing';
+    return 'unknown';
+}
+
+export async function listLicenseDeliveries(db, { limit = 40 } = {}) {
+    const cap = Math.min(80, Math.max(1, Number(limit) || 40));
+    const rows = await db.prepare(`
+        SELECT
+            o.id,
+            o.customer_email,
+            o.customer_first_name,
+            o.customer_last_name,
+            o.license_status,
+            o.license_email_sent_at,
+            o.license_email_event_src,
+            o.paid_at,
+            COUNT(k.id) AS keys_assigned,
+            SUM(CASE WHEN k.emailed_at IS NOT NULL THEN 1 ELSE 0 END) AS keys_emailed,
+            GROUP_CONCAT(DISTINCT k.sku) AS skus
+        FROM orders o
+        INNER JOIN license_keys k
+            ON k.order_id = o.id AND k.status = 'assigned'
+        GROUP BY o.id
+        ORDER BY COALESCE(o.license_email_sent_at, o.updated_at) DESC
+        LIMIT ?
+    `).bind(cap).all();
+
+    return (rows.results || []).map((row) => {
+        const keysAssigned = Number(row.keys_assigned) || 0;
+        const keysEmailed = Number(row.keys_emailed) || 0;
+        const emailSentAt = row.license_email_sent_at || null;
+        const eventSrc = row.license_email_event_src || null;
+        return {
+            orderId: row.id,
+            email: row.customer_email,
+            name: `${row.customer_first_name || ''} ${row.customer_last_name || ''}`.trim(),
+            paidAt: row.paid_at,
+            emailSentAt,
+            eventSrc,
+            skus: String(row.skus || '').split(',').filter(Boolean),
+            keysAssigned,
+            keysEmailed,
+            state: licenseDeliveryState({
+                emailSentAt,
+                eventSrc,
+                keysAssigned,
+                keysEmailed,
+            }),
+        };
+    });
+}
+
 export async function listAvailableKeysForSku(db, sku, limit = 100) {
     const key = String(sku || '').trim();
     const cap = Math.min(200, Math.max(1, Number(limit) || 100));

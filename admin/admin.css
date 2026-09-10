@@ -576,6 +576,18 @@ a.adm-btn:hover { text-decoration: none; }
     letter-spacing: .03em;
 }
 .adm-order-id:hover { text-decoration: underline; }
+button.adm-order-id {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+}
+.adm-table tbody tr.adm-row--warn td {
+    background: rgba(245, 158, 11, .08);
+}
 
 .adm-customer-name    { font-weight: 600; color: var(--adm-text); }
 .adm-customer-email   { font-size: .76rem; color: var(--adm-muted2); margin-top: .1rem; }
