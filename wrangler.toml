@@ -85,6 +85,10 @@ VAPID_SUBJECT = "mailto:Info@amlstore.it"
 # TOKEN_SECRET           — stringa random ≥32 caratteri per HMAC token thank-you
 # FRAUD_HASH_SECRET      — stringa random ≥16 caratteri per HMAC rate-limit checkout (email)
 # RESEND_API_KEY         — API key Resend (re_xxxx...)
+# RESEND_WEBHOOK_SECRET  — whsec_... da Resend → Webhooks
+#                          endpoint https://eurolicenze.com/api/webhooks/resend
+#                          eventi: email.delivered, email.bounced, email.complained,
+#                          email.failed, email.delivery_delayed, email.sent
 # TRUSTPILOT_BCC         — indirizzo ...+token@invite.trustpilot.com
 # STRIPE_SECRET_KEY      — sk_live_... (o sk_test_... in sviluppo)
 # STRIPE_WEBHOOK_SECRET  — whsec_... da Stripe Dashboard > Webhooks (deve inviare

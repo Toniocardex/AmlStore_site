@@ -581,11 +581,22 @@ export async function summarizeLicensePool(db) {
  * Stato operativo dell'invio automatico (non la consegna in inbox).
  * `sent` = Resend ha accettato e le chiavi hanno emailed_at.
  */
-export function licenseDeliveryState({ emailSentAt, eventSrc, keysAssigned, keysEmailed }) {
+export function licenseDeliveryState({
+    emailSentAt, eventSrc, keysAssigned, keysEmailed, delivery,
+}) {
     const assigned = Number(keysAssigned) || 0;
     const emailed = Number(keysEmailed) || 0;
-    if (String(eventSrc || '').startsWith('sending:')) return 'sending';
+    const sending = String(eventSrc || '').startsWith('sending:');
+    const d = String(delivery || '');
+    if (d === 'bounced' || d === 'complained' || d === 'failed') return d;
+    if (d === 'delivered') return 'delivered';
+    if (d === 'delayed') return 'delayed';
+    if (emailSentAt && assigned > 0 && emailed >= assigned) {
+        return d === 'accepted' ? 'accepted' : 'sent';
+    }
+    if (emailSentAt && assigned === 0) return d === 'delivered' ? 'delivered' : 'sent';
     if (assigned > 0 && emailed < assigned) return 'email_missing';
+    if (sending && !emailSentAt) return 'sending';
     if (emailSentAt) return 'sent';
     if (assigned > 0) return 'email_missing';
     return 'unknown';
@@ -593,7 +604,7 @@ export function licenseDeliveryState({ emailSentAt, eventSrc, keysAssigned, keys
 
 export async function listLicenseDeliveries(db, { limit = 40 } = {}) {
     const cap = Math.min(80, Math.max(1, Number(limit) || 40));
-    const rows = await db.prepare(`
+    const sql = (withDelivery) => `
         SELECT
             o.id,
             o.customer_email,
@@ -602,6 +613,7 @@ export async function listLicenseDeliveries(db, { limit = 40 } = {}) {
             o.license_status,
             o.license_email_sent_at,
             o.license_email_event_src,
+            ${withDelivery ? 'o.license_email_delivery,' : ''}
             o.paid_at,
             COUNT(k.id) AS keys_assigned,
             SUM(CASE WHEN k.emailed_at IS NOT NULL THEN 1 ELSE 0 END) AS keys_emailed,
@@ -612,13 +624,21 @@ export async function listLicenseDeliveries(db, { limit = 40 } = {}) {
         GROUP BY o.id
         ORDER BY COALESCE(o.license_email_sent_at, o.updated_at) DESC
         LIMIT ?
-    `).bind(cap).all();
+    `;
+    let rows;
+    try {
+        rows = await db.prepare(sql(true)).bind(cap).all();
+    } catch (e) {
+        if (!isLicensesSchemaMissing(e)) throw e;
+        rows = await db.prepare(sql(false)).bind(cap).all();
+    }
 
     return (rows.results || []).map((row) => {
         const keysAssigned = Number(row.keys_assigned) || 0;
         const keysEmailed = Number(row.keys_emailed) || 0;
         const emailSentAt = row.license_email_sent_at || null;
         const eventSrc = row.license_email_event_src || null;
+        const delivery = row.license_email_delivery || null;
         return {
             orderId: row.id,
             email: row.customer_email,
@@ -626,6 +646,7 @@ export async function listLicenseDeliveries(db, { limit = 40 } = {}) {
             paidAt: row.paid_at,
             emailSentAt,
             eventSrc,
+            delivery,
             skus: String(row.skus || '').split(',').filter(Boolean),
             keysAssigned,
             keysEmailed,
@@ -634,6 +655,7 @@ export async function listLicenseDeliveries(db, { limit = 40 } = {}) {
                 eventSrc,
                 keysAssigned,
                 keysEmailed,
+                delivery,
             }),
         };
     });

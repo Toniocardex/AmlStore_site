@@ -14,6 +14,7 @@ PAYPAL_CLIENT_SECRET=<client-secret-sandbox>
 
 # Facoltative in dev: se assenti le email non partono (comportamento gestito)
 # RESEND_API_KEY=re_xxx
+# RESEND_WEBHOOK_SECRET=whsec_xxx
 # STRIPE_SECRET_KEY=sk_test_xxx
 # STRIPE_WEBHOOK_SECRET=whsec_xxx
 # STRIPE_PUBLISHABLE_KEY=pk_test_xxx   # solo /it/checkout on-page (Payment/Express Element);

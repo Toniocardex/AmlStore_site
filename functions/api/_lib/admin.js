@@ -300,6 +300,7 @@ function formatAdminOrder(row) {
         internalNotificationEventSrc: row.internal_notification_event_src || null,
         licenseStatus:           row.license_status || null,
         licenseEmailSentAt:     row.license_email_sent_at || null,
+        licenseEmailDelivery:    row.license_email_delivery || null,
     };
 }
 

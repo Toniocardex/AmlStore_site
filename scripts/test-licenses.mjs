@@ -112,7 +112,16 @@ test('licenseDeliveryState distingue spedita e mail mancante', () => {
     }), 'email_missing');
     assert.equal(licenseDeliveryState({
         eventSrc: 'sending:webhook_stripe', keysAssigned: 1, keysEmailed: 0,
+    }), 'email_missing');
+    assert.equal(licenseDeliveryState({
+        eventSrc: 'sending:webhook_stripe', keysAssigned: 0, keysEmailed: 0,
     }), 'sending');
+    assert.equal(licenseDeliveryState({
+        emailSentAt: '2026-09-10T17:28:16.112Z', keysAssigned: 1, keysEmailed: 1, delivery: 'delivered',
+    }), 'delivered');
+    assert.equal(licenseDeliveryState({
+        emailSentAt: '2026-09-10T17:28:16.112Z', keysAssigned: 1, keysEmailed: 1, delivery: 'bounced',
+    }), 'bounced');
 });
 
 test('activationFromProductName allinea il generatore', () => {

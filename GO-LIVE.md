@@ -55,6 +55,7 @@ wrangler pages secret put STRIPE_PUBLISHABLE_KEY # pk_live_... (dato pubblico, e
 wrangler pages secret put PAYPAL_CLIENT_ID      # Client ID app PayPal LIVE
 wrangler pages secret put PAYPAL_CLIENT_SECRET  # Client Secret app PayPal LIVE
 wrangler pages secret put RESEND_API_KEY        # re_...
+wrangler pages secret put RESEND_WEBHOOK_SECRET # whsec_... (Resend → Webhooks → https://eurolicenze.com/api/webhooks/resend)
 wrangler pages secret put TRUSTPILOT_BCC        # facoltativo: ...@invite.trustpilot.com
 ```
 

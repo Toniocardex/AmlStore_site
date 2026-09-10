@@ -115,6 +115,8 @@ La mail licenza e l’assegnazione stanno **fuori** dal `if (wasUnpaid)` / `if (
 
 La pesca dal pool avviene **solo** sugli hook di pagamento catturato (§6): il prossimo ordine pagato con chiavi sufficienti riceve la mail del generatore.
 
+`POST /api/webhooks/resend` (firma Svix) aggiorna `license_email_delivery` (`delivered` / `bounced` / …) sulla riga che ha `license_email_resend_id`. Se il webhook arriva prima di `markLicenseEmailSent`, fallback sui tag `kind=license` + `order_id` (e si memorizza l’id Resend). Senza `RESEND_WEBHOOK_SECRET` l’invio licenza continua; il feed resta su “Accettata Resend”.
+
 ## 7. Email
 
 ### 7.1 Consegna licenza

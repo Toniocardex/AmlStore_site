@@ -17,7 +17,7 @@
     "test": "python scripts/test-commercial-pricing.py && npm run test:crosssell && npm run test:emaildomains && npm run test:restock && npm run test:licenses && npm run typecheck:chat && npm run test:chat && npm run test:pwa",
     "test:emaildomains": "node scripts/test-email-domains.mjs",
     "test:restock": "node scripts/test-restock.mjs",
-    "test:licenses": "node scripts/test-licenses.mjs"
+    "test:licenses": "node scripts/test-licenses.mjs && node scripts/test-resend-webhook.mjs"
   },
   "repository": {
     "type": "git",

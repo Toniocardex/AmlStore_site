@@ -10,6 +10,7 @@
  *   POST /api/paypal-capture-order
  *   POST /api/paypal-express-create-order
  *   POST /api/webhooks/paypal
+ *   POST /api/webhooks/resend
  *   POST /api/bank-transfer-order
  *   GET  /api/order-status
  *   GET  /api/stock
@@ -75,6 +76,8 @@ import { upsertCartSession, markCartCheckoutStarted,
          checkCartSyncRateLimit, listCarts, getCartStats,
          normalizeHoursIdle, maybeRunCartRetention, deleteCart } from './_lib/cart.js';
 import { getAnalyticsSummary, recordEvent, TRACKABLE_EVENTS } from './_lib/analytics.js';
+import { verifyResendWebhook, mappedLicenseDelivery,
+         applyLicenseEmailDelivery, licenseOrderIdFromResendTags } from './_lib/resend-webhook.js';
 
 /* ─── CORS ──────────────────────────────────────────────────────────────────── */
 
@@ -200,6 +203,9 @@ export async function onRequest(context) {
         }
         if (path === '/api/webhooks/paypal' && request.method === 'POST') {
             return await handlePaypalWebhook(request, env);
+        }
+        if (path === '/api/webhooks/resend' && request.method === 'POST') {
+            return await handleResendWebhook(request, env);
         }
         if (path === '/api/track' && request.method === 'POST') {
             return await handleTrack(request, env);
@@ -1594,6 +1600,47 @@ async function handlePaypalExpressCreateOrder(request, env) {
     });
 
     return json({ orderID: paypalOrderId, amlOrderId: orderId }, 200, request, env);
+}
+
+/* ─── POST /api/webhooks/resend ─────────────────────────────────────────────── */
+// Stato consegna delle mail licenza (delivered / bounce). Firma Svix.
+// Senza RESEND_WEBHOOK_SECRET risponde 503: Resend ritenta finche' il secret
+// non e' in Pages. Gli eventi di altre mail (conferma, interna) sono ack 200.
+async function handleResendWebhook(request, env) {
+    const secret = env.RESEND_WEBHOOK_SECRET || '';
+    if (!secret) {
+        console.error('[webhook/resend] RESEND_WEBHOOK_SECRET non configurato');
+        return new Response('Webhook not configured', { status: 503 });
+    }
+
+    const rawBody = await request.text();
+    let event;
+    try {
+        event = await verifyResendWebhook(rawBody, request.headers, secret);
+    } catch (e) {
+        console.error('[webhook/resend] Firma non valida:', e.message);
+        return new Response('Unauthorized', { status: 401 });
+    }
+
+    const delivery = mappedLicenseDelivery(event?.type);
+    if (!delivery) {
+        return new Response('OK', { status: 200 });
+    }
+
+    const emailId = event?.data?.email_id || event?.data?.id || '';
+    const orderId = licenseOrderIdFromResendTags(event?.data?.tags);
+    try {
+        await applyLicenseEmailDelivery(env.DB, emailId, delivery, { orderId });
+    } catch (e) {
+        if (isLicensesSchemaMissing(e)) {
+            console.warn('[webhook/resend] colonna delivery assente, evento ignorato');
+            return new Response('OK', { status: 200 });
+        }
+        console.error('[webhook/resend] apply fallito:', e?.message || e);
+        return new Response('Error', { status: 500 });
+    }
+
+    return new Response('OK', { status: 200 });
 }
 
 /* ─── POST /api/webhooks/paypal ─────────────────────────────────────────────── */

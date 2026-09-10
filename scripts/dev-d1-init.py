@@ -33,7 +33,10 @@ ALTERS = [
     "ALTER TABLE orders ADD COLUMN license_status TEXT;",
     "ALTER TABLE orders ADD COLUMN license_email_sent_at TEXT;",
     "ALTER TABLE orders ADD COLUMN license_email_event_src TEXT;",
+    "ALTER TABLE orders ADD COLUMN license_email_resend_id TEXT;",
+    "ALTER TABLE orders ADD COLUMN license_email_delivery TEXT;",
     "CREATE INDEX IF NOT EXISTS idx_orders_license_status ON orders(license_status);",
+    "CREATE INDEX IF NOT EXISTS idx_orders_license_resend ON orders(license_email_resend_id);",
 ]
 D1_DIRS = [
     ROOT / ".wrangler" / "state-chat" / "v3" / "d1" / "miniflare-D1DatabaseObject",
@@ -117,6 +120,7 @@ for d1_dir in existing_dirs:
             if line.strip() and not line.strip().startswith("--")
             and not line.strip().upper().startswith("ALTER TABLE")
             and "idx_orders_license_status" not in line
+            and "idx_orders_license_resend" not in line
         )
         if licenses_ddl.strip():
             con.executescript(licenses_ddl)

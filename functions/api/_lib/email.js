@@ -275,7 +275,12 @@ async function callResend(apiKey, payload) {
         console.error(`[email] Resend HTTP ${res.status}:`, body);
         return { ok: false, error: `resend_http_${res.status}` };
     }
-    return { ok: true };
+    let id = '';
+    try {
+        const data = await res.json();
+        id = String(data?.id || '');
+    } catch (_) { /* Resend ha comunque accettato */ }
+    return { ok: true, id };
 }
 
 /**
@@ -429,13 +434,17 @@ export async function sendLicenseDeliveryOnce(db, order, items, resendApiKey, ev
         reply_to: REPLY_TO,
         html:     licenseEmailHtml({ locale, orderId: order.id, name, items }),
         text:     licenseEmailText({ locale, orderId: order.id, name, items }),
+        tags:     [
+            { name: 'kind', value: 'license' },
+            { name: 'order_id', value: String(order.id).slice(0, 50) },
+        ],
     };
 
-    const { ok, error } = await callResend(resendApiKey, payload);
+    const { ok, error, id } = await callResend(resendApiKey, payload);
     if (!ok) return { sent: false, error };
 
     try {
-        await markLicenseEmailSent(db, order.id, eventSrc);
+        await markLicenseEmailSent(db, order.id, eventSrc, id);
     } catch (e) {
         console.error('[email] Impossibile aggiornare license_email_sent_at:', e);
     }

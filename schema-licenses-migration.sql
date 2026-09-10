@@ -26,5 +26,8 @@ CREATE INDEX IF NOT EXISTS idx_license_keys_order      ON license_keys(order_id)
 ALTER TABLE orders ADD COLUMN license_status TEXT;
 ALTER TABLE orders ADD COLUMN license_email_sent_at TEXT;
 ALTER TABLE orders ADD COLUMN license_email_event_src TEXT;
+ALTER TABLE orders ADD COLUMN license_email_resend_id TEXT;
+ALTER TABLE orders ADD COLUMN license_email_delivery TEXT;
 
 CREATE INDEX IF NOT EXISTS idx_orders_license_status ON orders(license_status);
+CREATE INDEX IF NOT EXISTS idx_orders_license_resend ON orders(license_email_resend_id);

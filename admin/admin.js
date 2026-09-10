@@ -457,6 +457,7 @@
             + (isBT ? field('Email pagato', o.paidNotificationSentAt ? esc(fmtDate(o.paidNotificationSentAt)) : dash()) : '')
             + field('Licenze', licenseStatusLabel(o.licenseStatus))
             + (o.licenseEmailSentAt ? field('Email licenza', esc(fmtDate(o.licenseEmailSentAt))) : '')
+            + (o.licenseEmailDelivery ? field('Consegna Resend', esc(o.licenseEmailDelivery)) : '')
         + '</div></div>';
 
         // Cliente
@@ -1438,17 +1439,30 @@
         }
         tbody.innerHTML = items.map(function (d) {
             var state = d.state || 'unknown';
-            var badge = state === 'sent'
-                ? '<span class="adm-badge adm-badge--paid">Spedita</span>'
-                : state === 'sending'
-                    ? '<span class="adm-badge adm-badge--checkout">Invio in corso</span>'
-                    : '<span class="adm-badge adm-badge--pending">Email non partita</span>';
-            var when = d.emailSentAt ? esc(fmtDate(d.emailSentAt)) : '—';
-            var src = licenseEventSrcLabel(d.eventSrc);
+            var badge = state === 'delivered'
+                ? '<span class="adm-badge adm-badge--paid">Consegnata</span>'
+                : state === 'accepted' || state === 'sent'
+                    ? '<span class="adm-badge adm-badge--checkout">Accettata Resend</span>'
+                    : state === 'delayed'
+                        ? '<span class="adm-badge adm-badge--checkout">In ritardo</span>'
+                        : state === 'bounced'
+                            ? '<span class="adm-badge adm-badge--cancelled">Bounce</span>'
+                            : state === 'complained'
+                                ? '<span class="adm-badge adm-badge--cancelled">Segnalata spam</span>'
+                                : state === 'failed'
+                                    ? '<span class="adm-badge adm-badge--cancelled">Invio fallito</span>'
+                                    : state === 'sending'
+                                        ? '<span class="adm-badge adm-badge--checkout">Invio in corso</span>'
+                                        : state === 'email_missing'
+                                            ? '<span class="adm-badge adm-badge--pending">Email non partita</span>'
+                                            : '<span class="adm-badge">—</span>';
+            var warn = (state === 'email_missing' || state === 'bounced' || state === 'complained' || state === 'failed')
+                ? ' adm-row--warn' : '';
             var retry = state === 'email_missing'
                 ? '<button type="button" class="adm-btn adm-btn--primary adm-btn--sm" data-license-fulfill="' + esc(d.orderId) + '">Riprova invio</button>'
                 : '';
-            var warn = state === 'email_missing' ? ' adm-row--warn' : '';
+            var when = d.emailSentAt ? esc(fmtDate(d.emailSentAt)) : '—';
+            var src = licenseEventSrcLabel(d.eventSrc);
             return '<tr class="' + warn.trim() + '">'
                 + '<td class="adm-td--nowrap"><button type="button" class="adm-order-id adm-linkish" data-license-detail="' + esc(d.orderId) + '">' + esc(d.orderId) + '</button></td>'
                 + '<td>' + esc(d.name || '') + '<div class="adm-customer-email">' + esc(d.email || '') + '</div></td>'

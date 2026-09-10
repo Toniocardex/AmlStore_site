@@ -62,7 +62,9 @@ CREATE TABLE IF NOT EXISTS orders (
     -- Evasione licenze digitali (ADR-004). NULL = ordine precedente alla feature.
     license_status               TEXT,                   -- pending | assigning | fulfilled | not_applicable
     license_email_sent_at        TEXT,
-    license_email_event_src      TEXT
+    license_email_event_src      TEXT,
+    license_email_resend_id     TEXT,                   -- id Resend per i webhook di consegna
+    license_email_delivery        TEXT                   -- accepted | delivered | bounced | complained | delayed | failed
 );
 
 -- Indici per lookup rapidi
@@ -73,6 +75,8 @@ CREATE INDEX IF NOT EXISTS idx_orders_customer_email  ON orders(customer_email);
 CREATE INDEX IF NOT EXISTS idx_orders_created_at      ON orders(created_at);
 CREATE INDEX IF NOT EXISTS idx_orders_archived        ON orders(archived_at);
 CREATE INDEX IF NOT EXISTS idx_orders_requires_shipping ON orders(requires_shipping);
+CREATE INDEX IF NOT EXISTS idx_orders_license_status ON orders(license_status);
+CREATE INDEX IF NOT EXISTS idx_orders_license_resend ON orders(license_email_resend_id);
 
 -- Magazzino prodotti fisici. Incluso anche in schema-stock-migration.sql per
 -- aggiornare in sicurezza database creati prima dell'introduzione dello stock.

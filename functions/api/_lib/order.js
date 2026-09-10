@@ -305,15 +305,29 @@ export async function markInternalNotificationSent(db, orderId, eventSrc) {
  * Prima mail di consegna licenza riuscita (ADR-004). COALESCE: i retry
  * successivi non cancellano il timestamp originale.
  */
-export async function markLicenseEmailSent(db, orderId, eventSrc) {
+export async function markLicenseEmailSent(db, orderId, eventSrc, resendId) {
     const ts = now();
-    await db.prepare(`
-        UPDATE orders
-        SET license_email_sent_at = COALESCE(license_email_sent_at, ?),
-            license_email_event_src = ?,
-            updated_at = ?
-        WHERE id = ?
-    `).bind(ts, eventSrc, ts, orderId).run();
+    try {
+        await db.prepare(`
+            UPDATE orders
+            SET license_email_sent_at = COALESCE(license_email_sent_at, ?),
+                license_email_event_src = ?,
+                license_email_resend_id = COALESCE(license_email_resend_id, ?),
+                license_email_delivery = COALESCE(license_email_delivery, 'accepted'),
+                updated_at = ?
+            WHERE id = ?
+        `).bind(ts, eventSrc, resendId || null, ts, orderId).run();
+    } catch (e) {
+        const m = String(e?.message || e || '');
+        if (!/no such column: license_email_(resend_id|delivery)/i.test(m)) throw e;
+        await db.prepare(`
+            UPDATE orders
+            SET license_email_sent_at = COALESCE(license_email_sent_at, ?),
+                license_email_event_src = ?,
+                updated_at = ?
+            WHERE id = ?
+        `).bind(ts, eventSrc, ts, orderId).run();
+    }
 }
 
 /**
