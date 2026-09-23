@@ -51,7 +51,7 @@ const CSP = [
         'https://googleads.g.doubleclick.net https://ad.doubleclick.net https://pagead2.googlesyndication.com ' +
         'https://www.googleadservices.com https://*.merchant-center-analytics.goog ' +
         `https://*.clarity.ms https://c.bing.com ${GOOGLE_MARKET_HOSTS}`,
-    'frame-src https://js.stripe.com https://hooks.stripe.com https://widget.trustpilot.com ' +
+    'frame-src https://js.stripe.com https://hooks.stripe.com https://*.trustpilot.com ' +
         'https://*.paypal.com https://www.googletagmanager.com https://*.doubleclick.net ' +
         'https://www.googleadservices.com',
     "worker-src 'self' blob:",

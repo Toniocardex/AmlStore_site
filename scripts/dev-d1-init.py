@@ -110,7 +110,11 @@ for d1_dir in existing_dirs:
         if db_path.name == "metadata.sqlite":
             continue
         con = sqlite3.connect(db_path)
-        con.executescript(SCHEMA)
+        schema_ddl = "\n".join(
+            line for line in SCHEMA.splitlines()
+            if "idx_orders_license_resend" not in line
+        )
+        con.executescript(schema_ddl)
         con.executescript(STOCK)
         con.executescript(RESTOCK)
         # CREATE TABLE/INDEX della migrazione licenze (idempotenti). Le ALTER
